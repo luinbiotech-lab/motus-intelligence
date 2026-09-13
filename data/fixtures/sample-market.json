@@ -1,0 +1,26 @@
+{
+  "sample": true,
+  "records": [
+    {
+      "sample": true,
+      "sourceId": "SAMPLE_A",
+      "sourceUrl": "https://example.invalid/sample-a",
+      "observedAt": "2000-01-03T21:00:00Z",
+      "collectedAt": "2000-01-03T21:10:00Z",
+      "unit": "points",
+      "status": "OK",
+      "missingReasons": {},
+      "id": "SAMPLE-MARKET-1",
+      "market": "US",
+      "tradingDate": "2000-01-03",
+      "symbol": "SAMPLE_INDEX_NOT_REAL",
+      "instrumentType": "INDEX",
+      "close": 110,
+      "previousClose": 100,
+      "change": 10,
+      "changePct": 10,
+      "volume": 1000,
+      "currency": "USD"
+    }
+  ]
+}

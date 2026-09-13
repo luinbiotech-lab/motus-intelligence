@@ -1,0 +1,25 @@
+{
+  "sample": true,
+  "records": [
+    {
+      "sample": true,
+      "sourceId": "SAMPLE_A",
+      "sourceUrl": "https://example.invalid/sample-a",
+      "observedAt": "2000-01-03T21:00:00Z",
+      "collectedAt": "2000-01-03T21:10:00Z",
+      "unit": "percent",
+      "status": "OK",
+      "missingReasons": {},
+      "id": "SAMPLE-MACRO-1",
+      "indicatorId": "SAMPLE_INDICATOR",
+      "indicatorName": "SAMPLE 산술 검증용 지표 (실제 통계 아님)",
+      "releaseTime": "2000-01-03T21:00:00Z",
+      "period": "SAMPLE_PERIOD",
+      "actual": 3,
+      "consensus": 2,
+      "previous": 1,
+      "revisedPrevious": 1,
+      "adjustmentType": "NSA"
+    }
+  ]
+}

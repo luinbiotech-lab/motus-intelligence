@@ -1,0 +1,17 @@
+{
+  "name": "us-market-close-report",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "tsc",
+    "test": "npm run build && node --test --test-isolation=none dist/tests/*.test.js",
+    "sample": "npm run build && node dist/src/cli.js --sample",
+    "report": "node dist/src/cli.js"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.2",
+    "typescript": "^7.0.2"
+  }
+}

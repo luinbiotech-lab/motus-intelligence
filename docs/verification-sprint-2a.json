@@ -1,0 +1,91 @@
+{
+  "verifiedAt": "2026-09-13T08:30:11Z",
+  "environment": {
+    "node": "v24.15.0",
+    "platform": "Windows",
+    "execution": "local"
+  },
+  "repository": {
+    "branch": "master",
+    "head": "unborn",
+    "note": "Repository has no commits; project files are untracked."
+  },
+  "realTradingDay": {
+    "tradingDate": "2026-09-11",
+    "session": "NYSE normal trading day",
+    "selectionBasis": "Latest completed normal U.S. regular session available during Sprint 2A run on 2026-09-13 Asia/Seoul.",
+    "calendarSource": "https://www.nyse.com/trade/hours-calendars",
+    "input": "data/manual/2026-09-11/input.json",
+    "collectionMode": "MANUAL_VERIFIED"
+  },
+  "checks": [
+    {
+      "command": "npm.cmd run typecheck",
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "command": "npm.cmd test",
+      "status": "PASS",
+      "exitCode": 0,
+      "tests": 41,
+      "passed": 41,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "command": "npm.cmd run report -- --input data/manual/2026-09-11/input.json",
+      "status": "PASS",
+      "exitCode": 0,
+      "reportId": "MANUAL-2026-09-11-94b605cfd86f",
+      "sections": 9,
+      "impactCandidates": 2,
+      "issues": 0,
+      "publishStatus": "BLOCKED"
+    },
+    {
+      "command": "npm.cmd run sample",
+      "status": "PASS",
+      "exitCode": 0,
+      "sample": true,
+      "publishStatus": "BLOCKED"
+    },
+    {
+      "command": "TreasuryYieldAdapter live collect for 2026-09-11",
+      "status": "PASS",
+      "records": [
+        {
+          "symbol": "US2Y",
+          "close": 4.63,
+          "previousClose": 4.56,
+          "changePct": 1.54,
+          "collectionMode": "API"
+        },
+        {
+          "symbol": "US10Y",
+          "close": 4.96,
+          "previousClose": 4.95,
+          "changePct": 0.2,
+          "collectionMode": "API"
+        }
+      ]
+    }
+  ],
+  "artifacts": {
+    "reportMarkdown": "data/reports/MANUAL-2026-09-11-94b605cfd86f.md",
+    "reportJson": "data/reports/MANUAL-2026-09-11-94b605cfd86f.json",
+    "evidenceJson": "data/evidence/MANUAL-2026-09-11-94b605cfd86f.json"
+  },
+  "manualReview": {
+    "manualReviewStatus": "PENDING",
+    "publishStatus": "BLOCKED",
+    "reviewMeasurementStatus": "NOT_MEASURED",
+    "reason": "No human review start/completion timestamps were recorded."
+  },
+  "unverified": [
+    "Commercial use and redistribution terms for market data sources",
+    "Automated adapters other than U.S. Treasury",
+    "Blogger publishing",
+    "Actual human review duration target of 10 to 20 minutes"
+  ]
+}

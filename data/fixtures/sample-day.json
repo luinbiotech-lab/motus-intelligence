@@ -1,0 +1,148 @@
+{
+  "schemaVersion": "1.0",
+  "sample": true,
+  "tradingDate": "2000-01-03",
+  "asOf": "2000-01-03T21:15:00Z",
+  "session": {
+    "status": "OK",
+    "closeAt": "2000-01-03T21:00:00Z",
+    "sourceId": "SAMPLE_A",
+    "sourceUrl": "https://example.invalid/sample-a"
+  },
+  "market": [
+    {
+      "sample": true,
+      "sourceId": "SAMPLE_A",
+      "sourceUrl": "https://example.invalid/sample-a",
+      "observedAt": "2000-01-03T21:00:00Z",
+      "collectedAt": "2000-01-03T21:10:00Z",
+      "unit": "points",
+      "status": "OK",
+      "missingReasons": {},
+      "id": "SAMPLE-MARKET-1",
+      "market": "US",
+      "tradingDate": "2000-01-03",
+      "symbol": "SAMPLE_INDEX_NOT_REAL",
+      "instrumentType": "INDEX",
+      "close": 110,
+      "previousClose": 100,
+      "change": 10,
+      "changePct": 10,
+      "volume": 1000,
+      "currency": "USD"
+    }
+  ],
+  "macro": [
+    {
+      "sample": true,
+      "sourceId": "SAMPLE_A",
+      "sourceUrl": "https://example.invalid/sample-a",
+      "observedAt": "2000-01-03T21:00:00Z",
+      "collectedAt": "2000-01-03T21:10:00Z",
+      "unit": "percent",
+      "status": "OK",
+      "missingReasons": {},
+      "id": "SAMPLE-MACRO-1",
+      "indicatorId": "SAMPLE_INDICATOR",
+      "indicatorName": "SAMPLE 산술 검증용 지표 (실제 통계 아님)",
+      "releaseTime": "2000-01-03T21:00:00Z",
+      "period": "SAMPLE_PERIOD",
+      "actual": 3,
+      "consensus": 2,
+      "previous": 1,
+      "revisedPrevious": 1,
+      "adjustmentType": "NSA"
+    }
+  ],
+  "companyEvents": [
+    {
+      "sample": true,
+      "sourceId": "SAMPLE_A",
+      "sourceUrl": "https://example.invalid/sample-a",
+      "observedAt": "2000-01-03T21:00:00Z",
+      "collectedAt": "2000-01-03T21:10:00Z",
+      "unit": "text",
+      "status": "OK",
+      "missingReasons": {},
+      "id": "SAMPLE-EVENT-1",
+      "companyId": "SAMPLE_COMPANY",
+      "ticker": "SAMPLE_CO",
+      "eventType": "AI_CAPEX_UP",
+      "eventTime": "2000-01-03T21:00:00Z",
+      "title": "SAMPLE 가상 AI 설비투자 확대 시나리오",
+      "summary": "실제 기업 발표가 아닌 규칙 엔진 검증용 문장.",
+      "primarySourceUrl": "https://example.invalid/sample-a"
+    }
+  ],
+  "filings": [
+    {
+      "sample": true,
+      "sourceId": "SAMPLE_A",
+      "sourceUrl": "https://example.invalid/sample-a",
+      "observedAt": "2000-01-03T21:00:00Z",
+      "collectedAt": "2000-01-03T21:10:00Z",
+      "unit": "text",
+      "status": "OK",
+      "missingReasons": {},
+      "id": "SAMPLE-FILING-1",
+      "companyId": "SAMPLE_COMPANY",
+      "ticker": "SAMPLE_CO",
+      "formType": "SAMPLE_FORM",
+      "accessionNumber": "SAMPLE_ACCESSION_NOT_REAL",
+      "filedAt": "2000-01-03T21:00:00Z",
+      "period": "SAMPLE_PERIOD",
+      "extractedFacts": [
+        "SAMPLE 테스트 설비투자 확대 신호"
+      ]
+    }
+  ],
+  "news": [
+    {
+      "sample": true,
+      "sourceId": "SAMPLE_B",
+      "sourceUrl": "https://example.invalid/sample-b",
+      "observedAt": "2000-01-03T21:00:00Z",
+      "collectedAt": "2000-01-03T21:10:00Z",
+      "unit": "text",
+      "status": "OK",
+      "missingReasons": {},
+      "id": "SAMPLE-NEWS-1",
+      "title": "SAMPLE 가상 발표 검증 참고",
+      "publisher": "SAMPLE_PUBLISHER",
+      "publishedAt": "2000-01-03T21:00:00Z",
+      "url": "https://example.invalid/sample-b",
+      "relatedTickers": [
+        "SAMPLE_CO"
+      ],
+      "relatedIndustries": [
+        "AI / Data Center"
+      ],
+      "verifiedFacts": [
+        "실제 뉴스가 아닌 테스트용 근거"
+      ],
+      "sourceTier": "A",
+      "usedInReport": true
+    }
+  ],
+  "signals": [
+    {
+      "id": "SAMPLE-SIGNAL-1",
+      "eventId": "SAMPLE-EVENT-1",
+      "trigger": "AI_CAPEX_UP",
+      "usIndustry": "AI / Data Center",
+      "usCompany": "SAMPLE_COMPANY",
+      "macroConditions": [],
+      "evidenceIds": [
+        "SAMPLE-FILING-1",
+        "SAMPLE-NEWS-1"
+      ],
+      "counterFactors": []
+    }
+  ],
+  "koreaContext": {
+    "calendar": [
+      "SAMPLE 검수 연습 일정 (실제 일정 아님)"
+    ],
+    "counterFactors": []
+  }
+}

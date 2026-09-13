@@ -1,0 +1,25 @@
+{
+  "sample": true,
+  "records": [
+    {
+      "sample": true,
+      "sourceId": "SAMPLE_A",
+      "sourceUrl": "https://example.invalid/sample-a",
+      "observedAt": "2000-01-03T21:00:00Z",
+      "collectedAt": "2000-01-03T21:10:00Z",
+      "unit": "text",
+      "status": "OK",
+      "missingReasons": {},
+      "id": "SAMPLE-FILING-1",
+      "companyId": "SAMPLE_COMPANY",
+      "ticker": "SAMPLE_CO",
+      "formType": "SAMPLE_FORM",
+      "accessionNumber": "SAMPLE_ACCESSION_NOT_REAL",
+      "filedAt": "2000-01-03T21:00:00Z",
+      "period": "SAMPLE_PERIOD",
+      "extractedFacts": [
+        "SAMPLE 테스트 설비투자 확대 신호"
+      ]
+    }
+  ]
+}

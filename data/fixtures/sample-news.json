@@ -1,0 +1,31 @@
+{
+  "sample": true,
+  "records": [
+    {
+      "sample": true,
+      "sourceId": "SAMPLE_B",
+      "sourceUrl": "https://example.invalid/sample-b",
+      "observedAt": "2000-01-03T21:00:00Z",
+      "collectedAt": "2000-01-03T21:10:00Z",
+      "unit": "text",
+      "status": "OK",
+      "missingReasons": {},
+      "id": "SAMPLE-NEWS-1",
+      "title": "SAMPLE 가상 발표 검증 참고",
+      "publisher": "SAMPLE_PUBLISHER",
+      "publishedAt": "2000-01-03T21:00:00Z",
+      "url": "https://example.invalid/sample-b",
+      "relatedTickers": [
+        "SAMPLE_CO"
+      ],
+      "relatedIndustries": [
+        "AI / Data Center"
+      ],
+      "verifiedFacts": [
+        "실제 뉴스가 아닌 테스트용 근거"
+      ],
+      "sourceTier": "A",
+      "usedInReport": true
+    }
+  ]
+}

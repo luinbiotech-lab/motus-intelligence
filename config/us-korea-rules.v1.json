@@ -1,0 +1,288 @@
+[
+  {
+    "ruleId": "UK-01",
+    "ruleVersion": "1.0.0",
+    "trigger": "AI_CAPEX_UP",
+    "usIndustry": "AI / Data Center",
+    "usCompany": [],
+    "macroCondition": [],
+    "transmissionPath": "AI_CAPEX",
+    "koreaIndustry": "Semiconductor",
+    "koreaCompanyCandidate": [],
+    "direction": "POSITIVE",
+    "baseStrength": 4,
+    "evidenceRequirements": {
+      "minimumSources": 1,
+      "primaryRequired": true
+    },
+    "counterFactors": [
+      "고객사 투자 지연",
+      "환율·국내 수급·기존 주가 반영 확인 필요"
+    ],
+    "validityHorizon": "SHORT_TERM"
+  },
+  {
+    "ruleId": "UK-02",
+    "ruleVersion": "1.0.0",
+    "trigger": "CHIP_DEMAND_UP",
+    "usIndustry": "Semiconductor",
+    "usCompany": [],
+    "macroCondition": [],
+    "transmissionPath": "SEMICONDUCTOR_CYCLE",
+    "koreaIndustry": "Semiconductor",
+    "koreaCompanyCandidate": [],
+    "direction": "POSITIVE",
+    "baseStrength": 3,
+    "evidenceRequirements": {
+      "minimumSources": 1,
+      "primaryRequired": true
+    },
+    "counterFactors": [
+      "재고 증가",
+      "환율·국내 수급·기존 주가 반영 확인 필요"
+    ],
+    "validityHorizon": "SHORT_TERM"
+  },
+  {
+    "ruleId": "UK-03",
+    "ruleVersion": "1.0.0",
+    "trigger": "EV_DEMAND_DOWN",
+    "usIndustry": "Battery / EV",
+    "usCompany": [],
+    "macroCondition": [],
+    "transmissionPath": "DEMAND",
+    "koreaIndustry": "Battery / EV",
+    "koreaCompanyCandidate": [],
+    "direction": "NEGATIVE",
+    "baseStrength": 3,
+    "evidenceRequirements": {
+      "minimumSources": 1,
+      "primaryRequired": true
+    },
+    "counterFactors": [
+      "보조금 확대",
+      "환율·국내 수급·기존 주가 반영 확인 필요"
+    ],
+    "validityHorizon": "SHORT_TERM"
+  },
+  {
+    "ruleId": "UK-04",
+    "ruleVersion": "1.0.0",
+    "trigger": "USD_UP",
+    "usIndustry": "Automobile",
+    "usCompany": [],
+    "macroCondition": [],
+    "transmissionPath": "FX",
+    "koreaIndustry": "Automobile",
+    "koreaCompanyCandidate": [],
+    "direction": "MIXED",
+    "baseStrength": 2,
+    "evidenceRequirements": {
+      "minimumSources": 1,
+      "primaryRequired": true
+    },
+    "counterFactors": [
+      "수입 원가 증가",
+      "환율·국내 수급·기존 주가 반영 확인 필요"
+    ],
+    "validityHorizon": "SHORT_TERM"
+  },
+  {
+    "ruleId": "UK-05",
+    "ruleVersion": "1.0.0",
+    "trigger": "OIL_UP",
+    "usIndustry": "Energy",
+    "usCompany": [],
+    "macroCondition": [],
+    "transmissionPath": "ENERGY",
+    "koreaIndustry": "Energy",
+    "koreaCompanyCandidate": [],
+    "direction": "MIXED",
+    "baseStrength": 3,
+    "evidenceRequirements": {
+      "minimumSources": 1,
+      "primaryRequired": true
+    },
+    "counterFactors": [
+      "정제마진 축소",
+      "환율·국내 수급·기존 주가 반영 확인 필요"
+    ],
+    "validityHorizon": "SHORT_TERM"
+  },
+  {
+    "ruleId": "UK-06",
+    "ruleVersion": "1.0.0",
+    "trigger": "DRUG_POLICY_TIGHTEN",
+    "usIndustry": "Bio / Healthcare",
+    "usCompany": [],
+    "macroCondition": [],
+    "transmissionPath": "REGULATION",
+    "koreaIndustry": "Bio / Healthcare",
+    "koreaCompanyCandidate": [],
+    "direction": "NEGATIVE",
+    "baseStrength": 3,
+    "evidenceRequirements": {
+      "minimumSources": 1,
+      "primaryRequired": true
+    },
+    "counterFactors": [
+      "국내 적용 범위 차이",
+      "환율·국내 수급·기존 주가 반영 확인 필요"
+    ],
+    "validityHorizon": "SHORT_TERM"
+  },
+  {
+    "ruleId": "UK-07",
+    "ruleVersion": "1.0.0",
+    "trigger": "RATES_UP",
+    "usIndustry": "Internet / Platform",
+    "usCompany": [],
+    "macroCondition": [],
+    "transmissionPath": "INTEREST_RATE",
+    "koreaIndustry": "Internet / Platform",
+    "koreaCompanyCandidate": [],
+    "direction": "NEGATIVE",
+    "baseStrength": 3,
+    "evidenceRequirements": {
+      "minimumSources": 1,
+      "primaryRequired": true
+    },
+    "counterFactors": [
+      "실적 개선",
+      "환율·국내 수급·기존 주가 반영 확인 필요"
+    ],
+    "validityHorizon": "SHORT_TERM"
+  },
+  {
+    "ruleId": "UK-08",
+    "ruleVersion": "1.0.0",
+    "trigger": "DEFENSE_BUDGET_UP",
+    "usIndustry": "Defense / Aerospace",
+    "usCompany": [],
+    "macroCondition": [],
+    "transmissionPath": "POLICY",
+    "koreaIndustry": "Defense / Aerospace",
+    "koreaCompanyCandidate": [],
+    "direction": "POSITIVE",
+    "baseStrength": 3,
+    "evidenceRequirements": {
+      "minimumSources": 1,
+      "primaryRequired": true
+    },
+    "counterFactors": [
+      "계약 및 수출 제한",
+      "환율·국내 수급·기존 주가 반영 확인 필요"
+    ],
+    "validityHorizon": "SHORT_TERM"
+  },
+  {
+    "ruleId": "UK-09",
+    "ruleVersion": "1.0.0",
+    "trigger": "CONSUMPTION_DOWN",
+    "usIndustry": "Consumer",
+    "usCompany": [],
+    "macroCondition": [],
+    "transmissionPath": "DEMAND",
+    "koreaIndustry": "Consumer",
+    "koreaCompanyCandidate": [],
+    "direction": "NEGATIVE",
+    "baseStrength": 2,
+    "evidenceRequirements": {
+      "minimumSources": 1,
+      "primaryRequired": true
+    },
+    "counterFactors": [
+      "국내 소비 회복",
+      "환율·국내 수급·기존 주가 반영 확인 필요"
+    ],
+    "validityHorizon": "SHORT_TERM"
+  },
+  {
+    "ruleId": "UK-10",
+    "ruleVersion": "1.0.0",
+    "trigger": "LIQUIDITY_DOWN",
+    "usIndustry": "Finance",
+    "usCompany": [],
+    "macroCondition": [],
+    "transmissionPath": "LIQUIDITY",
+    "koreaIndustry": "Finance",
+    "koreaCompanyCandidate": [],
+    "direction": "NEGATIVE",
+    "baseStrength": 3,
+    "evidenceRequirements": {
+      "minimumSources": 1,
+      "primaryRequired": true
+    },
+    "counterFactors": [
+      "정책 대응",
+      "환율·국내 수급·기존 주가 반영 확인 필요"
+    ],
+    "validityHorizon": "SHORT_TERM"
+  },
+  {
+    "ruleId": "UK-11",
+    "ruleVersion": "1.0.0",
+    "trigger": "INPUT_COST_UP",
+    "usIndustry": "Energy",
+    "usCompany": [],
+    "macroCondition": [],
+    "transmissionPath": "COMMODITY",
+    "koreaIndustry": "Consumer",
+    "koreaCompanyCandidate": [],
+    "direction": "NEGATIVE",
+    "baseStrength": 2,
+    "evidenceRequirements": {
+      "minimumSources": 1,
+      "primaryRequired": true
+    },
+    "counterFactors": [
+      "가격 전가",
+      "환율·국내 수급·기존 주가 반영 확인 필요"
+    ],
+    "validityHorizon": "SHORT_TERM"
+  },
+  {
+    "ruleId": "UK-12",
+    "ruleVersion": "1.0.0",
+    "trigger": "SUPPLY_DISRUPTION",
+    "usIndustry": "Semiconductor",
+    "usCompany": [],
+    "macroCondition": [],
+    "transmissionPath": "SUPPLY_CHAIN",
+    "koreaIndustry": "Semiconductor",
+    "koreaCompanyCandidate": [],
+    "direction": "MIXED",
+    "baseStrength": 3,
+    "evidenceRequirements": {
+      "minimumSources": 1,
+      "primaryRequired": true
+    },
+    "counterFactors": [
+      "대체 공급 확보",
+      "환율·국내 수급·기존 주가 반영 확인 필요"
+    ],
+    "validityHorizon": "SHORT_TERM"
+  },
+  {
+    "ruleId": "UK-13",
+    "ruleVersion": "1.0.0",
+    "trigger": "RISK_OFF",
+    "usIndustry": "Finance",
+    "usCompany": [],
+    "macroCondition": [],
+    "transmissionPath": "RISK_SENTIMENT",
+    "koreaIndustry": "Finance",
+    "koreaCompanyCandidate": [],
+    "direction": "NEGATIVE",
+    "baseStrength": 2,
+    "evidenceRequirements": {
+      "minimumSources": 1,
+      "primaryRequired": true
+    },
+    "counterFactors": [
+      "국내 유입 자금",
+      "환율·국내 수급·기존 주가 반영 확인 필요"
+    ],
+    "validityHorizon": "SHORT_TERM"
+  }
+]

@@ -1,0 +1,56 @@
+{
+  "verifiedAt": "2026-09-13T05:17:44Z",
+  "environment": {
+    "node": "v24.15.0",
+    "platform": "Windows",
+    "execution": "local"
+  },
+  "checks": [
+    {
+      "command": "npm.cmd run typecheck",
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "command": "npm.cmd run build (executed inside test and sample)",
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "command": "npm.cmd test",
+      "status": "PASS",
+      "exitCode": 0,
+      "tests": 30,
+      "passed": 30,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "command": "npm.cmd run sample",
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "command": "generated artifact consistency assertions",
+      "status": "PASS",
+      "exitCode": 0,
+      "sections": 9,
+      "evidenceRecords": 5,
+      "impactCandidates": 1
+    }
+  ],
+  "reportId": "SAMPLE-2000-01-03-bf2dc8032178",
+  "sample": true,
+  "publishStatus": "BLOCKED",
+  "manualReviewStatus": "PENDING",
+  "unverified": [
+    "실제 API 연결 및 시세",
+    "원문 진위 및 출처 URL 소유",
+    "공식 거래일 자동 검증",
+    "이용 약관 및 상업적 이용",
+    "실제 1거래일 운영 품질",
+    "10~20분 검수 소요시간",
+    "Blogger 연동"
+  ],
+  "unresolvedTestFailures": 0
+}

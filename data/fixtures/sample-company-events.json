@@ -1,0 +1,23 @@
+{
+  "sample": true,
+  "records": [
+    {
+      "sample": true,
+      "sourceId": "SAMPLE_A",
+      "sourceUrl": "https://example.invalid/sample-a",
+      "observedAt": "2000-01-03T21:00:00Z",
+      "collectedAt": "2000-01-03T21:10:00Z",
+      "unit": "text",
+      "status": "OK",
+      "missingReasons": {},
+      "id": "SAMPLE-EVENT-1",
+      "companyId": "SAMPLE_COMPANY",
+      "ticker": "SAMPLE_CO",
+      "eventType": "AI_CAPEX_UP",
+      "eventTime": "2000-01-03T21:00:00Z",
+      "title": "SAMPLE 가상 AI 설비투자 확대 시나리오",
+      "summary": "실제 기업 발표가 아닌 규칙 엔진 검증용 문장.",
+      "primarySourceUrl": "https://example.invalid/sample-a"
+    }
+  ]
+}
