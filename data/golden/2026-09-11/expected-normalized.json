@@ -154,7 +154,9 @@
       "collectedAt": "2026-09-13T08:30:11Z",
       "unit": "text",
       "status": "OK",
-      "missingReasons": {},
+      "missingReasons": {
+        "filedAt": "SEC submissions endpoint provides filingDate/reportDate, not accepted timestamp"
+      },
       "collectionMode": "API",
       "verificationUrls": [
         "https://data.sec.gov/submissions/CIK0001341439.json",
@@ -211,7 +213,9 @@
       "cik": "0001341439",
       "companyName": "Oracle Corporation",
       "primaryDocument": "orcl-20260910.htm",
-      "filingUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526387905/orcl-20260910.htm"
+      "filingUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526387905/orcl-20260910.htm",
+      "filedDate": "2026-09-10",
+      "timestampPrecision": "DATE"
     }
   ]
 }

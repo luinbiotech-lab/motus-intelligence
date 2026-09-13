@@ -3,6 +3,8 @@ import type { EvidencePackage, EvidenceRecord, FieldProvenance, InputBundle, Kor
 import { normalize, validate, worst, groups } from './validation.js';
 import { analyze } from './analysis.js';
 import { generateReport, markdown } from './report.js';
+import { buildClaimsFromOutcome } from './cross-verification.js';
+import { buildReviewQueue, initialApprovalStatus } from './review.js';
 import { marketChange } from '../utils/calculations.js';
 import { entitySchemas, ruleSchema, schemaErrors, sourceSchema } from '../data/schemas.js';
 export function configurationErrors(sources:Source[],rules:Rule[]): string[] {
@@ -57,7 +59,9 @@ export function runPipeline(raw:unknown,sources:Source[],rules:Rule[],generatedA
     });
   }
   const reportId=`${input.sample?'SAMPLE':'MANUAL'}-${normalized.input?input.tradingDate:'INVALID-INPUT'}-${createHash('sha256').update(JSON.stringify({raw,rules,sources})).digest('hex').slice(0,12)}`;
-  const report=generateReport(safeInput,validation,candidates,reportId,generatedAt);
+  const crossVerification=normalized.input&&!configErrors.length?buildClaimsFromOutcome(safeInput,candidates,reportId,generatedAt,sources):{claims:[],conflicts:[]};
+  const reviewQueue=buildReviewQueue(crossVerification.claims,crossVerification.conflicts);
+  const report=generateReport(safeInput,validation,candidates,reportId,generatedAt,crossVerification.claims);
   if(!normalized.input) {report.tradingDate='INVALID_INPUT';report.seoTitle='BLOCKED — 입력 형식 오류';report.threeLineSummary=['입력 형식 오류','시장 해석 생성 안 함','근거 패키지의 원본 및 검증 오류 확인'];report.sections=report.sections.map(s=>({...s,items:[{text:'BLOCKED — 입력 형식 오류로 생성 불가',nature:'CONFIRMED_FACT',evidenceIds:[]}]}));}
   const blocked=!normalized.input||configErrors.length>0||validation.issues.some(i=>i.status==='BLOCKED');
   if(blocked) report.status='BLOCKED';
@@ -75,7 +79,7 @@ export function runPipeline(raw:unknown,sources:Source[],rules:Rule[],generatedA
     evidenceRecords.push({evidenceId:id,reportId,sourceType:group,sourceId:field('sourceId'),sourceUrl:field('sourceUrl'),observedAt:field('observedAt'),collectedAt:field('collectedAt'),originalValue,unit:field('unit'),calculation,ruleVersion:'1.0.0',usedInSections:report.sections.filter(s=>s.items.some(i=>i.evidenceIds.includes(id))).map(s=>s.id),verificationStatus:worst(validation.issues.filter(i=>i.recordId===id).map(i=>i.status)),...(fieldProvenance?{fieldProvenance}: {})});
   }
   step('Generate Evidence Package','OK','JSON 원본/계산/규칙/검수상태 보관');
-  const evidence:EvidencePackage={reportId,reportMetadata:report,sourceMetadata:sources,records:evidenceRecords,originalInput:storedInput,inputSha256,redactedFields,analysisRules:rules,impactJudgments:candidates,aiGeneratedText:{used:false,text:null,reason:'결정론적 템플릿 생성; 외부 AI 호출 없음. 생성 문장은 reportMetadata.sections에 보존.'},validationResult:validation,manualReviewStatus:'PENDING',publishStatus:'BLOCKED',stages,reviewMetrics:{automaticGeneratedAt:generatedAt,humanReviewStartedAt:null,humanReviewCompletedAt:null,durationMinutes:null,measurementStatus:'NOT_MEASURED',edits:{NUMERIC_ERROR:[],SOURCE_ERROR:[],CAUSE_INTERPRETATION:[],KOREA_LINK:[],WORDING:[],SEO:[],LINK:[],OTHER:[]}}};
+  const evidence:EvidencePackage={reportId,reportMetadata:report,sourceMetadata:sources,records:evidenceRecords,originalInput:storedInput,inputSha256,redactedFields,analysisRules:rules,impactJudgments:candidates,aiGeneratedText:{used:false,text:null,reason:'결정론적 템플릿 생성; 외부 AI 호출 없음. 생성 문장은 reportMetadata.sections에 보존.'},validationResult:validation,manualReviewStatus:'PENDING',publishStatus:'BLOCKED',stages,reviewMetrics:{automaticGeneratedAt:generatedAt,humanReviewStartedAt:null,humanReviewCompletedAt:null,durationMinutes:null,measurementStatus:'NOT_MEASURED',edits:{NUMERIC_ERROR:[],SOURCE_ERROR:[],CAUSE_INTERPRETATION:[],KOREA_LINK:[],WORDING:[],SEO:[],LINK:[],OTHER:[]},reviewStartedAt:null,reviewCompletedAt:null,reviewDurationSeconds:null,claimsReviewed:0,claimsModified:0,claimsRejected:0,conflictsResolved:0,manualEdits:[],reviewer:null},claims:crossVerification.claims,conflicts:crossVerification.conflicts,reviewQueue,approvalStatus:initialApprovalStatus(blocked,crossVerification.claims,crossVerification.conflicts)};
   const operationalStatus=blocked?'BLOCKED':validation.issues.some(i=>i.status==='INVALID_VALUE')?'FAILED':validation.issues.some(i=>!['HOLIDAY','EARLY_CLOSE'].includes(i.status))?'REVIEW_REQUIRED':'PASS';
   return {operationalStatus,report,evidence,markdown:markdown(report,validation),stages};
 }

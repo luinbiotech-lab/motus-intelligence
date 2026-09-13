@@ -1,12 +1,49 @@
-export const statuses = ['OK','NO_DATA','DATA_NOT_CONNECTED','DELAYED','CONFLICT','LOW_CONFIDENCE','REVIEW_REQUIRED','SOURCE_UNAVAILABLE','INVALID_VALUE','HOLIDAY','EARLY_CLOSE','BLOCKED'] as const;
+export const statuses = ['OK','NO_DATA','NOT_RELEASED','SCHEDULED','DATA_NOT_CONNECTED','DELAYED','CONFLICT','LOW_CONFIDENCE','REVIEW_REQUIRED','SOURCE_UNAVAILABLE','INVALID_VALUE','HOLIDAY','EARLY_CLOSE','BLOCKED'] as const;
 export type Status = typeof statuses[number];
 export type Nature = 'CONFIRMED_FACT' | 'CALCULATED' | 'INFERENCE' | 'EXPECTATION' | 'OPINION';
 export type Direction = 'POSITIVE' | 'NEGATIVE' | 'MIXED' | 'HOLD';
 export type EvidenceLevel = 'A' | 'B' | 'C' | 'UNVERIFIED';
 export type Horizon = 'INTRADAY' | 'SHORT_TERM' | 'MEDIUM_TERM';
 export type CollectionMode = 'SAMPLE_FIXTURE' | 'MANUAL_VERIFIED' | 'API';
+export type VerificationTier = 'A'|'B'|'C'|'D';
+export type ClaimType = 'MARKET_FACT'|'MACRO_FACT'|'CORPORATE_FACT'|'POLICY_FACT'|'GEOPOLITICAL_FACT'|'CAUSAL_INTERPRETATION'|'MARKET_REACTION'|'KOREA_IMPACT';
+export type ClaimVerificationStatus = 'VERIFIED'|'PARTIALLY_VERIFIED'|'CONFLICT'|'UNVERIFIED'|'INSUFFICIENT_SOURCES'|'PRIMARY_SOURCE_ONLY'|'REVIEW_REQUIRED'|'REJECTED';
+export type InformationType = 'FACT'|'INTERPRETATION'|'ANALYSIS';
+export type MarketRelevance = 'HIGH'|'MEDIUM'|'LOW'|'NONE';
+export type ConflictType = 'NUMERIC_VALUE'|'TIMESTAMP'|'EVENT_EXISTENCE'|'CAUSAL_NARRATIVE'|'PARTY_CLAIM';
+export type ConflictMateriality = 'LOW'|'MEDIUM'|'HIGH'|'CRITICAL';
+export type ResolutionStatus = 'OPEN'|'RESOLVED'|'REJECTED';
+export type ReportApprovalStatus = 'DRAFT'|'AUTO_VALIDATED'|'REVIEW_REQUIRED'|'APPROVED'|'BLOCKED'|'PUBLISHED';
 export interface FieldProvenance {
   sourceId: string; sourceUrl: string; observedAt: string; collectedAt: string;
+}
+export interface ClaimSource {
+  sourceId: string; sourceUrl: string; evidenceId: string; value?: string|number|null;
+  observedAt: string; collectedAt: string; tier?: VerificationTier; role?: 'PARTY_A'|'PARTY_B'|'NEUTRAL'|'OFFICIAL'|'MEDIA';
+}
+export interface GeoVerificationContext {
+  eventId: string; countries: string[]; actors: string[]; region: string; eventType: string;
+  affectedMarkets: string[]; affectedCommodities: string[]; affectedRoutes: string[];
+  partyASources: ClaimSource[]; partyBSources: ClaimSource[]; neutralSources: ClaimSource[];
+  officialSources: ClaimSource[]; conflictStatus: ClaimVerificationStatus; unresolvedClaims: string[];
+}
+export interface ClaimRecord {
+  claimId: string; reportId: string; claimText: string; claimType: ClaimType; subject: string;
+  predicate: string; value: string|number|null; unit: string|null; eventTime: string;
+  verificationStatus: ClaimVerificationStatus; confidenceScore: number; evidenceIds: string[];
+  supportingSources: ClaimSource[]; contradictingSources: ClaimSource[]; unresolvedSources: ClaimSource[];
+  sourceDiversity: { tierCount: number; sourceCount: number; independentSourceCount: number; tiers: VerificationTier[] };
+  geopoliticalContext: GeoVerificationContext|null; informationType: InformationType; marketRelevance: MarketRelevance;
+  manualReviewRequired: boolean; createdAt: string; verifiedAt: string;
+}
+export interface ConflictRecord {
+  conflictId: string; claimId: string; sourceA: ClaimSource; sourceB: ClaimSource;
+  conflictType: ConflictType; valueA: string|number|null; valueB: string|number|null;
+  materiality: ConflictMateriality; resolutionStatus: ResolutionStatus; resolutionNote: string;
+}
+export interface ReviewQueueItem {
+  itemId: string; claimId: string; priority: number; reason: string;
+  verificationStatus: ClaimVerificationStatus; conflictIds: string[];
 }
 export const paths = ['INTEREST_RATE','FX','COMMODITY','DEMAND','SUPPLY_CHAIN','SEMICONDUCTOR_CYCLE','AI_CAPEX','ENERGY','POLICY','REGULATION','LIQUIDITY','RISK_SENTIMENT'] as const;
 export type TransmissionPath = typeof paths[number];
@@ -33,6 +70,7 @@ export interface CompanyEvent extends Provenance {
 export interface FilingRecord extends Provenance {
   companyId: string; ticker: string; formType: string; accessionNumber: string; filedAt: string;
   period: string; extractedFacts: string[]; cik?: string; companyName?: string; primaryDocument?: string; filingUrl?: string;
+  acceptedAt?: string; filedDate?: string; timestampPrecision?: 'DATE'|'ACCEPTED_TIMESTAMP';
 }
 export interface NewsReference extends Provenance {
   title: string; publisher: string; publishedAt: string; url: string; relatedTickers: string[];
@@ -54,7 +92,7 @@ export interface Source {
   sourceId: string; name: string; category: string; official: boolean; priority: number;
   authenticationType: string; rateLimit: string; latency: string;
   redistributionStatus: 'UNKNOWN'; commercialUseStatus: 'UNKNOWN'; enabled: boolean;
-  notes: string; homepage: string; maxAgeMinutes: number; connectionStatus: Status;
+  notes: string; homepage: string; maxAgeMinutes: number; connectionStatus: Status; verificationTier?: VerificationTier;
 }
 export interface Rule {
   ruleId: string; ruleVersion: string; trigger: string; usIndustry: string; usCompany: string[];
@@ -72,7 +110,7 @@ export interface KoreaImpactCandidate {
 }
 export interface Issue { recordId: string; field: string; status: Status; message: string }
 export interface ValidationResult { status: Status; issues: Issue[]; excludedIds: string[] }
-export interface Section { id: string; title: string; items: { text: string; nature: Nature; evidenceIds: string[] }[] }
+export interface Section { id: string; title: string; items: { text: string; nature: Nature; evidenceIds: string[]; claimIds?: string[] }[] }
 export interface ReportRecord {
   reportId: string; tradingDate: string; generatedAt: string; publishedAt: string|null;
   templateVersion: string; analysisRuleVersion: string; status: Status; sample: boolean;
@@ -89,13 +127,16 @@ export interface EvidencePackage {
   originalInput: unknown; inputSha256: string; redactedFields: string[]; analysisRules: Rule[]; impactJudgments: KoreaImpactCandidate[];
   aiGeneratedText: { used: false; text: null; reason: string }; validationResult: ValidationResult;
   manualReviewStatus: 'PENDING'; publishStatus: 'BLOCKED'; stages: StageResult[];
-  reviewMetrics: ReviewMetrics;
+  reviewMetrics: ReviewMetrics; claims?: ClaimRecord[]; conflicts?: ConflictRecord[];
+  reviewQueue?: ReviewQueueItem[]; approvalStatus?: ReportApprovalStatus;
 }
 export type ReviewCategory = 'NUMERIC_ERROR'|'SOURCE_ERROR'|'CAUSE_INTERPRETATION'|'KOREA_LINK'|'WORDING'|'SEO'|'LINK'|'OTHER';
 export interface ReviewMetrics {
   automaticGeneratedAt: string; humanReviewStartedAt: string|null; humanReviewCompletedAt: string|null;
   durationMinutes: number|null; measurementStatus: 'NOT_MEASURED'|'MEASURED';
-  edits: Record<ReviewCategory,string[]>;
+  edits: Record<ReviewCategory,string[]>; reviewStartedAt?: string|null; reviewCompletedAt?: string|null;
+  reviewDurationSeconds?: number|null; claimsReviewed?: number; claimsModified?: number; claimsRejected?: number;
+  conflictsResolved?: number; manualEdits?: string[]; reviewer?: string|null;
 }
 export interface StageResult { stage: string; status: Status; detail: string }
 export interface Outcome {

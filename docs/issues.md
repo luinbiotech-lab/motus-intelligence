@@ -20,5 +20,8 @@
 | BLS 공식 index 재계산값과 수동 rounded previous 차이 | API index에서 계산한 July m/m은 0.07, 수동 입력은 발표문 rounded 값 0.1 | golden comparison에 `CPI-MOM previous` 차이 -0.03을 `REVIEW_REQUIRED`로 기록 |
 | SEC submissions metadata의 시각 정밀도 제한 | submissions endpoint는 filingDate/reportDate 중심이며 accepted timestamp를 직접 제공하지 않음 | golden comparison에 `SEC filedAt` 수동 accepted time과 API normalized date 차이를 `REVIEW_REQUIRED`로 기록 |
 | API 레코드 ID가 signal evidenceIds와 달라질 수 있음 | 어댑터 기본 ID와 기존 수동 fixture ID가 다르면 분석 근거 연결이 끊김 | `recordId`/`recordIds` 옵션을 추가해 golden day에서 기존 evidence ID를 보존 |
+| 분석 claim의 서로 다른 근거값을 충돌로 오판 | CPI, 금리, 공시 등 서로 다른 evidence를 하나의 KOREA_IMPACT claim 근거로 묶으면 값이 다를 수밖에 없음 | 분석 claim은 supporting source 간 value equality 충돌 검사를 건너뛰고, 명시 contradictingSources가 있을 때 narrative conflict로 처리 |
+| 작은 숫자 차이가 status로 승격되지 않음 | materiality가 MEDIUM/LOW일 때 statusFor가 HIGH/CRITICAL만 CONFLICT 처리 | conflict record가 있으면 materiality와 무관하게 claim status는 CONFLICT로 두고, materiality는 검수 우선순위에 사용 |
+| APPROVED 전 publish 차단 경로 미검증 | Sprint 2B에는 publishStatus BLOCKED만 있었고 승인 상태 전환 모델이 없었음 | approvalStatus와 transitionApprovalStatus를 추가하고 APPROVED 전 publish는 BLOCKED가 되도록 테스트 |
 
 테스트되지 않은 API 연결, 실제 원문 진위, 거래 캘린더 정확성, 약관 및 10~20분 운영 시간은 PASS로 표시하지 않는다. Sprint 2B에서는 U.S. Treasury, BLS CPI, SEC submissions 어댑터를 mock 및 실호출로 PASS 확인했다.

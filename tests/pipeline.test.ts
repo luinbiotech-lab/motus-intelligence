@@ -1,11 +1,15 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import type { FilingRecord, InputBundle, MacroRelease, MarketSnapshot, Rule, Source, Status } from '../src/domain/models.js';
+import type { ClaimDraft } from '../src/services/cross-verification.js';
+import type { ClaimRecord, ClaimSource, FilingRecord, GeoVerificationContext, InputBundle, MacroRelease, MarketSnapshot, Rule, Source, Status, VerificationTier } from '../src/domain/models.js';
 import { runPipeline, configurationErrors } from '../src/services/pipeline.js';
 import { marketChange, roundPercent } from '../src/utils/calculations.js';
 import { schemaErrors, inputSchema } from '../src/data/schemas.js';
 import { BlsCpiAdapter, SecEdgarAdapter, TreasuryYieldAdapter, UnconnectedAdapter } from '../src/data/adapters.js';
+import { verifyClaims } from '../src/services/cross-verification.js';
+import { buildReviewQueue, initialApprovalStatus, transitionApprovalStatus } from '../src/services/review.js';
+import { generateReport } from '../src/services/report.js';
 const read=(p:string):unknown=>JSON.parse(readFileSync(p,'utf8'));
 const fixture=()=>structuredClone(read('data/fixtures/sample-day.json') as InputBundle);
 const realFixture=()=>structuredClone(read('data/manual/2026-09-11/input.json') as InputBundle);
@@ -222,4 +226,74 @@ test('golden day manual/API comparison detects no unexpected regression',async()
   assert.equal(input.market.find(record=>record.symbol==='US2Y')!.collectionMode,'API');
   assert.equal(input.macro.find(record=>record.indicatorId==='CPI_U_MOM')!.collectionMode,'API');
   assert.equal(input.filings[0]!.collectionMode,'API');
+});
+const claimSource=(sourceId:string,value:string|number|null,evidenceId='E1'):ClaimSource=>({sourceId,sourceUrl:`https://example.com/${sourceId}`,evidenceId,value,observedAt:'2026-09-11T12:30:00Z',collectedAt:'2026-09-11T13:00:00Z'});
+const sourceWithTier=(sourceId:string,tier:VerificationTier,official=tier==='A'):Source=>({...sources[0]!,sourceId,official,verificationTier:tier});
+const claim=(overrides:Partial<ClaimDraft>={}):ClaimDraft=>({claimId:'CLAIM-1',reportId:'REPORT-1',claimText:'미국 8월 CPI가 전월 대비 0.4% 상승했다.',claimType:'MACRO_FACT',subject:'CPI',predicate:'actual',value:0.4,unit:'percent',eventTime:'2026-09-11T12:30:00Z',evidenceIds:['E1'],supportingSources:[claimSource('BLS',0.4)],marketRelevance:'HIGH',...overrides});
+test('claim verification: official fact, two-source verified, insufficient, conflict, rejected',()=>{
+  const official=verifyClaims([claim()],sources,'2026-09-13T08:30:11Z').claims[0]!;
+  const twoSource=verifyClaims([claim({claimId:'CLAIM-2',supportingSources:[claimSource('BLS',0.4),claimSource('AP',0.4)]})],[...sources,sourceWithTier('AP','B',false)],'2026-09-13T08:30:11Z').claims[0]!;
+  const insufficient=verifyClaims([claim({claimId:'CLAIM-3',claimType:'CAUSAL_INTERPRETATION',informationType:'ANALYSIS',supportingSources:[claimSource('AP','CPI caused selloff')]})],[...sources,sourceWithTier('AP','B',false)],'2026-09-13T08:30:11Z').claims[0]!;
+  const conflictResult=verifyClaims([claim({claimId:'CLAIM-4',supportingSources:[claimSource('BLS',0.4),claimSource('AP',0.6)]})],[...sources,sourceWithTier('AP','B',false)],'2026-09-13T08:30:11Z');
+  const narrative=verifyClaims([claim({claimId:'CLAIM-5',claimType:'CAUSAL_INTERPRETATION',informationType:'ANALYSIS',supportingSources:[claimSource('AP','rates')],contradictingSources:[claimSource('CNBC','oil') as ClaimSource]})],[...sources,sourceWithTier('AP','B',false),sourceWithTier('CNBC','B',false)],'2026-09-13T08:30:11Z');
+  const rejected=verifyClaims([claim({claimId:'CLAIM-6',rejected:true})],sources,'2026-09-13T08:30:11Z').claims[0]!;
+  assert.equal(official.verificationStatus,'VERIFIED');
+  assert.equal(twoSource.verificationStatus,'VERIFIED');
+  assert.equal(insufficient.verificationStatus,'INSUFFICIENT_SOURCES');
+  assert.equal(conflictResult.claims[0]!.verificationStatus,'CONFLICT');
+  assert.equal(conflictResult.conflicts[0]!.conflictType,'NUMERIC_VALUE');
+  assert.equal(narrative.claims[0]!.verificationStatus,'CONFLICT');
+  assert.equal(narrative.conflicts[0]!.conflictType,'CAUSAL_NARRATIVE');
+  assert.equal(rejected.verificationStatus,'REJECTED');
+});
+test('geopolitical verification requires party balance plus neutral source',()=>{
+  const baseGeo:GeoVerificationContext={eventId:'GEO-1',countries:['A','B'],actors:['A government','B government'],region:'Strait',eventType:'ROUTE_BLOCKADE',affectedMarkets:['oil'],affectedCommodities:['Brent'],affectedRoutes:['shipping'],partyASources:[claimSource('PARTY_A','blocked')],partyBSources:[claimSource('PARTY_B','blocked')],neutralSources:[claimSource('UN','confirmed')],officialSources:[],conflictStatus:'UNVERIFIED',unresolvedClaims:[]};
+  const geoSources=[...sources,sourceWithTier('PARTY_A','A'),sourceWithTier('PARTY_B','A'),sourceWithTier('UN','A')];
+  const verified=verifyClaims([claim({claimId:'GEO-CLAIM-1',claimType:'GEOPOLITICAL_FACT',geopoliticalContext:baseGeo,supportingSources:[claimSource('UN','confirmed')]})],geoSources,'2026-09-13T08:30:11Z').claims[0]!;
+  const oneParty=verifyClaims([claim({claimId:'GEO-CLAIM-2',claimType:'GEOPOLITICAL_FACT',geopoliticalContext:{...baseGeo,partyBSources:[],neutralSources:[]},supportingSources:[claimSource('PARTY_A','blocked')]})],geoSources,'2026-09-13T08:30:11Z').claims[0]!;
+  const conflicted=verifyClaims([claim({claimId:'GEO-CLAIM-3',claimType:'GEOPOLITICAL_FACT',geopoliticalContext:{...baseGeo,conflictStatus:'CONFLICT'},supportingSources:[claimSource('PARTY_A','blocked')],contradictingSources:[claimSource('PARTY_B','not blocked')]})],geoSources,'2026-09-13T08:30:11Z').claims[0]!;
+  assert.equal(verified.verificationStatus,'VERIFIED');
+  assert.equal(oneParty.verificationStatus,'REVIEW_REQUIRED');
+  assert.equal(conflicted.verificationStatus,'CONFLICT');
+});
+test('report blocks unverified and conflict claims but allows verified claim with trace',()=>{
+  const input=realFixture();
+  const unverified=verifyClaims([claim({claimId:'CLAIM-SPX-BAD',claimText:'SPX unverified',evidenceIds:['SPX-2026-09-11'],supportingSources:[]})],sources,'2026-09-13T08:30:11Z').claims[0]!;
+  const blockedReport=generateReport(input,{status:'OK',issues:[],excludedIds:[]},[],'REPORT-1','2026-09-13T08:30:11Z',[unverified]);
+  assert.equal(blockedReport.sections[2]!.items.some(item=>item.evidenceIds.includes('SPX-2026-09-11')),false);
+  const verified=verifyClaims([claim({claimId:'CLAIM-SPX-GOOD',evidenceIds:['SPX-2026-09-11'],supportingSources:[claimSource('SP_DJI',7656.98,'SPX-2026-09-11')]})],sources,'2026-09-13T08:30:11Z').claims[0]!;
+  const allowedReport=generateReport(input,{status:'OK',issues:[],excludedIds:[]},[],'REPORT-2','2026-09-13T08:30:11Z',[verified]);
+  const item=allowedReport.sections[2]!.items.find(row=>row.evidenceIds.includes('SPX-2026-09-11'))!;
+  assert.ok(item.claimIds?.includes('CLAIM-SPX-GOOD'));
+});
+test('review queue priority and approval state transition block publish before approval',()=>{
+  const result=verifyClaims([claim({claimId:'A',supportingSources:[claimSource('BLS',0.4),claimSource('AP',0.6)]}),claim({claimId:'B',supportingSources:[]}),claim({claimId:'C',supportingSources:[claimSource('BLS',0.4)]})],[...sources,sourceWithTier('AP','B',false)],'2026-09-13T08:30:11Z');
+  const queue=buildReviewQueue(result.claims,result.conflicts);
+  assert.equal(queue[0]!.claimId,'A');
+  assert.equal(initialApprovalStatus(false,result.claims,result.conflicts),'REVIEW_REQUIRED');
+  assert.equal(transitionApprovalStatus('AUTO_VALIDATED','publish'),'BLOCKED');
+  assert.equal(transitionApprovalStatus(transitionApprovalStatus('REVIEW_REQUIRED','approve'),'publish'),'PUBLISHED');
+});
+test('pipeline creates claim traceability, review queue, and approval status',()=>{
+  const result=runReal(realFixture());
+  assert.ok(result.evidence.claims!.length>0);
+  assert.equal(result.evidence.conflicts!.length,0);
+  assert.equal(result.evidence.approvalStatus,'AUTO_VALIDATED');
+  const traced=result.report.sections.flatMap(section=>section.items).find(item=>item.claimIds?.length);
+  assert.ok(traced);
+  const claimId=traced!.claimIds![0]!;
+  const claim=result.evidence.claims!.find(item=>item.claimId===claimId)!;
+  assert.ok(claim.evidenceIds.some(id=>traced!.evidenceIds.includes(id)));
+});
+test('BLS adapter distinguishes scheduled/not released data',async()=>{
+  const result=await new BlsCpiAdapter(async()=>({ok:true,status:200,text:async()=>blsJson()})).collect(blsSource(),{...blsOptions,collectedAt:'2026-09-11T12:00:00Z'});
+  assert.equal(result.status,'NOT_RELEASED');
+  assert.equal(result.records.length,0);
+});
+test('SEC adapter preserves accepted timestamp when available and marks date precision when unavailable',async()=>{
+  const accepted=await new SecEdgarAdapter(async()=>({ok:true,status:200,text:async()=>secJson()}),0).collect(secSource(),{...secOptions,acceptedAt:'2026-09-10T20:16:50Z'});
+  const dateOnly=await new SecEdgarAdapter(async()=>({ok:true,status:200,text:async()=>secJson()}),0).collect(secSource(),secOptions);
+  assert.equal((accepted.records[0] as FilingRecord).timestampPrecision,'ACCEPTED_TIMESTAMP');
+  assert.equal((accepted.records[0] as FilingRecord).filedAt,'2026-09-10T20:16:50Z');
+  assert.equal((dateOnly.records[0] as FilingRecord).timestampPrecision,'DATE');
 });

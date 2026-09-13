@@ -14,7 +14,8 @@
     "notes": "Sprint 2B SEC submissions adapter 연결. 8-K/10-Q/10-K metadata만 정규화하며 전문 분석 없음.",
     "homepage": "https://www.sec.gov/",
     "maxAgeMinutes": 10080,
-    "connectionStatus": "OK"
+    "connectionStatus": "OK",
+    "verificationTier": "A"
   },
   {
     "sourceId": "BLS",
@@ -31,7 +32,8 @@
     "notes": "Sprint 2B BLS CPI adapter 연결. 공식 CPI index에서 전월 대비 actual/previous를 계산하며 consensus는 생성하지 않음.",
     "homepage": "https://www.bls.gov/",
     "maxAgeMinutes": 10080,
-    "connectionStatus": "OK"
+    "connectionStatus": "OK",
+    "verificationTier": "A"
   },
   {
     "sourceId": "BEA",
@@ -48,7 +50,8 @@
     "notes": "Sprint 1 수동 출처 분류용. 인증 방식도 연결 전 재검증. 공식 분류는 개별 입력의 진위 보증이 아님.",
     "homepage": "https://www.bea.gov/",
     "maxAgeMinutes": 2160,
-    "connectionStatus": "DATA_NOT_CONNECTED"
+    "connectionStatus": "DATA_NOT_CONNECTED",
+    "verificationTier": "A"
   },
   {
     "sourceId": "FRED",
@@ -65,7 +68,8 @@
     "notes": "Sprint 1 수동 출처 분류용. 인증 방식도 연결 전 재검증. 공식 분류는 개별 입력의 진위 보증이 아님.",
     "homepage": "https://fred.stlouisfed.org/",
     "maxAgeMinutes": 2160,
-    "connectionStatus": "DATA_NOT_CONNECTED"
+    "connectionStatus": "DATA_NOT_CONNECTED",
+    "verificationTier": "A"
   },
   {
     "sourceId": "US_TREASURY",
@@ -82,7 +86,8 @@
     "notes": "Sprint 2A CSV adapter 연결. 2Y/10Y 일별 par yield만 정규화하며 실패 시 가상값 대체 없음.",
     "homepage": "https://home.treasury.gov/",
     "maxAgeMinutes": 2880,
-    "connectionStatus": "OK"
+    "connectionStatus": "OK",
+    "verificationTier": "A"
   },
   {
     "sourceId": "FED",
@@ -99,7 +104,8 @@
     "notes": "Sprint 1 수동 출처 분류용. 인증 방식도 연결 전 재검증. 공식 분류는 개별 입력의 진위 보증이 아님.",
     "homepage": "https://www.federalreserve.gov/",
     "maxAgeMinutes": 2160,
-    "connectionStatus": "DATA_NOT_CONNECTED"
+    "connectionStatus": "DATA_NOT_CONNECTED",
+    "verificationTier": "A"
   },
   {
     "sourceId": "CORPORATE_IR",
@@ -116,7 +122,8 @@
     "notes": "Sprint 1 수동 출처 분류용. 인증 방식도 연결 전 재검증. 공식 분류는 개별 입력의 진위 보증이 아님.",
     "homepage": "https://www.sec.gov/edgar/search/",
     "maxAgeMinutes": 10080,
-    "connectionStatus": "DATA_NOT_CONNECTED"
+    "connectionStatus": "DATA_NOT_CONNECTED",
+    "verificationTier": "A"
   },
   {
     "sourceId": "KRX",
@@ -133,7 +140,8 @@
     "notes": "Sprint 1 수동 출처 분류용. 인증 방식도 연결 전 재검증. 공식 분류는 개별 입력의 진위 보증이 아님.",
     "homepage": "https://www.krx.co.kr/",
     "maxAgeMinutes": 2160,
-    "connectionStatus": "DATA_NOT_CONNECTED"
+    "connectionStatus": "DATA_NOT_CONNECTED",
+    "verificationTier": "A"
   },
   {
     "sourceId": "OPENDART",
@@ -150,7 +158,8 @@
     "notes": "Sprint 1 수동 출처 분류용. 인증 방식도 연결 전 재검증. 공식 분류는 개별 입력의 진위 보증이 아님.",
     "homepage": "https://opendart.fss.or.kr/",
     "maxAgeMinutes": 2160,
-    "connectionStatus": "DATA_NOT_CONNECTED"
+    "connectionStatus": "DATA_NOT_CONNECTED",
+    "verificationTier": "A"
   },
   {
     "sourceId": "ECOS",
@@ -167,7 +176,8 @@
     "notes": "Sprint 1 수동 출처 분류용. 인증 방식도 연결 전 재검증. 공식 분류는 개별 입력의 진위 보증이 아님.",
     "homepage": "https://ecos.bok.or.kr/",
     "maxAgeMinutes": 2160,
-    "connectionStatus": "DATA_NOT_CONNECTED"
+    "connectionStatus": "DATA_NOT_CONNECTED",
+    "verificationTier": "A"
   },
   {
     "sourceId": "BROKER_OPEN_API",
@@ -184,7 +194,8 @@
     "notes": "Sprint 1 수동 출처 분류용. 인증 방식도 연결 전 재검증. 공식 분류는 개별 입력의 진위 보증이 아님.",
     "homepage": "https://example.invalid/broker",
     "maxAgeMinutes": 2160,
-    "connectionStatus": "DATA_NOT_CONNECTED"
+    "connectionStatus": "DATA_NOT_CONNECTED",
+    "verificationTier": "D"
   },
   {
     "sourceId": "SAMPLE_A",
@@ -201,7 +212,8 @@
     "notes": "테스트에서 공식 출처 조건을 모사하는 가상 출처. 실제 사용 금지.",
     "homepage": "https://example.invalid/sample-a",
     "maxAgeMinutes": 2160,
-    "connectionStatus": "DATA_NOT_CONNECTED"
+    "connectionStatus": "DATA_NOT_CONNECTED",
+    "verificationTier": "A"
   },
   {
     "sourceId": "SAMPLE_B",
@@ -218,7 +230,8 @@
     "notes": "테스트에서 공식 출처 조건을 모사하는 가상 출처. 실제 사용 금지.",
     "homepage": "https://example.invalid/sample-b",
     "maxAgeMinutes": 2160,
-    "connectionStatus": "DATA_NOT_CONNECTED"
+    "connectionStatus": "DATA_NOT_CONNECTED",
+    "verificationTier": "A"
   },
   {
     "sourceId": "NYSE",
@@ -235,7 +248,8 @@
     "notes": "공식 휴장·조기종료 달력 수동 검증용.",
     "homepage": "https://www.nyse.com/trade/hours-calendars",
     "maxAgeMinutes": 525600,
-    "connectionStatus": "DATA_NOT_CONNECTED"
+    "connectionStatus": "DATA_NOT_CONNECTED",
+    "verificationTier": "A"
   },
   {
     "sourceId": "SP_DJI",
@@ -252,7 +266,8 @@
     "notes": "지수 제공자 페이지와 보조 종가 자료를 함께 수동 검증. 재배포 조건 미검증.",
     "homepage": "https://www.spglobal.com/spdji/",
     "maxAgeMinutes": 2880,
-    "connectionStatus": "DATA_NOT_CONNECTED"
+    "connectionStatus": "DATA_NOT_CONNECTED",
+    "verificationTier": "A"
   },
   {
     "sourceId": "NASDAQ",
@@ -269,7 +284,8 @@
     "notes": "Nasdaq Composite 지수 제공자 페이지 수동 검증용.",
     "homepage": "https://www.nasdaq.com/market-activity/index/comp",
     "maxAgeMinutes": 2880,
-    "connectionStatus": "DATA_NOT_CONNECTED"
+    "connectionStatus": "DATA_NOT_CONNECTED",
+    "verificationTier": "A"
   },
   {
     "sourceId": "FTSE_RUSSELL",
@@ -286,7 +302,8 @@
     "notes": "Russell 2000 지수 제공자 페이지 수동 검증용.",
     "homepage": "https://www.lseg.com/en/ftse-russell/indices/russell-2000-index",
     "maxAgeMinutes": 2880,
-    "connectionStatus": "DATA_NOT_CONNECTED"
+    "connectionStatus": "DATA_NOT_CONNECTED",
+    "verificationTier": "A"
   },
   {
     "sourceId": "CBOE",
@@ -303,7 +320,8 @@
     "notes": "VIX 공식 역사자료 수동 검증용.",
     "homepage": "https://www.cboe.com/tradable_products/vix/vix_historical_data/",
     "maxAgeMinutes": 2880,
-    "connectionStatus": "DATA_NOT_CONNECTED"
+    "connectionStatus": "DATA_NOT_CONNECTED",
+    "verificationTier": "A"
   },
   {
     "sourceId": "ICE",
@@ -320,6 +338,7 @@
     "notes": "DXY·Brent 제공자 페이지와 보조 종가 자료를 함께 수동 검증. 재배포 조건 미검증.",
     "homepage": "https://www.ice.com/market-data",
     "maxAgeMinutes": 2880,
-    "connectionStatus": "DATA_NOT_CONNECTED"
+    "connectionStatus": "DATA_NOT_CONNECTED",
+    "verificationTier": "A"
   }
 ]

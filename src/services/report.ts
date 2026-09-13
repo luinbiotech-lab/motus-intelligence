@@ -1,11 +1,21 @@
-import type { InputBundle, KoreaImpactCandidate, Nature, ReportRecord, Section, ValidationResult } from '../domain/models.js';
+import type { ClaimRecord, InputBundle, KoreaImpactCandidate, Nature, ReportRecord, Section, ValidationResult } from '../domain/models.js';
 import { marketChange } from '../utils/calculations.js';
+import { claimAllowedInReport } from './cross-verification.js';
 const displayNumber=(value:number,decimals=3)=>Number(value.toFixed(decimals)).toString();
 const displayChange=(value:number,unit:string)=>displayNumber(value,unit==='percent'?2:3);
-export function generateReport(input:InputBundle,validation:ValidationResult,candidates:KoreaImpactCandidate[],reportId:string,generatedAt:string): ReportRecord {
+export function generateReport(input:InputBundle,validation:ValidationResult,candidates:KoreaImpactCandidate[],reportId:string,generatedAt:string,claims:ClaimRecord[]=[]): ReportRecord {
   const titles=['SEO 제목 + 기준일','3줄 요약','미국시장 마감','시장을 움직인 원인','주요 기업과 산업','한국시장 영향','오늘의 일정과 체크리스트','출처 및 관련 기사','해시태그'];
   const sections: Section[]=titles.map((title,i)=>({id:`section-${i+1}`,title,items:[]}));
-  const add=(index:number,text:string,nature:Nature='CONFIRMED_FACT',evidenceIds:string[]=[])=>sections[index]!.items.push({text,nature,evidenceIds});
+  const claimIdsFor=(evidenceIds:string[])=>claims.filter(claim=>claim.evidenceIds.some(id=>evidenceIds.includes(id))).map(claim=>claim.claimId);
+  const blockedByClaim=(evidenceIds:string[])=>{
+    const related=claims.filter(claim=>claim.evidenceIds.some(id=>evidenceIds.includes(id)));
+    return related.some(claim=>!claimAllowedInReport(claim));
+  };
+  const add=(index:number,text:string,nature:Nature='CONFIRMED_FACT',evidenceIds:string[]=[])=>{
+    if(evidenceIds.length&&blockedByClaim(evidenceIds)) return;
+    const claimIds=claimIdsFor(evidenceIds);
+    sections[index]!.items.push({text,nature,evidenceIds,...(claimIds.length?{claimIds}: {})});
+  };
   const good=(id:string)=>!validation.excludedIds.includes(id);
   const markets=input.market.filter(r=>good(r.id));
   const marketSummary=(symbol:string)=>{

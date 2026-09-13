@@ -6,7 +6,7 @@ export interface CollectOptions {
   tradingDate: string; observedAt: string; collectedAt: string; timeoutMs?: number;
   recordId?: string; recordIds?: Record<string,string>;
   period?: string; releaseTime?: string; indicatorId?: string; indicatorName?: string; unit?: string; adjustmentType?: 'SA'|'NSA'|'UNKNOWN'; seriesId?: string;
-  cik?: string; ticker?: string; companyId?: string; forms?: string[]; accessionNumber?: string; companyName?: string;
+  cik?: string; ticker?: string; companyId?: string; forms?: string[]; accessionNumber?: string; companyName?: string; acceptedAt?: string;
 }
 export interface DataAdapter { collect(source: Source, options?: CollectOptions): Promise<AdapterResult> }
 export class UnconnectedAdapter implements DataAdapter {
@@ -67,6 +67,7 @@ export class BlsCpiAdapter implements DataAdapter {
   constructor(private readonly fetcher:Fetcher=globalThis.fetch as unknown as Fetcher) {}
   async collect(source:Source,options?:CollectOptions):Promise<AdapterResult> {
     if(!options?.period||!options.releaseTime) return {sourceId:source.sourceId,status:'REVIEW_REQUIRED',records:[],message:'period/releaseTime 옵션 필요'};
+    if(Date.parse(options.collectedAt)<Date.parse(options.releaseTime)) return {sourceId:source.sourceId,status:'NOT_RELEASED',records:[],message:'BLS release scheduled but not yet published'};
     const seriesId=options.seriesId??'CUSR0000SA0';
     const startYear=Number(options.period.slice(0,4))-1,endYear=Number(options.period.slice(0,4));
     const url=`https://api.bls.gov/publicAPI/v2/timeseries/data/${seriesId}?startyear=${startYear}&endyear=${endYear}`;
@@ -136,9 +137,9 @@ export class SecEdgarAdapter implements DataAdapter {
         const accessionPath=accession.replace(/-/g,'');
         const cikPlain=String(Number(options.cik));
         const filingUrl=`https://www.sec.gov/Archives/edgar/data/${cikPlain}/${accessionPath}/${primaryDocument}`;
-        const filedAt=`${filingDate}T20:00:00Z`;
+        const filedAt=options.acceptedAt??`${filingDate}T20:00:00Z`;
         const fp=provenance(source.sourceId,url,filedAt,options.collectedAt);
-        records.push({id:options.recordId??`SEC-${accession}`,sample:false,sourceId:source.sourceId,sourceUrl:url,observedAt:filedAt,collectedAt:options.collectedAt,unit:'text',status:'OK',missingReasons:{},collectionMode:'API',verificationUrls:[url,filingUrl],fieldProvenance:{accessionNumber:fp,formType:fp,filedAt:fp,period:fp,primaryDocument:fp,filingUrl:fp},companyId:options.companyId??options.ticker??padded,ticker:options.ticker??parsed.tickers?.[0]??'UNKNOWN',formType:form,accessionNumber:accession,filedAt,period:reportDate||'UNKNOWN',extractedFacts:[`SEC submissions metadata: ${form} ${accession}`,`primaryDocument=${primaryDocument}`],cik:padded,companyName:options.companyName??parsed.name??'UNKNOWN',primaryDocument,filingUrl});
+        records.push({id:options.recordId??`SEC-${accession}`,sample:false,sourceId:source.sourceId,sourceUrl:url,observedAt:filedAt,collectedAt:options.collectedAt,unit:'text',status:'OK',missingReasons:options.acceptedAt?{}:{filedAt:'SEC submissions endpoint provides filingDate/reportDate, not accepted timestamp'},collectionMode:'API',verificationUrls:[url,filingUrl],fieldProvenance:{accessionNumber:fp,formType:fp,filedAt:fp,period:fp,primaryDocument:fp,filingUrl:fp},companyId:options.companyId??options.ticker??padded,ticker:options.ticker??parsed.tickers?.[0]??'UNKNOWN',formType:form,accessionNumber:accession,filedAt,period:reportDate||'UNKNOWN',extractedFacts:[`SEC submissions metadata: ${form} ${accession}`,`primaryDocument=${primaryDocument}`],cik:padded,companyName:options.companyName??parsed.name??'UNKNOWN',primaryDocument,filingUrl,...(options.acceptedAt?{acceptedAt:options.acceptedAt,timestampPrecision:'ACCEPTED_TIMESTAMP' as const}:{filedDate:filingDate,timestampPrecision:'DATE' as const})});
         if(options.accessionNumber) break;
       }
       if(duplicate) return {sourceId:source.sourceId,status:'REVIEW_REQUIRED',records:[],message:'SEC duplicate accession in response'};

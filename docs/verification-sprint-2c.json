@@ -1,0 +1,65 @@
+{
+  "verifiedAt": "2026-09-13T08:30:11Z",
+  "startingCommit": "88f66835240f4580c02ce1da209efbc447e9cf3c",
+  "environment": {
+    "node": "v24.15.0",
+    "platform": "Windows",
+    "execution": "local"
+  },
+  "checks": [
+    {
+      "command": "npm.cmd run typecheck",
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "command": "npm.cmd run build",
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "command": "npm.cmd test",
+      "status": "PASS",
+      "exitCode": 0,
+      "tests": 54,
+      "passed": 54,
+      "failed": 0
+    },
+    {
+      "command": "node scripts/check-json-integrity.mjs",
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "command": "npm.cmd run sample",
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "command": "npm.cmd run report -- --input data/manual/2026-09-11/input-api.json",
+      "status": "PASS",
+      "exitCode": 0,
+      "reportId": "MANUAL-2026-09-11-72d7b69aa067",
+      "approvalStatus": "AUTO_VALIDATED",
+      "publishStatus": "BLOCKED"
+    }
+  ],
+  "crossVerification": {
+    "claimModel": "ClaimRecord",
+    "conflictModel": "ConflictRecord",
+    "geoModel": "GeoVerificationContext",
+    "goldenClaims": "data/golden/2026-09-11/claims.json",
+    "goldenClaimCount": 15,
+    "goldenConflictCount": 0,
+    "reportClaimTraceability": "PASS"
+  },
+  "approvalFlow": {
+    "initial": "AUTO_VALIDATED or REVIEW_REQUIRED/BLOCKED based on validation and claims",
+    "publishBeforeApproval": "BLOCKED",
+    "humanReviewMeasurement": "NOT_MEASURED"
+  },
+  "secretScan": {
+    "status": "PASS",
+    "note": "No credential pattern found in committed source scope."
+  }
+}

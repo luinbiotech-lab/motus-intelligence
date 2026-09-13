@@ -4,7 +4,7 @@ import { marketChange } from '../utils/calculations.js';
 export const groups = ['market','macro','companyEvents','filings','news'] as const;
 export const records = (input: InputBundle): Provenance[] => groups.flatMap<Provenance>(key => input[key]);
 const schemaNames = ['MarketSnapshot','MacroRelease','CompanyEvent','FilingRecord','NewsReference'] as const;
-const severity: Status[] = ['BLOCKED','INVALID_VALUE','CONFLICT','SOURCE_UNAVAILABLE','DATA_NOT_CONNECTED','NO_DATA','DELAYED','LOW_CONFIDENCE','REVIEW_REQUIRED','HOLIDAY','EARLY_CLOSE','OK'];
+const severity: Status[] = ['BLOCKED','INVALID_VALUE','CONFLICT','SOURCE_UNAVAILABLE','DATA_NOT_CONNECTED','NO_DATA','NOT_RELEASED','SCHEDULED','DELAYED','LOW_CONFIDENCE','REVIEW_REQUIRED','HOLIDAY','EARLY_CLOSE','OK'];
 export const worst = (values: Status[]): Status => severity.find(s => values.includes(s)) ?? 'OK';
 const nyDate = (time: string) => new Intl.DateTimeFormat('en-CA',{ timeZone:'America/New_York',year:'numeric',month:'2-digit',day:'2-digit' }).format(new Date(time));
 export function normalize(raw: unknown): { input: InputBundle|null; issues: Issue[] } {
