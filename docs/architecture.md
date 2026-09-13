@@ -20,14 +20,14 @@ JSON 수동 입력
 
 ## 공통 스키마
 
-모든 입력 레코드에는 `id`, `sample`, `sourceId`, `sourceUrl`, `observedAt`, `collectedAt`, `unit`, `status`, `missingReasons`를 요구한다. 실제 레코드는 추가로 `collectionMode=MANUAL_VERIFIED|API`와 1개 이상의 `verificationUrls`를 요구한다. 샘플 레코드는 이전 fixture 호환을 위해 provenance 확장 필드를 선택값으로 둔다. 요청된 FilingRecord와 NewsReference에도 동일 provenance를 추가했다.
+모든 입력 레코드에는 `id`, `sample`, `sourceId`, `sourceUrl`, `observedAt`, `collectedAt`, `unit`, `status`, `missingReasons`를 요구한다. 실제 레코드는 추가로 `collectionMode=MANUAL_VERIFIED|API`와 1개 이상의 `verificationUrls`를 요구한다. 샘플 레코드는 이전 fixture 호환을 위해 provenance 확장 필드를 선택값으로 둔다. Sprint 2B부터 핵심 수치는 선택적 `fieldProvenance`로 `sourceId`, `sourceUrl`, `observedAt`, `collectedAt`을 필드 단위에 붙일 수 있다.
 
 | 엔터티 | 용도 |
 | --- | --- |
 | MarketSnapshot | 거래일·상품·종가·전일값·등락·등락률·거래량·통화 |
 | MacroRelease | 발표시각·대상기간·실제·컨센서스·이전·수정 이전·조정 방식 |
 | CompanyEvent | 기업·이벤트 유형·발생시각·제목·요약·공식 링크 |
-| FilingRecord | 양식·접수번호·공시시각·기간·추출 사실 |
+| FilingRecord | 양식·접수번호·공시시각·기간·추출 사실·선택적 CIK/company/primaryDocument/filingUrl |
 | NewsReference | 제목·발행사·시각·링크·관련 종목/산업·검증 사실만 |
 | KoreaImpactCandidate | 원인 이벤트·규칙·전달경로·산업·방향·강도·근거·신뢰도·반대변수 |
 | ReportRecord | reportId·거래일·생성시각·버전·검수상태·목차·제목·3줄 요약 |

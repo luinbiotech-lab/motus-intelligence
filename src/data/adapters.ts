@@ -1,7 +1,13 @@
-import type { MarketSnapshot, Source, Status } from '../domain/models.js';
+import type { FieldProvenance, FilingRecord, MacroRelease, MarketSnapshot, Source, Status } from '../domain/models.js';
 import { marketChange } from '../utils/calculations.js';
-export interface AdapterResult { sourceId: string; status: Status; records: MarketSnapshot[]; message: string }
-export interface CollectOptions { tradingDate: string; observedAt: string; collectedAt: string; timeoutMs?: number }
+export type AdapterRecord = MarketSnapshot | MacroRelease | FilingRecord;
+export interface AdapterResult { sourceId: string; status: Status; records: AdapterRecord[]; message: string }
+export interface CollectOptions {
+  tradingDate: string; observedAt: string; collectedAt: string; timeoutMs?: number;
+  recordId?: string; recordIds?: Record<string,string>;
+  period?: string; releaseTime?: string; indicatorId?: string; indicatorName?: string; unit?: string; adjustmentType?: 'SA'|'NSA'|'UNKNOWN'; seriesId?: string;
+  cik?: string; ticker?: string; companyId?: string; forms?: string[]; accessionNumber?: string; companyName?: string;
+}
 export interface DataAdapter { collect(source: Source, options?: CollectOptions): Promise<AdapterResult> }
 export class UnconnectedAdapter implements DataAdapter {
   async collect(source: Source): Promise<AdapterResult> {
@@ -14,6 +20,9 @@ type Fetcher = (url:string, init:{signal:AbortSignal;headers:Record<string,strin
 const treasuryUrl=(date:string)=>`https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/all/${date.slice(0,4)}${date.slice(5,7)}?type=daily_treasury_yield_curve&field_tdr_date_value_month=${date.slice(0,4)}${date.slice(5,7)}`;
 const parseDate=(value:string):string|null=>{const match=value.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);return match?`${match[3]}-${match[1]}-${match[2]}`:null;};
 const splitCsv=(line:string)=>line.split(',').map(value=>value.trim().replace(/^"|"$/g,''));
+const provenance=(sourceId:string,sourceUrl:string,observedAt:string,collectedAt:string):FieldProvenance=>({sourceId,sourceUrl,observedAt,collectedAt});
+const round=(value:number,decimals=2)=>Number(value.toFixed(decimals));
+const previousMonth=(period:string,months=1)=>{const [year,month]=period.split('-').map(Number);const date=new Date(Date.UTC(year!,month!-1-months,1));return `${date.getUTCFullYear()}-${String(date.getUTCMonth()+1).padStart(2,'0')}`;};
 export class TreasuryYieldAdapter implements DataAdapter {
   constructor(private readonly fetcher:Fetcher=globalThis.fetch as unknown as Fetcher) {}
   async collect(source:Source,options?:CollectOptions):Promise<AdapterResult> {
@@ -38,7 +47,7 @@ export class TreasuryYieldAdapter implements DataAdapter {
         const close=Number(current.values[index]),previousClose=Number(previous.values[index]);
         const calculation=marketChange(close,previousClose);
         if(!Number.isFinite(close)||!Number.isFinite(previousClose)||calculation.status!=='OK') return null;
-        return {id:`TREASURY-${symbol}-${options.tradingDate}`,sample:false,sourceId:source.sourceId,sourceUrl:url,observedAt:options.observedAt,collectedAt:options.collectedAt,unit:'percent',status:'OK',missingReasons:{volume:'금리 지표에는 거래량 미적용'},collectionMode:'API',verificationUrls:[url],market:'US',tradingDate:options.tradingDate,symbol,instrumentType:'YIELD',close,previousClose,change:calculation.raw.change,changePct:calculation.display.changePct,volume:null,currency:'USD'};
+        return {id:options.recordIds?.[symbol]??`TREASURY-${symbol}-${options.tradingDate}`,sample:false,sourceId:source.sourceId,sourceUrl:url,observedAt:options.observedAt,collectedAt:options.collectedAt,unit:'percent',status:'OK',missingReasons:{volume:'금리 지표에는 거래량 미적용'},collectionMode:'API',verificationUrls:[url],fieldProvenance:{close:provenance(source.sourceId,url,options.observedAt,options.collectedAt),previousClose:provenance(source.sourceId,url,options.observedAt,options.collectedAt),changePct:provenance(source.sourceId,url,options.observedAt,options.collectedAt)},market:'US',tradingDate:options.tradingDate,symbol,instrumentType:'YIELD',close,previousClose,change:calculation.raw.change,changePct:calculation.display.changePct,volume:null,currency:'USD'};
       };
       const records=[make('US2Y',twoIndex),make('US10Y',tenIndex)].filter((record):record is MarketSnapshot=>record!==null);
       if(records.length!==2) return {sourceId:source.sourceId,status:'REVIEW_REQUIRED',records:[],message:'Treasury invalid numeric response'};
@@ -49,5 +58,101 @@ export class TreasuryYieldAdapter implements DataAdapter {
       const name=error instanceof Error?error.name:'';
       return {sourceId:source.sourceId,status:'SOURCE_UNAVAILABLE',records:[],message:name==='TimeoutError'||name==='AbortError'?'Treasury timeout':`Treasury unavailable: ${String(error)}`};
     }
+  }
+}
+
+interface BlsPeriod { year:string; period:string; periodName?:string; value:string }
+interface BlsResponse { status?:string; message?:string[]; Results?:{series?:{seriesID:string; data?:BlsPeriod[]}[]} }
+export class BlsCpiAdapter implements DataAdapter {
+  constructor(private readonly fetcher:Fetcher=globalThis.fetch as unknown as Fetcher) {}
+  async collect(source:Source,options?:CollectOptions):Promise<AdapterResult> {
+    if(!options?.period||!options.releaseTime) return {sourceId:source.sourceId,status:'REVIEW_REQUIRED',records:[],message:'period/releaseTime 옵션 필요'};
+    const seriesId=options.seriesId??'CUSR0000SA0';
+    const startYear=Number(options.period.slice(0,4))-1,endYear=Number(options.period.slice(0,4));
+    const url=`https://api.bls.gov/publicAPI/v2/timeseries/data/${seriesId}?startyear=${startYear}&endyear=${endYear}`;
+    try {
+      const response=await this.fetcher(url,{signal:AbortSignal.timeout(options.timeoutMs??10000),headers:{Accept:'application/json','User-Agent':'us-market-close-report/0.2'}});
+      if(response.status===429) return {sourceId:source.sourceId,status:'REVIEW_REQUIRED',records:[],message:'BLS rate limit'};
+      if(!response.ok) return {sourceId:source.sourceId,status:'SOURCE_UNAVAILABLE',records:[],message:`BLS HTTP ${response.status}`};
+      const body=await response.text();
+      if(!body.trim()) return {sourceId:source.sourceId,status:'NO_DATA',records:[],message:'BLS empty response'};
+      let parsed:BlsResponse;
+      try { parsed=JSON.parse(body) as BlsResponse; } catch { return {sourceId:source.sourceId,status:'REVIEW_REQUIRED',records:[],message:'BLS malformed JSON'}; }
+      if(parsed.status&&parsed.status!=='REQUEST_SUCCEEDED') return {sourceId:source.sourceId,status:'NO_DATA',records:[],message:`BLS ${parsed.status}: ${(parsed.message??[]).join('; ')}`};
+      const data=parsed.Results?.series?.[0]?.data;
+      if(!Array.isArray(data)) return {sourceId:source.sourceId,status:'REVIEW_REQUIRED',records:[],message:'BLS malformed response'};
+      const byPeriod=new Map(data.filter(row=>/^M\d{2}$/.test(row.period)).map(row=>[`${row.year}-${row.period.slice(1)}`,Number(row.value)]));
+      const current=byPeriod.get(options.period), previousIndex=byPeriod.get(previousMonth(options.period)), twoBack=byPeriod.get(previousMonth(options.period,2));
+      if(current===undefined) return {sourceId:source.sourceId,status:'NO_DATA',records:[],message:'BLS release not available for requested period'};
+      if(previousIndex===undefined||twoBack===undefined) return {sourceId:source.sourceId,status:'NO_DATA',records:[],message:'BLS previous periods unavailable'};
+      if(!Number.isFinite(current)||!Number.isFinite(previousIndex)||!Number.isFinite(twoBack)||previousIndex===0||twoBack===0) return {sourceId:source.sourceId,status:'REVIEW_REQUIRED',records:[],message:'BLS invalid numeric response'};
+      const actual=round(((current-previousIndex)/previousIndex)*100);
+      const previous=round(((previousIndex-twoBack)/twoBack)*100);
+      const fp=provenance(source.sourceId,url,options.releaseTime,options.collectedAt);
+      const record:MacroRelease={id:options.recordId??`BLS-CPI-MOM-${options.period}`,sample:false,sourceId:source.sourceId,sourceUrl:url,observedAt:options.releaseTime,collectedAt:options.collectedAt,unit:options.unit??'percent',status:'OK',missingReasons:{consensus:'BLS 공식 API는 시장 컨센서스를 제공하지 않음'},collectionMode:'API',verificationUrls:[url],fieldProvenance:{actual:fp,previous:fp,revisedPrevious:fp},indicatorId:options.indicatorId??'CPI_U_MOM',indicatorName:options.indicatorName??'미국 CPI-U 전월 대비',releaseTime:options.releaseTime,period:options.period,actual,consensus:null,previous,revisedPrevious:previous,adjustmentType:options.adjustmentType??'SA'};
+      const age=Date.parse(options.collectedAt)-Date.parse(options.releaseTime);
+      if(age>source.maxAgeMinutes*60000) return {sourceId:source.sourceId,status:'DELAYED',records:[record],message:'BLS data exceeds source freshness threshold'};
+      return {sourceId:source.sourceId,status:'OK',records:[record],message:'BLS CPI normalized without consensus'};
+    } catch(error) {
+      const name=error instanceof Error?error.name:'';
+      return {sourceId:source.sourceId,status:'SOURCE_UNAVAILABLE',records:[],message:name==='TimeoutError'||name==='AbortError'?'BLS timeout':`BLS unavailable: ${String(error)}`};
+    }
+  }
+}
+
+interface SecSubmission { name?:string; tickers?:string[]; cik?:string|number; filings?:{recent?:Record<string,unknown[]>} }
+export class SecEdgarAdapter implements DataAdapter {
+  private lastRequestAt=0;
+  constructor(private readonly fetcher:Fetcher=globalThis.fetch as unknown as Fetcher,private readonly minIntervalMs=100) {}
+  async collect(source:Source,options?:CollectOptions):Promise<AdapterResult> {
+    if(!options?.cik) return {sourceId:source.sourceId,status:'REVIEW_REQUIRED',records:[],message:'cik 옵션 필요'};
+    const padded=options.cik.padStart(10,'0');
+    const url=`https://data.sec.gov/submissions/CIK${padded}.json`;
+    const allowedForms=new Set(['8-K','10-Q','10-K']);
+    const requestedForms=(options.forms??['8-K','10-Q','10-K']).filter(form=>allowedForms.has(form));
+    if(!requestedForms.length) return {sourceId:source.sourceId,status:'REVIEW_REQUIRED',records:[],message:'지원하지 않는 SEC form'};
+    try {
+      const response=await this.request(url,options.timeoutMs??10000);
+      if(response.status===429) return {sourceId:source.sourceId,status:'SOURCE_UNAVAILABLE',records:[],message:'SEC rate limit'};
+      if(!response.ok) return {sourceId:source.sourceId,status:'SOURCE_UNAVAILABLE',records:[],message:`SEC HTTP ${response.status}`};
+      const body=await response.text();
+      if(!body.trim()) return {sourceId:source.sourceId,status:'NO_DATA',records:[],message:'SEC empty response'};
+      let parsed:SecSubmission;
+      try { parsed=JSON.parse(body) as SecSubmission; } catch { return {sourceId:source.sourceId,status:'REVIEW_REQUIRED',records:[],message:'SEC malformed JSON'}; }
+      const recent=parsed.filings?.recent;
+      if(!recent||!Array.isArray(recent.accessionNumber)||!Array.isArray(recent.form)) return {sourceId:source.sourceId,status:'REVIEW_REQUIRED',records:[],message:'SEC malformed response'};
+      const records:FilingRecord[]=[]; const seen=new Set<string>(); let duplicate=false;
+      for(let index=0;index<recent.accessionNumber.length;index++) {
+        const form=String(recent.form[index]??'');
+        const accession=String(recent.accessionNumber[index]??'');
+        if(options.accessionNumber&&accession!==options.accessionNumber) continue;
+        if(!requestedForms.includes(form)) continue;
+        if(seen.has(accession)) {duplicate=true;continue;}
+        seen.add(accession);
+        const primaryDocument=String(recent.primaryDocument?.[index]??'');
+        const filingDate=String(recent.filingDate?.[index]??'');
+        const reportDate=String(recent.reportDate?.[index]??'');
+        if(!accession||!primaryDocument||!filingDate) continue;
+        const accessionPath=accession.replace(/-/g,'');
+        const cikPlain=String(Number(options.cik));
+        const filingUrl=`https://www.sec.gov/Archives/edgar/data/${cikPlain}/${accessionPath}/${primaryDocument}`;
+        const filedAt=`${filingDate}T20:00:00Z`;
+        const fp=provenance(source.sourceId,url,filedAt,options.collectedAt);
+        records.push({id:options.recordId??`SEC-${accession}`,sample:false,sourceId:source.sourceId,sourceUrl:url,observedAt:filedAt,collectedAt:options.collectedAt,unit:'text',status:'OK',missingReasons:{},collectionMode:'API',verificationUrls:[url,filingUrl],fieldProvenance:{accessionNumber:fp,formType:fp,filedAt:fp,period:fp,primaryDocument:fp,filingUrl:fp},companyId:options.companyId??options.ticker??padded,ticker:options.ticker??parsed.tickers?.[0]??'UNKNOWN',formType:form,accessionNumber:accession,filedAt,period:reportDate||'UNKNOWN',extractedFacts:[`SEC submissions metadata: ${form} ${accession}`,`primaryDocument=${primaryDocument}`],cik:padded,companyName:options.companyName??parsed.name??'UNKNOWN',primaryDocument,filingUrl});
+        if(options.accessionNumber) break;
+      }
+      if(duplicate) return {sourceId:source.sourceId,status:'REVIEW_REQUIRED',records:[],message:'SEC duplicate accession in response'};
+      if(!records.length) return {sourceId:source.sourceId,status:'NO_DATA',records:[],message:'SEC requested filing missing'};
+      return {sourceId:source.sourceId,status:'OK',records,message:'SEC filing metadata normalized'};
+    } catch(error) {
+      const name=error instanceof Error?error.name:'';
+      return {sourceId:source.sourceId,status:'SOURCE_UNAVAILABLE',records:[],message:name==='TimeoutError'||name==='AbortError'?'SEC timeout':`SEC unavailable: ${String(error)}`};
+    }
+  }
+  private async request(url:string,timeoutMs:number):Promise<FetchResponse> {
+    const wait=Math.max(0,this.minIntervalMs-(Date.now()-this.lastRequestAt));
+    if(wait) await new Promise(resolve=>setTimeout(resolve,wait));
+    this.lastRequestAt=Date.now();
+    return this.fetcher(url,{signal:AbortSignal.timeout(timeoutMs),headers:{Accept:'application/json','User-Agent':'us-market-close-report/0.2 contact: codex@local'}});
   }
 }

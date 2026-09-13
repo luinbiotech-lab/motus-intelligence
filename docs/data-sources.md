@@ -2,7 +2,11 @@
 
 SEC EDGAR, BLS, BEA, FRED, U.S. Treasury, Federal Reserve, Corporate IR, KRX, OpenDART, ECOS, 향후 국내 증권사 Open API와 Sprint 2A 실제 리허설용 NYSE, S&P Dow Jones Indices, Nasdaq, FTSE Russell/LSEG, Cboe, ICE 분류를 등록했다. Corporate IR는 개별 기업별 등록으로 확장해야 하는 분류이며 homepage는 기업 공시 검색 참고 위치다. 국내 증권사는 미선정 placeholder다.
 
-Sprint 2A 기준 자동 수집 연결은 `US_TREASURY`만 `enabled=true`, `connectionStatus=OK`다. `TreasuryYieldAdapter`는 U.S. Treasury 일별 CSV에서 지정 거래일과 직전 거래일의 2Y/10Y par yield를 읽어 `MarketSnapshot` 두 건으로 정규화한다. 429는 `REVIEW_REQUIRED`, 503 등 공급자 오류와 timeout은 `SOURCE_UNAVAILABLE`, 빈 응답과 누락 거래일은 `NO_DATA`, malformed/invalid numeric은 `REVIEW_REQUIRED`, freshness 초과는 `DELAYED`로 반환한다. 실패 시 대체값을 만들지 않는다.
+Sprint 2B 기준 자동 수집 연결은 `US_TREASURY`, `BLS`, `SEC_EDGAR`가 `enabled=true`, `connectionStatus=OK`다. `TreasuryYieldAdapter`는 U.S. Treasury 일별 CSV에서 지정 거래일과 직전 거래일의 2Y/10Y par yield를 읽어 `MarketSnapshot` 두 건으로 정규화한다. 429는 `REVIEW_REQUIRED`, 503 등 공급자 오류와 timeout은 `SOURCE_UNAVAILABLE`, 빈 응답과 누락 거래일은 `NO_DATA`, malformed/invalid numeric은 `REVIEW_REQUIRED`, freshness 초과는 `DELAYED`로 반환한다. 실패 시 대체값을 만들지 않는다.
+
+`BlsCpiAdapter`는 BLS Public Data API의 CPI index series를 읽고 전월 대비 actual/previous/revisedPrevious를 계산한다. BLS 공식 API는 시장 consensus를 제공하지 않으므로 consensus는 생성하지 않고 `null` 및 missing reason으로 남긴다. 발표 전 또는 누락 기간은 `NO_DATA`, malformed/invalid numeric은 `REVIEW_REQUIRED`, timeout/provider unavailable은 `SOURCE_UNAVAILABLE`로 반환한다.
+
+`SecEdgarAdapter`는 `data.sec.gov/submissions/CIK##########.json`에서 8-K, 10-Q, 10-K filing metadata를 정규화한다. User-Agent를 명시하고 호출 간 최소 간격을 둔다. 동일 accession 중복은 `REVIEW_REQUIRED`, rate limit 및 provider unavailable은 `SOURCE_UNAVAILABLE`, unsupported form 및 malformed 응답은 `REVIEW_REQUIRED`로 반환한다. 전문 분석이나 AI 추출은 하지 않는다.
 
 그 외 자동 수집 연결은 `enabled=false`, `connectionStatus=DATA_NOT_CONNECTED`다. 실제 인증, API 호출, 시세 이용 계약을 확인하거나 연결하지 않았다. Registry의 인증 방식은 연결 설계용 초기 값이며 연결 전 공식 문서로 재검증해야 한다. sourceUrl은 실제 입력자가 해당 자료의 직접 원문 링크를 넣는다. URL 형식만 자동 검증하며 도메인 소유·본문 진위·접근 가능성은 자동 검증하지 않는다.
 
@@ -12,4 +16,4 @@ Sprint 2A 기준 자동 수집 연결은 `US_TREASURY`만 `enabled=true`, `conne
 
 어댑터는 DataAdapter의 collect(source, options)로 sourceId/status/records/message를 반환한다. 기본 UnconnectedAdapter는 빈 records와 DATA_NOT_CONNECTED만 반환한다. 미연결 상태에서 임의 수치를 생성하지 않는다.
 
-2026-09-11 리허설의 ICE DXY/Brent 값은 ICE 상품 페이지를 제공자 원문으로 두고 보조 종가 자료로 수동 대조했다. ICE 페이지 자체의 표시 지연과 재배포 조건은 별도 검토가 필요하다. BLS CPI의 실제 발표값은 BLS 원문, consensus 값은 보조 시장 캘린더/기사 URL로 확인했다. 필드별 provenance는 다음 Sprint 과제다.
+2026-09-11 리허설의 ICE DXY/Brent 값은 ICE 상품 페이지를 제공자 원문으로 두고 보조 종가 자료로 수동 대조했다. ICE 페이지 자체의 표시 지연과 재배포 조건은 별도 검토가 필요하다. BLS CPI의 실제 발표값은 BLS 원문/API, consensus 값은 보조 시장 캘린더/기사 URL로 확인했다. Sprint 2B부터 핵심 수치에는 선택적 `fieldProvenance`를 붙여 field 단위 출처 추적을 보존한다.

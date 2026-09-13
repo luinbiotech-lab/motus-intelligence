@@ -5,13 +5,16 @@ export type Direction = 'POSITIVE' | 'NEGATIVE' | 'MIXED' | 'HOLD';
 export type EvidenceLevel = 'A' | 'B' | 'C' | 'UNVERIFIED';
 export type Horizon = 'INTRADAY' | 'SHORT_TERM' | 'MEDIUM_TERM';
 export type CollectionMode = 'SAMPLE_FIXTURE' | 'MANUAL_VERIFIED' | 'API';
+export interface FieldProvenance {
+  sourceId: string; sourceUrl: string; observedAt: string; collectedAt: string;
+}
 export const paths = ['INTEREST_RATE','FX','COMMODITY','DEMAND','SUPPLY_CHAIN','SEMICONDUCTOR_CYCLE','AI_CAPEX','ENERGY','POLICY','REGULATION','LIQUIDITY','RISK_SENTIMENT'] as const;
 export type TransmissionPath = typeof paths[number];
 export interface Provenance {
   id: string; sample: boolean; sourceId: string; sourceUrl: string;
   observedAt: string; collectedAt: string; unit: string; status: Status;
   missingReasons: Record<string, string>; collectionMode?: CollectionMode;
-  verificationUrls?: string[];
+  verificationUrls?: string[]; fieldProvenance?: Record<string, FieldProvenance>;
 }
 export interface MarketSnapshot extends Provenance {
   market: 'US'; tradingDate: string; symbol: string; instrumentType: 'INDEX'|'EQUITY'|'FX'|'YIELD'|'COMMODITY';
@@ -29,7 +32,7 @@ export interface CompanyEvent extends Provenance {
 }
 export interface FilingRecord extends Provenance {
   companyId: string; ticker: string; formType: string; accessionNumber: string; filedAt: string;
-  period: string; extractedFacts: string[];
+  period: string; extractedFacts: string[]; cik?: string; companyName?: string; primaryDocument?: string; filingUrl?: string;
 }
 export interface NewsReference extends Provenance {
   title: string; publisher: string; publishedAt: string; url: string; relatedTickers: string[];
@@ -79,6 +82,7 @@ export interface EvidenceRecord {
   evidenceId: string; reportId: string; sourceType: string; sourceId: string; sourceUrl: string;
   observedAt: string; collectedAt: string; originalValue: unknown; unit: string;
   calculation: unknown; ruleVersion: string; usedInSections: string[]; verificationStatus: Status;
+  fieldProvenance?: Record<string, FieldProvenance>;
 }
 export interface EvidencePackage {
   reportId: string; reportMetadata: ReportRecord; sourceMetadata: Source[]; records: EvidenceRecord[];

@@ -1,0 +1,55 @@
+{
+  "tradingDate": "2026-09-11",
+  "generatedAt": "2026-09-13T08:30:11Z",
+  "rows": [
+    {
+      "field": "US2Y close",
+      "manualValue": 4.63,
+      "adapterValue": 4.63,
+      "difference": 0,
+      "status": "MATCH"
+    },
+    {
+      "field": "US10Y close",
+      "manualValue": 4.96,
+      "adapterValue": 4.96,
+      "difference": 0,
+      "status": "MATCH"
+    },
+    {
+      "field": "CPI-MOM actual",
+      "manualValue": 0.4,
+      "adapterValue": 0.4,
+      "difference": 0,
+      "status": "MATCH"
+    },
+    {
+      "field": "CPI-MOM previous",
+      "manualValue": 0.1,
+      "adapterValue": 0.07,
+      "difference": -0.03,
+      "status": "REVIEW_REQUIRED"
+    },
+    {
+      "field": "CPI-MOM consensus",
+      "manualValue": 0.4,
+      "adapterValue": null,
+      "difference": null,
+      "status": "EXPECTED_SEPARATION"
+    },
+    {
+      "field": "SEC accessionNumber",
+      "manualValue": "0001193125-26-387905",
+      "adapterValue": "0001193125-26-387905",
+      "difference": null,
+      "status": "MATCH"
+    },
+    {
+      "field": "SEC filedAt",
+      "manualValue": "2026-09-10T20:16:50Z",
+      "adapterValue": "2026-09-10T20:00:00Z",
+      "difference": null,
+      "status": "REVIEW_REQUIRED"
+    }
+  ]
+}

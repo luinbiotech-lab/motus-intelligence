@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto';
-import type { EvidencePackage, EvidenceRecord, InputBundle, KoreaImpactCandidate, Outcome, Rule, Source, StageResult, ValidationResult } from '../domain/models.js';
+import type { EvidencePackage, EvidenceRecord, FieldProvenance, InputBundle, KoreaImpactCandidate, Outcome, Rule, Source, StageResult, ValidationResult } from '../domain/models.js';
 import { normalize, validate, worst, groups } from './validation.js';
 import { analyze } from './analysis.js';
 import { generateReport, markdown } from './report.js';
@@ -71,7 +71,8 @@ export function runPipeline(raw:unknown,sources:Source[],rules:Rule[],generatedA
     let calculation:unknown=null;
     if(group==='market'&&typeof record.close==='number'&&typeof record.previousClose==='number') calculation=marketChange(record.close,record.previousClose);
     const originalValue=group==='news'?(storedInput as InputBundle).news[position]:rawRecord;
-    evidenceRecords.push({evidenceId:id,reportId,sourceType:group,sourceId:field('sourceId'),sourceUrl:field('sourceUrl'),observedAt:field('observedAt'),collectedAt:field('collectedAt'),originalValue,unit:field('unit'),calculation,ruleVersion:'1.0.0',usedInSections:report.sections.filter(s=>s.items.some(i=>i.evidenceIds.includes(id))).map(s=>s.id),verificationStatus:worst(validation.issues.filter(i=>i.recordId===id).map(i=>i.status))});
+    const fieldProvenance=record.fieldProvenance&&typeof record.fieldProvenance==='object'&&!Array.isArray(record.fieldProvenance)?record.fieldProvenance as Record<string,FieldProvenance>:undefined;
+    evidenceRecords.push({evidenceId:id,reportId,sourceType:group,sourceId:field('sourceId'),sourceUrl:field('sourceUrl'),observedAt:field('observedAt'),collectedAt:field('collectedAt'),originalValue,unit:field('unit'),calculation,ruleVersion:'1.0.0',usedInSections:report.sections.filter(s=>s.items.some(i=>i.evidenceIds.includes(id))).map(s=>s.id),verificationStatus:worst(validation.issues.filter(i=>i.recordId===id).map(i=>i.status)),...(fieldProvenance?{fieldProvenance}: {})});
   }
   step('Generate Evidence Package','OK','JSON 원본/계산/규칙/검수상태 보관');
   const evidence:EvidencePackage={reportId,reportMetadata:report,sourceMetadata:sources,records:evidenceRecords,originalInput:storedInput,inputSha256,redactedFields,analysisRules:rules,impactJudgments:candidates,aiGeneratedText:{used:false,text:null,reason:'결정론적 템플릿 생성; 외부 AI 호출 없음. 생성 문장은 reportMetadata.sections에 보존.'},validationResult:validation,manualReviewStatus:'PENDING',publishStatus:'BLOCKED',stages,reviewMetrics:{automaticGeneratedAt:generatedAt,humanReviewStartedAt:null,humanReviewCompletedAt:null,durationMinutes:null,measurementStatus:'NOT_MEASURED',edits:{NUMERIC_ERROR:[],SOURCE_ERROR:[],CAUSE_INTERPRETATION:[],KOREA_LINK:[],WORDING:[],SEO:[],LINK:[],OTHER:[]}}};

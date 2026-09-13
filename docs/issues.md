@@ -16,5 +16,9 @@
 | 실제 리포트에 부동소수점 계산 흔적 노출 | `close-previousClose` raw 값을 그대로 문장에 사용 | 원고 표시는 소수 자릿수 제한 함수로 정규화하고 회귀 테스트로 긴 float 문자열 부재 확인 |
 | 컨센서스와 공식 발표값의 출처 혼합 | BLS 원문은 실제 CPI 발표값을 제공하지만 consensus는 시장 예상 출처가 따로 필요 | `verificationUrls`에 보조 consensus 출처를 추가하고 문서에 필드별 provenance 확장 필요 기록 |
 | 공식 API 어댑터 장애상태 미검증 | Sprint 1은 미연결 어댑터만 보유 | Treasury CSV 어댑터를 추가하고 성공, timeout, rate limit, provider unavailable, empty, missing date, malformed, invalid numeric, delayed 테스트 추가 |
+| BLS consensus를 공식 API가 제공하지 않음 | BLS Public Data API는 시장 기대값이 아니라 공식 시계열을 제공 | BLS Adapter는 consensus를 생성하지 않고 null로 남김. missingReasons.consensus는 운영 PASS를 막지 않음 |
+| BLS 공식 index 재계산값과 수동 rounded previous 차이 | API index에서 계산한 July m/m은 0.07, 수동 입력은 발표문 rounded 값 0.1 | golden comparison에 `CPI-MOM previous` 차이 -0.03을 `REVIEW_REQUIRED`로 기록 |
+| SEC submissions metadata의 시각 정밀도 제한 | submissions endpoint는 filingDate/reportDate 중심이며 accepted timestamp를 직접 제공하지 않음 | golden comparison에 `SEC filedAt` 수동 accepted time과 API normalized date 차이를 `REVIEW_REQUIRED`로 기록 |
+| API 레코드 ID가 signal evidenceIds와 달라질 수 있음 | 어댑터 기본 ID와 기존 수동 fixture ID가 다르면 분석 근거 연결이 끊김 | `recordId`/`recordIds` 옵션을 추가해 golden day에서 기존 evidence ID를 보존 |
 
-테스트되지 않은 API 연결, 실제 원문 진위, 거래 캘린더 정확성, 약관 및 10~20분 운영 시간은 PASS로 표시하지 않는다. Sprint 2A에서는 U.S. Treasury CSV 어댑터만 mock 및 실호출로 PASS 확인했다.
+테스트되지 않은 API 연결, 실제 원문 진위, 거래 캘린더 정확성, 약관 및 10~20분 운영 시간은 PASS로 표시하지 않는다. Sprint 2B에서는 U.S. Treasury, BLS CPI, SEC submissions 어댑터를 mock 및 실호출로 PASS 확인했다.

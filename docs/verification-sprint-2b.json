@@ -1,0 +1,74 @@
+{
+  "verifiedAt": "2026-09-13T08:30:11Z",
+  "baselineCommit": "6864e00d4fe852a093fe4669c6df70117514a81f",
+  "environment": {
+    "node": "v24.15.0",
+    "platform": "Windows",
+    "execution": "local"
+  },
+  "checks": [
+    {
+      "command": "npm.cmd run typecheck",
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "command": "npm.cmd run build",
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "command": "npm.cmd test",
+      "status": "PASS",
+      "exitCode": 0,
+      "tests": 47,
+      "passed": 47,
+      "failed": 0
+    },
+    {
+      "command": "node scripts/check-json-integrity.mjs",
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "command": "npm.cmd run sample",
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "command": "npm.cmd run report -- --input data/manual/2026-09-11/input-api.json",
+      "status": "PASS",
+      "exitCode": 0,
+      "reportId": "MANUAL-2026-09-11-1b6c1279c7ee",
+      "publishStatus": "BLOCKED"
+    },
+    {
+      "command": "BLS live adapter collect",
+      "status": "PASS",
+      "records": 1,
+      "note": "BLS CPI actual 0.4, previous 0.07, consensus null"
+    },
+    {
+      "command": "SEC live adapter collect",
+      "status": "PASS",
+      "records": 1,
+      "note": "ORCL 8-K accession 0001193125-26-387905 normalized"
+    }
+  ],
+  "goldenDay": {
+    "tradingDate": "2026-09-11",
+    "sourceRaw": "data/golden/2026-09-11/source-raw.json",
+    "expectedNormalized": "data/golden/2026-09-11/expected-normalized.json",
+    "comparison": "data/golden/2026-09-11/comparison.json",
+    "apiInput": "data/manual/2026-09-11/input-api.json",
+    "knownDifferences": [
+      "CPI-MOM previous: manual 0.1 vs adapter 0.07",
+      "SEC filedAt: manual accepted timestamp 2026-09-10T20:16:50Z vs submissions filingDate normalized 2026-09-10T20:00:00Z",
+      "CPI consensus: intentionally null in BLS adapter"
+    ]
+  },
+  "secretScan": {
+    "status": "PASS",
+    "note": "No credential pattern found in committed source scope."
+  }
+}

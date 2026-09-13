@@ -2,7 +2,9 @@ import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 const files = [
-  'docs/verification-sprint-2a.json',
+  ...safeJsonFiles('docs').filter(file => file.includes('verification')),
+  ...safeJsonFiles('data/manual/2026-09-11'),
+  ...safeJsonFiles('data/golden/2026-09-11'),
   ...safeJsonFiles('data/evidence'),
   ...safeJsonFiles('data/reports')
 ];

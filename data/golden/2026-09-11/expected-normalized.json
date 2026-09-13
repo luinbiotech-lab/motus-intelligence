@@ -1,0 +1,217 @@
+{
+  "tradingDate": "2026-09-11",
+  "treasury": [
+    {
+      "id": "US2Y-2026-09-11",
+      "sample": false,
+      "sourceId": "US_TREASURY",
+      "sourceUrl": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/all/202609?type=daily_treasury_yield_curve&field_tdr_date_value_month=202609",
+      "observedAt": "2026-09-11T19:30:00Z",
+      "collectedAt": "2026-09-13T08:30:11Z",
+      "unit": "percent",
+      "status": "OK",
+      "missingReasons": {
+        "volume": "금리 지표에는 거래량 미적용"
+      },
+      "collectionMode": "API",
+      "verificationUrls": [
+        "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/all/202609?type=daily_treasury_yield_curve&field_tdr_date_value_month=202609"
+      ],
+      "fieldProvenance": {
+        "close": {
+          "sourceId": "US_TREASURY",
+          "sourceUrl": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/all/202609?type=daily_treasury_yield_curve&field_tdr_date_value_month=202609",
+          "observedAt": "2026-09-11T19:30:00Z",
+          "collectedAt": "2026-09-13T08:30:11Z"
+        },
+        "previousClose": {
+          "sourceId": "US_TREASURY",
+          "sourceUrl": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/all/202609?type=daily_treasury_yield_curve&field_tdr_date_value_month=202609",
+          "observedAt": "2026-09-11T19:30:00Z",
+          "collectedAt": "2026-09-13T08:30:11Z"
+        },
+        "changePct": {
+          "sourceId": "US_TREASURY",
+          "sourceUrl": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/all/202609?type=daily_treasury_yield_curve&field_tdr_date_value_month=202609",
+          "observedAt": "2026-09-11T19:30:00Z",
+          "collectedAt": "2026-09-13T08:30:11Z"
+        }
+      },
+      "market": "US",
+      "tradingDate": "2026-09-11",
+      "symbol": "US2Y",
+      "instrumentType": "YIELD",
+      "close": 4.63,
+      "previousClose": 4.56,
+      "change": 0.07000000000000028,
+      "changePct": 1.54,
+      "volume": null,
+      "currency": "USD"
+    },
+    {
+      "id": "US10Y-2026-09-11",
+      "sample": false,
+      "sourceId": "US_TREASURY",
+      "sourceUrl": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/all/202609?type=daily_treasury_yield_curve&field_tdr_date_value_month=202609",
+      "observedAt": "2026-09-11T19:30:00Z",
+      "collectedAt": "2026-09-13T08:30:11Z",
+      "unit": "percent",
+      "status": "OK",
+      "missingReasons": {
+        "volume": "금리 지표에는 거래량 미적용"
+      },
+      "collectionMode": "API",
+      "verificationUrls": [
+        "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/all/202609?type=daily_treasury_yield_curve&field_tdr_date_value_month=202609"
+      ],
+      "fieldProvenance": {
+        "close": {
+          "sourceId": "US_TREASURY",
+          "sourceUrl": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/all/202609?type=daily_treasury_yield_curve&field_tdr_date_value_month=202609",
+          "observedAt": "2026-09-11T19:30:00Z",
+          "collectedAt": "2026-09-13T08:30:11Z"
+        },
+        "previousClose": {
+          "sourceId": "US_TREASURY",
+          "sourceUrl": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/all/202609?type=daily_treasury_yield_curve&field_tdr_date_value_month=202609",
+          "observedAt": "2026-09-11T19:30:00Z",
+          "collectedAt": "2026-09-13T08:30:11Z"
+        },
+        "changePct": {
+          "sourceId": "US_TREASURY",
+          "sourceUrl": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/all/202609?type=daily_treasury_yield_curve&field_tdr_date_value_month=202609",
+          "observedAt": "2026-09-11T19:30:00Z",
+          "collectedAt": "2026-09-13T08:30:11Z"
+        }
+      },
+      "market": "US",
+      "tradingDate": "2026-09-11",
+      "symbol": "US10Y",
+      "instrumentType": "YIELD",
+      "close": 4.96,
+      "previousClose": 4.95,
+      "change": 0.009999999999999787,
+      "changePct": 0.2,
+      "volume": null,
+      "currency": "USD"
+    }
+  ],
+  "bls": [
+    {
+      "id": "CPI-MOM-2026-08",
+      "sample": false,
+      "sourceId": "BLS",
+      "sourceUrl": "https://api.bls.gov/publicAPI/v2/timeseries/data/CUSR0000SA0?startyear=2025&endyear=2026",
+      "observedAt": "2026-09-11T12:30:00Z",
+      "collectedAt": "2026-09-13T08:30:11Z",
+      "unit": "percent",
+      "status": "OK",
+      "missingReasons": {
+        "consensus": "BLS 공식 API는 시장 컨센서스를 제공하지 않음"
+      },
+      "collectionMode": "API",
+      "verificationUrls": [
+        "https://api.bls.gov/publicAPI/v2/timeseries/data/CUSR0000SA0?startyear=2025&endyear=2026"
+      ],
+      "fieldProvenance": {
+        "actual": {
+          "sourceId": "BLS",
+          "sourceUrl": "https://api.bls.gov/publicAPI/v2/timeseries/data/CUSR0000SA0?startyear=2025&endyear=2026",
+          "observedAt": "2026-09-11T12:30:00Z",
+          "collectedAt": "2026-09-13T08:30:11Z"
+        },
+        "previous": {
+          "sourceId": "BLS",
+          "sourceUrl": "https://api.bls.gov/publicAPI/v2/timeseries/data/CUSR0000SA0?startyear=2025&endyear=2026",
+          "observedAt": "2026-09-11T12:30:00Z",
+          "collectedAt": "2026-09-13T08:30:11Z"
+        },
+        "revisedPrevious": {
+          "sourceId": "BLS",
+          "sourceUrl": "https://api.bls.gov/publicAPI/v2/timeseries/data/CUSR0000SA0?startyear=2025&endyear=2026",
+          "observedAt": "2026-09-11T12:30:00Z",
+          "collectedAt": "2026-09-13T08:30:11Z"
+        }
+      },
+      "indicatorId": "CPI_U_MOM",
+      "indicatorName": "미국 CPI-U 전월 대비",
+      "releaseTime": "2026-09-11T12:30:00Z",
+      "period": "2026-08",
+      "actual": 0.4,
+      "consensus": null,
+      "previous": 0.07,
+      "revisedPrevious": 0.07,
+      "adjustmentType": "SA"
+    }
+  ],
+  "sec": [
+    {
+      "id": "ORCL-8K-2026-09-10",
+      "sample": false,
+      "sourceId": "SEC_EDGAR",
+      "sourceUrl": "https://data.sec.gov/submissions/CIK0001341439.json",
+      "observedAt": "2026-09-10T20:00:00Z",
+      "collectedAt": "2026-09-13T08:30:11Z",
+      "unit": "text",
+      "status": "OK",
+      "missingReasons": {},
+      "collectionMode": "API",
+      "verificationUrls": [
+        "https://data.sec.gov/submissions/CIK0001341439.json",
+        "https://www.sec.gov/Archives/edgar/data/1341439/000119312526387905/orcl-20260910.htm"
+      ],
+      "fieldProvenance": {
+        "accessionNumber": {
+          "sourceId": "SEC_EDGAR",
+          "sourceUrl": "https://data.sec.gov/submissions/CIK0001341439.json",
+          "observedAt": "2026-09-10T20:00:00Z",
+          "collectedAt": "2026-09-13T08:30:11Z"
+        },
+        "formType": {
+          "sourceId": "SEC_EDGAR",
+          "sourceUrl": "https://data.sec.gov/submissions/CIK0001341439.json",
+          "observedAt": "2026-09-10T20:00:00Z",
+          "collectedAt": "2026-09-13T08:30:11Z"
+        },
+        "filedAt": {
+          "sourceId": "SEC_EDGAR",
+          "sourceUrl": "https://data.sec.gov/submissions/CIK0001341439.json",
+          "observedAt": "2026-09-10T20:00:00Z",
+          "collectedAt": "2026-09-13T08:30:11Z"
+        },
+        "period": {
+          "sourceId": "SEC_EDGAR",
+          "sourceUrl": "https://data.sec.gov/submissions/CIK0001341439.json",
+          "observedAt": "2026-09-10T20:00:00Z",
+          "collectedAt": "2026-09-13T08:30:11Z"
+        },
+        "primaryDocument": {
+          "sourceId": "SEC_EDGAR",
+          "sourceUrl": "https://data.sec.gov/submissions/CIK0001341439.json",
+          "observedAt": "2026-09-10T20:00:00Z",
+          "collectedAt": "2026-09-13T08:30:11Z"
+        },
+        "filingUrl": {
+          "sourceId": "SEC_EDGAR",
+          "sourceUrl": "https://data.sec.gov/submissions/CIK0001341439.json",
+          "observedAt": "2026-09-10T20:00:00Z",
+          "collectedAt": "2026-09-13T08:30:11Z"
+        }
+      },
+      "companyId": "ORACLE",
+      "ticker": "ORCL",
+      "formType": "8-K",
+      "accessionNumber": "0001193125-26-387905",
+      "filedAt": "2026-09-10T20:00:00Z",
+      "period": "2026-09-10",
+      "extractedFacts": [
+        "SEC submissions metadata: 8-K 0001193125-26-387905",
+        "primaryDocument=orcl-20260910.htm"
+      ],
+      "cik": "0001341439",
+      "companyName": "Oracle Corporation",
+      "primaryDocument": "orcl-20260910.htm",
+      "filingUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526387905/orcl-20260910.htm"
+    }
+  ]
+}

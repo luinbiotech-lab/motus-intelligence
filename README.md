@@ -1,6 +1,6 @@
-# 미국 주식시장 마감 리포트 — Sprint 2A
+# 미국 주식시장 마감 리포트 — Sprint 2B
 
-미국 마감 자료를 수동 입력하여 검증 → 조건부 한국시장 영향 → 블로그 초안 → 근거 JSON을 만드는 **비공개 로컬 CLI**입니다. Sprint 2A에서는 실제 완료 정규 거래일 1건을 `MANUAL_VERIFIED` 입력으로 리허설했고, 첫 공식 데이터 어댑터로 U.S. Treasury 일별 CSV에서 2년/10년 금리를 정규화합니다. 자동 발행, 스케줄러, 투자 추천은 연결하지 않았습니다.
+미국 마감 자료를 수동 입력하거나 일부 공식 어댑터로 수집하여 검증 → 조건부 한국시장 영향 → 블로그 초안 → 근거 JSON을 만드는 **비공개 로컬 CLI**입니다. Sprint 2B 기준 U.S. Treasury, BLS CPI, SEC EDGAR submissions 어댑터가 연결됐고, 2026-09-11을 첫 golden trading day로 둡니다. 자동 발행, 스케줄러, 투자 추천은 연결하지 않았습니다.
 
 ## 실행
 
@@ -19,6 +19,9 @@ npm.cmd run sample
 ```powershell
 npm.cmd run report -- --input data/manual/day.json
 npm.cmd run report -- --input data/manual/2026-09-11/input.json
+npm.cmd run build
+node scripts/build-golden-day.mjs
+npm.cmd run report -- --input data/manual/2026-09-11/input-api.json
 ```
 
 `report`는 빌드된 CLI를 사용합니다. 코드 수정 후 `npm.cmd run build`를 실행하세요. `sample`과 `test`는 자동으로 빌드합니다. 경로는 프로젝트 루트 기준입니다.
@@ -40,7 +43,7 @@ npm.cmd run report -- --input data/manual/2026-09-11/input.json
 
 - `src/domain/models.ts`: 공통 엔터티 8종, 판단 필드, 사후 설명력 평가 모델
 - `src/data/schemas.ts`: 수동 입력·출처·규칙의 엄격한 런타임 스키마
-- `config/sources.json`: 실제/테스트 출처 registry. `US_TREASURY`만 Sprint 2A 공식 CSV 어댑터 연결
+- `config/sources.json`: 실제/테스트 출처 registry. `US_TREASURY`, `BLS`, `SEC_EDGAR` 공식 어댑터 연결
 - `config/us-korea-rules.v1.json`: 10개 대표 산업, 12개 전달경로를 다루는 13개 규칙
 - `src/services/validation.ts`: 입력 검증, 중복·충돌 격리
 - `src/services/analysis.ts`: 근거별 규칙 점수화
@@ -48,6 +51,8 @@ npm.cmd run report -- --input data/manual/2026-09-11/input.json
 - `src/services/report.ts`: 9개 목차와 Markdown 생성
 - `data/fixtures/sample-day.json`: 실행 가능한 통합 샘플. 분리된 sample-*.json은 각 입력 영역의 예시
 - `data/manual/2026-09-11/input.json`: 2026-09-11 실제 정규 거래일 수동 검증 리허설 입력
-- `tests/pipeline.test.ts`: 요구 시나리오와 회귀 테스트 41개
+- `data/manual/2026-09-11/input-api.json`: Treasury/BLS/SEC 어댑터 산출물을 일부 투입한 golden day 입력
+- `data/golden/2026-09-11/`: 원본 source snapshot, expected normalized result, manual/API 비교표
+- `tests/pipeline.test.ts`: 요구 시나리오와 회귀 테스트 47개
 
-[구조](docs/architecture.md) · [수동 입력](docs/manual-input.md) · [규칙](docs/rules.md) · [출처 운영](docs/data-sources.md) · [문제 및 회귀 방지](docs/issues.md) · [Sprint 1 완료 보고](docs/sprint-report.md) · [Sprint 2A 완료 보고](docs/sprint-2a-report.md)
+[구조](docs/architecture.md) · [수동 입력](docs/manual-input.md) · [규칙](docs/rules.md) · [출처 운영](docs/data-sources.md) · [문제 및 회귀 방지](docs/issues.md) · [Sprint 1 완료 보고](docs/sprint-report.md) · [Sprint 2A 완료 보고](docs/sprint-2a-report.md) · [Sprint 2B 완료 보고](docs/sprint-2b-report.md)

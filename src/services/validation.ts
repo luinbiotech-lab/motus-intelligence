@@ -51,7 +51,7 @@ export function validate(input: InputBundle, sources: Source[]): ValidationResul
       if (Date.parse(r.collectedAt) < Date.parse(r.observedAt) || Date.parse(r.collectedAt) > Date.parse(input.asOf)) add(id,'collectedAt','INVALID_VALUE','관측 ≤ 수집 ≤ 분석시각 위반');
       for (const [field,value] of Object.entries(fields)) if(value === null) {
         if (!r.missingReasons[field]) add(id,field,'INVALID_VALUE','값 부재 사유 필수');
-        else if(field!=='volume') add(id,field,'NO_DATA',r.missingReasons[field]!,['close','previousClose','actual'].includes(field));
+        else if(!['volume','consensus'].includes(field)) add(id,field,'NO_DATA',r.missingReasons[field]!,['close','previousClose','actual'].includes(field));
       }
       for (const field of ['releaseTime','eventTime','filedAt','publishedAt']) if(typeof fields[field] === 'string' && Date.parse(fields[field]) > Date.parse(input.asOf)) add(id,field,'INVALID_VALUE','미래 자료 사용 금지');
       let key: string = group;

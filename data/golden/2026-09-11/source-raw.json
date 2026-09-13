@@ -1,0 +1,70 @@
+{
+  "tradingDate": "2026-09-11",
+  "treasuryCsv": "Date,2 Yr,10 Yr\n09/10/2026,4.56,4.95\n09/11/2026,4.63,4.96\n",
+  "blsPayload": {
+    "status": "REQUEST_SUCCEEDED",
+    "Results": {
+      "series": [
+        {
+          "seriesID": "CUSR0000SA0",
+          "data": [
+            {
+              "year": "2026",
+              "period": "M08",
+              "periodName": "August",
+              "latest": "true",
+              "value": "334.131",
+              "footnotes": [
+                {}
+              ]
+            },
+            {
+              "year": "2026",
+              "period": "M07",
+              "periodName": "July",
+              "value": "332.813",
+              "footnotes": [
+                {}
+              ]
+            },
+            {
+              "year": "2026",
+              "period": "M06",
+              "periodName": "June",
+              "value": "332.568",
+              "footnotes": [
+                {}
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "secPayload": {
+    "name": "ORACLE CORP",
+    "tickers": [
+      "ORCL",
+      "ORCL-PD"
+    ],
+    "filings": {
+      "recent": {
+        "accessionNumber": [
+          "0001193125-26-387905"
+        ],
+        "form": [
+          "8-K"
+        ],
+        "filingDate": [
+          "2026-09-10"
+        ],
+        "reportDate": [
+          "2026-09-10"
+        ],
+        "primaryDocument": [
+          "orcl-20260910.htm"
+        ]
+      }
+    }
+  }
+}

@@ -6,15 +6,15 @@
     "official": true,
     "priority": 1,
     "authenticationType": "USER_AGENT",
-    "rateLimit": "UNKNOWN: 연결 전 공식 문서 확인",
-    "latency": "UNKNOWN",
+    "rateLimit": "SEC fair access policy; client rate control required",
+    "latency": "API",
     "redistributionStatus": "UNKNOWN",
     "commercialUseStatus": "UNKNOWN",
-    "enabled": false,
-    "notes": "Sprint 1 수동 출처 분류용. 인증 방식도 연결 전 재검증. 공식 분류는 개별 입력의 진위 보증이 아님.",
+    "enabled": true,
+    "notes": "Sprint 2B SEC submissions adapter 연결. 8-K/10-Q/10-K metadata만 정규화하며 전문 분석 없음.",
     "homepage": "https://www.sec.gov/",
     "maxAgeMinutes": 10080,
-    "connectionStatus": "DATA_NOT_CONNECTED"
+    "connectionStatus": "OK"
   },
   {
     "sourceId": "BLS",
@@ -22,16 +22,16 @@
     "category": "macro",
     "official": true,
     "priority": 1,
-    "authenticationType": "OPTIONAL_API_KEY",
-    "rateLimit": "UNKNOWN: 연결 전 공식 문서 확인",
-    "latency": "UNKNOWN",
+    "authenticationType": "NONE_OR_OPTIONAL_API_KEY",
+    "rateLimit": "BLS Public Data API unauthenticated limits apply; key optional",
+    "latency": "API",
     "redistributionStatus": "UNKNOWN",
     "commercialUseStatus": "UNKNOWN",
-    "enabled": false,
-    "notes": "Sprint 1 수동 출처 분류용. 인증 방식도 연결 전 재검증. 공식 분류는 개별 입력의 진위 보증이 아님.",
+    "enabled": true,
+    "notes": "Sprint 2B BLS CPI adapter 연결. 공식 CPI index에서 전월 대비 actual/previous를 계산하며 consensus는 생성하지 않음.",
     "homepage": "https://www.bls.gov/",
     "maxAgeMinutes": 10080,
-    "connectionStatus": "DATA_NOT_CONNECTED"
+    "connectionStatus": "OK"
   },
   {
     "sourceId": "BEA",
