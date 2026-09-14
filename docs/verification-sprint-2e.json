@@ -1,0 +1,19 @@
+{
+  "sprint": "2E",
+  "status": "PASS",
+  "startingHead": "d6bd916f30fbd04d91de6c492b87ffab7eca5dc9",
+  "sampleTradingDate": "2026-09-11",
+  "reportId": "MANUAL-2026-09-11-7cb0ccf11f29",
+  "tests": 65,
+  "typecheck": "PASS",
+  "build": "PASS",
+  "secretScan": "PASS",
+  "publicInternalLeakCheck": "PASS",
+  "outputs": {
+    "bloggerMarkdown": "data/editorial/2026-09-11/MANUAL-2026-09-11-7cb0ccf11f29-blogger.md",
+    "terms": "data/editorial/2026-09-11/MANUAL-2026-09-11-7cb0ccf11f29-terms.json",
+    "opportunities": "data/editorial/2026-09-11/MANUAL-2026-09-11-7cb0ccf11f29-opportunities.json",
+    "naver": "data/editorial/2026-09-11/MANUAL-2026-09-11-7cb0ccf11f29-naver.json",
+    "a4Brokerage": "data/brokerage/2026-09-11/MANUAL-2026-09-11-7cb0ccf11f29-2E.A4.1.0.md"
+  }
+}

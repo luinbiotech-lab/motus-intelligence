@@ -3,11 +3,14 @@ import { resolve } from 'node:path';
 import { runPipeline } from './services/pipeline.js';
 import type { EvidencePackage, ReportRecord, ReviewActionInput, Rule, Source } from './domain/models.js';
 import { applyReviewActions, buildMachineHumanDiff, buildPublishReadyDraft, buildReviewSheet, createReviewAction } from './services/review.js';
+import { renderBrokerageReportOnDemand, renderDailyEditorial } from './services/editorial.js';
 async function main() {
   const args=process.argv.slice(2);
   const sample=args[0]==='--sample';
   if(args[0]==='--review') return await writeReviewSheet(args[1]);
   if(args[0]==='--apply-review-actions') return await applyReviewActionFile(args[1],args[2],args[3]);
+  if(args[0]==='--editorial') return await writeEditorial(args[1],args[2]);
+  if(args[0]==='--brokerage-report') return await writeBrokerageReport(args[1],args[2]);
   if((sample&&args.length!==1)||(!sample&&(args.length!==2||args[0]!=='--input'))) throw new Error('사용법: npm run sample 또는 npm run report -- --input data/manual/day.json');
   const path=sample?'data/fixtures/sample-day.json':args[1]!;
   const read=async(p:string):Promise<unknown>=>JSON.parse((await readFile(resolve(p),'utf8')).replace(/^\uFEFF/,''));
@@ -51,6 +54,30 @@ async function applyReviewActionFile(evidencePath:string|undefined,reportPath:st
     writeFile(files[4]!,JSON.stringify(actions,null,2))
   ]);
   console.log(JSON.stringify({status:'PASS',reportId:report.reportId,approvalStatus:reviewed.approvalStatus,publishAllowed:draft.publishAllowed,files},null,2));
+}
+async function writeEditorial(reportPath:string|undefined,evidencePath:string|undefined) {
+  if(!reportPath||!evidencePath) throw new Error('사용법: node dist/src/cli.js --editorial data/reports/report.json data/evidence/report.json');
+  const report=JSON.parse(await readFile(resolve(reportPath),'utf8')) as ReportRecord;
+  const evidence=JSON.parse(await readFile(resolve(evidencePath),'utf8')) as EvidencePackage;
+  const editorial=renderDailyEditorial(report,evidence);
+  const dir=`data/editorial/${report.tradingDate}`;
+  await mkdir(dir,{recursive:true});
+  const files=[`${dir}/${report.reportId}-blogger.md`,`${dir}/${report.reportId}-blogger.json`,`${dir}/${report.reportId}-naver.json`,`${dir}/${report.reportId}-opportunities.json`,`${dir}/${report.reportId}-terms.json`];
+  await Promise.all([
+    writeFile(files[0]!,editorial.bloggerMarkdown),
+    writeFile(files[1]!,JSON.stringify({seo:editorial.seo,body:editorial.bloggerMarkdown,terms:editorial.terms},null,2)),
+    writeFile(files[2]!,JSON.stringify(editorial.naver,null,2)),
+    writeFile(files[3]!,JSON.stringify(editorial.opportunities,null,2)),
+    writeFile(files[4]!,JSON.stringify(editorial.terms,null,2))
+  ]);
+  console.log(JSON.stringify({status:'PASS',tradingDate:report.tradingDate,files,opportunities:editorial.opportunities.map(item=>({contentType:item.contentType,recommended:item.recommended})),naver:editorial.naver},null,2));
+}
+async function writeBrokerageReport(reportPath:string|undefined,evidencePath:string|undefined) {
+  if(!reportPath||!evidencePath) throw new Error('사용법: node dist/src/cli.js --brokerage-report data/reports/report.json data/evidence/report.json');
+  const report=JSON.parse(await readFile(resolve(reportPath),'utf8')) as ReportRecord;
+  const evidence=JSON.parse(await readFile(resolve(evidencePath),'utf8')) as EvidencePackage;
+  const output=await renderBrokerageReportOnDemand(report,evidence,`data/brokerage/${report.tradingDate}`);
+  console.log(JSON.stringify({status:'PASS',reportId:output.reportId,cached:output.cached,file:`data/brokerage/${report.tradingDate}/${report.reportId}-${output.rendererVersion}.md`,naver:output.naver},null,2));
 }
 function reviewSheetMarkdown(sheet:ReturnType<typeof buildReviewSheet>) {
   return `# Review Sheet — ${sheet.reportId}

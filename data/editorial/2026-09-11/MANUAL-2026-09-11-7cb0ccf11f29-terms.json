@@ -1,0 +1,44 @@
+[
+  {
+    "term": "S&P 500",
+    "explanation": "미국 대형주 500개 안팎으로 구성된 대표 주가지수입니다. 미국 주식시장 전체 흐름을 볼 때 가장 자주 확인하는 기준선입니다.",
+    "evergreenKey": "term-sp500",
+    "evergreenTitle": "S&P 500으로 미국증시 읽는 법"
+  },
+  {
+    "term": "나스닥",
+    "explanation": "기술주와 성장주 비중이 큰 미국 주가지수입니다. 반도체, 소프트웨어, AI 인프라 투자심리를 볼 때 중요합니다.",
+    "evergreenKey": "term-nasdaq",
+    "evergreenTitle": "나스닥이 한국 기술주에 미치는 영향"
+  },
+  {
+    "term": "VIX",
+    "explanation": "옵션시장에서 계산되는 변동성 지표입니다. 숫자가 내려가면 공포가 완화됐다는 신호로 해석되는 경우가 많습니다.",
+    "evergreenKey": "term-vix",
+    "evergreenTitle": "VIX로 시장 심리 확인하기"
+  },
+  {
+    "term": "국채금리",
+    "explanation": "정부가 발행한 채권의 수익률입니다. 금리가 오르면 성장주 밸류에이션과 환율, 외국인 수급에 부담이 될 수 있습니다.",
+    "evergreenKey": "term-treasury-yield",
+    "evergreenTitle": "미국 국채금리와 주식시장의 관계"
+  },
+  {
+    "term": "달러",
+    "explanation": "글로벌 자금 흐름과 환율을 보는 핵심 변수입니다. 달러 강세는 원화와 신흥국 자산 가격에 영향을 줄 수 있습니다.",
+    "evergreenKey": "term-dollar",
+    "evergreenTitle": "달러 강세가 한국시장에 주는 영향"
+  },
+  {
+    "term": "위험자산 선호",
+    "explanation": "투자자가 안전자산보다 주식·성장주 같은 위험자산을 더 선호하는 국면을 말합니다.",
+    "evergreenKey": "term-risk-on",
+    "evergreenTitle": "위험자산 선호와 증시 흐름"
+  },
+  {
+    "term": "AI 인프라",
+    "explanation": "AI 서비스를 운영하기 위한 반도체, 서버, 전력, 네트워크 투자를 묶어 부르는 표현입니다.",
+    "evergreenKey": "term-ai-infra",
+    "evergreenTitle": "AI 인프라 투자와 반도체 사이클"
+  }
+]

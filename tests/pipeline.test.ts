@@ -1,6 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { mkdtempSync, readFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import type { ClaimDraft } from '../src/services/cross-verification.js';
 import type { ClaimRecord, ClaimSource, ConflictRecord, EvidencePackage, FilingRecord, GeoVerificationContext, InputBundle, MacroRelease, MarketSnapshot, ReviewActionInput, Rule, Source, Status, VerificationTier } from '../src/domain/models.js';
 import { runPipeline, configurationErrors } from '../src/services/pipeline.js';
@@ -10,6 +12,7 @@ import { BlsCpiAdapter, SecEdgarAdapter, TreasuryYieldAdapter, UnconnectedAdapte
 import { verifyClaims } from '../src/services/cross-verification.js';
 import { applyReviewActions, buildMachineHumanDiff, buildPublishReadyDraft, buildReviewQueue, buildReviewSheet, createReviewAction, evaluateApprovalGate, initialApprovalStatus, transitionApprovalStatus } from '../src/services/review.js';
 import { generateReport } from '../src/services/report.js';
+import { buildDynamicTerms, decideContentOpportunities, renderBrokerageReportOnDemand, renderDailyEditorial } from '../src/services/editorial.js';
 const read=(p:string):unknown=>JSON.parse(readFileSync(p,'utf8'));
 const fixture=()=>structuredClone(read('data/fixtures/sample-day.json') as InputBundle);
 const realFixture=()=>structuredClone(read('data/manual/2026-09-11/input.json') as InputBundle);
@@ -388,4 +391,49 @@ test('Sprint 2D review metrics remain NOT_MEASURED without human actions',()=>{
   const reviewed=applyReviewActions(result.evidence,[]);
   assert.equal(reviewed.reviewMetrics.measurementStatus,'NOT_MEASURED');
   assert.equal(reviewed.reviewMetrics.reviewDurationSeconds,null);
+});
+test('Sprint 2E daily editorial renderer hides internal status and keeps public Korean prose',()=>{
+  const result=runReal(realFixture());
+  const editorial=renderDailyEditorial(result.report,result.evidence);
+  assert.match(editorial.bloggerMarkdown,/미국시장 마감/);
+  assert.match(editorial.bloggerMarkdown,/한국시장 영향/);
+  assert.doesNotMatch(editorial.bloggerMarkdown,/CLAIM-|MANUAL-2026|AUTO_VALIDATED|REVIEW_REQUIRED|BLOCKED|DATA_NOT_CONNECTED/);
+  assert.equal(editorial.seo.hashtags.includes('#미국증시'),true);
+  assert.ok(editorial.naver.intro.length>40);
+  assert.ok(editorial.naver.hashtags.length>=3);
+});
+test('Sprint 2E opportunity engine recommends B C D only when data supports them',()=>{
+  const result=runReal(realFixture());
+  const editorial=renderDailyEditorial(result.report,result.evidence);
+  const decisions=editorial.opportunities;
+  assert.equal(decisions.length,3);
+  assert.equal(decisions.find(item=>item.contentType==='C_EVERGREEN')!.recommended,true);
+  assert.equal(decisions.find(item=>item.contentType==='D_COMPANY_INDUSTRY')!.recommended,true);
+  const quietEvidence={...result.evidence,impactJudgments:[],originalInput:{...realFixture(),market:realFixture().market.map(item=>({...item,changePct:0.1})),news:[],companyEvents:[],filings:[],signals:[]}} as EvidencePackage;
+  const quiet=decideContentOpportunities(result.report,quietEvidence,'시장 요약',[]);
+  assert.equal(quiet.find(item=>item.contentType==='B_EVENT')!.recommended,false);
+  assert.equal(quiet.find(item=>item.contentType==='D_COMPANY_INDUSTRY')!.recommended,false);
+});
+test('Sprint 2E dynamic glossary uses only terms present in body and keeps evergreen keys',()=>{
+  const terms=buildDynamicTerms('S&P 500과 나스닥, VIX, 미국 국채금리, 달러가 함께 움직였다.');
+  assert.ok(terms.length>=3);
+  assert.ok(terms.length<=8);
+  for(const term of terms) {
+    assert.ok(term.evergreenKey.startsWith('term-'));
+    assert.match(term.explanation,/입니다|말합니다|뜻합니다/);
+  }
+  assert.equal(terms.some(item=>item.term==='WTI'),false);
+});
+test('Sprint 2E on-demand A4 brokerage report is cached by reportId and renderer version',async()=>{
+  const result=runReal(realFixture());
+  const dir=mkdtempSync(join(tmpdir(),'brokerage-'));
+  const first=await renderBrokerageReportOnDemand(result.report,result.evidence,dir);
+  const second=await renderBrokerageReportOnDemand(result.report,result.evidence,dir);
+  assert.equal(first.cached,false);
+  assert.equal(second.cached,true);
+  assert.equal(first.markdown,second.markdown);
+  assert.equal(first.naver.intro,second.naver.intro);
+  assert.doesNotMatch(second.naver.intro,/ OK|REVIEW_REQUIRED|BLOCKED/);
+  assert.match(first.markdown,/내부용 A4 브로커리지 요약/);
+  assert.ok(first.naver.hashtags.includes('#미국증시'));
 });
