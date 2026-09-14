@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>관리자 전용 A4 리포트 생성</title>
+  <style>
+    body{margin:0;font-family:Arial,"Noto Sans KR",sans-serif;background:#f3f5f8;color:#111827}
+    main{max-width:920px;margin:48px auto;padding:32px;background:#fff;border:1px solid #d8dee9;border-radius:18px}
+    h1{margin:0 0 12px;color:#0b1f3a}
+    label{display:block;margin:18px 0 6px;font-weight:700}
+    input{width:100%;padding:12px;border:1px solid #cfd7e3;border-radius:10px}
+    button{margin-top:22px;padding:12px 18px;border:0;border-radius:999px;background:#0b1f3a;color:#fff;font-weight:800}
+    p{line-height:1.65;color:#4b5563}
+  </style>
+</head>
+<body>
+  <main>
+    <h1>관리자 전용 A4 리포트 생성</h1>
+    <p>이 화면은 내부 관리자 route 전용입니다. 공개 Blogger 글에는 생성 버튼이나 내부 action을 노출하지 않습니다.</p>
+    <form method="post" action="/admin/a4-report">
+      <label for="tradingDate">날짜</label>
+      <input id="tradingDate" name="tradingDate" placeholder="2026-09-11" />
+      <label for="reportId">reportId</label>
+      <input id="reportId" name="reportId" placeholder="MANUAL-2026-09-11-..." />
+      <button type="submit">리포트 생성</button>
+    </form>
+  </main>
+</body>
+</html>

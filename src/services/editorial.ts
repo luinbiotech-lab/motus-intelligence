@@ -19,6 +19,7 @@ export interface EditorialTerm {
 export interface OpportunityDecision {
   contentType: 'B_EVENT'|'C_EVERGREEN'|'D_COMPANY_INDUSTRY';
   recommended: boolean;
+  score: number;
   reason: string;
   suggestedTitle: string|null;
   evidenceIds: string[];
@@ -112,47 +113,67 @@ export function renderDailyEditorial(report:ReportRecord,evidence:EvidencePackag
 export function decideContentOpportunities(report:ReportRecord,evidence:EvidencePackage,bodyText:string,terms:EditorialTerm[]):OpportunityDecision[] {
   const input=evidence.originalInput as InputBundle;
   const market=input.market.filter(item=>item.status==='OK'&&item.close!==null);
-  const largeMove=market.some(item=>Math.abs(item.changePct??0)>=1.5);
+  const largeMoves=market.filter(item=>Math.abs(item.changePct??0)>=2.5 || item.symbol==='VIX'&&Math.abs(item.changePct??0)>=10);
   const hasCompany=input.companyEvents.length+input.filings.length>0;
   const koreaImpact=evidence.impactJudgments.filter(item=>item.status==='OK'&&item.confidenceScore>=70);
-  return [
+  const base: OpportunityDecision[] = [
     {
       contentType:'B_EVENT',
-      recommended:largeMove || input.news.some(item=>item.usedInReport),
-      reason:largeMove?'지수·금리·원자재 중 큰 폭의 움직임이 있어 별도 이벤트 글 후보입니다.':input.news.some(item=>item.usedInReport)?'검증된 관련 기사 흐름이 있어 짧은 이벤트 해설 후보입니다.':'단일 사건 중심으로 분리할 만큼의 강한 움직임은 확인되지 않았습니다.',
-      suggestedTitle:largeMove?`${report.tradingDate} 미국시장 변동 요인 점검`:null,
-      evidenceIds:market.filter(item=>Math.abs(item.changePct??0)>=1.5).map(item=>item.id)
+      recommended:false,
+      score:Math.min(100,largeMoves.length*35 + (input.news.some(item=>item.usedInReport)?25:0)),
+      reason:largeMoves.length?'VIX·원자재·금리 등에서 별도 이벤트로 다룰 만한 움직임이 확인됐습니다.':'시장 충격이나 단일 이벤트가 충분히 크지 않아 Daily 안에서 처리합니다.',
+      suggestedTitle:largeMoves.length?`${report.tradingDate} 미국시장 변동 요인 점검`:null,
+      evidenceIds:largeMoves.map(item=>item.id)
     },
     {
       contentType:'C_EVERGREEN',
-      recommended:terms.length>=3,
-      reason:terms.length>=3?'본문에 반복 학습 가치가 있는 금융용어가 3개 이상 등장했습니다.':'본문 용어 수가 적어 별도 Evergreen 글은 보류합니다.',
-      suggestedTitle:terms.length>=3?'미국증시 마감 리포트에서 자주 나오는 금융용어 정리':null,
+      recommended:false,
+      score:Math.min(100,terms.filter(term=>highPriorityTerms.has(term.term)).length*18),
+      reason:terms.filter(term=>highPriorityTerms.has(term.term)).length>=4?'약어·전문 용어가 충분해 Evergreen 후보입니다.':'용어 해설은 Daily 안에 넣고 별도 Evergreen은 보류합니다.',
+      suggestedTitle:terms.filter(term=>highPriorityTerms.has(term.term)).length>=4?'미국증시 마감 리포트에서 자주 나오는 핵심 약어 정리':null,
       evidenceIds:[]
     },
     {
       contentType:'D_COMPANY_INDUSTRY',
-      recommended:hasCompany || koreaImpact.length>=2,
-      reason:hasCompany?'기업 공시·이벤트가 포함되어 산업 해설 글 후보입니다.':koreaImpact.length>=2?'한국시장 전달경로가 2개 이상 확인되어 산업별 후속 글 후보입니다.':'기업·산업 단독 글로 분리할 근거는 아직 제한적입니다.',
+      recommended:false,
+      score:Math.min(100,(hasCompany?35:0)+koreaImpact.length*18),
+      reason:hasCompany&&koreaImpact.length>=2?'기업 이벤트와 한국시장 전달경로가 함께 확인되어 산업 후속 글 후보입니다.':'기업·산업 단독 글로 분리할 만큼의 복합 근거는 제한적입니다.',
       suggestedTitle:hasCompany?'미국 기업 이벤트가 한국 산업에 주는 시사점':'미국 금리와 기술주 흐름의 한국시장 전달경로',
       evidenceIds:[...input.companyEvents.map(item=>item.id),...input.filings.map(item=>item.id),...koreaImpact.flatMap(item=>item.evidenceIds)].slice(0,8)
     }
   ];
+  const recommended=new Set(base.filter(item=>item.score>=70).sort((a,b)=>b.score-a.score).slice(0,2).map(item=>item.contentType));
+  return base.map(item=>({...item,recommended:recommended.has(item.contentType)}));
 }
 
+const highPriorityTerms=new Set(['PBR','PER','EPS','BPS','ROE','EBITDA','FCF','CAPEX','CPI','PCE','FOMC','VIX','DXY','YoY','MoM','QoQ','bp','Guidance','Consensus','WTI']);
 export function buildDynamicTerms(markdown:string):EditorialTerm[] {
   const candidates: EditorialTerm[] = [
-    {term:'S&P 500',explanation:'미국 대형주 500개 안팎으로 구성된 대표 주가지수입니다. 미국 주식시장 전체 흐름을 볼 때 가장 자주 확인하는 기준선입니다.',evergreenKey:'term-sp500',evergreenTitle:'S&P 500으로 미국증시 읽는 법'},
-    {term:'나스닥',explanation:'기술주와 성장주 비중이 큰 미국 주가지수입니다. 반도체, 소프트웨어, AI 인프라 투자심리를 볼 때 중요합니다.',evergreenKey:'term-nasdaq',evergreenTitle:'나스닥이 한국 기술주에 미치는 영향'},
+    {term:'PBR',explanation:'주가를 주당순자산으로 나눈 값입니다. 자산가치 대비 주가 수준을 볼 때 씁니다.',evergreenKey:'term-pbr',evergreenTitle:'PBR로 밸류에이션 읽기'},
+    {term:'PER',explanation:'주가를 주당순이익으로 나눈 값입니다. 이익 대비 주가 부담을 비교할 때 씁니다.',evergreenKey:'term-per',evergreenTitle:'PER과 성장주의 가격 부담'},
+    {term:'EPS',explanation:'주당순이익입니다. 기업 이익이 한 주당 얼마나 쌓이는지 보여줍니다.',evergreenKey:'term-eps',evergreenTitle:'EPS와 실적 시즌 읽기'},
+    {term:'BPS',explanation:'주당순자산입니다. 기업의 장부상 순자산을 주식 수로 나눈 값입니다.',evergreenKey:'term-bps',evergreenTitle:'BPS와 PBR 함께 보기'},
+    {term:'ROE',explanation:'자기자본이익률입니다. 회사가 자본을 얼마나 효율적으로 이익으로 바꾸는지 보여줍니다.',evergreenKey:'term-roe',evergreenTitle:'ROE가 높은 기업의 의미'},
+    {term:'EBITDA',explanation:'이자·세금·감가상각 전 이익입니다. 기업의 현금창출력을 거칠게 비교할 때 사용합니다.',evergreenKey:'term-ebitda',evergreenTitle:'EBITDA로 기업 체력 보기'},
+    {term:'FCF',explanation:'잉여현금흐름입니다. 영업과 투자 지출 뒤 실제로 남는 현금을 뜻합니다.',evergreenKey:'term-fcf',evergreenTitle:'FCF가 중요한 이유'},
+    {term:'CAPEX',explanation:'설비투자입니다. AI 데이터센터, 반도체, 에너지 인프라 투자 판단에 자주 등장합니다.',evergreenKey:'term-capex',evergreenTitle:'CAPEX와 투자 사이클'},
+    {term:'CPI',explanation:'소비자물가지수입니다. Fed 정책 기대와 국채금리 방향을 움직이는 핵심 물가 지표입니다.',evergreenKey:'term-cpi',evergreenTitle:'CPI 발표와 시장 반응'},
+    {term:'PCE',explanation:'개인소비지출 물가지수입니다. Fed가 선호하는 물가 지표로 알려져 있습니다.',evergreenKey:'term-pce',evergreenTitle:'PCE와 Fed의 물가 판단'},
+    {term:'FOMC',explanation:'미국 연방공개시장위원회입니다. 기준금리와 통화정책 방향을 결정합니다.',evergreenKey:'term-fomc',evergreenTitle:'FOMC 전후 시장 체크포인트'},
     {term:'VIX',explanation:'옵션시장에서 계산되는 변동성 지표입니다. 숫자가 내려가면 공포가 완화됐다는 신호로 해석되는 경우가 많습니다.',evergreenKey:'term-vix',evergreenTitle:'VIX로 시장 심리 확인하기'},
-    {term:'국채금리',explanation:'정부가 발행한 채권의 수익률입니다. 금리가 오르면 성장주 밸류에이션과 환율, 외국인 수급에 부담이 될 수 있습니다.',evergreenKey:'term-treasury-yield',evergreenTitle:'미국 국채금리와 주식시장의 관계'},
-    {term:'달러',explanation:'글로벌 자금 흐름과 환율을 보는 핵심 변수입니다. 달러 강세는 원화와 신흥국 자산 가격에 영향을 줄 수 있습니다.',evergreenKey:'term-dollar',evergreenTitle:'달러 강세가 한국시장에 주는 영향'},
+    {term:'DXY',explanation:'달러인덱스입니다. 주요 통화 대비 달러의 상대 강도를 보여줍니다.',evergreenKey:'term-dxy',evergreenTitle:'DXY와 원화 흐름'},
+    {term:'YoY',explanation:'전년 대비 변화율입니다. 물가와 실적의 장기 흐름을 비교할 때 사용합니다.',evergreenKey:'term-yoy',evergreenTitle:'YoY와 MoM 차이'},
+    {term:'MoM',explanation:'전월 대비 변화율입니다. CPI처럼 월간 지표의 단기 변화를 볼 때 씁니다.',evergreenKey:'term-mom',evergreenTitle:'MoM 지표 읽는 법'},
+    {term:'QoQ',explanation:'전분기 대비 변화율입니다. 기업 실적이나 GDP 흐름을 볼 때 자주 등장합니다.',evergreenKey:'term-qoq',evergreenTitle:'QoQ와 실적 해석'},
+    {term:'bp',explanation:'basis point의 줄임말로 0.01%포인트를 뜻합니다. 금리 변화폭을 정확히 말할 때 사용합니다.',evergreenKey:'term-bp',evergreenTitle:'bp로 금리 변화 읽기'},
+    {term:'Guidance',explanation:'기업이 제시하는 향후 실적 전망입니다. 실적 발표 뒤 주가 반응을 좌우할 수 있습니다.',evergreenKey:'term-guidance',evergreenTitle:'가이던스가 주가에 중요한 이유'},
+    {term:'Consensus',explanation:'시장 예상치입니다. 실제 지표나 실적이 예상치를 웃도는지 밑도는지 판단하는 기준입니다.',evergreenKey:'term-consensus',evergreenTitle:'컨센서스와 서프라이즈'},
     {term:'WTI',explanation:'미국 서부텍사스산 원유 가격을 뜻합니다. 에너지 비용, 물가 기대, 화학·항공 업종 판단에 자주 활용됩니다.',evergreenKey:'term-wti',evergreenTitle:'WTI 원유 가격과 산업별 영향'},
-    {term:'위험자산 선호',explanation:'투자자가 안전자산보다 주식·성장주 같은 위험자산을 더 선호하는 국면을 말합니다.',evergreenKey:'term-risk-on',evergreenTitle:'위험자산 선호와 증시 흐름'},
-    {term:'AI 인프라',explanation:'AI 서비스를 운영하기 위한 반도체, 서버, 전력, 네트워크 투자를 묶어 부르는 표현입니다.',evergreenKey:'term-ai-infra',evergreenTitle:'AI 인프라 투자와 반도체 사이클'}
+    {term:'국채금리',explanation:'정부가 발행한 채권의 수익률입니다. 금리가 오르면 성장주 밸류에이션과 환율, 외국인 수급에 부담이 될 수 있습니다.',evergreenKey:'term-treasury-yield',evergreenTitle:'미국 국채금리와 주식시장의 관계'}
   ];
-  const selected=candidates.filter(item=>markdown.includes(item.term)).slice(0,8);
-  return selected.length>=3?selected:selected.concat(candidates.filter(item=>!selected.includes(item)&&markdown.includes(item.term.replace('국채금리','금리')))).slice(0,Math.max(3,selected.length));
+  const aliases: Record<string,string[]>={DXY:['달러인덱스'],WTI:['원유'],CAPEX:['설비투자','AI 인프라'],CPI:['소비자물가'],bp:['%포인트','포인트'],Consensus:['예상치'],Guidance:['전망']};
+  const selected=candidates.filter(item=>markdown.includes(item.term)||(aliases[item.term]??[]).some(alias=>markdown.includes(alias))).slice(0,8);
+  return selected.length>=3?selected:selected.concat(candidates.filter(item=>!selected.includes(item)&&item.term==='국채금리'&&markdown.includes('금리'))).slice(0,Math.max(3,selected.length));
 }
 
 export async function renderBrokerageReportOnDemand(report:ReportRecord,evidence:EvidencePackage,outputDir:string):Promise<BrokerageReportOutput> {

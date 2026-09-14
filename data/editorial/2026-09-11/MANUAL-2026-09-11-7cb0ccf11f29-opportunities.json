@@ -1,26 +1,28 @@
 [
   {
     "contentType": "B_EVENT",
-    "recommended": true,
-    "reason": "지수·금리·원자재 중 큰 폭의 움직임이 있어 별도 이벤트 글 후보입니다.",
+    "recommended": false,
+    "score": 70,
+    "reason": "VIX·원자재·금리 등에서 별도 이벤트로 다룰 만한 움직임이 확인됐습니다.",
     "suggestedTitle": "2026-09-11 미국시장 변동 요인 점검",
     "evidenceIds": [
       "VIX-2026-09-11",
-      "US2Y-2026-09-11",
       "BRENT-2026-09-11"
     ]
   },
   {
     "contentType": "C_EVERGREEN",
     "recommended": true,
-    "reason": "본문에 반복 학습 가치가 있는 금융용어가 3개 이상 등장했습니다.",
-    "suggestedTitle": "미국증시 마감 리포트에서 자주 나오는 금융용어 정리",
+    "score": 100,
+    "reason": "약어·전문 용어가 충분해 Evergreen 후보입니다.",
+    "suggestedTitle": "미국증시 마감 리포트에서 자주 나오는 핵심 약어 정리",
     "evidenceIds": []
   },
   {
     "contentType": "D_COMPANY_INDUSTRY",
     "recommended": true,
-    "reason": "기업 공시·이벤트가 포함되어 산업 해설 글 후보입니다.",
+    "score": 71,
+    "reason": "기업 이벤트와 한국시장 전달경로가 함께 확인되어 산업 후속 글 후보입니다.",
     "suggestedTitle": "미국 기업 이벤트가 한국 산업에 주는 시사점",
     "evidenceIds": [
       "ORCL-Q1-FY27-EVENT",

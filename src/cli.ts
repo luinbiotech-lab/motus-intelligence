@@ -4,6 +4,7 @@ import { runPipeline } from './services/pipeline.js';
 import type { EvidencePackage, ReportRecord, ReviewActionInput, Rule, Source } from './domain/models.js';
 import { applyReviewActions, buildMachineHumanDiff, buildPublishReadyDraft, buildReviewSheet, createReviewAction } from './services/review.js';
 import { renderBrokerageReportOnDemand, renderDailyEditorial } from './services/editorial.js';
+import { renderA4MasterOnDemand } from './services/a4-visual.js';
 async function main() {
   const args=process.argv.slice(2);
   const sample=args[0]==='--sample';
@@ -11,6 +12,7 @@ async function main() {
   if(args[0]==='--apply-review-actions') return await applyReviewActionFile(args[1],args[2],args[3]);
   if(args[0]==='--editorial') return await writeEditorial(args[1],args[2]);
   if(args[0]==='--brokerage-report') return await writeBrokerageReport(args[1],args[2]);
+  if(args[0]==='--a4-master') return await writeA4Master(args[1],args[2],args.includes('--regenerate'));
   if((sample&&args.length!==1)||(!sample&&(args.length!==2||args[0]!=='--input'))) throw new Error('사용법: npm run sample 또는 npm run report -- --input data/manual/day.json');
   const path=sample?'data/fixtures/sample-day.json':args[1]!;
   const read=async(p:string):Promise<unknown>=>JSON.parse((await readFile(resolve(p),'utf8')).replace(/^\uFEFF/,''));
@@ -78,6 +80,13 @@ async function writeBrokerageReport(reportPath:string|undefined,evidencePath:str
   const evidence=JSON.parse(await readFile(resolve(evidencePath),'utf8')) as EvidencePackage;
   const output=await renderBrokerageReportOnDemand(report,evidence,`data/brokerage/${report.tradingDate}`);
   console.log(JSON.stringify({status:'PASS',reportId:output.reportId,cached:output.cached,file:`data/brokerage/${report.tradingDate}/${report.reportId}-${output.rendererVersion}.md`,naver:output.naver},null,2));
+}
+async function writeA4Master(reportPath:string|undefined,evidencePath:string|undefined,regenerate:boolean) {
+  if(!reportPath||!evidencePath) throw new Error('사용법: node dist/src/cli.js --a4-master data/reports/report.json data/evidence/report.json [--regenerate]');
+  const report=JSON.parse(await readFile(resolve(reportPath),'utf8')) as ReportRecord;
+  const evidence=JSON.parse(await readFile(resolve(evidencePath),'utf8')) as EvidencePackage;
+  const output=await renderA4MasterOnDemand(report,evidence,`data/a4-master/${report.tradingDate}`,{audience:'admin',action:'A4_REPORT_RENDER'},{regenerate});
+  console.log(JSON.stringify({status:'PASS',reportId:output.reportId,cached:output.cached,html:output.htmlPath,pdf:output.pdfPath,png:output.pngPath,naverPackage:output.naverPackagePath,admin:output.adminPath,onePage:output.layout.onePage,qrTargetUrl:output.layout.qrTargetUrl},null,2));
 }
 function reviewSheetMarkdown(sheet:ReturnType<typeof buildReviewSheet>) {
   return `# Review Sheet — ${sheet.reportId}

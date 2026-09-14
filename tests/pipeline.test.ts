@@ -13,6 +13,8 @@ import { verifyClaims } from '../src/services/cross-verification.js';
 import { applyReviewActions, buildMachineHumanDiff, buildPublishReadyDraft, buildReviewQueue, buildReviewSheet, createReviewAction, evaluateApprovalGate, initialApprovalStatus, transitionApprovalStatus } from '../src/services/review.js';
 import { generateReport } from '../src/services/report.js';
 import { buildDynamicTerms, decideContentOpportunities, renderBrokerageReportOnDemand, renderDailyEditorial } from '../src/services/editorial.js';
+import { renderA4MasterOnDemand } from '../src/services/a4-visual.js';
+import { publicCanRenderA4 } from '../src/services/admin.js';
 const read=(p:string):unknown=>JSON.parse(readFileSync(p,'utf8'));
 const fixture=()=>structuredClone(read('data/fixtures/sample-day.json') as InputBundle);
 const realFixture=()=>structuredClone(read('data/manual/2026-09-11/input.json') as InputBundle);
@@ -407,22 +409,25 @@ test('Sprint 2E opportunity engine recommends B C D only when data supports them
   const editorial=renderDailyEditorial(result.report,result.evidence);
   const decisions=editorial.opportunities;
   assert.equal(decisions.length,3);
-  assert.equal(decisions.find(item=>item.contentType==='C_EVERGREEN')!.recommended,true);
-  assert.equal(decisions.find(item=>item.contentType==='D_COMPANY_INDUSTRY')!.recommended,true);
+  assert.ok(decisions.every(item=>typeof item.score==='number'));
+  assert.ok(decisions.filter(item=>item.recommended).length<=2);
+  assert.equal(decisions.every(item=>item.recommended),false);
   const quietEvidence={...result.evidence,impactJudgments:[],originalInput:{...realFixture(),market:realFixture().market.map(item=>({...item,changePct:0.1})),news:[],companyEvents:[],filings:[],signals:[]}} as EvidencePackage;
   const quiet=decideContentOpportunities(result.report,quietEvidence,'시장 요약',[]);
   assert.equal(quiet.find(item=>item.contentType==='B_EVENT')!.recommended,false);
   assert.equal(quiet.find(item=>item.contentType==='D_COMPANY_INDUSTRY')!.recommended,false);
 });
 test('Sprint 2E dynamic glossary uses only terms present in body and keeps evergreen keys',()=>{
-  const terms=buildDynamicTerms('S&P 500과 나스닥, VIX, 미국 국채금리, 달러가 함께 움직였다.');
+  const terms=buildDynamicTerms('VIX와 DXY, WTI, CAPEX, CPI, Consensus, 미국 국채금리가 함께 움직였다.');
   assert.ok(terms.length>=3);
   assert.ok(terms.length<=8);
   for(const term of terms) {
     assert.ok(term.evergreenKey.startsWith('term-'));
     assert.match(term.explanation,/입니다|말합니다|뜻합니다/);
   }
-  assert.equal(terms.some(item=>item.term==='WTI'),false);
+  assert.equal(terms.some(item=>item.term==='VIX'),true);
+  assert.equal(terms.some(item=>item.term==='DXY'),true);
+  assert.equal(buildDynamicTerms('달러와 나스닥만 언급됐다.').some(item=>item.term==='나스닥'||item.term==='달러'),false);
 });
 test('Sprint 2E on-demand A4 brokerage report is cached by reportId and renderer version',async()=>{
   const result=runReal(realFixture());
@@ -436,4 +441,26 @@ test('Sprint 2E on-demand A4 brokerage report is cached by reportId and renderer
   assert.doesNotMatch(second.naver.intro,/ OK|REVIEW_REQUIRED|BLOCKED/);
   assert.match(first.markdown,/내부용 A4 브로커리지 요약/);
   assert.ok(first.naver.hashtags.includes('#미국증시'));
+});
+test('Sprint 2F A4 MASTER renders one-page HTML PDF PNG and complete Naver package',async()=>{
+  const result=runReal(realFixture());
+  const dir=mkdtempSync(join(tmpdir(),'a4-master-'));
+  const first=await renderA4MasterOnDemand(result.report,result.evidence,dir,{audience:'admin',action:'A4_REPORT_RENDER'},{regenerate:true});
+  const second=await renderA4MasterOnDemand(result.report,result.evidence,dir,{audience:'admin',action:'A4_REPORT_RENDER'});
+  assert.equal(first.cached,false);
+  assert.equal(second.cached,true);
+  assert.equal(first.layout.onePage,true);
+  assert.equal(first.layout.overflow,false);
+  assert.match(readFileSync(first.htmlPath,'utf8'),/data-qr-target="https:\/\/blog\.example\.com\/us-market-close-2026-09-11"/);
+  assert.equal(readFileSync(first.pdfPath).subarray(0,4).toString(),'%PDF');
+  assert.deepEqual([...readFileSync(first.pngPath).subarray(0,8)],[137,80,78,71,13,10,26,10]);
+  const naver=JSON.parse(readFileSync(first.naverPackagePath,'utf8')) as Record<string,string|string[]>;
+  for(const key of ['title','intro','hashtags','googleBloggerUrl','reportImagePath','reportPdfPath']) assert.ok(Object.hasOwn(naver,key),key);
+  assert.equal(naver.googleBloggerUrl,first.layout.qrTargetUrl);
+});
+test('Sprint 2F admin boundary blocks public A4 generation',async()=>{
+  const result=runReal(realFixture());
+  const dir=mkdtempSync(join(tmpdir(),'a4-admin-'));
+  assert.equal(publicCanRenderA4({audience:'public',action:'A4_REPORT_RENDER'}),false);
+  await assert.rejects(()=>renderA4MasterOnDemand(result.report,result.evidence,dir,{audience:'public',action:'A4_REPORT_RENDER'}),/admin authorization required/);
 });
