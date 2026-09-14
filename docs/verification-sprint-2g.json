@@ -1,0 +1,25 @@
+{
+  "startingHead": "21c4dea74b2548e2432bbfd5f8bb6a914d173294",
+  "sprint": "2G",
+  "reportId": "MANUAL-2026-09-11-7cb0ccf11f29",
+  "tradingDate": "2026-09-11",
+  "blogger": {
+    "publicationVersion": "2G.BLOGGER.1.0",
+    "statusAfterDryRun": "APPROVED",
+    "previewUrl": "https://preview.local/us-market-daily/us-market-close-2026-09-11",
+    "postUrl": null,
+    "fakePublish": false
+  },
+  "a4": {
+    "qrTargetUrl": "https://preview.local/us-market-daily/us-market-close-2026-09-11",
+    "onePage": true,
+    "overflow": false
+  },
+  "naver": {
+    "googleBloggerUrl": "https://preview.local/us-market-daily/us-market-close-2026-09-11"
+  },
+  "tests": {
+    "nodeTestCount": 72,
+    "nodeTestPass": 72
+  }
+}

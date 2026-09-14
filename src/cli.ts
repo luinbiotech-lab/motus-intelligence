@@ -5,6 +5,7 @@ import type { EvidencePackage, ReportRecord, ReviewActionInput, Rule, Source } f
 import { applyReviewActions, buildMachineHumanDiff, buildPublishReadyDraft, buildReviewSheet, createReviewAction } from './services/review.js';
 import { renderBrokerageReportOnDemand, renderDailyEditorial } from './services/editorial.js';
 import { renderA4MasterOnDemand } from './services/a4-visual.js';
+import { approveBloggerPublication, createBloggerPreview, DryRunBloggerAdapter, publishBloggerPublication, renderPublishingConsole, type BloggerPublicationRecord, type BloggerPublishingConfig } from './services/blogger.js';
 async function main() {
   const args=process.argv.slice(2);
   const sample=args[0]==='--sample';
@@ -13,6 +14,10 @@ async function main() {
   if(args[0]==='--editorial') return await writeEditorial(args[1],args[2]);
   if(args[0]==='--brokerage-report') return await writeBrokerageReport(args[1],args[2]);
   if(args[0]==='--a4-master') return await writeA4Master(args[1],args[2],args.includes('--regenerate'));
+  if(args[0]==='--blogger-preview') return await writeBloggerPreview(args[1],args[2]);
+  if(args[0]==='--blogger-approve') return await writeBloggerApprove(args[1]);
+  if(args[0]==='--blogger-publish') return await writeBloggerPublish(args[1],args.includes('--dry-run'));
+  if(args[0]==='--publishing-console') return await writePublishingConsole(args[1]);
   if((sample&&args.length!==1)||(!sample&&(args.length!==2||args[0]!=='--input'))) throw new Error('사용법: npm run sample 또는 npm run report -- --input data/manual/day.json');
   const path=sample?'data/fixtures/sample-day.json':args[1]!;
   const read=async(p:string):Promise<unknown>=>JSON.parse((await readFile(resolve(p),'utf8')).replace(/^\uFEFF/,''));
@@ -85,9 +90,65 @@ async function writeA4Master(reportPath:string|undefined,evidencePath:string|und
   if(!reportPath||!evidencePath) throw new Error('사용법: node dist/src/cli.js --a4-master data/reports/report.json data/evidence/report.json [--regenerate]');
   const report=JSON.parse(await readFile(resolve(reportPath),'utf8')) as ReportRecord;
   const evidence=JSON.parse(await readFile(resolve(evidencePath),'utf8')) as EvidencePackage;
-  const output=await renderA4MasterOnDemand(report,evidence,`data/a4-master/${report.tradingDate}`,{audience:'admin',action:'A4_REPORT_RENDER'},{regenerate});
+  const publication=await tryReadPublication(report);
+  const output=await renderA4MasterOnDemand(report,evidence,`data/a4-master/${report.tradingDate}`,{audience:'admin',action:'A4_REPORT_RENDER'},{regenerate,bloggerRecord:publication,publishingConfig:await readPublishingConfig()});
   console.log(JSON.stringify({status:'PASS',reportId:output.reportId,cached:output.cached,html:output.htmlPath,pdf:output.pdfPath,png:output.pngPath,naverPackage:output.naverPackagePath,admin:output.adminPath,onePage:output.layout.onePage,qrTargetUrl:output.layout.qrTargetUrl},null,2));
 }
+
+async function writeBloggerPreview(reportPath:string|undefined,evidencePath:string|undefined) {
+  if(!reportPath||!evidencePath) throw new Error('사용법: node dist/src/cli.js --blogger-preview data/reports/report.json data/evidence/report.json');
+  const report=JSON.parse(await readFile(resolve(reportPath),'utf8')) as ReportRecord;
+  const evidence=JSON.parse(await readFile(resolve(evidencePath),'utf8')) as EvidencePackage;
+  const record=createBloggerPreview(report,evidence,await readPublishingConfig());
+  const paths=await writePublicationArtifacts(record);
+  console.log(JSON.stringify({status:'PASS',reportId:record.reportId,publicationStatus:record.status,previewUrl:record.previewUrl,files:paths},null,2));
+}
+async function writeBloggerApprove(publicationPath:string|undefined) {
+  if(!publicationPath) throw new Error('사용법: node dist/src/cli.js --blogger-approve data/blogger/date/report-publication.json');
+  const record=JSON.parse(await readFile(resolve(publicationPath),'utf8')) as BloggerPublicationRecord;
+  const approved=approveBloggerPublication(record,{audience:'admin',action:'BLOGGER_APPROVE'});
+  const paths=await writePublicationArtifacts(approved);
+  console.log(JSON.stringify({status:'PASS',reportId:approved.reportId,publicationStatus:approved.status,files:paths},null,2));
+}
+async function writeBloggerPublish(publicationPath:string|undefined,dryRun:boolean) {
+  if(!publicationPath) throw new Error('사용법: node dist/src/cli.js --blogger-publish data/blogger/date/report-publication.json [--dry-run]');
+  const record=JSON.parse(await readFile(resolve(publicationPath),'utf8')) as BloggerPublicationRecord;
+  const published=await publishBloggerPublication(record,new DryRunBloggerAdapter(),await readPublishingConfig(),{audience:'admin',action:'BLOGGER_PUBLISH'},{dryRun});
+  const paths=await writePublicationArtifacts(published);
+  console.log(JSON.stringify({status:published.status==='FAILED'?'FAILED':'PASS',reportId:published.reportId,publicationStatus:published.status,postUrl:published.postUrl,dryRun:published.dryRun,error:published.error,files:paths},null,2));
+}
+async function writePublishingConsole(publicationPath:string|undefined) {
+  const record=publicationPath?JSON.parse(await readFile(resolve(publicationPath),'utf8')) as BloggerPublicationRecord:null;
+  const html=renderPublishingConsole(record,{audience:'admin',action:'BLOGGER_PREVIEW'});
+  const dir=record?`data/blogger/${record.tradingDate}`:'data/blogger/console';
+  await mkdir(dir,{recursive:true});
+  const path=record?`${dir}/${record.reportId}-publishing-console.html`:`${dir}/publishing-console.html`;
+  await writeFile(path,html);
+  console.log(JSON.stringify({status:'PASS',file:path,publicationStatus:record?.status??'DRAFT'},null,2));
+}
+async function writePublicationArtifacts(record:BloggerPublicationRecord):Promise<string[]> {
+  const dir=`data/blogger/${record.tradingDate}`;
+  await mkdir(dir,{recursive:true});
+  const jsonPath=`${dir}/${record.reportId}-publication.json`;
+  const htmlPath=`${dir}/${record.reportId}-preview.html`;
+  const consolePath=`${dir}/${record.reportId}-publishing-console.html`;
+  await Promise.all([
+    writeFile(jsonPath,JSON.stringify(record,null,2)),
+    writeFile(htmlPath,record.html),
+    writeFile(consolePath,renderPublishingConsole(record,{audience:'admin',action:'BLOGGER_PREVIEW'}))
+  ]);
+  return [jsonPath,htmlPath,consolePath];
+}
+async function readPublishingConfig():Promise<BloggerPublishingConfig> {
+  const raw=JSON.parse(await readFile(resolve('config/publishing.json'),'utf8')) as {blogger:BloggerPublishingConfig};
+  const envName=raw.blogger.credentialEnvironmentVariable;
+  return {...raw.blogger,credentialAvailable:envName?Boolean(process.env[envName]):raw.blogger.credentialAvailable===true};
+}
+async function tryReadPublication(report:ReportRecord):Promise<BloggerPublicationRecord|null> {
+  const path=`data/blogger/${report.tradingDate}/${report.reportId}-publication.json`;
+  try { return JSON.parse(await readFile(path,'utf8')) as BloggerPublicationRecord; } catch { return null; }
+}
+
 function reviewSheetMarkdown(sheet:ReturnType<typeof buildReviewSheet>) {
   return `# Review Sheet — ${sheet.reportId}
 

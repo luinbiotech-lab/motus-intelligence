@@ -29,7 +29,7 @@
    - Naver package: `data/a4-master/2026-09-11/MANUAL-2026-09-11-7cb0ccf11f29-2F.A4MASTER.1.0-naver.json`
    - Admin route: `data/a4-master/2026-09-11/admin-a4-route.html`
 
-11. QR target URL: `https://blog.example.com/us-market-close-2026-09-11`.
+11. QR target URL: `https://preview.local/us-market-daily/us-market-close-2026-09-11`.
 
 12. 테스트: 기존 65개에 A4 one-page/overflow/PDF/PNG/QR/Naver completeness/cache/admin boundary 테스트를 추가해 총 67개 PASS.
 

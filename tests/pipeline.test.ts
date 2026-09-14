@@ -15,11 +15,13 @@ import { generateReport } from '../src/services/report.js';
 import { buildDynamicTerms, decideContentOpportunities, renderBrokerageReportOnDemand, renderDailyEditorial } from '../src/services/editorial.js';
 import { renderA4MasterOnDemand } from '../src/services/a4-visual.js';
 import { publicCanRenderA4 } from '../src/services/admin.js';
+import { approveBloggerPublication, assertPublicBloggerHtmlSafe, ConfiguredBloggerAdapter, createBloggerPreview, DryRunBloggerAdapter, publishBloggerPublication, renderPublishingConsole, resolveBloggerUrl, type BloggerPublishingConfig } from '../src/services/blogger.js';
 const read=(p:string):unknown=>JSON.parse(readFileSync(p,'utf8'));
 const fixture=()=>structuredClone(read('data/fixtures/sample-day.json') as InputBundle);
 const realFixture=()=>structuredClone(read('data/manual/2026-09-11/input.json') as InputBundle);
 const sources=read('config/sources.json') as Source[];
 const rules=read('config/us-korea-rules.v1.json') as Rule[];
+const publishingConfig=(read('config/publishing.json') as {blogger:BloggerPublishingConfig}).blogger;
 const run=(input:unknown,registry=sources,ruleSet=rules)=>runPipeline(input,registry,ruleSet,'2000-01-03T21:20:00Z');
 const runReal=(input:unknown,registry=sources,ruleSet=rules)=>runPipeline(input,registry,ruleSet,'2026-09-13T05:17:44Z');
 const has=(input:InputBundle,status:Status)=>assert.ok(run(input).evidence.validationResult.issues.some(i=>i.status===status),status);
@@ -445,13 +447,15 @@ test('Sprint 2E on-demand A4 brokerage report is cached by reportId and renderer
 test('Sprint 2F A4 MASTER renders one-page HTML PDF PNG and complete Naver package',async()=>{
   const result=runReal(realFixture());
   const dir=mkdtempSync(join(tmpdir(),'a4-master-'));
-  const first=await renderA4MasterOnDemand(result.report,result.evidence,dir,{audience:'admin',action:'A4_REPORT_RENDER'},{regenerate:true});
+  const preview=createBloggerPreview(result.report,result.evidence,publishingConfig);
+  const first=await renderA4MasterOnDemand(result.report,result.evidence,dir,{audience:'admin',action:'A4_REPORT_RENDER'},{regenerate:true,bloggerRecord:preview,publishingConfig});
   const second=await renderA4MasterOnDemand(result.report,result.evidence,dir,{audience:'admin',action:'A4_REPORT_RENDER'});
   assert.equal(first.cached,false);
   assert.equal(second.cached,true);
   assert.equal(first.layout.onePage,true);
   assert.equal(first.layout.overflow,false);
-  assert.match(readFileSync(first.htmlPath,'utf8'),/data-qr-target="https:\/\/blog\.example\.com\/us-market-close-2026-09-11"/);
+  assert.match(readFileSync(first.htmlPath,'utf8'),/data-qr-target="https:\/\/preview\.local\/us-market-daily\/us-market-close-2026-09-11"/);
+  assert.doesNotMatch(readFileSync(first.htmlPath,'utf8'),/blog\.example\.com/);
   assert.equal(readFileSync(first.pdfPath).subarray(0,4).toString(),'%PDF');
   assert.deepEqual([...readFileSync(first.pngPath).subarray(0,8)],[137,80,78,71,13,10,26,10]);
   const naver=JSON.parse(readFileSync(first.naverPackagePath,'utf8')) as Record<string,string|string[]>;
@@ -463,4 +467,66 @@ test('Sprint 2F admin boundary blocks public A4 generation',async()=>{
   const dir=mkdtempSync(join(tmpdir(),'a4-admin-'));
   assert.equal(publicCanRenderA4({audience:'public',action:'A4_REPORT_RENDER'}),false);
   await assert.rejects(()=>renderA4MasterOnDemand(result.report,result.evidence,dir,{audience:'public',action:'A4_REPORT_RENDER'}),/admin authorization required/);
+});
+
+test('Sprint 2G Blogger preview preserves SEO, glossary, labels, sources and hides internals',()=>{
+  const result=runReal(realFixture());
+  const preview=createBloggerPreview(result.report,result.evidence,publishingConfig);
+  assert.equal(preview.status,'PREVIEW_READY');
+  assert.equal(preview.previewUrl,'https://preview.local/us-market-daily/us-market-close-2026-09-11');
+  assert.equal(preview.postUrl,null);
+  assert.ok(preview.labels.includes('미국증시'));
+  assert.ok(preview.hashtags.includes('#미국증시'));
+  assert.ok(preview.glossary.length>=3);
+  assert.match(preview.html,/<meta name="description"/);
+  assert.match(preview.html,/용어 해설/);
+  assert.match(preview.html,/관련 글/);
+  assert.match(preview.html,/출처/);
+  assertPublicBloggerHtmlSafe(preview.html);
+  assert.doesNotMatch(preview.html,/CLAIM-|AUTO_VALIDATED|confidenceScore|verificationStatus|\/admin\/blogger/);
+});
+test('Sprint 2G Blogger state transition, dry-run publish and credential failure are safe',async()=>{
+  const result=runReal(realFixture());
+  const preview=createBloggerPreview(result.report,result.evidence,publishingConfig);
+  const approved=approveBloggerPublication(preview,{audience:'admin',action:'BLOGGER_APPROVE'});
+  assert.equal(approved.status,'APPROVED');
+  const dryRun=await publishBloggerPublication(approved,new DryRunBloggerAdapter(),publishingConfig,{audience:'admin',action:'BLOGGER_PUBLISH'},{dryRun:true});
+  assert.equal(dryRun.status,'APPROVED');
+  assert.equal(dryRun.dryRun,true);
+  assert.equal(dryRun.postUrl,null);
+  const failed=await publishBloggerPublication(approved,new DryRunBloggerAdapter(),publishingConfig,{audience:'admin',action:'BLOGGER_PUBLISH'});
+  assert.equal(failed.status,'FAILED');
+  assert.equal(failed.error,'missing credential');
+});
+test('Sprint 2G Blogger publish stores real adapter URL and prevents duplicate publish',async()=>{
+  const result=runReal(realFixture());
+  const approved=approveBloggerPublication(createBloggerPreview(result.report,result.evidence,publishingConfig),{audience:'admin',action:'BLOGGER_APPROVE'});
+  const adapter=new ConfiguredBloggerAdapter(async record=>({url:`https://real-blog.test/posts/${record.slug}`,providerPostId:'POST-1',publishedAt:'2026-09-14T00:12:00+09:00'}));
+  const published=await publishBloggerPublication(approved,adapter,{...publishingConfig,credentialAvailable:true},{audience:'admin',action:'BLOGGER_PUBLISH'});
+  assert.equal(published.status,'PUBLISHED');
+  assert.equal(published.postUrl,'https://real-blog.test/posts/us-market-close-2026-09-11');
+  assert.deepEqual(resolveBloggerUrl(published),{url:'https://real-blog.test/posts/us-market-close-2026-09-11',state:'PUBLISHED'});
+  await assert.rejects(()=>publishBloggerPublication(published,adapter,{...publishingConfig,credentialAvailable:true},{audience:'admin',action:'BLOGGER_PUBLISH'}),/already-published reportId/);
+});
+test('Sprint 2G server-side auth denies public publishing console and publish action',async()=>{
+  const result=runReal(realFixture());
+  const preview=createBloggerPreview(result.report,result.evidence,publishingConfig);
+  assert.throws(()=>renderPublishingConsole(preview,{audience:'public',action:'BLOGGER_PREVIEW'}),/admin authorization required/);
+  const approved=approveBloggerPublication(preview,{audience:'admin',action:'BLOGGER_APPROVE'});
+  await assert.rejects(()=>publishBloggerPublication(approved,new DryRunBloggerAdapter(),publishingConfig,{audience:'public',action:'BLOGGER_PUBLISH'}),/admin authorization required/);
+  assert.throws(()=>approveBloggerPublication(preview,{audience:'admin',action:'BLOGGER_APPROVE',environment:'production'}),/production admin authentication provider required/);
+});
+test('Sprint 2G A4 QR and Naver package switch from preview URL to published Blogger URL on regenerate',async()=>{
+  const result=runReal(realFixture());
+  const dir=mkdtempSync(join(tmpdir(),'a4-2g-'));
+  const preview=createBloggerPreview(result.report,result.evidence,publishingConfig);
+  const before=await renderA4MasterOnDemand(result.report,result.evidence,dir,{audience:'admin',action:'A4_REPORT_RENDER'},{regenerate:true,bloggerRecord:preview,publishingConfig});
+  assert.equal(before.layout.qrTargetUrl,preview.previewUrl);
+  const published={...preview,status:'PUBLISHED' as const,postUrl:'https://real-blog.test/posts/us-market-close-2026-09-11'};
+  const after=await renderA4MasterOnDemand(result.report,result.evidence,dir,{audience:'admin',action:'A4_REPORT_RENDER'},{regenerate:true,bloggerRecord:published,publishingConfig});
+  assert.equal(after.layout.qrTargetUrl,published.postUrl);
+  assert.equal(after.naverPackage.googleBloggerUrl,published.postUrl);
+  const naver=JSON.parse(readFileSync(after.naverPackagePath,'utf8')) as Record<string,string|string[]>;
+  assert.equal(naver.googleBloggerUrl,published.postUrl);
+  assert.doesNotMatch(readFileSync(after.htmlPath,'utf8'),/blog\.example\.com|CLAIM-|confidenceScore|verificationStatus/);
 });

@@ -1,11 +1,20 @@
-export type AdminAction = 'A4_REPORT_RENDER';
+export type AdminAction = 'A4_REPORT_RENDER'|'BLOGGER_PREVIEW'|'BLOGGER_APPROVE'|'BLOGGER_PUBLISH';
 export interface AdminRequestContext {
   audience: 'admin'|'public';
   action: AdminAction;
+  environment?: 'local'|'production';
+  localAdminDevelopmentMode?: boolean;
+}
+export interface AdminAuthConfig {
+  localAdminDevelopmentMode: boolean;
+  productionAllowAnonymous: boolean;
 }
 
-export function assertAdminRequest(context:AdminRequestContext): void {
+export function assertAdminRequest(context:AdminRequestContext,config:AdminAuthConfig={localAdminDevelopmentMode:true,productionAllowAnonymous:false}): void {
   if(context.audience!=='admin') throw new Error('admin authorization required');
+  const env=context.environment??'local';
+  if(env==='production'&&!config.productionAllowAnonymous) throw new Error('production admin authentication provider required');
+  if(env==='local'&&context.audience==='admin'&&!config.localAdminDevelopmentMode&&context.localAdminDevelopmentMode!==true) throw new Error('local admin development mode disabled');
 }
 
 export function publicCanRenderA4(context:AdminRequestContext): boolean {

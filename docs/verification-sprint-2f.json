@@ -14,7 +14,7 @@
     "png": "data/a4-master/2026-09-11/MANUAL-2026-09-11-7cb0ccf11f29-2F.A4MASTER.1.0.png",
     "onePage": true,
     "overflow": false,
-    "qrTargetUrl": "https://blog.example.com/us-market-close-2026-09-11"
+    "qrTargetUrl": "https://preview.local/us-market-daily/us-market-close-2026-09-11"
   },
   "opportunities": {
     "B_EVENT": false,

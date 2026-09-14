@@ -1,0 +1,13 @@
+{
+  "blogger": {
+    "previewBaseUrl": "https://preview.local/us-market-daily",
+    "placeholderBaseUrl": "https://pending.local/us-market-daily",
+    "publicBaseUrl": null,
+    "blogId": null,
+    "credentialEnvironmentVariable": "BLOGGER_OAUTH_TOKEN"
+  },
+  "auth": {
+    "localAdminDevelopmentMode": true,
+    "productionAllowAnonymous": false
+  }
+}
