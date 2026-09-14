@@ -2,13 +2,13 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import type { ClaimDraft } from '../src/services/cross-verification.js';
-import type { ClaimRecord, ClaimSource, FilingRecord, GeoVerificationContext, InputBundle, MacroRelease, MarketSnapshot, Rule, Source, Status, VerificationTier } from '../src/domain/models.js';
+import type { ClaimRecord, ClaimSource, ConflictRecord, EvidencePackage, FilingRecord, GeoVerificationContext, InputBundle, MacroRelease, MarketSnapshot, ReviewActionInput, Rule, Source, Status, VerificationTier } from '../src/domain/models.js';
 import { runPipeline, configurationErrors } from '../src/services/pipeline.js';
 import { marketChange, roundPercent } from '../src/utils/calculations.js';
 import { schemaErrors, inputSchema } from '../src/data/schemas.js';
 import { BlsCpiAdapter, SecEdgarAdapter, TreasuryYieldAdapter, UnconnectedAdapter } from '../src/data/adapters.js';
 import { verifyClaims } from '../src/services/cross-verification.js';
-import { buildReviewQueue, initialApprovalStatus, transitionApprovalStatus } from '../src/services/review.js';
+import { applyReviewActions, buildMachineHumanDiff, buildPublishReadyDraft, buildReviewQueue, buildReviewSheet, createReviewAction, evaluateApprovalGate, initialApprovalStatus, transitionApprovalStatus } from '../src/services/review.js';
 import { generateReport } from '../src/services/report.js';
 const read=(p:string):unknown=>JSON.parse(readFileSync(p,'utf8'));
 const fixture=()=>structuredClone(read('data/fixtures/sample-day.json') as InputBundle);
@@ -296,4 +296,96 @@ test('SEC adapter preserves accepted timestamp when available and marks date pre
   assert.equal((accepted.records[0] as FilingRecord).timestampPrecision,'ACCEPTED_TIMESTAMP');
   assert.equal((accepted.records[0] as FilingRecord).filedAt,'2026-09-10T20:16:50Z');
   assert.equal((dateOnly.records[0] as FilingRecord).timestampPrecision,'DATE');
+});
+
+const actionInput=(evidence:EvidencePackage,claimId:string,action:ReviewActionInput['action'],overrides:Partial<ReviewActionInput>={}):ReviewActionInput=>({
+  reportId:evidence.reportId,
+  claimId,
+  action,
+  category:'WORDING',
+  note:`${action} note`,
+  reviewer:'human',
+  reviewedAt:'2026-09-13T05:30:00Z',
+  ...overrides
+});
+const evidenceWithClaims=(claims:ClaimRecord[],conflicts:ConflictRecord[]=[])=>{
+  const base=runReal(realFixture()).evidence;
+  return {...base,claims,conflicts,reviewQueue:buildReviewQueue(claims,conflicts),approvalStatus:initialApprovalStatus(false,claims,conflicts)} as EvidencePackage;
+};
+test('Sprint 2D review sheet summarizes counts and prioritizes problem items',()=>{
+  const verified=verifyClaims([claim({claimId:'VERIFIED-1'}),claim({claimId:'UNVERIFIED-1',supportingSources:[],unresolvedSources:[claimSource('AP','not confirmed')]}),claim({claimId:'PARTIAL-1',claimType:'CAUSAL_INTERPRETATION',informationType:'ANALYSIS',supportingSources:[claimSource('AP','rates'),claimSource('CNBC','rates')]})],[...sources,sourceWithTier('AP','B',false),sourceWithTier('CNBC','B',false)],'2026-09-13T08:30:11Z').claims;
+  const conflictResult=verifyClaims([claim({claimId:'CONFLICT-1',supportingSources:[claimSource('BLS',0.4),claimSource('AP',0.6)]})],[...sources,sourceWithTier('AP','B',false)],'2026-09-13T08:30:11Z');
+  conflictResult.conflicts[0]!.materiality='CRITICAL';
+  const evidence=evidenceWithClaims([...verified,...conflictResult.claims],conflictResult.conflicts);
+  const sheet=buildReviewSheet(evidence);
+  assert.equal(sheet.reportId,evidence.reportId);
+  assert.equal(sheet.counts.VERIFIED,1);
+  assert.equal(sheet.counts.UNVERIFIED,1);
+  assert.equal(sheet.counts.CONFLICT,1);
+  assert.ok(sheet.counts.REVIEW_REQUIRED_QUEUE>=2);
+  assert.equal(sheet.items[0]!.claimId,'CONFLICT-1');
+  assert.equal(sheet.items[0]!.recommendedAction,'CHECK_SOURCE');
+  assert.equal(sheet.verifiedSummary.count,1);
+});
+test('Sprint 2D manual APPROVE, MODIFY, REJECT, HOLD actions validate and preserve audit trail',()=>{
+  const result=runReal(realFixture());
+  const claimId=result.evidence.claims![0]!.claimId;
+  const approve=createReviewAction(result.evidence,actionInput(result.evidence,claimId,'APPROVE'));
+  const modify=createReviewAction(result.evidence,actionInput(result.evidence,claimId,'MODIFY',{modifiedText:'수정된 검수 문장',category:'CAUSAL_INTERPRETATION'}));
+  const reject=createReviewAction(result.evidence,actionInput(result.evidence,claimId,'REJECT',{category:'SOURCE_ERROR'}));
+  const hold=createReviewAction(result.evidence,actionInput(result.evidence,claimId,'HOLD',{category:'OTHER'}));
+  assert.equal(approve.originalText,result.evidence.claims![0]!.claimText);
+  assert.equal(modify.modifiedText,'수정된 검수 문장');
+  assert.equal(reject.finalDecision,'REJECTED_BY_REVIEWER');
+  assert.equal(hold.finalDecision,'HELD_FOR_FOLLOW_UP');
+  assert.equal(approve.originalVerificationStatus,result.evidence.claims![0]!.verificationStatus);
+});
+test('Sprint 2D invalid claimId and reportId mismatch are rejected',()=>{
+  const result=runReal(realFixture());
+  const claimId=result.evidence.claims![0]!.claimId;
+  assert.throws(()=>createReviewAction(result.evidence,actionInput(result.evidence,'NOPE','APPROVE')),/invalid claimId/);
+  assert.throws(()=>createReviewAction(result.evidence,{...actionInput(result.evidence,claimId,'APPROVE'),reportId:'OTHER'}),/reportId mismatch/);
+  assert.throws(()=>createReviewAction(result.evidence,actionInput(result.evidence,claimId,'MODIFY')),/MODIFY requires modifiedText/);
+});
+test('Sprint 2D approval gate blocks unresolved critical and high conflicts',()=>{
+  const high=verifyClaims([claim({claimId:'HIGH-CONFLICT',claimType:'CAUSAL_INTERPRETATION',informationType:'ANALYSIS',supportingSources:[claimSource('AP','rates')],contradictingSources:[claimSource('CNBC','oil')]})],[...sources,sourceWithTier('AP','B',false),sourceWithTier('CNBC','B',false)],'2026-09-13T08:30:11Z');
+  const evidence=evidenceWithClaims(high.claims,high.conflicts);
+  evidence.conflicts![0]!.materiality='HIGH';
+  assert.equal(evaluateApprovalGate(evidence,[]),'REVIEW_REQUIRED');
+  evidence.conflicts![0]!.materiality='CRITICAL';
+  assert.equal(evaluateApprovalGate(evidence,[]),'REVIEW_REQUIRED');
+});
+test('Sprint 2D human override keeps original conflict and records reason',()=>{
+  const conflictResult=verifyClaims([claim({claimId:'OVERRIDE-CONFLICT',supportingSources:[claimSource('BLS',0.4),claimSource('AP',0.6)]})],[...sources,sourceWithTier('AP','B',false)],'2026-09-13T08:30:11Z');
+  const evidence=evidenceWithClaims(conflictResult.claims,conflictResult.conflicts);
+  evidence.conflicts![0]!.materiality='LOW';
+  const action=createReviewAction(evidence,actionInput(evidence,'OVERRIDE-CONFLICT','APPROVE',{note:'양측 수치가 달라 확정 대신 엇갈린다고 표현',category:'WORDING'}));
+  const reviewed=applyReviewActions(evidence,[action]);
+  assert.equal(action.overrideReason,'양측 수치가 달라 확정 대신 엇갈린다고 표현');
+  assert.equal(reviewed.conflicts!.length,1);
+  assert.equal(reviewed.reviewMetrics.claimsApproved,1);
+});
+test('Sprint 2D publish-ready draft, machine/human diff, metrics, traceability',()=>{
+  const result=runReal(realFixture());
+  const traced=result.report.sections.flatMap(section=>section.items).find(item=>item.claimIds?.length)!;
+  const claimId=traced.claimIds![0]!;
+  const action=createReviewAction(result.evidence,actionInput(result.evidence,claimId,'MODIFY',{modifiedText:'검수자가 인과 표현을 완화한 최종 문장',category:'CAUSAL_INTERPRETATION',reviewedAt:'2026-09-13T05:40:00Z'}));
+  const reviewed=applyReviewActions(result.evidence,[action]);
+  const draft=buildPublishReadyDraft(result.report,reviewed,[action]);
+  const diff=buildMachineHumanDiff(result.report,draft,[action]);
+  assert.equal(reviewed.reviewMetrics.measurementStatus,'MEASURED');
+  assert.equal(reviewed.reviewMetrics.claimsReviewed,1);
+  assert.equal(reviewed.reviewMetrics.claimsModified,1);
+  assert.equal(diff.changedClaims.includes(claimId),true);
+  assert.equal(diff.editCategories.includes('CAUSAL_INTERPRETATION'),true);
+  assert.match(draft.markdown,/검수자가 인과 표현을 완화한 최종 문장/);
+  const trace=draft.traceability.find(item=>item.claimIds.includes(claimId))!;
+  assert.ok(trace.evidenceIds.length);
+  assert.ok(trace.sourceIds.length);
+});
+test('Sprint 2D review metrics remain NOT_MEASURED without human actions',()=>{
+  const result=runReal(realFixture());
+  const reviewed=applyReviewActions(result.evidence,[]);
+  assert.equal(reviewed.reviewMetrics.measurementStatus,'NOT_MEASURED');
+  assert.equal(reviewed.reviewMetrics.reviewDurationSeconds,null);
 });

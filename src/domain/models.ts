@@ -45,6 +45,40 @@ export interface ReviewQueueItem {
   itemId: string; claimId: string; priority: number; reason: string;
   verificationStatus: ClaimVerificationStatus; conflictIds: string[];
 }
+export type RecommendedReviewAction = 'APPROVE'|'CHECK_SOURCE'|'MODIFY_WORDING'|'DOWNGRADE_CONFIDENCE'|'REJECT'|'HOLD';
+export type ManualReviewActionType = 'APPROVE'|'MODIFY'|'REJECT'|'HOLD';
+export type ManualReviewCategory = 'DATA_ERROR'|'SOURCE_ERROR'|'CAUSAL_INTERPRETATION'|'KOREA_IMPACT'|'WORDING'|'SEO'|'LINK'|'DUPLICATE'|'OTHER';
+export interface ReviewSheetItem {
+  claimId: string; claimText: string; claimType: ClaimType; verificationStatus: ClaimVerificationStatus;
+  confidenceScore: number; informationType: InformationType; supportingSources: ClaimSource[];
+  contradictingSources: ClaimSource[]; evidenceIds: string[]; sourceTier: VerificationTier|'UNVERIFIED';
+  conflict: ConflictRecord|null; counterFactors: string[]; recommendedAction: RecommendedReviewAction;
+  priority: number; reason: string;
+}
+export interface ReviewSheet {
+  reportId: string; tradingDate: string; generatedAt: string; approvalStatus: ReportApprovalStatus;
+  blocked: boolean; counts: Record<ClaimVerificationStatus|'REVIEW_REQUIRED_QUEUE', number>;
+  items: ReviewSheetItem[]; verifiedSummary: { count: number; sampleClaimIds: string[] };
+}
+export interface ReviewAction {
+  reviewActionId: string; reportId: string; claimId: string; action: ManualReviewActionType;
+  originalText: string; modifiedText: string|null; category: ManualReviewCategory; note: string;
+  reviewer: string; reviewedAt: string; originalVerificationStatus: ClaimVerificationStatus;
+  finalDecision: string; overrideReason?: string;
+}
+export interface ReviewActionInput {
+  reportId: string; claimId: string; action: ManualReviewActionType; modifiedText?: string|null;
+  category: ManualReviewCategory; note: string; reviewer: string; reviewedAt?: string;
+}
+export interface PublishReadyDraft {
+  reportId: string; tradingDate: string; generatedAt: string; approvalStatus: ReportApprovalStatus;
+  publishAllowed: boolean; sections: Section[]; markdown: string;
+  traceability: { sentence: string; claimIds: string[]; evidenceIds: string[]; sourceIds: string[]; sourceUrls: string[] }[];
+}
+export interface MachineHumanDiff {
+  reportId: string; originalText: string; finalText: string; changedClaims: string[];
+  addedText: string[]; removedText: string[]; editCategories: ManualReviewCategory[]; editCount: number;
+}
 export const paths = ['INTEREST_RATE','FX','COMMODITY','DEMAND','SUPPLY_CHAIN','SEMICONDUCTOR_CYCLE','AI_CAPEX','ENERGY','POLICY','REGULATION','LIQUIDITY','RISK_SENTIMENT'] as const;
 export type TransmissionPath = typeof paths[number];
 export interface Provenance {
@@ -136,7 +170,7 @@ export interface ReviewMetrics {
   durationMinutes: number|null; measurementStatus: 'NOT_MEASURED'|'MEASURED';
   edits: Record<ReviewCategory,string[]>; reviewStartedAt?: string|null; reviewCompletedAt?: string|null;
   reviewDurationSeconds?: number|null; claimsReviewed?: number; claimsModified?: number; claimsRejected?: number;
-  conflictsResolved?: number; manualEdits?: string[]; reviewer?: string|null;
+  claimsApproved?: number; claimsHeld?: number; conflictsResolved?: number; manualEdits?: string[]; reviewer?: string|null;
 }
 export interface StageResult { stage: string; status: Status; detail: string }
 export interface Outcome {

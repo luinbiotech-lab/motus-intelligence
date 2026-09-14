@@ -1,0 +1,3008 @@
+{
+  "reportId": "MANUAL-2026-09-11-7cb0ccf11f29",
+  "reportMetadata": {
+    "reportId": "MANUAL-2026-09-11-7cb0ccf11f29",
+    "tradingDate": "2026-09-11",
+    "generatedAt": "2026-09-14T09:59:34.711Z",
+    "publishedAt": null,
+    "templateVersion": "1.0.0",
+    "analysisRuleVersion": "1.0.0",
+    "status": "REVIEW_REQUIRED",
+    "sample": false,
+    "sections": [
+      {
+        "id": "section-1",
+        "title": "SEO 제목 + 기준일",
+        "items": [
+          {
+            "text": "2026-09-11 미국시장 마감과 한국시장 전달경로",
+            "nature": "CONFIRMED_FACT",
+            "evidenceIds": []
+          }
+        ]
+      },
+      {
+        "id": "section-2",
+        "title": "3줄 요약",
+        "items": [
+          {
+            "text": "미국 기준 거래일 2026-09-11; 거래일 상태 OK.",
+            "nature": "CONFIRMED_FACT",
+            "evidenceIds": []
+          },
+          {
+            "text": "주요 마감 흐름: SPX 7656.98 (0.86%), IXIC 26333.04 (0.96%), VIX 15.84 (-11.21%). 검증 통과 마감 자료 9건.",
+            "nature": "CONFIRMED_FACT",
+            "evidenceIds": []
+          },
+          {
+            "text": "조건부 한국 영향 2건, 검수 항목 0건. 모든 영향 판단은 추론이며 발행 전 출처 확인이 필요합니다.",
+            "nature": "CONFIRMED_FACT",
+            "evidenceIds": []
+          }
+        ]
+      },
+      {
+        "id": "section-3",
+        "title": "미국시장 마감",
+        "items": [
+          {
+            "text": "SPX: 7656.98 points (USD), 전일 대비 65.28, 0.86%. 기준시각 2026-09-11T20:00:00Z.",
+            "nature": "CALCULATED",
+            "evidenceIds": [
+              "SPX-2026-09-11"
+            ],
+            "claimIds": [
+              "CLAIM-SPX-2026-09-11-CLOSE"
+            ]
+          },
+          {
+            "text": "DJIA: 52573.29 points (USD), 전일 대비 509.19, 0.98%. 기준시각 2026-09-11T20:00:00Z.",
+            "nature": "CALCULATED",
+            "evidenceIds": [
+              "DJIA-2026-09-11"
+            ],
+            "claimIds": [
+              "CLAIM-DJIA-2026-09-11-CLOSE"
+            ]
+          },
+          {
+            "text": "IXIC: 26333.04 points (USD), 전일 대비 251.31, 0.96%. 기준시각 2026-09-11T20:00:00Z.",
+            "nature": "CALCULATED",
+            "evidenceIds": [
+              "IXIC-2026-09-11"
+            ],
+            "claimIds": [
+              "CLAIM-IXIC-2026-09-11-CLOSE"
+            ]
+          },
+          {
+            "text": "RUT: 2903.944 points (USD), 전일 대비 12.997, 0.45%. 기준시각 2026-09-11T20:00:00Z.",
+            "nature": "CALCULATED",
+            "evidenceIds": [
+              "RUT-2026-09-11"
+            ],
+            "claimIds": [
+              "CLAIM-RUT-2026-09-11-CLOSE"
+            ]
+          },
+          {
+            "text": "VIX: 15.84 points (USD), 전일 대비 -2, -11.21%. 기준시각 2026-09-11T20:15:00Z.",
+            "nature": "CALCULATED",
+            "evidenceIds": [
+              "VIX-2026-09-11"
+            ],
+            "claimIds": [
+              "CLAIM-VIX-2026-09-11-CLOSE"
+            ]
+          },
+          {
+            "text": "US2Y: 4.63 percent (USD), 전일 대비 0.07, 1.54%. 기준시각 2026-09-11T19:30:00Z.",
+            "nature": "CALCULATED",
+            "evidenceIds": [
+              "US2Y-2026-09-11"
+            ],
+            "claimIds": [
+              "CLAIM-US2Y-2026-09-11-CLOSE",
+              "CLAIM-DRIVER-RATES-2026-09-11:UK-07"
+            ]
+          },
+          {
+            "text": "US10Y: 4.96 percent (USD), 전일 대비 0.01, 0.20%. 기준시각 2026-09-11T19:30:00Z.",
+            "nature": "CALCULATED",
+            "evidenceIds": [
+              "US10Y-2026-09-11"
+            ],
+            "claimIds": [
+              "CLAIM-US10Y-2026-09-11-CLOSE",
+              "CLAIM-DRIVER-RATES-2026-09-11:UK-07"
+            ]
+          },
+          {
+            "text": "DXY_FUTURES_SEP26: 99.111 points (USD), 전일 대비 0.064, 0.06%. 기준시각 2026-09-11T21:00:00Z.",
+            "nature": "CALCULATED",
+            "evidenceIds": [
+              "DXY-2026-09-11"
+            ],
+            "claimIds": [
+              "CLAIM-DXY-2026-09-11-CLOSE"
+            ]
+          },
+          {
+            "text": "BRENT_NOV26: 104.61 price (USD), 전일 대비 -3.02, -2.81%. 기준시각 2026-09-11T20:30:00Z.",
+            "nature": "CALCULATED",
+            "evidenceIds": [
+              "BRENT-2026-09-11"
+            ],
+            "claimIds": [
+              "CLAIM-BRENT-2026-09-11-CLOSE"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "section-4",
+        "title": "시장을 움직인 원인",
+        "items": [
+          {
+            "text": "미국 CPI-U 전월 대비 (2026-08, SA): 실제 0.4, 예상 0.4, 이전 0.1, 수정 이전 0.1 percent. 시장 반응의 원인 여부는 추가 검수 필요.",
+            "nature": "CONFIRMED_FACT",
+            "evidenceIds": [
+              "CPI-MOM-2026-08"
+            ],
+            "claimIds": [
+              "CLAIM-CPI-MOM-2026-08-ACTUAL",
+              "CLAIM-DRIVER-RATES-2026-09-11:UK-07"
+            ]
+          },
+          {
+            "text": "미국 CPI-U 전년 대비 (2026-08, NSA): 실제 3.4, 예상 3.4, 이전 3.4, 수정 이전 3.4 percent. 시장 반응의 원인 여부는 추가 검수 필요.",
+            "nature": "CONFIRMED_FACT",
+            "evidenceIds": [
+              "CPI-YOY-2026-08"
+            ],
+            "claimIds": [
+              "CLAIM-CPI-YOY-2026-08-ACTUAL",
+              "CLAIM-DRIVER-RATES-2026-09-11:UK-07"
+            ]
+          },
+          {
+            "text": "8월 CPI가 전월 대비 0.4% 상승하고 2년·10년 Treasury par yield가 전일보다 높아져, 금리 민감 성장주에는 할인율 부담이 남았다는 조건부 해석이다. (수동 근거 연결 신호 RATES_UP)",
+            "nature": "INFERENCE",
+            "evidenceIds": [
+              "CPI-MOM-2026-08",
+              "CPI-YOY-2026-08",
+              "US2Y-2026-09-11",
+              "US10Y-2026-09-11"
+            ],
+            "claimIds": [
+              "CLAIM-US2Y-2026-09-11-CLOSE",
+              "CLAIM-US10Y-2026-09-11-CLOSE",
+              "CLAIM-CPI-MOM-2026-08-ACTUAL",
+              "CLAIM-CPI-YOY-2026-08-ACTUAL",
+              "CLAIM-DRIVER-RATES-2026-09-11:UK-07"
+            ]
+          },
+          {
+            "text": "Oracle의 클라우드 인프라 성장과 추가 데이터센터 용량은 AI·데이터센터 투자 수요의 기업 단위 근거지만, 단일 기업 발표를 산업 전체로 일반화하지 않는다. (수동 근거 연결 신호 AI_CAPEX_UP)",
+            "nature": "INFERENCE",
+            "evidenceIds": [
+              "ORCL-Q1-FY27-EVENT",
+              "ORCL-8K-2026-09-10"
+            ],
+            "claimIds": [
+              "CLAIM-ORCL-Q1-FY27-EVENT-SUMMARY",
+              "CLAIM-ORCL-8K-2026-09-10-FILING",
+              "CLAIM-DRIVER-AI-CAPEX-2026-09-11:UK-01"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "section-5",
+        "title": "주요 기업과 산업",
+        "items": [
+          {
+            "text": "ORCL · Oracle FY27 1분기 실적 및 데이터센터 용량 확대: Oracle은 총매출 193억 달러, 클라우드 매출 116억 달러, IaaS 매출 74억 달러와 850MW 추가 데이터센터 용량 공급을 발표했다.",
+            "nature": "CONFIRMED_FACT",
+            "evidenceIds": [
+              "ORCL-Q1-FY27-EVENT"
+            ],
+            "claimIds": [
+              "CLAIM-ORCL-Q1-FY27-EVENT-SUMMARY",
+              "CLAIM-DRIVER-AI-CAPEX-2026-09-11:UK-01"
+            ]
+          },
+          {
+            "text": "ORCL 8-K: 2026-09-10 실적 발표 자료가 Exhibit 99.1로 첨부됨; 보고 대상 기간은 2026-08-31 종료 분기",
+            "nature": "CONFIRMED_FACT",
+            "evidenceIds": [
+              "ORCL-8K-2026-09-10"
+            ],
+            "claimIds": [
+              "CLAIM-ORCL-8K-2026-09-10-FILING",
+              "CLAIM-DRIVER-AI-CAPEX-2026-09-11:UK-01"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "section-6",
+        "title": "한국시장 영향",
+        "items": [
+          {
+            "text": "Internet / Platform: NEGATIVE, 강도 3/5, 근거 A, 신뢰도 80/100 (OK). 수동 확인 신호 RATES_UP → INTEREST_RATE → Internet / Platform. 인과관계 확정이나 수익률 예측이 아닌 조건부 전달경로입니다. 반대변수: 같은 날 유가 하락과 위험선호 회복이 금리 부담을 일부 상쇄; 실적 개선; 환율·국내 수급·기존 주가 반영 확인 필요. 유효기간 SHORT_TERM. 규칙 UK-07@1.0.0.",
+            "nature": "INFERENCE",
+            "evidenceIds": [
+              "CPI-MOM-2026-08",
+              "CPI-YOY-2026-08",
+              "US2Y-2026-09-11",
+              "US10Y-2026-09-11"
+            ],
+            "claimIds": [
+              "CLAIM-US2Y-2026-09-11-CLOSE",
+              "CLAIM-US10Y-2026-09-11-CLOSE",
+              "CLAIM-CPI-MOM-2026-08-ACTUAL",
+              "CLAIM-CPI-YOY-2026-08-ACTUAL",
+              "CLAIM-DRIVER-RATES-2026-09-11:UK-07"
+            ]
+          },
+          {
+            "text": "Semiconductor: POSITIVE, 강도 4/5, 근거 A, 신뢰도 80/100 (OK). 수동 확인 신호 AI_CAPEX_UP → AI_CAPEX → Semiconductor. 인과관계 확정이나 수익률 예측이 아닌 조건부 전달경로입니다. 반대변수: Oracle의 당일 주가는 장중 상승분을 반납해 실적과 주가 반응이 분리됨; 고객사 투자 지연; 환율·국내 수급·기존 주가 반영 확인 필요. 유효기간 SHORT_TERM. 규칙 UK-01@1.0.0.",
+            "nature": "INFERENCE",
+            "evidenceIds": [
+              "ORCL-Q1-FY27-EVENT",
+              "ORCL-8K-2026-09-10"
+            ],
+            "claimIds": [
+              "CLAIM-ORCL-Q1-FY27-EVENT-SUMMARY",
+              "CLAIM-ORCL-8K-2026-09-10-FILING",
+              "CLAIM-DRIVER-AI-CAPEX-2026-09-11:UK-01"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "section-7",
+        "title": "오늘의 일정과 체크리스트",
+        "items": [
+          {
+            "text": "수치·기준시각·원문·반대변수 확인, 샘플 혼입 확인, 수동 발행 검수 완료 여부 확인.",
+            "nature": "OPINION",
+            "evidenceIds": []
+          }
+        ]
+      },
+      {
+        "id": "section-8",
+        "title": "출처 및 관련 기사",
+        "items": [
+          {
+            "text": "SP_DJI — https://www.spglobal.com/spdji/en/indices/equity/sp-500/ (관측 2026-09-11T20:00:00Z, 수집 2026-09-13T05:17:44Z)",
+            "nature": "CONFIRMED_FACT",
+            "evidenceIds": [
+              "SPX-2026-09-11"
+            ],
+            "claimIds": [
+              "CLAIM-SPX-2026-09-11-CLOSE"
+            ]
+          },
+          {
+            "text": "SP_DJI — https://www.spglobal.com/spdji/en/indices/equity/dow-jones-industrial-average/ (관측 2026-09-11T20:00:00Z, 수집 2026-09-13T05:17:44Z)",
+            "nature": "CONFIRMED_FACT",
+            "evidenceIds": [
+              "DJIA-2026-09-11"
+            ],
+            "claimIds": [
+              "CLAIM-DJIA-2026-09-11-CLOSE"
+            ]
+          },
+          {
+            "text": "NASDAQ — https://www.nasdaq.com/market-activity/index/comp (관측 2026-09-11T20:00:00Z, 수집 2026-09-13T05:17:44Z)",
+            "nature": "CONFIRMED_FACT",
+            "evidenceIds": [
+              "IXIC-2026-09-11"
+            ],
+            "claimIds": [
+              "CLAIM-IXIC-2026-09-11-CLOSE"
+            ]
+          },
+          {
+            "text": "FTSE_RUSSELL — https://www.lseg.com/en/ftse-russell/indices/russell-2000-index (관측 2026-09-11T20:00:00Z, 수집 2026-09-13T05:17:44Z)",
+            "nature": "CONFIRMED_FACT",
+            "evidenceIds": [
+              "RUT-2026-09-11"
+            ],
+            "claimIds": [
+              "CLAIM-RUT-2026-09-11-CLOSE"
+            ]
+          },
+          {
+            "text": "CBOE — https://www.cboe.com/tradable_products/vix/vix_historical_data/ (관측 2026-09-11T20:15:00Z, 수집 2026-09-13T05:17:44Z)",
+            "nature": "CONFIRMED_FACT",
+            "evidenceIds": [
+              "VIX-2026-09-11"
+            ],
+            "claimIds": [
+              "CLAIM-VIX-2026-09-11-CLOSE"
+            ]
+          },
+          {
+            "text": "US_TREASURY — https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202609&type=daily_treasury_yield_curve (관측 2026-09-11T19:30:00Z, 수집 2026-09-13T05:17:44Z)",
+            "nature": "CONFIRMED_FACT",
+            "evidenceIds": [
+              "US2Y-2026-09-11"
+            ],
+            "claimIds": [
+              "CLAIM-US2Y-2026-09-11-CLOSE",
+              "CLAIM-DRIVER-RATES-2026-09-11:UK-07"
+            ]
+          },
+          {
+            "text": "US_TREASURY — https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202609&type=daily_treasury_yield_curve (관측 2026-09-11T19:30:00Z, 수집 2026-09-13T05:17:44Z)",
+            "nature": "CONFIRMED_FACT",
+            "evidenceIds": [
+              "US10Y-2026-09-11"
+            ],
+            "claimIds": [
+              "CLAIM-US10Y-2026-09-11-CLOSE",
+              "CLAIM-DRIVER-RATES-2026-09-11:UK-07"
+            ]
+          },
+          {
+            "text": "ICE — https://www.ice.com/products/194/US-Dollar-Index-Futures/data (관측 2026-09-11T21:00:00Z, 수집 2026-09-13T05:17:44Z)",
+            "nature": "CONFIRMED_FACT",
+            "evidenceIds": [
+              "DXY-2026-09-11"
+            ],
+            "claimIds": [
+              "CLAIM-DXY-2026-09-11-CLOSE"
+            ]
+          },
+          {
+            "text": "ICE — https://www.ice.com/products/219/Brent-Crude-Futures/data (관측 2026-09-11T20:30:00Z, 수집 2026-09-13T05:17:44Z)",
+            "nature": "CONFIRMED_FACT",
+            "evidenceIds": [
+              "BRENT-2026-09-11"
+            ],
+            "claimIds": [
+              "CLAIM-BRENT-2026-09-11-CLOSE"
+            ]
+          },
+          {
+            "text": "BLS — https://www.bls.gov/news.release/archives/cpi_09112026.htm (관측 2026-09-11T12:30:00Z, 수집 2026-09-13T05:17:44Z)",
+            "nature": "CONFIRMED_FACT",
+            "evidenceIds": [
+              "CPI-MOM-2026-08"
+            ],
+            "claimIds": [
+              "CLAIM-CPI-MOM-2026-08-ACTUAL",
+              "CLAIM-DRIVER-RATES-2026-09-11:UK-07"
+            ]
+          },
+          {
+            "text": "BLS — https://www.bls.gov/news.release/archives/cpi_09112026.htm (관측 2026-09-11T12:30:00Z, 수집 2026-09-13T05:17:44Z)",
+            "nature": "CONFIRMED_FACT",
+            "evidenceIds": [
+              "CPI-YOY-2026-08"
+            ],
+            "claimIds": [
+              "CLAIM-CPI-YOY-2026-08-ACTUAL",
+              "CLAIM-DRIVER-RATES-2026-09-11:UK-07"
+            ]
+          },
+          {
+            "text": "CORPORATE_IR — https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx (관측 2026-09-10T20:16:50Z, 수집 2026-09-13T05:17:44Z)",
+            "nature": "CONFIRMED_FACT",
+            "evidenceIds": [
+              "ORCL-Q1-FY27-EVENT"
+            ],
+            "claimIds": [
+              "CLAIM-ORCL-Q1-FY27-EVENT-SUMMARY",
+              "CLAIM-DRIVER-AI-CAPEX-2026-09-11:UK-01"
+            ]
+          },
+          {
+            "text": "SEC_EDGAR — https://www.sec.gov/Archives/edgar/data/1341439/000119312526387905/orcl-20260910.htm (관측 2026-09-10T20:16:50Z, 수집 2026-09-13T05:17:44Z)",
+            "nature": "CONFIRMED_FACT",
+            "evidenceIds": [
+              "ORCL-8K-2026-09-10"
+            ],
+            "claimIds": [
+              "CLAIM-ORCL-8K-2026-09-10-FILING",
+              "CLAIM-DRIVER-AI-CAPEX-2026-09-11:UK-01"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "section-9",
+        "title": "해시태그",
+        "items": [
+          {
+            "text": "#미국증시 #시장마감 #한국시장",
+            "nature": "CONFIRMED_FACT",
+            "evidenceIds": []
+          }
+        ]
+      }
+    ],
+    "seoTitle": "2026-09-11 미국시장 마감과 한국시장 전달경로",
+    "threeLineSummary": [
+      "미국 기준 거래일 2026-09-11; 거래일 상태 OK.",
+      "주요 마감 흐름: SPX 7656.98 (0.86%), IXIC 26333.04 (0.96%), VIX 15.84 (-11.21%). 검증 통과 마감 자료 9건.",
+      "조건부 한국 영향 2건, 검수 항목 0건. 모든 영향 판단은 추론이며 발행 전 출처 확인이 필요합니다."
+    ]
+  },
+  "sourceMetadata": [
+    {
+      "sourceId": "SEC_EDGAR",
+      "name": "SEC EDGAR",
+      "category": "filing",
+      "official": true,
+      "priority": 1,
+      "authenticationType": "USER_AGENT",
+      "rateLimit": "SEC fair access policy; client rate control required",
+      "latency": "API",
+      "redistributionStatus": "UNKNOWN",
+      "commercialUseStatus": "UNKNOWN",
+      "enabled": true,
+      "notes": "Sprint 2B SEC submissions adapter 연결. 8-K/10-Q/10-K metadata만 정규화하며 전문 분석 없음.",
+      "homepage": "https://www.sec.gov/",
+      "maxAgeMinutes": 10080,
+      "connectionStatus": "OK",
+      "verificationTier": "A"
+    },
+    {
+      "sourceId": "BLS",
+      "name": "BLS",
+      "category": "macro",
+      "official": true,
+      "priority": 1,
+      "authenticationType": "NONE_OR_OPTIONAL_API_KEY",
+      "rateLimit": "BLS Public Data API unauthenticated limits apply; key optional",
+      "latency": "API",
+      "redistributionStatus": "UNKNOWN",
+      "commercialUseStatus": "UNKNOWN",
+      "enabled": true,
+      "notes": "Sprint 2B BLS CPI adapter 연결. 공식 CPI index에서 전월 대비 actual/previous를 계산하며 consensus는 생성하지 않음.",
+      "homepage": "https://www.bls.gov/",
+      "maxAgeMinutes": 10080,
+      "connectionStatus": "OK",
+      "verificationTier": "A"
+    },
+    {
+      "sourceId": "BEA",
+      "name": "BEA",
+      "category": "macro",
+      "official": true,
+      "priority": 1,
+      "authenticationType": "API_KEY",
+      "rateLimit": "UNKNOWN: 연결 전 공식 문서 확인",
+      "latency": "UNKNOWN",
+      "redistributionStatus": "UNKNOWN",
+      "commercialUseStatus": "UNKNOWN",
+      "enabled": false,
+      "notes": "Sprint 1 수동 출처 분류용. 인증 방식도 연결 전 재검증. 공식 분류는 개별 입력의 진위 보증이 아님.",
+      "homepage": "https://www.bea.gov/",
+      "maxAgeMinutes": 2160,
+      "connectionStatus": "DATA_NOT_CONNECTED",
+      "verificationTier": "A"
+    },
+    {
+      "sourceId": "FRED",
+      "name": "FRED",
+      "category": "macro",
+      "official": true,
+      "priority": 1,
+      "authenticationType": "API_KEY",
+      "rateLimit": "UNKNOWN: 연결 전 공식 문서 확인",
+      "latency": "UNKNOWN",
+      "redistributionStatus": "UNKNOWN",
+      "commercialUseStatus": "UNKNOWN",
+      "enabled": false,
+      "notes": "Sprint 1 수동 출처 분류용. 인증 방식도 연결 전 재검증. 공식 분류는 개별 입력의 진위 보증이 아님.",
+      "homepage": "https://fred.stlouisfed.org/",
+      "maxAgeMinutes": 2160,
+      "connectionStatus": "DATA_NOT_CONNECTED",
+      "verificationTier": "A"
+    },
+    {
+      "sourceId": "US_TREASURY",
+      "name": "U.S. Treasury",
+      "category": "rates",
+      "official": true,
+      "priority": 1,
+      "authenticationType": "NONE",
+      "rateLimit": "UNKNOWN: 연결 전 공식 문서 확인",
+      "latency": "UNKNOWN",
+      "redistributionStatus": "UNKNOWN",
+      "commercialUseStatus": "UNKNOWN",
+      "enabled": true,
+      "notes": "Sprint 2A CSV adapter 연결. 2Y/10Y 일별 par yield만 정규화하며 실패 시 가상값 대체 없음.",
+      "homepage": "https://home.treasury.gov/",
+      "maxAgeMinutes": 2880,
+      "connectionStatus": "OK",
+      "verificationTier": "A"
+    },
+    {
+      "sourceId": "FED",
+      "name": "Federal Reserve",
+      "category": "policy",
+      "official": true,
+      "priority": 1,
+      "authenticationType": "NONE",
+      "rateLimit": "UNKNOWN: 연결 전 공식 문서 확인",
+      "latency": "UNKNOWN",
+      "redistributionStatus": "UNKNOWN",
+      "commercialUseStatus": "UNKNOWN",
+      "enabled": false,
+      "notes": "Sprint 1 수동 출처 분류용. 인증 방식도 연결 전 재검증. 공식 분류는 개별 입력의 진위 보증이 아님.",
+      "homepage": "https://www.federalreserve.gov/",
+      "maxAgeMinutes": 2160,
+      "connectionStatus": "DATA_NOT_CONNECTED",
+      "verificationTier": "A"
+    },
+    {
+      "sourceId": "CORPORATE_IR",
+      "name": "Corporate IR",
+      "category": "company",
+      "official": true,
+      "priority": 1,
+      "authenticationType": "PER_COMPANY",
+      "rateLimit": "UNKNOWN: 연결 전 공식 문서 확인",
+      "latency": "UNKNOWN",
+      "redistributionStatus": "UNKNOWN",
+      "commercialUseStatus": "UNKNOWN",
+      "enabled": false,
+      "notes": "Sprint 1 수동 출처 분류용. 인증 방식도 연결 전 재검증. 공식 분류는 개별 입력의 진위 보증이 아님.",
+      "homepage": "https://www.sec.gov/edgar/search/",
+      "maxAgeMinutes": 10080,
+      "connectionStatus": "DATA_NOT_CONNECTED",
+      "verificationTier": "A"
+    },
+    {
+      "sourceId": "KRX",
+      "name": "KRX",
+      "category": "market",
+      "official": true,
+      "priority": 1,
+      "authenticationType": "TO_VERIFY",
+      "rateLimit": "UNKNOWN: 연결 전 공식 문서 확인",
+      "latency": "UNKNOWN",
+      "redistributionStatus": "UNKNOWN",
+      "commercialUseStatus": "UNKNOWN",
+      "enabled": false,
+      "notes": "Sprint 1 수동 출처 분류용. 인증 방식도 연결 전 재검증. 공식 분류는 개별 입력의 진위 보증이 아님.",
+      "homepage": "https://www.krx.co.kr/",
+      "maxAgeMinutes": 2160,
+      "connectionStatus": "DATA_NOT_CONNECTED",
+      "verificationTier": "A"
+    },
+    {
+      "sourceId": "OPENDART",
+      "name": "OpenDART",
+      "category": "filing",
+      "official": true,
+      "priority": 1,
+      "authenticationType": "API_KEY",
+      "rateLimit": "UNKNOWN: 연결 전 공식 문서 확인",
+      "latency": "UNKNOWN",
+      "redistributionStatus": "UNKNOWN",
+      "commercialUseStatus": "UNKNOWN",
+      "enabled": false,
+      "notes": "Sprint 1 수동 출처 분류용. 인증 방식도 연결 전 재검증. 공식 분류는 개별 입력의 진위 보증이 아님.",
+      "homepage": "https://opendart.fss.or.kr/",
+      "maxAgeMinutes": 2160,
+      "connectionStatus": "DATA_NOT_CONNECTED",
+      "verificationTier": "A"
+    },
+    {
+      "sourceId": "ECOS",
+      "name": "ECOS",
+      "category": "macro",
+      "official": true,
+      "priority": 1,
+      "authenticationType": "API_KEY",
+      "rateLimit": "UNKNOWN: 연결 전 공식 문서 확인",
+      "latency": "UNKNOWN",
+      "redistributionStatus": "UNKNOWN",
+      "commercialUseStatus": "UNKNOWN",
+      "enabled": false,
+      "notes": "Sprint 1 수동 출처 분류용. 인증 방식도 연결 전 재검증. 공식 분류는 개별 입력의 진위 보증이 아님.",
+      "homepage": "https://ecos.bok.or.kr/",
+      "maxAgeMinutes": 2160,
+      "connectionStatus": "DATA_NOT_CONNECTED",
+      "verificationTier": "A"
+    },
+    {
+      "sourceId": "BROKER_OPEN_API",
+      "name": "국내 증권사 Open API (미선정)",
+      "category": "market",
+      "official": false,
+      "priority": 1,
+      "authenticationType": "TO_VERIFY",
+      "rateLimit": "UNKNOWN: 연결 전 공식 문서 확인",
+      "latency": "UNKNOWN",
+      "redistributionStatus": "UNKNOWN",
+      "commercialUseStatus": "UNKNOWN",
+      "enabled": false,
+      "notes": "Sprint 1 수동 출처 분류용. 인증 방식도 연결 전 재검증. 공식 분류는 개별 입력의 진위 보증이 아님.",
+      "homepage": "https://example.invalid/broker",
+      "maxAgeMinutes": 2160,
+      "connectionStatus": "DATA_NOT_CONNECTED",
+      "verificationTier": "D"
+    },
+    {
+      "sourceId": "SAMPLE_A",
+      "name": "SAMPLE 테스트 출처 A",
+      "category": "fixture",
+      "official": true,
+      "priority": 1,
+      "authenticationType": "NONE",
+      "rateLimit": "NOT_APPLICABLE",
+      "latency": "SYNTHETIC",
+      "redistributionStatus": "UNKNOWN",
+      "commercialUseStatus": "UNKNOWN",
+      "enabled": false,
+      "notes": "테스트에서 공식 출처 조건을 모사하는 가상 출처. 실제 사용 금지.",
+      "homepage": "https://example.invalid/sample-a",
+      "maxAgeMinutes": 2160,
+      "connectionStatus": "DATA_NOT_CONNECTED",
+      "verificationTier": "A"
+    },
+    {
+      "sourceId": "SAMPLE_B",
+      "name": "SAMPLE 테스트 출처 B",
+      "category": "fixture",
+      "official": true,
+      "priority": 1,
+      "authenticationType": "NONE",
+      "rateLimit": "NOT_APPLICABLE",
+      "latency": "SYNTHETIC",
+      "redistributionStatus": "UNKNOWN",
+      "commercialUseStatus": "UNKNOWN",
+      "enabled": false,
+      "notes": "테스트에서 공식 출처 조건을 모사하는 가상 출처. 실제 사용 금지.",
+      "homepage": "https://example.invalid/sample-b",
+      "maxAgeMinutes": 2160,
+      "connectionStatus": "DATA_NOT_CONNECTED",
+      "verificationTier": "A"
+    },
+    {
+      "sourceId": "NYSE",
+      "name": "New York Stock Exchange",
+      "category": "calendar",
+      "official": true,
+      "priority": 1,
+      "authenticationType": "NONE",
+      "rateLimit": "UNKNOWN",
+      "latency": "MANUAL",
+      "redistributionStatus": "UNKNOWN",
+      "commercialUseStatus": "UNKNOWN",
+      "enabled": false,
+      "notes": "공식 휴장·조기종료 달력 수동 검증용.",
+      "homepage": "https://www.nyse.com/trade/hours-calendars",
+      "maxAgeMinutes": 525600,
+      "connectionStatus": "DATA_NOT_CONNECTED",
+      "verificationTier": "A"
+    },
+    {
+      "sourceId": "SP_DJI",
+      "name": "S&P Dow Jones Indices",
+      "category": "market",
+      "official": true,
+      "priority": 1,
+      "authenticationType": "NONE",
+      "rateLimit": "UNKNOWN",
+      "latency": "MANUAL",
+      "redistributionStatus": "UNKNOWN",
+      "commercialUseStatus": "UNKNOWN",
+      "enabled": false,
+      "notes": "지수 제공자 페이지와 보조 종가 자료를 함께 수동 검증. 재배포 조건 미검증.",
+      "homepage": "https://www.spglobal.com/spdji/",
+      "maxAgeMinutes": 2880,
+      "connectionStatus": "DATA_NOT_CONNECTED",
+      "verificationTier": "A"
+    },
+    {
+      "sourceId": "NASDAQ",
+      "name": "Nasdaq",
+      "category": "market",
+      "official": true,
+      "priority": 1,
+      "authenticationType": "NONE",
+      "rateLimit": "UNKNOWN",
+      "latency": "MANUAL",
+      "redistributionStatus": "UNKNOWN",
+      "commercialUseStatus": "UNKNOWN",
+      "enabled": false,
+      "notes": "Nasdaq Composite 지수 제공자 페이지 수동 검증용.",
+      "homepage": "https://www.nasdaq.com/market-activity/index/comp",
+      "maxAgeMinutes": 2880,
+      "connectionStatus": "DATA_NOT_CONNECTED",
+      "verificationTier": "A"
+    },
+    {
+      "sourceId": "FTSE_RUSSELL",
+      "name": "FTSE Russell / LSEG",
+      "category": "market",
+      "official": true,
+      "priority": 1,
+      "authenticationType": "NONE",
+      "rateLimit": "UNKNOWN",
+      "latency": "MANUAL",
+      "redistributionStatus": "UNKNOWN",
+      "commercialUseStatus": "UNKNOWN",
+      "enabled": false,
+      "notes": "Russell 2000 지수 제공자 페이지 수동 검증용.",
+      "homepage": "https://www.lseg.com/en/ftse-russell/indices/russell-2000-index",
+      "maxAgeMinutes": 2880,
+      "connectionStatus": "DATA_NOT_CONNECTED",
+      "verificationTier": "A"
+    },
+    {
+      "sourceId": "CBOE",
+      "name": "Cboe Global Markets",
+      "category": "market",
+      "official": true,
+      "priority": 1,
+      "authenticationType": "NONE",
+      "rateLimit": "UNKNOWN",
+      "latency": "DELAYED",
+      "redistributionStatus": "UNKNOWN",
+      "commercialUseStatus": "UNKNOWN",
+      "enabled": false,
+      "notes": "VIX 공식 역사자료 수동 검증용.",
+      "homepage": "https://www.cboe.com/tradable_products/vix/vix_historical_data/",
+      "maxAgeMinutes": 2880,
+      "connectionStatus": "DATA_NOT_CONNECTED",
+      "verificationTier": "A"
+    },
+    {
+      "sourceId": "ICE",
+      "name": "Intercontinental Exchange",
+      "category": "market",
+      "official": true,
+      "priority": 1,
+      "authenticationType": "NONE",
+      "rateLimit": "UNKNOWN",
+      "latency": "DELAYED",
+      "redistributionStatus": "UNKNOWN",
+      "commercialUseStatus": "UNKNOWN",
+      "enabled": false,
+      "notes": "DXY·Brent 제공자 페이지와 보조 종가 자료를 함께 수동 검증. 재배포 조건 미검증.",
+      "homepage": "https://www.ice.com/market-data",
+      "maxAgeMinutes": 2880,
+      "connectionStatus": "DATA_NOT_CONNECTED",
+      "verificationTier": "A"
+    }
+  ],
+  "records": [
+    {
+      "evidenceId": "SPX-2026-09-11",
+      "reportId": "MANUAL-2026-09-11-7cb0ccf11f29",
+      "sourceType": "market",
+      "sourceId": "SP_DJI",
+      "sourceUrl": "https://www.spglobal.com/spdji/en/indices/equity/sp-500/",
+      "observedAt": "2026-09-11T20:00:00Z",
+      "collectedAt": "2026-09-13T05:17:44Z",
+      "originalValue": {
+        "id": "SPX-2026-09-11",
+        "sample": false,
+        "sourceId": "SP_DJI",
+        "sourceUrl": "https://www.spglobal.com/spdji/en/indices/equity/sp-500/",
+        "observedAt": "2026-09-11T20:00:00Z",
+        "collectedAt": "2026-09-13T05:17:44Z",
+        "unit": "points",
+        "status": "OK",
+        "missingReasons": {
+          "volume": "가격지수에 단일 거래량 미적용"
+        },
+        "collectionMode": "MANUAL_VERIFIED",
+        "verificationUrls": [
+          "https://fred.stlouisfed.org/series/SP500",
+          "https://apnews.com/article/wall-street-stocks-dow-nasdaq-67a463295d9ea178d7802ca4338a6eb5"
+        ],
+        "market": "US",
+        "tradingDate": "2026-09-11",
+        "symbol": "SPX",
+        "instrumentType": "INDEX",
+        "close": 7656.98,
+        "previousClose": 7591.7,
+        "change": 65.28,
+        "changePct": 0.86,
+        "volume": null,
+        "currency": "USD"
+      },
+      "unit": "points",
+      "calculation": {
+        "status": "OK",
+        "raw": {
+          "change": 65.27999999999975,
+          "changePct": 0.859886454944212
+        },
+        "display": {
+          "change": 65.27999999999975,
+          "changePct": 0.86
+        },
+        "formula": "(close - previousClose) / previousClose * 100",
+        "rounding": "percent: 2 decimals, half away from zero"
+      },
+      "ruleVersion": "1.0.0",
+      "usedInSections": [
+        "section-3",
+        "section-8"
+      ],
+      "verificationStatus": "OK"
+    },
+    {
+      "evidenceId": "DJIA-2026-09-11",
+      "reportId": "MANUAL-2026-09-11-7cb0ccf11f29",
+      "sourceType": "market",
+      "sourceId": "SP_DJI",
+      "sourceUrl": "https://www.spglobal.com/spdji/en/indices/equity/dow-jones-industrial-average/",
+      "observedAt": "2026-09-11T20:00:00Z",
+      "collectedAt": "2026-09-13T05:17:44Z",
+      "originalValue": {
+        "id": "DJIA-2026-09-11",
+        "sample": false,
+        "sourceId": "SP_DJI",
+        "sourceUrl": "https://www.spglobal.com/spdji/en/indices/equity/dow-jones-industrial-average/",
+        "observedAt": "2026-09-11T20:00:00Z",
+        "collectedAt": "2026-09-13T05:17:44Z",
+        "unit": "points",
+        "status": "OK",
+        "missingReasons": {
+          "volume": "가격지수에 단일 거래량 미적용"
+        },
+        "collectionMode": "MANUAL_VERIFIED",
+        "verificationUrls": [
+          "https://apnews.com/article/wall-street-stocks-dow-nasdaq-67a463295d9ea178d7802ca4338a6eb5"
+        ],
+        "market": "US",
+        "tradingDate": "2026-09-11",
+        "symbol": "DJIA",
+        "instrumentType": "INDEX",
+        "close": 52573.29,
+        "previousClose": 52064.1,
+        "change": 509.19,
+        "changePct": 0.98,
+        "volume": null,
+        "currency": "USD"
+      },
+      "unit": "points",
+      "calculation": {
+        "status": "OK",
+        "raw": {
+          "change": 509.1900000000023,
+          "changePct": 0.9780059580401895
+        },
+        "display": {
+          "change": 509.1900000000023,
+          "changePct": 0.98
+        },
+        "formula": "(close - previousClose) / previousClose * 100",
+        "rounding": "percent: 2 decimals, half away from zero"
+      },
+      "ruleVersion": "1.0.0",
+      "usedInSections": [
+        "section-3",
+        "section-8"
+      ],
+      "verificationStatus": "OK"
+    },
+    {
+      "evidenceId": "IXIC-2026-09-11",
+      "reportId": "MANUAL-2026-09-11-7cb0ccf11f29",
+      "sourceType": "market",
+      "sourceId": "NASDAQ",
+      "sourceUrl": "https://www.nasdaq.com/market-activity/index/comp",
+      "observedAt": "2026-09-11T20:00:00Z",
+      "collectedAt": "2026-09-13T05:17:44Z",
+      "originalValue": {
+        "id": "IXIC-2026-09-11",
+        "sample": false,
+        "sourceId": "NASDAQ",
+        "sourceUrl": "https://www.nasdaq.com/market-activity/index/comp",
+        "observedAt": "2026-09-11T20:00:00Z",
+        "collectedAt": "2026-09-13T05:17:44Z",
+        "unit": "points",
+        "status": "OK",
+        "missingReasons": {
+          "volume": "가격지수에 단일 거래량 미적용"
+        },
+        "collectionMode": "MANUAL_VERIFIED",
+        "verificationUrls": [
+          "https://apnews.com/article/wall-street-stocks-dow-nasdaq-67a463295d9ea178d7802ca4338a6eb5"
+        ],
+        "market": "US",
+        "tradingDate": "2026-09-11",
+        "symbol": "IXIC",
+        "instrumentType": "INDEX",
+        "close": 26333.04,
+        "previousClose": 26081.73,
+        "change": 251.31,
+        "changePct": 0.96,
+        "volume": null,
+        "currency": "USD"
+      },
+      "unit": "points",
+      "calculation": {
+        "status": "OK",
+        "raw": {
+          "change": 251.3100000000013,
+          "changePct": 0.9635480468511917
+        },
+        "display": {
+          "change": 251.3100000000013,
+          "changePct": 0.96
+        },
+        "formula": "(close - previousClose) / previousClose * 100",
+        "rounding": "percent: 2 decimals, half away from zero"
+      },
+      "ruleVersion": "1.0.0",
+      "usedInSections": [
+        "section-3",
+        "section-8"
+      ],
+      "verificationStatus": "OK"
+    },
+    {
+      "evidenceId": "RUT-2026-09-11",
+      "reportId": "MANUAL-2026-09-11-7cb0ccf11f29",
+      "sourceType": "market",
+      "sourceId": "FTSE_RUSSELL",
+      "sourceUrl": "https://www.lseg.com/en/ftse-russell/indices/russell-2000-index",
+      "observedAt": "2026-09-11T20:00:00Z",
+      "collectedAt": "2026-09-13T05:17:44Z",
+      "originalValue": {
+        "id": "RUT-2026-09-11",
+        "sample": false,
+        "sourceId": "FTSE_RUSSELL",
+        "sourceUrl": "https://www.lseg.com/en/ftse-russell/indices/russell-2000-index",
+        "observedAt": "2026-09-11T20:00:00Z",
+        "collectedAt": "2026-09-13T05:17:44Z",
+        "unit": "points",
+        "status": "OK",
+        "missingReasons": {
+          "volume": "가격지수에 단일 거래량 미적용"
+        },
+        "collectionMode": "MANUAL_VERIFIED",
+        "verificationUrls": [
+          "https://apnews.com/article/wall-street-stocks-dow-nasdaq-67a463295d9ea178d7802ca4338a6eb5",
+          "https://gsandel.com/2026/09/11/usa-market-close-gsd-setiembre-11-2026/"
+        ],
+        "market": "US",
+        "tradingDate": "2026-09-11",
+        "symbol": "RUT",
+        "instrumentType": "INDEX",
+        "close": 2903.944,
+        "previousClose": 2890.947,
+        "change": 12.997,
+        "changePct": 0.45,
+        "volume": null,
+        "currency": "USD"
+      },
+      "unit": "points",
+      "calculation": {
+        "status": "OK",
+        "raw": {
+          "change": 12.996999999999844,
+          "changePct": 0.4495758656246497
+        },
+        "display": {
+          "change": 12.996999999999844,
+          "changePct": 0.45
+        },
+        "formula": "(close - previousClose) / previousClose * 100",
+        "rounding": "percent: 2 decimals, half away from zero"
+      },
+      "ruleVersion": "1.0.0",
+      "usedInSections": [
+        "section-3",
+        "section-8"
+      ],
+      "verificationStatus": "OK"
+    },
+    {
+      "evidenceId": "VIX-2026-09-11",
+      "reportId": "MANUAL-2026-09-11-7cb0ccf11f29",
+      "sourceType": "market",
+      "sourceId": "CBOE",
+      "sourceUrl": "https://www.cboe.com/tradable_products/vix/vix_historical_data/",
+      "observedAt": "2026-09-11T20:15:00Z",
+      "collectedAt": "2026-09-13T05:17:44Z",
+      "originalValue": {
+        "id": "VIX-2026-09-11",
+        "sample": false,
+        "sourceId": "CBOE",
+        "sourceUrl": "https://www.cboe.com/tradable_products/vix/vix_historical_data/",
+        "observedAt": "2026-09-11T20:15:00Z",
+        "collectedAt": "2026-09-13T05:17:44Z",
+        "unit": "points",
+        "status": "OK",
+        "missingReasons": {
+          "volume": "VIX 현물지수에 거래량 미적용"
+        },
+        "collectionMode": "MANUAL_VERIFIED",
+        "verificationUrls": [
+          "https://www.cboe.com/tradable-products/vix/vix-futures",
+          "https://gsandel.com/2026/09/11/usa-market-close-gsd-setiembre-11-2026/"
+        ],
+        "market": "US",
+        "tradingDate": "2026-09-11",
+        "symbol": "VIX",
+        "instrumentType": "INDEX",
+        "close": 15.84,
+        "previousClose": 17.84,
+        "change": -2,
+        "changePct": -11.21,
+        "volume": null,
+        "currency": "USD"
+      },
+      "unit": "points",
+      "calculation": {
+        "status": "OK",
+        "raw": {
+          "change": -2,
+          "changePct": -11.210762331838566
+        },
+        "display": {
+          "change": -2,
+          "changePct": -11.21
+        },
+        "formula": "(close - previousClose) / previousClose * 100",
+        "rounding": "percent: 2 decimals, half away from zero"
+      },
+      "ruleVersion": "1.0.0",
+      "usedInSections": [
+        "section-3",
+        "section-8"
+      ],
+      "verificationStatus": "OK"
+    },
+    {
+      "evidenceId": "US2Y-2026-09-11",
+      "reportId": "MANUAL-2026-09-11-7cb0ccf11f29",
+      "sourceType": "market",
+      "sourceId": "US_TREASURY",
+      "sourceUrl": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202609&type=daily_treasury_yield_curve",
+      "observedAt": "2026-09-11T19:30:00Z",
+      "collectedAt": "2026-09-13T05:17:44Z",
+      "originalValue": {
+        "id": "US2Y-2026-09-11",
+        "sample": false,
+        "sourceId": "US_TREASURY",
+        "sourceUrl": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202609&type=daily_treasury_yield_curve",
+        "observedAt": "2026-09-11T19:30:00Z",
+        "collectedAt": "2026-09-13T05:17:44Z",
+        "unit": "percent",
+        "status": "OK",
+        "missingReasons": {
+          "volume": "공식 par yield에 거래량 미적용"
+        },
+        "collectionMode": "MANUAL_VERIFIED",
+        "verificationUrls": [
+          "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/all/202609?type=daily_treasury_yield_curve&field_tdr_date_value_month=202609"
+        ],
+        "market": "US",
+        "tradingDate": "2026-09-11",
+        "symbol": "US2Y",
+        "instrumentType": "YIELD",
+        "close": 4.63,
+        "previousClose": 4.56,
+        "change": 0.07,
+        "changePct": 1.54,
+        "volume": null,
+        "currency": "USD"
+      },
+      "unit": "percent",
+      "calculation": {
+        "status": "OK",
+        "raw": {
+          "change": 0.07000000000000028,
+          "changePct": 1.535087719298252
+        },
+        "display": {
+          "change": 0.07000000000000028,
+          "changePct": 1.54
+        },
+        "formula": "(close - previousClose) / previousClose * 100",
+        "rounding": "percent: 2 decimals, half away from zero"
+      },
+      "ruleVersion": "1.0.0",
+      "usedInSections": [
+        "section-3",
+        "section-4",
+        "section-6",
+        "section-8"
+      ],
+      "verificationStatus": "OK"
+    },
+    {
+      "evidenceId": "US10Y-2026-09-11",
+      "reportId": "MANUAL-2026-09-11-7cb0ccf11f29",
+      "sourceType": "market",
+      "sourceId": "US_TREASURY",
+      "sourceUrl": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202609&type=daily_treasury_yield_curve",
+      "observedAt": "2026-09-11T19:30:00Z",
+      "collectedAt": "2026-09-13T05:17:44Z",
+      "originalValue": {
+        "id": "US10Y-2026-09-11",
+        "sample": false,
+        "sourceId": "US_TREASURY",
+        "sourceUrl": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202609&type=daily_treasury_yield_curve",
+        "observedAt": "2026-09-11T19:30:00Z",
+        "collectedAt": "2026-09-13T05:17:44Z",
+        "unit": "percent",
+        "status": "OK",
+        "missingReasons": {
+          "volume": "공식 par yield에 거래량 미적용"
+        },
+        "collectionMode": "MANUAL_VERIFIED",
+        "verificationUrls": [
+          "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/all/202609?type=daily_treasury_yield_curve&field_tdr_date_value_month=202609"
+        ],
+        "market": "US",
+        "tradingDate": "2026-09-11",
+        "symbol": "US10Y",
+        "instrumentType": "YIELD",
+        "close": 4.96,
+        "previousClose": 4.95,
+        "change": 0.01,
+        "changePct": 0.2,
+        "volume": null,
+        "currency": "USD"
+      },
+      "unit": "percent",
+      "calculation": {
+        "status": "OK",
+        "raw": {
+          "change": 0.009999999999999787,
+          "changePct": 0.20202020202019771
+        },
+        "display": {
+          "change": 0.009999999999999787,
+          "changePct": 0.2
+        },
+        "formula": "(close - previousClose) / previousClose * 100",
+        "rounding": "percent: 2 decimals, half away from zero"
+      },
+      "ruleVersion": "1.0.0",
+      "usedInSections": [
+        "section-3",
+        "section-4",
+        "section-6",
+        "section-8"
+      ],
+      "verificationStatus": "OK"
+    },
+    {
+      "evidenceId": "DXY-2026-09-11",
+      "reportId": "MANUAL-2026-09-11-7cb0ccf11f29",
+      "sourceType": "market",
+      "sourceId": "ICE",
+      "sourceUrl": "https://www.ice.com/products/194/US-Dollar-Index-Futures/data",
+      "observedAt": "2026-09-11T21:00:00Z",
+      "collectedAt": "2026-09-13T05:17:44Z",
+      "originalValue": {
+        "id": "DXY-2026-09-11",
+        "sample": false,
+        "sourceId": "ICE",
+        "sourceUrl": "https://www.ice.com/products/194/US-Dollar-Index-Futures/data",
+        "observedAt": "2026-09-11T21:00:00Z",
+        "collectedAt": "2026-09-13T05:17:44Z",
+        "unit": "points",
+        "status": "OK",
+        "missingReasons": {
+          "volume": "종가 요약에서 검증 가능한 거래량 미확보"
+        },
+        "collectionMode": "MANUAL_VERIFIED",
+        "verificationUrls": [
+          "https://www.investing.com/currencies/us-dollar-index-historical-data"
+        ],
+        "market": "US",
+        "tradingDate": "2026-09-11",
+        "symbol": "DXY_FUTURES_SEP26",
+        "instrumentType": "INDEX",
+        "close": 99.111,
+        "previousClose": 99.047,
+        "change": 0.064,
+        "changePct": 0.06,
+        "volume": null,
+        "currency": "USD"
+      },
+      "unit": "points",
+      "calculation": {
+        "status": "OK",
+        "raw": {
+          "change": 0.06400000000000716,
+          "changePct": 0.06461578846406975
+        },
+        "display": {
+          "change": 0.06400000000000716,
+          "changePct": 0.06
+        },
+        "formula": "(close - previousClose) / previousClose * 100",
+        "rounding": "percent: 2 decimals, half away from zero"
+      },
+      "ruleVersion": "1.0.0",
+      "usedInSections": [
+        "section-3",
+        "section-8"
+      ],
+      "verificationStatus": "OK"
+    },
+    {
+      "evidenceId": "BRENT-2026-09-11",
+      "reportId": "MANUAL-2026-09-11-7cb0ccf11f29",
+      "sourceType": "market",
+      "sourceId": "ICE",
+      "sourceUrl": "https://www.ice.com/products/219/Brent-Crude-Futures/data",
+      "observedAt": "2026-09-11T20:30:00Z",
+      "collectedAt": "2026-09-13T05:17:44Z",
+      "originalValue": {
+        "id": "BRENT-2026-09-11",
+        "sample": false,
+        "sourceId": "ICE",
+        "sourceUrl": "https://www.ice.com/products/219/Brent-Crude-Futures/data",
+        "observedAt": "2026-09-11T20:30:00Z",
+        "collectedAt": "2026-09-13T05:17:44Z",
+        "unit": "price",
+        "status": "OK",
+        "missingReasons": {
+          "volume": "내부 리포트에 거래량 미사용"
+        },
+        "collectionMode": "MANUAL_VERIFIED",
+        "verificationUrls": [
+          "https://apnews.com/article/financial-markets-stocks-oil-iran-war-bonds-rates-8c3272812f5e9b9238c6a3301921c17a",
+          "https://www.investing.com/commodities/brent-oil-historical-data?cid=1184864"
+        ],
+        "market": "US",
+        "tradingDate": "2026-09-11",
+        "symbol": "BRENT_NOV26",
+        "instrumentType": "COMMODITY",
+        "close": 104.61,
+        "previousClose": 107.63,
+        "change": -3.02,
+        "changePct": -2.81,
+        "volume": null,
+        "currency": "USD"
+      },
+      "unit": "price",
+      "calculation": {
+        "status": "OK",
+        "raw": {
+          "change": -3.019999999999996,
+          "changePct": -2.8059091331413137
+        },
+        "display": {
+          "change": -3.019999999999996,
+          "changePct": -2.81
+        },
+        "formula": "(close - previousClose) / previousClose * 100",
+        "rounding": "percent: 2 decimals, half away from zero"
+      },
+      "ruleVersion": "1.0.0",
+      "usedInSections": [
+        "section-3",
+        "section-8"
+      ],
+      "verificationStatus": "OK"
+    },
+    {
+      "evidenceId": "CPI-MOM-2026-08",
+      "reportId": "MANUAL-2026-09-11-7cb0ccf11f29",
+      "sourceType": "macro",
+      "sourceId": "BLS",
+      "sourceUrl": "https://www.bls.gov/news.release/archives/cpi_09112026.htm",
+      "observedAt": "2026-09-11T12:30:00Z",
+      "collectedAt": "2026-09-13T05:17:44Z",
+      "originalValue": {
+        "id": "CPI-MOM-2026-08",
+        "sample": false,
+        "sourceId": "BLS",
+        "sourceUrl": "https://www.bls.gov/news.release/archives/cpi_09112026.htm",
+        "observedAt": "2026-09-11T12:30:00Z",
+        "collectedAt": "2026-09-13T05:17:44Z",
+        "unit": "percent",
+        "status": "OK",
+        "missingReasons": {},
+        "collectionMode": "MANUAL_VERIFIED",
+        "verificationUrls": [
+          "https://www.bls.gov/news.release/archives/cpi_09112026.htm",
+          "https://www.kiplinger.com/investing/economy/cpi-report-august-2026-what-to-expect"
+        ],
+        "indicatorId": "CPI_U_MOM",
+        "indicatorName": "미국 CPI-U 전월 대비",
+        "releaseTime": "2026-09-11T12:30:00Z",
+        "period": "2026-08",
+        "actual": 0.4,
+        "consensus": 0.4,
+        "previous": 0.1,
+        "revisedPrevious": 0.1,
+        "adjustmentType": "SA"
+      },
+      "unit": "percent",
+      "calculation": null,
+      "ruleVersion": "1.0.0",
+      "usedInSections": [
+        "section-4",
+        "section-6",
+        "section-8"
+      ],
+      "verificationStatus": "OK"
+    },
+    {
+      "evidenceId": "CPI-YOY-2026-08",
+      "reportId": "MANUAL-2026-09-11-7cb0ccf11f29",
+      "sourceType": "macro",
+      "sourceId": "BLS",
+      "sourceUrl": "https://www.bls.gov/news.release/archives/cpi_09112026.htm",
+      "observedAt": "2026-09-11T12:30:00Z",
+      "collectedAt": "2026-09-13T05:17:44Z",
+      "originalValue": {
+        "id": "CPI-YOY-2026-08",
+        "sample": false,
+        "sourceId": "BLS",
+        "sourceUrl": "https://www.bls.gov/news.release/archives/cpi_09112026.htm",
+        "observedAt": "2026-09-11T12:30:00Z",
+        "collectedAt": "2026-09-13T05:17:44Z",
+        "unit": "percent",
+        "status": "OK",
+        "missingReasons": {},
+        "collectionMode": "MANUAL_VERIFIED",
+        "verificationUrls": [
+          "https://www.bls.gov/news.release/archives/cpi_09112026.htm",
+          "https://www.kiplinger.com/investing/economy/cpi-report-august-2026-what-to-expect"
+        ],
+        "indicatorId": "CPI_U_YOY",
+        "indicatorName": "미국 CPI-U 전년 대비",
+        "releaseTime": "2026-09-11T12:30:00Z",
+        "period": "2026-08",
+        "actual": 3.4,
+        "consensus": 3.4,
+        "previous": 3.4,
+        "revisedPrevious": 3.4,
+        "adjustmentType": "NSA"
+      },
+      "unit": "percent",
+      "calculation": null,
+      "ruleVersion": "1.0.0",
+      "usedInSections": [
+        "section-4",
+        "section-6",
+        "section-8"
+      ],
+      "verificationStatus": "OK"
+    },
+    {
+      "evidenceId": "ORCL-Q1-FY27-EVENT",
+      "reportId": "MANUAL-2026-09-11-7cb0ccf11f29",
+      "sourceType": "companyEvents",
+      "sourceId": "CORPORATE_IR",
+      "sourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+      "observedAt": "2026-09-10T20:16:50Z",
+      "collectedAt": "2026-09-13T05:17:44Z",
+      "originalValue": {
+        "id": "ORCL-Q1-FY27-EVENT",
+        "sample": false,
+        "sourceId": "CORPORATE_IR",
+        "sourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+        "observedAt": "2026-09-10T20:16:50Z",
+        "collectedAt": "2026-09-13T05:17:44Z",
+        "unit": "text",
+        "status": "OK",
+        "missingReasons": {},
+        "collectionMode": "MANUAL_VERIFIED",
+        "verificationUrls": [
+          "https://www.sec.gov/Archives/edgar/data/1341439/000119312526387905/0001193125-26-387905-index.htm",
+          "https://apnews.com/article/financial-markets-stocks-oil-iran-war-bonds-rates-8c3272812f5e9b9238c6a3301921c17a"
+        ],
+        "companyId": "ORACLE",
+        "ticker": "ORCL",
+        "eventType": "AI_CAPEX_UP",
+        "eventTime": "2026-09-10T20:16:50Z",
+        "title": "Oracle FY27 1분기 실적 및 데이터센터 용량 확대",
+        "summary": "Oracle은 총매출 193억 달러, 클라우드 매출 116억 달러, IaaS 매출 74억 달러와 850MW 추가 데이터센터 용량 공급을 발표했다.",
+        "primarySourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx"
+      },
+      "unit": "text",
+      "calculation": null,
+      "ruleVersion": "1.0.0",
+      "usedInSections": [
+        "section-4",
+        "section-5",
+        "section-6",
+        "section-8"
+      ],
+      "verificationStatus": "OK"
+    },
+    {
+      "evidenceId": "ORCL-8K-2026-09-10",
+      "reportId": "MANUAL-2026-09-11-7cb0ccf11f29",
+      "sourceType": "filings",
+      "sourceId": "SEC_EDGAR",
+      "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526387905/orcl-20260910.htm",
+      "observedAt": "2026-09-10T20:16:50Z",
+      "collectedAt": "2026-09-13T05:17:44Z",
+      "originalValue": {
+        "id": "ORCL-8K-2026-09-10",
+        "sample": false,
+        "sourceId": "SEC_EDGAR",
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526387905/orcl-20260910.htm",
+        "observedAt": "2026-09-10T20:16:50Z",
+        "collectedAt": "2026-09-13T05:17:44Z",
+        "unit": "text",
+        "status": "OK",
+        "missingReasons": {},
+        "collectionMode": "MANUAL_VERIFIED",
+        "verificationUrls": [
+          "https://www.sec.gov/Archives/edgar/data/1341439/000119312526387905/0001193125-26-387905-index.htm"
+        ],
+        "companyId": "ORACLE",
+        "ticker": "ORCL",
+        "formType": "8-K",
+        "accessionNumber": "0001193125-26-387905",
+        "filedAt": "2026-09-10T20:16:50Z",
+        "period": "FY2027-Q1",
+        "extractedFacts": [
+          "2026-09-10 실적 발표 자료가 Exhibit 99.1로 첨부됨",
+          "보고 대상 기간은 2026-08-31 종료 분기"
+        ]
+      },
+      "unit": "text",
+      "calculation": null,
+      "ruleVersion": "1.0.0",
+      "usedInSections": [
+        "section-4",
+        "section-5",
+        "section-6",
+        "section-8"
+      ],
+      "verificationStatus": "OK"
+    }
+  ],
+  "originalInput": {
+    "schemaVersion": "1.0",
+    "sample": false,
+    "tradingDate": "2026-09-11",
+    "asOf": "2026-09-13T05:17:44Z",
+    "session": {
+      "status": "OK",
+      "closeAt": "2026-09-11T20:00:00Z",
+      "sourceId": "NYSE",
+      "sourceUrl": "https://www.nyse.com/trade/hours-calendars"
+    },
+    "market": [
+      {
+        "id": "SPX-2026-09-11",
+        "sample": false,
+        "sourceId": "SP_DJI",
+        "sourceUrl": "https://www.spglobal.com/spdji/en/indices/equity/sp-500/",
+        "observedAt": "2026-09-11T20:00:00Z",
+        "collectedAt": "2026-09-13T05:17:44Z",
+        "unit": "points",
+        "status": "OK",
+        "missingReasons": {
+          "volume": "가격지수에 단일 거래량 미적용"
+        },
+        "collectionMode": "MANUAL_VERIFIED",
+        "verificationUrls": [
+          "https://fred.stlouisfed.org/series/SP500",
+          "https://apnews.com/article/wall-street-stocks-dow-nasdaq-67a463295d9ea178d7802ca4338a6eb5"
+        ],
+        "market": "US",
+        "tradingDate": "2026-09-11",
+        "symbol": "SPX",
+        "instrumentType": "INDEX",
+        "close": 7656.98,
+        "previousClose": 7591.7,
+        "change": 65.28,
+        "changePct": 0.86,
+        "volume": null,
+        "currency": "USD"
+      },
+      {
+        "id": "DJIA-2026-09-11",
+        "sample": false,
+        "sourceId": "SP_DJI",
+        "sourceUrl": "https://www.spglobal.com/spdji/en/indices/equity/dow-jones-industrial-average/",
+        "observedAt": "2026-09-11T20:00:00Z",
+        "collectedAt": "2026-09-13T05:17:44Z",
+        "unit": "points",
+        "status": "OK",
+        "missingReasons": {
+          "volume": "가격지수에 단일 거래량 미적용"
+        },
+        "collectionMode": "MANUAL_VERIFIED",
+        "verificationUrls": [
+          "https://apnews.com/article/wall-street-stocks-dow-nasdaq-67a463295d9ea178d7802ca4338a6eb5"
+        ],
+        "market": "US",
+        "tradingDate": "2026-09-11",
+        "symbol": "DJIA",
+        "instrumentType": "INDEX",
+        "close": 52573.29,
+        "previousClose": 52064.1,
+        "change": 509.19,
+        "changePct": 0.98,
+        "volume": null,
+        "currency": "USD"
+      },
+      {
+        "id": "IXIC-2026-09-11",
+        "sample": false,
+        "sourceId": "NASDAQ",
+        "sourceUrl": "https://www.nasdaq.com/market-activity/index/comp",
+        "observedAt": "2026-09-11T20:00:00Z",
+        "collectedAt": "2026-09-13T05:17:44Z",
+        "unit": "points",
+        "status": "OK",
+        "missingReasons": {
+          "volume": "가격지수에 단일 거래량 미적용"
+        },
+        "collectionMode": "MANUAL_VERIFIED",
+        "verificationUrls": [
+          "https://apnews.com/article/wall-street-stocks-dow-nasdaq-67a463295d9ea178d7802ca4338a6eb5"
+        ],
+        "market": "US",
+        "tradingDate": "2026-09-11",
+        "symbol": "IXIC",
+        "instrumentType": "INDEX",
+        "close": 26333.04,
+        "previousClose": 26081.73,
+        "change": 251.31,
+        "changePct": 0.96,
+        "volume": null,
+        "currency": "USD"
+      },
+      {
+        "id": "RUT-2026-09-11",
+        "sample": false,
+        "sourceId": "FTSE_RUSSELL",
+        "sourceUrl": "https://www.lseg.com/en/ftse-russell/indices/russell-2000-index",
+        "observedAt": "2026-09-11T20:00:00Z",
+        "collectedAt": "2026-09-13T05:17:44Z",
+        "unit": "points",
+        "status": "OK",
+        "missingReasons": {
+          "volume": "가격지수에 단일 거래량 미적용"
+        },
+        "collectionMode": "MANUAL_VERIFIED",
+        "verificationUrls": [
+          "https://apnews.com/article/wall-street-stocks-dow-nasdaq-67a463295d9ea178d7802ca4338a6eb5",
+          "https://gsandel.com/2026/09/11/usa-market-close-gsd-setiembre-11-2026/"
+        ],
+        "market": "US",
+        "tradingDate": "2026-09-11",
+        "symbol": "RUT",
+        "instrumentType": "INDEX",
+        "close": 2903.944,
+        "previousClose": 2890.947,
+        "change": 12.997,
+        "changePct": 0.45,
+        "volume": null,
+        "currency": "USD"
+      },
+      {
+        "id": "VIX-2026-09-11",
+        "sample": false,
+        "sourceId": "CBOE",
+        "sourceUrl": "https://www.cboe.com/tradable_products/vix/vix_historical_data/",
+        "observedAt": "2026-09-11T20:15:00Z",
+        "collectedAt": "2026-09-13T05:17:44Z",
+        "unit": "points",
+        "status": "OK",
+        "missingReasons": {
+          "volume": "VIX 현물지수에 거래량 미적용"
+        },
+        "collectionMode": "MANUAL_VERIFIED",
+        "verificationUrls": [
+          "https://www.cboe.com/tradable-products/vix/vix-futures",
+          "https://gsandel.com/2026/09/11/usa-market-close-gsd-setiembre-11-2026/"
+        ],
+        "market": "US",
+        "tradingDate": "2026-09-11",
+        "symbol": "VIX",
+        "instrumentType": "INDEX",
+        "close": 15.84,
+        "previousClose": 17.84,
+        "change": -2,
+        "changePct": -11.21,
+        "volume": null,
+        "currency": "USD"
+      },
+      {
+        "id": "US2Y-2026-09-11",
+        "sample": false,
+        "sourceId": "US_TREASURY",
+        "sourceUrl": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202609&type=daily_treasury_yield_curve",
+        "observedAt": "2026-09-11T19:30:00Z",
+        "collectedAt": "2026-09-13T05:17:44Z",
+        "unit": "percent",
+        "status": "OK",
+        "missingReasons": {
+          "volume": "공식 par yield에 거래량 미적용"
+        },
+        "collectionMode": "MANUAL_VERIFIED",
+        "verificationUrls": [
+          "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/all/202609?type=daily_treasury_yield_curve&field_tdr_date_value_month=202609"
+        ],
+        "market": "US",
+        "tradingDate": "2026-09-11",
+        "symbol": "US2Y",
+        "instrumentType": "YIELD",
+        "close": 4.63,
+        "previousClose": 4.56,
+        "change": 0.07,
+        "changePct": 1.54,
+        "volume": null,
+        "currency": "USD"
+      },
+      {
+        "id": "US10Y-2026-09-11",
+        "sample": false,
+        "sourceId": "US_TREASURY",
+        "sourceUrl": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202609&type=daily_treasury_yield_curve",
+        "observedAt": "2026-09-11T19:30:00Z",
+        "collectedAt": "2026-09-13T05:17:44Z",
+        "unit": "percent",
+        "status": "OK",
+        "missingReasons": {
+          "volume": "공식 par yield에 거래량 미적용"
+        },
+        "collectionMode": "MANUAL_VERIFIED",
+        "verificationUrls": [
+          "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/all/202609?type=daily_treasury_yield_curve&field_tdr_date_value_month=202609"
+        ],
+        "market": "US",
+        "tradingDate": "2026-09-11",
+        "symbol": "US10Y",
+        "instrumentType": "YIELD",
+        "close": 4.96,
+        "previousClose": 4.95,
+        "change": 0.01,
+        "changePct": 0.2,
+        "volume": null,
+        "currency": "USD"
+      },
+      {
+        "id": "DXY-2026-09-11",
+        "sample": false,
+        "sourceId": "ICE",
+        "sourceUrl": "https://www.ice.com/products/194/US-Dollar-Index-Futures/data",
+        "observedAt": "2026-09-11T21:00:00Z",
+        "collectedAt": "2026-09-13T05:17:44Z",
+        "unit": "points",
+        "status": "OK",
+        "missingReasons": {
+          "volume": "종가 요약에서 검증 가능한 거래량 미확보"
+        },
+        "collectionMode": "MANUAL_VERIFIED",
+        "verificationUrls": [
+          "https://www.investing.com/currencies/us-dollar-index-historical-data"
+        ],
+        "market": "US",
+        "tradingDate": "2026-09-11",
+        "symbol": "DXY_FUTURES_SEP26",
+        "instrumentType": "INDEX",
+        "close": 99.111,
+        "previousClose": 99.047,
+        "change": 0.064,
+        "changePct": 0.06,
+        "volume": null,
+        "currency": "USD"
+      },
+      {
+        "id": "BRENT-2026-09-11",
+        "sample": false,
+        "sourceId": "ICE",
+        "sourceUrl": "https://www.ice.com/products/219/Brent-Crude-Futures/data",
+        "observedAt": "2026-09-11T20:30:00Z",
+        "collectedAt": "2026-09-13T05:17:44Z",
+        "unit": "price",
+        "status": "OK",
+        "missingReasons": {
+          "volume": "내부 리포트에 거래량 미사용"
+        },
+        "collectionMode": "MANUAL_VERIFIED",
+        "verificationUrls": [
+          "https://apnews.com/article/financial-markets-stocks-oil-iran-war-bonds-rates-8c3272812f5e9b9238c6a3301921c17a",
+          "https://www.investing.com/commodities/brent-oil-historical-data?cid=1184864"
+        ],
+        "market": "US",
+        "tradingDate": "2026-09-11",
+        "symbol": "BRENT_NOV26",
+        "instrumentType": "COMMODITY",
+        "close": 104.61,
+        "previousClose": 107.63,
+        "change": -3.02,
+        "changePct": -2.81,
+        "volume": null,
+        "currency": "USD"
+      }
+    ],
+    "macro": [
+      {
+        "id": "CPI-MOM-2026-08",
+        "sample": false,
+        "sourceId": "BLS",
+        "sourceUrl": "https://www.bls.gov/news.release/archives/cpi_09112026.htm",
+        "observedAt": "2026-09-11T12:30:00Z",
+        "collectedAt": "2026-09-13T05:17:44Z",
+        "unit": "percent",
+        "status": "OK",
+        "missingReasons": {},
+        "collectionMode": "MANUAL_VERIFIED",
+        "verificationUrls": [
+          "https://www.bls.gov/news.release/archives/cpi_09112026.htm",
+          "https://www.kiplinger.com/investing/economy/cpi-report-august-2026-what-to-expect"
+        ],
+        "indicatorId": "CPI_U_MOM",
+        "indicatorName": "미국 CPI-U 전월 대비",
+        "releaseTime": "2026-09-11T12:30:00Z",
+        "period": "2026-08",
+        "actual": 0.4,
+        "consensus": 0.4,
+        "previous": 0.1,
+        "revisedPrevious": 0.1,
+        "adjustmentType": "SA"
+      },
+      {
+        "id": "CPI-YOY-2026-08",
+        "sample": false,
+        "sourceId": "BLS",
+        "sourceUrl": "https://www.bls.gov/news.release/archives/cpi_09112026.htm",
+        "observedAt": "2026-09-11T12:30:00Z",
+        "collectedAt": "2026-09-13T05:17:44Z",
+        "unit": "percent",
+        "status": "OK",
+        "missingReasons": {},
+        "collectionMode": "MANUAL_VERIFIED",
+        "verificationUrls": [
+          "https://www.bls.gov/news.release/archives/cpi_09112026.htm",
+          "https://www.kiplinger.com/investing/economy/cpi-report-august-2026-what-to-expect"
+        ],
+        "indicatorId": "CPI_U_YOY",
+        "indicatorName": "미국 CPI-U 전년 대비",
+        "releaseTime": "2026-09-11T12:30:00Z",
+        "period": "2026-08",
+        "actual": 3.4,
+        "consensus": 3.4,
+        "previous": 3.4,
+        "revisedPrevious": 3.4,
+        "adjustmentType": "NSA"
+      }
+    ],
+    "companyEvents": [
+      {
+        "id": "ORCL-Q1-FY27-EVENT",
+        "sample": false,
+        "sourceId": "CORPORATE_IR",
+        "sourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+        "observedAt": "2026-09-10T20:16:50Z",
+        "collectedAt": "2026-09-13T05:17:44Z",
+        "unit": "text",
+        "status": "OK",
+        "missingReasons": {},
+        "collectionMode": "MANUAL_VERIFIED",
+        "verificationUrls": [
+          "https://www.sec.gov/Archives/edgar/data/1341439/000119312526387905/0001193125-26-387905-index.htm",
+          "https://apnews.com/article/financial-markets-stocks-oil-iran-war-bonds-rates-8c3272812f5e9b9238c6a3301921c17a"
+        ],
+        "companyId": "ORACLE",
+        "ticker": "ORCL",
+        "eventType": "AI_CAPEX_UP",
+        "eventTime": "2026-09-10T20:16:50Z",
+        "title": "Oracle FY27 1분기 실적 및 데이터센터 용량 확대",
+        "summary": "Oracle은 총매출 193억 달러, 클라우드 매출 116억 달러, IaaS 매출 74억 달러와 850MW 추가 데이터센터 용량 공급을 발표했다.",
+        "primarySourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx"
+      }
+    ],
+    "filings": [
+      {
+        "id": "ORCL-8K-2026-09-10",
+        "sample": false,
+        "sourceId": "SEC_EDGAR",
+        "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526387905/orcl-20260910.htm",
+        "observedAt": "2026-09-10T20:16:50Z",
+        "collectedAt": "2026-09-13T05:17:44Z",
+        "unit": "text",
+        "status": "OK",
+        "missingReasons": {},
+        "collectionMode": "MANUAL_VERIFIED",
+        "verificationUrls": [
+          "https://www.sec.gov/Archives/edgar/data/1341439/000119312526387905/0001193125-26-387905-index.htm"
+        ],
+        "companyId": "ORACLE",
+        "ticker": "ORCL",
+        "formType": "8-K",
+        "accessionNumber": "0001193125-26-387905",
+        "filedAt": "2026-09-10T20:16:50Z",
+        "period": "FY2027-Q1",
+        "extractedFacts": [
+          "2026-09-10 실적 발표 자료가 Exhibit 99.1로 첨부됨",
+          "보고 대상 기간은 2026-08-31 종료 분기"
+        ]
+      }
+    ],
+    "news": [],
+    "signals": [
+      {
+        "id": "DRIVER-RATES-2026-09-11",
+        "eventId": "CPI-MOM-2026-08",
+        "trigger": "RATES_UP",
+        "usIndustry": "Internet / Platform",
+        "usCompany": "US_MACRO",
+        "macroConditions": [],
+        "evidenceIds": [
+          "CPI-YOY-2026-08",
+          "US2Y-2026-09-11",
+          "US10Y-2026-09-11"
+        ],
+        "counterFactors": [
+          "같은 날 유가 하락과 위험선호 회복이 금리 부담을 일부 상쇄"
+        ],
+        "driverStatement": "8월 CPI가 전월 대비 0.4% 상승하고 2년·10년 Treasury par yield가 전일보다 높아져, 금리 민감 성장주에는 할인율 부담이 남았다는 조건부 해석이다."
+      },
+      {
+        "id": "DRIVER-AI-CAPEX-2026-09-11",
+        "eventId": "ORCL-Q1-FY27-EVENT",
+        "trigger": "AI_CAPEX_UP",
+        "usIndustry": "AI / Data Center",
+        "usCompany": "ORACLE",
+        "macroConditions": [],
+        "evidenceIds": [
+          "ORCL-8K-2026-09-10"
+        ],
+        "counterFactors": [
+          "Oracle의 당일 주가는 장중 상승분을 반납해 실적과 주가 반응이 분리됨"
+        ],
+        "driverStatement": "Oracle의 클라우드 인프라 성장과 추가 데이터센터 용량은 AI·데이터센터 투자 수요의 기업 단위 근거지만, 단일 기업 발표를 산업 전체로 일반화하지 않는다."
+      }
+    ],
+    "koreaContext": {
+      "calendar": [],
+      "counterFactors": []
+    }
+  },
+  "inputSha256": "f2a9a7f9ac99a66cd103134ab90d225b57495906c0fd12079ecc555e29303a9d",
+  "redactedFields": [],
+  "analysisRules": [
+    {
+      "ruleId": "UK-01",
+      "ruleVersion": "1.0.0",
+      "trigger": "AI_CAPEX_UP",
+      "usIndustry": "AI / Data Center",
+      "usCompany": [],
+      "macroCondition": [],
+      "transmissionPath": "AI_CAPEX",
+      "koreaIndustry": "Semiconductor",
+      "koreaCompanyCandidate": [],
+      "direction": "POSITIVE",
+      "baseStrength": 4,
+      "evidenceRequirements": {
+        "minimumSources": 1,
+        "primaryRequired": true
+      },
+      "counterFactors": [
+        "고객사 투자 지연",
+        "환율·국내 수급·기존 주가 반영 확인 필요"
+      ],
+      "validityHorizon": "SHORT_TERM"
+    },
+    {
+      "ruleId": "UK-02",
+      "ruleVersion": "1.0.0",
+      "trigger": "CHIP_DEMAND_UP",
+      "usIndustry": "Semiconductor",
+      "usCompany": [],
+      "macroCondition": [],
+      "transmissionPath": "SEMICONDUCTOR_CYCLE",
+      "koreaIndustry": "Semiconductor",
+      "koreaCompanyCandidate": [],
+      "direction": "POSITIVE",
+      "baseStrength": 3,
+      "evidenceRequirements": {
+        "minimumSources": 1,
+        "primaryRequired": true
+      },
+      "counterFactors": [
+        "재고 증가",
+        "환율·국내 수급·기존 주가 반영 확인 필요"
+      ],
+      "validityHorizon": "SHORT_TERM"
+    },
+    {
+      "ruleId": "UK-03",
+      "ruleVersion": "1.0.0",
+      "trigger": "EV_DEMAND_DOWN",
+      "usIndustry": "Battery / EV",
+      "usCompany": [],
+      "macroCondition": [],
+      "transmissionPath": "DEMAND",
+      "koreaIndustry": "Battery / EV",
+      "koreaCompanyCandidate": [],
+      "direction": "NEGATIVE",
+      "baseStrength": 3,
+      "evidenceRequirements": {
+        "minimumSources": 1,
+        "primaryRequired": true
+      },
+      "counterFactors": [
+        "보조금 확대",
+        "환율·국내 수급·기존 주가 반영 확인 필요"
+      ],
+      "validityHorizon": "SHORT_TERM"
+    },
+    {
+      "ruleId": "UK-04",
+      "ruleVersion": "1.0.0",
+      "trigger": "USD_UP",
+      "usIndustry": "Automobile",
+      "usCompany": [],
+      "macroCondition": [],
+      "transmissionPath": "FX",
+      "koreaIndustry": "Automobile",
+      "koreaCompanyCandidate": [],
+      "direction": "MIXED",
+      "baseStrength": 2,
+      "evidenceRequirements": {
+        "minimumSources": 1,
+        "primaryRequired": true
+      },
+      "counterFactors": [
+        "수입 원가 증가",
+        "환율·국내 수급·기존 주가 반영 확인 필요"
+      ],
+      "validityHorizon": "SHORT_TERM"
+    },
+    {
+      "ruleId": "UK-05",
+      "ruleVersion": "1.0.0",
+      "trigger": "OIL_UP",
+      "usIndustry": "Energy",
+      "usCompany": [],
+      "macroCondition": [],
+      "transmissionPath": "ENERGY",
+      "koreaIndustry": "Energy",
+      "koreaCompanyCandidate": [],
+      "direction": "MIXED",
+      "baseStrength": 3,
+      "evidenceRequirements": {
+        "minimumSources": 1,
+        "primaryRequired": true
+      },
+      "counterFactors": [
+        "정제마진 축소",
+        "환율·국내 수급·기존 주가 반영 확인 필요"
+      ],
+      "validityHorizon": "SHORT_TERM"
+    },
+    {
+      "ruleId": "UK-06",
+      "ruleVersion": "1.0.0",
+      "trigger": "DRUG_POLICY_TIGHTEN",
+      "usIndustry": "Bio / Healthcare",
+      "usCompany": [],
+      "macroCondition": [],
+      "transmissionPath": "REGULATION",
+      "koreaIndustry": "Bio / Healthcare",
+      "koreaCompanyCandidate": [],
+      "direction": "NEGATIVE",
+      "baseStrength": 3,
+      "evidenceRequirements": {
+        "minimumSources": 1,
+        "primaryRequired": true
+      },
+      "counterFactors": [
+        "국내 적용 범위 차이",
+        "환율·국내 수급·기존 주가 반영 확인 필요"
+      ],
+      "validityHorizon": "SHORT_TERM"
+    },
+    {
+      "ruleId": "UK-07",
+      "ruleVersion": "1.0.0",
+      "trigger": "RATES_UP",
+      "usIndustry": "Internet / Platform",
+      "usCompany": [],
+      "macroCondition": [],
+      "transmissionPath": "INTEREST_RATE",
+      "koreaIndustry": "Internet / Platform",
+      "koreaCompanyCandidate": [],
+      "direction": "NEGATIVE",
+      "baseStrength": 3,
+      "evidenceRequirements": {
+        "minimumSources": 1,
+        "primaryRequired": true
+      },
+      "counterFactors": [
+        "실적 개선",
+        "환율·국내 수급·기존 주가 반영 확인 필요"
+      ],
+      "validityHorizon": "SHORT_TERM"
+    },
+    {
+      "ruleId": "UK-08",
+      "ruleVersion": "1.0.0",
+      "trigger": "DEFENSE_BUDGET_UP",
+      "usIndustry": "Defense / Aerospace",
+      "usCompany": [],
+      "macroCondition": [],
+      "transmissionPath": "POLICY",
+      "koreaIndustry": "Defense / Aerospace",
+      "koreaCompanyCandidate": [],
+      "direction": "POSITIVE",
+      "baseStrength": 3,
+      "evidenceRequirements": {
+        "minimumSources": 1,
+        "primaryRequired": true
+      },
+      "counterFactors": [
+        "계약 및 수출 제한",
+        "환율·국내 수급·기존 주가 반영 확인 필요"
+      ],
+      "validityHorizon": "SHORT_TERM"
+    },
+    {
+      "ruleId": "UK-09",
+      "ruleVersion": "1.0.0",
+      "trigger": "CONSUMPTION_DOWN",
+      "usIndustry": "Consumer",
+      "usCompany": [],
+      "macroCondition": [],
+      "transmissionPath": "DEMAND",
+      "koreaIndustry": "Consumer",
+      "koreaCompanyCandidate": [],
+      "direction": "NEGATIVE",
+      "baseStrength": 2,
+      "evidenceRequirements": {
+        "minimumSources": 1,
+        "primaryRequired": true
+      },
+      "counterFactors": [
+        "국내 소비 회복",
+        "환율·국내 수급·기존 주가 반영 확인 필요"
+      ],
+      "validityHorizon": "SHORT_TERM"
+    },
+    {
+      "ruleId": "UK-10",
+      "ruleVersion": "1.0.0",
+      "trigger": "LIQUIDITY_DOWN",
+      "usIndustry": "Finance",
+      "usCompany": [],
+      "macroCondition": [],
+      "transmissionPath": "LIQUIDITY",
+      "koreaIndustry": "Finance",
+      "koreaCompanyCandidate": [],
+      "direction": "NEGATIVE",
+      "baseStrength": 3,
+      "evidenceRequirements": {
+        "minimumSources": 1,
+        "primaryRequired": true
+      },
+      "counterFactors": [
+        "정책 대응",
+        "환율·국내 수급·기존 주가 반영 확인 필요"
+      ],
+      "validityHorizon": "SHORT_TERM"
+    },
+    {
+      "ruleId": "UK-11",
+      "ruleVersion": "1.0.0",
+      "trigger": "INPUT_COST_UP",
+      "usIndustry": "Energy",
+      "usCompany": [],
+      "macroCondition": [],
+      "transmissionPath": "COMMODITY",
+      "koreaIndustry": "Consumer",
+      "koreaCompanyCandidate": [],
+      "direction": "NEGATIVE",
+      "baseStrength": 2,
+      "evidenceRequirements": {
+        "minimumSources": 1,
+        "primaryRequired": true
+      },
+      "counterFactors": [
+        "가격 전가",
+        "환율·국내 수급·기존 주가 반영 확인 필요"
+      ],
+      "validityHorizon": "SHORT_TERM"
+    },
+    {
+      "ruleId": "UK-12",
+      "ruleVersion": "1.0.0",
+      "trigger": "SUPPLY_DISRUPTION",
+      "usIndustry": "Semiconductor",
+      "usCompany": [],
+      "macroCondition": [],
+      "transmissionPath": "SUPPLY_CHAIN",
+      "koreaIndustry": "Semiconductor",
+      "koreaCompanyCandidate": [],
+      "direction": "MIXED",
+      "baseStrength": 3,
+      "evidenceRequirements": {
+        "minimumSources": 1,
+        "primaryRequired": true
+      },
+      "counterFactors": [
+        "대체 공급 확보",
+        "환율·국내 수급·기존 주가 반영 확인 필요"
+      ],
+      "validityHorizon": "SHORT_TERM"
+    },
+    {
+      "ruleId": "UK-13",
+      "ruleVersion": "1.0.0",
+      "trigger": "RISK_OFF",
+      "usIndustry": "Finance",
+      "usCompany": [],
+      "macroCondition": [],
+      "transmissionPath": "RISK_SENTIMENT",
+      "koreaIndustry": "Finance",
+      "koreaCompanyCandidate": [],
+      "direction": "NEGATIVE",
+      "baseStrength": 2,
+      "evidenceRequirements": {
+        "minimumSources": 1,
+        "primaryRequired": true
+      },
+      "counterFactors": [
+        "국내 유입 자금",
+        "환율·국내 수급·기존 주가 반영 확인 필요"
+      ],
+      "validityHorizon": "SHORT_TERM"
+    }
+  ],
+  "impactJudgments": [
+    {
+      "id": "DRIVER-RATES-2026-09-11:UK-07",
+      "usEventId": "CPI-MOM-2026-08",
+      "ruleId": "UK-07",
+      "ruleVersion": "1.0.0",
+      "transmissionPath": "INTEREST_RATE",
+      "koreaSector": "Internet / Platform",
+      "koreaCompanyId": null,
+      "koreaTicker": null,
+      "rationale": "수동 확인 신호 RATES_UP → INTEREST_RATE → Internet / Platform. 인과관계 확정이나 수익률 예측이 아닌 조건부 전달경로입니다.",
+      "impactDirection": "NEGATIVE",
+      "impactStrength": 3,
+      "evidenceLevel": "A",
+      "confidenceScore": 80,
+      "counterFactors": [
+        "같은 날 유가 하락과 위험선호 회복이 금리 부담을 일부 상쇄",
+        "실적 개선",
+        "환율·국내 수급·기존 주가 반영 확인 필요"
+      ],
+      "validityHorizon": "SHORT_TERM",
+      "status": "OK",
+      "nature": "INFERENCE",
+      "evidenceIds": [
+        "CPI-MOM-2026-08",
+        "CPI-YOY-2026-08",
+        "US2Y-2026-09-11",
+        "US10Y-2026-09-11"
+      ],
+      "scoreCalculation": "confidence = clamp((primarySources>=2 ? 90 : primarySources=1 ? 75 : 40) - activeCounters*10 - missingEvidence*30, 0, 100); primarySources=2, activeCounters=1, complete=true. strength=clamp(base=3 + A bonus - min(2,activeCounters), 1, 5); low confidence forces HOLD/1."
+    },
+    {
+      "id": "DRIVER-AI-CAPEX-2026-09-11:UK-01",
+      "usEventId": "ORCL-Q1-FY27-EVENT",
+      "ruleId": "UK-01",
+      "ruleVersion": "1.0.0",
+      "transmissionPath": "AI_CAPEX",
+      "koreaSector": "Semiconductor",
+      "koreaCompanyId": null,
+      "koreaTicker": null,
+      "rationale": "수동 확인 신호 AI_CAPEX_UP → AI_CAPEX → Semiconductor. 인과관계 확정이나 수익률 예측이 아닌 조건부 전달경로입니다.",
+      "impactDirection": "POSITIVE",
+      "impactStrength": 4,
+      "evidenceLevel": "A",
+      "confidenceScore": 80,
+      "counterFactors": [
+        "Oracle의 당일 주가는 장중 상승분을 반납해 실적과 주가 반응이 분리됨",
+        "고객사 투자 지연",
+        "환율·국내 수급·기존 주가 반영 확인 필요"
+      ],
+      "validityHorizon": "SHORT_TERM",
+      "status": "OK",
+      "nature": "INFERENCE",
+      "evidenceIds": [
+        "ORCL-Q1-FY27-EVENT",
+        "ORCL-8K-2026-09-10"
+      ],
+      "scoreCalculation": "confidence = clamp((primarySources>=2 ? 90 : primarySources=1 ? 75 : 40) - activeCounters*10 - missingEvidence*30, 0, 100); primarySources=2, activeCounters=1, complete=true. strength=clamp(base=4 + A bonus - min(2,activeCounters), 1, 5); low confidence forces HOLD/1."
+    }
+  ],
+  "aiGeneratedText": {
+    "used": false,
+    "text": null,
+    "reason": "결정론적 템플릿 생성; 외부 AI 호출 없음. 생성 문장은 reportMetadata.sections에 보존."
+  },
+  "validationResult": {
+    "status": "OK",
+    "issues": [],
+    "excludedIds": []
+  },
+  "manualReviewStatus": "PENDING",
+  "publishStatus": "BLOCKED",
+  "stages": [
+    {
+      "stage": "Input",
+      "status": "OK",
+      "detail": "원본 입력 보존"
+    },
+    {
+      "stage": "Normalize",
+      "status": "OK",
+      "detail": "자동 보간/수치 변환 없음"
+    },
+    {
+      "stage": "Validate",
+      "status": "OK",
+      "detail": ""
+    },
+    {
+      "stage": "Deduplicate",
+      "status": "OK",
+      "detail": "중복 레코드 분석 제외"
+    },
+    {
+      "stage": "Detect Conflict",
+      "status": "OK",
+      "detail": ""
+    },
+    {
+      "stage": "Identify Major Drivers",
+      "status": "OK",
+      "detail": "수동 근거 연결 신호. 자동 원인 추정 없음"
+    },
+    {
+      "stage": "Apply US-Korea Rules",
+      "status": "OK",
+      "detail": ""
+    },
+    {
+      "stage": "Score Evidence",
+      "status": "OK",
+      "detail": ""
+    },
+    {
+      "stage": "Generate Impact Candidates",
+      "status": "OK",
+      "detail": "2건"
+    },
+    {
+      "stage": "Generate Blog Draft",
+      "status": "OK",
+      "detail": ""
+    },
+    {
+      "stage": "Generate Evidence Package",
+      "status": "OK",
+      "detail": "JSON 원본/계산/규칙/검수상태 보관"
+    }
+  ],
+  "reviewMetrics": {
+    "automaticGeneratedAt": "2026-09-14T09:59:34.711Z",
+    "humanReviewStartedAt": null,
+    "humanReviewCompletedAt": null,
+    "durationMinutes": null,
+    "measurementStatus": "NOT_MEASURED",
+    "edits": {
+      "NUMERIC_ERROR": [],
+      "SOURCE_ERROR": [],
+      "CAUSE_INTERPRETATION": [],
+      "KOREA_LINK": [],
+      "WORDING": [],
+      "SEO": [],
+      "LINK": [],
+      "OTHER": []
+    },
+    "reviewStartedAt": null,
+    "reviewCompletedAt": null,
+    "reviewDurationSeconds": null,
+    "claimsReviewed": 0,
+    "claimsModified": 0,
+    "claimsRejected": 0,
+    "conflictsResolved": 0,
+    "manualEdits": [],
+    "reviewer": null,
+    "claimsApproved": 0,
+    "claimsHeld": 0
+  },
+  "claims": [
+    {
+      "claimId": "CLAIM-SPX-2026-09-11-CLOSE",
+      "reportId": "MANUAL-2026-09-11-7cb0ccf11f29",
+      "claimText": "SPX 종가는 7656.98 points이다.",
+      "claimType": "MARKET_FACT",
+      "subject": "SPX",
+      "predicate": "close",
+      "value": 7656.98,
+      "unit": "points",
+      "eventTime": "2026-09-11T20:00:00Z",
+      "verificationStatus": "VERIFIED",
+      "confidenceScore": 90,
+      "evidenceIds": [
+        "SPX-2026-09-11"
+      ],
+      "supportingSources": [
+        {
+          "sourceId": "SP_DJI",
+          "sourceUrl": "https://www.spglobal.com/spdji/en/indices/equity/sp-500/",
+          "evidenceId": "SPX-2026-09-11",
+          "value": 7656.98,
+          "observedAt": "2026-09-11T20:00:00Z",
+          "collectedAt": "2026-09-13T05:17:44Z",
+          "tier": "A"
+        }
+      ],
+      "contradictingSources": [],
+      "unresolvedSources": [],
+      "sourceDiversity": {
+        "tierCount": 1,
+        "sourceCount": 1,
+        "independentSourceCount": 1,
+        "tiers": [
+          "A"
+        ]
+      },
+      "geopoliticalContext": null,
+      "informationType": "FACT",
+      "marketRelevance": "HIGH",
+      "manualReviewRequired": false,
+      "createdAt": "2026-09-14T09:59:34.711Z",
+      "verifiedAt": "2026-09-14T09:59:34.711Z"
+    },
+    {
+      "claimId": "CLAIM-DJIA-2026-09-11-CLOSE",
+      "reportId": "MANUAL-2026-09-11-7cb0ccf11f29",
+      "claimText": "DJIA 종가는 52573.29 points이다.",
+      "claimType": "MARKET_FACT",
+      "subject": "DJIA",
+      "predicate": "close",
+      "value": 52573.29,
+      "unit": "points",
+      "eventTime": "2026-09-11T20:00:00Z",
+      "verificationStatus": "VERIFIED",
+      "confidenceScore": 90,
+      "evidenceIds": [
+        "DJIA-2026-09-11"
+      ],
+      "supportingSources": [
+        {
+          "sourceId": "SP_DJI",
+          "sourceUrl": "https://www.spglobal.com/spdji/en/indices/equity/dow-jones-industrial-average/",
+          "evidenceId": "DJIA-2026-09-11",
+          "value": 52573.29,
+          "observedAt": "2026-09-11T20:00:00Z",
+          "collectedAt": "2026-09-13T05:17:44Z",
+          "tier": "A"
+        }
+      ],
+      "contradictingSources": [],
+      "unresolvedSources": [],
+      "sourceDiversity": {
+        "tierCount": 1,
+        "sourceCount": 1,
+        "independentSourceCount": 1,
+        "tiers": [
+          "A"
+        ]
+      },
+      "geopoliticalContext": null,
+      "informationType": "FACT",
+      "marketRelevance": "HIGH",
+      "manualReviewRequired": false,
+      "createdAt": "2026-09-14T09:59:34.711Z",
+      "verifiedAt": "2026-09-14T09:59:34.711Z"
+    },
+    {
+      "claimId": "CLAIM-IXIC-2026-09-11-CLOSE",
+      "reportId": "MANUAL-2026-09-11-7cb0ccf11f29",
+      "claimText": "IXIC 종가는 26333.04 points이다.",
+      "claimType": "MARKET_FACT",
+      "subject": "IXIC",
+      "predicate": "close",
+      "value": 26333.04,
+      "unit": "points",
+      "eventTime": "2026-09-11T20:00:00Z",
+      "verificationStatus": "VERIFIED",
+      "confidenceScore": 90,
+      "evidenceIds": [
+        "IXIC-2026-09-11"
+      ],
+      "supportingSources": [
+        {
+          "sourceId": "NASDAQ",
+          "sourceUrl": "https://www.nasdaq.com/market-activity/index/comp",
+          "evidenceId": "IXIC-2026-09-11",
+          "value": 26333.04,
+          "observedAt": "2026-09-11T20:00:00Z",
+          "collectedAt": "2026-09-13T05:17:44Z",
+          "tier": "A"
+        }
+      ],
+      "contradictingSources": [],
+      "unresolvedSources": [],
+      "sourceDiversity": {
+        "tierCount": 1,
+        "sourceCount": 1,
+        "independentSourceCount": 1,
+        "tiers": [
+          "A"
+        ]
+      },
+      "geopoliticalContext": null,
+      "informationType": "FACT",
+      "marketRelevance": "HIGH",
+      "manualReviewRequired": false,
+      "createdAt": "2026-09-14T09:59:34.711Z",
+      "verifiedAt": "2026-09-14T09:59:34.711Z"
+    },
+    {
+      "claimId": "CLAIM-RUT-2026-09-11-CLOSE",
+      "reportId": "MANUAL-2026-09-11-7cb0ccf11f29",
+      "claimText": "RUT 종가는 2903.944 points이다.",
+      "claimType": "MARKET_FACT",
+      "subject": "RUT",
+      "predicate": "close",
+      "value": 2903.944,
+      "unit": "points",
+      "eventTime": "2026-09-11T20:00:00Z",
+      "verificationStatus": "VERIFIED",
+      "confidenceScore": 90,
+      "evidenceIds": [
+        "RUT-2026-09-11"
+      ],
+      "supportingSources": [
+        {
+          "sourceId": "FTSE_RUSSELL",
+          "sourceUrl": "https://www.lseg.com/en/ftse-russell/indices/russell-2000-index",
+          "evidenceId": "RUT-2026-09-11",
+          "value": 2903.944,
+          "observedAt": "2026-09-11T20:00:00Z",
+          "collectedAt": "2026-09-13T05:17:44Z",
+          "tier": "A"
+        }
+      ],
+      "contradictingSources": [],
+      "unresolvedSources": [],
+      "sourceDiversity": {
+        "tierCount": 1,
+        "sourceCount": 1,
+        "independentSourceCount": 1,
+        "tiers": [
+          "A"
+        ]
+      },
+      "geopoliticalContext": null,
+      "informationType": "FACT",
+      "marketRelevance": "HIGH",
+      "manualReviewRequired": false,
+      "createdAt": "2026-09-14T09:59:34.711Z",
+      "verifiedAt": "2026-09-14T09:59:34.711Z"
+    },
+    {
+      "claimId": "CLAIM-VIX-2026-09-11-CLOSE",
+      "reportId": "MANUAL-2026-09-11-7cb0ccf11f29",
+      "claimText": "VIX 종가는 15.84 points이다.",
+      "claimType": "MARKET_FACT",
+      "subject": "VIX",
+      "predicate": "close",
+      "value": 15.84,
+      "unit": "points",
+      "eventTime": "2026-09-11T20:15:00Z",
+      "verificationStatus": "VERIFIED",
+      "confidenceScore": 90,
+      "evidenceIds": [
+        "VIX-2026-09-11"
+      ],
+      "supportingSources": [
+        {
+          "sourceId": "CBOE",
+          "sourceUrl": "https://www.cboe.com/tradable_products/vix/vix_historical_data/",
+          "evidenceId": "VIX-2026-09-11",
+          "value": 15.84,
+          "observedAt": "2026-09-11T20:15:00Z",
+          "collectedAt": "2026-09-13T05:17:44Z",
+          "tier": "A"
+        }
+      ],
+      "contradictingSources": [],
+      "unresolvedSources": [],
+      "sourceDiversity": {
+        "tierCount": 1,
+        "sourceCount": 1,
+        "independentSourceCount": 1,
+        "tiers": [
+          "A"
+        ]
+      },
+      "geopoliticalContext": null,
+      "informationType": "FACT",
+      "marketRelevance": "HIGH",
+      "manualReviewRequired": false,
+      "createdAt": "2026-09-14T09:59:34.711Z",
+      "verifiedAt": "2026-09-14T09:59:34.711Z"
+    },
+    {
+      "claimId": "CLAIM-US2Y-2026-09-11-CLOSE",
+      "reportId": "MANUAL-2026-09-11-7cb0ccf11f29",
+      "claimText": "US2Y 종가는 4.63 percent이다.",
+      "claimType": "MARKET_FACT",
+      "subject": "US2Y",
+      "predicate": "close",
+      "value": 4.63,
+      "unit": "percent",
+      "eventTime": "2026-09-11T19:30:00Z",
+      "verificationStatus": "VERIFIED",
+      "confidenceScore": 90,
+      "evidenceIds": [
+        "US2Y-2026-09-11"
+      ],
+      "supportingSources": [
+        {
+          "sourceId": "US_TREASURY",
+          "sourceUrl": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202609&type=daily_treasury_yield_curve",
+          "evidenceId": "US2Y-2026-09-11",
+          "value": 4.63,
+          "observedAt": "2026-09-11T19:30:00Z",
+          "collectedAt": "2026-09-13T05:17:44Z",
+          "tier": "A"
+        }
+      ],
+      "contradictingSources": [],
+      "unresolvedSources": [],
+      "sourceDiversity": {
+        "tierCount": 1,
+        "sourceCount": 1,
+        "independentSourceCount": 1,
+        "tiers": [
+          "A"
+        ]
+      },
+      "geopoliticalContext": null,
+      "informationType": "FACT",
+      "marketRelevance": "HIGH",
+      "manualReviewRequired": false,
+      "createdAt": "2026-09-14T09:59:34.711Z",
+      "verifiedAt": "2026-09-14T09:59:34.711Z"
+    },
+    {
+      "claimId": "CLAIM-US10Y-2026-09-11-CLOSE",
+      "reportId": "MANUAL-2026-09-11-7cb0ccf11f29",
+      "claimText": "US10Y 종가는 4.96 percent이다.",
+      "claimType": "MARKET_FACT",
+      "subject": "US10Y",
+      "predicate": "close",
+      "value": 4.96,
+      "unit": "percent",
+      "eventTime": "2026-09-11T19:30:00Z",
+      "verificationStatus": "VERIFIED",
+      "confidenceScore": 90,
+      "evidenceIds": [
+        "US10Y-2026-09-11"
+      ],
+      "supportingSources": [
+        {
+          "sourceId": "US_TREASURY",
+          "sourceUrl": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202609&type=daily_treasury_yield_curve",
+          "evidenceId": "US10Y-2026-09-11",
+          "value": 4.96,
+          "observedAt": "2026-09-11T19:30:00Z",
+          "collectedAt": "2026-09-13T05:17:44Z",
+          "tier": "A"
+        }
+      ],
+      "contradictingSources": [],
+      "unresolvedSources": [],
+      "sourceDiversity": {
+        "tierCount": 1,
+        "sourceCount": 1,
+        "independentSourceCount": 1,
+        "tiers": [
+          "A"
+        ]
+      },
+      "geopoliticalContext": null,
+      "informationType": "FACT",
+      "marketRelevance": "HIGH",
+      "manualReviewRequired": false,
+      "createdAt": "2026-09-14T09:59:34.711Z",
+      "verifiedAt": "2026-09-14T09:59:34.711Z"
+    },
+    {
+      "claimId": "CLAIM-DXY-2026-09-11-CLOSE",
+      "reportId": "MANUAL-2026-09-11-7cb0ccf11f29",
+      "claimText": "DXY_FUTURES_SEP26 종가는 99.111 points이다.",
+      "claimType": "MARKET_FACT",
+      "subject": "DXY_FUTURES_SEP26",
+      "predicate": "close",
+      "value": 99.111,
+      "unit": "points",
+      "eventTime": "2026-09-11T21:00:00Z",
+      "verificationStatus": "VERIFIED",
+      "confidenceScore": 90,
+      "evidenceIds": [
+        "DXY-2026-09-11"
+      ],
+      "supportingSources": [
+        {
+          "sourceId": "ICE",
+          "sourceUrl": "https://www.ice.com/products/194/US-Dollar-Index-Futures/data",
+          "evidenceId": "DXY-2026-09-11",
+          "value": 99.111,
+          "observedAt": "2026-09-11T21:00:00Z",
+          "collectedAt": "2026-09-13T05:17:44Z",
+          "tier": "A"
+        }
+      ],
+      "contradictingSources": [],
+      "unresolvedSources": [],
+      "sourceDiversity": {
+        "tierCount": 1,
+        "sourceCount": 1,
+        "independentSourceCount": 1,
+        "tiers": [
+          "A"
+        ]
+      },
+      "geopoliticalContext": null,
+      "informationType": "FACT",
+      "marketRelevance": "HIGH",
+      "manualReviewRequired": false,
+      "createdAt": "2026-09-14T09:59:34.711Z",
+      "verifiedAt": "2026-09-14T09:59:34.711Z"
+    },
+    {
+      "claimId": "CLAIM-BRENT-2026-09-11-CLOSE",
+      "reportId": "MANUAL-2026-09-11-7cb0ccf11f29",
+      "claimText": "BRENT_NOV26 종가는 104.61 price이다.",
+      "claimType": "MARKET_FACT",
+      "subject": "BRENT_NOV26",
+      "predicate": "close",
+      "value": 104.61,
+      "unit": "price",
+      "eventTime": "2026-09-11T20:30:00Z",
+      "verificationStatus": "VERIFIED",
+      "confidenceScore": 90,
+      "evidenceIds": [
+        "BRENT-2026-09-11"
+      ],
+      "supportingSources": [
+        {
+          "sourceId": "ICE",
+          "sourceUrl": "https://www.ice.com/products/219/Brent-Crude-Futures/data",
+          "evidenceId": "BRENT-2026-09-11",
+          "value": 104.61,
+          "observedAt": "2026-09-11T20:30:00Z",
+          "collectedAt": "2026-09-13T05:17:44Z",
+          "tier": "A"
+        }
+      ],
+      "contradictingSources": [],
+      "unresolvedSources": [],
+      "sourceDiversity": {
+        "tierCount": 1,
+        "sourceCount": 1,
+        "independentSourceCount": 1,
+        "tiers": [
+          "A"
+        ]
+      },
+      "geopoliticalContext": null,
+      "informationType": "FACT",
+      "marketRelevance": "HIGH",
+      "manualReviewRequired": false,
+      "createdAt": "2026-09-14T09:59:34.711Z",
+      "verifiedAt": "2026-09-14T09:59:34.711Z"
+    },
+    {
+      "claimId": "CLAIM-CPI-MOM-2026-08-ACTUAL",
+      "reportId": "MANUAL-2026-09-11-7cb0ccf11f29",
+      "claimText": "미국 CPI-U 전월 대비 실제값은 0.4 percent이다.",
+      "claimType": "MACRO_FACT",
+      "subject": "CPI_U_MOM",
+      "predicate": "actual",
+      "value": 0.4,
+      "unit": "percent",
+      "eventTime": "2026-09-11T12:30:00Z",
+      "verificationStatus": "VERIFIED",
+      "confidenceScore": 90,
+      "evidenceIds": [
+        "CPI-MOM-2026-08"
+      ],
+      "supportingSources": [
+        {
+          "sourceId": "BLS",
+          "sourceUrl": "https://www.bls.gov/news.release/archives/cpi_09112026.htm",
+          "evidenceId": "CPI-MOM-2026-08",
+          "value": 0.4,
+          "observedAt": "2026-09-11T12:30:00Z",
+          "collectedAt": "2026-09-13T05:17:44Z",
+          "tier": "A"
+        }
+      ],
+      "contradictingSources": [],
+      "unresolvedSources": [],
+      "sourceDiversity": {
+        "tierCount": 1,
+        "sourceCount": 1,
+        "independentSourceCount": 1,
+        "tiers": [
+          "A"
+        ]
+      },
+      "geopoliticalContext": null,
+      "informationType": "FACT",
+      "marketRelevance": "HIGH",
+      "manualReviewRequired": false,
+      "createdAt": "2026-09-14T09:59:34.711Z",
+      "verifiedAt": "2026-09-14T09:59:34.711Z"
+    },
+    {
+      "claimId": "CLAIM-CPI-YOY-2026-08-ACTUAL",
+      "reportId": "MANUAL-2026-09-11-7cb0ccf11f29",
+      "claimText": "미국 CPI-U 전년 대비 실제값은 3.4 percent이다.",
+      "claimType": "MACRO_FACT",
+      "subject": "CPI_U_YOY",
+      "predicate": "actual",
+      "value": 3.4,
+      "unit": "percent",
+      "eventTime": "2026-09-11T12:30:00Z",
+      "verificationStatus": "VERIFIED",
+      "confidenceScore": 90,
+      "evidenceIds": [
+        "CPI-YOY-2026-08"
+      ],
+      "supportingSources": [
+        {
+          "sourceId": "BLS",
+          "sourceUrl": "https://www.bls.gov/news.release/archives/cpi_09112026.htm",
+          "evidenceId": "CPI-YOY-2026-08",
+          "value": 3.4,
+          "observedAt": "2026-09-11T12:30:00Z",
+          "collectedAt": "2026-09-13T05:17:44Z",
+          "tier": "A"
+        }
+      ],
+      "contradictingSources": [],
+      "unresolvedSources": [],
+      "sourceDiversity": {
+        "tierCount": 1,
+        "sourceCount": 1,
+        "independentSourceCount": 1,
+        "tiers": [
+          "A"
+        ]
+      },
+      "geopoliticalContext": null,
+      "informationType": "FACT",
+      "marketRelevance": "HIGH",
+      "manualReviewRequired": false,
+      "createdAt": "2026-09-14T09:59:34.711Z",
+      "verifiedAt": "2026-09-14T09:59:34.711Z"
+    },
+    {
+      "claimId": "CLAIM-ORCL-Q1-FY27-EVENT-SUMMARY",
+      "reportId": "MANUAL-2026-09-11-7cb0ccf11f29",
+      "claimText": "Oracle은 총매출 193억 달러, 클라우드 매출 116억 달러, IaaS 매출 74억 달러와 850MW 추가 데이터센터 용량 공급을 발표했다.",
+      "claimType": "CORPORATE_FACT",
+      "subject": "ORCL",
+      "predicate": "AI_CAPEX_UP",
+      "value": null,
+      "unit": "text",
+      "eventTime": "2026-09-10T20:16:50Z",
+      "verificationStatus": "VERIFIED",
+      "confidenceScore": 90,
+      "evidenceIds": [
+        "ORCL-Q1-FY27-EVENT"
+      ],
+      "supportingSources": [
+        {
+          "sourceId": "CORPORATE_IR",
+          "sourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+          "evidenceId": "ORCL-Q1-FY27-EVENT",
+          "value": "Oracle은 총매출 193억 달러, 클라우드 매출 116억 달러, IaaS 매출 74억 달러와 850MW 추가 데이터센터 용량 공급을 발표했다.",
+          "observedAt": "2026-09-10T20:16:50Z",
+          "collectedAt": "2026-09-13T05:17:44Z",
+          "tier": "A"
+        }
+      ],
+      "contradictingSources": [],
+      "unresolvedSources": [],
+      "sourceDiversity": {
+        "tierCount": 1,
+        "sourceCount": 1,
+        "independentSourceCount": 1,
+        "tiers": [
+          "A"
+        ]
+      },
+      "geopoliticalContext": null,
+      "informationType": "FACT",
+      "marketRelevance": "HIGH",
+      "manualReviewRequired": false,
+      "createdAt": "2026-09-14T09:59:34.711Z",
+      "verifiedAt": "2026-09-14T09:59:34.711Z"
+    },
+    {
+      "claimId": "CLAIM-ORCL-8K-2026-09-10-FILING",
+      "reportId": "MANUAL-2026-09-11-7cb0ccf11f29",
+      "claimText": "ORCL 8-K accession 0001193125-26-387905.",
+      "claimType": "CORPORATE_FACT",
+      "subject": "ORCL",
+      "predicate": "filing",
+      "value": "0001193125-26-387905",
+      "unit": "text",
+      "eventTime": "2026-09-10T20:16:50Z",
+      "verificationStatus": "VERIFIED",
+      "confidenceScore": 90,
+      "evidenceIds": [
+        "ORCL-8K-2026-09-10"
+      ],
+      "supportingSources": [
+        {
+          "sourceId": "SEC_EDGAR",
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526387905/orcl-20260910.htm",
+          "evidenceId": "ORCL-8K-2026-09-10",
+          "value": "0001193125-26-387905",
+          "observedAt": "2026-09-10T20:16:50Z",
+          "collectedAt": "2026-09-13T05:17:44Z",
+          "tier": "A"
+        }
+      ],
+      "contradictingSources": [],
+      "unresolvedSources": [],
+      "sourceDiversity": {
+        "tierCount": 1,
+        "sourceCount": 1,
+        "independentSourceCount": 1,
+        "tiers": [
+          "A"
+        ]
+      },
+      "geopoliticalContext": null,
+      "informationType": "FACT",
+      "marketRelevance": "HIGH",
+      "manualReviewRequired": false,
+      "createdAt": "2026-09-14T09:59:34.711Z",
+      "verifiedAt": "2026-09-14T09:59:34.711Z"
+    },
+    {
+      "claimId": "CLAIM-DRIVER-RATES-2026-09-11:UK-07",
+      "reportId": "MANUAL-2026-09-11-7cb0ccf11f29",
+      "claimText": "수동 확인 신호 RATES_UP → INTEREST_RATE → Internet / Platform. 인과관계 확정이나 수익률 예측이 아닌 조건부 전달경로입니다.",
+      "claimType": "KOREA_IMPACT",
+      "subject": "Internet / Platform",
+      "predicate": "INTEREST_RATE",
+      "value": "NEGATIVE",
+      "unit": null,
+      "eventTime": "2026-09-14T09:59:34.711Z",
+      "verificationStatus": "VERIFIED",
+      "confidenceScore": 95,
+      "evidenceIds": [
+        "CPI-MOM-2026-08",
+        "CPI-YOY-2026-08",
+        "US2Y-2026-09-11",
+        "US10Y-2026-09-11"
+      ],
+      "supportingSources": [
+        {
+          "sourceId": "BLS",
+          "sourceUrl": "https://www.bls.gov/news.release/archives/cpi_09112026.htm",
+          "evidenceId": "CPI-MOM-2026-08",
+          "value": 0.4,
+          "observedAt": "2026-09-11T12:30:00Z",
+          "collectedAt": "2026-09-13T05:17:44Z",
+          "tier": "A"
+        },
+        {
+          "sourceId": "BLS",
+          "sourceUrl": "https://www.bls.gov/news.release/archives/cpi_09112026.htm",
+          "evidenceId": "CPI-YOY-2026-08",
+          "value": 3.4,
+          "observedAt": "2026-09-11T12:30:00Z",
+          "collectedAt": "2026-09-13T05:17:44Z",
+          "tier": "A"
+        },
+        {
+          "sourceId": "US_TREASURY",
+          "sourceUrl": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202609&type=daily_treasury_yield_curve",
+          "evidenceId": "US2Y-2026-09-11",
+          "value": 4.63,
+          "observedAt": "2026-09-11T19:30:00Z",
+          "collectedAt": "2026-09-13T05:17:44Z",
+          "tier": "A"
+        },
+        {
+          "sourceId": "US_TREASURY",
+          "sourceUrl": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202609&type=daily_treasury_yield_curve",
+          "evidenceId": "US10Y-2026-09-11",
+          "value": 4.96,
+          "observedAt": "2026-09-11T19:30:00Z",
+          "collectedAt": "2026-09-13T05:17:44Z",
+          "tier": "A"
+        }
+      ],
+      "contradictingSources": [],
+      "unresolvedSources": [],
+      "sourceDiversity": {
+        "tierCount": 1,
+        "sourceCount": 2,
+        "independentSourceCount": 2,
+        "tiers": [
+          "A"
+        ]
+      },
+      "geopoliticalContext": null,
+      "informationType": "ANALYSIS",
+      "marketRelevance": "HIGH",
+      "manualReviewRequired": false,
+      "createdAt": "2026-09-14T09:59:34.711Z",
+      "verifiedAt": "2026-09-14T09:59:34.711Z"
+    },
+    {
+      "claimId": "CLAIM-DRIVER-AI-CAPEX-2026-09-11:UK-01",
+      "reportId": "MANUAL-2026-09-11-7cb0ccf11f29",
+      "claimText": "수동 확인 신호 AI_CAPEX_UP → AI_CAPEX → Semiconductor. 인과관계 확정이나 수익률 예측이 아닌 조건부 전달경로입니다.",
+      "claimType": "KOREA_IMPACT",
+      "subject": "Semiconductor",
+      "predicate": "AI_CAPEX",
+      "value": "POSITIVE",
+      "unit": null,
+      "eventTime": "2026-09-14T09:59:34.711Z",
+      "verificationStatus": "VERIFIED",
+      "confidenceScore": 95,
+      "evidenceIds": [
+        "ORCL-Q1-FY27-EVENT",
+        "ORCL-8K-2026-09-10"
+      ],
+      "supportingSources": [
+        {
+          "sourceId": "CORPORATE_IR",
+          "sourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+          "evidenceId": "ORCL-Q1-FY27-EVENT",
+          "value": "Oracle은 총매출 193억 달러, 클라우드 매출 116억 달러, IaaS 매출 74억 달러와 850MW 추가 데이터센터 용량 공급을 발표했다.",
+          "observedAt": "2026-09-10T20:16:50Z",
+          "collectedAt": "2026-09-13T05:17:44Z",
+          "tier": "A"
+        },
+        {
+          "sourceId": "SEC_EDGAR",
+          "sourceUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526387905/orcl-20260910.htm",
+          "evidenceId": "ORCL-8K-2026-09-10",
+          "value": "0001193125-26-387905",
+          "observedAt": "2026-09-10T20:16:50Z",
+          "collectedAt": "2026-09-13T05:17:44Z",
+          "tier": "A"
+        }
+      ],
+      "contradictingSources": [],
+      "unresolvedSources": [],
+      "sourceDiversity": {
+        "tierCount": 1,
+        "sourceCount": 2,
+        "independentSourceCount": 2,
+        "tiers": [
+          "A"
+        ]
+      },
+      "geopoliticalContext": null,
+      "informationType": "ANALYSIS",
+      "marketRelevance": "HIGH",
+      "manualReviewRequired": false,
+      "createdAt": "2026-09-14T09:59:34.711Z",
+      "verifiedAt": "2026-09-14T09:59:34.711Z"
+    }
+  ],
+  "conflicts": [],
+  "reviewQueue": [],
+  "approvalStatus": "AUTO_VALIDATED"
+}

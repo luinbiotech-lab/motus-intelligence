@@ -1,6 +1,6 @@
-# 미국 주식시장 마감 리포트 — Sprint 2C
+# 미국 주식시장 마감 리포트 — Sprint 2D
 
-미국 마감 자료를 수동 입력하거나 일부 공식 어댑터로 수집하여 검증 → claim 단위 교차검증 → 조건부 한국시장 영향 → 블로그 초안 → 근거 JSON을 만드는 **비공개 로컬 CLI**입니다. Sprint 2C 기준 U.S. Treasury, BLS CPI, SEC EDGAR submissions 어댑터와 Cross Verification Engine이 연결됐고, 2026-09-11을 첫 golden trading day로 둡니다. 자동 발행, 스케줄러, 투자 추천은 연결하지 않았습니다.
+미국 마감 자료를 수동 입력하거나 일부 공식 어댑터로 수집하여 검증 → claim 단위 교차검증 → 조건부 한국시장 영향 → 블로그 초안 → 사람 검수표 → publish-ready 초안을 만드는 **비공개 로컬 CLI**입니다. Sprint 2D 기준 U.S. Treasury, BLS CPI, SEC EDGAR submissions 어댑터와 Cross Verification Engine 위에 human review action, approval gate, machine/human diff, review metrics가 연결됐고, 2026-09-11을 첫 golden trading day 및 operational review day로 둡니다. 자동 발행, 스케줄러, 투자 추천은 연결하지 않았습니다.
 
 ## 실행
 
@@ -23,11 +23,13 @@ npm.cmd run build
 node scripts/build-golden-day.mjs
 node scripts/build-golden-claims.mjs
 npm.cmd run report -- --input data/manual/2026-09-11/input-api.json
+node dist/src/cli.js --review data/evidence/<reportId>.json
+node dist/src/cli.js --apply-review-actions data/evidence/<reportId>.json data/reports/<reportId>.json data/reviews/YYYY-MM-DD/actions.json
 ```
 
 `report`는 빌드된 CLI를 사용합니다. 코드 수정 후 `npm.cmd run build`를 실행하세요. `sample`과 `test`는 자동으로 빌드합니다. 경로는 프로젝트 루트 기준입니다.
 
-결과는 `data/reports/<reportId>.md`, `data/reports/<reportId>.json`, `data/evidence/<reportId>.json`에 저장됩니다. 같은 입력·출처 설정·규칙은 같은 reportId를 사용하며 다시 실행하면 파생 출력이 갱신됩니다. 과거 실행별 영구 보관은 다음 Sprint 범위입니다. 출력 파일은 Git에서 제외합니다.
+결과는 `data/reports/<reportId>.md`, `data/reports/<reportId>.json`, `data/evidence/<reportId>.json`에 저장됩니다. Review Sheet는 `data/reviews/YYYY-MM-DD/`, publish-ready 초안·diff·reviewed evidence는 `data/publish-ready/YYYY-MM-DD/`에 저장됩니다. 같은 입력·출처 설정·규칙은 같은 reportId를 사용하며 다시 실행하면 파생 출력이 갱신됩니다. 과거 실행별 영구 보관은 다음 Sprint 범위입니다. `data/reports`와 `data/evidence` 출력 파일은 Git에서 제외합니다.
 
 ## 결과 해석
 
@@ -38,7 +40,7 @@ npm.cmd run report -- --input data/manual/2026-09-11/input-api.json
 | FAILED | 개별 입력에 잘못된 타입·수치 등이 있음. 유효 자료는 계속 처리 | 2 |
 | BLOCKED | 입력 envelope·설정·거래일 정보가 유효하지 않음 | 3 |
 
-검수 목록이 원고와 CLI에서 먼저 표시됩니다. 근거 패키지는 `manualReviewStatus=PENDING`, `publishStatus=BLOCKED`가 기본입니다. Sprint 2C부터 `approvalStatus=AUTO_VALIDATED|REVIEW_REQUIRED|APPROVED|BLOCKED|PUBLISHED`를 별도로 보존하며, APPROVED 전 발행은 차단한다는 운영 계약을 둡니다. 샘플의 PASS는 테스트 성공만 뜻하며 샘플 발행은 금지합니다.
+검수 목록이 원고와 CLI에서 먼저 표시됩니다. 근거 패키지는 `manualReviewStatus=PENDING`, `publishStatus=BLOCKED`가 기본입니다. `approvalStatus=AUTO_VALIDATED|REVIEW_REQUIRED|APPROVED|BLOCKED|PUBLISHED`를 별도로 보존하며, APPROVED 전 발행은 차단합니다. Sprint 2D부터 수동 action이 없으면 `AUTO_VALIDATED`를 자동으로 `APPROVED`로 승격하지 않습니다. 샘플의 PASS는 테스트 성공만 뜻하며 샘플 발행은 금지합니다.
 
 ## 중요한 파일
 
@@ -51,11 +53,11 @@ npm.cmd run report -- --input data/manual/2026-09-11/input-api.json
 - `src/services/pipeline.ts`: 단계 상태, 부분 실패 처리, 근거 패키지
 - `src/services/report.ts`: 9개 목차와 Markdown 생성
 - `src/services/cross-verification.ts`: ClaimRecord, ConflictRecord, 지정학 검증, confidence score
-- `src/services/review.ts`: review queue와 approval status 전환
+- `src/services/review.ts`: review queue, review sheet, manual action, approval gate, publish-ready draft, machine/human diff
 - `data/fixtures/sample-day.json`: 실행 가능한 통합 샘플. 분리된 sample-*.json은 각 입력 영역의 예시
 - `data/manual/2026-09-11/input.json`: 2026-09-11 실제 정규 거래일 수동 검증 리허설 입력
 - `data/manual/2026-09-11/input-api.json`: Treasury/BLS/SEC 어댑터 산출물을 일부 투입한 golden day 입력
 - `data/golden/2026-09-11/`: 원본 source snapshot, expected normalized result, manual/API 비교표, claim 검증 결과
-- `tests/pipeline.test.ts`: 요구 시나리오와 회귀 테스트 54개
+- `tests/pipeline.test.ts`: 요구 시나리오와 회귀 테스트 61개
 
-[구조](docs/architecture.md) · [수동 입력](docs/manual-input.md) · [규칙](docs/rules.md) · [출처 운영](docs/data-sources.md) · [문제 및 회귀 방지](docs/issues.md) · [Sprint 1 완료 보고](docs/sprint-report.md) · [Sprint 2A 완료 보고](docs/sprint-2a-report.md) · [Sprint 2B 완료 보고](docs/sprint-2b-report.md) · [Sprint 2C 완료 보고](docs/sprint-2c-report.md)
+[구조](docs/architecture.md) · [수동 입력](docs/manual-input.md) · [규칙](docs/rules.md) · [출처 운영](docs/data-sources.md) · [문제 및 회귀 방지](docs/issues.md) · [Sprint 1 완료 보고](docs/sprint-report.md) · [Sprint 2A 완료 보고](docs/sprint-2a-report.md) · [Sprint 2B 완료 보고](docs/sprint-2b-report.md) · [Sprint 2C 완료 보고](docs/sprint-2c-report.md) · [Sprint 2D 완료 보고](docs/sprint-2d-report.md)

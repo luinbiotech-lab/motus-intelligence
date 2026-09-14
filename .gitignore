@@ -3,4 +3,5 @@ dist/
 .npm-cache/
 data/reports/*
 data/evidence/*
+*.bundle
 !**/.gitkeep
