@@ -2,7 +2,7 @@
   "publicationVersion": "2G.BLOGGER.1.0",
   "reportId": "MANUAL-2026-09-11-7cb0ccf11f29",
   "tradingDate": "2026-09-11",
-  "status": "PREVIEW_READY",
+  "status": "FAILED",
   "title": "MOTUS Daily Market | 2026-09-11 금리 상승에도 주식시장은 위험선호를 이어갔다",
   "seoTitle": "MOTUS Daily Market | 2026-09-11 금리 상승에도 주식시장은 위험선호를 이어갔다",
   "metaDescription": "S&P 500 7656.98(+0.86%)와 나스닥 26333.04(+0.96%)가 나란히 상승하며 장을 마쳤다. VIX 15.84(-11.21%)는 낮아졌고, 단기 국채금리는 +0.07포인트, +1.54% 움직였다. 한국시장 관점에서는 금리와 기술주 흐름을 함께 봐야 하는 하루였다.",
@@ -170,15 +170,27 @@
     }
   ],
   "dryRun": false,
-  "error": null,
+  "error": "Blogger OAuth refresh failed (400)",
   "createdAt": "2026-09-14T00:00:00+09:00",
-  "updatedAt": "2026-09-14T00:00:00+09:00",
+  "updatedAt": "2026-09-14T00:10:00+09:00",
   "history": [
     {
       "at": "2026-09-14T00:00:00+09:00",
       "from": null,
       "to": "PREVIEW_READY",
       "reason": "Blogger preview generated from approved Daily Editorial output"
+    },
+    {
+      "at": "2026-09-14T00:05:00+09:00",
+      "from": "PREVIEW_READY",
+      "to": "APPROVED",
+      "reason": "admin approved Blogger publication preview"
+    },
+    {
+      "at": "2026-09-14T00:10:00+09:00",
+      "from": "APPROVED",
+      "to": "FAILED",
+      "reason": "Blogger publish failed: Blogger OAuth refresh failed (400)"
     }
   ]
 }
