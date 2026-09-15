@@ -9,10 +9,10 @@
   "adminPath": "data/a4-master/2026-09-11/admin-a4-route.html",
   "naverPackagePath": "data/a4-master/2026-09-11/MANUAL-2026-09-11-7cb0ccf11f29-2F.A4MASTER.1.0-naver.json",
   "metadataPath": "data/a4-master/2026-09-11/MANUAL-2026-09-11-7cb0ccf11f29-2F.A4MASTER.1.0-metadata.json",
-  "googleBloggerUrl": "",
+  "googleBloggerUrl": "https://motusnova.blogspot.com/",
   "naverPackage": {
     "title": "2026-09-11 US Market Close",
-    "intro": "2026-09-11 미국장은 지수 상승과 VIX 하락으로 위험선호가 살아났지만, 2년물 금리 상승이 남긴 부담도 함께 봐야 했습니다. A4 요약과 함께 살펴보세요. 전체 분석은 MOTUS에서 확인하세요. 실제 MOTUS post URL이 확정되기 전에는 상세분석 링크를 제공하지 않습니다.",
+    "intro": "2026-09-11 미국장은 지수 상승과 VIX 하락으로 위험선호가 살아났지만, 2년물 금리 상승이 남긴 부담도 함께 봐야 했습니다. A4 요약과 함께 살펴보세요. 전체 분석은 MOTUS에서 확인하세요. 연결된 MOTUS 초안 URL입니다. 공개 전 최종 검수를 거쳐야 합니다.",
     "hashtags": [
       "#미국증시",
       "#미국시장마감",
@@ -22,7 +22,7 @@
       "#한국시장",
       "#20260911"
     ],
-    "googleBloggerUrl": "",
+    "googleBloggerUrl": "https://motusnova.blogspot.com/",
     "reportImagePath": "data/a4-master/2026-09-11/MANUAL-2026-09-11-7cb0ccf11f29-2F.A4MASTER.1.0.png",
     "reportPdfPath": "data/a4-master/2026-09-11/MANUAL-2026-09-11-7cb0ccf11f29-2F.A4MASTER.1.0.pdf"
   },
@@ -32,6 +32,6 @@
     "contentBottomPx": 1070,
     "onePage": true,
     "overflow": false,
-    "qrTargetUrl": ""
+    "qrTargetUrl": "https://motusnova.blogspot.com/"
   }
 }

@@ -101,8 +101,9 @@ export function createBloggerPreview(report:ReportRecord,evidence:EvidencePackag
 export function approveBloggerPublication(record:BloggerPublicationRecord,context:AdminRequestContext,now='2026-09-14T00:05:00+09:00'):BloggerPublicationRecord {
   assertAdminRequest({...context,action:'BLOGGER_APPROVE'});
   if(record.status==='PUBLISHED') throw new Error('already-published reportId');
-  if(record.status!=='PREVIEW_READY'&&record.status!=='APPROVED') throw new Error(`cannot approve from ${record.status}`);
-  return transition(record,'APPROVED','admin approved Blogger publication preview',now,{error:null,dryRun:false});
+  if(record.status!=='PREVIEW_READY'&&record.status!=='APPROVED'&&record.status!=='FAILED') throw new Error(`cannot approve from ${record.status}`);
+  const reason=record.status==='FAILED'?'admin approved Blogger publication retry after failed attempt':'admin approved Blogger publication preview';
+  return transition(record,'APPROVED',reason,now,{error:null,dryRun:false});
 }
 
 export async function publishBloggerPublication(record:BloggerPublicationRecord,adapter:BloggerAdapter,config:BloggerPublishingConfig,context:AdminRequestContext,options:{dryRun?:boolean; now?:string}={}):Promise<BloggerPublicationRecord> {
@@ -164,14 +165,9 @@ export class GoogleBloggerApiAdapter implements BloggerAdapter {
     const isDraft=config.publishAsDraft!==false;
     const endpoint=new URL(`https://www.googleapis.com/blogger/v3/blogs/${encodeURIComponent(blogId)}/posts`);
     endpoint.searchParams.set('isDraft',String(isDraft));
-    endpoint.searchParams.set('fetchBody','true');
-    endpoint.searchParams.set('fields','id,status,url,published,updated,title,labels');
     const response=await this.fetcher(endpoint,{method:'POST',headers:{authorization:`Bearer ${accessToken}`,'content-type':'application/json'},body:JSON.stringify({
-      kind:'blogger#post',
       title:record.title,
-      content:extractBloggerArticle(record.html),
-      labels:record.labels,
-      customMetaData:JSON.stringify({description:record.metaDescription,slug:record.slug,metadata:record.metadata})
+      content:extractBloggerArticle(record.html)
     })});
     if(!response.ok) throw new Error(`Blogger API ${response.status}: ${safeGoogleApiError(await response.text())}`);
     const post=await response.json() as GoogleBloggerPost;

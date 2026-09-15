@@ -543,6 +543,19 @@ test('Sprint 2G A4 QR and Naver package switch from preview URL to published Blo
   assert.doesNotMatch(readFileSync(after.htmlPath,'utf8'),/blog\.example\.com|CLAIM-|confidenceScore|verificationStatus/);
 });
 
+test('Blogger failed publication can be re-approved without deleting failure audit history',()=>{
+  const result=runReal(realFixture());
+  const preview=createBloggerPreview(result.report,result.evidence,publishingConfig);
+  const approved=approveBloggerPublication(preview,{audience:'admin',action:'BLOGGER_APPROVE'});
+  const failed={...approved,status:'FAILED' as const,error:'previous OAuth failure',history:[...approved.history,{at:'2026-09-15T00:00:00+09:00',from:'APPROVED' as const,to:'FAILED' as const,reason:'previous OAuth failure'}]};
+  const retried=approveBloggerPublication(failed,{audience:'admin',action:'BLOGGER_APPROVE'},'2026-09-15T00:05:00+09:00');
+  assert.equal(retried.status,'APPROVED');
+  assert.equal(retried.error,null);
+  assert.equal(retried.history.length,failed.history.length+1);
+  assert.ok(retried.history.some(event=>event.to==='FAILED'&&event.reason==='previous OAuth failure'));
+  assert.equal(retried.history.at(-1)?.reason,'admin approved Blogger publication retry after failed attempt');
+});
+
 test('Sprint 2H Google adapter creates an approved Blogger post as draft and preserves editorial metadata',async()=>{
   const result=runReal(realFixture());
   const approved=approveBloggerPublication(createBloggerPreview(result.report,result.evidence,publishingConfig),{audience:'admin',action:'BLOGGER_APPROVE'});
@@ -562,13 +575,13 @@ test('Sprint 2H Google adapter creates an approved Blogger post as draft and pre
   assert.deepEqual(resolveBloggerUrl(draft),{url:draft.postUrl,state:'DRAFT'});
   assert.match(requestUrl,/\/blogs\/123456789\/posts\?isDraft=true/);
   assert.equal((requestInit?.headers as Record<string,string>).authorization,'Bearer secret-access-token');
-  const payload=JSON.parse(String(requestInit?.body)) as {title:string;content:string;labels:string[];customMetaData:string};
+  const payload=JSON.parse(String(requestInit?.body)) as {title:string;content:string;labels?:string[];customMetaData?:string};
   assert.equal(payload.title,approved.title);
-  assert.deepEqual(payload.labels,approved.labels);
+  assert.equal(payload.labels,undefined);
   assert.match(payload.content,/class="motus-editorial"/);
   assert.match(payload.content,/MOTUS \| What Moves the World/);
   assert.doesNotMatch(payload.content,/<!doctype|<html|<head(?:\s|>)|publicationVersion|confidenceScore/);
-  assert.deepEqual(JSON.parse(payload.customMetaData),{description:approved.metaDescription,slug:approved.slug,metadata:approved.metadata});
+  assert.equal(payload.customMetaData,undefined);
 });
 
 test('Sprint 2H Google adapter never calls Blogger without both blogId and credential',async()=>{
