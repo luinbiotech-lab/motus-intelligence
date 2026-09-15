@@ -1,6 +1,6 @@
 # 미국 주식시장 마감 리포트 — Sprint 2H
 
-미국 마감 자료를 수동 입력하거나 일부 공식 어댑터로 수집하여 검증 → claim 단위 교차검증 → 조건부 한국시장 영향 → 사람 검수표 → publish-ready 초안 → 공개용 editorial 출력 → 내부 관리자용 A4 MASTER 리서치 포스터까지 만드는 **비공개 로컬 CLI**입니다. 공개 채널은 `MOTUS | What Moves the World`이며 `https://motusnova.blogspot.com/`을 사용합니다. Engine과 MOTUS Blog Publisher는 공통 content schema만 공유하고 Publisher는 별도 계층으로 유지합니다. 실제 Blogger 쓰기는 preview와 사람 승인을 거친 뒤, blogId와 OAuth access token이 모두 환경 변수에 있을 때만 실행합니다.
+미국 마감 자료를 수동 입력하거나 일부 공식 어댑터로 수집하여 검증 → claim 단위 교차검증 → 조건부 한국시장 영향 → 사람 검수표 → publish-ready 초안 → 공개용 editorial 출력 → 내부 관리자용 A4 MASTER 리서치 포스터까지 만드는 **비공개 로컬 CLI**입니다. 공개 채널은 `MOTUS | What Moves the World`이며 `https://motusnova.blogspot.com/`을 사용합니다. Engine과 MOTUS Blog Publisher는 공통 content schema만 공유하고 Publisher는 별도 계층으로 유지합니다. 실제 Blogger 쓰기는 preview와 사람 승인을 거친 뒤, blogId와 OAuth credential이 모두 환경 변수에 있을 때만 실행합니다.
 
 ## 실행
 
@@ -32,9 +32,13 @@ node dist/src/cli.js --a4-master data/reports/<reportId>.json data/evidence/<rep
 node dist/src/cli.js --blogger-preview data/reports/<reportId>.json data/evidence/<reportId>.json
 node dist/src/cli.js --blogger-approve data/blogger/YYYY-MM-DD/<reportId>-publication.json
 Set-Item Env:BLOGGER_BLOG_ID '<Google Blogger blog ID>'
-Set-Item Env:BLOGGER_OAUTH_TOKEN '<OAuth 2.0 access token with Blogger scope>'
+Set-Item Env:BLOGGER_CLIENT_ID '<Google Desktop OAuth client ID>'
+Set-Item Env:BLOGGER_CLIENT_SECRET '<Google Desktop OAuth client secret>'
+npm.cmd run blogger:oauth
 node dist/src/cli.js --blogger-publish data/blogger/YYYY-MM-DD/<reportId>-publication.json
 ```
+
+`blogger:oauth`는 `127.0.0.1`의 임시 callback 서버를 열고 기본 브라우저에서 Google 동의 화면을 표시합니다. 요청 scope는 `https://www.googleapis.com/auth/blogger` 하나이며 offline access와 명시적 consent를 사용합니다. 발급된 refresh token은 콘솔이나 파일에 출력하지 않고 로컬 클립보드에 한 번 전달합니다. 명령이 안내하는 PowerShell 구문으로 Windows 사용자 환경변수 `BLOGGER_REFRESH_TOKEN`에 저장한 뒤 클립보드를 비우고 새 터미널을 여세요. 사용자 거부, callback 검증 실패, refresh token 미발급 시 credential을 저장하거나 게시하지 않습니다. 기존 `BLOGGER_OAUTH_TOKEN`은 짧게 유효한 access token을 직접 주입할 때만 쓰는 deprecated fallback입니다.
 
 `report`는 빌드된 CLI를 사용합니다. 코드 수정 후 `npm.cmd run build`를 실행하세요. `sample`과 `test`는 자동으로 빌드합니다. 경로는 프로젝트 루트 기준입니다.
 
@@ -55,7 +59,7 @@ node dist/src/cli.js --blogger-publish data/blogger/YYYY-MM-DD/<reportId>-public
 
 A4 MASTER 생성은 관리자 전용 boundary를 통과해야 하며, 공개 route에서 호출할 수 없습니다. 개발환경에서는 `src/services/admin.ts`의 server-side authorization boundary와 `data/a4-master/YYYY-MM-DD/admin-a4-route.html`로 내부 route 화면을 분리합니다.
 
-실제 Blogger 연결 설정은 `config/publishing.json`에 MOTUS 브랜드·공개 주소, 환경 변수 이름과 `publishAsDraft` 정책만 저장합니다. blogId와 access token 값은 저장소 파일에 기록하지 않습니다. 기본값 `publishAsDraft=true`는 Google Blogger API v3 `posts.insert?isDraft=true`를 사용합니다. 둘 중 하나라도 없으면 외부 요청을 보내지 않고 실패 상태를 기록합니다. 초안 생성 후 반환된 실제 post URL만 A4 CTA/QR과 Naver package에 반영되며, 발행 전 preview URL은 외부 상세분석 링크로 사용하지 않습니다. 공개 CTA는 “전체 분석은 MOTUS에서 확인하세요”로 통일합니다.
+실제 Blogger 연결 설정은 `config/publishing.json`에 MOTUS 브랜드·공개 주소, 환경 변수 이름과 `publishAsDraft` 정책만 저장합니다. blogId, client secret, refresh token, access token 값은 저장소 파일에 기록하지 않습니다. Publisher는 `BLOGGER_REFRESH_TOKEN`으로 access token을 자동 갱신한 뒤 Google Blogger API v3의 `posts.insert?isDraft=true`를 호출합니다. refresh credential이 일부 누락되거나 갱신에 실패하면 게시 요청을 보내지 않습니다. 초안 생성 후 반환된 실제 post URL만 A4 CTA/QR과 Naver package에 반영되며, 발행 전 preview URL은 외부 상세분석 링크로 사용하지 않습니다. 공개 CTA는 “전체 분석은 MOTUS에서 확인하세요”로 통일합니다.
 
 ## 중요한 파일
 
@@ -73,6 +77,7 @@ A4 MASTER 생성은 관리자 전용 boundary를 통과해야 하며, 공개 rou
 - `src/services/a4-visual.ts`: A4 MASTER HTML/PDF/PNG renderer, Naver posting package, cache metadata
 - `src/services/admin.ts`: admin-only A4 generation boundary와 route HTML
 - `src/services/blogger.ts`: Blogger publication state machine, dry-run adapter, Google Blogger API v3 draft adapter
+- `src/services/blogger-oauth.ts`: Desktop OAuth authorization URL, loopback callback, authorization-code 교환
 - `src/content/publisher-schema.ts`: Engine과 Publisher가 공유하는 글로벌 콘텐츠 metadata schema
 - `src/publishers/motus.ts`: MOTUS 브랜드, 카테고리, Blogger HTML과 labels를 담당하는 독립 Publisher
 - `config/publishing.json`: Blogger URL 정책, 환경 변수 이름, draft-first 설정

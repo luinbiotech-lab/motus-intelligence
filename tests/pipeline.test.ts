@@ -16,6 +16,7 @@ import { buildDynamicTerms, decideContentOpportunities, renderBrokerageReportOnD
 import { renderA4MasterOnDemand } from '../src/services/a4-visual.js';
 import { publicCanRenderA4 } from '../src/services/admin.js';
 import { approveBloggerPublication, assertPublicBloggerHtmlSafe, ConfiguredBloggerAdapter, createBloggerPreview, DryRunBloggerAdapter, GoogleBloggerApiAdapter, publishBloggerPublication, renderPublishingConsole, resolveBloggerUrl, type BloggerPublishingConfig } from '../src/services/blogger.js';
+import { BLOGGER_OAUTH_SCOPE, BLOGGER_TOKEN_ENDPOINT, buildBloggerAuthorizationUrl, exchangeAuthorizationCode, readBloggerOAuthEnvironment, runBloggerOAuthBootstrap } from '../src/services/blogger-oauth.js';
 const read=(p:string):unknown=>JSON.parse(readFileSync(p,'utf8'));
 const fixture=()=>structuredClone(read('data/fixtures/sample-day.json') as InputBundle);
 const realFixture=()=>structuredClone(read('data/manual/2026-09-11/input.json') as InputBundle);
@@ -607,4 +608,128 @@ test('MOTUS publisher stays separate from the market engine and supports global 
   assert.match(preview.html,/https:\/\/motusnova\.blogspot\.com\/search\/label\/Evergreen/);
   assert.doesNotMatch(readFileSync('src/publishers/motus.ts','utf8'),/domain\/models|services\/pipeline|services\/validation|services\/analysis/);
   assert.equal(publishingConfig.publicBaseUrl,'https://motusnova.blogspot.com/');
+});
+
+test('Blogger OAuth bootstrap requests offline consent with only the Blogger scope',()=>{
+  const url=buildBloggerAuthorizationUrl({clientId:'desktop-client-id',redirectUri:'http://127.0.0.1:43123/oauth2/callback',state:'csrf-state'});
+  assert.equal(url.origin+url.pathname,'https://accounts.google.com/o/oauth2/v2/auth');
+  assert.equal(url.searchParams.get('scope'),BLOGGER_OAUTH_SCOPE);
+  assert.equal(url.searchParams.get('access_type'),'offline');
+  assert.equal(url.searchParams.get('prompt'),'consent');
+  assert.equal(url.searchParams.get('response_type'),'code');
+  assert.equal(url.searchParams.get('redirect_uri'),'http://127.0.0.1:43123/oauth2/callback');
+  assert.equal(url.searchParams.get('login_hint'),'luinbiotech@gmail.com');
+  assert.equal([...url.searchParams.getAll('scope')].length,1);
+});
+
+test('Blogger OAuth environment validation exposes names but never credential values',()=>{
+  const secretValue='client-secret-value';
+  const values:Record<string,string>={BLOGGER_CLIENT_ID:'client-id',BLOGGER_CLIENT_SECRET:secretValue,BLOGGER_BLOG_ID:'blog-id'};
+  assert.deepEqual(readBloggerOAuthEnvironment(name=>values[name]),{clientId:'client-id',clientSecret:secretValue,blogId:'blog-id'});
+  assert.throws(()=>readBloggerOAuthEnvironment(()=>undefined),error=>{
+    assert.match(String(error),/BLOGGER_CLIENT_ID/);
+    assert.doesNotMatch(String(error),new RegExp(secretValue));
+    return true;
+  });
+});
+
+test('authorization code exchange requires a refresh token and does not put credentials in the URL',async()=>{
+  let requestUrl='';
+  let requestInit:RequestInit|undefined;
+  const refreshToken='issued-refresh-token';
+  const fakeFetch:typeof fetch=async(input,init)=>{
+    requestUrl=String(input); requestInit=init;
+    return new Response(JSON.stringify({refresh_token:refreshToken,access_token:'short-lived'}),{status:200});
+  };
+  const result=await exchangeAuthorizationCode({code:'authorization-code',clientId:'client-id',clientSecret:'client-secret',redirectUri:'http://127.0.0.1:41000/oauth2/callback'},fakeFetch);
+  assert.equal(result,refreshToken);
+  assert.equal(requestUrl,BLOGGER_TOKEN_ENDPOINT);
+  assert.doesNotMatch(requestUrl,/authorization-code|client-secret/);
+  const body=requestInit?.body as URLSearchParams;
+  assert.equal(body.get('grant_type'),'authorization_code');
+  assert.equal(body.get('client_secret'),'client-secret');
+  await assert.rejects(()=>exchangeAuthorizationCode({code:'code',clientId:'id',clientSecret:'secret',redirectUri:'http://127.0.0.1/callback'},async()=>new Response(JSON.stringify({access_token:'temporary'}),{status:200})),/did not issue a refresh token/);
+});
+
+test('Google adapter refreshes access token before Blogger draft creation',async()=>{
+  const result=runReal(realFixture());
+  const approved=approveBloggerPublication(createBloggerPreview(result.report,result.evidence,publishingConfig),{audience:'admin',action:'BLOGGER_APPROVE'});
+  const calls:{url:string;init?:RequestInit}[]=[];
+  const fakeFetch:typeof fetch=async(input,init)=>{
+    calls.push({url:String(input),...(init?{init}:{})});
+    if(String(input)===BLOGGER_TOKEN_ENDPOINT) return new Response(JSON.stringify({access_token:'refreshed-access-token'}),{status:200});
+    return new Response(JSON.stringify({id:'DRAFT-REFRESH-1',url:'https://verified-blog.test/draft-refresh',status:'DRAFT'}),{status:200});
+  };
+  const env:Record<string,string>={BLOGGER_REFRESH_TOKEN:'refresh-value',BLOGGER_CLIENT_ID:'client-value',BLOGGER_CLIENT_SECRET:'secret-value',BLOGGER_OAUTH_TOKEN:'deprecated-value'};
+  const adapter=new GoogleBloggerApiAdapter(name=>env[name],fakeFetch);
+  const config={...publishingConfig,blogId:'blog-id'};
+  const draft=await publishBloggerPublication(approved,adapter,config,{audience:'admin',action:'BLOGGER_PUBLISH'});
+  assert.equal(draft.status,'DRAFT');
+  assert.equal(calls.length,2);
+  assert.equal(calls[0]!.url,BLOGGER_TOKEN_ENDPOINT);
+  assert.equal((calls[0]!.init?.body as URLSearchParams).get('grant_type'),'refresh_token');
+  assert.equal((calls[1]!.init?.headers as Record<string,string>).authorization,'Bearer refreshed-access-token');
+});
+
+test('refresh failure blocks Blogger publish without deprecated-token fallback',async()=>{
+  const result=runReal(realFixture());
+  const approved=approveBloggerPublication(createBloggerPreview(result.report,result.evidence,publishingConfig),{audience:'admin',action:'BLOGGER_APPROVE'});
+  const calls:string[]=[];
+  const fakeFetch:typeof fetch=async(input)=>{calls.push(String(input));return new Response('{}',{status:401});};
+  const env:Record<string,string>={BLOGGER_REFRESH_TOKEN:'invalid-refresh',BLOGGER_CLIENT_ID:'client',BLOGGER_CLIENT_SECRET:'secret',BLOGGER_OAUTH_TOKEN:'deprecated-value'};
+  const failed=await publishBloggerPublication(approved,new GoogleBloggerApiAdapter(name=>env[name],fakeFetch),{...publishingConfig,blogId:'blog-id'},{audience:'admin',action:'BLOGGER_PUBLISH'});
+  assert.equal(failed.status,'FAILED');
+  assert.equal(failed.postUrl,null);
+  assert.deepEqual(calls,[BLOGGER_TOKEN_ENDPOINT]);
+  assert.doesNotMatch(JSON.stringify(failed),/invalid-refresh|deprecated-value/);
+});
+
+test('OAuth bootstrap completes through the loopback callback without logging or returning the token',async()=>{
+  let stored='';
+  let tokenCalls=0;
+  const environment=(name:string)=>({BLOGGER_CLIENT_ID:'desktop-id',BLOGGER_CLIENT_SECRET:'desktop-secret',BLOGGER_BLOG_ID:'configured-blog'} as Record<string,string>)[name];
+  const result=await runBloggerOAuthBootstrap({
+    environment,
+    openUrl:async authorizationUrl=>{
+      const url=new URL(authorizationUrl);
+      const callback=new URL(url.searchParams.get('redirect_uri')!);
+      callback.searchParams.set('state',url.searchParams.get('state')!);
+      callback.searchParams.set('code','callback-code');
+      const response=await fetch(callback);
+      assert.equal(response.status,200);
+    },
+    fetcher:async(input,init)=>{
+      tokenCalls+=1;
+      assert.equal(String(input),BLOGGER_TOKEN_ENDPOINT);
+      assert.equal((init?.body as URLSearchParams).get('code'),'callback-code');
+      return new Response(JSON.stringify({refresh_token:'clipboard-only-token'}),{status:200});
+    },
+    storeSecret:async secret=>{stored=secret;},
+    timeoutMs:2_000
+  });
+  assert.equal(stored,'clipboard-only-token');
+  assert.equal(tokenCalls,1);
+  assert.equal(result.refreshTokenStored,true);
+  assert.doesNotMatch(JSON.stringify(result),/clipboard-only-token|desktop-secret/);
+});
+
+test('OAuth denial stops before token exchange and secret storage',async()=>{
+  let tokenCalls=0;
+  let storeCalls=0;
+  const environment=(name:string)=>({BLOGGER_CLIENT_ID:'desktop-id',BLOGGER_CLIENT_SECRET:'desktop-secret',BLOGGER_BLOG_ID:'configured-blog'} as Record<string,string>)[name];
+  await assert.rejects(()=>runBloggerOAuthBootstrap({
+    environment,
+    openUrl:async authorizationUrl=>{
+      const url=new URL(authorizationUrl);
+      const callback=new URL(url.searchParams.get('redirect_uri')!);
+      callback.searchParams.set('state',url.searchParams.get('state')!);
+      callback.searchParams.set('error','access_denied');
+      await fetch(callback);
+    },
+    fetcher:async()=>{tokenCalls+=1;return new Response('{}',{status:200});},
+    storeSecret:async()=>{storeCalls+=1;},
+    timeoutMs:2_000
+  }),/authorization was denied/);
+  assert.equal(tokenCalls,0);
+  assert.equal(storeCalls,0);
 });

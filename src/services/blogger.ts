@@ -13,6 +13,9 @@ export interface BloggerPublishingConfig {
   publicBaseUrl?: string|null;
   blogId?: string|null;
   blogIdEnvironmentVariable?: string|null;
+  clientIdEnvironmentVariable?: string|null;
+  clientSecretEnvironmentVariable?: string|null;
+  refreshTokenEnvironmentVariable?: string|null;
   credentialEnvironmentVariable?: string|null;
   credentialAvailable?: boolean;
   publishAsDraft?: boolean;
@@ -138,6 +141,7 @@ export class ConfiguredBloggerAdapter implements BloggerAdapter {
 
 type FetchLike = (input:string|URL,init?:RequestInit)=>Promise<Response>;
 type GoogleBloggerPost = { id?:string; url?:string; status?:string; published?:string; updated?:string };
+type GoogleOAuthToken = { access_token?:string; token_type?:string; expires_in?:number };
 
 export class GoogleBloggerApiAdapter implements BloggerAdapter {
   name=`google-blogger-api-v3@${GOOGLE_BLOGGER_ADAPTER_VERSION}`;
@@ -146,15 +150,17 @@ export class GoogleBloggerApiAdapter implements BloggerAdapter {
     private readonly fetcher:FetchLike=fetch
   ) {}
   hasCredential(config:BloggerPublishingConfig):boolean {
-    const envName=config.credentialEnvironmentVariable?.trim();
-    return Boolean(config.blogId?.trim()&&envName&&this.tokenProvider(envName)?.trim());
+    if(!config.blogId?.trim()) return false;
+    const refresh=this.readConfigured(config.refreshTokenEnvironmentVariable);
+    const clientId=this.readConfigured(config.clientIdEnvironmentVariable);
+    const clientSecret=this.readConfigured(config.clientSecretEnvironmentVariable);
+    if(refresh||clientId||clientSecret) return Boolean(refresh&&clientId&&clientSecret);
+    return Boolean(this.readConfigured(config.credentialEnvironmentVariable));
   }
   async publish(record:BloggerPublicationRecord,config:BloggerPublishingConfig):Promise<BloggerPublishResult> {
     const blogId=config.blogId?.trim();
-    const envName=config.credentialEnvironmentVariable?.trim();
-    const accessToken=envName?this.tokenProvider(envName)?.trim():undefined;
     if(!blogId) throw new Error('missing Blogger blogId');
-    if(!accessToken) throw new Error('missing Blogger credential');
+    const accessToken=await this.resolveAccessToken(config);
     const isDraft=config.publishAsDraft!==false;
     const endpoint=new URL(`https://www.googleapis.com/blogger/v3/blogs/${encodeURIComponent(blogId)}/posts`);
     endpoint.searchParams.set('isDraft',String(isDraft));
@@ -173,6 +179,29 @@ export class GoogleBloggerApiAdapter implements BloggerAdapter {
     if(!post.url) throw new Error('Blogger API response missing post URL');
     const publishedAt=post.published??post.updated;
     return {url:post.url,providerPostId:post.id,...(publishedAt?{publishedAt}:{}),status:isDraft?'DRAFT':'PUBLISHED'};
+  }
+
+  private readConfigured(environmentVariable:string|null|undefined):string|undefined {
+    const name=environmentVariable?.trim();
+    return name?this.tokenProvider(name)?.trim()||undefined:undefined;
+  }
+
+  private async resolveAccessToken(config:BloggerPublishingConfig):Promise<string> {
+    const refreshToken=this.readConfigured(config.refreshTokenEnvironmentVariable);
+    const clientId=this.readConfigured(config.clientIdEnvironmentVariable);
+    const clientSecret=this.readConfigured(config.clientSecretEnvironmentVariable);
+    if(refreshToken||clientId||clientSecret) {
+      if(!refreshToken||!clientId||!clientSecret) throw new Error('incomplete Blogger refresh credential');
+      const body=new URLSearchParams({client_id:clientId,client_secret:clientSecret,refresh_token:refreshToken,grant_type:'refresh_token'});
+      const response=await this.fetcher('https://oauth2.googleapis.com/token',{method:'POST',headers:{'content-type':'application/x-www-form-urlencoded'},body});
+      if(!response.ok) throw new Error(`Blogger OAuth refresh failed (${response.status})`);
+      const token=await response.json() as GoogleOAuthToken;
+      if(!token.access_token?.trim()) throw new Error('Blogger OAuth refresh response missing access token');
+      return token.access_token.trim();
+    }
+    const fallback=this.readConfigured(config.credentialEnvironmentVariable);
+    if(!fallback) throw new Error('missing Blogger credential');
+    return fallback;
   }
 }
 

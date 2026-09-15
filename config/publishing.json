@@ -5,6 +5,9 @@
     "publicBaseUrl": "https://motusnova.blogspot.com/",
     "blogId": null,
     "blogIdEnvironmentVariable": "BLOGGER_BLOG_ID",
+    "clientIdEnvironmentVariable": "BLOGGER_CLIENT_ID",
+    "clientSecretEnvironmentVariable": "BLOGGER_CLIENT_SECRET",
+    "refreshTokenEnvironmentVariable": "BLOGGER_REFRESH_TOKEN",
     "credentialEnvironmentVariable": "BLOGGER_OAUTH_TOKEN",
     "publishAsDraft": true,
     "publisher": {

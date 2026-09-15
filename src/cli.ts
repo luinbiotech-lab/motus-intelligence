@@ -145,7 +145,12 @@ async function readPublishingConfig():Promise<BloggerPublishingConfig> {
   const credentialEnv=raw.blogger.credentialEnvironmentVariable;
   const blogIdEnv=raw.blogger.blogIdEnvironmentVariable;
   const blogId=(blogIdEnv?process.env[blogIdEnv]??raw.blogger.blogId:raw.blogger.blogId)??null;
-  return {...raw.blogger,blogId,credentialAvailable:Boolean(blogId)&&(credentialEnv?Boolean(process.env[credentialEnv]):raw.blogger.credentialAvailable===true)};
+  const refresh=raw.blogger.refreshTokenEnvironmentVariable?process.env[raw.blogger.refreshTokenEnvironmentVariable]:undefined;
+  const clientId=raw.blogger.clientIdEnvironmentVariable?process.env[raw.blogger.clientIdEnvironmentVariable]:undefined;
+  const clientSecret=raw.blogger.clientSecretEnvironmentVariable?process.env[raw.blogger.clientSecretEnvironmentVariable]:undefined;
+  const refreshCredentialAvailable=Boolean(refresh&&clientId&&clientSecret);
+  const fallbackCredentialAvailable=credentialEnv?Boolean(process.env[credentialEnv]):raw.blogger.credentialAvailable===true;
+  return {...raw.blogger,blogId,credentialAvailable:Boolean(blogId)&&(refreshCredentialAvailable||fallbackCredentialAvailable)};
 }
 async function tryReadPublication(report:ReportRecord):Promise<BloggerPublicationRecord|null> {
   const path=`data/blogger/${report.tradingDate}/${report.reportId}-publication.json`;
