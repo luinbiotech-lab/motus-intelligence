@@ -22,6 +22,7 @@ import { updateExistingBloggerDraft } from '../src/services/blogger-draft-update
 const read=(p:string):unknown=>JSON.parse(readFileSync(p,'utf8'));
 const fixture=()=>structuredClone(read('data/fixtures/sample-day.json') as InputBundle);
 const realFixture=()=>structuredClone(read('data/manual/2026-09-11/input.json') as InputBundle);
+const latestCompletedFixture=()=>structuredClone(read('data/manual/2026-09-15/input.json') as InputBundle);
 const sources=read('config/sources.json') as Source[];
 const rules=read('config/us-korea-rules.v1.json') as Rule[];
 const publishingConfig=(read('config/publishing.json') as {blogger:BloggerPublishingConfig}).blogger;
@@ -526,6 +527,26 @@ test('Golden Day editorial preview uses opening prose, one dashboard, ordered in
   assert.equal((preview.html.match(/<h2>주요 출처<\/h2>/g)??[]).length,1);
   assert.equal((preview.html.match(/class="hashtags"/g)??[]).length,1);
   assert.ok(editorial.terms.every(term=>editorial.bloggerMarkdown.includes(term.term)));
+});
+test('latest completed trading day renders verified bearish market data without Golden Day assumptions',()=>{
+  const input=latestCompletedFixture();
+  const result=runPipeline(input,sources,rules,input.asOf);
+  assert.equal(result.report.tradingDate,'2026-09-15');
+  assert.deepEqual(result.evidence.validationResult.issues.map(item=>[item.recordId,item.status]),[['AP-MARKET-CLOSE-2026-09-15','LOW_CONFIDENCE']]);
+  assert.equal(input.market.find(item=>item.symbol==='SPX')?.close,7585.73);
+  assert.equal(input.market.find(item=>item.symbol==='US10Y')?.close,5);
+  assert.equal(input.market.find(item=>item.symbol==='BRENT_NOV26')?.close,108.75);
+  const editorial=renderDailyEditorial(result.report,result.evidence);
+  const preview=createBloggerPreview(result.report,result.evidence,publishingConfig,'2026-09-16T08:30:00+09:00');
+  assert.equal(editorial.seo.title,'미국 증시 마감: 유가·금리 상승에 나스닥 하락 (2026년 9월 15일)');
+  assert.match(editorial.bloggerMarkdown,/대형주와 기술주, 중소형주가 함께 밀렸다/);
+  assert.match(editorial.bloggerMarkdown,/Dave & Buster's\(PLAY\)/);
+  assert.match(editorial.bloggerMarkdown,/미국 장기금리와 유가가 동시에 오른 조합/);
+  assert.doesNotMatch(editorial.bloggerMarkdown,/위험선호 흐름을 이어갔다|나스닥 상승이/);
+  assert.deepEqual(editorial.terms.map(item=>item.term),['EPS','FOMC','bp','국채금리']);
+  assert.equal((preview.html.match(/class="market-dashboard"/g)??[]).length,1);
+  assert.equal((preview.html.match(/<h2>주요 출처<\/h2>/g)??[]).length,1);
+  assert.doesNotMatch(preview.html,/CLAIM-|confidenceScore|REVIEW_REQUIRED|<h1>/);
 });
 test('related articles render only for a verified MOTUS article permalink',()=>{
   const result=runReal(realFixture());

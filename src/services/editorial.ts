@@ -63,12 +63,11 @@ export function renderDailyEditorial(report:ReportRecord,evidence:EvidencePackag
   const spx=map.get('SPX'), nasdaq=map.get('IXIC'), dow=map.get('DJIA'), rut=map.get('RUT'), vix=map.get('VIX');
   const us2y=map.get('US2Y'), us10y=map.get('US10Y'), dollar=map.get('DXY_FUTURES_SEP26'), oil=map.get('BRENT_NOV26')??map.get('WTI_CL_FUTURES_OCT26');
   const dateLabel=formatKoreanDate(report.tradingDate);
-  const cpiPeriod=formatMacroPeriod(input.macro.find(item=>/CPI/i.test(`${item.indicatorId} ${item.indicatorName}`))?.period);
-  const title=buildEditorialTitle(report.tradingDate,nasdaq,us2y,vix);
-  const summary=[
-    `${dateLabel} 미국 증시는 대형주와 기술주, 중소형주가 함께 오르며 위험선호 흐름을 이어갔다. 변동성도 눈에 띄게 낮아져 장중 불안이 완화됐지만, 주가 상승만으로 금리 부담까지 사라졌다고 보기는 어렵다.`,
-    `단기 국채금리가 장기물보다 더 크게 오른 가운데 기술주가 강세를 지켰다는 점이 이날의 핵심이다. 한국시장에서는 미국 성장주의 탄력과 함께 반도체·AI 인프라 투자 기대가 실제 수급으로 연결되는지를 살펴볼 필요가 있다.`
-  ];
+  const cpi=input.macro.find(item=>/CPI/i.test(`${item.indicatorId} ${item.indicatorName}`));
+  const cpiPeriod=formatMacroPeriod(cpi?.period);
+  const title=buildEditorialTitle(report.tradingDate,nasdaq,us2y,vix,oil);
+  const summary=openingSummary(dateLabel,{spx,nasdaq,dow,rut,vix,us2y,us10y,oil},input);
+  const axes=marketAxes({spx,nasdaq,dow,rut,vix,us2y,us10y,dollar,oil});
   const body=[
     '## Opening Summary',
     '',
@@ -80,15 +79,15 @@ export function renderDailyEditorial(report:ReportRecord,evidence:EvidencePackag
     '',
     '## 장 흐름을 읽는 세 가지 축',
     '',
-    `첫째, 상승 범위가 일부 대형 기술주에만 머물지 않았다. 다우지수와 러셀2000까지 플러스권에 들어오면서 매수세의 폭이 비교적 넓었다. VIX의 두 자릿수 하락도 투자자들이 당장의 급격한 변동 가능성을 낮게 평가했음을 시사한다.`,
+    axes[0],
     '',
-    `둘째, 채권시장의 신호는 주식보다 조심스러웠다. 2년물 금리의 상승 폭이 10년물보다 컸고, 이는 통화정책 기대가 단기 구간에 더 강하게 반영됐다는 뜻이다. 그럼에도 나스닥이 강세를 지킨 만큼 이날 주식시장은 할인율 부담보다 성장 기대에 더 무게를 뒀다.`,
+    axes[1],
     '',
-    `셋째, DXY와 브렌트유는 주식시장의 방향을 뒤집을 정도의 압력을 만들지 않았다. 달러가 강보합에 머물고 유가가 하락하면서, 이날 가격 움직임의 중심은 환율이나 원자재보다 주식 내부의 위험선호에 있었다.`,
+    axes[2],
     '',
     '## 물가와 금리',
     '',
-    `${cpiPeriod} CPI는 전월 대비 상승했고, 국채시장에서는 2년물과 10년물이 각각 전일보다 높아졌다. 단기물 상승 폭이 더 컸다는 점은 향후 통화정책 경로를 둘러싼 경계가 남아 있음을 말해준다. 금리가 오른 날에도 성장주가 버틴 만큼, 다음 거래일에는 이 조합이 계속 유지되는지가 중요하다.`,
+    ratesAndMacroParagraph(cpiPeriod,Boolean(cpi),us2y,us10y,input),
     '',
     '## Company / Industry',
     '',
@@ -100,14 +99,12 @@ export function renderDailyEditorial(report:ReportRecord,evidence:EvidencePackag
     '',
     '## 오늘의 체크리스트',
     '',
-    '- 미국 국채 2년물과 10년물 금리의 추가 상승 여부',
-    '- 나스닥 상승이 반도체와 AI 인프라 종목으로 이어지는지',
-    '- 달러와 원유 가격이 한국 수출주와 항공·화학 업종에 주는 압력'
+    ...dailyChecklist(input,nasdaq,us10y,oil)
   ];
   const bloggerMarkdown=sanitizePublicMarkdown(body.join('\n'));
   const terms=buildDynamicTerms(bloggerMarkdown);
   const opportunities=decideContentOpportunities(report,evidence,bloggerMarkdown,terms);
-  const seo={title,description:summary.join(' '),slug:`us-market-close-${report.tradingDate}`,hashtags:hashtags(report.tradingDate)};
+  const seo={title,description:summary.join(' '),slug:`us-market-close-${report.tradingDate}`,hashtags:hashtags(input)};
   return {rendererVersion:EDITORIAL_RENDERER_VERSION,tradingDate:report.tradingDate,seo,bloggerMarkdown,terms,opportunities,naver:buildNaverIntro(title,summary,seo.hashtags)};
 }
 
@@ -215,11 +212,64 @@ export async function renderBrokerageReportOnDemand(report:ReportRecord,evidence
   return {rendererVersion:BROKERAGE_RENDERER_VERSION,reportId:report.reportId,tradingDate:report.tradingDate,cached:false,markdown,naver:daily.naver};
 }
 
-function buildEditorialTitle(tradingDate:string,nasdaq:MarketSnapshot|undefined,us2y:MarketSnapshot|undefined,vix:MarketSnapshot|undefined) {
-  const market=typeof nasdaq?.changePct==='number'&&nasdaq.changePct>=0?'나스닥 강세':'나스닥 약세';
-  const rates=typeof us2y?.change==='number'&&us2y.change>0?'금리 상승에도':'금리 부담 완화 속';
+function buildEditorialTitle(tradingDate:string,nasdaq:MarketSnapshot|undefined,us2y:MarketSnapshot|undefined,vix:MarketSnapshot|undefined,oil:MarketSnapshot|undefined) {
+  const marketUp=typeof nasdaq?.changePct==='number'&&nasdaq.changePct>=0;
+  if(!marketUp&&(us2y?.change??0)>0&&(oil?.changePct??0)>0) return `미국 증시 마감: 유가·금리 상승에 나스닥 하락 (${formatKoreanDate(tradingDate)})`;
+  const market=marketUp?'나스닥 강세':'나스닥 약세';
+  const rates=typeof us2y?.change==='number'&&us2y.change>0?(marketUp?'금리 상승에도':'금리 상승 속'):'금리 부담 완화 속';
   const volatility=typeof vix?.changePct==='number'&&vix.changePct<=-10?', VIX 급락':'';
   return `미국 증시 마감: ${rates} ${market}${volatility} (${formatKoreanDate(tradingDate)})`;
+}
+type MarketSet={spx:MarketSnapshot|undefined;nasdaq:MarketSnapshot|undefined;dow:MarketSnapshot|undefined;rut:MarketSnapshot|undefined;vix:MarketSnapshot|undefined;us2y:MarketSnapshot|undefined;us10y:MarketSnapshot|undefined;dollar?:MarketSnapshot|undefined;oil:MarketSnapshot|undefined};
+function openingSummary(dateLabel:string,records:MarketSet,input:InputBundle):string[] {
+  const equities=[records.spx,records.nasdaq,records.dow,records.rut].filter((item):item is MarketSnapshot=>Boolean(item&&typeof item.changePct==='number'));
+  const positive=equities.filter(item=>(item.changePct??0)>0).length;
+  const negative=equities.filter(item=>(item.changePct??0)<0).length;
+  const ratesUp=[records.us2y,records.us10y].some(item=>(item?.change??0)>0);
+  const oilUp=(records.oil?.changePct??0)>0;
+  if(equities.length>=3&&negative===equities.length) return [
+    `${dateLabel} 미국 증시는 대형주와 기술주, 중소형주가 함께 밀렸다. ${oilUp?'유가 상승이 물가 부담을 다시 키운 데다 ':''}${ratesUp?'국채금리까지 오르면서 ':''}주식시장은 성장 기대보다 자금조달 비용과 밸류에이션 부담에 민감하게 반응했다.`,
+    `낙폭이 한 업종에 그치지 않고 주요 지수 전반으로 번졌다는 점이 이날 흐름을 설명한다. 한국시장에서는 미국 성장주의 약세뿐 아니라 높은 에너지 비용과 금리가 외국인 수급, 원화, 운송·화학·소비 업종에 동시에 미칠 영향을 살펴야 한다.`
+  ];
+  if(equities.length>=3&&positive===equities.length) return [
+    `${dateLabel} 미국 증시는 대형주와 기술주, 중소형주가 함께 오르며 위험선호 흐름을 이어갔다. 변동성도 눈에 띄게 낮아져 장중 불안이 완화됐지만, 주가 상승만으로 금리 부담까지 사라졌다고 보기는 어렵다.`,
+    `단기 국채금리가 장기물보다 더 크게 오른 가운데 기술주가 강세를 지켰다는 점이 이날의 핵심이다. 한국시장에서는 미국 성장주의 탄력과 함께 반도체·AI 인프라 투자 기대가 실제 수급으로 연결되는지를 살펴볼 필요가 있다.`
+  ];
+  const lead=(records.nasdaq?.changePct??0)>=0?'기술주가 상대적으로 버텼지만':'기술주가 약세를 보인 가운데';
+  return [
+    `${dateLabel} 미국 증시는 지수별 방향이 엇갈렸다. ${lead} 시장 전체의 매수세가 한쪽으로 뚜렷하게 모이지는 않았다.`,
+    `${ratesUp?'국채금리 상승':'금리 흐름'}${oilUp?'과 유가 상승':''}을 함께 고려하면 지수 등락만으로 위험선호를 단정하기 어렵다. 한국시장에서는 환율과 외국인 수급, 업종별 실적 민감도를 나눠 확인할 필요가 있다.`
+  ];
+}
+function marketAxes(records:MarketSet):[string,string,string] {
+  const equities=[records.spx,records.nasdaq,records.dow,records.rut].filter((item):item is MarketSnapshot=>Boolean(item&&typeof item.changePct==='number'));
+  const allUp=equities.length>=3&&equities.every(item=>(item.changePct??0)>0);
+  const allDown=equities.length>=3&&equities.every(item=>(item.changePct??0)<0);
+  const breadth=allUp
+    ?'첫째, 상승 범위가 일부 대형 기술주에만 머물지 않았다. 다우지수와 러셀2000까지 플러스권에 들어오면서 매수세의 폭이 비교적 넓었다. VIX의 두 자릿수 하락도 투자자들이 당장의 급격한 변동 가능성을 낮게 평가했음을 시사한다.'
+    :allDown
+      ?'첫째, 매도세가 기술주에만 머물지 않았다. S&P 500과 다우지수, 러셀2000이 나란히 하락해 금리와 원가 부담이 대형주부터 중소형주까지 폭넓게 반영됐다.'
+      :'첫째, 지수별 움직임이 엇갈려 시장의 폭은 제한적이었다. 한 지수의 등락만으로 전체 투자심리를 설명하기보다 대형주와 중소형주의 상대 흐름을 나눠 볼 필요가 있다.';
+  const twoChange=(records.us2y?.change??0)*100,tenChange=(records.us10y?.change??0)*100;
+  const rates=twoChange>0&&tenChange>0
+    ?`둘째, 국채금리는 전 구간에서 올랐다. 2년물은 ${Number(twoChange.toFixed(1))}bp, 10년물은 ${Number(tenChange.toFixed(1))}bp 상승해 단기 정책금리 기대와 장기 자금조달 비용이 함께 주식의 할인율을 밀어 올렸다.`
+    :twoChange<0&&tenChange<0
+      ?'둘째, 2년물과 10년물 국채금리가 함께 내려 주식의 할인율 부담은 다소 완화됐다. 다만 하루의 금리 하락만으로 정책 경로가 바뀌었다고 보기는 이르다.'
+      :'둘째, 2년물과 10년물의 방향이 엇갈렸다. 수익률곡선의 어느 구간이 움직였는지에 따라 성장주와 금융주의 반응이 달라질 수 있다.';
+  const oilChange=records.oil?.changePct;
+  const cross=typeof oilChange==='number'&&oilChange>0
+    ?'셋째, 원유 가격 상승이 주식과 채권에 동시에 부담을 줬다. 에너지 기업에는 가격 효과가 우호적일 수 있지만, 항공·운송·화학과 소비 업종에는 비용 상승과 물가 재가속 우려가 더 직접적인 변수다.'
+    :typeof oilChange==='number'&&oilChange<0
+      ?'셋째, DXY와 브렌트유는 주식시장의 방향을 뒤집을 정도의 압력을 만들지 않았다. 달러가 강보합에 머물고 유가가 하락하면서, 이날 가격 움직임의 중심은 환율이나 원자재보다 주식 내부의 위험선호에 있었다.'
+      :'셋째, 확인된 교차자산 자료만으로 환율이나 원자재가 장 전체를 주도했다고 단정하기 어렵다. 주식과 국채의 동행 여부를 중심으로 해석하는 편이 타당하다.';
+  return [breadth,rates,cross];
+}
+function ratesAndMacroParagraph(cpiPeriod:string,hasCpi:boolean,us2y:MarketSnapshot|undefined,us10y:MarketSnapshot|undefined,input:InputBundle):string {
+  const bothUp=(us2y?.change??0)>0&&(us10y?.change??0)>0;
+  if(hasCpi) return `${cpiPeriod} CPI는 전월 대비 상승했고, 국채시장에서는 2년물과 10년물이 각각 전일보다 높아졌다. 단기물 상승 폭이 더 컸다는 점은 향후 통화정책 경로를 둘러싼 경계가 남아 있음을 말해준다. 금리가 오른 날에도 성장주가 버틴 만큼, 다음 거래일에는 이 조합이 계속 유지되는지가 중요하다.`;
+  const fomc=input.news.some(item=>/FOMC|Federal Reserve|연방준비|기준금리/i.test(`${item.title} ${item.verifiedFacts.join(' ')}`));
+  if(bothUp) return `이날 새 물가 발표보다 채권시장의 움직임이 더 직접적인 신호를 줬다. 2년물과 10년물 국채금리가 함께 상승했고${fomc?', 다음 날 FOMC 결정을 앞둔 경계도 가격에 반영됐다':''}. 장기금리가 높은 수준에 머무는 동안에는 성장률이 높더라도 먼 미래 이익의 현재가치가 낮아질 수 있다.`;
+  return '이날 확인된 새 물가 발표는 없었다. 통화정책 경로를 미리 단정하기보다 국채금리와 다음 공식 경제지표가 같은 방향을 가리키는지 확인할 구간이다.';
 }
 function formatKoreanDate(value:string) { return value.replace(/^(\d{4})-(\d{2})-(\d{2})$/,(_,year,month,day)=>`${year}년 ${Number(month)}월 ${Number(day)}일`); }
 function formatMacroPeriod(value:string|undefined) { return value?.replace(/^\d{4}-(\d{2})$/,(_,month)=>`${Number(month)}월`)??'최근'; }
@@ -249,28 +299,48 @@ function companyIndustryParagraph(input:InputBundle) {
   if(input.companyEvents.length||input.filings.length) {
     const event=input.companyEvents[0];
     const filing=input.filings[0];
-    const companyName=event?.companyId==='ORACLE'?'Oracle':event?.companyId;
+    const companyName=event?.companyId==='ORACLE'?'Oracle':event?.companyId==='DAVE_AND_BUSTERS'?"Dave & Buster's":event?.companyId;
     const eventText=event?`이번 기업 뉴스의 중심에는 ${companyName}(${event.ticker})이 있었다. ${event.summary}`:'';
-    const filingFacts=filing?.extractedFacts.map(fact=>fact.replace(/첨부됨$/,'첨부됐다').replace(/종료 분기$/,'종료 분기다'))??[];
-    const filingText=filing?`회사가 제출한 ${filing.formType}에는 ${filingFacts.join('. ')}.`:'';
+    const filingFact=filing?.extractedFacts.at(-1)?.replace(/첨부됨$/,'첨부됐다').replace(/첨부$/,'첨부됐다').replace(/종료 분기$/,'종료 분기다');
+    const filingText=filing?`회사는 ${formatKoreanDate(filing.filedAt.slice(0,10))} ${filing.formType}를 제출했다.${filingFact?` 공식 공시에는 ${filingFact}.`:''}`:'';
     const aiCapex=input.signals.some(item=>item.trigger==='AI_CAPEX_UP');
-    const industryText=aiCapex?'분기 실적 못지않게 눈길을 끈 대목은 데이터센터 용량 확대다. 이는 AI 인프라 CAPEX가 기업의 실제 설비 계획으로 이어지고 있다는 개별 사례다. 다만 한 회사의 발표만으로 산업 전체의 투자 속도를 단정할 단계는 아니다.':'이번 발표는 해당 기업의 실적과 투자 계획이 산업 수요에 어떤 변화를 주는지 살펴볼 단서다.';
-    const supplyChainText=aiCapex?'글로벌 공급망에서는 서버와 네트워크 장비, 전력·냉각 설비가 함께 움직이는지를 지켜볼 만하다. 데이터센터 증설이 예정대로 집행된다면 관련 부품과 인프라 발주에도 영향을 줄 수 있지만, 고객사의 투자 시기와 공급 여건에 따라 속도 차이가 날 수 있다.':'';
-    const koreaText=aiCapex?'한국시장에서는 반도체 업종이 가장 가까운 연결 고리다. 미국 AI 투자 기대가 우호적인 배경을 만들 수 있으나, 국내 종목의 실제 반응은 고객사 주문과 환율, 외국인 수급까지 함께 봐야 한다.':'';
+    const consumptionDown=input.signals.some(item=>item.trigger==='CONSUMPTION_DOWN');
+    const industryText=aiCapex?'분기 실적 못지않게 눈길을 끈 대목은 데이터센터 용량 확대다. 이는 AI 인프라 CAPEX가 기업의 실제 설비 계획으로 이어지고 있다는 개별 사례다. 다만 한 회사의 발표만으로 산업 전체의 투자 속도를 단정할 단계는 아니다.':consumptionDown?'매출과 동일점포 매출이 함께 줄었다는 점은 체험형 외식·레저 수요의 탄력을 점검하게 한다. 다만 한 회사의 실적만으로 미국 소비 전체가 꺾였다고 단정할 수는 없다.':'이번 발표는 해당 기업의 실적이 산업 수요에 어떤 변화를 주는지 살펴볼 단서다.';
+    const supplyChainText=aiCapex?'글로벌 공급망에서는 서버와 네트워크 장비, 전력·냉각 설비가 함께 움직이는지를 지켜볼 만하다. 데이터센터 증설이 예정대로 집행된다면 관련 부품과 인프라 발주에도 영향을 줄 수 있지만, 고객사의 투자 시기와 공급 여건에 따라 속도 차이가 날 수 있다.':consumptionDown?'이번 사례는 제조 공급망보다 미국 가계의 재량지출 여력을 읽는 데 의미가 크다. 외식과 체험형 소비의 매출 둔화가 다른 업체로 넓어지는지는 추가 실적을 통해 확인해야 한다.':'';
+    const koreaText=aiCapex?'한국시장에서는 반도체 업종이 가장 가까운 연결 고리다. 미국 AI 투자 기대가 우호적인 배경을 만들 수 있으나, 국내 종목의 실제 반응은 고객사 주문과 환율, 외국인 수급까지 함께 봐야 한다.':consumptionDown?'한국시장에서는 미국 소비 비중이 높은 의류·식품·레저 기업의 주문과 판매 흐름을 점검할 만하다. 한 기업의 부진을 업종 전체로 확대하기보다 환율과 물류비, 각 회사의 가격 전가력을 함께 봐야 한다.':'';
     return [eventText,filingText,industryText,supplyChainText,koreaText].filter(Boolean).join('\n\n');
   }
   return '개별 기업 이슈는 시장 전체 흐름을 압도할 만큼 따로 분리되지 않았다. 이날은 특정 한 종목보다 금리, 기술주, 변동성의 조합이 더 중요한 관찰 지점이었다.';
 }
 function koreaParagraph(input:InputBundle) {
-  const signals=input.signals.filter(item=>item.driverStatement);
-  if(signals.length) return '미국 금리 상승은 국내 인터넷·플랫폼 등 장기 성장주의 할인율 부담으로 작용할 수 있다. 반면 나스닥 강세와 AI 인프라 투자 기대는 반도체 투자심리에 우호적이다. 두 힘이 엇갈리는 만큼 지수 방향을 그대로 따라가기보다 원화 흐름, 외국인 수급, 반도체 업종의 장중 강도를 함께 살피는 편이 낫다.';
+  const triggers=new Set(input.signals.filter(item=>item.driverStatement).map(item=>item.trigger));
+  if(triggers.has('OIL_UP')&&triggers.has('RATES_UP')) return '미국 장기금리와 유가가 동시에 오른 조합은 한국시장에 가볍지 않다. 인터넷·플랫폼 같은 장기 성장주는 할인율 부담을 받고, 항공·운송·화학은 원가 압력을 먼저 맞을 수 있다. 정유·조선 등은 업황 수혜 가능성이 있지만 원화와 외국인 수급이 흔들리면 지수 전체의 방어력은 약해질 수 있다.';
+  if(triggers.has('AI_CAPEX_UP')) return '미국 금리 상승은 국내 인터넷·플랫폼 등 장기 성장주의 할인율 부담으로 작용할 수 있다. 반면 나스닥 강세와 AI 인프라 투자 기대는 반도체 투자심리에 우호적이다. 두 힘이 엇갈리는 만큼 지수 방향을 그대로 따라가기보다 원화 흐름, 외국인 수급, 반도체 업종의 장중 강도를 함께 살피는 편이 낫다.';
   return '한국시장에서는 미국 기술주 흐름과 금리 수준을 함께 봐야 한다. 지수 상승만 보고 추격하기보다 환율, 외국인 수급, 반도체 업종의 장중 반응을 확인하는 편이 안전하다.';
 }
-function hashtags(_date:string) {
-  return ['#미국증시','#미국주식','#미국시장마감','#나스닥','#SP500','#다우지수','#러셀2000','#VIX','#미국국채금리','#AI인프라','#오라클','#한국증시'];
+function dailyChecklist(input:InputBundle,nasdaq:MarketSnapshot|undefined,us10y:MarketSnapshot|undefined,oil:MarketSnapshot|undefined):string[] {
+  const items=['- 미국 국채 2년물과 10년물 금리의 추가 상승 여부'];
+  if((nasdaq?.changePct??0)<0) items.push('- 나스닥 약세가 반도체와 대형 기술주 전반으로 이어지는지');
+  else items.push('- 나스닥 상승이 반도체와 AI 인프라 종목으로 이어지는지');
+  if((oil?.changePct??0)>0) items.push('- 높은 유가가 운송·화학·소비 업종의 비용 부담으로 번지는지');
+  else items.push('- 달러와 원유 가격이 한국 수출주와 항공·화학 업종에 주는 압력');
+  if(input.news.some(item=>/FOMC|Federal Reserve|연방준비/i.test(`${item.title} ${item.verifiedFacts.join(' ')}`))) items.push('- FOMC 결정과 향후 금리 경로에 대한 공식 설명');
+  void us10y;
+  return items;
+}
+function hashtags(input:InputBundle) {
+  const symbols=new Set(input.market.map(item=>item.symbol));
+  const triggers=new Set(input.signals.map(item=>item.trigger));
+  const tags=['#미국증시','#미국주식','#미국시장마감','#나스닥','#SP500','#다우지수','#러셀2000','#미국국채금리'];
+  if(symbols.has('VIX')) tags.push('#VIX');
+  if(triggers.has('AI_CAPEX_UP')) tags.push('#AI인프라','#오라클');
+  if(triggers.has('OIL_UP')) tags.push('#국제유가','#브렌트유');
+  if(input.companyEvents.some(item=>item.ticker==='PLAY')) tags.push('#미국소비주');
+  tags.push('#한국증시');
+  return tags.slice(0,12);
 }
 function buildNaverIntro(title:string,summary:string[],tags:string[]) {
-  return {intro:`${title}\n\n오늘 미국장은 지수 상승, 금리, 변동성 흐름을 함께 봐야 했습니다. 핵심 수치와 한국시장 체크포인트만 짧게 정리했습니다.\n\n${summary[0]??''}`,hashtags:tags.slice(0,6)};
+  return {intro:`${title}\n\n오늘 미국장의 지수, 금리, 원자재 흐름을 함께 정리했습니다. 핵심 수치와 한국시장 체크포인트를 짧게 확인해 보세요.\n\n${summary[0]??''}`,hashtags:tags.slice(0,6)};
 }
 function sanitizePublicMarkdown(markdown:string) {
   return markdown

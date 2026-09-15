@@ -1,0 +1,26 @@
+[
+  {
+    "term": "EPS",
+    "explanation": "주당순이익입니다. 기업 이익이 한 주당 얼마나 쌓이는지 보여줍니다.",
+    "evergreenKey": "term-eps",
+    "evergreenTitle": "EPS와 실적 시즌 읽기"
+  },
+  {
+    "term": "FOMC",
+    "explanation": "미국 연방공개시장위원회입니다. 기준금리와 통화정책 방향을 결정합니다.",
+    "evergreenKey": "term-fomc",
+    "evergreenTitle": "FOMC 전후 시장 체크포인트"
+  },
+  {
+    "term": "bp",
+    "explanation": "basis point의 줄임말로 0.01%포인트를 뜻합니다. 금리 변화폭을 정확히 말할 때 사용합니다.",
+    "evergreenKey": "term-bp",
+    "evergreenTitle": "bp로 금리 변화 읽기"
+  },
+  {
+    "term": "국채금리",
+    "explanation": "정부가 발행한 채권의 수익률입니다. 금리가 오르면 성장주 밸류에이션과 환율, 외국인 수급에 부담이 될 수 있습니다.",
+    "evergreenKey": "term-treasury-yield",
+    "evergreenTitle": "미국 국채금리와 주식시장의 관계"
+  }
+]

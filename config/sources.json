@@ -340,5 +340,23 @@
     "maxAgeMinutes": 2880,
     "connectionStatus": "DATA_NOT_CONNECTED",
     "verificationTier": "A"
+  },
+  {
+    "sourceId": "AP_NEWS",
+    "name": "Associated Press",
+    "category": "news",
+    "official": false,
+    "priority": 2,
+    "authenticationType": "NONE",
+    "rateLimit": "PUBLIC_WEB",
+    "latency": "NEWS_WIRE",
+    "redistributionStatus": "UNKNOWN",
+    "commercialUseStatus": "UNKNOWN",
+    "enabled": true,
+    "notes": "시장 종가와 주요 동인의 독립 교차 검증용. 공식 원자료를 대체하지 않음.",
+    "homepage": "https://apnews.com/",
+    "maxAgeMinutes": 10080,
+    "connectionStatus": "OK",
+    "verificationTier": "B"
   }
 ]

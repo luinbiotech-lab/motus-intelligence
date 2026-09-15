@@ -58,7 +58,7 @@ export const BLOGGER_PUBLICATION_VERSION = '2I.BLOGGER.2.0';
 export const GOOGLE_BLOGGER_ADAPTER_VERSION = '2H.GOOGLEBLOGGER.1.0';
 const internalLeakPattern=/\b(CLAIM-|AUTO_VALIDATED|REVIEW_REQUIRED|BLOCKED|DATA_NOT_CONNECTED|confidenceScore|verificationStatus|publicationVersion|history|draftPostId)\b/i;
 
-export function createBloggerPreview(report:ReportRecord,evidence:EvidencePackage,config:BloggerPublishingConfig,now='2026-09-14T00:00:00+09:00'):BloggerPublicationRecord {
+export function createBloggerPreview(report:ReportRecord,evidence:EvidencePackage,config:BloggerPublishingConfig,now=new Date().toISOString()):BloggerPublicationRecord {
   validatePublishingConfig(config);
   const editorial=renderDailyEditorial(report,evidence);
   const title=editorial.seo.title;
@@ -98,7 +98,7 @@ export function createBloggerPreview(report:ReportRecord,evidence:EvidencePackag
   };
 }
 
-export function approveBloggerPublication(record:BloggerPublicationRecord,context:AdminRequestContext,now='2026-09-14T00:05:00+09:00'):BloggerPublicationRecord {
+export function approveBloggerPublication(record:BloggerPublicationRecord,context:AdminRequestContext,now=new Date().toISOString()):BloggerPublicationRecord {
   assertAdminRequest({...context,action:'BLOGGER_APPROVE'});
   if(record.status==='PUBLISHED') throw new Error('already-published reportId');
   if(record.status!=='PREVIEW_READY'&&record.status!=='APPROVED'&&record.status!=='FAILED') throw new Error(`cannot approve from ${record.status}`);
@@ -109,7 +109,7 @@ export function approveBloggerPublication(record:BloggerPublicationRecord,contex
 export async function publishBloggerPublication(record:BloggerPublicationRecord,adapter:BloggerAdapter,config:BloggerPublishingConfig,context:AdminRequestContext,options:{dryRun?:boolean; now?:string}={}):Promise<BloggerPublicationRecord> {
   assertAdminRequest({...context,action:'BLOGGER_PUBLISH'});
   validatePublishingConfig(config);
-  const now=options.now??'2026-09-14T00:10:00+09:00';
+  const now=options.now??new Date().toISOString();
   if(record.status==='PUBLISHED') throw new Error('already-published reportId');
   if(record.publicPostUrl) throw new Error('duplicate publish: public post URL already exists');
   if(record.draftPostId) throw new Error('duplicate publish: draft post ID already exists');
@@ -284,8 +284,10 @@ function sourceLabel(sourceId:string,url:string,configuredName:string|undefined)
   if(sourceId==='ICE'&&/products\/194/i.test(url)) return 'ICE · U.S. Dollar Index Futures';
   if(sourceId==='ICE'&&/products\/219/i.test(url)) return 'ICE · Brent Crude Futures';
   if(sourceId==='BLS') return 'U.S. Bureau of Labor Statistics · Consumer Price Index';
-  if(sourceId==='CORPORATE_IR') return 'Oracle Investor Relations · FY27 Q1 Results';
-  if(sourceId==='SEC_EDGAR') return 'U.S. SEC · Oracle 8-K Filing';
+  if(sourceId==='CORPORATE_IR'&&/oracle/i.test(url)) return 'Oracle Investor Relations · FY27 Q1 Results';
+  if(sourceId==='CORPORATE_IR'&&/daveandbusters/i.test(url)) return "Dave & Buster's Investor Relations · Quarterly Results";
+  if(sourceId==='SEC_EDGAR'&&/1525769/i.test(url)) return "U.S. SEC · Dave & Buster's 8-K Filing";
+  if(sourceId==='SEC_EDGAR'&&/oracle/i.test(url)) return 'U.S. SEC · Oracle 8-K Filing';
   return configuredName??sourceId.replaceAll('_',' ');
 }
 function buildMotusMetadata(input:InputBundle):GlobalContentMetadata {

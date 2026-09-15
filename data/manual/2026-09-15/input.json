@@ -1,0 +1,128 @@
+{
+  "schemaVersion": "1.0",
+  "sample": false,
+  "tradingDate": "2026-09-15",
+  "asOf": "2026-09-15T23:15:00Z",
+  "session": {
+    "status": "OK",
+    "closeAt": "2026-09-15T20:00:00Z",
+    "sourceId": "NYSE",
+    "sourceUrl": "https://www.nyse.com/trade/hours-calendars"
+  },
+  "market": [
+    {
+      "id": "SPX-2026-09-15", "sample": false, "sourceId": "SP_DJI",
+      "sourceUrl": "https://www.spglobal.com/spdji/en/indices/equity/sp-500/",
+      "observedAt": "2026-09-15T20:00:00Z", "collectedAt": "2026-09-15T22:30:00Z",
+      "unit": "points", "status": "OK", "missingReasons": {"volume":"가격지수에 단일 거래량 미적용"},
+      "collectionMode": "MANUAL_VERIFIED", "verificationUrls": ["https://apnews.com/article/wall-street-stocks-dow-nasdaq-b1b1bc9f943da62c6a639a8761b4eca3"],
+      "market": "US", "tradingDate": "2026-09-15", "symbol": "SPX", "instrumentType": "INDEX",
+      "close": 7585.73, "previousClose": 7619.98, "change": -34.25, "changePct": -0.45, "volume": null, "currency": "USD"
+    },
+    {
+      "id": "DJIA-2026-09-15", "sample": false, "sourceId": "SP_DJI",
+      "sourceUrl": "https://www.spglobal.com/spdji/en/indices/equity/dow-jones-industrial-average/",
+      "observedAt": "2026-09-15T20:00:00Z", "collectedAt": "2026-09-15T22:30:00Z",
+      "unit": "points", "status": "OK", "missingReasons": {"volume":"가격지수에 단일 거래량 미적용"},
+      "collectionMode": "MANUAL_VERIFIED", "verificationUrls": ["https://apnews.com/article/wall-street-stocks-dow-nasdaq-b1b1bc9f943da62c6a639a8761b4eca3"],
+      "market": "US", "tradingDate": "2026-09-15", "symbol": "DJIA", "instrumentType": "INDEX",
+      "close": 52093.11, "previousClose": 52421.20, "change": -328.09, "changePct": -0.63, "volume": null, "currency": "USD"
+    },
+    {
+      "id": "IXIC-2026-09-15", "sample": false, "sourceId": "NASDAQ",
+      "sourceUrl": "https://www.nasdaq.com/market-activity/index/comp",
+      "observedAt": "2026-09-15T20:00:00Z", "collectedAt": "2026-09-15T22:30:00Z",
+      "unit": "points", "status": "OK", "missingReasons": {"volume":"가격지수에 단일 거래량 미적용"},
+      "collectionMode": "MANUAL_VERIFIED", "verificationUrls": ["https://apnews.com/article/wall-street-stocks-dow-nasdaq-b1b1bc9f943da62c6a639a8761b4eca3"],
+      "market": "US", "tradingDate": "2026-09-15", "symbol": "IXIC", "instrumentType": "INDEX",
+      "close": 25981.57, "previousClose": 26186.41, "change": -204.84, "changePct": -0.78, "volume": null, "currency": "USD"
+    },
+    {
+      "id": "RUT-2026-09-15", "sample": false, "sourceId": "FTSE_RUSSELL",
+      "sourceUrl": "https://www.lseg.com/en/ftse-russell/indices/russell-2000-index",
+      "observedAt": "2026-09-15T20:00:00Z", "collectedAt": "2026-09-15T22:30:00Z",
+      "unit": "points", "status": "OK", "missingReasons": {"volume":"가격지수에 단일 거래량 미적용"},
+      "collectionMode": "MANUAL_VERIFIED", "verificationUrls": ["https://apnews.com/article/wall-street-stocks-dow-nasdaq-b1b1bc9f943da62c6a639a8761b4eca3"],
+      "market": "US", "tradingDate": "2026-09-15", "symbol": "RUT", "instrumentType": "INDEX",
+      "close": 2870.29, "previousClose": 2892.24, "change": -21.95, "changePct": -0.76, "volume": null, "currency": "USD"
+    },
+    {
+      "id": "US2Y-2026-09-15", "sample": false, "sourceId": "US_TREASURY",
+      "sourceUrl": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202609&type=daily_treasury_yield_curve",
+      "observedAt": "2026-09-15T19:30:00Z", "collectedAt": "2026-09-15T22:30:00Z",
+      "unit": "percent", "status": "OK", "missingReasons": {"volume":"공식 par yield에 거래량 미적용"},
+      "collectionMode": "API", "verificationUrls": ["https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/all/202609?type=daily_treasury_yield_curve&field_tdr_date_value_month=202609"],
+      "market": "US", "tradingDate": "2026-09-15", "symbol": "US2Y", "instrumentType": "YIELD",
+      "close": 4.67, "previousClose": 4.65, "change": 0.02, "changePct": 0.43, "volume": null, "currency": "USD"
+    },
+    {
+      "id": "US10Y-2026-09-15", "sample": false, "sourceId": "US_TREASURY",
+      "sourceUrl": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202609&type=daily_treasury_yield_curve",
+      "observedAt": "2026-09-15T19:30:00Z", "collectedAt": "2026-09-15T22:30:00Z",
+      "unit": "percent", "status": "OK", "missingReasons": {"volume":"공식 par yield에 거래량 미적용"},
+      "collectionMode": "API", "verificationUrls": ["https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/all/202609?type=daily_treasury_yield_curve&field_tdr_date_value_month=202609"],
+      "market": "US", "tradingDate": "2026-09-15", "symbol": "US10Y", "instrumentType": "YIELD",
+      "close": 5.00, "previousClose": 4.97, "change": 0.03, "changePct": 0.60, "volume": null, "currency": "USD"
+    },
+    {
+      "id": "BRENT-2026-09-15", "sample": false, "sourceId": "ICE",
+      "sourceUrl": "https://www.ice.com/products/219/Brent-Crude-Futures/data",
+      "observedAt": "2026-09-15T18:30:00Z", "collectedAt": "2026-09-15T22:30:00Z",
+      "unit": "price", "status": "OK", "missingReasons": {"volume":"결제 요약에 거래량 미사용"},
+      "collectionMode": "MANUAL_VERIFIED", "verificationUrls": ["https://apnews.com/article/stock-markets-oil-rates-inflation-ai-123ddc2d8ba06c324cbbd899f7eeebd2"],
+      "market": "US", "tradingDate": "2026-09-15", "symbol": "BRENT_NOV26", "instrumentType": "COMMODITY",
+      "close": 108.75, "previousClose": 105.68, "change": 3.07, "changePct": 2.90, "volume": null, "currency": "USD"
+    }
+  ],
+  "macro": [],
+  "companyEvents": [
+    {
+      "id": "PLAY-Q2-2026-RESULTS", "sample": false, "sourceId": "CORPORATE_IR",
+      "sourceUrl": "https://ir.daveandbusters.com/node/18151", "observedAt": "2026-09-14T20:00:00Z", "collectedAt": "2026-09-15T22:40:00Z",
+      "unit": "text", "status": "OK", "missingReasons": {}, "collectionMode": "MANUAL_VERIFIED",
+      "verificationUrls": ["https://ir.daveandbusters.com/node/18151", "https://www.sec.gov/Archives/edgar/data/1525769/000152576926000039/play-20260914.htm"],
+      "companyId": "DAVE_AND_BUSTERS", "ticker": "PLAY", "eventType": "CONSUMPTION_DOWN",
+      "eventTime": "2026-09-14T20:00:00Z", "title": "Dave & Buster's 2026 회계연도 2분기 실적",
+      "summary": "매출은 5억4410만달러로 전년 동기보다 2.4% 감소했고, 동일점포 매출은 2.9% 줄었다. 희석 EPS는 0.36달러 순손실로 전환됐다.",
+      "primarySourceUrl": "https://ir.daveandbusters.com/node/18151"
+    }
+  ],
+  "filings": [
+    {
+      "id": "SEC-0001525769-26-000039", "sample": false, "sourceId": "SEC_EDGAR",
+      "sourceUrl": "https://data.sec.gov/submissions/CIK0001525769.json", "observedAt": "2026-09-14T20:13:28Z", "collectedAt": "2026-09-15T22:40:00Z",
+      "unit": "text", "status": "OK", "missingReasons": {}, "collectionMode": "API",
+      "verificationUrls": ["https://www.sec.gov/Archives/edgar/data/1525769/000152576926000039/play-20260914.htm"],
+      "companyId": "DAVE_AND_BUSTERS", "ticker": "PLAY", "formType": "8-K", "accessionNumber": "0001525769-26-000039",
+      "filedAt": "2026-09-14T20:13:28Z", "period": "2026-08-04",
+      "extractedFacts": ["2026년 9월 14일 8-K 제출", "2026 회계연도 2분기 실적 자료 첨부"],
+      "cik": "0001525769", "companyName": "Dave & Buster's Entertainment, Inc.", "primaryDocument": "play-20260914.htm",
+      "filingUrl": "https://www.sec.gov/Archives/edgar/data/1525769/000152576926000039/play-20260914.htm",
+      "acceptedAt": "2026-09-14T20:13:28Z", "timestampPrecision": "ACCEPTED_TIMESTAMP"
+    }
+  ],
+  "news": [
+    {
+      "id": "AP-MARKET-CLOSE-2026-09-15", "sample": false, "sourceId": "AP_NEWS",
+      "sourceUrl": "https://apnews.com/article/stock-markets-oil-rates-inflation-ai-123ddc2d8ba06c324cbbd899f7eeebd2",
+      "observedAt": "2026-09-15T20:17:03Z", "collectedAt": "2026-09-15T22:45:00Z", "unit": "text", "status": "OK",
+      "missingReasons": {}, "collectionMode": "MANUAL_VERIFIED",
+      "verificationUrls": ["https://apnews.com/article/wall-street-stocks-dow-nasdaq-b1b1bc9f943da62c6a639a8761b4eca3", "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202609&type=daily_treasury_yield_curve"],
+      "title": "미국 증시 하락, 유가와 국채금리 상승 부담", "publisher": "Associated Press", "publishedAt": "2026-09-15T20:17:03Z",
+      "url": "https://apnews.com/article/stock-markets-oil-rates-inflation-ai-123ddc2d8ba06c324cbbd899f7eeebd2",
+      "relatedTickers": ["PLAY", "NVDA", "AMD"], "relatedIndustries": ["Consumer", "Energy", "Semiconductor"],
+      "verifiedFacts": ["S&P 500, 다우, 나스닥, 러셀2000 하락", "브렌트유 108.75달러 결제", "미국 10년물 국채금리 5.00%", "다음 날 연방준비제도 금리 결정 예정"],
+      "sourceTier": "B", "usedInReport": true
+    }
+  ],
+  "signals": [
+    {"id":"SIG-RATES-UP-2026-09-15","eventId":"US10Y-2026-09-15","trigger":"RATES_UP","usIndustry":"Internet / Platform","usCompany":"BROAD_MARKET","macroConditions":[],"evidenceIds":["US2Y-2026-09-15","US10Y-2026-09-15"],"counterFactors":[],"driverStatement":"미국 2년물과 10년물 국채금리가 함께 상승했다."},
+    {"id":"SIG-OIL-UP-2026-09-15","eventId":"BRENT-2026-09-15","trigger":"OIL_UP","usIndustry":"Energy","usCompany":"BROAD_MARKET","macroConditions":[],"evidenceIds":["BRENT-2026-09-15"],"counterFactors":[],"driverStatement":"브렌트유 결제가격이 전일보다 상승했다."},
+    {"id":"SIG-CONSUMPTION-DOWN-2026-09-15","eventId":"PLAY-Q2-2026-RESULTS","trigger":"CONSUMPTION_DOWN","usIndustry":"Consumer","usCompany":"DAVE_AND_BUSTERS","macroConditions":[],"evidenceIds":["PLAY-Q2-2026-RESULTS","SEC-0001525769-26-000039"],"counterFactors":[],"driverStatement":"체험형 외식 기업의 매출과 동일점포 매출이 감소했다."},
+    {"id":"SIG-RISK-OFF-2026-09-15","eventId":"SPX-2026-09-15","trigger":"RISK_OFF","usIndustry":"Finance","usCompany":"BROAD_MARKET","macroConditions":[],"evidenceIds":["SPX-2026-09-15","IXIC-2026-09-15","RUT-2026-09-15"],"counterFactors":[],"driverStatement":"주요 미국 주가지수가 모두 하락했다."}
+  ],
+  "koreaContext": {
+    "calendar": ["2026-09-16 한국 정규장"],
+    "counterFactors": ["원화 환율과 외국인 수급"]
+  }
+}

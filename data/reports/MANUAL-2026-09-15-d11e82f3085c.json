@@ -1,0 +1,295 @@
+{
+  "reportId": "MANUAL-2026-09-15-d11e82f3085c",
+  "tradingDate": "2026-09-15",
+  "generatedAt": "2026-09-15T23:28:28.363Z",
+  "publishedAt": null,
+  "templateVersion": "1.0.0",
+  "analysisRuleVersion": "1.0.0",
+  "status": "REVIEW_REQUIRED",
+  "sample": false,
+  "sections": [
+    {
+      "id": "section-1",
+      "title": "SEO 제목 + 기준일",
+      "items": [
+        {
+          "text": "2026-09-15 미국시장 마감과 한국시장 전달경로",
+          "nature": "CONFIRMED_FACT",
+          "evidenceIds": []
+        }
+      ]
+    },
+    {
+      "id": "section-2",
+      "title": "3줄 요약",
+      "items": [
+        {
+          "text": "미국 기준 거래일 2026-09-15; 거래일 상태 OK.",
+          "nature": "CONFIRMED_FACT",
+          "evidenceIds": []
+        },
+        {
+          "text": "주요 마감 흐름: SPX 7585.73 (-0.45%), IXIC 25981.57 (-0.78%). 검증 통과 마감 자료 7건.",
+          "nature": "CONFIRMED_FACT",
+          "evidenceIds": []
+        },
+        {
+          "text": "조건부 한국 영향 4건, 검수 항목 1건. 모든 영향 판단은 추론이며 발행 전 출처 확인이 필요합니다.",
+          "nature": "CONFIRMED_FACT",
+          "evidenceIds": []
+        }
+      ]
+    },
+    {
+      "id": "section-3",
+      "title": "미국시장 마감",
+      "items": [
+        {
+          "text": "SPX: 7585.73 points (USD), 전일 대비 -34.25, -0.45%. 기준시각 2026-09-15T20:00:00Z.",
+          "nature": "CALCULATED",
+          "evidenceIds": [
+            "SPX-2026-09-15"
+          ],
+          "claimIds": [
+            "CLAIM-SPX-2026-09-15-CLOSE",
+            "CLAIM-SIG-RISK-OFF-2026-09-15:UK-13"
+          ]
+        },
+        {
+          "text": "DJIA: 52093.11 points (USD), 전일 대비 -328.09, -0.63%. 기준시각 2026-09-15T20:00:00Z.",
+          "nature": "CALCULATED",
+          "evidenceIds": [
+            "DJIA-2026-09-15"
+          ],
+          "claimIds": [
+            "CLAIM-DJIA-2026-09-15-CLOSE"
+          ]
+        },
+        {
+          "text": "IXIC: 25981.57 points (USD), 전일 대비 -204.84, -0.78%. 기준시각 2026-09-15T20:00:00Z.",
+          "nature": "CALCULATED",
+          "evidenceIds": [
+            "IXIC-2026-09-15"
+          ],
+          "claimIds": [
+            "CLAIM-IXIC-2026-09-15-CLOSE",
+            "CLAIM-SIG-RISK-OFF-2026-09-15:UK-13"
+          ]
+        },
+        {
+          "text": "RUT: 2870.29 points (USD), 전일 대비 -21.95, -0.76%. 기준시각 2026-09-15T20:00:00Z.",
+          "nature": "CALCULATED",
+          "evidenceIds": [
+            "RUT-2026-09-15"
+          ],
+          "claimIds": [
+            "CLAIM-RUT-2026-09-15-CLOSE",
+            "CLAIM-SIG-RISK-OFF-2026-09-15:UK-13"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section-4",
+      "title": "시장을 움직인 원인",
+      "items": [
+        {
+          "text": "체험형 외식 기업의 매출과 동일점포 매출이 감소했다. (수동 근거 연결 신호 CONSUMPTION_DOWN)",
+          "nature": "INFERENCE",
+          "evidenceIds": [
+            "PLAY-Q2-2026-RESULTS",
+            "PLAY-Q2-2026-RESULTS",
+            "SEC-0001525769-26-000039"
+          ],
+          "claimIds": [
+            "CLAIM-PLAY-Q2-2026-RESULTS-SUMMARY",
+            "CLAIM-SEC-0001525769-26-000039-FILING",
+            "CLAIM-SIG-CONSUMPTION-DOWN-2026-09-15:UK-09"
+          ]
+        },
+        {
+          "text": "주요 미국 주가지수가 모두 하락했다. (수동 근거 연결 신호 RISK_OFF)",
+          "nature": "INFERENCE",
+          "evidenceIds": [
+            "SPX-2026-09-15",
+            "SPX-2026-09-15",
+            "IXIC-2026-09-15",
+            "RUT-2026-09-15"
+          ],
+          "claimIds": [
+            "CLAIM-SPX-2026-09-15-CLOSE",
+            "CLAIM-IXIC-2026-09-15-CLOSE",
+            "CLAIM-RUT-2026-09-15-CLOSE",
+            "CLAIM-SIG-RISK-OFF-2026-09-15:UK-13"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section-5",
+      "title": "주요 기업과 산업",
+      "items": [
+        {
+          "text": "PLAY · Dave & Buster's 2026 회계연도 2분기 실적: 매출은 5억4410만달러로 전년 동기보다 2.4% 감소했고, 동일점포 매출은 2.9% 줄었다. 희석 EPS는 0.36달러 순손실로 전환됐다.",
+          "nature": "CONFIRMED_FACT",
+          "evidenceIds": [
+            "PLAY-Q2-2026-RESULTS"
+          ],
+          "claimIds": [
+            "CLAIM-PLAY-Q2-2026-RESULTS-SUMMARY",
+            "CLAIM-SIG-CONSUMPTION-DOWN-2026-09-15:UK-09"
+          ]
+        },
+        {
+          "text": "PLAY 8-K: 2026년 9월 14일 8-K 제출; 2026 회계연도 2분기 실적 자료 첨부",
+          "nature": "CONFIRMED_FACT",
+          "evidenceIds": [
+            "SEC-0001525769-26-000039"
+          ],
+          "claimIds": [
+            "CLAIM-SEC-0001525769-26-000039-FILING",
+            "CLAIM-SIG-CONSUMPTION-DOWN-2026-09-15:UK-09"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section-6",
+      "title": "한국시장 영향",
+      "items": [
+        {
+          "text": "Consumer: NEGATIVE, 강도 2/5, 근거 A, 신뢰도 80/100 (OK). 수동 확인 신호 CONSUMPTION_DOWN → DEMAND → Consumer. 인과관계 확정이나 수익률 예측이 아닌 조건부 전달경로입니다. 반대변수: 원화 환율과 외국인 수급; 국내 소비 회복; 환율·국내 수급·기존 주가 반영 확인 필요. 유효기간 SHORT_TERM. 규칙 UK-09@1.0.0.",
+          "nature": "INFERENCE",
+          "evidenceIds": [
+            "PLAY-Q2-2026-RESULTS",
+            "SEC-0001525769-26-000039"
+          ],
+          "claimIds": [
+            "CLAIM-PLAY-Q2-2026-RESULTS-SUMMARY",
+            "CLAIM-SEC-0001525769-26-000039-FILING",
+            "CLAIM-SIG-CONSUMPTION-DOWN-2026-09-15:UK-09"
+          ]
+        },
+        {
+          "text": "Finance: NEGATIVE, 강도 2/5, 근거 A, 신뢰도 80/100 (OK). 수동 확인 신호 RISK_OFF → RISK_SENTIMENT → Finance. 인과관계 확정이나 수익률 예측이 아닌 조건부 전달경로입니다. 반대변수: 원화 환율과 외국인 수급; 국내 유입 자금; 환율·국내 수급·기존 주가 반영 확인 필요. 유효기간 SHORT_TERM. 규칙 UK-13@1.0.0.",
+          "nature": "INFERENCE",
+          "evidenceIds": [
+            "SPX-2026-09-15",
+            "IXIC-2026-09-15",
+            "RUT-2026-09-15"
+          ],
+          "claimIds": [
+            "CLAIM-SPX-2026-09-15-CLOSE",
+            "CLAIM-IXIC-2026-09-15-CLOSE",
+            "CLAIM-RUT-2026-09-15-CLOSE",
+            "CLAIM-SIG-RISK-OFF-2026-09-15:UK-13"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section-7",
+      "title": "오늘의 일정과 체크리스트",
+      "items": [
+        {
+          "text": "수동 입력 일정(출처·시각 검수 필요): 2026-09-16 한국 정규장",
+          "nature": "EXPECTATION",
+          "evidenceIds": []
+        },
+        {
+          "text": "수치·기준시각·원문·반대변수 확인, 샘플 혼입 확인, 수동 발행 검수 완료 여부 확인.",
+          "nature": "OPINION",
+          "evidenceIds": []
+        }
+      ]
+    },
+    {
+      "id": "section-8",
+      "title": "출처 및 관련 기사",
+      "items": [
+        {
+          "text": "SP_DJI — https://www.spglobal.com/spdji/en/indices/equity/sp-500/ (관측 2026-09-15T20:00:00Z, 수집 2026-09-15T22:30:00Z)",
+          "nature": "CONFIRMED_FACT",
+          "evidenceIds": [
+            "SPX-2026-09-15"
+          ],
+          "claimIds": [
+            "CLAIM-SPX-2026-09-15-CLOSE",
+            "CLAIM-SIG-RISK-OFF-2026-09-15:UK-13"
+          ]
+        },
+        {
+          "text": "SP_DJI — https://www.spglobal.com/spdji/en/indices/equity/dow-jones-industrial-average/ (관측 2026-09-15T20:00:00Z, 수집 2026-09-15T22:30:00Z)",
+          "nature": "CONFIRMED_FACT",
+          "evidenceIds": [
+            "DJIA-2026-09-15"
+          ],
+          "claimIds": [
+            "CLAIM-DJIA-2026-09-15-CLOSE"
+          ]
+        },
+        {
+          "text": "NASDAQ — https://www.nasdaq.com/market-activity/index/comp (관측 2026-09-15T20:00:00Z, 수집 2026-09-15T22:30:00Z)",
+          "nature": "CONFIRMED_FACT",
+          "evidenceIds": [
+            "IXIC-2026-09-15"
+          ],
+          "claimIds": [
+            "CLAIM-IXIC-2026-09-15-CLOSE",
+            "CLAIM-SIG-RISK-OFF-2026-09-15:UK-13"
+          ]
+        },
+        {
+          "text": "FTSE_RUSSELL — https://www.lseg.com/en/ftse-russell/indices/russell-2000-index (관측 2026-09-15T20:00:00Z, 수집 2026-09-15T22:30:00Z)",
+          "nature": "CONFIRMED_FACT",
+          "evidenceIds": [
+            "RUT-2026-09-15"
+          ],
+          "claimIds": [
+            "CLAIM-RUT-2026-09-15-CLOSE",
+            "CLAIM-SIG-RISK-OFF-2026-09-15:UK-13"
+          ]
+        },
+        {
+          "text": "CORPORATE_IR — https://ir.daveandbusters.com/node/18151 (관측 2026-09-14T20:00:00Z, 수집 2026-09-15T22:40:00Z)",
+          "nature": "CONFIRMED_FACT",
+          "evidenceIds": [
+            "PLAY-Q2-2026-RESULTS"
+          ],
+          "claimIds": [
+            "CLAIM-PLAY-Q2-2026-RESULTS-SUMMARY",
+            "CLAIM-SIG-CONSUMPTION-DOWN-2026-09-15:UK-09"
+          ]
+        },
+        {
+          "text": "SEC_EDGAR — https://data.sec.gov/submissions/CIK0001525769.json (관측 2026-09-14T20:13:28Z, 수집 2026-09-15T22:40:00Z)",
+          "nature": "CONFIRMED_FACT",
+          "evidenceIds": [
+            "SEC-0001525769-26-000039"
+          ],
+          "claimIds": [
+            "CLAIM-SEC-0001525769-26-000039-FILING",
+            "CLAIM-SIG-CONSUMPTION-DOWN-2026-09-15:UK-09"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section-9",
+      "title": "해시태그",
+      "items": [
+        {
+          "text": "#미국증시 #시장마감 #한국시장",
+          "nature": "CONFIRMED_FACT",
+          "evidenceIds": []
+        }
+      ]
+    }
+  ],
+  "seoTitle": "2026-09-15 미국시장 마감과 한국시장 전달경로",
+  "threeLineSummary": [
+    "미국 기준 거래일 2026-09-15; 거래일 상태 OK.",
+    "주요 마감 흐름: SPX 7585.73 (-0.45%), IXIC 25981.57 (-0.78%). 검증 통과 마감 자료 7건.",
+    "조건부 한국 영향 4건, 검수 항목 1건. 모든 영향 판단은 추론이며 발행 전 출처 확인이 필요합니다."
+  ]
+}
