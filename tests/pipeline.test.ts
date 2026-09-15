@@ -477,7 +477,8 @@ test('Sprint 2G Blogger preview preserves SEO, glossary, labels, sources and hid
   assert.equal(preview.status,'PREVIEW_READY');
   assert.equal(preview.previewUrl,'https://preview.local/motus/daily-market-2026-09-11');
   assert.match(preview.title,/^MOTUS Daily Market \| 2026-09-11/);
-  assert.equal(preview.postUrl,null);
+  assert.equal(preview.draftPostId,null);
+  assert.equal(preview.publicPostUrl,null);
   assert.ok(preview.labels.includes('미국증시'));
   assert.ok(preview.hashtags.includes('#미국증시'));
   assert.equal(preview.metadata.brand,'MOTUS');
@@ -504,7 +505,7 @@ test('Sprint 2G Blogger state transition, dry-run publish and credential failure
   const dryRun=await publishBloggerPublication(approved,new DryRunBloggerAdapter(),publishingConfig,{audience:'admin',action:'BLOGGER_PUBLISH'},{dryRun:true});
   assert.equal(dryRun.status,'APPROVED');
   assert.equal(dryRun.dryRun,true);
-  assert.equal(dryRun.postUrl,null);
+  assert.equal(dryRun.publicPostUrl,null);
   const failed=await publishBloggerPublication(approved,new DryRunBloggerAdapter(),publishingConfig,{audience:'admin',action:'BLOGGER_PUBLISH'});
   assert.equal(failed.status,'FAILED');
   assert.equal(failed.error,'missing credential');
@@ -512,10 +513,11 @@ test('Sprint 2G Blogger state transition, dry-run publish and credential failure
 test('Sprint 2G Blogger publish stores real adapter URL and prevents duplicate publish',async()=>{
   const result=runReal(realFixture());
   const approved=approveBloggerPublication(createBloggerPreview(result.report,result.evidence,publishingConfig),{audience:'admin',action:'BLOGGER_APPROVE'});
-  const adapter=new ConfiguredBloggerAdapter(async record=>({url:`https://real-blog.test/posts/${record.slug}`,providerPostId:'POST-1',publishedAt:'2026-09-14T00:12:00+09:00'}));
+  const adapter=new ConfiguredBloggerAdapter(async record=>({publicPostUrl:`https://real-blog.test/posts/${record.slug}`,postId:'POST-1',publishedAt:'2026-09-14T00:12:00+09:00'}));
   const published=await publishBloggerPublication(approved,adapter,{...publishingConfig,credentialAvailable:true},{audience:'admin',action:'BLOGGER_PUBLISH'});
   assert.equal(published.status,'PUBLISHED');
-  assert.equal(published.postUrl,'https://real-blog.test/posts/daily-market-2026-09-11');
+  assert.equal(published.draftPostId,'POST-1');
+  assert.equal(published.publicPostUrl,'https://real-blog.test/posts/daily-market-2026-09-11');
   assert.deepEqual(resolveBloggerUrl(published),{url:'https://real-blog.test/posts/daily-market-2026-09-11',state:'PUBLISHED'});
   await assert.rejects(()=>publishBloggerPublication(published,adapter,{...publishingConfig,credentialAvailable:true},{audience:'admin',action:'BLOGGER_PUBLISH'}),/already-published reportId/);
 });
@@ -534,12 +536,12 @@ test('Sprint 2G A4 QR and Naver package switch from preview URL to published Blo
   const before=await renderA4MasterOnDemand(result.report,result.evidence,dir,{audience:'admin',action:'A4_REPORT_RENDER'},{regenerate:true,bloggerRecord:preview,publishingConfig});
   assert.equal(before.layout.qrTargetUrl,'');
   assert.equal(before.naverPackage.googleBloggerUrl,'');
-  const published={...preview,status:'PUBLISHED' as const,postUrl:'https://real-blog.test/posts/daily-market-2026-09-11'};
+  const published={...preview,status:'PUBLISHED' as const,publicPostUrl:'https://real-blog.test/posts/daily-market-2026-09-11'};
   const after=await renderA4MasterOnDemand(result.report,result.evidence,dir,{audience:'admin',action:'A4_REPORT_RENDER'},{regenerate:true,bloggerRecord:published,publishingConfig});
-  assert.equal(after.layout.qrTargetUrl,published.postUrl);
-  assert.equal(after.naverPackage.googleBloggerUrl,published.postUrl);
+  assert.equal(after.layout.qrTargetUrl,published.publicPostUrl);
+  assert.equal(after.naverPackage.googleBloggerUrl,published.publicPostUrl);
   const naver=JSON.parse(readFileSync(after.naverPackagePath,'utf8')) as Record<string,string|string[]>;
-  assert.equal(naver.googleBloggerUrl,published.postUrl);
+  assert.equal(naver.googleBloggerUrl,published.publicPostUrl);
   assert.doesNotMatch(readFileSync(after.htmlPath,'utf8'),/blog\.example\.com|CLAIM-|confidenceScore|verificationStatus/);
 });
 
@@ -556,7 +558,7 @@ test('Blogger failed publication can be re-approved without deleting failure aud
   assert.equal(retried.history.at(-1)?.reason,'admin approved Blogger publication retry after failed attempt');
 });
 
-test('Sprint 2H Google adapter creates an approved Blogger post as draft and preserves editorial metadata',async()=>{
+test('DRAFT plus Blogger root URL stores only draftPostId and leaves publicPostUrl null',async()=>{
   const result=runReal(realFixture());
   const approved=approveBloggerPublication(createBloggerPreview(result.report,result.evidence,publishingConfig),{audience:'admin',action:'BLOGGER_APPROVE'});
   let requestUrl='';
@@ -564,15 +566,15 @@ test('Sprint 2H Google adapter creates an approved Blogger post as draft and pre
   const fakeFetch:typeof fetch=async(input,init)=>{
     requestUrl=String(input);
     requestInit=init;
-    return new Response(JSON.stringify({id:'DRAFT-POST-1',url:'https://verified-blog.test/2026/09/golden-day.html',status:'DRAFT',updated:'2026-09-15T01:30:00Z'}),{status:200,headers:{'content-type':'application/json'}});
+    return new Response(JSON.stringify({id:'DRAFT-POST-1',url:'https://motusnova.blogspot.com/',status:'DRAFT',updated:'2026-09-15T01:30:00Z'}),{status:200,headers:{'content-type':'application/json'}});
   };
   const adapter=new GoogleBloggerApiAdapter(name=>name==='BLOGGER_OAUTH_TOKEN'?'secret-access-token':undefined,fakeFetch);
   const config={...publishingConfig,blogId:'123456789',credentialEnvironmentVariable:'BLOGGER_OAUTH_TOKEN',publishAsDraft:true};
   const draft=await publishBloggerPublication(approved,adapter,config,{audience:'admin',action:'BLOGGER_PUBLISH'});
   assert.equal(draft.status,'DRAFT');
-  assert.equal(draft.providerPostId,'DRAFT-POST-1');
-  assert.equal(draft.postUrl,'https://verified-blog.test/2026/09/golden-day.html');
-  assert.deepEqual(resolveBloggerUrl(draft),{url:draft.postUrl,state:'DRAFT'});
+  assert.equal(draft.draftPostId,'DRAFT-POST-1');
+  assert.equal(draft.publicPostUrl,null);
+  assert.deepEqual(resolveBloggerUrl(draft),{url:'',state:'DRAFT'});
   assert.match(requestUrl,/\/blogs\/123456789\/posts\?isDraft=true/);
   assert.equal((requestInit?.headers as Record<string,string>).authorization,'Bearer secret-access-token');
   const payload=JSON.parse(String(requestInit?.body)) as {title:string;content:string;labels?:string[];customMetaData?:string};
@@ -595,19 +597,35 @@ test('Sprint 2H Google adapter never calls Blogger without both blogId and crede
   const withoutToken=await publishBloggerPublication(approved,missingToken,{...publishingConfig,blogId:'123'},{audience:'admin',action:'BLOGGER_PUBLISH'});
   assert.equal(withoutBlog.status,'FAILED');
   assert.equal(withoutToken.status,'FAILED');
-  assert.equal(withoutBlog.postUrl,null);
-  assert.equal(withoutToken.postUrl,null);
+  assert.equal(withoutBlog.publicPostUrl,null);
+  assert.equal(withoutToken.publicPostUrl,null);
   assert.equal(calls,0);
 });
 
-test('Sprint 2H A4 and Naver use an actual Blogger draft URL',async()=>{
+test('Blogger draft root URL never propagates to A4 or Naver',async()=>{
   const result=runReal(realFixture());
   const dir=mkdtempSync(join(tmpdir(),'a4-2h-draft-'));
-  const draft={...createBloggerPreview(result.report,result.evidence,publishingConfig),status:'DRAFT' as const,postUrl:'https://verified-blog.test/2026/09/golden-day.html',providerPostId:'DRAFT-POST-1'};
-  const output=await renderA4MasterOnDemand(result.report,result.evidence,dir,{audience:'admin',action:'A4_REPORT_RENDER'},{regenerate:true,bloggerRecord:draft,publishingConfig});
-  assert.equal(output.layout.qrTargetUrl,draft.postUrl);
-  assert.equal(output.naverPackage.googleBloggerUrl,draft.postUrl);
-  assert.match(output.naverPackage.intro,/MOTUS 초안 URL/);
+  const rootUrl='https://motusnova.blogspot.com/';
+  const draft={...createBloggerPreview(result.report,result.evidence,publishingConfig),status:'DRAFT' as const,draftPostId:'DRAFT-POST-1',publicPostUrl:null};
+  const output=await renderA4MasterOnDemand(result.report,result.evidence,dir,{audience:'admin',action:'A4_REPORT_RENDER'},{regenerate:true,bloggerUrl:rootUrl,bloggerRecord:draft,publishingConfig});
+  assert.equal(output.layout.qrTargetUrl,'');
+  assert.equal(output.naverPackage.googleBloggerUrl,'');
+  assert.doesNotMatch(readFileSync(output.htmlPath,'utf8'),new RegExp(rootUrl.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')));
+  assert.doesNotMatch(JSON.stringify(output.naverPackage),new RegExp(rootUrl.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')));
+  assert.match(output.naverPackage.intro,/MOTUS 초안은 검수 중/);
+});
+
+test('existing Blogger draftPostId blocks a duplicate remote insert',async()=>{
+  const result=runReal(realFixture());
+  const approved=approveBloggerPublication(createBloggerPreview(result.report,result.evidence,publishingConfig),{audience:'admin',action:'BLOGGER_APPROVE'});
+  const existing={...approved,draftPostId:'4610978170890431016'};
+  let calls=0;
+  const adapter=new ConfiguredBloggerAdapter(async()=>{
+    calls+=1;
+    return {publicPostUrl:null,postId:'SHOULD-NOT-BE-CREATED',status:'DRAFT'};
+  });
+  await assert.rejects(()=>publishBloggerPublication(existing,adapter,{...publishingConfig,credentialAvailable:true},{audience:'admin',action:'BLOGGER_PUBLISH'}),/duplicate publish: draft post ID already exists/);
+  assert.equal(calls,0);
 });
 
 test('MOTUS publisher stays separate from the market engine and supports global metadata categories',()=>{
@@ -692,7 +710,7 @@ test('refresh failure blocks Blogger publish without deprecated-token fallback',
   const env:Record<string,string>={BLOGGER_REFRESH_TOKEN:'invalid-refresh',BLOGGER_CLIENT_ID:'client',BLOGGER_CLIENT_SECRET:'secret',BLOGGER_OAUTH_TOKEN:'deprecated-value'};
   const failed=await publishBloggerPublication(approved,new GoogleBloggerApiAdapter(name=>env[name],fakeFetch),{...publishingConfig,blogId:'blog-id'},{audience:'admin',action:'BLOGGER_PUBLISH'});
   assert.equal(failed.status,'FAILED');
-  assert.equal(failed.postUrl,null);
+  assert.equal(failed.publicPostUrl,null);
   assert.deepEqual(calls,[BLOGGER_TOKEN_ENDPOINT]);
   assert.doesNotMatch(JSON.stringify(failed),/invalid-refresh|deprecated-value/);
 });

@@ -4,10 +4,10 @@ import type { EvidencePackage, InputBundle, MarketSnapshot, ReportRecord } from 
 import { renderDailyEditorial } from './editorial.js';
 import { assertAdminRequest, type AdminRequestContext, renderA4AdminRoute } from './admin.js';
 import type { BloggerPublicationRecord, BloggerPublishingConfig } from './blogger.js';
-import { resolveBloggerUrl } from './blogger.js';
+import { isPublicBloggerPostUrl, resolveBloggerUrl } from './blogger.js';
 import { MOTUS_CTA_TEXT } from '../content/publisher-schema.js';
 
-export const A4_MASTER_RENDERER_VERSION = '2F.A4MASTER.1.0';
+export const A4_MASTER_RENDERER_VERSION = '2F.A4MASTER.1.1';
 const A4 = { width: 794, height: 1123 };
 
 export interface A4MasterPackage {
@@ -135,13 +135,13 @@ function buildA4Model(report:ReportRecord,evidence:EvidencePackage,bloggerTarget
   const risks=['단기금리 추가 상승 시 성장주 밸류에이션 압박','단일 기업 공시를 산업 전체 수요로 과잉 해석할 위험','유가 하락이 수요 둔화 신호로 해석될 가능성'];
   const sources=evidence.records.filter(record=>record.sourceUrl).slice(0,4).map((record,index)=>`Source ${index+1}: ${record.sourceUrl}`);
   const naverIntro=`${report.tradingDate} 미국장은 지수 상승과 VIX 하락으로 위험선호가 살아났지만, 2년물 금리 상승이 남긴 부담도 함께 봐야 했습니다. A4 요약과 함께 살펴보세요. ${MOTUS_CTA_TEXT}.`;
-  const stateSuffix=bloggerTarget.state==='PUBLISHED'?'':bloggerTarget.state==='DRAFT'?' 연결된 MOTUS 초안 URL입니다. 공개 전 최종 검수를 거쳐야 합니다.':' 실제 MOTUS post URL이 확정되기 전에는 상세분석 링크를 제공하지 않습니다.';
+  const stateSuffix=bloggerTarget.state==='PUBLISHED'?'':bloggerTarget.state==='DRAFT'?' MOTUS 초안은 검수 중이며, 공개 permalink 확정 후 상세분석 링크가 제공됩니다.':' 실제 MOTUS post URL이 확정되기 전에는 상세분석 링크를 제공하지 않습니다.';
   return {title,subtitle:headline,tradingDate:report.tradingDate,metrics,executive,drivers,korea,checkpoints,risks,sources,hashtags:daily.seo.hashtags,googleBloggerUrl,naverIntro:`${naverIntro}${stateSuffix}`,qr:qrMatrix(googleBloggerUrl),contentBottomPx:1070};
 }
 
 
 function resolveA4BloggerTarget(options:{bloggerUrl?:string; bloggerRecord?:BloggerPublicationRecord|null; publishingConfig?:BloggerPublishingConfig}):{url:string;state:'PUBLISHED'|'DRAFT'|'PREVIEW'|'UNRESOLVED'} {
-  if(options.bloggerUrl) return {url:options.bloggerUrl,state:'PUBLISHED'};
+  if(isPublicBloggerPostUrl(options.bloggerUrl)) return {url:options.bloggerUrl!,state:'PUBLISHED'};
   const fromRecord=resolveBloggerUrl(options.bloggerRecord);
   if(fromRecord.state==='PUBLISHED'||fromRecord.state==='DRAFT') return fromRecord;
   return {url:'',state:'UNRESOLVED'};

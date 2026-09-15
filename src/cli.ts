@@ -116,7 +116,7 @@ async function writeBloggerPublish(publicationPath:string|undefined,dryRun:boole
   const adapter=dryRun?new DryRunBloggerAdapter():new GoogleBloggerApiAdapter();
   const published=await publishBloggerPublication(record,adapter,await readPublishingConfig(),{audience:'admin',action:'BLOGGER_PUBLISH'},{dryRun});
   const paths=await writePublicationArtifacts(published);
-  console.log(JSON.stringify({status:published.status==='FAILED'?'FAILED':'PASS',reportId:published.reportId,publicationStatus:published.status,postUrl:published.postUrl,dryRun:published.dryRun,error:published.error,files:paths},null,2));
+  console.log(JSON.stringify({status:published.status==='FAILED'?'FAILED':'PASS',reportId:published.reportId,publicationStatus:published.status,draftPostId:published.draftPostId,publicPostUrl:published.publicPostUrl,dryRun:published.dryRun,error:published.error,files:paths},null,2));
 }
 async function writePublishingConsole(publicationPath:string|undefined) {
   const record=publicationPath?JSON.parse(await readFile(resolve(publicationPath),'utf8')) as BloggerPublicationRecord:null;

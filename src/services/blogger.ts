@@ -35,8 +35,8 @@ export interface BloggerPublicationRecord {
   metadata: GlobalContentMetadata;
   previewUrl: string;
   placeholderUrl: string;
-  postUrl: string|null;
-  providerPostId?: string|null;
+  draftPostId: string|null;
+  publicPostUrl: string|null;
   html: string;
   glossary: EditorialTerm[];
   relatedLinks: { title: string; url: string }[];
@@ -47,16 +47,16 @@ export interface BloggerPublicationRecord {
   updatedAt: string;
   history: BloggerHistoryEvent[];
 }
-export interface BloggerPublishResult { url: string; providerPostId?: string; publishedAt?: string; status?: 'DRAFT'|'PUBLISHED' }
+export interface BloggerPublishResult { publicPostUrl?: string|null; postId?: string; publishedAt?: string; status?: 'DRAFT'|'PUBLISHED' }
 export interface BloggerAdapter {
   name: string;
   hasCredential(config:BloggerPublishingConfig): boolean;
   publish(record:BloggerPublicationRecord,config:BloggerPublishingConfig): Promise<BloggerPublishResult>;
 }
 
-export const BLOGGER_PUBLICATION_VERSION = '2G.BLOGGER.1.0';
+export const BLOGGER_PUBLICATION_VERSION = '2I.BLOGGER.2.0';
 export const GOOGLE_BLOGGER_ADAPTER_VERSION = '2H.GOOGLEBLOGGER.1.0';
-const internalLeakPattern=/\b(CLAIM-|AUTO_VALIDATED|REVIEW_REQUIRED|BLOCKED|DATA_NOT_CONNECTED|confidenceScore|verificationStatus|publicationVersion|history|providerPostId)\b/i;
+const internalLeakPattern=/\b(CLAIM-|AUTO_VALIDATED|REVIEW_REQUIRED|BLOCKED|DATA_NOT_CONNECTED|confidenceScore|verificationStatus|publicationVersion|history|draftPostId)\b/i;
 
 export function createBloggerPreview(report:ReportRecord,evidence:EvidencePackage,config:BloggerPublishingConfig,now='2026-09-14T00:00:00+09:00'):BloggerPublicationRecord {
   validatePublishingConfig(config);
@@ -84,8 +84,8 @@ export function createBloggerPreview(report:ReportRecord,evidence:EvidencePackag
     metadata,
     previewUrl,
     placeholderUrl,
-    postUrl:null,
-    providerPostId:null,
+    draftPostId:null,
+    publicPostUrl:null,
     html,
     glossary:editorial.terms,
     relatedLinks,
@@ -111,16 +111,20 @@ export async function publishBloggerPublication(record:BloggerPublicationRecord,
   validatePublishingConfig(config);
   const now=options.now??'2026-09-14T00:10:00+09:00';
   if(record.status==='PUBLISHED') throw new Error('already-published reportId');
-  if(record.postUrl) throw new Error('duplicate publish: post URL already exists');
+  if(record.publicPostUrl) throw new Error('duplicate publish: public post URL already exists');
+  if(record.draftPostId) throw new Error('duplicate publish: draft post ID already exists');
   if(record.status!=='APPROVED') throw new Error(`cannot publish from ${record.status}`);
   if(options.dryRun) return transition(record,'APPROVED','dry-run publish checked adapter path without external write',now,{dryRun:true,error:null});
   if(!adapter.hasCredential(config)) return transition(record,'FAILED','missing Blogger credential; external publish was not attempted',now,{error:'missing credential',dryRun:false});
   try {
     const result=await adapter.publish(record,config);
-    if(!result.url) return transition(record,'FAILED','Blogger adapter returned missing URL',now,{error:'missing URL',dryRun:false});
     const status=result.status??'PUBLISHED';
-    const reason=status==='DRAFT'?'Blogger draft created after human approval and remote post URL stored':'Blogger publish completed and post URL stored';
-    return transition(record,status,reason,result.publishedAt??now,{postUrl:result.url,providerPostId:result.providerPostId??null,error:null,dryRun:false});
+    if(status==='DRAFT') {
+      if(!result.postId) return transition(record,'FAILED','Blogger adapter returned missing draft post ID',now,{error:'missing draft post ID',dryRun:false});
+      return transition(record,'DRAFT','Blogger draft created after human approval; public permalink remains unresolved',result.publishedAt??now,{draftPostId:result.postId,publicPostUrl:null,error:null,dryRun:false});
+    }
+    if(!isPublicBloggerPostUrl(result.publicPostUrl)) return transition(record,'FAILED','Blogger adapter returned missing or non-article public permalink',now,{error:'missing public permalink',dryRun:false});
+    return transition(record,'PUBLISHED','Blogger publish completed and verified public permalink stored',result.publishedAt??now,{draftPostId:result.postId??record.draftPostId,publicPostUrl:result.publicPostUrl!,error:null,dryRun:false});
   } catch(error) {
     const message=error instanceof Error?error.message:'network error';
     return transition(record,'FAILED',`Blogger publish failed: ${message}`,now,{error:message,dryRun:false});
@@ -172,9 +176,10 @@ export class GoogleBloggerApiAdapter implements BloggerAdapter {
     if(!response.ok) throw new Error(`Blogger API ${response.status}: ${safeGoogleApiError(await response.text())}`);
     const post=await response.json() as GoogleBloggerPost;
     if(!post.id) throw new Error('Blogger API response missing post id');
-    if(!post.url) throw new Error('Blogger API response missing post URL');
+    if(!isDraft&&!post.url) throw new Error('Blogger API response missing public post URL');
     const publishedAt=post.published??post.updated;
-    return {url:post.url,providerPostId:post.id,...(publishedAt?{publishedAt}:{}),status:isDraft?'DRAFT':'PUBLISHED'};
+    const publicPostUrl=isDraft?null:post.url!;
+    return {publicPostUrl,postId:post.id,...(publishedAt?{publishedAt}:{}),status:isDraft?'DRAFT':'PUBLISHED'};
   }
 
   private readConfigured(environmentVariable:string|null|undefined):string|undefined {
@@ -202,10 +207,18 @@ export class GoogleBloggerApiAdapter implements BloggerAdapter {
 }
 
 export function resolveBloggerUrl(record:BloggerPublicationRecord|null|undefined): { url: string; state: 'PUBLISHED'|'DRAFT'|'PREVIEW'|'UNRESOLVED' } {
-  if(record?.status==='PUBLISHED'&&record.postUrl) return {url:record.postUrl,state:'PUBLISHED'};
-  if(record?.status==='DRAFT'&&record.postUrl) return {url:record.postUrl,state:'DRAFT'};
+  if(record?.status==='PUBLISHED'&&record.publicPostUrl&&isPublicBloggerPostUrl(record.publicPostUrl)) return {url:record.publicPostUrl,state:'PUBLISHED'};
+  if(record?.status==='DRAFT') return {url:'',state:'DRAFT'};
   if(record?.previewUrl) return {url:record.previewUrl,state:'PREVIEW'};
   return {url:'about:blank#blogger-url-unresolved',state:'UNRESOLVED'};
+}
+
+export function isPublicBloggerPostUrl(value:string|null|undefined):boolean {
+  if(!value?.trim()) return false;
+  try {
+    const url=new URL(value);
+    return (url.protocol==='https:'||url.protocol==='http:')&&url.pathname.replace(/\/+$/,'')!=='';
+  } catch { return false; }
 }
 
 export function renderPublishingConsole(record:BloggerPublicationRecord|null,context:AdminRequestContext):string {
