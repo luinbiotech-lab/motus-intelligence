@@ -1,5 +1,5 @@
 import { createServer, type Server } from 'node:http';
-import { randomBytes } from 'node:crypto';
+import { createHash, randomBytes } from 'node:crypto';
 import { spawn } from 'node:child_process';
 
 export const BLOGGER_OAUTH_SCOPE='https://www.googleapis.com/auth/blogger';
@@ -21,16 +21,23 @@ export interface BloggerOAuthBootstrapDependencies {
   environment?:EnvironmentReader;
   fetcher?:FetchLike;
   openUrl?:(url:string)=>Promise<void>;
-  storeSecret?:(secret:string)=>Promise<void>;
+  persistSecret?:(secret:string)=>Promise<string>;
   timeoutMs?:number;
   loginHint?:string;
 }
 
 export interface BloggerOAuthBootstrapResult {
   blogIdConfigured:true;
-  scope:typeof BLOGGER_OAUTH_SCOPE;
+  oauthCodeExchange:'PASS';
+  refreshTokenReceived:'YES';
+  immediateRefreshSelfTest:'PASS';
+  expiresIn:number;
+  scope:string;
   loginHint:string;
   refreshTokenStored:true;
+  tokenFingerprintMatch:'YES'|'NO';
+  storedTokenCrLfContamination:'YES'|'NO';
+  storedTokenSurroundingQuoteContamination:'YES'|'NO';
 }
 
 export function readBloggerOAuthEnvironment(environment:EnvironmentReader=(name)=>process.env[name]):BloggerOAuthEnvironment {
@@ -73,8 +80,21 @@ export async function exchangeAuthorizationCode(input:{code:string;clientId:stri
   const response=await fetcher(BLOGGER_TOKEN_ENDPOINT,{method:'POST',headers:{'content-type':'application/x-www-form-urlencoded'},body});
   if(!response.ok) throw new Error(`Blogger OAuth token exchange failed (${response.status})`);
   const token=await response.json() as OAuthTokenResponse;
-  if(!token.refresh_token?.trim()) throw new Error('Blogger OAuth did not issue a refresh token; revoke the prior grant and retry with consent');
-  return token.refresh_token.trim();
+  if(typeof token.refresh_token!=='string'||token.refresh_token.length===0) throw new Error('Blogger OAuth did not issue a refresh token; revoke the prior grant and retry with consent');
+  return token.refresh_token;
+}
+
+export async function testRefreshTokenImmediately(input:{refreshToken:string;clientId:string;clientSecret:string},fetcher:FetchLike=fetch):Promise<{expiresIn:number;scope:string}> {
+  const body=new URLSearchParams({client_id:input.clientId,client_secret:input.clientSecret,refresh_token:input.refreshToken,grant_type:'refresh_token'});
+  const response=await fetcher(BLOGGER_TOKEN_ENDPOINT,{method:'POST',headers:{'content-type':'application/x-www-form-urlencoded'},body});
+  if(!response.ok) {
+    const error=await safeOAuthError(response);
+    throw new Error(`Blogger OAuth immediate refresh self-test failed (${response.status}): ${error}`);
+  }
+  const token=await response.json() as OAuthTokenResponse;
+  if(!token.access_token?.trim()) throw new Error('Blogger OAuth immediate refresh self-test returned no access token');
+  if(!Number.isFinite(token.expires_in)||token.expires_in!<=0) throw new Error('Blogger OAuth immediate refresh self-test returned invalid expires_in');
+  return {expiresIn:token.expires_in!,scope:token.scope?.trim()||BLOGGER_OAUTH_SCOPE};
 }
 
 export async function runBloggerOAuthBootstrap(dependencies:BloggerOAuthBootstrapDependencies={}):Promise<BloggerOAuthBootstrapResult> {
@@ -87,8 +107,22 @@ export async function runBloggerOAuthBootstrap(dependencies:BloggerOAuthBootstra
     await (dependencies.openUrl??openExternalUrl)(authorizationUrl.toString());
     const code=await callback.code;
     const refreshToken=await exchangeAuthorizationCode({code,clientId:environment.clientId,clientSecret:environment.clientSecret,redirectUri:callback.redirectUri},dependencies.fetcher);
-    await (dependencies.storeSecret??copySecretToClipboard)(refreshToken);
-    return {blogIdConfigured:true,scope:BLOGGER_OAUTH_SCOPE,loginHint:dependencies.loginHint??BLOGGER_LOGIN_HINT,refreshTokenStored:true};
+    const selfTest=await testRefreshTokenImmediately({refreshToken,clientId:environment.clientId,clientSecret:environment.clientSecret},dependencies.fetcher);
+    const storedToken=await (dependencies.persistSecret??persistRefreshTokenToWindowsUserEnvironment)(refreshToken);
+    const inspection=inspectStoredRefreshToken(storedToken);
+    return {
+      blogIdConfigured:true,
+      oauthCodeExchange:'PASS',
+      refreshTokenReceived:'YES',
+      immediateRefreshSelfTest:'PASS',
+      expiresIn:selfTest.expiresIn,
+      scope:selfTest.scope,
+      loginHint:dependencies.loginHint??BLOGGER_LOGIN_HINT,
+      refreshTokenStored:true,
+      tokenFingerprintMatch:fingerprint(refreshToken)===fingerprint(storedToken)?'YES':'NO',
+      storedTokenCrLfContamination:inspection.crLf?'YES':'NO',
+      storedTokenSurroundingQuoteContamination:inspection.surroundingQuote?'YES':'NO'
+    };
   } finally {
     callback.close();
   }
@@ -156,14 +190,35 @@ async function openExternalUrl(url:string):Promise<void> {
   await spawnAndWait(command,args);
 }
 
-async function copySecretToClipboard(secret:string):Promise<void> {
-  const command=process.platform==='win32'?'clip.exe':process.platform==='darwin'?'pbcopy':'wl-copy';
-  await new Promise<void>((resolve,reject)=>{
-    const child=spawn(command,[],{stdio:['pipe','ignore','ignore'],windowsHide:true});
-    child.once('error',()=>reject(new Error('refresh token was issued but secure clipboard storage is unavailable')));
-    child.once('exit',code=>code===0?resolve():reject(new Error('refresh token was issued but secure clipboard storage failed')));
+async function persistRefreshTokenToWindowsUserEnvironment(secret:string):Promise<string> {
+  if(process.platform!=='win32') throw new Error('automatic BLOGGER_REFRESH_TOKEN storage requires Windows');
+  const script="[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new($false); $value=[Console]::In.ReadToEnd(); [Environment]::SetEnvironmentVariable('BLOGGER_REFRESH_TOKEN',$value,'User'); $stored=[Environment]::GetEnvironmentVariable('BLOGGER_REFRESH_TOKEN','User'); [Console]::Out.Write($stored)";
+  return await new Promise<string>((resolve,reject)=>{
+    const child=spawn('powershell.exe',['-NoLogo','-NoProfile','-NonInteractive','-Command',script],{stdio:['pipe','pipe','ignore'],windowsHide:true});
+    const output:Buffer[]=[];
+    let settled=false;
+    const fail=()=>{if(!settled){settled=true;reject(new Error('refresh token self-test passed but Windows User environment storage failed'));}};
+    child.stdout.on('data',(chunk:Buffer)=>output.push(chunk));
+    child.once('error',fail);
+    child.once('exit',code=>{
+      if(code!==0) return fail();
+      if(!settled){settled=true;resolve(Buffer.concat(output).toString('utf8'));}
+    });
     child.stdin.end(secret);
   });
+}
+
+function fingerprint(value:string):string { return createHash('sha256').update(value,'utf8').digest('hex').slice(0,8); }
+function inspectStoredRefreshToken(value:string):{crLf:boolean;surroundingQuote:boolean} {
+  const first=value[0];
+  const last=value[value.length-1];
+  return {crLf:value.includes('\r')||value.includes('\n'),surroundingQuote:first==='"'||first==="'"||last==='"'||last==="'"};
+}
+async function safeOAuthError(response:Response):Promise<string> {
+  try {
+    const parsed=JSON.parse(await response.text()) as {error?:string;error_description?:string};
+    return [parsed.error,parsed.error_description].filter(value=>typeof value==='string').join(' - ').slice(0,240)||'request failed';
+  } catch { return 'request failed'; }
 }
 
 async function spawnAndWait(command:string,args:string[]):Promise<void> {

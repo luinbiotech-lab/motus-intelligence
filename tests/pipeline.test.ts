@@ -16,7 +16,7 @@ import { buildDynamicTerms, decideContentOpportunities, renderBrokerageReportOnD
 import { renderA4MasterOnDemand } from '../src/services/a4-visual.js';
 import { publicCanRenderA4 } from '../src/services/admin.js';
 import { approveBloggerPublication, assertPublicBloggerHtmlSafe, ConfiguredBloggerAdapter, createBloggerPreview, DryRunBloggerAdapter, GoogleBloggerApiAdapter, publishBloggerPublication, renderPublishingConsole, resolveBloggerUrl, type BloggerPublishingConfig } from '../src/services/blogger.js';
-import { BLOGGER_OAUTH_SCOPE, BLOGGER_TOKEN_ENDPOINT, buildBloggerAuthorizationUrl, exchangeAuthorizationCode, readBloggerOAuthEnvironment, runBloggerOAuthBootstrap } from '../src/services/blogger-oauth.js';
+import { BLOGGER_OAUTH_SCOPE, BLOGGER_TOKEN_ENDPOINT, buildBloggerAuthorizationUrl, exchangeAuthorizationCode, readBloggerOAuthEnvironment, runBloggerOAuthBootstrap, testRefreshTokenImmediately } from '../src/services/blogger-oauth.js';
 const read=(p:string):unknown=>JSON.parse(readFileSync(p,'utf8'));
 const fixture=()=>structuredClone(read('data/fixtures/sample-day.json') as InputBundle);
 const realFixture=()=>structuredClone(read('data/manual/2026-09-11/input.json') as InputBundle);
@@ -684,7 +684,7 @@ test('refresh failure blocks Blogger publish without deprecated-token fallback',
   assert.doesNotMatch(JSON.stringify(failed),/invalid-refresh|deprecated-value/);
 });
 
-test('OAuth bootstrap completes through the loopback callback without logging or returning the token',async()=>{
+test('OAuth bootstrap self-tests then persists without logging or returning the token',async()=>{
   let stored='';
   let tokenCalls=0;
   const environment=(name:string)=>({BLOGGER_CLIENT_ID:'desktop-id',BLOGGER_CLIENT_SECRET:'desktop-secret',BLOGGER_BLOG_ID:'configured-blog'} as Record<string,string>)[name];
@@ -701,16 +701,30 @@ test('OAuth bootstrap completes through the loopback callback without logging or
     fetcher:async(input,init)=>{
       tokenCalls+=1;
       assert.equal(String(input),BLOGGER_TOKEN_ENDPOINT);
-      assert.equal((init?.body as URLSearchParams).get('code'),'callback-code');
-      return new Response(JSON.stringify({refresh_token:'clipboard-only-token'}),{status:200});
+      const body=init?.body as URLSearchParams;
+      if(tokenCalls===1) {
+        assert.equal(body.get('code'),'callback-code');
+        return new Response(JSON.stringify({refresh_token:'memory-only-token'}),{status:200});
+      }
+      assert.equal(body.get('grant_type'),'refresh_token');
+      assert.equal(body.get('refresh_token'),'memory-only-token');
+      return new Response(JSON.stringify({access_token:'discarded-access-token',expires_in:3600,scope:BLOGGER_OAUTH_SCOPE}),{status:200});
     },
-    storeSecret:async secret=>{stored=secret;},
+    persistSecret:async secret=>{stored=secret;return secret;},
     timeoutMs:2_000
   });
-  assert.equal(stored,'clipboard-only-token');
-  assert.equal(tokenCalls,1);
+  assert.equal(stored,'memory-only-token');
+  assert.equal(tokenCalls,2);
   assert.equal(result.refreshTokenStored,true);
-  assert.doesNotMatch(JSON.stringify(result),/clipboard-only-token|desktop-secret/);
+  assert.equal(result.oauthCodeExchange,'PASS');
+  assert.equal(result.refreshTokenReceived,'YES');
+  assert.equal(result.immediateRefreshSelfTest,'PASS');
+  assert.equal(result.expiresIn,3600);
+  assert.equal(result.scope,BLOGGER_OAUTH_SCOPE);
+  assert.equal(result.tokenFingerprintMatch,'YES');
+  assert.equal(result.storedTokenCrLfContamination,'NO');
+  assert.equal(result.storedTokenSurroundingQuoteContamination,'NO');
+  assert.doesNotMatch(JSON.stringify(result),/memory-only-token|discarded-access-token|desktop-secret/);
 });
 
 test('OAuth denial stops before token exchange and secret storage',async()=>{
@@ -727,9 +741,72 @@ test('OAuth denial stops before token exchange and secret storage',async()=>{
       await fetch(callback);
     },
     fetcher:async()=>{tokenCalls+=1;return new Response('{}',{status:200});},
-    storeSecret:async()=>{storeCalls+=1;},
+    persistSecret:async secret=>{storeCalls+=1;return secret;},
     timeoutMs:2_000
   }),/authorization was denied/);
   assert.equal(tokenCalls,0);
   assert.equal(storeCalls,0);
+});
+
+test('immediate refresh self-test reports metadata without returning the access token',async()=>{
+  const result=await testRefreshTokenImmediately({refreshToken:'memory-refresh',clientId:'desktop-id',clientSecret:'desktop-secret'},async(input,init)=>{
+    assert.equal(String(input),BLOGGER_TOKEN_ENDPOINT);
+    const body=init?.body as URLSearchParams;
+    assert.equal(body.get('grant_type'),'refresh_token');
+    assert.equal(body.get('refresh_token'),'memory-refresh');
+    return new Response(JSON.stringify({access_token:'must-not-escape',expires_in:3599,scope:BLOGGER_OAUTH_SCOPE}),{status:200});
+  });
+  assert.deepEqual(result,{expiresIn:3599,scope:BLOGGER_OAUTH_SCOPE});
+  assert.doesNotMatch(JSON.stringify(result),/must-not-escape|memory-refresh|desktop-secret/);
+});
+
+test('OAuth bootstrap does not persist when immediate refresh self-test fails',async()=>{
+  let tokenCalls=0;
+  let persistCalls=0;
+  const environment=(name:string)=>({BLOGGER_CLIENT_ID:'desktop-id',BLOGGER_CLIENT_SECRET:'desktop-secret',BLOGGER_BLOG_ID:'configured-blog'} as Record<string,string>)[name];
+  await assert.rejects(()=>runBloggerOAuthBootstrap({
+    environment,
+    openUrl:async authorizationUrl=>{
+      const url=new URL(authorizationUrl);
+      const callback=new URL(url.searchParams.get('redirect_uri')!);
+      callback.searchParams.set('state',url.searchParams.get('state')!);
+      callback.searchParams.set('code','callback-code');
+      await fetch(callback);
+    },
+    fetcher:async()=>{
+      tokenCalls+=1;
+      if(tokenCalls===1) return new Response(JSON.stringify({refresh_token:'unpersisted-token'}),{status:200});
+      return new Response(JSON.stringify({error:'invalid_grant',error_description:'Bad Request'}),{status:400});
+    },
+    persistSecret:async secret=>{persistCalls+=1;return secret;},
+    timeoutMs:2_000
+  }),/immediate refresh self-test failed \(400\): invalid_grant - Bad Request/);
+  assert.equal(tokenCalls,2);
+  assert.equal(persistCalls,0);
+});
+
+test('OAuth bootstrap detects fingerprint mismatch and stored-token contamination',async()=>{
+  let tokenCalls=0;
+  const environment=(name:string)=>({BLOGGER_CLIENT_ID:'desktop-id',BLOGGER_CLIENT_SECRET:'desktop-secret',BLOGGER_BLOG_ID:'configured-blog'} as Record<string,string>)[name];
+  const result=await runBloggerOAuthBootstrap({
+    environment,
+    openUrl:async authorizationUrl=>{
+      const url=new URL(authorizationUrl);
+      const callback=new URL(url.searchParams.get('redirect_uri')!);
+      callback.searchParams.set('state',url.searchParams.get('state')!);
+      callback.searchParams.set('code','callback-code');
+      await fetch(callback);
+    },
+    fetcher:async()=>{
+      tokenCalls+=1;
+      return tokenCalls===1
+        ?new Response(JSON.stringify({refresh_token:'clean-token'}),{status:200})
+        :new Response(JSON.stringify({access_token:'discarded',expires_in:3600,scope:BLOGGER_OAUTH_SCOPE}),{status:200});
+    },
+    persistSecret:async()=>"'clean-token\n'",
+    timeoutMs:2_000
+  });
+  assert.equal(result.tokenFingerprintMatch,'NO');
+  assert.equal(result.storedTokenCrLfContamination,'YES');
+  assert.equal(result.storedTokenSurroundingQuoteContamination,'YES');
 });

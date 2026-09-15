@@ -38,7 +38,7 @@ npm.cmd run blogger:oauth
 node dist/src/cli.js --blogger-publish data/blogger/YYYY-MM-DD/<reportId>-publication.json
 ```
 
-`blogger:oauth`는 `127.0.0.1`의 임시 callback 서버를 열고 기본 브라우저에서 Google 동의 화면을 표시합니다. 요청 scope는 `https://www.googleapis.com/auth/blogger` 하나이며 offline access와 명시적 consent를 사용합니다. 발급된 refresh token은 콘솔이나 파일에 출력하지 않고 로컬 클립보드에 한 번 전달합니다. 명령이 안내하는 PowerShell 구문으로 Windows 사용자 환경변수 `BLOGGER_REFRESH_TOKEN`에 저장한 뒤 클립보드를 비우고 새 터미널을 여세요. 사용자 거부, callback 검증 실패, refresh token 미발급 시 credential을 저장하거나 게시하지 않습니다. 기존 `BLOGGER_OAUTH_TOKEN`은 짧게 유효한 access token을 직접 주입할 때만 쓰는 deprecated fallback입니다.
+`blogger:oauth`는 `127.0.0.1`의 임시 callback 서버를 열고 기본 브라우저에서 Google 동의 화면을 표시합니다. 요청 scope는 `https://www.googleapis.com/auth/blogger` 하나이며 offline access와 명시적 consent를 사용합니다. Authorization code 교환으로 받은 refresh token은 저장 전에 같은 client credential로 즉시 access token 교환을 검증합니다. 이 self-test가 통과한 경우에만 프로그램이 원본 토큰을 표준입력으로 별도 Windows 프로세스에 전달해 사용자 환경변수 `BLOGGER_REFRESH_TOKEN`에 직접 저장합니다. 저장값을 다시 읽어 원본과 8자리 SHA-256 fingerprint를 비교하며 CR/LF와 둘레 따옴표 오염도 검사합니다. 토큰은 클립보드·파일·명령행·로그에 기록하지 않습니다. 사용자 거부, callback 검증 실패, refresh token 미발급 또는 self-test 실패 시 credential을 저장하거나 게시하지 않습니다. 기존 `BLOGGER_OAUTH_TOKEN`은 짧게 유효한 access token을 직접 주입할 때만 쓰는 deprecated fallback입니다.
 
 `report`는 빌드된 CLI를 사용합니다. 코드 수정 후 `npm.cmd run build`를 실행하세요. `sample`과 `test`는 자동으로 빌드합니다. 경로는 프로젝트 루트 기준입니다.
 
