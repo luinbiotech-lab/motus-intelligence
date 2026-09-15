@@ -1,6 +1,6 @@
 # 미국 주식시장 마감 리포트 — Sprint 2H
 
-미국 마감 자료를 수동 입력하거나 일부 공식 어댑터로 수집하여 검증 → claim 단위 교차검증 → 조건부 한국시장 영향 → 사람 검수표 → publish-ready 초안 → 공개용 editorial 출력 → 내부 관리자용 A4 MASTER 리서치 포스터까지 만드는 **비공개 로컬 CLI**입니다. Google Blogger용 Daily Editorial Renderer, B/C/D Content Opportunity Engine, 약어 우선 금융용어 해설, SEO/Naver package, 내부 관리자용 A4 MASTER HTML/PDF/PNG Renderer와 Blogger API v3 초안 생성 어댑터가 연결돼 있습니다. 2026-09-11을 golden day로 사용합니다. 실제 Blogger 쓰기는 preview와 사람 승인을 거친 뒤, blogId와 OAuth access token이 모두 환경 변수에 있을 때만 실행합니다.
+미국 마감 자료를 수동 입력하거나 일부 공식 어댑터로 수집하여 검증 → claim 단위 교차검증 → 조건부 한국시장 영향 → 사람 검수표 → publish-ready 초안 → 공개용 editorial 출력 → 내부 관리자용 A4 MASTER 리서치 포스터까지 만드는 **비공개 로컬 CLI**입니다. 공개 채널은 `MOTUS | What Moves the World`이며 `https://motusnova.blogspot.com/`을 사용합니다. Engine과 MOTUS Blog Publisher는 공통 content schema만 공유하고 Publisher는 별도 계층으로 유지합니다. 실제 Blogger 쓰기는 preview와 사람 승인을 거친 뒤, blogId와 OAuth access token이 모두 환경 변수에 있을 때만 실행합니다.
 
 ## 실행
 
@@ -55,7 +55,7 @@ node dist/src/cli.js --blogger-publish data/blogger/YYYY-MM-DD/<reportId>-public
 
 A4 MASTER 생성은 관리자 전용 boundary를 통과해야 하며, 공개 route에서 호출할 수 없습니다. 개발환경에서는 `src/services/admin.ts`의 server-side authorization boundary와 `data/a4-master/YYYY-MM-DD/admin-a4-route.html`로 내부 route 화면을 분리합니다.
 
-실제 Blogger 연결 설정은 `config/publishing.json`에 환경 변수 이름과 `publishAsDraft` 정책만 저장합니다. blogId와 access token 값은 저장소 파일에 기록하지 않습니다. 기본값 `publishAsDraft=true`는 Google Blogger API v3 `posts.insert?isDraft=true`를 사용합니다. 둘 중 하나라도 없으면 외부 요청을 보내지 않고 실패 상태를 기록합니다. 초안 생성 후 반환된 post URL은 publication record에 저장되며, A4를 `--regenerate`로 다시 만들면 CTA/QR과 Naver package에 같은 URL이 반영됩니다.
+실제 Blogger 연결 설정은 `config/publishing.json`에 MOTUS 브랜드·공개 주소, 환경 변수 이름과 `publishAsDraft` 정책만 저장합니다. blogId와 access token 값은 저장소 파일에 기록하지 않습니다. 기본값 `publishAsDraft=true`는 Google Blogger API v3 `posts.insert?isDraft=true`를 사용합니다. 둘 중 하나라도 없으면 외부 요청을 보내지 않고 실패 상태를 기록합니다. 초안 생성 후 반환된 실제 post URL만 A4 CTA/QR과 Naver package에 반영되며, 발행 전 preview URL은 외부 상세분석 링크로 사용하지 않습니다. 공개 CTA는 “전체 분석은 MOTUS에서 확인하세요”로 통일합니다.
 
 ## 중요한 파일
 
@@ -73,6 +73,8 @@ A4 MASTER 생성은 관리자 전용 boundary를 통과해야 하며, 공개 rou
 - `src/services/a4-visual.ts`: A4 MASTER HTML/PDF/PNG renderer, Naver posting package, cache metadata
 - `src/services/admin.ts`: admin-only A4 generation boundary와 route HTML
 - `src/services/blogger.ts`: Blogger publication state machine, dry-run adapter, Google Blogger API v3 draft adapter
+- `src/content/publisher-schema.ts`: Engine과 Publisher가 공유하는 글로벌 콘텐츠 metadata schema
+- `src/publishers/motus.ts`: MOTUS 브랜드, 카테고리, Blogger HTML과 labels를 담당하는 독립 Publisher
 - `config/publishing.json`: Blogger URL 정책, 환경 변수 이름, draft-first 설정
 - `data/fixtures/sample-day.json`: 실행 가능한 통합 샘플. 분리된 sample-*.json은 각 입력 영역의 예시
 - `data/manual/2026-09-11/input.json`: 2026-09-11 실제 정규 거래일 수동 검증 리허설 입력

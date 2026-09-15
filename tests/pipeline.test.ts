@@ -454,7 +454,8 @@ test('Sprint 2F A4 MASTER renders one-page HTML PDF PNG and complete Naver packa
   assert.equal(second.cached,true);
   assert.equal(first.layout.onePage,true);
   assert.equal(first.layout.overflow,false);
-  assert.match(readFileSync(first.htmlPath,'utf8'),/data-qr-target="https:\/\/preview\.local\/us-market-daily\/us-market-close-2026-09-11"/);
+  assert.match(readFileSync(first.htmlPath,'utf8'),/data-qr-target=""/);
+  assert.match(readFileSync(first.htmlPath,'utf8'),/전체 분석은 MOTUS에서 확인하세요/);
   assert.doesNotMatch(readFileSync(first.htmlPath,'utf8'),/blog\.example\.com/);
   assert.equal(readFileSync(first.pdfPath).subarray(0,4).toString(),'%PDF');
   assert.deepEqual([...readFileSync(first.pngPath).subarray(0,8)],[137,80,78,71,13,10,26,10]);
@@ -473,10 +474,19 @@ test('Sprint 2G Blogger preview preserves SEO, glossary, labels, sources and hid
   const result=runReal(realFixture());
   const preview=createBloggerPreview(result.report,result.evidence,publishingConfig);
   assert.equal(preview.status,'PREVIEW_READY');
-  assert.equal(preview.previewUrl,'https://preview.local/us-market-daily/us-market-close-2026-09-11');
+  assert.equal(preview.previewUrl,'https://preview.local/motus/daily-market-2026-09-11');
+  assert.match(preview.title,/^MOTUS Daily Market \| 2026-09-11/);
   assert.equal(preview.postUrl,null);
   assert.ok(preview.labels.includes('미국증시'));
   assert.ok(preview.hashtags.includes('#미국증시'));
+  assert.equal(preview.metadata.brand,'MOTUS');
+  assert.equal(preview.metadata.displayName,'MOTUS | What Moves the World');
+  assert.equal(preview.metadata.primaryCategory,'Daily Market');
+  assert.ok(preview.labels.includes('Daily Market'));
+  assert.ok(preview.metadata.companies.includes('ORCL'));
+  assert.ok(preview.metadata.sectors.includes('AI / Data Center'));
+  assert.ok(preview.metadata.countries.includes('United States'));
+  assert.ok(preview.metadata.regions.includes('Asia'));
   assert.ok(preview.glossary.length>=3);
   assert.match(preview.html,/<meta name="description"/);
   assert.match(preview.html,/용어 해설/);
@@ -504,8 +514,8 @@ test('Sprint 2G Blogger publish stores real adapter URL and prevents duplicate p
   const adapter=new ConfiguredBloggerAdapter(async record=>({url:`https://real-blog.test/posts/${record.slug}`,providerPostId:'POST-1',publishedAt:'2026-09-14T00:12:00+09:00'}));
   const published=await publishBloggerPublication(approved,adapter,{...publishingConfig,credentialAvailable:true},{audience:'admin',action:'BLOGGER_PUBLISH'});
   assert.equal(published.status,'PUBLISHED');
-  assert.equal(published.postUrl,'https://real-blog.test/posts/us-market-close-2026-09-11');
-  assert.deepEqual(resolveBloggerUrl(published),{url:'https://real-blog.test/posts/us-market-close-2026-09-11',state:'PUBLISHED'});
+  assert.equal(published.postUrl,'https://real-blog.test/posts/daily-market-2026-09-11');
+  assert.deepEqual(resolveBloggerUrl(published),{url:'https://real-blog.test/posts/daily-market-2026-09-11',state:'PUBLISHED'});
   await assert.rejects(()=>publishBloggerPublication(published,adapter,{...publishingConfig,credentialAvailable:true},{audience:'admin',action:'BLOGGER_PUBLISH'}),/already-published reportId/);
 });
 test('Sprint 2G server-side auth denies public publishing console and publish action',async()=>{
@@ -521,8 +531,9 @@ test('Sprint 2G A4 QR and Naver package switch from preview URL to published Blo
   const dir=mkdtempSync(join(tmpdir(),'a4-2g-'));
   const preview=createBloggerPreview(result.report,result.evidence,publishingConfig);
   const before=await renderA4MasterOnDemand(result.report,result.evidence,dir,{audience:'admin',action:'A4_REPORT_RENDER'},{regenerate:true,bloggerRecord:preview,publishingConfig});
-  assert.equal(before.layout.qrTargetUrl,preview.previewUrl);
-  const published={...preview,status:'PUBLISHED' as const,postUrl:'https://real-blog.test/posts/us-market-close-2026-09-11'};
+  assert.equal(before.layout.qrTargetUrl,'');
+  assert.equal(before.naverPackage.googleBloggerUrl,'');
+  const published={...preview,status:'PUBLISHED' as const,postUrl:'https://real-blog.test/posts/daily-market-2026-09-11'};
   const after=await renderA4MasterOnDemand(result.report,result.evidence,dir,{audience:'admin',action:'A4_REPORT_RENDER'},{regenerate:true,bloggerRecord:published,publishingConfig});
   assert.equal(after.layout.qrTargetUrl,published.postUrl);
   assert.equal(after.naverPackage.googleBloggerUrl,published.postUrl);
@@ -553,9 +564,10 @@ test('Sprint 2H Google adapter creates an approved Blogger post as draft and pre
   const payload=JSON.parse(String(requestInit?.body)) as {title:string;content:string;labels:string[];customMetaData:string};
   assert.equal(payload.title,approved.title);
   assert.deepEqual(payload.labels,approved.labels);
-  assert.match(payload.content,/class="daily-editorial"/);
-  assert.doesNotMatch(payload.content,/<!doctype|<html|<head|publicationVersion|confidenceScore/);
-  assert.deepEqual(JSON.parse(payload.customMetaData),{description:approved.metaDescription,slug:approved.slug});
+  assert.match(payload.content,/class="motus-editorial"/);
+  assert.match(payload.content,/MOTUS \| What Moves the World/);
+  assert.doesNotMatch(payload.content,/<!doctype|<html|<head(?:\s|>)|publicationVersion|confidenceScore/);
+  assert.deepEqual(JSON.parse(payload.customMetaData),{description:approved.metaDescription,slug:approved.slug,metadata:approved.metadata});
 });
 
 test('Sprint 2H Google adapter never calls Blogger without both blogId and credential',async()=>{
@@ -581,5 +593,18 @@ test('Sprint 2H A4 and Naver use an actual Blogger draft URL',async()=>{
   const output=await renderA4MasterOnDemand(result.report,result.evidence,dir,{audience:'admin',action:'A4_REPORT_RENDER'},{regenerate:true,bloggerRecord:draft,publishingConfig});
   assert.equal(output.layout.qrTargetUrl,draft.postUrl);
   assert.equal(output.naverPackage.googleBloggerUrl,draft.postUrl);
-  assert.match(output.naverPackage.intro,/Blogger 초안 URL/);
+  assert.match(output.naverPackage.intro,/MOTUS 초안 URL/);
+});
+
+test('MOTUS publisher stays separate from the market engine and supports global metadata categories',()=>{
+  const result=runReal(realFixture());
+  const preview=createBloggerPreview(result.report,result.evidence,publishingConfig);
+  assert.deepEqual(publishingConfig.publisher.categories,[
+    'Daily Market','AI & Industry','Global Company','Market / Investment Insight','Evergreen'
+  ]);
+  assert.match(preview.html,/MOTUS \| What Moves the World/);
+  assert.match(preview.html,/<h1>MOTUS Daily Market \| 2026-09-11/);
+  assert.match(preview.html,/https:\/\/motusnova\.blogspot\.com\/search\/label\/Evergreen/);
+  assert.doesNotMatch(readFileSync('src/publishers/motus.ts','utf8'),/domain\/models|services\/pipeline|services\/validation|services\/analysis/);
+  assert.equal(publishingConfig.publicBaseUrl,'https://motusnova.blogspot.com/');
 });

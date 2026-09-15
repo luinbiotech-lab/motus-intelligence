@@ -16,26 +16,28 @@
   <main data-admin-route="blogger-publishing-console">
     <h1>관리자 전용 Blogger Publishing Console</h1>
     <p class="meta">날짜/report 선택 → Blogger preview → approve → publish 순서로 처리합니다. 실제 credential이 없으면 외부 게시를 시도하지 않습니다.</p>
-    <p>현재 상태 <span class="status">APPROVED</span></p>
+    <p>현재 상태 <span class="status">PREVIEW_READY</span></p>
     <form class="toolbar" method="post" action="/admin/blogger/preview">
       <input name="tradingDate" value="2026-09-11" />
       <input name="reportId" value="MANUAL-2026-09-11-7cb0ccf11f29" placeholder="reportId" />
       <button type="submit">Preview</button>
-      <button formaction="/admin/blogger/approve" disabled>Approve</button>
-      <button formaction="/admin/blogger/publish">Publish</button>
+      <button formaction="/admin/blogger/approve">Approve</button>
+      <button formaction="/admin/blogger/publish" disabled>Publish</button>
     </form>
-    <h2>2026-09-11 미국증시 마감: 금리 상승에도 주식시장은 위험선호를 이어갔다</h2>
+    <h2>MOTUS Daily Market | 2026-09-11 금리 상승에도 주식시장은 위험선호를 이어갔다</h2>
     <iframe title="Blogger preview" srcdoc="&lt;!doctype html&gt;
 &lt;html lang=&quot;ko&quot;&gt;
 &lt;head&gt;
   &lt;meta charset=&quot;utf-8&quot; /&gt;
-  &lt;title&gt;2026-09-11 미국증시 마감: 금리 상승에도 주식시장은 위험선호를 이어갔다&lt;/title&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot; /&gt;
+  &lt;title&gt;MOTUS Daily Market | 2026-09-11 금리 상승에도 주식시장은 위험선호를 이어갔다&lt;/title&gt;
   &lt;meta name=&quot;description&quot; content=&quot;S&amp;amp;P 500 7656.98(+0.86%)와 나스닥 26333.04(+0.96%)가 나란히 상승하며 장을 마쳤다. VIX 15.84(-11.21%)는 낮아졌고, 단기 국채금리는 +0.07포인트, +1.54% 움직였다. 한국시장 관점에서는 금리와 기술주 흐름을 함께 봐야 하는 하루였다.&quot; /&gt;
   &lt;meta name=&quot;keywords&quot; content=&quot;미국증시, 미국시장마감, 나스닥, SP500, 국채금리, 한국시장, 20260911&quot; /&gt;
 &lt;/head&gt;
 &lt;body&gt;
-  &lt;article class=&quot;daily-editorial&quot; data-channel=&quot;google-blogger&quot;&gt;
-    &lt;h1&gt;2026-09-11 미국증시 마감: 금리 상승에도 주식시장은 위험선호를 이어갔다&lt;/h1&gt;
+  &lt;article class=&quot;motus-editorial&quot; data-channel=&quot;motus-blogger&quot;&gt;
+    &lt;header class=&quot;motus-brand&quot;&gt;&lt;strong&gt;MOTUS | What Moves the World&lt;/strong&gt;&lt;span&gt;Daily Market&lt;/span&gt;&lt;/header&gt;
+    &lt;h1&gt;MOTUS Daily Market | 2026-09-11 금리 상승에도 주식시장은 위험선호를 이어갔다&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;S&amp;amp;P 500 7656.98(+0.86%)와 나스닥 26333.04(+0.96%)가 나란히 상승하며 장을 마쳤다.&lt;/li&gt;
 &lt;li&gt;VIX 15.84(-11.21%)는 낮아졌고, 단기 국채금리는 +0.07포인트, +1.54% 움직였다.&lt;/li&gt;
@@ -69,8 +71,8 @@
 &lt;li&gt;자료 링크 8: &lt;a href=&quot;https://www.ice.com/products/219/Brent-Crude-Futures/data&quot; rel=&quot;nofollow noopener&quot;&gt;https://www.ice.com/products/219/Brent-Crude-Futures/data&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;#미국증시 #미국시장마감 #나스닥 #SP500 #국채금리 #한국시장 #20260911&lt;/p&gt;
-    &lt;section class=&quot;glossary&quot;&gt;&lt;h2&gt;용어 해설&lt;/h2&gt;&lt;dl&gt;&lt;dt&gt;CAPEX&lt;/dt&gt;&lt;dd&gt;설비투자입니다. AI 데이터센터, 반도체, 에너지 인프라 투자 판단에 자주 등장합니다. &lt;a href=&quot;/evergreen/term-capex&quot;&gt;CAPEX와 투자 사이클&lt;/a&gt;&lt;/dd&gt;&lt;dt&gt;CPI&lt;/dt&gt;&lt;dd&gt;소비자물가지수입니다. Fed 정책 기대와 국채금리 방향을 움직이는 핵심 물가 지표입니다. &lt;a href=&quot;/evergreen/term-cpi&quot;&gt;CPI 발표와 시장 반응&lt;/a&gt;&lt;/dd&gt;&lt;dt&gt;VIX&lt;/dt&gt;&lt;dd&gt;옵션시장에서 계산되는 변동성 지표입니다. 숫자가 내려가면 공포가 완화됐다는 신호로 해석되는 경우가 많습니다. &lt;a href=&quot;/evergreen/term-vix&quot;&gt;VIX로 시장 심리 확인하기&lt;/a&gt;&lt;/dd&gt;&lt;dt&gt;DXY&lt;/dt&gt;&lt;dd&gt;달러인덱스입니다. 주요 통화 대비 달러의 상대 강도를 보여줍니다. &lt;a href=&quot;/evergreen/term-dxy&quot;&gt;DXY와 원화 흐름&lt;/a&gt;&lt;/dd&gt;&lt;dt&gt;bp&lt;/dt&gt;&lt;dd&gt;basis point의 줄임말로 0.01%포인트를 뜻합니다. 금리 변화폭을 정확히 말할 때 사용합니다. &lt;a href=&quot;/evergreen/term-bp&quot;&gt;bp로 금리 변화 읽기&lt;/a&gt;&lt;/dd&gt;&lt;dt&gt;WTI&lt;/dt&gt;&lt;dd&gt;미국 서부텍사스산 원유 가격을 뜻합니다. 에너지 비용, 물가 기대, 화학·항공 업종 판단에 자주 활용됩니다. &lt;a href=&quot;/evergreen/term-wti&quot;&gt;WTI 원유 가격과 산업별 영향&lt;/a&gt;&lt;/dd&gt;&lt;dt&gt;국채금리&lt;/dt&gt;&lt;dd&gt;정부가 발행한 채권의 수익률입니다. 금리가 오르면 성장주 밸류에이션과 환율, 외국인 수급에 부담이 될 수 있습니다. &lt;a href=&quot;/evergreen/term-treasury-yield&quot;&gt;미국 국채금리와 주식시장의 관계&lt;/a&gt;&lt;/dd&gt;&lt;/dl&gt;&lt;/section&gt;
-    &lt;section class=&quot;related&quot;&gt;&lt;h2&gt;관련 글&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://pending.local/us-market-daily/evergreen/term-capex&quot;&gt;CAPEX와 투자 사이클&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://pending.local/us-market-daily/evergreen/term-cpi&quot;&gt;CPI 발표와 시장 반응&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://pending.local/us-market-daily/evergreen/term-vix&quot;&gt;VIX로 시장 심리 확인하기&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/section&gt;
+    &lt;section class=&quot;glossary&quot;&gt;&lt;h2&gt;용어 해설&lt;/h2&gt;&lt;dl&gt;&lt;dt&gt;CAPEX&lt;/dt&gt;&lt;dd&gt;설비투자입니다. AI 데이터센터, 반도체, 에너지 인프라 투자 판단에 자주 등장합니다. &lt;a href=&quot;https://motusnova.blogspot.com/search/label/Evergreen&quot;&gt;CAPEX와 투자 사이클&lt;/a&gt;&lt;/dd&gt;&lt;dt&gt;CPI&lt;/dt&gt;&lt;dd&gt;소비자물가지수입니다. Fed 정책 기대와 국채금리 방향을 움직이는 핵심 물가 지표입니다. &lt;a href=&quot;https://motusnova.blogspot.com/search/label/Evergreen&quot;&gt;CPI 발표와 시장 반응&lt;/a&gt;&lt;/dd&gt;&lt;dt&gt;VIX&lt;/dt&gt;&lt;dd&gt;옵션시장에서 계산되는 변동성 지표입니다. 숫자가 내려가면 공포가 완화됐다는 신호로 해석되는 경우가 많습니다. &lt;a href=&quot;https://motusnova.blogspot.com/search/label/Evergreen&quot;&gt;VIX로 시장 심리 확인하기&lt;/a&gt;&lt;/dd&gt;&lt;dt&gt;DXY&lt;/dt&gt;&lt;dd&gt;달러인덱스입니다. 주요 통화 대비 달러의 상대 강도를 보여줍니다. &lt;a href=&quot;https://motusnova.blogspot.com/search/label/Evergreen&quot;&gt;DXY와 원화 흐름&lt;/a&gt;&lt;/dd&gt;&lt;dt&gt;bp&lt;/dt&gt;&lt;dd&gt;basis point의 줄임말로 0.01%포인트를 뜻합니다. 금리 변화폭을 정확히 말할 때 사용합니다. &lt;a href=&quot;https://motusnova.blogspot.com/search/label/Evergreen&quot;&gt;bp로 금리 변화 읽기&lt;/a&gt;&lt;/dd&gt;&lt;dt&gt;WTI&lt;/dt&gt;&lt;dd&gt;미국 서부텍사스산 원유 가격을 뜻합니다. 에너지 비용, 물가 기대, 화학·항공 업종 판단에 자주 활용됩니다. &lt;a href=&quot;https://motusnova.blogspot.com/search/label/Evergreen&quot;&gt;WTI 원유 가격과 산업별 영향&lt;/a&gt;&lt;/dd&gt;&lt;dt&gt;국채금리&lt;/dt&gt;&lt;dd&gt;정부가 발행한 채권의 수익률입니다. 금리가 오르면 성장주 밸류에이션과 환율, 외국인 수급에 부담이 될 수 있습니다. &lt;a href=&quot;https://motusnova.blogspot.com/search/label/Evergreen&quot;&gt;미국 국채금리와 주식시장의 관계&lt;/a&gt;&lt;/dd&gt;&lt;/dl&gt;&lt;/section&gt;
+    &lt;section class=&quot;related&quot;&gt;&lt;h2&gt;관련 글&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&quot;https://motusnova.blogspot.com/search/label/Evergreen&quot;&gt;CAPEX와 투자 사이클&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://motusnova.blogspot.com/search/label/Evergreen&quot;&gt;CPI 발표와 시장 반응&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://motusnova.blogspot.com/search/label/Evergreen&quot;&gt;VIX로 시장 심리 확인하기&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/section&gt;
     &lt;section class=&quot;sources&quot;&gt;&lt;h2&gt;출처&lt;/h2&gt;&lt;ol&gt;&lt;li&gt;&lt;a href=&quot;https://www.spglobal.com/spdji/en/indices/equity/sp-500/&quot; rel=&quot;nofollow noopener&quot;&gt;자료 링크 1&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.spglobal.com/spdji/en/indices/equity/dow-jones-industrial-average/&quot; rel=&quot;nofollow noopener&quot;&gt;자료 링크 2&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.nasdaq.com/market-activity/index/comp&quot; rel=&quot;nofollow noopener&quot;&gt;자료 링크 3&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.lseg.com/en/ftse-russell/indices/russell-2000-index&quot; rel=&quot;nofollow noopener&quot;&gt;자료 링크 4&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.cboe.com/tradable_products/vix/vix_historical_data/&quot; rel=&quot;nofollow noopener&quot;&gt;자료 링크 5&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202609&amp;amp;type=daily_treasury_yield_curve&quot; rel=&quot;nofollow noopener&quot;&gt;자료 링크 6&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.ice.com/products/194/US-Dollar-Index-Futures/data&quot; rel=&quot;nofollow noopener&quot;&gt;자료 링크 7&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&quot;https://www.ice.com/products/219/Brent-Crude-Futures/data&quot; rel=&quot;nofollow noopener&quot;&gt;자료 링크 8&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;&lt;/section&gt;
     &lt;p class=&quot;hashtags&quot;&gt;#미국증시 #미국시장마감 #나스닥 #SP500 #국채금리 #한국시장 #20260911&lt;/p&gt;
   &lt;/article&gt;

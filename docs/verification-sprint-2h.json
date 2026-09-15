@@ -7,10 +7,13 @@
     "publicationVersion": "2G.BLOGGER.1.0",
     "adapterVersion": "2H.GOOGLEBLOGGER.1.0",
     "publishAsDraft": true,
+    "targetBrand": "MOTUS",
+    "displayName": "MOTUS | What Moves the World",
+    "publicBaseUrl": "https://motusnova.blogspot.com/",
     "blogIdConfigured": false,
     "credentialConfigured": false,
     "networkAttempted": false,
-    "status": "APPROVED",
+    "status": "PREVIEW_READY",
     "postUrl": null,
     "fakePublish": false
   },
@@ -20,7 +23,7 @@
     "naverUrlUpdated": false
   },
   "tests": {
-    "nodeTestCount": 75,
-    "nodeTestPass": 75
+    "nodeTestCount": 76,
+    "nodeTestPass": 76
   }
 }

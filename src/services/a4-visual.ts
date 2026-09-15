@@ -5,6 +5,7 @@ import { renderDailyEditorial } from './editorial.js';
 import { assertAdminRequest, type AdminRequestContext, renderA4AdminRoute } from './admin.js';
 import type { BloggerPublicationRecord, BloggerPublishingConfig } from './blogger.js';
 import { resolveBloggerUrl } from './blogger.js';
+import { MOTUS_CTA_TEXT } from '../content/publisher-schema.js';
 
 export const A4_MASTER_RENDERER_VERSION = '2F.A4MASTER.1.0';
 const A4 = { width: 794, height: 1123 };
@@ -133,8 +134,8 @@ function buildA4Model(report:ReportRecord,evidence:EvidencePackage,bloggerTarget
   const checkpoints=['미국 2년물·10년물 금리 방향','나스닥 강세의 반도체 확산 여부','원화와 외국인 수급 반응'];
   const risks=['단기금리 추가 상승 시 성장주 밸류에이션 압박','단일 기업 공시를 산업 전체 수요로 과잉 해석할 위험','유가 하락이 수요 둔화 신호로 해석될 가능성'];
   const sources=evidence.records.filter(record=>record.sourceUrl).slice(0,4).map((record,index)=>`Source ${index+1}: ${record.sourceUrl}`);
-  const naverIntro=`${report.tradingDate} 미국장은 지수 상승과 VIX 하락으로 위험선호가 살아났지만, 2년물 금리 상승이 남긴 부담도 함께 봐야 했습니다. A4 요약 이미지와 상세 Blogger 글을 함께 확인하세요.`;
-  const stateSuffix=bloggerTarget.state==='PUBLISHED'?'':bloggerTarget.state==='DRAFT'?' 연결된 Blogger 초안 URL입니다. 공개 전 최종 검수를 거쳐야 합니다.':bloggerTarget.state==='PREVIEW'?' 아직 실제 Blogger URL 확정 전이므로 QR은 preview URL을 가리킵니다.':' 아직 Blogger URL이 확정되지 않았습니다.';
+  const naverIntro=`${report.tradingDate} 미국장은 지수 상승과 VIX 하락으로 위험선호가 살아났지만, 2년물 금리 상승이 남긴 부담도 함께 봐야 했습니다. A4 요약과 함께 살펴보세요. ${MOTUS_CTA_TEXT}.`;
+  const stateSuffix=bloggerTarget.state==='PUBLISHED'?'':bloggerTarget.state==='DRAFT'?' 연결된 MOTUS 초안 URL입니다. 공개 전 최종 검수를 거쳐야 합니다.':' 실제 MOTUS post URL이 확정되기 전에는 상세분석 링크를 제공하지 않습니다.';
   return {title,subtitle:headline,tradingDate:report.tradingDate,metrics,executive,drivers,korea,checkpoints,risks,sources,hashtags:daily.seo.hashtags,googleBloggerUrl,naverIntro:`${naverIntro}${stateSuffix}`,qr:qrMatrix(googleBloggerUrl),contentBottomPx:1070};
 }
 
@@ -142,9 +143,8 @@ function buildA4Model(report:ReportRecord,evidence:EvidencePackage,bloggerTarget
 function resolveA4BloggerTarget(options:{bloggerUrl?:string; bloggerRecord?:BloggerPublicationRecord|null; publishingConfig?:BloggerPublishingConfig}):{url:string;state:'PUBLISHED'|'DRAFT'|'PREVIEW'|'UNRESOLVED'} {
   if(options.bloggerUrl) return {url:options.bloggerUrl,state:'PUBLISHED'};
   const fromRecord=resolveBloggerUrl(options.bloggerRecord);
-  if(fromRecord.state!=='UNRESOLVED') return fromRecord;
-  if(options.publishingConfig?.placeholderBaseUrl) return {url:options.publishingConfig.placeholderBaseUrl,state:'UNRESOLVED'};
-  return fromRecord;
+  if(fromRecord.state==='PUBLISHED'||fromRecord.state==='DRAFT') return fromRecord;
+  return {url:'',state:'UNRESOLVED'};
 }
 
 function metric(label:string,record:MarketSnapshot|undefined) {
@@ -189,7 +189,7 @@ function renderA4Html(model:A4Model) {
       <article class="panel"><h2>Today’s Checkpoint</h2><ul>${list(model.checkpoints)}</ul></article>
       <article class="panel"><h2>Risk / Counter View</h2><ul>${list(model.risks)}</ul></article>
     </section>
-    <section class="cta">Google Blogger 상세글에서 근거 링크와 전체 해설을 확인하세요. ${escapeHtml(model.googleBloggerUrl)}</section>
+    <section class="cta">${MOTUS_CTA_TEXT}. ${escapeHtml(model.googleBloggerUrl)}</section>
     <section class="footer">
       <div><div class="sources">${model.sources.map(escapeHtml).join('<br>')}</div><p class="disclaimer">Disclaimer: 내부 리서치 참고자료이며 투자 권유가 아닙니다. 수치는 검증된 2026-09-11 Golden Day 입력만 사용했습니다.</p></div>
       <div class="qr">${model.qr.flatMap(row=>row).map(cell=>cell?'<i></i>':'<b></b>').join('')}</div>
@@ -208,7 +208,7 @@ function renderA4Pdf(model:A4Model) {
     'Korea Market View', model.korea,
     'Today’s Checkpoint', ...model.checkpoints,
     'Risk / Counter View', ...model.risks,
-    `CTA: ${model.googleBloggerUrl}`,
+    `${MOTUS_CTA_TEXT}: ${model.googleBloggerUrl}`,
     'Disclaimer: 내부 리서치 참고자료이며 투자 권유가 아닙니다.'
   ];
   const stream=[

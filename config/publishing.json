@@ -1,12 +1,25 @@
 {
   "blogger": {
-    "previewBaseUrl": "https://preview.local/us-market-daily",
-    "placeholderBaseUrl": "https://pending.local/us-market-daily",
-    "publicBaseUrl": null,
+    "previewBaseUrl": "https://preview.local/motus",
+    "placeholderBaseUrl": "https://pending.local/motus",
+    "publicBaseUrl": "https://motusnova.blogspot.com/",
     "blogId": null,
     "blogIdEnvironmentVariable": "BLOGGER_BLOG_ID",
     "credentialEnvironmentVariable": "BLOGGER_OAUTH_TOKEN",
-    "publishAsDraft": true
+    "publishAsDraft": true,
+    "publisher": {
+      "brand": "MOTUS",
+      "displayName": "MOTUS | What Moves the World",
+      "baseUrl": "https://motusnova.blogspot.com/",
+      "ctaText": "전체 분석은 MOTUS에서 확인하세요",
+      "categories": [
+        "Daily Market",
+        "AI & Industry",
+        "Global Company",
+        "Market / Investment Insight",
+        "Evergreen"
+      ]
+    }
   },
   "auth": {
     "localAdminDevelopmentMode": true,

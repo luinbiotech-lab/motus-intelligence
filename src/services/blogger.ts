@@ -1,6 +1,8 @@
-import type { EvidencePackage, ReportRecord } from '../domain/models.js';
-import { renderDailyEditorial, type DailyEditorialOutput, type EditorialTerm } from './editorial.js';
+import type { EvidencePackage, InputBundle, ReportRecord } from '../domain/models.js';
+import { renderDailyEditorial, type EditorialTerm } from './editorial.js';
 import { assertAdminRequest, type AdminRequestContext } from './admin.js';
+import type { GlobalContentMetadata, MotusCategory, PublisherContentDocument } from '../content/publisher-schema.js';
+import { renderMotusBloggerContent, type MotusPublisherConfig } from '../publishers/motus.js';
 
 export type BloggerPublicationStatus = 'DRAFT'|'PREVIEW_READY'|'APPROVED'|'PUBLISHED'|'FAILED';
 export type BloggerHistoryEvent = { at: string; from: BloggerPublicationStatus|null; to: BloggerPublicationStatus; reason: string };
@@ -14,6 +16,7 @@ export interface BloggerPublishingConfig {
   credentialEnvironmentVariable?: string|null;
   credentialAvailable?: boolean;
   publishAsDraft?: boolean;
+  publisher: MotusPublisherConfig;
 }
 export interface BloggerPublicationRecord {
   publicationVersion: string;
@@ -26,6 +29,7 @@ export interface BloggerPublicationRecord {
   slug: string;
   labels: string[];
   hashtags: string[];
+  metadata: GlobalContentMetadata;
   previewUrl: string;
   placeholderUrl: string;
   postUrl: string|null;
@@ -54,23 +58,27 @@ const internalLeakPattern=/\b(CLAIM-|AUTO_VALIDATED|REVIEW_REQUIRED|BLOCKED|DATA
 export function createBloggerPreview(report:ReportRecord,evidence:EvidencePackage,config:BloggerPublishingConfig,now='2026-09-14T00:00:00+09:00'):BloggerPublicationRecord {
   validatePublishingConfig(config);
   const editorial=renderDailyEditorial(report,evidence);
-  const slug=editorial.seo.slug;
+  const title=buildMotusTitle(editorial.seo.title,report.tradingDate);
+  const slug=`daily-market-${report.tradingDate}`;
   const previewUrl=joinUrl(config.previewBaseUrl,slug);
   const placeholderUrl=joinUrl(config.placeholderBaseUrl,slug);
   const sources=buildSources(evidence);
-  const relatedLinks=buildRelatedLinks(editorial,config);
-  const html=renderBloggerHtml(editorial,sources,relatedLinks);
+  const metadata=buildMotusMetadata(evidence.originalInput as InputBundle);
+  const document:PublisherContentDocument={title,seoTitle:title,metaDescription:editorial.seo.description,slug,markdown:editorial.bloggerMarkdown,hashtags:editorial.seo.hashtags,glossary:editorial.terms,sources,metadata};
+  const {html,labels,relatedLinks}=renderMotusBloggerContent(document,config.publisher);
+  assertPublicBloggerHtmlSafe(html);
   return {
     publicationVersion:BLOGGER_PUBLICATION_VERSION,
     reportId:report.reportId,
     tradingDate:report.tradingDate,
     status:'PREVIEW_READY',
-    title:editorial.seo.title,
-    seoTitle:editorial.seo.title,
+    title,
+    seoTitle:title,
     metaDescription:editorial.seo.description,
     slug,
-    labels:buildLabels(editorial),
+    labels,
     hashtags:editorial.seo.hashtags,
+    metadata,
     previewUrl,
     placeholderUrl,
     postUrl:null,
@@ -157,7 +165,7 @@ export class GoogleBloggerApiAdapter implements BloggerAdapter {
       title:record.title,
       content:extractBloggerArticle(record.html),
       labels:record.labels,
-      customMetaData:JSON.stringify({description:record.metaDescription,slug:record.slug})
+      customMetaData:JSON.stringify({description:record.metaDescription,slug:record.slug,metadata:record.metadata})
     })});
     if(!response.ok) throw new Error(`Blogger API ${response.status}: ${safeGoogleApiError(await response.text())}`);
     const post=await response.json() as GoogleBloggerPost;
@@ -221,64 +229,32 @@ export function assertPublicBloggerHtmlSafe(html:string):void {
   if(/\/admin\/blogger|BLOGGER_PUBLISH|BLOGGER_APPROVE|data-admin-route/i.test(html)) throw new Error('public Blogger HTML leaks admin route');
 }
 
-function renderBloggerHtml(editorial:DailyEditorialOutput,sources:{label:string;url:string}[],relatedLinks:{title:string;url:string}[]):string {
-  const article=markdownToHtml(editorial.bloggerMarkdown);
-  const glossary=editorial.terms.length?`<section class="glossary"><h2>용어 해설</h2><dl>${editorial.terms.map(term=>`<dt>${escapeHtml(term.term)}</dt><dd>${escapeHtml(term.explanation)} <a href="/evergreen/${escapeAttr(term.evergreenKey)}">${escapeHtml(term.evergreenTitle)}</a></dd>`).join('')}</dl></section>`:'';
-  const related=`<section class="related"><h2>관련 글</h2><ul>${relatedLinks.map(item=>`<li><a href="${escapeAttr(item.url)}">${escapeHtml(item.title)}</a></li>`).join('')}</ul></section>`;
-  const sourceSection=`<section class="sources"><h2>출처</h2><ol>${sources.map(item=>`<li><a href="${escapeAttr(item.url)}" rel="nofollow noopener">${escapeHtml(item.label)}</a></li>`).join('')}</ol></section>`;
-  const tags=`<p class="hashtags">${editorial.seo.hashtags.map(escapeHtml).join(' ')}</p>`;
-  const html=`<!doctype html>
-<html lang="ko">
-<head>
-  <meta charset="utf-8" />
-  <title>${escapeHtml(editorial.seo.title)}</title>
-  <meta name="description" content="${escapeAttr(editorial.seo.description)}" />
-  <meta name="keywords" content="${escapeAttr(editorial.seo.hashtags.map(tag=>tag.replace(/^#/, '')).join(', '))}" />
-</head>
-<body>
-  <article class="daily-editorial" data-channel="google-blogger">
-    ${article}
-    ${glossary}
-    ${related}
-    ${sourceSection}
-    ${tags}
-  </article>
-</body>
-</html>`;
-  assertPublicBloggerHtmlSafe(html);
-  return html;
-}
-
-function markdownToHtml(markdown:string):string {
-  const lines=markdown.split(/\r?\n/);
-  const html:string[]=[];
-  let inList=false;
-  const closeList=()=>{ if(inList) { html.push('</ul>'); inList=false; } };
-  for(const line of lines) {
-    if(line.startsWith('# ')) { closeList(); html.push(`<h1>${escapeHtml(line.slice(2))}</h1>`); continue; }
-    if(line.startsWith('## ')) { closeList(); html.push(`<h2>${escapeHtml(line.slice(3))}</h2>`); continue; }
-    if(line.startsWith('- ')) { if(!inList) { html.push('<ul>'); inList=true; } html.push(`<li>${linkify(escapeHtml(line.slice(2)))}</li>`); continue; }
-    if(!line.trim()) { closeList(); continue; }
-    closeList(); html.push(`<p>${linkify(escapeHtml(line))}</p>`);
-  }
-  closeList();
-  return html.join('\n');
-}
-function linkify(text:string):string { return text.replace(/https?:\/\/[^\s<]+/g,url=>`<a href="${escapeAttr(url)}" rel="nofollow noopener">${url}</a>`); }
-function buildLabels(editorial:DailyEditorialOutput):string[] { return editorial.seo.hashtags.map(tag=>tag.replace(/^#/,'')).slice(0,10); }
 function buildSources(evidence:EvidencePackage):{label:string;url:string}[] {
   const seen=new Set<string>();
   return evidence.records.filter(record=>record.sourceUrl&&!seen.has(record.sourceUrl)&&seen.add(record.sourceUrl)).slice(0,8).map((record,index)=>({label:`자료 링크 ${index+1}`,url:record.sourceUrl}));
 }
-function buildRelatedLinks(editorial:DailyEditorialOutput,config:BloggerPublishingConfig):{title:string;url:string}[] {
-  return editorial.terms.slice(0,3).map(term=>({title:term.evergreenTitle,url:joinUrl(config.placeholderBaseUrl,`evergreen/${term.evergreenKey}`)}));
+function buildMotusMetadata(input:InputBundle):GlobalContentMetadata {
+  const companies=unique([...input.companyEvents.flatMap(item=>[item.companyId,item.ticker]),...input.filings.flatMap(item=>[item.companyName??item.companyId,item.ticker])]);
+  const sectors=unique(input.signals.map(item=>item.usIndustry));
+  const themes=unique([...input.signals.map(item=>item.trigger.replace(/_/g,' ')),...input.macro.map(item=>item.indicatorName)]);
+  const categories:MotusCategory[]=['Daily Market'];
+  if(input.signals.some(item=>/AI|CAPEX|DATA.CENTER/i.test(`${item.trigger} ${item.usIndustry}`))) categories.push('AI & Industry');
+  if(companies.length) categories.push('Global Company');
+  categories.push('Market / Investment Insight');
+  return {schemaVersion:'1.0',brand:'MOTUS',displayName:'MOTUS | What Moves the World',primaryCategory:'Daily Market',categories,companies,sectors,themes,countries:['United States','South Korea'],regions:['North America','Asia']};
 }
+function buildMotusTitle(editorialTitle:string,tradingDate:string):string {
+  const subject=editorialTitle.replace(/^\d{4}-\d{2}-\d{2}\s+미국증시\s+마감:\s*/,'');
+  return `MOTUS Daily Market | ${tradingDate} ${subject}`;
+}
+function unique(values:string[]):string[] { return [...new Set(values.map(value=>value.trim()).filter(Boolean))]; }
 function transition(record:BloggerPublicationRecord,to:BloggerPublicationStatus,reason:string,at:string,patch:Partial<BloggerPublicationRecord>={}):BloggerPublicationRecord {
   return {...record,...patch,status:to,updatedAt:at,history:[...record.history,{at,from:record.status,to,reason}]};
 }
 function validatePublishingConfig(config:BloggerPublishingConfig):void {
   if(!config.previewBaseUrl) throw new Error('missing Blogger preview URL');
   if(!config.placeholderBaseUrl) throw new Error('missing Blogger placeholder URL');
+  if(!config.publisher) throw new Error('missing MOTUS publisher config');
   const forbiddenPlaceholderHost=['blog','example','com'].join('.');
   if(config.previewBaseUrl.includes(forbiddenPlaceholderHost)||config.placeholderBaseUrl.includes(forbiddenPlaceholderHost)) throw new Error('Blogger placeholder must be config-managed and cannot use the reserved example host');
 }
