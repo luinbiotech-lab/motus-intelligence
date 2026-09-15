@@ -6,6 +6,7 @@ import { applyReviewActions, buildMachineHumanDiff, buildPublishReadyDraft, buil
 import { renderBrokerageReportOnDemand, renderDailyEditorial } from './services/editorial.js';
 import { renderA4MasterOnDemand } from './services/a4-visual.js';
 import { approveBloggerPublication, createBloggerPreview, DryRunBloggerAdapter, GoogleBloggerApiAdapter, publishBloggerPublication, renderPublishingConsole, type BloggerPublicationRecord, type BloggerPublishingConfig } from './services/blogger.js';
+import { updateExistingBloggerDraft } from './services/blogger-draft-update.js';
 async function main() {
   const args=process.argv.slice(2);
   const sample=args[0]==='--sample';
@@ -17,6 +18,7 @@ async function main() {
   if(args[0]==='--blogger-preview') return await writeBloggerPreview(args[1],args[2]);
   if(args[0]==='--blogger-approve') return await writeBloggerApprove(args[1]);
   if(args[0]==='--blogger-publish') return await writeBloggerPublish(args[1],args.includes('--dry-run'));
+  if(args[0]==='--blogger-update-draft') return await writeBloggerDraftUpdate(args[1],args[2],args[3],args[4]);
   if(args[0]==='--publishing-console') return await writePublishingConsole(args[1]);
   if((sample&&args.length!==1)||(!sample&&(args.length!==2||args[0]!=='--input'))) throw new Error('사용법: npm run sample 또는 npm run report -- --input data/manual/day.json');
   const path=sample?'data/fixtures/sample-day.json':args[1]!;
@@ -117,6 +119,18 @@ async function writeBloggerPublish(publicationPath:string|undefined,dryRun:boole
   const published=await publishBloggerPublication(record,adapter,await readPublishingConfig(),{audience:'admin',action:'BLOGGER_PUBLISH'},{dryRun});
   const paths=await writePublicationArtifacts(published);
   console.log(JSON.stringify({status:published.status==='FAILED'?'FAILED':'PASS',reportId:published.reportId,publicationStatus:published.status,draftPostId:published.draftPostId,publicPostUrl:published.publicPostUrl,dryRun:published.dryRun,error:published.error,files:paths},null,2));
+}
+async function writeBloggerDraftUpdate(publicationPath:string|undefined,previewPath:string|undefined,metadataPath:string|undefined,expectedPostId:string|undefined) {
+  if(!publicationPath||!previewPath||!metadataPath||!expectedPostId) throw new Error('사용법: node dist/src/cli.js --blogger-update-draft publication.json preview.html preview.json expectedPostId');
+  const record=JSON.parse(await readFile(resolve(publicationPath),'utf8')) as BloggerPublicationRecord;
+  const previewHtml=await readFile(resolve(previewPath),'utf8');
+  const metadata=JSON.parse(await readFile(resolve(metadataPath),'utf8')) as {title?:string};
+  if(!metadata.title) throw new Error('preview metadata is missing title');
+  const result=await updateExistingBloggerDraft(record,previewHtml,await readPublishingConfig(),{audience:'admin',action:'BLOGGER_PUBLISH'},{expectedPostId,expectedTitle:metadata.title});
+  const files=await writePublicationArtifacts(result.record);
+  const verificationPath=`data/blogger/${record.tradingDate}/${record.reportId}-draft-update-verification.json`;
+  await writeFile(verificationPath,JSON.stringify(result.verification,null,2));
+  console.log(JSON.stringify({status:'PASS',publicationStatus:result.record.status,draftPostId:result.record.draftPostId,publicPostUrl:result.record.publicPostUrl,verification:result.verification,files:[...files,verificationPath]},null,2));
 }
 async function writePublishingConsole(publicationPath:string|undefined) {
   const record=publicationPath?JSON.parse(await readFile(resolve(publicationPath),'utf8')) as BloggerPublicationRecord:null;

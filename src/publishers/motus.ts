@@ -44,11 +44,11 @@ export function renderMotusBloggerContent(document:PublisherContentDocument,conf
 </head>
 <body>
   <article class="motus-editorial" data-channel="motus-blogger">
-    ${article}
-    ${glossary}
-    ${related}
-    ${sourceSection}
-    ${tags}
+${article}
+${glossary}
+${related}
+${sourceSection}
+${tags}
   </article>
 </body>
 </html>`;

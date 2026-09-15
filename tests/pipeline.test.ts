@@ -18,6 +18,7 @@ import { publicCanRenderA4 } from '../src/services/admin.js';
 import { approveBloggerPublication, assertPublicBloggerHtmlSafe, ConfiguredBloggerAdapter, createBloggerPreview, DryRunBloggerAdapter, GoogleBloggerApiAdapter, publishBloggerPublication, renderPublishingConsole, resolveBloggerUrl, type BloggerPublishingConfig } from '../src/services/blogger.js';
 import { BLOGGER_OAUTH_SCOPE, BLOGGER_TOKEN_ENDPOINT, buildBloggerAuthorizationUrl, exchangeAuthorizationCode, readBloggerOAuthEnvironment, runBloggerOAuthBootstrap, testRefreshTokenImmediately } from '../src/services/blogger-oauth.js';
 import { renderMotusBloggerContent } from '../src/publishers/motus.js';
+import { updateExistingBloggerDraft } from '../src/services/blogger-draft-update.js';
 const read=(p:string):unknown=>JSON.parse(readFileSync(p,'utf8'));
 const fixture=()=>structuredClone(read('data/fixtures/sample-day.json') as InputBundle);
 const realFixture=()=>structuredClone(read('data/manual/2026-09-11/input.json') as InputBundle);
@@ -668,6 +669,41 @@ test('existing Blogger draftPostId blocks a duplicate remote insert',async()=>{
   });
   await assert.rejects(()=>publishBloggerPublication(existing,adapter,{...publishingConfig,credentialAvailable:true},{audience:'admin',action:'BLOGGER_PUBLISH'}),/duplicate publish: draft post ID already exists/);
   assert.equal(calls,0);
+});
+
+test('existing Blogger draft is patched in place and re-read without publish or duplicate insert',async()=>{
+  const result=runReal(realFixture());
+  const preview=createBloggerPreview(result.report,result.evidence,publishingConfig);
+  const existing={...preview,status:'DRAFT' as const,draftPostId:'4610978170890431016',publicPostUrl:null,history:[...preview.history,{at:'2026-09-15T00:00:00Z',from:'APPROVED' as const,to:'DRAFT' as const,reason:'existing draft created'}]};
+  const env:Record<string,string>={BLOGGER_BLOG_ID:'blog-id',BLOGGER_REFRESH_TOKEN:'refresh',BLOGGER_CLIENT_ID:'client',BLOGGER_CLIENT_SECRET:'secret'};
+  let patched:{title:string;content:string}|null=null;
+  const calls:{method:string;url:string}[]=[];
+  const fakeFetch:typeof fetch=async(input,init)=>{
+    const url=String(input),method=init?.method??'GET';
+    calls.push({method,url});
+    if(url===BLOGGER_TOKEN_ENDPOINT) return new Response(JSON.stringify({access_token:'access'}),{status:200});
+    if(method==='PATCH') {
+      patched=JSON.parse(String(init?.body)) as {title:string;content:string};
+      assert.deepEqual(Object.keys(patched).sort(),['content','title']);
+      assert.doesNotMatch(url,/publish|revert/);
+      return new Response(JSON.stringify({id:existing.draftPostId,status:'DRAFT'}),{status:200});
+    }
+    if(new URL(url).pathname.endsWith(`/posts/${existing.draftPostId}`)) return new Response(JSON.stringify({id:existing.draftPostId,status:'DRAFT',title:patched?.title??'old title',content:patched?.content??'<p>old</p>',updated:'2026-09-16T01:00:00Z'}),{status:200});
+    return new Response(JSON.stringify({items:[{id:existing.draftPostId,status:'DRAFT',title:patched?.title??'old title'}]}),{status:200});
+  };
+  const updated=await updateExistingBloggerDraft(existing,preview.html,publishingConfig,{audience:'admin',action:'BLOGGER_PUBLISH'},{expectedPostId:existing.draftPostId,expectedTitle:preview.title,environment:name=>env[name],fetcher:fakeFetch});
+  assert.equal(updated.record.status,'DRAFT');
+  assert.equal(updated.record.draftPostId,existing.draftPostId);
+  assert.equal(updated.record.publicPostUrl,null);
+  assert.equal(updated.record.history.length,existing.history.length+1);
+  assert.equal(updated.verification.h1Count,0);
+  assert.equal(updated.verification.marketDashboardCount,1);
+  assert.equal(updated.verification.primarySourcesCount,1);
+  assert.equal(updated.verification.visibleRawUrlCount,0);
+  assert.equal(updated.verification.unpublishedRelatedLinksCount,0);
+  assert.equal(updated.verification.duplicateDraftCount,0);
+  assert.equal(calls.filter(call=>call.method==='PATCH').length,1);
+  assert.equal(calls.filter(call=>call.method==='POST'&&call.url.includes('/blogger/')).length,0);
 });
 
 test('MOTUS publisher stays separate from the market engine and supports global metadata categories',()=>{
