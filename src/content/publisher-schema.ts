@@ -30,6 +30,7 @@ export interface PublisherGlossaryEntry {
   explanation: string;
   evergreenKey: string;
   evergreenTitle: string;
+  publishedUrl?: string;
 }
 
 export interface PublisherContentDocument {

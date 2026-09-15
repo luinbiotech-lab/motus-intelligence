@@ -61,7 +61,7 @@ const internalLeakPattern=/\b(CLAIM-|AUTO_VALIDATED|REVIEW_REQUIRED|BLOCKED|DATA
 export function createBloggerPreview(report:ReportRecord,evidence:EvidencePackage,config:BloggerPublishingConfig,now='2026-09-14T00:00:00+09:00'):BloggerPublicationRecord {
   validatePublishingConfig(config);
   const editorial=renderDailyEditorial(report,evidence);
-  const title=buildMotusTitle(editorial.seo.title,report.tradingDate);
+  const title=editorial.seo.title;
   const slug=`daily-market-${report.tradingDate}`;
   const previewUrl=joinUrl(config.previewBaseUrl,slug);
   const placeholderUrl=joinUrl(config.placeholderBaseUrl,slug);
@@ -269,7 +269,24 @@ export function assertPublicBloggerHtmlSafe(html:string):void {
 
 function buildSources(evidence:EvidencePackage):{label:string;url:string}[] {
   const seen=new Set<string>();
-  return evidence.records.filter(record=>record.sourceUrl&&!seen.has(record.sourceUrl)&&seen.add(record.sourceUrl)).slice(0,8).map((record,index)=>({label:`자료 링크 ${index+1}`,url:record.sourceUrl}));
+  const sourceNames=new Map(evidence.sourceMetadata.map(source=>[source.sourceId,source.name]));
+  return evidence.records
+    .filter(record=>record.sourceUrl&&!seen.has(record.sourceUrl)&&seen.add(record.sourceUrl))
+    .map(record=>({label:sourceLabel(record.sourceId,record.sourceUrl,sourceNames.get(record.sourceId)),url:record.sourceUrl}));
+}
+function sourceLabel(sourceId:string,url:string,configuredName:string|undefined):string {
+  if(sourceId==='SP_DJI'&&/sp-500/i.test(url)) return 'S&P Dow Jones Indices · S&P 500';
+  if(sourceId==='SP_DJI'&&/dow-jones/i.test(url)) return 'S&P Dow Jones Indices · Dow Jones Industrial Average';
+  if(sourceId==='NASDAQ') return 'Nasdaq · Nasdaq Composite';
+  if(sourceId==='FTSE_RUSSELL') return 'FTSE Russell · Russell 2000';
+  if(sourceId==='CBOE') return 'Cboe · VIX Historical Data';
+  if(sourceId==='US_TREASURY') return 'U.S. Treasury · Daily Treasury Par Yield Curve';
+  if(sourceId==='ICE'&&/products\/194/i.test(url)) return 'ICE · U.S. Dollar Index Futures';
+  if(sourceId==='ICE'&&/products\/219/i.test(url)) return 'ICE · Brent Crude Futures';
+  if(sourceId==='BLS') return 'U.S. Bureau of Labor Statistics · Consumer Price Index';
+  if(sourceId==='CORPORATE_IR') return 'Oracle Investor Relations · FY27 Q1 Results';
+  if(sourceId==='SEC_EDGAR') return 'U.S. SEC · Oracle 8-K Filing';
+  return configuredName??sourceId.replaceAll('_',' ');
 }
 function buildMotusMetadata(input:InputBundle):GlobalContentMetadata {
   const companies=unique([...input.companyEvents.flatMap(item=>[item.companyId,item.ticker]),...input.filings.flatMap(item=>[item.companyName??item.companyId,item.ticker])]);

@@ -17,6 +17,7 @@ import { renderA4MasterOnDemand } from '../src/services/a4-visual.js';
 import { publicCanRenderA4 } from '../src/services/admin.js';
 import { approveBloggerPublication, assertPublicBloggerHtmlSafe, ConfiguredBloggerAdapter, createBloggerPreview, DryRunBloggerAdapter, GoogleBloggerApiAdapter, publishBloggerPublication, renderPublishingConsole, resolveBloggerUrl, type BloggerPublishingConfig } from '../src/services/blogger.js';
 import { BLOGGER_OAUTH_SCOPE, BLOGGER_TOKEN_ENDPOINT, buildBloggerAuthorizationUrl, exchangeAuthorizationCode, readBloggerOAuthEnvironment, runBloggerOAuthBootstrap, testRefreshTokenImmediately } from '../src/services/blogger-oauth.js';
+import { renderMotusBloggerContent } from '../src/publishers/motus.js';
 const read=(p:string):unknown=>JSON.parse(readFileSync(p,'utf8'));
 const fixture=()=>structuredClone(read('data/fixtures/sample-day.json') as InputBundle);
 const realFixture=()=>structuredClone(read('data/manual/2026-09-11/input.json') as InputBundle);
@@ -400,10 +401,14 @@ test('Sprint 2D review metrics remain NOT_MEASURED without human actions',()=>{
 test('Sprint 2E daily editorial renderer hides internal status and keeps public Korean prose',()=>{
   const result=runReal(realFixture());
   const editorial=renderDailyEditorial(result.report,result.evidence);
-  assert.match(editorial.bloggerMarkdown,/미국시장 마감/);
-  assert.match(editorial.bloggerMarkdown,/한국시장 영향/);
+  assert.match(editorial.bloggerMarkdown,/## Opening Summary/);
+  assert.match(editorial.bloggerMarkdown,/## 시장 한눈에 보기/);
+  assert.match(editorial.bloggerMarkdown,/## 한국시장 관점/);
+  assert.doesNotMatch(editorial.bloggerMarkdown,/^# /m);
   assert.doesNotMatch(editorial.bloggerMarkdown,/CLAIM-|MANUAL-2026|AUTO_VALIDATED|REVIEW_REQUIRED|BLOCKED|DATA_NOT_CONNECTED/);
   assert.equal(editorial.seo.hashtags.includes('#미국증시'),true);
+  assert.ok(editorial.seo.hashtags.length>=8&&editorial.seo.hashtags.length<=12);
+  assert.equal(editorial.seo.hashtags.some(tag=>/#\d{8}/.test(tag)),false);
   assert.ok(editorial.naver.intro.length>40);
   assert.ok(editorial.naver.hashtags.length>=3);
 });
@@ -423,7 +428,7 @@ test('Sprint 2E opportunity engine recommends B C D only when data supports them
 test('Sprint 2E dynamic glossary uses only terms present in body and keeps evergreen keys',()=>{
   const terms=buildDynamicTerms('VIX와 DXY, WTI, CAPEX, CPI, Consensus, 미국 국채금리가 함께 움직였다.');
   assert.ok(terms.length>=3);
-  assert.ok(terms.length<=8);
+  assert.ok(terms.length<=6);
   for(const term of terms) {
     assert.ok(term.evergreenKey.startsWith('term-'));
     assert.match(term.explanation,/입니다|말합니다|뜻합니다/);
@@ -476,7 +481,8 @@ test('Sprint 2G Blogger preview preserves SEO, glossary, labels, sources and hid
   const preview=createBloggerPreview(result.report,result.evidence,publishingConfig);
   assert.equal(preview.status,'PREVIEW_READY');
   assert.equal(preview.previewUrl,'https://preview.local/motus/daily-market-2026-09-11');
-  assert.match(preview.title,/^MOTUS Daily Market \| 2026-09-11/);
+  assert.match(preview.title,/^미국 증시 마감:/);
+  assert.doesNotMatch(preview.title,/MOTUS Daily Market/);
   assert.equal(preview.draftPostId,null);
   assert.equal(preview.publicPostUrl,null);
   assert.ok(preview.labels.includes('미국증시'));
@@ -490,12 +496,46 @@ test('Sprint 2G Blogger preview preserves SEO, glossary, labels, sources and hid
   assert.ok(preview.metadata.countries.includes('United States'));
   assert.ok(preview.metadata.regions.includes('Asia'));
   assert.ok(preview.glossary.length>=3);
+  assert.ok(preview.glossary.length<=6);
   assert.match(preview.html,/<meta name="description"/);
+  assert.doesNotMatch(preview.html,/<h1>|MOTUS \| What Moves the WorldDaily Market/);
+  assert.match(preview.html,/<h2>Opening Summary<\/h2>/);
+  assert.match(preview.html,/<div class="market-dashboard"/);
   assert.match(preview.html,/용어 해설/);
-  assert.match(preview.html,/관련 글/);
-  assert.match(preview.html,/출처/);
+  assert.doesNotMatch(preview.html,/<section class="related">/);
+  assert.match(preview.html,/<h2>주요 출처<\/h2>/);
+  assert.doesNotMatch(preview.html,/자료 링크 \d|>https?:\/\//);
   assertPublicBloggerHtmlSafe(preview.html);
   assert.doesNotMatch(preview.html,/CLAIM-|AUTO_VALIDATED|confidenceScore|verificationStatus|\/admin\/blogger/);
+});
+test('Golden Day editorial preview uses opening prose, one dashboard, ordered industry analysis and one source section',()=>{
+  const result=runReal(realFixture());
+  const editorial=renderDailyEditorial(result.report,result.evidence);
+  const preview=createBloggerPreview(result.report,result.evidence,publishingConfig);
+  const opening=preview.html.match(/<h2>Opening Summary<\/h2>([\s\S]*?)<h2>시장 한눈에 보기<\/h2>/)?.[1]??'';
+  assert.equal((opening.match(/<p>/g)??[]).length,2);
+  assert.equal((preview.html.match(/class="market-dashboard"/g)??[]).length,1);
+  const afterDashboard=preview.html.split('</div>')[1]??'';
+  assert.doesNotMatch(afterDashboard,/7656\.98|26333\.04|4\.63%/);
+  const company=preview.html.indexOf('이번 기업 뉴스의 중심');
+  const industry=preview.html.indexOf('분기 실적 못지않게');
+  const supplyChain=preview.html.indexOf('글로벌 공급망에서는');
+  const korea=preview.html.indexOf('한국시장에서는 반도체 업종');
+  assert.ok(company>=0&&company<industry&&industry<supplyChain&&supplyChain<korea);
+  assert.equal((preview.html.match(/<h2>주요 출처<\/h2>/g)??[]).length,1);
+  assert.equal((preview.html.match(/class="hashtags"/g)??[]).length,1);
+  assert.ok(editorial.terms.every(term=>editorial.bloggerMarkdown.includes(term.term)));
+});
+test('related articles render only for a verified MOTUS article permalink',()=>{
+  const result=runReal(realFixture());
+  const editorial=renderDailyEditorial(result.report,result.evidence);
+  const preview=createBloggerPreview(result.report,result.evidence,publishingConfig);
+  const glossary=editorial.terms.slice(0,3).map((term,index)=>({...term,publishedUrl:index===0?'https://motusnova.blogspot.com/2026/09/capex-cycle.html':index===1?'https://motusnova.blogspot.com/':'https://motusnova.blogspot.com/search/label/Evergreen'}));
+  const rendered=renderMotusBloggerContent({title:preview.title,seoTitle:preview.seoTitle,metaDescription:preview.metaDescription,slug:preview.slug,markdown:editorial.bloggerMarkdown,hashtags:preview.hashtags,glossary,sources:preview.sources,metadata:preview.metadata},publishingConfig.publisher);
+  assert.equal(rendered.relatedLinks.length,1);
+  assert.equal(rendered.relatedLinks[0]?.url,'https://motusnova.blogspot.com/2026/09/capex-cycle.html');
+  assert.match(rendered.html,/<section class="related">/);
+  assert.doesNotMatch(rendered.html,/href="https:\/\/motusnova\.blogspot\.com\/"|\/search\/label\/Evergreen/);
 });
 test('Sprint 2G Blogger state transition, dry-run publish and credential failure are safe',async()=>{
   const result=runReal(realFixture());
@@ -581,7 +621,9 @@ test('DRAFT plus Blogger root URL stores only draftPostId and leaves publicPostU
   assert.equal(payload.title,approved.title);
   assert.equal(payload.labels,undefined);
   assert.match(payload.content,/class="motus-editorial"/);
-  assert.match(payload.content,/MOTUS \| What Moves the World/);
+  assert.match(payload.content,/<h2>Opening Summary<\/h2>/);
+  assert.match(payload.content,/market-dashboard/);
+  assert.doesNotMatch(payload.content,/<h1>|MOTUS \| What Moves the WorldDaily Market/);
   assert.doesNotMatch(payload.content,/<!doctype|<html|<head(?:\s|>)|publicationVersion|confidenceScore/);
   assert.equal(payload.customMetaData,undefined);
 });
@@ -634,9 +676,9 @@ test('MOTUS publisher stays separate from the market engine and supports global 
   assert.deepEqual(publishingConfig.publisher.categories,[
     'Daily Market','AI & Industry','Global Company','Market / Investment Insight','Evergreen'
   ]);
-  assert.match(preview.html,/MOTUS \| What Moves the World/);
-  assert.match(preview.html,/<h1>MOTUS Daily Market \| 2026-09-11/);
-  assert.match(preview.html,/https:\/\/motusnova\.blogspot\.com\/search\/label\/Evergreen/);
+  assert.equal(preview.metadata.displayName,'MOTUS | What Moves the World');
+  assert.ok(preview.labels.includes('Daily Market'));
+  assert.doesNotMatch(preview.html,/<h1>|\/search\/label\/Evergreen|<section class="related">/);
   assert.doesNotMatch(readFileSync('src/publishers/motus.ts','utf8'),/domain\/models|services\/pipeline|services\/validation|services\/analysis/);
   assert.equal(publishingConfig.publicBaseUrl,'https://motusnova.blogspot.com/');
 });
