@@ -5,7 +5,7 @@ import type { EvidencePackage, ReportRecord, ReviewActionInput, Rule, Source } f
 import { applyReviewActions, buildMachineHumanDiff, buildPublishReadyDraft, buildReviewSheet, createReviewAction } from './services/review.js';
 import { renderBrokerageReportOnDemand, renderDailyEditorial } from './services/editorial.js';
 import { renderA4MasterOnDemand } from './services/a4-visual.js';
-import { approveBloggerPublication, createBloggerPreview, DryRunBloggerAdapter, publishBloggerPublication, renderPublishingConsole, type BloggerPublicationRecord, type BloggerPublishingConfig } from './services/blogger.js';
+import { approveBloggerPublication, createBloggerPreview, DryRunBloggerAdapter, GoogleBloggerApiAdapter, publishBloggerPublication, renderPublishingConsole, type BloggerPublicationRecord, type BloggerPublishingConfig } from './services/blogger.js';
 async function main() {
   const args=process.argv.slice(2);
   const sample=args[0]==='--sample';
@@ -113,7 +113,8 @@ async function writeBloggerApprove(publicationPath:string|undefined) {
 async function writeBloggerPublish(publicationPath:string|undefined,dryRun:boolean) {
   if(!publicationPath) throw new Error('사용법: node dist/src/cli.js --blogger-publish data/blogger/date/report-publication.json [--dry-run]');
   const record=JSON.parse(await readFile(resolve(publicationPath),'utf8')) as BloggerPublicationRecord;
-  const published=await publishBloggerPublication(record,new DryRunBloggerAdapter(),await readPublishingConfig(),{audience:'admin',action:'BLOGGER_PUBLISH'},{dryRun});
+  const adapter=dryRun?new DryRunBloggerAdapter():new GoogleBloggerApiAdapter();
+  const published=await publishBloggerPublication(record,adapter,await readPublishingConfig(),{audience:'admin',action:'BLOGGER_PUBLISH'},{dryRun});
   const paths=await writePublicationArtifacts(published);
   console.log(JSON.stringify({status:published.status==='FAILED'?'FAILED':'PASS',reportId:published.reportId,publicationStatus:published.status,postUrl:published.postUrl,dryRun:published.dryRun,error:published.error,files:paths},null,2));
 }
@@ -141,8 +142,10 @@ async function writePublicationArtifacts(record:BloggerPublicationRecord):Promis
 }
 async function readPublishingConfig():Promise<BloggerPublishingConfig> {
   const raw=JSON.parse(await readFile(resolve('config/publishing.json'),'utf8')) as {blogger:BloggerPublishingConfig};
-  const envName=raw.blogger.credentialEnvironmentVariable;
-  return {...raw.blogger,credentialAvailable:envName?Boolean(process.env[envName]):raw.blogger.credentialAvailable===true};
+  const credentialEnv=raw.blogger.credentialEnvironmentVariable;
+  const blogIdEnv=raw.blogger.blogIdEnvironmentVariable;
+  const blogId=(blogIdEnv?process.env[blogIdEnv]??raw.blogger.blogId:raw.blogger.blogId)??null;
+  return {...raw.blogger,blogId,credentialAvailable:Boolean(blogId)&&(credentialEnv?Boolean(process.env[credentialEnv]):raw.blogger.credentialAvailable===true)};
 }
 async function tryReadPublication(report:ReportRecord):Promise<BloggerPublicationRecord|null> {
   const path=`data/blogger/${report.tradingDate}/${report.reportId}-publication.json`;

@@ -1,0 +1,26 @@
+{
+  "startingHead": "c98b613a32cf220c2514efc5f001f3cb8233d59b",
+  "sprint": "2H",
+  "reportId": "MANUAL-2026-09-11-7cb0ccf11f29",
+  "tradingDate": "2026-09-11",
+  "blogger": {
+    "publicationVersion": "2G.BLOGGER.1.0",
+    "adapterVersion": "2H.GOOGLEBLOGGER.1.0",
+    "publishAsDraft": true,
+    "blogIdConfigured": false,
+    "credentialConfigured": false,
+    "networkAttempted": false,
+    "status": "APPROVED",
+    "postUrl": null,
+    "fakePublish": false
+  },
+  "propagation": {
+    "actualUrlAvailable": false,
+    "a4QrUpdated": false,
+    "naverUrlUpdated": false
+  },
+  "tests": {
+    "nodeTestCount": 75,
+    "nodeTestPass": 75
+  }
+}

@@ -4,7 +4,9 @@
     "placeholderBaseUrl": "https://pending.local/us-market-daily",
     "publicBaseUrl": null,
     "blogId": null,
-    "credentialEnvironmentVariable": "BLOGGER_OAUTH_TOKEN"
+    "blogIdEnvironmentVariable": "BLOGGER_BLOG_ID",
+    "credentialEnvironmentVariable": "BLOGGER_OAUTH_TOKEN",
+    "publishAsDraft": true
   },
   "auth": {
     "localAdminDevelopmentMode": true,

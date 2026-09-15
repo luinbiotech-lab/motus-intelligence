@@ -106,7 +106,7 @@ interface A4Model {
   contentBottomPx: number;
 }
 
-function buildA4Model(report:ReportRecord,evidence:EvidencePackage,bloggerTarget:{url:string;state:'PUBLISHED'|'PREVIEW'|'UNRESOLVED'}):A4Model {
+function buildA4Model(report:ReportRecord,evidence:EvidencePackage,bloggerTarget:{url:string;state:'PUBLISHED'|'DRAFT'|'PREVIEW'|'UNRESOLVED'}):A4Model {
   const input=evidence.originalInput as InputBundle;
   const bySymbol=new Map(input.market.map(item=>[item.symbol,item]));
   const daily=renderDailyEditorial(report,evidence);
@@ -134,12 +134,12 @@ function buildA4Model(report:ReportRecord,evidence:EvidencePackage,bloggerTarget
   const risks=['단기금리 추가 상승 시 성장주 밸류에이션 압박','단일 기업 공시를 산업 전체 수요로 과잉 해석할 위험','유가 하락이 수요 둔화 신호로 해석될 가능성'];
   const sources=evidence.records.filter(record=>record.sourceUrl).slice(0,4).map((record,index)=>`Source ${index+1}: ${record.sourceUrl}`);
   const naverIntro=`${report.tradingDate} 미국장은 지수 상승과 VIX 하락으로 위험선호가 살아났지만, 2년물 금리 상승이 남긴 부담도 함께 봐야 했습니다. A4 요약 이미지와 상세 Blogger 글을 함께 확인하세요.`;
-  const stateSuffix=bloggerTarget.state==='PUBLISHED'?'':bloggerTarget.state==='PREVIEW'?' 아직 실제 Blogger URL 확정 전이므로 QR은 preview URL을 가리킵니다.':' 아직 Blogger URL이 확정되지 않았습니다.';
+  const stateSuffix=bloggerTarget.state==='PUBLISHED'?'':bloggerTarget.state==='DRAFT'?' 연결된 Blogger 초안 URL입니다. 공개 전 최종 검수를 거쳐야 합니다.':bloggerTarget.state==='PREVIEW'?' 아직 실제 Blogger URL 확정 전이므로 QR은 preview URL을 가리킵니다.':' 아직 Blogger URL이 확정되지 않았습니다.';
   return {title,subtitle:headline,tradingDate:report.tradingDate,metrics,executive,drivers,korea,checkpoints,risks,sources,hashtags:daily.seo.hashtags,googleBloggerUrl,naverIntro:`${naverIntro}${stateSuffix}`,qr:qrMatrix(googleBloggerUrl),contentBottomPx:1070};
 }
 
 
-function resolveA4BloggerTarget(options:{bloggerUrl?:string; bloggerRecord?:BloggerPublicationRecord|null; publishingConfig?:BloggerPublishingConfig}):{url:string;state:'PUBLISHED'|'PREVIEW'|'UNRESOLVED'} {
+function resolveA4BloggerTarget(options:{bloggerUrl?:string; bloggerRecord?:BloggerPublicationRecord|null; publishingConfig?:BloggerPublishingConfig}):{url:string;state:'PUBLISHED'|'DRAFT'|'PREVIEW'|'UNRESOLVED'} {
   if(options.bloggerUrl) return {url:options.bloggerUrl,state:'PUBLISHED'};
   const fromRecord=resolveBloggerUrl(options.bloggerRecord);
   if(fromRecord.state!=='UNRESOLVED') return fromRecord;

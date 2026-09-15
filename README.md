@@ -1,6 +1,6 @@
-# 미국 주식시장 마감 리포트 — Sprint 2F
+# 미국 주식시장 마감 리포트 — Sprint 2H
 
-미국 마감 자료를 수동 입력하거나 일부 공식 어댑터로 수집하여 검증 → claim 단위 교차검증 → 조건부 한국시장 영향 → 사람 검수표 → publish-ready 초안 → 공개용 editorial 출력 → 내부 관리자용 A4 MASTER 리서치 포스터까지 만드는 **비공개 로컬 CLI**입니다. Sprint 2F 기준 Google Blogger용 Daily Editorial Renderer, 보정된 B/C/D Content Opportunity Engine, 약어 우선 금융용어 해설, SEO/Naver package, 내부 관리자용 on-demand A4 MASTER HTML/PDF/PNG Renderer가 연결됐습니다. 2026-09-11을 첫 golden trading day, operational review day, editorial sample day, A4 sample day로 둡니다. 자동 발행, 스케줄러, 투자 추천은 연결하지 않았습니다.
+미국 마감 자료를 수동 입력하거나 일부 공식 어댑터로 수집하여 검증 → claim 단위 교차검증 → 조건부 한국시장 영향 → 사람 검수표 → publish-ready 초안 → 공개용 editorial 출력 → 내부 관리자용 A4 MASTER 리서치 포스터까지 만드는 **비공개 로컬 CLI**입니다. Google Blogger용 Daily Editorial Renderer, B/C/D Content Opportunity Engine, 약어 우선 금융용어 해설, SEO/Naver package, 내부 관리자용 A4 MASTER HTML/PDF/PNG Renderer와 Blogger API v3 초안 생성 어댑터가 연결돼 있습니다. 2026-09-11을 golden day로 사용합니다. 실제 Blogger 쓰기는 preview와 사람 승인을 거친 뒤, blogId와 OAuth access token이 모두 환경 변수에 있을 때만 실행합니다.
 
 ## 실행
 
@@ -29,6 +29,11 @@ node dist/src/cli.js --editorial data/reports/<reportId>.json data/evidence/<rep
 node dist/src/cli.js --brokerage-report data/reports/<reportId>.json data/evidence/<reportId>.json
 node dist/src/cli.js --a4-master data/reports/<reportId>.json data/evidence/<reportId>.json
 node dist/src/cli.js --a4-master data/reports/<reportId>.json data/evidence/<reportId>.json --regenerate
+node dist/src/cli.js --blogger-preview data/reports/<reportId>.json data/evidence/<reportId>.json
+node dist/src/cli.js --blogger-approve data/blogger/YYYY-MM-DD/<reportId>-publication.json
+Set-Item Env:BLOGGER_BLOG_ID '<Google Blogger blog ID>'
+Set-Item Env:BLOGGER_OAUTH_TOKEN '<OAuth 2.0 access token with Blogger scope>'
+node dist/src/cli.js --blogger-publish data/blogger/YYYY-MM-DD/<reportId>-publication.json
 ```
 
 `report`는 빌드된 CLI를 사용합니다. 코드 수정 후 `npm.cmd run build`를 실행하세요. `sample`과 `test`는 자동으로 빌드합니다. 경로는 프로젝트 루트 기준입니다.
@@ -50,6 +55,8 @@ node dist/src/cli.js --a4-master data/reports/<reportId>.json data/evidence/<rep
 
 A4 MASTER 생성은 관리자 전용 boundary를 통과해야 하며, 공개 route에서 호출할 수 없습니다. 개발환경에서는 `src/services/admin.ts`의 server-side authorization boundary와 `data/a4-master/YYYY-MM-DD/admin-a4-route.html`로 내부 route 화면을 분리합니다.
 
+실제 Blogger 연결 설정은 `config/publishing.json`에 환경 변수 이름과 `publishAsDraft` 정책만 저장합니다. blogId와 access token 값은 저장소 파일에 기록하지 않습니다. 기본값 `publishAsDraft=true`는 Google Blogger API v3 `posts.insert?isDraft=true`를 사용합니다. 둘 중 하나라도 없으면 외부 요청을 보내지 않고 실패 상태를 기록합니다. 초안 생성 후 반환된 post URL은 publication record에 저장되며, A4를 `--regenerate`로 다시 만들면 CTA/QR과 Naver package에 같은 URL이 반영됩니다.
+
 ## 중요한 파일
 
 - `src/domain/models.ts`: 공통 엔터티 8종, 판단 필드, 사후 설명력 평가 모델
@@ -65,10 +72,12 @@ A4 MASTER 생성은 관리자 전용 boundary를 통과해야 하며, 공개 rou
 - `src/services/editorial.ts`: Blogger Daily renderer, B/C/D opportunity engine, dynamic glossary, Naver intro, on-demand A4 brokerage renderer
 - `src/services/a4-visual.ts`: A4 MASTER HTML/PDF/PNG renderer, Naver posting package, cache metadata
 - `src/services/admin.ts`: admin-only A4 generation boundary와 route HTML
+- `src/services/blogger.ts`: Blogger publication state machine, dry-run adapter, Google Blogger API v3 draft adapter
+- `config/publishing.json`: Blogger URL 정책, 환경 변수 이름, draft-first 설정
 - `data/fixtures/sample-day.json`: 실행 가능한 통합 샘플. 분리된 sample-*.json은 각 입력 영역의 예시
 - `data/manual/2026-09-11/input.json`: 2026-09-11 실제 정규 거래일 수동 검증 리허설 입력
 - `data/manual/2026-09-11/input-api.json`: Treasury/BLS/SEC 어댑터 산출물을 일부 투입한 golden day 입력
 - `data/golden/2026-09-11/`: 원본 source snapshot, expected normalized result, manual/API 비교표, claim 검증 결과
-- `tests/pipeline.test.ts`: 요구 시나리오와 회귀 테스트 67개
+- `tests/pipeline.test.ts`: 요구 시나리오와 회귀 테스트
 
-[구조](docs/architecture.md) · [수동 입력](docs/manual-input.md) · [규칙](docs/rules.md) · [출처 운영](docs/data-sources.md) · [문제 및 회귀 방지](docs/issues.md) · [Sprint 1 완료 보고](docs/sprint-report.md) · [Sprint 2A 완료 보고](docs/sprint-2a-report.md) · [Sprint 2B 완료 보고](docs/sprint-2b-report.md) · [Sprint 2C 완료 보고](docs/sprint-2c-report.md) · [Sprint 2D 완료 보고](docs/sprint-2d-report.md) · [Sprint 2E 완료 보고](docs/sprint-2e-report.md) · [Sprint 2F 완료 보고](docs/sprint-2f-report.md)
+[구조](docs/architecture.md) · [수동 입력](docs/manual-input.md) · [규칙](docs/rules.md) · [출처 운영](docs/data-sources.md) · [문제 및 회귀 방지](docs/issues.md) · [Sprint 1 완료 보고](docs/sprint-report.md) · [Sprint 2A 완료 보고](docs/sprint-2a-report.md) · [Sprint 2B 완료 보고](docs/sprint-2b-report.md) · [Sprint 2C 완료 보고](docs/sprint-2c-report.md) · [Sprint 2D 완료 보고](docs/sprint-2d-report.md) · [Sprint 2E 완료 보고](docs/sprint-2e-report.md) · [Sprint 2F 완료 보고](docs/sprint-2f-report.md) · [Sprint 2G 완료 보고](docs/sprint-2g-report.md) · [Sprint 2H 진행 보고](docs/sprint-2h-report.md)

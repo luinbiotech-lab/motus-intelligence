@@ -15,7 +15,7 @@ import { generateReport } from '../src/services/report.js';
 import { buildDynamicTerms, decideContentOpportunities, renderBrokerageReportOnDemand, renderDailyEditorial } from '../src/services/editorial.js';
 import { renderA4MasterOnDemand } from '../src/services/a4-visual.js';
 import { publicCanRenderA4 } from '../src/services/admin.js';
-import { approveBloggerPublication, assertPublicBloggerHtmlSafe, ConfiguredBloggerAdapter, createBloggerPreview, DryRunBloggerAdapter, publishBloggerPublication, renderPublishingConsole, resolveBloggerUrl, type BloggerPublishingConfig } from '../src/services/blogger.js';
+import { approveBloggerPublication, assertPublicBloggerHtmlSafe, ConfiguredBloggerAdapter, createBloggerPreview, DryRunBloggerAdapter, GoogleBloggerApiAdapter, publishBloggerPublication, renderPublishingConsole, resolveBloggerUrl, type BloggerPublishingConfig } from '../src/services/blogger.js';
 const read=(p:string):unknown=>JSON.parse(readFileSync(p,'utf8'));
 const fixture=()=>structuredClone(read('data/fixtures/sample-day.json') as InputBundle);
 const realFixture=()=>structuredClone(read('data/manual/2026-09-11/input.json') as InputBundle);
@@ -529,4 +529,57 @@ test('Sprint 2G A4 QR and Naver package switch from preview URL to published Blo
   const naver=JSON.parse(readFileSync(after.naverPackagePath,'utf8')) as Record<string,string|string[]>;
   assert.equal(naver.googleBloggerUrl,published.postUrl);
   assert.doesNotMatch(readFileSync(after.htmlPath,'utf8'),/blog\.example\.com|CLAIM-|confidenceScore|verificationStatus/);
+});
+
+test('Sprint 2H Google adapter creates an approved Blogger post as draft and preserves editorial metadata',async()=>{
+  const result=runReal(realFixture());
+  const approved=approveBloggerPublication(createBloggerPreview(result.report,result.evidence,publishingConfig),{audience:'admin',action:'BLOGGER_APPROVE'});
+  let requestUrl='';
+  let requestInit:RequestInit|undefined;
+  const fakeFetch:typeof fetch=async(input,init)=>{
+    requestUrl=String(input);
+    requestInit=init;
+    return new Response(JSON.stringify({id:'DRAFT-POST-1',url:'https://verified-blog.test/2026/09/golden-day.html',status:'DRAFT',updated:'2026-09-15T01:30:00Z'}),{status:200,headers:{'content-type':'application/json'}});
+  };
+  const adapter=new GoogleBloggerApiAdapter(name=>name==='BLOGGER_OAUTH_TOKEN'?'secret-access-token':undefined,fakeFetch);
+  const config={...publishingConfig,blogId:'123456789',credentialEnvironmentVariable:'BLOGGER_OAUTH_TOKEN',publishAsDraft:true};
+  const draft=await publishBloggerPublication(approved,adapter,config,{audience:'admin',action:'BLOGGER_PUBLISH'});
+  assert.equal(draft.status,'DRAFT');
+  assert.equal(draft.providerPostId,'DRAFT-POST-1');
+  assert.equal(draft.postUrl,'https://verified-blog.test/2026/09/golden-day.html');
+  assert.deepEqual(resolveBloggerUrl(draft),{url:draft.postUrl,state:'DRAFT'});
+  assert.match(requestUrl,/\/blogs\/123456789\/posts\?isDraft=true/);
+  assert.equal((requestInit?.headers as Record<string,string>).authorization,'Bearer secret-access-token');
+  const payload=JSON.parse(String(requestInit?.body)) as {title:string;content:string;labels:string[];customMetaData:string};
+  assert.equal(payload.title,approved.title);
+  assert.deepEqual(payload.labels,approved.labels);
+  assert.match(payload.content,/class="daily-editorial"/);
+  assert.doesNotMatch(payload.content,/<!doctype|<html|<head|publicationVersion|confidenceScore/);
+  assert.deepEqual(JSON.parse(payload.customMetaData),{description:approved.metaDescription,slug:approved.slug});
+});
+
+test('Sprint 2H Google adapter never calls Blogger without both blogId and credential',async()=>{
+  const result=runReal(realFixture());
+  const approved=approveBloggerPublication(createBloggerPreview(result.report,result.evidence,publishingConfig),{audience:'admin',action:'BLOGGER_APPROVE'});
+  let calls=0;
+  const fakeFetch:typeof fetch=async()=>{ calls+=1; return new Response('{}',{status:200}); };
+  const missingBlog=new GoogleBloggerApiAdapter(()=> 'token',fakeFetch);
+  const missingToken=new GoogleBloggerApiAdapter(()=> undefined,fakeFetch);
+  const withoutBlog=await publishBloggerPublication(approved,missingBlog,{...publishingConfig,blogId:null},{audience:'admin',action:'BLOGGER_PUBLISH'});
+  const withoutToken=await publishBloggerPublication(approved,missingToken,{...publishingConfig,blogId:'123'},{audience:'admin',action:'BLOGGER_PUBLISH'});
+  assert.equal(withoutBlog.status,'FAILED');
+  assert.equal(withoutToken.status,'FAILED');
+  assert.equal(withoutBlog.postUrl,null);
+  assert.equal(withoutToken.postUrl,null);
+  assert.equal(calls,0);
+});
+
+test('Sprint 2H A4 and Naver use an actual Blogger draft URL',async()=>{
+  const result=runReal(realFixture());
+  const dir=mkdtempSync(join(tmpdir(),'a4-2h-draft-'));
+  const draft={...createBloggerPreview(result.report,result.evidence,publishingConfig),status:'DRAFT' as const,postUrl:'https://verified-blog.test/2026/09/golden-day.html',providerPostId:'DRAFT-POST-1'};
+  const output=await renderA4MasterOnDemand(result.report,result.evidence,dir,{audience:'admin',action:'A4_REPORT_RENDER'},{regenerate:true,bloggerRecord:draft,publishingConfig});
+  assert.equal(output.layout.qrTargetUrl,draft.postUrl);
+  assert.equal(output.naverPackage.googleBloggerUrl,draft.postUrl);
+  assert.match(output.naverPackage.intro,/Blogger 초안 URL/);
 });
