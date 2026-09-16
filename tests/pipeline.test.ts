@@ -575,6 +575,29 @@ test('2026-09-15 AI semiconductor review candidate preserves draft and requires 
   assert.equal(candidate.humanReview.bloggerWriteAttempted,false);
   assert.equal(candidate.humanReview.createNewDraft,false);
 });
+test('2026-09-15 editorial review records explicit human approval and draft-only patch audit',()=>{
+  const review=read('data/editorial/2026-09-15/MANUAL-2026-09-15-d11e82f3085c-ai-semiconductor-human-review.json') as {
+    reviewStatus:string; publishAllowed:boolean; approval:{decision:string;reviewer:string;reviewedAt:string;notes:string};
+    approvalHistory:{from:string;to:string;decision:string;reviewer:string}[];
+    bloggerDraftUpdate:{result:string;method:string;createdNewPost:boolean;postId:string;status:string;publicPostUrl:null;verification:Record<string,boolean|number>};
+  };
+  assert.equal(review.reviewStatus,'APPROVED');
+  assert.equal(review.publishAllowed,false);
+  assert.equal(review.approval.decision,'APPROVE');
+  assert.equal(review.approval.reviewer,'human');
+  assert.ok(Date.parse(review.approval.reviewedAt)>0);
+  assert.match(review.approval.notes,/공개 발행 승인이 아니다/);
+  assert.deepEqual(review.approvalHistory.map(item=>[item.from,item.to,item.decision,item.reviewer]),[['PENDING_HUMAN_APPROVAL','APPROVED','APPROVE','human']]);
+  assert.equal(review.bloggerDraftUpdate.result,'PASS');
+  assert.equal(review.bloggerDraftUpdate.method,'posts.patch');
+  assert.equal(review.bloggerDraftUpdate.createdNewPost,false);
+  assert.equal(review.bloggerDraftUpdate.postId,'393279749369966296');
+  assert.equal(review.bloggerDraftUpdate.status,'DRAFT');
+  assert.equal(review.bloggerDraftUpdate.publicPostUrl,null);
+  assert.equal(review.bloggerDraftUpdate.verification.marketDataUnchanged,true);
+  assert.equal(review.bloggerDraftUpdate.verification.internalTokenCount,0);
+  assert.equal(review.bloggerDraftUpdate.verification.duplicateDraftCount,0);
+});
 test('related articles render only for a verified MOTUS article permalink',()=>{
   const result=runReal(realFixture());
   const editorial=renderDailyEditorial(result.report,result.evidence);
@@ -750,6 +773,9 @@ test('existing Blogger draft is patched in place and re-read without publish or 
   assert.equal(updated.verification.visibleRawUrlCount,0);
   assert.equal(updated.verification.unpublishedRelatedLinksCount,0);
   assert.equal(updated.verification.duplicateDraftCount,0);
+  assert.equal(updated.verification.marketDataUnchanged,true);
+  assert.equal(updated.verification.internalTokenCount,0);
+  assert.equal(updated.verification.aiSemiconductorFocus,null);
   assert.equal(calls.filter(call=>call.method==='PATCH').length,1);
   assert.equal(calls.filter(call=>call.method==='POST'&&call.url.includes('/blogger/')).length,0);
 });

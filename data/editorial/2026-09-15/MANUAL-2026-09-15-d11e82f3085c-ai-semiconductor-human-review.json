@@ -2,7 +2,8 @@
   "version": "2E.2.0-AI-REVIEW.1",
   "reportId": "MANUAL-2026-09-15-d11e82f3085c",
   "tradingDate": "2026-09-15",
-  "reviewStatus": "PENDING_HUMAN_APPROVAL",
+  "title": "미국 증시 마감: 유가·금리 상승에 나스닥 하락 (2026년 9월 15일)",
+  "reviewStatus": "APPROVED",
   "proposedAction": "승인 후 기존 draft의 title/content만 patch",
   "publishAllowed": false,
   "bloggerWriteAttempted": false,
@@ -61,5 +62,47 @@
     "미국 소비 체크"
   ],
   "approvalInstruction": "Reuters와 공식자료의 보강 근거를 사람이 확인한 뒤에만 기존 Blogger draft update를 별도 실행한다.",
+  "approval": {
+    "decision": "APPROVE",
+    "reviewer": "human",
+    "reviewedAt": "2026-09-16T20:02:23.6832085+09:00",
+    "scope": "기존 Blogger draft의 title과 content만 patch하고 DRAFT 상태를 유지한다.",
+    "basis": [
+      "AP의 AI 주가 흐름을 Reuters의 독립 보도와 미국 재무부 공식 금리 자료로 교차검토했다.",
+      "AI CAPEX와 실적 설명은 Microsoft, AMD, NVIDIA 공식 자료에서 확인했다.",
+      "기존 시장 지표와 수치는 변경하지 않고 Dave & Buster's를 미국 소비 체크 보조 항목으로 축소했다."
+    ],
+    "notes": "AP B-tier 자료는 단독 확정 근거로 승격하지 않는다. 교차검증 결과와 조건부 표현을 함께 유지하는 수정 후보에 한해 사람이 승인했다. 이 승인은 공개 발행 승인이 아니다."
+  },
+  "approvalHistory": [
+    {
+      "from": "PENDING_HUMAN_APPROVAL",
+      "to": "APPROVED",
+      "decision": "APPROVE",
+      "reviewer": "human",
+      "reviewedAt": "2026-09-16T20:02:23.6832085+09:00",
+      "reason": "Reuters 및 공식자료 교차검증과 공개 문구 검토를 완료했다. 기존 draft patch만 승인하며 공개 발행은 승인하지 않는다."
+    }
+  ],
+  "bloggerDraftUpdate": {
+    "result": "PASS",
+    "method": "posts.patch",
+    "createdNewPost": false,
+    "postId": "393279749369966296",
+    "status": "DRAFT",
+    "publicPostUrl": null,
+    "updatedAt": "2026-09-16T20:05:03+09:00",
+    "verification": {
+      "titleMatched": true,
+      "aiSemiconductorFocus": true,
+      "daveConsumerAuxiliary": true,
+      "marketDataUnchanged": true,
+      "h1Count": 0,
+      "marketDashboardCount": 1,
+      "primarySourcesCount": 1,
+      "internalTokenCount": 0,
+      "duplicateDraftCount": 0
+    }
+  },
   "publicationRecordSha256": "50a9004693894e9ad798d57e0cbb1617f59b8933f46b124562c21917fd2fc79a"
 }

@@ -126,9 +126,12 @@ async function writeBloggerDraftUpdate(publicationPath:string|undefined,previewP
   if(!publicationPath||!previewPath||!metadataPath||!expectedPostId) throw new Error('사용법: node dist/src/cli.js --blogger-update-draft publication.json preview.html preview.json expectedPostId');
   const record=JSON.parse(await readFile(resolve(publicationPath),'utf8')) as BloggerPublicationRecord;
   const previewHtml=await readFile(resolve(previewPath),'utf8');
-  const metadata=JSON.parse(await readFile(resolve(metadataPath),'utf8')) as {title?:string};
+  const metadata=JSON.parse(await readFile(resolve(metadataPath),'utf8')) as {title?:string;version?:string;reviewStatus?:string;approval?:{decision?:string;reviewer?:string;reviewedAt?:string}};
   if(!metadata.title) throw new Error('preview metadata is missing title');
-  const result=await updateExistingBloggerDraft(record,previewHtml,await readPublishingConfig(),{audience:'admin',action:'BLOGGER_PUBLISH'},{expectedPostId,expectedTitle:metadata.title});
+  if(metadata.reviewStatus!==undefined) {
+    if(metadata.reviewStatus!=='APPROVED'||metadata.approval?.decision!=='APPROVE'||metadata.approval.reviewer!=='human'||!metadata.approval.reviewedAt) throw new Error('editorial review requires recorded human approval');
+  }
+  const result=await updateExistingBloggerDraft(record,previewHtml,await readPublishingConfig(),{audience:'admin',action:'BLOGGER_PUBLISH'},{expectedPostId,expectedTitle:metadata.title,...(metadata.version?.includes('AI-REVIEW')?{expectedEditorialFocus:'AI_SEMICONDUCTOR' as const}:{})});
   const files=await writePublicationArtifacts(result.record);
   const verificationPath=`data/blogger/${record.tradingDate}/${record.reportId}-draft-update-verification.json`;
   await writeFile(verificationPath,JSON.stringify(result.verification,null,2));
