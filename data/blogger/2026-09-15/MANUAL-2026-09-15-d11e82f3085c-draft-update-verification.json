@@ -13,7 +13,22 @@
   "aiSemiconductorFocus": true,
   "consumerCheckCount": 1,
   "daveConsumerAuxiliary": true,
+  "sectionOrder": [
+    "Opening Summary",
+    "시장 한눈에 보기",
+    "시장을 움직인 핵심 요인",
+    "AI·반도체 / 주요 산업",
+    "한국시장 연결 포인트",
+    "오늘 체크리스트",
+    "용어해설",
+    "주요 출처"
+  ],
+  "editorialBlockCount": 8,
+  "glossaryCardCount": 4,
+  "sourceGroupCount": 3,
+  "koreaHighlightBox": true,
+  "adminDraftUrl": "https://www.blogger.com/blog/post/edit/3015267553244608361/393279749369966296",
   "draftCountBefore": 2,
   "draftCountAfter": 2,
-  "updatedAt": "2026-09-16T20:05:03+09:00"
+  "updatedAt": "2026-09-16T22:18:49+09:00"
 }

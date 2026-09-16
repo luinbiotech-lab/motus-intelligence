@@ -606,7 +606,8 @@ test('2026-09-15 category block preview keeps title and market data while preser
     bloggerApiCalled:boolean;publicationRecordChanged:boolean;titleUnchanged:boolean;marketDataUnchanged:boolean;
     sectionOrder:string[];sectionBlockCount:number;glossaryCardCount:number;sourceGroups:string[];koreaHighlightBox:boolean;internalTokenCount:number;
   };
-  assert.equal(before,readFileSync('data/blogger/2026-09-15/MANUAL-2026-09-15-d11e82f3085c-preview.html','utf8'));
+  assert.notEqual(before,after);
+  assert.equal(after,readFileSync('data/blogger/2026-09-15/MANUAL-2026-09-15-d11e82f3085c-preview.html','utf8'));
   assert.equal(comparison.bloggerApiCalled,false);
   assert.equal(comparison.publicationRecordChanged,false);
   assert.equal(comparison.titleUnchanged,true);
@@ -620,6 +621,26 @@ test('2026-09-15 category block preview keeps title and market data while preser
   assert.match(after,/class="editorial-block block-korea-market"/);
   assert.equal((after.match(/class="market-dashboard"/g)??[]).length,1);
   assert.doesNotMatch(after,/CLAIM-|REVIEW_REQUIRED|confidenceScore|draftPostId/);
+});
+test('2026-09-15 Blogger category block patch verification preserves the existing draft',()=>{
+  const verification=read('data/blogger/2026-09-15/MANUAL-2026-09-15-d11e82f3085c-draft-update-verification.json') as {
+    postId:string;status:string;title:string;h1Count:number;marketDashboardCount:number;duplicateDraftCount:number;internalTokenCount:number;
+    sectionOrder:string[];editorialBlockCount:number;glossaryCardCount:number;sourceGroupCount:number;koreaHighlightBox:boolean;adminDraftUrl:string;draftCountBefore:number;draftCountAfter:number;
+  };
+  assert.equal(verification.postId,'393279749369966296');
+  assert.equal(verification.status,'DRAFT');
+  assert.equal(verification.title,'미국 증시 마감: 유가·금리 상승에 나스닥 하락 (2026년 9월 15일)');
+  assert.deepEqual(verification.sectionOrder,['Opening Summary','시장 한눈에 보기','시장을 움직인 핵심 요인','AI·반도체 / 주요 산업','한국시장 연결 포인트','오늘 체크리스트','용어해설','주요 출처']);
+  assert.equal(verification.editorialBlockCount,8);
+  assert.equal(verification.glossaryCardCount,4);
+  assert.equal(verification.sourceGroupCount,3);
+  assert.equal(verification.koreaHighlightBox,true);
+  assert.equal(verification.h1Count,0);
+  assert.equal(verification.marketDashboardCount,1);
+  assert.equal(verification.internalTokenCount,0);
+  assert.equal(verification.duplicateDraftCount,0);
+  assert.equal(verification.draftCountBefore,verification.draftCountAfter);
+  assert.match(verification.adminDraftUrl,/^https:\/\/www\.blogger\.com\/blog\/post\/edit\/\d+\/393279749369966296$/);
 });
 test('related articles render only for a verified MOTUS article permalink',()=>{
   const result=runReal(realFixture());
@@ -799,6 +820,9 @@ test('existing Blogger draft is patched in place and re-read without publish or 
   assert.equal(updated.verification.marketDataUnchanged,true);
   assert.equal(updated.verification.internalTokenCount,0);
   assert.equal(updated.verification.aiSemiconductorFocus,null);
+  assert.equal(updated.verification.sectionOrder,null);
+  assert.equal(updated.verification.editorialBlockCount,null);
+  assert.match(updated.verification.adminDraftUrl,/^https:\/\/www\.blogger\.com\/blog\/post\/edit\/blog-id\/4610978170890431016$/);
   assert.equal(calls.filter(call=>call.method==='PATCH').length,1);
   assert.equal(calls.filter(call=>call.method==='POST'&&call.url.includes('/blogger/')).length,0);
 });

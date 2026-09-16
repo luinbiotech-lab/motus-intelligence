@@ -132,7 +132,7 @@ async function writeBloggerDraftUpdate(publicationPath:string|undefined,previewP
   if(metadata.reviewStatus!==undefined) {
     if(metadata.reviewStatus!=='APPROVED'||metadata.approval?.decision!=='APPROVE'||metadata.approval.reviewer!=='human'||!metadata.approval.reviewedAt) throw new Error('editorial review requires recorded human approval');
   }
-  const result=await updateExistingBloggerDraft(record,previewHtml,await readPublishingConfig(),{audience:'admin',action:'BLOGGER_PUBLISH'},{expectedPostId,expectedTitle:metadata.title,...(metadata.version?.includes('AI-REVIEW')?{expectedEditorialFocus:'AI_SEMICONDUCTOR' as const}:{})});
+  const result=await updateExistingBloggerDraft(record,previewHtml,await readPublishingConfig(),{audience:'admin',action:'BLOGGER_PUBLISH'},{expectedPostId,expectedTitle:metadata.title,...(metadata.version?.includes('AI-REVIEW')?{expectedEditorialFocus:'AI_SEMICONDUCTOR' as const}:{}),...(previewHtml.includes('data-section="glossary"')&&previewHtml.includes('block-korea-market')?{expectedLayout:'CATEGORY_BLOCK_V1' as const}:{})});
   const files=await writePublicationArtifacts(result.record);
   const verificationPath=`data/blogger/${record.tradingDate}/${record.reportId}-draft-update-verification.json`;
   await writeFile(verificationPath,JSON.stringify(result.verification,null,2));

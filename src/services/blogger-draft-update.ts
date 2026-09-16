@@ -21,6 +21,12 @@ export interface BloggerDraftUpdateVerification {
   aiSemiconductorFocus: boolean|null;
   consumerCheckCount: number;
   daveConsumerAuxiliary: boolean|null;
+  sectionOrder: string[]|null;
+  editorialBlockCount: number|null;
+  glossaryCardCount: number|null;
+  sourceGroupCount: number|null;
+  koreaHighlightBox: boolean|null;
+  adminDraftUrl: string;
   draftCountBefore: number;
   draftCountAfter: number;
   updatedAt: string|null;
@@ -36,7 +42,7 @@ export async function updateExistingBloggerDraft(
   previewHtml:string,
   config:BloggerPublishingConfig,
   context:AdminRequestContext,
-  options:{expectedPostId:string; expectedTitle:string; expectedEditorialFocus?:'AI_SEMICONDUCTOR'; now?:string; environment?:(name:string)=>string|undefined; fetcher?:FetchLike}
+  options:{expectedPostId:string; expectedTitle:string; expectedEditorialFocus?:'AI_SEMICONDUCTOR'; expectedLayout?:'CATEGORY_BLOCK_V1'; now?:string; environment?:(name:string)=>string|undefined; fetcher?:FetchLike}
 ):Promise<BloggerDraftUpdateResult> {
   assertAdminRequest({...context,action:'BLOGGER_PUBLISH'});
   if(record.status!=='DRAFT') throw new Error(`draft update requires DRAFT publication, received ${record.status}`);
@@ -57,7 +63,7 @@ export async function updateExistingBloggerDraft(
   await patchPost(blogId,options.expectedPostId,title,content,accessToken,fetcher);
   const after=await getPost(blogId,options.expectedPostId,accessToken,fetcher);
   const draftsAfter=await listDrafts(blogId,accessToken,fetcher);
-  const verification=verifyUpdatedDraft(after,draftsBefore,draftsAfter,options.expectedPostId,title,content,options.expectedEditorialFocus);
+  const verification=verifyUpdatedDraft(after,draftsBefore,draftsAfter,options.expectedPostId,title,content,blogId,options.expectedEditorialFocus,options.expectedLayout);
   const at=after.updated??options.now??new Date().toISOString();
   return {
     record:{
@@ -123,7 +129,7 @@ async function listDrafts(blogId:string,accessToken:string,fetcher:FetchLike):Pr
   throw new Error('Blogger draft list exceeded safe pagination limit');
 }
 
-function verifyUpdatedDraft(post:BloggerPost,before:BloggerPost[],after:BloggerPost[],postId:string,title:string,expectedContent:string,expectedEditorialFocus:'AI_SEMICONDUCTOR'|undefined):BloggerDraftUpdateVerification {
+function verifyUpdatedDraft(post:BloggerPost,before:BloggerPost[],after:BloggerPost[],postId:string,title:string,expectedContent:string,blogId:string,expectedEditorialFocus:'AI_SEMICONDUCTOR'|undefined,expectedLayout:'CATEGORY_BLOCK_V1'|undefined):BloggerDraftUpdateVerification {
   assertTargetDraft(post,postId);
   if(post.title!==title) throw new Error('updated Blogger draft title mismatch');
   const content=post.content??'';
@@ -141,6 +147,12 @@ function verifyUpdatedDraft(post:BloggerPost,before:BloggerPost[],after:BloggerP
   const aiSemiconductorFocus=expectedEditorialFocus?markerPositions.every((position,index)=>position>=0&&(index===0||position>markerPositions[index-1]!)):null;
   const consumerIndex=content.indexOf('미국 소비 체크');
   const daveConsumerAuxiliary=expectedEditorialFocus?consumerCheckCount===1&&content.indexOf("Dave &amp; Buster's",consumerIndex)>consumerIndex:null;
+  const sectionOrder=expectedLayout?[...content.matchAll(/<h2>([^<]+)<\/h2>/g)].map(match=>decodeHtml(match[1]!)):null;
+  const editorialBlockCount=expectedLayout?count(content,/class=["'][^"']*\beditorial-block\b[^"']*["']/gi):null;
+  const glossaryCardCount=expectedLayout?count(content,/class=["'][^"']*\bglossary-card\b[^"']*["']/gi):null;
+  const sourceGroupCount=expectedLayout?count(content,/class=["'][^"']*\bsource-group\b[^"']*["']/gi):null;
+  const koreaHighlightBox=expectedLayout?/class=["'][^"']*\bblock-korea-market\b[^"']*["']/i.test(content):null;
+  const expectedSections=['Opening Summary','시장 한눈에 보기','시장을 움직인 핵심 요인','AI·반도체 / 주요 산업','한국시장 연결 포인트','오늘 체크리스트','용어해설','주요 출처'];
   if(h1Count!==0) throw new Error(`updated Blogger draft contains ${h1Count} H1 elements`);
   if(marketDashboardCount!==1) throw new Error(`updated Blogger draft contains ${marketDashboardCount} market dashboards`);
   if(primarySourcesCount!==1) throw new Error(`updated Blogger draft contains ${primarySourcesCount} primary source sections`);
@@ -151,8 +163,9 @@ function verifyUpdatedDraft(post:BloggerPost,before:BloggerPost[],after:BloggerP
   if(!marketDataUnchanged) throw new Error('updated Blogger draft changed market dashboard values');
   if(internalTokenCount!==0) throw new Error(`updated Blogger draft exposes ${internalTokenCount} internal tokens`);
   if(expectedEditorialFocus&&(!aiSemiconductorFocus||!daveConsumerAuxiliary)) throw new Error('updated Blogger draft editorial focus verification failed');
+  if(expectedLayout&&(JSON.stringify(sectionOrder)!==JSON.stringify(expectedSections)||editorialBlockCount!==8||glossaryCardCount!==4||sourceGroupCount!==3||!koreaHighlightBox)) throw new Error('updated Blogger draft category block verification failed');
   assertSingleTarget(after,postId);
-  return {postId,status:'DRAFT',title,h1Count,marketDashboardCount,primarySourcesCount,visibleRawUrlCount,unpublishedRelatedLinksCount,duplicateDraftCount,marketDataUnchanged,internalTokenCount,aiSemiconductorFocus,consumerCheckCount,daveConsumerAuxiliary,draftCountBefore:before.length,draftCountAfter:after.length,updatedAt:post.updated??null};
+  return {postId,status:'DRAFT',title,h1Count,marketDashboardCount,primarySourcesCount,visibleRawUrlCount,unpublishedRelatedLinksCount,duplicateDraftCount,marketDataUnchanged,internalTokenCount,aiSemiconductorFocus,consumerCheckCount,daveConsumerAuxiliary,sectionOrder,editorialBlockCount,glossaryCardCount,sourceGroupCount,koreaHighlightBox,adminDraftUrl:`https://www.blogger.com/blog/post/edit/${encodeURIComponent(blogId)}/${encodeURIComponent(postId)}`,draftCountBefore:before.length,draftCountAfter:after.length,updatedAt:post.updated??null};
 }
 
 function assertTargetDraft(post:BloggerPost,postId:string):void {
@@ -186,6 +199,7 @@ function extractBloggerArticle(html:string):string {
 function stripTags(html:string):string { return html.replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi,' ').replace(/<[^>]+>/g,' '); }
 function extractMarketDashboard(html:string):string { return html.match(/<div\b[^>]*class=["'][^"']*\bmarket-dashboard\b[^"']*["'][^>]*>[\s\S]*?<\/div>/i)?.[0]??''; }
 function normalizeHtml(html:string):string { return html.replace(/\s+/g,' ').trim(); }
+function decodeHtml(value:string):string { return value.replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/&#39;/g,"'").replace(/&lt;/g,'<').replace(/&gt;/g,'>'); }
 function count(value:string,pattern:RegExp):number { return [...value.matchAll(pattern)].length; }
 async function safeApiError(response:Response):Promise<string> {
   try { const parsed=JSON.parse(await response.text()) as {error?:{status?:string;message?:string}}; return [parsed.error?.status,parsed.error?.message].filter(Boolean).join(' - ').slice(0,300)||'request failed'; }
