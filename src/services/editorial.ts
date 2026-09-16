@@ -97,7 +97,7 @@ export function renderDailyEditorial(report:ReportRecord,evidence:EvidencePackag
     '',
     ratesAndMacroParagraph(cpiPeriod,Boolean(cpi),us2y,us10y,input),
     '',
-    '## AI·반도체 / 핵심 산업',
+    '## AI·반도체 / 주요 산업',
     '',
     companyIndustryParagraph(input,reviewContext),
     '',

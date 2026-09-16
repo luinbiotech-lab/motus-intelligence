@@ -29,6 +29,13 @@ export interface BloggerDraftUpdateVerification {
   koreaHighlightBox: boolean|null;
   titleBarCount: number|null;
   mobileHorizontalOverflowDisabled: boolean|null;
+  inlineStyleAttributeCount: number|null;
+  titleBarInlineStyleCount: number|null;
+  contentBoxInlineStyleCount: number|null;
+  styleTagCount: number|null;
+  glossaryCompactTable: boolean|null;
+  sourceGroupsInlineStyled: boolean|null;
+  koreaInlineHighlight: boolean|null;
   adminDraftUrl: string;
   draftCountBefore: number;
   draftCountAfter: number;
@@ -138,7 +145,7 @@ function verifyUpdatedDraft(post:BloggerPost,before:BloggerPost[],after:BloggerP
   const content=post.content??'';
   const h1Count=count(content,/<h1(?:\s|>)/gi);
   const marketDashboardCount=count(content,/class=["'][^"']*\bmarket-dashboard\b[^"']*["']/gi);
-  const primarySourcesCount=count(content,/<h2>\s*주요 출처\s*<\/h2>/gi);
+  const primarySourcesCount=count(content,/<h2\b[^>]*>\s*주요 출처\s*<\/h2>/gi);
   const visibleRawUrlCount=count(stripTags(content),/https?:\/\/\S+/gi);
   const unpublishedRelatedLinksCount=count(content,/<[a-z]+\b[^>]*class=["'][^"']*\brelated\b/gi);
   const duplicateDraftCount=after.filter(item=>item.id!==postId&&item.title===title).length;
@@ -150,15 +157,22 @@ function verifyUpdatedDraft(post:BloggerPost,before:BloggerPost[],after:BloggerP
   const aiSemiconductorFocus=expectedEditorialFocus?markerPositions.every((position,index)=>position>=0&&(index===0||position>markerPositions[index-1]!)):null;
   const consumerIndex=content.indexOf('미국 소비 체크');
   const daveConsumerAuxiliary=expectedEditorialFocus?consumerCheckCount===1&&content.indexOf("Dave &amp; Buster's",consumerIndex)>consumerIndex:null;
-  const sectionOrder=expectedLayout?[...content.matchAll(/<h2>([^<]+)<\/h2>/g)].map(match=>decodeHtml(match[1]!)):null;
+  const sectionOrder=expectedLayout?[...content.matchAll(/<h2\b[^>]*>([^<]+)<\/h2>/g)].map(match=>decodeHtml(match[1]!)):null;
   const editorialBlockCount=expectedLayout?count(content,/class=["'][^"']*\beditorial-block\b[^"']*["']/gi):null;
   const glossaryCardCount=expectedLayout?count(content,/class=["'][^"']*\bglossary-card\b[^"']*["']/gi):null;
   const glossaryReferenceCount=expectedLayout?count(content,/class=["'][^"']*\bglossary-row\b[^"']*["']/gi):null;
   const sourceGroupCount=expectedLayout?count(content,/class=["'][^"']*\bsource-group\b[^"']*["']/gi):null;
   const koreaHighlightBox=expectedLayout?/class=["'][^"']*\bblock-korea-market\b[^"']*["']/i.test(content):null;
-  const titleBarCount=expectedLayout?count(content,/<section\b[^>]*class=["'][^"']*\beditorial-block\b[^"']*["'][^>]*><h2>/gi):null;
-  const mobileHorizontalOverflowDisabled=expectedLayout?content.includes('overflow-x:hidden')&&!content.includes('overflow-x:auto'):null;
-  const expectedSections=expectedLayout==='FINANCIAL_RESEARCH_V1'?['핵심 요약','시장 한눈에 보기','시장을 움직인 핵심 요인','AI·반도체 / 핵심 산업','한국시장 연결 포인트','오늘 체크리스트','용어설명','주요 출처']:['Opening Summary','시장 한눈에 보기','시장을 움직인 핵심 요인','AI·반도체 / 주요 산업','한국시장 연결 포인트','오늘 체크리스트','용어해설','주요 출처'];
+  const titleBarCount=expectedLayout?count(content,/<section\b[^>]*class=["'][^"']*\beditorial-block\b[^"']*["'][^>]*><h2\b/gi):null;
+  const mobileHorizontalOverflowDisabled=expectedLayout?content.includes('width:100%')&&content.includes('max-width:100%')&&content.includes('box-sizing:border-box')&&!content.includes('overflow-x:auto'):null;
+  const inlineStyleAttributeCount=expectedLayout?count(content,/\sstyle=["'][^"']+["']/gi):null;
+  const titleBarInlineStyleCount=expectedLayout?count(content,/<h2\b[^>]*style=["'][^"']*background:[^"']*color:[^"']*padding:[^"']*font-size:[^"']*font-weight:[^"']*margin:[^"']*["']/gi):null;
+  const contentBoxInlineStyleCount=expectedLayout?count(content,/<div\b[^>]*class=["'][^"']*\beditorial-content\b[^"']*["'][^>]*style=["'][^"']*border:[^"']*padding:[^"']*background:[^"']*margin:[^"']*width:100%[^"']*max-width:100%[^"']*box-sizing:border-box[^"']*["']/gi):null;
+  const styleTagCount=expectedLayout?count(content,/<style\b/gi):null;
+  const glossaryCompactTable=expectedLayout?/<div\b[^>]*class=["'][^"']*\bglossary-reference\b[^"']*["'][^>]*style=["'][^"']*font-size:14px[^"']*["'][^>]*>\s*<table\b[^>]*style=["'][^"']*width:100%[^"']*table-layout:fixed[^"']*["']/i.test(content):null;
+  const sourceGroupsInlineStyled=expectedLayout?/<div\b[^>]*class=["'][^"']*\bsource-groups\b[^"']*["'][^>]*style=["'][^"']*border:[^"']*background:[^"']*font-size:14px[^"']*["']/i.test(content):null;
+  const koreaInlineHighlight=expectedLayout?/<section\b[^>]*class=["'][^"']*\bblock-korea-market\b[^"']*["'][^>]*>[\s\S]*?<div\b[^>]*class=["'][^"']*\beditorial-content\b[^"']*["'][^>]*style=["'][^"']*border:2px solid #8eabc9[^"']*background:#edf4fb[^"']*["']/i.test(content):null;
+  const expectedSections=expectedLayout==='FINANCIAL_RESEARCH_V1'?['핵심 요약','시장 한눈에 보기','시장을 움직인 핵심 요인','AI·반도체 / 주요 산업','한국시장 연결 포인트','오늘 체크리스트','용어설명','주요 출처']:['Opening Summary','시장 한눈에 보기','시장을 움직인 핵심 요인','AI·반도체 / 주요 산업','한국시장 연결 포인트','오늘 체크리스트','용어해설','주요 출처'];
   if(h1Count!==0) throw new Error(`updated Blogger draft contains ${h1Count} H1 elements`);
   if(marketDashboardCount!==1) throw new Error(`updated Blogger draft contains ${marketDashboardCount} market dashboards`);
   if(primarySourcesCount!==1) throw new Error(`updated Blogger draft contains ${primarySourcesCount} primary source sections`);
@@ -170,9 +184,9 @@ function verifyUpdatedDraft(post:BloggerPost,before:BloggerPost[],after:BloggerP
   if(internalTokenCount!==0) throw new Error(`updated Blogger draft exposes ${internalTokenCount} internal tokens`);
   if(expectedEditorialFocus&&(!aiSemiconductorFocus||!daveConsumerAuxiliary)) throw new Error('updated Blogger draft editorial focus verification failed');
   if(expectedLayout==='CATEGORY_BLOCK_V1'&&(JSON.stringify(sectionOrder)!==JSON.stringify(expectedSections)||editorialBlockCount!==8||glossaryCardCount!==4||sourceGroupCount!==3||!koreaHighlightBox)) throw new Error('updated Blogger draft category block verification failed');
-  if(expectedLayout==='FINANCIAL_RESEARCH_V1'&&(JSON.stringify(sectionOrder)!==JSON.stringify(expectedSections)||editorialBlockCount!==8||titleBarCount!==8||glossaryCardCount!==0||glossaryReferenceCount!==4||sourceGroupCount!==3||!koreaHighlightBox||!mobileHorizontalOverflowDisabled)) throw new Error('updated Blogger draft financial research layout verification failed');
+  if(expectedLayout==='FINANCIAL_RESEARCH_V1'&&(JSON.stringify(sectionOrder)!==JSON.stringify(expectedSections)||editorialBlockCount!==8||titleBarCount!==8||glossaryCardCount!==0||glossaryReferenceCount!==4||sourceGroupCount!==3||!koreaHighlightBox||!mobileHorizontalOverflowDisabled||titleBarInlineStyleCount!==8||contentBoxInlineStyleCount!==8||styleTagCount!==0||!glossaryCompactTable||!sourceGroupsInlineStyled||!koreaInlineHighlight)) throw new Error('updated Blogger draft financial research inline layout verification failed');
   assertSingleTarget(after,postId);
-  return {postId,status:'DRAFT',title,h1Count,marketDashboardCount,primarySourcesCount,visibleRawUrlCount,unpublishedRelatedLinksCount,duplicateDraftCount,marketDataUnchanged,internalTokenCount,aiSemiconductorFocus,consumerCheckCount,daveConsumerAuxiliary,sectionOrder,editorialBlockCount,glossaryCardCount,glossaryReferenceCount,sourceGroupCount,koreaHighlightBox,titleBarCount,mobileHorizontalOverflowDisabled,adminDraftUrl:`https://www.blogger.com/blog/post/edit/${encodeURIComponent(blogId)}/${encodeURIComponent(postId)}`,draftCountBefore:before.length,draftCountAfter:after.length,updatedAt:post.updated??null};
+  return {postId,status:'DRAFT',title,h1Count,marketDashboardCount,primarySourcesCount,visibleRawUrlCount,unpublishedRelatedLinksCount,duplicateDraftCount,marketDataUnchanged,internalTokenCount,aiSemiconductorFocus,consumerCheckCount,daveConsumerAuxiliary,sectionOrder,editorialBlockCount,glossaryCardCount,glossaryReferenceCount,sourceGroupCount,koreaHighlightBox,titleBarCount,mobileHorizontalOverflowDisabled,inlineStyleAttributeCount,titleBarInlineStyleCount,contentBoxInlineStyleCount,styleTagCount,glossaryCompactTable,sourceGroupsInlineStyled,koreaInlineHighlight,adminDraftUrl:`https://www.blogger.com/blog/post/edit/${encodeURIComponent(blogId)}/${encodeURIComponent(postId)}`,draftCountBefore:before.length,draftCountAfter:after.length,updatedAt:post.updated??null};
 }
 
 function assertTargetDraft(post:BloggerPost,postId:string):void {

@@ -147,5 +147,41 @@
       "duplicateDraftCount": 0
     }
   },
+  "bloggerSafeInlineDraftUpdate": {
+    "result": "PASS",
+    "method": "posts.patch",
+    "createdNewPost": false,
+    "postId": "393279749369966296",
+    "status": "DRAFT",
+    "publicPostUrl": null,
+    "updatedAt": "2026-09-17T08:17:28+09:00",
+    "verification": {
+      "marketDataUnchanged": true,
+      "inlineStyleAttributeCount": 78,
+      "titleBarInlineStyleCount": 8,
+      "contentBoxInlineStyleCount": 8,
+      "styleTagCount": 0,
+      "glossaryCompactTable": true,
+      "sourceGroupCount": 3,
+      "sourceGroupsInlineStyled": true,
+      "koreaInlineHighlight": true,
+      "mobileHorizontalOverflowDisabled": true,
+      "internalTokenCount": 0,
+      "duplicateDraftCount": 0
+    },
+    "adminPreviewVisualReview": {
+      "result": "PASS",
+      "reviewedAt": "2026-09-17T08:19:21.9796534+09:00",
+      "viewport": "Blogger smartphone preview",
+      "checks": [
+        "Deep Navy/Slate title bars are visually distinct",
+        "content boxes retain borders, padding and background",
+        "market dashboard fits without horizontal overflow",
+        "Korea market connection remains highlighted",
+        "glossary renders as one compact reference table",
+        "sources render as three grouped blocks"
+      ]
+    }
+  },
   "publicationRecordSha256": "50a9004693894e9ad798d57e0cbb1617f59b8933f46b124562c21917fd2fc79a"
 }

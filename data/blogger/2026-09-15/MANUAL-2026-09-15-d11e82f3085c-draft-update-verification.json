@@ -17,7 +17,7 @@
     "핵심 요약",
     "시장 한눈에 보기",
     "시장을 움직인 핵심 요인",
-    "AI·반도체 / 핵심 산업",
+    "AI·반도체 / 주요 산업",
     "한국시장 연결 포인트",
     "오늘 체크리스트",
     "용어설명",
@@ -30,8 +30,15 @@
   "koreaHighlightBox": true,
   "titleBarCount": 8,
   "mobileHorizontalOverflowDisabled": true,
+  "inlineStyleAttributeCount": 78,
+  "titleBarInlineStyleCount": 8,
+  "contentBoxInlineStyleCount": 8,
+  "styleTagCount": 0,
+  "glossaryCompactTable": true,
+  "sourceGroupsInlineStyled": true,
+  "koreaInlineHighlight": true,
   "adminDraftUrl": "https://www.blogger.com/blog/post/edit/3015267553244608361/393279749369966296",
   "draftCountBefore": 2,
   "draftCountAfter": 2,
-  "updatedAt": "2026-09-17T00:20:42+09:00"
+  "updatedAt": "2026-09-17T08:17:28+09:00"
 }

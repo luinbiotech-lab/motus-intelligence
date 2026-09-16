@@ -115,20 +115,25 @@ export async function writeFinancialResearchLayoutComparison(report:ReportRecord
   const candidate=buildEditorialReviewCandidate(report,evidence,publication,plan,publisher);
   if(candidate.publicationFingerprint!==publicationBefore||fingerprint(publication)!==publicationBefore) throw new Error('publication record changed during research layout preview');
   const after=candidate.candidateHtml;
-  const expectedSections=['핵심 요약','시장 한눈에 보기','시장을 움직인 핵심 요인','AI·반도체 / 핵심 산업','한국시장 연결 포인트','오늘 체크리스트','용어설명','주요 출처'];
-  const actualSections=[...after.matchAll(/<h2>([^<]+)<\/h2>/g)].map(match=>decodeHtml(match[1]!));
+  const expectedSections=['핵심 요약','시장 한눈에 보기','시장을 움직인 핵심 요인','AI·반도체 / 주요 산업','한국시장 연결 포인트','오늘 체크리스트','용어설명','주요 출처'];
+  const actualSections=[...after.matchAll(/<h2\b[^>]*>([^<]+)<\/h2>/g)].map(match=>decodeHtml(match[1]!));
   if(JSON.stringify(actualSections)!==JSON.stringify(expectedSections)) throw new Error(`financial research section order mismatch: ${actualSections.join(' > ')}`);
   const beforeRows=marketDashboardRows(before),afterRows=marketDashboardRows(after);
   if(!beforeRows.length||JSON.stringify(beforeRows)!==JSON.stringify(afterRows)) throw new Error('financial research preview changed market values');
   assertPublicBloggerHtmlSafe(after);
+  const titleBarInlineStyleCount=count(after,/<h2\b[^>]*style="[^"]*background:[^"]*color:[^"]*padding:[^"]*font-size:[^"]*font-weight:[^"]*margin:[^"]*"/g);
+  const contentBoxInlineStyleCount=count(after,/<div\b[^>]*class="[^"]*editorial-content[^"]*"[^>]*style="[^"]*border:[^"]*padding:[^"]*background:[^"]*margin:[^"]*width:100%[^"]*max-width:100%[^"]*box-sizing:border-box[^"]*"/g);
+  const styleTagCount=count(after,/<style\b/gi);
+  if(titleBarInlineStyleCount!==8||contentBoxInlineStyleCount!==8||styleTagCount!==0) throw new Error('financial research preview is not Blogger-safe inline layout');
   const comparison={
     reportId:report.reportId,tradingDate:report.tradingDate,bloggerApiCalled:false,publicationRecordChanged:false,
     titleUnchanged:htmlTitle(before)===htmlTitle(after),marketDataUnchanged:true,marketRows:afterRows,
     sectionOrder:actualSections,sectionBlockCount:count(after,/class="editorial-block\b/g),
-    titleBarCount:count(after,/<section\b[^>]*class="[^"]*editorial-block[^"]*"[^>]*><h2>/g),
+    titleBarCount:count(after,/<section\b[^>]*class="[^"]*editorial-block[^"]*"[^>]*><h2\b/g),
+    titleBarInlineStyleCount,contentBoxInlineStyleCount,styleTagCount,
     glossaryReferenceCount:count(after,/class="glossary-row"/g),
-    sourceGroups:[...after.matchAll(/<div class="source-group"><h3>([^<]+)<\/h3>/g)].map(match=>decodeHtml(match[1]!)),
-    koreaHighlightBox:after.includes('block-korea-market'),mobileHorizontalOverflowDisabled:after.includes('overflow-x:hidden')&&!after.includes('overflow-x:auto'),
+    sourceGroups:[...after.matchAll(/<div class="source-group"[^>]*><h3[^>]*>([^<]+)<\/h3>/g)].map(match=>decodeHtml(match[1]!)),
+    koreaHighlightBox:after.includes('block-korea-market'),mobileHorizontalOverflowDisabled:after.includes('width:100%')&&after.includes('max-width:100%')&&after.includes('box-sizing:border-box')&&!after.includes('overflow-x:auto'),
     internalTokenCount:count(after,/\b(?:CLAIM-|AUTO_VALIDATED|REVIEW_REQUIRED|BLOCKED|DATA_NOT_CONNECTED|confidenceScore|verificationStatus|publicationVersion|draftPostId)\b/gi),
     beforeSha256:fingerprint(before),afterSha256:fingerprint(after),publicationRecordSha256:publicationBefore
   };
