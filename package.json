@@ -10,6 +10,7 @@
     "blogger:oauth": "npm run build && node dist/src/blogger-oauth-cli.js",
     "editorial:review": "npm run build && node dist/src/cli.js --editorial-review-preview",
     "editorial:layout-preview": "npm run build && node dist/src/cli.js --editorial-layout-preview",
+    "editorial:research-preview": "npm run build && node dist/src/cli.js --financial-research-layout-preview",
     "sample": "npm run build && node dist/src/cli.js --sample",
     "report": "node dist/src/cli.js"
   },

@@ -124,5 +124,28 @@
       "duplicateDraftCount": 0
     }
   },
+  "financialResearchDraftUpdate": {
+    "result": "PASS",
+    "method": "posts.patch",
+    "createdNewPost": false,
+    "postId": "393279749369966296",
+    "status": "DRAFT",
+    "publicPostUrl": null,
+    "updatedAt": "2026-09-17T00:20:42+09:00",
+    "verification": {
+      "sectionOrderMatched": true,
+      "editorialBlockCount": 8,
+      "titleBarCount": 8,
+      "glossaryReferenceCount": 4,
+      "sourceGroupCount": 3,
+      "koreaHighlightBox": true,
+      "mobileHorizontalOverflowDisabled": true,
+      "h1Count": 0,
+      "marketDashboardCount": 1,
+      "marketDataUnchanged": true,
+      "internalTokenCount": 0,
+      "duplicateDraftCount": 0
+    }
+  },
   "publicationRecordSha256": "50a9004693894e9ad798d57e0cbb1617f59b8933f46b124562c21917fd2fc79a"
 }

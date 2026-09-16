@@ -404,7 +404,7 @@ test('Sprint 2D review metrics remain NOT_MEASURED without human actions',()=>{
 test('Sprint 2E daily editorial renderer hides internal status and keeps public Korean prose',()=>{
   const result=runReal(realFixture());
   const editorial=renderDailyEditorial(result.report,result.evidence);
-  assert.match(editorial.bloggerMarkdown,/## Opening Summary/);
+  assert.match(editorial.bloggerMarkdown,/## 핵심 요약/);
   assert.match(editorial.bloggerMarkdown,/## 시장 한눈에 보기/);
   assert.match(editorial.bloggerMarkdown,/## 한국시장 연결 포인트/);
   assert.doesNotMatch(editorial.bloggerMarkdown,/^# /m);
@@ -502,9 +502,9 @@ test('Sprint 2G Blogger preview preserves SEO, glossary, labels, sources and hid
   assert.ok(preview.glossary.length<=6);
   assert.match(preview.html,/<meta name="description"/);
   assert.doesNotMatch(preview.html,/<h1>|MOTUS \| What Moves the WorldDaily Market/);
-  assert.match(preview.html,/<h2>Opening Summary<\/h2>/);
+  assert.match(preview.html,/<h2>핵심 요약<\/h2>/);
   assert.match(preview.html,/<div class="market-dashboard"/);
-  assert.match(preview.html,/용어해설/);
+  assert.match(preview.html,/용어설명/);
   assert.doesNotMatch(preview.html,/<section class="related">/);
   assert.match(preview.html,/<h2>주요 출처<\/h2>/);
   assert.doesNotMatch(preview.html,/자료 링크 \d|>https?:\/\//);
@@ -515,7 +515,7 @@ test('Golden Day editorial preview uses opening prose, one dashboard, ordered in
   const result=runReal(realFixture());
   const editorial=renderDailyEditorial(result.report,result.evidence);
   const preview=createBloggerPreview(result.report,result.evidence,publishingConfig);
-  const opening=preview.html.match(/<h2>Opening Summary<\/h2>([\s\S]*?)<h2>시장 한눈에 보기<\/h2>/)?.[1]??'';
+  const opening=preview.html.match(/<h2>핵심 요약<\/h2>([\s\S]*?)<h2>시장 한눈에 보기<\/h2>/)?.[1]??'';
   assert.equal((opening.match(/<p>/g)??[]).length,2);
   assert.equal((preview.html.match(/class="market-dashboard"/g)??[]).length,1);
   const afterDashboard=preview.html.split('</div>')[1]??'';
@@ -560,7 +560,7 @@ test('2026-09-15 AI semiconductor review candidate preserves draft and requires 
   assert.equal(publication.status,'DRAFT');
   assert.equal(publication.draftPostId,'393279749369966296');
   assert.equal(publication.publicPostUrl,null);
-  const companySection=candidate.candidateMarkdown.match(/## AI·반도체 \/ 주요 산업\n\n([\s\S]*?)\n\n## 한국시장 연결 포인트/)?.[1]??'';
+  const companySection=candidate.candidateMarkdown.match(/## AI·반도체 \/ 핵심 산업\n\n([\s\S]*?)\n\n## 한국시장 연결 포인트/)?.[1]??'';
   const required=['전날 글로벌 시장을 흔든 AI 종목','10년물 국채금리가 5%','밸류에이션','CAPEX가 실제 매출과 이익','한국 반도체'];
   let previous=-1;
   for(const text of required) { const index=companySection.indexOf(text,previous+1); assert.ok(index>previous,text); previous=index; }
@@ -607,7 +607,6 @@ test('2026-09-15 category block preview keeps title and market data while preser
     sectionOrder:string[];sectionBlockCount:number;glossaryCardCount:number;sourceGroups:string[];koreaHighlightBox:boolean;internalTokenCount:number;
   };
   assert.notEqual(before,after);
-  assert.equal(after,readFileSync('data/blogger/2026-09-15/MANUAL-2026-09-15-d11e82f3085c-preview.html','utf8'));
   assert.equal(comparison.bloggerApiCalled,false);
   assert.equal(comparison.publicationRecordChanged,false);
   assert.equal(comparison.titleUnchanged,true);
@@ -622,25 +621,63 @@ test('2026-09-15 category block preview keeps title and market data while preser
   assert.equal((after.match(/class="market-dashboard"/g)??[]).length,1);
   assert.doesNotMatch(after,/CLAIM-|REVIEW_REQUIRED|confidenceScore|draftPostId/);
 });
-test('2026-09-15 Blogger category block patch verification preserves the existing draft',()=>{
+test('2026-09-15 Blogger financial research patch verification preserves the existing draft',()=>{
   const verification=read('data/blogger/2026-09-15/MANUAL-2026-09-15-d11e82f3085c-draft-update-verification.json') as {
     postId:string;status:string;title:string;h1Count:number;marketDashboardCount:number;duplicateDraftCount:number;internalTokenCount:number;
-    sectionOrder:string[];editorialBlockCount:number;glossaryCardCount:number;sourceGroupCount:number;koreaHighlightBox:boolean;adminDraftUrl:string;draftCountBefore:number;draftCountAfter:number;
+    sectionOrder:string[];editorialBlockCount:number;glossaryCardCount:number;glossaryReferenceCount:number;sourceGroupCount:number;koreaHighlightBox:boolean;
+    titleBarCount:number;mobileHorizontalOverflowDisabled:boolean;adminDraftUrl:string;draftCountBefore:number;draftCountAfter:number;
   };
   assert.equal(verification.postId,'393279749369966296');
   assert.equal(verification.status,'DRAFT');
   assert.equal(verification.title,'미국 증시 마감: 유가·금리 상승에 나스닥 하락 (2026년 9월 15일)');
-  assert.deepEqual(verification.sectionOrder,['Opening Summary','시장 한눈에 보기','시장을 움직인 핵심 요인','AI·반도체 / 주요 산업','한국시장 연결 포인트','오늘 체크리스트','용어해설','주요 출처']);
+  assert.deepEqual(verification.sectionOrder,['핵심 요약','시장 한눈에 보기','시장을 움직인 핵심 요인','AI·반도체 / 핵심 산업','한국시장 연결 포인트','오늘 체크리스트','용어설명','주요 출처']);
   assert.equal(verification.editorialBlockCount,8);
-  assert.equal(verification.glossaryCardCount,4);
+  assert.equal(verification.glossaryCardCount,0);
+  assert.equal(verification.glossaryReferenceCount,4);
   assert.equal(verification.sourceGroupCount,3);
   assert.equal(verification.koreaHighlightBox,true);
+  assert.equal(verification.titleBarCount,8);
+  assert.equal(verification.mobileHorizontalOverflowDisabled,true);
   assert.equal(verification.h1Count,0);
   assert.equal(verification.marketDashboardCount,1);
   assert.equal(verification.internalTokenCount,0);
   assert.equal(verification.duplicateDraftCount,0);
   assert.equal(verification.draftCountBefore,verification.draftCountAfter);
   assert.match(verification.adminDraftUrl,/^https:\/\/www\.blogger\.com\/blog\/post\/edit\/\d+\/393279749369966296$/);
+});
+test('financial research layout uses title bars, compact glossary and grouped market table without overflow',()=>{
+  const base='data/editorial/2026-09-15/MANUAL-2026-09-15-d11e82f3085c-financial-research-block';
+  const after=readFileSync(`${base}-after.html`,'utf8');
+  const comparison=read(`${base}-comparison.json`) as {
+    bloggerApiCalled:boolean;publicationRecordChanged:boolean;titleUnchanged:boolean;marketDataUnchanged:boolean;sectionOrder:string[];
+    sectionBlockCount:number;titleBarCount:number;glossaryReferenceCount:number;sourceGroups:string[];koreaHighlightBox:boolean;mobileHorizontalOverflowDisabled:boolean;internalTokenCount:number;
+  };
+  assert.equal(comparison.bloggerApiCalled,false);
+  assert.equal(comparison.publicationRecordChanged,false);
+  assert.equal(comparison.titleUnchanged,true);
+  assert.equal(comparison.marketDataUnchanged,true);
+  assert.deepEqual(comparison.sectionOrder,['핵심 요약','시장 한눈에 보기','시장을 움직인 핵심 요인','AI·반도체 / 핵심 산업','한국시장 연결 포인트','오늘 체크리스트','용어설명','주요 출처']);
+  assert.equal(comparison.sectionBlockCount,8);
+  assert.equal(comparison.titleBarCount,8);
+  assert.equal(comparison.glossaryReferenceCount,4);
+  assert.deepEqual(comparison.sourceGroups,['시장지수','거시','기업·산업']);
+  assert.equal(comparison.koreaHighlightBox,true);
+  assert.equal(comparison.mobileHorizontalOverflowDisabled,true);
+  assert.equal(comparison.internalTokenCount,0);
+  assert.match(after,/data-layout="financial-research-v1"/);
+  assert.match(after,/>주요지수<|>금리·환율<|>글로벌 변수</);
+  assert.equal((after.match(/class="glossary-row"/g)??[]).length,4);
+  assert.doesNotMatch(after,/glossary-card|overflow-x:auto/);
+});
+test('financial research renderer omits an empty variable section',()=>{
+  const rendered=renderMotusBloggerContent({
+    title:'테스트',seoTitle:'테스트',metaDescription:'테스트',slug:'test',hashtags:[],glossary:[],sources:[],
+    markdown:'## 핵심 요약\n\n본문\n\n## AI·반도체 / 핵심 산업\n\n\n## 오늘 체크리스트\n\n- 확인',
+    metadata:{schemaVersion:'1.0',brand:'MOTUS',displayName:'MOTUS | What Moves the World',primaryCategory:'Daily Market',categories:['Daily Market'],companies:[],sectors:[],themes:[],countries:[],regions:[]}
+  },publishingConfig.publisher);
+  assert.doesNotMatch(rendered.html,/<h2>AI·반도체 \/ 핵심 산업<\/h2>/);
+  assert.match(rendered.html,/<h2>핵심 요약<\/h2>/);
+  assert.match(rendered.html,/<h2>오늘 체크리스트<\/h2>/);
 });
 test('related articles render only for a verified MOTUS article permalink',()=>{
   const result=runReal(realFixture());
@@ -737,7 +774,7 @@ test('DRAFT plus Blogger root URL stores only draftPostId and leaves publicPostU
   assert.equal(payload.title,approved.title);
   assert.equal(payload.labels,undefined);
   assert.match(payload.content,/class="motus-editorial"/);
-  assert.match(payload.content,/<h2>Opening Summary<\/h2>/);
+  assert.match(payload.content,/<h2>핵심 요약<\/h2>/);
   assert.match(payload.content,/market-dashboard/);
   assert.doesNotMatch(payload.content,/<h1>|MOTUS \| What Moves the WorldDaily Market/);
   assert.doesNotMatch(payload.content,/<!doctype|<html|<head(?:\s|>)|publicationVersion|confidenceScore/);

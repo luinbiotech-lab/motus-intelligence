@@ -77,7 +77,7 @@ export function renderDailyEditorial(report:ReportRecord,evidence:EvidencePackag
   const summary=openingSummary(dateLabel,{spx,nasdaq,dow,rut,vix,us2y,us10y,oil},input);
   const axes=marketAxes({spx,nasdaq,dow,rut,vix,us2y,us10y,dollar,oil});
   const body=[
-    '## Opening Summary',
+    '## 핵심 요약',
     '',
     summary.join('\n\n'),
     '',
@@ -97,7 +97,7 @@ export function renderDailyEditorial(report:ReportRecord,evidence:EvidencePackag
     '',
     ratesAndMacroParagraph(cpiPeriod,Boolean(cpi),us2y,us10y,input),
     '',
-    '## AI·반도체 / 주요 산업',
+    '## AI·반도체 / 핵심 산업',
     '',
     companyIndustryParagraph(input,reviewContext),
     '',
@@ -284,10 +284,15 @@ function formatMacroPeriod(value:string|undefined) { return value?.replace(/^\d{
 function marketDashboard(records:(MarketSnapshot|undefined)[]) {
   const rows=records.filter((record):record is MarketSnapshot=>Boolean(record&&record.close!==null));
   return [
-    '| 지표 | 종가 | 등락 |',
-    '| --- | ---: | ---: |',
-    ...rows.map(record=>`| ${indexName[record.symbol]??record.symbol} | ${dashboardValue(record)} | ${dashboardChange(record)} |`)
+    '| 구분 | 지표 | 종가 | 등락 |',
+    '| --- | --- | ---: | ---: |',
+    ...rows.map(record=>`| ${marketDashboardGroup(record)} | ${indexName[record.symbol]??record.symbol} | ${dashboardValue(record)} | ${dashboardChange(record)} |`)
   ].join('\n');
+}
+function marketDashboardGroup(record:MarketSnapshot) {
+  if(['SPX','DJIA','IXIC','RUT'].includes(record.symbol)) return '주요지수';
+  if(record.instrumentType==='YIELD'||record.symbol.startsWith('DXY')) return '금리·환율';
+  return '글로벌 변수';
 }
 function dashboardValue(record:MarketSnapshot) {
   if(record.close===null) return '—';
