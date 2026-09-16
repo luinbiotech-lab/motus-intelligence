@@ -1,0 +1,52 @@
+{
+  "version": "2E.2.0-AI-REVIEW.1",
+  "reportId": "MANUAL-2026-09-15-d11e82f3085c",
+  "tradingDate": "2026-09-15",
+  "reviewStatus": "PENDING_HUMAN_APPROVAL",
+  "context": {
+    "focus": "AI_SEMICONDUCTOR",
+    "aiStockFlow": "전날 글로벌 시장을 흔든 AI 종목 매도세는 이날 일부 선도 반도체주가 반등하며 진정되는 모습을 보였다. 그러나 나스닥은 약세로 마감했고, Reuters도 AI 수요의 지속성에 대한 불확실성이 투자심리를 붙잡았다고 전했다. 단기 반등과 업종 전반의 신뢰 회복을 같은 의미로 받아들이기 어려운 장이었다.",
+    "ratesAndValuation": "미국 10년물 국채금리가 5%에 닿은 환경은 AI 성장주의 밸류에이션에 분명한 부담이다. 먼 미래의 이익 비중이 큰 기업일수록 할인율 상승에 민감하기 때문에, 기술력이나 매출 성장만으로 높은 가격을 정당화하기가 까다로워진다.",
+    "capexAndEarnings": "이제 시장이 확인할 것은 AI 기대의 크기보다 CAPEX가 실제 매출과 이익, 현금흐름으로 이어지는 속도다. Microsoft는 데이터센터 투자를 계속 확대할 계획을 밝혔고 AMD와 NVIDIA의 공식 자료에서도 AI 컴퓨팅 수요와 공급망 투자가 이어지고 있다. 다만 전력과 설비, 공급 능력, 고객사의 투자 시기가 실적 전환 속도를 좌우할 수 있어 분기별 집행과 수익성을 함께 살펴야 한다.",
+    "koreaSemiconductor": "한국 반도체에는 HBM과 메모리, 첨단 패키징, 장비가 가장 가까운 연결 고리다. 글로벌 데이터센터 CAPEX와 가속기 수요가 계획대로 집행되면 관련 주문에 우호적일 수 있다. 반대로 5% 부근의 금리가 장기화되거나 AI 투자 회수에 대한 의문이 커지면 밸류에이션과 고객사 발주 시점이 동시에 흔들릴 수 있으므로, 국내 주가보다 실제 주문과 실적 가시성을 먼저 볼 필요가 있다.",
+    "consumerCheck": "Dave & Buster's의 공식 실적에서 매출과 동일점포 매출 감소가 확인됐다. 체험형 외식과 레저 지출의 탄력을 살펴볼 보조 지표지만, 한 기업의 결과를 미국 소비 전체의 방향으로 확대해 해석하지는 않는다."
+  },
+  "sources": [
+    {
+      "role": "MARKET_FLOW",
+      "label": "Associated Press · 2026년 9월 15일 미국시장 마감",
+      "url": "https://apnews.com/article/stock-markets-oil-rates-inflation-ai-123ddc2d8ba06c324cbbd899f7eeebd2",
+      "finding": "전날 AI 종목 매도 이후 일부 선도 반도체주가 반등했지만 주요 지수는 하락했다. B-tier 기사이므로 단독 자동 승인 근거로 사용하지 않는다."
+    },
+    {
+      "role": "CROSS_VERIFICATION",
+      "label": "Reuters · Wall Street close, 2026년 9월 15일",
+      "url": "https://www.kitco.com/news/off-the-wire/2026-09-15/wall-street-ends-lower-oil-spikes-and-benchmark-treasury-yield",
+      "finding": "10년물 금리가 5%를 넘었고 AI 수요의 지속성에 대한 우려가 투자자의 경계 요인으로 작용했다는 독립 교차 근거다."
+    },
+    {
+      "role": "OFFICIAL_DATA",
+      "label": "U.S. Treasury · Daily Treasury Par Yield Curve",
+      "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202609&type=daily_treasury_yield_curve",
+      "finding": "2026년 9월 15일 미국 10년물 국채금리 5.00%를 확인한다."
+    },
+    {
+      "role": "OFFICIAL_COMPANY",
+      "label": "Microsoft Investor Relations · FY2026 Q4",
+      "url": "https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q4",
+      "finding": "AI 수요 대응을 위한 데이터센터 투자 확대 계획과 컴퓨팅 투자 지속을 확인한다."
+    },
+    {
+      "role": "OFFICIAL_COMPANY",
+      "label": "AMD Investor Relations · Q2 2026 Results",
+      "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
+      "finding": "데이터센터 매출 성장과 AI 컴퓨팅 수요에 대한 회사의 공식 실적 설명을 확인한다."
+    },
+    {
+      "role": "OFFICIAL_COMPANY",
+      "label": "NVIDIA Investor Relations · FY2027 Q2 Form 10-Q",
+      "url": "https://investor.nvidia.com/files/doc_financials/2027/NVDA-2027-Q2-10Q-Final-including-exhibits.pdf",
+      "finding": "AI 인프라 수요와 함께 공급 능력, 전력, 자본 지출 제약이 실적 위험요인임을 확인한다."
+    }
+  ]
+}

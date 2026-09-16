@@ -8,6 +8,7 @@
     "build": "tsc",
     "test": "npm run build && node --test --test-isolation=none dist/tests/*.test.js",
     "blogger:oauth": "npm run build && node dist/src/blogger-oauth-cli.js",
+    "editorial:review": "npm run build && node dist/src/cli.js --editorial-review-preview",
     "sample": "npm run build && node dist/src/cli.js --sample",
     "report": "node dist/src/cli.js"
   },

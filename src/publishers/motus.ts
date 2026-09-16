@@ -39,7 +39,7 @@ export function renderMotusBloggerContent(document:PublisherContentDocument,conf
   <meta name="description" content="${escapeAttr(document.metaDescription)}" />
   <meta name="keywords" content="${escapeAttr(document.hashtags.map(tag=>tag.replace(/^#/, '')).join(', '))}" />
   <style>
-    .motus-editorial{font-family:Arial,"Noto Sans KR",sans-serif;color:#172033;line-height:1.75;max-width:820px;margin:auto}.motus-editorial h2{margin:34px 0 12px;color:#071a33}.market-dashboard{overflow-x:auto;margin:14px 0 26px}.market-dashboard table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid #dbe3ee;border-radius:14px;overflow:hidden}.market-dashboard th{background:#071a33;color:#fff;padding:11px 12px;text-align:left}.market-dashboard td{padding:10px 12px;border-top:1px solid #e7ecf3}.market-dashboard th:nth-child(n+2),.market-dashboard td:nth-child(n+2){text-align:right}.glossary,.sources{margin-top:34px;padding:20px;background:#f5f7fa;border-radius:14px}.glossary dt{font-weight:800;color:#071a33}.glossary dd{margin:3px 0 14px}.hashtags{margin-top:28px;color:#40516b}
+    .motus-editorial{font-family:Arial,"Noto Sans KR",sans-serif;color:#172033;line-height:1.75;max-width:820px;margin:auto}.motus-editorial h2{margin:34px 0 12px;color:#071a33}.motus-editorial h3{margin:24px 0 8px;color:#173a63}.market-dashboard{overflow-x:auto;margin:14px 0 26px}.market-dashboard table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid #dbe3ee;border-radius:14px;overflow:hidden}.market-dashboard th{background:#071a33;color:#fff;padding:11px 12px;text-align:left}.market-dashboard td{padding:10px 12px;border-top:1px solid #e7ecf3}.market-dashboard th:nth-child(n+2),.market-dashboard td:nth-child(n+2){text-align:right}.glossary,.sources{margin-top:34px;padding:20px;background:#f5f7fa;border-radius:14px}.glossary dt{font-weight:800;color:#071a33}.glossary dd{margin:3px 0 14px}.hashtags{margin-top:28px;color:#40516b}
   </style>
 </head>
 <body>
@@ -93,6 +93,7 @@ function markdownToHtml(markdown:string):string {
       continue;
     }
     if(line.startsWith('# ')) { closeList(); continue; }
+    if(line.startsWith('### ')) { closeList(); html.push(`<h3>${escapeHtml(line.slice(4))}</h3>`); continue; }
     if(line.startsWith('## ')) { closeList(); html.push(`<h2>${escapeHtml(line.slice(3))}</h2>`); continue; }
     if(line.startsWith('- ')) { if(!inList) { html.push('<ul>'); inList=true; } html.push(`<li>${linkify(escapeHtml(line.slice(2)))}</li>`); continue; }
     if(!line.trim()) { closeList(); continue; }

@@ -1,0 +1,65 @@
+{
+  "version": "2E.2.0-AI-REVIEW.1",
+  "reportId": "MANUAL-2026-09-15-d11e82f3085c",
+  "tradingDate": "2026-09-15",
+  "reviewStatus": "PENDING_HUMAN_APPROVAL",
+  "proposedAction": "승인 후 기존 draft의 title/content만 patch",
+  "publishAllowed": false,
+  "bloggerWriteAttempted": false,
+  "createNewDraft": false,
+  "preservedDraftPostId": "393279749369966296",
+  "preservedPublicPostUrl": null,
+  "unresolvedItem": {
+    "recordId": "AP-MARKET-CLOSE-2026-09-15",
+    "status": "LOW_CONFIDENCE",
+    "reason": "비공식 출처: 교차 검수 필요"
+  },
+  "crossVerification": [
+    {
+      "role": "MARKET_FLOW",
+      "label": "Associated Press · 2026년 9월 15일 미국시장 마감",
+      "url": "https://apnews.com/article/stock-markets-oil-rates-inflation-ai-123ddc2d8ba06c324cbbd899f7eeebd2",
+      "finding": "전날 AI 종목 매도 이후 일부 선도 반도체주가 반등했지만 주요 지수는 하락했다. B-tier 기사이므로 단독 자동 승인 근거로 사용하지 않는다."
+    },
+    {
+      "role": "CROSS_VERIFICATION",
+      "label": "Reuters · Wall Street close, 2026년 9월 15일",
+      "url": "https://www.kitco.com/news/off-the-wire/2026-09-15/wall-street-ends-lower-oil-spikes-and-benchmark-treasury-yield",
+      "finding": "10년물 금리가 5%를 넘었고 AI 수요의 지속성에 대한 우려가 투자자의 경계 요인으로 작용했다는 독립 교차 근거다."
+    },
+    {
+      "role": "OFFICIAL_DATA",
+      "label": "U.S. Treasury · Daily Treasury Par Yield Curve",
+      "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202609&type=daily_treasury_yield_curve",
+      "finding": "2026년 9월 15일 미국 10년물 국채금리 5.00%를 확인한다."
+    },
+    {
+      "role": "OFFICIAL_COMPANY",
+      "label": "Microsoft Investor Relations · FY2026 Q4",
+      "url": "https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q4",
+      "finding": "AI 수요 대응을 위한 데이터센터 투자 확대 계획과 컴퓨팅 투자 지속을 확인한다."
+    },
+    {
+      "role": "OFFICIAL_COMPANY",
+      "label": "AMD Investor Relations · Q2 2026 Results",
+      "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
+      "finding": "데이터센터 매출 성장과 AI 컴퓨팅 수요에 대한 회사의 공식 실적 설명을 확인한다."
+    },
+    {
+      "role": "OFFICIAL_COMPANY",
+      "label": "NVIDIA Investor Relations · FY2027 Q2 Form 10-Q",
+      "url": "https://investor.nvidia.com/files/doc_financials/2027/NVDA-2027-Q2-10Q-Final-including-exhibits.pdf",
+      "finding": "AI 인프라 수요와 함께 공급 능력, 전력, 자본 지출 제약이 실적 위험요인임을 확인한다."
+    }
+  ],
+  "editorialChecks": [
+    "AI 주가 흐름",
+    "금리 5% 부근",
+    "밸류에이션 부담",
+    "AI CAPEX/실적 확인 필요",
+    "한국 반도체 연결",
+    "미국 소비 체크"
+  ],
+  "approvalInstruction": "Reuters와 공식자료의 보강 근거를 사람이 확인한 뒤에만 기존 Blogger draft update를 별도 실행한다.",
+  "publicationRecordSha256": "50a9004693894e9ad798d57e0cbb1617f59b8933f46b124562c21917fd2fc79a"
+}

@@ -7,6 +7,7 @@ import { renderBrokerageReportOnDemand, renderDailyEditorial } from './services/
 import { renderA4MasterOnDemand } from './services/a4-visual.js';
 import { approveBloggerPublication, createBloggerPreview, DryRunBloggerAdapter, GoogleBloggerApiAdapter, publishBloggerPublication, renderPublishingConsole, type BloggerPublicationRecord, type BloggerPublishingConfig } from './services/blogger.js';
 import { updateExistingBloggerDraft } from './services/blogger-draft-update.js';
+import { writeEditorialReviewArtifacts, type EditorialReviewPlan } from './services/editorial-review.js';
 async function main() {
   const args=process.argv.slice(2);
   const sample=args[0]==='--sample';
@@ -20,6 +21,7 @@ async function main() {
   if(args[0]==='--blogger-publish') return await writeBloggerPublish(args[1],args.includes('--dry-run'));
   if(args[0]==='--blogger-update-draft') return await writeBloggerDraftUpdate(args[1],args[2],args[3],args[4]);
   if(args[0]==='--publishing-console') return await writePublishingConsole(args[1]);
+  if(args[0]==='--editorial-review-preview') return await writeEditorialReviewPreview(args[1],args[2],args[3],args[4]);
   if((sample&&args.length!==1)||(!sample&&(args.length!==2||args[0]!=='--input'))) throw new Error('사용법: npm run sample 또는 npm run report -- --input data/manual/day.json');
   const path=sample?'data/fixtures/sample-day.json':args[1]!;
   const read=async(p:string):Promise<unknown>=>JSON.parse((await readFile(resolve(p),'utf8')).replace(/^\uFEFF/,''));
@@ -165,6 +167,18 @@ async function readPublishingConfig():Promise<BloggerPublishingConfig> {
   const refreshCredentialAvailable=Boolean(refresh&&clientId&&clientSecret);
   const fallbackCredentialAvailable=credentialEnv?Boolean(process.env[credentialEnv]):raw.blogger.credentialAvailable===true;
   return {...raw.blogger,blogId,credentialAvailable:Boolean(blogId)&&(refreshCredentialAvailable||fallbackCredentialAvailable)};
+}
+async function writeEditorialReviewPreview(reportPath:string|undefined,evidencePath:string|undefined,publicationPath:string|undefined,planPath:string|undefined) {
+  if(!reportPath||!evidencePath||!publicationPath||!planPath) throw new Error('사용법: node dist/src/cli.js --editorial-review-preview report.json evidence.json publication.json review-plan.json');
+  const [report,evidence,publication,plan]=await Promise.all([
+    readFile(resolve(reportPath),'utf8').then(value=>JSON.parse(value) as ReportRecord),
+    readFile(resolve(evidencePath),'utf8').then(value=>JSON.parse(value) as EvidencePackage),
+    readFile(resolve(publicationPath),'utf8').then(value=>JSON.parse(value) as BloggerPublicationRecord),
+    readFile(resolve(planPath),'utf8').then(value=>JSON.parse(value) as EditorialReviewPlan)
+  ]);
+  const config=await readPublishingConfig();
+  const files=await writeEditorialReviewArtifacts(report,evidence,publication,plan,config.publisher,`data/editorial/${report.tradingDate}`);
+  console.log(JSON.stringify({status:'PASS',reviewStatus:plan.reviewStatus,publicationStatus:publication.status,draftPostId:publication.draftPostId,publicPostUrl:publication.publicPostUrl,bloggerWriteAttempted:false,files},null,2));
 }
 async function tryReadPublication(report:ReportRecord):Promise<BloggerPublicationRecord|null> {
   const path=`data/blogger/${report.tradingDate}/${report.reportId}-publication.json`;

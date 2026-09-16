@@ -34,6 +34,14 @@ export interface DailyEditorialOutput {
   opportunities: OpportunityDecision[];
   naver: { intro: string; hashtags: string[] };
 }
+export interface EditorialReviewContext {
+  focus: 'AI_SEMICONDUCTOR';
+  aiStockFlow: string;
+  ratesAndValuation: string;
+  capexAndEarnings: string;
+  koreaSemiconductor: string;
+  consumerCheck: string;
+}
 export interface BrokerageReportOutput {
   rendererVersion: string;
   reportId: string;
@@ -56,7 +64,7 @@ const indexName: Record<string,string> = {
   BRENT_NOV26: '브렌트유 선물'
 };
 
-export function renderDailyEditorial(report:ReportRecord,evidence:EvidencePackage):DailyEditorialOutput {
+export function renderDailyEditorial(report:ReportRecord,evidence:EvidencePackage,reviewContext?:EditorialReviewContext):DailyEditorialOutput {
   const input=evidence.originalInput as InputBundle;
   const market=input.market.filter(item=>item.status==='OK'&&item.close!==null);
   const map=new Map(market.map(item=>[item.symbol,item]));
@@ -91,7 +99,7 @@ export function renderDailyEditorial(report:ReportRecord,evidence:EvidencePackag
     '',
     '## Company / Industry',
     '',
-    companyIndustryParagraph(input),
+    companyIndustryParagraph(input,reviewContext),
     '',
     '## 한국시장 관점',
     '',
@@ -295,7 +303,15 @@ function formatPct(value:number|null|undefined) {
   if(typeof value!=='number') return '변동률 확인 불가';
   return `${value>0?'+':''}${Number(value.toFixed(2))}%`;
 }
-function companyIndustryParagraph(input:InputBundle) {
+function companyIndustryParagraph(input:InputBundle,reviewContext?:EditorialReviewContext) {
+  if(reviewContext?.focus==='AI_SEMICONDUCTOR') return [
+    reviewContext.aiStockFlow,
+    reviewContext.ratesAndValuation,
+    reviewContext.capexAndEarnings,
+    reviewContext.koreaSemiconductor,
+    '### 미국 소비 체크',
+    reviewContext.consumerCheck
+  ].join('\n\n');
   if(input.companyEvents.length||input.filings.length) {
     const event=input.companyEvents[0];
     const filing=input.filings[0];
