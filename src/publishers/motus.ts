@@ -26,9 +26,9 @@ export function renderMotusBloggerContent(document:PublisherContentDocument,conf
   validateMotusConfig(config);
   const article=markdownToHtml(document.markdown);
   const relatedLinks=document.glossary.filter(term=>isPublishedArticleUrl(term.publishedUrl)).slice(0,3).map(term=>({title:term.evergreenTitle,url:term.publishedUrl!}));
-  const glossary=document.glossary.length?`<section class="glossary"><h2>용어 해설</h2><dl>${document.glossary.map(term=>`<dt>${escapeHtml(term.term)}</dt><dd>${escapeHtml(term.explanation)}${isPublishedArticleUrl(term.publishedUrl)?` <a href="${escapeAttr(term.publishedUrl!)}">${escapeHtml(term.evergreenTitle)}</a>`:''}</dd>`).join('')}</dl></section>`:'';
-  const related=relatedLinks.length?`<section class="related"><h2>관련 글</h2><ul>${relatedLinks.map(item=>`<li><a href="${escapeAttr(item.url)}">${escapeHtml(item.title)}</a></li>`).join('')}</ul></section>`:'';
-  const sourceSection=`<section class="sources"><h2>주요 출처</h2><ul>${document.sources.map(item=>`<li><a href="${escapeAttr(item.url)}" rel="nofollow noopener">${escapeHtml(item.label)}</a></li>`).join('')}</ul></section>`;
+  const related=relatedLinks.length?`<div class="related"><h3>관련 글</h3><ul>${relatedLinks.map(item=>`<li><a href="${escapeAttr(item.url)}">${escapeHtml(item.title)}</a></li>`).join('')}</ul></div>`:'';
+  const glossary=document.glossary.length?`<section class="editorial-block glossary" data-section="glossary"><h2>용어해설</h2><div class="glossary-grid">${document.glossary.map(term=>`<article class="glossary-card"><h3>${escapeHtml(term.term)}</h3><p>${escapeHtml(term.explanation)}${isPublishedArticleUrl(term.publishedUrl)?` <a href="${escapeAttr(term.publishedUrl!)}">${escapeHtml(term.evergreenTitle)}</a>`:''}</p></article>`).join('')}</div>${related}</section>`:'';
+  const sourceSection=renderSourceSection(document.sources);
   const tags=`<p class="hashtags">${document.hashtags.map(escapeHtml).join(' ')}</p>`;
   const html=`<!doctype html>
 <html lang="ko">
@@ -39,14 +39,13 @@ export function renderMotusBloggerContent(document:PublisherContentDocument,conf
   <meta name="description" content="${escapeAttr(document.metaDescription)}" />
   <meta name="keywords" content="${escapeAttr(document.hashtags.map(tag=>tag.replace(/^#/, '')).join(', '))}" />
   <style>
-    .motus-editorial{font-family:Arial,"Noto Sans KR",sans-serif;color:#172033;line-height:1.75;max-width:820px;margin:auto}.motus-editorial h2{margin:34px 0 12px;color:#071a33}.motus-editorial h3{margin:24px 0 8px;color:#173a63}.market-dashboard{overflow-x:auto;margin:14px 0 26px}.market-dashboard table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid #dbe3ee;border-radius:14px;overflow:hidden}.market-dashboard th{background:#071a33;color:#fff;padding:11px 12px;text-align:left}.market-dashboard td{padding:10px 12px;border-top:1px solid #e7ecf3}.market-dashboard th:nth-child(n+2),.market-dashboard td:nth-child(n+2){text-align:right}.glossary,.sources{margin-top:34px;padding:20px;background:#f5f7fa;border-radius:14px}.glossary dt{font-weight:800;color:#071a33}.glossary dd{margin:3px 0 14px}.hashtags{margin-top:28px;color:#40516b}
+    .motus-editorial{font-family:Arial,"Noto Sans KR",sans-serif;color:#172033;line-height:1.75;max-width:820px;margin:auto}.editorial-block{margin:20px 0;padding:22px 24px;background:#fff;border:1px solid #dbe3ee;border-radius:16px;box-shadow:0 7px 22px rgba(7,26,51,.06)}.editorial-block h2{margin:0 0 14px;color:#071a33;font-size:1.35rem}.editorial-block h3{margin:20px 0 8px;color:#173a63}.block-opening-summary{border-top:4px solid #173a63}.block-market-overview{padding-bottom:8px}.block-korea-market{background:#edf4fb;border-color:#a9c3df;border-left:6px solid #173a63}.market-dashboard{overflow-x:auto;margin:12px 0 16px}.market-dashboard table{width:100%;border-collapse:separate;border-spacing:0;border:1px solid #dbe3ee;border-radius:12px;overflow:hidden}.market-dashboard th{background:#071a33;color:#fff;padding:11px 12px;text-align:left}.market-dashboard td{padding:10px 12px;border-top:1px solid #e7ecf3}.market-dashboard th:nth-child(n+2),.market-dashboard td:nth-child(n+2){text-align:right}.glossary{background:#f5f7fa}.glossary-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.glossary-card{padding:15px;background:#fff;border:1px solid #dbe3ee;border-radius:12px}.glossary-card h3{margin:0 0 5px}.glossary-card p{margin:0}.source-groups{display:grid;gap:14px}.source-group{padding:14px 16px;background:#f8fafc;border-radius:12px}.source-group h3{margin:0 0 7px}.source-group ul{margin:0;padding-left:20px}.related{margin-top:16px;padding-top:12px;border-top:1px solid #dbe3ee}.hashtags{margin:24px 4px;color:#40516b}@media(max-width:640px){.editorial-block{padding:18px}.glossary-grid{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
   <article class="motus-editorial" data-channel="motus-blogger">
 ${article}
 ${glossary}
-${related}
 ${sourceSection}
 ${tags}
   </article>
@@ -78,8 +77,9 @@ function validateMotusConfig(config:MotusPublisherConfig):void {
 
 function markdownToHtml(markdown:string):string {
   const lines=markdown.split(/\r?\n/),html:string[]=[];
-  let inList=false;
+  let inList=false,inSection=false;
   const closeList=()=>{ if(inList) { html.push('</ul>'); inList=false; } };
+  const closeSection=()=>{ closeList(); if(inSection) { html.push('</section>'); inSection=false; } };
   for(let index=0;index<lines.length;index++) {
     const line=lines[index]!;
     if(isTableHeader(line,lines[index+1])) {
@@ -94,13 +94,35 @@ function markdownToHtml(markdown:string):string {
     }
     if(line.startsWith('# ')) { closeList(); continue; }
     if(line.startsWith('### ')) { closeList(); html.push(`<h3>${escapeHtml(line.slice(4))}</h3>`); continue; }
-    if(line.startsWith('## ')) { closeList(); html.push(`<h2>${escapeHtml(line.slice(3))}</h2>`); continue; }
+    if(line.startsWith('## ')) { closeSection(); const heading=line.slice(3); html.push(`<section class="editorial-block ${blockClass(heading)}" data-section="${sectionKey(heading)}"><h2>${escapeHtml(heading)}</h2>`); inSection=true; continue; }
     if(line.startsWith('- ')) { if(!inList) { html.push('<ul>'); inList=true; } html.push(`<li>${linkify(escapeHtml(line.slice(2)))}</li>`); continue; }
     if(!line.trim()) { closeList(); continue; }
     closeList(); html.push(`<p>${linkify(escapeHtml(line))}</p>`);
   }
-  closeList();
+  closeSection();
   return html.join('\n');
+}
+
+function renderSourceSection(sources:{label:string;url:string}[]):string {
+  const groups=[
+    {title:'시장지수',items:sources.filter(item=>sourceCategory(item.label)==='MARKET')},
+    {title:'거시',items:sources.filter(item=>sourceCategory(item.label)==='MACRO')},
+    {title:'기업·산업',items:sources.filter(item=>sourceCategory(item.label)==='INDUSTRY')}
+  ];
+  return `<section class="editorial-block sources" data-section="sources"><h2>주요 출처</h2><div class="source-groups">${groups.filter(group=>group.items.length).map(group=>`<div class="source-group"><h3>${group.title}</h3><ul>${group.items.map(item=>`<li><a href="${escapeAttr(item.url)}" rel="nofollow noopener">${escapeHtml(item.label)}</a></li>`).join('')}</ul></div>`).join('')}</div></section>`;
+}
+function sourceCategory(label:string):'MARKET'|'MACRO'|'INDUSTRY' {
+  if(/S&P|Nasdaq|FTSE|Russell|Cboe|VIX|ICE|Dollar Index|Brent|WTI/i.test(label)) return 'MARKET';
+  if(/Treasury|Bureau of Labor|Federal Reserve|FOMC|CPI|PCE/i.test(label)) return 'MACRO';
+  return 'INDUSTRY';
+}
+function sectionKey(heading:string):string { return blockClass(heading).replace(/^block-/,''); }
+function blockClass(heading:string):string {
+  const classes:Record<string,string>={
+    'Opening Summary':'block-opening-summary','시장 한눈에 보기':'block-market-overview','시장을 움직인 핵심 요인':'block-market-drivers',
+    'AI·반도체 / 주요 산업':'block-ai-industry','한국시장 연결 포인트':'block-korea-market','오늘 체크리스트':'block-checklist'
+  };
+  return classes[heading]??'block-general';
 }
 
 function isTableHeader(line:string,next:string|undefined):boolean { return /^\s*\|.*\|\s*$/.test(line)&&Boolean(next&&/^\s*\|(?:\s*:?-{3,}:?\s*\|)+\s*$/.test(next)); }

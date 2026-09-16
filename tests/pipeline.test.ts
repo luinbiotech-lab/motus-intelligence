@@ -406,7 +406,7 @@ test('Sprint 2E daily editorial renderer hides internal status and keeps public 
   const editorial=renderDailyEditorial(result.report,result.evidence);
   assert.match(editorial.bloggerMarkdown,/## Opening Summary/);
   assert.match(editorial.bloggerMarkdown,/## 시장 한눈에 보기/);
-  assert.match(editorial.bloggerMarkdown,/## 한국시장 관점/);
+  assert.match(editorial.bloggerMarkdown,/## 한국시장 연결 포인트/);
   assert.doesNotMatch(editorial.bloggerMarkdown,/^# /m);
   assert.doesNotMatch(editorial.bloggerMarkdown,/CLAIM-|MANUAL-2026|AUTO_VALIDATED|REVIEW_REQUIRED|BLOCKED|DATA_NOT_CONNECTED/);
   assert.equal(editorial.seo.hashtags.includes('#미국증시'),true);
@@ -504,7 +504,7 @@ test('Sprint 2G Blogger preview preserves SEO, glossary, labels, sources and hid
   assert.doesNotMatch(preview.html,/<h1>|MOTUS \| What Moves the WorldDaily Market/);
   assert.match(preview.html,/<h2>Opening Summary<\/h2>/);
   assert.match(preview.html,/<div class="market-dashboard"/);
-  assert.match(preview.html,/용어 해설/);
+  assert.match(preview.html,/용어해설/);
   assert.doesNotMatch(preview.html,/<section class="related">/);
   assert.match(preview.html,/<h2>주요 출처<\/h2>/);
   assert.doesNotMatch(preview.html,/자료 링크 \d|>https?:\/\//);
@@ -560,7 +560,7 @@ test('2026-09-15 AI semiconductor review candidate preserves draft and requires 
   assert.equal(publication.status,'DRAFT');
   assert.equal(publication.draftPostId,'393279749369966296');
   assert.equal(publication.publicPostUrl,null);
-  const companySection=candidate.candidateMarkdown.match(/## Company \/ Industry\n\n([\s\S]*?)\n\n## 한국시장 관점/)?.[1]??'';
+  const companySection=candidate.candidateMarkdown.match(/## AI·반도체 \/ 주요 산업\n\n([\s\S]*?)\n\n## 한국시장 연결 포인트/)?.[1]??'';
   const required=['전날 글로벌 시장을 흔든 AI 종목','10년물 국채금리가 5%','밸류에이션','CAPEX가 실제 매출과 이익','한국 반도체'];
   let previous=-1;
   for(const text of required) { const index=companySection.indexOf(text,previous+1); assert.ok(index>previous,text); previous=index; }
@@ -598,6 +598,29 @@ test('2026-09-15 editorial review records explicit human approval and draft-only
   assert.equal(review.bloggerDraftUpdate.verification.internalTokenCount,0);
   assert.equal(review.bloggerDraftUpdate.verification.duplicateDraftCount,0);
 });
+test('2026-09-15 category block preview keeps title and market data while preserving publication',()=>{
+  const base='data/editorial/2026-09-15/MANUAL-2026-09-15-d11e82f3085c-category-block';
+  const before=readFileSync(`${base}-before.html`,'utf8');
+  const after=readFileSync(`${base}-after.html`,'utf8');
+  const comparison=read(`${base}-comparison.json`) as {
+    bloggerApiCalled:boolean;publicationRecordChanged:boolean;titleUnchanged:boolean;marketDataUnchanged:boolean;
+    sectionOrder:string[];sectionBlockCount:number;glossaryCardCount:number;sourceGroups:string[];koreaHighlightBox:boolean;internalTokenCount:number;
+  };
+  assert.equal(before,readFileSync('data/blogger/2026-09-15/MANUAL-2026-09-15-d11e82f3085c-preview.html','utf8'));
+  assert.equal(comparison.bloggerApiCalled,false);
+  assert.equal(comparison.publicationRecordChanged,false);
+  assert.equal(comparison.titleUnchanged,true);
+  assert.equal(comparison.marketDataUnchanged,true);
+  assert.deepEqual(comparison.sectionOrder,['Opening Summary','시장 한눈에 보기','시장을 움직인 핵심 요인','AI·반도체 / 주요 산업','한국시장 연결 포인트','오늘 체크리스트','용어해설','주요 출처']);
+  assert.equal(comparison.sectionBlockCount,8);
+  assert.equal(comparison.glossaryCardCount,4);
+  assert.deepEqual(comparison.sourceGroups,['시장지수','거시','기업·산업']);
+  assert.equal(comparison.koreaHighlightBox,true);
+  assert.equal(comparison.internalTokenCount,0);
+  assert.match(after,/class="editorial-block block-korea-market"/);
+  assert.equal((after.match(/class="market-dashboard"/g)??[]).length,1);
+  assert.doesNotMatch(after,/CLAIM-|REVIEW_REQUIRED|confidenceScore|draftPostId/);
+});
 test('related articles render only for a verified MOTUS article permalink',()=>{
   const result=runReal(realFixture());
   const editorial=renderDailyEditorial(result.report,result.evidence);
@@ -606,7 +629,7 @@ test('related articles render only for a verified MOTUS article permalink',()=>{
   const rendered=renderMotusBloggerContent({title:preview.title,seoTitle:preview.seoTitle,metaDescription:preview.metaDescription,slug:preview.slug,markdown:editorial.bloggerMarkdown,hashtags:preview.hashtags,glossary,sources:preview.sources,metadata:preview.metadata},publishingConfig.publisher);
   assert.equal(rendered.relatedLinks.length,1);
   assert.equal(rendered.relatedLinks[0]?.url,'https://motusnova.blogspot.com/2026/09/capex-cycle.html');
-  assert.match(rendered.html,/<section class="related">/);
+  assert.match(rendered.html,/<div class="related">/);
   assert.doesNotMatch(rendered.html,/href="https:\/\/motusnova\.blogspot\.com\/"|\/search\/label\/Evergreen/);
 });
 test('Sprint 2G Blogger state transition, dry-run publish and credential failure are safe',async()=>{

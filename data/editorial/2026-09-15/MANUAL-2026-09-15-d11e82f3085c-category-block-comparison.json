@@ -1,0 +1,30 @@
+{
+  "reportId": "MANUAL-2026-09-15-d11e82f3085c",
+  "tradingDate": "2026-09-15",
+  "bloggerApiCalled": false,
+  "publicationRecordChanged": false,
+  "titleUnchanged": true,
+  "marketDataUnchanged": true,
+  "sectionOrder": [
+    "Opening Summary",
+    "시장 한눈에 보기",
+    "시장을 움직인 핵심 요인",
+    "AI·반도체 / 주요 산업",
+    "한국시장 연결 포인트",
+    "오늘 체크리스트",
+    "용어해설",
+    "주요 출처"
+  ],
+  "sectionBlockCount": 8,
+  "glossaryCardCount": 4,
+  "sourceGroups": [
+    "시장지수",
+    "거시",
+    "기업·산업"
+  ],
+  "koreaHighlightBox": true,
+  "internalTokenCount": 0,
+  "beforeSha256": "dc69e968b3fd94f5441f7c9fbb21aacac55e93e23af04b00f467543294eb4f7b",
+  "afterSha256": "875d7f71d4d84f8910440a8964363be0a74d11377f7ea7874c268c6cc0fa076d",
+  "publicationRecordSha256": "8b4211d4ce22cbf0032c1d8cbd08dc2db939a8d3572f0e9706b82eb07a578b0a"
+}

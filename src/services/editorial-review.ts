@@ -71,5 +71,46 @@ export async function writeEditorialReviewArtifacts(report:ReportRecord,evidence
   return paths;
 }
 
+export async function writeEditorialLayoutComparison(report:ReportRecord,evidence:EvidencePackage,publication:BloggerPublicationRecord,plan:EditorialReviewPlan,publisher:MotusPublisherConfig,beforePath:string,outputDir:string):Promise<{files:string[];comparison:Record<string,unknown>}> {
+  const before=await readFile(beforePath,'utf8');
+  if(fingerprint(before)!==fingerprint(publication.html)) throw new Error('before preview does not match preserved publication HTML');
+  const publicationBefore=fingerprint(publication);
+  const candidate=buildEditorialReviewCandidate(report,evidence,publication,plan,publisher);
+  if(candidate.publicationFingerprint!==publicationBefore||fingerprint(publication)!==publicationBefore) throw new Error('publication record changed during layout preview');
+  const after=candidate.candidateHtml;
+  const expectedSections=['Opening Summary','시장 한눈에 보기','시장을 움직인 핵심 요인','AI·반도체 / 주요 산업','한국시장 연결 포인트','오늘 체크리스트','용어해설','주요 출처'];
+  const actualSections=[...after.matchAll(/<h2>([^<]+)<\/h2>/g)].map(match=>decodeHtml(match[1]!));
+  if(JSON.stringify(actualSections)!==JSON.stringify(expectedSections)) throw new Error(`category block section order mismatch: ${actualSections.join(' > ')}`);
+  const beforeMarket=marketDashboardText(before),afterMarket=marketDashboardText(after);
+  if(!beforeMarket||beforeMarket!==afterMarket) throw new Error('category block preview changed market dashboard values');
+  assertPublicBloggerHtmlSafe(after);
+  const comparison={
+    reportId:report.reportId,
+    tradingDate:report.tradingDate,
+    bloggerApiCalled:false,
+    publicationRecordChanged:false,
+    titleUnchanged:htmlTitle(before)===htmlTitle(after),
+    marketDataUnchanged:beforeMarket===afterMarket,
+    sectionOrder:actualSections,
+    sectionBlockCount:count(after,/class="editorial-block\b/g),
+    glossaryCardCount:count(after,/class="glossary-card"/g),
+    sourceGroups:[...after.matchAll(/<div class="source-group"><h3>([^<]+)<\/h3>/g)].map(match=>decodeHtml(match[1]!)),
+    koreaHighlightBox:after.includes('block-korea-market'),
+    internalTokenCount:count(after,/\b(?:CLAIM-|AUTO_VALIDATED|REVIEW_REQUIRED|BLOCKED|DATA_NOT_CONNECTED|confidenceScore|verificationStatus|publicationVersion|draftPostId)\b/gi),
+    beforeSha256:fingerprint(before),
+    afterSha256:fingerprint(after),
+    publicationRecordSha256:publicationBefore
+  };
+  const base=`${outputDir}/${report.reportId}-category-block`;
+  const files=[`${base}-before.html`,`${base}-after.html`,`${base}-comparison.json`];
+  await mkdir(outputDir,{recursive:true});
+  await Promise.all([writeFile(files[0]!,before),writeFile(files[1]!,after),writeFile(files[2]!,JSON.stringify(comparison,null,2))]);
+  return {files,comparison};
+}
+
 function fingerprint(value:unknown):string { return createHash('sha256').update(JSON.stringify(value)).digest('hex'); }
 function uniqueSources(values:{label:string;url:string}[]):{label:string;url:string}[] { const seen=new Set<string>(); return values.filter(item=>!seen.has(item.url)&&seen.add(item.url)); }
+function htmlTitle(html:string):string { return decodeHtml(html.match(/<title>([\s\S]*?)<\/title>/i)?.[1]??''); }
+function marketDashboardText(html:string):string { const block=html.match(/<div\b[^>]*class="[^"]*\bmarket-dashboard\b[^"]*"[^>]*>[\s\S]*?<\/div>/i)?.[0]??''; return decodeHtml(block.replace(/<[^>]+>/g,' ')).replace(/\s+/g,' ').trim(); }
+function decodeHtml(value:string):string { return value.replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/&#39;/g,"'").replace(/&lt;/g,'<').replace(/&gt;/g,'>'); }
+function count(value:string,pattern:RegExp):number { return [...value.matchAll(pattern)].length; }

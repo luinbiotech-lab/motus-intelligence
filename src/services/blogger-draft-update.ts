@@ -131,7 +131,7 @@ function verifyUpdatedDraft(post:BloggerPost,before:BloggerPost[],after:BloggerP
   const marketDashboardCount=count(content,/class=["'][^"']*\bmarket-dashboard\b[^"']*["']/gi);
   const primarySourcesCount=count(content,/<h2>\s*주요 출처\s*<\/h2>/gi);
   const visibleRawUrlCount=count(stripTags(content),/https?:\/\/\S+/gi);
-  const unpublishedRelatedLinksCount=count(content,/<section\b[^>]*class=["'][^"']*\brelated\b/gi);
+  const unpublishedRelatedLinksCount=count(content,/<[a-z]+\b[^>]*class=["'][^"']*\brelated\b/gi);
   const duplicateDraftCount=after.filter(item=>item.id!==postId&&item.title===title).length;
   const marketDataUnchanged=normalizeHtml(extractMarketDashboard(content))===normalizeHtml(extractMarketDashboard(expectedContent));
   const internalTokenCount=count(content,/\b(?:CLAIM-|AUTO_VALIDATED|REVIEW_REQUIRED|BLOCKED|DATA_NOT_CONNECTED|confidenceScore|verificationStatus|publicationVersion|draftPostId)\b/gi);
