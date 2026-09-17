@@ -1,0 +1,83 @@
+[
+  {
+    "reportId": "MANUAL-2026-09-16-65e0805c062f",
+    "claimId": "CLAIM-SIG-RATES-UP-2026-09-16:UK-07",
+    "action": "APPROVE",
+    "category": "KOREA_IMPACT",
+    "note": "Fed의 25bp 인상과 3.75~4.00% 목표 범위, Treasury의 2년물 4.74%·10년물 5.01%, AP·Reuters의 금리 인상 후 시장 반응을 교차검토했다. 한국 성장주와 외국인 수급 연결은 확정 예측이 아닌 조건부 점검 항목으로 유지한다.",
+    "reviewer": "human",
+    "reviewedAt": "2026-09-17T19:21:28.6223159+09:00"
+  },
+  {
+    "reportId": "MANUAL-2026-09-16-65e0805c062f",
+    "claimId": "CLAIM-SIG-RISK-OFF-2026-09-16:UK-13",
+    "action": "APPROVE",
+    "category": "KOREA_IMPACT",
+    "note": "AP와 Reuters에서 미국 주요 지수의 하락 방향을 교차확인했고 한국시장 연결을 조건부 해석으로 검토했다.",
+    "reviewer": "human",
+    "reviewedAt": "2026-09-17T19:21:28.6223159+09:00"
+  },
+  {
+    "reportId": "MANUAL-2026-09-16-65e0805c062f",
+    "claimId": "CLAIM-BRENT-2026-09-16-CLOSE",
+    "action": "APPROVE",
+    "category": "SOURCE_ERROR",
+    "note": "브렌트유 105.83달러와 2.7% 하락을 AP 마감 보도에서 확인했다.",
+    "reviewer": "human",
+    "reviewedAt": "2026-09-17T19:21:28.6223159+09:00"
+  },
+  {
+    "reportId": "MANUAL-2026-09-16-65e0805c062f",
+    "claimId": "CLAIM-DJIA-2026-09-16-CLOSE",
+    "action": "APPROVE",
+    "category": "DATA_ERROR",
+    "note": "AP 종가와 Reuters 독립 마감 데이터의 방향·등락률을 대조했다. 공급자별 소수점 차이는 비중요 범위다.",
+    "reviewer": "human",
+    "reviewedAt": "2026-09-17T19:21:28.6223159+09:00"
+  },
+  {
+    "reportId": "MANUAL-2026-09-16-65e0805c062f",
+    "claimId": "CLAIM-IXIC-2026-09-16-CLOSE",
+    "action": "APPROVE",
+    "category": "DATA_ERROR",
+    "note": "AP 종가와 Reuters 독립 마감 데이터의 방향·등락률을 대조했다. 공급자별 0.01포인트 차이는 비중요 범위다.",
+    "reviewer": "human",
+    "reviewedAt": "2026-09-17T19:21:28.6223159+09:00"
+  },
+  {
+    "reportId": "MANUAL-2026-09-16-65e0805c062f",
+    "claimId": "CLAIM-RUT-2026-09-16-CLOSE",
+    "action": "APPROVE",
+    "category": "DATA_ERROR",
+    "note": "AP의 러셀2000 종가 2,858.81과 0.4% 하락을 확인했다.",
+    "reviewer": "human",
+    "reviewedAt": "2026-09-17T19:21:28.6223159+09:00"
+  },
+  {
+    "reportId": "MANUAL-2026-09-16-65e0805c062f",
+    "claimId": "CLAIM-SPX-2026-09-16-CLOSE",
+    "action": "APPROVE",
+    "category": "DATA_ERROR",
+    "note": "AP 종가 7,551.81과 Reuters의 독립 마감 데이터 방향·등락률을 대조했다. 공급자별 소수점 차이는 비중요 범위다.",
+    "reviewer": "human",
+    "reviewedAt": "2026-09-17T19:21:28.6223159+09:00"
+  },
+  {
+    "reportId": "MANUAL-2026-09-16-65e0805c062f",
+    "claimId": "CLAIM-US10Y-2026-09-16-CLOSE",
+    "action": "APPROVE",
+    "category": "SOURCE_ERROR",
+    "note": "U.S. Treasury 공식 일별 수익률 곡선에서 10년물 5.01%를 확인했다.",
+    "reviewer": "human",
+    "reviewedAt": "2026-09-17T19:21:28.6223159+09:00"
+  },
+  {
+    "reportId": "MANUAL-2026-09-16-65e0805c062f",
+    "claimId": "CLAIM-US2Y-2026-09-16-CLOSE",
+    "action": "APPROVE",
+    "category": "SOURCE_ERROR",
+    "note": "U.S. Treasury 공식 일별 수익률 곡선에서 2년물 4.74%를 확인했다.",
+    "reviewer": "human",
+    "reviewedAt": "2026-09-17T19:21:28.6223159+09:00"
+  }
+]

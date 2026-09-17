@@ -568,6 +568,28 @@ test('2026-09-16 MOTUS Daily uses verified FOMC close data and dictionary glossa
   assert.equal(publication.publicPostUrl,null);
   assert.doesNotMatch(publication.html,/CLAIM-|confidenceScore|REVIEW_REQUIRED|<h1>/);
 });
+test('2026-09-16 Human Review approves the existing draft without publishing',()=>{
+  const publication=read('data/blogger/2026-09-16/MANUAL-2026-09-16-65e0805c062f-publication.json') as BloggerPublicationRecord;
+  const review=read('data/reviews/2026-09-16/MANUAL-2026-09-16-65e0805c062f-human-review.json') as {
+    reviewStatus:string;decision:string;reviewer:string;reviewedAt:string;
+    editorialReview:{result:string};finalPreviewVerification:{result:string;postIdMatched:boolean;sectionCount:number;internalTokenVisible:boolean;layoutOverflowObserved:boolean};
+    publicationGuard:{state:string;publicPostUrl:null;createdNewPost:boolean;bloggerWriteAttempted:boolean;automaticPublishAttempted:boolean};
+  };
+  const reviewedEvidence=read('data/publish-ready/2026-09-16/MANUAL-2026-09-16-65e0805c062f-reviewed-evidence.json') as EvidencePackage;
+  assert.equal(review.reviewStatus,'APPROVED');
+  assert.equal(review.decision,'APPROVE');
+  assert.equal(review.reviewer,'human');
+  assert.ok(Date.parse(review.reviewedAt));
+  assert.equal(review.editorialReview.result,'PASS');
+  assert.deepEqual(review.finalPreviewVerification,{...review.finalPreviewVerification,result:'PASS',postIdMatched:true,sectionCount:8,internalTokenVisible:false,layoutOverflowObserved:false});
+  assert.deepEqual(review.publicationGuard,{...review.publicationGuard,state:'DRAFT',publicPostUrl:null,createdNewPost:false,bloggerWriteAttempted:false,automaticPublishAttempted:false});
+  assert.equal(reviewedEvidence.approvalStatus,'APPROVED');
+  assert.equal(reviewedEvidence.reviewMetrics.reviewer,'human');
+  assert.equal(publication.status,'DRAFT');
+  assert.equal(publication.draftPostId,'1299415515105343069');
+  assert.equal(publication.publicPostUrl,null);
+  assert.match(publication.history.at(-1)?.reason??'',/human editorial review approved/);
+});
 test('2026-09-15 AI semiconductor review candidate preserves draft and requires human approval',()=>{
   const report=read('data/reports/MANUAL-2026-09-15-d11e82f3085c.json') as ReportRecord;
   const evidence=read('data/evidence/MANUAL-2026-09-15-d11e82f3085c.json') as EvidencePackage;
