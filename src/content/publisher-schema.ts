@@ -27,6 +27,7 @@ export interface GlobalContentMetadata {
 
 export interface PublisherGlossaryEntry {
   term: string;
+  fullSpelling?: string;
   explanation: string;
   evergreenKey: string;
   evergreenTitle: string;

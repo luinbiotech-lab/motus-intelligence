@@ -1,0 +1,29 @@
+{
+  "version": "2E.2.0-VISIBILITY.1",
+  "draftPostId": "1299415515105343069",
+  "state": "DRAFT",
+  "newPostCreated": false,
+  "automaticPublishAttempted": false,
+  "titleUnchanged": true,
+  "marketDataUnchanged": true,
+  "bloggerApiVerification": {
+    "titleBarContrast": "PASS",
+    "marketTableReadability": "PASS",
+    "glossaryFullSpelling": "PASS",
+    "glossaryDictionaryStyle": "PASS",
+    "sourceLinksClickable": "PASS",
+    "mobileOverflow": "PASS"
+  },
+  "mobileAdminPreview": {
+    "result": "PASS",
+    "surface": "Blogger 관리자 스마트폰 미리보기",
+    "titleBarsVisible": true,
+    "marketHeaderContrastVisible": true,
+    "marketNumericEmphasisVisible": true,
+    "riseFallColorVisible": true,
+    "glossaryThreeColumnReferenceVisible": true,
+    "horizontalOverflowObserved": false,
+    "sourceLinkNavigationVerified": true,
+    "verifiedSourceLink": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20260916a.htm"
+  }
+}

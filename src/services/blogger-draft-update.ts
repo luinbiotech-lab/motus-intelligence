@@ -36,6 +36,11 @@ export interface BloggerDraftUpdateVerification {
   glossaryCompactTable: boolean|null;
   sourceGroupsInlineStyled: boolean|null;
   koreaInlineHighlight: boolean|null;
+  titleBarContrast: boolean|null;
+  marketTableReadability: boolean|null;
+  glossaryFullSpelling: boolean|null;
+  glossaryDictionaryStyle: boolean|null;
+  sourceLinksClickable: boolean|null;
   adminDraftUrl: string;
   draftCountBefore: number;
   draftCountAfter: number;
@@ -172,6 +177,14 @@ function verifyUpdatedDraft(post:BloggerPost,before:BloggerPost[],after:BloggerP
   const glossaryCompactTable=expectedLayout?/<div\b[^>]*class=["'][^"']*\bglossary-reference\b[^"']*["'][^>]*style=["'][^"']*font-size:14px[^"']*["'][^>]*>\s*<table\b[^>]*style=["'][^"']*width:100%[^"']*table-layout:fixed[^"']*["']/i.test(content):null;
   const sourceGroupsInlineStyled=expectedLayout?/<div\b[^>]*class=["'][^"']*\bsource-groups\b[^"']*["'][^>]*style=["'][^"']*border:[^"']*background:[^"']*font-size:14px[^"']*["']/i.test(content):null;
   const koreaInlineHighlight=expectedLayout?/<section\b[^>]*class=["'][^"']*\bblock-korea-market\b[^"']*["'][^>]*>[\s\S]*?<div\b[^>]*class=["'][^"']*\beditorial-content\b[^"']*["'][^>]*style=["'][^"']*border:2px solid #8eabc9[^"']*background:#edf4fb[^"']*["']/i.test(content):null;
+  const titleBarContrast=expectedLayout?count(content,/<h2\b[^>]*style=["'][^"']*background:#(?:03162e|17283d)[^"']*color:#ffffff[^"']*border:1px solid #[^"']*font-size:20px[^"']*font-weight:800[^"']*["']/gi)===8:null;
+  const marketTableReadability=expectedLayout?/<table\b[^>]*style=["'][^"']*border:2px solid #183552[^"']*["'][^>]*>[\s\S]*?<th\b[^>]*style=["'][^"']*background:#0b2745[^"']*color:#ffffff[^"']*font-size:14px[^"']*font-weight:800[^"']*["'][^>]*>종가<\/th>[\s\S]*?<td\b[^>]*style=["'][^"']*font-weight:800[^"']*font-variant-numeric:tabular-nums[^"']*["']/i.test(content):null;
+  const glossaryFullSpelling=expectedLayout?['Capital Expenditure','Federal Open Market Committee','basis point','Treasury yield'].every(value=>content.includes(value)):null;
+  const glossaryBlock=expectedLayout?(content.match(/<section\b[^>]*data-section=["']glossary["'][^>]*>[\s\S]*?<\/section>/i)?.[0]??''):'';
+  const glossaryDictionaryStyle=expectedLayout?!/(?:입니다|합니다)/.test(stripTags(glossaryBlock)):null;
+  const sourceBlock=expectedLayout?(content.match(/<section\b[^>]*data-section=["']sources["'][^>]*>[\s\S]*?<\/section>/i)?.[0]??''):'';
+  const sourceLinkCount=expectedLayout?count(sourceBlock,/<a\b[^>]*href=["']https:\/\/[^"']+["'][^>]*style=["'][^"']*color:#0759a6[^"']*text-decoration:underline[^"']*["'][^>]*>/gi):0;
+  const sourceLinksClickable=expectedLayout?sourceLinkCount>0&&visibleRawUrlCount===0:null;
   const expectedSections=expectedLayout==='FINANCIAL_RESEARCH_V1'?['핵심 요약','시장 한눈에 보기','시장을 움직인 핵심 요인','AI·반도체 / 주요 산업','한국시장 연결 포인트','오늘 체크리스트','용어설명','주요 출처']:['Opening Summary','시장 한눈에 보기','시장을 움직인 핵심 요인','AI·반도체 / 주요 산업','한국시장 연결 포인트','오늘 체크리스트','용어해설','주요 출처'];
   if(h1Count!==0) throw new Error(`updated Blogger draft contains ${h1Count} H1 elements`);
   if(marketDashboardCount!==1) throw new Error(`updated Blogger draft contains ${marketDashboardCount} market dashboards`);
@@ -184,9 +197,9 @@ function verifyUpdatedDraft(post:BloggerPost,before:BloggerPost[],after:BloggerP
   if(internalTokenCount!==0) throw new Error(`updated Blogger draft exposes ${internalTokenCount} internal tokens`);
   if(expectedEditorialFocus&&(!aiSemiconductorFocus||!daveConsumerAuxiliary)) throw new Error('updated Blogger draft editorial focus verification failed');
   if(expectedLayout==='CATEGORY_BLOCK_V1'&&(JSON.stringify(sectionOrder)!==JSON.stringify(expectedSections)||editorialBlockCount!==8||glossaryCardCount!==4||sourceGroupCount!==3||!koreaHighlightBox)) throw new Error('updated Blogger draft category block verification failed');
-  if(expectedLayout==='FINANCIAL_RESEARCH_V1'&&(JSON.stringify(sectionOrder)!==JSON.stringify(expectedSections)||editorialBlockCount!==8||titleBarCount!==8||glossaryCardCount!==0||glossaryReferenceCount!==4||sourceGroupCount!==3||!koreaHighlightBox||!mobileHorizontalOverflowDisabled||titleBarInlineStyleCount!==8||contentBoxInlineStyleCount!==8||styleTagCount!==0||!glossaryCompactTable||!sourceGroupsInlineStyled||!koreaInlineHighlight)) throw new Error('updated Blogger draft financial research inline layout verification failed');
+  if(expectedLayout==='FINANCIAL_RESEARCH_V1'&&(JSON.stringify(sectionOrder)!==JSON.stringify(expectedSections)||editorialBlockCount!==8||titleBarCount!==8||glossaryCardCount!==0||glossaryReferenceCount!==4||sourceGroupCount!==3||!koreaHighlightBox||!mobileHorizontalOverflowDisabled||titleBarInlineStyleCount!==8||contentBoxInlineStyleCount!==8||styleTagCount!==0||!glossaryCompactTable||!sourceGroupsInlineStyled||!koreaInlineHighlight||!titleBarContrast||!marketTableReadability||!glossaryFullSpelling||!glossaryDictionaryStyle||!sourceLinksClickable)) throw new Error('updated Blogger draft financial research inline layout verification failed');
   assertSingleTarget(after,postId);
-  return {postId,status:'DRAFT',title,h1Count,marketDashboardCount,primarySourcesCount,visibleRawUrlCount,unpublishedRelatedLinksCount,duplicateDraftCount,marketDataUnchanged,internalTokenCount,aiSemiconductorFocus,consumerCheckCount,daveConsumerAuxiliary,sectionOrder,editorialBlockCount,glossaryCardCount,glossaryReferenceCount,sourceGroupCount,koreaHighlightBox,titleBarCount,mobileHorizontalOverflowDisabled,inlineStyleAttributeCount,titleBarInlineStyleCount,contentBoxInlineStyleCount,styleTagCount,glossaryCompactTable,sourceGroupsInlineStyled,koreaInlineHighlight,adminDraftUrl:`https://www.blogger.com/blog/post/edit/${encodeURIComponent(blogId)}/${encodeURIComponent(postId)}`,draftCountBefore:before.length,draftCountAfter:after.length,updatedAt:post.updated??null};
+  return {postId,status:'DRAFT',title,h1Count,marketDashboardCount,primarySourcesCount,visibleRawUrlCount,unpublishedRelatedLinksCount,duplicateDraftCount,marketDataUnchanged,internalTokenCount,aiSemiconductorFocus,consumerCheckCount,daveConsumerAuxiliary,sectionOrder,editorialBlockCount,glossaryCardCount,glossaryReferenceCount,sourceGroupCount,koreaHighlightBox,titleBarCount,mobileHorizontalOverflowDisabled,inlineStyleAttributeCount,titleBarInlineStyleCount,contentBoxInlineStyleCount,styleTagCount,glossaryCompactTable,sourceGroupsInlineStyled,koreaInlineHighlight,titleBarContrast,marketTableReadability,glossaryFullSpelling,glossaryDictionaryStyle,sourceLinksClickable,adminDraftUrl:`https://www.blogger.com/blog/post/edit/${encodeURIComponent(blogId)}/${encodeURIComponent(postId)}`,draftCountBefore:before.length,draftCountAfter:after.length,updatedAt:post.updated??null};
 }
 
 function assertTargetDraft(post:BloggerPost,postId:string):void {

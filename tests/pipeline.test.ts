@@ -588,7 +588,24 @@ test('2026-09-16 Human Review approves the existing draft without publishing',()
   assert.equal(publication.status,'DRAFT');
   assert.equal(publication.draftPostId,'1299415515105343069');
   assert.equal(publication.publicPostUrl,null);
-  assert.match(publication.history.at(-1)?.reason??'',/human editorial review approved/);
+  assert.ok(publication.history.some(item=>/human editorial review approved/.test(item.reason)));
+});
+test('2026-09-16 visibility patch keeps the existing draft and passes Blogger mobile review',()=>{
+  const verification=read('data/blogger/2026-09-16/MANUAL-2026-09-16-65e0805c062f-visibility-verification.json') as {
+    draftPostId:string;state:string;newPostCreated:boolean;automaticPublishAttempted:boolean;titleUnchanged:boolean;marketDataUnchanged:boolean;
+    bloggerApiVerification:Record<string,string>;mobileAdminPreview:{result:string;horizontalOverflowObserved:boolean;sourceLinkNavigationVerified:boolean;verifiedSourceLink:string};
+  };
+  assert.equal(verification.draftPostId,'1299415515105343069');
+  assert.equal(verification.state,'DRAFT');
+  assert.equal(verification.newPostCreated,false);
+  assert.equal(verification.automaticPublishAttempted,false);
+  assert.equal(verification.titleUnchanged,true);
+  assert.equal(verification.marketDataUnchanged,true);
+  assert.ok(Object.values(verification.bloggerApiVerification).every(result=>result==='PASS'));
+  assert.equal(verification.mobileAdminPreview.result,'PASS');
+  assert.equal(verification.mobileAdminPreview.horizontalOverflowObserved,false);
+  assert.equal(verification.mobileAdminPreview.sourceLinkNavigationVerified,true);
+  assert.match(verification.mobileAdminPreview.verifiedSourceLink,/^https:\/\/www\.federalreserve\.gov\//);
 });
 test('2026-09-15 AI semiconductor review candidate preserves draft and requires human approval',()=>{
   const report=read('data/reports/MANUAL-2026-09-15-d11e82f3085c.json') as ReportRecord;
@@ -733,6 +750,33 @@ test('financial research renderer omits an empty variable section',()=>{
   assert.doesNotMatch(rendered.html,/<h2\b[^>]*>AI·반도체 \/ 주요 산업<\/h2>/);
   assert.match(rendered.html,/<h2\b[^>]*>핵심 요약<\/h2>/);
   assert.match(rendered.html,/<h2\b[^>]*>오늘 체크리스트<\/h2>/);
+});
+test('Blogger visibility renderer uses high-contrast inline styles, dictionary glossary and clickable sources',()=>{
+  const rendered=renderMotusBloggerContent({
+    title:'테스트',seoTitle:'테스트',metaDescription:'테스트',slug:'test',hashtags:[],
+    glossary:[
+      {term:'CAPEX',explanation:'자본적 지출·설비투자입니다.',evergreenKey:'capex',evergreenTitle:'CAPEX'},
+      {term:'FOMC',explanation:'미국 연방공개시장위원회',evergreenKey:'fomc',evergreenTitle:'FOMC'},
+      {term:'bp',explanation:'0.01%포인트',evergreenKey:'bp',evergreenTitle:'bp'},
+      {term:'국채금리',explanation:'국채의 시장 수익률',evergreenKey:'yield',evergreenTitle:'국채금리'}
+    ],
+    sources:[{label:'Federal Reserve',url:'https://www.federalreserve.gov/test'}],
+    markdown:'## 핵심 요약\n\n본문\n\n## 시장 한눈에 보기\n\n| 구분 | 지표 | 종가 | 등락 |\n| --- | --- | ---: | ---: |\n| 주요지수 | 지수 A | 100 | +1.0% |\n| 주요지수 | 지수 B | 90 | -1.0% |',
+    metadata:{schemaVersion:'1.0',brand:'MOTUS',displayName:'MOTUS | What Moves the World',primaryCategory:'Daily Market',categories:['Daily Market'],companies:[],sectors:[],themes:[],countries:[],regions:[]}
+  },publishingConfig.publisher);
+  assert.match(rendered.html,/background:#03162e;color:#ffffff;border:1px solid #010b17[^"']*font-size:20px;font-weight:800/);
+  assert.match(rendered.html,/background:#0b2745;color:#ffffff[^"']*font-size:14px;font-weight:800/);
+  assert.match(rendered.html,/color:#08733f;background:#edf8f1/);
+  assert.match(rendered.html,/color:#b42318;background:#fff1f0/);
+  assert.match(rendered.html,/CAPEX[\s\S]*Capital Expenditure[\s\S]*자본적 지출·설비투자/);
+  assert.match(rendered.html,/FOMC[\s\S]*Federal Open Market Committee/);
+  assert.match(rendered.html,/bp[\s\S]*basis point/);
+  assert.match(rendered.html,/국채금리[\s\S]*Treasury yield/);
+  const glossary=rendered.html.match(/data-section="glossary"[\s\S]*?<\/section>/)?.[0]??'';
+  assert.doesNotMatch(glossary,/입니다|합니다/);
+  assert.match(rendered.html,/<a href="https:\/\/www\.federalreserve\.gov\/test" target="_blank" rel="nofollow noopener noreferrer" style="color:#0759a6;text-decoration:underline/);
+  assert.doesNotMatch(rendered.html,/>https:\/\//);
+  assert.match(rendered.html,/width:100%;max-width:100%;box-sizing:border-box/);
 });
 test('related articles render only for a verified MOTUS article permalink',()=>{
   const result=runReal(realFixture());
