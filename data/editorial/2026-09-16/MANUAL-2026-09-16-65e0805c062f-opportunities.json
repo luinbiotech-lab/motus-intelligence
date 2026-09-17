@@ -1,0 +1,28 @@
+[
+  {
+    "contentType": "B_EVENT",
+    "recommended": false,
+    "score": 60,
+    "reason": "VIX·원자재·금리 등에서 별도 이벤트로 다룰 만한 움직임이 확인됐습니다.",
+    "suggestedTitle": "2026-09-16 미국시장 변동 요인 점검",
+    "evidenceIds": [
+      "BRENT-2026-09-16"
+    ]
+  },
+  {
+    "contentType": "C_EVERGREEN",
+    "recommended": false,
+    "score": 54,
+    "reason": "용어 해설은 Daily 안에 넣고 별도 Evergreen은 보류합니다.",
+    "suggestedTitle": null,
+    "evidenceIds": []
+  },
+  {
+    "contentType": "D_COMPANY_INDUSTRY",
+    "recommended": false,
+    "score": 0,
+    "reason": "기업·산업 단독 글로 분리할 만큼의 복합 근거는 제한적입니다.",
+    "suggestedTitle": "미국 금리와 기술주 흐름의 한국시장 전달경로",
+    "evidenceIds": []
+  }
+]

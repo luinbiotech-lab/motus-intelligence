@@ -73,7 +73,7 @@ export function renderDailyEditorial(report:ReportRecord,evidence:EvidencePackag
   const dateLabel=formatKoreanDate(report.tradingDate);
   const cpi=input.macro.find(item=>/CPI/i.test(`${item.indicatorId} ${item.indicatorName}`));
   const cpiPeriod=formatMacroPeriod(cpi?.period);
-  const title=buildEditorialTitle(report.tradingDate,nasdaq,us2y,vix,oil);
+  const title=buildEditorialTitle(report.tradingDate,nasdaq,us2y,vix,oil,input);
   const summary=openingSummary(dateLabel,{spx,nasdaq,dow,rut,vix,us2y,us10y,oil},input);
   const axes=marketAxes({spx,nasdaq,dow,rut,vix,us2y,us10y,dollar,oil});
   const body=[
@@ -155,27 +155,27 @@ export function decideContentOpportunities(report:ReportRecord,evidence:Evidence
 const highPriorityTerms=new Set(['PBR','PER','EPS','BPS','ROE','EBITDA','FCF','CAPEX','CPI','PCE','FOMC','VIX','DXY','YoY','MoM','QoQ','bp','Guidance','Consensus','WTI']);
 export function buildDynamicTerms(markdown:string):EditorialTerm[] {
   const candidates: EditorialTerm[] = [
-    {term:'PBR',explanation:'주가를 주당순자산으로 나눈 값입니다. 자산가치 대비 주가 수준을 볼 때 씁니다.',evergreenKey:'term-pbr',evergreenTitle:'PBR로 밸류에이션 읽기'},
-    {term:'PER',explanation:'주가를 주당순이익으로 나눈 값입니다. 이익 대비 주가 부담을 비교할 때 씁니다.',evergreenKey:'term-per',evergreenTitle:'PER과 성장주의 가격 부담'},
-    {term:'EPS',explanation:'주당순이익입니다. 기업 이익이 한 주당 얼마나 쌓이는지 보여줍니다.',evergreenKey:'term-eps',evergreenTitle:'EPS와 실적 시즌 읽기'},
-    {term:'BPS',explanation:'주당순자산입니다. 기업의 장부상 순자산을 주식 수로 나눈 값입니다.',evergreenKey:'term-bps',evergreenTitle:'BPS와 PBR 함께 보기'},
-    {term:'ROE',explanation:'자기자본이익률입니다. 회사가 자본을 얼마나 효율적으로 이익으로 바꾸는지 보여줍니다.',evergreenKey:'term-roe',evergreenTitle:'ROE가 높은 기업의 의미'},
-    {term:'EBITDA',explanation:'이자·세금·감가상각 전 이익입니다. 기업의 현금창출력을 거칠게 비교할 때 사용합니다.',evergreenKey:'term-ebitda',evergreenTitle:'EBITDA로 기업 체력 보기'},
-    {term:'FCF',explanation:'잉여현금흐름입니다. 영업과 투자 지출 뒤 실제로 남는 현금을 뜻합니다.',evergreenKey:'term-fcf',evergreenTitle:'FCF가 중요한 이유'},
-    {term:'CAPEX',explanation:'설비투자입니다. AI 데이터센터, 반도체, 에너지 인프라 투자 판단에 자주 등장합니다.',evergreenKey:'term-capex',evergreenTitle:'CAPEX와 투자 사이클'},
-    {term:'CPI',explanation:'소비자물가지수입니다. Fed 정책 기대와 국채금리 방향을 움직이는 핵심 물가 지표입니다.',evergreenKey:'term-cpi',evergreenTitle:'CPI 발표와 시장 반응'},
-    {term:'PCE',explanation:'개인소비지출 물가지수입니다. Fed가 선호하는 물가 지표로 알려져 있습니다.',evergreenKey:'term-pce',evergreenTitle:'PCE와 Fed의 물가 판단'},
-    {term:'FOMC',explanation:'미국 연방공개시장위원회입니다. 기준금리와 통화정책 방향을 결정합니다.',evergreenKey:'term-fomc',evergreenTitle:'FOMC 전후 시장 체크포인트'},
-    {term:'VIX',explanation:'옵션시장에서 계산되는 변동성 지표입니다. 숫자가 내려가면 공포가 완화됐다는 신호로 해석되는 경우가 많습니다.',evergreenKey:'term-vix',evergreenTitle:'VIX로 시장 심리 확인하기'},
-    {term:'DXY',explanation:'달러인덱스입니다. 주요 통화 대비 달러의 상대 강도를 보여줍니다.',evergreenKey:'term-dxy',evergreenTitle:'DXY와 원화 흐름'},
-    {term:'YoY',explanation:'전년 대비 변화율입니다. 물가와 실적의 장기 흐름을 비교할 때 사용합니다.',evergreenKey:'term-yoy',evergreenTitle:'YoY와 MoM 차이'},
-    {term:'MoM',explanation:'전월 대비 변화율입니다. CPI처럼 월간 지표의 단기 변화를 볼 때 씁니다.',evergreenKey:'term-mom',evergreenTitle:'MoM 지표 읽는 법'},
-    {term:'QoQ',explanation:'전분기 대비 변화율입니다. 기업 실적이나 GDP 흐름을 볼 때 자주 등장합니다.',evergreenKey:'term-qoq',evergreenTitle:'QoQ와 실적 해석'},
-    {term:'bp',explanation:'basis point의 줄임말로 0.01%포인트를 뜻합니다. 금리 변화폭을 정확히 말할 때 사용합니다.',evergreenKey:'term-bp',evergreenTitle:'bp로 금리 변화 읽기'},
-    {term:'Guidance',explanation:'기업이 제시하는 향후 실적 전망입니다. 실적 발표 뒤 주가 반응을 좌우할 수 있습니다.',evergreenKey:'term-guidance',evergreenTitle:'가이던스가 주가에 중요한 이유'},
-    {term:'Consensus',explanation:'시장 예상치입니다. 실제 지표나 실적이 예상치를 웃도는지 밑도는지 판단하는 기준입니다.',evergreenKey:'term-consensus',evergreenTitle:'컨센서스와 서프라이즈'},
-    {term:'WTI',explanation:'미국 서부텍사스산 원유 가격을 뜻합니다. 에너지 비용, 물가 기대, 화학·항공 업종 판단에 자주 활용됩니다.',evergreenKey:'term-wti',evergreenTitle:'WTI 원유 가격과 산업별 영향'},
-    {term:'국채금리',explanation:'정부가 발행한 채권의 수익률입니다. 금리가 오르면 성장주 밸류에이션과 환율, 외국인 수급에 부담이 될 수 있습니다.',evergreenKey:'term-treasury-yield',evergreenTitle:'미국 국채금리와 주식시장의 관계'}
+    {term:'PBR',explanation:'주가순자산비율',evergreenKey:'term-pbr',evergreenTitle:'PBR로 밸류에이션 읽기'},
+    {term:'PER',explanation:'주가수익비율',evergreenKey:'term-per',evergreenTitle:'PER과 성장주의 가격 부담'},
+    {term:'EPS',explanation:'주당순이익',evergreenKey:'term-eps',evergreenTitle:'EPS와 실적 시즌 읽기'},
+    {term:'BPS',explanation:'주당순자산',evergreenKey:'term-bps',evergreenTitle:'BPS와 PBR 함께 보기'},
+    {term:'ROE',explanation:'자기자본이익률',evergreenKey:'term-roe',evergreenTitle:'ROE가 높은 기업의 의미'},
+    {term:'EBITDA',explanation:'이자·세금·감가상각 전 이익',evergreenKey:'term-ebitda',evergreenTitle:'EBITDA로 기업 체력 보기'},
+    {term:'FCF',explanation:'잉여현금흐름',evergreenKey:'term-fcf',evergreenTitle:'FCF가 중요한 이유'},
+    {term:'CAPEX',explanation:'자본적 지출·설비투자',evergreenKey:'term-capex',evergreenTitle:'CAPEX와 투자 사이클'},
+    {term:'CPI',explanation:'소비자물가지수',evergreenKey:'term-cpi',evergreenTitle:'CPI 발표와 시장 반응'},
+    {term:'PCE',explanation:'개인소비지출 물가지수',evergreenKey:'term-pce',evergreenTitle:'PCE와 Fed의 물가 판단'},
+    {term:'FOMC',explanation:'미국 연방공개시장위원회',evergreenKey:'term-fomc',evergreenTitle:'FOMC 전후 시장 체크포인트'},
+    {term:'VIX',explanation:'S&P 500 옵션 기반 예상 변동성 지수',evergreenKey:'term-vix',evergreenTitle:'VIX로 시장 심리 확인하기'},
+    {term:'DXY',explanation:'주요 통화 대비 미국 달러 가치 지수',evergreenKey:'term-dxy',evergreenTitle:'DXY와 원화 흐름'},
+    {term:'YoY',explanation:'전년 동기 대비 변화율',evergreenKey:'term-yoy',evergreenTitle:'YoY와 MoM 차이'},
+    {term:'MoM',explanation:'전월 대비 변화율',evergreenKey:'term-mom',evergreenTitle:'MoM 지표 읽는 법'},
+    {term:'QoQ',explanation:'전분기 대비 변화율',evergreenKey:'term-qoq',evergreenTitle:'QoQ와 실적 해석'},
+    {term:'bp',explanation:'0.01%포인트',evergreenKey:'term-bp',evergreenTitle:'bp로 금리 변화 읽기'},
+    {term:'Guidance',explanation:'기업이 제시하는 향후 실적 전망',evergreenKey:'term-guidance',evergreenTitle:'가이던스가 주가에 중요한 이유'},
+    {term:'Consensus',explanation:'시장 예상치',evergreenKey:'term-consensus',evergreenTitle:'컨센서스와 서프라이즈'},
+    {term:'WTI',explanation:'미국 서부텍사스산 원유',evergreenKey:'term-wti',evergreenTitle:'WTI 원유 가격과 산업별 영향'},
+    {term:'국채금리',explanation:'국채의 시장 수익률',evergreenKey:'term-treasury-yield',evergreenTitle:'미국 국채금리와 주식시장의 관계'}
   ];
   const selected=candidates.filter(item=>markdown.includes(item.term)).slice(0,6);
   return selected.length>=3?selected:selected.concat(candidates.filter(item=>!selected.includes(item)&&item.term==='국채금리'&&markdown.includes('금리'))).slice(0,Math.max(3,selected.length));
@@ -220,7 +220,11 @@ export async function renderBrokerageReportOnDemand(report:ReportRecord,evidence
   return {rendererVersion:BROKERAGE_RENDERER_VERSION,reportId:report.reportId,tradingDate:report.tradingDate,cached:false,markdown,naver:daily.naver};
 }
 
-function buildEditorialTitle(tradingDate:string,nasdaq:MarketSnapshot|undefined,us2y:MarketSnapshot|undefined,vix:MarketSnapshot|undefined,oil:MarketSnapshot|undefined) {
+function buildEditorialTitle(tradingDate:string,nasdaq:MarketSnapshot|undefined,us2y:MarketSnapshot|undefined,vix:MarketSnapshot|undefined,oil:MarketSnapshot|undefined,input:InputBundle) {
+  const newsText=input.news.flatMap(item=>[item.title,...item.verifiedFacts]).join(' ');
+  if(/25bp|0\.25%포인트|3\.75%.*4\.00%/i.test(newsText)&&/금리.*인상|rate hike/i.test(newsText)) {
+    return `미국 증시 마감: 연준 금리 인상에 다우 급락, AI 반도체는 선방 (${formatKoreanDate(tradingDate)})`;
+  }
   const marketUp=typeof nasdaq?.changePct==='number'&&nasdaq.changePct>=0;
   if(!marketUp&&(us2y?.change??0)>0&&(oil?.changePct??0)>0) return `미국 증시 마감: 유가·금리 상승에 나스닥 하락 (${formatKoreanDate(tradingDate)})`;
   const market=marketUp?'나스닥 강세':'나스닥 약세';
@@ -237,7 +241,7 @@ function openingSummary(dateLabel:string,records:MarketSet,input:InputBundle):st
   const oilUp=(records.oil?.changePct??0)>0;
   if(equities.length>=3&&negative===equities.length) return [
     `${dateLabel} 미국 증시는 대형주와 기술주, 중소형주가 함께 밀렸다. ${oilUp?'유가 상승이 물가 부담을 다시 키운 데다 ':''}${ratesUp?'국채금리까지 오르면서 ':''}주식시장은 성장 기대보다 자금조달 비용과 밸류에이션 부담에 민감하게 반응했다.`,
-    `낙폭이 한 업종에 그치지 않고 주요 지수 전반으로 번졌다는 점이 이날 흐름을 설명한다. 한국시장에서는 미국 성장주의 약세뿐 아니라 높은 에너지 비용과 금리가 외국인 수급, 원화, 운송·화학·소비 업종에 동시에 미칠 영향을 살펴야 한다.`
+    `낙폭이 한 업종에 그치지 않고 주요 지수 전반으로 번졌다는 점이 이날 흐름을 설명한다. 한국시장에서는 ${oilUp?'높은 에너지 비용과 ':''}금리가 외국인 수급과 원화, 성장주 평가에 미칠 영향을 살펴야 한다.`
   ];
   if(equities.length>=3&&positive===equities.length) return [
     `${dateLabel} 미국 증시는 대형주와 기술주, 중소형주가 함께 오르며 위험선호 흐름을 이어갔다. 변동성도 눈에 띄게 낮아져 장중 불안이 완화됐지만, 주가 상승만으로 금리 부담까지 사라졌다고 보기는 어렵다.`,
@@ -268,15 +272,18 @@ function marketAxes(records:MarketSet):[string,string,string] {
   const cross=typeof oilChange==='number'&&oilChange>0
     ?'셋째, 원유 가격 상승이 주식과 채권에 동시에 부담을 줬다. 에너지 기업에는 가격 효과가 우호적일 수 있지만, 항공·운송·화학과 소비 업종에는 비용 상승과 물가 재가속 우려가 더 직접적인 변수다.'
     :typeof oilChange==='number'&&oilChange<0
-      ?'셋째, DXY와 브렌트유는 주식시장의 방향을 뒤집을 정도의 압력을 만들지 않았다. 달러가 강보합에 머물고 유가가 하락하면서, 이날 가격 움직임의 중심은 환율이나 원자재보다 주식 내부의 위험선호에 있었다.'
+      ?'셋째, 브렌트유는 하락했지만 주식시장의 방향을 뒤집지는 못했다. 에너지 비용 부담은 다소 누그러졌으나, 이날 가격 움직임의 중심은 원자재보다 연준 결정과 주식 내부의 위험선호에 있었다.'
       :'셋째, 확인된 교차자산 자료만으로 환율이나 원자재가 장 전체를 주도했다고 단정하기 어렵다. 주식과 국채의 동행 여부를 중심으로 해석하는 편이 타당하다.';
   return [breadth,rates,cross];
 }
 function ratesAndMacroParagraph(cpiPeriod:string,hasCpi:boolean,us2y:MarketSnapshot|undefined,us10y:MarketSnapshot|undefined,input:InputBundle):string {
   const bothUp=(us2y?.change??0)>0&&(us10y?.change??0)>0;
   if(hasCpi) return `${cpiPeriod} CPI는 전월 대비 상승했고, 국채시장에서는 2년물과 10년물이 각각 전일보다 높아졌다. 단기물 상승 폭이 더 컸다는 점은 향후 통화정책 경로를 둘러싼 경계가 남아 있음을 말해준다. 금리가 오른 날에도 성장주가 버틴 만큼, 다음 거래일에는 이 조합이 계속 유지되는지가 중요하다.`;
-  const fomc=input.news.some(item=>/FOMC|Federal Reserve|연방준비|기준금리/i.test(`${item.title} ${item.verifiedFacts.join(' ')}`));
-  if(bothUp) return `이날 새 물가 발표보다 채권시장의 움직임이 더 직접적인 신호를 줬다. 2년물과 10년물 국채금리가 함께 상승했고${fomc?', 다음 날 FOMC 결정을 앞둔 경계도 가격에 반영됐다':''}. 장기금리가 높은 수준에 머무는 동안에는 성장률이 높더라도 먼 미래 이익의 현재가치가 낮아질 수 있다.`;
+  const newsText=input.news.flatMap(item=>[item.title,...item.verifiedFacts]).join(' ');
+  const fomc=/FOMC|Federal Reserve|연방준비|기준금리/i.test(newsText);
+  const rateHike=fomc&&/금리.*인상|rate hike|25bp|0\.25%포인트/i.test(newsText);
+  if(rateHike) return '연준은 기준금리 목표 범위를 3.75~4.00%로 25bp 올렸다. 결정은 만장일치였고, 2년물과 10년물 국채금리도 함께 상승했다. 시장은 발표 직후 주가를 다시 낮추며 높은 할인율이 기업 가치에 미치는 부담을 반영했다.';
+  if(bothUp) return `이날 새 물가 발표보다 채권시장의 움직임이 더 직접적인 신호를 줬다. 2년물과 10년물 국채금리가 함께 상승했고${fomc?', FOMC 결정을 둘러싼 경계도 가격에 반영됐다':''}. 장기금리가 높은 수준에 머무는 동안에는 성장률이 높더라도 먼 미래 이익의 현재가치가 낮아질 수 있다.`;
   return '이날 확인된 새 물가 발표는 없었다. 통화정책 경로를 미리 단정하기보다 국채금리와 다음 공식 경제지표가 같은 방향을 가리키는지 확인할 구간이다.';
 }
 function formatKoreanDate(value:string) { return value.replace(/^(\d{4})-(\d{2})-(\d{2})$/,(_,year,month,day)=>`${year}년 ${Number(month)}월 ${Number(day)}일`); }
@@ -331,12 +338,15 @@ function companyIndustryParagraph(input:InputBundle,reviewContext?:EditorialRevi
     const koreaText=aiCapex?'한국시장에서는 반도체 업종이 가장 가까운 연결 고리다. 미국 AI 투자 기대가 우호적인 배경을 만들 수 있으나, 국내 종목의 실제 반응은 고객사 주문과 환율, 외국인 수급까지 함께 봐야 한다.':consumptionDown?'한국시장에서는 미국 소비 비중이 높은 의류·식품·레저 기업의 주문과 판매 흐름을 점검할 만하다. 한 기업의 부진을 업종 전체로 확대하기보다 환율과 물류비, 각 회사의 가격 전가력을 함께 봐야 한다.':'';
     return [eventText,filingText,industryText,supplyChainText,koreaText].filter(Boolean).join('\n\n');
   }
+  const newsText=input.news.flatMap(item=>[item.title,...item.verifiedFacts]).join(' ');
+  if(/Nvidia|엔비디아|AMD|반도체/i.test(newsText)) return '금리 인상으로 다우와 S&P 500이 밀린 날에도 AI 반도체주는 상대적으로 선방했다. 엔비디아는 0.8%, AMD는 1.6% 올랐고, Reuters가 집계한 반도체 업종도 0.6% 상승했다. 성장주 전체를 한 묶음으로 보기보다 실적 가시성과 AI 투자 수요가 확인되는 종목에 매수세가 남았다는 뜻에 가깝다. 다만 10년물 금리가 5%를 웃도는 환경에서는 높은 밸류에이션이 계속 부담이다. 다음 판단의 초점은 AI CAPEX 계획이 실제 주문과 매출, 이익으로 이어지는지에 있다. 한국시장에서는 메모리와 장비·소재 공급망의 실적 확인이 미국 AI 주가 흐름을 국내 반도체 수급으로 연결하는 핵심 고리다.';
   return '개별 기업 이슈는 시장 전체 흐름을 압도할 만큼 따로 분리되지 않았다. 이날은 특정 한 종목보다 금리, 기술주, 변동성의 조합이 더 중요한 관찰 지점이었다.';
 }
 function koreaParagraph(input:InputBundle) {
   const triggers=new Set(input.signals.filter(item=>item.driverStatement).map(item=>item.trigger));
   if(triggers.has('OIL_UP')&&triggers.has('RATES_UP')) return '미국 장기금리와 유가가 동시에 오른 조합은 한국시장에 가볍지 않다. 인터넷·플랫폼 같은 장기 성장주는 할인율 부담을 받고, 항공·운송·화학은 원가 압력을 먼저 맞을 수 있다. 정유·조선 등은 업황 수혜 가능성이 있지만 원화와 외국인 수급이 흔들리면 지수 전체의 방어력은 약해질 수 있다.';
   if(triggers.has('AI_CAPEX_UP')) return '미국 금리 상승은 국내 인터넷·플랫폼 등 장기 성장주의 할인율 부담으로 작용할 수 있다. 반면 나스닥 강세와 AI 인프라 투자 기대는 반도체 투자심리에 우호적이다. 두 힘이 엇갈리는 만큼 지수 방향을 그대로 따라가기보다 원화 흐름, 외국인 수급, 반도체 업종의 장중 강도를 함께 살피는 편이 낫다.';
+  if(input.news.some(item=>/Nvidia|엔비디아|AMD|반도체/i.test(`${item.title} ${item.verifiedFacts.join(' ')}`))) return '미국 지수 하락은 국내 위험선호에 부담이지만, AI 반도체주의 상대 강세는 업종별 차별화를 예고한다. 국내에서는 메모리·장비주가 미국 반도체 흐름을 따라가는지, 5%를 웃돈 미국 10년물 금리와 원화 움직임이 외국인 수급을 제약하는지를 함께 봐야 한다.';
   return '한국시장에서는 미국 기술주 흐름과 금리 수준을 함께 봐야 한다. 지수 상승만 보고 추격하기보다 환율, 외국인 수급, 반도체 업종의 장중 반응을 확인하는 편이 안전하다.';
 }
 function dailyChecklist(input:InputBundle,nasdaq:MarketSnapshot|undefined,us10y:MarketSnapshot|undefined,oil:MarketSnapshot|undefined):string[] {
@@ -345,7 +355,7 @@ function dailyChecklist(input:InputBundle,nasdaq:MarketSnapshot|undefined,us10y:
   else items.push('- 나스닥 상승이 반도체와 AI 인프라 종목으로 이어지는지');
   if((oil?.changePct??0)>0) items.push('- 높은 유가가 운송·화학·소비 업종의 비용 부담으로 번지는지');
   else items.push('- 달러와 원유 가격이 한국 수출주와 항공·화학 업종에 주는 압력');
-  if(input.news.some(item=>/FOMC|Federal Reserve|연방준비/i.test(`${item.title} ${item.verifiedFacts.join(' ')}`))) items.push('- FOMC 결정과 향후 금리 경로에 대한 공식 설명');
+  if(input.news.some(item=>/FOMC|Federal Reserve|연방준비/i.test(`${item.title} ${item.verifiedFacts.join(' ')}`))) items.push('- FOMC 결정 이후 시장이 반영하는 향후 금리 경로');
   void us10y;
   return items;
 }
@@ -355,6 +365,7 @@ function hashtags(input:InputBundle) {
   const tags=['#미국증시','#미국주식','#미국시장마감','#나스닥','#SP500','#다우지수','#러셀2000','#미국국채금리'];
   if(symbols.has('VIX')) tags.push('#VIX');
   if(triggers.has('AI_CAPEX_UP')) tags.push('#AI인프라','#오라클');
+  else if(input.news.some(item=>/Nvidia|엔비디아|AMD|반도체/i.test(`${item.title} ${item.verifiedFacts.join(' ')}`))) tags.push('#AI반도체','#엔비디아','#AMD');
   if(triggers.has('OIL_UP')) tags.push('#국제유가','#브렌트유');
   if(input.companyEvents.some(item=>item.ticker==='PLAY')) tags.push('#미국소비주');
   tags.push('#한국증시');

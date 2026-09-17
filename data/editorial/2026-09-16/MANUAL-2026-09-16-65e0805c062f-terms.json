@@ -1,0 +1,26 @@
+[
+  {
+    "term": "CAPEX",
+    "explanation": "자본적 지출·설비투자",
+    "evergreenKey": "term-capex",
+    "evergreenTitle": "CAPEX와 투자 사이클"
+  },
+  {
+    "term": "FOMC",
+    "explanation": "미국 연방공개시장위원회",
+    "evergreenKey": "term-fomc",
+    "evergreenTitle": "FOMC 전후 시장 체크포인트"
+  },
+  {
+    "term": "bp",
+    "explanation": "0.01%포인트",
+    "evergreenKey": "term-bp",
+    "evergreenTitle": "bp로 금리 변화 읽기"
+  },
+  {
+    "term": "국채금리",
+    "explanation": "국채의 시장 수익률",
+    "evergreenKey": "term-treasury-yield",
+    "evergreenTitle": "미국 국채금리와 주식시장의 관계"
+  }
+]

@@ -1,0 +1,335 @@
+{
+  "reportId": "MANUAL-2026-09-16-65e0805c062f",
+  "tradingDate": "2026-09-16",
+  "generatedAt": "2026-09-17T01:11:32.931Z",
+  "approvalStatus": "REVIEW_REQUIRED",
+  "blocked": true,
+  "counts": {
+    "VERIFIED": 8,
+    "PARTIALLY_VERIFIED": 0,
+    "CONFLICT": 0,
+    "UNVERIFIED": 0,
+    "INSUFFICIENT_SOURCES": 1,
+    "PRIMARY_SOURCE_ONLY": 0,
+    "REVIEW_REQUIRED": 0,
+    "REJECTED": 0,
+    "REVIEW_REQUIRED_QUEUE": 1
+  },
+  "items": [
+    {
+      "claimId": "CLAIM-SIG-RATES-UP-2026-09-16:UK-07",
+      "claimText": "수동 확인 신호 RATES_UP → INTEREST_RATE → Internet / Platform. 인과관계 확정이나 수익률 예측이 아닌 조건부 전달경로입니다.",
+      "claimType": "KOREA_IMPACT",
+      "verificationStatus": "INSUFFICIENT_SOURCES",
+      "confidenceScore": 50,
+      "informationType": "ANALYSIS",
+      "supportingSources": [
+        {
+          "sourceId": "US_TREASURY",
+          "sourceUrl": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202609&type=daily_treasury_yield_curve",
+          "evidenceId": "US2Y-2026-09-16",
+          "value": 4.74,
+          "observedAt": "2026-09-16T19:30:00Z",
+          "collectedAt": "2026-09-16T22:30:00Z",
+          "tier": "A"
+        },
+        {
+          "sourceId": "US_TREASURY",
+          "sourceUrl": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202609&type=daily_treasury_yield_curve",
+          "evidenceId": "US10Y-2026-09-16",
+          "value": 5.01,
+          "observedAt": "2026-09-16T19:30:00Z",
+          "collectedAt": "2026-09-16T22:30:00Z",
+          "tier": "A"
+        }
+      ],
+      "contradictingSources": [],
+      "evidenceIds": [
+        "US2Y-2026-09-16",
+        "US10Y-2026-09-16",
+        "FED-FOMC-2026-09-16"
+      ],
+      "sourceTier": "A",
+      "conflict": null,
+      "counterFactors": [],
+      "recommendedAction": "HOLD",
+      "priority": 60,
+      "reason": "INSUFFICIENT_SOURCES"
+    },
+    {
+      "claimId": "CLAIM-SIG-RISK-OFF-2026-09-16:UK-13",
+      "claimText": "수동 확인 신호 RISK_OFF → RISK_SENTIMENT → Finance. 인과관계 확정이나 수익률 예측이 아닌 조건부 전달경로입니다.",
+      "claimType": "KOREA_IMPACT",
+      "verificationStatus": "VERIFIED",
+      "confidenceScore": 100,
+      "informationType": "ANALYSIS",
+      "supportingSources": [
+        {
+          "sourceId": "SP_DJI",
+          "sourceUrl": "https://www.spglobal.com/spdji/en/indices/equity/dow-jones-industrial-average/",
+          "evidenceId": "DJIA-2026-09-16",
+          "value": 51461.9,
+          "observedAt": "2026-09-16T20:00:00Z",
+          "collectedAt": "2026-09-16T22:30:00Z",
+          "tier": "A"
+        },
+        {
+          "sourceId": "SP_DJI",
+          "sourceUrl": "https://www.spglobal.com/spdji/en/indices/equity/sp-500/",
+          "evidenceId": "SPX-2026-09-16",
+          "value": 7551.81,
+          "observedAt": "2026-09-16T20:00:00Z",
+          "collectedAt": "2026-09-16T22:30:00Z",
+          "tier": "A"
+        },
+        {
+          "sourceId": "NASDAQ",
+          "sourceUrl": "https://www.nasdaq.com/market-activity/index/comp",
+          "evidenceId": "IXIC-2026-09-16",
+          "value": 25978.42,
+          "observedAt": "2026-09-16T20:00:00Z",
+          "collectedAt": "2026-09-16T22:30:00Z",
+          "tier": "A"
+        },
+        {
+          "sourceId": "FTSE_RUSSELL",
+          "sourceUrl": "https://www.lseg.com/en/ftse-russell/indices/russell-2000-index",
+          "evidenceId": "RUT-2026-09-16",
+          "value": 2858.81,
+          "observedAt": "2026-09-16T20:00:00Z",
+          "collectedAt": "2026-09-16T22:30:00Z",
+          "tier": "A"
+        }
+      ],
+      "contradictingSources": [],
+      "evidenceIds": [
+        "DJIA-2026-09-16",
+        "SPX-2026-09-16",
+        "IXIC-2026-09-16",
+        "RUT-2026-09-16"
+      ],
+      "sourceTier": "A",
+      "conflict": null,
+      "counterFactors": [],
+      "recommendedAction": "APPROVE",
+      "priority": 50,
+      "reason": "정상 검증 claim"
+    },
+    {
+      "claimId": "CLAIM-BRENT-2026-09-16-CLOSE",
+      "claimText": "BRENT_NOV26 종가는 105.83 price이다.",
+      "claimType": "MARKET_FACT",
+      "verificationStatus": "VERIFIED",
+      "confidenceScore": 90,
+      "informationType": "FACT",
+      "supportingSources": [
+        {
+          "sourceId": "ICE",
+          "sourceUrl": "https://www.ice.com/products/219/Brent-Crude-Futures/data",
+          "evidenceId": "BRENT-2026-09-16",
+          "value": 105.83,
+          "observedAt": "2026-09-16T18:30:00Z",
+          "collectedAt": "2026-09-16T22:30:00Z",
+          "tier": "A"
+        }
+      ],
+      "contradictingSources": [],
+      "evidenceIds": [
+        "BRENT-2026-09-16"
+      ],
+      "sourceTier": "A",
+      "conflict": null,
+      "counterFactors": [],
+      "recommendedAction": "APPROVE",
+      "priority": 10,
+      "reason": "정상 검증 claim"
+    },
+    {
+      "claimId": "CLAIM-DJIA-2026-09-16-CLOSE",
+      "claimText": "DJIA 종가는 51461.9 points이다.",
+      "claimType": "MARKET_FACT",
+      "verificationStatus": "VERIFIED",
+      "confidenceScore": 90,
+      "informationType": "FACT",
+      "supportingSources": [
+        {
+          "sourceId": "SP_DJI",
+          "sourceUrl": "https://www.spglobal.com/spdji/en/indices/equity/dow-jones-industrial-average/",
+          "evidenceId": "DJIA-2026-09-16",
+          "value": 51461.9,
+          "observedAt": "2026-09-16T20:00:00Z",
+          "collectedAt": "2026-09-16T22:30:00Z",
+          "tier": "A"
+        }
+      ],
+      "contradictingSources": [],
+      "evidenceIds": [
+        "DJIA-2026-09-16"
+      ],
+      "sourceTier": "A",
+      "conflict": null,
+      "counterFactors": [],
+      "recommendedAction": "APPROVE",
+      "priority": 10,
+      "reason": "정상 검증 claim"
+    },
+    {
+      "claimId": "CLAIM-IXIC-2026-09-16-CLOSE",
+      "claimText": "IXIC 종가는 25978.42 points이다.",
+      "claimType": "MARKET_FACT",
+      "verificationStatus": "VERIFIED",
+      "confidenceScore": 90,
+      "informationType": "FACT",
+      "supportingSources": [
+        {
+          "sourceId": "NASDAQ",
+          "sourceUrl": "https://www.nasdaq.com/market-activity/index/comp",
+          "evidenceId": "IXIC-2026-09-16",
+          "value": 25978.42,
+          "observedAt": "2026-09-16T20:00:00Z",
+          "collectedAt": "2026-09-16T22:30:00Z",
+          "tier": "A"
+        }
+      ],
+      "contradictingSources": [],
+      "evidenceIds": [
+        "IXIC-2026-09-16"
+      ],
+      "sourceTier": "A",
+      "conflict": null,
+      "counterFactors": [],
+      "recommendedAction": "APPROVE",
+      "priority": 10,
+      "reason": "정상 검증 claim"
+    },
+    {
+      "claimId": "CLAIM-RUT-2026-09-16-CLOSE",
+      "claimText": "RUT 종가는 2858.81 points이다.",
+      "claimType": "MARKET_FACT",
+      "verificationStatus": "VERIFIED",
+      "confidenceScore": 90,
+      "informationType": "FACT",
+      "supportingSources": [
+        {
+          "sourceId": "FTSE_RUSSELL",
+          "sourceUrl": "https://www.lseg.com/en/ftse-russell/indices/russell-2000-index",
+          "evidenceId": "RUT-2026-09-16",
+          "value": 2858.81,
+          "observedAt": "2026-09-16T20:00:00Z",
+          "collectedAt": "2026-09-16T22:30:00Z",
+          "tier": "A"
+        }
+      ],
+      "contradictingSources": [],
+      "evidenceIds": [
+        "RUT-2026-09-16"
+      ],
+      "sourceTier": "A",
+      "conflict": null,
+      "counterFactors": [],
+      "recommendedAction": "APPROVE",
+      "priority": 10,
+      "reason": "정상 검증 claim"
+    },
+    {
+      "claimId": "CLAIM-SPX-2026-09-16-CLOSE",
+      "claimText": "SPX 종가는 7551.81 points이다.",
+      "claimType": "MARKET_FACT",
+      "verificationStatus": "VERIFIED",
+      "confidenceScore": 90,
+      "informationType": "FACT",
+      "supportingSources": [
+        {
+          "sourceId": "SP_DJI",
+          "sourceUrl": "https://www.spglobal.com/spdji/en/indices/equity/sp-500/",
+          "evidenceId": "SPX-2026-09-16",
+          "value": 7551.81,
+          "observedAt": "2026-09-16T20:00:00Z",
+          "collectedAt": "2026-09-16T22:30:00Z",
+          "tier": "A"
+        }
+      ],
+      "contradictingSources": [],
+      "evidenceIds": [
+        "SPX-2026-09-16"
+      ],
+      "sourceTier": "A",
+      "conflict": null,
+      "counterFactors": [],
+      "recommendedAction": "APPROVE",
+      "priority": 10,
+      "reason": "정상 검증 claim"
+    },
+    {
+      "claimId": "CLAIM-US10Y-2026-09-16-CLOSE",
+      "claimText": "US10Y 종가는 5.01 percent이다.",
+      "claimType": "MARKET_FACT",
+      "verificationStatus": "VERIFIED",
+      "confidenceScore": 90,
+      "informationType": "FACT",
+      "supportingSources": [
+        {
+          "sourceId": "US_TREASURY",
+          "sourceUrl": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202609&type=daily_treasury_yield_curve",
+          "evidenceId": "US10Y-2026-09-16",
+          "value": 5.01,
+          "observedAt": "2026-09-16T19:30:00Z",
+          "collectedAt": "2026-09-16T22:30:00Z",
+          "tier": "A"
+        }
+      ],
+      "contradictingSources": [],
+      "evidenceIds": [
+        "US10Y-2026-09-16"
+      ],
+      "sourceTier": "A",
+      "conflict": null,
+      "counterFactors": [],
+      "recommendedAction": "APPROVE",
+      "priority": 10,
+      "reason": "정상 검증 claim"
+    },
+    {
+      "claimId": "CLAIM-US2Y-2026-09-16-CLOSE",
+      "claimText": "US2Y 종가는 4.74 percent이다.",
+      "claimType": "MARKET_FACT",
+      "verificationStatus": "VERIFIED",
+      "confidenceScore": 90,
+      "informationType": "FACT",
+      "supportingSources": [
+        {
+          "sourceId": "US_TREASURY",
+          "sourceUrl": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202609&type=daily_treasury_yield_curve",
+          "evidenceId": "US2Y-2026-09-16",
+          "value": 4.74,
+          "observedAt": "2026-09-16T19:30:00Z",
+          "collectedAt": "2026-09-16T22:30:00Z",
+          "tier": "A"
+        }
+      ],
+      "contradictingSources": [],
+      "evidenceIds": [
+        "US2Y-2026-09-16"
+      ],
+      "sourceTier": "A",
+      "conflict": null,
+      "counterFactors": [],
+      "recommendedAction": "APPROVE",
+      "priority": 10,
+      "reason": "정상 검증 claim"
+    }
+  ],
+  "verifiedSummary": {
+    "count": 8,
+    "sampleClaimIds": [
+      "CLAIM-SPX-2026-09-16-CLOSE",
+      "CLAIM-DJIA-2026-09-16-CLOSE",
+      "CLAIM-IXIC-2026-09-16-CLOSE",
+      "CLAIM-RUT-2026-09-16-CLOSE",
+      "CLAIM-US2Y-2026-09-16-CLOSE",
+      "CLAIM-US10Y-2026-09-16-CLOSE",
+      "CLAIM-BRENT-2026-09-16-CLOSE",
+      "CLAIM-SIG-RISK-OFF-2026-09-16:UK-13"
+    ]
+  }
+}

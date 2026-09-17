@@ -51,6 +51,7 @@ export interface BloggerPublishResult { publicPostUrl?: string|null; postId?: st
 export interface BloggerAdapter {
   name: string;
   hasCredential(config:BloggerPublishingConfig): boolean;
+  findExistingDraft?(record:BloggerPublicationRecord,config:BloggerPublishingConfig): Promise<{postId:string;title:string}|null>;
   publish(record:BloggerPublicationRecord,config:BloggerPublishingConfig): Promise<BloggerPublishResult>;
 }
 
@@ -117,6 +118,8 @@ export async function publishBloggerPublication(record:BloggerPublicationRecord,
   if(options.dryRun) return transition(record,'APPROVED','dry-run publish checked adapter path without external write',now,{dryRun:true,error:null});
   if(!adapter.hasCredential(config)) return transition(record,'FAILED','missing Blogger credential; external publish was not attempted',now,{error:'missing credential',dryRun:false});
   try {
+    const existing=adapter.findExistingDraft?await adapter.findExistingDraft(record,config):null;
+    if(existing) return transition(record,'DRAFT','duplicate draft creation blocked; existing Blogger draft retained',now,{draftPostId:existing.postId,publicPostUrl:null,error:null,dryRun:false});
     const result=await adapter.publish(record,config);
     const status=result.status??'PUBLISHED';
     if(status==='DRAFT') {
@@ -145,11 +148,13 @@ export class ConfiguredBloggerAdapter implements BloggerAdapter {
 }
 
 type FetchLike = (input:string|URL,init?:RequestInit)=>Promise<Response>;
-type GoogleBloggerPost = { id?:string; url?:string; status?:string; published?:string; updated?:string };
+type GoogleBloggerPost = { id?:string; title?:string; url?:string; status?:string; published?:string; updated?:string };
+type GoogleBloggerPostList = { items?:GoogleBloggerPost[]; nextPageToken?:string };
 type GoogleOAuthToken = { access_token?:string; token_type?:string; expires_in?:number };
 
 export class GoogleBloggerApiAdapter implements BloggerAdapter {
   name=`google-blogger-api-v3@${GOOGLE_BLOGGER_ADAPTER_VERSION}`;
+  private cachedAccessToken:{value:string;expiresAt:number}|null=null;
   constructor(
     private readonly tokenProvider:(environmentVariable:string)=>string|undefined=(name)=>process.env[name],
     private readonly fetcher:FetchLike=fetch
@@ -161,6 +166,27 @@ export class GoogleBloggerApiAdapter implements BloggerAdapter {
     const clientSecret=this.readConfigured(config.clientSecretEnvironmentVariable);
     if(refresh||clientId||clientSecret) return Boolean(refresh&&clientId&&clientSecret);
     return Boolean(this.readConfigured(config.credentialEnvironmentVariable));
+  }
+  async findExistingDraft(record:BloggerPublicationRecord,config:BloggerPublishingConfig):Promise<{postId:string;title:string}|null> {
+    const blogId=config.blogId?.trim();
+    if(!blogId) throw new Error('missing Blogger blogId');
+    const accessToken=await this.resolveAccessToken(config);
+    let pageToken:string|undefined;
+    const koreanDate=record.tradingDate.replace(/^(\d{4})-(\d{2})-(\d{2})$/,(_,year,month,day)=>`${year}년 ${Number(month)}월 ${Number(day)}일`);
+    do {
+      const endpoint=new URL(`https://www.googleapis.com/blogger/v3/blogs/${encodeURIComponent(blogId)}/posts`);
+      endpoint.searchParams.set('status','draft');
+      endpoint.searchParams.set('fetchBodies','false');
+      endpoint.searchParams.set('maxResults','50');
+      if(pageToken) endpoint.searchParams.set('pageToken',pageToken);
+      const response=await this.fetcher(endpoint,{headers:{authorization:`Bearer ${accessToken}`}});
+      if(!response.ok) throw new Error(`Blogger draft lookup ${response.status}: ${safeGoogleApiError(await response.text())}`);
+      const page=await response.json() as GoogleBloggerPostList;
+      const match=(page.items??[]).find(post=>post.id&&post.title&&(post.title===record.title||post.title.includes(koreanDate)));
+      if(match?.id&&match.title) return {postId:match.id,title:match.title};
+      pageToken=page.nextPageToken;
+    } while(pageToken);
+    return null;
   }
   async publish(record:BloggerPublicationRecord,config:BloggerPublishingConfig):Promise<BloggerPublishResult> {
     const blogId=config.blogId?.trim();
@@ -188,6 +214,7 @@ export class GoogleBloggerApiAdapter implements BloggerAdapter {
   }
 
   private async resolveAccessToken(config:BloggerPublishingConfig):Promise<string> {
+    if(this.cachedAccessToken&&this.cachedAccessToken.expiresAt>Date.now()) return this.cachedAccessToken.value;
     const refreshToken=this.readConfigured(config.refreshTokenEnvironmentVariable);
     const clientId=this.readConfigured(config.clientIdEnvironmentVariable);
     const clientSecret=this.readConfigured(config.clientSecretEnvironmentVariable);
@@ -198,7 +225,9 @@ export class GoogleBloggerApiAdapter implements BloggerAdapter {
       if(!response.ok) throw new Error(`Blogger OAuth refresh failed (${response.status})`);
       const token=await response.json() as GoogleOAuthToken;
       if(!token.access_token?.trim()) throw new Error('Blogger OAuth refresh response missing access token');
-      return token.access_token.trim();
+      const value=token.access_token.trim();
+      this.cachedAccessToken={value,expiresAt:Date.now()+Math.max(60,(token.expires_in??3600)-60)*1000};
+      return value;
     }
     const fallback=this.readConfigured(config.credentialEnvironmentVariable);
     if(!fallback) throw new Error('missing Blogger credential');

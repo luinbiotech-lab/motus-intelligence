@@ -434,8 +434,9 @@ test('Sprint 2E dynamic glossary uses only terms present in body and keeps everg
   assert.ok(terms.length<=6);
   for(const term of terms) {
     assert.ok(term.evergreenKey.startsWith('term-'));
-    assert.match(term.explanation,/입니다|말합니다|뜻합니다/);
+    assert.doesNotMatch(term.explanation,/입니다|합니다|말합니다|뜻합니다/);
   }
+  assert.equal(terms.find(item=>item.term==='CAPEX')?.explanation,'자본적 지출·설비투자');
   assert.equal(terms.some(item=>item.term==='VIX'),true);
   assert.equal(terms.some(item=>item.term==='DXY'),true);
   assert.equal(buildDynamicTerms('달러와 나스닥만 언급됐다.').some(item=>item.term==='나스닥'||item.term==='달러'),false);
@@ -548,6 +549,24 @@ test('latest completed trading day renders verified bearish market data without 
   assert.equal((preview.html.match(/class="market-dashboard"/g)??[]).length,1);
   assert.equal((preview.html.match(/<h2\b[^>]*>주요 출처<\/h2>/g)??[]).length,1);
   assert.doesNotMatch(preview.html,/CLAIM-|confidenceScore|REVIEW_REQUIRED|<h1>/);
+});
+test('2026-09-16 MOTUS Daily uses verified FOMC close data and dictionary glossary',()=>{
+  const input=read('data/manual/2026-09-16/input.json') as InputBundle;
+  const result=runPipeline(input,sources,rules,input.asOf);
+  const editorial=renderDailyEditorial(result.report,result.evidence);
+  const publication=read('data/blogger/2026-09-16/MANUAL-2026-09-16-65e0805c062f-publication.json') as BloggerPublicationRecord;
+  assert.equal(result.report.tradingDate,'2026-09-16');
+  assert.equal(input.market.find(item=>item.symbol==='SPX')?.close,7551.81);
+  assert.equal(input.market.find(item=>item.symbol==='US2Y')?.close,4.74);
+  assert.equal(input.market.find(item=>item.symbol==='US10Y')?.close,5.01);
+  assert.match(editorial.seo.title,/연준 금리 인상에 다우 급락, AI 반도체는 선방/);
+  assert.match(editorial.bloggerMarkdown,/엔비디아는 0\.8%, AMD는 1\.6%/);
+  assert.deepEqual(editorial.terms.map(item=>item.term),['CAPEX','FOMC','bp','국채금리']);
+  assert.ok(editorial.terms.every(item=>!/(입니다|합니다|말합니다|뜻합니다|[.!?]$)/.test(item.explanation)));
+  assert.equal(publication.status,'DRAFT');
+  assert.ok(publication.draftPostId);
+  assert.equal(publication.publicPostUrl,null);
+  assert.doesNotMatch(publication.html,/CLAIM-|confidenceScore|REVIEW_REQUIRED|<h1>/);
 });
 test('2026-09-15 AI semiconductor review candidate preserves draft and requires human approval',()=>{
   const report=read('data/reports/MANUAL-2026-09-15-d11e82f3085c.json') as ReportRecord;
@@ -939,6 +958,7 @@ test('Google adapter refreshes access token before Blogger draft creation',async
   const fakeFetch:typeof fetch=async(input,init)=>{
     calls.push({url:String(input),...(init?{init}:{})});
     if(String(input)===BLOGGER_TOKEN_ENDPOINT) return new Response(JSON.stringify({access_token:'refreshed-access-token'}),{status:200});
+    if(init?.method!=='POST') return new Response(JSON.stringify({items:[]}),{status:200});
     return new Response(JSON.stringify({id:'DRAFT-REFRESH-1',url:'https://verified-blog.test/draft-refresh',status:'DRAFT'}),{status:200});
   };
   const env:Record<string,string>={BLOGGER_REFRESH_TOKEN:'refresh-value',BLOGGER_CLIENT_ID:'client-value',BLOGGER_CLIENT_SECRET:'secret-value',BLOGGER_OAUTH_TOKEN:'deprecated-value'};
@@ -946,10 +966,31 @@ test('Google adapter refreshes access token before Blogger draft creation',async
   const config={...publishingConfig,blogId:'blog-id'};
   const draft=await publishBloggerPublication(approved,adapter,config,{audience:'admin',action:'BLOGGER_PUBLISH'});
   assert.equal(draft.status,'DRAFT');
-  assert.equal(calls.length,2);
+  assert.equal(calls.length,3);
   assert.equal(calls[0]!.url,BLOGGER_TOKEN_ENDPOINT);
   assert.equal((calls[0]!.init?.body as URLSearchParams).get('grant_type'),'refresh_token');
   assert.equal((calls[1]!.init?.headers as Record<string,string>).authorization,'Bearer refreshed-access-token');
+  assert.match(calls[1]!.url,/status=draft/);
+  assert.equal(calls[2]!.init?.method,'POST');
+});
+
+test('Google adapter blocks a second draft for the same trading day before posts.insert',async()=>{
+  const result=runReal(realFixture());
+  const approved=approveBloggerPublication(createBloggerPreview(result.report,result.evidence,publishingConfig),{audience:'admin',action:'BLOGGER_APPROVE'});
+  const calls:{url:string;init?:RequestInit}[]=[];
+  const fakeFetch:typeof fetch=async(input,init)=>{
+    calls.push({url:String(input),...(init?{init}:{})});
+    if(String(input)===BLOGGER_TOKEN_ENDPOINT) return new Response(JSON.stringify({access_token:'refreshed-access-token'}),{status:200});
+    if(init?.method==='POST') throw new Error('posts.insert must not run for duplicate trading day');
+    return new Response(JSON.stringify({items:[{id:'EXISTING-DRAFT',title:approved.title,status:'DRAFT'}]}),{status:200});
+  };
+  const env:Record<string,string>={BLOGGER_REFRESH_TOKEN:'refresh-value',BLOGGER_CLIENT_ID:'client-value',BLOGGER_CLIENT_SECRET:'secret-value'};
+  const draft=await publishBloggerPublication(approved,new GoogleBloggerApiAdapter(name=>env[name],fakeFetch),{...publishingConfig,blogId:'blog-id'},{audience:'admin',action:'BLOGGER_PUBLISH'});
+  assert.equal(draft.status,'DRAFT');
+  assert.equal(draft.draftPostId,'EXISTING-DRAFT');
+  assert.equal(draft.publicPostUrl,null);
+  assert.equal(calls.some(call=>call.url.includes('/blogger/v3/')&&call.init?.method==='POST'),false);
+  assert.match(draft.history.at(-1)?.reason??'',/duplicate draft creation blocked/);
 });
 
 test('refresh failure blocks Blogger publish without deprecated-token fallback',async()=>{
