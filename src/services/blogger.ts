@@ -294,6 +294,7 @@ export function renderPublishingConsole(record:BloggerPublicationRecord|null,con
 export function assertPublicBloggerHtmlSafe(html:string):void {
   if(internalLeakPattern.test(html)) throw new Error('public Blogger HTML leaks internal token');
   if(/\/admin\/blogger|BLOGGER_PUBLISH|BLOGGER_APPROVE|data-admin-route/i.test(html)) throw new Error('public Blogger HTML leaks admin route');
+  if(/<script\b|javascript:|<foreignObject\b|\son\w+\s*=|<object\b|<embed\b/i.test(html)) throw new Error('public Blogger HTML contains unsafe active content');
 }
 
 function buildSources(evidence:EvidencePackage):{label:string;url:string}[] {

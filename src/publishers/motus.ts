@@ -88,7 +88,49 @@ function markdownToHtml(markdown:string):string {
     else if(current) current.lines.push(line);
   }
   if(current) sections.push(current);
-  return sections.filter(section=>section.lines.some(line=>line.trim()&&!line.startsWith('### '))).map(section=>renderMarkdownSection(section.heading,section.lines)).join('\n');
+  return sections.filter(section=>section.lines.some(line=>line.trim()&&!line.startsWith('### '))).map(section=>{
+    const rendered=renderMarkdownSection(section.heading,section.lines);
+    return section.heading==='시장 한눈에 보기'?`${rendered}\n${renderMarketGraphSection(section.lines)}`:rendered;
+  }).join('\n');
+}
+
+function renderMarketGraphSection(lines:string[]):string {
+  try {
+    const series=extractMajorIndexChanges(lines);
+    if(series.length!==4) throw new Error('major index coverage incomplete');
+    const maxAbs=Math.max(...series.map(item=>Math.abs(item.change)),0.1);
+    const zeroX=285, maxBarWidth=120;
+    const rows=series.map((item,index)=>{
+      const y=50+index*51;
+      const width=Math.max(2,Math.round(Math.abs(item.change)/maxAbs*maxBarWidth));
+      const x=item.change>=0?zeroX:zeroX-width;
+      const fill=item.change>=0?'#08733f':'#b42318';
+      const value=`${item.change>0?'+':''}${item.rawChange}`;
+      return `<g data-index="${escapeAttr(item.key)}" data-change="${escapeAttr(item.rawChange)}"><text x="14" y="${y+16}" fill="#172033" font-size="16" font-weight="700">${escapeHtml(item.label)}</text><rect x="${x}" y="${y}" width="${width}" height="22" rx="3" fill="${fill}"></rect><text x="${item.change>=0?x+width+6:x-6}" y="${y+16}" fill="${fill}" font-size="14" font-weight="800" text-anchor="${item.change>=0?'start':'end'}">${escapeHtml(value)}</text></g>`;
+    }).join('');
+    const svg=`<svg class="major-index-chart" viewBox="0 0 420 260" role="img" aria-labelledby="major-index-chart-title major-index-chart-desc" style="display:block;width:100%;max-width:620px;height:auto;box-sizing:border-box;overflow:hidden;margin:0 auto"><title id="major-index-chart-title">미국 주요 증시 당일 등락률 비교</title><desc id="major-index-chart-desc">S&amp;P 500, Nasdaq, Dow Jones, Russell 2000의 당일 등락률을 비교한 정적 막대그래프</desc><rect x="0" y="0" width="420" height="260" fill="#f7f9fc"></rect><text x="14" y="26" fill="#40516b" font-size="13">당일 등락률 · 0% 기준</text><line x1="${zeroX}" y1="38" x2="${zeroX}" y2="244" stroke="#718096" stroke-width="2"></line>${rows}</svg>`;
+    return `<section class="editorial-block block-major-index-graph" data-section="major-index-graph" data-chart-status="rendered" style="${SECTION_STYLE}"><h2 style="${SLATE_TITLE_STYLE}">미국 주요 증시 그래프</h2><div class="editorial-content chart-content" style="${CONTENT_STYLE};background:#f7f9fc;padding:16px;width:100%;max-width:100%;box-sizing:border-box;overflow:hidden">${svg}<p style="margin:10px 2px 0;color:#59697d;font-size:13px;line-height:1.45">기준: 정규장 종가의 전일 대비 등락률</p></div></section>`;
+  } catch {
+    return `<section class="editorial-block block-major-index-graph" data-section="major-index-graph" data-chart-status="fallback" style="${SECTION_STYLE}"><h2 style="${SLATE_TITLE_STYLE}">미국 주요 증시 그래프</h2><div class="editorial-content chart-content" style="${CONTENT_STYLE};background:#f7f9fc;width:100%;max-width:100%;box-sizing:border-box;overflow:hidden"><p style="margin:0;color:#59697d;font-size:14px">그래프를 표시할 수 없습니다. 검증된 시장 수치는 위 표에서 확인할 수 있습니다.</p></div></section>`;
+  }
+}
+
+function extractMajorIndexChanges(lines:string[]):{key:string;label:string;change:number;rawChange:string}[] {
+  const labels:Record<string,{key:string;label:string}>={
+    'S&P 500':{key:'sp500',label:'S&P 500'},'나스닥':{key:'nasdaq',label:'Nasdaq'},'다우지수':{key:'dow-jones',label:'Dow Jones'},'러셀2000':{key:'russell-2000',label:'Russell 2000'}
+  };
+  const found=new Map<string,{key:string;label:string;change:number;rawChange:string}>();
+  for(const line of lines.filter(value=>/^\s*\|.*\|\s*$/.test(value))) {
+    const cells=parseTableRow(line);
+    const mapped=labels[cells[1]??''];
+    if(!mapped) continue;
+    const rawChange=cells.at(-1)??'';
+    if(!/^[+-]?\d+(?:\.\d+)?%$/.test(rawChange)) continue;
+    const change=Number(rawChange.replace('%',''));
+    if(!Number.isFinite(change)) continue;
+    found.set(mapped.key,{...mapped,change,rawChange});
+  }
+  return ['sp500','nasdaq','dow-jones','russell-2000'].map(key=>found.get(key)).filter((item):item is {key:string;label:string;change:number;rawChange:string}=>Boolean(item));
 }
 
 function renderMarkdownSection(heading:string,lines:string[]):string {

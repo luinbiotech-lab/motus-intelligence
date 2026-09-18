@@ -607,6 +607,30 @@ test('2026-09-16 visibility patch keeps the existing draft and passes Blogger mo
   assert.equal(verification.mobileAdminPreview.sourceLinkNavigationVerified,true);
   assert.match(verification.mobileAdminPreview.verifiedSourceLink,/^https:\/\/www\.federalreserve\.gov\//);
 });
+test('2026-09-16 market graph patch preserves the draft and passes Blogger mobile verification',()=>{
+  const verification=read('data/blogger/2026-09-16/MANUAL-2026-09-16-65e0805c062f-market-graph-verification.json') as {
+    draftPostId:string;state:string;draftUpdated:boolean;newPostCreated:boolean;automaticPublishAttempted:boolean;
+    titleUnchanged:boolean;marketDataUnchanged:boolean;chartType:string;graphSectionRendered:string;mobileOverflow:string;indexCoverage:string;bloggerSafe:string;
+    indices:string[];bloggerApi:{svgPreserved:boolean;duplicateDraftCount:number;draftCountBefore:number;draftCountAfter:number};
+    mobileAdminPreview:{result:string;fourIndexLabelsVisible:boolean;horizontalOverflowObserved:boolean};
+  };
+  assert.equal(verification.draftPostId,'1299415515105343069');
+  assert.equal(verification.state,'DRAFT');
+  assert.equal(verification.draftUpdated,true);
+  assert.equal(verification.newPostCreated,false);
+  assert.equal(verification.automaticPublishAttempted,false);
+  assert.equal(verification.titleUnchanged,true);
+  assert.equal(verification.marketDataUnchanged,true);
+  assert.equal(verification.chartType,'STATIC_INLINE_SVG_DAILY_CHANGE_BAR');
+  assert.deepEqual([verification.graphSectionRendered,verification.mobileOverflow,verification.indexCoverage,verification.bloggerSafe],['PASS','PASS','PASS','PASS']);
+  assert.deepEqual(verification.indices,['S&P 500','Nasdaq','Dow Jones','Russell 2000']);
+  assert.equal(verification.bloggerApi.svgPreserved,true);
+  assert.equal(verification.bloggerApi.duplicateDraftCount,0);
+  assert.equal(verification.bloggerApi.draftCountBefore,verification.bloggerApi.draftCountAfter);
+  assert.equal(verification.mobileAdminPreview.result,'PASS');
+  assert.equal(verification.mobileAdminPreview.fourIndexLabelsVisible,true);
+  assert.equal(verification.mobileAdminPreview.horizontalOverflowObserved,false);
+});
 test('2026-09-15 AI semiconductor review candidate preserves draft and requires human approval',()=>{
   const report=read('data/reports/MANUAL-2026-09-15-d11e82f3085c.json') as ReportRecord;
   const evidence=read('data/evidence/MANUAL-2026-09-15-d11e82f3085c.json') as EvidencePackage;
@@ -777,6 +801,34 @@ test('Blogger visibility renderer uses high-contrast inline styles, dictionary g
   assert.match(rendered.html,/<a href="https:\/\/www\.federalreserve\.gov\/test" target="_blank" rel="nofollow noopener noreferrer" style="color:#0759a6;text-decoration:underline/);
   assert.doesNotMatch(rendered.html,/>https:\/\//);
   assert.match(rendered.html,/width:100%;max-width:100%;box-sizing:border-box/);
+});
+test('MOTUS Blogger renderer adds a responsive static SVG for four verified US indices',()=>{
+  const rendered=renderMotusBloggerContent({
+    title:'테스트',seoTitle:'테스트',metaDescription:'테스트',slug:'test',hashtags:[],glossary:[],sources:[],
+    markdown:'## 핵심 요약\n\n본문\n\n## 시장 한눈에 보기\n\n| 구분 | 지표 | 종가 | 등락 |\n| --- | --- | ---: | ---: |\n| 주요지수 | S&P 500 | 7551.81 | -0.45% |\n| 주요지수 | 나스닥 | 25978.42 | -0.01% |\n| 주요지수 | 다우지수 | 51461.9 | -1.21% |\n| 주요지수 | 러셀2000 | 2858.81 | -0.4% |',
+    metadata:{schemaVersion:'1.0',brand:'MOTUS',displayName:'MOTUS | What Moves the World',primaryCategory:'Daily Market',categories:['Daily Market'],companies:[],sectors:[],themes:[],countries:[],regions:[]}
+  },publishingConfig.publisher);
+  const tableIndex=rendered.html.indexOf('data-section="market-overview"');
+  const graphIndex=rendered.html.indexOf('data-section="major-index-graph"');
+  assert.ok(tableIndex>=0&&graphIndex>tableIndex);
+  assert.match(rendered.html,/data-chart-status="rendered"/);
+  assert.match(rendered.html,/<svg class="major-index-chart" viewBox="0 0 420 260"[^>]*style="[^"]*width:100%;max-width:620px;height:auto/);
+  for(const key of ['sp500','nasdaq','dow-jones','russell-2000']) assert.match(rendered.html,new RegExp(`data-index="${key}"`));
+  assert.match(rendered.html,/data-change="-0\.45%"/);
+  assert.doesNotMatch(rendered.html,/<script\b|javascript:|<foreignObject\b|overflow-x:auto/);
+  assertPublicBloggerHtmlSafe(rendered.html);
+});
+test('market graph failure falls back without breaking the Blogger article',()=>{
+  const rendered=renderMotusBloggerContent({
+    title:'테스트',seoTitle:'테스트',metaDescription:'테스트',slug:'test',hashtags:[],glossary:[],sources:[],
+    markdown:'## 핵심 요약\n\n본문\n\n## 시장 한눈에 보기\n\n| 구분 | 지표 | 종가 | 등락 |\n| --- | --- | ---: | ---: |\n| 주요지수 | S&P 500 | 100 | -0.5% |',
+    metadata:{schemaVersion:'1.0',brand:'MOTUS',displayName:'MOTUS | What Moves the World',primaryCategory:'Daily Market',categories:['Daily Market'],companies:[],sectors:[],themes:[],countries:[],regions:[]}
+  },publishingConfig.publisher);
+  assert.match(rendered.html,/data-section="major-index-graph" data-chart-status="fallback"/);
+  assert.doesNotMatch(rendered.html,/<svg\b/);
+  assert.match(rendered.html,/검증된 시장 수치는 위 표에서 확인/);
+  assert.match(rendered.html,/본문/);
+  assertPublicBloggerHtmlSafe(rendered.html);
 });
 test('related articles render only for a verified MOTUS article permalink',()=>{
   const result=runReal(realFixture());

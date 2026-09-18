@@ -115,7 +115,7 @@ export async function writeFinancialResearchLayoutComparison(report:ReportRecord
   const candidate=buildEditorialReviewCandidate(report,evidence,publication,plan,publisher);
   if(candidate.publicationFingerprint!==publicationBefore||fingerprint(publication)!==publicationBefore) throw new Error('publication record changed during research layout preview');
   const after=candidate.candidateHtml;
-  const expectedSections=['핵심 요약','시장 한눈에 보기','시장을 움직인 핵심 요인','AI·반도체 / 주요 산업','한국시장 연결 포인트','오늘 체크리스트','용어설명','주요 출처'];
+  const expectedSections=['핵심 요약','시장 한눈에 보기','미국 주요 증시 그래프','시장을 움직인 핵심 요인','AI·반도체 / 주요 산업','한국시장 연결 포인트','오늘 체크리스트','용어설명','주요 출처'];
   const actualSections=[...after.matchAll(/<h2\b[^>]*>([^<]+)<\/h2>/g)].map(match=>decodeHtml(match[1]!));
   if(JSON.stringify(actualSections)!==JSON.stringify(expectedSections)) throw new Error(`financial research section order mismatch: ${actualSections.join(' > ')}`);
   const beforeRows=marketDashboardRows(before),afterRows=marketDashboardRows(after);
@@ -124,7 +124,7 @@ export async function writeFinancialResearchLayoutComparison(report:ReportRecord
   const titleBarInlineStyleCount=count(after,/<h2\b[^>]*style="[^"]*background:[^"]*color:[^"]*padding:[^"]*font-size:[^"]*font-weight:[^"]*margin:[^"]*"/g);
   const contentBoxInlineStyleCount=count(after,/<div\b[^>]*class="[^"]*editorial-content[^"]*"[^>]*style="[^"]*border:[^"]*padding:[^"]*background:[^"]*margin:[^"]*width:100%[^"]*max-width:100%[^"]*box-sizing:border-box[^"]*"/g);
   const styleTagCount=count(after,/<style\b/gi);
-  if(titleBarInlineStyleCount!==8||contentBoxInlineStyleCount!==8||styleTagCount!==0) throw new Error('financial research preview is not Blogger-safe inline layout');
+  if(titleBarInlineStyleCount!==9||contentBoxInlineStyleCount!==9||styleTagCount!==0) throw new Error('financial research preview is not Blogger-safe inline layout');
   const comparison={
     reportId:report.reportId,tradingDate:report.tradingDate,bloggerApiCalled:false,publicationRecordChanged:false,
     titleUnchanged:htmlTitle(before)===htmlTitle(after),marketDataUnchanged:true,marketRows:afterRows,
