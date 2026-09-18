@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import type { EvidencePackage, ReportRecord } from '../domain/models.js';
-import type { PublisherContentDocument } from '../content/publisher-schema.js';
+import type { MajorIndexHistory, PublisherContentDocument } from '../content/publisher-schema.js';
 import { renderMotusBloggerContent, type MotusPublisherConfig } from '../publishers/motus.js';
 import { assertPublicBloggerHtmlSafe, type BloggerPublicationRecord } from './blogger.js';
 import { renderDailyEditorial, type EditorialReviewContext } from './editorial.js';
@@ -14,6 +14,7 @@ export interface EditorialReviewPlan {
   reviewStatus:'PENDING_HUMAN_APPROVAL';
   context:EditorialReviewContext;
   sources:EditorialReviewSource[];
+  marketHistory?:MajorIndexHistory;
 }
 export interface EditorialReviewResult {
   candidateHtml:string;
@@ -33,7 +34,7 @@ export function buildEditorialReviewCandidate(report:ReportRecord,evidence:Evide
     ...plan.sources.map(({label,url})=>({label,url}))
   ]);
   const metadata={...publication.metadata,categories:[...new Set([...publication.metadata.categories,'AI & Industry' as const])],sectors:[...new Set([...publication.metadata.sectors,'AI Semiconductors'])],themes:[...new Set([...publication.metadata.themes,'AI valuation','AI CAPEX'])]};
-  const document:PublisherContentDocument={title:publication.title,seoTitle:publication.seoTitle,metaDescription:editorial.seo.description,slug:publication.slug,markdown:editorial.bloggerMarkdown,hashtags:editorial.seo.hashtags,glossary:editorial.terms,sources,metadata};
+  const document:PublisherContentDocument={title:publication.title,seoTitle:publication.seoTitle,metaDescription:editorial.seo.description,slug:publication.slug,markdown:editorial.bloggerMarkdown,hashtags:editorial.seo.hashtags,glossary:editorial.terms,sources,metadata,...(plan.marketHistory?{marketHistory:plan.marketHistory}:{})};
   const rendered=renderMotusBloggerContent(document,publisher);
   assertPublicBloggerHtmlSafe(rendered.html);
   const apIssue=evidence.validationResult.issues.find(item=>item.recordId==='AP-MARKET-CLOSE-2026-09-15');
@@ -115,7 +116,7 @@ export async function writeFinancialResearchLayoutComparison(report:ReportRecord
   const candidate=buildEditorialReviewCandidate(report,evidence,publication,plan,publisher);
   if(candidate.publicationFingerprint!==publicationBefore||fingerprint(publication)!==publicationBefore) throw new Error('publication record changed during research layout preview');
   const after=candidate.candidateHtml;
-  const expectedSections=['핵심 요약','시장 한눈에 보기','미국 주요 증시 그래프','시장을 움직인 핵심 요인','AI·반도체 / 주요 산업','한국시장 연결 포인트','오늘 체크리스트','용어설명','주요 출처'];
+  const expectedSections=['핵심 요약','시장 한눈에 보기','미국 주요 증시 추이','시장을 움직인 핵심 요인','AI·반도체 / 주요 산업','한국시장 연결 포인트','오늘 체크리스트','용어설명','주요 출처'];
   const actualSections=[...after.matchAll(/<h2\b[^>]*>([^<]+)<\/h2>/g)].map(match=>decodeHtml(match[1]!));
   if(JSON.stringify(actualSections)!==JSON.stringify(expectedSections)) throw new Error(`financial research section order mismatch: ${actualSections.join(' > ')}`);
   const beforeRows=marketDashboardRows(before),afterRows=marketDashboardRows(after);

@@ -4,6 +4,8 @@ import {
   MOTUS_CTA_TEXT,
   MOTUS_DISPLAY_NAME,
   type GlobalContentMetadata,
+  type MajorIndexHistory,
+  type MajorIndexHistorySeries,
   type MotusCategory,
   type PublisherContentDocument
 } from '../content/publisher-schema.js';
@@ -32,7 +34,7 @@ const SOURCE_LINK_STYLE='color:#0759a6;text-decoration:underline;text-decoration
 
 export function renderMotusBloggerContent(document:PublisherContentDocument,config:MotusPublisherConfig):MotusRenderedContent {
   validateMotusConfig(config);
-  const article=markdownToHtml(document.markdown);
+  const article=markdownToHtml(document.markdown,document.marketHistory);
   const relatedLinks=document.glossary.filter(term=>isPublishedArticleUrl(term.publishedUrl)).slice(0,3).map(term=>({title:term.evergreenTitle,url:term.publishedUrl!}));
   const related=relatedLinks.length?`<div class="related" style="margin-top:14px;padding-top:10px;border-top:1px solid #dbe3ee;font-size:14px"><strong>관련 글</strong><ul>${relatedLinks.map(item=>`<li><a href="${escapeAttr(item.url)}">${escapeHtml(item.title)}</a></li>`).join('')}</ul></div>`:'';
   const glossary=document.glossary.length?`<section class="editorial-block glossary" data-section="glossary" style="${SECTION_STYLE}"><h2 style="${TITLE_STYLE}">용어설명</h2><div class="editorial-content glossary-reference" style="${CONTENT_STYLE};background:#f1f5fa;font-size:14px;line-height:1.55"><table style="width:100%;max-width:100%;table-layout:fixed;border-collapse:collapse;box-sizing:border-box"><tbody>${document.glossary.slice(0,6).map(term=>`<tr class="glossary-row"><th scope="row" style="width:22%;padding:9px 8px;text-align:left;vertical-align:top;color:#03162e;font-size:14px;font-weight:800;border-bottom:1px solid #c9d5e3;overflow-wrap:anywhere">${escapeHtml(term.term)}</th><td style="width:36%;padding:9px 8px;vertical-align:top;color:#344860;font-size:14px;font-weight:600;border-bottom:1px solid #c9d5e3;overflow-wrap:anywhere">${escapeHtml(glossaryFullSpelling(term.term,term.fullSpelling))}</td><td style="width:42%;padding:9px 8px;vertical-align:top;color:#172033;font-size:14px;border-bottom:1px solid #c9d5e3;overflow-wrap:anywhere">${escapeHtml(dictionaryMeaning(term.explanation))}${isPublishedArticleUrl(term.publishedUrl)?` <a href="${escapeAttr(term.publishedUrl!)}" style="${SOURCE_LINK_STYLE}">${escapeHtml(term.evergreenTitle)}</a>`:''}</td></tr>`).join('')}</tbody></table>${related}</div></section>`:'';
@@ -80,7 +82,7 @@ function validateMotusConfig(config:MotusPublisherConfig):void {
   if(MOTUS_CATEGORIES.some(category=>!config.categories.includes(category))) throw new Error('MOTUS publisher must support every required category');
 }
 
-function markdownToHtml(markdown:string):string {
+function markdownToHtml(markdown:string,marketHistory?:MajorIndexHistory):string {
   const sections:{heading:string;lines:string[]}[]=[];
   let current:{heading:string;lines:string[]}|null=null;
   for(const line of markdown.split(/\r?\n/)) {
@@ -90,48 +92,40 @@ function markdownToHtml(markdown:string):string {
   if(current) sections.push(current);
   return sections.filter(section=>section.lines.some(line=>line.trim()&&!line.startsWith('### '))).map(section=>{
     const rendered=renderMarkdownSection(section.heading,section.lines);
-    return section.heading==='시장 한눈에 보기'?`${rendered}\n${renderMarketGraphSection(section.lines)}`:rendered;
+    return section.heading==='시장 한눈에 보기'?`${rendered}\n${renderMarketTrendSection(marketHistory)}`:rendered;
   }).join('\n');
 }
 
-function renderMarketGraphSection(lines:string[]):string {
+export function renderMarketTrendSection(history:MajorIndexHistory|undefined):string {
   try {
-    const series=extractMajorIndexChanges(lines);
-    if(series.length!==4) throw new Error('major index coverage incomplete');
-    const maxAbs=Math.max(...series.map(item=>Math.abs(item.change)),0.1);
-    const zeroX=285, maxBarWidth=120;
-    const rows=series.map((item,index)=>{
-      const y=50+index*51;
-      const width=Math.max(2,Math.round(Math.abs(item.change)/maxAbs*maxBarWidth));
-      const x=item.change>=0?zeroX:zeroX-width;
-      const fill=item.change>=0?'#08733f':'#b42318';
-      const value=`${item.change>0?'+':''}${item.rawChange}`;
-      return `<g data-index="${escapeAttr(item.key)}" data-change="${escapeAttr(item.rawChange)}"><text x="14" y="${y+16}" fill="#172033" font-size="16" font-weight="700">${escapeHtml(item.label)}</text><rect x="${x}" y="${y}" width="${width}" height="22" rx="3" fill="${fill}"></rect><text x="${item.change>=0?x+width+6:x-6}" y="${y+16}" fill="${fill}" font-size="14" font-weight="800" text-anchor="${item.change>=0?'start':'end'}">${escapeHtml(value)}</text></g>`;
-    }).join('');
-    const svg=`<svg class="major-index-chart" viewBox="0 0 420 260" role="img" aria-labelledby="major-index-chart-title major-index-chart-desc" style="display:block;width:100%;max-width:620px;height:auto;box-sizing:border-box;overflow:hidden;margin:0 auto"><title id="major-index-chart-title">미국 주요 증시 당일 등락률 비교</title><desc id="major-index-chart-desc">S&amp;P 500, Nasdaq, Dow Jones, Russell 2000의 당일 등락률을 비교한 정적 막대그래프</desc><rect x="0" y="0" width="420" height="260" fill="#f7f9fc"></rect><text x="14" y="26" fill="#40516b" font-size="13">당일 등락률 · 0% 기준</text><line x1="${zeroX}" y1="38" x2="${zeroX}" y2="244" stroke="#718096" stroke-width="2"></line>${rows}</svg>`;
-    return `<section class="editorial-block block-major-index-graph" data-section="major-index-graph" data-chart-status="rendered" style="${SECTION_STYLE}"><h2 style="${SLATE_TITLE_STYLE}">미국 주요 증시 그래프</h2><div class="editorial-content chart-content" style="${CONTENT_STYLE};background:#f7f9fc;padding:16px;width:100%;max-width:100%;box-sizing:border-box;overflow:hidden">${svg}<p style="margin:10px 2px 0;color:#59697d;font-size:13px;line-height:1.45">기준: 정규장 종가의 전일 대비 등락률</p></div></section>`;
+    const series=validateMarketHistory(history);
+    const cards=series.map(renderTrendCard);
+    const grid=`<div class="index-trend-grid" data-layout="two-by-two" style="width:100%;max-width:100%;box-sizing:border-box;margin:0;overflow:hidden"><div class="index-trend-row" style="display:flex!important;flex-wrap:nowrap!important;width:100%;max-width:100%;box-sizing:border-box;margin:0 0 10px"><div style="width:50%;max-width:50%;padding:0 5px 0 0;box-sizing:border-box">${cards[0]}</div><div style="width:50%;max-width:50%;padding:0 0 0 5px;box-sizing:border-box">${cards[1]}</div></div><div class="index-trend-row" style="display:flex!important;flex-wrap:nowrap!important;width:100%;max-width:100%;box-sizing:border-box;margin:0"><div style="width:50%;max-width:50%;padding:0 5px 0 0;box-sizing:border-box">${cards[2]}</div><div style="width:50%;max-width:50%;padding:0 0 0 5px;box-sizing:border-box">${cards[3]}</div></div></div>`;
+    const sources=series.map(item=>`<a href="${escapeAttr(item.sourceUrl)}" target="_blank" rel="nofollow noopener noreferrer" style="${SOURCE_LINK_STYLE}">${escapeHtml(item.sourceLabel)}</a>`).join(' · ');
+    return `<section class="editorial-block block-major-index-trend" data-section="major-index-trend" data-chart-status="rendered" data-session-count="5" style="${SECTION_STYLE}"><h2 style="${SLATE_TITLE_STYLE}">미국 주요 증시 추이</h2><div class="editorial-content chart-content" style="${CONTENT_STYLE};background:#f7f9fc;padding:14px;width:100%;max-width:100%;box-sizing:border-box;overflow:hidden">${grid}<p style="margin:11px 2px 0;color:#59697d;font-size:12px;line-height:1.5">2026년 9월 10~16일 정규장 종가 · ${sources}</p></div></section>`;
   } catch {
-    return `<section class="editorial-block block-major-index-graph" data-section="major-index-graph" data-chart-status="fallback" style="${SECTION_STYLE}"><h2 style="${SLATE_TITLE_STYLE}">미국 주요 증시 그래프</h2><div class="editorial-content chart-content" style="${CONTENT_STYLE};background:#f7f9fc;width:100%;max-width:100%;box-sizing:border-box;overflow:hidden"><p style="margin:0;color:#59697d;font-size:14px">그래프를 표시할 수 없습니다. 검증된 시장 수치는 위 표에서 확인할 수 있습니다.</p></div></section>`;
+    return `<section class="editorial-block block-major-index-trend" data-section="major-index-trend" data-chart-status="fallback" style="${SECTION_STYLE}"><h2 style="${SLATE_TITLE_STYLE}">미국 주요 증시 추이</h2><div class="editorial-content chart-content" style="${CONTENT_STYLE};background:#f7f9fc;width:100%;max-width:100%;box-sizing:border-box;overflow:hidden"><p style="margin:0;color:#59697d;font-size:14px">검증된 5거래일 종가를 모두 확인할 수 없어 차트를 표시하지 않았습니다.</p></div></section>`;
   }
 }
 
-function extractMajorIndexChanges(lines:string[]):{key:string;label:string;change:number;rawChange:string}[] {
-  const labels:Record<string,{key:string;label:string}>={
-    'S&P 500':{key:'sp500',label:'S&P 500'},'나스닥':{key:'nasdaq',label:'Nasdaq'},'다우지수':{key:'dow-jones',label:'Dow Jones'},'러셀2000':{key:'russell-2000',label:'Russell 2000'}
-  };
-  const found=new Map<string,{key:string;label:string;change:number;rawChange:string}>();
-  for(const line of lines.filter(value=>/^\s*\|.*\|\s*$/.test(value))) {
-    const cells=parseTableRow(line);
-    const mapped=labels[cells[1]??''];
-    if(!mapped) continue;
-    const rawChange=cells.at(-1)??'';
-    if(!/^[+-]?\d+(?:\.\d+)?%$/.test(rawChange)) continue;
-    const change=Number(rawChange.replace('%',''));
-    if(!Number.isFinite(change)) continue;
-    found.set(mapped.key,{...mapped,change,rawChange});
-  }
-  return ['sp500','nasdaq','dow-jones','russell-2000'].map(key=>found.get(key)).filter((item):item is {key:string;label:string;change:number;rawChange:string}=>Boolean(item));
+function validateMarketHistory(history:MajorIndexHistory|undefined):MajorIndexHistorySeries[] {
+  if(!history||history.sessionCount!==5||!/^\d{4}-\d{2}-\d{2}$/.test(history.asOf)) throw new Error('missing verified market history');
+  const order=['sp500','nasdaq','dow-jones','russell-2000'];
+  if(history.series.length!==4||history.series.some((item,index)=>item.key!==order[index]||item.dates.length!==5||item.closes.length!==5||item.dates.some(date=>!/^\d{4}-\d{2}-\d{2}$/.test(date))||item.closes.some(value=>!Number.isFinite(value))||item.closes[4]!==item.latestClose||!Number.isFinite(item.latestChangePct)||!/^https:\/\//.test(item.sourceUrl))) throw new Error('invalid verified market history');
+  return history.series;
 }
+
+function renderTrendCard(item:MajorIndexHistorySeries):string {
+  const min=Math.min(...item.closes),max=Math.max(...item.closes),range=Math.max(max-min,Math.max(Math.abs(max),1)*0.002);
+  const points=item.closes.map((value,index)=>`${18+index*51},${Math.round(86-(value-min)/range*60)}`).join(' ');
+  const pct=`${item.latestChangePct>0?'+':''}${Number(item.latestChangePct.toFixed(2))}%`;
+  const directionColor=item.latestChangePct>=0?'#356f59':'#8f4b49';
+  const dateRange=`${item.dates[0]!.slice(5).replace('-','/')}–${item.dates[4]!.slice(5).replace('-','/')}`;
+  const values=item.closes.map(value=>String(value)).join(',');
+  return `<div class="index-trend-card" data-index="${escapeAttr(item.key)}" data-values="${escapeAttr(values)}" style="width:100%;max-width:100%;box-sizing:border-box;background:#fbfcfe;border:1px solid #c4cfdb;margin:0;overflow:hidden"><h3 style="margin:0;padding:8px 8px;background:#203a57;color:#ffffff;font-size:14px;font-weight:800;line-height:1.3">${escapeHtml(item.label)}</h3><div style="padding:8px;width:100%;max-width:100%;box-sizing:border-box"><svg class="index-line-chart" data-index="${escapeAttr(item.key)}" viewBox="0 0 240 112" role="img" aria-label="${escapeAttr(item.label)} 최근 5거래일 종가 추이" style="display:block;width:100%;max-width:100%;height:auto;box-sizing:border-box;overflow:hidden"><title>${escapeHtml(item.label)} 최근 5거래일 종가</title><desc>${escapeHtml(item.dates.map((date,index)=>`${date} ${item.closes[index]}`).join(', '))}</desc><line x1="18" y1="26" x2="222" y2="26" stroke="#dce3eb" stroke-width="1"></line><line x1="18" y1="56" x2="222" y2="56" stroke="#dce3eb" stroke-width="1"></line><line x1="18" y1="86" x2="222" y2="86" stroke="#dce3eb" stroke-width="1"></line><polyline points="${points}" fill="none" stroke="#456b91" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></polyline>${item.closes.map((_,index)=>`<circle cx="${18+index*51}" cy="${points.split(' ')[index]!.split(',')[1]}" r="3" fill="#173a63"></circle>`).join('')}<text x="18" y="105" fill="#65758a" font-size="10">${escapeHtml(dateRange.split('–')[0]!)}</text><text x="222" y="105" fill="#65758a" font-size="10" text-anchor="end">${escapeHtml(dateRange.split('–')[1]!)}</text></svg><div style="display:flex;justify-content:space-between;gap:4px;align-items:baseline;margin-top:3px;width:100%;max-width:100%;box-sizing:border-box;white-space:nowrap"><strong style="color:#172033;font-size:12px;font-variant-numeric:tabular-nums;white-space:nowrap">${escapeHtml(formatIndexClose(item.latestClose))}</strong><span style="color:${directionColor};font-size:12px;font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap">${escapeHtml(pct)}</span></div></div></div>`;
+}
+
+function formatIndexClose(value:number):string { return value.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
 
 function renderMarkdownSection(heading:string,lines:string[]):string {
   const contentStyle=heading==='한국시장 연결 포인트'?KOREA_CONTENT_STYLE:CONTENT_STYLE;

@@ -44,6 +44,11 @@ export interface BloggerDraftUpdateVerification {
   graphSectionRendered: boolean|null;
   graphIndexCoverage: boolean|null;
   graphBloggerSafe: boolean|null;
+  oldBarChartRemoved: boolean|null;
+  lineChartCount: number|null;
+  fiveSessionCoverage: boolean|null;
+  chartTwoByTwoLayout: boolean|null;
+  chartProvenancePresent: boolean|null;
   adminDraftUrl: string;
   draftCountBefore: number;
   draftCountAfter: number;
@@ -188,11 +193,16 @@ function verifyUpdatedDraft(post:BloggerPost,before:BloggerPost[],after:BloggerP
   const sourceBlock=expectedLayout?(content.match(/<section\b[^>]*data-section=["']sources["'][^>]*>[\s\S]*?<\/section>/i)?.[0]??''):'';
   const sourceLinkCount=expectedLayout?count(sourceBlock,/<a\b[^>]*href=["']https:\/\/[^"']+["'][^>]*style=["'][^"']*color:#0759a6[^"']*text-decoration:underline[^"']*["'][^>]*>/gi):0;
   const sourceLinksClickable=expectedLayout?sourceLinkCount>0&&visibleRawUrlCount===0:null;
-  const graphBlock=expectedLayout?(content.match(/<section\b[^>]*data-section=["']major-index-graph["'][^>]*>[\s\S]*?<\/section>/i)?.[0]??''):'';
-  const graphSectionRendered=expectedLayout?Boolean(graphBlock&&/data-chart-status=["']rendered["']/.test(graphBlock)&&/<svg\b[^>]*class=["']major-index-chart["']/.test(graphBlock)):null;
+  const graphBlock=expectedLayout?(content.match(/<section\b[^>]*data-section=["']major-index-trend["'][^>]*>[\s\S]*?<\/section>/i)?.[0]??''):'';
+  const lineChartCount=expectedLayout?count(graphBlock,/<svg\b[^>]*class=["']index-line-chart["']/gi):null;
+  const graphSectionRendered=expectedLayout?Boolean(graphBlock&&/data-chart-status=["']rendered["']/.test(graphBlock)&&lineChartCount===4):null;
   const graphIndexCoverage=expectedLayout?['sp500','nasdaq','dow-jones','russell-2000'].every(key=>graphBlock.includes(`data-index="${key}"`)):null;
-  const graphBloggerSafe=expectedLayout?Boolean(graphBlock&&/<svg\b[^>]*viewBox=["']0 0 420 260["'][^>]*style=["'][^"']*width:100%[^"']*max-width:620px[^"']*height:auto[^"']*["']/.test(graphBlock)&&!/<script\b|javascript:|<foreignObject\b|\son\w+\s*=/i.test(graphBlock)):null;
-  const expectedSections=expectedLayout==='FINANCIAL_RESEARCH_V1'?['핵심 요약','시장 한눈에 보기','미국 주요 증시 그래프','시장을 움직인 핵심 요인','AI·반도체 / 주요 산업','한국시장 연결 포인트','오늘 체크리스트','용어설명','주요 출처']:['Opening Summary','시장 한눈에 보기','시장을 움직인 핵심 요인','AI·반도체 / 주요 산업','한국시장 연결 포인트','오늘 체크리스트','용어해설','주요 출처'];
+  const oldBarChartRemoved=expectedLayout?!/major-index-chart|막대그래프|data-change=|당일 등락률 · 0% 기준/i.test(graphBlock):null;
+  const fiveSessionCoverage=expectedLayout?count(graphBlock,/data-values=["'][^"']+(?:,[^,"']+){4}["']/gi)===4:null;
+  const chartTwoByTwoLayout=expectedLayout?/data-layout=["']two-by-two["'][^>]*style=["'][^"']*width:100%[^"']*max-width:100%[^"']*box-sizing:border-box/i.test(graphBlock)&&count(graphBlock,/class=["']index-trend-row["'][^>]*style=["'][^"']*display:flex!important[^"']*flex-wrap:nowrap!important/gi)===2&&count(graphBlock,/width:50%;max-width:50%/gi)===4&&count(graphBlock,/class=["']index-trend-card["']/gi)===4:null;
+  const chartProvenancePresent=expectedLayout?['S&amp;P Dow Jones Indices','Nasdaq','FTSE Russell'].every(label=>graphBlock.includes(label))&&/2026년 9월 10~16일 정규장 종가/.test(graphBlock):null;
+  const graphBloggerSafe=expectedLayout?Boolean(graphBlock&&lineChartCount===4&&count(graphBlock,/<polyline\b/gi)===4&&!/<script\b|javascript:|<foreignObject\b|<iframe\b|\son\w+\s*=/i.test(graphBlock)):null;
+  const expectedSections=expectedLayout==='FINANCIAL_RESEARCH_V1'?['핵심 요약','시장 한눈에 보기','미국 주요 증시 추이','시장을 움직인 핵심 요인','AI·반도체 / 주요 산업','한국시장 연결 포인트','오늘 체크리스트','용어설명','주요 출처']:['Opening Summary','시장 한눈에 보기','시장을 움직인 핵심 요인','AI·반도체 / 주요 산업','한국시장 연결 포인트','오늘 체크리스트','용어해설','주요 출처'];
   if(h1Count!==0) throw new Error(`updated Blogger draft contains ${h1Count} H1 elements`);
   if(marketDashboardCount!==1) throw new Error(`updated Blogger draft contains ${marketDashboardCount} market dashboards`);
   if(primarySourcesCount!==1) throw new Error(`updated Blogger draft contains ${primarySourcesCount} primary source sections`);
@@ -204,9 +214,9 @@ function verifyUpdatedDraft(post:BloggerPost,before:BloggerPost[],after:BloggerP
   if(internalTokenCount!==0) throw new Error(`updated Blogger draft exposes ${internalTokenCount} internal tokens`);
   if(expectedEditorialFocus&&(!aiSemiconductorFocus||!daveConsumerAuxiliary)) throw new Error('updated Blogger draft editorial focus verification failed');
   if(expectedLayout==='CATEGORY_BLOCK_V1'&&(JSON.stringify(sectionOrder)!==JSON.stringify(expectedSections)||editorialBlockCount!==8||glossaryCardCount!==4||sourceGroupCount!==3||!koreaHighlightBox)) throw new Error('updated Blogger draft category block verification failed');
-  if(expectedLayout==='FINANCIAL_RESEARCH_V1'&&(JSON.stringify(sectionOrder)!==JSON.stringify(expectedSections)||editorialBlockCount!==9||titleBarCount!==9||glossaryCardCount!==0||glossaryReferenceCount!==4||sourceGroupCount!==3||!koreaHighlightBox||!mobileHorizontalOverflowDisabled||titleBarInlineStyleCount!==9||contentBoxInlineStyleCount!==9||styleTagCount!==0||!glossaryCompactTable||!sourceGroupsInlineStyled||!koreaInlineHighlight||!titleBarContrast||!marketTableReadability||!glossaryFullSpelling||!glossaryDictionaryStyle||!sourceLinksClickable||!graphSectionRendered||!graphIndexCoverage||!graphBloggerSafe)) throw new Error('updated Blogger draft financial research inline layout verification failed');
+  if(expectedLayout==='FINANCIAL_RESEARCH_V1'&&(JSON.stringify(sectionOrder)!==JSON.stringify(expectedSections)||editorialBlockCount!==9||titleBarCount!==9||glossaryCardCount!==0||glossaryReferenceCount!==4||sourceGroupCount!==3||!koreaHighlightBox||!mobileHorizontalOverflowDisabled||titleBarInlineStyleCount!==9||contentBoxInlineStyleCount!==9||styleTagCount!==0||!glossaryCompactTable||!sourceGroupsInlineStyled||!koreaInlineHighlight||!titleBarContrast||!marketTableReadability||!glossaryFullSpelling||!glossaryDictionaryStyle||!sourceLinksClickable||!graphSectionRendered||!graphIndexCoverage||!graphBloggerSafe||!oldBarChartRemoved||!fiveSessionCoverage||!chartTwoByTwoLayout||!chartProvenancePresent)) throw new Error('updated Blogger draft financial research inline layout verification failed');
   assertSingleTarget(after,postId);
-  return {postId,status:'DRAFT',title,h1Count,marketDashboardCount,primarySourcesCount,visibleRawUrlCount,unpublishedRelatedLinksCount,duplicateDraftCount,marketDataUnchanged,internalTokenCount,aiSemiconductorFocus,consumerCheckCount,daveConsumerAuxiliary,sectionOrder,editorialBlockCount,glossaryCardCount,glossaryReferenceCount,sourceGroupCount,koreaHighlightBox,titleBarCount,mobileHorizontalOverflowDisabled,inlineStyleAttributeCount,titleBarInlineStyleCount,contentBoxInlineStyleCount,styleTagCount,glossaryCompactTable,sourceGroupsInlineStyled,koreaInlineHighlight,titleBarContrast,marketTableReadability,glossaryFullSpelling,glossaryDictionaryStyle,sourceLinksClickable,graphSectionRendered,graphIndexCoverage,graphBloggerSafe,adminDraftUrl:`https://www.blogger.com/blog/post/edit/${encodeURIComponent(blogId)}/${encodeURIComponent(postId)}`,draftCountBefore:before.length,draftCountAfter:after.length,updatedAt:post.updated??null};
+  return {postId,status:'DRAFT',title,h1Count,marketDashboardCount,primarySourcesCount,visibleRawUrlCount,unpublishedRelatedLinksCount,duplicateDraftCount,marketDataUnchanged,internalTokenCount,aiSemiconductorFocus,consumerCheckCount,daveConsumerAuxiliary,sectionOrder,editorialBlockCount,glossaryCardCount,glossaryReferenceCount,sourceGroupCount,koreaHighlightBox,titleBarCount,mobileHorizontalOverflowDisabled,inlineStyleAttributeCount,titleBarInlineStyleCount,contentBoxInlineStyleCount,styleTagCount,glossaryCompactTable,sourceGroupsInlineStyled,koreaInlineHighlight,titleBarContrast,marketTableReadability,glossaryFullSpelling,glossaryDictionaryStyle,sourceLinksClickable,graphSectionRendered,graphIndexCoverage,graphBloggerSafe,oldBarChartRemoved,lineChartCount,fiveSessionCoverage,chartTwoByTwoLayout,chartProvenancePresent,adminDraftUrl:`https://www.blogger.com/blog/post/edit/${encodeURIComponent(blogId)}/${encodeURIComponent(postId)}`,draftCountBefore:before.length,draftCountAfter:after.length,updatedAt:post.updated??null};
 }
 
 function assertTargetDraft(post:BloggerPost,postId:string):void {

@@ -34,6 +34,26 @@ export interface PublisherGlossaryEntry {
   publishedUrl?: string;
 }
 
+export type MajorIndexKey = 'sp500'|'nasdaq'|'dow-jones'|'russell-2000';
+
+export interface MajorIndexHistorySeries {
+  key: MajorIndexKey;
+  label: string;
+  dates: string[];
+  closes: number[];
+  latestClose: number;
+  latestChangePct: number;
+  sourceLabel: string;
+  sourceUrl: string;
+  provenance: {date:string;inputDate:string;field:'close'|'previousClose';sourceId:string;sourceUrl:string;collectionMode:string;crossCheckDelta?:number}[];
+}
+
+export interface MajorIndexHistory {
+  asOf: string;
+  sessionCount: 5;
+  series: MajorIndexHistorySeries[];
+}
+
 export interface PublisherContentDocument {
   title: string;
   seoTitle: string;
@@ -44,4 +64,5 @@ export interface PublisherContentDocument {
   glossary: PublisherGlossaryEntry[];
   sources: { label: string; url: string }[];
   metadata: GlobalContentMetadata;
+  marketHistory?: MajorIndexHistory;
 }

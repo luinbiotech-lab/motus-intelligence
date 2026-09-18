@@ -16,7 +16,7 @@
   "sectionOrder": [
     "핵심 요약",
     "시장 한눈에 보기",
-    "미국 주요 증시 그래프",
+    "미국 주요 증시 추이",
     "시장을 움직인 핵심 요인",
     "AI·반도체 / 주요 산업",
     "한국시장 연결 포인트",
@@ -31,7 +31,7 @@
   "koreaHighlightBox": true,
   "titleBarCount": 9,
   "mobileHorizontalOverflowDisabled": true,
-  "inlineStyleAttributeCount": 95,
+  "inlineStyleAttributeCount": 133,
   "titleBarInlineStyleCount": 9,
   "contentBoxInlineStyleCount": 9,
   "styleTagCount": 0,
@@ -46,8 +46,13 @@
   "graphSectionRendered": true,
   "graphIndexCoverage": true,
   "graphBloggerSafe": true,
+  "oldBarChartRemoved": true,
+  "lineChartCount": 4,
+  "fiveSessionCoverage": true,
+  "chartTwoByTwoLayout": true,
+  "chartProvenancePresent": true,
   "adminDraftUrl": "https://www.blogger.com/blog/post/edit/3015267553244608361/1299415515105343069",
   "draftCountBefore": 3,
   "draftCountAfter": 3,
-  "updatedAt": "2026-09-17T20:17:17+09:00"
+  "updatedAt": "2026-09-18T11:37:13+09:00"
 }

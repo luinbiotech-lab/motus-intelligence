@@ -20,6 +20,7 @@ import { BLOGGER_OAUTH_SCOPE, BLOGGER_TOKEN_ENDPOINT, buildBloggerAuthorizationU
 import { renderMotusBloggerContent } from '../src/publishers/motus.js';
 import { updateExistingBloggerDraft } from '../src/services/blogger-draft-update.js';
 import { buildEditorialReviewCandidate, type EditorialReviewPlan } from '../src/services/editorial-review.js';
+import { buildFiveSessionMajorIndexHistory } from '../src/services/market-history.js';
 const read=(p:string):unknown=>JSON.parse(readFileSync(p,'utf8'));
 const fixture=()=>structuredClone(read('data/fixtures/sample-day.json') as InputBundle);
 const realFixture=()=>structuredClone(read('data/manual/2026-09-11/input.json') as InputBundle);
@@ -607,12 +608,12 @@ test('2026-09-16 visibility patch keeps the existing draft and passes Blogger mo
   assert.equal(verification.mobileAdminPreview.sourceLinkNavigationVerified,true);
   assert.match(verification.mobileAdminPreview.verifiedSourceLink,/^https:\/\/www\.federalreserve\.gov\//);
 });
-test('2026-09-16 market graph patch preserves the draft and passes Blogger mobile verification',()=>{
-  const verification=read('data/blogger/2026-09-16/MANUAL-2026-09-16-65e0805c062f-market-graph-verification.json') as {
+test('2026-09-16 market trend patch preserves the draft and passes Blogger mobile verification',()=>{
+  const verification=read('data/blogger/2026-09-16/MANUAL-2026-09-16-65e0805c062f-market-trend-verification.json') as {
     draftPostId:string;state:string;draftUpdated:boolean;newPostCreated:boolean;automaticPublishAttempted:boolean;
-    titleUnchanged:boolean;marketDataUnchanged:boolean;chartType:string;graphSectionRendered:string;mobileOverflow:string;indexCoverage:string;bloggerSafe:string;
-    indices:string[];bloggerApi:{svgPreserved:boolean;duplicateDraftCount:number;draftCountBefore:number;draftCountAfter:number};
-    mobileAdminPreview:{result:string;fourIndexLabelsVisible:boolean;horizontalOverflowObserved:boolean};
+    titleUnchanged:boolean;marketDataUnchanged:boolean;chartType:string;oldBarChartRemoved:string;lineChartsRendered:string;fiveSessionActualData:string;twoByTwoLayout:string;mobileOverflow:string;indexCoverage:string;bloggerSafe:string;
+    indices:string[];bloggerApi:{svgCount:number;duplicateDraftCount:number;draftCountBefore:number;draftCountAfter:number};
+    mobileAdminPreview:{result:string;fourCardsVisible:boolean;twoByTwoVisible:boolean;horizontalOverflowObserved:boolean};
   };
   assert.equal(verification.draftPostId,'1299415515105343069');
   assert.equal(verification.state,'DRAFT');
@@ -621,14 +622,15 @@ test('2026-09-16 market graph patch preserves the draft and passes Blogger mobil
   assert.equal(verification.automaticPublishAttempted,false);
   assert.equal(verification.titleUnchanged,true);
   assert.equal(verification.marketDataUnchanged,true);
-  assert.equal(verification.chartType,'STATIC_INLINE_SVG_DAILY_CHANGE_BAR');
-  assert.deepEqual([verification.graphSectionRendered,verification.mobileOverflow,verification.indexCoverage,verification.bloggerSafe],['PASS','PASS','PASS','PASS']);
+  assert.equal(verification.chartType,'STATIC_INLINE_SVG_FIVE_SESSION_LINE_CARDS');
+  assert.deepEqual([verification.oldBarChartRemoved,verification.lineChartsRendered,verification.fiveSessionActualData,verification.twoByTwoLayout,verification.mobileOverflow,verification.indexCoverage,verification.bloggerSafe],['PASS','PASS','PASS','PASS','PASS','PASS','PASS']);
   assert.deepEqual(verification.indices,['S&P 500','Nasdaq','Dow Jones','Russell 2000']);
-  assert.equal(verification.bloggerApi.svgPreserved,true);
+  assert.equal(verification.bloggerApi.svgCount,4);
   assert.equal(verification.bloggerApi.duplicateDraftCount,0);
   assert.equal(verification.bloggerApi.draftCountBefore,verification.bloggerApi.draftCountAfter);
   assert.equal(verification.mobileAdminPreview.result,'PASS');
-  assert.equal(verification.mobileAdminPreview.fourIndexLabelsVisible,true);
+  assert.equal(verification.mobileAdminPreview.fourCardsVisible,true);
+  assert.equal(verification.mobileAdminPreview.twoByTwoVisible,true);
   assert.equal(verification.mobileAdminPreview.horizontalOverflowObserved,false);
 });
 test('2026-09-15 AI semiconductor review candidate preserves draft and requires human approval',()=>{
@@ -802,31 +804,50 @@ test('Blogger visibility renderer uses high-contrast inline styles, dictionary g
   assert.doesNotMatch(rendered.html,/>https:\/\//);
   assert.match(rendered.html,/width:100%;max-width:100%;box-sizing:border-box/);
 });
-test('MOTUS Blogger renderer adds a responsive static SVG for four verified US indices',()=>{
+test('MOTUS Blogger renderer adds four responsive five-session line charts from verified inputs',()=>{
+  const marketHistory=buildFiveSessionMajorIndexHistory([
+    read('data/manual/2026-09-11/input.json') as InputBundle,
+    read('data/manual/2026-09-15/input.json') as InputBundle,
+    read('data/manual/2026-09-16/input.json') as InputBundle
+  ]);
+  assert.deepEqual(marketHistory.series.map(item=>item.closes),[
+    [7591.70,7656.98,7619.98,7585.73,7551.81],
+    [26081.73,26333.04,26186.41,25981.57,25978.42],
+    [52064.10,52573.29,52421.20,52093.11,51461.90],
+    [2890.947,2903.944,2892.24,2870.29,2858.81]
+  ]);
+  assert.equal(marketHistory.series[3]!.provenance[3]!.crossCheckDelta,0.01);
   const rendered=renderMotusBloggerContent({
     title:'테스트',seoTitle:'테스트',metaDescription:'테스트',slug:'test',hashtags:[],glossary:[],sources:[],
     markdown:'## 핵심 요약\n\n본문\n\n## 시장 한눈에 보기\n\n| 구분 | 지표 | 종가 | 등락 |\n| --- | --- | ---: | ---: |\n| 주요지수 | S&P 500 | 7551.81 | -0.45% |\n| 주요지수 | 나스닥 | 25978.42 | -0.01% |\n| 주요지수 | 다우지수 | 51461.9 | -1.21% |\n| 주요지수 | 러셀2000 | 2858.81 | -0.4% |',
-    metadata:{schemaVersion:'1.0',brand:'MOTUS',displayName:'MOTUS | What Moves the World',primaryCategory:'Daily Market',categories:['Daily Market'],companies:[],sectors:[],themes:[],countries:[],regions:[]}
+    metadata:{schemaVersion:'1.0',brand:'MOTUS',displayName:'MOTUS | What Moves the World',primaryCategory:'Daily Market',categories:['Daily Market'],companies:[],sectors:[],themes:[],countries:[],regions:[]},marketHistory
   },publishingConfig.publisher);
   const tableIndex=rendered.html.indexOf('data-section="market-overview"');
-  const graphIndex=rendered.html.indexOf('data-section="major-index-graph"');
+  const graphIndex=rendered.html.indexOf('data-section="major-index-trend"');
   assert.ok(tableIndex>=0&&graphIndex>tableIndex);
   assert.match(rendered.html,/data-chart-status="rendered"/);
-  assert.match(rendered.html,/<svg class="major-index-chart" viewBox="0 0 420 260"[^>]*style="[^"]*width:100%;max-width:620px;height:auto/);
+  assert.equal((rendered.html.match(/<svg class="index-line-chart"/g)??[]).length,4);
+  assert.equal((rendered.html.match(/<polyline points=/g)??[]).length,4);
+  assert.equal((rendered.html.match(/data-values="[^"]+(?:,[^,"]+){4}"/g)??[]).length,4);
+  assert.match(rendered.html,/<div class="index-trend-grid" data-layout="two-by-two"/);
+  assert.equal((rendered.html.match(/class="index-trend-row"[^>]*display:flex!important;flex-wrap:nowrap!important/g)??[]).length,2);
+  assert.equal((rendered.html.match(/width:50%;max-width:50%/g)??[]).length,4);
   for(const key of ['sp500','nasdaq','dow-jones','russell-2000']) assert.match(rendered.html,new RegExp(`data-index="${key}"`));
-  assert.match(rendered.html,/data-change="-0\.45%"/);
-  assert.doesNotMatch(rendered.html,/<script\b|javascript:|<foreignObject\b|overflow-x:auto/);
+  assert.match(rendered.html,/7,551\.81[\s\S]*-0\.45%/);
+  assert.match(rendered.html,/2026년 9월 10~16일 정규장 종가/);
+  assert.match(rendered.html,/S&amp;P Dow Jones Indices[\s\S]*Nasdaq[\s\S]*FTSE Russell/);
+  assert.doesNotMatch(rendered.html,/major-index-chart|막대그래프|data-change=|<script\b|javascript:|<foreignObject\b|<iframe\b|overflow-x:auto/);
   assertPublicBloggerHtmlSafe(rendered.html);
 });
-test('market graph failure falls back without breaking the Blogger article',()=>{
+test('market trend failure falls back without breaking the Blogger article',()=>{
   const rendered=renderMotusBloggerContent({
     title:'테스트',seoTitle:'테스트',metaDescription:'테스트',slug:'test',hashtags:[],glossary:[],sources:[],
     markdown:'## 핵심 요약\n\n본문\n\n## 시장 한눈에 보기\n\n| 구분 | 지표 | 종가 | 등락 |\n| --- | --- | ---: | ---: |\n| 주요지수 | S&P 500 | 100 | -0.5% |',
     metadata:{schemaVersion:'1.0',brand:'MOTUS',displayName:'MOTUS | What Moves the World',primaryCategory:'Daily Market',categories:['Daily Market'],companies:[],sectors:[],themes:[],countries:[],regions:[]}
   },publishingConfig.publisher);
-  assert.match(rendered.html,/data-section="major-index-graph" data-chart-status="fallback"/);
+  assert.match(rendered.html,/data-section="major-index-trend" data-chart-status="fallback"/);
   assert.doesNotMatch(rendered.html,/<svg\b/);
-  assert.match(rendered.html,/검증된 시장 수치는 위 표에서 확인/);
+  assert.match(rendered.html,/검증된 5거래일 종가를 모두 확인할 수 없어/);
   assert.match(rendered.html,/본문/);
   assertPublicBloggerHtmlSafe(rendered.html);
 });

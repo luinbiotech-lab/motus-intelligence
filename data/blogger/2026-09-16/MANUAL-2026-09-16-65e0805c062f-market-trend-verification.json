@@ -1,0 +1,38 @@
+{
+  "reportId": "MANUAL-2026-09-16-65e0805c062f",
+  "tradingDate": "2026-09-16",
+  "draftPostId": "1299415515105343069",
+  "state": "DRAFT",
+  "draftUpdated": true,
+  "newPostCreated": false,
+  "automaticPublishAttempted": false,
+  "publicPostUrl": null,
+  "titleUnchanged": true,
+  "marketDataUnchanged": true,
+  "chartType": "STATIC_INLINE_SVG_FIVE_SESSION_LINE_CARDS",
+  "oldBarChartRemoved": "PASS",
+  "lineChartsRendered": "PASS",
+  "fiveSessionActualData": "PASS",
+  "twoByTwoLayout": "PASS",
+  "mobileOverflow": "PASS",
+  "indexCoverage": "PASS",
+  "bloggerSafe": "PASS",
+  "indices": ["S&P 500", "Nasdaq", "Dow Jones", "Russell 2000"],
+  "provenanceArtifact": "data/editorial/2026-09-16/MANUAL-2026-09-16-65e0805c062f-market-trend-provenance.json",
+  "bloggerApi": {
+    "svgCount": 4,
+    "fiveSessionSeriesCount": 4,
+    "oldBarChartCount": 0,
+    "duplicateDraftCount": 0,
+    "draftCountBefore": 3,
+    "draftCountAfter": 3,
+    "updatedAt": "2026-09-18T11:37:13+09:00"
+  },
+  "mobileAdminPreview": {
+    "result": "PASS",
+    "fourCardsVisible": true,
+    "twoByTwoVisible": true,
+    "horizontalOverflowObserved": false,
+    "verifiedAt": "2026-09-18T11:40:00+09:00"
+  }
+}

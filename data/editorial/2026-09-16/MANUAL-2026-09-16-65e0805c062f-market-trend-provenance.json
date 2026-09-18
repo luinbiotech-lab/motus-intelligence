@@ -1,0 +1,266 @@
+{
+  "asOf": "2026-09-16",
+  "sessionCount": 5,
+  "series": [
+    {
+      "key": "sp500",
+      "label": "S&P 500",
+      "dates": [
+        "2026-09-10",
+        "2026-09-11",
+        "2026-09-14",
+        "2026-09-15",
+        "2026-09-16"
+      ],
+      "closes": [
+        7591.7,
+        7656.98,
+        7619.98,
+        7585.73,
+        7551.81
+      ],
+      "latestClose": 7551.81,
+      "latestChangePct": -0.45,
+      "sourceLabel": "S&P Dow Jones Indices",
+      "sourceUrl": "https://www.spglobal.com/spdji/en/indices/equity/sp-500/",
+      "provenance": [
+        {
+          "date": "2026-09-10",
+          "inputDate": "2026-09-11",
+          "field": "previousClose",
+          "sourceId": "SP_DJI",
+          "sourceUrl": "https://www.spglobal.com/spdji/en/indices/equity/sp-500/",
+          "collectionMode": "MANUAL_VERIFIED"
+        },
+        {
+          "date": "2026-09-11",
+          "inputDate": "2026-09-11",
+          "field": "close",
+          "sourceId": "SP_DJI",
+          "sourceUrl": "https://www.spglobal.com/spdji/en/indices/equity/sp-500/",
+          "collectionMode": "MANUAL_VERIFIED"
+        },
+        {
+          "date": "2026-09-14",
+          "inputDate": "2026-09-15",
+          "field": "previousClose",
+          "sourceId": "SP_DJI",
+          "sourceUrl": "https://www.spglobal.com/spdji/en/indices/equity/sp-500/",
+          "collectionMode": "MANUAL_VERIFIED"
+        },
+        {
+          "date": "2026-09-15",
+          "inputDate": "2026-09-15",
+          "field": "close",
+          "sourceId": "SP_DJI",
+          "sourceUrl": "https://www.spglobal.com/spdji/en/indices/equity/sp-500/",
+          "collectionMode": "MANUAL_VERIFIED",
+          "crossCheckDelta": 0
+        },
+        {
+          "date": "2026-09-16",
+          "inputDate": "2026-09-16",
+          "field": "close",
+          "sourceId": "SP_DJI",
+          "sourceUrl": "https://www.spglobal.com/spdji/en/indices/equity/sp-500/",
+          "collectionMode": "MANUAL_VERIFIED"
+        }
+      ]
+    },
+    {
+      "key": "nasdaq",
+      "label": "Nasdaq",
+      "dates": [
+        "2026-09-10",
+        "2026-09-11",
+        "2026-09-14",
+        "2026-09-15",
+        "2026-09-16"
+      ],
+      "closes": [
+        26081.73,
+        26333.04,
+        26186.41,
+        25981.57,
+        25978.42
+      ],
+      "latestClose": 25978.42,
+      "latestChangePct": -0.01,
+      "sourceLabel": "Nasdaq",
+      "sourceUrl": "https://www.nasdaq.com/market-activity/index/comp",
+      "provenance": [
+        {
+          "date": "2026-09-10",
+          "inputDate": "2026-09-11",
+          "field": "previousClose",
+          "sourceId": "NASDAQ",
+          "sourceUrl": "https://www.nasdaq.com/market-activity/index/comp",
+          "collectionMode": "MANUAL_VERIFIED"
+        },
+        {
+          "date": "2026-09-11",
+          "inputDate": "2026-09-11",
+          "field": "close",
+          "sourceId": "NASDAQ",
+          "sourceUrl": "https://www.nasdaq.com/market-activity/index/comp",
+          "collectionMode": "MANUAL_VERIFIED"
+        },
+        {
+          "date": "2026-09-14",
+          "inputDate": "2026-09-15",
+          "field": "previousClose",
+          "sourceId": "NASDAQ",
+          "sourceUrl": "https://www.nasdaq.com/market-activity/index/comp",
+          "collectionMode": "MANUAL_VERIFIED"
+        },
+        {
+          "date": "2026-09-15",
+          "inputDate": "2026-09-15",
+          "field": "close",
+          "sourceId": "NASDAQ",
+          "sourceUrl": "https://www.nasdaq.com/market-activity/index/comp",
+          "collectionMode": "MANUAL_VERIFIED",
+          "crossCheckDelta": 0
+        },
+        {
+          "date": "2026-09-16",
+          "inputDate": "2026-09-16",
+          "field": "close",
+          "sourceId": "NASDAQ",
+          "sourceUrl": "https://www.nasdaq.com/market-activity/index/comp",
+          "collectionMode": "MANUAL_VERIFIED"
+        }
+      ]
+    },
+    {
+      "key": "dow-jones",
+      "label": "Dow Jones",
+      "dates": [
+        "2026-09-10",
+        "2026-09-11",
+        "2026-09-14",
+        "2026-09-15",
+        "2026-09-16"
+      ],
+      "closes": [
+        52064.1,
+        52573.29,
+        52421.2,
+        52093.11,
+        51461.9
+      ],
+      "latestClose": 51461.9,
+      "latestChangePct": -1.21,
+      "sourceLabel": "S&P Dow Jones Indices",
+      "sourceUrl": "https://www.spglobal.com/spdji/en/indices/equity/dow-jones-industrial-average/",
+      "provenance": [
+        {
+          "date": "2026-09-10",
+          "inputDate": "2026-09-11",
+          "field": "previousClose",
+          "sourceId": "SP_DJI",
+          "sourceUrl": "https://www.spglobal.com/spdji/en/indices/equity/dow-jones-industrial-average/",
+          "collectionMode": "MANUAL_VERIFIED"
+        },
+        {
+          "date": "2026-09-11",
+          "inputDate": "2026-09-11",
+          "field": "close",
+          "sourceId": "SP_DJI",
+          "sourceUrl": "https://www.spglobal.com/spdji/en/indices/equity/dow-jones-industrial-average/",
+          "collectionMode": "MANUAL_VERIFIED"
+        },
+        {
+          "date": "2026-09-14",
+          "inputDate": "2026-09-15",
+          "field": "previousClose",
+          "sourceId": "SP_DJI",
+          "sourceUrl": "https://www.spglobal.com/spdji/en/indices/equity/dow-jones-industrial-average/",
+          "collectionMode": "MANUAL_VERIFIED"
+        },
+        {
+          "date": "2026-09-15",
+          "inputDate": "2026-09-15",
+          "field": "close",
+          "sourceId": "SP_DJI",
+          "sourceUrl": "https://www.spglobal.com/spdji/en/indices/equity/dow-jones-industrial-average/",
+          "collectionMode": "MANUAL_VERIFIED",
+          "crossCheckDelta": 0
+        },
+        {
+          "date": "2026-09-16",
+          "inputDate": "2026-09-16",
+          "field": "close",
+          "sourceId": "SP_DJI",
+          "sourceUrl": "https://www.spglobal.com/spdji/en/indices/equity/dow-jones-industrial-average/",
+          "collectionMode": "MANUAL_VERIFIED"
+        }
+      ]
+    },
+    {
+      "key": "russell-2000",
+      "label": "Russell 2000",
+      "dates": [
+        "2026-09-10",
+        "2026-09-11",
+        "2026-09-14",
+        "2026-09-15",
+        "2026-09-16"
+      ],
+      "closes": [
+        2890.947,
+        2903.944,
+        2892.24,
+        2870.29,
+        2858.81
+      ],
+      "latestClose": 2858.81,
+      "latestChangePct": -0.4,
+      "sourceLabel": "FTSE Russell",
+      "sourceUrl": "https://www.lseg.com/en/ftse-russell/indices/russell-2000-index",
+      "provenance": [
+        {
+          "date": "2026-09-10",
+          "inputDate": "2026-09-11",
+          "field": "previousClose",
+          "sourceId": "FTSE_RUSSELL",
+          "sourceUrl": "https://www.lseg.com/en/ftse-russell/indices/russell-2000-index",
+          "collectionMode": "MANUAL_VERIFIED"
+        },
+        {
+          "date": "2026-09-11",
+          "inputDate": "2026-09-11",
+          "field": "close",
+          "sourceId": "FTSE_RUSSELL",
+          "sourceUrl": "https://www.lseg.com/en/ftse-russell/indices/russell-2000-index",
+          "collectionMode": "MANUAL_VERIFIED"
+        },
+        {
+          "date": "2026-09-14",
+          "inputDate": "2026-09-15",
+          "field": "previousClose",
+          "sourceId": "FTSE_RUSSELL",
+          "sourceUrl": "https://www.lseg.com/en/ftse-russell/indices/russell-2000-index",
+          "collectionMode": "MANUAL_VERIFIED"
+        },
+        {
+          "date": "2026-09-15",
+          "inputDate": "2026-09-15",
+          "field": "close",
+          "sourceId": "FTSE_RUSSELL",
+          "sourceUrl": "https://www.lseg.com/en/ftse-russell/indices/russell-2000-index",
+          "collectionMode": "MANUAL_VERIFIED",
+          "crossCheckDelta": 0.01
+        },
+        {
+          "date": "2026-09-16",
+          "inputDate": "2026-09-16",
+          "field": "close",
+          "sourceId": "FTSE_RUSSELL",
+          "sourceUrl": "https://www.lseg.com/en/ftse-russell/indices/russell-2000-index",
+          "collectionMode": "MANUAL_VERIFIED"
+        }
+      ]
+    }
+  ]
+}
