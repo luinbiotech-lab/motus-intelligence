@@ -11,6 +11,7 @@ import {
   FixtureAIIntakeAdapter,
   aiIntakeSourceTypes,
   collectAIIntelligence,
+  canonicalThemeId,
   headlineFingerprint,
   runAIIntelligenceIntake,
   type AIIntakeSourceRecord,
@@ -44,6 +45,8 @@ test('Sprint 3B official AI news intake normalizes to the common schema',()=>{
   assert.equal(item.contentType,'AI_INTELLIGENCE'); assert.equal(item.sourceType,'OFFICIAL');
   assert.equal(item.companyId,'company:openai'); assert.equal(item.themeId,'theme:ai-infrastructure');
   assert.equal(item.eventId,'event:openai-platform-update-2026-09-20');
+  assert.equal(result.eventGroups[0]!.primaryThemeId,'theme:ai-infrastructure');
+  assert.deepEqual(result.eventGroups[0]!.relatedThemeIds,[]);
   assert.equal(validateResearchIntelligenceItem(item).valid,true);
 });
 
@@ -98,14 +101,41 @@ test('Sprint 3B merges independent sources for one event and retains every claim
   assert.deepEqual(item.claimIds,['CLAIM-SAMPLE-OPENAI-1','CLAIM-SAMPLE-OPENAI-2']);
   assert.deepEqual(item.evidenceIds,['EVIDENCE-SAMPLE-OPENAI-1','EVIDENCE-SAMPLE-OPENAI-2']);
   assert.equal(item.provenance.sources.length,2); assert.equal(item.verificationStatus,'PARTIALLY_VERIFIED');
+  assert.deepEqual(item.relatedThemeIds,[]);
+  assert.equal(item.provenance.themeLinks!.length,1);
+  assert.equal(result.duplicateThemeLinks.length,1);
+  assert.equal(result.duplicateThemeLinks[0]!.themeId,'theme:ai-infrastructure');
+  assert.equal(result.duplicateThemeLinks[0]!.duplicateSourceRecordId,'SAMPLE-PRIMARY-MEDIA-OPENAI-1');
+  assert.deepEqual(item.provenance.themeLinks![0]!.evidenceIds,['EVIDENCE-SAMPLE-OPENAI-1','EVIDENCE-SAMPLE-OPENAI-2']);
   assert.equal(group.eventId,item.eventId); assert.equal(group.themeId,item.themeId);
 });
 
-test('Sprint 3B rejects conflicting theme linkage for the same event ID',()=>{
-  const conflicting=sourceRecord({sourceRecordId:'SAMPLE-CONFLICTING-THEME',sourceUrl:'https://example.net/other-theme',headline:'Independent item with conflicting theme',themeKey:'robotics',theme:'Robotics',claimIds:['CLAIM-OTHER-THEME'],evidenceIds:['EVIDENCE-OTHER-THEME']});
-  const result=runAIIntelligenceIntake([sourceRecord(),conflicting]);
-  assert.equal(result.items.length,1); assert.equal(result.eventGroups[0]!.themeId,'theme:ai-infrastructure');
-  assert.ok(result.rejected[0]!.errors.includes('eventId: an event cannot link to multiple themeIds'));
+test('Sprint 3B follow-up supports one event linked to multiple legitimate themes',()=>{
+  const robotics=sourceRecord({sourceRecordId:'SAMPLE-ROBOTICS-THEME',sourceType:'PRIMARY_MEDIA',source:'Robotics media fixture',publisher:'Fixture Wire',sourceUrl:'https://example.net/robotics-theme',headline:'Independent robotics impact analysis',themeKey:'robotics',theme:'Robotics',claimIds:['CLAIM-ROBOTICS-THEME'],evidenceIds:['EVIDENCE-ROBOTICS-THEME'],verificationStatus:'PARTIALLY_VERIFIED',confidence:75});
+  const result=runAIIntelligenceIntake([robotics,sourceRecord()]);
+  assert.equal(result.items.length,1); assert.equal(result.rejected.length,0);
+  const item=result.items[0]!; const group=result.eventGroups[0]!;
+  assert.equal(item.themeId,'theme:ai-infrastructure');
+  assert.equal(group.primaryThemeId,'theme:ai-infrastructure');
+  assert.deepEqual(item.relatedThemeIds,['theme:robotics']);
+  assert.deepEqual(group.relatedThemeIds,['theme:robotics']);
+  assert.deepEqual(item.provenance.themeLinks!.map(link=>link.themeId),['theme:ai-infrastructure','theme:robotics']);
+  assert.deepEqual(item.provenance.themeLinks!.find(link=>link.themeId==='theme:robotics')!.evidenceIds,['EVIDENCE-ROBOTICS-THEME']);
+});
+
+test('Sprint 3B follow-up canonicalizes theme aliases and deduplicates repeated theme links',()=>{
+  const alias=sourceRecord({sourceRecordId:'SAMPLE-AI-INFRA-ALIAS',sourceType:'PRIMARY_MEDIA',source:'Alias media fixture',publisher:'Fixture Wire',sourceUrl:'https://example.net/ai-infra-alias',headline:'Independent AI infrastructure theme coverage',themeKey:'AI Infra',theme:'AI Infrastructure',claimIds:['CLAIM-AI-INFRA-ALIAS'],evidenceIds:['EVIDENCE-AI-INFRA-ALIAS'],verificationStatus:'PARTIALLY_VERIFIED',confidence:74});
+  const result=runAIIntelligenceIntake([sourceRecord(),alias]);
+  const item=result.items[0]!;
+  assert.equal(canonicalThemeId('AI Infra'),'theme:ai-infrastructure');
+  assert.equal(item.themeId,'theme:ai-infrastructure');
+  assert.deepEqual(item.relatedThemeIds,[]);
+  assert.equal(item.provenance.themeLinks!.length,1);
+  assert.equal(result.duplicateThemeLinks.length,1);
+  assert.equal(result.duplicateThemeLinks[0]!.themeId,'theme:ai-infrastructure');
+  assert.equal(result.duplicateThemeLinks[0]!.duplicateSourceRecordId,'SAMPLE-AI-INFRA-ALIAS');
+  assert.deepEqual(item.provenance.themeLinks![0]!.sourceIds,['SAMPLE-OFFICIAL-OPENAI-1','SAMPLE-AI-INFRA-ALIAS']);
+  assert.deepEqual(item.provenance.themeLinks![0]!.evidenceIds,['EVIDENCE-SAMPLE-OPENAI-1','EVIDENCE-AI-INFRA-ALIAS']);
 });
 
 test('Sprint 3B rejects missing source URL or published time without fabricating either value',()=>{

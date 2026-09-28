@@ -32,6 +32,7 @@
     "industry": { "$ref": "#/$defs/nullableText" },
     "themeId": { "$ref": "#/$defs/nullableThemeId" },
     "theme": { "$ref": "#/$defs/nullableText" },
+    "relatedThemeIds": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/themeId" } },
     "eventId": { "$ref": "#/$defs/nullableEventId" },
     "parentEventId": { "$ref": "#/$defs/nullableEventId" },
     "relatedCompanies": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/companyId" } },
@@ -104,7 +105,21 @@
         "legacyReportId": { "$ref": "#/$defs/nullableId" },
         "inputSha256": { "$ref": "#/$defs/nullableText" },
         "adapterVersion": { "$ref": "#/$defs/nullableText" },
-        "sources": { "type": "array", "items": { "$ref": "#/$defs/sourceProvenance" } }
+        "sources": { "type": "array", "items": { "$ref": "#/$defs/sourceProvenance" } },
+        "themeLinks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["themeId", "evidenceIds", "sourceIds", "sourceUrls"],
+            "properties": {
+              "themeId": { "$ref": "#/$defs/themeId" },
+              "evidenceIds": { "$ref": "#/$defs/idList" },
+              "sourceIds": { "$ref": "#/$defs/idList" },
+              "sourceUrls": { "type": "array", "uniqueItems": true, "items": { "type": "string", "format": "uri", "pattern": "^https?://" } }
+            },
+            "additionalProperties": false
+          }
+        }
       },
       "additionalProperties": false
     }

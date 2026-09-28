@@ -30,6 +30,10 @@ export interface IntelligenceSourceProvenance {
 export interface IntelligenceProvenance {
   legacyReportId:string|null; inputSha256:string|null; adapterVersion:string|null;
   sources:IntelligenceSourceProvenance[];
+  themeLinks?:IntelligenceThemeLinkProvenance[];
+}
+export interface IntelligenceThemeLinkProvenance {
+  themeId:ThemeId; evidenceIds:string[]; sourceIds:string[]; sourceUrls:string[];
 }
 
 /** Stable cross-domain contract. Nullable values stay explicit; no missing fact is inferred. */
@@ -39,7 +43,11 @@ export interface ResearchIntelligenceItem {
   source:string; publisher:string|null; analyst:string|null; publishedAt:string|null; collectedAt:string;
   market:string|null; country:string|null; region:string|null;
   companyId:CompanyId|null; company:string|null; ticker:string|null; sector:string|null; industry:string|null;
-  themeId:ThemeId|null; theme:string|null; eventId:EventId|null; parentEventId:EventId|null;
+  /** Backwards-compatible primary theme. */
+  themeId:ThemeId|null; theme:string|null;
+  /** Additional legitimate themes for the same event; never repeats themeId. */
+  relatedThemeIds?:ThemeId[];
+  eventId:EventId|null; parentEventId:EventId|null;
   relatedCompanies:CompanyId[]; relatedSectors:string[]; relatedMarkets:string[];
   headline:string; summary:string; claimIds:string[]; evidenceIds:string[];
   stance:IntelligenceStance; targetPrice:number|null; rating:string|null; ratingChange:string|null;
@@ -76,6 +84,10 @@ export function validateResearchIntelligenceItem(value:unknown):IntelligenceVali
   if(!isoTime(item.collectedAt)) errors.push('$.collectedAt: ISO timestamp required');
   for(const key of ['relatedCompanies','relatedSectors','relatedMarkets','claimIds','evidenceIds'] as const) if(!stringList(item[key])) errors.push(`$.${key}: unique string array required`);
   if(Array.isArray(item.relatedCompanies)&&item.relatedCompanies.some(value=>!commonId(value,'company'))) errors.push('$.relatedCompanies: namespaced company IDs required');
+  if(item.relatedThemeIds!==undefined){
+    if(!stringList(item.relatedThemeIds)||(item.relatedThemeIds as unknown[]).some(value=>!commonId(value,'theme'))) errors.push('$.relatedThemeIds: unique namespaced theme ID array required');
+    if(Array.isArray(item.relatedThemeIds)&&item.themeId!==null&&item.relatedThemeIds.includes(item.themeId)) errors.push('$.relatedThemeIds: primary themeId must not be repeated');
+  }
   if(!intelligenceStances.includes(item.stance as IntelligenceStance)) errors.push('$.stance: unsupported');
   for(const key of ['targetPrice','targetPriceChange'] as const) if(item[key]!==null&&(typeof item[key]!=='number'||!Number.isFinite(item[key]))) errors.push(`$.${key}: finite number or null required`);
   if(typeof item.targetPrice==='number'&&item.targetPrice<0) errors.push('$.targetPrice: negative value');
@@ -99,6 +111,22 @@ export function validateResearchIntelligenceItem(value:unknown):IntelligenceVali
       if(!isoTime(record.observedAt)||!isoTime(record.collectedAt)) errors.push(`$.provenance.sources[${index}]: ISO timestamps required`);
       if(!record.fieldProvenance||typeof record.fieldProvenance!=='object'||Array.isArray(record.fieldProvenance)) errors.push(`$.provenance.sources[${index}].fieldProvenance: object required`);
     });
+    if(provenance.themeLinks!==undefined){
+      if(!Array.isArray(provenance.themeLinks)) errors.push('$.provenance.themeLinks: array required');
+      else {
+        provenance.themeLinks.forEach((link,index)=>{
+          if(!link||typeof link!=='object'||Array.isArray(link)){errors.push(`$.provenance.themeLinks[${index}]: object required`);return;}
+          const record=link as Record<string,unknown>;
+          if(!commonId(record.themeId,'theme')) errors.push(`$.provenance.themeLinks[${index}].themeId: namespaced theme ID required`);
+          for(const key of ['evidenceIds','sourceIds','sourceUrls'] as const) if(!stringList(record[key])) errors.push(`$.provenance.themeLinks[${index}].${key}: unique string array required`);
+          if(Array.isArray(record.sourceUrls)&&record.sourceUrls.some(url=>!httpUrl(url))) errors.push(`$.provenance.themeLinks[${index}].sourceUrls: HTTP(S) URLs required`);
+        });
+        const linkThemeIds=provenance.themeLinks.flatMap(link=>link&&typeof link==='object'&&!Array.isArray(link)&&typeof (link as Record<string,unknown>).themeId==='string'?[(link as Record<string,unknown>).themeId as string]:[]);
+        if(new Set(linkThemeIds).size!==linkThemeIds.length) errors.push('$.provenance.themeLinks: duplicate theme linkage');
+        const itemThemeIds=[...(typeof item.themeId==='string'?[item.themeId]:[]),...(Array.isArray(item.relatedThemeIds)?item.relatedThemeIds.filter((theme):theme is string=>typeof theme==='string'):[])];
+        if(itemThemeIds.some(themeId=>!linkThemeIds.includes(themeId))||linkThemeIds.some(themeId=>!itemThemeIds.includes(themeId))) errors.push('$.provenance.themeLinks: must match primary and related themes');
+      }
+    }
   }
   if(item.contentType==='AI_INTELLIGENCE'&&!nonEmpty(item.aiInterpretation)) errors.push('$.aiInterpretation: required for AI Intelligence');
   if(item.contentType==='WALL_STREET_INTELLIGENCE'&&!nonEmpty(item.institutionView)) errors.push('$.institutionView: required for Wall Street Intelligence');

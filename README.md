@@ -64,6 +64,8 @@ MOTUS Intelligence 공통 연구 계약은 `config/motus-intelligence.schema.v1.
 
 AI Intelligence intake는 `src/intelligence/ai-intake.ts`에서 별도 계층으로 운영합니다. OFFICIAL, COMPANY_IR, REGULATORY, PRIMARY_MEDIA, SECONDARY_MEDIA, MANUAL 출처를 구분하고 원래 출처 종류를 provenance에 보존합니다. URL, headline fingerprint, company/theme/time-window 중복을 차단하며 같은 `eventId`의 독립 출처는 Claim/Evidence provenance를 합쳐 하나의 event item으로 묶습니다. URL이나 source published time이 없으면 대체값을 만들지 않고 해당 입력을 거부합니다.
 
+하나의 AI event는 여러 theme에 연결할 수 있습니다. 기존 `themeId`는 primary theme로 유지하고 선택적 `relatedThemeIds`에 추가 canonical theme를 보존합니다. Alias는 canonical theme ID로 합치며, `provenance.themeLinks`가 theme별 evidence/source 연결을 추적합니다. 기존 단일-theme item과 US Market compatibility output은 새 선택 필드 없이도 계속 유효합니다.
+
 A4 MASTER 생성은 관리자 전용 boundary를 통과해야 하며, 공개 route에서 호출할 수 없습니다. 개발환경에서는 `src/services/admin.ts`의 server-side authorization boundary와 `data/a4-master/YYYY-MM-DD/admin-a4-route.html`로 내부 route 화면을 분리합니다.
 
 실제 Blogger 연결 설정은 `config/publishing.json`에 MOTUS 브랜드·공개 주소, 환경 변수 이름과 `publishAsDraft` 정책만 저장합니다. blogId, client secret, refresh token, access token 값은 저장소 파일에 기록하지 않습니다. Publisher는 `BLOGGER_REFRESH_TOKEN`으로 access token을 자동 갱신한 뒤 Google Blogger API v3의 `posts.insert?isDraft=true`를 호출합니다. refresh credential이 일부 누락되거나 갱신에 실패하면 게시 요청을 보내지 않습니다. Publication record는 초안 식별자인 `draftPostId`와 공개 글 주소인 `publicPostUrl`을 분리하며, `DRAFT`에서는 `publicPostUrl=null`을 유지합니다. 실제 게시 후 확인된 글 permalink만 A4 CTA/QR과 Naver package에 반영하고 Blogger 루트 URL이나 preview URL은 상세분석 링크로 사용하지 않습니다. 공개 CTA는 “전체 분석은 MOTUS에서 확인하세요”로 통일합니다.
