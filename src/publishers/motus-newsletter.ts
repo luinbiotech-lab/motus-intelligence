@@ -1,0 +1,67 @@
+import { MOTUS_DISPLAY_NAME } from '../content/publisher-schema.js';
+import type { NewsletterIntelligenceEntry, NewsletterMarketMetric, NewsletterSourceLink, NewsletterViewModel } from '../intelligence/newsletter.js';
+import { validateNewsletterViewModel } from '../intelligence/newsletter.js';
+import { renderMarketTrendSection } from './motus.js';
+
+export interface MotusNewsletterRenderResult { html:string; renderedSections:string[] }
+
+const ARTICLE='font-family:Arial,&quot;Noto Sans KR&quot;,sans-serif;color:#172033;line-height:1.7;font-size:17px;width:100%;max-width:820px;box-sizing:border-box;margin:0 auto;overflow-wrap:anywhere';
+const SECTION='width:100%;max-width:100%;box-sizing:border-box;margin:22px 0 0';
+const TITLE='background:#03162e;color:#ffffff;border:1px solid #010b17;padding:14px 16px;font-size:21px;font-weight:800;line-height:1.35;margin:0;width:100%;max-width:100%;box-sizing:border-box';
+const CONTENT='border:1px solid #aebed2;padding:21px 22px;background:#ffffff;margin:0 0 22px;width:100%;max-width:100%;box-sizing:border-box';
+const LINK='color:#0759a6;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere';
+
+export function renderMotusDailyNewsletter(model:NewsletterViewModel):MotusNewsletterRenderResult {
+  const errors=validateNewsletterViewModel(model); if(errors.length) throw new Error(`invalid NewsletterViewModel: ${errors.join('; ')}`);
+  const sections:string[]=[]; const renderedSections:string[]=[];
+  const add=(key:string,html:string)=>{sections.push(html);renderedSections.push(key);};
+  add('masthead',renderMasthead(model));
+  if(model.todayAtAGlance) add('today-at-a-glance',section('Today at a Glance',`<h3 style="margin:0 0 8px;color:#03162e;font-size:22px;line-height:1.35">${escapeHtml(model.todayAtAGlance.headline)}</h3><p style="margin:0 0 12px">${escapeHtml(model.todayAtAGlance.summary)}</p>${list(model.todayAtAGlance.bullets)}`,'10-second'));
+  if(model.marketSnapshot){
+    add('market-snapshot',section('Market Snapshot',`<p style="margin:0 0 14px">${escapeHtml(model.marketSnapshot.summary)}</p>${renderMetrics(model.marketSnapshot.metrics)}`,'10-second'));
+    if(model.marketSnapshot.marketHistory) { sections.push(renderMarketTrendSection(model.marketSnapshot.marketHistory)); renderedSections.push('major-index-trend'); }
+  }
+  if(model.aiIntelligence) add('ai-intelligence',intelligenceSection('AI & Industry Intelligence',model.aiIntelligence));
+  if(model.wallStreetIntelligence) add('wall-street-intelligence',intelligenceSection('Wall Street Intelligence',model.wallStreetIntelligence));
+  if(model.koreaMarketIntelligence) add('korea-market-intelligence',intelligenceSection('Korea Market Intelligence',model.koreaMarketIntelligence));
+  if(model.crossIntelligence) add('cross-intelligence',section('Cross Intelligence',model.crossIntelligence.map(item=>`<div style="border-left:4px solid #456b91;padding:10px 12px;margin:0 0 12px;background:#f5f8fb;width:100%;max-width:100%;box-sizing:border-box"><h3 style="margin:0 0 6px;font-size:18px;color:#102f50">${escapeHtml(item.headline)}</h3><p style="margin:0">${escapeHtml(item.summary)}</p></div>`).join(''),'3-minute'));
+  if(model.investmentMap) add('investment-map',section('Investment Map',model.investmentMap.map(item=>`<div style="border:1px solid #c4cfdb;padding:13px;margin:0 0 12px;background:#f8fafc;width:100%;max-width:100%;box-sizing:border-box"><h3 style="margin:0 0 8px;color:#102f50;font-size:18px">${escapeHtml(item.theme)}</h3>${labeledList('상류',item.upstream)}${labeledList('수혜 연결',item.beneficiaries)}${labeledList('리스크',item.risks)}</div>`).join(''),'3-minute'));
+  if(model.whatToWatch) add('what-to-watch',section('What to Watch',model.whatToWatch.map(item=>`<div style="padding:11px 12px;margin:0 0 10px;background:#f7f9fc;border-left:4px solid #17283d;width:100%;max-width:100%;box-sizing:border-box"><strong style="display:block;color:#03162e">${escapeHtml(item.headline)}</strong><span>${escapeHtml(item.watchFor)}</span><small style="display:block;margin-top:5px;color:#59697d">${escapeHtml(item.validityHorizon)}</small></div>`).join(''),'3-minute'));
+  if(model.sources.length) add('sources',section('Sources',renderSources(model.sources),'deep-read'));
+  const html=`<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escapeHtml(model.title)}</title></head><body><article data-product="motus-daily-intelligence" data-layout="newsletter-inline-v1" style="${ARTICLE}">${sections.join('\n')}</article></body></html>`;
+  assertNewsletterPublicHtmlSafe(html);
+  return {html,renderedSections};
+}
+
+function renderMasthead(model:NewsletterViewModel):string {
+  return `<header data-section="masthead" data-read-depth="10-second" style="width:100%;max-width:100%;box-sizing:border-box;background:#03162e;color:#ffffff;padding:28px 24px;border:1px solid #010b17;margin:0 0 22px"><p style="margin:0 0 12px;font-size:14px;font-weight:800;letter-spacing:.08em;color:#c7d8ea">${escapeHtml(MOTUS_DISPLAY_NAME)}</p><h1 style="margin:0 0 10px;font-size:32px;line-height:1.2;font-weight:850">${escapeHtml(model.title)}</h1><p style="margin:0 0 14px;font-size:18px;line-height:1.45;color:#e6edf5">${escapeHtml(model.subtitle)}</p><p style="margin:0;font-size:16px;line-height:1.65;color:#ffffff">${escapeHtml(model.editorialSummary)}</p><div style="margin-top:14px;font-size:12px;color:#b7c8da">${escapeHtml(model.issueDate)} · Issue ${model.issueNumber}</div></header>`;
+}
+function section(title:string,content:string,depth:'10-second'|'3-minute'|'deep-read'):string {
+  return `<section data-section="${slug(title)}" data-read-depth="${depth}" style="${SECTION}"><h2 style="${TITLE}">${escapeHtml(title)}</h2><div style="${CONTENT}">${content}</div></section>`;
+}
+function intelligenceSection(title:string,items:NewsletterIntelligenceEntry[]):string { return section(title,items.map(renderIntelligenceCard).join(''),'3-minute'); }
+function renderIntelligenceCard(item:NewsletterIntelligenceEntry):string {
+  const themeIds=[...(item.primaryThemeId?[item.primaryThemeId]:[]),...item.relatedThemeIds].map(value=>value.replace(/^theme:/,'')).join(' · ');
+  const meta=[item.company,themeIds].filter(Boolean).map(value=>escapeHtml(value!)).join(' · ');
+  const institution=item.institutionView?`<div data-render-field="institution-view" style="margin:12px 0 0;padding:12px;background:#eef3f8;border-left:4px solid #405f7f;width:100%;max-width:100%;box-sizing:border-box"><strong style="display:block;color:#102f50;margin-bottom:4px">기관 관점</strong>${escapeHtml(item.institutionView)}</div>`:'';
+  const interpretation=item.aiInterpretation?`<div data-render-field="ai-interpretation" style="margin:12px 0 0;padding:12px;background:#f4f1e9;border-left:4px solid #8c7441;width:100%;max-width:100%;box-sizing:border-box"><strong style="display:block;color:#59491f;margin-bottom:4px">MOTUS 해석</strong>${escapeHtml(item.aiInterpretation)}</div>`:'';
+  const deep=(item.sourceFacts.length||item.sources.length)?`<div data-read-depth="deep-read" style="margin-top:13px;padding-top:12px;border-top:1px solid #d7e0ea;font-size:14px;color:#344860">${item.sourceFacts.length?`<strong>확인된 사실</strong>${list(item.sourceFacts)}`:''}${item.sources.length?`<strong>근거</strong>${renderSources(item.sources)}`:''}</div>`:'';
+  return `<article style="width:100%;max-width:100%;box-sizing:border-box;border:1px solid #c4cfdb;background:#ffffff;padding:16px;margin:0 0 14px"><h3 style="margin:0 0 7px;color:#03162e;font-size:20px;line-height:1.4">${escapeHtml(item.headline)}</h3>${meta?`<p style="margin:0 0 8px;color:#59697d;font-size:13px;font-weight:700">${meta}</p>`:''}<p style="margin:0">${escapeHtml(item.summary)}</p>${institution}${interpretation}${deep}</article>`;
+}
+function renderMetrics(metrics:NewsletterMarketMetric[]):string {
+  if(!metrics.length) return '';
+  return `<div style="display:flex;flex-wrap:wrap;width:100%;max-width:100%;box-sizing:border-box;margin:0 -4px">${metrics.map(metric=>`<div style="width:50%;max-width:50%;padding:4px;box-sizing:border-box"><div style="border:1px solid #c4cfdb;background:#f7f9fc;padding:12px;width:100%;max-width:100%;box-sizing:border-box"><span style="display:block;color:#59697d;font-size:13px">${escapeHtml(metric.label)}</span><strong style="display:block;color:#172033;font-size:19px;font-variant-numeric:tabular-nums">${escapeHtml(metric.value)}</strong>${metric.change?`<span style="color:${metric.direction==='UP'?'#08733f':metric.direction==='DOWN'?'#b42318':'#59697d'};font-weight:800;font-size:14px">${escapeHtml(metric.change)}</span>`:''}</div></div>`).join('')}</div>`;
+}
+function renderSources(sources:NewsletterSourceLink[]):string { return `<ul style="margin:5px 0 0;padding-left:19px">${sources.map(source=>`<li style="margin:4px 0"><a href="${escapeAttr(source.url)}" target="_blank" rel="nofollow noopener noreferrer" style="${LINK}">${escapeHtml(source.label)}</a>${source.publisher?` <span style="color:#65758a">· ${escapeHtml(source.publisher)}</span>`:''}</li>`).join('')}</ul>`; }
+function labeledList(label:string,values:string[]):string { return values.length?`<div style="margin:6px 0"><strong>${escapeHtml(label)}</strong>${list(values)}</div>`:''; }
+function list(values:string[]):string { return values.length?`<ul style="margin:7px 0 0;padding-left:20px">${values.map(value=>`<li style="margin:4px 0">${escapeHtml(value)}</li>`).join('')}</ul>`:''; }
+function slug(value:string):string { return value.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''); }
+function escapeHtml(value:string):string { return String(value).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function escapeAttr(value:string):string { return escapeHtml(value).replace(/'/g,'&#39;'); }
+
+export function assertNewsletterPublicHtmlSafe(html:string):void {
+  if(/<script\b|<iframe\b|javascript:|<style\b/i.test(html)) throw new Error('newsletter contains Blogger-unsafe markup');
+  if(/claimId|reportId|confidenceScore|sourceTier|verificationStatus|MANUAL_VERIFIED|PENDING_HUMAN_APPROVAL/i.test(html)) throw new Error('newsletter contains internal token');
+  const visible=html.replace(/<[^>]+>/g,' ');
+  if(/https?:\/\//i.test(visible)) throw new Error('newsletter exposes a raw URL');
+}
