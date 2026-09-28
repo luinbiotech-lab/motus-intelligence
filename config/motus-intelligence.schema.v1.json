@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://motusnova.blogspot.com/schemas/motus-intelligence-v1.json",
+  "title": "MOTUS Intelligence Common Research Schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "intelligenceId", "contentType", "sourceType", "source", "publisher", "analyst",
+    "publishedAt", "collectedAt", "market", "country", "region", "companyId", "company", "ticker",
+    "sector", "industry", "themeId", "theme", "eventId", "parentEventId", "relatedCompanies",
+    "relatedSectors", "relatedMarkets", "headline", "summary", "claimIds", "evidenceIds", "stance",
+    "targetPrice", "rating", "ratingChange", "targetPriceChange", "institutionView", "aiInterpretation",
+    "sourceUrl", "verificationStatus", "confidence", "validityHorizon", "provenance"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "intelligenceId": { "$ref": "#/$defs/id" },
+    "contentType": { "enum": ["AI_INTELLIGENCE", "WALL_STREET_INTELLIGENCE", "KOREA_MARKET_INTELLIGENCE", "US_MARKET_DAILY"] },
+    "sourceType": { "enum": ["OFFICIAL", "MARKET_DATA", "REGULATORY_FILING", "COMPANY_IR", "NEWS", "SELL_SIDE_RESEARCH", "AGGREGATED_VERIFIED_SOURCES"] },
+    "source": { "$ref": "#/$defs/text" },
+    "publisher": { "$ref": "#/$defs/nullableText" },
+    "analyst": { "$ref": "#/$defs/nullableText" },
+    "publishedAt": { "$ref": "#/$defs/nullableDateTime" },
+    "collectedAt": { "type": "string", "format": "date-time" },
+    "market": { "$ref": "#/$defs/nullableText" },
+    "country": { "$ref": "#/$defs/nullableText" },
+    "region": { "$ref": "#/$defs/nullableText" },
+    "companyId": { "$ref": "#/$defs/nullableCompanyId" },
+    "company": { "$ref": "#/$defs/nullableText" },
+    "ticker": { "$ref": "#/$defs/nullableText" },
+    "sector": { "$ref": "#/$defs/nullableText" },
+    "industry": { "$ref": "#/$defs/nullableText" },
+    "themeId": { "$ref": "#/$defs/nullableThemeId" },
+    "theme": { "$ref": "#/$defs/nullableText" },
+    "eventId": { "$ref": "#/$defs/nullableEventId" },
+    "parentEventId": { "$ref": "#/$defs/nullableEventId" },
+    "relatedCompanies": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/companyId" } },
+    "relatedSectors": { "$ref": "#/$defs/textList" },
+    "relatedMarkets": { "$ref": "#/$defs/textList" },
+    "headline": { "$ref": "#/$defs/text" },
+    "summary": { "$ref": "#/$defs/text" },
+    "claimIds": { "$ref": "#/$defs/idList" },
+    "evidenceIds": { "$ref": "#/$defs/idList" },
+    "stance": { "enum": ["BULLISH", "BEARISH", "NEUTRAL", "MIXED", "NOT_APPLICABLE"] },
+    "targetPrice": { "type": ["number", "null"], "minimum": 0 },
+    "rating": { "$ref": "#/$defs/nullableText" },
+    "ratingChange": { "$ref": "#/$defs/nullableText" },
+    "targetPriceChange": { "type": ["number", "null"] },
+    "institutionView": { "$ref": "#/$defs/nullableText", "description": "Source institution view; never an AI interpretation alias." },
+    "aiInterpretation": { "$ref": "#/$defs/nullableText", "description": "MOTUS AI interpretation; never an institution view alias." },
+    "sourceUrl": { "type": "string", "format": "uri", "pattern": "^https?://" },
+    "verificationStatus": { "enum": ["VERIFIED", "PARTIALLY_VERIFIED", "CONFLICT", "UNVERIFIED", "INSUFFICIENT_SOURCES", "PRIMARY_SOURCE_ONLY", "REVIEW_REQUIRED", "REJECTED"] },
+    "confidence": { "type": "number", "minimum": 0, "maximum": 100 },
+    "validityHorizon": { "enum": ["INTRADAY", "SHORT_TERM", "MEDIUM_TERM", "LONG_TERM"] },
+    "provenance": { "$ref": "#/$defs/provenance" }
+  },
+  "$defs": {
+    "text": { "type": "string", "minLength": 1 },
+    "id": { "type": "string", "minLength": 1 },
+    "nullableText": { "type": ["string", "null"], "minLength": 1 },
+    "nullableId": { "type": ["string", "null"], "minLength": 1 },
+    "companyId": { "type": "string", "pattern": "^company:[a-z0-9][a-z0-9._:-]*$" },
+    "nullableCompanyId": { "anyOf": [{ "$ref": "#/$defs/companyId" }, { "type": "null" }] },
+    "themeId": { "type": "string", "pattern": "^theme:[a-z0-9][a-z0-9._:-]*$" },
+    "nullableThemeId": { "anyOf": [{ "$ref": "#/$defs/themeId" }, { "type": "null" }] },
+    "eventId": { "type": "string", "pattern": "^event:[a-z0-9][a-z0-9._:-]*$" },
+    "nullableEventId": { "anyOf": [{ "$ref": "#/$defs/eventId" }, { "type": "null" }] },
+    "nullableDateTime": { "anyOf": [{ "type": "string", "format": "date-time" }, { "type": "null" }] },
+    "textList": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/text" } },
+    "idList": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
+    "fieldProvenance": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["sourceId", "sourceUrl", "observedAt", "collectedAt"],
+        "properties": {
+          "sourceId": { "$ref": "#/$defs/text" },
+          "sourceUrl": { "type": "string", "format": "uri" },
+          "observedAt": { "type": "string", "format": "date-time" },
+          "collectedAt": { "type": "string", "format": "date-time" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "sourceProvenance": {
+      "type": "object",
+      "required": ["evidenceId", "sourceType", "sourceId", "sourceUrl", "observedAt", "collectedAt", "verificationStatus", "fieldProvenance"],
+      "properties": {
+        "evidenceId": { "$ref": "#/$defs/id" },
+        "sourceType": { "$ref": "#/$defs/text" },
+        "sourceId": { "$ref": "#/$defs/id" },
+        "sourceUrl": { "type": "string", "format": "uri" },
+        "observedAt": { "type": "string", "format": "date-time" },
+        "collectedAt": { "type": "string", "format": "date-time" },
+        "verificationStatus": { "$ref": "#/$defs/text" },
+        "fieldProvenance": { "$ref": "#/$defs/fieldProvenance" }
+      },
+      "additionalProperties": false
+    },
+    "provenance": {
+      "type": "object",
+      "required": ["legacyReportId", "inputSha256", "adapterVersion", "sources"],
+      "properties": {
+        "legacyReportId": { "$ref": "#/$defs/nullableId" },
+        "inputSha256": { "$ref": "#/$defs/nullableText" },
+        "adapterVersion": { "$ref": "#/$defs/nullableText" },
+        "sources": { "type": "array", "items": { "$ref": "#/$defs/sourceProvenance" } }
+      },
+      "additionalProperties": false
+    }
+  }
+}

@@ -60,6 +60,8 @@ node dist/src/cli.js --blogger-update-draft data/blogger/YYYY-MM-DD/<reportId>-p
 
 공개 Blogger/Naver 출력에는 내부 `claimId`, `reportId`, approval status, pipeline status를 표시하지 않습니다. B/C/D 콘텐츠는 Daily A와 달리 항상 생성하지 않고 opportunity 판단 결과로 추천 여부만 기록합니다. 금융용어 해설은 공개 본문에 실제 등장한 용어만 3~8개로 제한하고 Evergreen 연결 키를 함께 보존합니다.
 
+MOTUS Intelligence 공통 연구 계약은 `config/motus-intelligence.schema.v1.json`과 `src/intelligence/schema.ts`에 정의합니다. AI Intelligence, Wall Street Intelligence, Korea Market Intelligence, 기존 US Market Daily가 같은 company/theme/event ID와 Claim/Evidence provenance를 사용합니다. 기관 원문 관점인 `institutionView`와 MOTUS 해석인 `aiInterpretation`은 독립 필드이며 서로 대체하지 않습니다. 기존 Daily 파이프라인은 `adaptDailyReportToIntelligence`라는 순수 compatibility adapter로 연결하므로 기존 report/evidence, 검증 상태, Blogger/A4 출력은 변경되지 않습니다.
+
 A4 MASTER 생성은 관리자 전용 boundary를 통과해야 하며, 공개 route에서 호출할 수 없습니다. 개발환경에서는 `src/services/admin.ts`의 server-side authorization boundary와 `data/a4-master/YYYY-MM-DD/admin-a4-route.html`로 내부 route 화면을 분리합니다.
 
 실제 Blogger 연결 설정은 `config/publishing.json`에 MOTUS 브랜드·공개 주소, 환경 변수 이름과 `publishAsDraft` 정책만 저장합니다. blogId, client secret, refresh token, access token 값은 저장소 파일에 기록하지 않습니다. Publisher는 `BLOGGER_REFRESH_TOKEN`으로 access token을 자동 갱신한 뒤 Google Blogger API v3의 `posts.insert?isDraft=true`를 호출합니다. refresh credential이 일부 누락되거나 갱신에 실패하면 게시 요청을 보내지 않습니다. Publication record는 초안 식별자인 `draftPostId`와 공개 글 주소인 `publicPostUrl`을 분리하며, `DRAFT`에서는 `publicPostUrl=null`을 유지합니다. 실제 게시 후 확인된 글 permalink만 A4 CTA/QR과 Naver package에 반영하고 Blogger 루트 URL이나 preview URL은 상세분석 링크로 사용하지 않습니다. 공개 CTA는 “전체 분석은 MOTUS에서 확인하세요”로 통일합니다.
@@ -82,6 +84,9 @@ A4 MASTER 생성은 관리자 전용 boundary를 통과해야 하며, 공개 rou
 - `src/services/blogger.ts`: Blogger publication state machine, dry-run adapter, Google Blogger API v3 draft adapter
 - `src/services/blogger-oauth.ts`: Desktop OAuth authorization URL, loopback callback, authorization-code 교환
 - `src/content/publisher-schema.ts`: Engine과 Publisher가 공유하는 글로벌 콘텐츠 metadata schema
+- `src/intelligence/schema.ts`: MOTUS Intelligence 공통 타입과 런타임 validator
+- `src/intelligence/compatibility.ts`: 기존 Daily report/evidence를 변경 없이 공통 schema로 연결하는 adapter
+- `config/motus-intelligence.schema.v1.json`: 외부 소비자를 위한 JSON Schema 계약
 - `src/publishers/motus.ts`: MOTUS 브랜드, 카테고리, Blogger HTML과 labels를 담당하는 독립 Publisher
 - `config/publishing.json`: Blogger URL 정책, 환경 변수 이름, draft-first 설정
 - `data/fixtures/sample-day.json`: 실행 가능한 통합 샘플. 분리된 sample-*.json은 각 입력 영역의 예시
@@ -89,5 +94,6 @@ A4 MASTER 생성은 관리자 전용 boundary를 통과해야 하며, 공개 rou
 - `data/manual/2026-09-11/input-api.json`: Treasury/BLS/SEC 어댑터 산출물을 일부 투입한 golden day 입력
 - `data/golden/2026-09-11/`: 원본 source snapshot, expected normalized result, manual/API 비교표, claim 검증 결과
 - `tests/pipeline.test.ts`: 요구 시나리오와 회귀 테스트
+- `tests/intelligence.test.ts`: AI/Wall Street/Korea validation, 공통 ID, provenance, Daily/Blogger/A4 호환성 회귀 테스트
 
 [구조](docs/architecture.md) · [수동 입력](docs/manual-input.md) · [규칙](docs/rules.md) · [출처 운영](docs/data-sources.md) · [문제 및 회귀 방지](docs/issues.md) · [Sprint 1 완료 보고](docs/sprint-report.md) · [Sprint 2A 완료 보고](docs/sprint-2a-report.md) · [Sprint 2B 완료 보고](docs/sprint-2b-report.md) · [Sprint 2C 완료 보고](docs/sprint-2c-report.md) · [Sprint 2D 완료 보고](docs/sprint-2d-report.md) · [Sprint 2E 완료 보고](docs/sprint-2e-report.md) · [Sprint 2F 완료 보고](docs/sprint-2f-report.md) · [Sprint 2G 완료 보고](docs/sprint-2g-report.md) · [Sprint 2H 진행 보고](docs/sprint-2h-report.md)
