@@ -68,6 +68,8 @@ AI Intelligence intake는 `src/intelligence/ai-intake.ts`에서 별도 계층으
 
 MOTUS Daily Intelligence newsletter는 기존 Daily Market 게시물을 대체하지 않는 별도 presentation layer입니다. `NewsletterViewModel`이 Today at a Glance, Market Snapshot, AI/Wall Street/Korea/Cross Intelligence, Investment Map, What to Watch, Sources를 고정 순서로 구성하며 빈 section은 만들지 않습니다. Blogger renderer는 기존 inline-style 톤과 검증된 미국 주요지수 2×2 차트를 재사용하고, 기관 의견·MOTUS 해석·source fact를 서로 다른 공개 필드로 렌더링합니다. DAILY/TOPIC/WEEKLY/EVERGREEN asset metadata와 Google Alerts, Gmail, RSS, 공식 자료, 기존 수집, content library용 adapter boundary만 정의하며 기존 Apps Script는 변경하지 않습니다.
 
+한국시장 Market Fact intake는 `src/intelligence/korea-market.ts`에서 별도 계층으로 운영합니다. KOSPI, KOSDAQ, USD/KRW와 투자자 수급, 거래대금, 프로그램 매매, 업종, 등락 종목 및 시장 폭을 정규화하며 출처 URL과 관측·수집 시각이 없으면 입력을 거부합니다. 투자자 구분은 `FOREIGN|INSTITUTION|RETAIL`, 금액은 내부 `KRW_MILLION`으로 통일하고 업종 ID와 표시명을 분리합니다. Market Fact에는 기관 의견이나 MOTUS AI 해석을 넣을 수 없으며, 검증 가능한 fact가 없으면 Newsletter의 Korea Market section 자체를 생략합니다. `KoreaMarketAdapter`를 통해 KRX, BOK ECOS, 공식 시장 자료, 검증된 공개 자료 및 수동 검증 자료의 live adapter를 이후 추가할 수 있습니다.
+
 A4 MASTER 생성은 관리자 전용 boundary를 통과해야 하며, 공개 route에서 호출할 수 없습니다. 개발환경에서는 `src/services/admin.ts`의 server-side authorization boundary와 `data/a4-master/YYYY-MM-DD/admin-a4-route.html`로 내부 route 화면을 분리합니다.
 
 실제 Blogger 연결 설정은 `config/publishing.json`에 MOTUS 브랜드·공개 주소, 환경 변수 이름과 `publishAsDraft` 정책만 저장합니다. blogId, client secret, refresh token, access token 값은 저장소 파일에 기록하지 않습니다. Publisher는 `BLOGGER_REFRESH_TOKEN`으로 access token을 자동 갱신한 뒤 Google Blogger API v3의 `posts.insert?isDraft=true`를 호출합니다. refresh credential이 일부 누락되거나 갱신에 실패하면 게시 요청을 보내지 않습니다. Publication record는 초안 식별자인 `draftPostId`와 공개 글 주소인 `publicPostUrl`을 분리하며, `DRAFT`에서는 `publicPostUrl=null`을 유지합니다. 실제 게시 후 확인된 글 permalink만 A4 CTA/QR과 Naver package에 반영하고 Blogger 루트 URL이나 preview URL은 상세분석 링크로 사용하지 않습니다. 공개 CTA는 “전체 분석은 MOTUS에서 확인하세요”로 통일합니다.
@@ -94,6 +96,7 @@ A4 MASTER 생성은 관리자 전용 boundary를 통과해야 하며, 공개 rou
 - `src/intelligence/compatibility.ts`: 기존 Daily report/evidence를 변경 없이 공통 schema로 연결하는 adapter
 - `src/intelligence/ai-intake.ts`: AI source adapter 계약, guard, 정규화, dedupe와 event/theme grouping
 - `src/intelligence/newsletter.ts`: NewsletterViewModel, content asset metadata, legacy AI News adapter boundary
+- `src/intelligence/korea-market.ts`: 한국시장 Market Fact schema, adapter, guard, canonicalization과 Newsletter 변환
 - `config/motus-intelligence.schema.v1.json`: 외부 소비자를 위한 JSON Schema 계약
 - `src/publishers/motus.ts`: MOTUS 브랜드, 카테고리, Blogger HTML과 labels를 담당하는 독립 Publisher
 - `src/publishers/motus-newsletter.ts`: 별도 MOTUS Daily Intelligence Blogger-safe newsletter renderer
@@ -106,5 +109,6 @@ A4 MASTER 생성은 관리자 전용 boundary를 통과해야 하며, 공개 rou
 - `tests/intelligence.test.ts`: AI/Wall Street/Korea validation, 공통 ID, provenance, Daily/Blogger/A4 호환성 회귀 테스트
 - `tests/ai-intake.test.ts`: AI source type, dedupe, multi-source merge, provenance 및 기존 출력 회귀 테스트
 - `tests/newsletter.test.ts`: newsletter validation, section omission, rendering hierarchy, mobile/chart 및 publication 회귀 테스트
+- `tests/korea-market.test.ts`: 한국 지수·환율·수급·단위·업종·provenance·Newsletter 연결 테스트
 
 [구조](docs/architecture.md) · [수동 입력](docs/manual-input.md) · [규칙](docs/rules.md) · [출처 운영](docs/data-sources.md) · [문제 및 회귀 방지](docs/issues.md) · [Sprint 1 완료 보고](docs/sprint-report.md) · [Sprint 2A 완료 보고](docs/sprint-2a-report.md) · [Sprint 2B 완료 보고](docs/sprint-2b-report.md) · [Sprint 2C 완료 보고](docs/sprint-2c-report.md) · [Sprint 2D 완료 보고](docs/sprint-2d-report.md) · [Sprint 2E 완료 보고](docs/sprint-2e-report.md) · [Sprint 2F 완료 보고](docs/sprint-2f-report.md) · [Sprint 2G 완료 보고](docs/sprint-2g-report.md) · [Sprint 2H 진행 보고](docs/sprint-2h-report.md)

@@ -1,5 +1,6 @@
 import type { MajorIndexHistory } from '../content/publisher-schema.js';
 import type { CompanyId, EventId, ResearchIntelligenceItem, ThemeId } from './schema.js';
+import type { KoreaMarketNewsletterView } from './korea-market.js';
 
 export const newsletterAssetLayers=['DAILY','TOPIC','WEEKLY','EVERGREEN'] as const;
 export type NewsletterAssetLayer=typeof newsletterAssetLayers[number];
@@ -42,6 +43,7 @@ export interface NewsletterViewModel {
   marketSnapshot?:NewsletterMarketSnapshot;
   aiIntelligence?:NewsletterIntelligenceEntry[];
   wallStreetIntelligence?:NewsletterIntelligenceEntry[];
+  koreaMarketFacts?:KoreaMarketNewsletterView;
   koreaMarketIntelligence?:NewsletterIntelligenceEntry[];
   crossIntelligence?:NewsletterCrossIntelligence[];
   investmentMap?:NewsletterInvestmentMapEntry[];
@@ -81,6 +83,7 @@ export function createNewsletterViewModel(input:NewsletterBuildInput):Newsletter
     ...(input.marketSnapshot?{marketSnapshot:structuredClone(input.marketSnapshot)}:{}),
     ...(optionalArray(input.aiIntelligence)?{aiIntelligence:optionalArray(input.aiIntelligence)!}:{}),
     ...(optionalArray(input.wallStreetIntelligence)?{wallStreetIntelligence:optionalArray(input.wallStreetIntelligence)!}:{}),
+    ...(input.koreaMarketFacts?.metrics.length?{koreaMarketFacts:structuredClone(input.koreaMarketFacts)}:{}),
     ...(optionalArray(input.koreaMarketIntelligence)?{koreaMarketIntelligence:optionalArray(input.koreaMarketIntelligence)!}:{}),
     ...(optionalArray(input.crossIntelligence)?{crossIntelligence:optionalArray(input.crossIntelligence)!}:{}),
     ...(optionalArray(input.investmentMap)?{investmentMap:optionalArray(input.investmentMap)!}:{}),
@@ -110,6 +113,20 @@ export function validateNewsletterViewModel(value:unknown):string[] {
       const record=metric as Record<string,unknown>;if(!nonEmpty(record.label)||!nonEmpty(record.value)||record.change!==null&&!nonEmpty(record.change)||!['UP','DOWN','FLAT'].includes(record.direction as string)) errors.push(`marketSnapshot.metrics[${index}]: invalid metric`);
     });}
   }
+  if(model.koreaMarketFacts!==undefined){
+    if(!model.koreaMarketFacts||typeof model.koreaMarketFacts!=='object'||Array.isArray(model.koreaMarketFacts)) errors.push('koreaMarketFacts: object required');
+    else {
+      const section=model.koreaMarketFacts as Record<string,unknown>;
+      if(!isoTime(section.asOf)||!Array.isArray(section.metrics)||section.metrics.length===0||!Array.isArray(section.sources)) errors.push('koreaMarketFacts: asOf, metrics and sources required; omit empty section');
+      if(Array.isArray(section.metrics)) section.metrics.forEach((metric,index)=>{
+        if(!metric||typeof metric!=='object'||Array.isArray(metric)){errors.push(`koreaMarketFacts.metrics[${index}]: object required`);return;}
+        const record=metric as Record<string,unknown>;
+        if(!nonEmpty(record.factId)||!['INDEX','FX','FLOW','VALUE','PROGRAM','SECTOR','MOVER','BREADTH'].includes(record.group as string)||!nonEmpty(record.label)||!nonEmpty(record.displayValue)||!['UP','DOWN','FLAT'].includes(record.direction as string)) errors.push(`koreaMarketFacts.metrics[${index}]: invalid fact metric`);
+        if(!record.source||typeof record.source!=='object'||Array.isArray(record.source)) errors.push(`koreaMarketFacts.metrics[${index}].source: object required`); else errors.push(...validateSource({...record.source as object,publisher:null},`koreaMarketFacts.metrics[${index}].source`));
+      });
+      if(Array.isArray(section.sources)) section.sources.forEach((source,index)=>errors.push(...validateSource({...source,publisher:null},`koreaMarketFacts.sources[${index}]`)));
+    }
+  }
   if(Array.isArray(model.crossIntelligence)) model.crossIntelligence.forEach((item,index)=>{
     if(!item||typeof item!=='object'||Array.isArray(item)){errors.push(`crossIntelligence[${index}]: object required`);return;}
     const record=item as Record<string,unknown>;if(!nonEmpty(record.headline)||!nonEmpty(record.summary)||!stringArray(record.linkedIntelligenceIds)||!stringArray(record.sourceIds)) errors.push(`crossIntelligence[${index}]: invalid cross-intelligence item`);
@@ -134,6 +151,7 @@ export function validateNewsletterViewModel(value:unknown):string[] {
   return errors;
 }
 function stringArray(value:unknown):value is string[] { return Array.isArray(value)&&value.every(nonEmpty)&&new Set(value).size===value.length; }
+function isoTime(value:unknown):value is string { return typeof value==='string'&&Number.isFinite(Date.parse(value)); }
 
 function validateEntry(value:unknown,path:string):string[] {
   if(!value||typeof value!=='object'||Array.isArray(value)) return [`${path}: object required`];
