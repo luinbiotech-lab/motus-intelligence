@@ -3,6 +3,7 @@ import type { CompanyId, EventId, ResearchIntelligenceItem, ThemeId } from './sc
 import type { KoreaMarketNewsletterView } from './korea-market.js';
 import type { KoreaResearchNewsletterEntry } from './brokerage-research.js';
 import type { CrossIntelligenceNewsletterEntry } from './cross-intelligence.js';
+import type { InvestmentMapNewsletterView } from './investment-map.js';
 
 export const newsletterAssetLayers=['DAILY','TOPIC','WEEKLY','EVERGREEN'] as const;
 export type NewsletterAssetLayer=typeof newsletterAssetLayers[number];
@@ -50,19 +51,21 @@ export interface NewsletterViewModel {
   koreaMarketIntelligence?:NewsletterIntelligenceEntry[];
   crossIntelligenceChains?:CrossIntelligenceNewsletterEntry[];
   crossIntelligence?:NewsletterCrossIntelligence[];
+  investmentMapV1?:InvestmentMapNewsletterView;
   investmentMap?:NewsletterInvestmentMapEntry[];
   whatToWatch?:NewsletterWatchItem[];
   sources:NewsletterSourceLink[];
   assets:NewsletterContentAsset[];
 }
 
-export interface NewsletterBuildInput extends Omit<NewsletterViewModel,'aiIntelligence'|'wallStreetIntelligence'|'koreaResearch'|'koreaMarketIntelligence'|'crossIntelligenceChains'|'crossIntelligence'|'investmentMap'|'whatToWatch'> {
+export interface NewsletterBuildInput extends Omit<NewsletterViewModel,'aiIntelligence'|'wallStreetIntelligence'|'koreaResearch'|'koreaMarketIntelligence'|'crossIntelligenceChains'|'crossIntelligence'|'investmentMapV1'|'investmentMap'|'whatToWatch'> {
   aiIntelligence?:NewsletterIntelligenceEntry[];
   wallStreetIntelligence?:NewsletterIntelligenceEntry[];
   koreaResearch?:KoreaResearchNewsletterEntry[];
   koreaMarketIntelligence?:NewsletterIntelligenceEntry[];
   crossIntelligenceChains?:CrossIntelligenceNewsletterEntry[];
   crossIntelligence?:NewsletterCrossIntelligence[];
+  investmentMapV1?:InvestmentMapNewsletterView;
   investmentMap?:NewsletterInvestmentMapEntry[];
   whatToWatch?:NewsletterWatchItem[];
 }
@@ -94,6 +97,7 @@ export function createNewsletterViewModel(input:NewsletterBuildInput):Newsletter
     ...(optionalArray(input.koreaMarketIntelligence)?{koreaMarketIntelligence:optionalArray(input.koreaMarketIntelligence)!}:{}),
     ...(optionalArray(input.crossIntelligenceChains)?{crossIntelligenceChains:optionalArray(input.crossIntelligenceChains)!}:{}),
     ...(optionalArray(input.crossIntelligence)?{crossIntelligence:optionalArray(input.crossIntelligence)!}:{}),
+    ...(hasInvestmentMapContent(input.investmentMapV1)?{investmentMapV1:structuredClone(input.investmentMapV1)}:{}),
     ...(optionalArray(input.investmentMap)?{investmentMap:optionalArray(input.investmentMap)!}:{}),
     ...(optionalArray(input.whatToWatch)?{whatToWatch:optionalArray(input.whatToWatch)!}:{})
   };
@@ -164,6 +168,15 @@ export function validateNewsletterViewModel(value:unknown):string[] {
     if(!item||typeof item!=='object'||Array.isArray(item)){errors.push(`investmentMap[${index}]: object required`);return;}
     const record=item as Record<string,unknown>;if(!nonEmpty(record.theme)||!stringArray(record.upstream)||!stringArray(record.beneficiaries)||!stringArray(record.risks)) errors.push(`investmentMap[${index}]: invalid investment map item`);
   });
+  if(model.investmentMapV1!==undefined){
+    if(!model.investmentMapV1||typeof model.investmentMapV1!=='object'||Array.isArray(model.investmentMapV1)) errors.push('investmentMapV1: object required');
+    else {
+      const view=model.investmentMapV1 as Record<string,unknown>;
+      const sections=['institutionalFocus','koreaResearchFocus','crossMarketThemes','mostDiscussedStocks','changes','majorRisks'] as const;
+      for(const key of sections)if(!Array.isArray(view[key]))errors.push(`investmentMapV1.${key}: array required`);
+      if(sections.every(key=>Array.isArray(view[key])&&(view[key] as unknown[]).length===0))errors.push('investmentMapV1: omit empty section');
+    }
+  }
   if(Array.isArray(model.whatToWatch)) model.whatToWatch.forEach((item,index)=>{
     if(!item||typeof item!=='object'||Array.isArray(item)){errors.push(`whatToWatch[${index}]: object required`);return;}
     const record=item as Record<string,unknown>;if(!nonEmpty(record.headline)||!nonEmpty(record.watchFor)||!nonEmpty(record.validityHorizon)) errors.push(`whatToWatch[${index}]: invalid watch item`);
@@ -181,6 +194,7 @@ export function validateNewsletterViewModel(value:unknown):string[] {
 }
 function stringArray(value:unknown):value is string[] { return Array.isArray(value)&&value.every(nonEmpty)&&new Set(value).size===value.length; }
 function isoTime(value:unknown):value is string { return typeof value==='string'&&Number.isFinite(Date.parse(value)); }
+function hasInvestmentMapContent(value:InvestmentMapNewsletterView|undefined):value is InvestmentMapNewsletterView { return Boolean(value)&&Object.values(value!).some(section=>section.length>0); }
 
 function validateEntry(value:unknown,path:string):string[] {
   if(!value||typeof value!=='object'||Array.isArray(value)) return [`${path}: object required`];
