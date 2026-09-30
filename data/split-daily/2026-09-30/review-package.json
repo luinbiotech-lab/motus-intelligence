@@ -1,0 +1,98 @@
+{
+  "generatedAt": "2026-10-01T09:00:00+09:00",
+  "selectedDates": {
+    "ai": "2026-09-29",
+    "us": "2026-09-30",
+    "korea": "2026-09-30"
+  },
+  "units": [
+    {
+      "publicationId": "motus-ai-intelligence-2026-09-29",
+      "category": "AI_INTELLIGENCE",
+      "observedDate": "2026-09-29",
+      "title": "상시 실행형 에이전트와 AI 보안·과학 연구의 확장 (2026년 9월 29일)",
+      "label": "AI Intelligence",
+      "sourceCount": 3,
+      "itemCount": 3,
+      "readiness": "READY",
+      "readinessReasons": [],
+      "humanReview": {
+        "state": "PENDING",
+        "reviewer": null,
+        "reviewedAt": null,
+        "history": []
+      },
+      "publicationState": "PREVIEW_READY",
+      "draftPostId": null,
+      "publicPostUrl": null,
+      "duplicateCount": 0,
+      "contentFingerprint": "d02a15429bf03afafb33b656df3498da7ffc8d4ec432108027bb13074a332051",
+      "renderValidation": {
+        "mobileSafe": true,
+        "clickableSources": true,
+        "internalTokenLeak": false,
+        "script": false
+      }
+    },
+    {
+      "publicationId": "motus-us-market-2026-09-30",
+      "category": "US_MARKET",
+      "observedDate": "2026-09-30",
+      "title": "미국 증시 마감: 장기금리 부담에 다우 약세, 나스닥은 소폭 상승 (2026년 9월 30일)",
+      "label": "U.S. Market",
+      "sourceCount": 5,
+      "itemCount": 8,
+      "readiness": "READY",
+      "readinessReasons": [],
+      "humanReview": {
+        "state": "PENDING",
+        "reviewer": null,
+        "reviewedAt": null,
+        "history": []
+      },
+      "publicationState": "PREVIEW_READY",
+      "draftPostId": null,
+      "publicPostUrl": null,
+      "duplicateCount": 0,
+      "contentFingerprint": "a2103261e7771fb91d62f091b19b37d31f4dbe9f48ab4f3a22f9faf28e3bff03",
+      "renderValidation": {
+        "mobileSafe": true,
+        "clickableSources": true,
+        "internalTokenLeak": false,
+        "script": false
+      }
+    },
+    {
+      "publicationId": "motus-korea-market-2026-09-30",
+      "category": "KOREA_MARKET",
+      "observedDate": "2026-09-30",
+      "title": "국내 증시 마감: 외국인·기관 매도에 코스피 하락, 코스닥은 반등 (2026년 9월 30일)",
+      "label": "Korea Market",
+      "sourceCount": 8,
+      "itemCount": 22,
+      "readiness": "READY",
+      "readinessReasons": [],
+      "humanReview": {
+        "state": "PENDING",
+        "reviewer": null,
+        "reviewedAt": null,
+        "history": []
+      },
+      "publicationState": "PREVIEW_READY",
+      "draftPostId": null,
+      "publicPostUrl": null,
+      "duplicateCount": 0,
+      "contentFingerprint": "02d561ce2468b808683eefeb702ade2d5be0180d5ec6573185ee3ce641ad4cf4",
+      "renderValidation": {
+        "mobileSafe": true,
+        "clickableSources": true,
+        "internalTokenLeak": false,
+        "script": false
+      }
+    }
+  ],
+  "externalActions": {
+    "bloggerInsertCount": 0,
+    "publishCount": 0
+  }
+}
