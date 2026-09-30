@@ -1,9 +1,10 @@
 {
   "postId": "9009523239057574527",
-  "state": "DRAFT",
-  "publicPostUrl": null,
-  "duplicateCount": 0,
-  "verification": {
+  "state": "PUBLISHED",
+  "publicPostUrl": "https://motusnova.blogspot.com/2026/09/5-ai.html",
+  "publishedAt": "2026-09-30T22:24:58+09:00",
+  "publishApiCallCount": 1,
+  "prePublishVerification": {
     "checks": {
       "postId": true,
       "draftState": true,
@@ -29,21 +30,31 @@
     "styleAttributeCount": 555,
     "anchorCount": 47
   },
-  "sourceDestinationVerification": {
-    "status": "PASS",
-    "checkedUniqueUrls": 15,
-    "httpDirectPass": 10,
-    "browserVerifiedAfterBotBlock": 5,
-    "brokenOrPlaceholderCount": 0
-  },
-  "noFixtureVerification": "PASS",
-  "actualAdminPreviewVerification": {
-    "status": "PASS",
-    "device": "smartphone",
-    "horizontalOverflow": "NONE_OBSERVED",
+  "publicPageVerification": {
+    "httpStatus": 200,
+    "finalUrl": "https://motusnova.blogspot.com/2026/09/5-ai.html",
+    "title": "PASS",
     "masthead": "PASS",
-    "sectionFlow": "PASS",
-    "charts": "FOUR_SVG_PRESENT",
-    "titleH1Duplication": "NONE"
+    "requiredSections": "PASS",
+    "svgCount": 4,
+    "twoByTwoCharts": "PASS",
+    "sourceAnchorCount": 47,
+    "sourceLinks": "PASS",
+    "mobile": "PASS",
+    "horizontalOverflow": "NONE",
+    "styleTagCount": 0,
+    "scriptCount": 0,
+    "h1Count": 0,
+    "rawUrlVisible": false,
+    "internalOrFixtureLeak": false,
+    "pass": true
+  },
+  "propagation": {
+    "a4Cta": "PASS",
+    "a4QrTarget": "PASS",
+    "emailCta": "PASS",
+    "targetUrl": "https://motusnova.blogspot.com/2026/09/5-ai.html",
+    "a4Released": false,
+    "emailSent": false
   }
 }
