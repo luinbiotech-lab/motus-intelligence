@@ -1,0 +1,175 @@
+{
+  "weekly": {
+    "metadata": {
+      "publicationId": "weekly-intelligence-2026-w40",
+      "category": "WEEKLY_INTELLIGENCE",
+      "canonicalSlug": "weekly-intelligence",
+      "periodStart": "2026-09-28",
+      "periodEnd": "2026-10-02",
+      "observedDates": [
+        "2026-09-29",
+        "2026-09-30"
+      ],
+      "generatedAt": "2026-10-01T12:00:00+09:00",
+      "readiness": "HOLD",
+      "readinessReasons": [
+        "주간 전체 발행일이 완료되지 않아 변화 추세 판정 보류"
+      ],
+      "review": {
+        "state": "PENDING",
+        "reviewer": null,
+        "reviewedAt": null,
+        "history": []
+      }
+    },
+    "fingerprint": "6f47b373216696894693800ae362aaadec5ad329846940f23f0cc3ead735afc8"
+  },
+  "monthly": {
+    "metadata": {
+      "publicationId": "monthly-intelligence-2026-09",
+      "category": "MONTHLY_INTELLIGENCE",
+      "canonicalSlug": "monthly-intelligence",
+      "periodStart": "2026-09-01",
+      "periodEnd": "2026-09-30",
+      "observedDates": [
+        "2026-09-29",
+        "2026-09-30"
+      ],
+      "generatedAt": "2026-10-01T12:00:00+09:00",
+      "readiness": "HOLD",
+      "readinessReasons": [
+        "월간 전체 일별 history가 없어 반복 빈도와 기관 시각 변화 판정 보류"
+      ],
+      "review": {
+        "state": "PENDING",
+        "reviewer": null,
+        "reviewedAt": null,
+        "history": []
+      }
+    },
+    "fingerprint": "6cca83578510e5d1ca01a5cfddea1f644ac6e377e34ef9720adba5f241a8d718",
+    "eventToMarket": [
+      {
+        "eventId": "event:openai-dots-2026-09-29",
+        "eventDate": "2026-09-29",
+        "themeIds": [
+          "theme:agentic-ai"
+        ],
+        "companyIds": [
+          "company:openai"
+        ],
+        "initialEventSummary": "OpenAI가 장시간 작업을 이어가는 에이전트 실행 환경 Dots를 공개했다.",
+        "wallStreetInterpretation": null,
+        "koreaInterpretation": "삼성증권 공개 리서치는 상시 실행형 에이전트의 기업 적용에서 작업 라우팅과 비용·칩 최적화를 확인 조건으로 제시했다.",
+        "initialMarketReaction": null,
+        "subsequentMarketReaction": null,
+        "evidenceRefs": [
+          "EVIDENCE-REAL-OPENAI-DOTS-1",
+          "EVIDENCE-REAL-SAMSUNG-MORNING-1"
+        ],
+        "sourceRefs": [
+          "https://openai.com/index/introducing-dots/",
+          "https://www.samsungpop.com/v2/today-invest/series/todaymarkettrend-3040"
+        ],
+        "verificationStatus": "VERIFIED",
+        "confidence": null
+      }
+    ]
+  },
+  "reports": {
+    "title": "리포트 (Reports)",
+    "filters": {},
+    "groups": [
+      {
+        "group": "Daily",
+        "entries": [
+          {
+            "title": "상시 실행형 에이전트와 AI 보안·과학 연구의 확장 (2026년 9월 29일)",
+            "issueDate": "2026-09-29",
+            "periodStart": "2026-09-29",
+            "periodEnd": "2026-09-29",
+            "category": "AI_INTELLIGENCE",
+            "reportType": "AI_DAILY",
+            "downloadUrl": null,
+            "articleUrl": null,
+            "generatedAt": "2026-10-01T12:00:00+09:00",
+            "publishedAt": null,
+            "state": "PREVIEW_READY"
+          },
+          {
+            "title": "미국 증시 마감: 장기금리 부담에 다우 약세, 나스닥은 소폭 상승 (2026년 9월 30일)",
+            "issueDate": "2026-09-30",
+            "periodStart": "2026-09-30",
+            "periodEnd": "2026-09-30",
+            "category": "US_MARKET",
+            "reportType": "US_MARKET_DAILY",
+            "downloadUrl": null,
+            "articleUrl": null,
+            "generatedAt": "2026-10-01T12:00:00+09:00",
+            "publishedAt": null,
+            "state": "PREVIEW_READY"
+          },
+          {
+            "title": "국내 증시 마감: 외국인·기관 매도에 코스피 하락, 코스닥은 반등 (2026년 9월 30일)",
+            "issueDate": "2026-09-30",
+            "periodStart": "2026-09-30",
+            "periodEnd": "2026-09-30",
+            "category": "KOREA_MARKET",
+            "reportType": "KOREA_MARKET_DAILY",
+            "downloadUrl": null,
+            "articleUrl": null,
+            "generatedAt": "2026-10-01T12:00:00+09:00",
+            "publishedAt": null,
+            "state": "PREVIEW_READY"
+          }
+        ]
+      },
+      {
+        "group": "Weekly",
+        "entries": [
+          {
+            "title": "주간 인텔리전스 구조 미리보기",
+            "issueDate": "2026-10-02",
+            "periodStart": "2026-09-28",
+            "periodEnd": "2026-10-02",
+            "category": "WEEKLY_INTELLIGENCE",
+            "reportType": "WEEKLY_INTELLIGENCE",
+            "downloadUrl": null,
+            "articleUrl": null,
+            "generatedAt": "2026-10-01T12:00:00+09:00",
+            "publishedAt": null,
+            "state": "PREVIEW_READY"
+          }
+        ]
+      },
+      {
+        "group": "Monthly",
+        "entries": [
+          {
+            "title": "월간 인텔리전스 구조 미리보기",
+            "issueDate": "2026-09-30",
+            "periodStart": "2026-09-01",
+            "periodEnd": "2026-09-30",
+            "category": "MONTHLY_INTELLIGENCE",
+            "reportType": "MONTHLY_INTELLIGENCE",
+            "downloadUrl": null,
+            "articleUrl": null,
+            "generatedAt": "2026-10-01T12:00:00+09:00",
+            "publishedAt": null,
+            "state": "PREVIEW_READY"
+          }
+        ]
+      }
+    ]
+  },
+  "remoteCalls": {
+    "insert": 0,
+    "patch": 0,
+    "publish": 0,
+    "themeUpdate": 0,
+    "menuUpdate": 0
+  },
+  "commerce": {
+    "enabled": false
+  }
+}

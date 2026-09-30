@@ -80,6 +80,27 @@ Sprint 3G production layer는 `src/intelligence/daily-production.ts`에서 검�
 
 Sprint 4D presentation layer는 `src/intelligence/daily-masters.ts`에서 기존 `NewsletterViewModel`을 AI 인텔리전스, 미국증시, 국내증시의 독립 Daily publication ViewModel로 나눕니다. 공통 검증 데이터를 다시 분석하지 않으며 기존 Daily Intelligence renderer와 공개 이력도 유지합니다. Blogger label용 canonical name과 한·영 display label을 분리하고, 시장 등락은 한국 관행에 따라 상승 빨강·하락 파랑·보합 슬레이트로 표시합니다. 미국 Daily는 실제 5거래일 4대 지수 차트에 종가와 등락을 결합하고 별도 중복 지수 카드를 만들지 않습니다. 국내 Daily는 검증된 history가 없으면 선형 차트를 만들지 않으며 투자자 수급과 실제 업종 등락을 방향형 시각화로 표시합니다. 용어해설과 PDF CTA는 조건을 충족할 때만 노출됩니다. Weekly/Monthly는 Cross Intelligence, Consensus/Divergence, Investment Map, 변화 추적을 위한 경계만 제공합니다. `npm run intelligence:editorial-ia-preview`는 첫 공개 글을 수정하지 않고 세 MASTER의 로컬 side-by-side preview를 생성합니다. Commerce는 이 계층에 포함되지 않으며 `enabled=false` 운영 조건을 유지합니다.
 
+Sprint 4F production foundation은 `src/intelligence/periodic-production.ts`에서 검증된 Daily 구조와 intelligence record를 Weekly/Monthly ViewModel로 집계합니다. 단일 관측으로 변화 추세를 만들지 않으며, Consensus는 같은 주제와 방향을 명시한 독립 기관 2곳 이상 및 evidence가 있을 때만, Divergence는 같은 대상에 대한 실제 상반 관점과 evidence가 있을 때만 생성합니다. Event-to-Market review는 후속 시장 반응이 확인되지 않으면 `null`을 유지합니다. Weekly PDF는 3~5쪽 compact ViewModel, Monthly PDF는 long-form ViewModel로 Blogger HTML과 분리합니다. Reports Archive는 Daily/Weekly/Monthly 그룹 및 연·월·카테고리·report type 필터를 지원하고, HTTPS PDF와 실제 article URL이 확인된 경우에만 CTA를 표시합니다. `npm run intelligence:periodic-preview`는 로컬 preview와 review package만 생성하며 Blogger 원격 동작은 수행하지 않습니다.
+
+MOTUS publication hierarchy:
+
+```text
+DAILY
+├ AI Intelligence
+├ U.S. Market
+└ Korea Market
+WEEKLY
+└ Weekly Intelligence
+MONTHLY
+└ Monthly Intelligence
+REPORTS
+├ Daily PDFs
+├ Weekly PDF
+└ Monthly PDF
+```
+
+Blogger는 publishing channel이고, MOTUS Intelligence는 검증·집계·표현을 담당하는 product/system입니다.
+
 A4 MASTER 생성은 관리자 전용 boundary를 통과해야 하며, 공개 route에서 호출할 수 없습니다. 개발환경에서는 `src/services/admin.ts`의 server-side authorization boundary와 `data/a4-master/YYYY-MM-DD/admin-a4-route.html`로 내부 route 화면을 분리합니다.
 
 실제 Blogger 연결 설정은 `config/publishing.json`에 MOTUS 브랜드·공개 주소, 환경 변수 이름과 `publishAsDraft` 정책만 저장합니다. blogId, client secret, refresh token, access token 값은 저장소 파일에 기록하지 않습니다. Publisher는 `BLOGGER_REFRESH_TOKEN`으로 access token을 자동 갱신한 뒤 Google Blogger API v3의 `posts.insert?isDraft=true`를 호출합니다. refresh credential이 일부 누락되거나 갱신에 실패하면 게시 요청을 보내지 않습니다. Publication record는 초안 식별자인 `draftPostId`와 공개 글 주소인 `publicPostUrl`을 분리하며, `DRAFT`에서는 `publicPostUrl=null`을 유지합니다. 실제 게시 후 확인된 글 permalink만 A4 CTA/QR과 Naver package에 반영하고 Blogger 루트 URL이나 preview URL은 상세분석 링크로 사용하지 않습니다. 공개 CTA는 “전체 분석은 MOTUS에서 확인하세요”로 통일합니다.

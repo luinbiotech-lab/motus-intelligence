@@ -10,7 +10,7 @@ export const motusMarketColors={positive:'#c62828',negative:'#1565c0',unchanged:
 export type DailyGlossaryEntry={term:string;fullSpelling:string;definition:string};
 export type DailyReportType='AI_DAILY'|'US_MARKET_DAILY'|'KOREA_MARKET_DAILY'|'WEEKLY_INTELLIGENCE'|'MONTHLY_INTELLIGENCE';
 export type PublicReportState='PREVIEW_READY'|'AVAILABLE'|'WITHDRAWN';
-export interface PublicReportEntry { title:string;issueDate:string;category:MotusPublicCategoryKey;reportType:DailyReportType;downloadUrl:string|null;generatedAt:string;state:PublicReportState }
+export interface PublicReportEntry { title:string;issueDate:string;periodStart?:string;periodEnd?:string;category:MotusPublicCategoryKey;reportType:DailyReportType;downloadUrl:string|null;articleUrl?:string|null;generatedAt:string;publishedAt?:string|null;state:PublicReportState }
 export interface ReportsArchiveViewModel { title:string;entries:PublicReportEntry[] }
 export interface PeriodicIntelligenceBoundary { cadence:'WEEKLY'|'MONTHLY';crossIntelligence:boolean;consensusDivergence:boolean;investmentMap:boolean;themeChanges:boolean;institutionChanges:boolean;eventToMarketReview:boolean }
 

@@ -23,6 +23,7 @@ export const MOTUS_PUBLIC_CATEGORY_MASTER = {
 
 export type MotusPublicCategoryKey = keyof typeof MOTUS_PUBLIC_CATEGORY_MASTER;
 export type MotusPublicCategory = typeof MOTUS_PUBLIC_CATEGORY_MASTER[MotusPublicCategoryKey];
+export const MOTUS_PUBLIC_CATEGORY_SLUGS:Record<MotusPublicCategoryKey,string>={AI_INTELLIGENCE:'ai-intelligence',US_MARKET:'us-market',KOREA_MARKET:'korea-market',WEEKLY_INTELLIGENCE:'weekly-intelligence',MONTHLY_INTELLIGENCE:'monthly-intelligence',REPORTS:'reports'};
 
 export interface GlobalContentMetadata {
   schemaVersion: '1.0';

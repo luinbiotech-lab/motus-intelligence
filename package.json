@@ -16,6 +16,7 @@
     "intelligence:golden-review": "npm run build && node dist/src/golden-review-cli.js",
     "intelligence:editorial-ia-preview": "npm run build && node dist/src/editorial-ia-preview-cli.js",
     "intelligence:split-daily": "npm run build && node dist/src/split-daily-production-cli.js",
+    "intelligence:periodic-preview": "npm run build && node dist/src/periodic-production-cli.js",
     "sample": "npm run build && node dist/src/cli.js --sample",
     "report": "node dist/src/cli.js"
   },

@@ -1,0 +1,166 @@
+{
+  "channel": "PDF",
+  "format": "MONTHLY_LONG_FORM",
+  "colorMaster": {
+    "positive": "#c62828",
+    "negative": "#1565c0",
+    "unchanged": "#59697d",
+    "primary": "#03162e"
+  },
+  "metadata": {
+    "publicationId": "monthly-intelligence-2026-09",
+    "category": "MONTHLY_INTELLIGENCE",
+    "canonicalSlug": "monthly-intelligence",
+    "periodStart": "2026-09-01",
+    "periodEnd": "2026-09-30",
+    "observedDates": [
+      "2026-09-29",
+      "2026-09-30"
+    ],
+    "generatedAt": "2026-10-01T12:00:00+09:00",
+    "readiness": "HOLD",
+    "readinessReasons": [
+      "월간 전체 일별 history가 없어 반복 빈도와 기관 시각 변화 판정 보류"
+    ],
+    "review": {
+      "state": "PENDING",
+      "reviewer": null,
+      "reviewedAt": null,
+      "history": []
+    }
+  },
+  "sections": [
+    {
+      "title": "Executive Summary",
+      "items": [
+        "9월 말 검증 구간에서는 AI 에이전트의 실행·보안·연구 적용이 구체화되는 한편, 장기금리와 유가가 주식시장 할인율을 높였다. 한국시장에서는 대형주 외국인 수급과 AI 인프라 관련 장기 연구 관점을 분리해 볼 필요가 있었다."
+      ]
+    },
+    {
+      "title": "Monthly Domains",
+      "items": [
+        "Microsoft Research, 생물학 연구 시스템 Quine 공개",
+        "NVIDIA, Open Agent Safety Platform 공개",
+        "OpenAI, 상시 실행형 에이전트 Dots 공개",
+        "9월 마지막 거래일에는 지수 내부의 온도 차가 컸다. 나스닥은 0.24% 올랐지만 S&P 500과 러셀2000은 하락했고, 다우는 0.86% 밀렸다. 예상보다 완만한 물가 지표로 시작한 안도감은 견조한 성장 지표와 5.29%까지 오른 10년물 금리에 눌렸다.",
+        "코스피는 외국인과 기관의 동반 순매도에 0.48% 하락한 6,838.04로 마감했다. 반면 코스닥은 기관 순매수와 일부 반도체·장비주의 강세에 0.72% 올랐다. 원·달러 환율은 1,352.8원으로 3.9원 내려 환율 부담은 다소 완화됐지만, 대형주 수급은 여전히 무거웠다."
+      ]
+    },
+    {
+      "title": "Event to Market",
+      "items": [
+        "OpenAI가 장시간 작업을 이어가는 에이전트 실행 환경 Dots를 공개했다."
+      ]
+    },
+    {
+      "title": "Investment Map",
+      "items": [
+        "기관 관심: Higher-for-longer rates",
+        "기관 관심: Market volatility",
+        "언급 기업: Anthropic",
+        "언급 기업: Meta Platforms (META)",
+        "언급 기업: Microsoft (MSFT)",
+        "리스크: 기업 도입 속도",
+        "리스크: 대규모 투자 계획의 집행 지연",
+        "리스크: 데이터센터 투자 부담",
+        "리스크: 에이전트 제품의 초기 실행 안정성",
+        "리스크: 장기 국채금리 상승",
+        "리스크: 제품 실행 지연",
+        "리스크: 추론 비용 부담",
+        "리스크: 하드웨어 수요 불확실성",
+        "리스크: 현금 소진"
+      ]
+    },
+    {
+      "title": "Review / Next Month",
+      "items": [
+        "현재 확보한 월말 검증 자료만으로 월간 추세를 단정하지 않았다. Event-to-Market 항목은 사건과 국내 기관 해석까지만 연결하고 시장 반응 및 사후 성과는 null로 유지했다.",
+        "에이전트 제품의 기업 도입과 비용 구조",
+        "장기금리·유가의 성장주 밸류에이션 영향",
+        "한국 반도체 수급과 실제 설비투자 집행"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "Microsoft Research",
+      "url": "https://www.microsoft.com/en-us/research/blog/introducing-quine-an-ai-research-system-designed-for-the-complexity-of-biology",
+      "publisher": "Microsoft Research"
+    },
+    {
+      "label": "NVIDIA",
+      "url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Launches-Open-Agent-Safety-Platform-to-Secure-Agents-From-Testing-to-Deployment/default.aspx",
+      "publisher": "NVIDIA"
+    },
+    {
+      "label": "OpenAI",
+      "url": "https://openai.com/index/introducing-dots",
+      "publisher": "OpenAI"
+    },
+    {
+      "label": "AP — 9월 30일 미국 주요지수 종가",
+      "url": "https://apnews.com/article/1ee73f14dc23f6139eeb12c7397f543e",
+      "publisher": "Associated Press"
+    },
+    {
+      "label": "AP — 미국시장 마감 해설",
+      "url": "https://apnews.com/article/e61d3d7b947a390c7eee6c8758e3095d",
+      "publisher": "Associated Press"
+    },
+    {
+      "label": "U.S. Treasury — Daily Treasury Rates",
+      "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202609&type=daily_treasury_yield_curve",
+      "publisher": "U.S. Department of the Treasury"
+    },
+    {
+      "label": "Cboe — VIX",
+      "url": "https://www.cboe.com/tradable-products/vix",
+      "publisher": "Cboe"
+    },
+    {
+      "label": "DXY historical data",
+      "url": "https://es.investing.com/currencies/us-dollar-index-historical-data",
+      "publisher": "Investing.com"
+    },
+    {
+      "label": "MarketTimes — 9월 30일 KRX 마감",
+      "url": "https://www.markettimes.co.kr/2026/09/30/krx-%EB%A7%88%EA%B0%90-9%EC%9B%94-30%EC%9D%BC-%EC%BD%94%EC%8A%A4%ED%94%BC-3%EA%B1%B0%EB%9E%98%EC%9D%BC-%EC%97%B0%EC%86%8D-%ED%95%98%EB%9D%BD%EC%99%B8%EA%B5%AD%EC%9D%B8%EA%B8%B0%EA%B4%80-%EB%8F%99",
+      "publisher": "MarketTimes"
+    },
+    {
+      "label": "Newsway — 국내 증시 마감",
+      "url": "https://www.newsway.co.kr/news/view?ud=2026093015491609752",
+      "publisher": "Newsway"
+    },
+    {
+      "label": "News1 — 원·달러 환율 마감",
+      "url": "https://www.news1.kr/finance/market-exr/6306362",
+      "publisher": "News1"
+    },
+    {
+      "label": "삼성증권 HTML 원문",
+      "url": "https://www.samsungpop.com/v2/today-invest/series/todaymarkettrend-3040",
+      "publisher": "삼성증권"
+    },
+    {
+      "label": "삼성증권 HTML 원문",
+      "url": "https://samsungpop.com/v2/today-invest/series/researchanalysttalk-3022",
+      "publisher": "삼성증권"
+    },
+    {
+      "label": "삼성증권 HTML 원문",
+      "url": "https://samsungpop.com/v2/today-invest/series/researchanalysttalk-3025",
+      "publisher": "삼성증권"
+    },
+    {
+      "label": "삼성증권 HTML 원문",
+      "url": "https://samsungpop.com/v2/today-invest/series/researchanalysttalk-3008",
+      "publisher": "삼성증권"
+    },
+    {
+      "label": "삼성증권 HTML 원문",
+      "url": "https://samsungpop.com/v2/today-invest/series/researchanalysttalk-3001",
+      "publisher": "삼성증권"
+    }
+  ]
+}

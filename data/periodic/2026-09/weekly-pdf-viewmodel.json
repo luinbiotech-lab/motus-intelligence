@@ -1,0 +1,182 @@
+{
+  "channel": "PDF",
+  "format": "WEEKLY_COMPACT",
+  "targetPages": {
+    "min": 3,
+    "max": 5
+  },
+  "colorMaster": {
+    "positive": "#c62828",
+    "negative": "#1565c0",
+    "unchanged": "#59697d",
+    "primary": "#03162e"
+  },
+  "metadata": {
+    "publicationId": "weekly-intelligence-2026-w40",
+    "category": "WEEKLY_INTELLIGENCE",
+    "canonicalSlug": "weekly-intelligence",
+    "periodStart": "2026-09-28",
+    "periodEnd": "2026-10-02",
+    "observedDates": [
+      "2026-09-29",
+      "2026-09-30"
+    ],
+    "generatedAt": "2026-10-01T12:00:00+09:00",
+    "readiness": "HOLD",
+    "readinessReasons": [
+      "주간 전체 발행일이 완료되지 않아 변화 추세 판정 보류"
+    ],
+    "review": {
+      "state": "PENDING",
+      "reviewer": null,
+      "reviewedAt": null,
+      "history": []
+    }
+  },
+  "sections": [
+    {
+      "title": "Executive Summary",
+      "items": [
+        "확인 가능한 주간 구간에서는 AI가 장시간 실행·보안·과학 연구로 확장됐고, 미국 증시는 높은 장기금리 때문에 지수별 차별화가 나타났다. 국내 증시는 외국인·기관의 대형주 매도와 코스닥 일부 업종의 반등이 함께 관찰됐다."
+      ]
+    },
+    {
+      "title": "AI / U.S. / Korea",
+      "items": [
+        "Microsoft Research, 생물학 연구 시스템 Quine 공개: Microsoft Research는 생물학의 복잡성을 다루는 멀티모달 월드 모델과 연구 하네스로 Quine을 소개했다.",
+        "NVIDIA, Open Agent Safety Platform 공개: NVIDIA는 에이전트 시험부터 배포까지 격리와 정책 집행을 지원하는 개방형 안전 플랫폼을 발표했다.",
+        "OpenAI, 상시 실행형 에이전트 Dots 공개: OpenAI는 클라우드 컴퓨터와 연결 앱을 이용해 장기 작업을 수행하는 Dots를 공개했다.",
+        "9월 마지막 거래일에는 지수 내부의 온도 차가 컸다. 나스닥은 0.24% 올랐지만 S&P 500과 러셀2000은 하락했고, 다우는 0.86% 밀렸다. 예상보다 완만한 물가 지표로 시작한 안도감은 견조한 성장 지표와 5.29%까지 오른 10년물 금리에 눌렸다.",
+        "장 초반에는 8월 PCE 물가가 시장 예상보다 낮게 나오며 금리 부담이 완화되는 듯했지만, 미국 경제의 성장세가 예상보다 강하다는 자료가 장기금리를 다시 끌어올렸다. 그 결과 금리에 민감한 광범위한 종목군은 약해졌고, 기술주 중심의 나스닥만 소폭 상승을 지켰다.",
+        "다우와 러셀2000의 동반 약세는 상승이 시장 전체로 퍼지지 않았다는 뜻이다. VIX는 낮은 수준을 유지했지만, 10년물 5%대와 유가 반등이 이어지면 기업의 자금조달 비용과 밸류에이션 부담이 다시 부각될 수 있다.",
+        "코스피는 외국인과 기관의 동반 순매도에 0.48% 하락한 6,838.04로 마감했다. 반면 코스닥은 기관 순매수와 일부 반도체·장비주의 강세에 0.72% 올랐다. 원·달러 환율은 1,352.8원으로 3.9원 내려 환율 부담은 다소 완화됐지만, 대형주 수급은 여전히 무거웠다.",
+        "코스피의 하락은 지수 전체의 위험회피라기보다 대형주에 집중된 외국인·기관 매도 영향이 컸다. 코스닥에서는 기관이 순매수로 전환했고 반도체 장비와 금속 업종이 강세를 보이면서 시장 내부 차별화가 뚜렷했다.",
+        "국내 증권사 리서치는 AI 인프라와 기업용 에이전트의 장기 성장성을 다루면서도, 설비투자 집행과 추론 비용, 실제 고객 사용량을 확인해야 한다는 조건을 함께 제시했다. 단기 지수 방향과 장기 산업 논리를 분리해 볼 필요가 있다."
+      ]
+    },
+    {
+      "title": "Cross Intelligence",
+      "items": [
+        "2개 검증 항목을 공통 이벤트 근거로 연결"
+      ]
+    },
+    {
+      "title": "Investment Map",
+      "items": [
+        "기관 관심: Higher-for-longer rates",
+        "기관 관심: Market volatility",
+        "언급 기업: Anthropic",
+        "언급 기업: Meta Platforms (META)",
+        "언급 기업: Microsoft (MSFT)",
+        "리스크: 기업 도입 속도",
+        "리스크: 대규모 투자 계획의 집행 지연",
+        "리스크: 데이터센터 투자 부담",
+        "리스크: 에이전트 제품의 초기 실행 안정성",
+        "리스크: 장기 국채금리 상승",
+        "리스크: 제품 실행 지연",
+        "리스크: 추론 비용 부담",
+        "리스크: 하드웨어 수요 불확실성",
+        "리스크: 현금 소진"
+      ]
+    },
+    {
+      "title": "Risk / Next Week",
+      "items": [
+        "기업 도입 속도",
+        "대규모 투자 계획의 집행 지연",
+        "데이터센터 투자 부담",
+        "에이전트 제품의 초기 실행 안정성",
+        "장기 국채금리 상승",
+        "제품 실행 지연",
+        "추론 비용 부담",
+        "하드웨어 수요 불확실성",
+        "현금 소진",
+        "미국 10년물 5.3% 부근의 방향과 기술주 시장 폭",
+        "AI 에이전트의 장시간 실행 안정성과 보안 적용 사례",
+        "코스피 외국인 매도 강도와 코스닥 기관 수급의 지속 여부"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "Microsoft Research",
+      "url": "https://www.microsoft.com/en-us/research/blog/introducing-quine-an-ai-research-system-designed-for-the-complexity-of-biology",
+      "publisher": "Microsoft Research"
+    },
+    {
+      "label": "NVIDIA",
+      "url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Launches-Open-Agent-Safety-Platform-to-Secure-Agents-From-Testing-to-Deployment/default.aspx",
+      "publisher": "NVIDIA"
+    },
+    {
+      "label": "OpenAI",
+      "url": "https://openai.com/index/introducing-dots",
+      "publisher": "OpenAI"
+    },
+    {
+      "label": "AP — 9월 30일 미국 주요지수 종가",
+      "url": "https://apnews.com/article/1ee73f14dc23f6139eeb12c7397f543e",
+      "publisher": "Associated Press"
+    },
+    {
+      "label": "AP — 미국시장 마감 해설",
+      "url": "https://apnews.com/article/e61d3d7b947a390c7eee6c8758e3095d",
+      "publisher": "Associated Press"
+    },
+    {
+      "label": "U.S. Treasury — Daily Treasury Rates",
+      "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202609&type=daily_treasury_yield_curve",
+      "publisher": "U.S. Department of the Treasury"
+    },
+    {
+      "label": "Cboe — VIX",
+      "url": "https://www.cboe.com/tradable-products/vix",
+      "publisher": "Cboe"
+    },
+    {
+      "label": "DXY historical data",
+      "url": "https://es.investing.com/currencies/us-dollar-index-historical-data",
+      "publisher": "Investing.com"
+    },
+    {
+      "label": "MarketTimes — 9월 30일 KRX 마감",
+      "url": "https://www.markettimes.co.kr/2026/09/30/krx-%EB%A7%88%EA%B0%90-9%EC%9B%94-30%EC%9D%BC-%EC%BD%94%EC%8A%A4%ED%94%BC-3%EA%B1%B0%EB%9E%98%EC%9D%BC-%EC%97%B0%EC%86%8D-%ED%95%98%EB%9D%BD%EC%99%B8%EA%B5%AD%EC%9D%B8%EA%B8%B0%EA%B4%80-%EB%8F%99",
+      "publisher": "MarketTimes"
+    },
+    {
+      "label": "Newsway — 국내 증시 마감",
+      "url": "https://www.newsway.co.kr/news/view?ud=2026093015491609752",
+      "publisher": "Newsway"
+    },
+    {
+      "label": "News1 — 원·달러 환율 마감",
+      "url": "https://www.news1.kr/finance/market-exr/6306362",
+      "publisher": "News1"
+    },
+    {
+      "label": "삼성증권 HTML 원문",
+      "url": "https://www.samsungpop.com/v2/today-invest/series/todaymarkettrend-3040",
+      "publisher": "삼성증권"
+    },
+    {
+      "label": "삼성증권 HTML 원문",
+      "url": "https://samsungpop.com/v2/today-invest/series/researchanalysttalk-3022",
+      "publisher": "삼성증권"
+    },
+    {
+      "label": "삼성증권 HTML 원문",
+      "url": "https://samsungpop.com/v2/today-invest/series/researchanalysttalk-3025",
+      "publisher": "삼성증권"
+    },
+    {
+      "label": "삼성증권 HTML 원문",
+      "url": "https://samsungpop.com/v2/today-invest/series/researchanalysttalk-3008",
+      "publisher": "삼성증권"
+    },
+    {
+      "label": "삼성증권 HTML 원문",
+      "url": "https://samsungpop.com/v2/today-invest/series/researchanalysttalk-3001",
+      "publisher": "삼성증권"
+    }
+  ]
+}
