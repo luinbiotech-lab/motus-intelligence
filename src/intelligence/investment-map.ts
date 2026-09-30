@@ -54,6 +54,7 @@ export interface InvestmentMapNewsletterView {
 export interface InvestmentMapA4CompactView {
   institutionalFocus:PublicFocus[]; koreaResearchFocus:PublicFocus[]; crossMarketThemes:PublicFocus[];
   mostDiscussedStocks:{label:string;mentionCount:number;institutionCount:number}[]; majorRisks:PublicTextAggregate[];
+  tiedBoundaryCounts:{institutionalFocus:number;koreaResearchFocus:number;crossMarketThemes:number;mostDiscussedStocks:number;majorRisks:number};
 }
 interface PublicFocus { label:string;mentionCount:number;institutionCount:number;supportingInstitutions:string[] }
 interface PublicTextAggregate { label:string;mentionCount:number;supportingInstitutions:string[] }
@@ -212,17 +213,23 @@ export function buildInvestmentMapNewsletterView(map:InvestmentMap):InvestmentMa
   };
 }
 export function buildInvestmentMapA4CompactView(map:InvestmentMap):InvestmentMapA4CompactView {
+  const institutionalFocus=compactWithTieMetadata(map.institutionalFocus,3);
+  const koreaResearchFocus=compactWithTieMetadata(map.koreaResearchFocus,3);
+  const crossMarketThemes=compactWithTieMetadata(map.crossMarketThemes,3);
+  const mostDiscussedStocks=compactWithTieMetadata(map.mostDiscussedStocks,5);
+  const majorRisks=compactWithTieMetadata(map.majorRisks,3);
   return {
-    institutionalFocus:takeWithoutSplittingTies(map.institutionalFocus,3).map(publicFocus),koreaResearchFocus:takeWithoutSplittingTies(map.koreaResearchFocus,3).map(publicFocus),
-    crossMarketThemes:takeWithoutSplittingTies(map.crossMarketThemes,3).map(publicFocus),
-    mostDiscussedStocks:takeWithoutSplittingTies(map.mostDiscussedStocks,5).map(item=>({label:`${item.company}${item.ticker?` (${item.ticker})`:''}`,mentionCount:item.mentionCount,institutionCount:item.institutionCount})),
-    majorRisks:takeWithoutSplittingTies(map.majorRisks,3).map(publicText)
+    institutionalFocus:institutionalFocus.items.map(publicFocus),koreaResearchFocus:koreaResearchFocus.items.map(publicFocus),
+    crossMarketThemes:crossMarketThemes.items.map(publicFocus),
+    mostDiscussedStocks:mostDiscussedStocks.items.map(item=>({label:`${item.company}${item.ticker?` (${item.ticker})`:''}`,mentionCount:item.mentionCount,institutionCount:item.institutionCount})),
+    majorRisks:majorRisks.items.map(publicText),
+    tiedBoundaryCounts:{institutionalFocus:institutionalFocus.tiedBoundaryCount,koreaResearchFocus:koreaResearchFocus.tiedBoundaryCount,crossMarketThemes:crossMarketThemes.tiedBoundaryCount,mostDiscussedStocks:mostDiscussedStocks.tiedBoundaryCount,majorRisks:majorRisks.tiedBoundaryCount}
   };
 }
-function takeWithoutSplittingTies<T extends {mentionCount:number;institutionCount?:number}>(items:T[],limit:number):T[] {
-  if(items.length<=limit)return [...items];const at=items[limit-1];if(!at)return [];
+function compactWithTieMetadata<T extends {mentionCount:number;institutionCount?:number}>(items:T[],limit:number):{items:T[];tiedBoundaryCount:number} {
+  if(items.length<=limit)return {items:[...items],tiedBoundaryCount:0};const at=items[limit-1];if(!at)return {items:[],tiedBoundaryCount:0};
   const tied=items.filter(item=>item.mentionCount===at.mentionCount&&(item.institutionCount??-1)===(at.institutionCount??-1));const before=items.filter(item=>item.mentionCount>at.mentionCount||(item.mentionCount===at.mentionCount&&(item.institutionCount??-1)>(at.institutionCount??-1)));
-  return before.length+tied.length<=limit?[...before,...tied]:before;
+  return before.length+tied.length<=limit?{items:[...before,...tied],tiedBoundaryCount:0}:{items:before,tiedBoundaryCount:tied.length};
 }
 
 function observationFocusMap(values:Observation[]):Map<string,Observation[]>{const map=new Map<string,Observation[]>();for(const item of values)for(const focus of item.focuses)map.set(focus.key,[...(map.get(focus.key)??[]),item]);return map;}

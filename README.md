@@ -76,6 +76,8 @@ Cross Intelligence Engine은 `src/intelligence/cross-intelligence.ts`에서 AI I
 
 Investment Map v1은 `src/intelligence/investment-map.ts`에서 검증된 Wall Street research, Korea Brokerage Research, AI/industry theme와 Cross Intelligence chain을 집계합니다. 동일 research ID, 기관·제목·발행시각, canonical source, 기관·event 중복을 먼저 제거하고 deduped report 집합으로만 언급 수와 기관 수를 계산합니다. Market Fact는 관심도 count에서 제외하고 Cross chain에 연결된 시장 반응에만 사용합니다. 목표주가·투자의견 변경과 전략·risk는 원문 구조화 필드만 사용하며 추천, 점수, 별점이나 임의 ranking을 만들지 않습니다. Emerging/increased/decreased attention은 이전 deduped snapshot이 있을 때만 생성합니다. A4 compact view는 실제 언급·기관 수로 정렬하고 표시 한도 경계의 동률 그룹을 자르지 않습니다.
 
+Sprint 3G production layer는 `src/intelligence/daily-production.ts`에서 검증된 AI, Wall Street, Korea Market, Korea Research, Cross Intelligence, Investment Map을 한 번만 조립해 단일 `NewsletterViewModel`과 content fingerprint를 만듭니다. Blogger, Email, A4 preview는 이 모델만 읽고 빈 section을 생략합니다. Preview는 Human Review 전에도 만들 수 있지만 Blogger publish, Email send, public A4 release는 공통 review가 `APPROVED`일 때만 허용합니다. Morning operator boundary는 collect → assemble → review-ready → preview까지만 수행하며 외부 발행·전송·배포를 자동 실행하지 않습니다. Compact 출력 경계의 동률은 `tiedBoundaryCounts`로 보존하고 “외 동일 관심도 N개”로 표시합니다.
+
 A4 MASTER 생성은 관리자 전용 boundary를 통과해야 하며, 공개 route에서 호출할 수 없습니다. 개발환경에서는 `src/services/admin.ts`의 server-side authorization boundary와 `data/a4-master/YYYY-MM-DD/admin-a4-route.html`로 내부 route 화면을 분리합니다.
 
 실제 Blogger 연결 설정은 `config/publishing.json`에 MOTUS 브랜드·공개 주소, 환경 변수 이름과 `publishAsDraft` 정책만 저장합니다. blogId, client secret, refresh token, access token 값은 저장소 파일에 기록하지 않습니다. Publisher는 `BLOGGER_REFRESH_TOKEN`으로 access token을 자동 갱신한 뒤 Google Blogger API v3의 `posts.insert?isDraft=true`를 호출합니다. refresh credential이 일부 누락되거나 갱신에 실패하면 게시 요청을 보내지 않습니다. Publication record는 초안 식별자인 `draftPostId`와 공개 글 주소인 `publicPostUrl`을 분리하며, `DRAFT`에서는 `publicPostUrl=null`을 유지합니다. 실제 게시 후 확인된 글 permalink만 A4 CTA/QR과 Naver package에 반영하고 Blogger 루트 URL이나 preview URL은 상세분석 링크로 사용하지 않습니다. 공개 CTA는 “전체 분석은 MOTUS에서 확인하세요”로 통일합니다.
@@ -106,6 +108,7 @@ A4 MASTER 생성은 관리자 전용 boundary를 통과해야 하며, 공개 rou
 - `src/intelligence/brokerage-research.ts`: 국내 증권사 registry, 공개 리서치 intake, dedupe와 Newsletter 변환
 - `src/intelligence/cross-intelligence.ts`: 공통 ID 연결, edge provenance, 합의·차이·변화 신호와 Newsletter 변환
 - `src/intelligence/investment-map.ts`: 리서치 dedupe, 관심도·종목·변경·risk 집계, history 비교와 A4 compact view
+- `src/intelligence/daily-production.ts`: single-source Daily assembler, Email/A4 preview, 공통 Human Review gate와 morning operator boundary
 - `config/motus-intelligence.schema.v1.json`: 외부 소비자를 위한 JSON Schema 계약
 - `src/publishers/motus.ts`: MOTUS 브랜드, 카테고리, Blogger HTML과 labels를 담당하는 독립 Publisher
 - `src/publishers/motus-newsletter.ts`: 별도 MOTUS Daily Intelligence Blogger-safe newsletter renderer
@@ -122,5 +125,6 @@ A4 MASTER 생성은 관리자 전용 boundary를 통과해야 하며, 공개 rou
 - `tests/brokerage-research.test.ts`: 증권사 리서치 유형·목표주가·투자의견·mirror 병합·provenance 테스트
 - `tests/cross-intelligence.test.ts`: event/theme/company/sector 연결, 신호 구조, history와 공개 렌더링 테스트
 - `tests/investment-map.test.ts`: dedupe count, focus·종목·변경·risk·history 집계와 Newsletter/A4 테스트
+- `tests/daily-production.test.ts`: full/partial assembly, 채널 일관성, review gate, tie metadata, chart·leakage 테스트
 
 [구조](docs/architecture.md) · [수동 입력](docs/manual-input.md) · [규칙](docs/rules.md) · [출처 운영](docs/data-sources.md) · [문제 및 회귀 방지](docs/issues.md) · [Sprint 1 완료 보고](docs/sprint-report.md) · [Sprint 2A 완료 보고](docs/sprint-2a-report.md) · [Sprint 2B 완료 보고](docs/sprint-2b-report.md) · [Sprint 2C 완료 보고](docs/sprint-2c-report.md) · [Sprint 2D 완료 보고](docs/sprint-2d-report.md) · [Sprint 2E 완료 보고](docs/sprint-2e-report.md) · [Sprint 2F 완료 보고](docs/sprint-2f-report.md) · [Sprint 2G 완료 보고](docs/sprint-2g-report.md) · [Sprint 2H 진행 보고](docs/sprint-2h-report.md)
