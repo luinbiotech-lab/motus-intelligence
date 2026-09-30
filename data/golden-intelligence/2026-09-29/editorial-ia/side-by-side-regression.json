@@ -1,0 +1,64 @@
+{
+  "issueDate": "2026-09-29",
+  "sourceNewsletterId": "newsletter:motus:2026-09-29",
+  "existingProduction": {
+    "postId": "9009523239057574527",
+    "state": "PUBLISHED",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/09/5-ai.html",
+    "patched": false
+  },
+  "previews": {
+    "ai": {
+      "label": "AI Intelligence",
+      "sections": [
+        "masthead",
+        "today-core",
+        "key-ai-issues",
+        "industry-flow",
+        "what-to-watch",
+        "sources"
+      ]
+    },
+    "us": {
+      "label": "U.S. Market",
+      "sections": [
+        "masthead",
+        "market-summary",
+        "market-snapshot",
+        "major-index-trends",
+        "market-commentary",
+        "sectors-companies",
+        "wall-street-research",
+        "checkpoints",
+        "sources"
+      ],
+      "chartCount": 4
+    },
+    "korea": {
+      "label": "Korea Market",
+      "sections": [
+        "masthead",
+        "korea-summary",
+        "korea-index-trends",
+        "fx-supporting",
+        "investor-flows",
+        "sectors",
+        "movers",
+        "korea-research",
+        "market-commentary",
+        "checkpoints",
+        "sources"
+      ],
+      "flowVisualization": true
+    }
+  },
+  "externalActions": {
+    "bloggerPatch": false,
+    "bloggerInsert": false,
+    "publish": false
+  },
+  "commerce": {
+    "enabled": false,
+    "publicBlock": false
+  }
+}

@@ -792,8 +792,8 @@ test('Blogger visibility renderer uses high-contrast inline styles, dictionary g
   },publishingConfig.publisher);
   assert.match(rendered.html,/background:#03162e;color:#ffffff;border:1px solid #010b17[^"']*font-size:20px;font-weight:800/);
   assert.match(rendered.html,/background:#0b2745;color:#ffffff[^"']*font-size:14px;font-weight:800/);
-  assert.match(rendered.html,/color:#08733f;background:#edf8f1/);
-  assert.match(rendered.html,/color:#b42318;background:#fff1f0/);
+  assert.match(rendered.html,/color:#c62828;background:#fff2f2/);
+  assert.match(rendered.html,/color:#1565c0;background:#eef5ff/);
   assert.match(rendered.html,/CAPEX[\s\S]*Capital Expenditure[\s\S]*자본적 지출·설비투자/);
   assert.match(rendered.html,/FOMC[\s\S]*Federal Open Market Committee/);
   assert.match(rendered.html,/bp[\s\S]*basis point/);

@@ -12,6 +12,18 @@ export const MOTUS_CATEGORIES = [
 
 export type MotusCategory = typeof MOTUS_CATEGORIES[number];
 
+export const MOTUS_PUBLIC_CATEGORY_MASTER = {
+  AI_INTELLIGENCE: { canonicalLabel: 'AI Intelligence', displayLabel: 'AI 인텔리전스 (AI Intelligence)' },
+  US_MARKET: { canonicalLabel: 'U.S. Market', displayLabel: '미국증시 (U.S. Market)' },
+  KOREA_MARKET: { canonicalLabel: 'Korea Market', displayLabel: '국내증시 (Korea Market)' },
+  WEEKLY_INTELLIGENCE: { canonicalLabel: 'Weekly Intelligence', displayLabel: '주간 인텔리전스 (Weekly Intelligence)' },
+  MONTHLY_INTELLIGENCE: { canonicalLabel: 'Monthly Intelligence', displayLabel: '월간 인텔리전스 (Monthly Intelligence)' },
+  REPORTS: { canonicalLabel: 'Reports', displayLabel: '리포트 (Reports)' }
+} as const;
+
+export type MotusPublicCategoryKey = keyof typeof MOTUS_PUBLIC_CATEGORY_MASTER;
+export type MotusPublicCategory = typeof MOTUS_PUBLIC_CATEGORY_MASTER[MotusPublicCategoryKey];
+
 export interface GlobalContentMetadata {
   schemaVersion: '1.0';
   brand: typeof MOTUS_BRAND;
