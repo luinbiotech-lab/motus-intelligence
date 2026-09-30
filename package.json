@@ -12,6 +12,7 @@
     "editorial:layout-preview": "npm run build && node dist/src/cli.js --editorial-layout-preview",
     "editorial:research-preview": "npm run build && node dist/src/cli.js --financial-research-layout-preview",
     "editorial:market-trend-preview": "npm run build && node scripts/build-market-trend-preview.mjs",
+    "intelligence:golden-rehearsal": "npm run build && node dist/src/golden-rehearsal-cli.js",
     "sample": "npm run build && node dist/src/cli.js --sample",
     "report": "node dist/src/cli.js"
   },

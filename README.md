@@ -126,5 +126,6 @@ A4 MASTER 생성은 관리자 전용 boundary를 통과해야 하며, 공개 rou
 - `tests/cross-intelligence.test.ts`: event/theme/company/sector 연결, 신호 구조, history와 공개 렌더링 테스트
 - `tests/investment-map.test.ts`: dedupe count, focus·종목·변경·risk·history 집계와 Newsletter/A4 테스트
 - `tests/daily-production.test.ts`: full/partial assembly, 채널 일관성, review gate, tie metadata, chart·leakage 테스트
+- `npm run intelligence:golden-rehearsal`: 2026-09-29 실제 공개자료를 기존 intake와 Daily production layer에 통과시켜 Blogger·Email·A4 비공개 preview 및 PENDING Human Review package를 생성한다. 외부 publish/send/release는 수행하지 않는다.
 
 [구조](docs/architecture.md) · [수동 입력](docs/manual-input.md) · [규칙](docs/rules.md) · [출처 운영](docs/data-sources.md) · [문제 및 회귀 방지](docs/issues.md) · [Sprint 1 완료 보고](docs/sprint-report.md) · [Sprint 2A 완료 보고](docs/sprint-2a-report.md) · [Sprint 2B 완료 보고](docs/sprint-2b-report.md) · [Sprint 2C 완료 보고](docs/sprint-2c-report.md) · [Sprint 2D 완료 보고](docs/sprint-2d-report.md) · [Sprint 2E 완료 보고](docs/sprint-2e-report.md) · [Sprint 2F 완료 보고](docs/sprint-2f-report.md) · [Sprint 2G 완료 보고](docs/sprint-2g-report.md) · [Sprint 2H 진행 보고](docs/sprint-2h-report.md)

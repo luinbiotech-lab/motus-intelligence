@@ -1,0 +1,1210 @@
+{
+  "audit": {
+    "selectedDate": "2026-09-29",
+    "selectionReason": "미국·한국 정상 거래, 공식 AI 발표, 시장·거시 자료와 공개 국내 리서치를 함께 확인할 수 있는 최근 완료 공통 거래일",
+    "sourceCounts": {
+      "ai": 3,
+      "wallStreet": 3,
+      "koreaMarket": 18,
+      "koreaResearch": 5
+    },
+    "crossChainCount": 1,
+    "investmentMap": {
+      "sourceCount": 15,
+      "institutionalFocus": 2,
+      "koreaResearchFocus": 6,
+      "crossMarketThemes": 0,
+      "mostDiscussedStocks": 3,
+      "majorRisks": 9
+    },
+    "states": {
+      "blogger": {
+        "artifactState": "PREVIEW_READY",
+        "publicationState": "DRAFT",
+        "error": null
+      },
+      "email": {
+        "artifactState": "PREVIEW_READY",
+        "error": null
+      },
+      "a4": {
+        "artifactState": "PREVIEW_READY",
+        "distributionState": "PRIVATE_PREVIEW",
+        "error": null
+      }
+    },
+    "humanReview": {
+      "status": "PENDING",
+      "reviewer": null,
+      "reviewedAt": null,
+      "history": []
+    },
+    "bloggerDraftPostId": null,
+    "externalActions": {
+      "bloggerInsert": false,
+      "emailSend": false,
+      "a4Release": false
+    },
+    "safety": {
+      "fixtureInPublicOutput": false,
+      "fabricatedSourceUrl": false,
+      "fabricatedMarketValue": false,
+      "inventedAnalyst": false,
+      "inferredTargetPrice": false,
+      "inferredRating": false,
+      "unsupportedCrossMarketConnection": false,
+      "internalIdLeakage": false,
+      "secretLeakage": false,
+      "duplicateResearchCounting": false
+    }
+  },
+  "newsletter": {
+    "newsletterId": "newsletter:motus:2026-09-29",
+    "issueDate": "2026-09-29",
+    "issueNumber": 1,
+    "title": "국채금리 5%대의 압박과 AI 에이전트 경쟁",
+    "subtitle": "MOTUS Golden Intelligence Day",
+    "editorialSummary": "미국 장기금리 부담으로 주요 지수가 소폭 밀린 가운데 AI 산업은 에이전트 실행 환경·보안·과학 연구로 적용 범위를 넓혔다. 한국시장에서는 외국인 매도가 지수 상단을 눌렀다.",
+    "sources": [
+      {
+        "label": "Microsoft Research",
+        "url": "https://www.microsoft.com/en-us/research/blog/introducing-quine-an-ai-research-system-designed-for-the-complexity-of-biology/",
+        "publisher": "Microsoft Research"
+      },
+      {
+        "label": "NVIDIA",
+        "url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Launches-Open-Agent-Safety-Platform-to-Secure-Agents-From-Testing-to-Deployment/default.aspx",
+        "publisher": "NVIDIA"
+      },
+      {
+        "label": "OpenAI",
+        "url": "https://openai.com/index/introducing-dots/",
+        "publisher": "OpenAI"
+      },
+      {
+        "label": "Associated Press",
+        "url": "https://apnews.com/article/wall-street-stocks-dow-nasdaq-69778ade7a033a10cb44b9078b6bb15d",
+        "publisher": "Associated Press"
+      },
+      {
+        "label": "Reuters",
+        "url": "https://www.marketscreener.com/news/equities-end-slightly-lower-as-bond-yields-hold-near-multi-decade-highs-ce785ad2d98cf420",
+        "publisher": "Reuters"
+      },
+      {
+        "label": "Tallac Options",
+        "url": "https://tallacoptions.com/Indices/VIX",
+        "publisher": "Tallac Options"
+      },
+      {
+        "label": "서울경제·한국거래소",
+        "url": "https://en.sedaily.com/finance/2026/09/29/kospi-falls-for-second-day-as-foreigners-dump-2-billion-in",
+        "publisher": "서울경제·한국거래소"
+      },
+      {
+        "label": "검증 공개자료",
+        "url": "https://www.koreatimes.co.kr/economy/20260929/kospi-slips-as-us-bond-yields-oil-prices-weigh-on-investor-sentiment",
+        "publisher": "검증 공개자료"
+      },
+      {
+        "label": "검증 공개자료",
+        "url": "https://www.indopremier.com/ipotnews/newsDetail.php?group_news=IPOTNEWS&halaman=1&jdl=South_Korean_shares_extend_losses_as_high_bond_yields_weigh&name=&news_id=245346&q=korean+shares,+kospi,+kosdaq,&search=y_general&taging_subtype=INDEKS+KOSPI+KOREA",
+        "publisher": "검증 공개자료"
+      },
+      {
+        "label": "Aju Press 장중 시황",
+        "url": "https://www.ajupress.com/view/20260929114521326",
+        "publisher": "Aju Press 장중 시황"
+      },
+      {
+        "label": "삼성증권 HTML 원문",
+        "url": "https://www.samsungpop.com/v2/today-invest/series/todaymarkettrend-3040",
+        "publisher": "삼성증권"
+      },
+      {
+        "label": "삼성증권 HTML 원문",
+        "url": "https://samsungpop.com/v2/today-invest/series/researchanalysttalk-3022",
+        "publisher": "삼성증권"
+      },
+      {
+        "label": "삼성증권 HTML 원문",
+        "url": "https://samsungpop.com/v2/today-invest/series/researchanalysttalk-3025",
+        "publisher": "삼성증권"
+      },
+      {
+        "label": "삼성증권 HTML 원문",
+        "url": "https://samsungpop.com/v2/today-invest/series/researchanalysttalk-3008",
+        "publisher": "삼성증권"
+      },
+      {
+        "label": "삼성증권 HTML 원문",
+        "url": "https://samsungpop.com/v2/today-invest/series/researchanalysttalk-3001",
+        "publisher": "삼성증권"
+      }
+    ],
+    "assets": [],
+    "todayAtAGlance": {
+      "headline": "금리 부담과 AI 제품화가 같은 화면에 들어온 하루",
+      "summary": "미국 증시는 높은 장기금리 속 약세였고 한국 증시는 외국인 매도가 이어졌다. 공식 AI 발표는 장기 실행형 에이전트, 보안 계층, 과학 연구 적용으로 확장됐다.",
+      "bullets": [
+        "미국 4대 지수 모두 소폭 하락",
+        "KOSPI 외국인 순매도 지속",
+        "AI 에이전트 실행·보안·연구 도구 발표"
+      ]
+    },
+    "marketSnapshot": {
+      "summary": "9월 29일 미국 정규장 종가와 확인 가능한 거시 변수.",
+      "metrics": [
+        {
+          "label": "S&P 500",
+          "value": "7,670.84",
+          "change": "-0.17%",
+          "direction": "DOWN"
+        },
+        {
+          "label": "Nasdaq",
+          "value": "26,797.54",
+          "change": "-0.09%",
+          "direction": "DOWN"
+        },
+        {
+          "label": "Dow Jones",
+          "value": "51,349.92",
+          "change": "-0.26%",
+          "direction": "DOWN"
+        },
+        {
+          "label": "Russell 2000",
+          "value": "2,807.92",
+          "change": "-0.35%",
+          "direction": "DOWN"
+        },
+        {
+          "label": "VIX",
+          "value": "16.04",
+          "change": "-0.19%",
+          "direction": "DOWN"
+        },
+        {
+          "label": "미국 10년물",
+          "value": "5.25%",
+          "change": null,
+          "direction": "FLAT"
+        },
+        {
+          "label": "Brent",
+          "value": "$96.16",
+          "change": "-1.70%",
+          "direction": "DOWN"
+        }
+      ],
+      "marketHistory": {
+        "asOf": "2026-09-29",
+        "sessionCount": 5,
+        "series": [
+          {
+            "key": "sp500",
+            "label": "S&P 500",
+            "dates": [
+              "2026-09-23",
+              "2026-09-24",
+              "2026-09-25",
+              "2026-09-28",
+              "2026-09-29"
+            ],
+            "closes": [
+              7706.03,
+              7704.13,
+              7743.41,
+              7683.69,
+              7670.84
+            ],
+            "latestClose": 7670.84,
+            "latestChangePct": -0.17,
+            "sourceLabel": "Associated Press market closes",
+            "sourceUrl": "https://apnews.com/article/wall-street-stocks-dow-nasdaq-69778ade7a033a10cb44b9078b6bb15d",
+            "provenance": [
+              {
+                "date": "2026-09-23",
+                "inputDate": "2026-09-23",
+                "field": "close",
+                "sourceId": "AP-2026-09-23",
+                "sourceUrl": "https://apnews.com/article/2625f87993578025820f4572e0ea0c0b",
+                "collectionMode": "MANUAL_VERIFIED"
+              },
+              {
+                "date": "2026-09-24",
+                "inputDate": "2026-09-24",
+                "field": "close",
+                "sourceId": "AP-2026-09-24",
+                "sourceUrl": "https://apnews.com/article/2487345eeaa8145f051da6b1d7e9f37d",
+                "collectionMode": "MANUAL_VERIFIED"
+              },
+              {
+                "date": "2026-09-25",
+                "inputDate": "2026-09-25",
+                "field": "close",
+                "sourceId": "AP-2026-09-25",
+                "sourceUrl": "https://apnews.com/article/36d06c7a598e03539e0e09bdf6b7ede2",
+                "collectionMode": "MANUAL_VERIFIED"
+              },
+              {
+                "date": "2026-09-28",
+                "inputDate": "2026-09-28",
+                "field": "close",
+                "sourceId": "AP-2026-09-28",
+                "sourceUrl": "https://apnews.com/article/095baa4855b9363bd7c4539ff65a6f13",
+                "collectionMode": "MANUAL_VERIFIED"
+              },
+              {
+                "date": "2026-09-29",
+                "inputDate": "2026-09-29",
+                "field": "close",
+                "sourceId": "AP-2026-09-29",
+                "sourceUrl": "https://apnews.com/article/wall-street-stocks-dow-nasdaq-69778ade7a033a10cb44b9078b6bb15d",
+                "collectionMode": "MANUAL_VERIFIED"
+              }
+            ]
+          },
+          {
+            "key": "nasdaq",
+            "label": "Nasdaq",
+            "dates": [
+              "2026-09-23",
+              "2026-09-24",
+              "2026-09-25",
+              "2026-09-28",
+              "2026-09-29"
+            ],
+            "closes": [
+              26936.04,
+              26939.37,
+              27068.72,
+              26820.38,
+              26797.54
+            ],
+            "latestClose": 26797.54,
+            "latestChangePct": -0.09,
+            "sourceLabel": "Associated Press market closes",
+            "sourceUrl": "https://apnews.com/article/wall-street-stocks-dow-nasdaq-69778ade7a033a10cb44b9078b6bb15d",
+            "provenance": [
+              {
+                "date": "2026-09-23",
+                "inputDate": "2026-09-23",
+                "field": "close",
+                "sourceId": "AP-2026-09-23",
+                "sourceUrl": "https://apnews.com/article/2625f87993578025820f4572e0ea0c0b",
+                "collectionMode": "MANUAL_VERIFIED"
+              },
+              {
+                "date": "2026-09-24",
+                "inputDate": "2026-09-24",
+                "field": "close",
+                "sourceId": "AP-2026-09-24",
+                "sourceUrl": "https://apnews.com/article/2487345eeaa8145f051da6b1d7e9f37d",
+                "collectionMode": "MANUAL_VERIFIED"
+              },
+              {
+                "date": "2026-09-25",
+                "inputDate": "2026-09-25",
+                "field": "close",
+                "sourceId": "AP-2026-09-25",
+                "sourceUrl": "https://apnews.com/article/36d06c7a598e03539e0e09bdf6b7ede2",
+                "collectionMode": "MANUAL_VERIFIED"
+              },
+              {
+                "date": "2026-09-28",
+                "inputDate": "2026-09-28",
+                "field": "close",
+                "sourceId": "AP-2026-09-28",
+                "sourceUrl": "https://apnews.com/article/095baa4855b9363bd7c4539ff65a6f13",
+                "collectionMode": "MANUAL_VERIFIED"
+              },
+              {
+                "date": "2026-09-29",
+                "inputDate": "2026-09-29",
+                "field": "close",
+                "sourceId": "AP-2026-09-29",
+                "sourceUrl": "https://apnews.com/article/wall-street-stocks-dow-nasdaq-69778ade7a033a10cb44b9078b6bb15d",
+                "collectionMode": "MANUAL_VERIFIED"
+              }
+            ]
+          },
+          {
+            "key": "dow-jones",
+            "label": "Dow Jones",
+            "dates": [
+              "2026-09-23",
+              "2026-09-24",
+              "2026-09-25",
+              "2026-09-28",
+              "2026-09-29"
+            ],
+            "closes": [
+              51511.59,
+              51349.98,
+              51828.62,
+              51481.51,
+              51349.92
+            ],
+            "latestClose": 51349.92,
+            "latestChangePct": -0.26,
+            "sourceLabel": "Associated Press market closes",
+            "sourceUrl": "https://apnews.com/article/wall-street-stocks-dow-nasdaq-69778ade7a033a10cb44b9078b6bb15d",
+            "provenance": [
+              {
+                "date": "2026-09-23",
+                "inputDate": "2026-09-23",
+                "field": "close",
+                "sourceId": "AP-2026-09-23",
+                "sourceUrl": "https://apnews.com/article/2625f87993578025820f4572e0ea0c0b",
+                "collectionMode": "MANUAL_VERIFIED"
+              },
+              {
+                "date": "2026-09-24",
+                "inputDate": "2026-09-24",
+                "field": "close",
+                "sourceId": "AP-2026-09-24",
+                "sourceUrl": "https://apnews.com/article/2487345eeaa8145f051da6b1d7e9f37d",
+                "collectionMode": "MANUAL_VERIFIED"
+              },
+              {
+                "date": "2026-09-25",
+                "inputDate": "2026-09-25",
+                "field": "close",
+                "sourceId": "AP-2026-09-25",
+                "sourceUrl": "https://apnews.com/article/36d06c7a598e03539e0e09bdf6b7ede2",
+                "collectionMode": "MANUAL_VERIFIED"
+              },
+              {
+                "date": "2026-09-28",
+                "inputDate": "2026-09-28",
+                "field": "close",
+                "sourceId": "AP-2026-09-28",
+                "sourceUrl": "https://apnews.com/article/095baa4855b9363bd7c4539ff65a6f13",
+                "collectionMode": "MANUAL_VERIFIED"
+              },
+              {
+                "date": "2026-09-29",
+                "inputDate": "2026-09-29",
+                "field": "close",
+                "sourceId": "AP-2026-09-29",
+                "sourceUrl": "https://apnews.com/article/wall-street-stocks-dow-nasdaq-69778ade7a033a10cb44b9078b6bb15d",
+                "collectionMode": "MANUAL_VERIFIED"
+              }
+            ]
+          },
+          {
+            "key": "russell-2000",
+            "label": "Russell 2000",
+            "dates": [
+              "2026-09-23",
+              "2026-09-24",
+              "2026-09-25",
+              "2026-09-28",
+              "2026-09-29"
+            ],
+            "closes": [
+              2838.66,
+              2835.57,
+              2837.55,
+              2817.91,
+              2807.92
+            ],
+            "latestClose": 2807.92,
+            "latestChangePct": -0.35,
+            "sourceLabel": "Associated Press market closes",
+            "sourceUrl": "https://apnews.com/article/wall-street-stocks-dow-nasdaq-69778ade7a033a10cb44b9078b6bb15d",
+            "provenance": [
+              {
+                "date": "2026-09-23",
+                "inputDate": "2026-09-23",
+                "field": "close",
+                "sourceId": "AP-2026-09-23",
+                "sourceUrl": "https://apnews.com/article/2625f87993578025820f4572e0ea0c0b",
+                "collectionMode": "MANUAL_VERIFIED"
+              },
+              {
+                "date": "2026-09-24",
+                "inputDate": "2026-09-24",
+                "field": "close",
+                "sourceId": "AP-2026-09-24",
+                "sourceUrl": "https://apnews.com/article/2487345eeaa8145f051da6b1d7e9f37d",
+                "collectionMode": "MANUAL_VERIFIED"
+              },
+              {
+                "date": "2026-09-25",
+                "inputDate": "2026-09-25",
+                "field": "close",
+                "sourceId": "AP-2026-09-25",
+                "sourceUrl": "https://apnews.com/article/36d06c7a598e03539e0e09bdf6b7ede2",
+                "collectionMode": "MANUAL_VERIFIED"
+              },
+              {
+                "date": "2026-09-28",
+                "inputDate": "2026-09-28",
+                "field": "close",
+                "sourceId": "AP-2026-09-28",
+                "sourceUrl": "https://apnews.com/article/095baa4855b9363bd7c4539ff65a6f13",
+                "collectionMode": "MANUAL_VERIFIED"
+              },
+              {
+                "date": "2026-09-29",
+                "inputDate": "2026-09-29",
+                "field": "close",
+                "sourceId": "AP-2026-09-29",
+                "sourceUrl": "https://apnews.com/article/wall-street-stocks-dow-nasdaq-69778ade7a033a10cb44b9078b6bb15d",
+                "collectionMode": "MANUAL_VERIFIED"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "aiIntelligence": [
+      {
+        "intelligenceId": "intel:ai:microsoft-quine-2026-09-29",
+        "headline": "Microsoft Research, 생물학 연구 시스템 Quine 공개",
+        "summary": "Microsoft Research는 생물학의 복잡성을 다루는 멀티모달 월드 모델과 연구 하네스로 Quine을 소개했다.",
+        "company": "Microsoft",
+        "companyId": "company:microsoft",
+        "primaryThemeId": "theme:ai-for-science",
+        "relatedThemeIds": [],
+        "eventId": "event:microsoft-quine-2026-09-29",
+        "institutionView": null,
+        "aiInterpretation": "AI for Science가 범용 모델 발표를 넘어 실험 설계와 검증 흐름에 들어가는지 실제 연구 성과를 지켜봐야 한다.",
+        "sourceFacts": [
+          "Quine은 멀티모달 생물학 월드 모델과 연구 하네스로 구성된다.",
+          "Microsoft Research는 Broad Institute와의 협업 및 실험 연구 목적을 명시했다."
+        ],
+        "sources": [
+          {
+            "label": "Microsoft Research",
+            "url": "https://www.microsoft.com/en-us/research/blog/introducing-quine-an-ai-research-system-designed-for-the-complexity-of-biology/",
+            "publisher": "Microsoft Research"
+          }
+        ],
+        "assetIds": []
+      },
+      {
+        "intelligenceId": "intel:ai:nvidia-open-agent-safety-platform-2026-09-28",
+        "headline": "NVIDIA, Open Agent Safety Platform 공개",
+        "summary": "NVIDIA는 에이전트 시험부터 배포까지 격리와 정책 집행을 지원하는 개방형 안전 플랫폼을 발표했다.",
+        "company": "NVIDIA",
+        "companyId": "company:nvidia",
+        "primaryThemeId": "theme:agent-security",
+        "relatedThemeIds": [],
+        "eventId": "event:nvidia-open-agent-safety-platform-2026-09-28",
+        "institutionView": null,
+        "aiInterpretation": "AI 인프라 투자 범위가 연산 장비에서 에이전트 보안과 격리 계층으로 넓어지는지를 파트너 채택과 매출 기여로 검증해야 한다.",
+        "sourceFacts": [
+          "플랫폼은 OpenShell, Sentry와 BlueField-4를 결합한다.",
+          "NVIDIA는 에이전트 격리를 밀리초 단위로 수행한다고 설명했다."
+        ],
+        "sources": [
+          {
+            "label": "NVIDIA",
+            "url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Launches-Open-Agent-Safety-Platform-to-Secure-Agents-From-Testing-to-Deployment/default.aspx",
+            "publisher": "NVIDIA"
+          }
+        ],
+        "assetIds": []
+      },
+      {
+        "intelligenceId": "intel:ai:openai-dots-2026-09-29",
+        "headline": "OpenAI, 상시 실행형 에이전트 Dots 공개",
+        "summary": "OpenAI는 클라우드 컴퓨터와 연결 앱을 이용해 장기 작업을 수행하는 Dots를 공개했다.",
+        "company": "OpenAI",
+        "companyId": "company:openai",
+        "primaryThemeId": "theme:agentic-ai",
+        "relatedThemeIds": [],
+        "eventId": "event:openai-dots-2026-09-29",
+        "institutionView": null,
+        "aiInterpretation": "기업용 에이전트 경쟁의 초점이 모델 응답에서 장기 실행 환경과 권한 통제로 이동하는지 후속 도입 사례를 확인할 필요가 있다.",
+        "sourceFacts": [
+          "Dots는 GPT-6 Astra 기반 에이전트가 클라우드 컴퓨터와 연결 앱에서 작업하도록 설계됐다.",
+          "OpenAI는 Pro·Business Premium·Enterprise 고객부터 순차 제공한다고 밝혔다."
+        ],
+        "sources": [
+          {
+            "label": "OpenAI",
+            "url": "https://openai.com/index/introducing-dots/",
+            "publisher": "OpenAI"
+          }
+        ],
+        "assetIds": []
+      }
+    ],
+    "wallStreetIntelligence": [
+      {
+        "intelligenceId": "intel:wall:us-close-2026-09-29",
+        "headline": "미국 주요 지수, 장기금리 부담 속 소폭 하락",
+        "summary": "S&P 500·Nasdaq·Dow·Russell 2000이 모두 소폭 하락했고 10년물 국채금리는 5.25%로 제시됐다.",
+        "company": null,
+        "companyId": null,
+        "primaryThemeId": "theme:higher-for-longer",
+        "relatedThemeIds": [],
+        "eventId": "event:us-market-close-2026-09-29",
+        "institutionView": null,
+        "aiInterpretation": "높은 장기금리가 성장주 밸류에이션과 위험선호에 미친 영향을 다음 세션의 금리·주가 동행으로 확인한다.",
+        "sourceFacts": [],
+        "sources": [
+          {
+            "label": "Associated Press",
+            "url": "https://apnews.com/article/wall-street-stocks-dow-nasdaq-69778ade7a033a10cb44b9078b6bb15d",
+            "publisher": "Associated Press"
+          }
+        ],
+        "assetIds": []
+      },
+      {
+        "intelligenceId": "intel:wall:us-close-reuters-2026-09-29",
+        "headline": "미국 증시, 높은 국채금리 속 약세 마감",
+        "summary": "Reuters 보도는 장기금리가 다년 고점 부근을 유지한 가운데 미국 주식시장이 약세로 끝났다고 교차 확인했다.",
+        "company": null,
+        "companyId": null,
+        "primaryThemeId": "theme:higher-for-longer",
+        "relatedThemeIds": [],
+        "eventId": "event:us-market-close-2026-09-29",
+        "institutionView": null,
+        "aiInterpretation": "높은 장기금리가 성장주 밸류에이션과 위험선호에 미친 영향을 다음 세션의 금리·주가 동행으로 확인한다.",
+        "sourceFacts": [],
+        "sources": [
+          {
+            "label": "Reuters",
+            "url": "https://www.marketscreener.com/news/equities-end-slightly-lower-as-bond-yields-hold-near-multi-decade-highs-ce785ad2d98cf420",
+            "publisher": "Reuters"
+          }
+        ],
+        "assetIds": []
+      },
+      {
+        "intelligenceId": "intel:wall:vix-close-2026-09-29",
+        "headline": "VIX 16.04로 소폭 하락",
+        "summary": "공개 VIX 일별 자료는 9월 29일 종가 16.04와 당일 -0.19% 변화를 제시했다.",
+        "company": null,
+        "companyId": null,
+        "primaryThemeId": "theme:market-volatility",
+        "relatedThemeIds": [],
+        "eventId": "event:vix-close-2026-09-29",
+        "institutionView": null,
+        "aiInterpretation": "높은 장기금리가 성장주 밸류에이션과 위험선호에 미친 영향을 다음 세션의 금리·주가 동행으로 확인한다.",
+        "sourceFacts": [],
+        "sources": [
+          {
+            "label": "Tallac Options",
+            "url": "https://tallacoptions.com/Indices/VIX",
+            "publisher": "Tallac Options"
+          }
+        ],
+        "assetIds": []
+      }
+    ],
+    "koreaMarketFacts": {
+      "asOf": "2026-09-29T15:30:00+09:00",
+      "metrics": [
+        {
+          "factId": "kr-fact:REAL-KR-KOSPI-CLOSE-20260929",
+          "group": "INDEX",
+          "label": "KOSPI",
+          "displayValue": "6,870.81",
+          "direction": "FLAT",
+          "source": {
+            "label": "서울경제·한국거래소",
+            "url": "https://en.sedaily.com/finance/2026/09/29/kospi-falls-for-second-day-as-foreigners-dump-2-billion-in"
+          }
+        },
+        {
+          "factId": "kr-fact:REAL-KR-KOSDAQ-CLOSE-20260929",
+          "group": "INDEX",
+          "label": "KOSDAQ",
+          "displayValue": "849.8",
+          "direction": "FLAT",
+          "source": {
+            "label": "서울경제·한국거래소",
+            "url": "https://en.sedaily.com/finance/2026/09/29/kospi-falls-for-second-day-as-foreigners-dump-2-billion-in"
+          }
+        },
+        {
+          "factId": "kr-fact:REAL-KR-USDKRW-CLOSE-20260929",
+          "group": "FX",
+          "label": "USD/KRW",
+          "displayValue": "1,356.7원",
+          "direction": "FLAT",
+          "source": {
+            "label": "검증 공개자료",
+            "url": "https://www.koreatimes.co.kr/economy/20260929/kospi-slips-as-us-bond-yields-oil-prices-weigh-on-investor-sentiment"
+          }
+        },
+        {
+          "factId": "kr-fact:REAL-KR-KOSPI-FOREIGN-20260929",
+          "group": "FLOW",
+          "label": "외국인 순매수",
+          "displayValue": "-2,903,000백만원",
+          "direction": "DOWN",
+          "source": {
+            "label": "서울경제·한국거래소",
+            "url": "https://en.sedaily.com/finance/2026/09/29/kospi-falls-for-second-day-as-foreigners-dump-2-billion-in"
+          }
+        },
+        {
+          "factId": "kr-fact:REAL-KR-KOSPI-RETAIL-20260929",
+          "group": "FLOW",
+          "label": "개인 순매수",
+          "displayValue": "1,143,200백만원",
+          "direction": "UP",
+          "source": {
+            "label": "서울경제·한국거래소",
+            "url": "https://en.sedaily.com/finance/2026/09/29/kospi-falls-for-second-day-as-foreigners-dump-2-billion-in"
+          }
+        },
+        {
+          "factId": "kr-fact:REAL-KR-KOSPI-INSTITUTION-20260929",
+          "group": "FLOW",
+          "label": "기관 순매수",
+          "displayValue": "121,100백만원",
+          "direction": "UP",
+          "source": {
+            "label": "서울경제·한국거래소",
+            "url": "https://en.sedaily.com/finance/2026/09/29/kospi-falls-for-second-day-as-foreigners-dump-2-billion-in"
+          }
+        },
+        {
+          "factId": "kr-fact:REAL-KR-KOSDAQ-FOREIGN-20260929",
+          "group": "FLOW",
+          "label": "외국인 순매수",
+          "displayValue": "-129,100백만원",
+          "direction": "DOWN",
+          "source": {
+            "label": "서울경제·한국거래소",
+            "url": "https://en.sedaily.com/finance/2026/09/29/kospi-falls-for-second-day-as-foreigners-dump-2-billion-in"
+          }
+        },
+        {
+          "factId": "kr-fact:REAL-KR-KOSDAQ-RETAIL-20260929",
+          "group": "FLOW",
+          "label": "개인 순매수",
+          "displayValue": "148,600백만원",
+          "direction": "UP",
+          "source": {
+            "label": "서울경제·한국거래소",
+            "url": "https://en.sedaily.com/finance/2026/09/29/kospi-falls-for-second-day-as-foreigners-dump-2-billion-in"
+          }
+        },
+        {
+          "factId": "kr-fact:REAL-KR-KOSDAQ-INSTITUTION-20260929",
+          "group": "FLOW",
+          "label": "기관 순매수",
+          "displayValue": "5,200백만원",
+          "direction": "UP",
+          "source": {
+            "label": "서울경제·한국거래소",
+            "url": "https://en.sedaily.com/finance/2026/09/29/kospi-falls-for-second-day-as-foreigners-dump-2-billion-in"
+          }
+        },
+        {
+          "factId": "kr-fact:REAL-KR-KOSPI-ADVANCE-20260929",
+          "group": "BREADTH",
+          "label": "상승 종목",
+          "displayValue": "232개",
+          "direction": "FLAT",
+          "source": {
+            "label": "검증 공개자료",
+            "url": "https://www.indopremier.com/ipotnews/newsDetail.php?group_news=IPOTNEWS&halaman=1&jdl=South_Korean_shares_extend_losses_as_high_bond_yields_weigh&name=&news_id=245346&q=korean+shares,+kospi,+kosdaq,&search=y_general&taging_subtype=INDEKS+KOSPI+KOREA"
+          }
+        },
+        {
+          "factId": "kr-fact:REAL-KR-KOSPI-DECLINE-20260929",
+          "group": "BREADTH",
+          "label": "하락 종목",
+          "displayValue": "624개",
+          "direction": "FLAT",
+          "source": {
+            "label": "검증 공개자료",
+            "url": "https://www.indopremier.com/ipotnews/newsDetail.php?group_news=IPOTNEWS&halaman=1&jdl=South_Korean_shares_extend_losses_as_high_bond_yields_weigh&name=&news_id=245346&q=korean+shares,+kospi,+kosdaq,&search=y_general&taging_subtype=INDEKS+KOSPI+KOREA"
+          }
+        },
+        {
+          "factId": "kr-fact:REAL-KR-SEMICONDUCTOR-1115-20260929",
+          "group": "SECTOR",
+          "label": "반도체",
+          "displayValue": "1%",
+          "direction": "UP",
+          "source": {
+            "label": "Aju Press 장중 시황",
+            "url": "https://www.ajupress.com/view/20260929114521326"
+          }
+        },
+        {
+          "factId": "kr-fact:REAL-KR-SAMSUNG-CHANGE-20260929",
+          "group": "MOVER",
+          "label": "Samsung Electronics (005930)",
+          "displayValue": "0.93%",
+          "direction": "UP",
+          "source": {
+            "label": "서울경제·한국거래소",
+            "url": "https://en.sedaily.com/finance/2026/09/29/kospi-falls-for-second-day-as-foreigners-dump-2-billion-in"
+          }
+        },
+        {
+          "factId": "kr-fact:REAL-KR-SKHYNIX-CHANGE-20260929",
+          "group": "MOVER",
+          "label": "SK Hynix (000660)",
+          "displayValue": "-0.17%",
+          "direction": "DOWN",
+          "source": {
+            "label": "서울경제·한국거래소",
+            "url": "https://en.sedaily.com/finance/2026/09/29/kospi-falls-for-second-day-as-foreigners-dump-2-billion-in"
+          }
+        },
+        {
+          "factId": "kr-fact:REAL-KR-LGES-CHANGE-20260929",
+          "group": "MOVER",
+          "label": "LG Energy Solution (373220)",
+          "displayValue": "-3.16%",
+          "direction": "DOWN",
+          "source": {
+            "label": "서울경제·한국거래소",
+            "url": "https://en.sedaily.com/finance/2026/09/29/kospi-falls-for-second-day-as-foreigners-dump-2-billion-in"
+          }
+        }
+      ],
+      "sources": [
+        {
+          "label": "서울경제·한국거래소",
+          "url": "https://en.sedaily.com/finance/2026/09/29/kospi-falls-for-second-day-as-foreigners-dump-2-billion-in"
+        },
+        {
+          "label": "검증 공개자료",
+          "url": "https://www.koreatimes.co.kr/economy/20260929/kospi-slips-as-us-bond-yields-oil-prices-weigh-on-investor-sentiment"
+        },
+        {
+          "label": "검증 공개자료",
+          "url": "https://www.indopremier.com/ipotnews/newsDetail.php?group_news=IPOTNEWS&halaman=1&jdl=South_Korean_shares_extend_losses_as_high_bond_yields_weigh&name=&news_id=245346&q=korean+shares,+kospi,+kosdaq,&search=y_general&taging_subtype=INDEKS+KOSPI+KOREA"
+        },
+        {
+          "label": "Aju Press 장중 시황",
+          "url": "https://www.ajupress.com/view/20260929114521326"
+        }
+      ]
+    },
+    "koreaResearch": [
+      {
+        "researchId": "research:samsung:morning-20260930",
+        "publisher": "삼성증권",
+        "analyst": null,
+        "headline": "[미국 마감] 국채금리 부담 속 AI 종목별 차별화",
+        "summary": "9월 29일 미국 시장에서 장기금리 부담과 AI 종목별 등락을 정리한 공개 모닝 브리프.",
+        "institutionView": "상시 실행형 에이전트 시연과 반도체 종목별 흐름을 함께 점검하며 AI 투자 기대와 실행 리스크를 구분했다.",
+        "evidence": [
+          "공개 페이지는 OpenAI 에이전트 시연과 NVIDIA·Broadcom 등 주요 AI 종목의 등락을 함께 기록했다."
+        ],
+        "interests": [],
+        "investmentStrategy": [
+          "AI 서비스 상용화와 반도체 실적을 분리해 확인"
+        ],
+        "riskFactors": [
+          "장기 국채금리 상승",
+          "에이전트 제품의 초기 실행 안정성"
+        ],
+        "targetPriceLabel": null,
+        "ratingLabel": null,
+        "aiInterpretation": null,
+        "sources": [
+          {
+            "label": "삼성증권 HTML 원문",
+            "url": "https://www.samsungpop.com/v2/today-invest/series/todaymarkettrend-3040",
+            "publisher": "삼성증권"
+          }
+        ]
+      },
+      {
+        "researchId": "research:samsung:copilot-20260928",
+        "publisher": "삼성증권",
+        "analyst": null,
+        "headline": "Microsoft Copilot: 상시 실행형 에이전트의 기업 적용",
+        "summary": "Microsoft Copilot의 기업용 에이전트 방향과 수익성 조건을 다룬 공개 리서치.",
+        "institutionView": "기업용 에이전트 확산에는 작업 라우팅, 자체 모델, 칩 최적화가 수익성의 핵심 조건이라는 관점이다.",
+        "evidence": [
+          "공개 리서치는 상시 실행형 기업 에이전트와 모델·칩 최적화 필요성을 함께 제시했다."
+        ],
+        "interests": [
+          "소프트웨어",
+          "생성형 AI",
+          "Microsoft",
+          "MSFT"
+        ],
+        "investmentStrategy": [
+          "기업 고객의 실제 사용량과 비용 구조 확인"
+        ],
+        "riskFactors": [
+          "추론 비용 부담",
+          "기업 도입 속도"
+        ],
+        "targetPriceLabel": null,
+        "ratingLabel": null,
+        "aiInterpretation": null,
+        "sources": [
+          {
+            "label": "삼성증권 HTML 원문",
+            "url": "https://samsungpop.com/v2/today-invest/series/researchanalysttalk-3022",
+            "publisher": "삼성증권"
+          }
+        ]
+      },
+      {
+        "researchId": "research:samsung:meta-connect-20260928",
+        "publisher": "삼성증권",
+        "analyst": null,
+        "headline": "Meta Connect: AI 인터페이스 확장의 실행 조건",
+        "summary": "Meta의 AR 기기와 AI 서비스 연결을 다룬 공개 리서치.",
+        "institutionView": "AR 기기와 실시간 아바타, 외부 서비스 연결이 사용 경험을 넓히지만 제품 실행력 확인이 필요하다는 관점이다.",
+        "evidence": [
+          "공개 리서치는 Muse AR 안경, 실시간 아바타 및 외부 서비스 연동을 주요 내용으로 제시했다."
+        ],
+        "interests": [
+          "커뮤니케이션 서비스",
+          "AI 플랫폼",
+          "Meta Platforms",
+          "META"
+        ],
+        "investmentStrategy": [
+          "신규 인터페이스의 이용자 채택 추적"
+        ],
+        "riskFactors": [
+          "제품 실행 지연",
+          "하드웨어 수요 불확실성"
+        ],
+        "targetPriceLabel": null,
+        "ratingLabel": null,
+        "aiInterpretation": null,
+        "sources": [
+          {
+            "label": "삼성증권 HTML 원문",
+            "url": "https://samsungpop.com/v2/today-invest/series/researchanalysttalk-3025",
+            "publisher": "삼성증권"
+          }
+        ]
+      },
+      {
+        "researchId": "research:samsung:terafab-20260922",
+        "publisher": "삼성증권",
+        "analyst": null,
+        "headline": "Terafab: AI 수요가 제조 역량 투자로 확장될 가능성",
+        "summary": "AI 인프라 수요가 반도체 구매를 넘어 제조 역량 투자로 이어질 가능성을 다룬 공개 리서치.",
+        "institutionView": "계획이 현실화되면 AI 수요의 무게중심이 칩 구매에서 제조 역량 투자로 확장될 수 있다는 관점이다.",
+        "evidence": [
+          "공개 리서치는 AI 수요와 반도체 제조 능력 투자의 연결 가능성을 제시했다."
+        ],
+        "interests": [
+          "반도체",
+          "AI 반도체"
+        ],
+        "investmentStrategy": [
+          "실제 설비투자 집행과 공급계약 확인"
+        ],
+        "riskFactors": [
+          "대규모 투자 계획의 집행 지연"
+        ],
+        "targetPriceLabel": null,
+        "ratingLabel": null,
+        "aiInterpretation": null,
+        "sources": [
+          {
+            "label": "삼성증권 HTML 원문",
+            "url": "https://samsungpop.com/v2/today-invest/series/researchanalysttalk-3008",
+            "publisher": "삼성증권"
+          }
+        ]
+      },
+      {
+        "researchId": "research:samsung:anthropic-20260921",
+        "publisher": "삼성증권",
+        "analyst": null,
+        "headline": "Anthropic: 데이터센터 확장과 수익성의 균형",
+        "summary": "Anthropic의 데이터센터 확장, 현금 사용과 사업 일정의 균형을 다룬 공개 리서치.",
+        "institutionView": "데이터센터 확장 과정에서 투자 속도와 수익성, 신규 모델과 기업 일정의 균형이 핵심이라는 관점이다.",
+        "evidence": [
+          "공개 리서치는 데이터센터 확장과 현금 사용, 신규 모델 및 기업 일정의 균형을 주요 쟁점으로 제시했다."
+        ],
+        "interests": [
+          "소프트웨어",
+          "생성형 AI",
+          "Anthropic"
+        ],
+        "investmentStrategy": [
+          "모델 출시와 기업 고객 매출 추적"
+        ],
+        "riskFactors": [
+          "현금 소진",
+          "데이터센터 투자 부담"
+        ],
+        "targetPriceLabel": null,
+        "ratingLabel": null,
+        "aiInterpretation": null,
+        "sources": [
+          {
+            "label": "삼성증권 HTML 원문",
+            "url": "https://samsungpop.com/v2/today-invest/series/researchanalysttalk-3001",
+            "publisher": "삼성증권"
+          }
+        ]
+      }
+    ],
+    "crossIntelligenceChains": [
+      {
+        "themeEvent": "Theme · agentic ai",
+        "connectionSummary": "6개 검증 항목을 공통 이벤트·공통 테마·공통 업종 근거로 연결",
+        "aiIndustry": [
+          "OpenAI, 상시 실행형 에이전트 Dots 공개"
+        ],
+        "wallStreet": [],
+        "koreaResearch": [
+          "[미국 마감] 국채금리 부담 속 AI 종목별 차별화",
+          "Microsoft Copilot: 상시 실행형 에이전트의 기업 적용",
+          "Terafab: AI 수요가 제조 역량 투자로 확장될 가능성",
+          "Anthropic: 데이터센터 확장과 수익성의 균형"
+        ],
+        "koreaMarketReaction": [
+          "반도체 업종 반응"
+        ],
+        "sharedSignals": [],
+        "divergentSignals": [],
+        "changedSignals": [],
+        "aiSummary": null,
+        "sources": [
+          {
+            "label": "OpenAI",
+            "url": "https://openai.com/index/introducing-dots/",
+            "publisher": "OpenAI"
+          },
+          {
+            "label": "삼성증권 HTML 원문",
+            "url": "https://www.samsungpop.com/v2/today-invest/series/todaymarkettrend-3040",
+            "publisher": "삼성증권"
+          },
+          {
+            "label": "삼성증권 HTML 원문",
+            "url": "https://samsungpop.com/v2/today-invest/series/researchanalysttalk-3022",
+            "publisher": "삼성증권"
+          },
+          {
+            "label": "삼성증권 HTML 원문",
+            "url": "https://samsungpop.com/v2/today-invest/series/researchanalysttalk-3008",
+            "publisher": "삼성증권"
+          },
+          {
+            "label": "삼성증권 HTML 원문",
+            "url": "https://samsungpop.com/v2/today-invest/series/researchanalysttalk-3001",
+            "publisher": "삼성증권"
+          },
+          {
+            "label": "Aju Press 장중 시황",
+            "url": "https://www.ajupress.com/view/20260929114521326",
+            "publisher": "Aju Press 장중 시황"
+          }
+        ]
+      }
+    ],
+    "investmentMapV1": {
+      "institutionalFocus": [
+        {
+          "label": "Higher-for-longer rates",
+          "mentionCount": 2,
+          "institutionCount": 2,
+          "supportingInstitutions": [
+            "Associated Press",
+            "Reuters"
+          ]
+        },
+        {
+          "label": "Higher-for-longer rates",
+          "mentionCount": 1,
+          "institutionCount": 1,
+          "supportingInstitutions": [
+            "Tallac Options"
+          ]
+        }
+      ],
+      "koreaResearchFocus": [
+        {
+          "label": "소프트웨어",
+          "mentionCount": 2,
+          "institutionCount": 1,
+          "supportingInstitutions": [
+            "삼성증권"
+          ]
+        },
+        {
+          "label": "agentic ai",
+          "mentionCount": 2,
+          "institutionCount": 1,
+          "supportingInstitutions": [
+            "삼성증권"
+          ]
+        },
+        {
+          "label": "ai infrastructure",
+          "mentionCount": 2,
+          "institutionCount": 1,
+          "supportingInstitutions": [
+            "삼성증권"
+          ]
+        },
+        {
+          "label": "반도체",
+          "mentionCount": 1,
+          "institutionCount": 1,
+          "supportingInstitutions": [
+            "삼성증권"
+          ]
+        },
+        {
+          "label": "커뮤니케이션 서비스",
+          "mentionCount": 1,
+          "institutionCount": 1,
+          "supportingInstitutions": [
+            "삼성증권"
+          ]
+        },
+        {
+          "label": "ai interface",
+          "mentionCount": 1,
+          "institutionCount": 1,
+          "supportingInstitutions": [
+            "삼성증권"
+          ]
+        }
+      ],
+      "crossMarketThemes": [],
+      "mostDiscussedStocks": [
+        {
+          "label": "Anthropic",
+          "mentionCount": 1,
+          "institutionCount": 1,
+          "supportingInstitutions": [
+            "삼성증권"
+          ],
+          "majorReasons": [
+            "데이터센터 확장 과정에서 투자 속도와 수익성, 신규 모델과 기업 일정의 균형이 핵심이라는 관점이다."
+          ],
+          "relatedThemes": [
+            "ai infrastructure"
+          ]
+        },
+        {
+          "label": "Meta Platforms (META)",
+          "mentionCount": 1,
+          "institutionCount": 1,
+          "supportingInstitutions": [
+            "삼성증권"
+          ],
+          "majorReasons": [
+            "AR 기기와 실시간 아바타, 외부 서비스 연결이 사용 경험을 넓히지만 제품 실행력 확인이 필요하다는 관점이다."
+          ],
+          "relatedThemes": [
+            "ai interface"
+          ]
+        },
+        {
+          "label": "Microsoft (MSFT)",
+          "mentionCount": 1,
+          "institutionCount": 1,
+          "supportingInstitutions": [
+            "삼성증권"
+          ],
+          "majorReasons": [
+            "기업용 에이전트 확산에는 작업 라우팅, 자체 모델, 칩 최적화가 수익성의 핵심 조건이라는 관점이다."
+          ],
+          "relatedThemes": [
+            "agentic ai"
+          ]
+        }
+      ],
+      "changes": [],
+      "majorRisks": [
+        {
+          "label": "기업 도입 속도",
+          "mentionCount": 1,
+          "supportingInstitutions": [
+            "삼성증권"
+          ]
+        },
+        {
+          "label": "대규모 투자 계획의 집행 지연",
+          "mentionCount": 1,
+          "supportingInstitutions": [
+            "삼성증권"
+          ]
+        },
+        {
+          "label": "데이터센터 투자 부담",
+          "mentionCount": 1,
+          "supportingInstitutions": [
+            "삼성증권"
+          ]
+        },
+        {
+          "label": "에이전트 제품의 초기 실행 안정성",
+          "mentionCount": 1,
+          "supportingInstitutions": [
+            "삼성증권"
+          ]
+        },
+        {
+          "label": "장기 국채금리 상승",
+          "mentionCount": 1,
+          "supportingInstitutions": [
+            "삼성증권"
+          ]
+        },
+        {
+          "label": "제품 실행 지연",
+          "mentionCount": 1,
+          "supportingInstitutions": [
+            "삼성증권"
+          ]
+        },
+        {
+          "label": "추론 비용 부담",
+          "mentionCount": 1,
+          "supportingInstitutions": [
+            "삼성증권"
+          ]
+        },
+        {
+          "label": "하드웨어 수요 불확실성",
+          "mentionCount": 1,
+          "supportingInstitutions": [
+            "삼성증권"
+          ]
+        },
+        {
+          "label": "현금 소진",
+          "mentionCount": 1,
+          "supportingInstitutions": [
+            "삼성증권"
+          ]
+        }
+      ]
+    },
+    "whatToWatch": [
+      {
+        "headline": "미국 장기금리",
+        "watchFor": "10년물 5%대 지속 여부와 성장주 반응",
+        "validityHorizon": "SHORT_TERM"
+      },
+      {
+        "headline": "AI 에이전트",
+        "watchFor": "기업 도입과 실행 안정성, 보안 계층의 실제 채택",
+        "validityHorizon": "MEDIUM_TERM"
+      },
+      {
+        "headline": "한국 외국인 수급",
+        "watchFor": "대형 반도체를 중심으로 순매도 강도가 완화되는지 확인",
+        "validityHorizon": "SHORT_TERM"
+      }
+    ]
+  },
+  "contentFingerprint": "5b3e2e93494ff35e18424fb0421181855f5079defd511265dcdc8607d0a7c56c"
+}

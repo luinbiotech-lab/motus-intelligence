@@ -1,0 +1,29 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { buildGoldenIntelligenceRehearsal,goldenRehearsalAudit } from '../src/intelligence/golden-rehearsal.js';
+import { markA4Released,markBloggerPublished,markEmailSent } from '../src/intelligence/daily-production.js';
+
+test('Sprint 4A builds one real-data Golden Intelligence rehearsal with no external action',()=>{
+  const preview=buildGoldenIntelligenceRehearsal();const audit=goldenRehearsalAudit(preview);const publicOutput=`${preview.blogger.html}${preview.email.html}${preview.a4.html}`;
+  assert.equal(audit.selectedDate,'2026-09-29');assert.deepEqual(audit.sourceCounts,{ai:3,wallStreet:3,koreaMarket:18,koreaResearch:5});assert.ok(audit.crossChainCount>=1);
+  assert.equal(preview.review.status,'PENDING');assert.equal(preview.states.blogger.artifactState,'PREVIEW_READY');assert.equal(preview.states.blogger.publicationState,'DRAFT');assert.equal(preview.states.email.artifactState,'PREVIEW_READY');assert.equal(preview.states.a4.artifactState,'PREVIEW_READY');
+  assert.equal(audit.bloggerDraftPostId,null);assert.deepEqual(audit.externalActions,{bloggerInsert:false,emailSend:false,a4Release:false});
+  assert.throws(()=>markBloggerPublished(preview),/APPROVED required/);assert.throws(()=>markEmailSent(preview),/APPROVED required/);assert.throws(()=>markA4Released(preview),/APPROVED required/);
+  assert.doesNotMatch(publicOutput,/fixture|example\.org|claimId|researchId|eventId|themeId|confidence|MANUAL_VERIFIED/i);
+  assert.match(publicOutput,/OpenAI|NVIDIA|Microsoft Research|삼성증권|KOSPI/);assert.equal(preview.a4.onePage,true);assert.equal(preview.a4.overflow,false);
+});
+
+test('Sprint 4A preserves actual 5-session index data and source links across channels',()=>{
+  const preview=buildGoldenIntelligenceRehearsal();const history=preview.newsletter.marketSnapshot?.marketHistory;
+  assert.equal(history?.series.length,4);assert.ok(history?.series.every(series=>series.closes.length===5&&series.provenance.length===5));assert.equal(history?.series[0]?.latestClose,7670.84);
+  assert.equal((preview.blogger.html.match(/<svg class="index-line-chart"/g)??[]).length,4);
+  assert.match(preview.blogger.html,/href="https:\/\/openai\.com\/index\/introducing-dots\//);assert.match(preview.email.html,/href="https:\/\/openai\.com\/index\/introducing-dots\//);
+  assert.ok(preview.newsletter.sources.every(source=>/^https:\/\//.test(source.url)));
+});
+
+test('Sprint 4A omits unavailable facts and inferred research fields',()=>{
+  const preview=buildGoldenIntelligenceRehearsal();const html=preview.blogger.html;
+  assert.doesNotMatch(html,/프로그램 순매수|거래대금/);assert.doesNotMatch(html,/목표주가 .*→|투자의견 .*→/);
+  assert.equal(preview.newsletter.koreaResearch?.length,5);assert.ok(preview.newsletter.koreaResearch?.every(item=>item.analyst===null&&item.targetPriceLabel===null&&item.ratingLabel===null));
+  assert.equal(preview.newsletter.crossIntelligenceChains?.length,1);assert.ok(preview.newsletter.crossIntelligenceChains?.[0]?.aiIndustry.length);assert.ok(preview.newsletter.crossIntelligenceChains?.[0]?.koreaResearch.length);
+});
