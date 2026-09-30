@@ -1,0 +1,107 @@
+{
+  "issueDate": "2026-09-29",
+  "decision": "APPROVED",
+  "reviewer": "human",
+  "reviewedAt": "2026-09-30T12:33:34.347Z",
+  "modificationHistory": [
+    {
+      "at": "2026-09-30T12:33:34.347Z",
+      "from": "PENDING",
+      "to": "MODIFY",
+      "reason": "초기 검토에서 Cross Intelligence 전이 연결 과장과 VIX 테마 라벨 재사용을 확인"
+    },
+    {
+      "at": "2026-09-30T12:33:34.347Z",
+      "from": "MODIFY",
+      "to": "APPROVED",
+      "reason": "event exact-match 범위로 축소하고 VIX 테마 라벨 및 제목 중복을 보정한 뒤 전 항목 재검토"
+    }
+  ],
+  "checks": [
+    {
+      "item": "제목",
+      "status": "PASS",
+      "detail": "국채금리 5%대의 압박과 AI 에이전트 경쟁"
+    },
+    {
+      "item": "Today at a Glance",
+      "status": "PASS",
+      "detail": "headline·summary·3 bullets"
+    },
+    {
+      "item": "Market Snapshot",
+      "status": "PASS",
+      "detail": "미국 지수·VIX·10년물·Brent 7개"
+    },
+    {
+      "item": "미국 주요지수 2×2 차트",
+      "status": "PASS",
+      "detail": "5거래일 line chart 4개"
+    },
+    {
+      "item": "AI Intelligence",
+      "status": "PASS",
+      "detail": "공식 발표 3건"
+    },
+    {
+      "item": "Wall Street",
+      "status": "PASS",
+      "detail": "교차검증 3건"
+    },
+    {
+      "item": "Korea Market",
+      "status": "PASS",
+      "detail": "공개 허용 fact 15개; REVIEW_REQUIRED 3개 제외"
+    },
+    {
+      "item": "Korea Research",
+      "status": "PASS",
+      "detail": "공개 리서치 5건"
+    },
+    {
+      "item": "Cross Intelligence",
+      "status": "PASS",
+      "detail": "공통 event 근거 2개 항목만 연결"
+    },
+    {
+      "item": "Investment Map",
+      "status": "PASS",
+      "detail": "실제 deduped count만 사용"
+    },
+    {
+      "item": "What to Watch",
+      "status": "PASS",
+      "detail": "금리·에이전트·외국인 수급"
+    },
+    {
+      "item": "출처 링크",
+      "status": "PASS",
+      "detail": "출처명 anchor; raw URL 비노출"
+    },
+    {
+      "item": "기관 의견 / MOTUS AI 해석 분리",
+      "status": "PASS",
+      "detail": "AI 해석과 기관 원문 필드 분리"
+    },
+    {
+      "item": "모바일 overflow",
+      "status": "PASS",
+      "detail": "inline style·responsive width"
+    },
+    {
+      "item": "public leakage",
+      "status": "PASS",
+      "detail": "내부 토큰·화면 raw URL 없음"
+    },
+    {
+      "item": "제목 중복",
+      "status": "PASS",
+      "detail": "Blogger post title과 본문 H1 중복 없음"
+    }
+  ],
+  "notes": [
+    "REVIEW_REQUIRED Korea Market fact 3건은 공개 출력에서 제외",
+    "확인되지 않은 analyst·target price·rating은 null 유지",
+    "Investment Map은 언급 집계이며 추천 또는 임의 순위가 아님"
+  ]
+}

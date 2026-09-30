@@ -944,7 +944,7 @@ test('DRAFT plus Blogger root URL stores only draftPostId and leaves publicPostU
   assert.equal((requestInit?.headers as Record<string,string>).authorization,'Bearer secret-access-token');
   const payload=JSON.parse(String(requestInit?.body)) as {title:string;content:string;labels?:string[];customMetaData?:string};
   assert.equal(payload.title,approved.title);
-  assert.equal(payload.labels,undefined);
+  assert.deepEqual(payload.labels,approved.labels);
   assert.match(payload.content,/class="motus-editorial"/);
   assert.match(payload.content,/<h2\b[^>]*>핵심 요약<\/h2>/);
   assert.match(payload.content,/market-dashboard/);
@@ -967,6 +967,13 @@ test('Sprint 2H Google adapter never calls Blogger without both blogId and crede
   assert.equal(withoutBlog.publicPostUrl,null);
   assert.equal(withoutToken.publicPostUrl,null);
   assert.equal(calls,0);
+});
+
+test('Google adapter reads an admin draft back without accepting a root URL as permalink',async()=>{
+  const fakeFetch:typeof fetch=async(input)=>new Response(JSON.stringify({id:'DRAFT-READ-1',title:'MOTUS title',content:'<article style="width:100%">body</article>',status:'DRAFT',url:'https://motusnova.blogspot.com/',labels:['MOTUS Daily']}),{status:200,headers:{'content-type':'application/json'}});
+  const adapter=new GoogleBloggerApiAdapter(name=>name==='BLOGGER_OAUTH_TOKEN'?'access':undefined,fakeFetch);
+  const result=await adapter.readPost('DRAFT-READ-1',{...publishingConfig,blogId:'blog-id',credentialEnvironmentVariable:'BLOGGER_OAUTH_TOKEN'});
+  assert.equal(result.status,'DRAFT');assert.equal(result.url,null);assert.deepEqual(result.labels,['MOTUS Daily']);
 });
 
 test('Blogger draft root URL never propagates to A4 or Naver',async()=>{

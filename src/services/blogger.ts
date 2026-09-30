@@ -48,6 +48,7 @@ export interface BloggerPublicationRecord {
   history: BloggerHistoryEvent[];
 }
 export interface BloggerPublishResult { publicPostUrl?: string|null; postId?: string; publishedAt?: string; status?: 'DRAFT'|'PUBLISHED' }
+export interface BloggerPostReadback { postId:string;title:string;content:string;status:'DRAFT'|'PUBLISHED'|'UNKNOWN';url:string|null;labels:string[] }
 export interface BloggerAdapter {
   name: string;
   hasCredential(config:BloggerPublishingConfig): boolean;
@@ -197,7 +198,8 @@ export class GoogleBloggerApiAdapter implements BloggerAdapter {
     endpoint.searchParams.set('isDraft',String(isDraft));
     const response=await this.fetcher(endpoint,{method:'POST',headers:{authorization:`Bearer ${accessToken}`,'content-type':'application/json'},body:JSON.stringify({
       title:record.title,
-      content:extractBloggerArticle(record.html)
+      content:extractBloggerArticle(record.html),
+      labels:record.labels
     })});
     if(!response.ok) throw new Error(`Blogger API ${response.status}: ${safeGoogleApiError(await response.text())}`);
     const post=await response.json() as GoogleBloggerPost;
@@ -206,6 +208,14 @@ export class GoogleBloggerApiAdapter implements BloggerAdapter {
     const publishedAt=post.published??post.updated;
     const publicPostUrl=isDraft?null:post.url!;
     return {publicPostUrl,postId:post.id,...(publishedAt?{publishedAt}:{}),status:isDraft?'DRAFT':'PUBLISHED'};
+  }
+
+  async readPost(postId:string,config:BloggerPublishingConfig):Promise<BloggerPostReadback> {
+    const blogId=config.blogId?.trim();if(!blogId)throw new Error('missing Blogger blogId');if(!postId.trim())throw new Error('missing Blogger postId');
+    const accessToken=await this.resolveAccessToken(config);const endpoint=new URL(`https://www.googleapis.com/blogger/v3/blogs/${encodeURIComponent(blogId)}/posts/${encodeURIComponent(postId)}`);endpoint.searchParams.set('view','ADMIN');
+    const response=await this.fetcher(endpoint,{headers:{authorization:`Bearer ${accessToken}`}});if(!response.ok)throw new Error(`Blogger post readback ${response.status}: ${safeGoogleApiError(await response.text())}`);
+    const post=await response.json() as GoogleBloggerPost&{content?:string;labels?:string[]};if(!post.id||!post.title||typeof post.content!=='string')throw new Error('Blogger readback missing post fields');
+    const status=post.status==='DRAFT'?'DRAFT':post.status==='LIVE'?'PUBLISHED':'UNKNOWN';return {postId:post.id,title:post.title,content:post.content,status,url:status==='PUBLISHED'&&isPublicBloggerPostUrl(post.url)?post.url!:null,labels:Array.isArray(post.labels)?post.labels:[]};
   }
 
   private readConfigured(environmentVariable:string|null|undefined):string|undefined {

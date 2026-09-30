@@ -102,14 +102,14 @@
         "publisher": "서울경제·한국거래소"
       },
       {
-        "label": "검증 공개자료",
+        "label": "연합뉴스·Korea Times",
         "url": "https://www.koreatimes.co.kr/economy/20260929/kospi-slips-as-us-bond-yields-oil-prices-weigh-on-investor-sentiment",
-        "publisher": "검증 공개자료"
+        "publisher": "연합뉴스·Korea Times"
       },
       {
-        "label": "검증 공개자료",
+        "label": "Reuters 공개 배포본",
         "url": "https://www.indopremier.com/ipotnews/newsDetail.php?group_news=IPOTNEWS&halaman=1&jdl=South_Korean_shares_extend_losses_as_high_bond_yields_weigh&name=&news_id=245346&q=korean+shares,+kospi,+kosdaq,&search=y_general&taging_subtype=INDEKS+KOSPI+KOREA",
-        "publisher": "검증 공개자료"
+        "publisher": "Reuters 공개 배포본"
       },
       {
         "label": "Aju Press 장중 시황",
@@ -632,7 +632,7 @@
           "displayValue": "1,356.7원",
           "direction": "FLAT",
           "source": {
-            "label": "검증 공개자료",
+            "label": "연합뉴스·Korea Times",
             "url": "https://www.koreatimes.co.kr/economy/20260929/kospi-slips-as-us-bond-yields-oil-prices-weigh-on-investor-sentiment"
           }
         },
@@ -709,7 +709,7 @@
           "displayValue": "232개",
           "direction": "FLAT",
           "source": {
-            "label": "검증 공개자료",
+            "label": "Reuters 공개 배포본",
             "url": "https://www.indopremier.com/ipotnews/newsDetail.php?group_news=IPOTNEWS&halaman=1&jdl=South_Korean_shares_extend_losses_as_high_bond_yields_weigh&name=&news_id=245346&q=korean+shares,+kospi,+kosdaq,&search=y_general&taging_subtype=INDEKS+KOSPI+KOREA"
           }
         },
@@ -720,7 +720,7 @@
           "displayValue": "624개",
           "direction": "FLAT",
           "source": {
-            "label": "검증 공개자료",
+            "label": "Reuters 공개 배포본",
             "url": "https://www.indopremier.com/ipotnews/newsDetail.php?group_news=IPOTNEWS&halaman=1&jdl=South_Korean_shares_extend_losses_as_high_bond_yields_weigh&name=&news_id=245346&q=korean+shares,+kospi,+kosdaq,&search=y_general&taging_subtype=INDEKS+KOSPI+KOREA"
           }
         },
@@ -775,11 +775,11 @@
           "url": "https://en.sedaily.com/finance/2026/09/29/kospi-falls-for-second-day-as-foreigners-dump-2-billion-in"
         },
         {
-          "label": "검증 공개자료",
+          "label": "연합뉴스·Korea Times",
           "url": "https://www.koreatimes.co.kr/economy/20260929/kospi-slips-as-us-bond-yields-oil-prices-weigh-on-investor-sentiment"
         },
         {
-          "label": "검증 공개자료",
+          "label": "Reuters 공개 배포본",
           "url": "https://www.indopremier.com/ipotnews/newsDetail.php?group_news=IPOTNEWS&halaman=1&jdl=South_Korean_shares_extend_losses_as_high_bond_yields_weigh&name=&news_id=245346&q=korean+shares,+kospi,+kosdaq,&search=y_general&taging_subtype=INDEKS+KOSPI+KOREA"
         },
         {
@@ -954,20 +954,15 @@
     "crossIntelligenceChains": [
       {
         "themeEvent": "Theme · agentic ai",
-        "connectionSummary": "6개 검증 항목을 공통 이벤트·공통 테마·공통 업종 근거로 연결",
+        "connectionSummary": "2개 검증 항목을 공통 이벤트 근거로 연결",
         "aiIndustry": [
           "OpenAI, 상시 실행형 에이전트 Dots 공개"
         ],
         "wallStreet": [],
         "koreaResearch": [
-          "[미국 마감] 국채금리 부담 속 AI 종목별 차별화",
-          "Microsoft Copilot: 상시 실행형 에이전트의 기업 적용",
-          "Terafab: AI 수요가 제조 역량 투자로 확장될 가능성",
-          "Anthropic: 데이터센터 확장과 수익성의 균형"
+          "[미국 마감] 국채금리 부담 속 AI 종목별 차별화"
         ],
-        "koreaMarketReaction": [
-          "반도체 업종 반응"
-        ],
+        "koreaMarketReaction": [],
         "sharedSignals": [],
         "divergentSignals": [],
         "changedSignals": [],
@@ -982,26 +977,6 @@
             "label": "삼성증권 HTML 원문",
             "url": "https://www.samsungpop.com/v2/today-invest/series/todaymarkettrend-3040",
             "publisher": "삼성증권"
-          },
-          {
-            "label": "삼성증권 HTML 원문",
-            "url": "https://samsungpop.com/v2/today-invest/series/researchanalysttalk-3022",
-            "publisher": "삼성증권"
-          },
-          {
-            "label": "삼성증권 HTML 원문",
-            "url": "https://samsungpop.com/v2/today-invest/series/researchanalysttalk-3008",
-            "publisher": "삼성증권"
-          },
-          {
-            "label": "삼성증권 HTML 원문",
-            "url": "https://samsungpop.com/v2/today-invest/series/researchanalysttalk-3001",
-            "publisher": "삼성증권"
-          },
-          {
-            "label": "Aju Press 장중 시황",
-            "url": "https://www.ajupress.com/view/20260929114521326",
-            "publisher": "Aju Press 장중 시황"
           }
         ]
       }
@@ -1018,7 +993,7 @@
           ]
         },
         {
-          "label": "Higher-for-longer rates",
+          "label": "Market volatility",
           "mentionCount": 1,
           "institutionCount": 1,
           "supportingInstitutions": [
@@ -1206,5 +1181,5 @@
       }
     ]
   },
-  "contentFingerprint": "5b3e2e93494ff35e18424fb0421181855f5079defd511265dcdc8607d0a7c56c"
+  "contentFingerprint": "817df8c874301793e6956299e5505c9baaa9be0ba0575486bb3797cced03d438"
 }
