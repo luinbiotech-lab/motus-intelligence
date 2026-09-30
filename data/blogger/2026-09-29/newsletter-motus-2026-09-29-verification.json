@@ -1,0 +1,49 @@
+{
+  "postId": "9009523239057574527",
+  "state": "DRAFT",
+  "publicPostUrl": null,
+  "duplicateCount": 0,
+  "verification": {
+    "checks": {
+      "postId": true,
+      "draftState": true,
+      "title": true,
+      "label": true,
+      "deepNavy": true,
+      "titleTypography": true,
+      "charts": true,
+      "koreaMarket": true,
+      "koreaResearch": true,
+      "crossIntelligence": true,
+      "investmentMap": true,
+      "sourceLinks": true,
+      "inlineStyles": true,
+      "mobile": true,
+      "rawUrl": true,
+      "internalTokens": true,
+      "h1": true,
+      "publicPostUrl": true
+    },
+    "pass": true,
+    "svgCount": 4,
+    "styleAttributeCount": 555,
+    "anchorCount": 47
+  },
+  "sourceDestinationVerification": {
+    "status": "PASS",
+    "checkedUniqueUrls": 15,
+    "httpDirectPass": 10,
+    "browserVerifiedAfterBotBlock": 5,
+    "brokenOrPlaceholderCount": 0
+  },
+  "noFixtureVerification": "PASS",
+  "actualAdminPreviewVerification": {
+    "status": "PASS",
+    "device": "smartphone",
+    "horizontalOverflow": "NONE_OBSERVED",
+    "masthead": "PASS",
+    "sectionFlow": "PASS",
+    "charts": "FOUR_SVG_PRESENT",
+    "titleH1Duplication": "NONE"
+  }
+}
