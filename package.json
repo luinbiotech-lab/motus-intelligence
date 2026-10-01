@@ -18,6 +18,7 @@
     "intelligence:split-daily": "npm run build && node dist/src/split-daily-production-cli.js",
     "intelligence:periodic-preview": "npm run build && node dist/src/periodic-production-cli.js",
     "motus:daily": "npm run build && node dist/src/daily-operations-cli.js",
+    "motus:search": "npm run build && node dist/src/search-operations-cli.js",
     "sample": "npm run build && node dist/src/cli.js --sample",
     "report": "node dist/src/cli.js"
   },

@@ -1,0 +1,6 @@
+{
+  "state": "NOT_CONFIGURED",
+  "records": [],
+  "zeroMetrics": false,
+  "reason": "credential/property connection not configured; unknown is not converted to zero"
+}

@@ -1,0 +1,23 @@
+[
+  {
+    "publicationId": "newsletter:motus:2026-09-29",
+    "url": "https://motusnova.blogspot.com/2026/09/5-ai.html",
+    "status": "WARN",
+    "titlePresent": true,
+    "titleLength": 24,
+    "metaDescriptionPresent": true,
+    "canonicalPresent": true,
+    "singleH1": true,
+    "headingHierarchy": true,
+    "internalLinks": 0,
+    "externalSourceLinks": 47,
+    "imageAlt": true,
+    "mobileSafe": true,
+    "https": true,
+    "structuredDataPresent": false,
+    "warnings": [
+      "structured data not detected"
+    ],
+    "errors": []
+  }
+]

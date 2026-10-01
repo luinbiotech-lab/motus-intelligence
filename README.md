@@ -13,6 +13,7 @@ npm.cmd run build
 npm.cmd test
 npm.cmd run sample
 npm.cmd run motus:daily -- --date 2026-10-01 --all --dry-run --review-package
+npm.cmd run motus:search -- --provider google --date-range 28d --dry-run --audit
 ```
 
 실제 수동 자료는 [수동 입력 안내](docs/manual-input.md)에 따라 준비한 뒤 실행합니다.
@@ -105,6 +106,10 @@ Blogger는 publishing channel이고, MOTUS Intelligence는 검증·집계·표�
 Sprint 4G daily operations는 `src/operations/daily-orchestrator.ts`에서 AI Intelligence, U.S. Market, Korea Market을 독립적으로 collect → normalize → verify → dedupe → assemble → quality gate → preview → review package → audit 순서로 실행합니다. 각 stage는 시작·완료 시각과 입출력 fingerprint를 기록하며 한 category의 실패는 다른 category를 중단하지 않습니다. 동일 category·issueDate·input fingerprint는 `UNCHANGED`, 입력 변경은 `INPUT_CHANGED`, 명시적 재생성은 `REGENERATED`로 구분합니다. 일시적 network/rate-limit/upstream 5xx만 제한적으로 재시도하고 인증·파싱·검증 충돌은 자동 재시도하지 않습니다. 완료된 verified structured record만 Weekly/Monthly feed에 등록하며 public publish 여부와 분리합니다. 비용을 알 수 없으면 token usage와 cost는 `null`로 유지합니다.
 
 `npm run motus:daily -- --date YYYY-MM-DD --all --dry-run --review-package`는 `data/operations/YYYY-MM-DD/` 아래에 category preview와 review, Morning Operator package, selection audit, source failure, periodic feed를 생성합니다. 입력이 같으면 `UNCHANGED`로 종료하며, 운영자가 명시적으로 다시 만들 때만 `--force`를 추가합니다. 기본 동작은 항상 dry-run이며 Sprint 4G에서는 Blogger insert·patch·publish 및 theme/menu 변경을 호출하지 않습니다.
+
+MOTUS Audience Loop은 **Publish → Discover → Index → Search Impression → Click → Read → Related Content → Weekly/Monthly → Performance Learning** 순서로 추적합니다. `npm run motus:search -- --provider google|naver --date-range 7d|28d|90d --publication ID --dry-run --audit`는 기본적으로 read-only이며, 연결된 property와 credential이 없으면 0건으로 가장하지 않고 `NOT_CONFIGURED` 또는 `MANUAL_REQUIRED`를 기록합니다. Google Search Console과 Naver 측정치는 provider별로 유지하며 임의 합산하지 않습니다. 일반 기사에 Google Indexing API를 사용하지 않고, IndexNow도 검증된 key·key location·소유권·설정과 별도 승인이 있기 전까지 `enabled=false`입니다.
+
+검색 성과는 Editorial Audit과 Content Library에 연결할 수 있지만 클릭 수만으로 기사 주제를 선정하지 않습니다. 출처 검증, 독자에게 필요한 설명, 편집 품질을 우선하고 검색 지표는 이후 성과 학습의 근거로만 사용합니다.
 
 A4 MASTER 생성은 관리자 전용 boundary를 통과해야 하며, 공개 route에서 호출할 수 없습니다. 개발환경에서는 `src/services/admin.ts`의 server-side authorization boundary와 `data/a4-master/YYYY-MM-DD/admin-a4-route.html`로 내부 route 화면을 분리합니다.
 

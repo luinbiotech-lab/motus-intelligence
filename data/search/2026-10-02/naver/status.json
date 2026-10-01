@@ -1,0 +1,20 @@
+{
+  "state": "MANUAL_REQUIRED",
+  "status": {
+    "siteRegistration": "MANUAL_REQUIRED",
+    "ownershipVerification": "MANUAL_REQUIRED",
+    "sitemapSubmission": "UNKNOWN",
+    "rssSubmission": "UNKNOWN",
+    "collectionState": "MANUAL_REQUIRED",
+    "diagnosticState": "MANUAL_REQUIRED",
+    "checkedAt": null
+  },
+  "candidates": {
+    "sitemap": "https://motusnova.blogspot.com/sitemap.xml",
+    "rss": "https://motusnova.blogspot.com/feeds/posts/default"
+  },
+  "indexNow": {
+    "enabled": false,
+    "calls": 0
+  }
+}
