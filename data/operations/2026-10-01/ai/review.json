@@ -1,0 +1,199 @@
+{
+  "category": "AI_INTELLIGENCE",
+  "issueDate": "2026-09-29",
+  "state": "REVIEW_READY",
+  "result": "UNCHANGED",
+  "publicationId": "motus-ai-intelligence-2026-09-29",
+  "headline": "상시 실행형 에이전트와 AI 보안·과학 연구의 확장 (2026년 9월 29일)",
+  "itemCount": 3,
+  "sourceCount": 3,
+  "warnings": [],
+  "failureReason": null,
+  "inputFingerprint": "7a4f0b7d30bff2d9be41c433f2b492f5dd1c4d4549dfe7e944f0454f84732848",
+  "outputFingerprint": "d02a15429bf03afafb33b656df3498da7ffc8d4ec432108027bb13074a332051",
+  "reviewState": "PENDING",
+  "publicationState": "PREVIEW_READY",
+  "stages": [
+    {
+      "stage": "COLLECT",
+      "startedAt": "2026-10-01T14:39:02.747Z",
+      "completedAt": "2026-10-01T14:39:02.747Z",
+      "status": "PASS",
+      "failureReason": null,
+      "inputFingerprint": null,
+      "outputFingerprint": "9ec771a21eaaa2201db8df79ab909fd26a6519cdbcd9714c93ad46602cc645cc"
+    },
+    {
+      "stage": "NORMALIZE",
+      "startedAt": "2026-10-01T14:39:02.747Z",
+      "completedAt": "2026-10-01T14:39:02.747Z",
+      "status": "PASS",
+      "failureReason": null,
+      "inputFingerprint": "7a4f0b7d30bff2d9be41c433f2b492f5dd1c4d4549dfe7e944f0454f84732848",
+      "outputFingerprint": "7a4f0b7d30bff2d9be41c433f2b492f5dd1c4d4549dfe7e944f0454f84732848"
+    },
+    {
+      "stage": "VERIFY",
+      "startedAt": "2026-10-01T14:39:02.747Z",
+      "completedAt": "2026-10-01T14:39:02.747Z",
+      "status": "PASS",
+      "failureReason": null,
+      "inputFingerprint": "7a4f0b7d30bff2d9be41c433f2b492f5dd1c4d4549dfe7e944f0454f84732848",
+      "outputFingerprint": "7a4f0b7d30bff2d9be41c433f2b492f5dd1c4d4549dfe7e944f0454f84732848"
+    },
+    {
+      "stage": "DEDUPE",
+      "startedAt": "2026-10-01T14:39:02.747Z",
+      "completedAt": "2026-10-01T14:39:02.747Z",
+      "status": "PASS",
+      "failureReason": null,
+      "inputFingerprint": "7a4f0b7d30bff2d9be41c433f2b492f5dd1c4d4549dfe7e944f0454f84732848",
+      "outputFingerprint": "7a4f0b7d30bff2d9be41c433f2b492f5dd1c4d4549dfe7e944f0454f84732848"
+    },
+    {
+      "stage": "ASSEMBLE",
+      "startedAt": "2026-10-01T14:39:02.747Z",
+      "completedAt": "2026-10-01T14:39:02.747Z",
+      "status": "PASS",
+      "failureReason": null,
+      "inputFingerprint": "7a4f0b7d30bff2d9be41c433f2b492f5dd1c4d4549dfe7e944f0454f84732848",
+      "outputFingerprint": "7a4f0b7d30bff2d9be41c433f2b492f5dd1c4d4549dfe7e944f0454f84732848"
+    },
+    {
+      "stage": "QUALITY_GATE",
+      "startedAt": "2026-10-01T14:39:02.747Z",
+      "completedAt": "2026-10-01T14:39:02.747Z",
+      "status": "PASS",
+      "failureReason": null,
+      "inputFingerprint": "7a4f0b7d30bff2d9be41c433f2b492f5dd1c4d4549dfe7e944f0454f84732848",
+      "outputFingerprint": "7a4f0b7d30bff2d9be41c433f2b492f5dd1c4d4549dfe7e944f0454f84732848"
+    },
+    {
+      "stage": "RENDER_PREVIEW",
+      "startedAt": "2026-10-01T14:39:02.747Z",
+      "completedAt": "2026-10-01T14:39:02.747Z",
+      "status": "PASS",
+      "failureReason": null,
+      "inputFingerprint": "7a4f0b7d30bff2d9be41c433f2b492f5dd1c4d4549dfe7e944f0454f84732848",
+      "outputFingerprint": "d02a15429bf03afafb33b656df3498da7ffc8d4ec432108027bb13074a332051"
+    },
+    {
+      "stage": "CREATE_REVIEW_PACKAGE",
+      "startedAt": "2026-10-01T14:39:02.747Z",
+      "completedAt": "2026-10-01T14:39:02.747Z",
+      "status": "PASS",
+      "failureReason": null,
+      "inputFingerprint": "7a4f0b7d30bff2d9be41c433f2b492f5dd1c4d4549dfe7e944f0454f84732848",
+      "outputFingerprint": "d02a15429bf03afafb33b656df3498da7ffc8d4ec432108027bb13074a332051"
+    },
+    {
+      "stage": "PERSIST_AUDIT",
+      "startedAt": "2026-10-01T14:39:02.747Z",
+      "completedAt": "2026-10-01T14:39:02.747Z",
+      "status": "PASS",
+      "failureReason": null,
+      "inputFingerprint": "7a4f0b7d30bff2d9be41c433f2b492f5dd1c4d4549dfe7e944f0454f84732848",
+      "outputFingerprint": "d02a15429bf03afafb33b656df3498da7ffc8d4ec432108027bb13074a332051"
+    }
+  ],
+  "failures": [],
+  "selectionDecisions": [
+    {
+      "candidate_id": "candidate:ai_intelligence:1",
+      "entity_topic": "상시 실행형 에이전트와 AI 보안·과학 연구의 확장 (2026년 9월 29일)",
+      "source_url": "https://www.microsoft.com/en-us/research/blog/introducing-quine-an-ai-research-system-designed-for-the-complexity-of-biology",
+      "publisher": "Microsoft Research",
+      "source_type": "VERIFIED_PUBLIC",
+      "published_at": "2026-09-29",
+      "discovered_at": "2026-10-01T14:39:02.747Z",
+      "selection_status": "SELECTED",
+      "selection_reason": "검증된 publication unit의 공개 근거로 채택",
+      "rejection_reason": null,
+      "relevance_score": null,
+      "importance_score": null,
+      "novelty_score": null,
+      "source_quality_score": null,
+      "market_impact_score": null,
+      "cross_verification_status": "VERIFIED",
+      "duplicate_cluster_id": null,
+      "chosen_representative_reason": "canonical URL과 publisher 기준 중복 제거 후 대표 출처 유지",
+      "summarization_basis": "검증된 structured intelligence record와 source fact",
+      "reviewer_agent": "MOTUS DailyProductionOrchestrator",
+      "decision_at": "2026-10-01T14:39:02.747Z",
+      "model_version": "none-deterministic-orchestration",
+      "rule_version": "4G.1.0",
+      "confidence": null,
+      "evidence_refs": [
+        "https://www.microsoft.com/en-us/research/blog/introducing-quine-an-ai-research-system-designed-for-the-complexity-of-biology"
+      ]
+    },
+    {
+      "candidate_id": "candidate:ai_intelligence:2",
+      "entity_topic": "상시 실행형 에이전트와 AI 보안·과학 연구의 확장 (2026년 9월 29일)",
+      "source_url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Launches-Open-Agent-Safety-Platform-to-Secure-Agents-From-Testing-to-Deployment/default.aspx",
+      "publisher": "NVIDIA",
+      "source_type": "VERIFIED_PUBLIC",
+      "published_at": "2026-09-29",
+      "discovered_at": "2026-10-01T14:39:02.747Z",
+      "selection_status": "SELECTED",
+      "selection_reason": "검증된 publication unit의 공개 근거로 채택",
+      "rejection_reason": null,
+      "relevance_score": null,
+      "importance_score": null,
+      "novelty_score": null,
+      "source_quality_score": null,
+      "market_impact_score": null,
+      "cross_verification_status": "VERIFIED",
+      "duplicate_cluster_id": null,
+      "chosen_representative_reason": "canonical URL과 publisher 기준 중복 제거 후 대표 출처 유지",
+      "summarization_basis": "검증된 structured intelligence record와 source fact",
+      "reviewer_agent": "MOTUS DailyProductionOrchestrator",
+      "decision_at": "2026-10-01T14:39:02.747Z",
+      "model_version": "none-deterministic-orchestration",
+      "rule_version": "4G.1.0",
+      "confidence": null,
+      "evidence_refs": [
+        "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Launches-Open-Agent-Safety-Platform-to-Secure-Agents-From-Testing-to-Deployment/default.aspx"
+      ]
+    },
+    {
+      "candidate_id": "candidate:ai_intelligence:3",
+      "entity_topic": "상시 실행형 에이전트와 AI 보안·과학 연구의 확장 (2026년 9월 29일)",
+      "source_url": "https://openai.com/index/introducing-dots",
+      "publisher": "OpenAI",
+      "source_type": "VERIFIED_PUBLIC",
+      "published_at": "2026-09-29",
+      "discovered_at": "2026-10-01T14:39:02.747Z",
+      "selection_status": "SELECTED",
+      "selection_reason": "검증된 publication unit의 공개 근거로 채택",
+      "rejection_reason": null,
+      "relevance_score": null,
+      "importance_score": null,
+      "novelty_score": null,
+      "source_quality_score": null,
+      "market_impact_score": null,
+      "cross_verification_status": "VERIFIED",
+      "duplicate_cluster_id": null,
+      "chosen_representative_reason": "canonical URL과 publisher 기준 중복 제거 후 대표 출처 유지",
+      "summarization_basis": "검증된 structured intelligence record와 source fact",
+      "reviewer_agent": "MOTUS DailyProductionOrchestrator",
+      "decision_at": "2026-10-01T14:39:02.747Z",
+      "model_version": "none-deterministic-orchestration",
+      "rule_version": "4G.1.0",
+      "confidence": null,
+      "evidence_refs": [
+        "https://openai.com/index/introducing-dots"
+      ]
+    }
+  ],
+  "performance": {
+    "durationMs": 71,
+    "sourceFetchCount": 3,
+    "successfulSources": 3,
+    "failedSources": 0,
+    "LLMCallCount": 0,
+    "estimatedTokenUsage": null,
+    "estimatedCost": null,
+    "renderDurationMs": 0
+  }
+}

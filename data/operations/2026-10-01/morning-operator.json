@@ -1,0 +1,38 @@
+{
+  "runDate": "2026-10-01",
+  "generatedAt": "2026-10-01T14:39:02.747Z",
+  "AI": {
+    "state": "REVIEW_READY",
+    "headline": "상시 실행형 에이전트와 AI 보안·과학 연구의 확장 (2026년 9월 29일)",
+    "itemCount": 3,
+    "sourceCount": 3,
+    "warnings": []
+  },
+  "US": {
+    "state": "REVIEW_READY",
+    "headline": "미국 증시 마감: 장기금리 부담에 다우 약세, 나스닥은 소폭 상승 (2026년 9월 30일)",
+    "itemCount": 8,
+    "sourceCount": 5,
+    "warnings": []
+  },
+  "Korea": {
+    "state": "REVIEW_READY",
+    "headline": "국내 증시 마감: 외국인·기관 매도에 코스피 하락, 코스닥은 반등 (2026년 9월 30일)",
+    "itemCount": 22,
+    "sourceCount": 8,
+    "warnings": []
+  },
+  "weeklyReadiness": "HOLD",
+  "monthlyReadiness": "HOLD",
+  "criticalFailures": [],
+  "reviewLinks": [
+    "data/operations/2026-10-01/ai/review.json",
+    "data/operations/2026-10-01/us/review.json",
+    "data/operations/2026-10-01/korea/review.json"
+  ],
+  "recommendedHumanActions": [
+    "AI Intelligence preview와 출처를 검토하고 PENDING 상태를 결정",
+    "U.S. Market preview와 출처를 검토하고 PENDING 상태를 결정",
+    "Korea Market preview와 출처를 검토하고 PENDING 상태를 결정"
+  ]
+}
