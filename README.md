@@ -15,9 +15,16 @@ npm.cmd run sample
 npm.cmd run motus:daily -- --date 2026-10-01 --all --dry-run --review-package
 npm.cmd run motus:search -- --provider google --date-range 28d --dry-run --audit
 npm.cmd run motus:report -- --type us-market-daily --date 2026-09-30 --generate --validate --dry-run
+npm.cmd run motus:library -- --search OpenAI
 ```
 
 실제 수동 자료는 [수동 입력 안내](docs/manual-input.md)에 따라 준비한 뒤 실행합니다.
+
+## MOTUS Content Library
+
+`npm run motus:library`는 기본적으로 읽기 전용 dry-run으로 동작합니다. 검증된 2026-09-29/30 production record를 로컬 영속 저장소에 반영할 때만 `npm run motus:library -- --ingest`를 사용합니다. 이 명령은 `data/library/` 아래에 schema-versioned registry, event, research, relationship, history, evergreen, audit 및 operator package JSON을 기록하며 Blogger·Drive·PDF 공개 작업은 호출하지 않습니다.
+
+`--company`, `--theme`, `--institution`, `--market`, `--period`, `--evergreen`, `--audit` 조회를 지원합니다. `--dry-run`은 `--ingest`와 함께 주어도 파일을 쓰지 않습니다. Canonical alias가 여러 entity 후보와 일치하면 자동 병합하지 않고 `REVIEW_REQUIRED`로 남깁니다. 검색 성과는 audience signal로만 저장하며 entity 중요도나 검증 상태를 바꾸지 않습니다.
 
 ```powershell
 npm.cmd run report -- --input data/manual/day.json

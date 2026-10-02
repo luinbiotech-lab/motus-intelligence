@@ -1,0 +1,23 @@
+[
+  {
+    "decisionId": "decision:ee042a4943155980",
+    "originRecordId": "motus-daily-intelligence-2026-09-29",
+    "decision": "SELECTED",
+    "reason": "verified Golden Intelligence production record",
+    "at": "2026-09-29T23:59:00Z"
+  },
+  {
+    "decisionId": "decision:803fbff2a5697165",
+    "originRecordId": "motus-us-market-2026-09-30",
+    "decision": "SELECTED",
+    "reason": "verified split Daily production record",
+    "at": "2026-09-30T23:59:00Z"
+  },
+  {
+    "decisionId": "decision:5a4defac5777364d",
+    "originRecordId": "motus-korea-market-2026-09-30",
+    "decision": "SELECTED",
+    "reason": "verified split Daily production record",
+    "at": "2026-09-30T23:59:30Z"
+  }
+]

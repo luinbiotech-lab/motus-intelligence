@@ -1,0 +1,268 @@
+[
+  {
+    "recordType": "MARKET",
+    "canonicalId": "market:global",
+    "canonicalName": "Global",
+    "displayName": "Global",
+    "aliases": [
+      "Global",
+      "글로벌"
+    ],
+    "summary": null,
+    "status": "ACTIVE",
+    "verificationStatus": "VERIFIED",
+    "confidence": null,
+    "sourceRefs": [
+      "source:02483f80431a21af",
+      "source:097dd4926e5cb359",
+      "source:110e8e26550eddab",
+      "source:29a07ab3ee191f5d",
+      "source:3b960f3ca7c5f68d",
+      "source:48d126d9d9877b2b",
+      "source:4b15991b9e2930ef",
+      "source:5248fdb3ba75d77c",
+      "source:634601952cfcccbc",
+      "source:637f78c2396e4eed",
+      "source:669ab915e7e3ea94",
+      "source:7e576ecf0c83e93f",
+      "source:7ee79eecb360c6d0",
+      "source:a640107c7e713e6d",
+      "source:a8bfcc6803e874a0",
+      "source:b623893b395d1f8a",
+      "source:d6ff3ff59270a263",
+      "source:dc19ef3ea4436f19",
+      "source:dec620cb7225d243",
+      "source:e5145426af47238c",
+      "source:f14e8f2db1e52e24",
+      "source:f33c539a6ad0bf3c",
+      "source:fc083cd0ad774d94"
+    ],
+    "evidenceRefs": [],
+    "originRecordIds": [
+      "motus-daily-intelligence-2026-09-29",
+      "motus-korea-market-2026-09-30",
+      "motus-us-market-2026-09-30"
+    ],
+    "internalMetadata": {
+      "facts": [],
+      "observations": []
+    },
+    "publicMetadata": null,
+    "libraryId": "library:market:global",
+    "firstSeenAt": "2026-09-29T23:59:00Z",
+    "lastSeenAt": "2026-09-30T23:59:30Z",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "updatedAt": "2026-09-30T23:59:30Z"
+  },
+  {
+    "recordType": "MARKET",
+    "canonicalId": "market:us",
+    "canonicalName": "United States",
+    "displayName": "United States",
+    "aliases": [
+      "U.S.",
+      "US",
+      "United States",
+      "미국"
+    ],
+    "summary": null,
+    "status": "ACTIVE",
+    "verificationStatus": "VERIFIED",
+    "confidence": null,
+    "sourceRefs": [
+      "source:02483f80431a21af",
+      "source:097dd4926e5cb359",
+      "source:110e8e26550eddab",
+      "source:29a07ab3ee191f5d",
+      "source:3b960f3ca7c5f68d",
+      "source:48d126d9d9877b2b",
+      "source:4b15991b9e2930ef",
+      "source:5248fdb3ba75d77c",
+      "source:634601952cfcccbc",
+      "source:637f78c2396e4eed",
+      "source:7ee79eecb360c6d0",
+      "source:a640107c7e713e6d",
+      "source:a8bfcc6803e874a0",
+      "source:b623893b395d1f8a",
+      "source:d6ff3ff59270a263",
+      "source:dec620cb7225d243",
+      "source:e5145426af47238c",
+      "source:f14e8f2db1e52e24",
+      "source:f33c539a6ad0bf3c",
+      "source:fc083cd0ad774d94"
+    ],
+    "evidenceRefs": [],
+    "originRecordIds": [
+      "motus-daily-intelligence-2026-09-29",
+      "motus-us-market-2026-09-30"
+    ],
+    "internalMetadata": {
+      "facts": [
+        "S&P 500 7,670.84 -0.17%",
+        "Nasdaq 26,797.54 -0.09%",
+        "Dow Jones 51,349.92 -0.26%",
+        "Russell 2000 2,807.92 -0.35%",
+        "VIX 16.04 -0.19%",
+        "미국 10년물 5.25%",
+        "Brent $96.16 -1.70%",
+        "VIX 15.99 -0.31%",
+        "미국 10년물 5.29% +3bp",
+        "DXY 100.95 -0.16%",
+        "Brent $98.03 +1.90%"
+      ],
+      "observations": [
+        {
+          "observedAt": "2026-09-29T23:59:00Z",
+          "facts": [
+            "S&P 500 7,670.84 -0.17%",
+            "Nasdaq 26,797.54 -0.09%",
+            "Dow Jones 51,349.92 -0.26%",
+            "Russell 2000 2,807.92 -0.35%",
+            "VIX 16.04 -0.19%",
+            "미국 10년물 5.25%",
+            "Brent $96.16 -1.70%"
+          ],
+          "originRecordId": "motus-daily-intelligence-2026-09-29"
+        },
+        {
+          "observedAt": "2026-09-30T23:59:00Z",
+          "facts": [
+            "VIX 15.99 -0.31%",
+            "미국 10년물 5.29% +3bp",
+            "DXY 100.95 -0.16%",
+            "Brent $98.03 +1.90%"
+          ],
+          "originRecordId": "motus-us-market-2026-09-30"
+        }
+      ]
+    },
+    "publicMetadata": null,
+    "libraryId": "library:market:us",
+    "firstSeenAt": "2026-09-29T23:59:00Z",
+    "lastSeenAt": "2026-09-30T23:59:00Z",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "updatedAt": "2026-09-30T23:59:00Z"
+  },
+  {
+    "recordType": "MARKET",
+    "canonicalId": "market:korea",
+    "canonicalName": "Korea",
+    "displayName": "Korea",
+    "aliases": [
+      "KR",
+      "Korea",
+      "한국"
+    ],
+    "summary": null,
+    "status": "ACTIVE",
+    "verificationStatus": "VERIFIED",
+    "confidence": null,
+    "sourceRefs": [
+      "source:097dd4926e5cb359",
+      "source:110e8e26550eddab",
+      "source:3b960f3ca7c5f68d",
+      "source:48d126d9d9877b2b",
+      "source:5248fdb3ba75d77c",
+      "source:637f78c2396e4eed",
+      "source:669ab915e7e3ea94",
+      "source:7e576ecf0c83e93f",
+      "source:dc19ef3ea4436f19",
+      "source:e5145426af47238c",
+      "source:f33c539a6ad0bf3c",
+      "source:fc083cd0ad774d94"
+    ],
+    "evidenceRefs": [],
+    "originRecordIds": [
+      "motus-daily-intelligence-2026-09-29",
+      "motus-korea-market-2026-09-30"
+    ],
+    "internalMetadata": {
+      "facts": [
+        "KOSPI 6,870.81",
+        "KOSDAQ 849.8",
+        "USD/KRW 1,356.7원",
+        "외국인 순매수 -2,903,000백만원",
+        "개인 순매수 1,143,200백만원",
+        "기관 순매수 121,100백만원",
+        "외국인 순매수 -129,100백만원",
+        "개인 순매수 148,600백만원",
+        "기관 순매수 5,200백만원",
+        "상승 종목 232개",
+        "하락 종목 624개",
+        "반도체 1%",
+        "Samsung Electronics (005930) 0.93%",
+        "SK Hynix (000660) -0.17%",
+        "LG Energy Solution (373220) -3.16%",
+        "KOSPI 6,838.04 (-0.48%)",
+        "KOSDAQ 855.91 (+0.72%)",
+        "USD/KRW 1,352.8원 (-3.9원)",
+        "KOSPI 외국인 -2조 575억원",
+        "KOSPI 기관 -7,718억원",
+        "KOSPI 개인 +1조 1,721억원",
+        "KOSDAQ 외국인 -688억원",
+        "KOSDAQ 기관 +488억원",
+        "KOSDAQ 개인 +119억원",
+        "보험 -3.3%",
+        "금융 -1.4%",
+        "코스닥 금속 +1.9%",
+        "코스닥 기계·장비 +1.5%",
+        "삼성전자 -1.47%",
+        "SK하이닉스 +0.62%",
+        "S-Oil +2.47%",
+        "두산에너빌리티 +2.38%"
+      ],
+      "observations": [
+        {
+          "observedAt": "2026-09-29T23:59:00Z",
+          "facts": [
+            "KOSPI 6,870.81",
+            "KOSDAQ 849.8",
+            "USD/KRW 1,356.7원",
+            "외국인 순매수 -2,903,000백만원",
+            "개인 순매수 1,143,200백만원",
+            "기관 순매수 121,100백만원",
+            "외국인 순매수 -129,100백만원",
+            "개인 순매수 148,600백만원",
+            "기관 순매수 5,200백만원",
+            "상승 종목 232개",
+            "하락 종목 624개",
+            "반도체 1%",
+            "Samsung Electronics (005930) 0.93%",
+            "SK Hynix (000660) -0.17%",
+            "LG Energy Solution (373220) -3.16%"
+          ],
+          "originRecordId": "motus-daily-intelligence-2026-09-29"
+        },
+        {
+          "observedAt": "2026-09-30T23:59:30Z",
+          "facts": [
+            "KOSPI 6,838.04 (-0.48%)",
+            "KOSDAQ 855.91 (+0.72%)",
+            "USD/KRW 1,352.8원 (-3.9원)",
+            "KOSPI 외국인 -2조 575억원",
+            "KOSPI 기관 -7,718억원",
+            "KOSPI 개인 +1조 1,721억원",
+            "KOSDAQ 외국인 -688억원",
+            "KOSDAQ 기관 +488억원",
+            "KOSDAQ 개인 +119억원",
+            "보험 -3.3%",
+            "금융 -1.4%",
+            "코스닥 금속 +1.9%",
+            "코스닥 기계·장비 +1.5%",
+            "삼성전자 -1.47%",
+            "SK하이닉스 +0.62%",
+            "S-Oil +2.47%",
+            "두산에너빌리티 +2.38%"
+          ],
+          "originRecordId": "motus-korea-market-2026-09-30"
+        }
+      ]
+    },
+    "publicMetadata": null,
+    "libraryId": "library:market:korea",
+    "firstSeenAt": "2026-09-29T23:59:00Z",
+    "lastSeenAt": "2026-09-30T23:59:30Z",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "updatedAt": "2026-09-30T23:59:30Z"
+  }
+]

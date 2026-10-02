@@ -1,0 +1,3132 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-09-30T23:59:30Z",
+  "records": [
+    {
+      "recordType": "SOURCE",
+      "canonicalId": "source:7ee79eecb360c6d0",
+      "canonicalName": "Microsoft Research",
+      "displayName": "Microsoft Research",
+      "aliases": [],
+      "summary": null,
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:7ee79eecb360c6d0"
+      ],
+      "evidenceRefs": [
+        "evidence:093c3d76c93e873f"
+      ],
+      "originRecordIds": [
+        "intel:ai:microsoft-quine-2026-09-29",
+        "motus-daily-intelligence-2026-09-29"
+      ],
+      "internalMetadata": {
+        "canonicalUrl": "https://www.microsoft.com/en-us/research/blog/introducing-quine-an-ai-research-system-designed-for-the-complexity-of-biology",
+        "publisher": "Microsoft Research"
+      },
+      "publicMetadata": {
+        "url": "https://www.microsoft.com/en-us/research/blog/introducing-quine-an-ai-research-system-designed-for-the-complexity-of-biology"
+      },
+      "libraryId": "library:source:7ee79eecb360c6d0",
+      "firstSeenAt": "2026-09-29T23:59:00Z",
+      "lastSeenAt": "2026-09-29T23:59:00Z",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "updatedAt": "2026-09-29T23:59:00Z"
+    },
+    {
+      "recordType": "SOURCE",
+      "canonicalId": "source:a640107c7e713e6d",
+      "canonicalName": "NVIDIA",
+      "displayName": "NVIDIA",
+      "aliases": [],
+      "summary": null,
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:a640107c7e713e6d"
+      ],
+      "evidenceRefs": [
+        "evidence:6ef292ef9ed4c924"
+      ],
+      "originRecordIds": [
+        "intel:ai:nvidia-open-agent-safety-platform-2026-09-28",
+        "motus-daily-intelligence-2026-09-29"
+      ],
+      "internalMetadata": {
+        "canonicalUrl": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Launches-Open-Agent-Safety-Platform-to-Secure-Agents-From-Testing-to-Deployment/default.aspx",
+        "publisher": "NVIDIA"
+      },
+      "publicMetadata": {
+        "url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Launches-Open-Agent-Safety-Platform-to-Secure-Agents-From-Testing-to-Deployment/default.aspx"
+      },
+      "libraryId": "library:source:a640107c7e713e6d",
+      "firstSeenAt": "2026-09-29T23:59:00Z",
+      "lastSeenAt": "2026-09-29T23:59:00Z",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "updatedAt": "2026-09-29T23:59:00Z"
+    },
+    {
+      "recordType": "SOURCE",
+      "canonicalId": "source:dec620cb7225d243",
+      "canonicalName": "OpenAI",
+      "displayName": "OpenAI",
+      "aliases": [],
+      "summary": null,
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:dec620cb7225d243"
+      ],
+      "evidenceRefs": [
+        "evidence:85f88d7fda0fd1c8"
+      ],
+      "originRecordIds": [
+        "intel:ai:openai-dots-2026-09-29",
+        "motus-daily-intelligence-2026-09-29"
+      ],
+      "internalMetadata": {
+        "canonicalUrl": "https://openai.com/index/introducing-dots",
+        "publisher": "OpenAI"
+      },
+      "publicMetadata": {
+        "url": "https://openai.com/index/introducing-dots"
+      },
+      "libraryId": "library:source:dec620cb7225d243",
+      "firstSeenAt": "2026-09-29T23:59:00Z",
+      "lastSeenAt": "2026-09-29T23:59:00Z",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "updatedAt": "2026-09-29T23:59:00Z"
+    },
+    {
+      "recordType": "SOURCE",
+      "canonicalId": "source:b623893b395d1f8a",
+      "canonicalName": "Associated Press",
+      "displayName": "Associated Press",
+      "aliases": [],
+      "summary": null,
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:b623893b395d1f8a"
+      ],
+      "evidenceRefs": [
+        "evidence:06c1304ac6eefca7"
+      ],
+      "originRecordIds": [
+        "intel:wall:us-close-2026-09-29",
+        "motus-daily-intelligence-2026-09-29"
+      ],
+      "internalMetadata": {
+        "canonicalUrl": "https://apnews.com/article/wall-street-stocks-dow-nasdaq-69778ade7a033a10cb44b9078b6bb15d",
+        "publisher": "Associated Press"
+      },
+      "publicMetadata": {
+        "url": "https://apnews.com/article/wall-street-stocks-dow-nasdaq-69778ade7a033a10cb44b9078b6bb15d"
+      },
+      "libraryId": "library:source:b623893b395d1f8a",
+      "firstSeenAt": "2026-09-29T23:59:00Z",
+      "lastSeenAt": "2026-09-29T23:59:00Z",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "updatedAt": "2026-09-29T23:59:00Z"
+    },
+    {
+      "recordType": "SOURCE",
+      "canonicalId": "source:02483f80431a21af",
+      "canonicalName": "Reuters",
+      "displayName": "Reuters",
+      "aliases": [],
+      "summary": null,
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:02483f80431a21af"
+      ],
+      "evidenceRefs": [
+        "evidence:98f05ead2988fafe"
+      ],
+      "originRecordIds": [
+        "intel:wall:us-close-reuters-2026-09-29",
+        "motus-daily-intelligence-2026-09-29"
+      ],
+      "internalMetadata": {
+        "canonicalUrl": "https://www.marketscreener.com/news/equities-end-slightly-lower-as-bond-yields-hold-near-multi-decade-highs-ce785ad2d98cf420",
+        "publisher": "Reuters"
+      },
+      "publicMetadata": {
+        "url": "https://www.marketscreener.com/news/equities-end-slightly-lower-as-bond-yields-hold-near-multi-decade-highs-ce785ad2d98cf420"
+      },
+      "libraryId": "library:source:02483f80431a21af",
+      "firstSeenAt": "2026-09-29T23:59:00Z",
+      "lastSeenAt": "2026-09-29T23:59:00Z",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "updatedAt": "2026-09-29T23:59:00Z"
+    },
+    {
+      "recordType": "SOURCE",
+      "canonicalId": "source:4b15991b9e2930ef",
+      "canonicalName": "Tallac Options",
+      "displayName": "Tallac Options",
+      "aliases": [],
+      "summary": null,
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:4b15991b9e2930ef"
+      ],
+      "evidenceRefs": [
+        "evidence:83f0a9319d679a86"
+      ],
+      "originRecordIds": [
+        "intel:wall:vix-close-2026-09-29",
+        "motus-daily-intelligence-2026-09-29"
+      ],
+      "internalMetadata": {
+        "canonicalUrl": "https://tallacoptions.com/Indices/VIX",
+        "publisher": "Tallac Options"
+      },
+      "publicMetadata": {
+        "url": "https://tallacoptions.com/Indices/VIX"
+      },
+      "libraryId": "library:source:4b15991b9e2930ef",
+      "firstSeenAt": "2026-09-29T23:59:00Z",
+      "lastSeenAt": "2026-09-29T23:59:00Z",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "updatedAt": "2026-09-29T23:59:00Z"
+    },
+    {
+      "recordType": "SOURCE",
+      "canonicalId": "source:097dd4926e5cb359",
+      "canonicalName": "서울경제·한국거래소",
+      "displayName": "서울경제·한국거래소",
+      "aliases": [],
+      "summary": null,
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:097dd4926e5cb359"
+      ],
+      "evidenceRefs": [
+        "evidence:d9e74daab87870a4"
+      ],
+      "originRecordIds": [
+        "motus-daily-intelligence-2026-09-29"
+      ],
+      "internalMetadata": {
+        "canonicalUrl": "https://en.sedaily.com/finance/2026/09/29/kospi-falls-for-second-day-as-foreigners-dump-2-billion-in",
+        "publisher": "서울경제·한국거래소"
+      },
+      "publicMetadata": {
+        "url": "https://en.sedaily.com/finance/2026/09/29/kospi-falls-for-second-day-as-foreigners-dump-2-billion-in"
+      },
+      "libraryId": "library:source:097dd4926e5cb359",
+      "firstSeenAt": "2026-09-29T23:59:00Z",
+      "lastSeenAt": "2026-09-29T23:59:00Z",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "updatedAt": "2026-09-29T23:59:00Z"
+    },
+    {
+      "recordType": "SOURCE",
+      "canonicalId": "source:110e8e26550eddab",
+      "canonicalName": "연합뉴스·Korea Times",
+      "displayName": "연합뉴스·Korea Times",
+      "aliases": [],
+      "summary": null,
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:110e8e26550eddab"
+      ],
+      "evidenceRefs": [
+        "evidence:67bf6af739034024"
+      ],
+      "originRecordIds": [
+        "motus-daily-intelligence-2026-09-29"
+      ],
+      "internalMetadata": {
+        "canonicalUrl": "https://www.koreatimes.co.kr/economy/20260929/kospi-slips-as-us-bond-yields-oil-prices-weigh-on-investor-sentiment",
+        "publisher": "연합뉴스·Korea Times"
+      },
+      "publicMetadata": {
+        "url": "https://www.koreatimes.co.kr/economy/20260929/kospi-slips-as-us-bond-yields-oil-prices-weigh-on-investor-sentiment"
+      },
+      "libraryId": "library:source:110e8e26550eddab",
+      "firstSeenAt": "2026-09-29T23:59:00Z",
+      "lastSeenAt": "2026-09-29T23:59:00Z",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "updatedAt": "2026-09-29T23:59:00Z"
+    },
+    {
+      "recordType": "SOURCE",
+      "canonicalId": "source:e5145426af47238c",
+      "canonicalName": "Reuters 공개 배포본",
+      "displayName": "Reuters 공개 배포본",
+      "aliases": [],
+      "summary": null,
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:e5145426af47238c"
+      ],
+      "evidenceRefs": [
+        "evidence:78537304b0b693ca"
+      ],
+      "originRecordIds": [
+        "motus-daily-intelligence-2026-09-29"
+      ],
+      "internalMetadata": {
+        "canonicalUrl": "https://www.indopremier.com/ipotnews/newsDetail.php?group_news=IPOTNEWS&halaman=1&jdl=South_Korean_shares_extend_losses_as_high_bond_yields_weigh&name=&news_id=245346&q=korean+shares%2C+kospi%2C+kosdaq%2C&search=y_general&taging_subtype=INDEKS+KOSPI+KOREA",
+        "publisher": "Reuters 공개 배포본"
+      },
+      "publicMetadata": {
+        "url": "https://www.indopremier.com/ipotnews/newsDetail.php?group_news=IPOTNEWS&halaman=1&jdl=South_Korean_shares_extend_losses_as_high_bond_yields_weigh&name=&news_id=245346&q=korean+shares%2C+kospi%2C+kosdaq%2C&search=y_general&taging_subtype=INDEKS+KOSPI+KOREA"
+      },
+      "libraryId": "library:source:e5145426af47238c",
+      "firstSeenAt": "2026-09-29T23:59:00Z",
+      "lastSeenAt": "2026-09-29T23:59:00Z",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "updatedAt": "2026-09-29T23:59:00Z"
+    },
+    {
+      "recordType": "SOURCE",
+      "canonicalId": "source:48d126d9d9877b2b",
+      "canonicalName": "Aju Press 장중 시황",
+      "displayName": "Aju Press 장중 시황",
+      "aliases": [],
+      "summary": null,
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:48d126d9d9877b2b"
+      ],
+      "evidenceRefs": [
+        "evidence:1753ef1d99b878dd"
+      ],
+      "originRecordIds": [
+        "motus-daily-intelligence-2026-09-29"
+      ],
+      "internalMetadata": {
+        "canonicalUrl": "https://www.ajupress.com/view/20260929114521326",
+        "publisher": "Aju Press 장중 시황"
+      },
+      "publicMetadata": {
+        "url": "https://www.ajupress.com/view/20260929114521326"
+      },
+      "libraryId": "library:source:48d126d9d9877b2b",
+      "firstSeenAt": "2026-09-29T23:59:00Z",
+      "lastSeenAt": "2026-09-29T23:59:00Z",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "updatedAt": "2026-09-29T23:59:00Z"
+    },
+    {
+      "recordType": "SOURCE",
+      "canonicalId": "source:f33c539a6ad0bf3c",
+      "canonicalName": "삼성증권 HTML 원문",
+      "displayName": "삼성증권 HTML 원문",
+      "aliases": [],
+      "summary": null,
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:f33c539a6ad0bf3c"
+      ],
+      "evidenceRefs": [
+        "evidence:641ce008392a4640"
+      ],
+      "originRecordIds": [
+        "motus-daily-intelligence-2026-09-29",
+        "motus-korea-market-2026-09-30",
+        "research:samsung:morning-20260930"
+      ],
+      "internalMetadata": {
+        "canonicalUrl": "https://www.samsungpop.com/v2/today-invest/series/todaymarkettrend-3040",
+        "publisher": "삼성증권"
+      },
+      "publicMetadata": {
+        "url": "https://www.samsungpop.com/v2/today-invest/series/todaymarkettrend-3040"
+      },
+      "libraryId": "library:source:f33c539a6ad0bf3c",
+      "firstSeenAt": "2026-09-29T23:59:00Z",
+      "lastSeenAt": "2026-09-29T23:59:00Z",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "updatedAt": "2026-09-29T23:59:00Z"
+    },
+    {
+      "recordType": "SOURCE",
+      "canonicalId": "source:3b960f3ca7c5f68d",
+      "canonicalName": "삼성증권 HTML 원문",
+      "displayName": "삼성증권 HTML 원문",
+      "aliases": [],
+      "summary": null,
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:3b960f3ca7c5f68d"
+      ],
+      "evidenceRefs": [
+        "evidence:171a0c50d47972f6"
+      ],
+      "originRecordIds": [
+        "motus-daily-intelligence-2026-09-29",
+        "motus-korea-market-2026-09-30",
+        "research:samsung:copilot-20260928"
+      ],
+      "internalMetadata": {
+        "canonicalUrl": "https://samsungpop.com/v2/today-invest/series/researchanalysttalk-3022",
+        "publisher": "삼성증권"
+      },
+      "publicMetadata": {
+        "url": "https://samsungpop.com/v2/today-invest/series/researchanalysttalk-3022"
+      },
+      "libraryId": "library:source:3b960f3ca7c5f68d",
+      "firstSeenAt": "2026-09-29T23:59:00Z",
+      "lastSeenAt": "2026-09-29T23:59:00Z",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "updatedAt": "2026-09-29T23:59:00Z"
+    },
+    {
+      "recordType": "SOURCE",
+      "canonicalId": "source:5248fdb3ba75d77c",
+      "canonicalName": "삼성증권 HTML 원문",
+      "displayName": "삼성증권 HTML 원문",
+      "aliases": [],
+      "summary": null,
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:5248fdb3ba75d77c"
+      ],
+      "evidenceRefs": [
+        "evidence:8f0a7836490927b1"
+      ],
+      "originRecordIds": [
+        "motus-daily-intelligence-2026-09-29",
+        "motus-korea-market-2026-09-30",
+        "research:samsung:meta-connect-20260928"
+      ],
+      "internalMetadata": {
+        "canonicalUrl": "https://samsungpop.com/v2/today-invest/series/researchanalysttalk-3025",
+        "publisher": "삼성증권"
+      },
+      "publicMetadata": {
+        "url": "https://samsungpop.com/v2/today-invest/series/researchanalysttalk-3025"
+      },
+      "libraryId": "library:source:5248fdb3ba75d77c",
+      "firstSeenAt": "2026-09-29T23:59:00Z",
+      "lastSeenAt": "2026-09-29T23:59:00Z",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "updatedAt": "2026-09-29T23:59:00Z"
+    },
+    {
+      "recordType": "SOURCE",
+      "canonicalId": "source:637f78c2396e4eed",
+      "canonicalName": "삼성증권 HTML 원문",
+      "displayName": "삼성증권 HTML 원문",
+      "aliases": [],
+      "summary": null,
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:637f78c2396e4eed"
+      ],
+      "evidenceRefs": [
+        "evidence:1e340c4ff14cc390"
+      ],
+      "originRecordIds": [
+        "motus-daily-intelligence-2026-09-29",
+        "motus-korea-market-2026-09-30",
+        "research:samsung:terafab-20260922"
+      ],
+      "internalMetadata": {
+        "canonicalUrl": "https://samsungpop.com/v2/today-invest/series/researchanalysttalk-3008",
+        "publisher": "삼성증권"
+      },
+      "publicMetadata": {
+        "url": "https://samsungpop.com/v2/today-invest/series/researchanalysttalk-3008"
+      },
+      "libraryId": "library:source:637f78c2396e4eed",
+      "firstSeenAt": "2026-09-29T23:59:00Z",
+      "lastSeenAt": "2026-09-29T23:59:00Z",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "updatedAt": "2026-09-29T23:59:00Z"
+    },
+    {
+      "recordType": "SOURCE",
+      "canonicalId": "source:fc083cd0ad774d94",
+      "canonicalName": "삼성증권 HTML 원문",
+      "displayName": "삼성증권 HTML 원문",
+      "aliases": [],
+      "summary": null,
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:fc083cd0ad774d94"
+      ],
+      "evidenceRefs": [
+        "evidence:6a799d59f29f24b8"
+      ],
+      "originRecordIds": [
+        "motus-daily-intelligence-2026-09-29",
+        "motus-korea-market-2026-09-30",
+        "research:samsung:anthropic-20260921"
+      ],
+      "internalMetadata": {
+        "canonicalUrl": "https://samsungpop.com/v2/today-invest/series/researchanalysttalk-3001",
+        "publisher": "삼성증권"
+      },
+      "publicMetadata": {
+        "url": "https://samsungpop.com/v2/today-invest/series/researchanalysttalk-3001"
+      },
+      "libraryId": "library:source:fc083cd0ad774d94",
+      "firstSeenAt": "2026-09-29T23:59:00Z",
+      "lastSeenAt": "2026-09-29T23:59:00Z",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "updatedAt": "2026-09-29T23:59:00Z"
+    },
+    {
+      "recordType": "PUBLICATION",
+      "canonicalId": "motus-daily-intelligence-2026-09-29",
+      "canonicalName": "국채금리 5%대의 압박과 AI 에이전트 경쟁",
+      "displayName": "국채금리 5%대의 압박과 AI 에이전트 경쟁",
+      "aliases": [],
+      "summary": "미국 장기금리 부담으로 주요 지수가 소폭 밀린 가운데 AI 산업은 에이전트 실행 환경·보안·과학 연구로 적용 범위를 넓혔다. 한국시장에서는 외국인 매도가 지수 상단을 눌렀다.",
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:02483f80431a21af",
+        "source:097dd4926e5cb359",
+        "source:110e8e26550eddab",
+        "source:3b960f3ca7c5f68d",
+        "source:48d126d9d9877b2b",
+        "source:4b15991b9e2930ef",
+        "source:5248fdb3ba75d77c",
+        "source:637f78c2396e4eed",
+        "source:7ee79eecb360c6d0",
+        "source:a640107c7e713e6d",
+        "source:b623893b395d1f8a",
+        "source:dec620cb7225d243",
+        "source:e5145426af47238c",
+        "source:f33c539a6ad0bf3c",
+        "source:fc083cd0ad774d94"
+      ],
+      "evidenceRefs": [],
+      "originRecordIds": [
+        "newsletter:motus:2026-09-29"
+      ],
+      "internalMetadata": {
+        "issueDate": "2026-09-29",
+        "decision": "SELECTED"
+      },
+      "publicMetadata": {
+        "issueDate": "2026-09-29"
+      },
+      "libraryId": "library:publication:motus-daily-intelligence-2026-09-29",
+      "firstSeenAt": "2026-09-29T23:59:00Z",
+      "lastSeenAt": "2026-09-29T23:59:00Z",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "updatedAt": "2026-09-29T23:59:00Z"
+    },
+    {
+      "recordType": "MARKET",
+      "canonicalId": "market:global",
+      "canonicalName": "Global",
+      "displayName": "Global",
+      "aliases": [
+        "Global",
+        "글로벌"
+      ],
+      "summary": null,
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:02483f80431a21af",
+        "source:097dd4926e5cb359",
+        "source:110e8e26550eddab",
+        "source:29a07ab3ee191f5d",
+        "source:3b960f3ca7c5f68d",
+        "source:48d126d9d9877b2b",
+        "source:4b15991b9e2930ef",
+        "source:5248fdb3ba75d77c",
+        "source:634601952cfcccbc",
+        "source:637f78c2396e4eed",
+        "source:669ab915e7e3ea94",
+        "source:7e576ecf0c83e93f",
+        "source:7ee79eecb360c6d0",
+        "source:a640107c7e713e6d",
+        "source:a8bfcc6803e874a0",
+        "source:b623893b395d1f8a",
+        "source:d6ff3ff59270a263",
+        "source:dc19ef3ea4436f19",
+        "source:dec620cb7225d243",
+        "source:e5145426af47238c",
+        "source:f14e8f2db1e52e24",
+        "source:f33c539a6ad0bf3c",
+        "source:fc083cd0ad774d94"
+      ],
+      "evidenceRefs": [],
+      "originRecordIds": [
+        "motus-daily-intelligence-2026-09-29",
+        "motus-korea-market-2026-09-30",
+        "motus-us-market-2026-09-30"
+      ],
+      "internalMetadata": {
+        "facts": [],
+        "observations": []
+      },
+      "publicMetadata": null,
+      "libraryId": "library:market:global",
+      "firstSeenAt": "2026-09-29T23:59:00Z",
+      "lastSeenAt": "2026-09-30T23:59:30Z",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "updatedAt": "2026-09-30T23:59:30Z"
+    },
+    {
+      "recordType": "COMPANY",
+      "canonicalId": "company:microsoft",
+      "canonicalName": "Microsoft",
+      "displayName": "Microsoft",
+      "aliases": [
+        "MSFT",
+        "Microsoft",
+        "Microsoft Corp."
+      ],
+      "summary": "Microsoft Research는 생물학의 복잡성을 다루는 멀티모달 월드 모델과 연구 하네스로 Quine을 소개했다.",
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:3b960f3ca7c5f68d",
+        "source:7ee79eecb360c6d0"
+      ],
+      "evidenceRefs": [
+        "evidence:24b8b98d7c0e7f30",
+        "evidence:34b62b954fac69b0",
+        "evidence:94be5f47fde810e2"
+      ],
+      "originRecordIds": [
+        "intel:ai:microsoft-quine-2026-09-29",
+        "research:samsung:copilot-20260928"
+      ],
+      "internalMetadata": {},
+      "publicMetadata": null,
+      "libraryId": "library:company:microsoft",
+      "firstSeenAt": "2026-09-29T23:59:00Z",
+      "lastSeenAt": "2026-09-30T23:59:30Z",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "updatedAt": "2026-09-30T23:59:30Z"
+    },
+    {
+      "recordType": "THEME",
+      "canonicalId": "theme:ai-for-science",
+      "canonicalName": "AI for Science",
+      "displayName": "AI for Science",
+      "aliases": [
+        "AI for Science",
+        "ai for science"
+      ],
+      "summary": "Microsoft Research는 생물학의 복잡성을 다루는 멀티모달 월드 모델과 연구 하네스로 Quine을 소개했다.",
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:7ee79eecb360c6d0"
+      ],
+      "evidenceRefs": [
+        "evidence:24b8b98d7c0e7f30",
+        "evidence:34b62b954fac69b0"
+      ],
+      "originRecordIds": [
+        "intel:ai:microsoft-quine-2026-09-29"
+      ],
+      "internalMetadata": {},
+      "publicMetadata": null,
+      "libraryId": "library:theme:ai-for-science",
+      "firstSeenAt": "2026-09-29T23:59:00Z",
+      "lastSeenAt": "2026-09-29T23:59:00Z",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "updatedAt": "2026-09-29T23:59:00Z"
+    },
+    {
+      "recordType": "EVENT",
+      "canonicalId": "event:microsoft-quine-2026-09-29",
+      "canonicalName": "Microsoft Research, 생물학 연구 시스템 Quine 공개",
+      "displayName": "Microsoft Research, 생물학 연구 시스템 Quine 공개",
+      "aliases": [],
+      "summary": "Microsoft Research는 생물학의 복잡성을 다루는 멀티모달 월드 모델과 연구 하네스로 Quine을 소개했다.",
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:7ee79eecb360c6d0"
+      ],
+      "evidenceRefs": [
+        "evidence:24b8b98d7c0e7f30",
+        "evidence:34b62b954fac69b0"
+      ],
+      "originRecordIds": [
+        "intel:ai:microsoft-quine-2026-09-29"
+      ],
+      "internalMetadata": {
+        "eventType": "AI",
+        "eventDate": "2026-09-29",
+        "companyIds": [
+          "company:microsoft"
+        ],
+        "themeIds": [
+          "theme:ai-for-science"
+        ],
+        "marketIds": [
+          "market:global"
+        ],
+        "wallStreetViews": [],
+        "koreaResearchViews": []
+      },
+      "publicMetadata": null,
+      "libraryId": "library:event:microsoft-quine-2026-09-29",
+      "firstSeenAt": "2026-09-29T23:59:00Z",
+      "lastSeenAt": "2026-09-29T23:59:00Z",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "updatedAt": "2026-09-29T23:59:00Z"
+    },
+    {
+      "recordType": "COMPANY",
+      "canonicalId": "company:nvidia",
+      "canonicalName": "NVIDIA",
+      "displayName": "NVIDIA",
+      "aliases": [
+        "NVDA",
+        "NVIDIA",
+        "NVIDIA Corp.",
+        "Nvidia"
+      ],
+      "summary": "NVIDIA는 에이전트 시험부터 배포까지 격리와 정책 집행을 지원하는 개방형 안전 플랫폼을 발표했다.",
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:a640107c7e713e6d"
+      ],
+      "evidenceRefs": [
+        "evidence:99fcb3de586ee7cc",
+        "evidence:fa29a7a21147353b"
+      ],
+      "originRecordIds": [
+        "intel:ai:nvidia-open-agent-safety-platform-2026-09-28"
+      ],
+      "internalMetadata": {},
+      "publicMetadata": null,
+      "libraryId": "library:company:nvidia",
+      "firstSeenAt": "2026-09-29T23:59:00Z",
+      "lastSeenAt": "2026-09-29T23:59:00Z",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "updatedAt": "2026-09-29T23:59:00Z"
+    },
+    {
+      "recordType": "THEME",
+      "canonicalId": "theme:agent-security",
+      "canonicalName": "Agent Security",
+      "displayName": "Agent Security",
+      "aliases": [
+        "AI 보안",
+        "Agent Security",
+        "agent security"
+      ],
+      "summary": "NVIDIA는 에이전트 시험부터 배포까지 격리와 정책 집행을 지원하는 개방형 안전 플랫폼을 발표했다.",
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:a640107c7e713e6d"
+      ],
+      "evidenceRefs": [
+        "evidence:99fcb3de586ee7cc",
+        "evidence:fa29a7a21147353b"
+      ],
+      "originRecordIds": [
+        "intel:ai:nvidia-open-agent-safety-platform-2026-09-28"
+      ],
+      "internalMetadata": {},
+      "publicMetadata": null,
+      "libraryId": "library:theme:agent-security",
+      "firstSeenAt": "2026-09-29T23:59:00Z",
+      "lastSeenAt": "2026-09-29T23:59:00Z",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "updatedAt": "2026-09-29T23:59:00Z"
+    },
+    {
+      "recordType": "EVENT",
+      "canonicalId": "event:nvidia-open-agent-safety-platform-2026-09-28",
+      "canonicalName": "NVIDIA, Open Agent Safety Platform 공개",
+      "displayName": "NVIDIA, Open Agent Safety Platform 공개",
+      "aliases": [],
+      "summary": "NVIDIA는 에이전트 시험부터 배포까지 격리와 정책 집행을 지원하는 개방형 안전 플랫폼을 발표했다.",
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:a640107c7e713e6d"
+      ],
+      "evidenceRefs": [
+        "evidence:99fcb3de586ee7cc",
+        "evidence:fa29a7a21147353b"
+      ],
+      "originRecordIds": [
+        "intel:ai:nvidia-open-agent-safety-platform-2026-09-28"
+      ],
+      "internalMetadata": {
+        "eventType": "AI",
+        "eventDate": "2026-09-29",
+        "companyIds": [
+          "company:nvidia"
+        ],
+        "themeIds": [
+          "theme:agent-security"
+        ],
+        "marketIds": [
+          "market:global"
+        ],
+        "wallStreetViews": [],
+        "koreaResearchViews": []
+      },
+      "publicMetadata": null,
+      "libraryId": "library:event:nvidia-open-agent-safety-platform-2026-09-28",
+      "firstSeenAt": "2026-09-29T23:59:00Z",
+      "lastSeenAt": "2026-09-29T23:59:00Z",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "updatedAt": "2026-09-29T23:59:00Z"
+    },
+    {
+      "recordType": "COMPANY",
+      "canonicalId": "company:openai",
+      "canonicalName": "OpenAI",
+      "displayName": "OpenAI",
+      "aliases": [
+        "OpenAI"
+      ],
+      "summary": "OpenAI는 클라우드 컴퓨터와 연결 앱을 이용해 장기 작업을 수행하는 Dots를 공개했다.",
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:dec620cb7225d243"
+      ],
+      "evidenceRefs": [
+        "evidence:0fda3e21c70099a7",
+        "evidence:d442e8e2eccd8c10"
+      ],
+      "originRecordIds": [
+        "intel:ai:openai-dots-2026-09-29"
+      ],
+      "internalMetadata": {},
+      "publicMetadata": null,
+      "libraryId": "library:company:openai",
+      "firstSeenAt": "2026-09-29T23:59:00Z",
+      "lastSeenAt": "2026-09-29T23:59:00Z",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "updatedAt": "2026-09-29T23:59:00Z"
+    },
+    {
+      "recordType": "THEME",
+      "canonicalId": "theme:agentic-ai",
+      "canonicalName": "Agentic AI",
+      "displayName": "Agentic AI",
+      "aliases": [
+        "AI agent",
+        "AI agents",
+        "Agentic AI",
+        "agentic ai",
+        "에이전트 AI"
+      ],
+      "summary": "OpenAI는 클라우드 컴퓨터와 연결 앱을 이용해 장기 작업을 수행하는 Dots를 공개했다.",
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:dec620cb7225d243"
+      ],
+      "evidenceRefs": [
+        "evidence:0fda3e21c70099a7",
+        "evidence:d442e8e2eccd8c10"
+      ],
+      "originRecordIds": [
+        "intel:ai:openai-dots-2026-09-29"
+      ],
+      "internalMetadata": {},
+      "publicMetadata": null,
+      "libraryId": "library:theme:agentic-ai",
+      "firstSeenAt": "2026-09-29T23:59:00Z",
+      "lastSeenAt": "2026-09-29T23:59:00Z",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "updatedAt": "2026-09-29T23:59:00Z"
+    },
+    {
+      "recordType": "EVENT",
+      "canonicalId": "event:openai-dots-2026-09-29",
+      "canonicalName": "OpenAI, 상시 실행형 에이전트 Dots 공개",
+      "displayName": "OpenAI, 상시 실행형 에이전트 Dots 공개",
+      "aliases": [],
+      "summary": "OpenAI는 클라우드 컴퓨터와 연결 앱을 이용해 장기 작업을 수행하는 Dots를 공개했다.",
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:dec620cb7225d243"
+      ],
+      "evidenceRefs": [
+        "evidence:0fda3e21c70099a7",
+        "evidence:d442e8e2eccd8c10"
+      ],
+      "originRecordIds": [
+        "intel:ai:openai-dots-2026-09-29"
+      ],
+      "internalMetadata": {
+        "eventType": "AI",
+        "eventDate": "2026-09-29",
+        "companyIds": [
+          "company:openai"
+        ],
+        "themeIds": [
+          "theme:agentic-ai"
+        ],
+        "marketIds": [
+          "market:global"
+        ],
+        "wallStreetViews": [],
+        "koreaResearchViews": []
+      },
+      "publicMetadata": null,
+      "libraryId": "library:event:openai-dots-2026-09-29",
+      "firstSeenAt": "2026-09-29T23:59:00Z",
+      "lastSeenAt": "2026-09-29T23:59:00Z",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "updatedAt": "2026-09-29T23:59:00Z"
+    },
+    {
+      "recordType": "THEME",
+      "canonicalId": "theme:higher-for-longer",
+      "canonicalName": "Higher-for-longer rates",
+      "displayName": "Higher-for-longer rates",
+      "aliases": [
+        "Higher-for-longer rates",
+        "higher for longer",
+        "장기금리"
+      ],
+      "summary": "9월 마지막 거래일에는 지수 내부의 온도 차가 컸다. 나스닥은 0.24% 올랐지만 S&P 500과 러셀2000은 하락했고, 다우는 0.86% 밀렸다. 예상보다 완만한 물가 지표로 시작한 안도감은 견조한 성장 지표와 5.29%까지 오른 10년물 금리에 눌렸다.",
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:02483f80431a21af",
+        "source:29a07ab3ee191f5d",
+        "source:634601952cfcccbc",
+        "source:a8bfcc6803e874a0",
+        "source:b623893b395d1f8a",
+        "source:d6ff3ff59270a263",
+        "source:f14e8f2db1e52e24"
+      ],
+      "evidenceRefs": [
+        "evidence:018dce979ceb61e7",
+        "evidence:323e7d43d74167ca",
+        "evidence:7daff3c8bd8706fc"
+      ],
+      "originRecordIds": [
+        "intel:wall:us-close-2026-09-29",
+        "intel:wall:us-close-reuters-2026-09-29",
+        "intelligence:us-market-close-2026-09-30"
+      ],
+      "internalMetadata": {},
+      "publicMetadata": null,
+      "libraryId": "library:theme:higher-for-longer",
+      "firstSeenAt": "2026-09-29T23:59:00Z",
+      "lastSeenAt": "2026-09-30T23:59:00Z",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "updatedAt": "2026-09-30T23:59:00Z"
+    },
+    {
+      "recordType": "EVENT",
+      "canonicalId": "event:us-market-close-2026-09-29",
+      "canonicalName": "미국 주요 지수, 장기금리 부담 속 소폭 하락",
+      "displayName": "미국 주요 지수, 장기금리 부담 속 소폭 하락",
+      "aliases": [],
+      "summary": "Reuters 보도는 장기금리가 다년 고점 부근을 유지한 가운데 미국 주식시장이 약세로 끝났다고 교차 확인했다.",
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:02483f80431a21af",
+        "source:b623893b395d1f8a"
+      ],
+      "evidenceRefs": [],
+      "originRecordIds": [
+        "intel:wall:us-close-2026-09-29",
+        "intel:wall:us-close-reuters-2026-09-29"
+      ],
+      "internalMetadata": {
+        "eventType": "WALL_STREET",
+        "eventDate": "2026-09-29",
+        "companyIds": [],
+        "themeIds": [
+          "theme:higher-for-longer"
+        ],
+        "marketIds": [
+          "market:us"
+        ],
+        "wallStreetViews": [],
+        "koreaResearchViews": []
+      },
+      "publicMetadata": null,
+      "libraryId": "library:event:us-market-close-2026-09-29",
+      "firstSeenAt": "2026-09-29T23:59:00Z",
+      "lastSeenAt": "2026-09-29T23:59:00Z",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "updatedAt": "2026-09-29T23:59:00Z"
+    },
+    {
+      "recordType": "THEME",
+      "canonicalId": "theme:market-volatility",
+      "canonicalName": "Market Volatility",
+      "displayName": "Market Volatility",
+      "aliases": [
+        "Market Volatility",
+        "VIX",
+        "시장 변동성"
+      ],
+      "summary": "9월 마지막 거래일에는 지수 내부의 온도 차가 컸다. 나스닥은 0.24% 올랐지만 S&P 500과 러셀2000은 하락했고, 다우는 0.86% 밀렸다. 예상보다 완만한 물가 지표로 시작한 안도감은 견조한 성장 지표와 5.29%까지 오른 10년물 금리에 눌렸다.",
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:29a07ab3ee191f5d",
+        "source:4b15991b9e2930ef",
+        "source:634601952cfcccbc",
+        "source:a8bfcc6803e874a0",
+        "source:d6ff3ff59270a263",
+        "source:f14e8f2db1e52e24"
+      ],
+      "evidenceRefs": [
+        "evidence:018dce979ceb61e7",
+        "evidence:323e7d43d74167ca",
+        "evidence:7daff3c8bd8706fc"
+      ],
+      "originRecordIds": [
+        "intel:wall:vix-close-2026-09-29",
+        "intelligence:us-market-close-2026-09-30"
+      ],
+      "internalMetadata": {},
+      "publicMetadata": null,
+      "libraryId": "library:theme:market-volatility",
+      "firstSeenAt": "2026-09-29T23:59:00Z",
+      "lastSeenAt": "2026-09-30T23:59:00Z",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "updatedAt": "2026-09-30T23:59:00Z"
+    },
+    {
+      "recordType": "EVENT",
+      "canonicalId": "event:vix-close-2026-09-29",
+      "canonicalName": "VIX 16.04로 소폭 하락",
+      "displayName": "VIX 16.04로 소폭 하락",
+      "aliases": [],
+      "summary": "공개 VIX 일별 자료는 9월 29일 종가 16.04와 당일 -0.19% 변화를 제시했다.",
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:4b15991b9e2930ef"
+      ],
+      "evidenceRefs": [],
+      "originRecordIds": [
+        "intel:wall:vix-close-2026-09-29"
+      ],
+      "internalMetadata": {
+        "eventType": "WALL_STREET",
+        "eventDate": "2026-09-29",
+        "companyIds": [],
+        "themeIds": [
+          "theme:market-volatility"
+        ],
+        "marketIds": [
+          "market:us"
+        ],
+        "wallStreetViews": [],
+        "koreaResearchViews": []
+      },
+      "publicMetadata": null,
+      "libraryId": "library:event:vix-close-2026-09-29",
+      "firstSeenAt": "2026-09-29T23:59:00Z",
+      "lastSeenAt": "2026-09-29T23:59:00Z",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "updatedAt": "2026-09-29T23:59:00Z"
+    },
+    {
+      "recordType": "INSTITUTION",
+      "canonicalId": "institution:samsung-securities",
+      "canonicalName": "삼성증권",
+      "displayName": "삼성증권",
+      "aliases": [
+        "Samsung Securities",
+        "삼성증권"
+      ],
+      "summary": null,
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:3b960f3ca7c5f68d",
+        "source:5248fdb3ba75d77c",
+        "source:637f78c2396e4eed",
+        "source:f33c539a6ad0bf3c",
+        "source:fc083cd0ad774d94"
+      ],
+      "evidenceRefs": [
+        "evidence:94be5f47fde810e2",
+        "evidence:9f39820d3b56959b",
+        "evidence:baeb7bae5a932959",
+        "evidence:d687c6421d8d1e2a",
+        "evidence:ff0e9bdbb34fb41c"
+      ],
+      "originRecordIds": [
+        "research:samsung:anthropic-20260921",
+        "research:samsung:copilot-20260928",
+        "research:samsung:meta-connect-20260928",
+        "research:samsung:morning-20260930",
+        "research:samsung:terafab-20260922"
+      ],
+      "internalMetadata": {
+        "institutionType": "BROKERAGE"
+      },
+      "publicMetadata": null,
+      "libraryId": "library:institution:samsung-securities",
+      "firstSeenAt": "2026-09-29T23:59:00Z",
+      "lastSeenAt": "2026-09-30T23:59:30Z",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "updatedAt": "2026-09-30T23:59:30Z"
+    },
+    {
+      "recordType": "RESEARCH",
+      "canonicalId": "research:samsung:morning-20260930",
+      "canonicalName": "[미국 마감] 국채금리 부담 속 AI 종목별 차별화",
+      "displayName": "[미국 마감] 국채금리 부담 속 AI 종목별 차별화",
+      "aliases": [],
+      "summary": "9월 29일 미국 시장에서 장기금리 부담과 AI 종목별 등락을 정리한 공개 모닝 브리프.",
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:f33c539a6ad0bf3c"
+      ],
+      "evidenceRefs": [
+        "evidence:ff0e9bdbb34fb41c"
+      ],
+      "originRecordIds": [
+        "research:samsung:morning-20260930"
+      ],
+      "internalMetadata": {
+        "publisher": "삼성증권",
+        "institutionView": "상시 실행형 에이전트 시연과 반도체 종목별 흐름을 함께 점검하며 AI 투자 기대와 실행 리스크를 구분했다.",
+        "aiInterpretation": null,
+        "riskFactors": [
+          "장기 국채금리 상승",
+          "에이전트 제품의 초기 실행 안정성"
+        ]
+      },
+      "publicMetadata": null,
+      "libraryId": "library:research:samsung:morning-20260930",
+      "firstSeenAt": "2026-09-29T23:59:00Z",
+      "lastSeenAt": "2026-09-30T23:59:30Z",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "updatedAt": "2026-09-30T23:59:30Z"
+    },
+    {
+      "recordType": "RESEARCH",
+      "canonicalId": "research:samsung:copilot-20260928",
+      "canonicalName": "Microsoft Copilot: 상시 실행형 에이전트의 기업 적용",
+      "displayName": "Microsoft Copilot: 상시 실행형 에이전트의 기업 적용",
+      "aliases": [],
+      "summary": "Microsoft Copilot의 기업용 에이전트 방향과 수익성 조건을 다룬 공개 리서치.",
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:3b960f3ca7c5f68d"
+      ],
+      "evidenceRefs": [
+        "evidence:94be5f47fde810e2"
+      ],
+      "originRecordIds": [
+        "research:samsung:copilot-20260928"
+      ],
+      "internalMetadata": {
+        "publisher": "삼성증권",
+        "institutionView": "기업용 에이전트 확산에는 작업 라우팅, 자체 모델, 칩 최적화가 수익성의 핵심 조건이라는 관점이다.",
+        "aiInterpretation": null,
+        "riskFactors": [
+          "추론 비용 부담",
+          "기업 도입 속도"
+        ]
+      },
+      "publicMetadata": null,
+      "libraryId": "library:research:samsung:copilot-20260928",
+      "firstSeenAt": "2026-09-29T23:59:00Z",
+      "lastSeenAt": "2026-09-30T23:59:30Z",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "updatedAt": "2026-09-30T23:59:30Z"
+    },
+    {
+      "recordType": "SECTOR",
+      "canonicalId": "sector:software",
+      "canonicalName": "소프트웨어",
+      "displayName": "소프트웨어",
+      "aliases": [
+        "Software",
+        "소프트웨어"
+      ],
+      "summary": null,
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:3b960f3ca7c5f68d",
+        "source:fc083cd0ad774d94"
+      ],
+      "evidenceRefs": [
+        "evidence:94be5f47fde810e2",
+        "evidence:d687c6421d8d1e2a"
+      ],
+      "originRecordIds": [
+        "research:samsung:anthropic-20260921",
+        "research:samsung:copilot-20260928"
+      ],
+      "internalMetadata": {},
+      "publicMetadata": null,
+      "libraryId": "library:sector:software",
+      "firstSeenAt": "2026-09-29T23:59:00Z",
+      "lastSeenAt": "2026-09-30T23:59:30Z",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "updatedAt": "2026-09-30T23:59:30Z"
+    },
+    {
+      "recordType": "RESEARCH",
+      "canonicalId": "research:samsung:meta-connect-20260928",
+      "canonicalName": "Meta Connect: AI 인터페이스 확장의 실행 조건",
+      "displayName": "Meta Connect: AI 인터페이스 확장의 실행 조건",
+      "aliases": [],
+      "summary": "Meta의 AR 기기와 AI 서비스 연결을 다룬 공개 리서치.",
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:5248fdb3ba75d77c"
+      ],
+      "evidenceRefs": [
+        "evidence:9f39820d3b56959b"
+      ],
+      "originRecordIds": [
+        "research:samsung:meta-connect-20260928"
+      ],
+      "internalMetadata": {
+        "publisher": "삼성증권",
+        "institutionView": "AR 기기와 실시간 아바타, 외부 서비스 연결이 사용 경험을 넓히지만 제품 실행력 확인이 필요하다는 관점이다.",
+        "aiInterpretation": null,
+        "riskFactors": [
+          "제품 실행 지연",
+          "하드웨어 수요 불확실성"
+        ]
+      },
+      "publicMetadata": null,
+      "libraryId": "library:research:samsung:meta-connect-20260928",
+      "firstSeenAt": "2026-09-29T23:59:00Z",
+      "lastSeenAt": "2026-09-30T23:59:30Z",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "updatedAt": "2026-09-30T23:59:30Z"
+    },
+    {
+      "recordType": "SECTOR",
+      "canonicalId": "sector:communication-services",
+      "canonicalName": "커뮤니케이션 서비스",
+      "displayName": "커뮤니케이션 서비스",
+      "aliases": [
+        "Communication Services",
+        "커뮤니케이션 서비스"
+      ],
+      "summary": null,
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:5248fdb3ba75d77c"
+      ],
+      "evidenceRefs": [
+        "evidence:9f39820d3b56959b"
+      ],
+      "originRecordIds": [
+        "research:samsung:meta-connect-20260928"
+      ],
+      "internalMetadata": {},
+      "publicMetadata": null,
+      "libraryId": "library:sector:communication-services",
+      "firstSeenAt": "2026-09-29T23:59:00Z",
+      "lastSeenAt": "2026-09-30T23:59:30Z",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "updatedAt": "2026-09-30T23:59:30Z"
+    },
+    {
+      "recordType": "COMPANY",
+      "canonicalId": "company:meta",
+      "canonicalName": "Meta Platforms",
+      "displayName": "Meta Platforms",
+      "aliases": [
+        "META",
+        "Meta",
+        "Meta Platforms"
+      ],
+      "summary": null,
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:5248fdb3ba75d77c"
+      ],
+      "evidenceRefs": [
+        "evidence:9f39820d3b56959b"
+      ],
+      "originRecordIds": [
+        "research:samsung:meta-connect-20260928"
+      ],
+      "internalMetadata": {},
+      "publicMetadata": null,
+      "libraryId": "library:company:meta",
+      "firstSeenAt": "2026-09-29T23:59:00Z",
+      "lastSeenAt": "2026-09-30T23:59:30Z",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "updatedAt": "2026-09-30T23:59:30Z"
+    },
+    {
+      "recordType": "RESEARCH",
+      "canonicalId": "research:samsung:terafab-20260922",
+      "canonicalName": "Terafab: AI 수요가 제조 역량 투자로 확장될 가능성",
+      "displayName": "Terafab: AI 수요가 제조 역량 투자로 확장될 가능성",
+      "aliases": [],
+      "summary": "AI 인프라 수요가 반도체 구매를 넘어 제조 역량 투자로 이어질 가능성을 다룬 공개 리서치.",
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:637f78c2396e4eed"
+      ],
+      "evidenceRefs": [
+        "evidence:baeb7bae5a932959"
+      ],
+      "originRecordIds": [
+        "research:samsung:terafab-20260922"
+      ],
+      "internalMetadata": {
+        "publisher": "삼성증권",
+        "institutionView": "계획이 현실화되면 AI 수요의 무게중심이 칩 구매에서 제조 역량 투자로 확장될 수 있다는 관점이다.",
+        "aiInterpretation": null,
+        "riskFactors": [
+          "대규모 투자 계획의 집행 지연"
+        ]
+      },
+      "publicMetadata": null,
+      "libraryId": "library:research:samsung:terafab-20260922",
+      "firstSeenAt": "2026-09-29T23:59:00Z",
+      "lastSeenAt": "2026-09-30T23:59:30Z",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "updatedAt": "2026-09-30T23:59:30Z"
+    },
+    {
+      "recordType": "SECTOR",
+      "canonicalId": "sector:semiconductors",
+      "canonicalName": "반도체",
+      "displayName": "반도체",
+      "aliases": [
+        "AI 반도체",
+        "Semiconductors",
+        "반도체"
+      ],
+      "summary": null,
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:637f78c2396e4eed"
+      ],
+      "evidenceRefs": [
+        "evidence:baeb7bae5a932959"
+      ],
+      "originRecordIds": [
+        "research:samsung:terafab-20260922"
+      ],
+      "internalMetadata": {},
+      "publicMetadata": null,
+      "libraryId": "library:sector:semiconductors",
+      "firstSeenAt": "2026-09-29T23:59:00Z",
+      "lastSeenAt": "2026-09-30T23:59:30Z",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "updatedAt": "2026-09-30T23:59:30Z"
+    },
+    {
+      "recordType": "RESEARCH",
+      "canonicalId": "research:samsung:anthropic-20260921",
+      "canonicalName": "Anthropic: 데이터센터 확장과 수익성의 균형",
+      "displayName": "Anthropic: 데이터센터 확장과 수익성의 균형",
+      "aliases": [],
+      "summary": "Anthropic의 데이터센터 확장, 현금 사용과 사업 일정의 균형을 다룬 공개 리서치.",
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:fc083cd0ad774d94"
+      ],
+      "evidenceRefs": [
+        "evidence:d687c6421d8d1e2a"
+      ],
+      "originRecordIds": [
+        "research:samsung:anthropic-20260921"
+      ],
+      "internalMetadata": {
+        "publisher": "삼성증권",
+        "institutionView": "데이터센터 확장 과정에서 투자 속도와 수익성, 신규 모델과 기업 일정의 균형이 핵심이라는 관점이다.",
+        "aiInterpretation": null,
+        "riskFactors": [
+          "현금 소진",
+          "데이터센터 투자 부담"
+        ]
+      },
+      "publicMetadata": null,
+      "libraryId": "library:research:samsung:anthropic-20260921",
+      "firstSeenAt": "2026-09-29T23:59:00Z",
+      "lastSeenAt": "2026-09-30T23:59:30Z",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "updatedAt": "2026-09-30T23:59:30Z"
+    },
+    {
+      "recordType": "COMPANY",
+      "canonicalId": "company:anthropic",
+      "canonicalName": "Anthropic",
+      "displayName": "Anthropic",
+      "aliases": [
+        "Anthropic"
+      ],
+      "summary": null,
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:fc083cd0ad774d94"
+      ],
+      "evidenceRefs": [
+        "evidence:d687c6421d8d1e2a"
+      ],
+      "originRecordIds": [
+        "research:samsung:anthropic-20260921"
+      ],
+      "internalMetadata": {},
+      "publicMetadata": null,
+      "libraryId": "library:company:anthropic",
+      "firstSeenAt": "2026-09-29T23:59:00Z",
+      "lastSeenAt": "2026-09-30T23:59:30Z",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "updatedAt": "2026-09-30T23:59:30Z"
+    },
+    {
+      "recordType": "MARKET",
+      "canonicalId": "market:us",
+      "canonicalName": "United States",
+      "displayName": "United States",
+      "aliases": [
+        "U.S.",
+        "US",
+        "United States",
+        "미국"
+      ],
+      "summary": null,
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:02483f80431a21af",
+        "source:097dd4926e5cb359",
+        "source:110e8e26550eddab",
+        "source:29a07ab3ee191f5d",
+        "source:3b960f3ca7c5f68d",
+        "source:48d126d9d9877b2b",
+        "source:4b15991b9e2930ef",
+        "source:5248fdb3ba75d77c",
+        "source:634601952cfcccbc",
+        "source:637f78c2396e4eed",
+        "source:7ee79eecb360c6d0",
+        "source:a640107c7e713e6d",
+        "source:a8bfcc6803e874a0",
+        "source:b623893b395d1f8a",
+        "source:d6ff3ff59270a263",
+        "source:dec620cb7225d243",
+        "source:e5145426af47238c",
+        "source:f14e8f2db1e52e24",
+        "source:f33c539a6ad0bf3c",
+        "source:fc083cd0ad774d94"
+      ],
+      "evidenceRefs": [],
+      "originRecordIds": [
+        "motus-daily-intelligence-2026-09-29",
+        "motus-us-market-2026-09-30"
+      ],
+      "internalMetadata": {
+        "facts": [
+          "S&P 500 7,670.84 -0.17%",
+          "Nasdaq 26,797.54 -0.09%",
+          "Dow Jones 51,349.92 -0.26%",
+          "Russell 2000 2,807.92 -0.35%",
+          "VIX 16.04 -0.19%",
+          "미국 10년물 5.25%",
+          "Brent $96.16 -1.70%",
+          "VIX 15.99 -0.31%",
+          "미국 10년물 5.29% +3bp",
+          "DXY 100.95 -0.16%",
+          "Brent $98.03 +1.90%"
+        ],
+        "observations": [
+          {
+            "observedAt": "2026-09-29T23:59:00Z",
+            "facts": [
+              "S&P 500 7,670.84 -0.17%",
+              "Nasdaq 26,797.54 -0.09%",
+              "Dow Jones 51,349.92 -0.26%",
+              "Russell 2000 2,807.92 -0.35%",
+              "VIX 16.04 -0.19%",
+              "미국 10년물 5.25%",
+              "Brent $96.16 -1.70%"
+            ],
+            "originRecordId": "motus-daily-intelligence-2026-09-29"
+          },
+          {
+            "observedAt": "2026-09-30T23:59:00Z",
+            "facts": [
+              "VIX 15.99 -0.31%",
+              "미국 10년물 5.29% +3bp",
+              "DXY 100.95 -0.16%",
+              "Brent $98.03 +1.90%"
+            ],
+            "originRecordId": "motus-us-market-2026-09-30"
+          }
+        ]
+      },
+      "publicMetadata": null,
+      "libraryId": "library:market:us",
+      "firstSeenAt": "2026-09-29T23:59:00Z",
+      "lastSeenAt": "2026-09-30T23:59:00Z",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "updatedAt": "2026-09-30T23:59:00Z"
+    },
+    {
+      "recordType": "MARKET",
+      "canonicalId": "market:korea",
+      "canonicalName": "Korea",
+      "displayName": "Korea",
+      "aliases": [
+        "KR",
+        "Korea",
+        "한국"
+      ],
+      "summary": null,
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:097dd4926e5cb359",
+        "source:110e8e26550eddab",
+        "source:3b960f3ca7c5f68d",
+        "source:48d126d9d9877b2b",
+        "source:5248fdb3ba75d77c",
+        "source:637f78c2396e4eed",
+        "source:669ab915e7e3ea94",
+        "source:7e576ecf0c83e93f",
+        "source:dc19ef3ea4436f19",
+        "source:e5145426af47238c",
+        "source:f33c539a6ad0bf3c",
+        "source:fc083cd0ad774d94"
+      ],
+      "evidenceRefs": [],
+      "originRecordIds": [
+        "motus-daily-intelligence-2026-09-29",
+        "motus-korea-market-2026-09-30"
+      ],
+      "internalMetadata": {
+        "facts": [
+          "KOSPI 6,870.81",
+          "KOSDAQ 849.8",
+          "USD/KRW 1,356.7원",
+          "외국인 순매수 -2,903,000백만원",
+          "개인 순매수 1,143,200백만원",
+          "기관 순매수 121,100백만원",
+          "외국인 순매수 -129,100백만원",
+          "개인 순매수 148,600백만원",
+          "기관 순매수 5,200백만원",
+          "상승 종목 232개",
+          "하락 종목 624개",
+          "반도체 1%",
+          "Samsung Electronics (005930) 0.93%",
+          "SK Hynix (000660) -0.17%",
+          "LG Energy Solution (373220) -3.16%",
+          "KOSPI 6,838.04 (-0.48%)",
+          "KOSDAQ 855.91 (+0.72%)",
+          "USD/KRW 1,352.8원 (-3.9원)",
+          "KOSPI 외국인 -2조 575억원",
+          "KOSPI 기관 -7,718억원",
+          "KOSPI 개인 +1조 1,721억원",
+          "KOSDAQ 외국인 -688억원",
+          "KOSDAQ 기관 +488억원",
+          "KOSDAQ 개인 +119억원",
+          "보험 -3.3%",
+          "금융 -1.4%",
+          "코스닥 금속 +1.9%",
+          "코스닥 기계·장비 +1.5%",
+          "삼성전자 -1.47%",
+          "SK하이닉스 +0.62%",
+          "S-Oil +2.47%",
+          "두산에너빌리티 +2.38%"
+        ],
+        "observations": [
+          {
+            "observedAt": "2026-09-29T23:59:00Z",
+            "facts": [
+              "KOSPI 6,870.81",
+              "KOSDAQ 849.8",
+              "USD/KRW 1,356.7원",
+              "외국인 순매수 -2,903,000백만원",
+              "개인 순매수 1,143,200백만원",
+              "기관 순매수 121,100백만원",
+              "외국인 순매수 -129,100백만원",
+              "개인 순매수 148,600백만원",
+              "기관 순매수 5,200백만원",
+              "상승 종목 232개",
+              "하락 종목 624개",
+              "반도체 1%",
+              "Samsung Electronics (005930) 0.93%",
+              "SK Hynix (000660) -0.17%",
+              "LG Energy Solution (373220) -3.16%"
+            ],
+            "originRecordId": "motus-daily-intelligence-2026-09-29"
+          },
+          {
+            "observedAt": "2026-09-30T23:59:30Z",
+            "facts": [
+              "KOSPI 6,838.04 (-0.48%)",
+              "KOSDAQ 855.91 (+0.72%)",
+              "USD/KRW 1,352.8원 (-3.9원)",
+              "KOSPI 외국인 -2조 575억원",
+              "KOSPI 기관 -7,718억원",
+              "KOSPI 개인 +1조 1,721억원",
+              "KOSDAQ 외국인 -688억원",
+              "KOSDAQ 기관 +488억원",
+              "KOSDAQ 개인 +119억원",
+              "보험 -3.3%",
+              "금융 -1.4%",
+              "코스닥 금속 +1.9%",
+              "코스닥 기계·장비 +1.5%",
+              "삼성전자 -1.47%",
+              "SK하이닉스 +0.62%",
+              "S-Oil +2.47%",
+              "두산에너빌리티 +2.38%"
+            ],
+            "originRecordId": "motus-korea-market-2026-09-30"
+          }
+        ]
+      },
+      "publicMetadata": null,
+      "libraryId": "library:market:korea",
+      "firstSeenAt": "2026-09-29T23:59:00Z",
+      "lastSeenAt": "2026-09-30T23:59:30Z",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "updatedAt": "2026-09-30T23:59:30Z"
+    },
+    {
+      "recordType": "SOURCE",
+      "canonicalId": "source:d6ff3ff59270a263",
+      "canonicalName": "AP — 9월 30일 미국 주요지수 종가",
+      "displayName": "AP — 9월 30일 미국 주요지수 종가",
+      "aliases": [],
+      "summary": null,
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:d6ff3ff59270a263"
+      ],
+      "evidenceRefs": [
+        "evidence:633828bc463e07bf"
+      ],
+      "originRecordIds": [
+        "intelligence:us-market-close-2026-09-30",
+        "motus-us-market-2026-09-30"
+      ],
+      "internalMetadata": {
+        "canonicalUrl": "https://apnews.com/article/1ee73f14dc23f6139eeb12c7397f543e",
+        "publisher": "Associated Press"
+      },
+      "publicMetadata": {
+        "url": "https://apnews.com/article/1ee73f14dc23f6139eeb12c7397f543e"
+      },
+      "libraryId": "library:source:d6ff3ff59270a263",
+      "firstSeenAt": "2026-09-30T23:59:00Z",
+      "lastSeenAt": "2026-09-30T23:59:00Z",
+      "createdAt": "2026-09-30T23:59:00Z",
+      "updatedAt": "2026-09-30T23:59:00Z"
+    },
+    {
+      "recordType": "SOURCE",
+      "canonicalId": "source:634601952cfcccbc",
+      "canonicalName": "AP — 미국시장 마감 해설",
+      "displayName": "AP — 미국시장 마감 해설",
+      "aliases": [],
+      "summary": null,
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:634601952cfcccbc"
+      ],
+      "evidenceRefs": [
+        "evidence:92ae5d1063e52f1b"
+      ],
+      "originRecordIds": [
+        "intelligence:us-market-close-2026-09-30",
+        "motus-us-market-2026-09-30"
+      ],
+      "internalMetadata": {
+        "canonicalUrl": "https://apnews.com/article/e61d3d7b947a390c7eee6c8758e3095d",
+        "publisher": "Associated Press"
+      },
+      "publicMetadata": {
+        "url": "https://apnews.com/article/e61d3d7b947a390c7eee6c8758e3095d"
+      },
+      "libraryId": "library:source:634601952cfcccbc",
+      "firstSeenAt": "2026-09-30T23:59:00Z",
+      "lastSeenAt": "2026-09-30T23:59:00Z",
+      "createdAt": "2026-09-30T23:59:00Z",
+      "updatedAt": "2026-09-30T23:59:00Z"
+    },
+    {
+      "recordType": "SOURCE",
+      "canonicalId": "source:a8bfcc6803e874a0",
+      "canonicalName": "U.S. Treasury — Daily Treasury Rates",
+      "displayName": "U.S. Treasury — Daily Treasury Rates",
+      "aliases": [],
+      "summary": null,
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:a8bfcc6803e874a0"
+      ],
+      "evidenceRefs": [
+        "evidence:9cf37572c76adaae"
+      ],
+      "originRecordIds": [
+        "intelligence:us-market-close-2026-09-30",
+        "motus-us-market-2026-09-30"
+      ],
+      "internalMetadata": {
+        "canonicalUrl": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202609&type=daily_treasury_yield_curve",
+        "publisher": "U.S. Department of the Treasury"
+      },
+      "publicMetadata": {
+        "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202609&type=daily_treasury_yield_curve"
+      },
+      "libraryId": "library:source:a8bfcc6803e874a0",
+      "firstSeenAt": "2026-09-30T23:59:00Z",
+      "lastSeenAt": "2026-09-30T23:59:00Z",
+      "createdAt": "2026-09-30T23:59:00Z",
+      "updatedAt": "2026-09-30T23:59:00Z"
+    },
+    {
+      "recordType": "SOURCE",
+      "canonicalId": "source:f14e8f2db1e52e24",
+      "canonicalName": "Cboe — VIX",
+      "displayName": "Cboe — VIX",
+      "aliases": [],
+      "summary": null,
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:f14e8f2db1e52e24"
+      ],
+      "evidenceRefs": [
+        "evidence:1e0eb7dcd7568897"
+      ],
+      "originRecordIds": [
+        "intelligence:us-market-close-2026-09-30",
+        "motus-us-market-2026-09-30"
+      ],
+      "internalMetadata": {
+        "canonicalUrl": "https://www.cboe.com/tradable-products/vix",
+        "publisher": "Cboe"
+      },
+      "publicMetadata": {
+        "url": "https://www.cboe.com/tradable-products/vix"
+      },
+      "libraryId": "library:source:f14e8f2db1e52e24",
+      "firstSeenAt": "2026-09-30T23:59:00Z",
+      "lastSeenAt": "2026-09-30T23:59:00Z",
+      "createdAt": "2026-09-30T23:59:00Z",
+      "updatedAt": "2026-09-30T23:59:00Z"
+    },
+    {
+      "recordType": "SOURCE",
+      "canonicalId": "source:29a07ab3ee191f5d",
+      "canonicalName": "DXY historical data",
+      "displayName": "DXY historical data",
+      "aliases": [],
+      "summary": null,
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:29a07ab3ee191f5d"
+      ],
+      "evidenceRefs": [
+        "evidence:c227489721719444"
+      ],
+      "originRecordIds": [
+        "intelligence:us-market-close-2026-09-30",
+        "motus-us-market-2026-09-30"
+      ],
+      "internalMetadata": {
+        "canonicalUrl": "https://es.investing.com/currencies/us-dollar-index-historical-data",
+        "publisher": "Investing.com"
+      },
+      "publicMetadata": {
+        "url": "https://es.investing.com/currencies/us-dollar-index-historical-data"
+      },
+      "libraryId": "library:source:29a07ab3ee191f5d",
+      "firstSeenAt": "2026-09-30T23:59:00Z",
+      "lastSeenAt": "2026-09-30T23:59:00Z",
+      "createdAt": "2026-09-30T23:59:00Z",
+      "updatedAt": "2026-09-30T23:59:00Z"
+    },
+    {
+      "recordType": "PUBLICATION",
+      "canonicalId": "motus-us-market-2026-09-30",
+      "canonicalName": "미국 증시 마감: 장기금리 부담에 다우 약세, 나스닥은 소폭 상승 (2026년 9월 30일)",
+      "displayName": "미국 증시 마감: 장기금리 부담에 다우 약세, 나스닥은 소폭 상승 (2026년 9월 30일)",
+      "aliases": [],
+      "summary": "9월 마지막 거래일에는 지수 내부의 온도 차가 컸다. 나스닥은 0.24% 올랐지만 S&P 500과 러셀2000은 하락했고, 다우는 0.86% 밀렸다. 예상보다 완만한 물가 지표로 시작한 안도감은 견조한 성장 지표와 5.29%까지 오른 10년물 금리에 눌렸다.",
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:29a07ab3ee191f5d",
+        "source:634601952cfcccbc",
+        "source:a8bfcc6803e874a0",
+        "source:d6ff3ff59270a263",
+        "source:f14e8f2db1e52e24"
+      ],
+      "evidenceRefs": [],
+      "originRecordIds": [
+        "motus-us-market-2026-09-30"
+      ],
+      "internalMetadata": {
+        "issueDate": "2026-09-30",
+        "decision": "SELECTED"
+      },
+      "publicMetadata": {
+        "issueDate": "2026-09-30"
+      },
+      "libraryId": "library:publication:motus-us-market-2026-09-30",
+      "firstSeenAt": "2026-09-30T23:59:00Z",
+      "lastSeenAt": "2026-09-30T23:59:00Z",
+      "createdAt": "2026-09-30T23:59:00Z",
+      "updatedAt": "2026-09-30T23:59:00Z"
+    },
+    {
+      "recordType": "EVENT",
+      "canonicalId": "event:us-market-close-2026-09-30",
+      "canonicalName": "미국 증시 마감: 장기금리 부담에 다우 약세, 나스닥은 소폭 상승 (2026년 9월 30일)",
+      "displayName": "미국 증시 마감: 장기금리 부담에 다우 약세, 나스닥은 소폭 상승 (2026년 9월 30일)",
+      "aliases": [],
+      "summary": "9월 마지막 거래일에는 지수 내부의 온도 차가 컸다. 나스닥은 0.24% 올랐지만 S&P 500과 러셀2000은 하락했고, 다우는 0.86% 밀렸다. 예상보다 완만한 물가 지표로 시작한 안도감은 견조한 성장 지표와 5.29%까지 오른 10년물 금리에 눌렸다.",
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:29a07ab3ee191f5d",
+        "source:634601952cfcccbc",
+        "source:a8bfcc6803e874a0",
+        "source:d6ff3ff59270a263",
+        "source:f14e8f2db1e52e24"
+      ],
+      "evidenceRefs": [
+        "evidence:018dce979ceb61e7",
+        "evidence:323e7d43d74167ca",
+        "evidence:7daff3c8bd8706fc"
+      ],
+      "originRecordIds": [
+        "intelligence:us-market-close-2026-09-30"
+      ],
+      "internalMetadata": {
+        "eventType": "WALL_STREET",
+        "eventDate": "2026-09-30",
+        "companyIds": [],
+        "themeIds": [
+          "theme:higher-for-longer",
+          "theme:market-volatility"
+        ],
+        "marketIds": [
+          "market:us"
+        ],
+        "wallStreetViews": [
+          "Wells Fargo Investment Institute는 소비자가 예상보다 견조한 상태라고 평가했다."
+        ],
+        "koreaResearchViews": []
+      },
+      "publicMetadata": null,
+      "libraryId": "library:event:us-market-close-2026-09-30",
+      "firstSeenAt": "2026-09-30T23:59:00Z",
+      "lastSeenAt": "2026-09-30T23:59:00Z",
+      "createdAt": "2026-09-30T23:59:00Z",
+      "updatedAt": "2026-09-30T23:59:00Z"
+    },
+    {
+      "recordType": "SOURCE",
+      "canonicalId": "source:dc19ef3ea4436f19",
+      "canonicalName": "MarketTimes — 9월 30일 KRX 마감",
+      "displayName": "MarketTimes — 9월 30일 KRX 마감",
+      "aliases": [],
+      "summary": null,
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:dc19ef3ea4436f19"
+      ],
+      "evidenceRefs": [
+        "evidence:49b2aeac9287c15d"
+      ],
+      "originRecordIds": [
+        "motus-korea-market-2026-09-30"
+      ],
+      "internalMetadata": {
+        "canonicalUrl": "https://www.markettimes.co.kr/2026/09/30/krx-%EB%A7%88%EA%B0%90-9%EC%9B%94-30%EC%9D%BC-%EC%BD%94%EC%8A%A4%ED%94%BC-3%EA%B1%B0%EB%9E%98%EC%9D%BC-%EC%97%B0%EC%86%8D-%ED%95%98%EB%9D%BD%EC%99%B8%EA%B5%AD%EC%9D%B8%EA%B8%B0%EA%B4%80-%EB%8F%99",
+        "publisher": "MarketTimes"
+      },
+      "publicMetadata": {
+        "url": "https://www.markettimes.co.kr/2026/09/30/krx-%EB%A7%88%EA%B0%90-9%EC%9B%94-30%EC%9D%BC-%EC%BD%94%EC%8A%A4%ED%94%BC-3%EA%B1%B0%EB%9E%98%EC%9D%BC-%EC%97%B0%EC%86%8D-%ED%95%98%EB%9D%BD%EC%99%B8%EA%B5%AD%EC%9D%B8%EA%B8%B0%EA%B4%80-%EB%8F%99"
+      },
+      "libraryId": "library:source:dc19ef3ea4436f19",
+      "firstSeenAt": "2026-09-30T23:59:30Z",
+      "lastSeenAt": "2026-09-30T23:59:30Z",
+      "createdAt": "2026-09-30T23:59:30Z",
+      "updatedAt": "2026-09-30T23:59:30Z"
+    },
+    {
+      "recordType": "SOURCE",
+      "canonicalId": "source:7e576ecf0c83e93f",
+      "canonicalName": "Newsway — 국내 증시 마감",
+      "displayName": "Newsway — 국내 증시 마감",
+      "aliases": [],
+      "summary": null,
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:7e576ecf0c83e93f"
+      ],
+      "evidenceRefs": [
+        "evidence:7e2bea8b336077fe"
+      ],
+      "originRecordIds": [
+        "motus-korea-market-2026-09-30"
+      ],
+      "internalMetadata": {
+        "canonicalUrl": "https://www.newsway.co.kr/news/view?ud=2026093015491609752",
+        "publisher": "Newsway"
+      },
+      "publicMetadata": {
+        "url": "https://www.newsway.co.kr/news/view?ud=2026093015491609752"
+      },
+      "libraryId": "library:source:7e576ecf0c83e93f",
+      "firstSeenAt": "2026-09-30T23:59:30Z",
+      "lastSeenAt": "2026-09-30T23:59:30Z",
+      "createdAt": "2026-09-30T23:59:30Z",
+      "updatedAt": "2026-09-30T23:59:30Z"
+    },
+    {
+      "recordType": "SOURCE",
+      "canonicalId": "source:669ab915e7e3ea94",
+      "canonicalName": "News1 — 원·달러 환율 마감",
+      "displayName": "News1 — 원·달러 환율 마감",
+      "aliases": [],
+      "summary": null,
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:669ab915e7e3ea94"
+      ],
+      "evidenceRefs": [
+        "evidence:8bfb014bbe8d9fb4"
+      ],
+      "originRecordIds": [
+        "motus-korea-market-2026-09-30"
+      ],
+      "internalMetadata": {
+        "canonicalUrl": "https://www.news1.kr/finance/market-exr/6306362",
+        "publisher": "News1"
+      },
+      "publicMetadata": {
+        "url": "https://www.news1.kr/finance/market-exr/6306362"
+      },
+      "libraryId": "library:source:669ab915e7e3ea94",
+      "firstSeenAt": "2026-09-30T23:59:30Z",
+      "lastSeenAt": "2026-09-30T23:59:30Z",
+      "createdAt": "2026-09-30T23:59:30Z",
+      "updatedAt": "2026-09-30T23:59:30Z"
+    },
+    {
+      "recordType": "PUBLICATION",
+      "canonicalId": "motus-korea-market-2026-09-30",
+      "canonicalName": "국내 증시 마감: 외국인·기관 매도에 코스피 하락, 코스닥은 반등 (2026년 9월 30일)",
+      "displayName": "국내 증시 마감: 외국인·기관 매도에 코스피 하락, 코스닥은 반등 (2026년 9월 30일)",
+      "aliases": [],
+      "summary": "코스피는 외국인과 기관의 동반 순매도에 0.48% 하락한 6,838.04로 마감했다. 반면 코스닥은 기관 순매수와 일부 반도체·장비주의 강세에 0.72% 올랐다. 원·달러 환율은 1,352.8원으로 3.9원 내려 환율 부담은 다소 완화됐지만, 대형주 수급은 여전히 무거웠다.",
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:3b960f3ca7c5f68d",
+        "source:5248fdb3ba75d77c",
+        "source:637f78c2396e4eed",
+        "source:669ab915e7e3ea94",
+        "source:7e576ecf0c83e93f",
+        "source:dc19ef3ea4436f19",
+        "source:f33c539a6ad0bf3c",
+        "source:fc083cd0ad774d94"
+      ],
+      "evidenceRefs": [],
+      "originRecordIds": [
+        "motus-korea-market-2026-09-30"
+      ],
+      "internalMetadata": {
+        "issueDate": "2026-09-30",
+        "decision": "SELECTED"
+      },
+      "publicMetadata": {
+        "issueDate": "2026-09-30"
+      },
+      "libraryId": "library:publication:motus-korea-market-2026-09-30",
+      "firstSeenAt": "2026-09-30T23:59:30Z",
+      "lastSeenAt": "2026-09-30T23:59:30Z",
+      "createdAt": "2026-09-30T23:59:30Z",
+      "updatedAt": "2026-09-30T23:59:30Z"
+    }
+  ],
+  "edges": [
+    {
+      "edgeId": "edge:49940379010449fc",
+      "fromId": "event:microsoft-quine-2026-09-29",
+      "toId": "theme:ai-for-science",
+      "relationshipType": "EVENT_RELATES_THEME",
+      "reason": "verified AI item declared theme",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "sourceRefs": [
+        "source:7ee79eecb360c6d0"
+      ],
+      "evidenceRefs": [
+        "evidence:24b8b98d7c0e7f30",
+        "evidence:34b62b954fac69b0"
+      ],
+      "originRecordIds": [
+        "intel:ai:microsoft-quine-2026-09-29"
+      ]
+    },
+    {
+      "edgeId": "edge:48165fb97cacb284",
+      "fromId": "event:microsoft-quine-2026-09-29",
+      "toId": "company:microsoft",
+      "relationshipType": "EVENT_INVOLVES_COMPANY",
+      "reason": "verified AI item declared company",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "sourceRefs": [
+        "source:7ee79eecb360c6d0"
+      ],
+      "evidenceRefs": [
+        "evidence:24b8b98d7c0e7f30",
+        "evidence:34b62b954fac69b0"
+      ],
+      "originRecordIds": [
+        "intel:ai:microsoft-quine-2026-09-29"
+      ]
+    },
+    {
+      "edgeId": "edge:17c65ea1140926b7",
+      "fromId": "motus-daily-intelligence-2026-09-29",
+      "toId": "event:microsoft-quine-2026-09-29",
+      "relationshipType": "PUBLICATION_COVERS_EVENT",
+      "reason": "publication view model includes event",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "sourceRefs": [
+        "source:7ee79eecb360c6d0"
+      ],
+      "evidenceRefs": [
+        "evidence:24b8b98d7c0e7f30",
+        "evidence:34b62b954fac69b0"
+      ],
+      "originRecordIds": [
+        "newsletter:motus:2026-09-29"
+      ]
+    },
+    {
+      "edgeId": "edge:a76c91acbfdc6a0d",
+      "fromId": "company:microsoft",
+      "toId": "theme:ai-for-science",
+      "relationshipType": "COMPANY_HAS_THEME",
+      "reason": "verified intelligence item links company and theme",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "sourceRefs": [
+        "source:7ee79eecb360c6d0"
+      ],
+      "evidenceRefs": [
+        "evidence:24b8b98d7c0e7f30",
+        "evidence:34b62b954fac69b0"
+      ],
+      "originRecordIds": [
+        "intel:ai:microsoft-quine-2026-09-29"
+      ]
+    },
+    {
+      "edgeId": "edge:1cee0d6230a131f7",
+      "fromId": "motus-daily-intelligence-2026-09-29",
+      "toId": "theme:ai-for-science",
+      "relationshipType": "PUBLICATION_COVERS_THEME",
+      "reason": "publication view model includes theme",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "sourceRefs": [
+        "source:7ee79eecb360c6d0"
+      ],
+      "evidenceRefs": [
+        "evidence:24b8b98d7c0e7f30",
+        "evidence:34b62b954fac69b0"
+      ],
+      "originRecordIds": [
+        "newsletter:motus:2026-09-29"
+      ]
+    },
+    {
+      "edgeId": "edge:d2d09226c9d62847",
+      "fromId": "motus-daily-intelligence-2026-09-29",
+      "toId": "company:microsoft",
+      "relationshipType": "PUBLICATION_COVERS_COMPANY",
+      "reason": "publication view model includes company",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "sourceRefs": [
+        "source:7ee79eecb360c6d0"
+      ],
+      "evidenceRefs": [
+        "evidence:24b8b98d7c0e7f30",
+        "evidence:34b62b954fac69b0"
+      ],
+      "originRecordIds": [
+        "newsletter:motus:2026-09-29"
+      ]
+    },
+    {
+      "edgeId": "edge:ee2ec5b18764cefe",
+      "fromId": "event:nvidia-open-agent-safety-platform-2026-09-28",
+      "toId": "theme:agent-security",
+      "relationshipType": "EVENT_RELATES_THEME",
+      "reason": "verified AI item declared theme",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "sourceRefs": [
+        "source:a640107c7e713e6d"
+      ],
+      "evidenceRefs": [
+        "evidence:99fcb3de586ee7cc",
+        "evidence:fa29a7a21147353b"
+      ],
+      "originRecordIds": [
+        "intel:ai:nvidia-open-agent-safety-platform-2026-09-28"
+      ]
+    },
+    {
+      "edgeId": "edge:c597486787514b52",
+      "fromId": "event:nvidia-open-agent-safety-platform-2026-09-28",
+      "toId": "company:nvidia",
+      "relationshipType": "EVENT_INVOLVES_COMPANY",
+      "reason": "verified AI item declared company",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "sourceRefs": [
+        "source:a640107c7e713e6d"
+      ],
+      "evidenceRefs": [
+        "evidence:99fcb3de586ee7cc",
+        "evidence:fa29a7a21147353b"
+      ],
+      "originRecordIds": [
+        "intel:ai:nvidia-open-agent-safety-platform-2026-09-28"
+      ]
+    },
+    {
+      "edgeId": "edge:62fd065afc4cfbc6",
+      "fromId": "motus-daily-intelligence-2026-09-29",
+      "toId": "event:nvidia-open-agent-safety-platform-2026-09-28",
+      "relationshipType": "PUBLICATION_COVERS_EVENT",
+      "reason": "publication view model includes event",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "sourceRefs": [
+        "source:a640107c7e713e6d"
+      ],
+      "evidenceRefs": [
+        "evidence:99fcb3de586ee7cc",
+        "evidence:fa29a7a21147353b"
+      ],
+      "originRecordIds": [
+        "newsletter:motus:2026-09-29"
+      ]
+    },
+    {
+      "edgeId": "edge:aefedd7f5f91dc15",
+      "fromId": "company:nvidia",
+      "toId": "theme:agent-security",
+      "relationshipType": "COMPANY_HAS_THEME",
+      "reason": "verified intelligence item links company and theme",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "sourceRefs": [
+        "source:a640107c7e713e6d"
+      ],
+      "evidenceRefs": [
+        "evidence:99fcb3de586ee7cc",
+        "evidence:fa29a7a21147353b"
+      ],
+      "originRecordIds": [
+        "intel:ai:nvidia-open-agent-safety-platform-2026-09-28"
+      ]
+    },
+    {
+      "edgeId": "edge:b1257e813a49edf5",
+      "fromId": "motus-daily-intelligence-2026-09-29",
+      "toId": "theme:agent-security",
+      "relationshipType": "PUBLICATION_COVERS_THEME",
+      "reason": "publication view model includes theme",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "sourceRefs": [
+        "source:a640107c7e713e6d"
+      ],
+      "evidenceRefs": [
+        "evidence:99fcb3de586ee7cc",
+        "evidence:fa29a7a21147353b"
+      ],
+      "originRecordIds": [
+        "newsletter:motus:2026-09-29"
+      ]
+    },
+    {
+      "edgeId": "edge:64dbd2240f5f0ae1",
+      "fromId": "motus-daily-intelligence-2026-09-29",
+      "toId": "company:nvidia",
+      "relationshipType": "PUBLICATION_COVERS_COMPANY",
+      "reason": "publication view model includes company",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "sourceRefs": [
+        "source:a640107c7e713e6d"
+      ],
+      "evidenceRefs": [
+        "evidence:99fcb3de586ee7cc",
+        "evidence:fa29a7a21147353b"
+      ],
+      "originRecordIds": [
+        "newsletter:motus:2026-09-29"
+      ]
+    },
+    {
+      "edgeId": "edge:527bc2a3fef98899",
+      "fromId": "event:openai-dots-2026-09-29",
+      "toId": "theme:agentic-ai",
+      "relationshipType": "EVENT_RELATES_THEME",
+      "reason": "verified AI item declared theme",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "sourceRefs": [
+        "source:dec620cb7225d243"
+      ],
+      "evidenceRefs": [
+        "evidence:0fda3e21c70099a7",
+        "evidence:d442e8e2eccd8c10"
+      ],
+      "originRecordIds": [
+        "intel:ai:openai-dots-2026-09-29"
+      ]
+    },
+    {
+      "edgeId": "edge:c993b7004e9beeff",
+      "fromId": "event:openai-dots-2026-09-29",
+      "toId": "company:openai",
+      "relationshipType": "EVENT_INVOLVES_COMPANY",
+      "reason": "verified AI item declared company",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "sourceRefs": [
+        "source:dec620cb7225d243"
+      ],
+      "evidenceRefs": [
+        "evidence:0fda3e21c70099a7",
+        "evidence:d442e8e2eccd8c10"
+      ],
+      "originRecordIds": [
+        "intel:ai:openai-dots-2026-09-29"
+      ]
+    },
+    {
+      "edgeId": "edge:178c048de9db8b54",
+      "fromId": "motus-daily-intelligence-2026-09-29",
+      "toId": "event:openai-dots-2026-09-29",
+      "relationshipType": "PUBLICATION_COVERS_EVENT",
+      "reason": "publication view model includes event",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "sourceRefs": [
+        "source:dec620cb7225d243"
+      ],
+      "evidenceRefs": [
+        "evidence:0fda3e21c70099a7",
+        "evidence:d442e8e2eccd8c10"
+      ],
+      "originRecordIds": [
+        "newsletter:motus:2026-09-29"
+      ]
+    },
+    {
+      "edgeId": "edge:bad779913914b1dd",
+      "fromId": "company:openai",
+      "toId": "theme:agentic-ai",
+      "relationshipType": "COMPANY_HAS_THEME",
+      "reason": "verified intelligence item links company and theme",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "sourceRefs": [
+        "source:dec620cb7225d243"
+      ],
+      "evidenceRefs": [
+        "evidence:0fda3e21c70099a7",
+        "evidence:d442e8e2eccd8c10"
+      ],
+      "originRecordIds": [
+        "intel:ai:openai-dots-2026-09-29"
+      ]
+    },
+    {
+      "edgeId": "edge:4622b8b1be16675e",
+      "fromId": "motus-daily-intelligence-2026-09-29",
+      "toId": "theme:agentic-ai",
+      "relationshipType": "PUBLICATION_COVERS_THEME",
+      "reason": "publication view model includes theme",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "sourceRefs": [
+        "source:dec620cb7225d243"
+      ],
+      "evidenceRefs": [
+        "evidence:0fda3e21c70099a7",
+        "evidence:d442e8e2eccd8c10"
+      ],
+      "originRecordIds": [
+        "newsletter:motus:2026-09-29"
+      ]
+    },
+    {
+      "edgeId": "edge:d956c0070a8d340a",
+      "fromId": "motus-daily-intelligence-2026-09-29",
+      "toId": "company:openai",
+      "relationshipType": "PUBLICATION_COVERS_COMPANY",
+      "reason": "publication view model includes company",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "sourceRefs": [
+        "source:dec620cb7225d243"
+      ],
+      "evidenceRefs": [
+        "evidence:0fda3e21c70099a7",
+        "evidence:d442e8e2eccd8c10"
+      ],
+      "originRecordIds": [
+        "newsletter:motus:2026-09-29"
+      ]
+    },
+    {
+      "edgeId": "edge:cef3444d3487412d",
+      "fromId": "event:us-market-close-2026-09-29",
+      "toId": "theme:higher-for-longer",
+      "relationshipType": "EVENT_RELATES_THEME",
+      "reason": "verified WALL_STREET item declared theme",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "sourceRefs": [
+        "source:02483f80431a21af",
+        "source:b623893b395d1f8a"
+      ],
+      "evidenceRefs": [],
+      "originRecordIds": [
+        "intel:wall:us-close-2026-09-29",
+        "intel:wall:us-close-reuters-2026-09-29"
+      ]
+    },
+    {
+      "edgeId": "edge:d01cb328673b0d54",
+      "fromId": "motus-daily-intelligence-2026-09-29",
+      "toId": "event:us-market-close-2026-09-29",
+      "relationshipType": "PUBLICATION_COVERS_EVENT",
+      "reason": "publication view model includes event",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "sourceRefs": [
+        "source:02483f80431a21af",
+        "source:b623893b395d1f8a"
+      ],
+      "evidenceRefs": [],
+      "originRecordIds": [
+        "newsletter:motus:2026-09-29"
+      ]
+    },
+    {
+      "edgeId": "edge:0d96e87572882941",
+      "fromId": "motus-daily-intelligence-2026-09-29",
+      "toId": "theme:higher-for-longer",
+      "relationshipType": "PUBLICATION_COVERS_THEME",
+      "reason": "publication view model includes theme",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "sourceRefs": [
+        "source:02483f80431a21af",
+        "source:b623893b395d1f8a"
+      ],
+      "evidenceRefs": [],
+      "originRecordIds": [
+        "newsletter:motus:2026-09-29"
+      ]
+    },
+    {
+      "edgeId": "edge:aba0ca7ad7011f09",
+      "fromId": "event:vix-close-2026-09-29",
+      "toId": "theme:market-volatility",
+      "relationshipType": "EVENT_RELATES_THEME",
+      "reason": "verified WALL_STREET item declared theme",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "sourceRefs": [
+        "source:4b15991b9e2930ef"
+      ],
+      "evidenceRefs": [],
+      "originRecordIds": [
+        "intel:wall:vix-close-2026-09-29"
+      ]
+    },
+    {
+      "edgeId": "edge:0655c2b503515866",
+      "fromId": "motus-daily-intelligence-2026-09-29",
+      "toId": "event:vix-close-2026-09-29",
+      "relationshipType": "PUBLICATION_COVERS_EVENT",
+      "reason": "publication view model includes event",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "sourceRefs": [
+        "source:4b15991b9e2930ef"
+      ],
+      "evidenceRefs": [],
+      "originRecordIds": [
+        "newsletter:motus:2026-09-29"
+      ]
+    },
+    {
+      "edgeId": "edge:8522722dc36929bf",
+      "fromId": "motus-daily-intelligence-2026-09-29",
+      "toId": "theme:market-volatility",
+      "relationshipType": "PUBLICATION_COVERS_THEME",
+      "reason": "publication view model includes theme",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "sourceRefs": [
+        "source:4b15991b9e2930ef"
+      ],
+      "evidenceRefs": [],
+      "originRecordIds": [
+        "newsletter:motus:2026-09-29"
+      ]
+    },
+    {
+      "edgeId": "edge:ef90cce0c04b5e67",
+      "fromId": "institution:samsung-securities",
+      "toId": "research:samsung:morning-20260930",
+      "relationshipType": "INSTITUTION_PUBLISHED_RESEARCH",
+      "reason": "verified publication provenance",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "sourceRefs": [
+        "source:f33c539a6ad0bf3c"
+      ],
+      "evidenceRefs": [
+        "evidence:ff0e9bdbb34fb41c"
+      ],
+      "originRecordIds": [
+        "research:samsung:morning-20260930"
+      ]
+    },
+    {
+      "edgeId": "edge:166aceeb846bcc5b",
+      "fromId": "institution:samsung-securities",
+      "toId": "research:samsung:copilot-20260928",
+      "relationshipType": "INSTITUTION_PUBLISHED_RESEARCH",
+      "reason": "verified publication provenance",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "sourceRefs": [
+        "source:3b960f3ca7c5f68d"
+      ],
+      "evidenceRefs": [
+        "evidence:94be5f47fde810e2"
+      ],
+      "originRecordIds": [
+        "research:samsung:copilot-20260928"
+      ]
+    },
+    {
+      "edgeId": "edge:a1df7b6ab10339fe",
+      "fromId": "research:samsung:copilot-20260928",
+      "toId": "company:microsoft",
+      "relationshipType": "RESEARCH_COVERS_COMPANY",
+      "reason": "structured research interest",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "sourceRefs": [
+        "source:3b960f3ca7c5f68d"
+      ],
+      "evidenceRefs": [
+        "evidence:94be5f47fde810e2"
+      ],
+      "originRecordIds": [
+        "research:samsung:copilot-20260928"
+      ]
+    },
+    {
+      "edgeId": "edge:28f13131da16bd9f",
+      "fromId": "institution:samsung-securities",
+      "toId": "research:samsung:meta-connect-20260928",
+      "relationshipType": "INSTITUTION_PUBLISHED_RESEARCH",
+      "reason": "verified publication provenance",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "sourceRefs": [
+        "source:5248fdb3ba75d77c"
+      ],
+      "evidenceRefs": [
+        "evidence:9f39820d3b56959b"
+      ],
+      "originRecordIds": [
+        "research:samsung:meta-connect-20260928"
+      ]
+    },
+    {
+      "edgeId": "edge:aedac440a271a5d2",
+      "fromId": "research:samsung:meta-connect-20260928",
+      "toId": "company:meta",
+      "relationshipType": "RESEARCH_COVERS_COMPANY",
+      "reason": "structured research interest",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "sourceRefs": [
+        "source:5248fdb3ba75d77c"
+      ],
+      "evidenceRefs": [
+        "evidence:9f39820d3b56959b"
+      ],
+      "originRecordIds": [
+        "research:samsung:meta-connect-20260928"
+      ]
+    },
+    {
+      "edgeId": "edge:89b27dee78e1d452",
+      "fromId": "institution:samsung-securities",
+      "toId": "research:samsung:terafab-20260922",
+      "relationshipType": "INSTITUTION_PUBLISHED_RESEARCH",
+      "reason": "verified publication provenance",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "sourceRefs": [
+        "source:637f78c2396e4eed"
+      ],
+      "evidenceRefs": [
+        "evidence:baeb7bae5a932959"
+      ],
+      "originRecordIds": [
+        "research:samsung:terafab-20260922"
+      ]
+    },
+    {
+      "edgeId": "edge:2fe356c7070286f7",
+      "fromId": "institution:samsung-securities",
+      "toId": "research:samsung:anthropic-20260921",
+      "relationshipType": "INSTITUTION_PUBLISHED_RESEARCH",
+      "reason": "verified publication provenance",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "sourceRefs": [
+        "source:fc083cd0ad774d94"
+      ],
+      "evidenceRefs": [
+        "evidence:d687c6421d8d1e2a"
+      ],
+      "originRecordIds": [
+        "research:samsung:anthropic-20260921"
+      ]
+    },
+    {
+      "edgeId": "edge:61007a9b52dfae5b",
+      "fromId": "research:samsung:anthropic-20260921",
+      "toId": "company:anthropic",
+      "relationshipType": "RESEARCH_COVERS_COMPANY",
+      "reason": "structured research interest",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "sourceRefs": [
+        "source:fc083cd0ad774d94"
+      ],
+      "evidenceRefs": [
+        "evidence:d687c6421d8d1e2a"
+      ],
+      "originRecordIds": [
+        "research:samsung:anthropic-20260921"
+      ]
+    },
+    {
+      "edgeId": "edge:c153cf13c901f134",
+      "fromId": "event:us-market-close-2026-09-30",
+      "toId": "theme:higher-for-longer",
+      "relationshipType": "EVENT_RELATES_THEME",
+      "reason": "verified WALL_STREET item declared theme",
+      "createdAt": "2026-09-30T23:59:00Z",
+      "sourceRefs": [
+        "source:29a07ab3ee191f5d",
+        "source:634601952cfcccbc",
+        "source:a8bfcc6803e874a0",
+        "source:d6ff3ff59270a263",
+        "source:f14e8f2db1e52e24"
+      ],
+      "evidenceRefs": [
+        "evidence:018dce979ceb61e7",
+        "evidence:323e7d43d74167ca",
+        "evidence:7daff3c8bd8706fc"
+      ],
+      "originRecordIds": [
+        "intelligence:us-market-close-2026-09-30"
+      ]
+    },
+    {
+      "edgeId": "edge:ad07585f90e03307",
+      "fromId": "event:us-market-close-2026-09-30",
+      "toId": "theme:market-volatility",
+      "relationshipType": "EVENT_RELATES_THEME",
+      "reason": "verified WALL_STREET item declared theme",
+      "createdAt": "2026-09-30T23:59:00Z",
+      "sourceRefs": [
+        "source:29a07ab3ee191f5d",
+        "source:634601952cfcccbc",
+        "source:a8bfcc6803e874a0",
+        "source:d6ff3ff59270a263",
+        "source:f14e8f2db1e52e24"
+      ],
+      "evidenceRefs": [
+        "evidence:018dce979ceb61e7",
+        "evidence:323e7d43d74167ca",
+        "evidence:7daff3c8bd8706fc"
+      ],
+      "originRecordIds": [
+        "intelligence:us-market-close-2026-09-30"
+      ]
+    },
+    {
+      "edgeId": "edge:6c2f80f15f9281b3",
+      "fromId": "motus-us-market-2026-09-30",
+      "toId": "event:us-market-close-2026-09-30",
+      "relationshipType": "PUBLICATION_COVERS_EVENT",
+      "reason": "publication view model includes event",
+      "createdAt": "2026-09-30T23:59:00Z",
+      "sourceRefs": [
+        "source:29a07ab3ee191f5d",
+        "source:634601952cfcccbc",
+        "source:a8bfcc6803e874a0",
+        "source:d6ff3ff59270a263",
+        "source:f14e8f2db1e52e24"
+      ],
+      "evidenceRefs": [
+        "evidence:018dce979ceb61e7",
+        "evidence:323e7d43d74167ca",
+        "evidence:7daff3c8bd8706fc"
+      ],
+      "originRecordIds": [
+        "motus-us-market-2026-09-30"
+      ]
+    },
+    {
+      "edgeId": "edge:754e36153220f7fb",
+      "fromId": "motus-us-market-2026-09-30",
+      "toId": "theme:higher-for-longer",
+      "relationshipType": "PUBLICATION_COVERS_THEME",
+      "reason": "publication view model includes theme",
+      "createdAt": "2026-09-30T23:59:00Z",
+      "sourceRefs": [
+        "source:29a07ab3ee191f5d",
+        "source:634601952cfcccbc",
+        "source:a8bfcc6803e874a0",
+        "source:d6ff3ff59270a263",
+        "source:f14e8f2db1e52e24"
+      ],
+      "evidenceRefs": [
+        "evidence:018dce979ceb61e7",
+        "evidence:323e7d43d74167ca",
+        "evidence:7daff3c8bd8706fc"
+      ],
+      "originRecordIds": [
+        "motus-us-market-2026-09-30"
+      ]
+    },
+    {
+      "edgeId": "edge:91580abf5255cbc2",
+      "fromId": "motus-us-market-2026-09-30",
+      "toId": "theme:market-volatility",
+      "relationshipType": "PUBLICATION_COVERS_THEME",
+      "reason": "publication view model includes theme",
+      "createdAt": "2026-09-30T23:59:00Z",
+      "sourceRefs": [
+        "source:29a07ab3ee191f5d",
+        "source:634601952cfcccbc",
+        "source:a8bfcc6803e874a0",
+        "source:d6ff3ff59270a263",
+        "source:f14e8f2db1e52e24"
+      ],
+      "evidenceRefs": [
+        "evidence:018dce979ceb61e7",
+        "evidence:323e7d43d74167ca",
+        "evidence:7daff3c8bd8706fc"
+      ],
+      "originRecordIds": [
+        "motus-us-market-2026-09-30"
+      ]
+    }
+  ],
+  "themeHistory": [
+    {
+      "themeId": "theme:ai-for-science",
+      "periodStart": "2026-09-29",
+      "periodEnd": "2026-09-30",
+      "eventCount": 1,
+      "companyCount": 1,
+      "institutionCount": 0,
+      "researchCount": 0,
+      "marketCount": 0,
+      "supportingRecordIds": [
+        "event:microsoft-quine-2026-09-29"
+      ],
+      "changeState": null,
+      "sourceRefs": [
+        "source:7ee79eecb360c6d0"
+      ],
+      "evidenceRefs": [
+        "evidence:24b8b98d7c0e7f30",
+        "evidence:34b62b954fac69b0"
+      ],
+      "originRecordIds": [
+        "intel:ai:microsoft-quine-2026-09-29"
+      ]
+    },
+    {
+      "themeId": "theme:agent-security",
+      "periodStart": "2026-09-29",
+      "periodEnd": "2026-09-30",
+      "eventCount": 1,
+      "companyCount": 1,
+      "institutionCount": 0,
+      "researchCount": 0,
+      "marketCount": 0,
+      "supportingRecordIds": [
+        "event:nvidia-open-agent-safety-platform-2026-09-28"
+      ],
+      "changeState": null,
+      "sourceRefs": [
+        "source:a640107c7e713e6d"
+      ],
+      "evidenceRefs": [
+        "evidence:99fcb3de586ee7cc",
+        "evidence:fa29a7a21147353b"
+      ],
+      "originRecordIds": [
+        "intel:ai:nvidia-open-agent-safety-platform-2026-09-28"
+      ]
+    },
+    {
+      "themeId": "theme:agentic-ai",
+      "periodStart": "2026-09-29",
+      "periodEnd": "2026-09-30",
+      "eventCount": 1,
+      "companyCount": 1,
+      "institutionCount": 0,
+      "researchCount": 0,
+      "marketCount": 0,
+      "supportingRecordIds": [
+        "event:openai-dots-2026-09-29"
+      ],
+      "changeState": null,
+      "sourceRefs": [
+        "source:dec620cb7225d243"
+      ],
+      "evidenceRefs": [
+        "evidence:0fda3e21c70099a7",
+        "evidence:d442e8e2eccd8c10"
+      ],
+      "originRecordIds": [
+        "intel:ai:openai-dots-2026-09-29"
+      ]
+    },
+    {
+      "themeId": "theme:higher-for-longer",
+      "periodStart": "2026-09-29",
+      "periodEnd": "2026-09-30",
+      "eventCount": 2,
+      "companyCount": 0,
+      "institutionCount": 0,
+      "researchCount": 0,
+      "marketCount": 0,
+      "supportingRecordIds": [
+        "event:us-market-close-2026-09-29",
+        "event:us-market-close-2026-09-30"
+      ],
+      "changeState": null,
+      "sourceRefs": [
+        "source:02483f80431a21af",
+        "source:29a07ab3ee191f5d",
+        "source:634601952cfcccbc",
+        "source:a8bfcc6803e874a0",
+        "source:b623893b395d1f8a",
+        "source:d6ff3ff59270a263",
+        "source:f14e8f2db1e52e24"
+      ],
+      "evidenceRefs": [
+        "evidence:018dce979ceb61e7",
+        "evidence:323e7d43d74167ca",
+        "evidence:7daff3c8bd8706fc"
+      ],
+      "originRecordIds": [
+        "intel:wall:us-close-2026-09-29",
+        "intel:wall:us-close-reuters-2026-09-29",
+        "intelligence:us-market-close-2026-09-30"
+      ]
+    },
+    {
+      "themeId": "theme:market-volatility",
+      "periodStart": "2026-09-29",
+      "periodEnd": "2026-09-30",
+      "eventCount": 2,
+      "companyCount": 0,
+      "institutionCount": 0,
+      "researchCount": 0,
+      "marketCount": 0,
+      "supportingRecordIds": [
+        "event:us-market-close-2026-09-30",
+        "event:vix-close-2026-09-29"
+      ],
+      "changeState": null,
+      "sourceRefs": [
+        "source:29a07ab3ee191f5d",
+        "source:4b15991b9e2930ef",
+        "source:634601952cfcccbc",
+        "source:a8bfcc6803e874a0",
+        "source:d6ff3ff59270a263",
+        "source:f14e8f2db1e52e24"
+      ],
+      "evidenceRefs": [
+        "evidence:018dce979ceb61e7",
+        "evidence:323e7d43d74167ca",
+        "evidence:7daff3c8bd8706fc"
+      ],
+      "originRecordIds": [
+        "intel:wall:vix-close-2026-09-29",
+        "intelligence:us-market-close-2026-09-30"
+      ]
+    }
+  ],
+  "companyHistory": [
+    {
+      "companyId": "company:microsoft",
+      "periodStart": "2026-09-29",
+      "periodEnd": "2026-09-30",
+      "events": [
+        "event:microsoft-quine-2026-09-29"
+      ],
+      "researchMentions": [
+        "research:samsung:copilot-20260928"
+      ],
+      "institutionMentions": [
+        "institution:samsung-securities"
+      ],
+      "marketReactions": [],
+      "relatedThemes": [
+        "theme:ai-for-science"
+      ],
+      "attentionChange": null,
+      "sourceRefs": [
+        "source:3b960f3ca7c5f68d",
+        "source:7ee79eecb360c6d0"
+      ],
+      "evidenceRefs": [
+        "evidence:24b8b98d7c0e7f30",
+        "evidence:34b62b954fac69b0",
+        "evidence:94be5f47fde810e2"
+      ],
+      "originRecordIds": [
+        "intel:ai:microsoft-quine-2026-09-29",
+        "research:samsung:copilot-20260928"
+      ]
+    },
+    {
+      "companyId": "company:nvidia",
+      "periodStart": "2026-09-29",
+      "periodEnd": "2026-09-30",
+      "events": [
+        "event:nvidia-open-agent-safety-platform-2026-09-28"
+      ],
+      "researchMentions": [],
+      "institutionMentions": [],
+      "marketReactions": [],
+      "relatedThemes": [
+        "theme:agent-security"
+      ],
+      "attentionChange": null,
+      "sourceRefs": [
+        "source:a640107c7e713e6d"
+      ],
+      "evidenceRefs": [
+        "evidence:99fcb3de586ee7cc",
+        "evidence:fa29a7a21147353b"
+      ],
+      "originRecordIds": [
+        "intel:ai:nvidia-open-agent-safety-platform-2026-09-28"
+      ]
+    },
+    {
+      "companyId": "company:openai",
+      "periodStart": "2026-09-29",
+      "periodEnd": "2026-09-30",
+      "events": [
+        "event:openai-dots-2026-09-29"
+      ],
+      "researchMentions": [],
+      "institutionMentions": [],
+      "marketReactions": [],
+      "relatedThemes": [
+        "theme:agentic-ai"
+      ],
+      "attentionChange": null,
+      "sourceRefs": [
+        "source:dec620cb7225d243"
+      ],
+      "evidenceRefs": [
+        "evidence:0fda3e21c70099a7",
+        "evidence:d442e8e2eccd8c10"
+      ],
+      "originRecordIds": [
+        "intel:ai:openai-dots-2026-09-29"
+      ]
+    },
+    {
+      "companyId": "company:meta",
+      "periodStart": "2026-09-29",
+      "periodEnd": "2026-09-30",
+      "events": [],
+      "researchMentions": [
+        "research:samsung:meta-connect-20260928"
+      ],
+      "institutionMentions": [
+        "institution:samsung-securities"
+      ],
+      "marketReactions": [],
+      "relatedThemes": [],
+      "attentionChange": null,
+      "sourceRefs": [
+        "source:5248fdb3ba75d77c"
+      ],
+      "evidenceRefs": [
+        "evidence:9f39820d3b56959b"
+      ],
+      "originRecordIds": [
+        "research:samsung:meta-connect-20260928"
+      ]
+    },
+    {
+      "companyId": "company:anthropic",
+      "periodStart": "2026-09-29",
+      "periodEnd": "2026-09-30",
+      "events": [],
+      "researchMentions": [
+        "research:samsung:anthropic-20260921"
+      ],
+      "institutionMentions": [
+        "institution:samsung-securities"
+      ],
+      "marketReactions": [],
+      "relatedThemes": [],
+      "attentionChange": null,
+      "sourceRefs": [
+        "source:fc083cd0ad774d94"
+      ],
+      "evidenceRefs": [
+        "evidence:d687c6421d8d1e2a"
+      ],
+      "originRecordIds": [
+        "research:samsung:anthropic-20260921"
+      ]
+    }
+  ],
+  "evergreenCandidates": [
+    {
+      "candidateId": "evergreen:theme-higher-for-longer",
+      "topicType": "THEME",
+      "topicId": "theme:higher-for-longer",
+      "reason": "반복 가능한 설명 주제이며 둘 이상의 독립 source 근거가 존재",
+      "supportingEvents": [
+        "event:us-market-close-2026-09-29",
+        "event:us-market-close-2026-09-30"
+      ],
+      "supportingPublications": [
+        "motus-daily-intelligence-2026-09-29",
+        "motus-us-market-2026-09-30"
+      ],
+      "sourceCount": 7,
+      "candidateState": "REVIEW_REQUIRED",
+      "sourceRefs": [
+        "source:02483f80431a21af",
+        "source:29a07ab3ee191f5d",
+        "source:634601952cfcccbc",
+        "source:a8bfcc6803e874a0",
+        "source:b623893b395d1f8a",
+        "source:d6ff3ff59270a263",
+        "source:f14e8f2db1e52e24"
+      ],
+      "evidenceRefs": [
+        "evidence:018dce979ceb61e7",
+        "evidence:323e7d43d74167ca",
+        "evidence:7daff3c8bd8706fc"
+      ],
+      "originRecordIds": [
+        "intel:wall:us-close-2026-09-29",
+        "intel:wall:us-close-reuters-2026-09-29",
+        "intelligence:us-market-close-2026-09-30"
+      ]
+    },
+    {
+      "candidateId": "evergreen:theme-market-volatility",
+      "topicType": "THEME",
+      "topicId": "theme:market-volatility",
+      "reason": "반복 가능한 설명 주제이며 둘 이상의 독립 source 근거가 존재",
+      "supportingEvents": [
+        "event:us-market-close-2026-09-30",
+        "event:vix-close-2026-09-29"
+      ],
+      "supportingPublications": [
+        "motus-daily-intelligence-2026-09-29",
+        "motus-us-market-2026-09-30"
+      ],
+      "sourceCount": 6,
+      "candidateState": "REVIEW_REQUIRED",
+      "sourceRefs": [
+        "source:29a07ab3ee191f5d",
+        "source:4b15991b9e2930ef",
+        "source:634601952cfcccbc",
+        "source:a8bfcc6803e874a0",
+        "source:d6ff3ff59270a263",
+        "source:f14e8f2db1e52e24"
+      ],
+      "evidenceRefs": [
+        "evidence:018dce979ceb61e7",
+        "evidence:323e7d43d74167ca",
+        "evidence:7daff3c8bd8706fc"
+      ],
+      "originRecordIds": [
+        "intel:wall:vix-close-2026-09-29",
+        "intelligence:us-market-close-2026-09-30"
+      ]
+    }
+  ],
+  "decisions": [
+    {
+      "decisionId": "decision:ee042a4943155980",
+      "originRecordId": "motus-daily-intelligence-2026-09-29",
+      "decision": "SELECTED",
+      "reason": "verified Golden Intelligence production record",
+      "at": "2026-09-29T23:59:00Z"
+    },
+    {
+      "decisionId": "decision:803fbff2a5697165",
+      "originRecordId": "motus-us-market-2026-09-30",
+      "decision": "SELECTED",
+      "reason": "verified split Daily production record",
+      "at": "2026-09-30T23:59:00Z"
+    },
+    {
+      "decisionId": "decision:5a4defac5777364d",
+      "originRecordId": "motus-korea-market-2026-09-30",
+      "decision": "SELECTED",
+      "reason": "verified split Daily production record",
+      "at": "2026-09-30T23:59:30Z"
+    }
+  ],
+  "audienceSignals": [],
+  "pdfArtifacts": [
+    {
+      "artifactId": "report:daily-ai-2026-09-29",
+      "path": "data/reports/daily/2026-09-29/ai/report.pdf",
+      "publicationId": "motus-daily-intelligence-2026-09-29",
+      "companyIds": [
+        "company:microsoft",
+        "company:nvidia",
+        "company:openai"
+      ],
+      "themeIds": [
+        "theme:agent-security",
+        "theme:agentic-ai",
+        "theme:ai-for-science",
+        "theme:higher-for-longer",
+        "theme:market-volatility"
+      ],
+      "eventIds": [
+        "event:microsoft-quine-2026-09-29",
+        "event:nvidia-open-agent-safety-platform-2026-09-28",
+        "event:openai-dots-2026-09-29",
+        "event:us-market-close-2026-09-29",
+        "event:vix-close-2026-09-29"
+      ],
+      "publicUrl": null,
+      "createdAt": "2026-09-29T23:59:00Z"
+    },
+    {
+      "artifactId": "report:daily-us-2026-09-30",
+      "path": "data/reports/daily/2026-09-30/us/report.pdf",
+      "publicationId": "motus-us-market-2026-09-30",
+      "companyIds": [],
+      "themeIds": [
+        "theme:higher-for-longer",
+        "theme:market-volatility"
+      ],
+      "eventIds": [
+        "event:us-market-close-2026-09-30"
+      ],
+      "publicUrl": null,
+      "createdAt": "2026-09-30T23:59:00Z"
+    },
+    {
+      "artifactId": "report:daily-korea-2026-09-30",
+      "path": "data/reports/daily/2026-09-30/korea/report.pdf",
+      "publicationId": "motus-korea-market-2026-09-30",
+      "companyIds": [],
+      "themeIds": [],
+      "eventIds": [],
+      "publicUrl": null,
+      "createdAt": "2026-09-30T23:59:30Z"
+    }
+  ],
+  "redirects": {}
+}

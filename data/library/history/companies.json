@@ -1,0 +1,132 @@
+[
+  {
+    "companyId": "company:microsoft",
+    "periodStart": "2026-09-29",
+    "periodEnd": "2026-09-30",
+    "events": [
+      "event:microsoft-quine-2026-09-29"
+    ],
+    "researchMentions": [
+      "research:samsung:copilot-20260928"
+    ],
+    "institutionMentions": [
+      "institution:samsung-securities"
+    ],
+    "marketReactions": [],
+    "relatedThemes": [
+      "theme:ai-for-science"
+    ],
+    "attentionChange": null,
+    "sourceRefs": [
+      "source:3b960f3ca7c5f68d",
+      "source:7ee79eecb360c6d0"
+    ],
+    "evidenceRefs": [
+      "evidence:24b8b98d7c0e7f30",
+      "evidence:34b62b954fac69b0",
+      "evidence:94be5f47fde810e2"
+    ],
+    "originRecordIds": [
+      "intel:ai:microsoft-quine-2026-09-29",
+      "research:samsung:copilot-20260928"
+    ]
+  },
+  {
+    "companyId": "company:nvidia",
+    "periodStart": "2026-09-29",
+    "periodEnd": "2026-09-30",
+    "events": [
+      "event:nvidia-open-agent-safety-platform-2026-09-28"
+    ],
+    "researchMentions": [],
+    "institutionMentions": [],
+    "marketReactions": [],
+    "relatedThemes": [
+      "theme:agent-security"
+    ],
+    "attentionChange": null,
+    "sourceRefs": [
+      "source:a640107c7e713e6d"
+    ],
+    "evidenceRefs": [
+      "evidence:99fcb3de586ee7cc",
+      "evidence:fa29a7a21147353b"
+    ],
+    "originRecordIds": [
+      "intel:ai:nvidia-open-agent-safety-platform-2026-09-28"
+    ]
+  },
+  {
+    "companyId": "company:openai",
+    "periodStart": "2026-09-29",
+    "periodEnd": "2026-09-30",
+    "events": [
+      "event:openai-dots-2026-09-29"
+    ],
+    "researchMentions": [],
+    "institutionMentions": [],
+    "marketReactions": [],
+    "relatedThemes": [
+      "theme:agentic-ai"
+    ],
+    "attentionChange": null,
+    "sourceRefs": [
+      "source:dec620cb7225d243"
+    ],
+    "evidenceRefs": [
+      "evidence:0fda3e21c70099a7",
+      "evidence:d442e8e2eccd8c10"
+    ],
+    "originRecordIds": [
+      "intel:ai:openai-dots-2026-09-29"
+    ]
+  },
+  {
+    "companyId": "company:meta",
+    "periodStart": "2026-09-29",
+    "periodEnd": "2026-09-30",
+    "events": [],
+    "researchMentions": [
+      "research:samsung:meta-connect-20260928"
+    ],
+    "institutionMentions": [
+      "institution:samsung-securities"
+    ],
+    "marketReactions": [],
+    "relatedThemes": [],
+    "attentionChange": null,
+    "sourceRefs": [
+      "source:5248fdb3ba75d77c"
+    ],
+    "evidenceRefs": [
+      "evidence:9f39820d3b56959b"
+    ],
+    "originRecordIds": [
+      "research:samsung:meta-connect-20260928"
+    ]
+  },
+  {
+    "companyId": "company:anthropic",
+    "periodStart": "2026-09-29",
+    "periodEnd": "2026-09-30",
+    "events": [],
+    "researchMentions": [
+      "research:samsung:anthropic-20260921"
+    ],
+    "institutionMentions": [
+      "institution:samsung-securities"
+    ],
+    "marketReactions": [],
+    "relatedThemes": [],
+    "attentionChange": null,
+    "sourceRefs": [
+      "source:fc083cd0ad774d94"
+    ],
+    "evidenceRefs": [
+      "evidence:d687c6421d8d1e2a"
+    ],
+    "originRecordIds": [
+      "research:samsung:anthropic-20260921"
+    ]
+  }
+]

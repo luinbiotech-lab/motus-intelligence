@@ -1,0 +1,160 @@
+[
+  {
+    "recordType": "COMPANY",
+    "canonicalId": "company:microsoft",
+    "canonicalName": "Microsoft",
+    "displayName": "Microsoft",
+    "aliases": [
+      "MSFT",
+      "Microsoft",
+      "Microsoft Corp."
+    ],
+    "summary": "Microsoft Research는 생물학의 복잡성을 다루는 멀티모달 월드 모델과 연구 하네스로 Quine을 소개했다.",
+    "status": "ACTIVE",
+    "verificationStatus": "VERIFIED",
+    "confidence": null,
+    "sourceRefs": [
+      "source:3b960f3ca7c5f68d",
+      "source:7ee79eecb360c6d0"
+    ],
+    "evidenceRefs": [
+      "evidence:24b8b98d7c0e7f30",
+      "evidence:34b62b954fac69b0",
+      "evidence:94be5f47fde810e2"
+    ],
+    "originRecordIds": [
+      "intel:ai:microsoft-quine-2026-09-29",
+      "research:samsung:copilot-20260928"
+    ],
+    "internalMetadata": {},
+    "publicMetadata": null,
+    "libraryId": "library:company:microsoft",
+    "firstSeenAt": "2026-09-29T23:59:00Z",
+    "lastSeenAt": "2026-09-30T23:59:30Z",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "updatedAt": "2026-09-30T23:59:30Z"
+  },
+  {
+    "recordType": "COMPANY",
+    "canonicalId": "company:nvidia",
+    "canonicalName": "NVIDIA",
+    "displayName": "NVIDIA",
+    "aliases": [
+      "NVDA",
+      "NVIDIA",
+      "NVIDIA Corp.",
+      "Nvidia"
+    ],
+    "summary": "NVIDIA는 에이전트 시험부터 배포까지 격리와 정책 집행을 지원하는 개방형 안전 플랫폼을 발표했다.",
+    "status": "ACTIVE",
+    "verificationStatus": "VERIFIED",
+    "confidence": null,
+    "sourceRefs": [
+      "source:a640107c7e713e6d"
+    ],
+    "evidenceRefs": [
+      "evidence:99fcb3de586ee7cc",
+      "evidence:fa29a7a21147353b"
+    ],
+    "originRecordIds": [
+      "intel:ai:nvidia-open-agent-safety-platform-2026-09-28"
+    ],
+    "internalMetadata": {},
+    "publicMetadata": null,
+    "libraryId": "library:company:nvidia",
+    "firstSeenAt": "2026-09-29T23:59:00Z",
+    "lastSeenAt": "2026-09-29T23:59:00Z",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "updatedAt": "2026-09-29T23:59:00Z"
+  },
+  {
+    "recordType": "COMPANY",
+    "canonicalId": "company:openai",
+    "canonicalName": "OpenAI",
+    "displayName": "OpenAI",
+    "aliases": [
+      "OpenAI"
+    ],
+    "summary": "OpenAI는 클라우드 컴퓨터와 연결 앱을 이용해 장기 작업을 수행하는 Dots를 공개했다.",
+    "status": "ACTIVE",
+    "verificationStatus": "VERIFIED",
+    "confidence": null,
+    "sourceRefs": [
+      "source:dec620cb7225d243"
+    ],
+    "evidenceRefs": [
+      "evidence:0fda3e21c70099a7",
+      "evidence:d442e8e2eccd8c10"
+    ],
+    "originRecordIds": [
+      "intel:ai:openai-dots-2026-09-29"
+    ],
+    "internalMetadata": {},
+    "publicMetadata": null,
+    "libraryId": "library:company:openai",
+    "firstSeenAt": "2026-09-29T23:59:00Z",
+    "lastSeenAt": "2026-09-29T23:59:00Z",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "updatedAt": "2026-09-29T23:59:00Z"
+  },
+  {
+    "recordType": "COMPANY",
+    "canonicalId": "company:meta",
+    "canonicalName": "Meta Platforms",
+    "displayName": "Meta Platforms",
+    "aliases": [
+      "META",
+      "Meta",
+      "Meta Platforms"
+    ],
+    "summary": null,
+    "status": "ACTIVE",
+    "verificationStatus": "VERIFIED",
+    "confidence": null,
+    "sourceRefs": [
+      "source:5248fdb3ba75d77c"
+    ],
+    "evidenceRefs": [
+      "evidence:9f39820d3b56959b"
+    ],
+    "originRecordIds": [
+      "research:samsung:meta-connect-20260928"
+    ],
+    "internalMetadata": {},
+    "publicMetadata": null,
+    "libraryId": "library:company:meta",
+    "firstSeenAt": "2026-09-29T23:59:00Z",
+    "lastSeenAt": "2026-09-30T23:59:30Z",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "updatedAt": "2026-09-30T23:59:30Z"
+  },
+  {
+    "recordType": "COMPANY",
+    "canonicalId": "company:anthropic",
+    "canonicalName": "Anthropic",
+    "displayName": "Anthropic",
+    "aliases": [
+      "Anthropic"
+    ],
+    "summary": null,
+    "status": "ACTIVE",
+    "verificationStatus": "VERIFIED",
+    "confidence": null,
+    "sourceRefs": [
+      "source:fc083cd0ad774d94"
+    ],
+    "evidenceRefs": [
+      "evidence:d687c6421d8d1e2a"
+    ],
+    "originRecordIds": [
+      "research:samsung:anthropic-20260921"
+    ],
+    "internalMetadata": {},
+    "publicMetadata": null,
+    "libraryId": "library:company:anthropic",
+    "firstSeenAt": "2026-09-29T23:59:00Z",
+    "lastSeenAt": "2026-09-30T23:59:30Z",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "updatedAt": "2026-09-30T23:59:30Z"
+  }
+]

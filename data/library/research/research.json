@@ -1,0 +1,176 @@
+[
+  {
+    "recordType": "RESEARCH",
+    "canonicalId": "research:samsung:morning-20260930",
+    "canonicalName": "[미국 마감] 국채금리 부담 속 AI 종목별 차별화",
+    "displayName": "[미국 마감] 국채금리 부담 속 AI 종목별 차별화",
+    "aliases": [],
+    "summary": "9월 29일 미국 시장에서 장기금리 부담과 AI 종목별 등락을 정리한 공개 모닝 브리프.",
+    "status": "ACTIVE",
+    "verificationStatus": "VERIFIED",
+    "confidence": null,
+    "sourceRefs": [
+      "source:f33c539a6ad0bf3c"
+    ],
+    "evidenceRefs": [
+      "evidence:ff0e9bdbb34fb41c"
+    ],
+    "originRecordIds": [
+      "research:samsung:morning-20260930"
+    ],
+    "internalMetadata": {
+      "publisher": "삼성증권",
+      "institutionView": "상시 실행형 에이전트 시연과 반도체 종목별 흐름을 함께 점검하며 AI 투자 기대와 실행 리스크를 구분했다.",
+      "aiInterpretation": null,
+      "riskFactors": [
+        "장기 국채금리 상승",
+        "에이전트 제품의 초기 실행 안정성"
+      ]
+    },
+    "publicMetadata": null,
+    "libraryId": "library:research:samsung:morning-20260930",
+    "firstSeenAt": "2026-09-29T23:59:00Z",
+    "lastSeenAt": "2026-09-30T23:59:30Z",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "updatedAt": "2026-09-30T23:59:30Z"
+  },
+  {
+    "recordType": "RESEARCH",
+    "canonicalId": "research:samsung:copilot-20260928",
+    "canonicalName": "Microsoft Copilot: 상시 실행형 에이전트의 기업 적용",
+    "displayName": "Microsoft Copilot: 상시 실행형 에이전트의 기업 적용",
+    "aliases": [],
+    "summary": "Microsoft Copilot의 기업용 에이전트 방향과 수익성 조건을 다룬 공개 리서치.",
+    "status": "ACTIVE",
+    "verificationStatus": "VERIFIED",
+    "confidence": null,
+    "sourceRefs": [
+      "source:3b960f3ca7c5f68d"
+    ],
+    "evidenceRefs": [
+      "evidence:94be5f47fde810e2"
+    ],
+    "originRecordIds": [
+      "research:samsung:copilot-20260928"
+    ],
+    "internalMetadata": {
+      "publisher": "삼성증권",
+      "institutionView": "기업용 에이전트 확산에는 작업 라우팅, 자체 모델, 칩 최적화가 수익성의 핵심 조건이라는 관점이다.",
+      "aiInterpretation": null,
+      "riskFactors": [
+        "추론 비용 부담",
+        "기업 도입 속도"
+      ]
+    },
+    "publicMetadata": null,
+    "libraryId": "library:research:samsung:copilot-20260928",
+    "firstSeenAt": "2026-09-29T23:59:00Z",
+    "lastSeenAt": "2026-09-30T23:59:30Z",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "updatedAt": "2026-09-30T23:59:30Z"
+  },
+  {
+    "recordType": "RESEARCH",
+    "canonicalId": "research:samsung:meta-connect-20260928",
+    "canonicalName": "Meta Connect: AI 인터페이스 확장의 실행 조건",
+    "displayName": "Meta Connect: AI 인터페이스 확장의 실행 조건",
+    "aliases": [],
+    "summary": "Meta의 AR 기기와 AI 서비스 연결을 다룬 공개 리서치.",
+    "status": "ACTIVE",
+    "verificationStatus": "VERIFIED",
+    "confidence": null,
+    "sourceRefs": [
+      "source:5248fdb3ba75d77c"
+    ],
+    "evidenceRefs": [
+      "evidence:9f39820d3b56959b"
+    ],
+    "originRecordIds": [
+      "research:samsung:meta-connect-20260928"
+    ],
+    "internalMetadata": {
+      "publisher": "삼성증권",
+      "institutionView": "AR 기기와 실시간 아바타, 외부 서비스 연결이 사용 경험을 넓히지만 제품 실행력 확인이 필요하다는 관점이다.",
+      "aiInterpretation": null,
+      "riskFactors": [
+        "제품 실행 지연",
+        "하드웨어 수요 불확실성"
+      ]
+    },
+    "publicMetadata": null,
+    "libraryId": "library:research:samsung:meta-connect-20260928",
+    "firstSeenAt": "2026-09-29T23:59:00Z",
+    "lastSeenAt": "2026-09-30T23:59:30Z",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "updatedAt": "2026-09-30T23:59:30Z"
+  },
+  {
+    "recordType": "RESEARCH",
+    "canonicalId": "research:samsung:terafab-20260922",
+    "canonicalName": "Terafab: AI 수요가 제조 역량 투자로 확장될 가능성",
+    "displayName": "Terafab: AI 수요가 제조 역량 투자로 확장될 가능성",
+    "aliases": [],
+    "summary": "AI 인프라 수요가 반도체 구매를 넘어 제조 역량 투자로 이어질 가능성을 다룬 공개 리서치.",
+    "status": "ACTIVE",
+    "verificationStatus": "VERIFIED",
+    "confidence": null,
+    "sourceRefs": [
+      "source:637f78c2396e4eed"
+    ],
+    "evidenceRefs": [
+      "evidence:baeb7bae5a932959"
+    ],
+    "originRecordIds": [
+      "research:samsung:terafab-20260922"
+    ],
+    "internalMetadata": {
+      "publisher": "삼성증권",
+      "institutionView": "계획이 현실화되면 AI 수요의 무게중심이 칩 구매에서 제조 역량 투자로 확장될 수 있다는 관점이다.",
+      "aiInterpretation": null,
+      "riskFactors": [
+        "대규모 투자 계획의 집행 지연"
+      ]
+    },
+    "publicMetadata": null,
+    "libraryId": "library:research:samsung:terafab-20260922",
+    "firstSeenAt": "2026-09-29T23:59:00Z",
+    "lastSeenAt": "2026-09-30T23:59:30Z",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "updatedAt": "2026-09-30T23:59:30Z"
+  },
+  {
+    "recordType": "RESEARCH",
+    "canonicalId": "research:samsung:anthropic-20260921",
+    "canonicalName": "Anthropic: 데이터센터 확장과 수익성의 균형",
+    "displayName": "Anthropic: 데이터센터 확장과 수익성의 균형",
+    "aliases": [],
+    "summary": "Anthropic의 데이터센터 확장, 현금 사용과 사업 일정의 균형을 다룬 공개 리서치.",
+    "status": "ACTIVE",
+    "verificationStatus": "VERIFIED",
+    "confidence": null,
+    "sourceRefs": [
+      "source:fc083cd0ad774d94"
+    ],
+    "evidenceRefs": [
+      "evidence:d687c6421d8d1e2a"
+    ],
+    "originRecordIds": [
+      "research:samsung:anthropic-20260921"
+    ],
+    "internalMetadata": {
+      "publisher": "삼성증권",
+      "institutionView": "데이터센터 확장 과정에서 투자 속도와 수익성, 신규 모델과 기업 일정의 균형이 핵심이라는 관점이다.",
+      "aiInterpretation": null,
+      "riskFactors": [
+        "현금 소진",
+        "데이터센터 투자 부담"
+      ]
+    },
+    "publicMetadata": null,
+    "libraryId": "library:research:samsung:anthropic-20260921",
+    "firstSeenAt": "2026-09-29T23:59:00Z",
+    "lastSeenAt": "2026-09-30T23:59:30Z",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "updatedAt": "2026-09-30T23:59:30Z"
+  }
+]

@@ -1,0 +1,46 @@
+[
+  {
+    "recordType": "INSTITUTION",
+    "canonicalId": "institution:samsung-securities",
+    "canonicalName": "삼성증권",
+    "displayName": "삼성증권",
+    "aliases": [
+      "Samsung Securities",
+      "삼성증권"
+    ],
+    "summary": null,
+    "status": "ACTIVE",
+    "verificationStatus": "VERIFIED",
+    "confidence": null,
+    "sourceRefs": [
+      "source:3b960f3ca7c5f68d",
+      "source:5248fdb3ba75d77c",
+      "source:637f78c2396e4eed",
+      "source:f33c539a6ad0bf3c",
+      "source:fc083cd0ad774d94"
+    ],
+    "evidenceRefs": [
+      "evidence:94be5f47fde810e2",
+      "evidence:9f39820d3b56959b",
+      "evidence:baeb7bae5a932959",
+      "evidence:d687c6421d8d1e2a",
+      "evidence:ff0e9bdbb34fb41c"
+    ],
+    "originRecordIds": [
+      "research:samsung:anthropic-20260921",
+      "research:samsung:copilot-20260928",
+      "research:samsung:meta-connect-20260928",
+      "research:samsung:morning-20260930",
+      "research:samsung:terafab-20260922"
+    ],
+    "internalMetadata": {
+      "institutionType": "BROKERAGE"
+    },
+    "publicMetadata": null,
+    "libraryId": "library:institution:samsung-securities",
+    "firstSeenAt": "2026-09-29T23:59:00Z",
+    "lastSeenAt": "2026-09-30T23:59:30Z",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "updatedAt": "2026-09-30T23:59:30Z"
+  }
+]

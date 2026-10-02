@@ -22,6 +22,7 @@
     "motus:report": "npm run build && node dist/src/report-production-cli.js",
     "motus:report-review": "npm run build && node dist/src/report-review-cli.js",
     "motus:report-storage": "npm run build && node dist/src/report-storage-cli.js",
+    "motus:library": "npm run build && node dist/src/library-cli.js",
     "sample": "npm run build && node dist/src/cli.js --sample",
     "report": "node dist/src/cli.js"
   },

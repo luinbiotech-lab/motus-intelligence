@@ -1,0 +1,759 @@
+[
+  {
+    "recordType": "SOURCE",
+    "canonicalId": "source:7ee79eecb360c6d0",
+    "canonicalName": "Microsoft Research",
+    "displayName": "Microsoft Research",
+    "aliases": [],
+    "summary": null,
+    "status": "ACTIVE",
+    "verificationStatus": "VERIFIED",
+    "confidence": null,
+    "sourceRefs": [
+      "source:7ee79eecb360c6d0"
+    ],
+    "evidenceRefs": [
+      "evidence:093c3d76c93e873f"
+    ],
+    "originRecordIds": [
+      "intel:ai:microsoft-quine-2026-09-29",
+      "motus-daily-intelligence-2026-09-29"
+    ],
+    "internalMetadata": {
+      "canonicalUrl": "https://www.microsoft.com/en-us/research/blog/introducing-quine-an-ai-research-system-designed-for-the-complexity-of-biology",
+      "publisher": "Microsoft Research"
+    },
+    "publicMetadata": {
+      "url": "https://www.microsoft.com/en-us/research/blog/introducing-quine-an-ai-research-system-designed-for-the-complexity-of-biology"
+    },
+    "libraryId": "library:source:7ee79eecb360c6d0",
+    "firstSeenAt": "2026-09-29T23:59:00Z",
+    "lastSeenAt": "2026-09-29T23:59:00Z",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "updatedAt": "2026-09-29T23:59:00Z"
+  },
+  {
+    "recordType": "SOURCE",
+    "canonicalId": "source:a640107c7e713e6d",
+    "canonicalName": "NVIDIA",
+    "displayName": "NVIDIA",
+    "aliases": [],
+    "summary": null,
+    "status": "ACTIVE",
+    "verificationStatus": "VERIFIED",
+    "confidence": null,
+    "sourceRefs": [
+      "source:a640107c7e713e6d"
+    ],
+    "evidenceRefs": [
+      "evidence:6ef292ef9ed4c924"
+    ],
+    "originRecordIds": [
+      "intel:ai:nvidia-open-agent-safety-platform-2026-09-28",
+      "motus-daily-intelligence-2026-09-29"
+    ],
+    "internalMetadata": {
+      "canonicalUrl": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Launches-Open-Agent-Safety-Platform-to-Secure-Agents-From-Testing-to-Deployment/default.aspx",
+      "publisher": "NVIDIA"
+    },
+    "publicMetadata": {
+      "url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Launches-Open-Agent-Safety-Platform-to-Secure-Agents-From-Testing-to-Deployment/default.aspx"
+    },
+    "libraryId": "library:source:a640107c7e713e6d",
+    "firstSeenAt": "2026-09-29T23:59:00Z",
+    "lastSeenAt": "2026-09-29T23:59:00Z",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "updatedAt": "2026-09-29T23:59:00Z"
+  },
+  {
+    "recordType": "SOURCE",
+    "canonicalId": "source:dec620cb7225d243",
+    "canonicalName": "OpenAI",
+    "displayName": "OpenAI",
+    "aliases": [],
+    "summary": null,
+    "status": "ACTIVE",
+    "verificationStatus": "VERIFIED",
+    "confidence": null,
+    "sourceRefs": [
+      "source:dec620cb7225d243"
+    ],
+    "evidenceRefs": [
+      "evidence:85f88d7fda0fd1c8"
+    ],
+    "originRecordIds": [
+      "intel:ai:openai-dots-2026-09-29",
+      "motus-daily-intelligence-2026-09-29"
+    ],
+    "internalMetadata": {
+      "canonicalUrl": "https://openai.com/index/introducing-dots",
+      "publisher": "OpenAI"
+    },
+    "publicMetadata": {
+      "url": "https://openai.com/index/introducing-dots"
+    },
+    "libraryId": "library:source:dec620cb7225d243",
+    "firstSeenAt": "2026-09-29T23:59:00Z",
+    "lastSeenAt": "2026-09-29T23:59:00Z",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "updatedAt": "2026-09-29T23:59:00Z"
+  },
+  {
+    "recordType": "SOURCE",
+    "canonicalId": "source:b623893b395d1f8a",
+    "canonicalName": "Associated Press",
+    "displayName": "Associated Press",
+    "aliases": [],
+    "summary": null,
+    "status": "ACTIVE",
+    "verificationStatus": "VERIFIED",
+    "confidence": null,
+    "sourceRefs": [
+      "source:b623893b395d1f8a"
+    ],
+    "evidenceRefs": [
+      "evidence:06c1304ac6eefca7"
+    ],
+    "originRecordIds": [
+      "intel:wall:us-close-2026-09-29",
+      "motus-daily-intelligence-2026-09-29"
+    ],
+    "internalMetadata": {
+      "canonicalUrl": "https://apnews.com/article/wall-street-stocks-dow-nasdaq-69778ade7a033a10cb44b9078b6bb15d",
+      "publisher": "Associated Press"
+    },
+    "publicMetadata": {
+      "url": "https://apnews.com/article/wall-street-stocks-dow-nasdaq-69778ade7a033a10cb44b9078b6bb15d"
+    },
+    "libraryId": "library:source:b623893b395d1f8a",
+    "firstSeenAt": "2026-09-29T23:59:00Z",
+    "lastSeenAt": "2026-09-29T23:59:00Z",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "updatedAt": "2026-09-29T23:59:00Z"
+  },
+  {
+    "recordType": "SOURCE",
+    "canonicalId": "source:02483f80431a21af",
+    "canonicalName": "Reuters",
+    "displayName": "Reuters",
+    "aliases": [],
+    "summary": null,
+    "status": "ACTIVE",
+    "verificationStatus": "VERIFIED",
+    "confidence": null,
+    "sourceRefs": [
+      "source:02483f80431a21af"
+    ],
+    "evidenceRefs": [
+      "evidence:98f05ead2988fafe"
+    ],
+    "originRecordIds": [
+      "intel:wall:us-close-reuters-2026-09-29",
+      "motus-daily-intelligence-2026-09-29"
+    ],
+    "internalMetadata": {
+      "canonicalUrl": "https://www.marketscreener.com/news/equities-end-slightly-lower-as-bond-yields-hold-near-multi-decade-highs-ce785ad2d98cf420",
+      "publisher": "Reuters"
+    },
+    "publicMetadata": {
+      "url": "https://www.marketscreener.com/news/equities-end-slightly-lower-as-bond-yields-hold-near-multi-decade-highs-ce785ad2d98cf420"
+    },
+    "libraryId": "library:source:02483f80431a21af",
+    "firstSeenAt": "2026-09-29T23:59:00Z",
+    "lastSeenAt": "2026-09-29T23:59:00Z",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "updatedAt": "2026-09-29T23:59:00Z"
+  },
+  {
+    "recordType": "SOURCE",
+    "canonicalId": "source:4b15991b9e2930ef",
+    "canonicalName": "Tallac Options",
+    "displayName": "Tallac Options",
+    "aliases": [],
+    "summary": null,
+    "status": "ACTIVE",
+    "verificationStatus": "VERIFIED",
+    "confidence": null,
+    "sourceRefs": [
+      "source:4b15991b9e2930ef"
+    ],
+    "evidenceRefs": [
+      "evidence:83f0a9319d679a86"
+    ],
+    "originRecordIds": [
+      "intel:wall:vix-close-2026-09-29",
+      "motus-daily-intelligence-2026-09-29"
+    ],
+    "internalMetadata": {
+      "canonicalUrl": "https://tallacoptions.com/Indices/VIX",
+      "publisher": "Tallac Options"
+    },
+    "publicMetadata": {
+      "url": "https://tallacoptions.com/Indices/VIX"
+    },
+    "libraryId": "library:source:4b15991b9e2930ef",
+    "firstSeenAt": "2026-09-29T23:59:00Z",
+    "lastSeenAt": "2026-09-29T23:59:00Z",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "updatedAt": "2026-09-29T23:59:00Z"
+  },
+  {
+    "recordType": "SOURCE",
+    "canonicalId": "source:097dd4926e5cb359",
+    "canonicalName": "서울경제·한국거래소",
+    "displayName": "서울경제·한국거래소",
+    "aliases": [],
+    "summary": null,
+    "status": "ACTIVE",
+    "verificationStatus": "VERIFIED",
+    "confidence": null,
+    "sourceRefs": [
+      "source:097dd4926e5cb359"
+    ],
+    "evidenceRefs": [
+      "evidence:d9e74daab87870a4"
+    ],
+    "originRecordIds": [
+      "motus-daily-intelligence-2026-09-29"
+    ],
+    "internalMetadata": {
+      "canonicalUrl": "https://en.sedaily.com/finance/2026/09/29/kospi-falls-for-second-day-as-foreigners-dump-2-billion-in",
+      "publisher": "서울경제·한국거래소"
+    },
+    "publicMetadata": {
+      "url": "https://en.sedaily.com/finance/2026/09/29/kospi-falls-for-second-day-as-foreigners-dump-2-billion-in"
+    },
+    "libraryId": "library:source:097dd4926e5cb359",
+    "firstSeenAt": "2026-09-29T23:59:00Z",
+    "lastSeenAt": "2026-09-29T23:59:00Z",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "updatedAt": "2026-09-29T23:59:00Z"
+  },
+  {
+    "recordType": "SOURCE",
+    "canonicalId": "source:110e8e26550eddab",
+    "canonicalName": "연합뉴스·Korea Times",
+    "displayName": "연합뉴스·Korea Times",
+    "aliases": [],
+    "summary": null,
+    "status": "ACTIVE",
+    "verificationStatus": "VERIFIED",
+    "confidence": null,
+    "sourceRefs": [
+      "source:110e8e26550eddab"
+    ],
+    "evidenceRefs": [
+      "evidence:67bf6af739034024"
+    ],
+    "originRecordIds": [
+      "motus-daily-intelligence-2026-09-29"
+    ],
+    "internalMetadata": {
+      "canonicalUrl": "https://www.koreatimes.co.kr/economy/20260929/kospi-slips-as-us-bond-yields-oil-prices-weigh-on-investor-sentiment",
+      "publisher": "연합뉴스·Korea Times"
+    },
+    "publicMetadata": {
+      "url": "https://www.koreatimes.co.kr/economy/20260929/kospi-slips-as-us-bond-yields-oil-prices-weigh-on-investor-sentiment"
+    },
+    "libraryId": "library:source:110e8e26550eddab",
+    "firstSeenAt": "2026-09-29T23:59:00Z",
+    "lastSeenAt": "2026-09-29T23:59:00Z",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "updatedAt": "2026-09-29T23:59:00Z"
+  },
+  {
+    "recordType": "SOURCE",
+    "canonicalId": "source:e5145426af47238c",
+    "canonicalName": "Reuters 공개 배포본",
+    "displayName": "Reuters 공개 배포본",
+    "aliases": [],
+    "summary": null,
+    "status": "ACTIVE",
+    "verificationStatus": "VERIFIED",
+    "confidence": null,
+    "sourceRefs": [
+      "source:e5145426af47238c"
+    ],
+    "evidenceRefs": [
+      "evidence:78537304b0b693ca"
+    ],
+    "originRecordIds": [
+      "motus-daily-intelligence-2026-09-29"
+    ],
+    "internalMetadata": {
+      "canonicalUrl": "https://www.indopremier.com/ipotnews/newsDetail.php?group_news=IPOTNEWS&halaman=1&jdl=South_Korean_shares_extend_losses_as_high_bond_yields_weigh&name=&news_id=245346&q=korean+shares%2C+kospi%2C+kosdaq%2C&search=y_general&taging_subtype=INDEKS+KOSPI+KOREA",
+      "publisher": "Reuters 공개 배포본"
+    },
+    "publicMetadata": {
+      "url": "https://www.indopremier.com/ipotnews/newsDetail.php?group_news=IPOTNEWS&halaman=1&jdl=South_Korean_shares_extend_losses_as_high_bond_yields_weigh&name=&news_id=245346&q=korean+shares%2C+kospi%2C+kosdaq%2C&search=y_general&taging_subtype=INDEKS+KOSPI+KOREA"
+    },
+    "libraryId": "library:source:e5145426af47238c",
+    "firstSeenAt": "2026-09-29T23:59:00Z",
+    "lastSeenAt": "2026-09-29T23:59:00Z",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "updatedAt": "2026-09-29T23:59:00Z"
+  },
+  {
+    "recordType": "SOURCE",
+    "canonicalId": "source:48d126d9d9877b2b",
+    "canonicalName": "Aju Press 장중 시황",
+    "displayName": "Aju Press 장중 시황",
+    "aliases": [],
+    "summary": null,
+    "status": "ACTIVE",
+    "verificationStatus": "VERIFIED",
+    "confidence": null,
+    "sourceRefs": [
+      "source:48d126d9d9877b2b"
+    ],
+    "evidenceRefs": [
+      "evidence:1753ef1d99b878dd"
+    ],
+    "originRecordIds": [
+      "motus-daily-intelligence-2026-09-29"
+    ],
+    "internalMetadata": {
+      "canonicalUrl": "https://www.ajupress.com/view/20260929114521326",
+      "publisher": "Aju Press 장중 시황"
+    },
+    "publicMetadata": {
+      "url": "https://www.ajupress.com/view/20260929114521326"
+    },
+    "libraryId": "library:source:48d126d9d9877b2b",
+    "firstSeenAt": "2026-09-29T23:59:00Z",
+    "lastSeenAt": "2026-09-29T23:59:00Z",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "updatedAt": "2026-09-29T23:59:00Z"
+  },
+  {
+    "recordType": "SOURCE",
+    "canonicalId": "source:f33c539a6ad0bf3c",
+    "canonicalName": "삼성증권 HTML 원문",
+    "displayName": "삼성증권 HTML 원문",
+    "aliases": [],
+    "summary": null,
+    "status": "ACTIVE",
+    "verificationStatus": "VERIFIED",
+    "confidence": null,
+    "sourceRefs": [
+      "source:f33c539a6ad0bf3c"
+    ],
+    "evidenceRefs": [
+      "evidence:641ce008392a4640"
+    ],
+    "originRecordIds": [
+      "motus-daily-intelligence-2026-09-29",
+      "motus-korea-market-2026-09-30",
+      "research:samsung:morning-20260930"
+    ],
+    "internalMetadata": {
+      "canonicalUrl": "https://www.samsungpop.com/v2/today-invest/series/todaymarkettrend-3040",
+      "publisher": "삼성증권"
+    },
+    "publicMetadata": {
+      "url": "https://www.samsungpop.com/v2/today-invest/series/todaymarkettrend-3040"
+    },
+    "libraryId": "library:source:f33c539a6ad0bf3c",
+    "firstSeenAt": "2026-09-29T23:59:00Z",
+    "lastSeenAt": "2026-09-29T23:59:00Z",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "updatedAt": "2026-09-29T23:59:00Z"
+  },
+  {
+    "recordType": "SOURCE",
+    "canonicalId": "source:3b960f3ca7c5f68d",
+    "canonicalName": "삼성증권 HTML 원문",
+    "displayName": "삼성증권 HTML 원문",
+    "aliases": [],
+    "summary": null,
+    "status": "ACTIVE",
+    "verificationStatus": "VERIFIED",
+    "confidence": null,
+    "sourceRefs": [
+      "source:3b960f3ca7c5f68d"
+    ],
+    "evidenceRefs": [
+      "evidence:171a0c50d47972f6"
+    ],
+    "originRecordIds": [
+      "motus-daily-intelligence-2026-09-29",
+      "motus-korea-market-2026-09-30",
+      "research:samsung:copilot-20260928"
+    ],
+    "internalMetadata": {
+      "canonicalUrl": "https://samsungpop.com/v2/today-invest/series/researchanalysttalk-3022",
+      "publisher": "삼성증권"
+    },
+    "publicMetadata": {
+      "url": "https://samsungpop.com/v2/today-invest/series/researchanalysttalk-3022"
+    },
+    "libraryId": "library:source:3b960f3ca7c5f68d",
+    "firstSeenAt": "2026-09-29T23:59:00Z",
+    "lastSeenAt": "2026-09-29T23:59:00Z",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "updatedAt": "2026-09-29T23:59:00Z"
+  },
+  {
+    "recordType": "SOURCE",
+    "canonicalId": "source:5248fdb3ba75d77c",
+    "canonicalName": "삼성증권 HTML 원문",
+    "displayName": "삼성증권 HTML 원문",
+    "aliases": [],
+    "summary": null,
+    "status": "ACTIVE",
+    "verificationStatus": "VERIFIED",
+    "confidence": null,
+    "sourceRefs": [
+      "source:5248fdb3ba75d77c"
+    ],
+    "evidenceRefs": [
+      "evidence:8f0a7836490927b1"
+    ],
+    "originRecordIds": [
+      "motus-daily-intelligence-2026-09-29",
+      "motus-korea-market-2026-09-30",
+      "research:samsung:meta-connect-20260928"
+    ],
+    "internalMetadata": {
+      "canonicalUrl": "https://samsungpop.com/v2/today-invest/series/researchanalysttalk-3025",
+      "publisher": "삼성증권"
+    },
+    "publicMetadata": {
+      "url": "https://samsungpop.com/v2/today-invest/series/researchanalysttalk-3025"
+    },
+    "libraryId": "library:source:5248fdb3ba75d77c",
+    "firstSeenAt": "2026-09-29T23:59:00Z",
+    "lastSeenAt": "2026-09-29T23:59:00Z",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "updatedAt": "2026-09-29T23:59:00Z"
+  },
+  {
+    "recordType": "SOURCE",
+    "canonicalId": "source:637f78c2396e4eed",
+    "canonicalName": "삼성증권 HTML 원문",
+    "displayName": "삼성증권 HTML 원문",
+    "aliases": [],
+    "summary": null,
+    "status": "ACTIVE",
+    "verificationStatus": "VERIFIED",
+    "confidence": null,
+    "sourceRefs": [
+      "source:637f78c2396e4eed"
+    ],
+    "evidenceRefs": [
+      "evidence:1e340c4ff14cc390"
+    ],
+    "originRecordIds": [
+      "motus-daily-intelligence-2026-09-29",
+      "motus-korea-market-2026-09-30",
+      "research:samsung:terafab-20260922"
+    ],
+    "internalMetadata": {
+      "canonicalUrl": "https://samsungpop.com/v2/today-invest/series/researchanalysttalk-3008",
+      "publisher": "삼성증권"
+    },
+    "publicMetadata": {
+      "url": "https://samsungpop.com/v2/today-invest/series/researchanalysttalk-3008"
+    },
+    "libraryId": "library:source:637f78c2396e4eed",
+    "firstSeenAt": "2026-09-29T23:59:00Z",
+    "lastSeenAt": "2026-09-29T23:59:00Z",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "updatedAt": "2026-09-29T23:59:00Z"
+  },
+  {
+    "recordType": "SOURCE",
+    "canonicalId": "source:fc083cd0ad774d94",
+    "canonicalName": "삼성증권 HTML 원문",
+    "displayName": "삼성증권 HTML 원문",
+    "aliases": [],
+    "summary": null,
+    "status": "ACTIVE",
+    "verificationStatus": "VERIFIED",
+    "confidence": null,
+    "sourceRefs": [
+      "source:fc083cd0ad774d94"
+    ],
+    "evidenceRefs": [
+      "evidence:6a799d59f29f24b8"
+    ],
+    "originRecordIds": [
+      "motus-daily-intelligence-2026-09-29",
+      "motus-korea-market-2026-09-30",
+      "research:samsung:anthropic-20260921"
+    ],
+    "internalMetadata": {
+      "canonicalUrl": "https://samsungpop.com/v2/today-invest/series/researchanalysttalk-3001",
+      "publisher": "삼성증권"
+    },
+    "publicMetadata": {
+      "url": "https://samsungpop.com/v2/today-invest/series/researchanalysttalk-3001"
+    },
+    "libraryId": "library:source:fc083cd0ad774d94",
+    "firstSeenAt": "2026-09-29T23:59:00Z",
+    "lastSeenAt": "2026-09-29T23:59:00Z",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "updatedAt": "2026-09-29T23:59:00Z"
+  },
+  {
+    "recordType": "SOURCE",
+    "canonicalId": "source:d6ff3ff59270a263",
+    "canonicalName": "AP — 9월 30일 미국 주요지수 종가",
+    "displayName": "AP — 9월 30일 미국 주요지수 종가",
+    "aliases": [],
+    "summary": null,
+    "status": "ACTIVE",
+    "verificationStatus": "VERIFIED",
+    "confidence": null,
+    "sourceRefs": [
+      "source:d6ff3ff59270a263"
+    ],
+    "evidenceRefs": [
+      "evidence:633828bc463e07bf"
+    ],
+    "originRecordIds": [
+      "intelligence:us-market-close-2026-09-30",
+      "motus-us-market-2026-09-30"
+    ],
+    "internalMetadata": {
+      "canonicalUrl": "https://apnews.com/article/1ee73f14dc23f6139eeb12c7397f543e",
+      "publisher": "Associated Press"
+    },
+    "publicMetadata": {
+      "url": "https://apnews.com/article/1ee73f14dc23f6139eeb12c7397f543e"
+    },
+    "libraryId": "library:source:d6ff3ff59270a263",
+    "firstSeenAt": "2026-09-30T23:59:00Z",
+    "lastSeenAt": "2026-09-30T23:59:00Z",
+    "createdAt": "2026-09-30T23:59:00Z",
+    "updatedAt": "2026-09-30T23:59:00Z"
+  },
+  {
+    "recordType": "SOURCE",
+    "canonicalId": "source:634601952cfcccbc",
+    "canonicalName": "AP — 미국시장 마감 해설",
+    "displayName": "AP — 미국시장 마감 해설",
+    "aliases": [],
+    "summary": null,
+    "status": "ACTIVE",
+    "verificationStatus": "VERIFIED",
+    "confidence": null,
+    "sourceRefs": [
+      "source:634601952cfcccbc"
+    ],
+    "evidenceRefs": [
+      "evidence:92ae5d1063e52f1b"
+    ],
+    "originRecordIds": [
+      "intelligence:us-market-close-2026-09-30",
+      "motus-us-market-2026-09-30"
+    ],
+    "internalMetadata": {
+      "canonicalUrl": "https://apnews.com/article/e61d3d7b947a390c7eee6c8758e3095d",
+      "publisher": "Associated Press"
+    },
+    "publicMetadata": {
+      "url": "https://apnews.com/article/e61d3d7b947a390c7eee6c8758e3095d"
+    },
+    "libraryId": "library:source:634601952cfcccbc",
+    "firstSeenAt": "2026-09-30T23:59:00Z",
+    "lastSeenAt": "2026-09-30T23:59:00Z",
+    "createdAt": "2026-09-30T23:59:00Z",
+    "updatedAt": "2026-09-30T23:59:00Z"
+  },
+  {
+    "recordType": "SOURCE",
+    "canonicalId": "source:a8bfcc6803e874a0",
+    "canonicalName": "U.S. Treasury — Daily Treasury Rates",
+    "displayName": "U.S. Treasury — Daily Treasury Rates",
+    "aliases": [],
+    "summary": null,
+    "status": "ACTIVE",
+    "verificationStatus": "VERIFIED",
+    "confidence": null,
+    "sourceRefs": [
+      "source:a8bfcc6803e874a0"
+    ],
+    "evidenceRefs": [
+      "evidence:9cf37572c76adaae"
+    ],
+    "originRecordIds": [
+      "intelligence:us-market-close-2026-09-30",
+      "motus-us-market-2026-09-30"
+    ],
+    "internalMetadata": {
+      "canonicalUrl": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202609&type=daily_treasury_yield_curve",
+      "publisher": "U.S. Department of the Treasury"
+    },
+    "publicMetadata": {
+      "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202609&type=daily_treasury_yield_curve"
+    },
+    "libraryId": "library:source:a8bfcc6803e874a0",
+    "firstSeenAt": "2026-09-30T23:59:00Z",
+    "lastSeenAt": "2026-09-30T23:59:00Z",
+    "createdAt": "2026-09-30T23:59:00Z",
+    "updatedAt": "2026-09-30T23:59:00Z"
+  },
+  {
+    "recordType": "SOURCE",
+    "canonicalId": "source:f14e8f2db1e52e24",
+    "canonicalName": "Cboe — VIX",
+    "displayName": "Cboe — VIX",
+    "aliases": [],
+    "summary": null,
+    "status": "ACTIVE",
+    "verificationStatus": "VERIFIED",
+    "confidence": null,
+    "sourceRefs": [
+      "source:f14e8f2db1e52e24"
+    ],
+    "evidenceRefs": [
+      "evidence:1e0eb7dcd7568897"
+    ],
+    "originRecordIds": [
+      "intelligence:us-market-close-2026-09-30",
+      "motus-us-market-2026-09-30"
+    ],
+    "internalMetadata": {
+      "canonicalUrl": "https://www.cboe.com/tradable-products/vix",
+      "publisher": "Cboe"
+    },
+    "publicMetadata": {
+      "url": "https://www.cboe.com/tradable-products/vix"
+    },
+    "libraryId": "library:source:f14e8f2db1e52e24",
+    "firstSeenAt": "2026-09-30T23:59:00Z",
+    "lastSeenAt": "2026-09-30T23:59:00Z",
+    "createdAt": "2026-09-30T23:59:00Z",
+    "updatedAt": "2026-09-30T23:59:00Z"
+  },
+  {
+    "recordType": "SOURCE",
+    "canonicalId": "source:29a07ab3ee191f5d",
+    "canonicalName": "DXY historical data",
+    "displayName": "DXY historical data",
+    "aliases": [],
+    "summary": null,
+    "status": "ACTIVE",
+    "verificationStatus": "VERIFIED",
+    "confidence": null,
+    "sourceRefs": [
+      "source:29a07ab3ee191f5d"
+    ],
+    "evidenceRefs": [
+      "evidence:c227489721719444"
+    ],
+    "originRecordIds": [
+      "intelligence:us-market-close-2026-09-30",
+      "motus-us-market-2026-09-30"
+    ],
+    "internalMetadata": {
+      "canonicalUrl": "https://es.investing.com/currencies/us-dollar-index-historical-data",
+      "publisher": "Investing.com"
+    },
+    "publicMetadata": {
+      "url": "https://es.investing.com/currencies/us-dollar-index-historical-data"
+    },
+    "libraryId": "library:source:29a07ab3ee191f5d",
+    "firstSeenAt": "2026-09-30T23:59:00Z",
+    "lastSeenAt": "2026-09-30T23:59:00Z",
+    "createdAt": "2026-09-30T23:59:00Z",
+    "updatedAt": "2026-09-30T23:59:00Z"
+  },
+  {
+    "recordType": "SOURCE",
+    "canonicalId": "source:dc19ef3ea4436f19",
+    "canonicalName": "MarketTimes — 9월 30일 KRX 마감",
+    "displayName": "MarketTimes — 9월 30일 KRX 마감",
+    "aliases": [],
+    "summary": null,
+    "status": "ACTIVE",
+    "verificationStatus": "VERIFIED",
+    "confidence": null,
+    "sourceRefs": [
+      "source:dc19ef3ea4436f19"
+    ],
+    "evidenceRefs": [
+      "evidence:49b2aeac9287c15d"
+    ],
+    "originRecordIds": [
+      "motus-korea-market-2026-09-30"
+    ],
+    "internalMetadata": {
+      "canonicalUrl": "https://www.markettimes.co.kr/2026/09/30/krx-%EB%A7%88%EA%B0%90-9%EC%9B%94-30%EC%9D%BC-%EC%BD%94%EC%8A%A4%ED%94%BC-3%EA%B1%B0%EB%9E%98%EC%9D%BC-%EC%97%B0%EC%86%8D-%ED%95%98%EB%9D%BD%EC%99%B8%EA%B5%AD%EC%9D%B8%EA%B8%B0%EA%B4%80-%EB%8F%99",
+      "publisher": "MarketTimes"
+    },
+    "publicMetadata": {
+      "url": "https://www.markettimes.co.kr/2026/09/30/krx-%EB%A7%88%EA%B0%90-9%EC%9B%94-30%EC%9D%BC-%EC%BD%94%EC%8A%A4%ED%94%BC-3%EA%B1%B0%EB%9E%98%EC%9D%BC-%EC%97%B0%EC%86%8D-%ED%95%98%EB%9D%BD%EC%99%B8%EA%B5%AD%EC%9D%B8%EA%B8%B0%EA%B4%80-%EB%8F%99"
+    },
+    "libraryId": "library:source:dc19ef3ea4436f19",
+    "firstSeenAt": "2026-09-30T23:59:30Z",
+    "lastSeenAt": "2026-09-30T23:59:30Z",
+    "createdAt": "2026-09-30T23:59:30Z",
+    "updatedAt": "2026-09-30T23:59:30Z"
+  },
+  {
+    "recordType": "SOURCE",
+    "canonicalId": "source:7e576ecf0c83e93f",
+    "canonicalName": "Newsway — 국내 증시 마감",
+    "displayName": "Newsway — 국내 증시 마감",
+    "aliases": [],
+    "summary": null,
+    "status": "ACTIVE",
+    "verificationStatus": "VERIFIED",
+    "confidence": null,
+    "sourceRefs": [
+      "source:7e576ecf0c83e93f"
+    ],
+    "evidenceRefs": [
+      "evidence:7e2bea8b336077fe"
+    ],
+    "originRecordIds": [
+      "motus-korea-market-2026-09-30"
+    ],
+    "internalMetadata": {
+      "canonicalUrl": "https://www.newsway.co.kr/news/view?ud=2026093015491609752",
+      "publisher": "Newsway"
+    },
+    "publicMetadata": {
+      "url": "https://www.newsway.co.kr/news/view?ud=2026093015491609752"
+    },
+    "libraryId": "library:source:7e576ecf0c83e93f",
+    "firstSeenAt": "2026-09-30T23:59:30Z",
+    "lastSeenAt": "2026-09-30T23:59:30Z",
+    "createdAt": "2026-09-30T23:59:30Z",
+    "updatedAt": "2026-09-30T23:59:30Z"
+  },
+  {
+    "recordType": "SOURCE",
+    "canonicalId": "source:669ab915e7e3ea94",
+    "canonicalName": "News1 — 원·달러 환율 마감",
+    "displayName": "News1 — 원·달러 환율 마감",
+    "aliases": [],
+    "summary": null,
+    "status": "ACTIVE",
+    "verificationStatus": "VERIFIED",
+    "confidence": null,
+    "sourceRefs": [
+      "source:669ab915e7e3ea94"
+    ],
+    "evidenceRefs": [
+      "evidence:8bfb014bbe8d9fb4"
+    ],
+    "originRecordIds": [
+      "motus-korea-market-2026-09-30"
+    ],
+    "internalMetadata": {
+      "canonicalUrl": "https://www.news1.kr/finance/market-exr/6306362",
+      "publisher": "News1"
+    },
+    "publicMetadata": {
+      "url": "https://www.news1.kr/finance/market-exr/6306362"
+    },
+    "libraryId": "library:source:669ab915e7e3ea94",
+    "firstSeenAt": "2026-09-30T23:59:30Z",
+    "lastSeenAt": "2026-09-30T23:59:30Z",
+    "createdAt": "2026-09-30T23:59:30Z",
+    "updatedAt": "2026-09-30T23:59:30Z"
+  }
+]

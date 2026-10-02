@@ -1,0 +1,96 @@
+[
+  {
+    "recordType": "SECTOR",
+    "canonicalId": "sector:software",
+    "canonicalName": "소프트웨어",
+    "displayName": "소프트웨어",
+    "aliases": [
+      "Software",
+      "소프트웨어"
+    ],
+    "summary": null,
+    "status": "ACTIVE",
+    "verificationStatus": "VERIFIED",
+    "confidence": null,
+    "sourceRefs": [
+      "source:3b960f3ca7c5f68d",
+      "source:fc083cd0ad774d94"
+    ],
+    "evidenceRefs": [
+      "evidence:94be5f47fde810e2",
+      "evidence:d687c6421d8d1e2a"
+    ],
+    "originRecordIds": [
+      "research:samsung:anthropic-20260921",
+      "research:samsung:copilot-20260928"
+    ],
+    "internalMetadata": {},
+    "publicMetadata": null,
+    "libraryId": "library:sector:software",
+    "firstSeenAt": "2026-09-29T23:59:00Z",
+    "lastSeenAt": "2026-09-30T23:59:30Z",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "updatedAt": "2026-09-30T23:59:30Z"
+  },
+  {
+    "recordType": "SECTOR",
+    "canonicalId": "sector:communication-services",
+    "canonicalName": "커뮤니케이션 서비스",
+    "displayName": "커뮤니케이션 서비스",
+    "aliases": [
+      "Communication Services",
+      "커뮤니케이션 서비스"
+    ],
+    "summary": null,
+    "status": "ACTIVE",
+    "verificationStatus": "VERIFIED",
+    "confidence": null,
+    "sourceRefs": [
+      "source:5248fdb3ba75d77c"
+    ],
+    "evidenceRefs": [
+      "evidence:9f39820d3b56959b"
+    ],
+    "originRecordIds": [
+      "research:samsung:meta-connect-20260928"
+    ],
+    "internalMetadata": {},
+    "publicMetadata": null,
+    "libraryId": "library:sector:communication-services",
+    "firstSeenAt": "2026-09-29T23:59:00Z",
+    "lastSeenAt": "2026-09-30T23:59:30Z",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "updatedAt": "2026-09-30T23:59:30Z"
+  },
+  {
+    "recordType": "SECTOR",
+    "canonicalId": "sector:semiconductors",
+    "canonicalName": "반도체",
+    "displayName": "반도체",
+    "aliases": [
+      "AI 반도체",
+      "Semiconductors",
+      "반도체"
+    ],
+    "summary": null,
+    "status": "ACTIVE",
+    "verificationStatus": "VERIFIED",
+    "confidence": null,
+    "sourceRefs": [
+      "source:637f78c2396e4eed"
+    ],
+    "evidenceRefs": [
+      "evidence:baeb7bae5a932959"
+    ],
+    "originRecordIds": [
+      "research:samsung:terafab-20260922"
+    ],
+    "internalMetadata": {},
+    "publicMetadata": null,
+    "libraryId": "library:sector:semiconductors",
+    "firstSeenAt": "2026-09-29T23:59:00Z",
+    "lastSeenAt": "2026-09-30T23:59:30Z",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "updatedAt": "2026-09-30T23:59:30Z"
+  }
+]

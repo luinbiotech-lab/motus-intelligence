@@ -1,0 +1,174 @@
+{
+  "generatedAt": "2026-10-02T09:00:00+09:00",
+  "counts": {
+    "companies": 5,
+    "themes": 5,
+    "sectors": 3,
+    "events": 6,
+    "institutions": 1,
+    "markets": 3,
+    "research": 5,
+    "relationships": 37
+  },
+  "newThisRun": [
+    "library:company:anthropic",
+    "library:company:meta",
+    "library:company:microsoft",
+    "library:company:nvidia",
+    "library:company:openai",
+    "library:event:microsoft-quine-2026-09-29",
+    "library:event:nvidia-open-agent-safety-platform-2026-09-28",
+    "library:event:openai-dots-2026-09-29",
+    "library:event:us-market-close-2026-09-29",
+    "library:event:us-market-close-2026-09-30",
+    "library:event:vix-close-2026-09-29",
+    "library:institution:samsung-securities",
+    "library:market:global",
+    "library:market:korea",
+    "library:market:us",
+    "library:publication:motus-daily-intelligence-2026-09-29",
+    "library:publication:motus-korea-market-2026-09-30",
+    "library:publication:motus-us-market-2026-09-30",
+    "library:research:samsung:anthropic-20260921",
+    "library:research:samsung:copilot-20260928",
+    "library:research:samsung:meta-connect-20260928",
+    "library:research:samsung:morning-20260930",
+    "library:research:samsung:terafab-20260922",
+    "library:sector:communication-services",
+    "library:sector:semiconductors",
+    "library:sector:software",
+    "library:source:02483f80431a21af",
+    "library:source:097dd4926e5cb359",
+    "library:source:110e8e26550eddab",
+    "library:source:29a07ab3ee191f5d",
+    "library:source:3b960f3ca7c5f68d",
+    "library:source:48d126d9d9877b2b",
+    "library:source:4b15991b9e2930ef",
+    "library:source:5248fdb3ba75d77c",
+    "library:source:634601952cfcccbc",
+    "library:source:637f78c2396e4eed",
+    "library:source:669ab915e7e3ea94",
+    "library:source:7e576ecf0c83e93f",
+    "library:source:7ee79eecb360c6d0",
+    "library:source:a640107c7e713e6d",
+    "library:source:a8bfcc6803e874a0",
+    "library:source:b623893b395d1f8a",
+    "library:source:d6ff3ff59270a263",
+    "library:source:dc19ef3ea4436f19",
+    "library:source:dec620cb7225d243",
+    "library:source:e5145426af47238c",
+    "library:source:f14e8f2db1e52e24",
+    "library:source:f33c539a6ad0bf3c",
+    "library:source:fc083cd0ad774d94",
+    "library:theme:agent-security",
+    "library:theme:agentic-ai",
+    "library:theme:ai-for-science",
+    "library:theme:higher-for-longer",
+    "library:theme:market-volatility"
+  ],
+  "updatedThisRun": [
+    "library:company:anthropic",
+    "library:company:meta",
+    "library:company:microsoft",
+    "library:event:us-market-close-2026-09-29",
+    "library:institution:samsung-securities",
+    "library:market:global",
+    "library:market:korea",
+    "library:market:us",
+    "library:research:samsung:anthropic-20260921",
+    "library:research:samsung:copilot-20260928",
+    "library:research:samsung:meta-connect-20260928",
+    "library:research:samsung:morning-20260930",
+    "library:research:samsung:terafab-20260922",
+    "library:sector:communication-services",
+    "library:sector:semiconductors",
+    "library:sector:software",
+    "library:theme:higher-for-longer",
+    "library:theme:market-volatility"
+  ],
+  "reviewRequired": [],
+  "topChangedThemes": [],
+  "topChangedCompanies": [],
+  "evergreenCandidates": [
+    {
+      "candidateId": "evergreen:theme-higher-for-longer",
+      "topicType": "THEME",
+      "topicId": "theme:higher-for-longer",
+      "reason": "반복 가능한 설명 주제이며 둘 이상의 독립 source 근거가 존재",
+      "supportingEvents": [
+        "event:us-market-close-2026-09-29",
+        "event:us-market-close-2026-09-30"
+      ],
+      "supportingPublications": [
+        "motus-daily-intelligence-2026-09-29",
+        "motus-us-market-2026-09-30"
+      ],
+      "sourceCount": 7,
+      "candidateState": "REVIEW_REQUIRED",
+      "sourceRefs": [
+        "source:02483f80431a21af",
+        "source:29a07ab3ee191f5d",
+        "source:634601952cfcccbc",
+        "source:a8bfcc6803e874a0",
+        "source:b623893b395d1f8a",
+        "source:d6ff3ff59270a263",
+        "source:f14e8f2db1e52e24"
+      ],
+      "evidenceRefs": [
+        "evidence:018dce979ceb61e7",
+        "evidence:323e7d43d74167ca",
+        "evidence:7daff3c8bd8706fc"
+      ],
+      "originRecordIds": [
+        "intel:wall:us-close-2026-09-29",
+        "intel:wall:us-close-reuters-2026-09-29",
+        "intelligence:us-market-close-2026-09-30"
+      ]
+    },
+    {
+      "candidateId": "evergreen:theme-market-volatility",
+      "topicType": "THEME",
+      "topicId": "theme:market-volatility",
+      "reason": "반복 가능한 설명 주제이며 둘 이상의 독립 source 근거가 존재",
+      "supportingEvents": [
+        "event:us-market-close-2026-09-30",
+        "event:vix-close-2026-09-29"
+      ],
+      "supportingPublications": [
+        "motus-daily-intelligence-2026-09-29",
+        "motus-us-market-2026-09-30"
+      ],
+      "sourceCount": 6,
+      "candidateState": "REVIEW_REQUIRED",
+      "sourceRefs": [
+        "source:29a07ab3ee191f5d",
+        "source:4b15991b9e2930ef",
+        "source:634601952cfcccbc",
+        "source:a8bfcc6803e874a0",
+        "source:d6ff3ff59270a263",
+        "source:f14e8f2db1e52e24"
+      ],
+      "evidenceRefs": [
+        "evidence:018dce979ceb61e7",
+        "evidence:323e7d43d74167ca",
+        "evidence:7daff3c8bd8706fc"
+      ],
+      "originRecordIds": [
+        "intel:wall:vix-close-2026-09-29",
+        "intelligence:us-market-close-2026-09-30"
+      ]
+    }
+  ],
+  "warnings": [],
+  "conflicts": [],
+  "externalActions": {
+    "bloggerInsert": 0,
+    "bloggerPatch": 0,
+    "bloggerPublish": 0,
+    "driveUpload": 0,
+    "publicPdfShare": 0
+  },
+  "commerce": {
+    "enabled": false
+  }
+}

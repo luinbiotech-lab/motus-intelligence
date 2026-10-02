@@ -1,0 +1,140 @@
+[
+  {
+    "themeId": "theme:ai-for-science",
+    "periodStart": "2026-09-29",
+    "periodEnd": "2026-09-30",
+    "eventCount": 1,
+    "companyCount": 1,
+    "institutionCount": 0,
+    "researchCount": 0,
+    "marketCount": 0,
+    "supportingRecordIds": [
+      "event:microsoft-quine-2026-09-29"
+    ],
+    "changeState": null,
+    "sourceRefs": [
+      "source:7ee79eecb360c6d0"
+    ],
+    "evidenceRefs": [
+      "evidence:24b8b98d7c0e7f30",
+      "evidence:34b62b954fac69b0"
+    ],
+    "originRecordIds": [
+      "intel:ai:microsoft-quine-2026-09-29"
+    ]
+  },
+  {
+    "themeId": "theme:agent-security",
+    "periodStart": "2026-09-29",
+    "periodEnd": "2026-09-30",
+    "eventCount": 1,
+    "companyCount": 1,
+    "institutionCount": 0,
+    "researchCount": 0,
+    "marketCount": 0,
+    "supportingRecordIds": [
+      "event:nvidia-open-agent-safety-platform-2026-09-28"
+    ],
+    "changeState": null,
+    "sourceRefs": [
+      "source:a640107c7e713e6d"
+    ],
+    "evidenceRefs": [
+      "evidence:99fcb3de586ee7cc",
+      "evidence:fa29a7a21147353b"
+    ],
+    "originRecordIds": [
+      "intel:ai:nvidia-open-agent-safety-platform-2026-09-28"
+    ]
+  },
+  {
+    "themeId": "theme:agentic-ai",
+    "periodStart": "2026-09-29",
+    "periodEnd": "2026-09-30",
+    "eventCount": 1,
+    "companyCount": 1,
+    "institutionCount": 0,
+    "researchCount": 0,
+    "marketCount": 0,
+    "supportingRecordIds": [
+      "event:openai-dots-2026-09-29"
+    ],
+    "changeState": null,
+    "sourceRefs": [
+      "source:dec620cb7225d243"
+    ],
+    "evidenceRefs": [
+      "evidence:0fda3e21c70099a7",
+      "evidence:d442e8e2eccd8c10"
+    ],
+    "originRecordIds": [
+      "intel:ai:openai-dots-2026-09-29"
+    ]
+  },
+  {
+    "themeId": "theme:higher-for-longer",
+    "periodStart": "2026-09-29",
+    "periodEnd": "2026-09-30",
+    "eventCount": 2,
+    "companyCount": 0,
+    "institutionCount": 0,
+    "researchCount": 0,
+    "marketCount": 0,
+    "supportingRecordIds": [
+      "event:us-market-close-2026-09-29",
+      "event:us-market-close-2026-09-30"
+    ],
+    "changeState": null,
+    "sourceRefs": [
+      "source:02483f80431a21af",
+      "source:29a07ab3ee191f5d",
+      "source:634601952cfcccbc",
+      "source:a8bfcc6803e874a0",
+      "source:b623893b395d1f8a",
+      "source:d6ff3ff59270a263",
+      "source:f14e8f2db1e52e24"
+    ],
+    "evidenceRefs": [
+      "evidence:018dce979ceb61e7",
+      "evidence:323e7d43d74167ca",
+      "evidence:7daff3c8bd8706fc"
+    ],
+    "originRecordIds": [
+      "intel:wall:us-close-2026-09-29",
+      "intel:wall:us-close-reuters-2026-09-29",
+      "intelligence:us-market-close-2026-09-30"
+    ]
+  },
+  {
+    "themeId": "theme:market-volatility",
+    "periodStart": "2026-09-29",
+    "periodEnd": "2026-09-30",
+    "eventCount": 2,
+    "companyCount": 0,
+    "institutionCount": 0,
+    "researchCount": 0,
+    "marketCount": 0,
+    "supportingRecordIds": [
+      "event:us-market-close-2026-09-30",
+      "event:vix-close-2026-09-29"
+    ],
+    "changeState": null,
+    "sourceRefs": [
+      "source:29a07ab3ee191f5d",
+      "source:4b15991b9e2930ef",
+      "source:634601952cfcccbc",
+      "source:a8bfcc6803e874a0",
+      "source:d6ff3ff59270a263",
+      "source:f14e8f2db1e52e24"
+    ],
+    "evidenceRefs": [
+      "evidence:018dce979ceb61e7",
+      "evidence:323e7d43d74167ca",
+      "evidence:7daff3c8bd8706fc"
+    ],
+    "originRecordIds": [
+      "intel:wall:vix-close-2026-09-29",
+      "intelligence:us-market-close-2026-09-30"
+    ]
+  }
+]

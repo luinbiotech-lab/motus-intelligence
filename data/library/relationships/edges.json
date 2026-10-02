@@ -1,0 +1,671 @@
+[
+  {
+    "edgeId": "edge:49940379010449fc",
+    "fromId": "event:microsoft-quine-2026-09-29",
+    "toId": "theme:ai-for-science",
+    "relationshipType": "EVENT_RELATES_THEME",
+    "reason": "verified AI item declared theme",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "sourceRefs": [
+      "source:7ee79eecb360c6d0"
+    ],
+    "evidenceRefs": [
+      "evidence:24b8b98d7c0e7f30",
+      "evidence:34b62b954fac69b0"
+    ],
+    "originRecordIds": [
+      "intel:ai:microsoft-quine-2026-09-29"
+    ]
+  },
+  {
+    "edgeId": "edge:48165fb97cacb284",
+    "fromId": "event:microsoft-quine-2026-09-29",
+    "toId": "company:microsoft",
+    "relationshipType": "EVENT_INVOLVES_COMPANY",
+    "reason": "verified AI item declared company",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "sourceRefs": [
+      "source:7ee79eecb360c6d0"
+    ],
+    "evidenceRefs": [
+      "evidence:24b8b98d7c0e7f30",
+      "evidence:34b62b954fac69b0"
+    ],
+    "originRecordIds": [
+      "intel:ai:microsoft-quine-2026-09-29"
+    ]
+  },
+  {
+    "edgeId": "edge:17c65ea1140926b7",
+    "fromId": "motus-daily-intelligence-2026-09-29",
+    "toId": "event:microsoft-quine-2026-09-29",
+    "relationshipType": "PUBLICATION_COVERS_EVENT",
+    "reason": "publication view model includes event",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "sourceRefs": [
+      "source:7ee79eecb360c6d0"
+    ],
+    "evidenceRefs": [
+      "evidence:24b8b98d7c0e7f30",
+      "evidence:34b62b954fac69b0"
+    ],
+    "originRecordIds": [
+      "newsletter:motus:2026-09-29"
+    ]
+  },
+  {
+    "edgeId": "edge:a76c91acbfdc6a0d",
+    "fromId": "company:microsoft",
+    "toId": "theme:ai-for-science",
+    "relationshipType": "COMPANY_HAS_THEME",
+    "reason": "verified intelligence item links company and theme",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "sourceRefs": [
+      "source:7ee79eecb360c6d0"
+    ],
+    "evidenceRefs": [
+      "evidence:24b8b98d7c0e7f30",
+      "evidence:34b62b954fac69b0"
+    ],
+    "originRecordIds": [
+      "intel:ai:microsoft-quine-2026-09-29"
+    ]
+  },
+  {
+    "edgeId": "edge:1cee0d6230a131f7",
+    "fromId": "motus-daily-intelligence-2026-09-29",
+    "toId": "theme:ai-for-science",
+    "relationshipType": "PUBLICATION_COVERS_THEME",
+    "reason": "publication view model includes theme",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "sourceRefs": [
+      "source:7ee79eecb360c6d0"
+    ],
+    "evidenceRefs": [
+      "evidence:24b8b98d7c0e7f30",
+      "evidence:34b62b954fac69b0"
+    ],
+    "originRecordIds": [
+      "newsletter:motus:2026-09-29"
+    ]
+  },
+  {
+    "edgeId": "edge:d2d09226c9d62847",
+    "fromId": "motus-daily-intelligence-2026-09-29",
+    "toId": "company:microsoft",
+    "relationshipType": "PUBLICATION_COVERS_COMPANY",
+    "reason": "publication view model includes company",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "sourceRefs": [
+      "source:7ee79eecb360c6d0"
+    ],
+    "evidenceRefs": [
+      "evidence:24b8b98d7c0e7f30",
+      "evidence:34b62b954fac69b0"
+    ],
+    "originRecordIds": [
+      "newsletter:motus:2026-09-29"
+    ]
+  },
+  {
+    "edgeId": "edge:ee2ec5b18764cefe",
+    "fromId": "event:nvidia-open-agent-safety-platform-2026-09-28",
+    "toId": "theme:agent-security",
+    "relationshipType": "EVENT_RELATES_THEME",
+    "reason": "verified AI item declared theme",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "sourceRefs": [
+      "source:a640107c7e713e6d"
+    ],
+    "evidenceRefs": [
+      "evidence:99fcb3de586ee7cc",
+      "evidence:fa29a7a21147353b"
+    ],
+    "originRecordIds": [
+      "intel:ai:nvidia-open-agent-safety-platform-2026-09-28"
+    ]
+  },
+  {
+    "edgeId": "edge:c597486787514b52",
+    "fromId": "event:nvidia-open-agent-safety-platform-2026-09-28",
+    "toId": "company:nvidia",
+    "relationshipType": "EVENT_INVOLVES_COMPANY",
+    "reason": "verified AI item declared company",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "sourceRefs": [
+      "source:a640107c7e713e6d"
+    ],
+    "evidenceRefs": [
+      "evidence:99fcb3de586ee7cc",
+      "evidence:fa29a7a21147353b"
+    ],
+    "originRecordIds": [
+      "intel:ai:nvidia-open-agent-safety-platform-2026-09-28"
+    ]
+  },
+  {
+    "edgeId": "edge:62fd065afc4cfbc6",
+    "fromId": "motus-daily-intelligence-2026-09-29",
+    "toId": "event:nvidia-open-agent-safety-platform-2026-09-28",
+    "relationshipType": "PUBLICATION_COVERS_EVENT",
+    "reason": "publication view model includes event",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "sourceRefs": [
+      "source:a640107c7e713e6d"
+    ],
+    "evidenceRefs": [
+      "evidence:99fcb3de586ee7cc",
+      "evidence:fa29a7a21147353b"
+    ],
+    "originRecordIds": [
+      "newsletter:motus:2026-09-29"
+    ]
+  },
+  {
+    "edgeId": "edge:aefedd7f5f91dc15",
+    "fromId": "company:nvidia",
+    "toId": "theme:agent-security",
+    "relationshipType": "COMPANY_HAS_THEME",
+    "reason": "verified intelligence item links company and theme",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "sourceRefs": [
+      "source:a640107c7e713e6d"
+    ],
+    "evidenceRefs": [
+      "evidence:99fcb3de586ee7cc",
+      "evidence:fa29a7a21147353b"
+    ],
+    "originRecordIds": [
+      "intel:ai:nvidia-open-agent-safety-platform-2026-09-28"
+    ]
+  },
+  {
+    "edgeId": "edge:b1257e813a49edf5",
+    "fromId": "motus-daily-intelligence-2026-09-29",
+    "toId": "theme:agent-security",
+    "relationshipType": "PUBLICATION_COVERS_THEME",
+    "reason": "publication view model includes theme",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "sourceRefs": [
+      "source:a640107c7e713e6d"
+    ],
+    "evidenceRefs": [
+      "evidence:99fcb3de586ee7cc",
+      "evidence:fa29a7a21147353b"
+    ],
+    "originRecordIds": [
+      "newsletter:motus:2026-09-29"
+    ]
+  },
+  {
+    "edgeId": "edge:64dbd2240f5f0ae1",
+    "fromId": "motus-daily-intelligence-2026-09-29",
+    "toId": "company:nvidia",
+    "relationshipType": "PUBLICATION_COVERS_COMPANY",
+    "reason": "publication view model includes company",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "sourceRefs": [
+      "source:a640107c7e713e6d"
+    ],
+    "evidenceRefs": [
+      "evidence:99fcb3de586ee7cc",
+      "evidence:fa29a7a21147353b"
+    ],
+    "originRecordIds": [
+      "newsletter:motus:2026-09-29"
+    ]
+  },
+  {
+    "edgeId": "edge:527bc2a3fef98899",
+    "fromId": "event:openai-dots-2026-09-29",
+    "toId": "theme:agentic-ai",
+    "relationshipType": "EVENT_RELATES_THEME",
+    "reason": "verified AI item declared theme",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "sourceRefs": [
+      "source:dec620cb7225d243"
+    ],
+    "evidenceRefs": [
+      "evidence:0fda3e21c70099a7",
+      "evidence:d442e8e2eccd8c10"
+    ],
+    "originRecordIds": [
+      "intel:ai:openai-dots-2026-09-29"
+    ]
+  },
+  {
+    "edgeId": "edge:c993b7004e9beeff",
+    "fromId": "event:openai-dots-2026-09-29",
+    "toId": "company:openai",
+    "relationshipType": "EVENT_INVOLVES_COMPANY",
+    "reason": "verified AI item declared company",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "sourceRefs": [
+      "source:dec620cb7225d243"
+    ],
+    "evidenceRefs": [
+      "evidence:0fda3e21c70099a7",
+      "evidence:d442e8e2eccd8c10"
+    ],
+    "originRecordIds": [
+      "intel:ai:openai-dots-2026-09-29"
+    ]
+  },
+  {
+    "edgeId": "edge:178c048de9db8b54",
+    "fromId": "motus-daily-intelligence-2026-09-29",
+    "toId": "event:openai-dots-2026-09-29",
+    "relationshipType": "PUBLICATION_COVERS_EVENT",
+    "reason": "publication view model includes event",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "sourceRefs": [
+      "source:dec620cb7225d243"
+    ],
+    "evidenceRefs": [
+      "evidence:0fda3e21c70099a7",
+      "evidence:d442e8e2eccd8c10"
+    ],
+    "originRecordIds": [
+      "newsletter:motus:2026-09-29"
+    ]
+  },
+  {
+    "edgeId": "edge:bad779913914b1dd",
+    "fromId": "company:openai",
+    "toId": "theme:agentic-ai",
+    "relationshipType": "COMPANY_HAS_THEME",
+    "reason": "verified intelligence item links company and theme",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "sourceRefs": [
+      "source:dec620cb7225d243"
+    ],
+    "evidenceRefs": [
+      "evidence:0fda3e21c70099a7",
+      "evidence:d442e8e2eccd8c10"
+    ],
+    "originRecordIds": [
+      "intel:ai:openai-dots-2026-09-29"
+    ]
+  },
+  {
+    "edgeId": "edge:4622b8b1be16675e",
+    "fromId": "motus-daily-intelligence-2026-09-29",
+    "toId": "theme:agentic-ai",
+    "relationshipType": "PUBLICATION_COVERS_THEME",
+    "reason": "publication view model includes theme",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "sourceRefs": [
+      "source:dec620cb7225d243"
+    ],
+    "evidenceRefs": [
+      "evidence:0fda3e21c70099a7",
+      "evidence:d442e8e2eccd8c10"
+    ],
+    "originRecordIds": [
+      "newsletter:motus:2026-09-29"
+    ]
+  },
+  {
+    "edgeId": "edge:d956c0070a8d340a",
+    "fromId": "motus-daily-intelligence-2026-09-29",
+    "toId": "company:openai",
+    "relationshipType": "PUBLICATION_COVERS_COMPANY",
+    "reason": "publication view model includes company",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "sourceRefs": [
+      "source:dec620cb7225d243"
+    ],
+    "evidenceRefs": [
+      "evidence:0fda3e21c70099a7",
+      "evidence:d442e8e2eccd8c10"
+    ],
+    "originRecordIds": [
+      "newsletter:motus:2026-09-29"
+    ]
+  },
+  {
+    "edgeId": "edge:cef3444d3487412d",
+    "fromId": "event:us-market-close-2026-09-29",
+    "toId": "theme:higher-for-longer",
+    "relationshipType": "EVENT_RELATES_THEME",
+    "reason": "verified WALL_STREET item declared theme",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "sourceRefs": [
+      "source:02483f80431a21af",
+      "source:b623893b395d1f8a"
+    ],
+    "evidenceRefs": [],
+    "originRecordIds": [
+      "intel:wall:us-close-2026-09-29",
+      "intel:wall:us-close-reuters-2026-09-29"
+    ]
+  },
+  {
+    "edgeId": "edge:d01cb328673b0d54",
+    "fromId": "motus-daily-intelligence-2026-09-29",
+    "toId": "event:us-market-close-2026-09-29",
+    "relationshipType": "PUBLICATION_COVERS_EVENT",
+    "reason": "publication view model includes event",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "sourceRefs": [
+      "source:02483f80431a21af",
+      "source:b623893b395d1f8a"
+    ],
+    "evidenceRefs": [],
+    "originRecordIds": [
+      "newsletter:motus:2026-09-29"
+    ]
+  },
+  {
+    "edgeId": "edge:0d96e87572882941",
+    "fromId": "motus-daily-intelligence-2026-09-29",
+    "toId": "theme:higher-for-longer",
+    "relationshipType": "PUBLICATION_COVERS_THEME",
+    "reason": "publication view model includes theme",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "sourceRefs": [
+      "source:02483f80431a21af",
+      "source:b623893b395d1f8a"
+    ],
+    "evidenceRefs": [],
+    "originRecordIds": [
+      "newsletter:motus:2026-09-29"
+    ]
+  },
+  {
+    "edgeId": "edge:aba0ca7ad7011f09",
+    "fromId": "event:vix-close-2026-09-29",
+    "toId": "theme:market-volatility",
+    "relationshipType": "EVENT_RELATES_THEME",
+    "reason": "verified WALL_STREET item declared theme",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "sourceRefs": [
+      "source:4b15991b9e2930ef"
+    ],
+    "evidenceRefs": [],
+    "originRecordIds": [
+      "intel:wall:vix-close-2026-09-29"
+    ]
+  },
+  {
+    "edgeId": "edge:0655c2b503515866",
+    "fromId": "motus-daily-intelligence-2026-09-29",
+    "toId": "event:vix-close-2026-09-29",
+    "relationshipType": "PUBLICATION_COVERS_EVENT",
+    "reason": "publication view model includes event",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "sourceRefs": [
+      "source:4b15991b9e2930ef"
+    ],
+    "evidenceRefs": [],
+    "originRecordIds": [
+      "newsletter:motus:2026-09-29"
+    ]
+  },
+  {
+    "edgeId": "edge:8522722dc36929bf",
+    "fromId": "motus-daily-intelligence-2026-09-29",
+    "toId": "theme:market-volatility",
+    "relationshipType": "PUBLICATION_COVERS_THEME",
+    "reason": "publication view model includes theme",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "sourceRefs": [
+      "source:4b15991b9e2930ef"
+    ],
+    "evidenceRefs": [],
+    "originRecordIds": [
+      "newsletter:motus:2026-09-29"
+    ]
+  },
+  {
+    "edgeId": "edge:ef90cce0c04b5e67",
+    "fromId": "institution:samsung-securities",
+    "toId": "research:samsung:morning-20260930",
+    "relationshipType": "INSTITUTION_PUBLISHED_RESEARCH",
+    "reason": "verified publication provenance",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "sourceRefs": [
+      "source:f33c539a6ad0bf3c"
+    ],
+    "evidenceRefs": [
+      "evidence:ff0e9bdbb34fb41c"
+    ],
+    "originRecordIds": [
+      "research:samsung:morning-20260930"
+    ]
+  },
+  {
+    "edgeId": "edge:166aceeb846bcc5b",
+    "fromId": "institution:samsung-securities",
+    "toId": "research:samsung:copilot-20260928",
+    "relationshipType": "INSTITUTION_PUBLISHED_RESEARCH",
+    "reason": "verified publication provenance",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "sourceRefs": [
+      "source:3b960f3ca7c5f68d"
+    ],
+    "evidenceRefs": [
+      "evidence:94be5f47fde810e2"
+    ],
+    "originRecordIds": [
+      "research:samsung:copilot-20260928"
+    ]
+  },
+  {
+    "edgeId": "edge:a1df7b6ab10339fe",
+    "fromId": "research:samsung:copilot-20260928",
+    "toId": "company:microsoft",
+    "relationshipType": "RESEARCH_COVERS_COMPANY",
+    "reason": "structured research interest",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "sourceRefs": [
+      "source:3b960f3ca7c5f68d"
+    ],
+    "evidenceRefs": [
+      "evidence:94be5f47fde810e2"
+    ],
+    "originRecordIds": [
+      "research:samsung:copilot-20260928"
+    ]
+  },
+  {
+    "edgeId": "edge:28f13131da16bd9f",
+    "fromId": "institution:samsung-securities",
+    "toId": "research:samsung:meta-connect-20260928",
+    "relationshipType": "INSTITUTION_PUBLISHED_RESEARCH",
+    "reason": "verified publication provenance",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "sourceRefs": [
+      "source:5248fdb3ba75d77c"
+    ],
+    "evidenceRefs": [
+      "evidence:9f39820d3b56959b"
+    ],
+    "originRecordIds": [
+      "research:samsung:meta-connect-20260928"
+    ]
+  },
+  {
+    "edgeId": "edge:aedac440a271a5d2",
+    "fromId": "research:samsung:meta-connect-20260928",
+    "toId": "company:meta",
+    "relationshipType": "RESEARCH_COVERS_COMPANY",
+    "reason": "structured research interest",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "sourceRefs": [
+      "source:5248fdb3ba75d77c"
+    ],
+    "evidenceRefs": [
+      "evidence:9f39820d3b56959b"
+    ],
+    "originRecordIds": [
+      "research:samsung:meta-connect-20260928"
+    ]
+  },
+  {
+    "edgeId": "edge:89b27dee78e1d452",
+    "fromId": "institution:samsung-securities",
+    "toId": "research:samsung:terafab-20260922",
+    "relationshipType": "INSTITUTION_PUBLISHED_RESEARCH",
+    "reason": "verified publication provenance",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "sourceRefs": [
+      "source:637f78c2396e4eed"
+    ],
+    "evidenceRefs": [
+      "evidence:baeb7bae5a932959"
+    ],
+    "originRecordIds": [
+      "research:samsung:terafab-20260922"
+    ]
+  },
+  {
+    "edgeId": "edge:2fe356c7070286f7",
+    "fromId": "institution:samsung-securities",
+    "toId": "research:samsung:anthropic-20260921",
+    "relationshipType": "INSTITUTION_PUBLISHED_RESEARCH",
+    "reason": "verified publication provenance",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "sourceRefs": [
+      "source:fc083cd0ad774d94"
+    ],
+    "evidenceRefs": [
+      "evidence:d687c6421d8d1e2a"
+    ],
+    "originRecordIds": [
+      "research:samsung:anthropic-20260921"
+    ]
+  },
+  {
+    "edgeId": "edge:61007a9b52dfae5b",
+    "fromId": "research:samsung:anthropic-20260921",
+    "toId": "company:anthropic",
+    "relationshipType": "RESEARCH_COVERS_COMPANY",
+    "reason": "structured research interest",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "sourceRefs": [
+      "source:fc083cd0ad774d94"
+    ],
+    "evidenceRefs": [
+      "evidence:d687c6421d8d1e2a"
+    ],
+    "originRecordIds": [
+      "research:samsung:anthropic-20260921"
+    ]
+  },
+  {
+    "edgeId": "edge:c153cf13c901f134",
+    "fromId": "event:us-market-close-2026-09-30",
+    "toId": "theme:higher-for-longer",
+    "relationshipType": "EVENT_RELATES_THEME",
+    "reason": "verified WALL_STREET item declared theme",
+    "createdAt": "2026-09-30T23:59:00Z",
+    "sourceRefs": [
+      "source:29a07ab3ee191f5d",
+      "source:634601952cfcccbc",
+      "source:a8bfcc6803e874a0",
+      "source:d6ff3ff59270a263",
+      "source:f14e8f2db1e52e24"
+    ],
+    "evidenceRefs": [
+      "evidence:018dce979ceb61e7",
+      "evidence:323e7d43d74167ca",
+      "evidence:7daff3c8bd8706fc"
+    ],
+    "originRecordIds": [
+      "intelligence:us-market-close-2026-09-30"
+    ]
+  },
+  {
+    "edgeId": "edge:ad07585f90e03307",
+    "fromId": "event:us-market-close-2026-09-30",
+    "toId": "theme:market-volatility",
+    "relationshipType": "EVENT_RELATES_THEME",
+    "reason": "verified WALL_STREET item declared theme",
+    "createdAt": "2026-09-30T23:59:00Z",
+    "sourceRefs": [
+      "source:29a07ab3ee191f5d",
+      "source:634601952cfcccbc",
+      "source:a8bfcc6803e874a0",
+      "source:d6ff3ff59270a263",
+      "source:f14e8f2db1e52e24"
+    ],
+    "evidenceRefs": [
+      "evidence:018dce979ceb61e7",
+      "evidence:323e7d43d74167ca",
+      "evidence:7daff3c8bd8706fc"
+    ],
+    "originRecordIds": [
+      "intelligence:us-market-close-2026-09-30"
+    ]
+  },
+  {
+    "edgeId": "edge:6c2f80f15f9281b3",
+    "fromId": "motus-us-market-2026-09-30",
+    "toId": "event:us-market-close-2026-09-30",
+    "relationshipType": "PUBLICATION_COVERS_EVENT",
+    "reason": "publication view model includes event",
+    "createdAt": "2026-09-30T23:59:00Z",
+    "sourceRefs": [
+      "source:29a07ab3ee191f5d",
+      "source:634601952cfcccbc",
+      "source:a8bfcc6803e874a0",
+      "source:d6ff3ff59270a263",
+      "source:f14e8f2db1e52e24"
+    ],
+    "evidenceRefs": [
+      "evidence:018dce979ceb61e7",
+      "evidence:323e7d43d74167ca",
+      "evidence:7daff3c8bd8706fc"
+    ],
+    "originRecordIds": [
+      "motus-us-market-2026-09-30"
+    ]
+  },
+  {
+    "edgeId": "edge:754e36153220f7fb",
+    "fromId": "motus-us-market-2026-09-30",
+    "toId": "theme:higher-for-longer",
+    "relationshipType": "PUBLICATION_COVERS_THEME",
+    "reason": "publication view model includes theme",
+    "createdAt": "2026-09-30T23:59:00Z",
+    "sourceRefs": [
+      "source:29a07ab3ee191f5d",
+      "source:634601952cfcccbc",
+      "source:a8bfcc6803e874a0",
+      "source:d6ff3ff59270a263",
+      "source:f14e8f2db1e52e24"
+    ],
+    "evidenceRefs": [
+      "evidence:018dce979ceb61e7",
+      "evidence:323e7d43d74167ca",
+      "evidence:7daff3c8bd8706fc"
+    ],
+    "originRecordIds": [
+      "motus-us-market-2026-09-30"
+    ]
+  },
+  {
+    "edgeId": "edge:91580abf5255cbc2",
+    "fromId": "motus-us-market-2026-09-30",
+    "toId": "theme:market-volatility",
+    "relationshipType": "PUBLICATION_COVERS_THEME",
+    "reason": "publication view model includes theme",
+    "createdAt": "2026-09-30T23:59:00Z",
+    "sourceRefs": [
+      "source:29a07ab3ee191f5d",
+      "source:634601952cfcccbc",
+      "source:a8bfcc6803e874a0",
+      "source:d6ff3ff59270a263",
+      "source:f14e8f2db1e52e24"
+    ],
+    "evidenceRefs": [
+      "evidence:018dce979ceb61e7",
+      "evidence:323e7d43d74167ca",
+      "evidence:7daff3c8bd8706fc"
+    ],
+    "originRecordIds": [
+      "motus-us-market-2026-09-30"
+    ]
+  }
+]

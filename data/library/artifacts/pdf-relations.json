@@ -1,0 +1,53 @@
+[
+  {
+    "artifactId": "report:daily-ai-2026-09-29",
+    "path": "data/reports/daily/2026-09-29/ai/report.pdf",
+    "publicationId": "motus-daily-intelligence-2026-09-29",
+    "companyIds": [
+      "company:microsoft",
+      "company:nvidia",
+      "company:openai"
+    ],
+    "themeIds": [
+      "theme:agent-security",
+      "theme:agentic-ai",
+      "theme:ai-for-science",
+      "theme:higher-for-longer",
+      "theme:market-volatility"
+    ],
+    "eventIds": [
+      "event:microsoft-quine-2026-09-29",
+      "event:nvidia-open-agent-safety-platform-2026-09-28",
+      "event:openai-dots-2026-09-29",
+      "event:us-market-close-2026-09-29",
+      "event:vix-close-2026-09-29"
+    ],
+    "publicUrl": null,
+    "createdAt": "2026-09-29T23:59:00Z"
+  },
+  {
+    "artifactId": "report:daily-us-2026-09-30",
+    "path": "data/reports/daily/2026-09-30/us/report.pdf",
+    "publicationId": "motus-us-market-2026-09-30",
+    "companyIds": [],
+    "themeIds": [
+      "theme:higher-for-longer",
+      "theme:market-volatility"
+    ],
+    "eventIds": [
+      "event:us-market-close-2026-09-30"
+    ],
+    "publicUrl": null,
+    "createdAt": "2026-09-30T23:59:00Z"
+  },
+  {
+    "artifactId": "report:daily-korea-2026-09-30",
+    "path": "data/reports/daily/2026-09-30/korea/report.pdf",
+    "publicationId": "motus-korea-market-2026-09-30",
+    "companyIds": [],
+    "themeIds": [],
+    "eventIds": [],
+    "publicUrl": null,
+    "createdAt": "2026-09-30T23:59:30Z"
+  }
+]
