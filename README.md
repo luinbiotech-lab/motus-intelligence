@@ -14,6 +14,7 @@ npm.cmd test
 npm.cmd run sample
 npm.cmd run motus:daily -- --date 2026-10-01 --all --dry-run --review-package
 npm.cmd run motus:search -- --provider google --date-range 28d --dry-run --audit
+npm.cmd run motus:report -- --type us-market-daily --date 2026-09-30 --generate --validate --dry-run
 ```
 
 실제 수동 자료는 [수동 입력 안내](docs/manual-input.md)에 따라 준비한 뒤 실행합니다.
@@ -110,6 +111,10 @@ Sprint 4G daily operations는 `src/operations/daily-orchestrator.ts`에서 AI In
 MOTUS Audience Loop은 **Publish → Discover → Index → Search Impression → Click → Read → Related Content → Weekly/Monthly → Performance Learning** 순서로 추적합니다. `npm run motus:search -- --provider google|naver --date-range 7d|28d|90d --publication ID --dry-run --audit`는 기본적으로 read-only이며, 연결된 property와 credential이 없으면 0건으로 가장하지 않고 `NOT_CONFIGURED` 또는 `MANUAL_REQUIRED`를 기록합니다. Google Search Console과 Naver 측정치는 provider별로 유지하며 임의 합산하지 않습니다. 일반 기사에 Google Indexing API를 사용하지 않고, IndexNow도 검증된 key·key location·소유권·설정과 별도 승인이 있기 전까지 `enabled=false`입니다.
 
 검색 성과는 Editorial Audit과 Content Library에 연결할 수 있지만 클릭 수만으로 기사 주제를 선정하지 않습니다. 출처 검증, 독자에게 필요한 설명, 편집 품질을 우선하고 검색 지표는 이후 성과 학습의 근거로만 사용합니다.
+
+`npm run motus:report`는 검증된 publication ViewModel에서 Daily PDF를 독립 렌더링하고 `data/reports/` 아래에 `report.pdf`, `artifact.json`, `validation.json`, `review.json`을 생성합니다. 기본 저장소는 `LOCAL_ONLY`이며 Human Review `APPROVED`와 검증된 storage adapter가 없으면 `--upload`를 거부합니다. Weekly/Monthly foundation은 현재 `HOLD` 데이터를 `SAMPLE / PREVIEW`로만 취급합니다. PDF 다운로드 CTA는 publication이 `PUBLISHED`, artifact가 `PUBLIC_AVAILABLE`, HTTPS PDF URL이 검증된 경우에만 노출할 수 있습니다.
+
+`--type`, `--date`, `--period`, `--generate`, `--validate`, `--dry-run`을 지원합니다. `--dry-run`은 선택된 verified ViewModel과 canonical 파일명만 출력하고 파일이나 외부 상태를 변경하지 않습니다.
 
 A4 MASTER 생성은 관리자 전용 boundary를 통과해야 하며, 공개 route에서 호출할 수 없습니다. 개발환경에서는 `src/services/admin.ts`의 server-side authorization boundary와 `data/a4-master/YYYY-MM-DD/admin-a4-route.html`로 내부 route 화면을 분리합니다.
 

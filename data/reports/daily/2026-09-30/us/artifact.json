@@ -1,0 +1,28 @@
+{
+  "artifactId": "pdf:motus-us-market-2026-09-30:2d5dffb6ea28",
+  "publicationId": "motus-us-market-2026-09-30",
+  "reportType": "US_MARKET_DAILY",
+  "issueDate": "2026-09-30",
+  "periodStart": "2026-09-30",
+  "periodEnd": "2026-09-30",
+  "fileName": "motus-us-market-2026-09-30.pdf",
+  "localPath": "data/reports/daily/2026-09-30/us/report.pdf",
+  "fileSizeBytes": 91936,
+  "pageCount": 2,
+  "contentFingerprint": "2d5dffb6ea28f9729513ab3cff8e0dfe54f53fcc0ec83bf724dfaad647d93760",
+  "sourceFingerprint": "60bb627b3f0c0912d2bc1f80de0afe8281cde033fb34fbd52a7252860663f3d3",
+  "generatedAt": "2026-10-02T05:57:36.708Z",
+  "state": "VALIDATED",
+  "downloadUrl": null,
+  "storageProvider": "LOCAL_ONLY",
+  "storageObjectId": null,
+  "reviewState": "PENDING",
+  "validationStatus": "PASS",
+  "failureReason": null,
+  "canonicalFileName": "motus-us-market-2026-09-30.pdf",
+  "publicDistribution": false,
+  "consistency": {
+    "state": "PASS",
+    "reason": null
+  }
+}
