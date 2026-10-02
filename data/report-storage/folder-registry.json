@@ -1,0 +1,53 @@
+{
+  "provider": "GOOGLE_DRIVE",
+  "entries": [
+    {
+      "logicalPath": "MOTUS Reports",
+      "driveFolderId": null,
+      "verifiedAt": null,
+      "state": "UNVERIFIED"
+    },
+    {
+      "logicalPath": "MOTUS Reports/2026",
+      "driveFolderId": null,
+      "verifiedAt": null,
+      "state": "UNVERIFIED"
+    },
+    {
+      "logicalPath": "MOTUS Reports/2026/Daily",
+      "driveFolderId": null,
+      "verifiedAt": null,
+      "state": "UNVERIFIED"
+    },
+    {
+      "logicalPath": "MOTUS Reports/2026/Daily/AI Intelligence",
+      "driveFolderId": null,
+      "verifiedAt": null,
+      "state": "UNVERIFIED"
+    },
+    {
+      "logicalPath": "MOTUS Reports/2026/Daily/U.S. Market",
+      "driveFolderId": null,
+      "verifiedAt": null,
+      "state": "UNVERIFIED"
+    },
+    {
+      "logicalPath": "MOTUS Reports/2026/Daily/Korea Market",
+      "driveFolderId": null,
+      "verifiedAt": null,
+      "state": "UNVERIFIED"
+    },
+    {
+      "logicalPath": "MOTUS Reports/2026/Weekly Intelligence",
+      "driveFolderId": null,
+      "verifiedAt": null,
+      "state": "UNVERIFIED"
+    },
+    {
+      "logicalPath": "MOTUS Reports/2026/Monthly Intelligence",
+      "driveFolderId": null,
+      "verifiedAt": null,
+      "state": "UNVERIFIED"
+    }
+  ]
+}

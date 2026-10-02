@@ -1,0 +1,35 @@
+{
+  "generatedAt": "2026-10-02T06:11:40.501Z",
+  "provider": "GOOGLE_DRIVE",
+  "writeEnabled": false,
+  "publicShareEnabled": false,
+  "plannedUploads": [],
+  "uploadCount": 0,
+  "permissionChangeCount": 0,
+  "artifacts": [
+    {
+      "artifactId": "pdf:motus-ai-intelligence-2026-09-29:e0c995c3f87f",
+      "uniqueKey": "AI_DAILY:2026-09-29:2026-09-29:2026-09-29:e0c995c3f87f1c64fae36e40074e788a1bd91af6a45ccb037e0e29a57d5e0594",
+      "decision": "NEW_ARTIFACT",
+      "state": "BLOCKED_WRITE_DISABLED"
+    },
+    {
+      "artifactId": "pdf:motus-us-market-2026-09-30:2d5dffb6ea28",
+      "uniqueKey": "US_MARKET_DAILY:2026-09-30:2026-09-30:2026-09-30:2d5dffb6ea28f9729513ab3cff8e0dfe54f53fcc0ec83bf724dfaad647d93760",
+      "decision": "NEW_ARTIFACT",
+      "state": "BLOCKED_WRITE_DISABLED"
+    },
+    {
+      "artifactId": "pdf:motus-korea-market-2026-09-30:15b3022c4555",
+      "uniqueKey": "KOREA_MARKET_DAILY:2026-09-30:2026-09-30:2026-09-30:15b3022c4555e7bc80aa830b39ff69bd8429ab4df939d6416ec4b43bb5aade34",
+      "decision": "NEW_ARTIFACT",
+      "state": "BLOCKED_WRITE_DISABLED"
+    },
+    {
+      "artifactId": "pdf:weekly-intelligence-2026-w40:bc14c66591c7",
+      "uniqueKey": "WEEKLY_INTELLIGENCE:2026-10-02:2026-09-28:2026-10-02:bc14c66591c7f29c3daa7a1d7c8628ce9656aea4e86ec4486a56b47d058da11e",
+      "decision": "NEW_ARTIFACT",
+      "state": "BLOCKED_WRITE_DISABLED"
+    }
+  ]
+}

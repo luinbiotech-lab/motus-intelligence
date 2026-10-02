@@ -1,0 +1,80 @@
+{
+  "generatedAt": "2026-10-02T06:13:43.956Z",
+  "artifacts": [
+    {
+      "artifactId": "pdf:motus-ai-intelligence-2026-09-29:e0c995c3f87f",
+      "publicationId": "motus-ai-intelligence-2026-09-29",
+      "reportType": "AI_DAILY",
+      "issueDate": "2026-09-29",
+      "period": {
+        "start": "2026-09-29",
+        "end": "2026-09-29"
+      },
+      "localFile": "data/reports/review/daily/ai/report.pdf",
+      "version": 1,
+      "reviewState": "PENDING",
+      "validationState": "VALIDATED",
+      "storageState": "LOCAL_ONLY",
+      "publicState": "PRIVATE"
+    },
+    {
+      "artifactId": "pdf:motus-us-market-2026-09-30:2d5dffb6ea28",
+      "publicationId": "motus-us-market-2026-09-30",
+      "reportType": "US_MARKET_DAILY",
+      "issueDate": "2026-09-30",
+      "period": {
+        "start": "2026-09-30",
+        "end": "2026-09-30"
+      },
+      "localFile": "data/reports/review/daily/us/report.pdf",
+      "version": 1,
+      "reviewState": "PENDING",
+      "validationState": "VALIDATED",
+      "storageState": "LOCAL_ONLY",
+      "publicState": "PRIVATE"
+    },
+    {
+      "artifactId": "pdf:motus-korea-market-2026-09-30:15b3022c4555",
+      "publicationId": "motus-korea-market-2026-09-30",
+      "reportType": "KOREA_MARKET_DAILY",
+      "issueDate": "2026-09-30",
+      "period": {
+        "start": "2026-09-30",
+        "end": "2026-09-30"
+      },
+      "localFile": "data/reports/review/daily/korea/report.pdf",
+      "version": 1,
+      "reviewState": "PENDING",
+      "validationState": "VALIDATED",
+      "storageState": "LOCAL_ONLY",
+      "publicState": "PRIVATE"
+    },
+    {
+      "artifactId": "pdf:weekly-intelligence-2026-w40:bc14c66591c7",
+      "publicationId": "weekly-intelligence-2026-w40",
+      "reportType": "WEEKLY_INTELLIGENCE",
+      "issueDate": "2026-10-02",
+      "period": {
+        "start": "2026-09-28",
+        "end": "2026-10-02"
+      },
+      "localFile": "data/reports/review/weekly/report.pdf",
+      "version": 1,
+      "reviewState": "PENDING",
+      "validationState": "VALIDATED",
+      "storageState": "LOCAL_ONLY",
+      "publicState": "PRIVATE"
+    }
+  ],
+  "publicArtifactCount": 0,
+  "commerce": {
+    "enabled": false
+  },
+  "bloggerCalls": {
+    "insert": 0,
+    "patch": 0,
+    "publish": 0,
+    "theme": 0,
+    "menu": 0
+  }
+}

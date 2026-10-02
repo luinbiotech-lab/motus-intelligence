@@ -1,4 +1,4 @@
-import argparse, json, os, re, sys
+import argparse, json, math, os, re, sys
 from pathlib import Path
 from reportlab.lib import colors
 from reportlab.lib.enums import TA_LEFT, TA_RIGHT
@@ -53,13 +53,18 @@ class MotusDoc(BaseDocTemplate):
         super().__init__(path,pagesize=A4,leftMargin=15*mm,rightMargin=15*mm,topMargin=14*mm,bottomMargin=14*mm,title=vm['displayTitle'],author='MOTUS')
         self.vm=vm;frame=Frame(self.leftMargin,self.bottomMargin,self.width,self.height,id='content');self.addPageTemplates(PageTemplate(id='motus',frames=frame,onPage=self.footer))
     def footer(self,canvas,doc):
-        canvas.saveState();canvas.setStrokeColor(BORDER);canvas.line(15*mm,10*mm,A4[0]-15*mm,10*mm);canvas.setFont('MOTUS-KR',6.5);canvas.setFillColor(SLATE);canvas.drawString(15*mm,6.3*mm,'MOTUS | What Moves the World · 검증된 자료 기반 · 투자 권유 아님');canvas.drawRightString(A4[0]-15*mm,6.3*mm,f'{doc.page}');canvas.restoreState()
+        canvas.saveState();canvas.setStrokeColor(BORDER);canvas.line(15*mm,10*mm,A4[0]-15*mm,10*mm);canvas.setFont('MOTUS-KR',6.5);canvas.setFillColor(SLATE);canvas.drawString(15*mm,6.3*mm,'MOTUS | What Moves the World · 검증된 자료 기반 · 투자 권유 아님');canvas.drawRightString(A4[0]-15*mm,6.3*mm,f'{doc.page}');
+        if self.vm.get('previewOnly'):
+            canvas.setFont('MOTUS-KR-Bold',8);canvas.setFillColor(colors.HexColor('#9b3f3f'));canvas.drawCentredString(A4[0]/2,A4[1]-8*mm,'SAMPLE · PREVIEW · NOT FOR PUBLICATION')
+        canvas.restoreState()
 
 def build_story(vm):
     s=styles();story=[]
     header=Table([[Paragraph('MOTUS | What Moves the World',s['small'])],[Paragraph(esc(vm['displayTitle']),s['title'])],[Paragraph(f"{esc(vm['subtitle'])}<br/>{vm['issueDate']}",s['subtitle'])]],colWidths=[A4[0]-30*mm]);header.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,-1),NAVY),('BOX',(0,0),(-1,-1),.7,colors.HexColor('#010b17')),('LEFTPADDING',(0,0),(-1,-1),10*mm),('RIGHTPADDING',(0,0),(-1,-1),10*mm),('TOPPADDING',(0,0),(-1,-1),2.5*mm),('BOTTOMPADDING',(0,0),(-1,-1),2.5*mm)]));story.extend([header,Spacer(1,3*mm)])
     if vm.get('previewOnly'):
         badge=Table([[Paragraph('SAMPLE / PREVIEW · 현재 운영 readiness가 HOLD이므로 production 배포 대상이 아님',s['body'])]],colWidths=[A4[0]-30*mm]);badge.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,-1),colors.HexColor('#fff4e5')),('BOX',(0,0),(-1,-1),.7,colors.HexColor('#b7791f')),('PADDING',(0,0),(-1,-1),3*mm)]));story.extend([badge,Spacer(1,3*mm)])
+    if vm['reportType']=='WEEKLY_INTELLIGENCE':
+        return weekly_story(vm,s,story)
     if vm.get('charts'):
         cards=[chart_card(item) for item in vm['charts']];grid=Table([[cards[0],cards[1]],[cards[2],cards[3]]],colWidths=[(A4[0]-34*mm)/2]*2,rowHeights=[42*mm,42*mm]);grid.setStyle(TableStyle([('BOX',(0,0),(-1,-1),.6,BORDER),('INNERGRID',(0,0),(-1,-1),.6,BORDER),('BACKGROUND',(0,0),(-1,-1),OFF),('VALIGN',(0,0),(-1,-1),'MIDDLE'),('LEFTPADDING',(0,0),(-1,-1),1.5*mm),('RIGHTPADDING',(0,0),(-1,-1),1.5*mm)]));story.extend([KeepTogether([section_bar('미국 주요지수 5거래일',s),grid]),Spacer(1,3*mm)])
     for section in vm['sections']:
@@ -73,6 +78,26 @@ def build_story(vm):
     if source_lines:
         box=Table([[line] for line in source_lines],colWidths=[A4[0]-34*mm]);box.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,-1),OFF),('BOX',(0,0),(-1,-1),.6,BORDER),('LEFTPADDING',(0,0),(-1,-1),4*mm),('RIGHTPADDING',(0,0),(-1,-1),4*mm),('TOPPADDING',(0,0),(-1,-1),1*mm),('BOTTOMPADDING',(0,0),(-1,-1),1*mm)]));story.append(KeepTogether([section_bar('주요 출처 / Sources',s),box]))
     return story
+
+def weekly_story(vm,s,story):
+    sections={section['title']:section for section in vm['sections']}
+    roles=[('Executive',['Executive Summary','Week at a Glance']),('AI & Industry / U.S. Market',['AI & Industry','U.S. Market']),('Korea Market / Cross Intelligence',['Korea Market','Cross Intelligence']),('Investment / Risk / Watch',['Investment Map','Risks','Next Week Watch'])]
+    for page_index,(role,names) in enumerate(roles):
+        if page_index:
+            story.extend([PageBreak(),section_bar(f'Page {page_index+1} · {role}',s),Spacer(1,3*mm)])
+        for name in names:
+            section=sections.get(name)
+            if section and section['items']:story.extend(section_block(section,s))
+    source_lines=[Paragraph(f"{esc(src['label'])} · {esc(re.sub(r'^www\\.','',urlparse(src['url']).hostname or 'source'))}",s['source']) for src in vm['sources']]
+    if source_lines:
+        midpoint=math.ceil(len(source_lines)/2);rows=[]
+        for index in range(midpoint):rows.append([source_lines[index],source_lines[index+midpoint] if index+midpoint<len(source_lines) else ''])
+        box=Table(rows,colWidths=[(A4[0]-34*mm)/2]*2);box.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,-1),OFF),('BOX',(0,0),(-1,-1),.6,BORDER),('INNERGRID',(0,0),(-1,-1),.3,BORDER),('LEFTPADDING',(0,0),(-1,-1),2*mm),('RIGHTPADDING',(0,0),(-1,-1),2*mm),('TOPPADDING',(0,0),(-1,-1),.7*mm),('BOTTOMPADDING',(0,0),(-1,-1),.7*mm)]));story.extend([KeepTogether([section_bar('주요 출처 / Sources',s),box])])
+    return story
+
+def section_block(section,s):
+    items=[Paragraph('• '+esc(text),s['body']) for text in section['items']]
+    box=Table([[item] for item in items],colWidths=[A4[0]-34*mm]);box.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,-1),colors.white),('BOX',(0,0),(-1,-1),.6,BORDER),('LEFTPADDING',(0,0),(-1,-1),4*mm),('RIGHTPADDING',(0,0),(-1,-1),4*mm),('TOPPADDING',(0,0),(-1,-1),1.2*mm),('BOTTOMPADDING',(0,0),(-1,-1),1.2*mm)]));return [KeepTogether([section_bar(section['title'],s),box]),Spacer(1,2.2*mm)]
 
 def section_bar(title,s):
     table=Table([[Paragraph(esc(title),s['section'])]],colWidths=[A4[0]-34*mm]);table.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,-1),colors.HexColor('#17283d')),('BOX',(0,0),(-1,-1),.7,NAVY),('LEFTPADDING',(0,0),(-1,-1),4*mm),('RIGHTPADDING',(0,0),(-1,-1),4*mm),('TOPPADDING',(0,0),(-1,-1),1.5*mm),('BOTTOMPADDING',(0,0),(-1,-1),1.5*mm)]));return table

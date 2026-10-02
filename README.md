@@ -116,6 +116,10 @@ MOTUS Audience Loop은 **Publish → Discover → Index → Search Impression �
 
 `--type`, `--date`, `--period`, `--generate`, `--validate`, `--dry-run`을 지원합니다. `--dry-run`은 선택된 verified ViewModel과 canonical 파일명만 출력하고 파일이나 외부 상태를 변경하지 않습니다.
 
+`npm run motus:report-review`는 Daily PDF 3종의 PENDING Human Review package와 페이지 contact sheet를 만들고, Weekly HOLD ViewModel을 `SAMPLE · PREVIEW · NOT FOR PUBLICATION` 표시가 있는 4페이지 PDF로 렌더링합니다. Monthly PDF는 생성하지 않고 HOLD를 유지합니다.
+
+`npm run motus:report-storage -- --provider google-drive --check`는 Drive 구성 상태와 folder registry, upload plan을 생성합니다. 기본 정책은 `WRITE_ENABLED=false`, `PUBLIC_SHARE_ENABLED=false`이며 실제 업로드·폴더 생성·권한 변경은 수행하지 않습니다.
+
 A4 MASTER 생성은 관리자 전용 boundary를 통과해야 하며, 공개 route에서 호출할 수 없습니다. 개발환경에서는 `src/services/admin.ts`의 server-side authorization boundary와 `data/a4-master/YYYY-MM-DD/admin-a4-route.html`로 내부 route 화면을 분리합니다.
 
 실제 Blogger 연결 설정은 `config/publishing.json`에 MOTUS 브랜드·공개 주소, 환경 변수 이름과 `publishAsDraft` 정책만 저장합니다. blogId, client secret, refresh token, access token 값은 저장소 파일에 기록하지 않습니다. Publisher는 `BLOGGER_REFRESH_TOKEN`으로 access token을 자동 갱신한 뒤 Google Blogger API v3의 `posts.insert?isDraft=true`를 호출합니다. refresh credential이 일부 누락되거나 갱신에 실패하면 게시 요청을 보내지 않습니다. Publication record는 초안 식별자인 `draftPostId`와 공개 글 주소인 `publicPostUrl`을 분리하며, `DRAFT`에서는 `publicPostUrl=null`을 유지합니다. 실제 게시 후 확인된 글 permalink만 A4 CTA/QR과 Naver package에 반영하고 Blogger 루트 URL이나 preview URL은 상세분석 링크로 사용하지 않습니다. 공개 CTA는 “전체 분석은 MOTUS에서 확인하세요”로 통일합니다.

@@ -1,0 +1,12 @@
+{
+  "provider": "GOOGLE_DRIVE",
+  "configured": "NO",
+  "credentialFingerprint": null,
+  "scope": "https://www.googleapis.com/auth/drive.metadata.readonly",
+  "credentialValidation": "NOT_CONFIGURED",
+  "rootFolder": "UNKNOWN",
+  "writeEnabled": false,
+  "publicShareEnabled": false,
+  "uploadCount": 0,
+  "permissionChangeCount": 0
+}

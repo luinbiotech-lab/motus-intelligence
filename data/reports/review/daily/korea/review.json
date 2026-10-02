@@ -1,0 +1,41 @@
+{
+  "artifactId": "pdf:motus-korea-market-2026-09-30:15b3022c4555",
+  "reportType": "KOREA_MARKET_DAILY",
+  "issueDate": "2026-09-30",
+  "fileName": "motus-korea-market-2026-09-30.pdf",
+  "pageCount": 2,
+  "fileSizeBytes": 87278,
+  "contentFingerprint": "15b3022c4555e7bc80aa830b39ff69bd8429ab4df939d6416ec4b43bb5aade34",
+  "sourceFingerprint": "16ef7ac8862422aee0b1f43edbed0b9cc0cb1d81067fee0f384d48a631fdbabf",
+  "validationSummary": {
+    "status": "PASS",
+    "warnings": [
+      "Daily report used 2-page fallback"
+    ],
+    "errors": []
+  },
+  "contactSheetPath": "data/reports/review/daily/korea/contact-sheet.png",
+  "visualChecks": {
+    "titleHierarchy": "PENDING",
+    "typography": "PENDING",
+    "chartReadability": "PENDING",
+    "spacing": "PENDING",
+    "pageBalance": "PENDING",
+    "sourceReadability": "PENDING",
+    "footer": "PENDING",
+    "colorConvention": "PENDING",
+    "KoreanRendering": "PENDING"
+  },
+  "contentChecks": {
+    "headlineAccuracy": "PENDING",
+    "dataAccuracy": "PENDING",
+    "explanationSufficiency": "PENDING",
+    "sourceCoverage": "PENDING",
+    "noUnsupportedClaim": "PENDING",
+    "articlePdfConsistency": "PENDING"
+  },
+  "reviewState": "PENDING",
+  "reviewNotes": null,
+  "reviewedAt": null,
+  "reviewedBy": null
+}
