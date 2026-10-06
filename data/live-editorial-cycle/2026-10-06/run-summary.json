@@ -27,9 +27,9 @@
   "pdfStatus": "VALIDATED_PRIVATE",
   "searchMetricsStatus": "QUEUED_UNKNOWN",
   "externalActions": {
-    "bloggerLookup": 15,
+    "bloggerLookup": 20,
     "bloggerInsert": 3,
-    "bloggerPatch": 1,
+    "bloggerPatch": 3,
     "bloggerPublish": 2
   },
   "commerce": {
@@ -512,6 +512,128 @@
         "sourceFingerprint": "bdf4c31f4ae3e6f2cb471f987170779803cbf1a5e3a5ca9200a21c4a7c9a2020",
         "articleContentFingerprint": "sha256:3448dfc454ae0320cf7c7c5939d289c65906abe55fafa6203c42864b628f712e"
       }
+    }
+  },
+  "publicNarrativeMaintenance": {
+    "generatedAt": "2026-10-06T15:17:36.823Z",
+    "ai": {
+      "postId": "4294902999154862199",
+      "beforeFingerprint": "sha256:9062f8ebedd846e4e82d545545eaeb7751d22fec7fa79a75ace34433ff6d033b",
+      "oldRenderer": {
+        "bulletCount": 31,
+        "analyticalLabelCount": 12
+      },
+      "newRenderer": {
+        "bulletCount": 6,
+        "analyticalLabelCount": 0
+      },
+      "state": "PUBLISHED",
+      "patchCount": 1,
+      "afterFingerprint": "sha256:c1001696c2dcfb624c453e95fee7bfb916d0d5207a8cf7cf1d6f3126fe12277f",
+      "validation": {
+        "title": true,
+        "label": true,
+        "state": true,
+        "fingerprint": true,
+        "sourceSet": true,
+        "sourceLinks": true,
+        "sourceDedupe": true,
+        "mobile": true,
+        "rawUrlSafe": true,
+        "internalSafe": true,
+        "commerceDisabled": true,
+        "repeatedAnalyticalLabels": 0,
+        "connectionExplanationCount": 3,
+        "titleOnlyConnectionCount": 0,
+        "internalWarningCount": 0,
+        "pass": true
+      },
+      "httpStatus": 200,
+      "sourceValidation": true,
+      "mobileValidation": true,
+      "audit": {
+        "event": "PUBLIC_NARRATIVE_PATCH",
+        "detail": "Presentation changed from repeated analytical labels and bullet-heavy blocks to verified fact-context-meaning prose; title, label, source set and publication identity preserved"
+      },
+      "error": null
+    },
+    "korea": {
+      "postId": "568850689418151231",
+      "beforeFingerprint": "sha256:844df0da6fd96a8cccc5ea0a9a81b619fea176b1c66b141cb62b281e69c6f6e1",
+      "oldRenderer": {
+        "bulletCount": 2,
+        "analyticalLabelCount": 0
+      },
+      "newRenderer": {
+        "bulletCount": 2,
+        "analyticalLabelCount": 0
+      },
+      "state": "DRAFT",
+      "patchCount": 1,
+      "afterFingerprint": "sha256:9796bc0d7d8a028e402cf8e013603dd87d4f3d76b50fcd032ae18b6a4fc65259",
+      "validation": {
+        "title": true,
+        "label": true,
+        "state": true,
+        "fingerprint": true,
+        "sourceSet": true,
+        "sourceLinks": true,
+        "sourceDedupe": true,
+        "mobile": true,
+        "rawUrlSafe": true,
+        "internalSafe": true,
+        "commerceDisabled": true,
+        "repeatedAnalyticalLabels": 0,
+        "connectionExplanationCount": 0,
+        "titleOnlyConnectionCount": 0,
+        "internalWarningCount": 0,
+        "pass": true
+      },
+      "httpStatus": null,
+      "sourceValidation": true,
+      "mobileValidation": true,
+      "audit": {
+        "event": "PUBLIC_NARRATIVE_PATCH",
+        "detail": "Presentation changed from repeated analytical labels and bullet-heavy blocks to verified fact-context-meaning prose; title, label, source set and publication identity preserved"
+      },
+      "error": null
+    },
+    "us": {
+      "postId": "614930389904987485",
+      "changed": false,
+      "beforeFingerprint": "sha256:15b2387b1fc360f961b5ab5afc23c3c73293b435aa42d1658ccf1f51c086b607",
+      "candidateFingerprint": "sha256:15b2387b1fc360f961b5ab5afc23c3c73293b435aa42d1658ccf1f51c086b607",
+      "sourceSetPreserved": true,
+      "titlePreserved": true,
+      "labelPreserved": true,
+      "oldRenderer": {
+        "bulletCount": 14,
+        "analyticalLabelCount": 0
+      },
+      "newRenderer": {
+        "bulletCount": 14,
+        "analyticalLabelCount": 0
+      },
+      "patchPerformed": false,
+      "candidatePath": "data/live-editorial-cycle/2026-10-06/us/narrative-candidate.html"
+    },
+    "editorialMemory": {
+      "newRecords": [
+        "Public article prose should not expose internal analytical labels.",
+        "Industry/company connection must explain why the connection exists.",
+        "Title-only thematic lists are insufficient for public publication.",
+        "Bullets are for scanning and comparison; core explanation should use prose."
+      ],
+      "recordCount": 11
+    },
+    "actions": {
+      "lookup": 5,
+      "insert": 0,
+      "patch": 2,
+      "publish": 0
+    },
+    "commerce": {
+      "enabled": false
     }
   }
 }

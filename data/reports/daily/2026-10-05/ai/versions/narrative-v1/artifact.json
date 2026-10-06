@@ -1,0 +1,30 @@
+{
+  "artifactId": "pdf:motus-ai-intelligence-2026-10-05:bb780996bb1c",
+  "publicationId": "motus-ai-intelligence-2026-10-05",
+  "reportType": "AI_DAILY",
+  "issueDate": "2026-10-05",
+  "periodStart": "2026-10-05",
+  "periodEnd": "2026-10-05",
+  "fileName": "motus-ai-daily-2026-10-05.pdf",
+  "localPath": "data/reports/daily/2026-10-05/ai/versions/narrative-v1/report.pdf",
+  "fileSizeBytes": 102160,
+  "pageCount": 2,
+  "contentFingerprint": "bb780996bb1cc82f36abb34256021b4b29446a112d63cafafdb6a95a8ab36d82",
+  "sourceFingerprint": "04eb69d6538dfeed666d364b808dc863613064678c988a12451e91249fb00103",
+  "generatedAt": "2026-10-06T15:16:42.843Z",
+  "state": "VALIDATED",
+  "downloadUrl": null,
+  "storageProvider": "LOCAL_ONLY",
+  "storageObjectId": null,
+  "reviewState": "PENDING",
+  "validationStatus": "PASS",
+  "failureReason": null,
+  "canonicalFileName": "motus-ai-daily-2026-10-05.pdf",
+  "candidateVersion": "narrative-v1",
+  "publicDistribution": false,
+  "consistency": {
+    "state": "PASS",
+    "reason": null
+  },
+  "contactSheetPath": "data/reports/daily/2026-10-05/ai/versions/narrative-v1/contact-sheet.png"
+}

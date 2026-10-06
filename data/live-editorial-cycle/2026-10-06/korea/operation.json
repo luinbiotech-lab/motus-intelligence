@@ -25,5 +25,46 @@
   "readinessPolicy": "KOREA_READINESS_V2",
   "commerce": {
     "enabled": false
+  },
+  "narrativeMaintenance": {
+    "postId": "568850689418151231",
+    "beforeFingerprint": "sha256:844df0da6fd96a8cccc5ea0a9a81b619fea176b1c66b141cb62b281e69c6f6e1",
+    "oldRenderer": {
+      "bulletCount": 2,
+      "analyticalLabelCount": 0
+    },
+    "newRenderer": {
+      "bulletCount": 2,
+      "analyticalLabelCount": 0
+    },
+    "state": "DRAFT",
+    "patchCount": 1,
+    "afterFingerprint": "sha256:9796bc0d7d8a028e402cf8e013603dd87d4f3d76b50fcd032ae18b6a4fc65259",
+    "validation": {
+      "title": true,
+      "label": true,
+      "state": true,
+      "fingerprint": true,
+      "sourceSet": true,
+      "sourceLinks": true,
+      "sourceDedupe": true,
+      "mobile": true,
+      "rawUrlSafe": true,
+      "internalSafe": true,
+      "commerceDisabled": true,
+      "repeatedAnalyticalLabels": 0,
+      "connectionExplanationCount": 0,
+      "titleOnlyConnectionCount": 0,
+      "internalWarningCount": 0,
+      "pass": true
+    },
+    "httpStatus": null,
+    "sourceValidation": true,
+    "mobileValidation": true,
+    "audit": {
+      "event": "PUBLIC_NARRATIVE_PATCH",
+      "detail": "Presentation changed from repeated analytical labels and bullet-heavy blocks to verified fact-context-meaning prose; title, label, source set and publication identity preserved"
+    },
+    "error": null
   }
 }

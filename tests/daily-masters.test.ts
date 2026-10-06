@@ -26,9 +26,10 @@ test('Sprint 4D builds three independent Daily ViewModels without changing the s
 
 test('Sprint 4D AI Daily renders explanatory article hierarchy instead of a summary-only article',()=>{
   const rendered=renderAIIntelligenceDaily(split().ai);const html=rendered.html;
-  assert.deepEqual(rendered.renderedSections,['masthead','today-core','key-ai-issues','industry-flow','what-to-watch','sources']);
-  for(const heading of ['오늘의 핵심','핵심 AI 이슈','AI Intelligence','무슨 일이 있었나','핵심 내용','왜 중요한가','관련 기업·산업','시장 연결','오늘의 산업 흐름','다음 확인사항','주요 출처'])assert.match(html,new RegExp(heading));
-  assert.match(html,/data-render-field="source-fact"/);assert.match(html,/data-render-field="ai-interpretation"/);assert.doesNotMatch(html,/intelligenceId|eventId|themeId|companyId/);
+  assert.deepEqual(rendered.renderedSections,['masthead','today-core','key-ai-issues','industry-connections','what-to-watch','sources']);
+  for(const heading of ['오늘의 핵심','AI·산업 인텔리전스','산업·기업 연결','연결 대상','다음 확인사항','주요 출처'])assert.match(html,new RegExp(heading));
+  assert.doesNotMatch(html,/무슨 일이 있었나|핵심 내용|왜 중요한가|시장 연결|data-render-field="source-fact"|data-render-field="ai-interpretation"/);assert.doesNotMatch(html,/intelligenceId|eventId|themeId|companyId/);
+  assert.ok(split().ai.issues.every(item=>item.whyItMatters));
 });
 
 test('Sprint 4D US Daily renders four actual charts and no duplicate index number cards',()=>{

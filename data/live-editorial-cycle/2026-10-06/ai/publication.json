@@ -34,6 +34,11 @@
       "at": "2026-10-06T19:55:36+09:00",
       "event": "PUBLISHED",
       "detail": "Blogger post 4294902999154862199 published once and public page returned HTTP 200"
+    },
+    {
+      "at": "2026-10-06T15:17:36.823Z",
+      "event": "PUBLIC_NARRATIVE_PATCH",
+      "detail": "Public prose reorganized without changing title, labels, verified facts or source URLs; HTTP 200 confirmed"
     }
   ],
   "commerce": {
@@ -143,6 +148,47 @@
     "state": "PUBLISHED"
   },
   "error": null,
-  "contentFingerprint": "sha256:9062f8ebedd846e4e82d545545eaeb7751d22fec7fa79a75ace34433ff6d033b",
-  "postPublishAudit": "PASS"
+  "contentFingerprint": "sha256:c1001696c2dcfb624c453e95fee7bfb916d0d5207a8cf7cf1d6f3126fe12277f",
+  "postPublishAudit": "PASS",
+  "narrativeMaintenance": {
+    "postId": "4294902999154862199",
+    "beforeFingerprint": "sha256:9062f8ebedd846e4e82d545545eaeb7751d22fec7fa79a75ace34433ff6d033b",
+    "oldRenderer": {
+      "bulletCount": 31,
+      "analyticalLabelCount": 12
+    },
+    "newRenderer": {
+      "bulletCount": 6,
+      "analyticalLabelCount": 0
+    },
+    "state": "PUBLISHED",
+    "patchCount": 1,
+    "afterFingerprint": "sha256:c1001696c2dcfb624c453e95fee7bfb916d0d5207a8cf7cf1d6f3126fe12277f",
+    "validation": {
+      "title": true,
+      "label": true,
+      "state": true,
+      "fingerprint": true,
+      "sourceSet": true,
+      "sourceLinks": true,
+      "sourceDedupe": true,
+      "mobile": true,
+      "rawUrlSafe": true,
+      "internalSafe": true,
+      "commerceDisabled": true,
+      "repeatedAnalyticalLabels": 0,
+      "connectionExplanationCount": 3,
+      "titleOnlyConnectionCount": 0,
+      "internalWarningCount": 0,
+      "pass": true
+    },
+    "httpStatus": 200,
+    "sourceValidation": true,
+    "mobileValidation": true,
+    "audit": {
+      "event": "PUBLIC_NARRATIVE_PATCH",
+      "detail": "Presentation changed from repeated analytical labels and bullet-heavy blocks to verified fact-context-meaning prose; title, label, source set and publication identity preserved"
+    },
+    "error": null
+  }
 }

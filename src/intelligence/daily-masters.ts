@@ -21,11 +21,15 @@ interface DailyMasterBase {
 }
 export interface AIIntelligenceIssue {
   headline:string;whatHappened:string[];coreContent:string;whyItMatters:string|null;
-  relatedCompaniesIndustries:string[];marketConnection:string|null;institutionView:string|null;
+  relatedCompaniesIndustries:string[];marketConnection:string|null;institutionView:string|null;evidenceRefs:string[];
+}
+export interface AIIndustryConnection {
+  title:string;explanation:string;connectedCompanies:string[];connectedIndustries:string[];
+  evidenceRefs:string[];optionalWatchPoint:string|null;
 }
 export interface AIIntelligenceDailyViewModel extends DailyMasterBase {
   category:'AI_INTELLIGENCE';todayCore:{headline:string;summary:string;bullets:string[]};issues:AIIntelligenceIssue[];
-  industryFlow:string[];whatToWatch:NewsletterWatchItem[];
+  industryFlow:string[];industryConnections:AIIndustryConnection[];whatToWatch:NewsletterWatchItem[];
 }
 export interface USMarketDailyViewModel extends DailyMasterBase {
   category:'US_MARKET';marketSummary:string;marketHistory:MajorIndexHistory;
@@ -61,8 +65,8 @@ export function splitNewsletterIntoDailyMasters(model:NewsletterViewModel,option
   const ai:AIIntelligenceDailyViewModel={
     ...shared,publicationId:`${model.newsletterId}:ai`,title:`${model.title} — AI 산업의 핵심 흐름`,subtitle:'공식 발표와 검증 자료로 읽는 AI 산업',...category('AI_INTELLIGENCE'),
     todayCore:model.todayAtAGlance??{headline:model.title,summary:model.editorialSummary,bullets:[]},
-    issues:model.aiIntelligence.map(item=>({headline:item.headline,whatHappened:item.sourceFacts,coreContent:item.summary,whyItMatters:item.aiInterpretation,relatedCompaniesIndustries:unique([item.company,...themeLabels(item)].filter((value):value is string=>Boolean(value))),marketConnection:item.aiInterpretation,institutionView:item.institutionView})),
-    industryFlow:unique(model.aiIntelligence.flatMap(item=>themeLabels(item))),whatToWatch:filterWatch(model.whatToWatch,/AI|에이전트|반도체|산업|CAPEX/i),sources:aiSources,
+    issues:model.aiIntelligence.map(item=>({headline:item.headline,whatHappened:item.sourceFacts,coreContent:item.summary,whyItMatters:item.aiInterpretation,relatedCompaniesIndustries:unique([item.company,...themeLabels(item)].filter((value):value is string=>Boolean(value))),marketConnection:item.aiInterpretation,institutionView:item.institutionView,evidenceRefs:item.sources.map(source=>source.url)})),
+    industryFlow:unique(model.aiIntelligence.flatMap(item=>themeLabels(item))),industryConnections:model.aiIntelligence.map(item=>connectionFromEntry(item)).filter((item):item is AIIndustryConnection=>item!==null),whatToWatch:filterWatch(model.whatToWatch,/AI|에이전트|반도체|산업|CAPEX/i),sources:aiSources,
     ...optionalGlossary(options.glossaries?.ai),...optionalReport(options.reports?.ai)
   };
   const us:USMarketDailyViewModel={
@@ -87,8 +91,9 @@ export function splitNewsletterIntoDailyMasters(model:NewsletterViewModel,option
 export function renderAIIntelligenceDaily(view:AIIntelligenceDailyViewModel):DailyMasterRenderResult {
   const parts:string[]=[masthead(view)];const keys=['masthead'];
   push(parts,keys,'today-core',section('오늘의 핵심',`<h3 style="margin:0 0 8px;color:#03162e;font-size:22px">${esc(view.todayCore.headline)}</h3><p style="margin:0 0 12px">${esc(view.todayCore.summary)}</p>${list(view.todayCore.bullets)}`));
-  push(parts,keys,'key-ai-issues',section('핵심 AI 이슈 (AI Intelligence)',view.issues.map(renderAIIssue).join('')));
-  if(view.industryFlow.length)push(parts,keys,'industry-flow',section('오늘의 산업 흐름',list(view.industryFlow)));
+  push(parts,keys,'key-ai-issues',section('AI·산업 인텔리전스',view.issues.map(renderAIIssue).join('')));
+  const connections=view.industryConnections.filter(validConnection);
+  if(connections.length)push(parts,keys,'industry-connections',section('산업·기업 연결',connections.map(renderIndustryConnection).join('')));
   if(view.whatToWatch.length)push(parts,keys,'what-to-watch',section('다음 확인사항',watch(view.whatToWatch)));
   appendOptional(parts,keys,view);return finish(view,parts,keys);
 }
@@ -129,8 +134,12 @@ export function renderReportsArchive(view:ReportsArchiveViewModel):string {
 export const periodicIntelligenceBoundaries:PeriodicIntelligenceBoundary[]=(['WEEKLY','MONTHLY'] as const).map(cadence=>({cadence,crossIntelligence:true,consensusDivergence:true,investmentMap:true,themeChanges:true,institutionChanges:true,eventToMarketReview:true}));
 
 function renderAIIssue(item:AIIntelligenceIssue):string {
-  return `<article style="border:1px solid #c4cfdb;padding:16px;margin:0 0 15px;width:100%;max-width:100%;box-sizing:border-box"><h3 style="margin:0 0 10px;color:#03162e;font-size:20px">${esc(item.headline)}</h3>${labeled('무슨 일이 있었나',item.whatHappened)}${field('핵심 내용',item.coreContent,'source-fact')}${item.whyItMatters?field('왜 중요한가',item.whyItMatters,'ai-interpretation'):''}${labeled('관련 기업·산업',item.relatedCompaniesIndustries)}${item.marketConnection?field('시장 연결',item.marketConnection,'market-connection'):''}${item.institutionView?field('기관 의견',item.institutionView,'institution-view'):''}</article>`;
+  const fact=sentenceParagraph(item.whatHappened);
+  const context=sentenceParagraph([item.coreContent,item.whyItMatters].filter((value):value is string=>Boolean(value)));
+  const implication=sentenceParagraph([item.marketConnection].filter((value):value is string=>Boolean(value)));
+  return `<article style="border:1px solid #c4cfdb;padding:18px 18px 16px;margin:0 0 16px;width:100%;max-width:100%;box-sizing:border-box"><h3 style="margin:0 0 12px;color:#03162e;font-size:20px">${esc(item.headline)}</h3>${fact}${context}${implication}${item.institutionView?field('기관 의견',item.institutionView,'institution-view'):''}</article>`;
 }
+function renderIndustryConnection(item:AIIndustryConnection):string {const targets=unique([...item.connectedCompanies,...item.connectedIndustries]);return `<article style="border-left:4px solid #405f7f;background:#f6f8fb;padding:15px 16px;margin:0 0 13px;width:100%;max-width:100%;box-sizing:border-box"><h3 style="margin:0 0 8px;color:#03162e;font-size:18px">${esc(item.title)}</h3><p style="margin:0 0 9px">${esc(item.explanation)}</p>${targets.length?`<p style="margin:0 0 9px;color:#42536a;font-size:14px"><strong>연결 대상</strong> · ${esc(targets.join(' · '))}</p>`:''}${item.optionalWatchPoint?`<p style="margin:0;color:#42536a;font-size:14px">${esc(item.optionalWatchPoint)}</p>`:''}</article>`;}
 function renderResearch(item:KoreaResearchNewsletterEntry):string {
   return `<article style="border:1px solid #c4cfdb;padding:15px;margin:0 0 12px;width:100%;max-width:100%;box-sizing:border-box"><h3 style="margin:0 0 6px;color:#03162e;font-size:18px">${esc(item.headline)}</h3><p style="margin:0 0 8px;color:#59697d;font-size:13px;font-weight:700">${esc(item.publisher)}${item.analyst?` · ${esc(item.analyst)}`:''}</p><p style="margin:0">${esc(item.summary)}</p>${field('기관 의견',item.institutionView,'institution-view')}${item.aiInterpretation?field('MOTUS 해석',item.aiInterpretation,'ai-interpretation'):''}${item.riskFactors.length?labeled('리스크',item.riskFactors):''}</article>`;
 }
@@ -154,11 +163,14 @@ function field(label:string,value:string,key:string):string{return `<div data-re
 function labeled(label:string,values:string[]):string{return values.length?`<div style="margin:10px 0"><strong style="color:#102f50">${esc(label)}</strong>${list(values)}</div>`:'';}
 function list(values:string[]):string{return values.length?`<ul style="margin:7px 0 0;padding-left:20px">${values.map(value=>`<li style="margin:4px 0">${esc(value)}</li>`).join('')}</ul>`:'';}
 function paragraphs(values:string[]):string{return unique(values.filter(Boolean)).map(value=>`<p style="margin:0 0 11px">${esc(value)}</p>`).join('');}
+function sentenceParagraph(values:string[]):string {const prose=values.map(value=>value.trim()).filter(Boolean).map(value=>/[.!?]$/.test(value)?value:`${value}.`).join(' ');return prose?`<p style="margin:0 0 12px">${esc(prose)}</p>`:'';}
 function watch(values:NewsletterWatchItem[]):string{return values.map(item=>`<div style="border-left:4px solid #405f7f;padding:10px 12px;margin:0 0 10px;background:#f7f9fc;width:100%;max-width:100%;box-sizing:border-box"><strong style="display:block;color:#03162e">${esc(item.headline)}</strong>${esc(item.watchFor)}</div>`).join('');}
 function renderSources(values:NewsletterSourceLink[]):string{return `<ul style="margin:0;padding-left:19px">${dedupeSources(values).map(source=>`<li style="margin:5px 0"><a href="${attr(source.url)}" target="_blank" rel="nofollow noopener noreferrer" style="${LINK}">${esc(source.label)}</a>${source.publisher&&source.publisher!==source.label?` <span style="color:#65758a">· ${esc(source.publisher)}</span>`:''}</li>`).join('')}</ul>`;}
 function category<K extends MotusPublicCategoryKey>(key:K):{category:K;canonicalLabel:typeof MOTUS_PUBLIC_CATEGORY_MASTER[K]['canonicalLabel'];displayLabel:typeof MOTUS_PUBLIC_CATEGORY_MASTER[K]['displayLabel']} {return {category:key,canonicalLabel:MOTUS_PUBLIC_CATEGORY_MASTER[key].canonicalLabel,displayLabel:MOTUS_PUBLIC_CATEGORY_MASTER[key].displayLabel};}
 function optionalGlossary(value:DailyGlossaryEntry[]|undefined):{glossary?:DailyGlossaryEntry[]}{return value?.length?{glossary:structuredClone(value.slice(0,6))}:{};}
 function optionalReport(value:PublicReportEntry|undefined):{report?:PublicReportEntry}{return value?{report:structuredClone(value)}:{};}
+function connectionFromEntry(item:NewsletterIntelligenceEntry):AIIndustryConnection|null {const companies=item.company?[item.company]:[];const industries=themeLabels(item);const evidenceRefs=item.sources.map(source=>source.url).filter(Boolean);if(!item.aiInterpretation?.trim()||!evidenceRefs.length||companies.length+industries.length===0)return null;return {title:[...companies,...industries].slice(0,2).join('·'),explanation:item.aiInterpretation,connectedCompanies:companies,connectedIndustries:industries,evidenceRefs,optionalWatchPoint:null};}
+function validConnection(item:AIIndustryConnection):boolean{return Boolean(item.title.trim()&&item.explanation.trim()&&item.evidenceRefs.length&&(item.connectedCompanies.length||item.connectedIndustries.length));}
 function group(view:KoreaMarketNewsletterView,key:KoreaMarketNewsletterMetric['group']){return view.metrics.filter(metric=>metric.group===key);}
 function filterWatch(values:NewsletterWatchItem[]|undefined,pattern:RegExp):NewsletterWatchItem[]{const matching=(values??[]).filter(item=>pattern.test(`${item.headline} ${item.watchFor}`));return structuredClone(matching);}
 function koreaSummary(model:NewsletterViewModel,view:KoreaMarketNewsletterView):string{const index=view.metrics.filter(item=>item.group==='INDEX').map(item=>`${item.label} ${item.displayValue}`).join(', ');return `${index}. ${model.todayAtAGlance?.summary??model.editorialSummary}`;}
