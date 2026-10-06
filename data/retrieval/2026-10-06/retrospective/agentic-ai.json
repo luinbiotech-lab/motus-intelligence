@@ -1,0 +1,151 @@
+{
+  "theme": {
+    "themeId": "theme:agentic-ai",
+    "themeName": "Agentic AI",
+    "aliases": [
+      "AI agent",
+      "AI agents",
+      "Agentic AI",
+      "agentic ai",
+      "에이전트 AI"
+    ],
+    "relatedCompanyIds": [
+      "company:openai"
+    ],
+    "relatedSectorIds": [],
+    "relatedEventIds": [
+      "event:openai-dots-2026-09-29"
+    ],
+    "relatedInstitutionIds": [],
+    "firstSeenAt": "2026-09-29T23:59:00Z",
+    "lastSeenAt": "2026-09-29T23:59:00Z",
+    "currentState": null,
+    "priorState": null,
+    "supportingEvidence": [
+      "evidence:0fda3e21c70099a7",
+      "evidence:d442e8e2eccd8c10"
+    ],
+    "publications": [
+      "motus-daily-intelligence-2026-09-29"
+    ],
+    "history": [
+      {
+        "themeId": "theme:agentic-ai",
+        "periodStart": "2026-09-29",
+        "periodEnd": "2026-09-30",
+        "eventCount": 1,
+        "companyCount": 1,
+        "institutionCount": 0,
+        "researchCount": 0,
+        "marketCount": 0,
+        "supportingRecordIds": [
+          "event:openai-dots-2026-09-29"
+        ],
+        "changeState": null,
+        "sourceRefs": [
+          "source:dec620cb7225d243"
+        ],
+        "evidenceRefs": [
+          "evidence:0fda3e21c70099a7",
+          "evidence:d442e8e2eccd8c10"
+        ],
+        "originRecordIds": [
+          "intel:ai:openai-dots-2026-09-29"
+        ]
+      }
+    ],
+    "sourceRefs": [
+      "source:dec620cb7225d243"
+    ],
+    "evidenceRefs": [
+      "evidence:0fda3e21c70099a7",
+      "evidence:d442e8e2eccd8c10"
+    ],
+    "originRecordIds": [
+      "intel:ai:openai-dots-2026-09-29"
+    ]
+  },
+  "period": {
+    "from": "2026-09-01",
+    "to": "2026-10-06"
+  },
+  "majorEvents": [
+    {
+      "eventId": "event:openai-dots-2026-09-29",
+      "eventType": "AI",
+      "headline": "OpenAI, 상시 실행형 에이전트 Dots 공개",
+      "eventDate": "2026-09-29",
+      "companyIds": [
+        "company:openai"
+      ],
+      "themeIds": [
+        "theme:agentic-ai"
+      ],
+      "sectorIds": [],
+      "marketIds": [
+        "market:global"
+      ],
+      "primarySources": [
+        "source:dec620cb7225d243"
+      ],
+      "secondarySources": [],
+      "wallStreetViews": [],
+      "koreaResearchViews": [],
+      "initialMarketReaction": null,
+      "subsequentMarketReaction": null,
+      "relatedPublications": [
+        "motus-daily-intelligence-2026-09-29"
+      ],
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:dec620cb7225d243"
+      ],
+      "evidenceRefs": [
+        "evidence:0fda3e21c70099a7",
+        "evidence:d442e8e2eccd8c10"
+      ],
+      "originRecordIds": [
+        "intel:ai:openai-dots-2026-09-29"
+      ]
+    }
+  ],
+  "companies": [
+    "company:openai"
+  ],
+  "sectors": [],
+  "institutions": [],
+  "markets": [
+    "market:global"
+  ],
+  "priorPeriod": null,
+  "currentPeriod": {
+    "themeId": "theme:agentic-ai",
+    "periodStart": "2026-09-29",
+    "periodEnd": "2026-09-30",
+    "eventCount": 1,
+    "companyCount": 1,
+    "institutionCount": 0,
+    "researchCount": 0,
+    "marketCount": 0,
+    "supportingRecordIds": [
+      "event:openai-dots-2026-09-29"
+    ],
+    "changeState": null,
+    "sourceRefs": [
+      "source:dec620cb7225d243"
+    ],
+    "evidenceRefs": [
+      "evidence:0fda3e21c70099a7",
+      "evidence:d442e8e2eccd8c10"
+    ],
+    "originRecordIds": [
+      "intel:ai:openai-dots-2026-09-29"
+    ]
+  },
+  "newSignals": [],
+  "persistentSignals": [],
+  "resolvedSignals": [],
+  "conflictingSignals": [],
+  "trendState": null
+}

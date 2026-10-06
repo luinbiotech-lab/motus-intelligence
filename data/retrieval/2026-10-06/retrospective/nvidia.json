@@ -1,0 +1,163 @@
+{
+  "company": {
+    "companyId": "company:nvidia",
+    "companyName": "NVIDIA",
+    "ticker": null,
+    "market": null,
+    "sectorIds": [],
+    "themeIds": [
+      "theme:agent-security"
+    ],
+    "relatedEvents": [
+      "event:nvidia-open-agent-safety-platform-2026-09-28"
+    ],
+    "relatedResearch": [],
+    "relatedPublications": [
+      "motus-daily-intelligence-2026-09-29"
+    ],
+    "institutionMentions": [],
+    "marketReactions": [],
+    "firstSeenAt": "2026-09-29T23:59:00Z",
+    "lastSeenAt": "2026-09-29T23:59:00Z",
+    "latestVerifiedSummary": "NVIDIA는 에이전트 시험부터 배포까지 격리와 정책 집행을 지원하는 개방형 안전 플랫폼을 발표했다.",
+    "sourceRefs": [
+      "source:a640107c7e713e6d"
+    ],
+    "evidenceRefs": [
+      "evidence:99fcb3de586ee7cc",
+      "evidence:fa29a7a21147353b"
+    ],
+    "originRecordIds": [
+      "intel:ai:nvidia-open-agent-safety-platform-2026-09-28"
+    ]
+  },
+  "period": {
+    "from": "2026-09-01",
+    "to": "2026-10-06"
+  },
+  "keyEvents": [
+    {
+      "eventId": "event:nvidia-open-agent-safety-platform-2026-09-28",
+      "eventType": "AI",
+      "headline": "NVIDIA, Open Agent Safety Platform 공개",
+      "eventDate": "2026-09-29",
+      "companyIds": [
+        "company:nvidia"
+      ],
+      "themeIds": [
+        "theme:agent-security"
+      ],
+      "sectorIds": [],
+      "marketIds": [
+        "market:global"
+      ],
+      "primarySources": [
+        "source:a640107c7e713e6d"
+      ],
+      "secondarySources": [],
+      "wallStreetViews": [],
+      "koreaResearchViews": [],
+      "initialMarketReaction": null,
+      "subsequentMarketReaction": null,
+      "relatedPublications": [
+        "motus-daily-intelligence-2026-09-29"
+      ],
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:a640107c7e713e6d"
+      ],
+      "evidenceRefs": [
+        "evidence:99fcb3de586ee7cc",
+        "evidence:fa29a7a21147353b"
+      ],
+      "originRecordIds": [
+        "intel:ai:nvidia-open-agent-safety-platform-2026-09-28"
+      ]
+    }
+  ],
+  "themeChanges": [
+    {
+      "companyId": "company:nvidia",
+      "periodStart": "2026-09-29",
+      "periodEnd": "2026-09-30",
+      "events": [
+        "event:nvidia-open-agent-safety-platform-2026-09-28"
+      ],
+      "researchMentions": [],
+      "institutionMentions": [],
+      "marketReactions": [],
+      "relatedThemes": [
+        "theme:agent-security"
+      ],
+      "attentionChange": null,
+      "sourceRefs": [
+        "source:a640107c7e713e6d"
+      ],
+      "evidenceRefs": [
+        "evidence:99fcb3de586ee7cc",
+        "evidence:fa29a7a21147353b"
+      ],
+      "originRecordIds": [
+        "intel:ai:nvidia-open-agent-safety-platform-2026-09-28"
+      ]
+    }
+  ],
+  "institutionViews": [],
+  "researchMentions": [],
+  "marketReactions": [],
+  "relatedPublications": [
+    {
+      "recordType": "PUBLICATION",
+      "canonicalId": "motus-daily-intelligence-2026-09-29",
+      "canonicalName": "국채금리 5%대의 압박과 AI 에이전트 경쟁",
+      "displayName": "국채금리 5%대의 압박과 AI 에이전트 경쟁",
+      "aliases": [],
+      "summary": "미국 장기금리 부담으로 주요 지수가 소폭 밀린 가운데 AI 산업은 에이전트 실행 환경·보안·과학 연구로 적용 범위를 넓혔다. 한국시장에서는 외국인 매도가 지수 상단을 눌렀다.",
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "sourceRefs": [
+        "source:02483f80431a21af",
+        "source:097dd4926e5cb359",
+        "source:110e8e26550eddab",
+        "source:3b960f3ca7c5f68d",
+        "source:48d126d9d9877b2b",
+        "source:4b15991b9e2930ef",
+        "source:5248fdb3ba75d77c",
+        "source:637f78c2396e4eed",
+        "source:7ee79eecb360c6d0",
+        "source:a640107c7e713e6d",
+        "source:b623893b395d1f8a",
+        "source:dec620cb7225d243",
+        "source:e5145426af47238c",
+        "source:f33c539a6ad0bf3c",
+        "source:fc083cd0ad774d94"
+      ],
+      "evidenceRefs": [],
+      "originRecordIds": [
+        "newsletter:motus:2026-09-29"
+      ],
+      "internalMetadata": {
+        "issueDate": "2026-09-29",
+        "decision": "SELECTED"
+      },
+      "publicMetadata": {
+        "issueDate": "2026-09-29"
+      },
+      "libraryId": "library:publication:motus-daily-intelligence-2026-09-29",
+      "firstSeenAt": "2026-09-29T23:59:00Z",
+      "lastSeenAt": "2026-09-29T23:59:00Z",
+      "createdAt": "2026-09-29T23:59:00Z",
+      "updatedAt": "2026-09-29T23:59:00Z"
+    }
+  ],
+  "firstSeen": "2026-09-29T23:59:00Z",
+  "latestSeen": "2026-09-29T23:59:00Z",
+  "historyStatus": "INSUFFICIENT_HISTORY",
+  "whatChanged": [],
+  "whatStayedSame": [],
+  "unresolvedQuestions": [
+    "INSUFFICIENT_HISTORY"
+  ]
+}

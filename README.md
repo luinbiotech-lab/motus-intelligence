@@ -26,6 +26,8 @@ npm.cmd run motus:library -- --search OpenAI
 
 `--company`, `--theme`, `--institution`, `--market`, `--period`, `--evergreen`, `--audit` 조회를 지원합니다. `--dry-run`은 `--ingest`와 함께 주어도 파일을 쓰지 않습니다. Canonical alias가 여러 entity 후보와 일치하면 자동 병합하지 않고 `REVIEW_REQUIRED`로 남깁니다. 검색 성과는 audience signal로만 저장하며 entity 중요도나 검증 상태를 바꾸지 않습니다.
 
+`npm run motus:retrieve`는 Content Library를 canonical ID와 relationship graph로 조회합니다. `--company`, `--theme`, `--event`, `--institution`, `--sector`, `--market`, `--from`, `--to`와 `--timeline`, `--retrospective`, `--precedents`, `--prior-coverage`, `--memory`를 조합할 수 있습니다. `--audit`은 샘플 retrieval과 Editorial Memory를 `data/retrieval/YYYY-MM-DD/` 및 `data/library/memory/`에 로컬 저장하지만 Blogger·Drive·공개 PDF 작업은 호출하지 않습니다. 비교 기간이 없으면 trend나 변화 결론을 생성하지 않습니다.
+
 ```powershell
 npm.cmd run report -- --input data/manual/day.json
 npm.cmd run report -- --input data/manual/2026-09-11/input.json

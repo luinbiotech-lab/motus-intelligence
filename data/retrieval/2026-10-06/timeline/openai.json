@@ -1,0 +1,35 @@
+{
+  "subjectType": "COMPANY",
+  "subjectId": "company:openai",
+  "subjectName": "OpenAI",
+  "periodStart": "2026-09-29",
+  "periodEnd": "2026-09-29",
+  "timelineItems": [
+    {
+      "date": "2026-09-29",
+      "eventType": "AI",
+      "title": "OpenAI, 상시 실행형 에이전트 Dots 공개",
+      "summary": "OpenAI는 클라우드 컴퓨터와 연결 앱을 이용해 장기 작업을 수행하는 Dots를 공개했다.",
+      "companyIds": [
+        "company:openai"
+      ],
+      "themeIds": [
+        "theme:agentic-ai"
+      ],
+      "institutionIds": [],
+      "marketIds": [
+        "market:global"
+      ],
+      "publicationIds": [
+        "motus-daily-intelligence-2026-09-29"
+      ],
+      "sourceRefs": [
+        "source:dec620cb7225d243"
+      ],
+      "evidenceRefs": [
+        "evidence:0fda3e21c70099a7",
+        "evidence:d442e8e2eccd8c10"
+      ]
+    }
+  ]
+}

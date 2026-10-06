@@ -1,0 +1,155 @@
+[
+  {
+    "publisher": "삼성증권",
+    "sourceType": "VERIFIED_LIBRARY_SOURCE",
+    "successCount": 5,
+    "failureCount": 0,
+    "parseChangeCount": 0,
+    "verificationConflictCount": 0,
+    "lastSeenAt": "2026-09-29T23:59:00Z"
+  },
+  {
+    "publisher": "서울경제·한국거래소",
+    "sourceType": "VERIFIED_LIBRARY_SOURCE",
+    "successCount": 1,
+    "failureCount": 0,
+    "parseChangeCount": 0,
+    "verificationConflictCount": 0,
+    "lastSeenAt": "2026-09-29T23:59:00Z"
+  },
+  {
+    "publisher": "연합뉴스·Korea Times",
+    "sourceType": "VERIFIED_LIBRARY_SOURCE",
+    "successCount": 1,
+    "failureCount": 0,
+    "parseChangeCount": 0,
+    "verificationConflictCount": 0,
+    "lastSeenAt": "2026-09-29T23:59:00Z"
+  },
+  {
+    "publisher": "Aju Press 장중 시황",
+    "sourceType": "VERIFIED_LIBRARY_SOURCE",
+    "successCount": 1,
+    "failureCount": 0,
+    "parseChangeCount": 0,
+    "verificationConflictCount": 0,
+    "lastSeenAt": "2026-09-29T23:59:00Z"
+  },
+  {
+    "publisher": "Associated Press",
+    "sourceType": "VERIFIED_LIBRARY_SOURCE",
+    "successCount": 3,
+    "failureCount": 0,
+    "parseChangeCount": 0,
+    "verificationConflictCount": 0,
+    "lastSeenAt": "2026-09-30T23:59:00Z"
+  },
+  {
+    "publisher": "Cboe",
+    "sourceType": "VERIFIED_LIBRARY_SOURCE",
+    "successCount": 1,
+    "failureCount": 0,
+    "parseChangeCount": 0,
+    "verificationConflictCount": 0,
+    "lastSeenAt": "2026-09-30T23:59:00Z"
+  },
+  {
+    "publisher": "Investing.com",
+    "sourceType": "VERIFIED_LIBRARY_SOURCE",
+    "successCount": 1,
+    "failureCount": 0,
+    "parseChangeCount": 0,
+    "verificationConflictCount": 0,
+    "lastSeenAt": "2026-09-30T23:59:00Z"
+  },
+  {
+    "publisher": "MarketTimes",
+    "sourceType": "VERIFIED_LIBRARY_SOURCE",
+    "successCount": 1,
+    "failureCount": 0,
+    "parseChangeCount": 0,
+    "verificationConflictCount": 0,
+    "lastSeenAt": "2026-09-30T23:59:30Z"
+  },
+  {
+    "publisher": "Microsoft Research",
+    "sourceType": "VERIFIED_LIBRARY_SOURCE",
+    "successCount": 1,
+    "failureCount": 0,
+    "parseChangeCount": 0,
+    "verificationConflictCount": 0,
+    "lastSeenAt": "2026-09-29T23:59:00Z"
+  },
+  {
+    "publisher": "News1",
+    "sourceType": "VERIFIED_LIBRARY_SOURCE",
+    "successCount": 1,
+    "failureCount": 0,
+    "parseChangeCount": 0,
+    "verificationConflictCount": 0,
+    "lastSeenAt": "2026-09-30T23:59:30Z"
+  },
+  {
+    "publisher": "Newsway",
+    "sourceType": "VERIFIED_LIBRARY_SOURCE",
+    "successCount": 1,
+    "failureCount": 0,
+    "parseChangeCount": 0,
+    "verificationConflictCount": 0,
+    "lastSeenAt": "2026-09-30T23:59:30Z"
+  },
+  {
+    "publisher": "NVIDIA",
+    "sourceType": "VERIFIED_LIBRARY_SOURCE",
+    "successCount": 1,
+    "failureCount": 0,
+    "parseChangeCount": 0,
+    "verificationConflictCount": 0,
+    "lastSeenAt": "2026-09-29T23:59:00Z"
+  },
+  {
+    "publisher": "OpenAI",
+    "sourceType": "VERIFIED_LIBRARY_SOURCE",
+    "successCount": 1,
+    "failureCount": 0,
+    "parseChangeCount": 0,
+    "verificationConflictCount": 0,
+    "lastSeenAt": "2026-09-29T23:59:00Z"
+  },
+  {
+    "publisher": "Reuters",
+    "sourceType": "VERIFIED_LIBRARY_SOURCE",
+    "successCount": 1,
+    "failureCount": 0,
+    "parseChangeCount": 0,
+    "verificationConflictCount": 0,
+    "lastSeenAt": "2026-09-29T23:59:00Z"
+  },
+  {
+    "publisher": "Reuters 공개 배포본",
+    "sourceType": "VERIFIED_LIBRARY_SOURCE",
+    "successCount": 1,
+    "failureCount": 0,
+    "parseChangeCount": 0,
+    "verificationConflictCount": 0,
+    "lastSeenAt": "2026-09-29T23:59:00Z"
+  },
+  {
+    "publisher": "Tallac Options",
+    "sourceType": "VERIFIED_LIBRARY_SOURCE",
+    "successCount": 1,
+    "failureCount": 0,
+    "parseChangeCount": 0,
+    "verificationConflictCount": 0,
+    "lastSeenAt": "2026-09-29T23:59:00Z"
+  },
+  {
+    "publisher": "U.S. Department of the Treasury",
+    "sourceType": "VERIFIED_LIBRARY_SOURCE",
+    "successCount": 1,
+    "failureCount": 0,
+    "parseChangeCount": 0,
+    "verificationConflictCount": 0,
+    "lastSeenAt": "2026-09-30T23:59:00Z"
+  }
+]

@@ -1,0 +1,76 @@
+{
+  "institutionId": "institution:samsung-securities",
+  "subjectType": "INSTITUTION",
+  "subjectId": "institution:samsung-securities",
+  "records": [
+    {
+      "publishedAt": null,
+      "researchType": "UNKNOWN",
+      "stance": "상시 실행형 에이전트 시연과 반도체 종목별 흐름을 함께 점검하며 AI 투자 기대와 실행 리스크를 구분했다.",
+      "rating": null,
+      "targetPrice": null,
+      "evidenceRefs": [
+        "evidence:ff0e9bdbb34fb41c"
+      ],
+      "sourceRefs": [
+        "source:f33c539a6ad0bf3c"
+      ]
+    },
+    {
+      "publishedAt": null,
+      "researchType": "UNKNOWN",
+      "stance": "기업용 에이전트 확산에는 작업 라우팅, 자체 모델, 칩 최적화가 수익성의 핵심 조건이라는 관점이다.",
+      "rating": null,
+      "targetPrice": null,
+      "evidenceRefs": [
+        "evidence:94be5f47fde810e2"
+      ],
+      "sourceRefs": [
+        "source:3b960f3ca7c5f68d"
+      ]
+    },
+    {
+      "publishedAt": null,
+      "researchType": "UNKNOWN",
+      "stance": "AR 기기와 실시간 아바타, 외부 서비스 연결이 사용 경험을 넓히지만 제품 실행력 확인이 필요하다는 관점이다.",
+      "rating": null,
+      "targetPrice": null,
+      "evidenceRefs": [
+        "evidence:9f39820d3b56959b"
+      ],
+      "sourceRefs": [
+        "source:5248fdb3ba75d77c"
+      ]
+    },
+    {
+      "publishedAt": null,
+      "researchType": "UNKNOWN",
+      "stance": "계획이 현실화되면 AI 수요의 무게중심이 칩 구매에서 제조 역량 투자로 확장될 수 있다는 관점이다.",
+      "rating": null,
+      "targetPrice": null,
+      "evidenceRefs": [
+        "evidence:baeb7bae5a932959"
+      ],
+      "sourceRefs": [
+        "source:637f78c2396e4eed"
+      ]
+    },
+    {
+      "publishedAt": null,
+      "researchType": "UNKNOWN",
+      "stance": "데이터센터 확장 과정에서 투자 속도와 수익성, 신규 모델과 기업 일정의 균형이 핵심이라는 관점이다.",
+      "rating": null,
+      "targetPrice": null,
+      "evidenceRefs": [
+        "evidence:d687c6421d8d1e2a"
+      ],
+      "sourceRefs": [
+        "source:fc083cd0ad774d94"
+      ]
+    }
+  ],
+  "firstKnownView": null,
+  "latestKnownView": null,
+  "viewChanged": null,
+  "changeReasonEvidence": null
+}

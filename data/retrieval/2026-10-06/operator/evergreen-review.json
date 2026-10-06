@@ -1,0 +1,127 @@
+[
+  {
+    "candidate": {
+      "candidateId": "evergreen:theme-higher-for-longer",
+      "topicType": "THEME",
+      "topicId": "theme:higher-for-longer",
+      "reason": "반복 가능한 설명 주제이며 둘 이상의 독립 source 근거가 존재",
+      "supportingEvents": [
+        "event:us-market-close-2026-09-29",
+        "event:us-market-close-2026-09-30"
+      ],
+      "supportingPublications": [
+        "motus-daily-intelligence-2026-09-29",
+        "motus-us-market-2026-09-30"
+      ],
+      "sourceCount": 7,
+      "candidateState": "REVIEW_REQUIRED",
+      "sourceRefs": [
+        "source:02483f80431a21af",
+        "source:29a07ab3ee191f5d",
+        "source:634601952cfcccbc",
+        "source:a8bfcc6803e874a0",
+        "source:b623893b395d1f8a",
+        "source:d6ff3ff59270a263",
+        "source:f14e8f2db1e52e24"
+      ],
+      "evidenceRefs": [
+        "evidence:018dce979ceb61e7",
+        "evidence:323e7d43d74167ca",
+        "evidence:7daff3c8bd8706fc"
+      ],
+      "originRecordIds": [
+        "intel:wall:us-close-2026-09-29",
+        "intel:wall:us-close-reuters-2026-09-29",
+        "intelligence:us-market-close-2026-09-30"
+      ]
+    },
+    "priorCoverage": {
+      "state": "SAME_EVENT",
+      "relatedRecordIds": [
+        "event:us-market-close-2026-09-29"
+      ],
+      "basis": [
+        "CANONICAL_EVENT"
+      ]
+    },
+    "supportingEvents": [
+      "event:us-market-close-2026-09-29",
+      "event:us-market-close-2026-09-30"
+    ],
+    "supportingSources": [
+      "source:02483f80431a21af",
+      "source:29a07ab3ee191f5d",
+      "source:634601952cfcccbc",
+      "source:a8bfcc6803e874a0",
+      "source:b623893b395d1f8a",
+      "source:d6ff3ff59270a263",
+      "source:f14e8f2db1e52e24"
+    ],
+    "staleness": "CURRENT",
+    "conflicts": [],
+    "openQuestions": [
+      "후속 사건과 최신 source로 설명의 현재 유효성 확인"
+    ]
+  },
+  {
+    "candidate": {
+      "candidateId": "evergreen:theme-market-volatility",
+      "topicType": "THEME",
+      "topicId": "theme:market-volatility",
+      "reason": "반복 가능한 설명 주제이며 둘 이상의 독립 source 근거가 존재",
+      "supportingEvents": [
+        "event:us-market-close-2026-09-30",
+        "event:vix-close-2026-09-29"
+      ],
+      "supportingPublications": [
+        "motus-daily-intelligence-2026-09-29",
+        "motus-us-market-2026-09-30"
+      ],
+      "sourceCount": 6,
+      "candidateState": "REVIEW_REQUIRED",
+      "sourceRefs": [
+        "source:29a07ab3ee191f5d",
+        "source:4b15991b9e2930ef",
+        "source:634601952cfcccbc",
+        "source:a8bfcc6803e874a0",
+        "source:d6ff3ff59270a263",
+        "source:f14e8f2db1e52e24"
+      ],
+      "evidenceRefs": [
+        "evidence:018dce979ceb61e7",
+        "evidence:323e7d43d74167ca",
+        "evidence:7daff3c8bd8706fc"
+      ],
+      "originRecordIds": [
+        "intel:wall:vix-close-2026-09-29",
+        "intelligence:us-market-close-2026-09-30"
+      ]
+    },
+    "priorCoverage": {
+      "state": "SAME_EVENT",
+      "relatedRecordIds": [
+        "event:us-market-close-2026-09-30"
+      ],
+      "basis": [
+        "CANONICAL_EVENT"
+      ]
+    },
+    "supportingEvents": [
+      "event:us-market-close-2026-09-30",
+      "event:vix-close-2026-09-29"
+    ],
+    "supportingSources": [
+      "source:29a07ab3ee191f5d",
+      "source:4b15991b9e2930ef",
+      "source:634601952cfcccbc",
+      "source:a8bfcc6803e874a0",
+      "source:d6ff3ff59270a263",
+      "source:f14e8f2db1e52e24"
+    ],
+    "staleness": "CURRENT",
+    "conflicts": [],
+    "openQuestions": [
+      "후속 사건과 최신 source로 설명의 현재 유효성 확인"
+    ]
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "state": "DUPLICATE",
+    "relatedRecordIds": [
+      "event:openai-dots-2026-09-29"
+    ],
+    "basis": [
+      "CANONICAL_EVENT_AND_SOURCE"
+    ]
+  },
+  {
+    "state": "FOLLOW_UP",
+    "relatedRecordIds": [
+      "event:openai-dots-2026-09-29"
+    ],
+    "basis": [
+      "VERIFIED_CONTINUATION_RELATION"
+    ]
+  }
+]

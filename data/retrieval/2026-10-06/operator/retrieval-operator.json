@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-10-06T09:00:00+09:00",
+  "queriesRun": 3,
+  "recordsReturned": 12,
+  "conflictsFound": 0,
+  "staleRecords": 0,
+  "followUpsFound": 1,
+  "duplicatesFound": 1,
+  "precedentsFound": 0,
+  "editorialMemoryUsed": [
+    "memory:0b25a8e9f01e1430",
+    "memory:0d651e6d8bdf5720",
+    "memory:ac33e0d894fe4cbc",
+    "memory:bd7fd405efb636db",
+    "memory:d864d5229e91a734",
+    "memory:dac3e1773e203264",
+    "memory:db3e5bd4950e8de9"
+  ],
+  "warnings": [],
+  "externalActions": {
+    "bloggerInsert": 0,
+    "bloggerPatch": 0,
+    "bloggerPublish": 0,
+    "driveUpload": 0,
+    "publicPdf": 0
+  },
+  "commerce": {
+    "enabled": false
+  },
+  "fingerprint": "45ca08258cf233284c9975d947d75532c547a893267ebbd6e0f4fea2f2e72e33"
+}
