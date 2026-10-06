@@ -1,0 +1,122 @@
+{
+  "executionDate": "2026-10-06T09:25:14.540Z",
+  "retrievedMemoryCount": 21,
+  "newMemoryCandidates": [
+    {
+      "statement": "소버린 AI 운영 통제: 다음 사이클에서 실제 규제 산업 고객 도입 확인",
+      "reviewState": "REVIEW_REQUIRED"
+    },
+    {
+      "statement": "기업 AI 현장형 인재: 다음 사이클에서 교육 수료와 production use case 전환 확인",
+      "reviewState": "REVIEW_REQUIRED"
+    },
+    {
+      "statement": "AI 추론 최적화 에이전트: 다음 사이클에서 실제 benchmark와 고객 배포 사례 확인",
+      "reviewState": "REVIEW_REQUIRED"
+    },
+    {
+      "statement": "M&A와 AI주가 이끈 미국 증시 상승: 다음 사이클에서 10년물 5.3%와 시장 폭 확인",
+      "reviewState": "REVIEW_REQUIRED"
+    },
+    {
+      "statement": "코스피·코스닥 수급 차별화: 다음 사이클에서 외국인 반도체 매도 완화와 코스닥 수급 지속 확인",
+      "reviewState": "REVIEW_REQUIRED"
+    }
+  ],
+  "weeklyStatus": "NOT_READY",
+  "pdfStatus": "NOT_GENERATED",
+  "searchMetricsStatus": "NOT_AVAILABLE",
+  "externalActions": {
+    "bloggerLookup": 3,
+    "bloggerInsert": 2,
+    "bloggerPatch": 0,
+    "bloggerPublish": 0
+  },
+  "commerce": {
+    "enabled": false
+  },
+  "operations": [
+    {
+      "category": "AI_INTELLIGENCE",
+      "issueDate": "2026-10-05",
+      "title": "기업 AI의 다음 관문: 소버린 운영, 현장형 인재, 추론 최적화",
+      "publicationReadiness": "APPROVAL_REQUIRED",
+      "humanReviewState": "APPROVAL_REQUIRED",
+      "remoteDuplicateCount": 0,
+      "draftPostId": "4294902999154862199",
+      "draftState": "DRAFT",
+      "publicPostUrl": null,
+      "postsInsertCount": 1,
+      "publishCount": 0,
+      "validation": {
+        "state": true,
+        "title": true,
+        "label": true,
+        "body": true,
+        "sourceLinks": true,
+        "mobile": true,
+        "inlineStyle": true,
+        "rawUrl": true,
+        "internalToken": true,
+        "commerce": true,
+        "svg": 0,
+        "pass": true
+      },
+      "warnings": [],
+      "commerce": {
+        "enabled": false
+      }
+    },
+    {
+      "category": "US_MARKET",
+      "issueDate": "2026-10-05",
+      "title": "미국 증시 마감: 나스닥 사상 최고, M&A와 AI주 강세가 5.31% 금리 부담을 압도",
+      "publicationReadiness": "APPROVAL_REQUIRED",
+      "humanReviewState": "APPROVAL_REQUIRED",
+      "remoteDuplicateCount": 0,
+      "draftPostId": "614930389904987485",
+      "draftState": "DRAFT",
+      "publicPostUrl": null,
+      "postsInsertCount": 1,
+      "publishCount": 0,
+      "validation": {
+        "state": true,
+        "title": true,
+        "label": true,
+        "body": true,
+        "sourceLinks": true,
+        "mobile": true,
+        "inlineStyle": true,
+        "rawUrl": true,
+        "internalToken": true,
+        "commerce": true,
+        "svg": 4,
+        "pass": true
+      },
+      "warnings": [],
+      "commerce": {
+        "enabled": false
+      }
+    },
+    {
+      "category": "KOREA_MARKET",
+      "issueDate": "2026-10-06",
+      "title": "국내 증시 마감: 외국인 반도체 매도에 코스피 하락, 코스닥은 2.98% 반등",
+      "publicationReadiness": "HOLD",
+      "humanReviewState": "HOLD",
+      "remoteDuplicateCount": 0,
+      "draftPostId": null,
+      "draftState": null,
+      "publicPostUrl": null,
+      "postsInsertCount": 0,
+      "publishCount": 0,
+      "validation": null,
+      "warnings": [
+        "검증된 최신 국내 증권사 원문 리서치가 없어 publication unit을 HOLD"
+      ],
+      "commerce": {
+        "enabled": false
+      }
+    }
+  ]
+}

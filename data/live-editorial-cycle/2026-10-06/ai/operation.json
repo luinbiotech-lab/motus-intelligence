@@ -1,0 +1,31 @@
+{
+  "category": "AI_INTELLIGENCE",
+  "issueDate": "2026-10-05",
+  "title": "기업 AI의 다음 관문: 소버린 운영, 현장형 인재, 추론 최적화",
+  "publicationReadiness": "APPROVAL_REQUIRED",
+  "humanReviewState": "APPROVAL_REQUIRED",
+  "remoteDuplicateCount": 0,
+  "draftPostId": "4294902999154862199",
+  "draftState": "DRAFT",
+  "publicPostUrl": null,
+  "postsInsertCount": 1,
+  "publishCount": 0,
+  "validation": {
+    "state": true,
+    "title": true,
+    "label": true,
+    "body": true,
+    "sourceLinks": true,
+    "mobile": true,
+    "inlineStyle": true,
+    "rawUrl": true,
+    "internalToken": true,
+    "commerce": true,
+    "svg": 0,
+    "pass": true
+  },
+  "warnings": [],
+  "commerce": {
+    "enabled": false
+  }
+}

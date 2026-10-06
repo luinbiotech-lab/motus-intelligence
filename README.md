@@ -28,6 +28,8 @@ npm.cmd run motus:library -- --search OpenAI
 
 `npm run motus:retrieve`는 Content Library를 canonical ID와 relationship graph로 조회합니다. `--company`, `--theme`, `--event`, `--institution`, `--sector`, `--market`, `--from`, `--to`와 `--timeline`, `--retrospective`, `--precedents`, `--prior-coverage`, `--memory`를 조합할 수 있습니다. `--audit`은 샘플 retrieval과 Editorial Memory를 `data/retrieval/YYYY-MM-DD/` 및 `data/library/memory/`에 로컬 저장하지만 Blogger·Drive·공개 PDF 작업은 호출하지 않습니다. 비교 기간이 없으면 trend나 변화 결론을 생성하지 않습니다.
 
+`npm run motus:editorial-cycle`은 Content Library와 Editorial Memory를 조회해 카테고리별 `DailyEditorialPlan`과 로컬 preview를 생성합니다. 후보는 `NEW`, `FOLLOW_UP`, `RELATED`, `DUPLICATE`로 분류하고 점수나 임의 순위 없이 `LEAD`, `STANDARD`, `BRIEF`, `FOLLOW_UP`, `DEFER`, `REJECT`를 기록합니다. `--execute-drafts`를 명시하면 원격 중복 조회 후 품질 게이트를 통과한 항목만 Blogger Draft로 생성하며 publish는 호출하지 않습니다. post-publish Content Library, Weekly feed, Search registration은 Human Review `APPROVED`와 실제 공개 URL 확인 뒤에만 활성화합니다.
+
 ```powershell
 npm.cmd run report -- --input data/manual/day.json
 npm.cmd run report -- --input data/manual/2026-09-11/input.json

@@ -1,0 +1,126 @@
+{
+  "planId": "editorial-plan:korea_market:2026-10-06",
+  "category": "KOREA_MARKET",
+  "issueDate": "2026-10-06",
+  "candidates": [
+    {
+      "candidateId": "korea:close-2026-10-06",
+      "topic": "코스피·코스닥 수급 차별화",
+      "companyIds": [
+        "company:samsung-electronics",
+        "company:sk-hynix",
+        "company:lg-energy-solution"
+      ],
+      "themeIds": [
+        "theme:ai-infrastructure"
+      ],
+      "eventId": "event:korea-market-close-2026-10-06",
+      "continuationOfEventId": null,
+      "sourceRefs": [
+        "https://search.newspim.com/news/view/20261006001098",
+        "https://www.businesskorea.co.kr/news/articleView.html?idxno=278307"
+      ],
+      "importanceReason": "대형 반도체 매도와 코스닥 성장주 순환매",
+      "noveltyReason": "최신 완료 한국 정규장 수급과 종가",
+      "marketRelevance": "외국인 수급과 업종 순환",
+      "sourceQuality": "VERIFIED_PUBLIC_CROSS_CHECK",
+      "crossVerification": [
+        "NewsPim citing Korea Exchange",
+        "BusinessKorea citing Korea Exchange"
+      ],
+      "lead": true,
+      "depth": {
+        "whatHappened": "코스피 하락, 코스닥 2.98% 상승",
+        "whyImportant": "시장 전체보다 업종·수급 차별화가 핵심",
+        "whatChanged": "외국인 대형 반도체 매도와 코스닥 동반 순매수",
+        "marketMeaning": "대형주에서 이차전지·바이오·장비로 순환",
+        "whatNext": "외국인 반도체 매도 완화와 코스닥 수급 지속 확인"
+      },
+      "coverageState": "NEW",
+      "priorCoverage": {
+        "state": "NONE",
+        "relatedRecordIds": [],
+        "basis": []
+      },
+      "recommendedTreatment": "LEAD",
+      "memoryRefs": [
+        "memory:0d651e6d8bdf5720",
+        "memory:ac33e0d894fe4cbc",
+        "memory:db3e5bd4950e8de9",
+        "memory:dac3e1773e203264",
+        "memory:0b25a8e9f01e1430",
+        "memory:d864d5229e91a734",
+        "memory:bd7fd405efb636db"
+      ]
+    }
+  ],
+  "selected": [
+    {
+      "candidateId": "korea:close-2026-10-06",
+      "topic": "코스피·코스닥 수급 차별화",
+      "companyIds": [
+        "company:samsung-electronics",
+        "company:sk-hynix",
+        "company:lg-energy-solution"
+      ],
+      "themeIds": [
+        "theme:ai-infrastructure"
+      ],
+      "eventId": "event:korea-market-close-2026-10-06",
+      "continuationOfEventId": null,
+      "sourceRefs": [
+        "https://search.newspim.com/news/view/20261006001098",
+        "https://www.businesskorea.co.kr/news/articleView.html?idxno=278307"
+      ],
+      "importanceReason": "대형 반도체 매도와 코스닥 성장주 순환매",
+      "noveltyReason": "최신 완료 한국 정규장 수급과 종가",
+      "marketRelevance": "외국인 수급과 업종 순환",
+      "sourceQuality": "VERIFIED_PUBLIC_CROSS_CHECK",
+      "crossVerification": [
+        "NewsPim citing Korea Exchange",
+        "BusinessKorea citing Korea Exchange"
+      ],
+      "lead": true,
+      "depth": {
+        "whatHappened": "코스피 하락, 코스닥 2.98% 상승",
+        "whyImportant": "시장 전체보다 업종·수급 차별화가 핵심",
+        "whatChanged": "외국인 대형 반도체 매도와 코스닥 동반 순매수",
+        "marketMeaning": "대형주에서 이차전지·바이오·장비로 순환",
+        "whatNext": "외국인 반도체 매도 완화와 코스닥 수급 지속 확인"
+      },
+      "coverageState": "NEW",
+      "priorCoverage": {
+        "state": "NONE",
+        "relatedRecordIds": [],
+        "basis": []
+      },
+      "recommendedTreatment": "LEAD",
+      "memoryRefs": [
+        "memory:0d651e6d8bdf5720",
+        "memory:ac33e0d894fe4cbc",
+        "memory:db3e5bd4950e8de9",
+        "memory:dac3e1773e203264",
+        "memory:0b25a8e9f01e1430",
+        "memory:d864d5229e91a734",
+        "memory:bd7fd405efb636db"
+      ]
+    }
+  ],
+  "deferred": [],
+  "rejected": [],
+  "reviewState": "HOLD",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "weeklyFeedEligible": true,
+  "contentDepthGate": "PASS",
+  "externalActions": {
+    "bloggerLookup": 0,
+    "bloggerInsert": 0,
+    "bloggerPatch": 0,
+    "bloggerPublish": 0
+  },
+  "commerce": {
+    "enabled": false
+  },
+  "fingerprint": "sha256:a39f4e6a5791296398038982f2eebd6d647bc9bf9e6af32fccc07f6d4a4b066a"
+}

@@ -1,0 +1,31 @@
+{
+  "category": "US_MARKET",
+  "issueDate": "2026-10-05",
+  "title": "미국 증시 마감: 나스닥 사상 최고, M&A와 AI주 강세가 5.31% 금리 부담을 압도",
+  "publicationReadiness": "APPROVAL_REQUIRED",
+  "humanReviewState": "APPROVAL_REQUIRED",
+  "remoteDuplicateCount": 0,
+  "draftPostId": "614930389904987485",
+  "draftState": "DRAFT",
+  "publicPostUrl": null,
+  "postsInsertCount": 1,
+  "publishCount": 0,
+  "validation": {
+    "state": true,
+    "title": true,
+    "label": true,
+    "body": true,
+    "sourceLinks": true,
+    "mobile": true,
+    "inlineStyle": true,
+    "rawUrl": true,
+    "internalToken": true,
+    "commerce": true,
+    "svg": 4,
+    "pass": true
+  },
+  "warnings": [],
+  "commerce": {
+    "enabled": false
+  }
+}

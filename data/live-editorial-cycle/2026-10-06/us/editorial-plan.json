@@ -1,0 +1,134 @@
+{
+  "planId": "editorial-plan:us_market:2026-10-05",
+  "category": "US_MARKET",
+  "issueDate": "2026-10-05",
+  "candidates": [
+    {
+      "candidateId": "us:close-2026-10-05",
+      "topic": "M&A와 AI주가 이끈 미국 증시 상승",
+      "companyIds": [
+        "company:nvidia"
+      ],
+      "themeIds": [
+        "theme:ai-infrastructure",
+        "theme:higher-for-longer"
+      ],
+      "eventId": "event:us-market-close-2026-10-05",
+      "continuationOfEventId": null,
+      "sourceRefs": [
+        "https://apnews.com/article/7f89624b604f25f313502c77d4d0b010",
+        "https://apnews.com/article/f83cf147deaf5a2361b1ae7eee74a627",
+        "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202610&type=daily_treasury_yield_curve",
+        "https://finance.yahoo.com/quote/%5EVIX/history/?p=%5EVIX",
+        "https://www.portfolio-terminal.com/markets/us-dollar-index/october-2026",
+        "https://www.portfolio-terminal.com/markets/stock-market-close"
+      ],
+      "importanceReason": "나스닥 사상 최고와 5.31% 장기금리 공존",
+      "noveltyReason": "최신 완료 정규장 종가와 5거래일 흐름",
+      "marketRelevance": "성장주 밸류에이션과 M&A 확산",
+      "sourceQuality": "PRIMARY_MEDIA_AND_OFFICIAL",
+      "crossVerification": [
+        "AP index close",
+        "U.S. Treasury yield curve",
+        "Cboe VIX series"
+      ],
+      "lead": true,
+      "depth": {
+        "whatHappened": "4대 지수 상승, 나스닥 사상 최고",
+        "whyImportant": "높은 할인율에도 AI·M&A 수요가 위험선호를 지지",
+        "whatChanged": "직전 세션 대비 상승 폭 확대와 장기금리 상승",
+        "marketMeaning": "지수 상승의 지속성은 실적과 시장 폭 확산에 달림",
+        "whatNext": "10년물 5.3%와 시장 폭 확인"
+      },
+      "coverageState": "NEW",
+      "priorCoverage": {
+        "state": "NONE",
+        "relatedRecordIds": [],
+        "basis": []
+      },
+      "recommendedTreatment": "LEAD",
+      "memoryRefs": [
+        "memory:0d651e6d8bdf5720",
+        "memory:ac33e0d894fe4cbc",
+        "memory:db3e5bd4950e8de9",
+        "memory:dac3e1773e203264",
+        "memory:0b25a8e9f01e1430",
+        "memory:d864d5229e91a734",
+        "memory:bd7fd405efb636db"
+      ]
+    }
+  ],
+  "selected": [
+    {
+      "candidateId": "us:close-2026-10-05",
+      "topic": "M&A와 AI주가 이끈 미국 증시 상승",
+      "companyIds": [
+        "company:nvidia"
+      ],
+      "themeIds": [
+        "theme:ai-infrastructure",
+        "theme:higher-for-longer"
+      ],
+      "eventId": "event:us-market-close-2026-10-05",
+      "continuationOfEventId": null,
+      "sourceRefs": [
+        "https://apnews.com/article/7f89624b604f25f313502c77d4d0b010",
+        "https://apnews.com/article/f83cf147deaf5a2361b1ae7eee74a627",
+        "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202610&type=daily_treasury_yield_curve",
+        "https://finance.yahoo.com/quote/%5EVIX/history/?p=%5EVIX",
+        "https://www.portfolio-terminal.com/markets/us-dollar-index/october-2026",
+        "https://www.portfolio-terminal.com/markets/stock-market-close"
+      ],
+      "importanceReason": "나스닥 사상 최고와 5.31% 장기금리 공존",
+      "noveltyReason": "최신 완료 정규장 종가와 5거래일 흐름",
+      "marketRelevance": "성장주 밸류에이션과 M&A 확산",
+      "sourceQuality": "PRIMARY_MEDIA_AND_OFFICIAL",
+      "crossVerification": [
+        "AP index close",
+        "U.S. Treasury yield curve",
+        "Cboe VIX series"
+      ],
+      "lead": true,
+      "depth": {
+        "whatHappened": "4대 지수 상승, 나스닥 사상 최고",
+        "whyImportant": "높은 할인율에도 AI·M&A 수요가 위험선호를 지지",
+        "whatChanged": "직전 세션 대비 상승 폭 확대와 장기금리 상승",
+        "marketMeaning": "지수 상승의 지속성은 실적과 시장 폭 확산에 달림",
+        "whatNext": "10년물 5.3%와 시장 폭 확인"
+      },
+      "coverageState": "NEW",
+      "priorCoverage": {
+        "state": "NONE",
+        "relatedRecordIds": [],
+        "basis": []
+      },
+      "recommendedTreatment": "LEAD",
+      "memoryRefs": [
+        "memory:0d651e6d8bdf5720",
+        "memory:ac33e0d894fe4cbc",
+        "memory:db3e5bd4950e8de9",
+        "memory:dac3e1773e203264",
+        "memory:0b25a8e9f01e1430",
+        "memory:d864d5229e91a734",
+        "memory:bd7fd405efb636db"
+      ]
+    }
+  ],
+  "deferred": [],
+  "rejected": [],
+  "reviewState": "APPROVAL_REQUIRED",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "weeklyFeedEligible": true,
+  "contentDepthGate": "PASS",
+  "externalActions": {
+    "bloggerLookup": 0,
+    "bloggerInsert": 0,
+    "bloggerPatch": 0,
+    "bloggerPublish": 0
+  },
+  "commerce": {
+    "enabled": false
+  },
+  "fingerprint": "sha256:f87842ea62a8fe10085e21b271b2ff1f12a71828b1e751d7e0246464d6dcf679"
+}

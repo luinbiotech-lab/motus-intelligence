@@ -1,0 +1,310 @@
+{
+  "planId": "editorial-plan:ai_intelligence:2026-10-05",
+  "category": "AI_INTELLIGENCE",
+  "issueDate": "2026-10-05",
+  "candidates": [
+    {
+      "candidateId": "ai:msft-sovereign",
+      "topic": "소버린 AI 운영 통제",
+      "companyIds": [
+        "company:microsoft",
+        "company:nvidia"
+      ],
+      "themeIds": [
+        "theme:agent-security",
+        "theme:ai-infrastructure"
+      ],
+      "eventId": "event:microsoft-sovereign-ai-2026-10-05",
+      "continuationOfEventId": null,
+      "sourceRefs": [
+        "https://www.microsoft.com/en-us/microsoft-cloud/blog/general/2026/10/05/sovereign-ai-accelerate-innovation-with-control-and-choice/"
+      ],
+      "importanceReason": "규제 산업의 AI 도입 조건을 구체화",
+      "noveltyReason": "새 공식 framework와 white paper",
+      "marketRelevance": "클라우드·가속기·보안 인프라 수요 연결",
+      "sourceQuality": "OFFICIAL",
+      "crossVerification": [
+        "Microsoft official publication",
+        "NVIDIA contribution described in source"
+      ],
+      "lead": true,
+      "depth": {
+        "whatHappened": "Microsoft와 NVIDIA가 소버린 AI framework 공개",
+        "whyImportant": "기업 AI 운영 통제가 도입의 핵심 조건으로 부상",
+        "whatChanged": "데이터 위치에서 모델·에이전트·운영 통제로 범위 확대",
+        "marketMeaning": "클라우드와 AI 인프라의 통합 경쟁 심화",
+        "whatNext": "실제 규제 산업 고객 도입 확인"
+      },
+      "coverageState": "RELATED",
+      "priorCoverage": {
+        "state": "RELATED",
+        "relatedRecordIds": [
+          "event:nvidia-open-agent-safety-platform-2026-09-28"
+        ],
+        "basis": [
+          "COMPANY_AND_THEME_GRAPH_OVERLAP"
+        ]
+      },
+      "recommendedTreatment": "LEAD",
+      "memoryRefs": [
+        "memory:0d651e6d8bdf5720",
+        "memory:ac33e0d894fe4cbc",
+        "memory:db3e5bd4950e8de9",
+        "memory:dac3e1773e203264",
+        "memory:0b25a8e9f01e1430",
+        "memory:d864d5229e91a734",
+        "memory:bd7fd405efb636db"
+      ]
+    },
+    {
+      "candidateId": "ai:anthropic-academy",
+      "topic": "기업 AI 현장형 인재",
+      "companyIds": [
+        "company:anthropic"
+      ],
+      "themeIds": [
+        "theme:agentic-ai"
+      ],
+      "eventId": "event:anthropic-frontier-academy-2026-10-02",
+      "continuationOfEventId": null,
+      "sourceRefs": [
+        "https://www.anthropic.com/news/claude-frontier-academy"
+      ],
+      "importanceReason": "기업 AI 실행 인력 병목을 직접 겨냥",
+      "noveltyReason": "1억 달러·1만 명 공식 목표",
+      "marketRelevance": "기업 AI 사용량과 파트너 생태계 확장",
+      "sourceQuality": "OFFICIAL",
+      "crossVerification": [
+        "Anthropic official announcement"
+      ],
+      "depth": {
+        "whatHappened": "Anthropic이 Claude Frontier Academy 출범",
+        "whyImportant": "도입 병목이 모델에서 현장 실행 역량으로 이동",
+        "whatChanged": "교육을 실제 기업 프로젝트 residency와 연결",
+        "marketMeaning": "기업용 AI 서비스 확산의 실행 기반 확대",
+        "whatNext": "교육 수료와 production use case 전환 확인"
+      },
+      "coverageState": "NEW",
+      "priorCoverage": {
+        "state": "NONE",
+        "relatedRecordIds": [],
+        "basis": []
+      },
+      "recommendedTreatment": "STANDARD",
+      "memoryRefs": [
+        "memory:0d651e6d8bdf5720",
+        "memory:ac33e0d894fe4cbc",
+        "memory:db3e5bd4950e8de9",
+        "memory:dac3e1773e203264",
+        "memory:0b25a8e9f01e1430",
+        "memory:d864d5229e91a734",
+        "memory:bd7fd405efb636db"
+      ]
+    },
+    {
+      "candidateId": "ai:aws-inference-skill",
+      "topic": "AI 추론 최적화 에이전트",
+      "companyIds": [],
+      "themeIds": [
+        "theme:agentic-ai",
+        "theme:ai-infrastructure"
+      ],
+      "eventId": "event:aws-sagemaker-agent-skill-2026-10-05",
+      "continuationOfEventId": null,
+      "sourceRefs": [
+        "https://aws.amazon.com/blogs/machine-learning/new-agent-skill-amazon-sagemaker-optimized-generative-ai-inference-for-your-coding-agent/"
+      ],
+      "importanceReason": "추론 비용·성능 최적화를 코딩 에이전트에 연결",
+      "noveltyReason": "새 aws-ai-ml skill 공개",
+      "marketRelevance": "클라우드 추론 운영 효율 경쟁",
+      "sourceQuality": "OFFICIAL",
+      "crossVerification": [
+        "AWS official technical announcement"
+      ],
+      "depth": {
+        "whatHappened": "AWS가 SageMaker 추론 최적화 skill 공개",
+        "whyImportant": "추론 비용과 성능이 기업 AI 확장의 핵심",
+        "whatChanged": "인프라 선택을 자연어와 실행 코드로 연결",
+        "marketMeaning": "클라우드 사업자의 운영 도구 경쟁 강화",
+        "whatNext": "실제 benchmark와 고객 배포 사례 확인"
+      },
+      "coverageState": "NEW",
+      "priorCoverage": {
+        "state": "NONE",
+        "relatedRecordIds": [],
+        "basis": []
+      },
+      "recommendedTreatment": "STANDARD",
+      "memoryRefs": [
+        "memory:0d651e6d8bdf5720",
+        "memory:ac33e0d894fe4cbc",
+        "memory:db3e5bd4950e8de9",
+        "memory:dac3e1773e203264",
+        "memory:0b25a8e9f01e1430",
+        "memory:d864d5229e91a734",
+        "memory:bd7fd405efb636db"
+      ]
+    }
+  ],
+  "selected": [
+    {
+      "candidateId": "ai:msft-sovereign",
+      "topic": "소버린 AI 운영 통제",
+      "companyIds": [
+        "company:microsoft",
+        "company:nvidia"
+      ],
+      "themeIds": [
+        "theme:agent-security",
+        "theme:ai-infrastructure"
+      ],
+      "eventId": "event:microsoft-sovereign-ai-2026-10-05",
+      "continuationOfEventId": null,
+      "sourceRefs": [
+        "https://www.microsoft.com/en-us/microsoft-cloud/blog/general/2026/10/05/sovereign-ai-accelerate-innovation-with-control-and-choice/"
+      ],
+      "importanceReason": "규제 산업의 AI 도입 조건을 구체화",
+      "noveltyReason": "새 공식 framework와 white paper",
+      "marketRelevance": "클라우드·가속기·보안 인프라 수요 연결",
+      "sourceQuality": "OFFICIAL",
+      "crossVerification": [
+        "Microsoft official publication",
+        "NVIDIA contribution described in source"
+      ],
+      "lead": true,
+      "depth": {
+        "whatHappened": "Microsoft와 NVIDIA가 소버린 AI framework 공개",
+        "whyImportant": "기업 AI 운영 통제가 도입의 핵심 조건으로 부상",
+        "whatChanged": "데이터 위치에서 모델·에이전트·운영 통제로 범위 확대",
+        "marketMeaning": "클라우드와 AI 인프라의 통합 경쟁 심화",
+        "whatNext": "실제 규제 산업 고객 도입 확인"
+      },
+      "coverageState": "RELATED",
+      "priorCoverage": {
+        "state": "RELATED",
+        "relatedRecordIds": [
+          "event:nvidia-open-agent-safety-platform-2026-09-28"
+        ],
+        "basis": [
+          "COMPANY_AND_THEME_GRAPH_OVERLAP"
+        ]
+      },
+      "recommendedTreatment": "LEAD",
+      "memoryRefs": [
+        "memory:0d651e6d8bdf5720",
+        "memory:ac33e0d894fe4cbc",
+        "memory:db3e5bd4950e8de9",
+        "memory:dac3e1773e203264",
+        "memory:0b25a8e9f01e1430",
+        "memory:d864d5229e91a734",
+        "memory:bd7fd405efb636db"
+      ]
+    },
+    {
+      "candidateId": "ai:anthropic-academy",
+      "topic": "기업 AI 현장형 인재",
+      "companyIds": [
+        "company:anthropic"
+      ],
+      "themeIds": [
+        "theme:agentic-ai"
+      ],
+      "eventId": "event:anthropic-frontier-academy-2026-10-02",
+      "continuationOfEventId": null,
+      "sourceRefs": [
+        "https://www.anthropic.com/news/claude-frontier-academy"
+      ],
+      "importanceReason": "기업 AI 실행 인력 병목을 직접 겨냥",
+      "noveltyReason": "1억 달러·1만 명 공식 목표",
+      "marketRelevance": "기업 AI 사용량과 파트너 생태계 확장",
+      "sourceQuality": "OFFICIAL",
+      "crossVerification": [
+        "Anthropic official announcement"
+      ],
+      "depth": {
+        "whatHappened": "Anthropic이 Claude Frontier Academy 출범",
+        "whyImportant": "도입 병목이 모델에서 현장 실행 역량으로 이동",
+        "whatChanged": "교육을 실제 기업 프로젝트 residency와 연결",
+        "marketMeaning": "기업용 AI 서비스 확산의 실행 기반 확대",
+        "whatNext": "교육 수료와 production use case 전환 확인"
+      },
+      "coverageState": "NEW",
+      "priorCoverage": {
+        "state": "NONE",
+        "relatedRecordIds": [],
+        "basis": []
+      },
+      "recommendedTreatment": "STANDARD",
+      "memoryRefs": [
+        "memory:0d651e6d8bdf5720",
+        "memory:ac33e0d894fe4cbc",
+        "memory:db3e5bd4950e8de9",
+        "memory:dac3e1773e203264",
+        "memory:0b25a8e9f01e1430",
+        "memory:d864d5229e91a734",
+        "memory:bd7fd405efb636db"
+      ]
+    },
+    {
+      "candidateId": "ai:aws-inference-skill",
+      "topic": "AI 추론 최적화 에이전트",
+      "companyIds": [],
+      "themeIds": [
+        "theme:agentic-ai",
+        "theme:ai-infrastructure"
+      ],
+      "eventId": "event:aws-sagemaker-agent-skill-2026-10-05",
+      "continuationOfEventId": null,
+      "sourceRefs": [
+        "https://aws.amazon.com/blogs/machine-learning/new-agent-skill-amazon-sagemaker-optimized-generative-ai-inference-for-your-coding-agent/"
+      ],
+      "importanceReason": "추론 비용·성능 최적화를 코딩 에이전트에 연결",
+      "noveltyReason": "새 aws-ai-ml skill 공개",
+      "marketRelevance": "클라우드 추론 운영 효율 경쟁",
+      "sourceQuality": "OFFICIAL",
+      "crossVerification": [
+        "AWS official technical announcement"
+      ],
+      "depth": {
+        "whatHappened": "AWS가 SageMaker 추론 최적화 skill 공개",
+        "whyImportant": "추론 비용과 성능이 기업 AI 확장의 핵심",
+        "whatChanged": "인프라 선택을 자연어와 실행 코드로 연결",
+        "marketMeaning": "클라우드 사업자의 운영 도구 경쟁 강화",
+        "whatNext": "실제 benchmark와 고객 배포 사례 확인"
+      },
+      "coverageState": "NEW",
+      "priorCoverage": {
+        "state": "NONE",
+        "relatedRecordIds": [],
+        "basis": []
+      },
+      "recommendedTreatment": "STANDARD",
+      "memoryRefs": [
+        "memory:0d651e6d8bdf5720",
+        "memory:ac33e0d894fe4cbc",
+        "memory:db3e5bd4950e8de9",
+        "memory:dac3e1773e203264",
+        "memory:0b25a8e9f01e1430",
+        "memory:d864d5229e91a734",
+        "memory:bd7fd405efb636db"
+      ]
+    }
+  ],
+  "deferred": [],
+  "rejected": [],
+  "reviewState": "APPROVAL_REQUIRED",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "weeklyFeedEligible": true,
+  "contentDepthGate": "PASS",
+  "externalActions": {
+    "bloggerLookup": 0,
+    "bloggerInsert": 0,
+    "bloggerPatch": 0,
+    "bloggerPublish": 0
+  },
+  "commerce": {
+    "enabled": false
+  },
+  "fingerprint": "sha256:7166cce934eae5314213ba01640d947b31d0e427f2610843bd6f219d062d9a00"
+}
