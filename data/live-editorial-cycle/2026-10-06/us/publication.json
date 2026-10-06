@@ -1,0 +1,137 @@
+{
+  "publicationId": "motus-us-market-2026-10-05",
+  "category": "US_MARKET",
+  "issueDate": "2026-10-05",
+  "draftPostId": "614930389904987485",
+  "approvedAt": "2026-10-06T10:55:28.916Z",
+  "review": {
+    "decision": "APPROVED",
+    "reviewer": "human",
+    "provenance": "USER_EXPLICIT_APPROVAL"
+  },
+  "insertCount": 0,
+  "patchCount": 0,
+  "pdf": {
+    "state": "NOT_GENERATED",
+    "reviewState": "PENDING",
+    "visibility": "PRIVATE",
+    "consistency": "NOT_AVAILABLE"
+  },
+  "audit": [
+    {
+      "at": "2026-10-06T10:55:28.916Z",
+      "event": "HUMAN_REVIEW_APPROVED",
+      "detail": "User explicitly approved this exact Blogger Draft for production publish"
+    },
+    {
+      "at": "2026-10-06T19:55:45+09:00",
+      "event": "PUBLISHED",
+      "detail": "Blogger post 614930389904987485 published once and public page returned HTTP 200"
+    }
+  ],
+  "commerce": {
+    "enabled": false
+  },
+  "state": "PUBLISHED",
+  "publicPostUrl": "https://motusnova.blogspot.com/2026/10/m-ai-531.html",
+  "publishedAt": "2026-10-06T19:55:45+09:00",
+  "remoteLookupCount": 4,
+  "remoteDuplicateCount": 0,
+  "publishCallCount": 1,
+  "preflight": {
+    "postId": true,
+    "state": true,
+    "title": true,
+    "label": true,
+    "fingerprint": true,
+    "sourceAnchors": true,
+    "sourceDedupe": true,
+    "rawUrlSafe": true,
+    "internalSafe": true,
+    "fixtureSafe": true,
+    "commerceDisabled": true,
+    "mobile": true,
+    "colorRule": true,
+    "aiDepth": true,
+    "usMarket": true,
+    "svgCount": 4,
+    "pass": true
+  },
+  "postflight": {
+    "postId": true,
+    "state": true,
+    "title": true,
+    "label": true,
+    "fingerprint": true,
+    "sourceAnchors": true,
+    "sourceDedupe": true,
+    "rawUrlSafe": true,
+    "internalSafe": true,
+    "fixtureSafe": true,
+    "commerceDisabled": true,
+    "mobile": true,
+    "colorRule": true,
+    "aiDepth": true,
+    "usMarket": true,
+    "svgCount": 4,
+    "pass": true
+  },
+  "httpStatus": 200,
+  "searchRegistration": {
+    "publicationId": "motus-us-market-2026-10-05",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/m-ai-531.html",
+    "registeredAt": "2026-10-06T19:55:45+09:00",
+    "trigger": "PUBLICATION_PUBLISHED",
+    "googleInspectionState": "QUEUED",
+    "naverDiscoveryState": "PENDING",
+    "visibility": {
+      "publicationId": "motus-us-market-2026-10-05",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/10/m-ai-531.html",
+      "google": {
+        "discovered": null,
+        "indexed": null,
+        "lastCrawl": null,
+        "coverageState": null,
+        "inspectionAt": null
+      },
+      "naver": {
+        "discovered": null,
+        "indexed": null,
+        "collectionState": null,
+        "inspectionAt": null
+      },
+      "sitemapIncluded": null,
+      "rssIncluded": null
+    }
+  },
+  "libraryRegistration": {
+    "publicationId": "motus-us-market-2026-10-05",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/m-ai-531.html",
+    "publishedAt": "2026-10-06T19:55:45+09:00",
+    "relatedEvents": [
+      "event:us-market-close-2026-10-05"
+    ],
+    "relatedCompanies": [
+      "company:nvidia"
+    ],
+    "relatedThemes": [
+      "theme:ai-infrastructure",
+      "theme:higher-for-longer"
+    ],
+    "sourceRefs": [
+      "https://apnews.com/article/7f89624b604f25f313502c77d4d0b010",
+      "https://apnews.com/article/f83cf147deaf5a2361b1ae7eee74a627",
+      "https://finance.yahoo.com/quote/%5EVIX/history/?p=%5EVIX",
+      "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202610&type=daily_treasury_yield_curve",
+      "https://www.portfolio-terminal.com/markets/stock-market-close",
+      "https://www.portfolio-terminal.com/markets/us-dollar-index/october-2026"
+    ]
+  },
+  "weeklyFeed": {
+    "category": "US_MARKET",
+    "issueDate": "2026-10-05",
+    "publicationId": "motus-us-market-2026-10-05",
+    "state": "PUBLISHED"
+  },
+  "error": null
+}

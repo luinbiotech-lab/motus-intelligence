@@ -3,13 +3,13 @@
   "issueDate": "2026-10-05",
   "title": "미국 증시 마감: 나스닥 사상 최고, M&A와 AI주 강세가 5.31% 금리 부담을 압도",
   "publicationReadiness": "APPROVAL_REQUIRED",
-  "humanReviewState": "APPROVAL_REQUIRED",
+  "humanReviewState": "APPROVED",
   "remoteDuplicateCount": 0,
   "draftPostId": "614930389904987485",
-  "draftState": "DRAFT",
-  "publicPostUrl": null,
+  "draftState": "PUBLISHED",
+  "publicPostUrl": "https://motusnova.blogspot.com/2026/10/m-ai-531.html",
   "postsInsertCount": 1,
-  "publishCount": 0,
+  "publishCount": 1,
   "validation": {
     "state": true,
     "title": true,
@@ -27,5 +27,53 @@
   "warnings": [],
   "commerce": {
     "enabled": false
-  }
+  },
+  "reviewer": "human",
+  "approvedAt": "2026-10-06T10:55:28.916Z",
+  "reviewProvenance": "USER_EXPLICIT_APPROVAL",
+  "searchRegistration": {
+    "publicationId": "motus-us-market-2026-10-05",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/m-ai-531.html",
+    "registeredAt": "2026-10-06T19:55:45+09:00",
+    "trigger": "PUBLICATION_PUBLISHED",
+    "googleInspectionState": "QUEUED",
+    "naverDiscoveryState": "PENDING",
+    "visibility": {
+      "publicationId": "motus-us-market-2026-10-05",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/10/m-ai-531.html",
+      "google": {
+        "discovered": null,
+        "indexed": null,
+        "lastCrawl": null,
+        "coverageState": null,
+        "inspectionAt": null
+      },
+      "naver": {
+        "discovered": null,
+        "indexed": null,
+        "collectionState": null,
+        "inspectionAt": null
+      },
+      "sitemapIncluded": null,
+      "rssIncluded": null
+    }
+  },
+  "pdf": {
+    "state": "NOT_GENERATED",
+    "reviewState": "PENDING",
+    "visibility": "PRIVATE",
+    "consistency": "NOT_AVAILABLE"
+  },
+  "audit": [
+    {
+      "at": "2026-10-06T10:55:28.916Z",
+      "event": "HUMAN_REVIEW_APPROVED",
+      "detail": "User explicitly approved this exact Blogger Draft for production publish"
+    },
+    {
+      "at": "2026-10-06T19:55:45+09:00",
+      "event": "PUBLISHED",
+      "detail": "Blogger post 614930389904987485 published once and public page returned HTTP 200"
+    }
+  ]
 }

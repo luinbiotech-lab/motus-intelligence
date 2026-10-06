@@ -1,0 +1,50 @@
+[
+  {
+    "publicationId": "motus-ai-intelligence-2026-10-05",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/ai.html",
+    "publishedAt": "2026-10-06T19:55:36+09:00",
+    "relatedEvents": [
+      "event:anthropic-frontier-academy-2026-10-02",
+      "event:aws-sagemaker-agent-skill-2026-10-05",
+      "event:microsoft-sovereign-ai-2026-10-05"
+    ],
+    "relatedCompanies": [
+      "company:anthropic",
+      "company:microsoft",
+      "company:nvidia"
+    ],
+    "relatedThemes": [
+      "theme:agent-security",
+      "theme:agentic-ai",
+      "theme:ai-infrastructure"
+    ],
+    "sourceRefs": [
+      "https://aws.amazon.com/blogs/machine-learning/new-agent-skill-amazon-sagemaker-optimized-generative-ai-inference-for-your-coding-agent/",
+      "https://www.anthropic.com/news/claude-frontier-academy",
+      "https://www.microsoft.com/en-us/microsoft-cloud/blog/general/2026/10/05/sovereign-ai-accelerate-innovation-with-control-and-choice/"
+    ]
+  },
+  {
+    "publicationId": "motus-us-market-2026-10-05",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/m-ai-531.html",
+    "publishedAt": "2026-10-06T19:55:45+09:00",
+    "relatedEvents": [
+      "event:us-market-close-2026-10-05"
+    ],
+    "relatedCompanies": [
+      "company:nvidia"
+    ],
+    "relatedThemes": [
+      "theme:ai-infrastructure",
+      "theme:higher-for-longer"
+    ],
+    "sourceRefs": [
+      "https://apnews.com/article/7f89624b604f25f313502c77d4d0b010",
+      "https://apnews.com/article/f83cf147deaf5a2361b1ae7eee74a627",
+      "https://finance.yahoo.com/quote/%5EVIX/history/?p=%5EVIX",
+      "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202610&type=daily_treasury_yield_curve",
+      "https://www.portfolio-terminal.com/markets/stock-market-close",
+      "https://www.portfolio-terminal.com/markets/us-dollar-index/october-2026"
+    ]
+  }
+]

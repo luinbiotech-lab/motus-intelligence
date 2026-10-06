@@ -292,9 +292,9 @@
   ],
   "deferred": [],
   "rejected": [],
-  "reviewState": "APPROVAL_REQUIRED",
-  "reviewedBy": null,
-  "reviewedAt": null,
+  "reviewState": "APPROVED",
+  "reviewedBy": "human",
+  "reviewedAt": "2026-10-06T10:55:28.916Z",
   "weeklyFeedEligible": true,
   "contentDepthGate": "PASS",
   "externalActions": {
@@ -306,5 +306,6 @@
   "commerce": {
     "enabled": false
   },
-  "fingerprint": "sha256:7166cce934eae5314213ba01640d947b31d0e427f2610843bd6f219d062d9a00"
+  "fingerprint": "sha256:7166cce934eae5314213ba01640d947b31d0e427f2610843bd6f219d062d9a00",
+  "reviewProvenance": "USER_EXPLICIT_APPROVAL"
 }

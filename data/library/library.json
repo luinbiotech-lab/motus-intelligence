@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-09-30T23:59:30Z",
+  "generatedAt": "2026-10-06T10:55:48.096Z",
   "records": [
     {
       "recordType": "SOURCE",
@@ -2036,6 +2036,367 @@
       "lastSeenAt": "2026-09-30T23:59:30Z",
       "createdAt": "2026-09-30T23:59:30Z",
       "updatedAt": "2026-09-30T23:59:30Z"
+    },
+    {
+      "libraryId": "library:source:043f1ee35a103263",
+      "recordType": "SOURCE",
+      "canonicalId": "source:043f1ee35a103263",
+      "canonicalName": "aws.amazon.com",
+      "displayName": "aws.amazon.com",
+      "aliases": [],
+      "summary": null,
+      "firstSeenAt": "2026-10-06T19:55:36+09:00",
+      "lastSeenAt": "2026-10-06T19:55:36+09:00",
+      "createdAt": "2026-10-06T19:55:36+09:00",
+      "updatedAt": "2026-10-06T19:55:36+09:00",
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "internalMetadata": {
+        "canonicalUrl": "https://aws.amazon.com/blogs/machine-learning/new-agent-skill-amazon-sagemaker-optimized-generative-ai-inference-for-your-coding-agent/"
+      },
+      "publicMetadata": {
+        "url": "https://aws.amazon.com/blogs/machine-learning/new-agent-skill-amazon-sagemaker-optimized-generative-ai-inference-for-your-coding-agent/"
+      },
+      "sourceRefs": [
+        "source:043f1ee35a103263"
+      ],
+      "evidenceRefs": [],
+      "originRecordIds": [
+        "motus-ai-intelligence-2026-10-05"
+      ]
+    },
+    {
+      "libraryId": "library:source:bfc4355d370530a8",
+      "recordType": "SOURCE",
+      "canonicalId": "source:bfc4355d370530a8",
+      "canonicalName": "www.anthropic.com",
+      "displayName": "www.anthropic.com",
+      "aliases": [],
+      "summary": null,
+      "firstSeenAt": "2026-10-06T19:55:36+09:00",
+      "lastSeenAt": "2026-10-06T19:55:36+09:00",
+      "createdAt": "2026-10-06T19:55:36+09:00",
+      "updatedAt": "2026-10-06T19:55:36+09:00",
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "internalMetadata": {
+        "canonicalUrl": "https://www.anthropic.com/news/claude-frontier-academy"
+      },
+      "publicMetadata": {
+        "url": "https://www.anthropic.com/news/claude-frontier-academy"
+      },
+      "sourceRefs": [
+        "source:bfc4355d370530a8"
+      ],
+      "evidenceRefs": [],
+      "originRecordIds": [
+        "motus-ai-intelligence-2026-10-05"
+      ]
+    },
+    {
+      "libraryId": "library:source:540bbf036267ae85",
+      "recordType": "SOURCE",
+      "canonicalId": "source:540bbf036267ae85",
+      "canonicalName": "www.microsoft.com",
+      "displayName": "www.microsoft.com",
+      "aliases": [],
+      "summary": null,
+      "firstSeenAt": "2026-10-06T19:55:36+09:00",
+      "lastSeenAt": "2026-10-06T19:55:36+09:00",
+      "createdAt": "2026-10-06T19:55:36+09:00",
+      "updatedAt": "2026-10-06T19:55:36+09:00",
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "internalMetadata": {
+        "canonicalUrl": "https://www.microsoft.com/en-us/microsoft-cloud/blog/general/2026/10/05/sovereign-ai-accelerate-innovation-with-control-and-choice/"
+      },
+      "publicMetadata": {
+        "url": "https://www.microsoft.com/en-us/microsoft-cloud/blog/general/2026/10/05/sovereign-ai-accelerate-innovation-with-control-and-choice/"
+      },
+      "sourceRefs": [
+        "source:540bbf036267ae85"
+      ],
+      "evidenceRefs": [],
+      "originRecordIds": [
+        "motus-ai-intelligence-2026-10-05"
+      ]
+    },
+    {
+      "libraryId": "library:publication:motus-ai-intelligence-2026-10-05",
+      "recordType": "PUBLICATION",
+      "canonicalId": "motus-ai-intelligence-2026-10-05",
+      "canonicalName": "AI_INTELLIGENCE",
+      "displayName": "AI_INTELLIGENCE",
+      "aliases": [],
+      "summary": null,
+      "firstSeenAt": "2026-10-06T19:55:36+09:00",
+      "lastSeenAt": "2026-10-06T19:55:36+09:00",
+      "createdAt": "2026-10-06T19:55:36+09:00",
+      "updatedAt": "2026-10-06T19:55:36+09:00",
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "internalMetadata": {
+        "issueDate": "2026-10-05",
+        "publishedAt": "2026-10-06T19:55:36+09:00",
+        "publicPostUrl": "https://motusnova.blogspot.com/2026/10/ai.html",
+        "relatedEvents": [
+          "event:anthropic-frontier-academy-2026-10-02",
+          "event:aws-sagemaker-agent-skill-2026-10-05",
+          "event:microsoft-sovereign-ai-2026-10-05"
+        ],
+        "relatedCompanies": [
+          "company:anthropic",
+          "company:microsoft",
+          "company:nvidia"
+        ],
+        "relatedThemes": [
+          "theme:agent-security",
+          "theme:agentic-ai",
+          "theme:ai-infrastructure"
+        ]
+      },
+      "publicMetadata": {
+        "issueDate": "2026-10-05",
+        "url": "https://motusnova.blogspot.com/2026/10/ai.html"
+      },
+      "sourceRefs": [
+        "source:043f1ee35a103263",
+        "source:bfc4355d370530a8",
+        "source:540bbf036267ae85"
+      ],
+      "evidenceRefs": [
+        "evidence:c8a156186e457ab5"
+      ],
+      "originRecordIds": [
+        "motus-ai-intelligence-2026-10-05"
+      ]
+    },
+    {
+      "libraryId": "library:source:b6b95c51ab76c22a",
+      "recordType": "SOURCE",
+      "canonicalId": "source:b6b95c51ab76c22a",
+      "canonicalName": "apnews.com",
+      "displayName": "apnews.com",
+      "aliases": [],
+      "summary": null,
+      "firstSeenAt": "2026-10-06T19:55:45+09:00",
+      "lastSeenAt": "2026-10-06T19:55:45+09:00",
+      "createdAt": "2026-10-06T19:55:45+09:00",
+      "updatedAt": "2026-10-06T19:55:45+09:00",
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "internalMetadata": {
+        "canonicalUrl": "https://apnews.com/article/7f89624b604f25f313502c77d4d0b010"
+      },
+      "publicMetadata": {
+        "url": "https://apnews.com/article/7f89624b604f25f313502c77d4d0b010"
+      },
+      "sourceRefs": [
+        "source:b6b95c51ab76c22a"
+      ],
+      "evidenceRefs": [],
+      "originRecordIds": [
+        "motus-us-market-2026-10-05"
+      ]
+    },
+    {
+      "libraryId": "library:source:242db968be499f44",
+      "recordType": "SOURCE",
+      "canonicalId": "source:242db968be499f44",
+      "canonicalName": "apnews.com",
+      "displayName": "apnews.com",
+      "aliases": [],
+      "summary": null,
+      "firstSeenAt": "2026-10-06T19:55:45+09:00",
+      "lastSeenAt": "2026-10-06T19:55:45+09:00",
+      "createdAt": "2026-10-06T19:55:45+09:00",
+      "updatedAt": "2026-10-06T19:55:45+09:00",
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "internalMetadata": {
+        "canonicalUrl": "https://apnews.com/article/f83cf147deaf5a2361b1ae7eee74a627"
+      },
+      "publicMetadata": {
+        "url": "https://apnews.com/article/f83cf147deaf5a2361b1ae7eee74a627"
+      },
+      "sourceRefs": [
+        "source:242db968be499f44"
+      ],
+      "evidenceRefs": [],
+      "originRecordIds": [
+        "motus-us-market-2026-10-05"
+      ]
+    },
+    {
+      "libraryId": "library:source:e57ff28bfc030b36",
+      "recordType": "SOURCE",
+      "canonicalId": "source:e57ff28bfc030b36",
+      "canonicalName": "finance.yahoo.com",
+      "displayName": "finance.yahoo.com",
+      "aliases": [],
+      "summary": null,
+      "firstSeenAt": "2026-10-06T19:55:45+09:00",
+      "lastSeenAt": "2026-10-06T19:55:45+09:00",
+      "createdAt": "2026-10-06T19:55:45+09:00",
+      "updatedAt": "2026-10-06T19:55:45+09:00",
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "internalMetadata": {
+        "canonicalUrl": "https://finance.yahoo.com/quote/%5EVIX/history/?p=%5EVIX"
+      },
+      "publicMetadata": {
+        "url": "https://finance.yahoo.com/quote/%5EVIX/history/?p=%5EVIX"
+      },
+      "sourceRefs": [
+        "source:e57ff28bfc030b36"
+      ],
+      "evidenceRefs": [],
+      "originRecordIds": [
+        "motus-us-market-2026-10-05"
+      ]
+    },
+    {
+      "libraryId": "library:source:11de16bfb5ba6d9c",
+      "recordType": "SOURCE",
+      "canonicalId": "source:11de16bfb5ba6d9c",
+      "canonicalName": "home.treasury.gov",
+      "displayName": "home.treasury.gov",
+      "aliases": [],
+      "summary": null,
+      "firstSeenAt": "2026-10-06T19:55:45+09:00",
+      "lastSeenAt": "2026-10-06T19:55:45+09:00",
+      "createdAt": "2026-10-06T19:55:45+09:00",
+      "updatedAt": "2026-10-06T19:55:45+09:00",
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "internalMetadata": {
+        "canonicalUrl": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202610&type=daily_treasury_yield_curve"
+      },
+      "publicMetadata": {
+        "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202610&type=daily_treasury_yield_curve"
+      },
+      "sourceRefs": [
+        "source:11de16bfb5ba6d9c"
+      ],
+      "evidenceRefs": [],
+      "originRecordIds": [
+        "motus-us-market-2026-10-05"
+      ]
+    },
+    {
+      "libraryId": "library:source:4dea3a851232701f",
+      "recordType": "SOURCE",
+      "canonicalId": "source:4dea3a851232701f",
+      "canonicalName": "www.portfolio-terminal.com",
+      "displayName": "www.portfolio-terminal.com",
+      "aliases": [],
+      "summary": null,
+      "firstSeenAt": "2026-10-06T19:55:45+09:00",
+      "lastSeenAt": "2026-10-06T19:55:45+09:00",
+      "createdAt": "2026-10-06T19:55:45+09:00",
+      "updatedAt": "2026-10-06T19:55:45+09:00",
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "internalMetadata": {
+        "canonicalUrl": "https://www.portfolio-terminal.com/markets/stock-market-close"
+      },
+      "publicMetadata": {
+        "url": "https://www.portfolio-terminal.com/markets/stock-market-close"
+      },
+      "sourceRefs": [
+        "source:4dea3a851232701f"
+      ],
+      "evidenceRefs": [],
+      "originRecordIds": [
+        "motus-us-market-2026-10-05"
+      ]
+    },
+    {
+      "libraryId": "library:source:1ce39fe7074256cd",
+      "recordType": "SOURCE",
+      "canonicalId": "source:1ce39fe7074256cd",
+      "canonicalName": "www.portfolio-terminal.com",
+      "displayName": "www.portfolio-terminal.com",
+      "aliases": [],
+      "summary": null,
+      "firstSeenAt": "2026-10-06T19:55:45+09:00",
+      "lastSeenAt": "2026-10-06T19:55:45+09:00",
+      "createdAt": "2026-10-06T19:55:45+09:00",
+      "updatedAt": "2026-10-06T19:55:45+09:00",
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "internalMetadata": {
+        "canonicalUrl": "https://www.portfolio-terminal.com/markets/us-dollar-index/october-2026"
+      },
+      "publicMetadata": {
+        "url": "https://www.portfolio-terminal.com/markets/us-dollar-index/october-2026"
+      },
+      "sourceRefs": [
+        "source:1ce39fe7074256cd"
+      ],
+      "evidenceRefs": [],
+      "originRecordIds": [
+        "motus-us-market-2026-10-05"
+      ]
+    },
+    {
+      "libraryId": "library:publication:motus-us-market-2026-10-05",
+      "recordType": "PUBLICATION",
+      "canonicalId": "motus-us-market-2026-10-05",
+      "canonicalName": "US_MARKET",
+      "displayName": "US_MARKET",
+      "aliases": [],
+      "summary": null,
+      "firstSeenAt": "2026-10-06T19:55:45+09:00",
+      "lastSeenAt": "2026-10-06T19:55:45+09:00",
+      "createdAt": "2026-10-06T19:55:45+09:00",
+      "updatedAt": "2026-10-06T19:55:45+09:00",
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "internalMetadata": {
+        "issueDate": "2026-10-05",
+        "publishedAt": "2026-10-06T19:55:45+09:00",
+        "publicPostUrl": "https://motusnova.blogspot.com/2026/10/m-ai-531.html",
+        "relatedEvents": [
+          "event:us-market-close-2026-10-05"
+        ],
+        "relatedCompanies": [
+          "company:nvidia"
+        ],
+        "relatedThemes": [
+          "theme:ai-infrastructure",
+          "theme:higher-for-longer"
+        ]
+      },
+      "publicMetadata": {
+        "issueDate": "2026-10-05",
+        "url": "https://motusnova.blogspot.com/2026/10/m-ai-531.html"
+      },
+      "sourceRefs": [
+        "source:b6b95c51ab76c22a",
+        "source:242db968be499f44",
+        "source:e57ff28bfc030b36",
+        "source:11de16bfb5ba6d9c",
+        "source:4dea3a851232701f",
+        "source:1ce39fe7074256cd"
+      ],
+      "evidenceRefs": [
+        "evidence:2d8be729fab2a2a4"
+      ],
+      "originRecordIds": [
+        "motus-us-market-2026-10-05"
+      ]
     }
   ],
   "edges": [
@@ -2706,6 +3067,265 @@
       ],
       "originRecordIds": [
         "motus-us-market-2026-09-30"
+      ]
+    },
+    {
+      "edgeId": "edge:4613e7775b22b61f",
+      "fromId": "motus-ai-intelligence-2026-10-05",
+      "toId": "event:anthropic-frontier-academy-2026-10-02",
+      "relationshipType": "PUBLICATION_COVERS_EVENT",
+      "reason": "published Daily editorial plan relation",
+      "createdAt": "2026-10-06T19:55:36+09:00",
+      "sourceRefs": [
+        "source:043f1ee35a103263",
+        "source:bfc4355d370530a8",
+        "source:540bbf036267ae85"
+      ],
+      "evidenceRefs": [
+        "evidence:c8a156186e457ab5"
+      ],
+      "originRecordIds": [
+        "motus-ai-intelligence-2026-10-05"
+      ]
+    },
+    {
+      "edgeId": "edge:edcb8bd5b21f5f40",
+      "fromId": "motus-ai-intelligence-2026-10-05",
+      "toId": "event:aws-sagemaker-agent-skill-2026-10-05",
+      "relationshipType": "PUBLICATION_COVERS_EVENT",
+      "reason": "published Daily editorial plan relation",
+      "createdAt": "2026-10-06T19:55:36+09:00",
+      "sourceRefs": [
+        "source:043f1ee35a103263",
+        "source:bfc4355d370530a8",
+        "source:540bbf036267ae85"
+      ],
+      "evidenceRefs": [
+        "evidence:c8a156186e457ab5"
+      ],
+      "originRecordIds": [
+        "motus-ai-intelligence-2026-10-05"
+      ]
+    },
+    {
+      "edgeId": "edge:3a62a22227e572e7",
+      "fromId": "motus-ai-intelligence-2026-10-05",
+      "toId": "event:microsoft-sovereign-ai-2026-10-05",
+      "relationshipType": "PUBLICATION_COVERS_EVENT",
+      "reason": "published Daily editorial plan relation",
+      "createdAt": "2026-10-06T19:55:36+09:00",
+      "sourceRefs": [
+        "source:043f1ee35a103263",
+        "source:bfc4355d370530a8",
+        "source:540bbf036267ae85"
+      ],
+      "evidenceRefs": [
+        "evidence:c8a156186e457ab5"
+      ],
+      "originRecordIds": [
+        "motus-ai-intelligence-2026-10-05"
+      ]
+    },
+    {
+      "edgeId": "edge:fc0d5a260b045bc7",
+      "fromId": "motus-ai-intelligence-2026-10-05",
+      "toId": "company:anthropic",
+      "relationshipType": "PUBLICATION_COVERS_COMPANY",
+      "reason": "published Daily editorial plan relation",
+      "createdAt": "2026-10-06T19:55:36+09:00",
+      "sourceRefs": [
+        "source:043f1ee35a103263",
+        "source:bfc4355d370530a8",
+        "source:540bbf036267ae85"
+      ],
+      "evidenceRefs": [
+        "evidence:c8a156186e457ab5"
+      ],
+      "originRecordIds": [
+        "motus-ai-intelligence-2026-10-05"
+      ]
+    },
+    {
+      "edgeId": "edge:e82d49b113a2abf0",
+      "fromId": "motus-ai-intelligence-2026-10-05",
+      "toId": "company:microsoft",
+      "relationshipType": "PUBLICATION_COVERS_COMPANY",
+      "reason": "published Daily editorial plan relation",
+      "createdAt": "2026-10-06T19:55:36+09:00",
+      "sourceRefs": [
+        "source:043f1ee35a103263",
+        "source:bfc4355d370530a8",
+        "source:540bbf036267ae85"
+      ],
+      "evidenceRefs": [
+        "evidence:c8a156186e457ab5"
+      ],
+      "originRecordIds": [
+        "motus-ai-intelligence-2026-10-05"
+      ]
+    },
+    {
+      "edgeId": "edge:e0d0632abb0fde01",
+      "fromId": "motus-ai-intelligence-2026-10-05",
+      "toId": "company:nvidia",
+      "relationshipType": "PUBLICATION_COVERS_COMPANY",
+      "reason": "published Daily editorial plan relation",
+      "createdAt": "2026-10-06T19:55:36+09:00",
+      "sourceRefs": [
+        "source:043f1ee35a103263",
+        "source:bfc4355d370530a8",
+        "source:540bbf036267ae85"
+      ],
+      "evidenceRefs": [
+        "evidence:c8a156186e457ab5"
+      ],
+      "originRecordIds": [
+        "motus-ai-intelligence-2026-10-05"
+      ]
+    },
+    {
+      "edgeId": "edge:abc1a03ba99783d0",
+      "fromId": "motus-ai-intelligence-2026-10-05",
+      "toId": "theme:agent-security",
+      "relationshipType": "PUBLICATION_COVERS_THEME",
+      "reason": "published Daily editorial plan relation",
+      "createdAt": "2026-10-06T19:55:36+09:00",
+      "sourceRefs": [
+        "source:043f1ee35a103263",
+        "source:bfc4355d370530a8",
+        "source:540bbf036267ae85"
+      ],
+      "evidenceRefs": [
+        "evidence:c8a156186e457ab5"
+      ],
+      "originRecordIds": [
+        "motus-ai-intelligence-2026-10-05"
+      ]
+    },
+    {
+      "edgeId": "edge:9a91885f2a99fe71",
+      "fromId": "motus-ai-intelligence-2026-10-05",
+      "toId": "theme:agentic-ai",
+      "relationshipType": "PUBLICATION_COVERS_THEME",
+      "reason": "published Daily editorial plan relation",
+      "createdAt": "2026-10-06T19:55:36+09:00",
+      "sourceRefs": [
+        "source:043f1ee35a103263",
+        "source:bfc4355d370530a8",
+        "source:540bbf036267ae85"
+      ],
+      "evidenceRefs": [
+        "evidence:c8a156186e457ab5"
+      ],
+      "originRecordIds": [
+        "motus-ai-intelligence-2026-10-05"
+      ]
+    },
+    {
+      "edgeId": "edge:784509e5782546d5",
+      "fromId": "motus-ai-intelligence-2026-10-05",
+      "toId": "theme:ai-infrastructure",
+      "relationshipType": "PUBLICATION_COVERS_THEME",
+      "reason": "published Daily editorial plan relation",
+      "createdAt": "2026-10-06T19:55:36+09:00",
+      "sourceRefs": [
+        "source:043f1ee35a103263",
+        "source:bfc4355d370530a8",
+        "source:540bbf036267ae85"
+      ],
+      "evidenceRefs": [
+        "evidence:c8a156186e457ab5"
+      ],
+      "originRecordIds": [
+        "motus-ai-intelligence-2026-10-05"
+      ]
+    },
+    {
+      "edgeId": "edge:2c1f34c2c213fd16",
+      "fromId": "motus-us-market-2026-10-05",
+      "toId": "event:us-market-close-2026-10-05",
+      "relationshipType": "PUBLICATION_COVERS_EVENT",
+      "reason": "published Daily editorial plan relation",
+      "createdAt": "2026-10-06T19:55:45+09:00",
+      "sourceRefs": [
+        "source:b6b95c51ab76c22a",
+        "source:242db968be499f44",
+        "source:e57ff28bfc030b36",
+        "source:11de16bfb5ba6d9c",
+        "source:4dea3a851232701f",
+        "source:1ce39fe7074256cd"
+      ],
+      "evidenceRefs": [
+        "evidence:2d8be729fab2a2a4"
+      ],
+      "originRecordIds": [
+        "motus-us-market-2026-10-05"
+      ]
+    },
+    {
+      "edgeId": "edge:58e7060784a389b9",
+      "fromId": "motus-us-market-2026-10-05",
+      "toId": "company:nvidia",
+      "relationshipType": "PUBLICATION_COVERS_COMPANY",
+      "reason": "published Daily editorial plan relation",
+      "createdAt": "2026-10-06T19:55:45+09:00",
+      "sourceRefs": [
+        "source:b6b95c51ab76c22a",
+        "source:242db968be499f44",
+        "source:e57ff28bfc030b36",
+        "source:11de16bfb5ba6d9c",
+        "source:4dea3a851232701f",
+        "source:1ce39fe7074256cd"
+      ],
+      "evidenceRefs": [
+        "evidence:2d8be729fab2a2a4"
+      ],
+      "originRecordIds": [
+        "motus-us-market-2026-10-05"
+      ]
+    },
+    {
+      "edgeId": "edge:2f732481be92285c",
+      "fromId": "motus-us-market-2026-10-05",
+      "toId": "theme:ai-infrastructure",
+      "relationshipType": "PUBLICATION_COVERS_THEME",
+      "reason": "published Daily editorial plan relation",
+      "createdAt": "2026-10-06T19:55:45+09:00",
+      "sourceRefs": [
+        "source:b6b95c51ab76c22a",
+        "source:242db968be499f44",
+        "source:e57ff28bfc030b36",
+        "source:11de16bfb5ba6d9c",
+        "source:4dea3a851232701f",
+        "source:1ce39fe7074256cd"
+      ],
+      "evidenceRefs": [
+        "evidence:2d8be729fab2a2a4"
+      ],
+      "originRecordIds": [
+        "motus-us-market-2026-10-05"
+      ]
+    },
+    {
+      "edgeId": "edge:4da45f10561bdaa2",
+      "fromId": "motus-us-market-2026-10-05",
+      "toId": "theme:higher-for-longer",
+      "relationshipType": "PUBLICATION_COVERS_THEME",
+      "reason": "published Daily editorial plan relation",
+      "createdAt": "2026-10-06T19:55:45+09:00",
+      "sourceRefs": [
+        "source:b6b95c51ab76c22a",
+        "source:242db968be499f44",
+        "source:e57ff28bfc030b36",
+        "source:11de16bfb5ba6d9c",
+        "source:4dea3a851232701f",
+        "source:1ce39fe7074256cd"
+      ],
+      "evidenceRefs": [
+        "evidence:2d8be729fab2a2a4"
+      ],
+      "originRecordIds": [
+        "motus-us-market-2026-10-05"
       ]
     }
   ],

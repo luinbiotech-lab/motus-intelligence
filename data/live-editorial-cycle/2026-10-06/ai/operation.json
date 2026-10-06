@@ -3,13 +3,13 @@
   "issueDate": "2026-10-05",
   "title": "기업 AI의 다음 관문: 소버린 운영, 현장형 인재, 추론 최적화",
   "publicationReadiness": "APPROVAL_REQUIRED",
-  "humanReviewState": "APPROVAL_REQUIRED",
+  "humanReviewState": "APPROVED",
   "remoteDuplicateCount": 0,
   "draftPostId": "4294902999154862199",
-  "draftState": "DRAFT",
-  "publicPostUrl": null,
+  "draftState": "PUBLISHED",
+  "publicPostUrl": "https://motusnova.blogspot.com/2026/10/ai.html",
   "postsInsertCount": 1,
-  "publishCount": 0,
+  "publishCount": 1,
   "validation": {
     "state": true,
     "title": true,
@@ -27,5 +27,53 @@
   "warnings": [],
   "commerce": {
     "enabled": false
-  }
+  },
+  "reviewer": "human",
+  "approvedAt": "2026-10-06T10:55:28.916Z",
+  "reviewProvenance": "USER_EXPLICIT_APPROVAL",
+  "searchRegistration": {
+    "publicationId": "motus-ai-intelligence-2026-10-05",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/ai.html",
+    "registeredAt": "2026-10-06T19:55:36+09:00",
+    "trigger": "PUBLICATION_PUBLISHED",
+    "googleInspectionState": "QUEUED",
+    "naverDiscoveryState": "PENDING",
+    "visibility": {
+      "publicationId": "motus-ai-intelligence-2026-10-05",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/10/ai.html",
+      "google": {
+        "discovered": null,
+        "indexed": null,
+        "lastCrawl": null,
+        "coverageState": null,
+        "inspectionAt": null
+      },
+      "naver": {
+        "discovered": null,
+        "indexed": null,
+        "collectionState": null,
+        "inspectionAt": null
+      },
+      "sitemapIncluded": null,
+      "rssIncluded": null
+    }
+  },
+  "pdf": {
+    "state": "NOT_GENERATED",
+    "reviewState": "PENDING",
+    "visibility": "PRIVATE",
+    "consistency": "NOT_AVAILABLE"
+  },
+  "audit": [
+    {
+      "at": "2026-10-06T10:55:28.916Z",
+      "event": "HUMAN_REVIEW_APPROVED",
+      "detail": "User explicitly approved this exact Blogger Draft for production publish"
+    },
+    {
+      "at": "2026-10-06T19:55:36+09:00",
+      "event": "PUBLISHED",
+      "detail": "Blogger post 4294902999154862199 published once and public page returned HTTP 200"
+    }
+  ]
 }
