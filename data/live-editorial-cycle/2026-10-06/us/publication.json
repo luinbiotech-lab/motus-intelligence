@@ -12,10 +12,17 @@
   "insertCount": 0,
   "patchCount": 0,
   "pdf": {
-    "state": "NOT_GENERATED",
+    "state": "VALIDATED",
     "reviewState": "PENDING",
     "visibility": "PRIVATE",
-    "consistency": "NOT_AVAILABLE"
+    "consistency": "PASS",
+    "localPath": "data/reports/daily/2026-10-05/us/report.pdf",
+    "contactSheetPath": "data/reports/daily/2026-10-05/us/contact-sheet.png",
+    "pageCount": 2,
+    "fileSizeBytes": 92056,
+    "contentFingerprint": "e71f219a27d9a3c1a009c12a7a1e146c1e33fc67ce3d6322ab0ddc88ff8652dc",
+    "sourceFingerprint": "bdf4c31f4ae3e6f2cb471f987170779803cbf1a5e3a5ca9200a21c4a7c9a2020",
+    "articleContentFingerprint": "sha256:3448dfc454ae0320cf7c7c5939d289c65906abe55fafa6203c42864b628f712e"
   },
   "audit": [
     {
@@ -27,6 +34,11 @@
       "at": "2026-10-06T19:55:45+09:00",
       "event": "PUBLISHED",
       "detail": "Blogger post 614930389904987485 published once and public page returned HTTP 200"
+    },
+    {
+      "at": "2026-10-06T14:47:21.464Z",
+      "event": "FACTUAL_DISPLAY_CORRECTION",
+      "detail": "Chart caption corrected from a stale fixed range to the verified series firstDate~lastDate; public article re-fetched with HTTP 200"
     }
   ],
   "commerce": {
@@ -133,5 +145,25 @@
     "publicationId": "motus-us-market-2026-10-05",
     "state": "PUBLISHED"
   },
-  "error": null
+  "error": null,
+  "contentFingerprint": "sha256:3448dfc454ae0320cf7c7c5939d289c65906abe55fafa6203c42864b628f712e",
+  "correction": {
+    "postId": "614930389904987485",
+    "oldCaption": "2026년 9월 10~16일 정규장 종가",
+    "newCaption": "2026년 9월 29일~10월 5일 정규장 종가",
+    "patchCount": 1,
+    "state": "PUBLISHED",
+    "beforeFingerprint": "sha256:ac58b962f16562b6f8694939c86d205500f2e14683694241f925123b3de71663",
+    "afterFingerprint": "sha256:3448dfc454ae0320cf7c7c5939d289c65906abe55fafa6203c42864b628f712e",
+    "httpStatus": 200,
+    "chartValidation": true,
+    "sourceLinks": true,
+    "mobile": true,
+    "audit": {
+      "event": "FACTUAL_DISPLAY_CORRECTION",
+      "detail": "Hard-coded chart caption replaced with the verified series firstDate~lastDate; title, market values, body and sources unchanged"
+    },
+    "error": null
+  },
+  "postPublishAudit": "PASS"
 }

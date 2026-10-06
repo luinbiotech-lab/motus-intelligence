@@ -3,6 +3,7 @@ import { createFirstSplitDailyProductionRun } from '../intelligence/split-daily-
 import { createPeriodicProductionRun,type MonthlyPdfViewModel,type WeeklyIntelligenceViewModel } from '../intelligence/periodic-production.js';
 import type { AIIntelligenceDailyViewModel,KoreaMarketDailyViewModel,PublicReportEntry,USMarketDailyViewModel } from '../intelligence/daily-masters.js';
 import type { ArticleLinkEdge } from '../search/measurement.js';
+import { createLiveEditorialCycle } from '../editorial/live-cycle.js';
 
 export type PdfReportType='AI_DAILY'|'US_MARKET_DAILY'|'KOREA_MARKET_DAILY'|'WEEKLY_INTELLIGENCE'|'MONTHLY_INTELLIGENCE';
 export type PdfArtifactState='GENERATED'|'VALIDATED'|'UPLOAD_READY'|'UPLOADED'|'PUBLIC_AVAILABLE'|'FAILED';
@@ -28,6 +29,7 @@ export function buildDailyPdfViewModels():PdfDocumentViewModel[]{return createFi
   if(unit.category==='US_MARKET')return usDocument(unit.viewModel as USMarketDailyViewModel);
   return koreaDocument(unit.viewModel as KoreaMarketDailyViewModel);
 });}
+export function buildLiveDailyPdfViewModels(generatedAt='2026-10-06T20:00:00+09:00'):PdfDocumentViewModel[]{return createLiveEditorialCycle(generatedAt).units.filter(unit=>unit.category!=='KOREA_MARKET').map(unit=>unit.category==='AI_INTELLIGENCE'?aiDocument(unit.viewModel as AIIntelligenceDailyViewModel):usDocument(unit.viewModel as USMarketDailyViewModel));}
 export function buildPeriodicPdfFoundations():{weekly:PdfDocumentViewModel;monthly:PdfDocumentViewModel}{const run=createPeriodicProductionRun();return {weekly:weeklyDocument(run.weekly),monthly:periodicDocument(run.monthlyPdf)};}
 
 function aiDocument(view:AIIntelligenceDailyViewModel):PdfDocumentViewModel{return documentBase(view.publicationId,'AI_DAILY',view.issueDate,'AI 인텔리전스 (AI Intelligence)',view.subtitle,[{title:'오늘의 핵심',items:[view.todayCore.headline,view.todayCore.summary,...view.todayCore.bullets]},{title:'주요 AI 이슈',items:view.issues.flatMap(item=>[`${item.headline}: ${item.whatHappened}`,`왜 중요한가: ${item.whyItMatters}`])},{title:'산업·기업 연결',items:view.industryFlow},{title:'다음 확인사항',items:view.whatToWatch.map(item=>`${item.headline}: ${item.watchFor}`)}],view.sources,[],false);}

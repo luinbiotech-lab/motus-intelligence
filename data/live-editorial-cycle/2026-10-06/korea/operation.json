@@ -2,18 +2,27 @@
   "category": "KOREA_MARKET",
   "issueDate": "2026-10-06",
   "title": "국내 증시 마감: 외국인 반도체 매도에 코스피 하락, 코스닥은 2.98% 반등",
-  "publicationReadiness": "HOLD",
-  "humanReviewState": "HOLD",
+  "publicationReadiness": "APPROVAL_REQUIRED",
+  "humanReviewState": "APPROVAL_REQUIRED",
   "remoteDuplicateCount": 0,
-  "draftPostId": null,
-  "draftState": null,
+  "draftPostId": "568850689418151231",
+  "draftState": "DRAFT",
   "publicPostUrl": null,
-  "postsInsertCount": 0,
+  "postsInsertCount": 1,
   "publishCount": 0,
-  "validation": null,
+  "validation": {
+    "state": true,
+    "title": true,
+    "label": true,
+    "mobile": true,
+    "internalToken": true,
+    "commerce": true,
+    "pass": true
+  },
   "warnings": [
-    "검증된 최신 국내 증권사 원문 리서치가 없어 publication unit을 HOLD"
+    "BROKERAGE_RESEARCH_NOT_AVAILABLE"
   ],
+  "readinessPolicy": "KOREA_READINESS_V2",
   "commerce": {
     "enabled": false
   }

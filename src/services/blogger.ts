@@ -240,6 +240,13 @@ export class GoogleBloggerApiAdapter implements BloggerAdapter {
     if(!post.id)throw new Error('Blogger draft insert response missing post id');return this.readPost(post.id,config);
   }
 
+  async patchPostContent(postId:string,input:{title:string;content:string},config:BloggerPublishingConfig):Promise<BloggerPostReadback> {
+    const blogId=config.blogId?.trim();if(!blogId)throw new Error('missing Blogger blogId');if(!postId.trim())throw new Error('missing Blogger postId');const accessToken=await this.resolveAccessToken(config);
+    const endpoint=new URL(`https://www.googleapis.com/blogger/v3/blogs/${encodeURIComponent(blogId)}/posts/${encodeURIComponent(postId)}`);
+    const response=await this.fetcher(endpoint,{method:'PATCH',headers:{authorization:`Bearer ${accessToken}`,'content-type':'application/json'},body:JSON.stringify({title:input.title,content:extractBloggerArticle(input.content)})});
+    if(!response.ok)throw new Error(`Blogger post patch ${response.status}: ${safeGoogleApiError(await response.text())}`);return this.readPost(postId,config);
+  }
+
   async publishDraftPost(postId:string,config:BloggerPublishingConfig):Promise<{postId:string;publicPostUrl:string;publishedAt:string}> {
     const blogId=config.blogId?.trim();if(!blogId)throw new Error('missing Blogger blogId');if(!postId.trim())throw new Error('missing Blogger postId');const accessToken=await this.resolveAccessToken(config);
     const endpoint=new URL(`https://www.googleapis.com/blogger/v3/blogs/${encodeURIComponent(blogId)}/posts/${encodeURIComponent(postId)}/publish`);

@@ -108,7 +108,7 @@
   ],
   "deferred": [],
   "rejected": [],
-  "reviewState": "HOLD",
+  "reviewState": "APPROVAL_REQUIRED",
   "reviewedBy": null,
   "reviewedAt": null,
   "weeklyFeedEligible": true,

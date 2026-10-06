@@ -834,7 +834,7 @@ test('MOTUS Blogger renderer adds four responsive five-session line charts from 
   assert.equal((rendered.html.match(/width:50%;max-width:50%/g)??[]).length,4);
   for(const key of ['sp500','nasdaq','dow-jones','russell-2000']) assert.match(rendered.html,new RegExp(`data-index="${key}"`));
   assert.match(rendered.html,/7,551\.81[\s\S]*-0\.45%/);
-  assert.match(rendered.html,/2026년 9월 10~16일 정규장 종가/);
+  assert.match(rendered.html,/2026년 9월 10일~9월 16일 정규장 종가/);
   assert.match(rendered.html,/S&amp;P Dow Jones Indices[\s\S]*Nasdaq[\s\S]*FTSE Russell/);
   assert.doesNotMatch(rendered.html,/major-index-chart|막대그래프|data-change=|<script\b|javascript:|<foreignObject\b|<iframe\b|overflow-x:auto/);
   assertPublicBloggerHtmlSafe(rendered.html);

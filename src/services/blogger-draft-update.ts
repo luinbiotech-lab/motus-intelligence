@@ -200,7 +200,7 @@ function verifyUpdatedDraft(post:BloggerPost,before:BloggerPost[],after:BloggerP
   const oldBarChartRemoved=expectedLayout?!/major-index-chart|막대그래프|data-change=|당일 등락률 · 0% 기준/i.test(graphBlock):null;
   const fiveSessionCoverage=expectedLayout?count(graphBlock,/data-values=["'][^"']+(?:,[^,"']+){4}["']/gi)===4:null;
   const chartTwoByTwoLayout=expectedLayout?/data-layout=["']two-by-two["'][^>]*style=["'][^"']*width:100%[^"']*max-width:100%[^"']*box-sizing:border-box/i.test(graphBlock)&&count(graphBlock,/class=["']index-trend-row["'][^>]*style=["'][^"']*display:flex!important[^"']*flex-wrap:nowrap!important/gi)===2&&count(graphBlock,/width:50%;max-width:50%/gi)===4&&count(graphBlock,/class=["']index-trend-card["']/gi)===4:null;
-  const chartProvenancePresent=expectedLayout?['S&amp;P Dow Jones Indices','Nasdaq','FTSE Russell'].every(label=>graphBlock.includes(label))&&/2026년 9월 10~16일 정규장 종가/.test(graphBlock):null;
+  const chartProvenancePresent=expectedLayout?['S&amp;P Dow Jones Indices','Nasdaq','FTSE Russell'].every(label=>graphBlock.includes(label))&&chartCaptionMatchesSeries(graphBlock):null;
   const graphBloggerSafe=expectedLayout?Boolean(graphBlock&&lineChartCount===4&&count(graphBlock,/<polyline\b/gi)===4&&!/<script\b|javascript:|<foreignObject\b|<iframe\b|\son\w+\s*=/i.test(graphBlock)):null;
   const expectedSections=expectedLayout==='FINANCIAL_RESEARCH_V1'?['핵심 요약','시장 한눈에 보기','미국 주요 증시 추이','시장을 움직인 핵심 요인','AI·반도체 / 주요 산업','한국시장 연결 포인트','오늘 체크리스트','용어설명','주요 출처']:['Opening Summary','시장 한눈에 보기','시장을 움직인 핵심 요인','AI·반도체 / 주요 산업','한국시장 연결 포인트','오늘 체크리스트','용어해설','주요 출처'];
   if(h1Count!==0) throw new Error(`updated Blogger draft contains ${h1Count} H1 elements`);
@@ -218,6 +218,8 @@ function verifyUpdatedDraft(post:BloggerPost,before:BloggerPost[],after:BloggerP
   assertSingleTarget(after,postId);
   return {postId,status:'DRAFT',title,h1Count,marketDashboardCount,primarySourcesCount,visibleRawUrlCount,unpublishedRelatedLinksCount,duplicateDraftCount,marketDataUnchanged,internalTokenCount,aiSemiconductorFocus,consumerCheckCount,daveConsumerAuxiliary,sectionOrder,editorialBlockCount,glossaryCardCount,glossaryReferenceCount,sourceGroupCount,koreaHighlightBox,titleBarCount,mobileHorizontalOverflowDisabled,inlineStyleAttributeCount,titleBarInlineStyleCount,contentBoxInlineStyleCount,styleTagCount,glossaryCompactTable,sourceGroupsInlineStyled,koreaInlineHighlight,titleBarContrast,marketTableReadability,glossaryFullSpelling,glossaryDictionaryStyle,sourceLinksClickable,graphSectionRendered,graphIndexCoverage,graphBloggerSafe,oldBarChartRemoved,lineChartCount,fiveSessionCoverage,chartTwoByTwoLayout,chartProvenancePresent,adminDraftUrl:`https://www.blogger.com/blog/post/edit/${encodeURIComponent(blogId)}/${encodeURIComponent(postId)}`,draftCountBefore:before.length,draftCountAfter:after.length,updatedAt:post.updated??null};
 }
+
+function chartCaptionMatchesSeries(html:string):boolean {const dates=[...html.matchAll(/\b\d{4}-\d{2}-\d{2}\b/g)].map(match=>match[0]).sort();if(!dates.length)return false;const first=dates[0]!,last=dates.at(-1)!;const [fy,fm,fd]=first.split('-').map(Number);const [ly,lm,ld]=last.split('-').map(Number);return html.includes(`${fy}년 ${fm}월 ${fd}일~${fy===ly?'':`${ly}년 `}${lm}월 ${ld}일 정규장 종가`);}
 
 function assertTargetDraft(post:BloggerPost,postId:string):void {
   if(post.id!==postId) throw new Error('Blogger API returned a different post ID');

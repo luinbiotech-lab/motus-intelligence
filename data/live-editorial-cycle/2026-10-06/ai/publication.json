@@ -12,10 +12,17 @@
   "insertCount": 0,
   "patchCount": 0,
   "pdf": {
-    "state": "NOT_GENERATED",
+    "state": "VALIDATED",
     "reviewState": "PENDING",
     "visibility": "PRIVATE",
-    "consistency": "NOT_AVAILABLE"
+    "consistency": "PASS",
+    "localPath": "data/reports/daily/2026-10-05/ai/report.pdf",
+    "contactSheetPath": "data/reports/daily/2026-10-05/ai/contact-sheet.png",
+    "pageCount": 1,
+    "fileSizeBytes": 92305,
+    "contentFingerprint": "dc506e002a4682a160fa412c13e96526d16fd2984867a5f6df730da55a93d6ba",
+    "sourceFingerprint": "04eb69d6538dfeed666d364b808dc863613064678c988a12451e91249fb00103",
+    "articleContentFingerprint": "sha256:9062f8ebedd846e4e82d545545eaeb7751d22fec7fa79a75ace34433ff6d033b"
   },
   "audit": [
     {
@@ -135,5 +142,7 @@
     "publicationId": "motus-ai-intelligence-2026-10-05",
     "state": "PUBLISHED"
   },
-  "error": null
+  "error": null,
+  "contentFingerprint": "sha256:9062f8ebedd846e4e82d545545eaeb7751d22fec7fa79a75ace34433ff6d033b",
+  "postPublishAudit": "PASS"
 }

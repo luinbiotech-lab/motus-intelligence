@@ -1,0 +1,72 @@
+{
+  "generatedAt": "2026-10-06T14:47:27.765Z",
+  "usCorrection": {
+    "postId": "614930389904987485",
+    "oldCaption": "2026년 9월 10~16일 정규장 종가",
+    "newCaption": "2026년 9월 29일~10월 5일 정규장 종가",
+    "patchCount": 1,
+    "state": "PUBLISHED",
+    "beforeFingerprint": "sha256:ac58b962f16562b6f8694939c86d205500f2e14683694241f925123b3de71663",
+    "afterFingerprint": "sha256:3448dfc454ae0320cf7c7c5939d289c65906abe55fafa6203c42864b628f712e",
+    "httpStatus": 200,
+    "chartValidation": true,
+    "sourceLinks": true,
+    "mobile": true,
+    "audit": {
+      "event": "FACTUAL_DISPLAY_CORRECTION",
+      "detail": "Hard-coded chart caption replaced with the verified series firstDate~lastDate; title, market values, body and sources unchanged"
+    },
+    "error": null
+  },
+  "korea": {
+    "oldState": "HOLD",
+    "newReadiness": "APPROVAL_REQUIRED",
+    "draftPostId": "568850689418151231",
+    "insertCount": 1,
+    "warnings": [
+      "BROKERAGE_RESEARCH_NOT_AVAILABLE"
+    ]
+  },
+  "ai": {
+    "state": "PUBLISHED",
+    "postId": "4294902999154862199",
+    "contentFingerprint": "sha256:9062f8ebedd846e4e82d545545eaeb7751d22fec7fa79a75ace34433ff6d033b"
+  },
+  "search": {
+    "registrationCount": 2,
+    "state": "QUEUED"
+  },
+  "library": {
+    "registrationCount": 2
+  },
+  "weekly": {
+    "readiness": "NOT_READY",
+    "blockers": [
+      "FULL_TRADING_WEEK_NOT_ACCUMULATED",
+      "INSUFFICIENT_COMPARABLE_HISTORY"
+    ]
+  },
+  "nextDaily": {
+    "ai": {
+      "latestIssue": "2026-10-05",
+      "duplicateProtected": true
+    },
+    "us": {
+      "latestIssue": "2026-10-05",
+      "duplicateProtected": true
+    },
+    "korea": {
+      "latestIssue": "2026-10-06",
+      "duplicateProtected": true
+    }
+  },
+  "actions": {
+    "lookup": 4,
+    "insert": 1,
+    "patch": 1,
+    "publish": 0
+  },
+  "commerce": {
+    "enabled": false
+  }
+}
