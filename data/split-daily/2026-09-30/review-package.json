@@ -17,14 +17,21 @@
       "readiness": "READY",
       "readinessReasons": [],
       "humanReview": {
-        "state": "PENDING",
-        "reviewer": null,
-        "reviewedAt": null,
-        "history": []
+        "state": "APPROVED",
+        "reviewer": "human",
+        "reviewedAt": "2026-10-06T08:20:45.536Z",
+        "history": [
+          {
+            "at": "2026-10-06T08:20:45.536Z",
+            "decision": "APPROVED",
+            "reviewer": "human",
+            "note": "quality gate PASS publication unit approved for draft and one publish action"
+          }
+        ]
       },
-      "publicationState": "PREVIEW_READY",
-      "draftPostId": null,
-      "publicPostUrl": null,
+      "publicationState": "PUBLISHED",
+      "draftPostId": "2683873333879055086",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/10/ai-2026-9-29.html",
       "duplicateCount": 0,
       "contentFingerprint": "d02a15429bf03afafb33b656df3498da7ffc8d4ec432108027bb13074a332051",
       "renderValidation": {
@@ -32,7 +39,24 @@
         "clickableSources": true,
         "internalTokenLeak": false,
         "script": false
-      }
+      },
+      "productionAudit": [
+        {
+          "at": "2026-10-06T08:20:45.536Z",
+          "event": "HUMAN_REVIEW_APPROVED",
+          "detail": "explicit production publish instruction; verified production record and quality gate reviewed"
+        },
+        {
+          "at": "2026-10-06T08:20:53.275Z",
+          "event": "DRAFT_CREATED",
+          "detail": "Blogger draft 2683873333879055086 created"
+        },
+        {
+          "at": "2026-10-06T17:20:56+09:00",
+          "event": "PUBLISHED",
+          "detail": "Blogger post 2683873333879055086 published with verified article permalink"
+        }
+      ]
     },
     {
       "publicationId": "motus-us-market-2026-09-30",
@@ -45,14 +69,21 @@
       "readiness": "READY",
       "readinessReasons": [],
       "humanReview": {
-        "state": "PENDING",
-        "reviewer": null,
-        "reviewedAt": null,
-        "history": []
+        "state": "APPROVED",
+        "reviewer": "human",
+        "reviewedAt": "2026-10-06T08:20:45.536Z",
+        "history": [
+          {
+            "at": "2026-10-06T08:20:45.536Z",
+            "decision": "APPROVED",
+            "reviewer": "human",
+            "note": "quality gate PASS publication unit approved for draft and one publish action"
+          }
+        ]
       },
-      "publicationState": "PREVIEW_READY",
-      "draftPostId": null,
-      "publicPostUrl": null,
+      "publicationState": "PUBLISHED",
+      "draftPostId": "6490308826156387498",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/10/2026-9-30.html",
       "duplicateCount": 0,
       "contentFingerprint": "a2103261e7771fb91d62f091b19b37d31f4dbe9f48ab4f3a22f9faf28e3bff03",
       "renderValidation": {
@@ -60,7 +91,24 @@
         "clickableSources": true,
         "internalTokenLeak": false,
         "script": false
-      }
+      },
+      "productionAudit": [
+        {
+          "at": "2026-10-06T08:20:45.536Z",
+          "event": "HUMAN_REVIEW_APPROVED",
+          "detail": "explicit production publish instruction; verified production record and quality gate reviewed"
+        },
+        {
+          "at": "2026-10-06T08:21:06.684Z",
+          "event": "DRAFT_CREATED",
+          "detail": "Blogger draft 6490308826156387498 created"
+        },
+        {
+          "at": "2026-10-06T17:21:08+09:00",
+          "event": "PUBLISHED",
+          "detail": "Blogger post 6490308826156387498 published with verified article permalink"
+        }
+      ]
     },
     {
       "publicationId": "motus-korea-market-2026-09-30",
@@ -73,14 +121,21 @@
       "readiness": "READY",
       "readinessReasons": [],
       "humanReview": {
-        "state": "PENDING",
-        "reviewer": null,
-        "reviewedAt": null,
-        "history": []
+        "state": "APPROVED",
+        "reviewer": "human",
+        "reviewedAt": "2026-10-06T08:20:45.536Z",
+        "history": [
+          {
+            "at": "2026-10-06T08:20:45.536Z",
+            "decision": "APPROVED",
+            "reviewer": "human",
+            "note": "quality gate PASS publication unit approved for draft and one publish action"
+          }
+        ]
       },
-      "publicationState": "PREVIEW_READY",
-      "draftPostId": null,
-      "publicPostUrl": null,
+      "publicationState": "PUBLISHED",
+      "draftPostId": "7329329991867951886",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/10/2026-9-30_0170921246.html",
       "duplicateCount": 0,
       "contentFingerprint": "02d561ce2468b808683eefeb702ade2d5be0180d5ec6573185ee3ce641ad4cf4",
       "renderValidation": {
@@ -88,11 +143,28 @@
         "clickableSources": true,
         "internalTokenLeak": false,
         "script": false
-      }
+      },
+      "productionAudit": [
+        {
+          "at": "2026-10-06T08:20:45.536Z",
+          "event": "HUMAN_REVIEW_APPROVED",
+          "detail": "explicit production publish instruction; verified production record and quality gate reviewed"
+        },
+        {
+          "at": "2026-10-06T08:21:19.247Z",
+          "event": "DRAFT_CREATED",
+          "detail": "Blogger draft 7329329991867951886 created"
+        },
+        {
+          "at": "2026-10-06T17:21:21+09:00",
+          "event": "PUBLISHED",
+          "detail": "Blogger post 7329329991867951886 published with verified article permalink"
+        }
+      ]
     }
   ],
   "externalActions": {
-    "bloggerInsertCount": 0,
-    "publishCount": 0
+    "bloggerInsertCount": 3,
+    "publishCount": 3
   }
 }

@@ -1,0 +1,109 @@
+{
+  "publicationId": "motus-korea-market-2026-09-30",
+  "category": "KOREA_MARKET",
+  "issueDate": "2026-09-30",
+  "title": "국내 증시 마감: 외국인·기관 매도에 코스피 하락, 코스닥은 반등 (2026년 9월 30일)",
+  "label": "국내증시 (Korea Market)",
+  "review": {
+    "state": "APPROVED",
+    "reviewer": "human",
+    "reviewedAt": "2026-10-06T08:20:45.536Z",
+    "history": [
+      {
+        "at": "2026-10-06T08:20:45.536Z",
+        "decision": "APPROVED",
+        "reviewer": "human",
+        "note": "quality gate PASS publication unit approved for draft and one publish action"
+      }
+    ]
+  },
+  "sourceDestinationValidation": "PASS",
+  "articleFingerprint": "sha256:02d561ce2468b808683eefeb702ade2d5be0180d5ec6573185ee3ce641ad4cf4",
+  "pdfConsistency": "PASS",
+  "audit": [
+    {
+      "at": "2026-10-06T08:20:45.536Z",
+      "event": "HUMAN_REVIEW_APPROVED",
+      "detail": "explicit production publish instruction; verified production record and quality gate reviewed"
+    },
+    {
+      "at": "2026-10-06T08:21:19.247Z",
+      "event": "DRAFT_CREATED",
+      "detail": "Blogger draft 7329329991867951886 created"
+    },
+    {
+      "at": "2026-10-06T17:21:21+09:00",
+      "event": "PUBLISHED",
+      "detail": "Blogger post 7329329991867951886 published with verified article permalink"
+    }
+  ],
+  "commerce": {
+    "enabled": false
+  },
+  "state": "PUBLISHED",
+  "draftPostId": "7329329991867951886",
+  "publicPostUrl": "https://motusnova.blogspot.com/2026/10/2026-9-30_0170921246.html",
+  "publishedAt": "2026-10-06T17:21:21+09:00",
+  "remoteDuplicateCount": 0,
+  "postsInsertCallCount": 1,
+  "publishApiCallCount": 1,
+  "draftValidation": {
+    "title": true,
+    "label": true,
+    "sources": true,
+    "chart": true,
+    "mobile": true,
+    "colorRule": true,
+    "internalTokenSafe": true,
+    "rawUrlSafe": true,
+    "inlineStyle": true,
+    "commerceDisabled": true,
+    "pass": true,
+    "anchorCount": 8,
+    "svgCount": 0
+  },
+  "publicHttpStatus": 200,
+  "publicValidation": {
+    "title": true,
+    "label": true,
+    "sources": true,
+    "chart": true,
+    "mobile": true,
+    "colorRule": true,
+    "internalTokenSafe": true,
+    "rawUrlSafe": true,
+    "inlineStyle": true,
+    "commerceDisabled": true,
+    "pass": true,
+    "anchorCount": 8,
+    "svgCount": 0
+  },
+  "searchTrackingRegistration": {
+    "publicationId": "motus-korea-market-2026-09-30",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/2026-9-30_0170921246.html",
+    "registeredAt": "2026-10-06T17:21:21+09:00",
+    "trigger": "PUBLICATION_PUBLISHED",
+    "googleInspectionState": "QUEUED",
+    "naverDiscoveryState": "PENDING",
+    "visibility": {
+      "publicationId": "motus-korea-market-2026-09-30",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/10/2026-9-30_0170921246.html",
+      "google": {
+        "discovered": null,
+        "indexed": null,
+        "lastCrawl": null,
+        "coverageState": null,
+        "inspectionAt": null
+      },
+      "naver": {
+        "discovered": null,
+        "indexed": null,
+        "collectionState": null,
+        "inspectionAt": null
+      },
+      "sitemapIncluded": null,
+      "rssIncluded": null
+    }
+  },
+  "error": null
+}

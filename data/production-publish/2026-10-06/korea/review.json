@@ -1,0 +1,13 @@
+{
+  "state": "APPROVED",
+  "reviewer": "human",
+  "reviewedAt": "2026-10-06T08:20:45.536Z",
+  "history": [
+    {
+      "at": "2026-10-06T08:20:45.536Z",
+      "decision": "APPROVED",
+      "reviewer": "human",
+      "note": "quality gate PASS publication unit approved for draft and one publish action"
+    }
+  ]
+}

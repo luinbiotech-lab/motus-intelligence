@@ -11,7 +11,13 @@
       "https://openai.com/index/introducing-dots"
     ],
     "verificationState": "VERIFIED",
-    "publicPublicationRequired": false
+    "publicPublicationRequired": false,
+    "publicationState": "PUBLISHED",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/ai-2026-9-29.html",
+    "publishedAt": "2026-10-06T17:20:56+09:00",
+    "articleFingerprint": "sha256:d02a15429bf03afafb33b656df3498da7ffc8d4ec432108027bb13074a332051",
+    "pdfConsistency": "PASS",
+    "searchTrackingState": "QUEUED"
   },
   {
     "category": "US_MARKET",
@@ -27,7 +33,13 @@
       "https://es.investing.com/currencies/us-dollar-index-historical-data/"
     ],
     "verificationState": "VERIFIED",
-    "publicPublicationRequired": false
+    "publicPublicationRequired": false,
+    "publicationState": "PUBLISHED",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/2026-9-30.html",
+    "publishedAt": "2026-10-06T17:21:08+09:00",
+    "articleFingerprint": "sha256:a2103261e7771fb91d62f091b19b37d31f4dbe9f48ab4f3a22f9faf28e3bff03",
+    "pdfConsistency": "PASS",
+    "searchTrackingState": "QUEUED"
   },
   {
     "category": "KOREA_MARKET",
@@ -46,6 +58,12 @@
       "https://samsungpop.com/v2/today-invest/series/researchanalysttalk-3001"
     ],
     "verificationState": "VERIFIED",
-    "publicPublicationRequired": false
+    "publicPublicationRequired": false,
+    "publicationState": "PUBLISHED",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/2026-9-30_0170921246.html",
+    "publishedAt": "2026-10-06T17:21:21+09:00",
+    "articleFingerprint": "sha256:02d561ce2468b808683eefeb702ade2d5be0180d5ec6573185ee3ce641ad4cf4",
+    "pdfConsistency": "PASS",
+    "searchTrackingState": "QUEUED"
   }
 ]

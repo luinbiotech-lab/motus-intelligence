@@ -1,0 +1,109 @@
+{
+  "publicationId": "motus-us-market-2026-09-30",
+  "category": "US_MARKET",
+  "issueDate": "2026-09-30",
+  "title": "미국 증시 마감: 장기금리 부담에 다우 약세, 나스닥은 소폭 상승 (2026년 9월 30일)",
+  "label": "미국증시 (U.S. Market)",
+  "review": {
+    "state": "APPROVED",
+    "reviewer": "human",
+    "reviewedAt": "2026-10-06T08:20:45.536Z",
+    "history": [
+      {
+        "at": "2026-10-06T08:20:45.536Z",
+        "decision": "APPROVED",
+        "reviewer": "human",
+        "note": "quality gate PASS publication unit approved for draft and one publish action"
+      }
+    ]
+  },
+  "sourceDestinationValidation": "PASS",
+  "articleFingerprint": "sha256:a2103261e7771fb91d62f091b19b37d31f4dbe9f48ab4f3a22f9faf28e3bff03",
+  "pdfConsistency": "PASS",
+  "audit": [
+    {
+      "at": "2026-10-06T08:20:45.536Z",
+      "event": "HUMAN_REVIEW_APPROVED",
+      "detail": "explicit production publish instruction; verified production record and quality gate reviewed"
+    },
+    {
+      "at": "2026-10-06T08:21:06.684Z",
+      "event": "DRAFT_CREATED",
+      "detail": "Blogger draft 6490308826156387498 created"
+    },
+    {
+      "at": "2026-10-06T17:21:08+09:00",
+      "event": "PUBLISHED",
+      "detail": "Blogger post 6490308826156387498 published with verified article permalink"
+    }
+  ],
+  "commerce": {
+    "enabled": false
+  },
+  "state": "PUBLISHED",
+  "draftPostId": "6490308826156387498",
+  "publicPostUrl": "https://motusnova.blogspot.com/2026/10/2026-9-30.html",
+  "publishedAt": "2026-10-06T17:21:08+09:00",
+  "remoteDuplicateCount": 0,
+  "postsInsertCallCount": 1,
+  "publishApiCallCount": 1,
+  "draftValidation": {
+    "title": true,
+    "label": true,
+    "sources": true,
+    "chart": true,
+    "mobile": true,
+    "colorRule": true,
+    "internalTokenSafe": true,
+    "rawUrlSafe": true,
+    "inlineStyle": true,
+    "commerceDisabled": true,
+    "pass": true,
+    "anchorCount": 6,
+    "svgCount": 4
+  },
+  "publicHttpStatus": 200,
+  "publicValidation": {
+    "title": true,
+    "label": true,
+    "sources": true,
+    "chart": true,
+    "mobile": true,
+    "colorRule": true,
+    "internalTokenSafe": true,
+    "rawUrlSafe": true,
+    "inlineStyle": true,
+    "commerceDisabled": true,
+    "pass": true,
+    "anchorCount": 6,
+    "svgCount": 4
+  },
+  "searchTrackingRegistration": {
+    "publicationId": "motus-us-market-2026-09-30",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/2026-9-30.html",
+    "registeredAt": "2026-10-06T17:21:08+09:00",
+    "trigger": "PUBLICATION_PUBLISHED",
+    "googleInspectionState": "QUEUED",
+    "naverDiscoveryState": "PENDING",
+    "visibility": {
+      "publicationId": "motus-us-market-2026-09-30",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/10/2026-9-30.html",
+      "google": {
+        "discovered": null,
+        "indexed": null,
+        "lastCrawl": null,
+        "coverageState": null,
+        "inspectionAt": null
+      },
+      "naver": {
+        "discovered": null,
+        "indexed": null,
+        "collectionState": null,
+        "inspectionAt": null
+      },
+      "sitemapIncluded": null,
+      "rssIncluded": null
+    }
+  },
+  "error": null
+}

@@ -1,0 +1,23 @@
+[
+  {
+    "label": "Microsoft Research",
+    "url": "https://www.microsoft.com/en-us/research/blog/introducing-quine-an-ai-research-system-designed-for-the-complexity-of-biology",
+    "status": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "label": "NVIDIA",
+    "url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Launches-Open-Agent-Safety-Platform-to-Secure-Agents-From-Testing-to-Deployment/default.aspx",
+    "status": 403,
+    "pass": true,
+    "error": null
+  },
+  {
+    "label": "OpenAI",
+    "url": "https://openai.com/index/introducing-dots",
+    "status": 403,
+    "pass": true,
+    "error": null
+  }
+]

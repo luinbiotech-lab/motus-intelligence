@@ -1,0 +1,457 @@
+{
+  "startedAt": "2026-10-06T08:20:45.536Z",
+  "completedAt": "2026-10-06T08:21:23.496Z",
+  "records": [
+    {
+      "publicationId": "motus-ai-intelligence-2026-09-29",
+      "category": "AI_INTELLIGENCE",
+      "issueDate": "2026-09-29",
+      "title": "상시 실행형 에이전트와 AI 보안·과학 연구의 확장 (2026년 9월 29일)",
+      "label": "AI 인텔리전스 (AI Intelligence)",
+      "review": {
+        "state": "APPROVED",
+        "reviewer": "human",
+        "reviewedAt": "2026-10-06T08:20:45.536Z",
+        "history": [
+          {
+            "at": "2026-10-06T08:20:45.536Z",
+            "decision": "APPROVED",
+            "reviewer": "human",
+            "note": "quality gate PASS publication unit approved for draft and one publish action"
+          }
+        ]
+      },
+      "sourceDestinationValidation": "PASS",
+      "articleFingerprint": "sha256:d02a15429bf03afafb33b656df3498da7ffc8d4ec432108027bb13074a332051",
+      "pdfConsistency": "PASS",
+      "audit": [
+        {
+          "at": "2026-10-06T08:20:45.536Z",
+          "event": "HUMAN_REVIEW_APPROVED",
+          "detail": "explicit production publish instruction; verified production record and quality gate reviewed"
+        },
+        {
+          "at": "2026-10-06T08:20:53.275Z",
+          "event": "DRAFT_CREATED",
+          "detail": "Blogger draft 2683873333879055086 created"
+        },
+        {
+          "at": "2026-10-06T17:20:56+09:00",
+          "event": "PUBLISHED",
+          "detail": "Blogger post 2683873333879055086 published with verified article permalink"
+        }
+      ],
+      "commerce": {
+        "enabled": false
+      },
+      "state": "PUBLISHED",
+      "draftPostId": "2683873333879055086",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/10/ai-2026-9-29.html",
+      "publishedAt": "2026-10-06T17:20:56+09:00",
+      "remoteDuplicateCount": 0,
+      "postsInsertCallCount": 1,
+      "publishApiCallCount": 1,
+      "draftValidation": {
+        "title": true,
+        "label": true,
+        "sources": true,
+        "chart": true,
+        "mobile": true,
+        "colorRule": true,
+        "internalTokenSafe": true,
+        "rawUrlSafe": true,
+        "inlineStyle": true,
+        "commerceDisabled": true,
+        "pass": true,
+        "anchorCount": 3,
+        "svgCount": 0
+      },
+      "publicHttpStatus": 200,
+      "publicValidation": {
+        "title": true,
+        "label": true,
+        "sources": true,
+        "chart": true,
+        "mobile": true,
+        "colorRule": true,
+        "internalTokenSafe": true,
+        "rawUrlSafe": true,
+        "inlineStyle": true,
+        "commerceDisabled": true,
+        "pass": true,
+        "anchorCount": 3,
+        "svgCount": 0
+      },
+      "searchTrackingRegistration": {
+        "publicationId": "motus-ai-intelligence-2026-09-29",
+        "publicPostUrl": "https://motusnova.blogspot.com/2026/10/ai-2026-9-29.html",
+        "registeredAt": "2026-10-06T17:20:56+09:00",
+        "trigger": "PUBLICATION_PUBLISHED",
+        "googleInspectionState": "QUEUED",
+        "naverDiscoveryState": "PENDING",
+        "visibility": {
+          "publicationId": "motus-ai-intelligence-2026-09-29",
+          "publicPostUrl": "https://motusnova.blogspot.com/2026/10/ai-2026-9-29.html",
+          "google": {
+            "discovered": null,
+            "indexed": null,
+            "lastCrawl": null,
+            "coverageState": null,
+            "inspectionAt": null
+          },
+          "naver": {
+            "discovered": null,
+            "indexed": null,
+            "collectionState": null,
+            "inspectionAt": null
+          },
+          "sitemapIncluded": null,
+          "rssIncluded": null
+        }
+      },
+      "error": null
+    },
+    {
+      "publicationId": "motus-us-market-2026-09-30",
+      "category": "US_MARKET",
+      "issueDate": "2026-09-30",
+      "title": "미국 증시 마감: 장기금리 부담에 다우 약세, 나스닥은 소폭 상승 (2026년 9월 30일)",
+      "label": "미국증시 (U.S. Market)",
+      "review": {
+        "state": "APPROVED",
+        "reviewer": "human",
+        "reviewedAt": "2026-10-06T08:20:45.536Z",
+        "history": [
+          {
+            "at": "2026-10-06T08:20:45.536Z",
+            "decision": "APPROVED",
+            "reviewer": "human",
+            "note": "quality gate PASS publication unit approved for draft and one publish action"
+          }
+        ]
+      },
+      "sourceDestinationValidation": "PASS",
+      "articleFingerprint": "sha256:a2103261e7771fb91d62f091b19b37d31f4dbe9f48ab4f3a22f9faf28e3bff03",
+      "pdfConsistency": "PASS",
+      "audit": [
+        {
+          "at": "2026-10-06T08:20:45.536Z",
+          "event": "HUMAN_REVIEW_APPROVED",
+          "detail": "explicit production publish instruction; verified production record and quality gate reviewed"
+        },
+        {
+          "at": "2026-10-06T08:21:06.684Z",
+          "event": "DRAFT_CREATED",
+          "detail": "Blogger draft 6490308826156387498 created"
+        },
+        {
+          "at": "2026-10-06T17:21:08+09:00",
+          "event": "PUBLISHED",
+          "detail": "Blogger post 6490308826156387498 published with verified article permalink"
+        }
+      ],
+      "commerce": {
+        "enabled": false
+      },
+      "state": "PUBLISHED",
+      "draftPostId": "6490308826156387498",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/10/2026-9-30.html",
+      "publishedAt": "2026-10-06T17:21:08+09:00",
+      "remoteDuplicateCount": 0,
+      "postsInsertCallCount": 1,
+      "publishApiCallCount": 1,
+      "draftValidation": {
+        "title": true,
+        "label": true,
+        "sources": true,
+        "chart": true,
+        "mobile": true,
+        "colorRule": true,
+        "internalTokenSafe": true,
+        "rawUrlSafe": true,
+        "inlineStyle": true,
+        "commerceDisabled": true,
+        "pass": true,
+        "anchorCount": 6,
+        "svgCount": 4
+      },
+      "publicHttpStatus": 200,
+      "publicValidation": {
+        "title": true,
+        "label": true,
+        "sources": true,
+        "chart": true,
+        "mobile": true,
+        "colorRule": true,
+        "internalTokenSafe": true,
+        "rawUrlSafe": true,
+        "inlineStyle": true,
+        "commerceDisabled": true,
+        "pass": true,
+        "anchorCount": 6,
+        "svgCount": 4
+      },
+      "searchTrackingRegistration": {
+        "publicationId": "motus-us-market-2026-09-30",
+        "publicPostUrl": "https://motusnova.blogspot.com/2026/10/2026-9-30.html",
+        "registeredAt": "2026-10-06T17:21:08+09:00",
+        "trigger": "PUBLICATION_PUBLISHED",
+        "googleInspectionState": "QUEUED",
+        "naverDiscoveryState": "PENDING",
+        "visibility": {
+          "publicationId": "motus-us-market-2026-09-30",
+          "publicPostUrl": "https://motusnova.blogspot.com/2026/10/2026-9-30.html",
+          "google": {
+            "discovered": null,
+            "indexed": null,
+            "lastCrawl": null,
+            "coverageState": null,
+            "inspectionAt": null
+          },
+          "naver": {
+            "discovered": null,
+            "indexed": null,
+            "collectionState": null,
+            "inspectionAt": null
+          },
+          "sitemapIncluded": null,
+          "rssIncluded": null
+        }
+      },
+      "error": null
+    },
+    {
+      "publicationId": "motus-korea-market-2026-09-30",
+      "category": "KOREA_MARKET",
+      "issueDate": "2026-09-30",
+      "title": "국내 증시 마감: 외국인·기관 매도에 코스피 하락, 코스닥은 반등 (2026년 9월 30일)",
+      "label": "국내증시 (Korea Market)",
+      "review": {
+        "state": "APPROVED",
+        "reviewer": "human",
+        "reviewedAt": "2026-10-06T08:20:45.536Z",
+        "history": [
+          {
+            "at": "2026-10-06T08:20:45.536Z",
+            "decision": "APPROVED",
+            "reviewer": "human",
+            "note": "quality gate PASS publication unit approved for draft and one publish action"
+          }
+        ]
+      },
+      "sourceDestinationValidation": "PASS",
+      "articleFingerprint": "sha256:02d561ce2468b808683eefeb702ade2d5be0180d5ec6573185ee3ce641ad4cf4",
+      "pdfConsistency": "PASS",
+      "audit": [
+        {
+          "at": "2026-10-06T08:20:45.536Z",
+          "event": "HUMAN_REVIEW_APPROVED",
+          "detail": "explicit production publish instruction; verified production record and quality gate reviewed"
+        },
+        {
+          "at": "2026-10-06T08:21:19.247Z",
+          "event": "DRAFT_CREATED",
+          "detail": "Blogger draft 7329329991867951886 created"
+        },
+        {
+          "at": "2026-10-06T17:21:21+09:00",
+          "event": "PUBLISHED",
+          "detail": "Blogger post 7329329991867951886 published with verified article permalink"
+        }
+      ],
+      "commerce": {
+        "enabled": false
+      },
+      "state": "PUBLISHED",
+      "draftPostId": "7329329991867951886",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/10/2026-9-30_0170921246.html",
+      "publishedAt": "2026-10-06T17:21:21+09:00",
+      "remoteDuplicateCount": 0,
+      "postsInsertCallCount": 1,
+      "publishApiCallCount": 1,
+      "draftValidation": {
+        "title": true,
+        "label": true,
+        "sources": true,
+        "chart": true,
+        "mobile": true,
+        "colorRule": true,
+        "internalTokenSafe": true,
+        "rawUrlSafe": true,
+        "inlineStyle": true,
+        "commerceDisabled": true,
+        "pass": true,
+        "anchorCount": 8,
+        "svgCount": 0
+      },
+      "publicHttpStatus": 200,
+      "publicValidation": {
+        "title": true,
+        "label": true,
+        "sources": true,
+        "chart": true,
+        "mobile": true,
+        "colorRule": true,
+        "internalTokenSafe": true,
+        "rawUrlSafe": true,
+        "inlineStyle": true,
+        "commerceDisabled": true,
+        "pass": true,
+        "anchorCount": 8,
+        "svgCount": 0
+      },
+      "searchTrackingRegistration": {
+        "publicationId": "motus-korea-market-2026-09-30",
+        "publicPostUrl": "https://motusnova.blogspot.com/2026/10/2026-9-30_0170921246.html",
+        "registeredAt": "2026-10-06T17:21:21+09:00",
+        "trigger": "PUBLICATION_PUBLISHED",
+        "googleInspectionState": "QUEUED",
+        "naverDiscoveryState": "PENDING",
+        "visibility": {
+          "publicationId": "motus-korea-market-2026-09-30",
+          "publicPostUrl": "https://motusnova.blogspot.com/2026/10/2026-9-30_0170921246.html",
+          "google": {
+            "discovered": null,
+            "indexed": null,
+            "lastCrawl": null,
+            "coverageState": null,
+            "inspectionAt": null
+          },
+          "naver": {
+            "discovered": null,
+            "indexed": null,
+            "collectionState": null,
+            "inspectionAt": null
+          },
+          "sitemapIncluded": null,
+          "rssIncluded": null
+        }
+      },
+      "error": null
+    }
+  ],
+  "sourceChecks": {
+    "AI_INTELLIGENCE": [
+      {
+        "label": "Microsoft Research",
+        "url": "https://www.microsoft.com/en-us/research/blog/introducing-quine-an-ai-research-system-designed-for-the-complexity-of-biology",
+        "status": 200,
+        "pass": true,
+        "error": null
+      },
+      {
+        "label": "NVIDIA",
+        "url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Launches-Open-Agent-Safety-Platform-to-Secure-Agents-From-Testing-to-Deployment/default.aspx",
+        "status": 403,
+        "pass": true,
+        "error": null
+      },
+      {
+        "label": "OpenAI",
+        "url": "https://openai.com/index/introducing-dots",
+        "status": 403,
+        "pass": true,
+        "error": null
+      }
+    ],
+    "US_MARKET": [
+      {
+        "label": "AP — 9월 30일 미국 주요지수 종가",
+        "url": "https://apnews.com/article/1ee73f14dc23f6139eeb12c7397f543e",
+        "status": 403,
+        "pass": true,
+        "error": null
+      },
+      {
+        "label": "AP — 미국시장 마감 해설",
+        "url": "https://apnews.com/article/e61d3d7b947a390c7eee6c8758e3095d",
+        "status": 403,
+        "pass": true,
+        "error": null
+      },
+      {
+        "label": "U.S. Treasury — Daily Treasury Rates",
+        "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202609&type=daily_treasury_yield_curve",
+        "status": 200,
+        "pass": true,
+        "error": null
+      },
+      {
+        "label": "Cboe — VIX",
+        "url": "https://www.cboe.com/tradable-products/vix",
+        "status": 200,
+        "pass": true,
+        "error": null
+      },
+      {
+        "label": "DXY historical data",
+        "url": "https://es.investing.com/currencies/us-dollar-index-historical-data/",
+        "status": 403,
+        "pass": true,
+        "error": null
+      }
+    ],
+    "KOREA_MARKET": [
+      {
+        "label": "MarketTimes — 9월 30일 KRX 마감",
+        "url": "https://www.markettimes.co.kr/2026/09/30/krx-%EB%A7%88%EA%B0%90-9%EC%9B%94-30%EC%9D%BC-%EC%BD%94%EC%8A%A4%ED%94%BC-3%EA%B1%B0%EB%9E%98%EC%9D%BC-%EC%97%B0%EC%86%8D-%ED%95%98%EB%9D%BD%EC%99%B8%EA%B5%AD%EC%9D%B8%EA%B8%B0%EA%B4%80-%EB%8F%99/",
+        "status": 200,
+        "pass": true,
+        "error": null
+      },
+      {
+        "label": "Newsway — 국내 증시 마감",
+        "url": "https://www.newsway.co.kr/news/view?ud=2026093015491609752",
+        "status": 200,
+        "pass": true,
+        "error": null
+      },
+      {
+        "label": "News1 — 원·달러 환율 마감",
+        "url": "https://www.news1.kr/finance/market-exr/6306362",
+        "status": 200,
+        "pass": true,
+        "error": null
+      },
+      {
+        "label": "삼성증권 HTML 원문",
+        "url": "https://www.samsungpop.com/v2/today-invest/series/todaymarkettrend-3040",
+        "status": 200,
+        "pass": true,
+        "error": null
+      },
+      {
+        "label": "삼성증권 HTML 원문",
+        "url": "https://samsungpop.com/v2/today-invest/series/researchanalysttalk-3022",
+        "status": 200,
+        "pass": true,
+        "error": null
+      },
+      {
+        "label": "삼성증권 HTML 원문",
+        "url": "https://samsungpop.com/v2/today-invest/series/researchanalysttalk-3025",
+        "status": 200,
+        "pass": true,
+        "error": null
+      },
+      {
+        "label": "삼성증권 HTML 원문",
+        "url": "https://samsungpop.com/v2/today-invest/series/researchanalysttalk-3008",
+        "status": 200,
+        "pass": true,
+        "error": null
+      },
+      {
+        "label": "삼성증권 HTML 원문",
+        "url": "https://samsungpop.com/v2/today-invest/series/researchanalysttalk-3001",
+        "status": 200,
+        "pass": true,
+        "error": null
+      }
+    ]
+  },
+  "commerce": {
+    "enabled": false
+  },
+  "protectedPostId": "9009523239057574527"
+}

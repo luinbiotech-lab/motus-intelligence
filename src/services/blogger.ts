@@ -149,7 +149,7 @@ export class ConfiguredBloggerAdapter implements BloggerAdapter {
 }
 
 type FetchLike = (input:string|URL,init?:RequestInit)=>Promise<Response>;
-type GoogleBloggerPost = { id?:string; title?:string; url?:string; status?:string; published?:string; updated?:string };
+type GoogleBloggerPost = { id?:string; title?:string; url?:string; status?:string; published?:string; updated?:string; content?:string; labels?:string[] };
 type GoogleBloggerPostList = { items?:GoogleBloggerPost[]; nextPageToken?:string };
 type GoogleOAuthToken = { access_token?:string; token_type?:string; expires_in?:number };
 
@@ -216,6 +216,35 @@ export class GoogleBloggerApiAdapter implements BloggerAdapter {
     const response=await this.fetcher(endpoint,{headers:{authorization:`Bearer ${accessToken}`}});if(!response.ok)throw new Error(`Blogger post readback ${response.status}: ${safeGoogleApiError(await response.text())}`);
     const post=await response.json() as GoogleBloggerPost&{content?:string;labels?:string[]};if(!post.id||!post.title||typeof post.content!=='string')throw new Error('Blogger readback missing post fields');
     const status=post.status==='DRAFT'?'DRAFT':post.status==='LIVE'?'PUBLISHED':'UNKNOWN';return {postId:post.id,title:post.title,content:post.content,status,url:status==='PUBLISHED'&&isPublicBloggerPostUrl(post.url)?post.url!:null,labels:Array.isArray(post.labels)?post.labels:[]};
+  }
+
+  async findMatchingPosts(input:{title:string;label:string},config:BloggerPublishingConfig):Promise<BloggerPostReadback[]> {
+    const blogId=config.blogId?.trim();if(!blogId)throw new Error('missing Blogger blogId');
+    const accessToken=await this.resolveAccessToken(config);const matches:BloggerPostReadback[]=[];
+    for(const requestedStatus of ['draft','live'] as const){let pageToken:string|undefined;do{
+      const endpoint=new URL(`https://www.googleapis.com/blogger/v3/blogs/${encodeURIComponent(blogId)}/posts`);
+      endpoint.searchParams.set('status',requestedStatus);endpoint.searchParams.set('fetchBodies','true');endpoint.searchParams.set('maxResults','50');if(pageToken)endpoint.searchParams.set('pageToken',pageToken);
+      const response=await this.fetcher(endpoint,{headers:{authorization:`Bearer ${accessToken}`}});if(!response.ok)throw new Error(`Blogger remote duplicate lookup ${response.status}: ${safeGoogleApiError(await response.text())}`);
+      const page=await response.json() as GoogleBloggerPostList&{items?:GoogleBloggerPost[]};
+      for(const post of page.items??[]){if(!post.id||post.title!==input.title||!(post.labels??[]).includes(input.label))continue;const status=post.status==='DRAFT'?'DRAFT':post.status==='LIVE'?'PUBLISHED':'UNKNOWN';matches.push({postId:post.id,title:post.title,content:post.content??'',status,url:status==='PUBLISHED'&&isPublicBloggerPostUrl(post.url)?post.url!:null,labels:post.labels??[]});}
+      pageToken=page.nextPageToken;
+    }while(pageToken);}
+    return matches;
+  }
+
+  async insertDraftContent(input:{title:string;content:string;labels:string[]},config:BloggerPublishingConfig):Promise<BloggerPostReadback> {
+    const blogId=config.blogId?.trim();if(!blogId)throw new Error('missing Blogger blogId');const accessToken=await this.resolveAccessToken(config);
+    const endpoint=new URL(`https://www.googleapis.com/blogger/v3/blogs/${encodeURIComponent(blogId)}/posts`);endpoint.searchParams.set('isDraft','true');
+    const response=await this.fetcher(endpoint,{method:'POST',headers:{authorization:`Bearer ${accessToken}`,'content-type':'application/json'},body:JSON.stringify({title:input.title,content:extractBloggerArticle(input.content),labels:input.labels})});
+    if(!response.ok)throw new Error(`Blogger draft insert ${response.status}: ${safeGoogleApiError(await response.text())}`);const post=await response.json() as GoogleBloggerPost;
+    if(!post.id)throw new Error('Blogger draft insert response missing post id');return this.readPost(post.id,config);
+  }
+
+  async publishDraftPost(postId:string,config:BloggerPublishingConfig):Promise<{postId:string;publicPostUrl:string;publishedAt:string}> {
+    const blogId=config.blogId?.trim();if(!blogId)throw new Error('missing Blogger blogId');if(!postId.trim())throw new Error('missing Blogger postId');const accessToken=await this.resolveAccessToken(config);
+    const endpoint=new URL(`https://www.googleapis.com/blogger/v3/blogs/${encodeURIComponent(blogId)}/posts/${encodeURIComponent(postId)}/publish`);
+    const response=await this.fetcher(endpoint,{method:'POST',headers:{authorization:`Bearer ${accessToken}`}});if(!response.ok)throw new Error(`Blogger publish ${response.status}: ${safeGoogleApiError(await response.text())}`);const post=await response.json() as GoogleBloggerPost;
+    if(post.id!==postId||!isPublicBloggerPostUrl(post.url))throw new Error('Blogger publish response missing article permalink');return {postId,publicPostUrl:post.url!,publishedAt:post.published??post.updated??new Date().toISOString()};
   }
 
   private readConfigured(environmentVariable:string|null|undefined):string|undefined {

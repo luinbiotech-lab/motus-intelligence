@@ -1,0 +1,83 @@
+[
+  {
+    "publicationId": "motus-ai-intelligence-2026-09-29",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/ai-2026-9-29.html",
+    "registeredAt": "2026-10-06T17:20:56+09:00",
+    "trigger": "PUBLICATION_PUBLISHED",
+    "googleInspectionState": "QUEUED",
+    "naverDiscoveryState": "PENDING",
+    "visibility": {
+      "publicationId": "motus-ai-intelligence-2026-09-29",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/10/ai-2026-9-29.html",
+      "google": {
+        "discovered": null,
+        "indexed": null,
+        "lastCrawl": null,
+        "coverageState": null,
+        "inspectionAt": null
+      },
+      "naver": {
+        "discovered": null,
+        "indexed": null,
+        "collectionState": null,
+        "inspectionAt": null
+      },
+      "sitemapIncluded": null,
+      "rssIncluded": null
+    }
+  },
+  {
+    "publicationId": "motus-us-market-2026-09-30",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/2026-9-30.html",
+    "registeredAt": "2026-10-06T17:21:08+09:00",
+    "trigger": "PUBLICATION_PUBLISHED",
+    "googleInspectionState": "QUEUED",
+    "naverDiscoveryState": "PENDING",
+    "visibility": {
+      "publicationId": "motus-us-market-2026-09-30",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/10/2026-9-30.html",
+      "google": {
+        "discovered": null,
+        "indexed": null,
+        "lastCrawl": null,
+        "coverageState": null,
+        "inspectionAt": null
+      },
+      "naver": {
+        "discovered": null,
+        "indexed": null,
+        "collectionState": null,
+        "inspectionAt": null
+      },
+      "sitemapIncluded": null,
+      "rssIncluded": null
+    }
+  },
+  {
+    "publicationId": "motus-korea-market-2026-09-30",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/2026-9-30_0170921246.html",
+    "registeredAt": "2026-10-06T17:21:21+09:00",
+    "trigger": "PUBLICATION_PUBLISHED",
+    "googleInspectionState": "QUEUED",
+    "naverDiscoveryState": "PENDING",
+    "visibility": {
+      "publicationId": "motus-korea-market-2026-09-30",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/10/2026-9-30_0170921246.html",
+      "google": {
+        "discovered": null,
+        "indexed": null,
+        "lastCrawl": null,
+        "coverageState": null,
+        "inspectionAt": null
+      },
+      "naver": {
+        "discovered": null,
+        "indexed": null,
+        "collectionState": null,
+        "inspectionAt": null
+      },
+      "sitemapIncluded": null,
+      "rssIncluded": null
+    }
+  }
+]

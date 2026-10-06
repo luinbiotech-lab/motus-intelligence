@@ -1,0 +1,109 @@
+{
+  "publicationId": "motus-ai-intelligence-2026-09-29",
+  "category": "AI_INTELLIGENCE",
+  "issueDate": "2026-09-29",
+  "title": "상시 실행형 에이전트와 AI 보안·과학 연구의 확장 (2026년 9월 29일)",
+  "label": "AI 인텔리전스 (AI Intelligence)",
+  "review": {
+    "state": "APPROVED",
+    "reviewer": "human",
+    "reviewedAt": "2026-10-06T08:20:45.536Z",
+    "history": [
+      {
+        "at": "2026-10-06T08:20:45.536Z",
+        "decision": "APPROVED",
+        "reviewer": "human",
+        "note": "quality gate PASS publication unit approved for draft and one publish action"
+      }
+    ]
+  },
+  "sourceDestinationValidation": "PASS",
+  "articleFingerprint": "sha256:d02a15429bf03afafb33b656df3498da7ffc8d4ec432108027bb13074a332051",
+  "pdfConsistency": "PASS",
+  "audit": [
+    {
+      "at": "2026-10-06T08:20:45.536Z",
+      "event": "HUMAN_REVIEW_APPROVED",
+      "detail": "explicit production publish instruction; verified production record and quality gate reviewed"
+    },
+    {
+      "at": "2026-10-06T08:20:53.275Z",
+      "event": "DRAFT_CREATED",
+      "detail": "Blogger draft 2683873333879055086 created"
+    },
+    {
+      "at": "2026-10-06T17:20:56+09:00",
+      "event": "PUBLISHED",
+      "detail": "Blogger post 2683873333879055086 published with verified article permalink"
+    }
+  ],
+  "commerce": {
+    "enabled": false
+  },
+  "state": "PUBLISHED",
+  "draftPostId": "2683873333879055086",
+  "publicPostUrl": "https://motusnova.blogspot.com/2026/10/ai-2026-9-29.html",
+  "publishedAt": "2026-10-06T17:20:56+09:00",
+  "remoteDuplicateCount": 0,
+  "postsInsertCallCount": 1,
+  "publishApiCallCount": 1,
+  "draftValidation": {
+    "title": true,
+    "label": true,
+    "sources": true,
+    "chart": true,
+    "mobile": true,
+    "colorRule": true,
+    "internalTokenSafe": true,
+    "rawUrlSafe": true,
+    "inlineStyle": true,
+    "commerceDisabled": true,
+    "pass": true,
+    "anchorCount": 3,
+    "svgCount": 0
+  },
+  "publicHttpStatus": 200,
+  "publicValidation": {
+    "title": true,
+    "label": true,
+    "sources": true,
+    "chart": true,
+    "mobile": true,
+    "colorRule": true,
+    "internalTokenSafe": true,
+    "rawUrlSafe": true,
+    "inlineStyle": true,
+    "commerceDisabled": true,
+    "pass": true,
+    "anchorCount": 3,
+    "svgCount": 0
+  },
+  "searchTrackingRegistration": {
+    "publicationId": "motus-ai-intelligence-2026-09-29",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/ai-2026-9-29.html",
+    "registeredAt": "2026-10-06T17:20:56+09:00",
+    "trigger": "PUBLICATION_PUBLISHED",
+    "googleInspectionState": "QUEUED",
+    "naverDiscoveryState": "PENDING",
+    "visibility": {
+      "publicationId": "motus-ai-intelligence-2026-09-29",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/10/ai-2026-9-29.html",
+      "google": {
+        "discovered": null,
+        "indexed": null,
+        "lastCrawl": null,
+        "coverageState": null,
+        "inspectionAt": null
+      },
+      "naver": {
+        "discovered": null,
+        "indexed": null,
+        "collectionState": null,
+        "inspectionAt": null
+      },
+      "sitemapIncluded": null,
+      "rssIncluded": null
+    }
+  },
+  "error": null
+}

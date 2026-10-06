@@ -1,0 +1,37 @@
+[
+  {
+    "label": "AP — 9월 30일 미국 주요지수 종가",
+    "url": "https://apnews.com/article/1ee73f14dc23f6139eeb12c7397f543e",
+    "status": 403,
+    "pass": true,
+    "error": null
+  },
+  {
+    "label": "AP — 미국시장 마감 해설",
+    "url": "https://apnews.com/article/e61d3d7b947a390c7eee6c8758e3095d",
+    "status": 403,
+    "pass": true,
+    "error": null
+  },
+  {
+    "label": "U.S. Treasury — Daily Treasury Rates",
+    "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202609&type=daily_treasury_yield_curve",
+    "status": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "label": "Cboe — VIX",
+    "url": "https://www.cboe.com/tradable-products/vix",
+    "status": 200,
+    "pass": true,
+    "error": null
+  },
+  {
+    "label": "DXY historical data",
+    "url": "https://es.investing.com/currencies/us-dollar-index-historical-data/",
+    "status": 403,
+    "pass": true,
+    "error": null
+  }
+]
