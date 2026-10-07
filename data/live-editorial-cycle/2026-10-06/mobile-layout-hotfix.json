@@ -1,0 +1,180 @@
+{
+  "generatedAt": "2026-10-07T09:46:22.842Z",
+  "targetPostId": "614930389904987485",
+  "diagnosedRootCause": {
+    "nonWrappingFlexRows": true,
+    "fixedHalfWidthChartCells": true,
+    "responsiveSvgWidthAttributeMissing": true,
+    "outerOverflowGuardMissing": true
+  },
+  "result": {
+    "postId": "614930389904987485",
+    "publishCount": 0,
+    "beforeFingerprint": "sha256:136d3289ada08416cb89ad9e0b7d05c5ef722b196fc50a4fb7d0b1f7d5e02359",
+    "fingerprintGuard": "EXACT_MATCH",
+    "rootCause": {
+      "fixedHalfWidthChartCells": false,
+      "nonWrappingFlexRows": false,
+      "responsiveSvgMissing": false,
+      "outerOverflowGuardMissing": false
+    },
+    "beforeAudit": {
+      "outerContainment": true,
+      "fixedMinWidthAbsent": true,
+      "unsafeFlexRowsAbsent": true,
+      "fixedHalfWidthChartCellsAbsent": true,
+      "responsiveGrid": true,
+      "cardContainment": true,
+      "svgCount": 4,
+      "responsiveSvg": true,
+      "titleWrappingSafe": true,
+      "sourceLinks": true,
+      "dateCaption": true,
+      "colorRule": true,
+      "commerceAbsent": true,
+      "pass": true
+    },
+    "state": "PUBLISHED",
+    "patchCount": 0,
+    "afterFingerprint": "sha256:136d3289ada08416cb89ad9e0b7d05c5ef722b196fc50a4fb7d0b1f7d5e02359",
+    "afterAudit": {
+      "outerContainment": true,
+      "fixedMinWidthAbsent": true,
+      "unsafeFlexRowsAbsent": true,
+      "fixedHalfWidthChartCellsAbsent": true,
+      "responsiveGrid": true,
+      "cardContainment": true,
+      "svgCount": 4,
+      "responsiveSvg": true,
+      "titleWrappingSafe": true,
+      "sourceLinks": true,
+      "dateCaption": true,
+      "colorRule": true,
+      "commerceAbsent": true,
+      "pass": true
+    },
+    "httpStatus": 200,
+    "publicAudit": {
+      "outerContainment": true,
+      "fixedMinWidthAbsent": true,
+      "unsafeFlexRowsAbsent": true,
+      "fixedHalfWidthChartCellsAbsent": true,
+      "responsiveGrid": true,
+      "cardContainment": true,
+      "svgCount": 4,
+      "responsiveSvg": true,
+      "titleWrappingSafe": true,
+      "sourceLinks": true,
+      "dateCaption": true,
+      "colorRule": true,
+      "commerceAbsent": true,
+      "pass": true
+    },
+    "factsPreserved": true,
+    "sourcesPreserved": true,
+    "titlePreserved": true,
+    "labelPreserved": true,
+    "error": null
+  },
+  "viewports": [
+    {
+      "width": 320,
+      "status": "PASS",
+      "horizontalOverflow": 0,
+      "clippedCards": 0,
+      "titleWraps": 0,
+      "charts": 4,
+      "indicatorClips": 0,
+      "svgResponsive": true
+    },
+    {
+      "width": 360,
+      "status": "PASS",
+      "horizontalOverflow": 0,
+      "clippedCards": 0,
+      "titleWraps": 0,
+      "charts": 4,
+      "indicatorClips": 0,
+      "svgResponsive": true
+    },
+    {
+      "width": 375,
+      "status": "PASS",
+      "horizontalOverflow": 0,
+      "clippedCards": 0,
+      "titleWraps": 0,
+      "charts": 4,
+      "indicatorClips": 0,
+      "svgResponsive": true
+    },
+    {
+      "width": 390,
+      "status": "PASS",
+      "horizontalOverflow": 0,
+      "clippedCards": 0,
+      "titleWraps": 0,
+      "charts": 4,
+      "indicatorClips": 0,
+      "svgResponsive": true
+    },
+    {
+      "width": 430,
+      "status": "PASS",
+      "horizontalOverflow": 0,
+      "clippedCards": 0,
+      "titleWraps": 0,
+      "charts": 4,
+      "indicatorClips": 0,
+      "svgResponsive": true
+    }
+  ],
+  "actions": {
+    "operation": {
+      "patch": 1,
+      "insert": 0,
+      "publish": 0
+    },
+    "verificationRun": {
+      "lookup": 1,
+      "patch": 0,
+      "insert": 0,
+      "publish": 0
+    }
+  },
+  "localRegressions": {
+    "ai": {
+      "audit": {
+        "outerContainment": true,
+        "fixedMinWidthAbsent": true,
+        "breakAllAbsent": true,
+        "commerceAbsent": true,
+        "pass": true
+      },
+      "publishCount": 0
+    },
+    "korea": {
+      "audit": {
+        "outerContainment": true,
+        "fixedMinWidthAbsent": true,
+        "breakAllAbsent": true,
+        "commerceAbsent": true,
+        "pass": true
+      },
+      "state": "DRAFT",
+      "publishCount": 0
+    }
+  },
+  "editorialMemory": {
+    "rules": [
+      "Public renderers must not create horizontal overflow at 320–430px viewport widths.",
+      "Chart cards must use responsive containers with no fixed mobile width.",
+      "English chart titles must not use break-all wrapping.",
+      "Multi-column charts must collapse to one column when the container is too narrow.",
+      "Every public card must remain fully contained inside its parent at mobile widths."
+    ],
+    "recordCount": 16
+  },
+  "commerce": {
+    "enabled": false
+  }
+}

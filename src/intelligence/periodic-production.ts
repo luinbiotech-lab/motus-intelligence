@@ -31,8 +31,8 @@ export interface ReportArchiveGroup { group:'Daily'|'Weekly'|'Monthly';entries:P
 export interface ReportArchiveViewModel { title:string;filters:ReportArchiveFilter;groups:ReportArchiveGroup[] }
 export interface PeriodicProductionRun { weekly:WeeklyIntelligenceViewModel;monthly:MonthlyIntelligenceViewModel;weeklyRender:PeriodicRenderResult;monthlyRender:PeriodicRenderResult;weeklyPdf:WeeklyPdfViewModel;monthlyPdf:MonthlyPdfViewModel;reports:ReportArchiveViewModel;reportsHtml:string;remoteCalls:{insert:number;patch:number;publish:number;themeUpdate:number;menuUpdate:number};commerce:{enabled:false} }
 
-const body='font-family:Arial,&quot;Noto Sans KR&quot;,sans-serif;color:#172033;line-height:1.68;font-size:17px;width:100%;max-width:820px;box-sizing:border-box;margin:0 auto;overflow-wrap:anywhere';
-const bar='background:#03162e;color:#fff;border:1px solid #010b17;padding:14px 16px;font-size:21px;font-weight:800;margin:22px 0 0;width:100%;max-width:100%;box-sizing:border-box';
+const body='font-family:Arial,&quot;Noto Sans KR&quot;,sans-serif;color:#172033;line-height:1.68;font-size:17px;width:100%;max-width:820px;box-sizing:border-box;margin:0 auto;overflow-x:hidden;overflow-wrap:anywhere';
+const bar='background:#03162e;color:#fff;border:1px solid #010b17;padding:14px 16px;font-size:clamp(18px,4.8vw,21px);font-weight:800;margin:22px 0 0;width:100%;max-width:100%;box-sizing:border-box;word-break:keep-all;overflow-wrap:normal';
 const box='border:1px solid #aebed2;padding:20px 21px;background:#fff;margin:0 0 20px;width:100%;max-width:100%;box-sizing:border-box';
 
 export function createPeriodicProductionRun(generatedAt='2026-10-01T12:00:00+09:00'):PeriodicProductionRun {

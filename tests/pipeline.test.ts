@@ -790,7 +790,7 @@ test('Blogger visibility renderer uses high-contrast inline styles, dictionary g
     markdown:'## 핵심 요약\n\n본문\n\n## 시장 한눈에 보기\n\n| 구분 | 지표 | 종가 | 등락 |\n| --- | --- | ---: | ---: |\n| 주요지수 | 지수 A | 100 | +1.0% |\n| 주요지수 | 지수 B | 90 | -1.0% |',
     metadata:{schemaVersion:'1.0',brand:'MOTUS',displayName:'MOTUS | What Moves the World',primaryCategory:'Daily Market',categories:['Daily Market'],companies:[],sectors:[],themes:[],countries:[],regions:[]}
   },publishingConfig.publisher);
-  assert.match(rendered.html,/background:#03162e;color:#ffffff;border:1px solid #010b17[^"']*font-size:20px;font-weight:800/);
+  assert.match(rendered.html,/background:#03162e;color:#ffffff;border:1px solid #010b17[^"']*font-size:clamp\(18px,4\.8vw,20px\);font-weight:800/);
   assert.match(rendered.html,/background:#0b2745;color:#ffffff[^"']*font-size:14px;font-weight:800/);
   assert.match(rendered.html,/color:#c62828;background:#fff2f2/);
   assert.match(rendered.html,/color:#1565c0;background:#eef5ff/);
@@ -829,9 +829,10 @@ test('MOTUS Blogger renderer adds four responsive five-session line charts from 
   assert.equal((rendered.html.match(/<svg class="index-line-chart"/g)??[]).length,4);
   assert.equal((rendered.html.match(/<polyline points=/g)??[]).length,4);
   assert.equal((rendered.html.match(/data-values="[^"]+(?:,[^,"]+){4}"/g)??[]).length,4);
-  assert.match(rendered.html,/<div class="index-trend-grid" data-layout="two-by-two"/);
-  assert.equal((rendered.html.match(/class="index-trend-row"[^>]*display:flex!important;flex-wrap:nowrap!important/g)??[]).length,2);
-  assert.equal((rendered.html.match(/width:50%;max-width:50%/g)??[]).length,4);
+  assert.match(rendered.html,/<div class="index-trend-grid" data-layout="responsive-two-by-two"[^>]*display:grid/);
+  assert.equal((rendered.html.match(/class="index-trend-cell"/g)??[]).length,4);
+  assert.equal((rendered.html.match(/<svg class="index-line-chart"[^>]*width="100%"/g)??[]).length,4);
+  assert.doesNotMatch(rendered.html,/index-trend-row|width:50%;max-width:50%|flex-wrap:nowrap!important/);
   for(const key of ['sp500','nasdaq','dow-jones','russell-2000']) assert.match(rendered.html,new RegExp(`data-index="${key}"`));
   assert.match(rendered.html,/7,551\.81[\s\S]*-0\.45%/);
   assert.match(rendered.html,/2026년 9월 10일~9월 16일 정규장 종가/);

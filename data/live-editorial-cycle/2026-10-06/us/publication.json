@@ -39,6 +39,11 @@
       "at": "2026-10-06T14:47:21.464Z",
       "event": "FACTUAL_DISPLAY_CORRECTION",
       "detail": "Chart caption corrected from a stale fixed range to the verified series firstDate~lastDate; public article re-fetched with HTTP 200"
+    },
+    {
+      "at": "2026-10-07T09:41:36.194Z",
+      "event": "MOBILE_LAYOUT_HOTFIX",
+      "detail": "Blogger posts.patch executed once for the responsive indicator and index-chart layout; the public post was re-fetched without a publish call, while title, facts, sources and published state were preserved"
     }
   ],
   "commerce": {
@@ -146,7 +151,7 @@
     "state": "PUBLISHED"
   },
   "error": null,
-  "contentFingerprint": "sha256:3448dfc454ae0320cf7c7c5939d289c65906abe55fafa6203c42864b628f712e",
+  "contentFingerprint": "sha256:136d3289ada08416cb89ad9e0b7d05c5ef722b196fc50a4fb7d0b1f7d5e02359",
   "correction": {
     "postId": "614930389904987485",
     "oldCaption": "2026년 9월 10~16일 정규장 종가",
@@ -165,5 +170,74 @@
     },
     "error": null
   },
-  "postPublishAudit": "PASS"
+  "postPublishAudit": "PASS",
+  "mobileLayoutHotfix": {
+    "postId": "614930389904987485",
+    "publishCount": 0,
+    "beforeFingerprint": "sha256:136d3289ada08416cb89ad9e0b7d05c5ef722b196fc50a4fb7d0b1f7d5e02359",
+    "fingerprintGuard": "EXACT_MATCH",
+    "rootCause": {
+      "fixedHalfWidthChartCells": false,
+      "nonWrappingFlexRows": false,
+      "responsiveSvgMissing": false,
+      "outerOverflowGuardMissing": false
+    },
+    "beforeAudit": {
+      "outerContainment": true,
+      "fixedMinWidthAbsent": true,
+      "unsafeFlexRowsAbsent": true,
+      "fixedHalfWidthChartCellsAbsent": true,
+      "responsiveGrid": true,
+      "cardContainment": true,
+      "svgCount": 4,
+      "responsiveSvg": true,
+      "titleWrappingSafe": true,
+      "sourceLinks": true,
+      "dateCaption": true,
+      "colorRule": true,
+      "commerceAbsent": true,
+      "pass": true
+    },
+    "state": "PUBLISHED",
+    "patchCount": 0,
+    "afterFingerprint": "sha256:136d3289ada08416cb89ad9e0b7d05c5ef722b196fc50a4fb7d0b1f7d5e02359",
+    "afterAudit": {
+      "outerContainment": true,
+      "fixedMinWidthAbsent": true,
+      "unsafeFlexRowsAbsent": true,
+      "fixedHalfWidthChartCellsAbsent": true,
+      "responsiveGrid": true,
+      "cardContainment": true,
+      "svgCount": 4,
+      "responsiveSvg": true,
+      "titleWrappingSafe": true,
+      "sourceLinks": true,
+      "dateCaption": true,
+      "colorRule": true,
+      "commerceAbsent": true,
+      "pass": true
+    },
+    "httpStatus": 200,
+    "publicAudit": {
+      "outerContainment": true,
+      "fixedMinWidthAbsent": true,
+      "unsafeFlexRowsAbsent": true,
+      "fixedHalfWidthChartCellsAbsent": true,
+      "responsiveGrid": true,
+      "cardContainment": true,
+      "svgCount": 4,
+      "responsiveSvg": true,
+      "titleWrappingSafe": true,
+      "sourceLinks": true,
+      "dateCaption": true,
+      "colorRule": true,
+      "commerceAbsent": true,
+      "pass": true
+    },
+    "factsPreserved": true,
+    "sourcesPreserved": true,
+    "titlePreserved": true,
+    "labelPreserved": true,
+    "error": null
+  }
 }

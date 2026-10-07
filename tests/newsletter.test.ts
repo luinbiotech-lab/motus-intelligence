@@ -87,8 +87,9 @@ test('Sprint 3B.2 is Blogger-mobile safe and reuses the verified 2x2 chart',()=>
   assert.match(html,/data-product="motus-daily-intelligence"/);
   assert.match(html,/width:100%;max-width:100%;box-sizing:border-box/);
   assert.equal((html.match(/<svg class="index-line-chart"/g)??[]).length,4);
-  assert.match(html,/data-layout="two-by-two"/);
-  assert.equal((html.match(/width:50%;max-width:50%/g)??[]).length>=4,true);
+  assert.match(html,/data-layout="responsive-two-by-two"/);
+  assert.equal((html.match(/<svg class="index-line-chart"[^>]*width="100%"/g)??[]).length,4);
+  assert.doesNotMatch(html,/index-trend-row|word-break:break-all/);
   assert.doesNotMatch(html,/<script\b|<iframe\b|<style\b|overflow-x:auto|javascript:/i);
 });
 

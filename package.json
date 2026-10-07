@@ -28,6 +28,7 @@
     "motus:publish-live": "npm run build && node dist/src/live-editorial-publish-cli.js",
     "motus:post-publish-maintenance": "npm run build && node dist/src/post-publish-maintenance-cli.js",
     "motus:public-narrative-maintenance": "npm run build && node dist/src/public-narrative-maintenance-cli.js",
+    "motus:mobile-hotfix": "npm run build && node dist/src/mobile-layout-hotfix-cli.js",
     "motus:publish-split": "npm run build && node dist/src/split-daily-publish-cli.js",
     "sample": "npm run build && node dist/src/cli.js --sample",
     "report": "node dist/src/cli.js"

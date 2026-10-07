@@ -1,0 +1,14 @@
+{
+  "artifact": "local-browser-render-snapshot",
+  "preview": "us-local-preview.html",
+  "viewports": [
+    {"width": 320, "horizontalOverflow": 0, "clippedCards": 0, "titleWraps": 0, "charts": 4, "indicatorClips": 0, "svgResponsive": true},
+    {"width": 360, "horizontalOverflow": 0, "clippedCards": 0, "titleWraps": 0, "charts": 4, "indicatorClips": 0, "svgResponsive": true},
+    {"width": 375, "horizontalOverflow": 0, "clippedCards": 0, "titleWraps": 0, "charts": 4, "indicatorClips": 0, "svgResponsive": true},
+    {"width": 390, "horizontalOverflow": 0, "clippedCards": 0, "titleWraps": 0, "charts": 4, "indicatorClips": 0, "svgResponsive": true},
+    {"width": 430, "horizontalOverflow": 0, "clippedCards": 0, "titleWraps": 0, "charts": 4, "indicatorClips": 0, "svgResponsive": true}
+  ],
+  "sourceLinksReadable": true,
+  "sectionHeadingsReadable": true,
+  "pass": true
+}
