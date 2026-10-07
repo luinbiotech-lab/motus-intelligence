@@ -1,0 +1,60 @@
+{
+  "publicationId": "motus-ai-intelligence-2026-10-06",
+  "category": "AI_INTELLIGENCE",
+  "issueDate": "2026-10-06",
+  "title": "기업 AI의 경쟁 무대가 모델에서 실제 업무로 이동했다",
+  "canonicalLabel": "ai-intelligence",
+  "label": "AI 인텔리전스",
+  "state": "DRAFT",
+  "draftPostId": "3144124090554362868",
+  "publicPostUrl": null,
+  "remoteDuplicateCount": 0,
+  "postsInsertCount": 0,
+  "publishCount": 0,
+  "humanReviewState": "APPROVAL_REQUIRED",
+  "coverage": [
+    {
+      "topic": "Ironclad 전문 업무 에이전트 평가",
+      "classification": "NEW",
+      "reason": "10월 6일 신규 공식 연구 협업"
+    },
+    {
+      "topic": "Atlassian 기업 지식 기반 에이전트",
+      "classification": "NEW",
+      "reason": "10월 6일 신규 공식 파트너십"
+    },
+    {
+      "topic": "AI 수학 연구 공개",
+      "classification": "RELATED",
+      "reason": "과학 연구용 AI라는 기존 장기 테마의 새 공개 결과"
+    }
+  ],
+  "sourceCount": 3,
+  "itemCount": 3,
+  "validation": {
+    "postId": true,
+    "state": true,
+    "title": true,
+    "label": true,
+    "fingerprint": true,
+    "sourceAnchors": true,
+    "rawUrlSafe": true,
+    "internalSafe": true,
+    "fixtureSafe": true,
+    "mobile": true,
+    "forbiddenLabelsAbsent": true,
+    "commerceDisabled": true,
+    "chart": true,
+    "svgCount": 0,
+    "pass": true
+  },
+  "contentFingerprint": "sha256:50d33f7c160c67548e012007f500be94165799b80f141c3b916758afabfb911b",
+  "searchRegistration": null,
+  "pdf": {
+    "state": "NOT_GENERATED",
+    "visibility": "PRIVATE"
+  },
+  "commerce": {
+    "enabled": false
+  }
+}

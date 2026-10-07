@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-10-06T10:55:48.096Z",
+  "generatedAt": "2026-10-07T11:44:37.431Z",
   "records": [
     {
       "recordType": "SOURCE",
@@ -2397,6 +2397,110 @@
       "originRecordIds": [
         "motus-us-market-2026-10-05"
       ]
+    },
+    {
+      "libraryId": "library:source:5ad14bb5326d244a",
+      "recordType": "SOURCE",
+      "canonicalId": "source:5ad14bb5326d244a",
+      "canonicalName": "search.newspim.com",
+      "displayName": "search.newspim.com",
+      "aliases": [],
+      "summary": null,
+      "firstSeenAt": "2026-10-06T23:47:26+09:00",
+      "lastSeenAt": "2026-10-06T23:47:26+09:00",
+      "createdAt": "2026-10-06T23:47:26+09:00",
+      "updatedAt": "2026-10-06T23:47:26+09:00",
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "internalMetadata": {
+        "canonicalUrl": "https://search.newspim.com/news/view/20261006001098"
+      },
+      "publicMetadata": {
+        "url": "https://search.newspim.com/news/view/20261006001098"
+      },
+      "sourceRefs": [
+        "source:5ad14bb5326d244a"
+      ],
+      "evidenceRefs": [],
+      "originRecordIds": [
+        "motus-korea-market-2026-10-06"
+      ]
+    },
+    {
+      "libraryId": "library:source:6f185ffa83a02cf7",
+      "recordType": "SOURCE",
+      "canonicalId": "source:6f185ffa83a02cf7",
+      "canonicalName": "www.businesskorea.co.kr",
+      "displayName": "www.businesskorea.co.kr",
+      "aliases": [],
+      "summary": null,
+      "firstSeenAt": "2026-10-06T23:47:26+09:00",
+      "lastSeenAt": "2026-10-06T23:47:26+09:00",
+      "createdAt": "2026-10-06T23:47:26+09:00",
+      "updatedAt": "2026-10-06T23:47:26+09:00",
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "internalMetadata": {
+        "canonicalUrl": "https://www.businesskorea.co.kr/news/articleView.html?idxno=278307"
+      },
+      "publicMetadata": {
+        "url": "https://www.businesskorea.co.kr/news/articleView.html?idxno=278307"
+      },
+      "sourceRefs": [
+        "source:6f185ffa83a02cf7"
+      ],
+      "evidenceRefs": [],
+      "originRecordIds": [
+        "motus-korea-market-2026-10-06"
+      ]
+    },
+    {
+      "libraryId": "library:publication:motus-korea-market-2026-10-06",
+      "recordType": "PUBLICATION",
+      "canonicalId": "motus-korea-market-2026-10-06",
+      "canonicalName": "KOREA_MARKET",
+      "displayName": "KOREA_MARKET",
+      "aliases": [],
+      "summary": null,
+      "firstSeenAt": "2026-10-06T23:47:26+09:00",
+      "lastSeenAt": "2026-10-06T23:47:26+09:00",
+      "createdAt": "2026-10-06T23:47:26+09:00",
+      "updatedAt": "2026-10-06T23:47:26+09:00",
+      "status": "ACTIVE",
+      "verificationStatus": "VERIFIED",
+      "confidence": null,
+      "internalMetadata": {
+        "issueDate": "2026-10-06",
+        "publishedAt": "2026-10-06T23:47:26+09:00",
+        "publicPostUrl": "https://motusnova.blogspot.com/2026/10/298.html",
+        "relatedEvents": [
+          "event:korea-market-close-2026-10-06"
+        ],
+        "relatedCompanies": [
+          "company:lg-energy-solution",
+          "company:samsung-electronics",
+          "company:sk-hynix"
+        ],
+        "relatedThemes": [
+          "theme:ai-infrastructure"
+        ]
+      },
+      "publicMetadata": {
+        "issueDate": "2026-10-06",
+        "url": "https://motusnova.blogspot.com/2026/10/298.html"
+      },
+      "sourceRefs": [
+        "source:5ad14bb5326d244a",
+        "source:6f185ffa83a02cf7"
+      ],
+      "evidenceRefs": [
+        "evidence:aec293ef598d5f98"
+      ],
+      "originRecordIds": [
+        "motus-korea-market-2026-10-06"
+      ]
     }
   ],
   "edges": [
@@ -3326,6 +3430,96 @@
       ],
       "originRecordIds": [
         "motus-us-market-2026-10-05"
+      ]
+    },
+    {
+      "edgeId": "edge:af519e4edf29606c",
+      "fromId": "motus-korea-market-2026-10-06",
+      "toId": "event:korea-market-close-2026-10-06",
+      "relationshipType": "PUBLICATION_COVERS_EVENT",
+      "reason": "published Daily editorial plan relation",
+      "createdAt": "2026-10-06T23:47:26+09:00",
+      "sourceRefs": [
+        "source:5ad14bb5326d244a",
+        "source:6f185ffa83a02cf7"
+      ],
+      "evidenceRefs": [
+        "evidence:aec293ef598d5f98"
+      ],
+      "originRecordIds": [
+        "motus-korea-market-2026-10-06"
+      ]
+    },
+    {
+      "edgeId": "edge:d66a2b83934cee95",
+      "fromId": "motus-korea-market-2026-10-06",
+      "toId": "company:lg-energy-solution",
+      "relationshipType": "PUBLICATION_COVERS_COMPANY",
+      "reason": "published Daily editorial plan relation",
+      "createdAt": "2026-10-06T23:47:26+09:00",
+      "sourceRefs": [
+        "source:5ad14bb5326d244a",
+        "source:6f185ffa83a02cf7"
+      ],
+      "evidenceRefs": [
+        "evidence:aec293ef598d5f98"
+      ],
+      "originRecordIds": [
+        "motus-korea-market-2026-10-06"
+      ]
+    },
+    {
+      "edgeId": "edge:67951b924a482c25",
+      "fromId": "motus-korea-market-2026-10-06",
+      "toId": "company:samsung-electronics",
+      "relationshipType": "PUBLICATION_COVERS_COMPANY",
+      "reason": "published Daily editorial plan relation",
+      "createdAt": "2026-10-06T23:47:26+09:00",
+      "sourceRefs": [
+        "source:5ad14bb5326d244a",
+        "source:6f185ffa83a02cf7"
+      ],
+      "evidenceRefs": [
+        "evidence:aec293ef598d5f98"
+      ],
+      "originRecordIds": [
+        "motus-korea-market-2026-10-06"
+      ]
+    },
+    {
+      "edgeId": "edge:08794e7aaadfe601",
+      "fromId": "motus-korea-market-2026-10-06",
+      "toId": "company:sk-hynix",
+      "relationshipType": "PUBLICATION_COVERS_COMPANY",
+      "reason": "published Daily editorial plan relation",
+      "createdAt": "2026-10-06T23:47:26+09:00",
+      "sourceRefs": [
+        "source:5ad14bb5326d244a",
+        "source:6f185ffa83a02cf7"
+      ],
+      "evidenceRefs": [
+        "evidence:aec293ef598d5f98"
+      ],
+      "originRecordIds": [
+        "motus-korea-market-2026-10-06"
+      ]
+    },
+    {
+      "edgeId": "edge:99f731a9008fcb0e",
+      "fromId": "motus-korea-market-2026-10-06",
+      "toId": "theme:ai-infrastructure",
+      "relationshipType": "PUBLICATION_COVERS_THEME",
+      "reason": "published Daily editorial plan relation",
+      "createdAt": "2026-10-06T23:47:26+09:00",
+      "sourceRefs": [
+        "source:5ad14bb5326d244a",
+        "source:6f185ffa83a02cf7"
+      ],
+      "evidenceRefs": [
+        "evidence:aec293ef598d5f98"
+      ],
+      "originRecordIds": [
+        "motus-korea-market-2026-10-06"
       ]
     }
   ],

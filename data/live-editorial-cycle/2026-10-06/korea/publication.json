@@ -1,0 +1,140 @@
+{
+  "publicationId": "motus-korea-market-2026-10-06",
+  "category": "KOREA_MARKET",
+  "issueDate": "2026-10-06",
+  "draftPostId": "568850689418151231",
+  "approvedAt": "2026-10-07T11:34:24.001Z",
+  "review": {
+    "decision": "APPROVED",
+    "reviewer": "human",
+    "provenance": "USER_EXPLICIT_APPROVAL"
+  },
+  "insertCount": 0,
+  "patchCount": 0,
+  "pdf": {
+    "state": "NOT_GENERATED",
+    "reviewState": "PENDING",
+    "visibility": "PRIVATE",
+    "consistency": "NOT_AVAILABLE"
+  },
+  "audit": [
+    {
+      "at": "2026-10-07T11:34:24.001Z",
+      "event": "HUMAN_REVIEW_APPROVED",
+      "detail": "User explicitly approved this exact Blogger Draft for production publish"
+    },
+    {
+      "at": "2026-10-06T23:47:26+09:00",
+      "event": "PUBLISHED",
+      "detail": "Blogger post 568850689418151231 published once and public page returned HTTP 200"
+    },
+    {
+      "at": "2026-10-07T11:44:37.431Z",
+      "event": "EDITORIAL_FIRST_PATCH",
+      "detail": "Published content changed to editorial-first prose using the same verified facts and sources; no publish call"
+    }
+  ],
+  "commerce": {
+    "enabled": false
+  },
+  "state": "PUBLISHED",
+  "publicPostUrl": "https://motusnova.blogspot.com/2026/10/298.html",
+  "publishedAt": "2026-10-06T23:47:26+09:00",
+  "remoteLookupCount": 4,
+  "remoteDuplicateCount": 0,
+  "publishCallCount": 1,
+  "preflight": {
+    "postId": true,
+    "state": true,
+    "title": true,
+    "label": true,
+    "fingerprint": true,
+    "sourceAnchors": true,
+    "sourceDedupe": true,
+    "rawUrlSafe": true,
+    "internalSafe": true,
+    "fixtureSafe": true,
+    "commerceDisabled": true,
+    "mobile": true,
+    "colorRule": true,
+    "aiDepth": true,
+    "usMarket": true,
+    "svgCount": 0,
+    "pass": true
+  },
+  "postflight": {
+    "postId": true,
+    "state": true,
+    "title": true,
+    "label": true,
+    "fingerprint": true,
+    "sourceAnchors": true,
+    "sourceDedupe": true,
+    "rawUrlSafe": true,
+    "internalSafe": true,
+    "fixtureSafe": true,
+    "commerceDisabled": true,
+    "mobile": true,
+    "colorRule": true,
+    "aiDepth": true,
+    "usMarket": true,
+    "svgCount": 0,
+    "pass": true
+  },
+  "httpStatus": 200,
+  "searchRegistration": {
+    "publicationId": "motus-korea-market-2026-10-06",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/298.html",
+    "registeredAt": "2026-10-06T23:47:26+09:00",
+    "trigger": "PUBLICATION_PUBLISHED",
+    "googleInspectionState": "QUEUED",
+    "naverDiscoveryState": "PENDING",
+    "visibility": {
+      "publicationId": "motus-korea-market-2026-10-06",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/10/298.html",
+      "google": {
+        "discovered": null,
+        "indexed": null,
+        "lastCrawl": null,
+        "coverageState": null,
+        "inspectionAt": null
+      },
+      "naver": {
+        "discovered": null,
+        "indexed": null,
+        "collectionState": null,
+        "inspectionAt": null
+      },
+      "sitemapIncluded": null,
+      "rssIncluded": null
+    }
+  },
+  "libraryRegistration": {
+    "publicationId": "motus-korea-market-2026-10-06",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/298.html",
+    "publishedAt": "2026-10-06T23:47:26+09:00",
+    "relatedEvents": [
+      "event:korea-market-close-2026-10-06"
+    ],
+    "relatedCompanies": [
+      "company:lg-energy-solution",
+      "company:samsung-electronics",
+      "company:sk-hynix"
+    ],
+    "relatedThemes": [
+      "theme:ai-infrastructure"
+    ],
+    "sourceRefs": [
+      "https://search.newspim.com/news/view/20261006001098",
+      "https://www.businesskorea.co.kr/news/articleView.html?idxno=278307"
+    ]
+  },
+  "weeklyFeed": {
+    "category": "KOREA_MARKET",
+    "issueDate": "2026-10-06",
+    "publicationId": "motus-korea-market-2026-10-06",
+    "state": "PUBLISHED"
+  },
+  "error": null,
+  "prePublishLayoutPatchCount": 1
+}

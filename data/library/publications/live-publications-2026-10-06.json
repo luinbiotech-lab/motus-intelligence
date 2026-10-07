@@ -46,5 +46,25 @@
       "https://www.portfolio-terminal.com/markets/stock-market-close",
       "https://www.portfolio-terminal.com/markets/us-dollar-index/october-2026"
     ]
+  },
+  {
+    "publicationId": "motus-korea-market-2026-10-06",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/298.html",
+    "publishedAt": "2026-10-06T23:47:26+09:00",
+    "relatedEvents": [
+      "event:korea-market-close-2026-10-06"
+    ],
+    "relatedCompanies": [
+      "company:lg-energy-solution",
+      "company:samsung-electronics",
+      "company:sk-hynix"
+    ],
+    "relatedThemes": [
+      "theme:ai-infrastructure"
+    ],
+    "sourceRefs": [
+      "https://search.newspim.com/news/view/20261006001098",
+      "https://www.businesskorea.co.kr/news/articleView.html?idxno=278307"
+    ]
   }
 ]

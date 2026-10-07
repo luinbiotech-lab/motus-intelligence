@@ -1,0 +1,55 @@
+{
+  "publicationId": "motus-us-market-2026-10-06",
+  "category": "US_MARKET",
+  "issueDate": "2026-10-06",
+  "title": "미국 증시 마감: S&P 500·나스닥 최고치, 실적 기대가 5%대 금리를 눌렀다",
+  "canonicalLabel": "us-market",
+  "label": "미국증시",
+  "state": "DRAFT",
+  "draftPostId": "2371588160186534300",
+  "publicPostUrl": null,
+  "remoteDuplicateCount": 0,
+  "postsInsertCount": 0,
+  "publishCount": 0,
+  "humanReviewState": "APPROVAL_REQUIRED",
+  "coverage": [
+    {
+      "topic": "10월 6일 미국 정규장",
+      "classification": "NEW",
+      "reason": "직전 Daily 이후 새 완료 거래일"
+    },
+    {
+      "topic": "AI 전력 수요와 Constellation Energy",
+      "classification": "FOLLOW_UP",
+      "reason": "AI 인프라 투자 테마가 전력 공급 계약으로 확장"
+    }
+  ],
+  "sourceCount": 5,
+  "itemCount": 4,
+  "validation": {
+    "postId": true,
+    "state": true,
+    "title": true,
+    "label": true,
+    "fingerprint": true,
+    "sourceAnchors": true,
+    "rawUrlSafe": true,
+    "internalSafe": true,
+    "fixtureSafe": true,
+    "mobile": true,
+    "forbiddenLabelsAbsent": true,
+    "commerceDisabled": true,
+    "chart": true,
+    "svgCount": 4,
+    "pass": true
+  },
+  "contentFingerprint": "sha256:73e1d34ca5aac7cdc25ff08719593448892ef862172d2933b06f7cd02d872db5",
+  "searchRegistration": null,
+  "pdf": {
+    "state": "NOT_GENERATED",
+    "visibility": "PRIVATE"
+  },
+  "commerce": {
+    "enabled": false
+  }
+}

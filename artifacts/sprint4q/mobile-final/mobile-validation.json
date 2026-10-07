@@ -1,0 +1,81 @@
+{
+  "url": "https://motusnova.blogspot.com/2026/10/298.html",
+  "generatedAt": "2026-10-07T11:47:10.731Z",
+  "results": [
+    {
+      "width": 320,
+      "article": true,
+      "innerWidth": 320,
+      "documentScrollWidth": 320,
+      "bodyScrollWidth": 320,
+      "articleClientWidth": 288,
+      "articleScrollWidth": 288,
+      "overflowing": [],
+      "sourceLinks": 2,
+      "layout": "editorial-article-4q",
+      "commerce": false,
+      "internal": false,
+      "pass": true
+    },
+    {
+      "width": 360,
+      "article": true,
+      "innerWidth": 360,
+      "documentScrollWidth": 360,
+      "bodyScrollWidth": 360,
+      "articleClientWidth": 328,
+      "articleScrollWidth": 328,
+      "overflowing": [],
+      "sourceLinks": 2,
+      "layout": "editorial-article-4q",
+      "commerce": false,
+      "internal": false,
+      "pass": true
+    },
+    {
+      "width": 375,
+      "article": true,
+      "innerWidth": 375,
+      "documentScrollWidth": 375,
+      "bodyScrollWidth": 375,
+      "articleClientWidth": 343,
+      "articleScrollWidth": 343,
+      "overflowing": [],
+      "sourceLinks": 2,
+      "layout": "editorial-article-4q",
+      "commerce": false,
+      "internal": false,
+      "pass": true
+    },
+    {
+      "width": 390,
+      "article": true,
+      "innerWidth": 390,
+      "documentScrollWidth": 390,
+      "bodyScrollWidth": 390,
+      "articleClientWidth": 358,
+      "articleScrollWidth": 358,
+      "overflowing": [],
+      "sourceLinks": 2,
+      "layout": "editorial-article-4q",
+      "commerce": false,
+      "internal": false,
+      "pass": true
+    },
+    {
+      "width": 430,
+      "article": true,
+      "innerWidth": 430,
+      "documentScrollWidth": 430,
+      "bodyScrollWidth": 430,
+      "articleClientWidth": 398,
+      "articleScrollWidth": 398,
+      "overflowing": [],
+      "sourceLinks": 2,
+      "layout": "editorial-article-4q",
+      "commerce": false,
+      "internal": false,
+      "pass": true
+    }
+  ]
+}

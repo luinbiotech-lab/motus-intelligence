@@ -1,0 +1,335 @@
+{
+  "generatedAt": "2026-10-07T11:44:37.431Z",
+  "currentKorea": {
+    "publicationId": "motus-korea-market-2026-10-06",
+    "category": "KOREA_MARKET",
+    "issueDate": "2026-10-06",
+    "draftPostId": "568850689418151231",
+    "approvedAt": "2026-10-07T11:34:24.001Z",
+    "review": {
+      "decision": "APPROVED",
+      "reviewer": "human",
+      "provenance": "USER_EXPLICIT_APPROVAL"
+    },
+    "insertCount": 0,
+    "patchCount": 0,
+    "pdf": {
+      "state": "NOT_GENERATED",
+      "reviewState": "PENDING",
+      "visibility": "PRIVATE",
+      "consistency": "NOT_AVAILABLE"
+    },
+    "audit": [
+      {
+        "at": "2026-10-07T11:34:24.001Z",
+        "event": "HUMAN_REVIEW_APPROVED",
+        "detail": "User explicitly approved this exact Blogger Draft for production publish"
+      },
+      {
+        "at": "2026-10-06T23:47:26+09:00",
+        "event": "PUBLISHED",
+        "detail": "Blogger post 568850689418151231 published once and public page returned HTTP 200"
+      },
+      {
+        "at": "2026-10-07T11:44:37.431Z",
+        "event": "EDITORIAL_FIRST_PATCH",
+        "detail": "Published content changed to editorial-first prose using the same verified facts and sources; no publish call"
+      }
+    ],
+    "commerce": {
+      "enabled": false
+    },
+    "state": "PUBLISHED",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/298.html",
+    "publishedAt": "2026-10-06T23:47:26+09:00",
+    "remoteLookupCount": 4,
+    "remoteDuplicateCount": 0,
+    "publishCallCount": 1,
+    "preflight": {
+      "postId": true,
+      "state": true,
+      "title": true,
+      "label": true,
+      "fingerprint": true,
+      "sourceAnchors": true,
+      "sourceDedupe": true,
+      "rawUrlSafe": true,
+      "internalSafe": true,
+      "fixtureSafe": true,
+      "commerceDisabled": true,
+      "mobile": true,
+      "colorRule": true,
+      "aiDepth": true,
+      "usMarket": true,
+      "svgCount": 0,
+      "pass": true
+    },
+    "postflight": {
+      "postId": true,
+      "state": true,
+      "title": true,
+      "label": true,
+      "fingerprint": true,
+      "sourceAnchors": true,
+      "sourceDedupe": true,
+      "rawUrlSafe": true,
+      "internalSafe": true,
+      "fixtureSafe": true,
+      "commerceDisabled": true,
+      "mobile": true,
+      "colorRule": true,
+      "aiDepth": true,
+      "usMarket": true,
+      "svgCount": 0,
+      "pass": true
+    },
+    "httpStatus": 200,
+    "searchRegistration": {
+      "publicationId": "motus-korea-market-2026-10-06",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/10/298.html",
+      "registeredAt": "2026-10-06T23:47:26+09:00",
+      "trigger": "PUBLICATION_PUBLISHED",
+      "googleInspectionState": "QUEUED",
+      "naverDiscoveryState": "PENDING",
+      "visibility": {
+        "publicationId": "motus-korea-market-2026-10-06",
+        "publicPostUrl": "https://motusnova.blogspot.com/2026/10/298.html",
+        "google": {
+          "discovered": null,
+          "indexed": null,
+          "lastCrawl": null,
+          "coverageState": null,
+          "inspectionAt": null
+        },
+        "naver": {
+          "discovered": null,
+          "indexed": null,
+          "collectionState": null,
+          "inspectionAt": null
+        },
+        "sitemapIncluded": null,
+        "rssIncluded": null
+      }
+    },
+    "libraryRegistration": {
+      "publicationId": "motus-korea-market-2026-10-06",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/10/298.html",
+      "publishedAt": "2026-10-06T23:47:26+09:00",
+      "relatedEvents": [
+        "event:korea-market-close-2026-10-06"
+      ],
+      "relatedCompanies": [
+        "company:lg-energy-solution",
+        "company:samsung-electronics",
+        "company:sk-hynix"
+      ],
+      "relatedThemes": [
+        "theme:ai-infrastructure"
+      ],
+      "sourceRefs": [
+        "https://search.newspim.com/news/view/20261006001098",
+        "https://www.businesskorea.co.kr/news/articleView.html?idxno=278307"
+      ]
+    },
+    "weeklyFeed": {
+      "category": "KOREA_MARKET",
+      "issueDate": "2026-10-06",
+      "publicationId": "motus-korea-market-2026-10-06",
+      "state": "PUBLISHED"
+    },
+    "error": null,
+    "prePublishLayoutPatchCount": 1
+  },
+  "nextDaily": {
+    "records": [
+      {
+        "publicationId": "motus-ai-intelligence-2026-10-06",
+        "category": "AI_INTELLIGENCE",
+        "issueDate": "2026-10-06",
+        "title": "기업 AI의 경쟁 무대가 모델에서 실제 업무로 이동했다",
+        "canonicalLabel": "ai-intelligence",
+        "label": "AI 인텔리전스",
+        "state": "DRAFT",
+        "draftPostId": "3144124090554362868",
+        "publicPostUrl": null,
+        "remoteDuplicateCount": 0,
+        "postsInsertCount": 0,
+        "publishCount": 0,
+        "humanReviewState": "APPROVAL_REQUIRED",
+        "coverage": [
+          {
+            "topic": "Ironclad 전문 업무 에이전트 평가",
+            "classification": "NEW",
+            "reason": "10월 6일 신규 공식 연구 협업"
+          },
+          {
+            "topic": "Atlassian 기업 지식 기반 에이전트",
+            "classification": "NEW",
+            "reason": "10월 6일 신규 공식 파트너십"
+          },
+          {
+            "topic": "AI 수학 연구 공개",
+            "classification": "RELATED",
+            "reason": "과학 연구용 AI라는 기존 장기 테마의 새 공개 결과"
+          }
+        ],
+        "sourceCount": 3,
+        "itemCount": 3,
+        "validation": {
+          "postId": true,
+          "state": true,
+          "title": true,
+          "label": true,
+          "fingerprint": true,
+          "sourceAnchors": true,
+          "rawUrlSafe": true,
+          "internalSafe": true,
+          "fixtureSafe": true,
+          "mobile": true,
+          "forbiddenLabelsAbsent": true,
+          "commerceDisabled": true,
+          "chart": true,
+          "svgCount": 0,
+          "pass": true
+        },
+        "contentFingerprint": "sha256:50d33f7c160c67548e012007f500be94165799b80f141c3b916758afabfb911b",
+        "searchRegistration": null,
+        "pdf": {
+          "state": "NOT_GENERATED",
+          "visibility": "PRIVATE"
+        },
+        "commerce": {
+          "enabled": false
+        }
+      },
+      {
+        "publicationId": "motus-us-market-2026-10-06",
+        "category": "US_MARKET",
+        "issueDate": "2026-10-06",
+        "title": "미국 증시 마감: S&P 500·나스닥 최고치, 실적 기대가 5%대 금리를 눌렀다",
+        "canonicalLabel": "us-market",
+        "label": "미국증시",
+        "state": "DRAFT",
+        "draftPostId": "2371588160186534300",
+        "publicPostUrl": null,
+        "remoteDuplicateCount": 0,
+        "postsInsertCount": 0,
+        "publishCount": 0,
+        "humanReviewState": "APPROVAL_REQUIRED",
+        "coverage": [
+          {
+            "topic": "10월 6일 미국 정규장",
+            "classification": "NEW",
+            "reason": "직전 Daily 이후 새 완료 거래일"
+          },
+          {
+            "topic": "AI 전력 수요와 Constellation Energy",
+            "classification": "FOLLOW_UP",
+            "reason": "AI 인프라 투자 테마가 전력 공급 계약으로 확장"
+          }
+        ],
+        "sourceCount": 5,
+        "itemCount": 4,
+        "validation": {
+          "postId": true,
+          "state": true,
+          "title": true,
+          "label": true,
+          "fingerprint": true,
+          "sourceAnchors": true,
+          "rawUrlSafe": true,
+          "internalSafe": true,
+          "fixtureSafe": true,
+          "mobile": true,
+          "forbiddenLabelsAbsent": true,
+          "commerceDisabled": true,
+          "chart": true,
+          "svgCount": 4,
+          "pass": true
+        },
+        "contentFingerprint": "sha256:73e1d34ca5aac7cdc25ff08719593448892ef862172d2933b06f7cd02d872db5",
+        "searchRegistration": null,
+        "pdf": {
+          "state": "NOT_GENERATED",
+          "visibility": "PRIVATE"
+        },
+        "commerce": {
+          "enabled": false
+        }
+      }
+    ],
+    "korea": {
+      "category": "KOREA_MARKET",
+      "issueDate": "2026-10-07",
+      "state": "HOLD",
+      "humanReviewState": "HOLD",
+      "reason": "완료 KRX 세션의 KOSPI 일부는 확인됐지만 KOSDAQ·환율·투자자 수급·업종/종목 자료를 같은 기준일로 교차검증하지 못함",
+      "missingRequiredFacts": [
+        "KOSDAQ",
+        "USD/KRW",
+        "FOREIGN/INSTITUTION/RETAIL FLOWS",
+        "SECTOR/STOCK MOVES"
+      ],
+      "draftPostId": null,
+      "publicPostUrl": null
+    }
+  },
+  "bloggerCategoryAnalysis": {
+    "httpStatus": 200,
+    "currentLabels": [
+      "AI 인텔리전스 (AI Intelligence)",
+      "MOTUS Daily",
+      "국내증시",
+      "국내증시 (Korea Market)",
+      "미국증시 (U.S. Market)"
+    ],
+    "proposedMenu": [
+      "AI 인텔리전스",
+      "미국증시",
+      "국내증시",
+      "주간 인텔리전스",
+      "월간 인텔리전스",
+      "리포트",
+      "MOTUS 소개"
+    ],
+    "menuReadiness": "PLAN_READY_BACKUP_REQUIRED",
+    "themeMutationCount": 0,
+    "menuMutationCount": 0
+  },
+  "cadenceKst": {
+    "US_MARKET": "06:30-07:00",
+    "AI_INTELLIGENCE": "12:00-13:00",
+    "KOREA_MARKET": "17:00-18:00"
+  },
+  "weeklyReadiness": "NOT_READY",
+  "pdf": {
+    "distribution": "PRIVATE",
+    "candidates": [
+      {
+        "publicationId": "motus-ai-intelligence-2026-10-06",
+        "state": "NOT_GENERATED",
+        "visibility": "PRIVATE"
+      },
+      {
+        "publicationId": "motus-us-market-2026-10-06",
+        "state": "NOT_GENERATED",
+        "visibility": "PRIVATE"
+      }
+    ]
+  },
+  "search": {
+    "providerState": "NOT_CONFIGURED",
+    "metricsGenerated": false
+  },
+  "actions": {
+    "lookup": 7,
+    "insert": 0,
+    "patch": 1,
+    "publish": 0,
+    "themeMutation": 0,
+    "menuMutation": 0
+  },
+  "commerce": {
+    "enabled": false
+  }
+}
