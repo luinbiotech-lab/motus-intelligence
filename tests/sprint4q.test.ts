@@ -19,14 +19,14 @@ test('Sprint 4Q makes the editorial article renderer the future publication defa
   assert.deepEqual(BLOGGER_EDITORIAL_CATEGORIES.KOREA_MARKET,{canonicalLabel:'korea-market',publicLabel:'국내증시'});
 });
 
-test('next live cycle creates review-ready AI and US units without approving them',()=>{
+test('next live cycle creates review-ready AI, US and verified Korea units without approving them',()=>{
   const cycle=createNextLiveCycle('2026-10-07T09:00:00.000Z');
-  assert.equal(cycle.units.length,2);
+  assert.equal(cycle.units.length,3);
   for(const unit of cycle.units){
     assert.equal(unit.state,'REVIEW_READY');
     assert.equal(unit.humanReviewState,'APPROVAL_REQUIRED');
-    assert.match(unit.canonicalLabel,/^(?:ai-intelligence|us-market)$/);
-    assert.match(unit.label,/^(?:AI 인텔리전스|미국증시)$/);
+    assert.match(unit.canonicalLabel,/^(?:ai-intelligence|us-market|korea-market)$/);
+    assert.match(unit.label,/^(?:AI 인텔리전스|미국증시|국내증시)$/);
     assert.match(unit.render.html,/data-layout="editorial-article-4q"/);
     assert.doesNotMatch(unit.render.html,/>왜 중요한가<|>무슨 일이 있었나<|>산업 연결<|>시장 연결<|>핵심 내용</);
     assert.doesNotMatch(unit.render.html,/fixture|sample marker|affiliate|commerce/i);
@@ -56,14 +56,16 @@ test('US editorial article preserves actual five-session series and four respons
   assert.match(us.render.html,/overflow-x\s*:\s*hidden/i);
 });
 
-test('Korea next daily remains HOLD and cannot fabricate a partial market issue',()=>{
-  const korea=createNextLiveCycle().korea;
-  assert.equal(korea.state,'HOLD');
-  assert.equal(korea.humanReviewState,'HOLD');
-  assert.equal(korea.draftPostId,null);
-  assert.equal(korea.publicPostUrl,null);
-  assert.ok(korea.missingRequiredFacts.includes('KOSDAQ'));
-  assert.ok(korea.missingRequiredFacts.includes('FOREIGN/INSTITUTION/RETAIL FLOWS'));
+test('Korea 2026-10-07 uses cross-verified market facts and omits unavailable research',()=>{
+  const korea=createNextLiveCycle().units.find(unit=>unit.category==='KOREA_MARKET')!;
+  assert.equal(korea.state,'REVIEW_READY');
+  assert.equal(korea.humanReviewState,'APPROVAL_REQUIRED');
+  assert.equal(korea.issueDate,'2026-10-07');
+  assert.match(korea.render.html,/6,803\.90/);
+  assert.match(korea.render.html,/898\.43/);
+  assert.match(korea.render.html,/1,340\.4원/);
+  assert.doesNotMatch(korea.render.html,/국내 증권사 리서치/);
+  assert.ok(korea.warnings.includes('BROKERAGE_RESEARCH_SECTION_OMITTED'));
 });
 
 test('Korea editorial renderer is prose-first with one optional flow visual',()=>{

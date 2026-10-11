@@ -19,6 +19,7 @@
     "intelligence:periodic-preview": "npm run build && node dist/src/periodic-production-cli.js",
     "motus:daily": "npm run build && node dist/src/daily-operations-cli.js",
     "motus:search": "npm run build && node dist/src/search-operations-cli.js",
+    "search:intelligence": "npm run build && node dist/src/search-intelligence-cli.js --dry-run",
     "motus:report": "npm run build && node dist/src/report-production-cli.js",
     "motus:report-review": "npm run build && node dist/src/report-review-cli.js",
     "motus:report-storage": "npm run build && node dist/src/report-storage-cli.js",
@@ -31,6 +32,7 @@
     "motus:mobile-hotfix": "npm run build && node dist/src/mobile-layout-hotfix-cli.js",
     "motus:sprint4q": "npm run build && node dist/src/sprint4q-cli.js",
     "motus:publish-split": "npm run build && node dist/src/split-daily-publish-cli.js",
+    "motus:daily-production": "npm run build && node dist/src/daily-production-operation-cli.js",
     "sample": "npm run build && node dist/src/cli.js --sample",
     "report": "node dist/src/cli.js"
   },

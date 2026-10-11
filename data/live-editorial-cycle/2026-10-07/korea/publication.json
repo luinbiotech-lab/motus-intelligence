@@ -1,26 +1,52 @@
 {
+  "publicationId": "motus-korea-market-2026-10-07",
   "category": "KOREA_MARKET",
   "issueDate": "2026-10-07",
-  "state": "HOLD",
-  "humanReviewState": "HOLD",
-  "reason": "완료 KRX 세션의 KOSPI 일부는 확인됐지만 KOSDAQ·환율·투자자 수급·업종/종목 자료를 같은 기준일로 교차검증하지 못함",
-  "missingRequiredFacts": [
-    "KOSDAQ",
-    "USD/KRW",
-    "FOREIGN/INSTITUTION/RETAIL FLOWS",
-    "SECTOR/STOCK MOVES"
-  ],
-  "draftPostId": null,
+  "title": "국내 증시 마감: 외국인 매도에 코스피 1.98% 하락, 코스닥 900선 이탈",
+  "label": "국내증시",
+  "draftPostId": "150790364097842278",
+  "state": "DRAFT",
   "publicPostUrl": null,
-  "sourceCount": 1,
-  "itemCount": 0,
-  "publishCount": 0,
-  "postsInsertCount": 0,
-  "searchRegistration": null,
-  "pdf": {
-    "state": "NOT_GENERATED",
-    "visibility": "PRIVATE"
+  "publishedAt": null,
+  "humanReview": {
+    "state": "APPROVAL_REQUIRED",
+    "reviewer": null,
+    "reviewedAt": null,
+    "provenance": null
   },
+  "remoteDuplicateCount": 0,
+  "insertCount": 0,
+  "publishCount": 0,
+  "validation": {
+    "postId": true,
+    "state": true,
+    "title": true,
+    "label": true,
+    "fingerprint": true,
+    "sourceAnchors": true,
+    "sourceDedupe": true,
+    "rawUrlSafe": true,
+    "internalSafe": true,
+    "fixtureSafe": true,
+    "commerceDisabled": true,
+    "mobile": true,
+    "colorRule": true,
+    "editorialFirst": true,
+    "chart": true,
+    "svgCount": 0,
+    "pass": true
+  },
+  "publicHttpStatus": null,
+  "searchRegistration": null,
+  "contentFingerprint": "sha256:88165ca492e3f391a6fadf0f2745a0237adda2b2080259239b424d6fafbed8cd",
+  "audit": [
+    {
+      "at": "2026-10-07T13:01:10.612Z",
+      "event": "DRAFT_RECOVERED",
+      "detail": "Existing matching Draft reused; duplicate creation blocked"
+    }
+  ],
+  "error": null,
   "commerce": {
     "enabled": false
   }

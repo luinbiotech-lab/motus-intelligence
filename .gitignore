@@ -4,4 +4,6 @@ dist/
 data/reports/*
 data/evidence/*
 *.bundle
+artifacts/mobile-*/
+artifacts/search-intelligence-mobile-us/
 !**/.gitkeep

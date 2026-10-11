@@ -1,0 +1,33 @@
+{
+  "enabled": true,
+  "dryRunOnly": true,
+  "verificationPrecedesDemand": true,
+  "providerFailureNonBlocking": true,
+  "publicInternalMetrics": false,
+  "providers": {
+    "naverDataLab": {
+      "endpoint": "https://openapi.naver.com/v1/datalab/search",
+      "clientIdEnv": "NAVER_DATALAB_CLIENT_ID",
+      "clientSecretEnv": "NAVER_DATALAB_CLIENT_SECRET",
+      "timeUnit": "date"
+    },
+    "googleSearchConsole": {
+      "propertyEnv": "GOOGLE_SEARCH_CONSOLE_PROPERTY",
+      "scope": "https://www.googleapis.com/auth/webmasters.readonly"
+    }
+  },
+  "editorial": {
+    "verifiedTopicMatchRequired": true,
+    "maxDemandTopics": 3,
+    "keywordStuffingAllowed": false
+  },
+  "charts": {
+    "usMarketTargetTradingSessions": 63,
+    "syntheticFallbackAllowed": false
+  },
+  "publication": {
+    "autoPublish": false,
+    "demandCanReleaseHold": false
+  },
+  "commerce": { "enabled": false }
+}

@@ -1,0 +1,33 @@
+name: MOTUS Search Intelligence Daily Dry Run
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '15 21 * * 1-5'
+
+permissions:
+  contents: read
+
+jobs:
+  search-intelligence-dry-run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      MOTUS_SEARCH_MODE: dry-run
+      MOTUS_AUTO_PUBLISH: 'false'
+      MOTUS_COMMERCE_ENABLED: 'false'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run search:intelligence
+      - uses: actions/upload-artifact@v4
+        with:
+          name: motus-search-intelligence-dry-run
+          path: data/search-intelligence/latest-dry-run.json
+          if-no-files-found: error

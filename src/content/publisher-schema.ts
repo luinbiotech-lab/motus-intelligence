@@ -63,7 +63,7 @@ export interface MajorIndexHistorySeries {
 
 export interface MajorIndexHistory {
   asOf: string;
-  sessionCount: 5;
+  sessionCount: number;
   series: MajorIndexHistorySeries[];
 }
 

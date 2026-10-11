@@ -1,0 +1,239 @@
+{
+  "generatedAt": "2026-10-07T13:01:10.612Z",
+  "results": [
+    {
+      "category": "AI_INTELLIGENCE",
+      "issueDate": "2026-10-06",
+      "draftPostId": "3144124090554362868",
+      "state": "PUBLISHED",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/10/ai_01763533093.html",
+      "publishCount": 1,
+      "insertCount": 0,
+      "remoteDuplicateCount": 0,
+      "httpStatus": 200,
+      "humanReviewState": "APPROVED",
+      "validation": {
+        "postId": true,
+        "state": true,
+        "title": true,
+        "label": true,
+        "fingerprint": true,
+        "sourceAnchors": true,
+        "sourceDedupe": true,
+        "rawUrlSafe": true,
+        "internalSafe": true,
+        "fixtureSafe": true,
+        "commerceDisabled": true,
+        "mobile": true,
+        "colorRule": true,
+        "editorialFirst": true,
+        "chart": true,
+        "svgCount": 0,
+        "pass": true
+      },
+      "searchRegistration": {
+        "publicationId": "motus-ai-intelligence-2026-10-06",
+        "publicPostUrl": "https://motusnova.blogspot.com/2026/10/ai_01763533093.html",
+        "registeredAt": "2026-10-07T20:34:40+09:00",
+        "trigger": "PUBLICATION_PUBLISHED",
+        "googleInspectionState": "QUEUED",
+        "naverDiscoveryState": "PENDING",
+        "visibility": {
+          "publicationId": "motus-ai-intelligence-2026-10-06",
+          "publicPostUrl": "https://motusnova.blogspot.com/2026/10/ai_01763533093.html",
+          "google": {
+            "discovered": null,
+            "indexed": null,
+            "lastCrawl": null,
+            "coverageState": null,
+            "inspectionAt": null
+          },
+          "naver": {
+            "discovered": null,
+            "indexed": null,
+            "collectionState": null,
+            "inspectionAt": null
+          },
+          "sitemapIncluded": null,
+          "rssIncluded": null
+        }
+      }
+    },
+    {
+      "category": "US_MARKET",
+      "issueDate": "2026-10-06",
+      "draftPostId": "2371588160186534300",
+      "state": "PUBLISHED",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/10/s-500-5.html",
+      "publishCount": 1,
+      "insertCount": 0,
+      "remoteDuplicateCount": 0,
+      "httpStatus": 200,
+      "humanReviewState": "APPROVED",
+      "validation": {
+        "postId": true,
+        "state": true,
+        "title": true,
+        "label": true,
+        "fingerprint": true,
+        "sourceAnchors": true,
+        "sourceDedupe": true,
+        "rawUrlSafe": true,
+        "internalSafe": true,
+        "fixtureSafe": true,
+        "commerceDisabled": true,
+        "mobile": true,
+        "colorRule": true,
+        "editorialFirst": true,
+        "chart": true,
+        "svgCount": 4,
+        "pass": true
+      },
+      "searchRegistration": {
+        "publicationId": "motus-us-market-2026-10-06",
+        "publicPostUrl": "https://motusnova.blogspot.com/2026/10/s-500-5.html",
+        "registeredAt": "2026-10-07T20:34:46+09:00",
+        "trigger": "PUBLICATION_PUBLISHED",
+        "googleInspectionState": "QUEUED",
+        "naverDiscoveryState": "PENDING",
+        "visibility": {
+          "publicationId": "motus-us-market-2026-10-06",
+          "publicPostUrl": "https://motusnova.blogspot.com/2026/10/s-500-5.html",
+          "google": {
+            "discovered": null,
+            "indexed": null,
+            "lastCrawl": null,
+            "coverageState": null,
+            "inspectionAt": null
+          },
+          "naver": {
+            "discovered": null,
+            "indexed": null,
+            "collectionState": null,
+            "inspectionAt": null
+          },
+          "sitemapIncluded": null,
+          "rssIncluded": null
+        }
+      }
+    },
+    {
+      "category": "KOREA_MARKET",
+      "issueDate": "2026-10-07",
+      "draftPostId": "150790364097842278",
+      "state": "DRAFT",
+      "publicPostUrl": null,
+      "publishCount": 0,
+      "insertCount": 0,
+      "remoteDuplicateCount": 0,
+      "httpStatus": null,
+      "humanReviewState": "APPROVAL_REQUIRED",
+      "validation": {
+        "postId": true,
+        "state": true,
+        "title": true,
+        "label": true,
+        "fingerprint": true,
+        "sourceAnchors": true,
+        "sourceDedupe": true,
+        "rawUrlSafe": true,
+        "internalSafe": true,
+        "fixtureSafe": true,
+        "commerceDisabled": true,
+        "mobile": true,
+        "colorRule": true,
+        "editorialFirst": true,
+        "chart": true,
+        "svgCount": 0,
+        "pass": true
+      },
+      "searchRegistration": null
+    }
+  ],
+  "sourceChecks": [
+    {
+      "category": "AI_INTELLIGENCE",
+      "checks": [
+        {
+          "url": "https://openai.com/index/advancing-computer-use-with-ironclad/",
+          "status": 403
+        },
+        {
+          "url": "https://openai.com/index/atlassian-partnership/",
+          "status": 403
+        },
+        {
+          "url": "https://openai.com/index/sharing-ai-progress-in-mathematics/",
+          "status": 403
+        }
+      ]
+    },
+    {
+      "category": "US_MARKET",
+      "checks": [
+        {
+          "url": "https://apnews.com/article/wall-street-stocks-dow-nasdaq-267ca73e15e09f7e8deb5f6076405f48",
+          "status": 403
+        },
+        {
+          "url": "https://apnews.com/article/stocks-markets-oil-bonds-us-e8285ec7afbe81e9df277e8ee2127982",
+          "status": 403
+        },
+        {
+          "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202610&type=daily_treasury_yield_curve",
+          "status": 200
+        },
+        {
+          "url": "https://www.portfolio-terminal.com/markets/vix",
+          "status": 200
+        },
+        {
+          "url": "https://portfolio-terminal.com/markets/us-dollar-index/october-2026",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "category": "KOREA_MARKET",
+      "checks": [
+        {
+          "url": "https://www.krx.co.kr/main/mobile.jsp",
+          "status": 200
+        },
+        {
+          "url": "https://www.newspim.com/news/view/20261007001273",
+          "status": 200
+        },
+        {
+          "url": "https://account.myasset.com/myasset/research/rs_global/RS_0401000_M.cmd?glblGubun=KS",
+          "status": 200
+        },
+        {
+          "url": "https://www.fnnews.com/news/202610071537016283",
+          "status": 200
+        }
+      ]
+    }
+  ],
+  "actions": {
+    "lookup": 9,
+    "insert": 0,
+    "patch": 0,
+    "publish": 1
+  },
+  "menu": {
+    "state": "PENDING_UI_ORGANIZATION",
+    "target": [
+      "AI 인텔리전스",
+      "미국증시",
+      "국내증시",
+      "주간 인텔리전스",
+      "월간 인텔리전스",
+      "리포트",
+      "MOTUS 소개"
+    ]
+  },
+  "commerce": {
+    "enabled": false
+  }
+}

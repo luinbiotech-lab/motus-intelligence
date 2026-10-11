@@ -1,6 +1,8 @@
 import { createHash } from 'node:crypto';
 import type { ContentLibraryStore } from '../library/content-library.js';
 import { findPriorCoverage,retrieveEditorialMemory,type EditorialMemoryRecord,type EditorialMemoryStore,type PriorCoverageResult } from '../library/retrieval.js';
+import {buildDemandAwareEditorialContext,type DemandAwareEditorialContext} from './demand-aware.js';
+import type {SearchIntelligenceSnapshot} from '../search/intelligence.js';
 
 export type EditorialCategory='AI_INTELLIGENCE'|'US_MARKET'|'KOREA_MARKET';
 export type CoverageState='NEW'|'FOLLOW_UP'|'RELATED'|'DUPLICATE';
@@ -21,9 +23,10 @@ export interface DailyEditorialPlan {
   planId:string;category:EditorialCategory;issueDate:string;candidates:EditorialCandidate[];selected:EditorialCandidate[];
   deferred:EditorialCandidate[];rejected:EditorialCandidate[];reviewState:EditorialReviewState;reviewedBy:null;reviewedAt:null;
   weeklyFeedEligible:boolean;contentDepthGate:'PASS'|'FAIL';externalActions:{bloggerLookup:number;bloggerInsert:0;bloggerPatch:0;bloggerPublish:0};commerce:{enabled:false};fingerprint:string;
+  demandContext:DemandAwareEditorialContext|null;
 }
 
-export function buildDailyEditorialPlan(input:{category:EditorialCategory;issueDate:string;candidates:EditorialCandidateInput[];library:ContentLibraryStore;memory:EditorialMemoryStore;generatedAt:string}):{plan:DailyEditorialPlan;memory:EditorialMemoryStore;memoryUsed:EditorialMemoryRecord[]} {
+export function buildDailyEditorialPlan(input:{category:EditorialCategory;issueDate:string;candidates:EditorialCandidateInput[];library:ContentLibraryStore;memory:EditorialMemoryStore;generatedAt:string;searchIntelligence?:SearchIntelligenceSnapshot}):{plan:DailyEditorialPlan;memory:EditorialMemoryStore;memoryUsed:EditorialMemoryRecord[]} {
   if(!/^\d{4}-\d{2}-\d{2}$/.test(input.issueDate))throw new Error('valid issueDate required');
   let memory=input.memory;const memoryUsed:EditorialMemoryRecord[]=[];const candidates=input.candidates.map(candidate=>{
     const prior=findPriorCoverage(input.library,{...(candidate.eventId?{eventId:candidate.eventId}:{}),...(candidate.continuationOfEventId?{continuationOfEventId:candidate.continuationOfEventId}:{}),companyIds:candidate.companyIds,themeIds:candidate.themeIds,sourceRefs:candidate.sourceRefs,observedAt:input.generatedAt});
@@ -34,7 +37,9 @@ export function buildDailyEditorialPlan(input:{category:EditorialCategory;issueD
   });
   const rejected=candidates.filter(item=>item.recommendedTreatment==='REJECT');const deferred=candidates.filter(item=>item.recommendedTreatment==='DEFER');const selected=candidates.filter(item=>!['REJECT','DEFER'].includes(item.recommendedTreatment));
   const depthPass=selected.length>0&&selected.every(item=>Object.values(item.depth).every(value=>value.trim().length>0));
-  const base={planId:`editorial-plan:${input.category.toLowerCase()}:${input.issueDate}`,category:input.category,issueDate:input.issueDate,candidates,selected,deferred,rejected,reviewState:(depthPass?'APPROVAL_REQUIRED':'MODIFY') as EditorialReviewState,reviewedBy:null,reviewedAt:null,weeklyFeedEligible:depthPass&&selected.length>0,contentDepthGate:(depthPass?'PASS':'FAIL') as 'PASS'|'FAIL',externalActions:{bloggerLookup:0,bloggerInsert:0 as const,bloggerPatch:0 as const,bloggerPublish:0 as const},commerce:{enabled:false as const}};
+  const reviewState=(depthPass?'APPROVAL_REQUIRED':'MODIFY') as EditorialReviewState;
+  const demandContext=input.searchIntelligence?buildDemandAwareEditorialContext({snapshot:input.searchIntelligence,candidateTopicIds:unique(selected.flatMap(item=>item.themeIds)),reviewState}):null;
+  const base={planId:`editorial-plan:${input.category.toLowerCase()}:${input.issueDate}`,category:input.category,issueDate:input.issueDate,candidates,selected,deferred,rejected,reviewState,reviewedBy:null,reviewedAt:null,weeklyFeedEligible:depthPass&&selected.length>0,contentDepthGate:(depthPass?'PASS':'FAIL') as 'PASS'|'FAIL',externalActions:{bloggerLookup:0,bloggerInsert:0 as const,bloggerPatch:0 as const,bloggerPublish:0 as const},commerce:{enabled:false as const},demandContext};
   return {plan:{...base,fingerprint:hash(base)},memory,memoryUsed:dedupeMemory(memoryUsed)};
 }
 
@@ -52,3 +57,4 @@ function coverage(prior:PriorCoverageResult):CoverageState {return prior.state==
 function treatment(candidate:EditorialCandidateInput,state:CoverageState):RecommendedTreatment {if(state==='DUPLICATE')return 'REJECT';if(state==='FOLLOW_UP')return 'FOLLOW_UP';if(candidate.recommendedTreatment)return candidate.recommendedTreatment;if(candidate.lead)return 'LEAD';return 'STANDARD';}
 function hash(value:unknown):string{return `sha256:${createHash('sha256').update(JSON.stringify(value)).digest('hex')}`;}
 function dedupeMemory(items:EditorialMemoryRecord[]):EditorialMemoryRecord[]{return [...new Map(items.map(item=>[item.memoryId,item])).values()];}
+function unique<T>(items:T[]):T[]{return [...new Set(items)];}

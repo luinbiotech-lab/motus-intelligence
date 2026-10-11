@@ -1,0 +1,180 @@
+{
+  "mode": "DRY_RUN",
+  "publicationActions": {
+    "insert": 0,
+    "patch": 0,
+    "publish": 0
+  },
+  "normalDailyBlocked": false,
+  "snapshot": {
+    "generatedAt": "2026-10-11T15:51:15.487Z",
+    "topics": [
+      {
+        "topicId": "ai_intelligence:topic:1",
+        "label": "Ironclad 전문 업무 에이전트 평가",
+        "aliases": [
+          "Ironclad 전문 업무 에이전트 평가"
+        ],
+        "category": "AI_INTELLIGENCE",
+        "claimRefs": [
+          "motus-ai-intelligence-2026-10-06"
+        ],
+        "sourceRefs": [
+          "verified-publication:motus-ai-intelligence-2026-10-06"
+        ],
+        "verificationStatus": "VERIFIED"
+      },
+      {
+        "topicId": "ai_intelligence:topic:2",
+        "label": "Atlassian 기업 지식 기반 에이전트",
+        "aliases": [
+          "Atlassian 기업 지식 기반 에이전트"
+        ],
+        "category": "AI_INTELLIGENCE",
+        "claimRefs": [
+          "motus-ai-intelligence-2026-10-06"
+        ],
+        "sourceRefs": [
+          "verified-publication:motus-ai-intelligence-2026-10-06"
+        ],
+        "verificationStatus": "VERIFIED"
+      },
+      {
+        "topicId": "ai_intelligence:topic:3",
+        "label": "AI 수학 연구 공개",
+        "aliases": [
+          "AI 수학 연구 공개"
+        ],
+        "category": "AI_INTELLIGENCE",
+        "claimRefs": [
+          "motus-ai-intelligence-2026-10-06"
+        ],
+        "sourceRefs": [
+          "verified-publication:motus-ai-intelligence-2026-10-06"
+        ],
+        "verificationStatus": "VERIFIED"
+      },
+      {
+        "topicId": "us_market:topic:1",
+        "label": "10월 6일 미국 정규장",
+        "aliases": [
+          "10월 6일 미국 정규장"
+        ],
+        "category": "US_MARKET",
+        "claimRefs": [
+          "motus-us-market-2026-10-06"
+        ],
+        "sourceRefs": [
+          "verified-publication:motus-us-market-2026-10-06"
+        ],
+        "verificationStatus": "VERIFIED"
+      },
+      {
+        "topicId": "us_market:topic:2",
+        "label": "AI 전력 수요와 Constellation Energy",
+        "aliases": [
+          "AI 전력 수요와 Constellation Energy"
+        ],
+        "category": "US_MARKET",
+        "claimRefs": [
+          "motus-us-market-2026-10-06"
+        ],
+        "sourceRefs": [
+          "verified-publication:motus-us-market-2026-10-06"
+        ],
+        "verificationStatus": "VERIFIED"
+      },
+      {
+        "topicId": "korea_market:topic:1",
+        "label": "10월 7일 KRX 정규장 마감",
+        "aliases": [
+          "10월 7일 KRX 정규장 마감"
+        ],
+        "category": "KOREA_MARKET",
+        "claimRefs": [
+          "motus-korea-market-2026-10-07"
+        ],
+        "sourceRefs": [
+          "verified-publication:motus-korea-market-2026-10-07"
+        ],
+        "verificationStatus": "VERIFIED"
+      }
+    ],
+    "signals": [],
+    "providerStates": {
+      "NAVER_DATALAB": "NOT_CONFIGURED",
+      "GOOGLE_SEARCH_CONSOLE": "NOT_CONFIGURED"
+    },
+    "warnings": [
+      "DRY_RUN_NO_REMOTE_PROVIDER_CALLS"
+    ],
+    "policy": {
+      "verificationPrecedesDemand": true,
+      "providerFailureNonBlocking": true,
+      "internalMetricsPublic": false,
+      "commerce": {
+        "enabled": false
+      }
+    },
+    "snapshotId": "search-intelligence:69310b511d3dd3fb"
+  },
+  "performanceLearning": [
+    {
+      "topicId": "ai_intelligence:topic:1",
+      "observedQueries": [],
+      "evidenceSignalIds": [],
+      "editorialAction": "NO_ACTION",
+      "reviewRequired": true,
+      "changesFacts": false,
+      "changesPublicationGate": false
+    },
+    {
+      "topicId": "ai_intelligence:topic:2",
+      "observedQueries": [],
+      "evidenceSignalIds": [],
+      "editorialAction": "NO_ACTION",
+      "reviewRequired": true,
+      "changesFacts": false,
+      "changesPublicationGate": false
+    },
+    {
+      "topicId": "ai_intelligence:topic:3",
+      "observedQueries": [],
+      "evidenceSignalIds": [],
+      "editorialAction": "NO_ACTION",
+      "reviewRequired": true,
+      "changesFacts": false,
+      "changesPublicationGate": false
+    },
+    {
+      "topicId": "us_market:topic:1",
+      "observedQueries": [],
+      "evidenceSignalIds": [],
+      "editorialAction": "NO_ACTION",
+      "reviewRequired": true,
+      "changesFacts": false,
+      "changesPublicationGate": false
+    },
+    {
+      "topicId": "us_market:topic:2",
+      "observedQueries": [],
+      "evidenceSignalIds": [],
+      "editorialAction": "NO_ACTION",
+      "reviewRequired": true,
+      "changesFacts": false,
+      "changesPublicationGate": false
+    },
+    {
+      "topicId": "korea_market:topic:1",
+      "observedQueries": [],
+      "evidenceSignalIds": [],
+      "editorialAction": "NO_ACTION",
+      "reviewRequired": true,
+      "changesFacts": false,
+      "changesPublicationGate": false
+    }
+  ],
+  "commerce": {
+    "enabled": false
+  }
+}

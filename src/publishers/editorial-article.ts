@@ -25,9 +25,11 @@ export function renderAIEditorialArticle(view:AIIntelligenceDailyViewModel):Dail
 }
 
 export function renderUSEditorialArticle(view:USMarketDailyViewModel):DailyMasterRenderResult {
-  const parts=[masthead(view.title,view.subtitle,view.displayLabel,view.issueDate),lead([view.marketSummary,...view.marketCommentary].join(' '))];
-  parts.push(renderMarketTrendSection(view.marketHistory).replace('미국 주요 증시 추이','미국 주요지수 5거래일 흐름'));
-  if(view.supportingMetrics.length)parts.push(section('금리·달러·변동성',`<p style="margin:0">${view.supportingMetrics.map(item=>`${esc(item.label)} ${esc(item.value)}${item.change?` (${esc(item.change)})`:''}`).join(' · ')}</p>`));
+  const terms=new Set<string>();const describe=(value:string)=>explainTerms(value,terms);
+  const parts=[masthead(view.title,view.subtitle,view.displayLabel,view.issueDate),lead(describe([view.marketSummary,...view.marketCommentary].join(' ')))];
+  const period=view.marketHistory.sessionCount>=60?'3개월':`${view.marketHistory.sessionCount}거래일`;
+  parts.push(renderMarketTrendSection(view.marketHistory).replace('미국 주요 증시 추이',`미국 주요지수 ${period} 흐름`));
+  if(view.supportingMetrics.length)parts.push(section('금리·달러·변동성',`<p style="margin:0">${view.supportingMetrics.map(item=>`${esc(describe(item.label))} ${esc(item.value)}${item.change?` (${esc(item.change)})`:''}`).join(' · ')}</p>`));
   if(view.sectorsCompanies.length)parts.push(section('종목과 업종에서 읽힌 신호',paragraphs(view.sectorsCompanies)));
   if(view.wallStreetResearch.length)parts.push(section('실적 기대와 금리의 줄다리기',paragraphs(view.wallStreetResearch.flatMap(item=>[item.institutionView??'',item.motusInterpretation??'']))));
   if(view.checkpoints.length)parts.push(section('다음 거래일',paragraphs(view.checkpoints.map(item=>`${item.headline}: ${item.watchFor}`))));
@@ -54,3 +56,4 @@ function flow(values:Array<{label:string;displayValue:string;direction:'UP'|'DOW
 function sources(values:NewsletterSourceLink[]){const unique=[...new Map(values.map(item=>[item.url,item])).values()];return section('자료',`<ul style="margin:0;padding-left:20px">${unique.map(item=>`<li style="margin:5px 0"><a href="${attr(item.url)}" target="_blank" rel="nofollow noopener noreferrer" style="${LINK}">${esc(item.label)}</a></li>`).join('')}</ul>`);}
 function finish(product:string,title:string,label:string,parts:string[],renderedSections:string[]):DailyMasterRenderResult {const html=`<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)}</title></head><body><article data-product="motus-${product}" data-layout="editorial-article-4q" style="${BODY}">${parts.join('\n')}</article></body></html>`;assertNewsletterPublicHtmlSafe(html);for(const forbidden of BLOGGER_EDITORIAL_MASTER.forbiddenPublicLabels)if(new RegExp(`>${forbidden}<`).test(html))throw new Error(`forbidden public analytical label: ${forbidden}`);return {html,renderedSections,label};}
 function esc(value:string){return value.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}function attr(value:string){return esc(value).replace(/'/g,'&#39;');}
+function explainTerms(value:string,seen:Set<string>):string {const terms:[string,string][]=[['VIX','VIX (변동성지수)'],['DXY','DXY (달러인덱스)'],['미국 10년물','U.S. 10Y Treasury Yield (미국 10년물 국채금리)']];let output=value;for(const [term,label] of terms){if(seen.has(term))continue;if(output.includes(label)){seen.add(term);continue;}const index=output.indexOf(term);if(index<0)continue;output=`${output.slice(0,index)}${label}${output.slice(index+term.length)}`;seen.add(term);}return output;}

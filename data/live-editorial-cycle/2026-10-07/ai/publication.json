@@ -3,34 +3,20 @@
   "category": "AI_INTELLIGENCE",
   "issueDate": "2026-10-06",
   "title": "기업 AI의 경쟁 무대가 모델에서 실제 업무로 이동했다",
-  "canonicalLabel": "ai-intelligence",
   "label": "AI 인텔리전스",
-  "state": "DRAFT",
   "draftPostId": "3144124090554362868",
-  "publicPostUrl": null,
+  "state": "PUBLISHED",
+  "publicPostUrl": "https://motusnova.blogspot.com/2026/10/ai_01763533093.html",
+  "publishedAt": "2026-10-07T20:34:40+09:00",
+  "humanReview": {
+    "state": "APPROVED",
+    "reviewer": "human",
+    "reviewedAt": "2026-10-07T12:58:54.362Z",
+    "provenance": "USER_EXPLICIT_APPROVAL"
+  },
   "remoteDuplicateCount": 0,
-  "postsInsertCount": 0,
-  "publishCount": 0,
-  "humanReviewState": "APPROVAL_REQUIRED",
-  "coverage": [
-    {
-      "topic": "Ironclad 전문 업무 에이전트 평가",
-      "classification": "NEW",
-      "reason": "10월 6일 신규 공식 연구 협업"
-    },
-    {
-      "topic": "Atlassian 기업 지식 기반 에이전트",
-      "classification": "NEW",
-      "reason": "10월 6일 신규 공식 파트너십"
-    },
-    {
-      "topic": "AI 수학 연구 공개",
-      "classification": "RELATED",
-      "reason": "과학 연구용 AI라는 기존 장기 테마의 새 공개 결과"
-    }
-  ],
-  "sourceCount": 3,
-  "itemCount": 3,
+  "insertCount": 0,
+  "publishCount": 1,
   "validation": {
     "postId": true,
     "state": true,
@@ -38,22 +24,65 @@
     "label": true,
     "fingerprint": true,
     "sourceAnchors": true,
+    "sourceDedupe": true,
     "rawUrlSafe": true,
     "internalSafe": true,
     "fixtureSafe": true,
-    "mobile": true,
-    "forbiddenLabelsAbsent": true,
     "commerceDisabled": true,
+    "mobile": true,
+    "colorRule": true,
+    "editorialFirst": true,
     "chart": true,
     "svgCount": 0,
     "pass": true
   },
-  "contentFingerprint": "sha256:50d33f7c160c67548e012007f500be94165799b80f141c3b916758afabfb911b",
-  "searchRegistration": null,
-  "pdf": {
-    "state": "NOT_GENERATED",
-    "visibility": "PRIVATE"
+  "publicHttpStatus": 200,
+  "searchRegistration": {
+    "publicationId": "motus-ai-intelligence-2026-10-06",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/ai_01763533093.html",
+    "registeredAt": "2026-10-07T20:34:40+09:00",
+    "trigger": "PUBLICATION_PUBLISHED",
+    "googleInspectionState": "QUEUED",
+    "naverDiscoveryState": "PENDING",
+    "visibility": {
+      "publicationId": "motus-ai-intelligence-2026-10-06",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/10/ai_01763533093.html",
+      "google": {
+        "discovered": null,
+        "indexed": null,
+        "lastCrawl": null,
+        "coverageState": null,
+        "inspectionAt": null
+      },
+      "naver": {
+        "discovered": null,
+        "indexed": null,
+        "collectionState": null,
+        "inspectionAt": null
+      },
+      "sitemapIncluded": null,
+      "rssIncluded": null
+    }
   },
+  "contentFingerprint": "sha256:50d33f7c160c67548e012007f500be94165799b80f141c3b916758afabfb911b",
+  "audit": [
+    {
+      "at": "2026-10-07T12:58:54.362Z",
+      "event": "RETRY_AFTER_OAUTH_PROCESS_RELOAD",
+      "detail": "Prior refresh failure preserved; no Blogger write occurred before this retry"
+    },
+    {
+      "at": "2026-10-07T12:58:54.362Z",
+      "event": "HUMAN_REVIEW_APPROVED",
+      "detail": "User explicitly approved this exact Draft for production publication"
+    },
+    {
+      "at": "2026-10-07T20:34:40+09:00",
+      "event": "PUBLISHED",
+      "detail": "Blogger post 3144124090554362868 published exactly once and returned HTTP 200"
+    }
+  ],
+  "error": null,
   "commerce": {
     "enabled": false
   }

@@ -3,29 +3,20 @@
   "category": "US_MARKET",
   "issueDate": "2026-10-06",
   "title": "미국 증시 마감: S&P 500·나스닥 최고치, 실적 기대가 5%대 금리를 눌렀다",
-  "canonicalLabel": "us-market",
   "label": "미국증시",
-  "state": "DRAFT",
   "draftPostId": "2371588160186534300",
-  "publicPostUrl": null,
+  "state": "PUBLISHED",
+  "publicPostUrl": "https://motusnova.blogspot.com/2026/10/s-500-5.html",
+  "publishedAt": "2026-10-07T20:34:46+09:00",
+  "humanReview": {
+    "state": "APPROVED",
+    "reviewer": "human",
+    "reviewedAt": "2026-10-07T13:01:10.612Z",
+    "provenance": "USER_EXPLICIT_APPROVAL"
+  },
   "remoteDuplicateCount": 0,
-  "postsInsertCount": 0,
-  "publishCount": 0,
-  "humanReviewState": "APPROVAL_REQUIRED",
-  "coverage": [
-    {
-      "topic": "10월 6일 미국 정규장",
-      "classification": "NEW",
-      "reason": "직전 Daily 이후 새 완료 거래일"
-    },
-    {
-      "topic": "AI 전력 수요와 Constellation Energy",
-      "classification": "FOLLOW_UP",
-      "reason": "AI 인프라 투자 테마가 전력 공급 계약으로 확장"
-    }
-  ],
-  "sourceCount": 5,
-  "itemCount": 4,
+  "insertCount": 0,
+  "publishCount": 1,
   "validation": {
     "postId": true,
     "state": true,
@@ -33,22 +24,65 @@
     "label": true,
     "fingerprint": true,
     "sourceAnchors": true,
+    "sourceDedupe": true,
     "rawUrlSafe": true,
     "internalSafe": true,
     "fixtureSafe": true,
-    "mobile": true,
-    "forbiddenLabelsAbsent": true,
     "commerceDisabled": true,
+    "mobile": true,
+    "colorRule": true,
+    "editorialFirst": true,
     "chart": true,
     "svgCount": 4,
     "pass": true
   },
-  "contentFingerprint": "sha256:73e1d34ca5aac7cdc25ff08719593448892ef862172d2933b06f7cd02d872db5",
-  "searchRegistration": null,
-  "pdf": {
-    "state": "NOT_GENERATED",
-    "visibility": "PRIVATE"
+  "publicHttpStatus": 200,
+  "searchRegistration": {
+    "publicationId": "motus-us-market-2026-10-06",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/s-500-5.html",
+    "registeredAt": "2026-10-07T20:34:46+09:00",
+    "trigger": "PUBLICATION_PUBLISHED",
+    "googleInspectionState": "QUEUED",
+    "naverDiscoveryState": "PENDING",
+    "visibility": {
+      "publicationId": "motus-us-market-2026-10-06",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/10/s-500-5.html",
+      "google": {
+        "discovered": null,
+        "indexed": null,
+        "lastCrawl": null,
+        "coverageState": null,
+        "inspectionAt": null
+      },
+      "naver": {
+        "discovered": null,
+        "indexed": null,
+        "collectionState": null,
+        "inspectionAt": null
+      },
+      "sitemapIncluded": null,
+      "rssIncluded": null
+    }
   },
+  "contentFingerprint": "sha256:73e1d34ca5aac7cdc25ff08719593448892ef862172d2933b06f7cd02d872db5",
+  "audit": [
+    {
+      "at": "2026-10-07T13:01:10.612Z",
+      "event": "RETRY_AFTER_VALIDATION_RULE_FIX",
+      "detail": "Prior source-dedupe false positive preserved; no publish call occurred before this retry"
+    },
+    {
+      "at": "2026-10-07T13:01:10.612Z",
+      "event": "HUMAN_REVIEW_APPROVED",
+      "detail": "User explicitly approved this exact Draft for production publication"
+    },
+    {
+      "at": "2026-10-07T20:34:46+09:00",
+      "event": "PUBLISHED",
+      "detail": "Blogger post 2371588160186534300 published exactly once and returned HTTP 200"
+    }
+  ],
+  "error": null,
   "commerce": {
     "enabled": false
   }

@@ -182,3 +182,8 @@ A4 MASTER 생성은 관리자 전용 boundary를 통과해야 하며, 공개 rou
 - `npm run intelligence:golden-rehearsal`: 2026-09-29 실제 공개자료를 기존 intake와 Daily production layer에 통과시켜 Blogger·Email·A4 비공개 preview 및 PENDING Human Review package를 생성한다. 외부 publish/send/release는 수행하지 않는다.
 
 [구조](docs/architecture.md) · [수동 입력](docs/manual-input.md) · [규칙](docs/rules.md) · [출처 운영](docs/data-sources.md) · [문제 및 회귀 방지](docs/issues.md) · [Sprint 1 완료 보고](docs/sprint-report.md) · [Sprint 2A 완료 보고](docs/sprint-2a-report.md) · [Sprint 2B 완료 보고](docs/sprint-2b-report.md) · [Sprint 2C 완료 보고](docs/sprint-2c-report.md) · [Sprint 2D 완료 보고](docs/sprint-2d-report.md) · [Sprint 2E 완료 보고](docs/sprint-2e-report.md) · [Sprint 2F 완료 보고](docs/sprint-2f-report.md) · [Sprint 2G 완료 보고](docs/sprint-2g-report.md) · [Sprint 2H 진행 보고](docs/sprint-2h-report.md)
+## Search Intelligence / Audience Demand
+
+`npm run search:intelligence`는 발행 전 검색 수요 계층을 로컬 dry-run으로 실행한다. 기존 Search Console 성과 측정은 재사용하고, Naver DataLab은 `NAVER_DATALAB_CLIENT_ID`와 `NAVER_DATALAB_CLIENT_SECRET`이 있을 때만 연결한다. Search Console live adapter는 `https://www.googleapis.com/auth/webmasters.readonly` 범위와 검증된 property를 사용하는 구현을 주입한다.
+
+운영 순서는 “검증된 사실 → 검색·독자 수요 → 편집 관점 → 심층 기사 → SEO → 발행 게이트”다. 수요 신호는 VERIFIED 주제와 연결된 경우에만 제목·본문 후보로 사용할 수 있으며, Human Review 상태와 HOLD를 바꾸지 않는다. 공급자 장애는 경고로 격리하고 정상 Daily를 중단하지 않는다. 내부 ratio, click, impression과 signal ID는 공개 renderer 입력에서 제외한다. 미국 주요지수 차트의 목표 창은 실제 63거래일이며, 검증된 이력이 부족하면 현재 실제 구간을 그대로 유지하고 값을 합성하지 않는다. 자동 발행과 Commerce는 비활성 상태다.
