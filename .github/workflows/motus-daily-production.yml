@@ -69,7 +69,7 @@ jobs:
       - run: npm run build
       - run: node --test --test-isolation=none dist/tests/auto-publish-live.test.js dist/tests/daily-operations.test.js dist/tests/live-editorial-publish.test.js
       - run: npm run motus:live -- --date "$RUN_DATE" --category "$CATEGORY"
-      - run: npm run search:intelligence:live
+      - run: npm run search:intelligence:live -- --date "$RUN_DATE" --category "$CATEGORY"
       - name: Evaluate gate without live publication
         if: env.MOTUS_LIVE_PUBLISH_ENABLED != 'true'
         run: npm run motus:publish -- --date "$RUN_DATE" --category "$CATEGORY"

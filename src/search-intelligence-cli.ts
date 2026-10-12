@@ -1,3 +1,49 @@
-import {mkdir,writeFile} from 'node:fs/promises';import {createNextLiveCycle} from './editorial/next-live-cycle.js';import {buildPerformanceLearning,createSearchIntelligenceSnapshot,type VerifiedSearchTopic} from './search/intelligence.js';import {collectDemandSignals,GoogleSearchConsoleSignalProvider,NaverDataLabProvider,type SearchDemandProvider} from './search/providers.js';import {searchConsoleFromEnvironment} from './search/google-console-live.js';
-async function main(){const generatedAt=new Date().toISOString(),live=process.argv.includes('--live'),cycle=createNextLiveCycle(generatedAt),topics=topicsFromCycle(cycle.units),providers:SearchDemandProvider[]=[];if(live){const clientId=process.env.NAVER_DATALAB_CLIENT_ID?.trim(),clientSecret=process.env.NAVER_DATALAB_CLIENT_SECRET?.trim(),end=generatedAt.slice(0,10),start=new Date(Date.parse(end+'T00:00:00Z')-6*86400000).toISOString().slice(0,10);if(clientId&&clientSecret)providers.push(new NaverDataLabProvider({startDate:start,endDate:end,timeUnit:'date',keywordGroups:topics.map(t=>({groupName:t.label,keywords:[t.label,...t.aliases]}))},{clientId,clientSecret}));const google=searchConsoleFromEnvironment();if(google){const gStart=new Date(Date.parse(end+'T00:00:00Z')-27*86400000).toISOString().slice(0,10);providers.push(new GoogleSearchConsoleSignalProvider(google,{propertyId:process.env.GOOGLE_SEARCH_CONSOLE_PROPERTY!,dimensions:['date','page','query'],startDate:gStart,endDate:end}))}}const collected=await collectDemandSignals(providers,topics,generatedAt),warnings=[...collected.warnings,...(!live?['DRY_RUN_NO_REMOTE_PROVIDER_CALLS']:[])],snapshot=createSearchIntelligenceSnapshot({generatedAt,topics,signals:collected.signals,providerStates:collected.states,warnings}),output={mode:live?'LIVE_DEGRADED_OK':'DRY_RUN',publicationActions:{insert:0,patch:0,publish:0},normalDailyBlocked:false,snapshot,performanceLearning:buildPerformanceLearning(snapshot),commerce:{enabled:false}};await mkdir('data/search-intelligence',{recursive:true});await writeFile('data/search-intelligence/latest-'+(live?'live':'dry-run')+'.json',JSON.stringify(output,null,2)+'\n','utf8');console.log(JSON.stringify({mode:output.mode,topicCount:topics.length,signalCount:snapshot.signals.length,providerStates:snapshot.providerStates,normalDailyBlocked:false,publicationActions:output.publicationActions,commerce:output.commerce}))}
-function topicsFromCycle(units:Array<{category:'AI_INTELLIGENCE'|'US_MARKET'|'KOREA_MARKET';coverage:Array<{topic:string}>;publicationId:string}>):VerifiedSearchTopic[]{return units.flatMap(u=>u.coverage.map((x,i)=>({topicId:u.category.toLowerCase()+':topic:'+(i+1),label:x.topic,aliases:[x.topic],category:u.category,claimRefs:[u.publicationId],sourceRefs:['verified-publication:'+u.publicationId],verificationStatus:'VERIFIED' as const})))}await main();
+import {existsSync} from 'node:fs';
+import {mkdir,readFile,writeFile} from 'node:fs/promises';
+import {join} from 'node:path';
+import {createNextLiveCycle} from './editorial/next-live-cycle.js';
+import type {AIIntelligenceDailyViewModel,KoreaMarketDailyViewModel,USMarketDailyViewModel} from './intelligence/daily-masters.js';
+import type {SplitPublicationUnit} from './intelligence/split-daily-production.js';
+import {buildPerformanceLearning,createSearchIntelligenceSnapshot,type VerifiedSearchTopic} from './search/intelligence.js';
+import {collectDemandSignals,GoogleSearchConsoleSignalProvider,NaverDataLabProvider,type SearchDemandProvider} from './search/providers.js';
+import {searchConsoleFromEnvironment} from './search/google-console-live.js';
+
+const args=process.argv.slice(2);
+const value=(flag:string)=>{const index=args.indexOf(flag);return index>=0?args[index+1]:undefined};
+
+async function main(){
+  const generatedAt=new Date().toISOString(),live=args.includes('--live');
+  const input=await publicationUnits(live,generatedAt),topics=topicsFromUnits(input.units),providers:SearchDemandProvider[]=[];
+  if(live&&topics.length){
+    const clientId=process.env.NAVER_DATALAB_CLIENT_ID?.trim(),clientSecret=process.env.NAVER_DATALAB_CLIENT_SECRET?.trim(),end=generatedAt.slice(0,10),start=new Date(Date.parse(end+'T00:00:00Z')-6*86400000).toISOString().slice(0,10);
+    if(clientId&&clientSecret)providers.push(new NaverDataLabProvider({startDate:start,endDate:end,timeUnit:'date',keywordGroups:topics.map(topic=>({groupName:topic.label,keywords:[topic.label,...topic.aliases]}))},{clientId,clientSecret}));
+    const google=searchConsoleFromEnvironment();
+    if(google){const gStart=new Date(Date.parse(end+'T00:00:00Z')-27*86400000).toISOString().slice(0,10);providers.push(new GoogleSearchConsoleSignalProvider(google,{propertyId:process.env.GOOGLE_SEARCH_CONSOLE_PROPERTY!,dimensions:['date','page','query'],startDate:gStart,endDate:end}));}
+  }
+  const collected=await collectDemandSignals(providers,topics,generatedAt),warnings=[...input.warnings,...collected.warnings,...(!live?['DRY_RUN_NO_REMOTE_PROVIDER_CALLS']:[])],snapshot=createSearchIntelligenceSnapshot({generatedAt,topics,signals:collected.signals,providerStates:collected.states,warnings}),output={mode:live?'LIVE_DEGRADED_OK':'DRY_RUN',publicationActions:{insert:0,patch:0,publish:0},normalDailyBlocked:false,snapshot,performanceLearning:buildPerformanceLearning(snapshot),commerce:{enabled:false}};
+  await mkdir('data/search-intelligence',{recursive:true});
+  await writeFile('data/search-intelligence/latest-'+(live?'live':'dry-run')+'.json',JSON.stringify(output,null,2)+'\n','utf8');
+  console.log(JSON.stringify({mode:output.mode,topicCount:topics.length,signalCount:snapshot.signals.length,providerStates:snapshot.providerStates,warnings,normalDailyBlocked:false,publicationActions:output.publicationActions,commerce:output.commerce}));
+}
+
+type SearchTopicUnit={publicationId:string;category:'AI_INTELLIGENCE'|'US_MARKET'|'KOREA_MARKET';topics:string[];sourceRefs:string[]};
+async function publicationUnits(live:boolean,generatedAt:string):Promise<{units:SearchTopicUnit[];warnings:string[]}>
+{
+  if(!live)return {units:createNextLiveCycle(generatedAt).units.map(unit=>({publicationId:unit.publicationId,category:unit.category,topics:unit.coverage.map(item=>item.topic),sourceRefs:['verified-publication:'+unit.publicationId]})),warnings:[]};
+  const date=value('--date'),category=value('--category');
+  if(!date||!category||!['ai','us','korea'].includes(category))return {units:[],warnings:['LIVE_SEARCH_CONTEXT_MISSING']};
+  const path=join(process.cwd(),'data','operations',date,category,'live-unit.json');
+  if(!existsSync(path))return {units:[],warnings:['VERIFIED_LIVE_UNIT_MISSING']};
+  const unit=JSON.parse(await readFile(path,'utf8')) as SplitPublicationUnit;
+  const expected={ai:'AI_INTELLIGENCE',us:'US_MARKET',korea:'KOREA_MARKET'}[category];
+  if(unit.category!==expected||unit.observedDate!==date||unit.readiness!=='READY')return {units:[],warnings:['VERIFIED_LIVE_UNIT_CONTEXT_MISMATCH']};
+  return {units:[topicUnit(unit)],warnings:[]};
+}
+function topicUnit(unit:SplitPublicationUnit):SearchTopicUnit {
+  let topics:string[];
+  if(unit.category==='AI_INTELLIGENCE'){const view=unit.viewModel as AIIntelligenceDailyViewModel;topics=view.issues.map(item=>item.headline);}
+  else if(unit.category==='US_MARKET'){const view=unit.viewModel as USMarketDailyViewModel;topics=view.sectorsCompanies.length?view.sectorsCompanies:[view.title];}
+  else {const view=unit.viewModel as KoreaMarketDailyViewModel;topics=[...view.sectors,...view.movers].map(item=>item.label);if(!topics.length)topics=[view.title];}
+  return {publicationId:unit.publicationId,category:unit.category,topics:[...new Set(topics.filter(Boolean))],sourceRefs:unit.viewModel.sources.map(source=>source.url)};
+}
+function topicsFromUnits(units:SearchTopicUnit[]):VerifiedSearchTopic[]{return units.flatMap(unit=>unit.topics.map((topic,index)=>({topicId:unit.category.toLowerCase()+':topic:'+(index+1),label:topic,aliases:[],category:unit.category,claimRefs:[unit.publicationId],sourceRefs:unit.sourceRefs,verificationStatus:'VERIFIED' as const})))}await main();

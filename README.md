@@ -186,7 +186,7 @@ A4 MASTER 생성은 관리자 전용 boundary를 통과해야 하며, 공개 rou
 
 `npm run search:intelligence`는 발행 전 검색 수요 계층을 로컬 dry-run으로 실행한다. 기존 Search Console 성과 측정은 재사용하고, Naver DataLab은 `NAVER_DATALAB_CLIENT_ID`와 `NAVER_DATALAB_CLIENT_SECRET`이 있을 때만 연결한다. Search Console live adapter는 `https://www.googleapis.com/auth/webmasters.readonly` 범위와 검증된 property를 사용하는 구현을 주입한다.
 
-운영 순서는 “검증된 사실 → 검색·독자 수요 → 편집 관점 → 심층 기사 → SEO → 발행 게이트”다. 수요 신호는 VERIFIED 주제와 연결된 경우에만 제목·본문 후보로 사용할 수 있으며, Human Review 상태와 HOLD를 바꾸지 않는다. 공급자 장애는 경고로 격리하고 정상 Daily를 중단하지 않는다. 내부 ratio, click, impression과 signal ID는 공개 renderer 입력에서 제외한다. 미국 주요지수 차트의 목표 창은 실제 63거래일이며, 검증된 이력이 부족하면 현재 실제 구간을 그대로 유지하고 값을 합성하지 않는다. 자동 발행과 Commerce는 비활성 상태다.
+운영 순서는 “검증된 사실 → 검색·독자 수요 → 편집 관점 → 심층 기사 → SEO → 발행 게이트”다. 수요 신호는 VERIFIED 주제와 연결된 경우에만 제목·본문 후보로 사용할 수 있으며, Human Review 상태와 HOLD를 바꾸지 않는다. 공급자 장애는 경고로 격리하고 정상 Daily를 중단하지 않는다. 내부 ratio, click, impression과 signal ID는 공개 renderer 입력에서 제외한다. 미국 주요지수 차트의 목표 창은 실제 63거래일이며, 검증된 이력이 부족하면 현재 실제 구간을 그대로 유지하고 값을 합성하지 않는다. 자동 발행은 production workflow의 명시적 arm 전까지 기본 비활성이고 Commerce는 계속 비활성이다. live Search 실행은 같은 날짜·카테고리의 검증된 `live-unit.json`에서만 주제를 가져오며, unit이나 provider가 없으면 경고만 남기고 core Daily gate를 바꾸지 않는다.
 
 ## Phase 2 live production boundary
 
