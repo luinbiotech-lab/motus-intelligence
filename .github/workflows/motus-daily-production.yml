@@ -28,7 +28,7 @@ jobs:
     timeout-minutes: 30
     env:
       TZ: Asia/Seoul
-      MOTUS_LIVE_PUBLISH_ENABLED: 'false'
+      MOTUS_LIVE_PUBLISH_ENABLED: ${{ vars.MOTUS_PRODUCTION_ARMED || 'false' }}
       MOTUS_COMMERCE_ENABLED: 'false'
       MOTUS_LIVE_AI_URL: ${{ vars.MOTUS_LIVE_AI_URL }}
       MOTUS_LIVE_US_URL: ${{ vars.MOTUS_LIVE_US_URL }}
