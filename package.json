@@ -34,7 +34,10 @@
     "motus:publish-split": "npm run build && node dist/src/split-daily-publish-cli.js",
     "motus:daily-production": "npm run build && node dist/src/daily-production-operation-cli.js",
     "sample": "npm run build && node dist/src/cli.js --sample",
-    "report": "node dist/src/cli.js"
+    "report": "node dist/src/cli.js",
+    "motus:live": "npm run build && node dist/src/live-daily-cli.js",
+    "motus:publish": "npm run build && node dist/src/motus-publish-cli.js",
+    "search:intelligence:live": "npm run build && node dist/src/search-intelligence-cli.js --live"
   },
   "devDependencies": {
     "@types/node": "^22.20.2",

@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "dryRunOnly": true,
+  "dryRunOnly": false,
   "verificationPrecedesDemand": true,
   "providerFailureNonBlocking": true,
   "publicInternalMetrics": false,

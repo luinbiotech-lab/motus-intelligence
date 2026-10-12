@@ -187,3 +187,9 @@ A4 MASTER 생성은 관리자 전용 boundary를 통과해야 하며, 공개 rou
 `npm run search:intelligence`는 발행 전 검색 수요 계층을 로컬 dry-run으로 실행한다. 기존 Search Console 성과 측정은 재사용하고, Naver DataLab은 `NAVER_DATALAB_CLIENT_ID`와 `NAVER_DATALAB_CLIENT_SECRET`이 있을 때만 연결한다. Search Console live adapter는 `https://www.googleapis.com/auth/webmasters.readonly` 범위와 검증된 property를 사용하는 구현을 주입한다.
 
 운영 순서는 “검증된 사실 → 검색·독자 수요 → 편집 관점 → 심층 기사 → SEO → 발행 게이트”다. 수요 신호는 VERIFIED 주제와 연결된 경우에만 제목·본문 후보로 사용할 수 있으며, Human Review 상태와 HOLD를 바꾸지 않는다. 공급자 장애는 경고로 격리하고 정상 Daily를 중단하지 않는다. 내부 ratio, click, impression과 signal ID는 공개 renderer 입력에서 제외한다. 미국 주요지수 차트의 목표 창은 실제 63거래일이며, 검증된 이력이 부족하면 현재 실제 구간을 그대로 유지하고 값을 합성하지 않는다. 자동 발행과 Commerce는 비활성 상태다.
+
+## Phase 2 live production boundary
+
+`npm run motus:live -- --date YYYY-MM-DD --category ai|us|korea`는 category별 검증 완료 JSON endpoint에서 normalized publication unit을 수집한다. endpoint가 없거나 session이 미완료·휴장·stale·불완전하면 fallback 없이 HOLD artifact를 기록한다. U.S. Market live payload는 4개 지수의 최소 63거래일 실제 close/provenance와 VIX, 미국 10년물, DXY, Brent를 요구한다.
+
+`npm run motus:publish -- --date YYYY-MM-DD --category ai|us|korea`는 기본적으로 gate simulation만 수행한다. 실제 Blogger 쓰기는 `--execute`와 `MOTUS_LIVE_PUBLISH_ENABLED=true`가 함께 있을 때만 가능하다. 공통 gate는 VERIFIED, 충돌·중복 불확실성 없음, provenance/source/mobile/editorial/fingerprint 검증, Commerce disabled를 모두 요구하며 Search demand는 HOLD를 해제하지 않는다. `.github/workflows/motus-daily-production.yml`은 현재 publish activation을 false로 고정하여 schedule에서도 실제 publish를 호출하지 않는다.
