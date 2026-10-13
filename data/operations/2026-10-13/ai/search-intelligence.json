@@ -7,11 +7,11 @@
   },
   "normalDailyBlocked": false,
   "snapshot": {
-    "generatedAt": "2026-10-13T09:46:26.423Z",
+    "generatedAt": "2026-10-13T10:30:13.082Z",
     "topics": [
       {
         "topicId": "ai_intelligence:topic:1",
-        "label": "From Earth to Orbit, France’s Ecosystem Delivers Agentic Computing at Scale With NVIDIA",
+        "label": "엔비디아, 베라 루빈 설계를 개방형 AI 공장 표준으로 확장",
         "aliases": [],
         "category": "AI_INTELLIGENCE",
         "claimRefs": [
@@ -26,7 +26,7 @@
       },
       {
         "topicId": "ai_intelligence:topic:2",
-        "label": "OCP Global Summit: Amid Ecosystem Adoption, NVIDIA Opens Vera Rubin Architecture to Help Scale AI Factories Worldwide",
+        "label": "마이크로소프트, 자체 AI 가속기 마이아를 기가와트급으로 확대",
         "aliases": [],
         "category": "AI_INTELLIGENCE",
         "claimRefs": [
@@ -41,7 +41,7 @@
       },
       {
         "topicId": "ai_intelligence:topic:3",
-        "label": "Microsoft to expand Azure Maia system to multi-gigawatt deployments",
+        "label": "프랑스 AI 생태계, 에이전트 컴퓨팅을 산업 현장으로 확대",
         "aliases": [],
         "category": "AI_INTELLIGENCE",
         "claimRefs": [
@@ -69,7 +69,7 @@
         "enabled": false
       }
     },
-    "snapshotId": "search-intelligence:ac112214a8cc02a9"
+    "snapshotId": "search-intelligence:2eebf0259c54f7ca"
   },
   "performanceLearning": [
     {

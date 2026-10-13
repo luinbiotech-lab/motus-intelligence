@@ -13,9 +13,9 @@
   "leakagePass": true,
   "duplicateCheck": "PENDING_REMOTE",
   "duplicateUncertainty": true,
-  "articleFingerprint": "sha256:d089f84bd1ee0915bd39f359c3d13bdf884a0719f52023db2dcad39ada28aa47",
+  "articleFingerprint": "sha256:68193d4bb82ff4751fdd28918b526046bfd9ba9ede9d5b06f9cdaf2db237c7e3",
   "commerceEnabled": false,
-  "verifiedAt": "2026-10-13T18:00:00+09:00",
+  "verifiedAt": "2026-10-13T10:30:03.607Z",
   "sourceAuditIds": [
     "openai",
     "google-ai",

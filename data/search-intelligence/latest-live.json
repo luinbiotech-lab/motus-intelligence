@@ -7,16 +7,60 @@
   },
   "normalDailyBlocked": false,
   "snapshot": {
-    "generatedAt": "2026-10-13T09:46:38.921Z",
-    "topics": [],
+    "generatedAt": "2026-10-13T10:30:13.082Z",
+    "topics": [
+      {
+        "topicId": "ai_intelligence:topic:1",
+        "label": "엔비디아, 베라 루빈 설계를 개방형 AI 공장 표준으로 확장",
+        "aliases": [],
+        "category": "AI_INTELLIGENCE",
+        "claimRefs": [
+          "motus-live-2026-10-13:ai"
+        ],
+        "sourceRefs": [
+          "https://blogs.nvidia.com/blog/france-ecosystem-agentic-computing/",
+          "https://blogs.nvidia.com/blog/ocp-global-summit-vera-rubin-scale-ai-factories/",
+          "https://blogs.microsoft.com/blog/2026/10/12/microsoft-to-expand-azure-maia-system-to-multi-gigawatt-deployments/"
+        ],
+        "verificationStatus": "VERIFIED"
+      },
+      {
+        "topicId": "ai_intelligence:topic:2",
+        "label": "마이크로소프트, 자체 AI 가속기 마이아를 기가와트급으로 확대",
+        "aliases": [],
+        "category": "AI_INTELLIGENCE",
+        "claimRefs": [
+          "motus-live-2026-10-13:ai"
+        ],
+        "sourceRefs": [
+          "https://blogs.nvidia.com/blog/france-ecosystem-agentic-computing/",
+          "https://blogs.nvidia.com/blog/ocp-global-summit-vera-rubin-scale-ai-factories/",
+          "https://blogs.microsoft.com/blog/2026/10/12/microsoft-to-expand-azure-maia-system-to-multi-gigawatt-deployments/"
+        ],
+        "verificationStatus": "VERIFIED"
+      },
+      {
+        "topicId": "ai_intelligence:topic:3",
+        "label": "프랑스 AI 생태계, 에이전트 컴퓨팅을 산업 현장으로 확대",
+        "aliases": [],
+        "category": "AI_INTELLIGENCE",
+        "claimRefs": [
+          "motus-live-2026-10-13:ai"
+        ],
+        "sourceRefs": [
+          "https://blogs.nvidia.com/blog/france-ecosystem-agentic-computing/",
+          "https://blogs.nvidia.com/blog/ocp-global-summit-vera-rubin-scale-ai-factories/",
+          "https://blogs.microsoft.com/blog/2026/10/12/microsoft-to-expand-azure-maia-system-to-multi-gigawatt-deployments/"
+        ],
+        "verificationStatus": "VERIFIED"
+      }
+    ],
     "signals": [],
     "providerStates": {
       "NAVER_DATALAB": "NOT_CONFIGURED",
       "GOOGLE_SEARCH_CONSOLE": "NOT_CONFIGURED"
     },
-    "warnings": [
-      "VERIFIED_LIVE_UNIT_CONTEXT_MISMATCH"
-    ],
+    "warnings": [],
     "policy": {
       "verificationPrecedesDemand": true,
       "providerFailureNonBlocking": true,
@@ -25,9 +69,37 @@
         "enabled": false
       }
     },
-    "snapshotId": "search-intelligence:d793adf76da1e8e6"
+    "snapshotId": "search-intelligence:2eebf0259c54f7ca"
   },
-  "performanceLearning": [],
+  "performanceLearning": [
+    {
+      "topicId": "ai_intelligence:topic:1",
+      "observedQueries": [],
+      "evidenceSignalIds": [],
+      "editorialAction": "NO_ACTION",
+      "reviewRequired": true,
+      "changesFacts": false,
+      "changesPublicationGate": false
+    },
+    {
+      "topicId": "ai_intelligence:topic:2",
+      "observedQueries": [],
+      "evidenceSignalIds": [],
+      "editorialAction": "NO_ACTION",
+      "reviewRequired": true,
+      "changesFacts": false,
+      "changesPublicationGate": false
+    },
+    {
+      "topicId": "ai_intelligence:topic:3",
+      "observedQueries": [],
+      "evidenceSignalIds": [],
+      "editorialAction": "NO_ACTION",
+      "reviewRequired": true,
+      "changesFacts": false,
+      "changesPublicationGate": false
+    }
+  ],
   "commerce": {
     "enabled": false
   }
