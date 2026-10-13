@@ -3,7 +3,8 @@ import {existsSync} from 'node:fs';
 import {join,resolve} from 'node:path';
 import type {SplitPublicationUnit} from './intelligence/split-daily-production.js';
 import {evaluateAutoPublishGate,executeAutoPublish,type AutoPublishResult} from './production/auto-publish.js';
-import {candidateFromVerification,type ProductionVerificationArtifact} from './production/verification-artifact.js';
+import {revalidateProductionEvidence,type ProductionVerificationArtifact} from './production/verification-artifact.js';
+import type {InternalSourceAuditEntry} from './operations/internal-live-daily.js';
 import {GoogleBloggerApiAdapter,type BloggerPublishingConfig} from './services/blogger.js';
 
 const args=process.argv.slice(2);const value=(flag:string)=>{const index=args.indexOf(flag);return index>=0?args[index+1]:undefined};
@@ -12,10 +13,18 @@ if(!/^\d{4}-\d{2}-\d{2}$/.test(date)||!['ai','us','korea'].includes(name))throw 
 const root=join(process.cwd(),'data','operations',date,name),unitPath=join(root,'live-unit.json'),verificationPath=join(root,'verification.json');await mkdir(root,{recursive:true});
 if(!existsSync(unitPath)||!existsSync(verificationPath)){await finish({state:'HOLD',reason:'verified live unit or verification artifact missing',publishCallCount:0});}
 const unit=JSON.parse(await readFile(unitPath,'utf8')) as SplitPublicationUnit;
-const verification=JSON.parse(await readFile(verificationPath,'utf8')) as ProductionVerificationArtifact;
-const candidate=candidateFromVerification(unit,verification);
+const auditPath=join(root,'live-source-audit.json');
+if(!existsSync(auditPath))await finish({state:'HOLD',reason:'live source audit missing',publishCallCount:0});
+let candidate;
+try {
+ const verification=JSON.parse(await readFile(verificationPath,'utf8')) as ProductionVerificationArtifact;
+ const audit=JSON.parse(await readFile(auditPath,'utf8')) as {schemaVersion:string;sourceMode:string;category:string;entries:InternalSourceAuditEntry[]};
+ const check=revalidateProductionEvidence(unit,verification,audit,new Date().toISOString());
+ if(!check.valid)await finish({state:'HOLD',reason:check.reasons.join('; '),publishCallCount:0});
+ candidate=check.candidate;
+}catch{await finish({state:'HOLD',reason:'verification evidence invalid',publishCallCount:0});}
 const execute=args.includes('--execute');
-if(!execute||process.env.MOTUS_LIVE_PUBLISH_ENABLED!=='true'){const gate=evaluateAutoPublishGate(candidate);await finish({state:gate.state,gate,publishCallCount:0,execution:'SIMULATED',commerce:{enabled:false}});}
+if(!execute||process.env.MOTUS_LIVE_PUBLISH_ENABLED!=='true'){const gate=evaluateAutoPublishGate(candidate);await finish({state:gate.state,gate,publishCallCount:0,execution:'SIMULATED',reason:candidate.duplicateUncertainty?'PENDING_REMOTE_LOOKUP':undefined,commerce:{enabled:false}});}
 const required=['BLOGGER_BLOG_ID','BLOGGER_CLIENT_ID','BLOGGER_CLIENT_SECRET','BLOGGER_REFRESH_TOKEN'] as const;
 const missing=required.filter(key=>!process.env[key]?.trim());if(missing.length)await finish({state:'HOLD',reason:`required Blogger credentials missing: ${missing.join(', ')}`,publishCallCount:0});
 const raw=JSON.parse(await readFile(resolve('config/publishing.json'),'utf8')) as {blogger:BloggerPublishingConfig},config={...raw.blogger,blogId:process.env.BLOGGER_BLOG_ID!.trim(),credentialAvailable:true,publishAsDraft:true};
