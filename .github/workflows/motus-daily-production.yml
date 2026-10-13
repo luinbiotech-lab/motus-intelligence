@@ -31,6 +31,8 @@ jobs:
       MOTUS_LIVE_PUBLISH_ENABLED: 'false'
       MOTUS_COMMERCE_ENABLED: 'false'
       TWELVE_DATA_API_KEY: ${{ secrets.TWELVE_DATA_API_KEY }}
+      KRX_AUTH_KEY: ${{ secrets.KRX_AUTH_KEY }}
+      BOK_ECOS_API_KEY: ${{ secrets.BOK_ECOS_API_KEY }}
       BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
       BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
       BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}

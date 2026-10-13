@@ -1,0 +1,106 @@
+{
+  "mode": "LIVE_DEGRADED_OK",
+  "publicationActions": {
+    "insert": 0,
+    "patch": 0,
+    "publish": 0
+  },
+  "normalDailyBlocked": false,
+  "snapshot": {
+    "generatedAt": "2026-10-13T09:46:26.423Z",
+    "topics": [
+      {
+        "topicId": "ai_intelligence:topic:1",
+        "label": "From Earth to Orbit, France’s Ecosystem Delivers Agentic Computing at Scale With NVIDIA",
+        "aliases": [],
+        "category": "AI_INTELLIGENCE",
+        "claimRefs": [
+          "motus-live-2026-10-13:ai"
+        ],
+        "sourceRefs": [
+          "https://blogs.nvidia.com/blog/france-ecosystem-agentic-computing/",
+          "https://blogs.nvidia.com/blog/ocp-global-summit-vera-rubin-scale-ai-factories/",
+          "https://blogs.microsoft.com/blog/2026/10/12/microsoft-to-expand-azure-maia-system-to-multi-gigawatt-deployments/"
+        ],
+        "verificationStatus": "VERIFIED"
+      },
+      {
+        "topicId": "ai_intelligence:topic:2",
+        "label": "OCP Global Summit: Amid Ecosystem Adoption, NVIDIA Opens Vera Rubin Architecture to Help Scale AI Factories Worldwide",
+        "aliases": [],
+        "category": "AI_INTELLIGENCE",
+        "claimRefs": [
+          "motus-live-2026-10-13:ai"
+        ],
+        "sourceRefs": [
+          "https://blogs.nvidia.com/blog/france-ecosystem-agentic-computing/",
+          "https://blogs.nvidia.com/blog/ocp-global-summit-vera-rubin-scale-ai-factories/",
+          "https://blogs.microsoft.com/blog/2026/10/12/microsoft-to-expand-azure-maia-system-to-multi-gigawatt-deployments/"
+        ],
+        "verificationStatus": "VERIFIED"
+      },
+      {
+        "topicId": "ai_intelligence:topic:3",
+        "label": "Microsoft to expand Azure Maia system to multi-gigawatt deployments",
+        "aliases": [],
+        "category": "AI_INTELLIGENCE",
+        "claimRefs": [
+          "motus-live-2026-10-13:ai"
+        ],
+        "sourceRefs": [
+          "https://blogs.nvidia.com/blog/france-ecosystem-agentic-computing/",
+          "https://blogs.nvidia.com/blog/ocp-global-summit-vera-rubin-scale-ai-factories/",
+          "https://blogs.microsoft.com/blog/2026/10/12/microsoft-to-expand-azure-maia-system-to-multi-gigawatt-deployments/"
+        ],
+        "verificationStatus": "VERIFIED"
+      }
+    ],
+    "signals": [],
+    "providerStates": {
+      "NAVER_DATALAB": "NOT_CONFIGURED",
+      "GOOGLE_SEARCH_CONSOLE": "NOT_CONFIGURED"
+    },
+    "warnings": [],
+    "policy": {
+      "verificationPrecedesDemand": true,
+      "providerFailureNonBlocking": true,
+      "internalMetricsPublic": false,
+      "commerce": {
+        "enabled": false
+      }
+    },
+    "snapshotId": "search-intelligence:ac112214a8cc02a9"
+  },
+  "performanceLearning": [
+    {
+      "topicId": "ai_intelligence:topic:1",
+      "observedQueries": [],
+      "evidenceSignalIds": [],
+      "editorialAction": "NO_ACTION",
+      "reviewRequired": true,
+      "changesFacts": false,
+      "changesPublicationGate": false
+    },
+    {
+      "topicId": "ai_intelligence:topic:2",
+      "observedQueries": [],
+      "evidenceSignalIds": [],
+      "editorialAction": "NO_ACTION",
+      "reviewRequired": true,
+      "changesFacts": false,
+      "changesPublicationGate": false
+    },
+    {
+      "topicId": "ai_intelligence:topic:3",
+      "observedQueries": [],
+      "evidenceSignalIds": [],
+      "editorialAction": "NO_ACTION",
+      "reviewRequired": true,
+      "changesFacts": false,
+      "changesPublicationGate": false
+    }
+  ],
+  "commerce": {
+    "enabled": false
+  }
+}

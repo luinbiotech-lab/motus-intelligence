@@ -1,0 +1,9 @@
+{
+  "schemaVersion": "1.0",
+  "category": "US_MARKET",
+  "operationDate": "2026-10-13",
+  "status": "HOLD",
+  "observedDate": null,
+  "reasonCode": "TWELVE_DATA_API_KEY_MISSING",
+  "unit": null
+}

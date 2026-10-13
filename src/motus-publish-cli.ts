@@ -11,7 +11,7 @@ const date=value('--date')??'',name=value('--category')??'';
 if(!/^\d{4}-\d{2}-\d{2}$/.test(date)||!['ai','us','korea'].includes(name))throw new Error('--date YYYY-MM-DD and --category ai|us|korea required');
 const root=join(process.cwd(),'data','operations',date,name),unitPath=join(root,'live-unit.json'),verificationPath=join(root,'verification.json');await mkdir(root,{recursive:true});
 if(!existsSync(unitPath)||!existsSync(verificationPath)){await finish({state:'HOLD',reason:'verified live unit or verification artifact missing',publishCallCount:0});}
-const unit=JSON.parse(await readFile(unitPath,'utf8')) as SplitPublicationUnit;
+const unit=JSON.parse(await readFile(unitPath,'utf8')) as SplitPublicationUnit;if(!unit.render||!unit.viewModel||unit.readiness!=='READY')await finish({state:'HOLD',reason:'live unit is not publication-ready',publishCallCount:0});
 const verification=JSON.parse(await readFile(verificationPath,'utf8')) as ProductionVerificationArtifact;
 const candidate=candidateFromVerification(unit,verification);
 const execute=args.includes('--execute');

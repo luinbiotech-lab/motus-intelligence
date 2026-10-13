@@ -1,0 +1,14 @@
+{
+  "mode": "LIVE",
+  "sourceMode": "internal",
+  "date": "2026-10-13",
+  "observedDate": null,
+  "category": "US_MARKET",
+  "state": "HOLD",
+  "reasonCode": "TWELVE_DATA_API_KEY_MISSING",
+  "verification": "FAILED",
+  "publishCallCount": 0,
+  "commerce": {
+    "enabled": false
+  }
+}

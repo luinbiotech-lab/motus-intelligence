@@ -7,7 +7,7 @@
   },
   "normalDailyBlocked": false,
   "snapshot": {
-    "generatedAt": "2026-10-12T14:26:12.940Z",
+    "generatedAt": "2026-10-13T09:46:38.921Z",
     "topics": [],
     "signals": [],
     "providerStates": {
@@ -25,7 +25,7 @@
         "enabled": false
       }
     },
-    "snapshotId": "search-intelligence:6d8c660a802819f3"
+    "snapshotId": "search-intelligence:d793adf76da1e8e6"
   },
   "performanceLearning": [],
   "commerce": {

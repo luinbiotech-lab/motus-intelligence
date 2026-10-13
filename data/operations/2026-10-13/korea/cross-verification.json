@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "1.0",
+  "category": "KOREA_MARKET",
+  "observedDate": "2026-10-13",
+  "primarySource": {
+    "provider": "Naver Finance",
+    "domain": "naver.com",
+    "urls": [
+      "https://m.stock.naver.com/api/index/KOSPI/basic",
+      "https://m.stock.naver.com/api/index/KOSDAQ/basic",
+      "https://api.stock.naver.com/marketindex/exchange/FX_USDKRW"
+    ]
+  },
+  "independentSource": {
+    "providers": [],
+    "domains": [],
+    "urls": []
+  },
+  "comparedFields": [],
+  "tolerance": {
+    "KOSPI": 0.05,
+    "KOSDAQ": 0.05,
+    "USD_KRW": 2
+  },
+  "comparisonResult": "UNAVAILABLE",
+  "sourceDiversityPass": false,
+  "verification": "REVIEW_REQUIRED",
+  "reasonCodes": [
+    "KRX_AUTH_KEY_MISSING",
+    "KOREA_OFFICIAL_INDEX_COMPARISON_INCOMPLETE",
+    "KOREA_INDEPENDENT_SOURCE_DIVERSITY_FAILED"
+  ],
+  "verifiedAt": "2026-10-13T18:00:00+09:00"
+}

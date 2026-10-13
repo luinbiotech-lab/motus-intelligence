@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "1.0",
+  "sourceMode": "internal",
+  "category": "KOREA_MARKET",
+  "operationDate": "2026-10-13",
+  "status": "HOLD",
+  "reasonCode": "KRX_AUTH_KEY_MISSING",
+  "entries": [
+    {
+      "sourceId": "naver:kospi",
+      "category": "KOREA_MARKET",
+      "url": "https://m.stock.naver.com/api/index/KOSPI/basic",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-13T18:00:00+09:00",
+      "error": null
+    },
+    {
+      "sourceId": "naver:kosdaq",
+      "category": "KOREA_MARKET",
+      "url": "https://m.stock.naver.com/api/index/KOSDAQ/basic",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-13T18:00:00+09:00",
+      "error": null
+    },
+    {
+      "sourceId": "naver:usd-krw",
+      "category": "KOREA_MARKET",
+      "url": "https://api.stock.naver.com/marketindex/exchange/FX_USDKRW",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-13T18:00:00+09:00",
+      "error": null
+    },
+    {
+      "sourceId": "naver:flows",
+      "category": "KOREA_MARKET",
+      "url": "https://m.stock.naver.com/api/index/KOSPI/trend",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-13T18:00:00+09:00",
+      "error": null
+    },
+    {
+      "sourceId": "naver:sector",
+      "category": "KOREA_MARKET",
+      "url": "https://stock.naver.com/api/domestic/market/upjong/list?startIdx=0&pageSize=100&sortType=changeRate",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-13T18:00:00+09:00",
+      "error": null
+    },
+    {
+      "sourceId": "naver:mover",
+      "category": "KOREA_MARKET",
+      "url": "https://m.stock.naver.com/api/stocks/up/KOSPI?page=1&pageSize=20",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-13T18:00:00+09:00",
+      "error": null
+    },
+    {
+      "sourceId": "krx:kospi",
+      "category": "KOREA_MARKET",
+      "url": "https://openapi.krx.co.kr/svc/apis/idx/kospi_dd_trd?basDd=20261013",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-10-13T18:00:00+09:00",
+      "error": "KRX_AUTH_KEY_MISSING"
+    },
+    {
+      "sourceId": "krx:kosdaq",
+      "category": "KOREA_MARKET",
+      "url": "https://openapi.krx.co.kr/svc/apis/idx/kosdaq_dd_trd?basDd=20261013",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-10-13T18:00:00+09:00",
+      "error": "KRX_AUTH_KEY_MISSING"
+    }
+  ]
+}
