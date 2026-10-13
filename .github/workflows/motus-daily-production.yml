@@ -67,7 +67,7 @@ jobs:
           echo "RUN_DATE=$RUN_DATE" >> "$GITHUB_ENV"
       - run: npm run typecheck
       - run: npm run build
-      - run: node --test --test-isolation=none dist/tests/auto-publish-live.test.js dist/tests/daily-operations.test.js dist/tests/live-editorial-publish.test.js
+      - run: node --test --experimental-test-isolation=none dist/tests/auto-publish-live.test.js dist/tests/daily-operations.test.js dist/tests/live-editorial-publish.test.js
       - run: npm run motus:live -- --date "$RUN_DATE" --category "$CATEGORY" --source internal
       - run: npm run search:intelligence:live -- --date "$RUN_DATE" --category "$CATEGORY"
       - name: Evaluate gate without live publication
