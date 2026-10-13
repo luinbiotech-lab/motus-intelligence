@@ -23,6 +23,8 @@ async function main(){
   const collected=await collectDemandSignals(providers,topics,generatedAt),warnings=[...input.warnings,...collected.warnings,...(!live?['DRY_RUN_NO_REMOTE_PROVIDER_CALLS']:[])],snapshot=createSearchIntelligenceSnapshot({generatedAt,topics,signals:collected.signals,providerStates:collected.states,warnings}),output={mode:live?'LIVE_DEGRADED_OK':'DRY_RUN',publicationActions:{insert:0,patch:0,publish:0},normalDailyBlocked:false,snapshot,performanceLearning:buildPerformanceLearning(snapshot),commerce:{enabled:false}};
   await mkdir('data/search-intelligence',{recursive:true});
   await writeFile('data/search-intelligence/latest-'+(live?'live':'dry-run')+'.json',JSON.stringify(output,null,2)+'\n','utf8');
+  const operationDate=value('--date'),operationCategory=value('--category');
+  if(live&&operationDate&&operationCategory&&['ai','us','korea'].includes(operationCategory)){const operationRoot=join(process.cwd(),'data','operations',operationDate,operationCategory);await mkdir(operationRoot,{recursive:true});await writeFile(join(operationRoot,'search-intelligence.json'),JSON.stringify(output,null,2)+'\n','utf8');}
   console.log(JSON.stringify({mode:output.mode,topicCount:topics.length,signalCount:snapshot.signals.length,providerStates:snapshot.providerStates,warnings,normalDailyBlocked:false,publicationActions:output.publicationActions,commerce:output.commerce}));
 }
 
@@ -32,11 +34,11 @@ async function publicationUnits(live:boolean,generatedAt:string):Promise<{units:
   if(!live)return {units:createNextLiveCycle(generatedAt).units.map(unit=>({publicationId:unit.publicationId,category:unit.category,topics:unit.coverage.map(item=>item.topic),sourceRefs:['verified-publication:'+unit.publicationId]})),warnings:[]};
   const date=value('--date'),category=value('--category');
   if(!date||!category||!['ai','us','korea'].includes(category))return {units:[],warnings:['LIVE_SEARCH_CONTEXT_MISSING']};
-  const path=join(process.cwd(),'data','operations',date,category,'live-unit.json');
-  if(!existsSync(path))return {units:[],warnings:['VERIFIED_LIVE_UNIT_MISSING']};
-  const unit=JSON.parse(await readFile(path,'utf8')) as SplitPublicationUnit;
+  const root=join(process.cwd(),'data','operations',date,category),path=join(root,'live-unit.json'),verificationPath=join(root,'verification.json');
+  if(!existsSync(path)||!existsSync(verificationPath))return {units:[],warnings:['VERIFIED_LIVE_UNIT_MISSING']};
+  const unit=JSON.parse(await readFile(path,'utf8')) as SplitPublicationUnit,verification=JSON.parse(await readFile(verificationPath,'utf8')) as {verification?:string};
   const expected={ai:'AI_INTELLIGENCE',us:'US_MARKET',korea:'KOREA_MARKET'}[category];
-  if(unit.category!==expected||unit.observedDate!==date||unit.readiness!=='READY')return {units:[],warnings:['VERIFIED_LIVE_UNIT_CONTEXT_MISMATCH']};
+  if(unit.category!==expected||unit.readiness!=='READY'||verification.verification!=='VERIFIED')return {units:[],warnings:['VERIFIED_LIVE_UNIT_CONTEXT_MISMATCH']};
   return {units:[topicUnit(unit)],warnings:[]};
 }
 function topicUnit(unit:SplitPublicationUnit):SearchTopicUnit {

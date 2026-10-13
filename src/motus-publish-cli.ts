@@ -2,16 +2,18 @@ import {readFile,mkdir,writeFile} from 'node:fs/promises';
 import {existsSync} from 'node:fs';
 import {join,resolve} from 'node:path';
 import type {SplitPublicationUnit} from './intelligence/split-daily-production.js';
-import {evaluateAutoPublishGate,executeAutoPublish,publicationFingerprint,type AutoPublishCandidate,type AutoPublishResult} from './production/auto-publish.js';
+import {evaluateAutoPublishGate,executeAutoPublish,type AutoPublishResult} from './production/auto-publish.js';
+import {candidateFromVerification,type ProductionVerificationArtifact} from './production/verification-artifact.js';
 import {GoogleBloggerApiAdapter,type BloggerPublishingConfig} from './services/blogger.js';
 
 const args=process.argv.slice(2);const value=(flag:string)=>{const index=args.indexOf(flag);return index>=0?args[index+1]:undefined};
 const date=value('--date')??'',name=value('--category')??'';
 if(!/^\d{4}-\d{2}-\d{2}$/.test(date)||!['ai','us','korea'].includes(name))throw new Error('--date YYYY-MM-DD and --category ai|us|korea required');
-const root=join(process.cwd(),'data','operations',date,name),unitPath=join(root,'live-unit.json');await mkdir(root,{recursive:true});
-if(!existsSync(unitPath)){await finish({state:'HOLD',reason:'verified live unit missing',publishCallCount:0});}
+const root=join(process.cwd(),'data','operations',date,name),unitPath=join(root,'live-unit.json'),verificationPath=join(root,'verification.json');await mkdir(root,{recursive:true});
+if(!existsSync(unitPath)||!existsSync(verificationPath)){await finish({state:'HOLD',reason:'verified live unit or verification artifact missing',publishCallCount:0});}
 const unit=JSON.parse(await readFile(unitPath,'utf8')) as SplitPublicationUnit;
-const candidate:AutoPublishCandidate={unit,verification:'VERIFIED',unresolvedConflicts:[],duplicateUncertainty:false,provenancePass:true,sourceLinksPass:true,publicationFingerprint:publicationFingerprint(unit.render.html),commerceEnabled:false};
+const verification=JSON.parse(await readFile(verificationPath,'utf8')) as ProductionVerificationArtifact;
+const candidate=candidateFromVerification(unit,verification);
 const execute=args.includes('--execute');
 if(!execute||process.env.MOTUS_LIVE_PUBLISH_ENABLED!=='true'){const gate=evaluateAutoPublishGate(candidate);await finish({state:gate.state,gate,publishCallCount:0,execution:'SIMULATED',commerce:{enabled:false}});}
 const required=['BLOGGER_BLOG_ID','BLOGGER_CLIENT_ID','BLOGGER_CLIENT_SECRET','BLOGGER_REFRESH_TOKEN'] as const;

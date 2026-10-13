@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "1.0",
+  "sourceMode": "internal",
+  "category": "KOREA_MARKET",
+  "operationDate": "2026-10-12",
+  "entries": [
+    {
+      "sourceId": "naver:kospi",
+      "category": "KOREA_MARKET",
+      "url": "https://m.stock.naver.com/api/index/KOSPI/basic",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-12T18:00:00+09:00",
+      "error": null
+    },
+    {
+      "sourceId": "naver:kosdaq",
+      "category": "KOREA_MARKET",
+      "url": "https://m.stock.naver.com/api/index/KOSDAQ/basic",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-12T18:00:00+09:00",
+      "error": null
+    },
+    {
+      "sourceId": "naver:usd-krw",
+      "category": "KOREA_MARKET",
+      "url": "https://api.stock.naver.com/marketindex/exchange/FX_USDKRW",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-12T18:00:00+09:00",
+      "error": null
+    },
+    {
+      "sourceId": "naver:flows",
+      "category": "KOREA_MARKET",
+      "url": "https://m.stock.naver.com/api/index/KOSPI/trend",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-12T18:00:00+09:00",
+      "error": null
+    },
+    {
+      "sourceId": "naver:sector",
+      "category": "KOREA_MARKET",
+      "url": "https://stock.naver.com/api/domestic/market/upjong/list?startIdx=0&pageSize=100&sortType=changeRate",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-12T18:00:00+09:00",
+      "error": null
+    },
+    {
+      "sourceId": "naver:mover",
+      "category": "KOREA_MARKET",
+      "url": "https://m.stock.naver.com/api/stocks/up/KOSPI?page=1&pageSize=20",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-12T18:00:00+09:00",
+      "error": null
+    }
+  ]
+}

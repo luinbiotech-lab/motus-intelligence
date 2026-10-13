@@ -1,0 +1,278 @@
+{
+  "publicationId": "motus-live-2026-10-12:korea",
+  "category": "KOREA_MARKET",
+  "observedDate": "2026-10-12",
+  "title": "국내증시 마감: 2026-10-12 지수·수급·업종 흐름",
+  "label": "Korea Market",
+  "sourceCount": 6,
+  "itemCount": 15,
+  "readiness": "READY",
+  "readinessReasons": [],
+  "review": {
+    "state": "PENDING",
+    "reviewer": null,
+    "reviewedAt": null,
+    "history": []
+  },
+  "publicationState": "PREVIEW_READY",
+  "draftPostId": null,
+  "publicPostUrl": null,
+  "duplicateCount": 0,
+  "contentFingerprint": "f29cf8055e81113874f8d66f08da44a46c04169990e378e39e665eb1af091d1c",
+  "render": {
+    "html": "<!doctype html><html lang=\"ko\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>국내증시 마감: 2026-10-12 지수·수급·업종 흐름</title></head><body><article data-product=\"motus-korea-market\" data-layout=\"daily-master-inline-v1\" style=\"font-family:Arial,&quot;Noto Sans KR&quot;,sans-serif;color:#172033;line-height:1.72;font-size:17px;width:100%;max-width:820px;box-sizing:border-box;margin:0 auto;overflow-x:hidden;overflow-wrap:anywhere\"><header data-section=\"masthead\" style=\"width:100%;max-width:100%;box-sizing:border-box;background:#03162e;color:#fff;padding:28px 24px;border:1px solid #010b17;margin:0 0 22px\"><p style=\"margin:0 0 10px;color:#c7d8ea;font-size:14px;font-weight:800\">MOTUS | What Moves the World</p><div role=\"heading\" aria-level=\"2\" style=\"font-size:31px;line-height:1.22;font-weight:850\">국내증시 마감: 2026-10-12 지수·수급·업종 흐름</div><p style=\"margin:10px 0 0;color:#e6edf5\">마감 지수와 투자자 수급으로 읽는 국내증시</p><p style=\"margin:12px 0 0;color:#b7c8da;font-size:13px\">국내증시 (Korea Market) · 2026-10-12</p></header>\n<section data-section=\"오늘의-국내시장-요약\" style=\"width:100%;max-width:100%;box-sizing:border-box;margin:22px 0 0\"><h2 style=\"background:#03162e;color:#fff;border:1px solid #010b17;padding:14px 16px;font-size:clamp(18px,4.8vw,21px);font-weight:800;line-height:1.35;margin:0;width:100%;max-width:100%;box-sizing:border-box;word-break:keep-all;overflow-wrap:normal\">오늘의 국내시장 요약</h2><div style=\"border:1px solid #aebed2;padding:21px 22px;background:#fff;margin:0 0 22px;width:100%;max-width:100%;box-sizing:border-box\"><p style=\"margin:0 0 11px\">2026-10-12 KOSPI와 KOSDAQ 마감, 원·달러 환율과 투자자별 수급을 같은 기준일로 맞춰 살펴봤다.</p></div></section>\n<section data-section=\"주요지수-추이-major-index-trends\" style=\"width:100%;max-width:100%;box-sizing:border-box;margin:22px 0 0\"><h2 style=\"background:#03162e;color:#fff;border:1px solid #010b17;padding:14px 16px;font-size:clamp(18px,4.8vw,21px);font-weight:800;line-height:1.35;margin:0;width:100%;max-width:100%;box-sizing:border-box;word-break:keep-all;overflow-wrap:normal\">주요지수 추이 (Major Index Trends)</h2><div style=\"border:1px solid #aebed2;padding:21px 22px;background:#fff;margin:0 0 22px;width:100%;max-width:100%;box-sizing:border-box\"><div data-layout=\"responsive-indicator-cards\" style=\"display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:8px;width:100%;max-width:100%;min-width:0;box-sizing:border-box\"><div style=\"border:1px solid #c4cfdb;background:#f7f9fc;padding:12px;width:100%;max-width:100%;min-width:0;box-sizing:border-box\"><span style=\"display:block;color:#59697d;font-size:13px;word-break:keep-all\">KOSPI</span><strong style=\"color:#1565c0;font-size:18px;font-variant-numeric:tabular-nums;white-space:nowrap\">6,384.24</strong></div><div style=\"border:1px solid #c4cfdb;background:#f7f9fc;padding:12px;width:100%;max-width:100%;min-width:0;box-sizing:border-box\"><span style=\"display:block;color:#59697d;font-size:13px;word-break:keep-all\">KOSDAQ</span><strong style=\"color:#1565c0;font-size:18px;font-variant-numeric:tabular-nums;white-space:nowrap\">849.19</strong></div></div></div></section>\n<section data-section=\"환율-보조지표\" style=\"width:100%;max-width:100%;box-sizing:border-box;margin:22px 0 0\"><h2 style=\"background:#03162e;color:#fff;border:1px solid #010b17;padding:14px 16px;font-size:clamp(18px,4.8vw,21px);font-weight:800;line-height:1.35;margin:0;width:100%;max-width:100%;box-sizing:border-box;word-break:keep-all;overflow-wrap:normal\">환율/보조지표</h2><div style=\"border:1px solid #aebed2;padding:21px 22px;background:#fff;margin:0 0 22px;width:100%;max-width:100%;box-sizing:border-box\"><div data-layout=\"responsive-indicator-cards\" style=\"display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:8px;width:100%;max-width:100%;min-width:0;box-sizing:border-box\"><div style=\"border:1px solid #c4cfdb;background:#f7f9fc;padding:12px;width:100%;max-width:100%;min-width:0;box-sizing:border-box\"><span style=\"display:block;color:#59697d;font-size:13px;word-break:keep-all\">USD/KRW</span><strong style=\"color:#1565c0;font-size:18px;font-variant-numeric:tabular-nums;white-space:nowrap\">1,335.5</strong></div></div></div></section>\n<section data-section=\"투자자별-수급\" style=\"width:100%;max-width:100%;box-sizing:border-box;margin:22px 0 0\"><h2 style=\"background:#03162e;color:#fff;border:1px solid #010b17;padding:14px 16px;font-size:clamp(18px,4.8vw,21px);font-weight:800;line-height:1.35;margin:0;width:100%;max-width:100%;box-sizing:border-box;word-break:keep-all;overflow-wrap:normal\">투자자별 수급</h2><div style=\"border:1px solid #aebed2;padding:21px 22px;background:#fff;margin:0 0 22px;width:100%;max-width:100%;box-sizing:border-box\"><div data-visualization=\"korea-investor-flow\" style=\"width:100%;max-width:100%;box-sizing:border-box\"><div style=\"margin:0 0 13px;width:100%;max-width:100%;box-sizing:border-box\"><div style=\"display:flex;justify-content:space-between;gap:8px;font-size:14px;font-weight:700\"><span>개인</span><span style=\"color:#c62828;font-variant-numeric:tabular-nums\">+14,857</span></div><div style=\"display:flex;width:100%;height:13px;background:#eef2f6;box-sizing:border-box;border:1px solid #d6dee8\"><div style=\"width:50%;display:flex;justify-content:flex-end;border-right:1px solid #7d8a99;box-sizing:border-box\"></div><div style=\"width:50%;box-sizing:border-box\"><span style=\"display:block;width:35%;height:100%;background:#c62828\"></span></div></div></div><div style=\"margin:0 0 13px;width:100%;max-width:100%;box-sizing:border-box\"><div style=\"display:flex;justify-content:space-between;gap:8px;font-size:14px;font-weight:700\"><span>외국인</span><span style=\"color:#1565c0;font-variant-numeric:tabular-nums\">-20,103</span></div><div style=\"display:flex;width:100%;height:13px;background:#eef2f6;box-sizing:border-box;border:1px solid #d6dee8\"><div style=\"width:50%;display:flex;justify-content:flex-end;border-right:1px solid #7d8a99;box-sizing:border-box\"><span style=\"display:block;width:48%;background:#1565c0\"></span></div><div style=\"width:50%;box-sizing:border-box\"></div></div></div><div style=\"margin:0 0 13px;width:100%;max-width:100%;box-sizing:border-box\"><div style=\"display:flex;justify-content:space-between;gap:8px;font-size:14px;font-weight:700\"><span>기관</span><span style=\"color:#1565c0;font-variant-numeric:tabular-nums\">-1,345</span></div><div style=\"display:flex;width:100%;height:13px;background:#eef2f6;box-sizing:border-box;border:1px solid #d6dee8\"><div style=\"width:50%;display:flex;justify-content:flex-end;border-right:1px solid #7d8a99;box-sizing:border-box\"><span style=\"display:block;width:4%;background:#1565c0\"></span></div><div style=\"width:50%;box-sizing:border-box\"></div></div></div></div></div></section>\n<section data-section=\"업종-흐름\" style=\"width:100%;max-width:100%;box-sizing:border-box;margin:22px 0 0\"><h2 style=\"background:#03162e;color:#fff;border:1px solid #010b17;padding:14px 16px;font-size:clamp(18px,4.8vw,21px);font-weight:800;line-height:1.35;margin:0;width:100%;max-width:100%;box-sizing:border-box;word-break:keep-all;overflow-wrap:normal\">업종 흐름</h2><div style=\"border:1px solid #aebed2;padding:21px 22px;background:#fff;margin:0 0 22px;width:100%;max-width:100%;box-sizing:border-box\"><div style=\"width:100%;max-width:100%;box-sizing:border-box\"><div style=\"display:flex;align-items:center;gap:10px;margin:0 0 10px;width:100%;max-width:100%;box-sizing:border-box\"><span style=\"width:42%;font-size:14px;font-weight:700;overflow-wrap:anywhere\">해운사</span><span style=\"display:block;width:34%;height:9px;background:#c62828;opacity:.82\"></span><strong style=\"color:#c62828;font-size:14px;font-variant-numeric:tabular-nums\">+5.28</strong></div><div style=\"display:flex;align-items:center;gap:10px;margin:0 0 10px;width:100%;max-width:100%;box-sizing:border-box\"><span style=\"width:42%;font-size:14px;font-weight:700;overflow-wrap:anywhere\">손해보험</span><span style=\"display:block;width:7%;height:9px;background:#c62828;opacity:.82\"></span><strong style=\"color:#c62828;font-size:14px;font-variant-numeric:tabular-nums\">+1.1</strong></div><div style=\"display:flex;align-items:center;gap:10px;margin:0 0 10px;width:100%;max-width:100%;box-sizing:border-box\"><span style=\"width:42%;font-size:14px;font-weight:700;overflow-wrap:anywhere\">카드</span><span style=\"display:block;width:7%;height:9px;background:#c62828;opacity:.82\"></span><strong style=\"color:#c62828;font-size:14px;font-variant-numeric:tabular-nums\">+1.09</strong></div><div style=\"display:flex;align-items:center;gap:10px;margin:0 0 10px;width:100%;max-width:100%;box-sizing:border-box\"><span style=\"width:42%;font-size:14px;font-weight:700;overflow-wrap:anywhere\">담배</span><span style=\"display:block;width:6%;height:9px;background:#c62828;opacity:.82\"></span><strong style=\"color:#c62828;font-size:14px;font-variant-numeric:tabular-nums\">+0.96</strong></div><div style=\"display:flex;align-items:center;gap:10px;margin:0 0 10px;width:100%;max-width:100%;box-sizing:border-box\"><span style=\"width:42%;font-size:14px;font-weight:700;overflow-wrap:anywhere\">광고</span><span style=\"display:block;width:5%;height:9px;background:#c62828;opacity:.82\"></span><strong style=\"color:#c62828;font-size:14px;font-variant-numeric:tabular-nums\">+0.82</strong></div></div></div></section>\n<section data-section=\"주요-종목\" style=\"width:100%;max-width:100%;box-sizing:border-box;margin:22px 0 0\"><h2 style=\"background:#03162e;color:#fff;border:1px solid #010b17;padding:14px 16px;font-size:clamp(18px,4.8vw,21px);font-weight:800;line-height:1.35;margin:0;width:100%;max-width:100%;box-sizing:border-box;word-break:keep-all;overflow-wrap:normal\">주요 종목</h2><div style=\"border:1px solid #aebed2;padding:21px 22px;background:#fff;margin:0 0 22px;width:100%;max-width:100%;box-sizing:border-box\"><div style=\"width:100%;max-width:100%;box-sizing:border-box\"><div style=\"display:flex;align-items:center;gap:10px;margin:0 0 10px;width:100%;max-width:100%;box-sizing:border-box\"><span style=\"width:42%;font-size:14px;font-weight:700;overflow-wrap:anywhere\">금호전기</span><span style=\"display:block;width:34%;height:9px;background:#c62828;opacity:.82\"></span><strong style=\"color:#c62828;font-size:14px;font-variant-numeric:tabular-nums\">+29.93</strong></div><div style=\"display:flex;align-items:center;gap:10px;margin:0 0 10px;width:100%;max-width:100%;box-sizing:border-box\"><span style=\"width:42%;font-size:14px;font-weight:700;overflow-wrap:anywhere\">한투 레버리지코스닥150선물 ETN</span><span style=\"display:block;width:31%;height:9px;background:#c62828;opacity:.82\"></span><strong style=\"color:#c62828;font-size:14px;font-variant-numeric:tabular-nums\">+26.86</strong></div><div style=\"display:flex;align-items:center;gap:10px;margin:0 0 10px;width:100%;max-width:100%;box-sizing:border-box\"><span style=\"width:42%;font-size:14px;font-weight:700;overflow-wrap:anywhere\">한화머시너리앤서비스홀딩스</span><span style=\"display:block;width:30%;height:9px;background:#c62828;opacity:.82\"></span><strong style=\"color:#c62828;font-size:14px;font-variant-numeric:tabular-nums\">+25.99</strong></div><div style=\"display:flex;align-items:center;gap:10px;margin:0 0 10px;width:100%;max-width:100%;box-sizing:border-box\"><span style=\"width:42%;font-size:14px;font-weight:700;overflow-wrap:anywhere\">금호건설</span><span style=\"display:block;width:27%;height:9px;background:#c62828;opacity:.82\"></span><strong style=\"color:#c62828;font-size:14px;font-variant-numeric:tabular-nums\">+23.52</strong></div><div style=\"display:flex;align-items:center;gap:10px;margin:0 0 10px;width:100%;max-width:100%;box-sizing:border-box\"><span style=\"width:42%;font-size:14px;font-weight:700;overflow-wrap:anywhere\">덕성우</span><span style=\"display:block;width:19%;height:9px;background:#c62828;opacity:.82\"></span><strong style=\"color:#c62828;font-size:14px;font-variant-numeric:tabular-nums\">+16.67</strong></div></div></div></section>\n<section data-section=\"오늘-시장-해설\" style=\"width:100%;max-width:100%;box-sizing:border-box;margin:22px 0 0\"><h2 style=\"background:#03162e;color:#fff;border:1px solid #010b17;padding:14px 16px;font-size:clamp(18px,4.8vw,21px);font-weight:800;line-height:1.35;margin:0;width:100%;max-width:100%;box-sizing:border-box;word-break:keep-all;overflow-wrap:normal\">오늘 시장 해설</h2><div style=\"border:1px solid #aebed2;padding:21px 22px;background:#fff;margin:0 0 22px;width:100%;max-width:100%;box-sizing:border-box\"><p style=\"margin:0 0 11px\">지수 방향은 외국인·기관·개인 수급과 업종별 강약을 함께 봐야 당일 시장의 성격을 구분할 수 있다.</p></div></section>\n<section data-section=\"다음-거래일-체크포인트\" style=\"width:100%;max-width:100%;box-sizing:border-box;margin:22px 0 0\"><h2 style=\"background:#03162e;color:#fff;border:1px solid #010b17;padding:14px 16px;font-size:clamp(18px,4.8vw,21px);font-weight:800;line-height:1.35;margin:0;width:100%;max-width:100%;box-sizing:border-box;word-break:keep-all;overflow-wrap:normal\">다음 거래일 체크포인트</h2><div style=\"border:1px solid #aebed2;padding:21px 22px;background:#fff;margin:0 0 22px;width:100%;max-width:100%;box-sizing:border-box\"><div style=\"border-left:4px solid #405f7f;padding:10px 12px;margin:0 0 10px;background:#f7f9fc;width:100%;max-width:100%;box-sizing:border-box\"><strong style=\"display:block;color:#03162e\">다음 거래일 확인사항</strong>외국인 수급과 원·달러 환율의 동행 여부</div></div></section>\n<section data-section=\"주요-출처\" style=\"width:100%;max-width:100%;box-sizing:border-box;margin:22px 0 0\"><h2 style=\"background:#03162e;color:#fff;border:1px solid #010b17;padding:14px 16px;font-size:clamp(18px,4.8vw,21px);font-weight:800;line-height:1.35;margin:0;width:100%;max-width:100%;box-sizing:border-box;word-break:keep-all;overflow-wrap:normal\">주요 출처</h2><div style=\"border:1px solid #aebed2;padding:21px 22px;background:#fff;margin:0 0 22px;width:100%;max-width:100%;box-sizing:border-box\"><ul style=\"margin:0;padding-left:19px\"><li style=\"margin:5px 0\"><a href=\"https://m.stock.naver.com/api/index/KOSPI/basic\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">네이버금융 KOSPI</a> <span style=\"color:#65758a\">· 네이버금융</span></li><li style=\"margin:5px 0\"><a href=\"https://m.stock.naver.com/api/index/KOSDAQ/basic\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">네이버금융 KOSDAQ</a> <span style=\"color:#65758a\">· 네이버금융</span></li><li style=\"margin:5px 0\"><a href=\"https://api.stock.naver.com/marketindex/exchange/FX_USDKRW\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">네이버금융 USD/KRW</a> <span style=\"color:#65758a\">· 네이버금융</span></li><li style=\"margin:5px 0\"><a href=\"https://m.stock.naver.com/api/index/KOSPI/trend\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">네이버금융 투자자 수급</a> <span style=\"color:#65758a\">· 네이버금융</span></li><li style=\"margin:5px 0\"><a href=\"https://stock.naver.com/api/domestic/market/upjong/list?startIdx=0&amp;pageSize=100&amp;sortType=changeRate\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">네이버금융 업종</a> <span style=\"color:#65758a\">· 네이버금융</span></li><li style=\"margin:5px 0\"><a href=\"https://m.stock.naver.com/api/stocks/up/KOSPI?page=1&amp;pageSize=20\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">네이버금융 상승종목</a> <span style=\"color:#65758a\">· 네이버금융</span></li></ul></div></section></article></body></html>",
+    "renderedSections": [
+      "masthead",
+      "korea-summary",
+      "korea-index-trends",
+      "fx-supporting",
+      "investor-flows",
+      "sectors",
+      "movers",
+      "market-commentary",
+      "checkpoints",
+      "sources"
+    ],
+    "label": "Korea Market"
+  },
+  "viewModel": {
+    "publicationId": "motus-live-2026-10-12:korea",
+    "issueDate": "2026-10-12",
+    "issueNumber": 20261012,
+    "title": "국내증시 마감: 2026-10-12 지수·수급·업종 흐름",
+    "subtitle": "마감 지수와 투자자 수급으로 읽는 국내증시",
+    "category": "KOREA_MARKET",
+    "canonicalLabel": "Korea Market",
+    "displayLabel": "국내증시 (Korea Market)",
+    "marketSummary": "2026-10-12 KOSPI와 KOSDAQ 마감, 원·달러 환율과 투자자별 수급을 같은 기준일로 맞춰 살펴봤다.",
+    "indexMetrics": [
+      {
+        "factId": "index:KOSPI",
+        "group": "INDEX",
+        "label": "KOSPI",
+        "displayValue": "6,384.24",
+        "direction": "DOWN",
+        "source": {
+          "label": "네이버금융",
+          "url": "https://m.stock.naver.com/api/index/KOSPI/basic"
+        }
+      },
+      {
+        "factId": "index:KOSDAQ",
+        "group": "INDEX",
+        "label": "KOSDAQ",
+        "displayValue": "849.19",
+        "direction": "DOWN",
+        "source": {
+          "label": "네이버금융",
+          "url": "https://m.stock.naver.com/api/index/KOSDAQ/basic"
+        }
+      }
+    ],
+    "fxAndSupporting": [
+      {
+        "factId": "fx:usd-krw",
+        "group": "FX",
+        "label": "USD/KRW",
+        "displayValue": "1,335.5",
+        "direction": "DOWN",
+        "source": {
+          "label": "네이버금융",
+          "url": "https://api.stock.naver.com/marketindex/exchange/FX_USDKRW"
+        }
+      }
+    ],
+    "investorFlows": [
+      {
+        "factId": "flow:0",
+        "group": "FLOW",
+        "label": "개인",
+        "displayValue": "+14,857",
+        "direction": "UP",
+        "source": {
+          "label": "네이버금융",
+          "url": "https://m.stock.naver.com/api/index/KOSPI/trend"
+        }
+      },
+      {
+        "factId": "flow:1",
+        "group": "FLOW",
+        "label": "외국인",
+        "displayValue": "-20,103",
+        "direction": "DOWN",
+        "source": {
+          "label": "네이버금융",
+          "url": "https://m.stock.naver.com/api/index/KOSPI/trend"
+        }
+      },
+      {
+        "factId": "flow:2",
+        "group": "FLOW",
+        "label": "기관",
+        "displayValue": "-1,345",
+        "direction": "DOWN",
+        "source": {
+          "label": "네이버금융",
+          "url": "https://m.stock.naver.com/api/index/KOSPI/trend"
+        }
+      }
+    ],
+    "sectors": [
+      {
+        "factId": "sector:0",
+        "group": "SECTOR",
+        "label": "해운사",
+        "displayValue": "+5.28",
+        "direction": "UP",
+        "source": {
+          "label": "네이버금융",
+          "url": "https://stock.naver.com/api/domestic/market/upjong/list?startIdx=0&pageSize=100&sortType=changeRate"
+        }
+      },
+      {
+        "factId": "sector:1",
+        "group": "SECTOR",
+        "label": "손해보험",
+        "displayValue": "+1.1",
+        "direction": "UP",
+        "source": {
+          "label": "네이버금융",
+          "url": "https://stock.naver.com/api/domestic/market/upjong/list?startIdx=0&pageSize=100&sortType=changeRate"
+        }
+      },
+      {
+        "factId": "sector:2",
+        "group": "SECTOR",
+        "label": "카드",
+        "displayValue": "+1.09",
+        "direction": "UP",
+        "source": {
+          "label": "네이버금융",
+          "url": "https://stock.naver.com/api/domestic/market/upjong/list?startIdx=0&pageSize=100&sortType=changeRate"
+        }
+      },
+      {
+        "factId": "sector:3",
+        "group": "SECTOR",
+        "label": "담배",
+        "displayValue": "+0.96",
+        "direction": "UP",
+        "source": {
+          "label": "네이버금융",
+          "url": "https://stock.naver.com/api/domestic/market/upjong/list?startIdx=0&pageSize=100&sortType=changeRate"
+        }
+      },
+      {
+        "factId": "sector:4",
+        "group": "SECTOR",
+        "label": "광고",
+        "displayValue": "+0.82",
+        "direction": "UP",
+        "source": {
+          "label": "네이버금융",
+          "url": "https://stock.naver.com/api/domestic/market/upjong/list?startIdx=0&pageSize=100&sortType=changeRate"
+        }
+      }
+    ],
+    "movers": [
+      {
+        "factId": "mover:0",
+        "group": "MOVER",
+        "label": "금호전기",
+        "displayValue": "+29.93",
+        "direction": "UP",
+        "source": {
+          "label": "네이버금융",
+          "url": "https://m.stock.naver.com/api/stocks/up/KOSPI?page=1&pageSize=20"
+        }
+      },
+      {
+        "factId": "mover:1",
+        "group": "MOVER",
+        "label": "한투 레버리지코스닥150선물 ETN",
+        "displayValue": "+26.86",
+        "direction": "UP",
+        "source": {
+          "label": "네이버금융",
+          "url": "https://m.stock.naver.com/api/stocks/up/KOSPI?page=1&pageSize=20"
+        }
+      },
+      {
+        "factId": "mover:2",
+        "group": "MOVER",
+        "label": "한화머시너리앤서비스홀딩스",
+        "displayValue": "+25.99",
+        "direction": "UP",
+        "source": {
+          "label": "네이버금융",
+          "url": "https://m.stock.naver.com/api/stocks/up/KOSPI?page=1&pageSize=20"
+        }
+      },
+      {
+        "factId": "mover:3",
+        "group": "MOVER",
+        "label": "금호건설",
+        "displayValue": "+23.52",
+        "direction": "UP",
+        "source": {
+          "label": "네이버금융",
+          "url": "https://m.stock.naver.com/api/stocks/up/KOSPI?page=1&pageSize=20"
+        }
+      },
+      {
+        "factId": "mover:4",
+        "group": "MOVER",
+        "label": "덕성우",
+        "displayValue": "+16.67",
+        "direction": "UP",
+        "source": {
+          "label": "네이버금융",
+          "url": "https://m.stock.naver.com/api/stocks/up/KOSPI?page=1&pageSize=20"
+        }
+      }
+    ],
+    "research": [],
+    "marketCommentary": [
+      "지수 방향은 외국인·기관·개인 수급과 업종별 강약을 함께 봐야 당일 시장의 성격을 구분할 수 있다."
+    ],
+    "checkpoints": [
+      {
+        "headline": "다음 거래일 확인사항",
+        "watchFor": "외국인 수급과 원·달러 환율의 동행 여부",
+        "validityHorizon": "NEXT_SESSION"
+      }
+    ],
+    "sources": [
+      {
+        "label": "네이버금융 KOSPI",
+        "url": "https://m.stock.naver.com/api/index/KOSPI/basic",
+        "publisher": "네이버금융"
+      },
+      {
+        "label": "네이버금융 KOSDAQ",
+        "url": "https://m.stock.naver.com/api/index/KOSDAQ/basic",
+        "publisher": "네이버금융"
+      },
+      {
+        "label": "네이버금융 USD/KRW",
+        "url": "https://api.stock.naver.com/marketindex/exchange/FX_USDKRW",
+        "publisher": "네이버금융"
+      },
+      {
+        "label": "네이버금융 투자자 수급",
+        "url": "https://m.stock.naver.com/api/index/KOSPI/trend",
+        "publisher": "네이버금융"
+      },
+      {
+        "label": "네이버금융 업종",
+        "url": "https://stock.naver.com/api/domestic/market/upjong/list?startIdx=0&pageSize=100&sortType=changeRate",
+        "publisher": "네이버금융"
+      },
+      {
+        "label": "네이버금융 상승종목",
+        "url": "https://m.stock.naver.com/api/stocks/up/KOSPI?page=1&pageSize=20",
+        "publisher": "네이버금융"
+      }
+    ]
+  }
+}

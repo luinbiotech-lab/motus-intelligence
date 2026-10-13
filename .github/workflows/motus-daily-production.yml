@@ -28,11 +28,9 @@ jobs:
     timeout-minutes: 30
     env:
       TZ: Asia/Seoul
-      MOTUS_LIVE_PUBLISH_ENABLED: ${{ vars.MOTUS_PRODUCTION_ARMED || 'false' }}
+      MOTUS_LIVE_PUBLISH_ENABLED: 'false'
       MOTUS_COMMERCE_ENABLED: 'false'
-      MOTUS_LIVE_AI_URL: ${{ vars.MOTUS_LIVE_AI_URL }}
-      MOTUS_LIVE_US_URL: ${{ vars.MOTUS_LIVE_US_URL }}
-      MOTUS_LIVE_KOREA_URL: ${{ vars.MOTUS_LIVE_KOREA_URL }}
+      TWELVE_DATA_API_KEY: ${{ secrets.TWELVE_DATA_API_KEY }}
       BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
       BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
       BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
@@ -68,7 +66,7 @@ jobs:
       - run: npm run typecheck
       - run: npm run build
       - run: node --test --test-isolation=none dist/tests/auto-publish-live.test.js dist/tests/daily-operations.test.js dist/tests/live-editorial-publish.test.js
-      - run: npm run motus:live -- --date "$RUN_DATE" --category "$CATEGORY"
+      - run: npm run motus:live -- --date "$RUN_DATE" --category "$CATEGORY" --source internal
       - run: npm run search:intelligence:live -- --date "$RUN_DATE" --category "$CATEGORY"
       - name: Evaluate gate without live publication
         if: env.MOTUS_LIVE_PUBLISH_ENABLED != 'true'
