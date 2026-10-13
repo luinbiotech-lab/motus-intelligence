@@ -27,3 +27,32 @@ export function buildProductionVerification(payload:LiveDailyPayload,sourceMode:
 export function candidateFromVerification(unit:SplitPublicationUnit,artifact:ProductionVerificationArtifact){const mismatch=artifact.category!==unit.category||artifact.observedDate!==unit.observedDate||artifact.articleFingerprint!=='sha256:'+unit.contentFingerprint;return {unit,verification:mismatch?'FAILED' as const:artifact.verification,unresolvedConflicts:mismatch?[...artifact.unresolvedConflicts,'verification artifact context or fingerprint mismatch']:artifact.unresolvedConflicts,duplicateUncertainty:artifact.duplicateUncertainty||artifact.duplicateCheck==='PENDING_REMOTE',provenancePass:artifact.provenancePass,sourceLinksPass:artifact.sourceLinksPass,publicationFingerprint:artifact.articleFingerprint,commerceEnabled:false as const}}
 function providerDomain(value:string){try{const parts=new URL(value).hostname.toLowerCase().split('.');return parts.slice(-2).join('.')}catch{return ''}}
 function canonical(value:string){try{const url=new URL(value);url.hash='';return url.toString()}catch{return value}}
+
+/** Rebuild the gate from source audit; never trust persisted VERIFIED/boolean flags alone. */
+export function revalidateProductionEvidence(
+ unit:SplitPublicationUnit,
+ artifact:ProductionVerificationArtifact,
+ audit:{schemaVersion:string;sourceMode:string;category:string;entries:InternalSourceAuditEntry[]},
+ checkedAt:string,
+):{valid:boolean;reasons:string[];candidate:ReturnType<typeof candidateFromVerification>}{
+ const reasons:string[]=[];
+ if(artifact.schemaVersion!=='1.0'||audit.schemaVersion!=='1.0')reasons.push('unsupported evidence schema');
+ if(artifact.sourceMode!=='internal'||audit.sourceMode!=='internal')reasons.push('non-internal source mode');
+ if(artifact.category!==unit.category||audit.category!==unit.category)reasons.push('category mismatch');
+ if(!Array.isArray(audit.entries)||!Array.isArray(artifact.unresolvedConflicts)||!Array.isArray(artifact.sourceAuditIds))reasons.push('malformed evidence');
+ if(!Number.isFinite(Date.parse(artifact.verifiedAt))||!Number.isFinite(Date.parse(checkedAt)))reasons.push('invalid verification timestamp');
+ if(Date.parse(artifact.verifiedAt)>Date.parse(checkedAt)+60_000)reasons.push('future verification timestamp');
+ if(!reasons.length){
+  try {
+   const payload:LiveDailyPayload={schemaVersion:'1.0',session:{state:'COMPLETED',observedDate:unit.observedDate,completedAt:artifact.verifiedAt},unit};
+   const rebuilt=buildProductionVerification(payload,'internal',audit.entries,artifact.verifiedAt);
+   if(JSON.stringify(rebuilt)!==JSON.stringify(artifact))reasons.push('artifact and recomputed evidence differ');
+   if(buildProductionVerification(payload,'internal',audit.entries,checkedAt).verification!=='VERIFIED')reasons.push('evidence failed current verification');
+  }catch{reasons.push('source evidence recomputation failed')}
+ }
+ if(artifact.verification!=='VERIFIED')reasons.push('evidence not VERIFIED');
+ const candidate=candidateFromVerification(unit,artifact);
+ if(reasons.length)candidate.verification='FAILED';
+ candidate.unresolvedConflicts=[...new Set([...candidate.unresolvedConflicts,...reasons])];
+ return {valid:reasons.length===0,reasons,candidate};
+}

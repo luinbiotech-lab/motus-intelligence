@@ -1,3 +1,4 @@
+import {buildProductionVerification,revalidateProductionEvidence} from '../src/production/verification-artifact.js';
 import test from 'node:test';import assert from 'node:assert/strict';import {createFirstSplitDailyProductionRun,type SplitPublicationUnit} from '../src/intelligence/split-daily-production.js';import {LiveDailyCollector,type LiveDailyAdapter,type LiveDailyPayload,validateLiveDailyPayload} from '../src/operations/live-daily.js';import {InternalLiveDailyAdapter,type InternalDailyBuilder} from '../src/operations/internal-live-daily.js';import {buildProductionVerification,candidateFromVerification} from '../src/production/verification-artifact.js';import {evaluateAutoPublishGate,executeAutoPublish,publicationFingerprint,type AutoPublishAdapter,type AutoPublishCandidate} from '../src/production/auto-publish.js';
 const base=()=>structuredClone(createFirstSplitDailyProductionRun().units.find(x=>x.category==='AI_INTELLIGENCE')!);const payload=(unit=base()):LiveDailyPayload=>({schemaVersion:'1.0',session:{state:'COMPLETED',observedDate:unit.observedDate,completedAt:'2026-09-29T22:00:00Z'},unit});class A implements LiveDailyAdapter{readonly adapterId='test';constructor(private x:LiveDailyPayload|null){}async fetch(){return this.x}}
 test('live collector missing data becomes HOLD error',async()=>{await assert.rejects(()=>new LiveDailyCollector(new A(null),()=> '2026-09-30T00:00:00Z').collectAIIntelligence(),/no data/)});
@@ -22,3 +23,27 @@ test('verification artifact drives gate and cannot be replaced by fake VERIFIED 
 test('provenance and source-link artifact failures become REVIEW_REQUIRED',async()=>{const unit=base(),p=payload(unit),artifact=buildProductionVerification(p,'internal',[],'2026-09-30T00:00:00Z');assert.equal(artifact.provenancePass,false);assert.equal(artifact.verification,'REVIEW_REQUIRED');const changed=structuredClone(unit);changed.render.html=changed.render.html.replace(/<a\b[^>]*>[\s\S]*?<\/a>/i,'source removed');changed.contentFingerprint=(await import('node:crypto')).createHash('sha256').update(changed.render.html).digest('hex');const missingLinks=buildProductionVerification({...p,unit:changed},'internal',[], '2026-09-30T00:00:00Z');assert.equal(missingLinks.sourceLinksPass,false)});
 test('PENDING_REMOTE duplicate state is resolved by lookup before one-shot publish',async()=>{const unit=base(),p=payload(unit),audit=unit.viewModel.sources.map((source,index)=>({sourceId:'source:'+index,category:'AI_INTELLIGENCE' as const,url:source.url,status:'PASS' as const,recordCount:1,collectedAt:'2026-09-30T00:00:00Z',error:null})),artifact=buildProductionVerification(p,'internal',audit,'2026-09-30T00:00:00Z'),candidate=candidateFromVerification(unit,artifact);assert.equal(candidate.duplicateUncertainty,true);assert.equal(evaluateAutoPublishGate(candidate).state,'HOLD');const f=fake(candidate),result=await executeAutoPublish(candidate,f.adapter);assert.equal(result.state,'PUBLISHED');assert.equal(f.calls.publish,1);assert.ok(result.audit.some(item=>item.event==='REMOTE_DUPLICATE_CHECK'&&item.detail==='PASS'))});
 test('multiple endpoints on one provider domain do not satisfy independent source diversity',async()=>{const unit=base();for(const [index,source] of unit.viewModel.sources.entries()){const previous=source.url,next=`https://${index%2?'api':'m'}.naver.com/source/${index}`;source.url=next;unit.render.html=unit.render.html.replaceAll(previous,next)}unit.contentFingerprint=(await import('node:crypto')).createHash('sha256').update(unit.render.html).digest('hex');const p=payload(unit),audit=unit.viewModel.sources.map((source,index)=>({sourceId:'source:'+index,category:'AI_INTELLIGENCE' as const,url:source.url,status:'PASS' as const,recordCount:1,collectedAt:'2026-09-30T00:00:00Z',error:null})),artifact=buildProductionVerification(p,'internal',audit,'2026-09-30T00:00:00Z');assert.equal(artifact.sourceDiversityPass,false);assert.equal(artifact.verification,'REVIEW_REQUIRED')});
+
+test('revalidation rejects forged VERIFIED flag and absent audit provenance',()=>{
+ const u=base(),at='2026-09-29T22:00:00Z',payloadValue=payload(u);
+ const initial=buildProductionVerification(payloadValue,'snapshot',[],at);
+ const forged={...initial,sourceMode:'internal' as const,verification:'VERIFIED' as const,unresolvedConflicts:[],provenancePass:true,sourceLinksPass:true,sourceDiversityPass:true,duplicateUncertainty:false};
+ const check=revalidateProductionEvidence(u,forged,{schemaVersion:'1.0',sourceMode:'internal',category:u.category,entries:[]},at);
+ assert.equal(check.valid,false);
+ assert.equal(check.candidate.verification,'FAILED');
+ assert.ok(check.reasons.some(x=>/recomputed|VERIFIED|source/i.test(x)));
+});
+test('revalidation denies non-internal sources even when evidence claims VERIFIED',()=>{
+ const u=base(),at='2026-09-29T22:00:00Z';
+ const forged={...buildProductionVerification(payload(u),'snapshot',[],at),verification:'VERIFIED' as const};
+ const check=revalidateProductionEvidence(u,forged,{schemaVersion:'1.0',sourceMode:'snapshot',category:u.category,entries:[]},at);
+ assert.equal(check.valid,false);
+ assert.ok(check.reasons.includes('non-internal source mode'));
+});
+test('revalidation rejects future-dated evidence',()=>{
+ const u=base(),at='2099-01-01T00:00:00Z';
+ const forged=buildProductionVerification(payload(u),'internal',[],at);
+ const check=revalidateProductionEvidence(u,forged,{schemaVersion:'1.0',sourceMode:'internal',category:u.category,entries:[]},'2026-10-13T00:00:00Z');
+ assert.equal(check.valid,false);
+ assert.ok(check.reasons.includes('future verification timestamp'));
+});
