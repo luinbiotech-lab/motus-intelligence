@@ -70,9 +70,7 @@ jobs:
           RUN_DATE="${INPUT_DATE:-$(date +%F)}"
           [[ "$RUN_DATE" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]] || exit 1
           LIVE_PUBLISH=false
-          if [[ "$SCHEDULE" == "30 3 * * 1-5" && "$CATEGORY" == "ai" ]]; then
-            LIVE_PUBLISH=true
-          elif [[ "$INPUT_EXECUTE_PUBLISH" == "true" ]]; then
+          if [[ "$INPUT_EXECUTE_PUBLISH" == "true" ]]; then
             LIVE_PUBLISH=true
           fi
           echo "CATEGORY=$CATEGORY" >> "$GITHUB_ENV"
