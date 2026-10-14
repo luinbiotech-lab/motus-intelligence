@@ -10,6 +10,11 @@ on:
       run_date:
         required: false
         type: string
+      execute_publish:
+        description: Explicitly enable one controlled publish after every gate passes
+        required: false
+        type: boolean
+        default: false
   schedule:
     - cron: '45 21 * * 1-5'
     - cron: '30 3 * * 1-5'
@@ -53,6 +58,7 @@ jobs:
         env:
           INPUT_CATEGORY: ${{ inputs.category }}
           INPUT_DATE: ${{ inputs.run_date }}
+          INPUT_EXECUTE_PUBLISH: ${{ inputs.execute_publish }}
           SCHEDULE: ${{ github.event.schedule }}
         run: |
           case "$SCHEDULE" in
@@ -63,8 +69,15 @@ jobs:
           esac
           RUN_DATE="${INPUT_DATE:-$(date +%F)}"
           [[ "$RUN_DATE" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]] || exit 1
+          LIVE_PUBLISH=false
+          if [[ "$SCHEDULE" == "30 3 * * 1-5" && "$CATEGORY" == "ai" ]]; then
+            LIVE_PUBLISH=true
+          elif [[ "$INPUT_EXECUTE_PUBLISH" == "true" ]]; then
+            LIVE_PUBLISH=true
+          fi
           echo "CATEGORY=$CATEGORY" >> "$GITHUB_ENV"
           echo "RUN_DATE=$RUN_DATE" >> "$GITHUB_ENV"
+          echo "MOTUS_LIVE_PUBLISH_ENABLED=$LIVE_PUBLISH" >> "$GITHUB_ENV"
       - run: npm run typecheck
       - run: npm run build
       - run: node --test --experimental-test-isolation=none dist/tests/auto-publish-live.test.js dist/tests/daily-operations.test.js dist/tests/live-editorial-publish.test.js

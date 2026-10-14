@@ -4,5 +4,11 @@
     "publicationId": "motus-live-2026-10-13:ai",
     "publicPostUrl": "https://motusnova.blogspot.com/2026/10/ai_02030153127.html",
     "publishedAt": "2026-10-13T19:31:00+09:00"
+  },
+  {
+    "idempotencyKey": "library:motus-live-2026-10-14:ai|https://motusnova.blogspot.com/2026/10/ai-2026-10-14.html",
+    "publicationId": "motus-live-2026-10-14:ai",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/ai-2026-10-14.html",
+    "publishedAt": "2026-10-14T17:14:40+09:00"
   }
 ]

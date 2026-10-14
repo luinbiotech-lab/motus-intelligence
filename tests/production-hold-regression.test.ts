@@ -4,6 +4,7 @@ import {RepositoryInternalDailyBuilder,koreaReferenceDate} from '../src/operatio
 import {TwelveDataTimeSeriesProvider} from '../src/operations/market-source-providers.js';
 import {buildProductionVerification} from '../src/production/verification-artifact.js';
 import type {AIIntelligenceDailyViewModel} from '../src/intelligence/daily-masters.js';
+import {readFile} from 'node:fs/promises';
 
 const at='2026-10-13T18:03:18Z';
 test('encoded RSS image markup cannot leak into AI prose while citation and sentence survive',async()=>{
@@ -57,4 +58,11 @@ test('Korea next-day FX versus prior close remains HOLD and records the source p
  const fx=result.audit.find(entry=>entry.sourceId==='naver:usd-krw')!;
  assert.equal(fx.observedDate,'2026-10-14');assert.equal(fx.referenceDate,'2026-10-13');assert.equal(fx.dateField,'exchangeInfo.localTradedAt');
  assert.ok(result.audit.filter(entry=>entry!==fx).every(entry=>entry.observedDate==='2026-10-13'));
+});
+test('production schedule enables AI only while US and Korea remain simulation-only',async()=>{
+ const workflow=await readFile('.github/workflows/motus-daily-production.yml','utf8');
+ assert.match(workflow,/MOTUS_LIVE_PUBLISH_ENABLED:\s*'false'/);
+ assert.match(workflow,/SCHEDULE" == "30 3 \* \* 1-5" && "\$CATEGORY" == "ai"/);
+ assert.doesNotMatch(workflow,/SCHEDULE" == "(?:45 21|30 8) \* \* 1-5"[^\n]*LIVE_PUBLISH=true/);
+ assert.match(workflow,/INPUT_EXECUTE_PUBLISH" == "true"/);
 });
