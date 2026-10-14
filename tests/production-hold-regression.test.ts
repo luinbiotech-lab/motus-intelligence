@@ -9,15 +9,16 @@ import {readFile} from 'node:fs/promises';
 const at='2026-10-13T18:03:18Z';
 test('encoded RSS image markup cannot leak into AI prose while citation and sentence survive',async()=>{
  const fetcher=(async(input:RequestInfo|URL)=>{
-  const host=new URL(String(input)).hostname;
+  const parsed=new URL(String(input)),host=parsed.hostname;
   if(!['blog.google','blogs.nvidia.com'].includes(host))return new Response('<rss/>');
+  if(parsed.pathname==='/announcement'){const evidence=host==='blog.google'?'The official product page confirms broader developer access to the new model, including updated evaluation and deployment documentation.':'The official product page confirms expanded infrastructure capacity, including deployment guidance for enterprise AI workloads.';return new Response(`<html><head><meta name="description" content="${evidence}"></head></html>`);}
   const description=host==='blog.google'?'&lt;img src="https://images.example/image.webp"&gt;Developers gain access to the new model.':'<![CDATA[<a href="https://example.com/context">Infrastructure capacity expands.</a>]]>';
   return new Response(`<rss><item><title>Verified industrial AI announcement</title><link>https://${host}/announcement</link><pubDate>Tue, 13 Oct 2026 16:00:00 GMT</pubDate><description>${description}</description></item></rss>`);
  }) as typeof fetch;
  const result=await new RepositoryInternalDailyBuilder(fetcher,{}).build('AI_INTELLIGENCE',at);
  assert.equal(result.state,'LIVE_READY');const payload=result.payload!;
  const view=payload.unit.viewModel as AIIntelligenceDailyViewModel;
- assert.deepEqual(view.issues.map(item=>item.whatHappened[0]),['Developers gain access to the new model.','Infrastructure capacity expands.']);
+ assert.deepEqual(view.issues.map(item=>item.whatHappened[0]),['The official product page confirms broader developer access to the new model, including updated evaluation and deployment documentation.','The official product page confirms expanded infrastructure capacity, including deployment guidance for enterprise AI workloads.']);
  assert.doesNotMatch(payload.unit.render.html,/images\.example|&amp;lt;img/);
  for(const source of view.sources){assert.ok(payload.unit.render.html.includes(`href="${source.url}"`));assert.ok(view.issues.some(issue=>issue.evidenceRefs.includes(source.url)));}
  assert.equal(buildProductionVerification(payload,'internal',result.audit,at).verification,'VERIFIED');
@@ -29,11 +30,11 @@ for(const [http,code,reason] of [[404,404,'DATA_NOT_FOUND'],[403,403,'ACCESS_DEN
   await assert.rejects(()=>provider.fetchSeries({symbol:'RUT',count:63,requestedAt:at}),(error:Error)=>{assert.match(error.message,new RegExp(reason));assert.match(error.message,/symbol=RUT endpoint=\/time_series/);assert.doesNotMatch(error.message,/sentinel-secret|apikey=/);return true;});
  });
 }
-test('both required US instruments are audited when unavailable, without a fallback',async()=>{
+test('optional Russell and DXY failures are audited without a fabricated fallback',async()=>{
  const seen:string[]=[];
  const provider={providerId:'test',async fetchSeries(request:{symbol:string}){seen.push(request.symbol);throw new Error('TWELVE_DATA_DATA_NOT_FOUND symbol='+request.symbol);}};
  const result=await new RepositoryInternalDailyBuilder((async()=>{throw Error('unexpected fallback')}) as typeof fetch,{},undefined,provider).build('US_MARKET',at);
- assert.equal(result.state,'HOLD');assert.equal(result.payload,null);assert.deepEqual(seen,['RUT','DXY']);assert.equal(result.audit.length,2);assert.ok(result.audit.every(entry=>entry.status==='FAILED'));
+ assert.equal(result.state,'HOLD');assert.equal(result.payload,null);assert.deepEqual(seen,['RUT','DXY']);const twelve=result.audit.filter(entry=>entry.sourceId.startsWith('twelve:'));assert.equal(twelve.length,2);assert.ok(twelve.every(entry=>entry.status==='FAILED'));
 });
 test('Korea reference dates use KST for offset timestamps, preserve explicit provider dates',()=>{
  assert.equal(koreaReferenceDate('2026-10-13T18:03:00Z'),'2026-10-14');
@@ -59,10 +60,9 @@ test('Korea next-day FX versus prior close remains HOLD and records the source p
  assert.equal(fx.observedDate,'2026-10-14');assert.equal(fx.referenceDate,'2026-10-13');assert.equal(fx.dateField,'exchangeInfo.localTradedAt');
  assert.ok(result.audit.filter(entry=>entry!==fx).every(entry=>entry.observedDate==='2026-10-13'));
 });
-test('production schedule enables AI only while US and Korea remain simulation-only',async()=>{
+test('production schedules remain simulation-only until controlled acceptance is complete',async()=>{
  const workflow=await readFile('.github/workflows/motus-daily-production.yml','utf8');
  assert.match(workflow,/MOTUS_LIVE_PUBLISH_ENABLED:\s*'false'/);
- assert.match(workflow,/SCHEDULE" == "30 3 \* \* 1-5" && "\$CATEGORY" == "ai"/);
- assert.doesNotMatch(workflow,/SCHEDULE" == "(?:45 21|30 8) \* \* 1-5"[^\n]*LIVE_PUBLISH=true/);
+ assert.doesNotMatch(workflow,/SCHEDULE" == "(?:45 21|30 3|30 8) \* \* 1-5"[^\n]*LIVE_PUBLISH=true/);
  assert.match(workflow,/INPUT_EXECUTE_PUBLISH" == "true"/);
 });

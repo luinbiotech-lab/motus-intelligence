@@ -24,7 +24,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: motus-production-${{ github.event.schedule || inputs.category || 'manual' }}
+  group: motus-production-global
   cancel-in-progress: false
 
 jobs:
@@ -34,6 +34,7 @@ jobs:
     env:
       TZ: Asia/Seoul
       MOTUS_LIVE_PUBLISH_ENABLED: 'false'
+      MOTUS_PRODUCTION_RUN: 'true'
       MOTUS_COMMERCE_ENABLED: 'false'
       TWELVE_DATA_API_KEY: ${{ secrets.TWELVE_DATA_API_KEY }}
       KRX_AUTH_KEY: ${{ secrets.KRX_AUTH_KEY }}
@@ -53,6 +54,17 @@ jobs:
       - uses: actions/setup-node@v4
         with: {node-version: 22, cache: npm}
       - run: npm ci
+      - name: Restore durable production operations state
+        uses: actions/cache@v4
+        with:
+          path: |
+            data/operations
+            data/search
+            data/library/publications
+            data/reports/daily
+          key: motus-ops-${{ runner.os }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            motus-ops-${{ runner.os }}-
       - name: Resolve category and KST date
         shell: bash
         env:
@@ -80,13 +92,15 @@ jobs:
       - run: npm run build
       - run: node --test --experimental-test-isolation=none dist/tests/auto-publish-live.test.js dist/tests/daily-operations.test.js dist/tests/live-editorial-publish.test.js
       - run: npm run motus:live -- --date "$RUN_DATE" --category "$CATEGORY" --source internal
-      - run: npm run search:intelligence:live -- --date "$RUN_DATE" --category "$CATEGORY"
       - name: Evaluate gate without live publication
         if: env.MOTUS_LIVE_PUBLISH_ENABLED != 'true'
         run: npm run motus:publish -- --date "$RUN_DATE" --category "$CATEGORY"
       - name: Publish exactly once after explicit workflow activation
         if: env.MOTUS_LIVE_PUBLISH_ENABLED == 'true'
         run: npm run motus:publish -- --date "$RUN_DATE" --category "$CATEGORY" --execute
+      - name: Record production outcome
+        if: always()
+        run: npm run motus:production-summary -- --date "$RUN_DATE" --category "$CATEGORY"
       - name: Upload gate and HOLD diagnostics
         if: always()
         uses: actions/upload-artifact@v4
@@ -94,5 +108,10 @@ jobs:
           name: motus-production-gate-${{ env.RUN_DATE }}-${{ env.CATEGORY }}
           path: |
             data/operations/${{ env.RUN_DATE }}/${{ env.CATEGORY }}/
-            data/search-intelligence/latest-live.json
+            data/search-intelligence/
+            data/search/${{ env.RUN_DATE }}/
+            data/library/publications/
+            data/reports/daily/${{ env.RUN_DATE }}/
+            data/operations/${{ env.RUN_DATE }}/weekly-monthly-feed-auto.json
           if-no-files-found: warn
+          retention-days: 90

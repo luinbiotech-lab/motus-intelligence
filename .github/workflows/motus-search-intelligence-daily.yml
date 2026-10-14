@@ -29,7 +29,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: motus-daily-dry-run-${{ github.event.schedule || inputs.category || 'manual' }}
+  group: motus-daily-dry-run-global
   cancel-in-progress: false
 
 jobs:

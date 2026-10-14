@@ -17,10 +17,10 @@ export const BLOGGER_EDITORIAL_CATEGORIES={
 } as const;
 
 export function renderAIEditorialArticle(view:AIIntelligenceDailyViewModel):DailyMasterRenderResult {
-  const parts=[masthead(view.title,view.subtitle,view.displayLabel,view.issueDate),lead(view.todayCore.summary)];
-  for(const issue of view.issues)parts.push(section(issue.headline,paragraphs([...issue.whatHappened,issue.coreContent,issue.whyItMatters??'',issue.marketConnection??''])));
-  if(view.industryConnections.length)parts.push(section('기업 AI가 실제 업무로 들어가는 경로',paragraphs(view.industryConnections.flatMap(item=>[item.explanation,item.optionalWatchPoint??'']))));
-  if(view.whatToWatch.length)parts.push(section('앞으로 볼 지점',paragraphs(view.whatToWatch.map(item=>`${item.headline}: ${item.watchFor}`))));
+  const seen=new Set<string>([normalized(view.todayCore.summary)]),parts=[masthead(view.title,view.subtitle,view.displayLabel,view.issueDate),lead(view.todayCore.summary)];
+  for(const issue of view.issues){const content=paragraphs(uniqueProse([...issue.whatHappened,issue.coreContent,issue.whyItMatters??'',issue.marketConnection??''],seen));if(content)parts.push(section(issue.headline,content));}
+  const connections=paragraphs(uniqueProse(view.industryConnections.flatMap(item=>[item.explanation,item.optionalWatchPoint??'']),seen));if(connections)parts.push(section('기업 AI가 실제 업무로 들어가는 경로',connections));
+  const watch=paragraphs(uniqueProse(view.whatToWatch.map(item=>`${item.headline}: ${item.watchFor}`),seen));if(watch)parts.push(section('앞으로 볼 지점',watch));
   parts.push(sources(view.sources));return finish('ai-intelligence',view.title,BLOGGER_EDITORIAL_CATEGORIES.AI_INTELLIGENCE.publicLabel,parts,['masthead','lead','issues','connections','watch','sources']);
 }
 
@@ -51,6 +51,8 @@ function masthead(title:string,subtitle:string,label:string,date:string){return 
 function lead(value:string){return `<p data-section="editorial-lead" style="margin:0 0 24px;font-size:18px;line-height:1.82;color:#172033">${esc(value)}</p>`;}
 function section(title:string,content:string){return `<section style="${SECTION}"><h2 style="${HEADING}">${esc(title)}</h2>${content}</section>`;}
 function paragraphs(values:string[]){return values.map(value=>value.trim()).filter(Boolean).map(value=>`<p style="margin:0 0 13px">${esc(value)}</p>`).join('');}
+function uniqueProse(values:string[],seen:Set<string>):string[]{const result:string[]=[];for(const value of values){const key=normalized(value);if(!key||seen.has(key))continue;seen.add(key);result.push(value)}return result}
+function normalized(value:string){return value.replace(/\s+/g,' ').trim()}
 function metricProse(values:Array<{label:string;displayValue:string}>){return `<p style="margin:0">${values.map(item=>`${esc(item.label)} ${esc(item.displayValue)}`).join(' · ')}</p>`;}
 function flow(values:Array<{label:string;displayValue:string;direction:'UP'|'DOWN'|'FLAT'}>){const max=Math.max(...values.map(item=>Math.abs(Number(item.displayValue.replace(/[^0-9.-]/g,'')))),1);return `<div data-visualization="korea-investor-flow" style="width:100%;max-width:100%;box-sizing:border-box">${values.map(item=>{const size=Math.max(4,Math.round(Math.abs(Number(item.displayValue.replace(/[^0-9.-]/g,'')))/max*46));const color=item.direction==='UP'?'#c62828':item.direction==='DOWN'?'#1565c0':'#59697d';return `<div style="margin:0 0 12px;width:100%;max-width:100%;box-sizing:border-box"><div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap"><strong>${esc(item.label)}</strong><span style="color:${color};font-weight:800">${esc(item.displayValue)}</span></div><div style="height:8px;background:#eef2f6"><span style="display:block;width:${size}%;height:100%;background:${color}"></span></div></div>`;}).join('')}</div>`;}
 function sources(values:NewsletterSourceLink[]){const unique=[...new Map(values.map(item=>[item.url,item])).values()];return section('자료',`<ul style="margin:0;padding-left:20px">${unique.map(item=>`<li style="margin:5px 0"><a href="${attr(item.url)}" target="_blank" rel="nofollow noopener noreferrer" style="${LINK}">${esc(item.label)}</a></li>`).join('')}</ul>`);}

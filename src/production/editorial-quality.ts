@@ -1,0 +1,22 @@
+export interface EditorialQualityResult {pass:boolean;reasons:string[];notes:string[];visibleText:string;proseBlockCount:number}
+
+export function evaluateEditorialQuality(title:string,html:string):EditorialQualityResult {
+  const reasons:string[]=[],notes:string[]=[];
+  const decoded=decodeRepeated(html),withoutCode=decoded.replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1>/gi,' '),visible=withoutCode.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
+  const blocks=[...withoutCode.matchAll(/<(?:p|li)\b[^>]*>([\s\S]*?)<\/(?:p|li)>/gi)].map(match=>match[1]!.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim()).filter(value=>value.length>=40);
+  const korean=(title.match(/[가-힣]/g)??[]).length,latin=(title.match(/[A-Za-z]/g)??[]).length,bodyKorean=(visible.match(/[가-힣]/g)??[]).length,bodyLatin=(visible.match(/[A-Za-z]/g)??[]).length;
+  if(title.length<12||!korean||latin>korean*1.5)reasons.push('title is not natural Korean-first editorial copy');
+  if(/^\s*(?:\d{4}[-./]\d{1,2}[-./]\d{1,2}|MOTUS\b|AI 인텔리전스\s*:)/i.test(title))reasons.push('mechanical title prefix exposed');
+  if(/<(?:script|style)\b/i.test(decoded))reasons.push('script or style payload present');
+  if(/(?:^|[>\s])https?:\/\//i.test(visible))reasons.push('plain or encoded raw URL exposed');
+  if(/(무슨 일이 있었나|왜 중요한가|핵심 내용|산업 연결|시장 연결)\s*:?/i.test(visible))reasons.push('internal editorial label exposed');
+  if(visible.length<500||blocks.length<3)reasons.push('article depth insufficient');
+  if(blocks.length&&new Set(blocks.map(normalize)).size!==blocks.length)reasons.push('boilerplate prose repetition detected');
+  if(bodyLatin>bodyKorean*1.35)reasons.push('body contains excessive English copy');
+  if(/(?:&(?:amp;){1,3}lt;|&lt;)\s*(?:script|style|img|a)\b/i.test(html))reasons.push('double-encoded markup present');
+  if(reasons.length===0&&latin>korean)notes.push('English company or product names are concentrated; Korean-first context retained');
+  return {pass:reasons.length===0,reasons:[...new Set(reasons)],notes,visibleText:visible,proseBlockCount:blocks.length};
+}
+
+function decodeRepeated(value:string){let result=value;for(let i=0;i<3;i++){const next=result.replaceAll('&amp;','&').replaceAll('&lt;','<').replaceAll('&gt;','>').replaceAll('&quot;','"').replaceAll('&#39;',"'");if(next===result)break;result=next}return result}
+function normalize(value:string){return value.toLowerCase().replace(/[^\p{L}\p{N}]+/gu,' ').trim()}

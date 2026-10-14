@@ -48,7 +48,7 @@ export interface BloggerPublicationRecord {
   history: BloggerHistoryEvent[];
 }
 export interface BloggerPublishResult { publicPostUrl?: string|null; postId?: string; publishedAt?: string; status?: 'DRAFT'|'PUBLISHED' }
-export interface BloggerPostReadback { postId:string;title:string;content:string;status:'DRAFT'|'PUBLISHED'|'UNKNOWN';url:string|null;labels:string[] }
+export interface BloggerPostReadback { postId:string;title:string;content:string;status:'DRAFT'|'PUBLISHED'|'UNKNOWN';url:string|null;labels:string[];publishedAt?:string;updatedAt?:string }
 export interface BloggerAdapter {
   name: string;
   hasCredential(config:BloggerPublishingConfig): boolean;
@@ -215,10 +215,10 @@ export class GoogleBloggerApiAdapter implements BloggerAdapter {
     const accessToken=await this.resolveAccessToken(config);const endpoint=new URL(`https://www.googleapis.com/blogger/v3/blogs/${encodeURIComponent(blogId)}/posts/${encodeURIComponent(postId)}`);endpoint.searchParams.set('view','ADMIN');
     const response=await this.fetcher(endpoint,{headers:{authorization:`Bearer ${accessToken}`}});if(!response.ok)throw new Error(`Blogger post readback ${response.status}: ${safeGoogleApiError(await response.text())}`);
     const post=await response.json() as GoogleBloggerPost&{content?:string;labels?:string[]};if(!post.id||!post.title||typeof post.content!=='string')throw new Error('Blogger readback missing post fields');
-    const status=post.status==='DRAFT'?'DRAFT':post.status==='LIVE'?'PUBLISHED':'UNKNOWN';return {postId:post.id,title:post.title,content:post.content,status,url:status==='PUBLISHED'&&isPublicBloggerPostUrl(post.url)?post.url!:null,labels:Array.isArray(post.labels)?post.labels:[]};
+    const status=post.status==='DRAFT'?'DRAFT':post.status==='LIVE'?'PUBLISHED':'UNKNOWN';return {postId:post.id,title:post.title,content:post.content,status,url:status==='PUBLISHED'&&isPublicBloggerPostUrl(post.url)?post.url!:null,labels:Array.isArray(post.labels)?post.labels:[],...(post.published?{publishedAt:post.published}:{}),...(post.updated?{updatedAt:post.updated}:{})};
   }
 
-  async findMatchingPosts(input:{title:string;label:string},config:BloggerPublishingConfig):Promise<BloggerPostReadback[]> {
+  async findMatchingPosts(input:{title:string;label:string;operationDate?:string;publicationFingerprint?:string},config:BloggerPublishingConfig):Promise<BloggerPostReadback[]> {
     const blogId=config.blogId?.trim();if(!blogId)throw new Error('missing Blogger blogId');
     const accessToken=await this.resolveAccessToken(config);const matches:BloggerPostReadback[]=[];
     for(const requestedStatus of ['draft','live'] as const){let pageToken:string|undefined;do{
@@ -226,7 +226,7 @@ export class GoogleBloggerApiAdapter implements BloggerAdapter {
       endpoint.searchParams.set('status',requestedStatus);endpoint.searchParams.set('fetchBodies','true');endpoint.searchParams.set('maxResults','50');if(pageToken)endpoint.searchParams.set('pageToken',pageToken);
       const response=await this.fetcher(endpoint,{headers:{authorization:`Bearer ${accessToken}`}});if(!response.ok)throw new Error(`Blogger remote duplicate lookup ${response.status}: ${safeGoogleApiError(await response.text())}`);
       const page=await response.json() as GoogleBloggerPostList&{items?:GoogleBloggerPost[]};
-      for(const post of page.items??[]){if(!post.id||post.title!==input.title||!(post.labels??[]).includes(input.label))continue;const status=post.status==='DRAFT'?'DRAFT':post.status==='LIVE'?'PUBLISHED':'UNKNOWN';matches.push({postId:post.id,title:post.title,content:post.content??'',status,url:status==='PUBLISHED'&&isPublicBloggerPostUrl(post.url)?post.url!:null,labels:post.labels??[]});}
+      for(const post of page.items??[]){if(!post.id||!post.title||!(post.labels??[]).includes(input.label)||!identityMatches(post,input))continue;const status=post.status==='DRAFT'?'DRAFT':post.status==='LIVE'?'PUBLISHED':'UNKNOWN';matches.push({postId:post.id,title:post.title,content:post.content??'',status,url:status==='PUBLISHED'&&isPublicBloggerPostUrl(post.url)?post.url!:null,labels:post.labels??[],...(post.published?{publishedAt:post.published}:{}),...(post.updated?{updatedAt:post.updated}:{})});}
       pageToken=page.nextPageToken;
     }while(pageToken);}
     return matches;
@@ -253,6 +253,8 @@ export class GoogleBloggerApiAdapter implements BloggerAdapter {
     const response=await this.fetcher(endpoint,{method:'POST',headers:{authorization:`Bearer ${accessToken}`}});if(!response.ok)throw new Error(`Blogger publish ${response.status}: ${safeGoogleApiError(await response.text())}`);const post=await response.json() as GoogleBloggerPost;
     if(post.id!==postId||!isPublicBloggerPostUrl(post.url))throw new Error('Blogger publish response missing article permalink');return {postId,publicPostUrl:post.url!,publishedAt:post.published??post.updated??new Date().toISOString()};
   }
+
+  async healthCheck(config:BloggerPublishingConfig):Promise<{state:'PASS';checkedAt:string}> {await this.resolveAccessToken(config);return {state:'PASS',checkedAt:new Date().toISOString()}}
 
   private readConfigured(environmentVariable:string|null|undefined):string|undefined {
     const name=environmentVariable?.trim();
@@ -401,6 +403,19 @@ function safeGoogleApiError(body:string):string {
     const parsed=JSON.parse(body) as {error?:{message?:string;status?:string}};
     return [parsed.error?.status,parsed.error?.message].filter(Boolean).join(' - ').slice(0,300)||'request failed';
   } catch { return 'request failed'; }
+}
+function identityMatches(post:GoogleBloggerPost,input:{title:string;operationDate?:string}):boolean {
+  if(post.title===input.title)return true;
+  if(!input.operationDate)return false;
+  const body=post.content??'';
+  const korean=input.operationDate.replace(/^(\d{4})-(\d{2})-(\d{2})$/,(_,year,month,day)=>`${year}년 ${Number(month)}월 ${Number(day)}일`);
+  if(`${post.title} ${body}`.includes(input.operationDate)||`${post.title} ${body}`.includes(korean))return true;
+  return [post.published,post.updated].some(value=>value&&kstDate(value)===input.operationDate);
+}
+function kstDate(value:string):string {
+  const parts=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date(value));
+  const get=(type:string)=>parts.find(part=>part.type===type)?.value??'';
+  return `${get('year')}-${get('month')}-${get('day')}`;
 }
 function joinUrl(base:string,path:string):string { return `${base.replace(/\/+$/,'')}/${path.replace(/^\/+/, '')}`; }
 function escapeHtml(text:string):string { return String(text).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }

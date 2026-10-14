@@ -1,0 +1,14 @@
+import {appendFile,readFile} from 'node:fs/promises';
+import {existsSync} from 'node:fs';
+import {join} from 'node:path';
+
+const args=process.argv.slice(2),value=(name:string)=>{const index=args.indexOf(name);return index>=0?args[index+1]:undefined},date=value('--date')??'',category=value('--category')??'';
+if(!/^\d{4}-\d{2}-\d{2}$/.test(date)||!['ai','us','korea'].includes(category))throw new Error('--date and --category required');
+const root=join(process.cwd(),'data','operations',date,category),live=await json('live-collection.json'),verification=await json('verification.json'),search=await json('search-intelligence.json'),publish=await json('auto-publish.json'),audit=await json('live-source-audit.json');
+const entries=Array.isArray(audit.entries)?audit.entries as Array<Record<string,unknown>>:[],finalState=String(publish.state??live.state??'FAILED'),publishReason=String(publish.reason??publish.error??''),reason=String(!publishReason||publishReason==='live unit is not publication-ready'?live.reasonCode??publishReason:publishReason),failedSource=entries.filter(item=>item.status==='FAILED').map(item=>item.sourceId).join(', '),staleFields=entries.filter(item=>/STALE/i.test(String(item.error??''))).map(item=>item.sourceId).join(', '),duplicateState=!publish.gate?'PENDING':publish.gate?.reasons?.includes?.('duplicate state uncertain')?'UNCERTAIN':'RESOLVED',row=[category,date,live.state,verification.verification,search.freshness??search.snapshot?.providerStates,publish.gate?.state??publish.state,reason,failedSource,staleFields,duplicateState,Number(publish.publishCallCount??0)>0?'YES':'NO',publish.publishCallCount??0,publish.draftPostId??'',publish.publicPostUrl??'',publish.httpStatus??'',finalState].map(cell=>String(cell??'').replaceAll('|','/'));
+const summary=['| category | operationDate | sourceState | verification | searchState | gateState | reason | failedSource | staleFields | duplicateState | publishAttempted | publishCallCount | Post ID | Public URL | HTTP | finalState |','|---|---|---|---|---|---|---|---|---|---|---:|---:|---|---|---:|---|','| '+row.join(' | ')+' |'].join('\n')+'\n';
+if(process.env.GITHUB_STEP_SUMMARY)await appendFile(process.env.GITHUB_STEP_SUMMARY,summary,'utf8');else console.log(summary);
+if(finalState==='FAILED'){console.error(`::error title=MOTUS ${category} FAILED::${safe(reason||'production operation failed')}`);process.exitCode=1}else if(finalState==='HOLD'||finalState==='AUTO_PUBLISH_READY')console.warn(`::warning title=MOTUS ${category} ${finalState}::${safe(reason||'publication was not attempted')}`);else console.log(`::notice title=MOTUS ${category} ${finalState}::operation recorded`);
+
+async function json(name:string):Promise<Record<string,any>>{const path=join(root,name);if(!existsSync(path))return {};try{return JSON.parse(await readFile(path,'utf8')) as Record<string,any>}catch{return {}}}
+function safe(text:string){return text.replace(/[\r\n%]/g,' ').slice(0,500)}

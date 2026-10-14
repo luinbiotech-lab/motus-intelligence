@@ -6,7 +6,7 @@
   "scripts": {
     "typecheck": "tsc --noEmit",
     "build": "tsc",
-    "test": "npm run build && node --test --test-isolation=none dist/tests/*.test.js",
+    "test": "npm run build && node --test --experimental-test-isolation=none dist/tests/*.test.js",
     "blogger:oauth": "npm run build && node dist/src/blogger-oauth-cli.js",
     "editorial:review": "npm run build && node dist/src/cli.js --editorial-review-preview",
     "editorial:layout-preview": "npm run build && node dist/src/cli.js --editorial-layout-preview",
@@ -37,6 +37,7 @@
     "report": "node dist/src/cli.js",
     "motus:live": "npm run build && node dist/src/live-daily-cli.js",
     "motus:publish": "npm run build && node dist/src/motus-publish-cli.js",
+    "motus:production-summary": "npm run build && node dist/src/production-summary-cli.js",
     "search:intelligence:live": "npm run build && node dist/src/search-intelligence-cli.js --live"
   },
   "devDependencies": {
