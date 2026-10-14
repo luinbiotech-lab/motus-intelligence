@@ -11,14 +11,15 @@ test('encoded RSS image markup cannot leak into AI prose while citation and sent
  const fetcher=(async(input:RequestInfo|URL)=>{
   const parsed=new URL(String(input)),host=parsed.hostname;
   if(!['blog.google','blogs.nvidia.com'].includes(host))return new Response('<rss/>');
-  if(parsed.pathname==='/announcement'){const evidence=host==='blog.google'?'The official product page confirms broader developer access to the new model, including updated evaluation and deployment documentation.':'The official product page confirms expanded infrastructure capacity, including deployment guidance for enterprise AI workloads.';return new Response(`<html><head><meta name="description" content="${evidence}"></head></html>`);}
+  if(parsed.pathname==='/announcement'){const evidence=host==='blog.google'?'Developers, enterprises, scientists, and consumers gain access to Gemini 4 Argon, the latest frontier model for research and enterprise deployment.':'European partners are using accelerated computing and models to build AI agent applications that improve city operations and public services.';return new Response(`<html><head><meta name="description" content="${evidence}"></head></html>`);}
   const description=host==='blog.google'?'&lt;img src="https://images.example/image.webp"&gt;Developers gain access to the new model.':'<![CDATA[<a href="https://example.com/context">Infrastructure capacity expands.</a>]]>';
-  return new Response(`<rss><item><title>Verified industrial AI announcement</title><link>https://${host}/announcement</link><pubDate>Tue, 13 Oct 2026 16:00:00 GMT</pubDate><description>${description}</description></item></rss>`);
+  const title=host==='blog.google'?'Gemini 4 Argon: Built to solve hard problems':'European Cities Deploy NVIDIA-Powered AI Agents';
+  return new Response(`<rss><item><title>${title}</title><link>https://${host}/announcement</link><pubDate>Tue, 13 Oct 2026 16:00:00 GMT</pubDate><description>${description}</description></item></rss>`);
  }) as typeof fetch;
  const result=await new RepositoryInternalDailyBuilder(fetcher,{}).build('AI_INTELLIGENCE',at);
  assert.equal(result.state,'LIVE_READY');const payload=result.payload!;
  const view=payload.unit.viewModel as AIIntelligenceDailyViewModel;
- assert.deepEqual(view.issues.map(item=>item.whatHappened[0]),['The official product page confirms broader developer access to the new model, including updated evaluation and deployment documentation.','The official product page confirms expanded infrastructure capacity, including deployment guidance for enterprise AI workloads.']);
+ assert.ok(view.issues.every(item=>item.whatHappened.join(' ').length>=80)); assert.ok(view.issues.every(item=>/[가-힣]/.test(item.whatHappened.join(' ')))); assert.doesNotMatch(view.issues.flatMap(item=>item.whatHappened).join(' '),/Developers, enterprises|European partners are using/i);
  assert.doesNotMatch(payload.unit.render.html,/images\.example|&amp;lt;img/);
  for(const source of view.sources){assert.ok(payload.unit.render.html.includes(`href="${source.url}"`));assert.ok(view.issues.some(issue=>issue.evidenceRefs.includes(source.url)));}
  assert.equal(buildProductionVerification(payload,'internal',result.audit,at).verification,'VERIFIED');

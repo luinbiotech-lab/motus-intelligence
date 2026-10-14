@@ -1,4 +1,4 @@
-export interface EditorialQualityResult {pass:boolean;reasons:string[];notes:string[];visibleText:string;proseBlockCount:number}
+export interface EditorialQualityResult {pass:boolean;reasons:string[];notes:string[];visibleText:string;proseBlockCount:number;koreanTextRatio:number;englishCopiedTextRatio:number}
 
 export function evaluateEditorialQuality(title:string,html:string):EditorialQualityResult {
   const reasons:string[]=[],notes:string[]=[];
@@ -12,11 +12,14 @@ export function evaluateEditorialQuality(title:string,html:string):EditorialQual
   if(/(무슨 일이 있었나|왜 중요한가|핵심 내용|산업 연결|시장 연결)\s*:?/i.test(visible))reasons.push('internal editorial label exposed');
   if(visible.length<500||blocks.length<3)reasons.push('article depth insufficient');
   if(blocks.length&&new Set(blocks.map(normalize)).size!==blocks.length)reasons.push('boilerplate prose repetition detected');
-  if(bodyLatin>bodyKorean*1.35)reasons.push('body contains excessive English copy');
+  const koreanTextRatio=bodyKorean/Math.max(bodyKorean+bodyLatin,1),englishCopiedTextRatio=bodyLatin/Math.max(bodyKorean+bodyLatin,1);
+  if(koreanTextRatio<0.43||englishCopiedTextRatio>0.57)reasons.push('body contains excessive English copied text');
   if(/(?:&(?:amp;){1,3}lt;|&lt;)\s*(?:script|style|img|a)\b/i.test(html))reasons.push('double-encoded markup present');
   if(reasons.length===0&&latin>korean)notes.push('English company or product names are concentrated; Korean-first context retained');
-  return {pass:reasons.length===0,reasons:[...new Set(reasons)],notes,visibleText:visible,proseBlockCount:blocks.length};
+  return {pass:reasons.length===0,reasons:[...new Set(reasons)],notes,visibleText:visible,proseBlockCount:blocks.length,koreanTextRatio,englishCopiedTextRatio};
 }
+
+export function publisherConcentrationWarning(publishers:string[],majorIssueVerified:boolean):string|null {const normalized=publishers.map(value=>value.trim().toLowerCase()).filter(Boolean);if(normalized.length<2||new Set(normalized).size>1)return null;return majorIssueVerified?'publisher concentration accepted for one clearly verified major issue':'publisher concentration requires editorial review'}
 
 function decodeRepeated(value:string){let result=value;for(let i=0;i<3;i++){const next=result.replaceAll('&amp;','&').replaceAll('&lt;','<').replaceAll('&gt;','>').replaceAll('&quot;','"').replaceAll('&#39;',"'");if(next===result)break;result=next}return result}
 function normalize(value:string){return value.toLowerCase().replace(/[^\p{L}\p{N}]+/gu,' ').trim()}
