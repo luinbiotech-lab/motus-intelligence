@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "1.0",
+  "category": "AI_INTELLIGENCE",
+  "observedDate": "2026-10-14",
+  "sourceMode": "internal",
+  "verification": "VERIFIED",
+  "unresolvedConflicts": [],
+  "provenancePass": true,
+  "sourceDiversityPass": true,
+  "sourceLinksPass": true,
+  "mobilePass": true,
+  "editorialQualityPass": true,
+  "leakagePass": true,
+  "duplicateCheck": "PENDING_REMOTE",
+  "duplicateUncertainty": true,
+  "articleFingerprint": "sha256:0678e6803ff72b4e2015c140ad6b8fbb6b968145234c2526a037d73c0f1cdc0d",
+  "commerceEnabled": false,
+  "verifiedAt": "2026-10-14T08:07:42.404Z",
+  "sourceAuditIds": [
+    "openai",
+    "google-ai",
+    "nvidia",
+    "microsoft",
+    "ai:item:1",
+    "ai:item:2",
+    "ai:item:3",
+    "ai:item:4"
+  ],
+  "crossVerification": null
+}

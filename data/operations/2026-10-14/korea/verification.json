@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "1.0",
+  "category": "KOREA_MARKET",
+  "observedDate": "2026-10-14",
+  "sourceMode": "internal",
+  "verification": "FAILED",
+  "unresolvedConflicts": [
+    "KRX_AUTH_KEY_MISSING"
+  ],
+  "provenancePass": false,
+  "sourceDiversityPass": false,
+  "sourceLinksPass": false,
+  "mobilePass": false,
+  "editorialQualityPass": false,
+  "leakagePass": true,
+  "duplicateCheck": "PENDING_REMOTE",
+  "duplicateUncertainty": true,
+  "articleFingerprint": "",
+  "commerceEnabled": false,
+  "verifiedAt": "2026-10-14T08:08:01.213Z",
+  "sourceAuditIds": [
+    "naver:kospi",
+    "naver:kosdaq",
+    "naver:usd-krw",
+    "naver:flows",
+    "naver:sector",
+    "naver:mover"
+  ],
+  "crossVerification": {
+    "schemaVersion": "1.0",
+    "category": "KOREA_MARKET",
+    "observedDate": "2026-10-14",
+    "primarySource": {
+      "provider": "Naver Finance",
+      "domain": "naver.com",
+      "urls": [
+        "https://m.stock.naver.com/api/index/KOSPI/basic",
+        "https://m.stock.naver.com/api/index/KOSDAQ/basic",
+        "https://api.stock.naver.com/marketindex/exchange/FX_USDKRW"
+      ]
+    },
+    "independentSource": {
+      "providers": [],
+      "domains": [],
+      "urls": []
+    },
+    "comparedFields": [],
+    "tolerance": {
+      "KOSPI": 0.05,
+      "KOSDAQ": 0.05,
+      "USD_KRW": 2
+    },
+    "comparisonResult": "UNAVAILABLE",
+    "sourceDiversityPass": false,
+    "verification": "REVIEW_REQUIRED",
+    "reasonCodes": [
+      "KRX_AUTH_KEY_MISSING",
+      "KOREA_OFFICIAL_INDEX_COMPARISON_INCOMPLETE",
+      "KOREA_INDEPENDENT_SOURCE_DIVERSITY_FAILED"
+    ],
+    "verifiedAt": "2026-10-14T08:08:01.213Z"
+  }
+}

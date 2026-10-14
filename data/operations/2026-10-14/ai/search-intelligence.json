@@ -1,0 +1,134 @@
+{
+  "mode": "LIVE_DEGRADED_OK",
+  "publicationActions": {
+    "insert": 0,
+    "patch": 0,
+    "publish": 0
+  },
+  "normalDailyBlocked": false,
+  "snapshot": {
+    "generatedAt": "2026-10-14T08:07:45.256Z",
+    "topics": [
+      {
+        "topicId": "ai_intelligence:topic:1",
+        "label": "From Enterprise to Earthshot: UK’s Ecosystem Moves From Ambition to Application With NVIDIA",
+        "aliases": [],
+        "category": "AI_INTELLIGENCE",
+        "claimRefs": [
+          "motus-live-2026-10-14:ai"
+        ],
+        "sourceRefs": [
+          "https://blogs.nvidia.com/blog/uk-ecosystem-deployment/",
+          "https://blogs.nvidia.com/blog/european-cities-agents-urban-operations/",
+          "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon/",
+          "https://blogs.nvidia.com/blog/local-ai-rtx-spark-laptops-software-updates/"
+        ],
+        "verificationStatus": "VERIFIED"
+      },
+      {
+        "topicId": "ai_intelligence:topic:2",
+        "label": "European Cities Deploy NVIDIA-Powered AI Agents to Run Smarter Urban Operations",
+        "aliases": [],
+        "category": "AI_INTELLIGENCE",
+        "claimRefs": [
+          "motus-live-2026-10-14:ai"
+        ],
+        "sourceRefs": [
+          "https://blogs.nvidia.com/blog/uk-ecosystem-deployment/",
+          "https://blogs.nvidia.com/blog/european-cities-agents-urban-operations/",
+          "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon/",
+          "https://blogs.nvidia.com/blog/local-ai-rtx-spark-laptops-software-updates/"
+        ],
+        "verificationStatus": "VERIFIED"
+      },
+      {
+        "topicId": "ai_intelligence:topic:3",
+        "label": "Gemini 4 Argon: Built to solve your hardest problems",
+        "aliases": [],
+        "category": "AI_INTELLIGENCE",
+        "claimRefs": [
+          "motus-live-2026-10-14:ai"
+        ],
+        "sourceRefs": [
+          "https://blogs.nvidia.com/blog/uk-ecosystem-deployment/",
+          "https://blogs.nvidia.com/blog/european-cities-agents-urban-operations/",
+          "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon/",
+          "https://blogs.nvidia.com/blog/local-ai-rtx-spark-laptops-software-updates/"
+        ],
+        "verificationStatus": "VERIFIED"
+      },
+      {
+        "topicId": "ai_intelligence:topic:4",
+        "label": "All Systems Go: Global PC App Ecosystem Ready for NVIDIA RTX Spark",
+        "aliases": [],
+        "category": "AI_INTELLIGENCE",
+        "claimRefs": [
+          "motus-live-2026-10-14:ai"
+        ],
+        "sourceRefs": [
+          "https://blogs.nvidia.com/blog/uk-ecosystem-deployment/",
+          "https://blogs.nvidia.com/blog/european-cities-agents-urban-operations/",
+          "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon/",
+          "https://blogs.nvidia.com/blog/local-ai-rtx-spark-laptops-software-updates/"
+        ],
+        "verificationStatus": "VERIFIED"
+      }
+    ],
+    "signals": [],
+    "providerStates": {
+      "NAVER_DATALAB": "NOT_CONFIGURED",
+      "GOOGLE_SEARCH_CONSOLE": "NOT_CONFIGURED"
+    },
+    "warnings": [],
+    "policy": {
+      "verificationPrecedesDemand": true,
+      "providerFailureNonBlocking": true,
+      "internalMetricsPublic": false,
+      "commerce": {
+        "enabled": false
+      }
+    },
+    "snapshotId": "search-intelligence:d46b5133703f0537"
+  },
+  "performanceLearning": [
+    {
+      "topicId": "ai_intelligence:topic:1",
+      "observedQueries": [],
+      "evidenceSignalIds": [],
+      "editorialAction": "NO_ACTION",
+      "reviewRequired": true,
+      "changesFacts": false,
+      "changesPublicationGate": false
+    },
+    {
+      "topicId": "ai_intelligence:topic:2",
+      "observedQueries": [],
+      "evidenceSignalIds": [],
+      "editorialAction": "NO_ACTION",
+      "reviewRequired": true,
+      "changesFacts": false,
+      "changesPublicationGate": false
+    },
+    {
+      "topicId": "ai_intelligence:topic:3",
+      "observedQueries": [],
+      "evidenceSignalIds": [],
+      "editorialAction": "NO_ACTION",
+      "reviewRequired": true,
+      "changesFacts": false,
+      "changesPublicationGate": false
+    },
+    {
+      "topicId": "ai_intelligence:topic:4",
+      "observedQueries": [],
+      "evidenceSignalIds": [],
+      "editorialAction": "NO_ACTION",
+      "reviewRequired": true,
+      "changesFacts": false,
+      "changesPublicationGate": false
+    }
+  ],
+  "commerce": {
+    "enabled": false
+  }
+}

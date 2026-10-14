@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "1.0",
+  "sourceMode": "internal",
+  "category": "AI_INTELLIGENCE",
+  "operationDate": "2026-10-14",
+  "status": "LIVE_READY",
+  "reasonCode": null,
+  "entries": [
+    {
+      "sourceId": "openai",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/news/rss.xml",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-14T08:07:42.404Z",
+      "error": null
+    },
+    {
+      "sourceId": "google-ai",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blog.google/technology/ai/rss/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-14T08:07:42.404Z",
+      "error": null
+    },
+    {
+      "sourceId": "nvidia",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blogs.nvidia.com/feed/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-14T08:07:42.404Z",
+      "error": null
+    },
+    {
+      "sourceId": "microsoft",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blogs.microsoft.com/feed/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-14T08:07:42.404Z",
+      "error": null
+    },
+    {
+      "sourceId": "ai:item:1",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blogs.nvidia.com/blog/uk-ecosystem-deployment/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-14T08:07:42.404Z",
+      "error": null
+    },
+    {
+      "sourceId": "ai:item:2",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blogs.nvidia.com/blog/european-cities-agents-urban-operations/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-14T08:07:42.404Z",
+      "error": null
+    },
+    {
+      "sourceId": "ai:item:3",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-14T08:07:42.404Z",
+      "error": null
+    },
+    {
+      "sourceId": "ai:item:4",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blogs.nvidia.com/blog/local-ai-rtx-spark-laptops-software-updates/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-14T08:07:42.404Z",
+      "error": null
+    }
+  ]
+}
