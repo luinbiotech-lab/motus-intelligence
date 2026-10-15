@@ -1,0 +1,14 @@
+{
+  "mode": "LIVE",
+  "sourceMode": "internal",
+  "date": "2026-10-16",
+  "observedDate": null,
+  "category": "KOREA_MARKET",
+  "state": "HOLD",
+  "reasonCode": "KOREA_COMPLETED_SESSION_MISMATCH:2026-10-14:2026-10-15",
+  "verification": "FAILED",
+  "publishCallCount": 0,
+  "commerce": {
+    "enabled": false
+  }
+}

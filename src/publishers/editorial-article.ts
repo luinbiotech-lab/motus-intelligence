@@ -43,7 +43,7 @@ export function renderKoreaEditorialArticle(view:KoreaMarketDailyViewModel):Dail
   if(view.investorFlows.length)parts.push(section('수급이 가리킨 방향',flow(view.investorFlows)));
   if(view.sectors.length||view.movers.length)parts.push(section('업종과 종목의 온도차',metricProse([...view.sectors,...view.movers])));
   if(view.research.length)parts.push(section('증권사 시각',paragraphs(view.research.map(item=>`${item.publisher}: ${item.institutionView}`))));
-  if(view.checkpoints.length)parts.push(section('다음 거래일',paragraphs(view.checkpoints.map(item=>`${item.headline}: ${item.watchFor}`))));
+  if(view.checkpoints.length)parts.push(section(view.edition==='PREVIOUS_SESSION_MORNING'?'오늘 체크포인트':'다음 거래일',paragraphs(view.checkpoints.map(item=>`${item.headline}: ${item.watchFor}`))));
   parts.push(sources(view.sources));return finish('korea-market',view.title,BLOGGER_EDITORIAL_CATEGORIES.KOREA_MARKET.publicLabel,parts,['masthead','lead','indexes','fx','flows','sectors','research','watch','sources']);
 }
 

@@ -12,7 +12,7 @@
       "url": "https://openai.com/news/rss.xml",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-14T08:07:42.404Z",
+      "collectedAt": "2026-10-14T14:44:05.349Z",
       "error": null
     },
     {
@@ -21,7 +21,7 @@
       "url": "https://blog.google/technology/ai/rss/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-14T08:07:42.404Z",
+      "collectedAt": "2026-10-14T14:44:05.349Z",
       "error": null
     },
     {
@@ -30,7 +30,7 @@
       "url": "https://blogs.nvidia.com/feed/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-14T08:07:42.404Z",
+      "collectedAt": "2026-10-14T14:44:05.349Z",
       "error": null
     },
     {
@@ -39,43 +39,52 @@
       "url": "https://blogs.microsoft.com/feed/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-14T08:07:42.404Z",
+      "collectedAt": "2026-10-14T14:44:05.349Z",
       "error": null
     },
     {
-      "sourceId": "ai:item:1",
+      "sourceId": "ai:page:1",
       "category": "AI_INTELLIGENCE",
       "url": "https://blogs.nvidia.com/blog/uk-ecosystem-deployment/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-14T08:07:42.404Z",
+      "collectedAt": "2026-10-14T14:44:05.349Z",
       "error": null
     },
     {
-      "sourceId": "ai:item:2",
+      "sourceId": "ai:page:2",
       "category": "AI_INTELLIGENCE",
       "url": "https://blogs.nvidia.com/blog/european-cities-agents-urban-operations/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-14T08:07:42.404Z",
+      "collectedAt": "2026-10-14T14:44:05.349Z",
       "error": null
     },
     {
-      "sourceId": "ai:item:3",
+      "sourceId": "ai:page:3",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/the-eus-next-chapter-in-ai-is-agentic",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-10-14T14:44:05.349Z",
+      "error": "HTTP_403"
+    },
+    {
+      "sourceId": "ai:page:4",
       "category": "AI_INTELLIGENCE",
       "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-14T08:07:42.404Z",
+      "collectedAt": "2026-10-14T14:44:05.349Z",
       "error": null
     },
     {
-      "sourceId": "ai:item:4",
+      "sourceId": "ai:page:5",
       "category": "AI_INTELLIGENCE",
       "url": "https://blogs.nvidia.com/blog/local-ai-rtx-spark-laptops-software-updates/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-14T08:07:42.404Z",
+      "collectedAt": "2026-10-14T14:44:05.349Z",
       "error": null
     }
   ]

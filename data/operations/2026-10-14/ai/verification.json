@@ -1,6 +1,7 @@
 {
-  "schemaVersion": "1.0",
+  "schemaVersion": "1.1",
   "category": "AI_INTELLIGENCE",
+  "operationDate": "2026-10-14",
   "observedDate": "2026-10-14",
   "sourceMode": "internal",
   "verification": "VERIFIED",
@@ -13,18 +14,21 @@
   "leakagePass": true,
   "duplicateCheck": "PENDING_REMOTE",
   "duplicateUncertainty": true,
-  "articleFingerprint": "sha256:0678e6803ff72b4e2015c140ad6b8fbb6b968145234c2526a037d73c0f1cdc0d",
+  "articleFingerprint": "sha256:1148110359b1d506210b6f51975fa7fcc6bc58ce9a4e2a65de1dfa090db49f6b",
   "commerceEnabled": false,
-  "verifiedAt": "2026-10-14T08:07:42.404Z",
+  "verifiedAt": "2026-10-14T14:44:05.349Z",
+  "expiresAt": "2026-10-14T16:14:05.349Z",
   "sourceAuditIds": [
-    "openai",
+    "ai:page:1",
+    "ai:page:2",
+    "ai:page:4",
+    "ai:page:5",
     "google-ai",
-    "nvidia",
     "microsoft",
-    "ai:item:1",
-    "ai:item:2",
-    "ai:item:3",
-    "ai:item:4"
+    "nvidia",
+    "openai"
   ],
+  "sourceAuditFingerprint": "sha256:e2bd761eb66e21213b73bedfccf9929d3e047dc0ad613406a52cf21b15dfb540",
+  "crossVerificationFingerprint": null,
   "crossVerification": null
 }

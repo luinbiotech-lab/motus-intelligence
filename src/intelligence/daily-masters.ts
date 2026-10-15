@@ -39,6 +39,7 @@ export interface USMarketDailyViewModel extends DailyMasterBase {
 }
 export interface KoreaMarketDailyViewModel extends DailyMasterBase {
   category:'KOREA_MARKET';marketSummary:string;indexMetrics:KoreaMarketNewsletterMetric[];
+  operationDate?:string;sessionDate?:string;edition?:'PREVIOUS_SESSION_MORNING';fxBasis?:'BOK_REFERENCE_RATE'|'CURRENT_AT_COLLECTION';
   fxAndSupporting:KoreaMarketNewsletterMetric[];investorFlows:KoreaMarketNewsletterMetric[];
   sectors:KoreaMarketNewsletterMetric[];movers:KoreaMarketNewsletterMetric[];research:KoreaResearchNewsletterEntry[];
   marketCommentary:string[];checkpoints:NewsletterWatchItem[];marketHistory?:MajorIndexHistory;
