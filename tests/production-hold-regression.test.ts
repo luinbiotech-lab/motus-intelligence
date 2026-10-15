@@ -77,11 +77,11 @@ test('Korea 08:45 KST production model uses prior session, explicit FX basis and
  const view=result.payload!.unit.viewModel as import('../src/intelligence/daily-masters.js').KoreaMarketDailyViewModel;
  assert.equal(view.operationDate,'2026-10-15');assert.equal(view.sessionDate,'2026-10-14');assert.equal(view.issueDate,'2026-10-15');assert.equal(view.edition,'PREVIOUS_SESSION_MORNING');assert.equal(view.fxBasis,'CURRENT_AT_COLLECTION');assert.ok(view.indexMetrics.every(item=>item.source.label==='한국거래소'));assert.match(view.marketSummary,/전일 국내증시/);assert.doesNotMatch(view.title,/^\d{4}-\d{2}-\d{2}/);assert.match(result.payload!.unit.render.html,/오늘 체크포인트/);assert.match(result.payload!.unit.render.html,/USD\/KRW 수집 시점 현재가/);
 });
-test('only the accepted AI schedule enables live publication and Korea moves to morning',async()=>{
+test('controlled AI and U.S. schedules enable live publication while Korea stays gated',async()=>{
  const workflow=await readFile('.github/workflows/motus-daily-production.yml','utf8');
  assert.match(workflow,/MOTUS_LIVE_PUBLISH_ENABLED:\s*'false'/);
  assert.match(workflow,/SCHEDULE" == "30 3 \* \* 1-5" && "\$CATEGORY" == "ai"/);
  assert.match(workflow,/45 23 \* \* 0-4/);
- assert.doesNotMatch(workflow,/SCHEDULE" == "(?:45 21 \* \* 1-5|45 23 \* \* 0-4)"[^\n]*LIVE_PUBLISH=true/);
+ assert.match(workflow,/45 21 \* \* 1-5[^\n]*CATEGORY=us/);assert.match(workflow,/30 3 \* \* 1-5[^\n]*CATEGORY=ai/);assert.doesNotMatch(workflow,/SCHEDULE" == "45 23 \* \* 0-4"[^\n]*LIVE_PUBLISH=true/);
  assert.match(workflow,/INPUT_EXECUTE_PUBLISH" == "true"/);
 });

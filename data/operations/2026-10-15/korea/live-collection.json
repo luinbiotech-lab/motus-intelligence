@@ -5,7 +5,7 @@
   "observedDate": null,
   "category": "KOREA_MARKET",
   "state": "HOLD",
-  "reasonCode": "KRX_AUTH_KEY_MISSING",
+  "reasonCode": "KOSPI_MARKET_NOT_CLOSED",
   "verification": "FAILED",
   "publishCallCount": 0,
   "commerce": {

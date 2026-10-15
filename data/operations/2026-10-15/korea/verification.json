@@ -6,7 +6,7 @@
   "sourceMode": "internal",
   "verification": "FAILED",
   "unresolvedConflicts": [
-    "KRX_AUTH_KEY_MISSING"
+    "KOSPI_MARKET_NOT_CLOSED"
   ],
   "provenancePass": false,
   "sourceDiversityPass": false,
@@ -21,51 +21,9 @@
   "verifiedAt": "2026-10-14T23:45:00Z",
   "expiresAt": "2026-10-15T01:15:00.000Z",
   "sourceAuditIds": [
-    "naver:kospi",
-    "naver:kosdaq",
-    "naver:usd-krw",
-    "naver:flows",
-    "naver:sector",
-    "naver:mover"
+    "naver:kospi"
   ],
-  "sourceAuditFingerprint": "sha256:3c4bd66c5cc0178e2427fb855a5f9e2d9a91d88cc18a06e6c71849a0bd210c08",
-  "crossVerificationFingerprint": "sha256:139f6625f31c5fd5becd219b500c6372f6a38a5bfcbd8c6c57445d0d2acba8ac",
-  "crossVerification": {
-    "schemaVersion": "1.0",
-    "category": "KOREA_MARKET",
-    "observedDate": "2026-10-14",
-    "primarySource": {
-      "provider": "Naver Finance",
-      "domain": "naver.com",
-      "urls": [
-        "https://m.stock.naver.com/api/index/KOSPI/basic",
-        "https://m.stock.naver.com/api/index/KOSDAQ/basic"
-      ]
-    },
-    "independentSource": {
-      "providers": [],
-      "domains": [],
-      "urls": []
-    },
-    "comparedFields": [],
-    "tolerance": {
-      "KOSPI": 0.05,
-      "KOSDAQ": 0.05,
-      "USD_KRW": 2
-    },
-    "comparisonResult": "UNAVAILABLE",
-    "sourceDiversityPass": false,
-    "verification": "REVIEW_REQUIRED",
-    "reasonCodes": [
-      "KRX_AUTH_KEY_MISSING",
-      "KOREA_OFFICIAL_INDEX_COMPARISON_INCOMPLETE",
-      "KOREA_INDEPENDENT_SOURCE_DIVERSITY_FAILED"
-    ],
-    "verifiedAt": "2026-10-14T23:45:00Z",
-    "officialPhase": "PRE_PUBLICATION",
-    "reconciliation": {
-      "status": "NOT_REQUIRED",
-      "officialObservedDates": []
-    }
-  }
+  "sourceAuditFingerprint": "sha256:cf65e0463ef75b9ba6e7521b1588ed899ec74addbd15282d5b1e529b14119fa6",
+  "crossVerificationFingerprint": null,
+  "crossVerification": null
 }

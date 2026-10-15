@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "1.0",
+  "sourceMode": "internal",
+  "category": "US_MARKET",
+  "operationDate": "2026-10-15",
+  "status": "LIVE_READY",
+  "reasonCode": null,
+  "entries": [
+    {
+      "sourceId": "twelve:russell-2000",
+      "category": "US_MARKET",
+      "url": "https://api.twelvedata.com/time_series?symbol=RUT&interval=1day",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-10-15T03:56:46.586Z",
+      "error": "TWELVE_DATA_API_KEY_MISSING"
+    },
+    {
+      "sourceId": "twelve:dxy",
+      "category": "US_MARKET",
+      "url": "https://api.twelvedata.com/time_series?symbol=DXY&interval=1day",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-10-15T03:56:46.586Z",
+      "error": "TWELVE_DATA_API_KEY_MISSING"
+    },
+    {
+      "sourceId": "fred:sp500",
+      "category": "US_MARKET",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=SP500&cosd=2019-02-24",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-15T03:56:46.586Z",
+      "error": null
+    },
+    {
+      "sourceId": "fred:nasdaq",
+      "category": "US_MARKET",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=NASDAQCOM&cosd=2019-02-24",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-15T03:56:46.586Z",
+      "error": null
+    },
+    {
+      "sourceId": "fred:dow-jones",
+      "category": "US_MARKET",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-02-24",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-15T03:56:46.586Z",
+      "error": null
+    },
+    {
+      "sourceId": "fred:DGS10",
+      "category": "US_MARKET",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2025-12-09",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-15T03:56:46.586Z",
+      "error": null
+    },
+    {
+      "sourceId": "fred:VIXCLS",
+      "category": "US_MARKET",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS&cosd=2025-12-09",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-15T03:56:46.586Z",
+      "error": null
+    },
+    {
+      "sourceId": "fred:DCOILBRENTEU",
+      "category": "US_MARKET",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILBRENTEU&cosd=2025-12-09",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-15T03:56:46.586Z",
+      "error": null
+    },
+    {
+      "sourceId": "calendar:nyse",
+      "category": "US_MARKET",
+      "url": "https://www.nyse.com/trade/hours-calendars",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-15T03:56:46.586Z",
+      "error": null,
+      "observedDate": "2026-10-14",
+      "referenceDate": "2026-10-14"
+    },
+    {
+      "sourceId": "freshness:vix",
+      "category": "US_MARKET",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS&cosd=2025-12-09",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-10-15T03:56:46.586Z",
+      "error": "OPTIONAL_METRIC_STALE",
+      "observedDate": "2026-10-13",
+      "referenceDate": "2026-10-14"
+    },
+    {
+      "sourceId": "freshness:brent",
+      "category": "US_MARKET",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILBRENTEU&cosd=2025-12-09",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-10-15T03:56:46.586Z",
+      "error": "OPTIONAL_METRIC_STALE",
+      "observedDate": "2026-10-06",
+      "referenceDate": "2026-10-14"
+    }
+  ]
+}
