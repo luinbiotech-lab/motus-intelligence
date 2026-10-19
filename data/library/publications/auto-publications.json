@@ -16,5 +16,11 @@
     "publicationId": "motus-live-2026-10-14:us",
     "publicPostUrl": "https://motusnova.blogspot.com/2026/10/2026-10-14.html",
     "publishedAt": "2026-10-15T12:57:12+09:00"
+  },
+  {
+    "idempotencyKey": "library:motus-live-2026-10-19:korea|https://motusnova.blogspot.com/2026/10/kbi.html",
+    "publicationId": "motus-live-2026-10-19:korea",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/kbi.html",
+    "publishedAt": "2026-10-19T23:01:51+09:00"
   }
 ]

@@ -1,7 +1,7 @@
 export type KoreaComparedField='KOSPI'|'KOSDAQ'|'USD_KRW';
 export type KoreaMetricBasis='SESSION_CLOSE'|'CURRENT_AT_COLLECTION'|'REFERENCE_RATE';
 export interface KoreaPrimaryMarketSnapshot {observedDate:string;values:Partial<Record<KoreaComparedField,number>>;sourceUrls:string[];metricBasis?:Partial<Record<KoreaComparedField,KoreaMetricBasis>>}
-export interface KoreaOfficialObservation {field:KoreaComparedField;observedDate:string;value:number;provider:'KRX'|'BOK_ECOS';sourceUrl:string;metricBasis?:KoreaMetricBasis}
+export interface KoreaOfficialObservation {field:KoreaComparedField;observedDate:string;value:number;provider:'KRX'|'BOK_ECOS'|'YAHOO_FINANCE';sourceUrl:string;metricBasis?:KoreaMetricBasis}
 export interface KoreaOfficialAudit {sourceId:string;url:string;status:'PASS'|'FAILED'|'SKIPPED';recordCount:number;error:string|null}
 export interface KoreaOfficialFetchResult {observations:KoreaOfficialObservation[];audit:KoreaOfficialAudit[];requiredProviderAvailable:boolean;reasonCode:string|null;phase?:'PRE_PUBLICATION'|'POST_PUBLICATION_RECONCILIATION'}
 export interface KoreaOfficialSourceAdapter {readonly adapterId:string;fetch(observedDate:string,collectedAt:string):Promise<KoreaOfficialFetchResult>}
@@ -9,7 +9,7 @@ export interface KoreaFieldComparison {field:KoreaComparedField;primaryValue:num
 export interface KoreaCrossVerificationArtifact {
  schemaVersion:'1.0';category:'KOREA_MARKET';observedDate:string;
  primarySource:{provider:'Naver Finance';domain:'naver.com';urls:string[]};
- independentSource:{providers:Array<'KRX'|'BOK_ECOS'>;domains:string[];urls:string[]};
+ independentSource:{providers:Array<'KRX'|'BOK_ECOS'|'YAHOO_FINANCE'>;domains:string[];urls:string[]};
  comparedFields:KoreaFieldComparison[];tolerance:{KOSPI:number;KOSDAQ:number;USD_KRW:number};
  comparisonResult:'PASS'|'FAIL'|'UNAVAILABLE';sourceDiversityPass:boolean;
  verification:'VERIFIED'|'REVIEW_REQUIRED';reasonCodes:string[];verifiedAt:string;officialPhase?:'PRE_PUBLICATION'|'POST_PUBLICATION_RECONCILIATION';reconciliation?:{status:'NOT_REQUIRED'|'PENDING'|'PASS'|'MISMATCH';officialObservedDates:string[]};
@@ -32,6 +32,16 @@ export class KrxBokOfficialSourceAdapter implements KoreaOfficialSourceAdapter {
   else {const statCode=this.environment.BOK_ECOS_USD_KRW_STAT_CODE?.trim()||'731Y001',itemCode=this.environment.BOK_ECOS_USD_KRW_ITEM_CODE?.trim()||'0000001',url=`${BOK_ENDPOINT}/${encodeURIComponent(bokKey)}/json/kr/1/100/${encodeURIComponent(statCode)}/D/${compactDate}/${compactDate}/${encodeURIComponent(itemCode)}`,safeUrl='https://ecos.bok.or.kr/';try{const response=await this.fetcher(url,{headers:{accept:'application/json','user-agent':'MOTUS-Internal-Collector/1.0'},signal:AbortSignal.timeout(20000)});if(!response.ok)throw new Error('BOK_HTTP_'+response.status);const body=await response.json() as {StatisticSearch?:{row?:Array<{TIME?:string;DATA_VALUE?:string}>}},row=body.StatisticSearch?.row?.[0];if(!row)throw new Error('BOK_USD_KRW_ROW_MISSING');const date=normalizeDate(row.TIME),value=numberValue(row.DATA_VALUE);if(date!==observedDate)throw new Error('BOK_USD_KRW_OBSERVED_DATE_MISMATCH');observations.push({field:'USD_KRW',observedDate:date,value,provider:'BOK_ECOS',sourceUrl:safeUrl,metricBasis:'REFERENCE_RATE'});audit.push({sourceId:'bok:usd-krw',url:safeUrl,status:'PASS',recordCount:1,error:null})}catch(error){audit.push({sourceId:'bok:usd-krw',url:safeUrl,status:'FAILED',recordCount:0,error:errorMessage(error)})}}
   const sameDay=observations.filter(item=>item.provider==='KRX').every(item=>item.observedDate===observedDate),phase=sameDay?'PRE_PUBLICATION' as const:'POST_PUBLICATION_RECONCILIATION' as const;
   return {observations,audit,requiredProviderAvailable:sameDay,reasonCode:sameDay?null:'KRX_T_PLUS_ONE_RECONCILIATION_ONLY',phase};
+ }
+}
+
+export class YahooKoreaSecondarySourceAdapter implements KoreaOfficialSourceAdapter {
+ readonly adapterId='yahoo-korea-secondary-v1';
+ constructor(private readonly fetcher:typeof fetch=fetch){}
+ async fetch(observedDate:string,_collectedAt:string):Promise<KoreaOfficialFetchResult>{
+  const observations:KoreaOfficialObservation[]=[],audit:KoreaOfficialAudit[]=[],from=Math.floor(Date.parse(observedDate+'T00:00:00Z')/1000),to=from+3*86400;
+  try{for(const [field,symbol] of [['KOSPI','%5EKS11'],['KOSDAQ','%5EKQ11']] as const){const url=`https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?period1=${from}&period2=${to}&interval=1d`,response=await this.fetcher(url,{headers:{accept:'application/json','user-agent':'MOTUS-Internal-Collector/1.0'},signal:AbortSignal.timeout(20000)});if(!response.ok)throw new Error('YAHOO_FINANCE_HTTP_'+response.status);const body=await response.json() as {chart?:{result?:Array<{timestamp?:number[];indicators?:{quote?:Array<{close?:Array<number|null>}>}}>}},result=body.chart?.result?.[0],timestamps=result?.timestamp??[],closes=result?.indicators?.quote?.[0]?.close??[],index=timestamps.findIndex(value=>new Date(value*1000).toISOString().slice(0,10)===observedDate),value=index>=0?closes[index]:null;if(typeof value!=='number'||!Number.isFinite(value))throw new Error('YAHOO_FINANCE_'+field+'_ROW_MISSING');observations.push({field,observedDate,value,provider:'YAHOO_FINANCE',sourceUrl:url,metricBasis:'SESSION_CLOSE'});audit.push({sourceId:'yahoo-finance:'+field.toLowerCase(),url,status:'PASS',recordCount:1,error:null})}return {observations,audit,requiredProviderAvailable:true,reasonCode:null,phase:'PRE_PUBLICATION'}}
+  catch(error){return {observations,audit:[...audit,{sourceId:'yahoo-finance:secondary',url:'https://finance.yahoo.com/',status:'FAILED',recordCount:0,error:errorMessage(error)}],requiredProviderAvailable:false,reasonCode:errorMessage(error),phase:'PRE_PUBLICATION'}}
  }
 }
 

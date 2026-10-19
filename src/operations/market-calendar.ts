@@ -22,5 +22,11 @@ export function latestCompletedSession(market:'US'|'KOREA',at:string):MarketSess
   throw new Error(`${market}_COMPLETED_SESSION_NOT_FOUND`);
 }
 
+export function isCompletedSession(session:MarketSession,at:string):boolean {
+  if(session.state==='HOLIDAY'||!session.closeLocal)return false;
+  const zone=session.market==='US'?'America/New_York':'Asia/Seoul',local=localParts(at,zone);
+  return session.date<local.date||session.date===local.date&&local.time>=session.closeLocal;
+}
+
 function localParts(value:string,zone:string){const parts=new Intl.DateTimeFormat('en-CA',{timeZone:zone,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(new Date(value)),get=(type:string)=>parts.find(part=>part.type===type)?.value??'';return {date:`${get('year')}-${get('month')}-${get('day')}`,time:`${get('hour')}:${get('minute')}`}}
 function previous(date:string){const value=new Date(date+'T12:00:00Z');value.setUTCDate(value.getUTCDate()-1);return value.toISOString().slice(0,10)}
