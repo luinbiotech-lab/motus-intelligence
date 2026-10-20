@@ -6,7 +6,8 @@ export function evaluateEditorialQuality(title:string,html:string):EditorialQual
   const blocks=[...withoutCode.matchAll(/<(?:p|li)\b[^>]*>([\s\S]*?)<\/(?:p|li)>/gi)].map(match=>match[1]!.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim()).filter(value=>value.length>=40);
   const korean=(title.match(/[가-힣]/g)??[]).length,latin=(title.match(/[A-Za-z]/g)??[]).length,bodyKorean=(visible.match(/[가-힣]/g)??[]).length,bodyLatin=(visible.match(/[A-Za-z]/g)??[]).length;
   if(title.length<12||!korean||latin>korean*1.5)reasons.push('title is not natural Korean-first editorial copy');
-  if(/^\s*(?:\d{4}[-./]\d{1,2}[-./]\d{1,2}|MOTUS\b|AI 인텔리전스\s*:)/i.test(title))reasons.push('mechanical title prefix exposed');
+  if(titleContainsCalendarDate(title))reasons.push('calendar date exposed in title');
+  if(/^\s*(?:MOTUS\b|AI 인텔리전스\s*:|미국증시 마감\s*:)/i.test(title))reasons.push('mechanical title prefix exposed');
   if(/<(?:script|style)\b/i.test(decoded))reasons.push('script or style payload present');
   if(/(?:^|[>\s])https?:\/\//i.test(visible))reasons.push('plain or encoded raw URL exposed');
   if(/(무슨 일이 있었나|왜 중요한가|핵심 내용|산업 연결|시장 연결)\s*:?/i.test(visible))reasons.push('internal editorial label exposed');
@@ -17,6 +18,10 @@ export function evaluateEditorialQuality(title:string,html:string):EditorialQual
   if(/(?:&(?:amp;){1,3}lt;|&lt;)\s*(?:script|style|img|a)\b/i.test(html))reasons.push('double-encoded markup present');
   if(reasons.length===0&&latin>korean)notes.push('English company or product names are concentrated; Korean-first context retained');
   return {pass:reasons.length===0,reasons:[...new Set(reasons)],notes,visibleText:visible,proseBlockCount:blocks.length,koreanTextRatio,englishCopiedTextRatio};
+}
+
+export function titleContainsCalendarDate(title:string):boolean {
+  return /(?:\b(?:19|20)\d{2}[-./](?:0?[1-9]|1[0-2])[-./](?:0?[1-9]|[12]\d|3[01])\b|(?:(?:19|20)\d{2}년\s*)?(?:0?[1-9]|1[0-2])월\s*(?:0?[1-9]|[12]\d|3[01])일)/u.test(title);
 }
 
 export function publisherConcentrationWarning(publishers:string[],majorIssueVerified:boolean):string|null {const normalized=publishers.map(value=>value.trim().toLowerCase()).filter(Boolean);if(normalized.length<2||new Set(normalized).size>1)return null;return majorIssueVerified?'publisher concentration accepted for one clearly verified major issue':'publisher concentration requires editorial review'}

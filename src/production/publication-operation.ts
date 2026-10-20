@@ -11,6 +11,7 @@ export interface PublishLedgerEntry {
 type PublishLedgerInput=Omit<PublishLedgerEntry,'publicationIdentity'|'attemptId'|'gateState'|'publishAttempted'|'duplicateState'|'finalState'|'reason'|'commitSha'>&{identity:string;gateState?:string;publishAttempted?:boolean;duplicateState?:PublishLedgerEntry['duplicateState'];finalState?:string;reason?:string};
 
 export const publicationIdentity=(operationDate:string,category:DailyCategory)=>`${operationDate}|${category}`;
+export function persistedPublicationDecision(entries:PublishLedgerEntry[],operationDate:string,category:DailyCategory){const identity=publicationIdentity(operationDate,category),entry=entries.find(item=>(item.publicationIdentity??item.identity)===identity&&item.event==='PUBLISHED');return entry?{state:'SKIP' as const,reasonCode:'ALREADY_PUBLISHED_IN_PERSISTED_LEDGER',identity,postId:entry.postId,publicPostUrl:entry.publicPostUrl}:{state:'CONTINUE' as const,reasonCode:null,identity,postId:null,publicPostUrl:null}}
 
 export async function acquirePublicationLock(root:string,operationDate:string,category:DailyCategory):Promise<()=>Promise<void>> {
   const lockPath=join(root,'.publish-lock');

@@ -3,7 +3,10 @@ name: MOTUS Daily Catch-up Simulation
 on:
   workflow_dispatch:
   schedule:
-    - cron: '12 * * * 1-5'
+    # 07:20, 13:20 and 19:20 KST on weekdays
+    - cron: '20 22 * * 0-4'
+    - cron: '20 4 * * 1-5'
+    - cron: '20 10 * * 1-5'
 
 permissions:
   contents: read
@@ -14,7 +17,7 @@ concurrency:
 
 jobs:
   catch-up-readiness:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 30
     env:
       TZ: Asia/Seoul
@@ -32,6 +35,15 @@ jobs:
       SEARCH_CONSOLE_REFRESH_TOKEN: ${{ secrets.SEARCH_CONSOLE_REFRESH_TOKEN }}
     steps:
       - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Hydrate published ledger from ops-data
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git fetch origin ops-data:refs/remotes/origin/ops-data; then
+            git archive origin/ops-data data | tar -xf -
+            find data -name .publish-lock -type f -delete
+          fi
       - uses: actions/setup-node@v4
         with: {node-version: 22, cache: npm}
       - run: npm ci
@@ -63,7 +75,8 @@ jobs:
         run: |
           for CATEGORY in $CATEGORIES; do
             ROOT="data/operations/$RUN_DATE/$CATEGORY"
-            if [[ -f "$ROOT/publish-ledger.jsonl" ]] && grep -q '"event":"PUBLISHED"' "$ROOT/publish-ledger.jsonl"; then
+            CANONICAL_CATEGORY="$(case "$CATEGORY" in ai) echo AI_INTELLIGENCE;; us) echo US_MARKET;; korea) echo KOREA_MARKET;; esac)"
+            if [[ -f "$ROOT/publish-ledger.jsonl" ]] && grep -q "\"publicationIdentity\":\"$RUN_DATE|$CANONICAL_CATEGORY\".*\"event\":\"PUBLISHED\"" "$ROOT/publish-ledger.jsonl"; then
               echo "Already published: $RUN_DATE|$CATEGORY"
               continue
             fi
@@ -76,6 +89,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: motus-catchup-${{ env.RUN_DATE }}-${{ github.run_id }}
-          path: data/operations/${{ env.RUN_DATE }}/
+          path: |
+            data/operations/${{ env.RUN_DATE }}/
+            !data/**/.publish-lock
           if-no-files-found: warn
           retention-days: 90
