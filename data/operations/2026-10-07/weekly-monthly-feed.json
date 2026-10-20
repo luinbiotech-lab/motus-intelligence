@@ -1,0 +1,51 @@
+[
+  {
+    "category": "KOREA_MARKET",
+    "issueDate": "2026-10-06",
+    "publicationId": "motus-korea-market-2026-10-06",
+    "verificationState": "VERIFIED",
+    "publicationState": "PUBLISHED",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/298.html",
+    "publishedAt": "2026-10-06T23:47:26+09:00",
+    "articleFingerprint": "sha256:37e01d30e565db382764cc56f9f8fe50faf3c94adbc20a60800161a410ffb6cc",
+    "pdfConsistency": "NOT_AVAILABLE",
+    "searchTrackingState": "QUEUED",
+    "weeklyReadiness": "NOT_READY"
+  },
+  {
+    "category": "AI_INTELLIGENCE",
+    "issueDate": "2026-10-06",
+    "publicationId": "motus-ai-intelligence-2026-10-06",
+    "verificationState": "VERIFIED",
+    "publicationState": "PUBLISHED",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/ai_01763533093.html",
+    "publishedAt": "2026-10-07T20:34:40+09:00",
+    "articleFingerprint": "sha256:50d33f7c160c67548e012007f500be94165799b80f141c3b916758afabfb911b",
+    "searchTrackingState": "QUEUED",
+    "weeklyReadiness": "NOT_READY"
+  },
+  {
+    "category": "US_MARKET",
+    "issueDate": "2026-10-06",
+    "publicationId": "motus-us-market-2026-10-06",
+    "verificationState": "VERIFIED",
+    "publicationState": "PUBLISHED",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/s-500-5.html",
+    "publishedAt": "2026-10-07T20:34:46+09:00",
+    "articleFingerprint": "sha256:73e1d34ca5aac7cdc25ff08719593448892ef862172d2933b06f7cd02d872db5",
+    "searchTrackingState": "QUEUED",
+    "weeklyReadiness": "NOT_READY"
+  },
+  {
+    "category": "KOREA_MARKET",
+    "issueDate": "2026-10-07",
+    "publicationId": "motus-korea-market-2026-10-07",
+    "verificationState": "VERIFIED",
+    "publicationState": "DRAFT",
+    "publicPostUrl": null,
+    "publishedAt": null,
+    "articleFingerprint": "sha256:88165ca492e3f391a6fadf0f2745a0237adda2b2080259239b424d6fafbed8cd",
+    "searchTrackingState": "NOT_REGISTERED",
+    "weeklyReadiness": "NOT_READY"
+  }
+]

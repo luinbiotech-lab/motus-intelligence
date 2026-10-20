@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "1.0",
+  "sourceMode": "internal",
+  "category": "AI_INTELLIGENCE",
+  "operationDate": "2026-10-12",
+  "entries": [
+    {
+      "sourceId": "openai",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/news/rss.xml",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-12T18:00:00+09:00",
+      "error": null
+    },
+    {
+      "sourceId": "google-ai",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blog.google/technology/ai/rss/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-12T18:00:00+09:00",
+      "error": null
+    },
+    {
+      "sourceId": "nvidia",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blogs.nvidia.com/feed/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-12T18:00:00+09:00",
+      "error": null
+    },
+    {
+      "sourceId": "microsoft",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blogs.microsoft.com/feed/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-12T18:00:00+09:00",
+      "error": null
+    }
+  ]
+}

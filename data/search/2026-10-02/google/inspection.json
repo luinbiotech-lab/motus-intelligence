@@ -1,0 +1,11 @@
+{
+  "state": "NOT_CONFIGURED",
+  "queue": [
+    {
+      "publicationId": "newsletter:motus:2026-09-29",
+      "url": "https://motusnova.blogspot.com/2026/09/5-ai.html",
+      "status": "PENDING_CONFIGURATION"
+    }
+  ],
+  "results": []
+}

@@ -1,0 +1,69 @@
+{
+  "gate": {
+    "state": "AUTO_PUBLISH_READY",
+    "reasons": [],
+    "approval": "AUTO_POLICY_APPROVAL",
+    "checkedAt": "2026-10-13T10:30:52.037Z"
+  },
+  "searchRegistration": {
+    "publicationId": "motus-live-2026-10-13:ai",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/ai_02030153127.html",
+    "registeredAt": "2026-10-13T19:31:00+09:00",
+    "trigger": "PUBLICATION_PUBLISHED",
+    "googleInspectionState": "QUEUED",
+    "naverDiscoveryState": "PENDING",
+    "visibility": {
+      "publicationId": "motus-live-2026-10-13:ai",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/10/ai_02030153127.html",
+      "google": {
+        "discovered": null,
+        "indexed": null,
+        "lastCrawl": null,
+        "coverageState": null,
+        "inspectionAt": null
+      },
+      "naver": {
+        "discovered": null,
+        "indexed": null,
+        "collectionState": null,
+        "inspectionAt": null
+      },
+      "sitemapIncluded": null,
+      "rssIncluded": null
+    }
+  },
+  "libraryRegistration": {
+    "idempotencyKey": "library:motus-live-2026-10-13:ai|https://motusnova.blogspot.com/2026/10/ai_02030153127.html"
+  },
+  "weeklyFeed": {
+    "idempotencyKey": "weekly:motus-live-2026-10-13:ai"
+  },
+  "pdfCandidate": {
+    "idempotencyKey": "pdf:motus-live-2026-10-13:ai:sha256:68193d4bb82ff4751fdd28918b526046bfd9ba9ede9d5b06f9cdaf2db237c7e3",
+    "visibility": "PRIVATE"
+  },
+  "audit": [
+    {
+      "at": "2026-10-13T10:30:52.037Z",
+      "event": "AUTO_PUBLISH_GATE",
+      "detail": "AUTO_PUBLISH_READY"
+    },
+    {
+      "at": "2026-10-13T10:30:52.037Z",
+      "event": "REMOTE_DUPLICATE_CHECK",
+      "detail": "PASS"
+    },
+    {
+      "at": "2026-10-13T19:31:00+09:00",
+      "event": "PUBLISHED",
+      "detail": "AUTO_POLICY_APPROVAL"
+    }
+  ],
+  "state": "PUBLISHED",
+  "draftPostId": "9164842084025804267",
+  "publicPostUrl": "https://motusnova.blogspot.com/2026/10/ai_02030153127.html",
+  "publishedAt": "2026-10-13T19:31:00+09:00",
+  "insertCallCount": 1,
+  "publishCallCount": 1,
+  "error": null
+}

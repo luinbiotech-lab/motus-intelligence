@@ -1,0 +1,40 @@
+{
+  "status": "PASS",
+  "checks": {
+    "fileExists": true,
+    "nonZeroSize": true,
+    "validPdfSignature": true,
+    "pageCount": true,
+    "textExtraction": true,
+    "koreanText": true,
+    "motusTitle": true,
+    "issueDate": true,
+    "noInternalIds": true,
+    "noRawSecret": true,
+    "noLocalhost": true,
+    "noPlaceholder": true,
+    "noFixtureLabel": true,
+    "overflow": true,
+    "charts": true,
+    "sources": true,
+    "fontEmbedded": true,
+    "minimumBodyFontSize": true
+  },
+  "warnings": [
+    "Daily report used 2-page fallback"
+  ],
+  "errors": [],
+  "extractedTextLength": 1498,
+  "fontNames": [
+    "/AAAAAA+MalgunGothic",
+    "/AAAAAA+MalgunGothicBold",
+    "/AAAAAB+MalgunGothic",
+    "/Helvetica"
+  ],
+  "fontPaths": [
+    "malgun.ttf",
+    "malgunbd.ttf"
+  ],
+  "pageCount": 2,
+  "fileSizeBytes": 87278
+}

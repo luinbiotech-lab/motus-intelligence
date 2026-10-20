@@ -1,0 +1,32 @@
+{
+  "artifactId": "pdf:weekly-intelligence-2026-w40:bc14c66591c7",
+  "publicationId": "weekly-intelligence-2026-w40",
+  "reportType": "WEEKLY_INTELLIGENCE",
+  "issueDate": "2026-10-02",
+  "periodStart": "2026-09-28",
+  "periodEnd": "2026-10-02",
+  "fileName": "motus-weekly-2026-w40.pdf",
+  "localPath": "data/reports/review/weekly/report.pdf",
+  "fileSizeBytes": 107159,
+  "pageCount": 4,
+  "contentFingerprint": "bc14c66591c7f29c3daa7a1d7c8628ce9656aea4e86ec4486a56b47d058da11e",
+  "sourceFingerprint": "ac6054982cb8339130028d878e1e3b23f7436aa463fa075e4d78971fb2196a91",
+  "generatedAt": "2026-10-02T06:13:40.121Z",
+  "state": "VALIDATED",
+  "downloadUrl": null,
+  "storageProvider": "LOCAL_ONLY",
+  "storageObjectId": null,
+  "reviewState": "PENDING",
+  "validationStatus": "PASS",
+  "failureReason": null,
+  "canonicalFileName": "motus-weekly-2026-w40.pdf",
+  "publicDistribution": false,
+  "consistency": {
+    "state": "PASS",
+    "reason": null
+  },
+  "reviewPackagePath": "data/reports/review/weekly/review.json",
+  "contactSheetPath": "data/reports/review/weekly/contact-sheet.png",
+  "immutable": true,
+  "version": 1
+}

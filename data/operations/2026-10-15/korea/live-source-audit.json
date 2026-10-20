@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "1.0",
+  "sourceMode": "internal",
+  "category": "KOREA_MARKET",
+  "operationDate": "2026-10-15",
+  "status": "HOLD",
+  "reasonCode": "KOSPI_MARKET_NOT_CLOSED",
+  "entries": [
+    {
+      "sourceId": "naver:kospi",
+      "category": "KOREA_MARKET",
+      "url": "https://m.stock.naver.com/api/index/KOSPI/basic",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-14T23:45:00Z",
+      "error": null,
+      "dateField": "localTradedAt",
+      "sourceTimestamp": "2026-10-15T12:59:00+09:00",
+      "observedDate": "2026-10-15"
+    }
+  ]
+}

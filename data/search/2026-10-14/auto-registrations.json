@@ -1,0 +1,29 @@
+[
+  {
+    "publicationId": "motus-live-2026-10-14:ai",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/ai-2026-10-14.html",
+    "registeredAt": "2026-10-14T17:14:40+09:00",
+    "trigger": "PUBLICATION_PUBLISHED",
+    "googleInspectionState": "QUEUED",
+    "naverDiscoveryState": "PENDING",
+    "visibility": {
+      "publicationId": "motus-live-2026-10-14:ai",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/10/ai-2026-10-14.html",
+      "google": {
+        "discovered": null,
+        "indexed": null,
+        "lastCrawl": null,
+        "coverageState": null,
+        "inspectionAt": null
+      },
+      "naver": {
+        "discovered": null,
+        "indexed": null,
+        "collectionState": null,
+        "inspectionAt": null
+      },
+      "sitemapIncluded": null,
+      "rssIncluded": null
+    }
+  }
+]

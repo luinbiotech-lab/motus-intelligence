@@ -1,0 +1,38 @@
+{
+  "gate": {
+    "state": "HOLD",
+    "reasons": [
+      "final remote duplicate recheck failed"
+    ],
+    "approval": null,
+    "checkedAt": "2026-10-14T14:44:09.754Z"
+  },
+  "searchRegistration": null,
+  "libraryRegistration": null,
+  "weeklyFeed": null,
+  "pdfCandidate": null,
+  "audit": [
+    {
+      "at": "2026-10-14T14:44:09.754Z",
+      "event": "AUTO_PUBLISH_STATIC_GATE",
+      "detail": "AUTO_PUBLISH_READY"
+    },
+    {
+      "at": "2026-10-14T14:44:09.754Z",
+      "event": "REMOTE_DUPLICATE_CHECK",
+      "detail": "PASS"
+    },
+    {
+      "at": "2026-10-14T14:44:09.754Z",
+      "event": "FINAL_REMOTE_DUPLICATE_CHECK",
+      "detail": "HOLD"
+    }
+  ],
+  "state": "HOLD",
+  "draftPostId": "8137370965025302125",
+  "publicPostUrl": null,
+  "publishedAt": null,
+  "insertCallCount": 1,
+  "publishCallCount": 0,
+  "error": "final remote duplicate recheck failed"
+}

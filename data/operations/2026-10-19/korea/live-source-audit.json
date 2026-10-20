@@ -1,0 +1,128 @@
+{
+  "schemaVersion": "1.0",
+  "sourceMode": "internal",
+  "category": "KOREA_MARKET",
+  "operationDate": "2026-10-19",
+  "status": "LIVE_READY",
+  "reasonCode": null,
+  "entries": [
+    {
+      "sourceId": "naver:kospi",
+      "category": "KOREA_MARKET",
+      "url": "https://m.stock.naver.com/api/index/KOSPI/basic",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-19T14:01:06.120Z",
+      "error": null,
+      "dateField": "localTradedAt",
+      "sourceTimestamp": "2026-10-19T20:15:00+09:00",
+      "observedDate": "2026-10-19",
+      "referenceDate": "2026-10-19"
+    },
+    {
+      "sourceId": "naver:kosdaq",
+      "category": "KOREA_MARKET",
+      "url": "https://m.stock.naver.com/api/index/KOSDAQ/basic",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-19T14:01:06.120Z",
+      "error": null,
+      "dateField": "localTradedAt",
+      "sourceTimestamp": "2026-10-19T20:15:00+09:00",
+      "observedDate": "2026-10-19",
+      "referenceDate": "2026-10-19"
+    },
+    {
+      "sourceId": "naver:usd-krw",
+      "category": "KOREA_MARKET",
+      "url": "https://api.stock.naver.com/marketindex/exchange/FX_USDKRW",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-19T14:01:06.120Z",
+      "error": null,
+      "dateField": "exchangeInfo.localTradedAt",
+      "sourceTimestamp": "2026-10-19T22:59:43+09:00",
+      "observedDate": "2026-10-19",
+      "referenceDate": "2026-10-19"
+    },
+    {
+      "sourceId": "naver:flows",
+      "category": "KOREA_MARKET",
+      "url": "https://m.stock.naver.com/api/index/KOSPI/trend",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-19T14:01:06.120Z",
+      "error": null,
+      "dateField": "bizdate",
+      "sourceTimestamp": "20261019",
+      "observedDate": "2026-10-19",
+      "referenceDate": "2026-10-19"
+    },
+    {
+      "sourceId": "naver:sector",
+      "category": "KOREA_MARKET",
+      "url": "https://stock.naver.com/api/domestic/market/upjong/list?startIdx=0&pageSize=100&sortType=changeRate",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-19T14:01:06.120Z",
+      "error": null,
+      "dateField": "thistime",
+      "sourceTimestamp": "20261019200504",
+      "observedDate": "2026-10-19",
+      "referenceDate": "2026-10-19"
+    },
+    {
+      "sourceId": "naver:mover",
+      "category": "KOREA_MARKET",
+      "url": "https://m.stock.naver.com/api/stocks/up/KOSPI?page=1&pageSize=20",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-19T14:01:06.120Z",
+      "error": null,
+      "dateField": "localTradedAt",
+      "sourceTimestamp": "2026-10-19T20:20:21+09:00",
+      "observedDate": "2026-10-19",
+      "referenceDate": "2026-10-19"
+    },
+    {
+      "sourceId": "krx:kospi",
+      "category": "KOREA_MARKET",
+      "url": "https://openapi.krx.co.kr/svc/apis/idx/kospi_dd_trd?basDd=20261019",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-10-19T14:01:06.120Z",
+      "error": "KRX_AUTH_KEY_MISSING",
+      "referenceDate": "2026-10-19"
+    },
+    {
+      "sourceId": "krx:kosdaq",
+      "category": "KOREA_MARKET",
+      "url": "https://openapi.krx.co.kr/svc/apis/idx/kosdaq_dd_trd?basDd=20261019",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-10-19T14:01:06.120Z",
+      "error": "KRX_AUTH_KEY_MISSING",
+      "referenceDate": "2026-10-19"
+    },
+    {
+      "sourceId": "yahoo-finance:kospi",
+      "category": "KOREA_MARKET",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?period1=1792368000&period2=1792627200&interval=1d",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-19T14:01:06.120Z",
+      "error": null,
+      "referenceDate": "2026-10-19"
+    },
+    {
+      "sourceId": "yahoo-finance:kosdaq",
+      "category": "KOREA_MARKET",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?period1=1792368000&period2=1792627200&interval=1d",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-19T14:01:06.120Z",
+      "error": null,
+      "referenceDate": "2026-10-19"
+    }
+  ]
+}

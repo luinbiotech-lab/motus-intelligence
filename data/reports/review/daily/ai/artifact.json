@@ -1,0 +1,32 @@
+{
+  "artifactId": "pdf:motus-ai-intelligence-2026-09-29:e0c995c3f87f",
+  "publicationId": "motus-ai-intelligence-2026-09-29",
+  "reportType": "AI_DAILY",
+  "issueDate": "2026-09-29",
+  "periodStart": "2026-09-29",
+  "periodEnd": "2026-09-29",
+  "fileName": "motus-ai-daily-2026-09-29.pdf",
+  "localPath": "data/reports/review/daily/ai/report.pdf",
+  "fileSizeBytes": 90409,
+  "pageCount": 1,
+  "contentFingerprint": "e0c995c3f87f1c64fae36e40074e788a1bd91af6a45ccb037e0e29a57d5e0594",
+  "sourceFingerprint": "fcd8554217c17bd2009779f1675569a462b58364c35a2112841a451933ce4d0e",
+  "generatedAt": "2026-10-02T05:57:36.708Z",
+  "state": "VALIDATED",
+  "downloadUrl": null,
+  "storageProvider": "LOCAL_ONLY",
+  "storageObjectId": null,
+  "reviewState": "PENDING",
+  "validationStatus": "PASS",
+  "failureReason": null,
+  "canonicalFileName": "motus-ai-daily-2026-09-29.pdf",
+  "publicDistribution": false,
+  "consistency": {
+    "state": "PASS",
+    "reason": null
+  },
+  "reviewPackagePath": "data/reports/review/daily/ai/review.json",
+  "contactSheetPath": "data/reports/review/daily/ai/contact-sheet.png",
+  "immutable": true,
+  "version": 1
+}

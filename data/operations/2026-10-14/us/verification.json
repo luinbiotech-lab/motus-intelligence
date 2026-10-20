@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0",
+  "category": "US_MARKET",
+  "observedDate": "2026-10-14",
+  "sourceMode": "internal",
+  "verification": "FAILED",
+  "unresolvedConflicts": [
+    "TWELVE_DATA_API_KEY_MISSING"
+  ],
+  "provenancePass": false,
+  "sourceDiversityPass": false,
+  "sourceLinksPass": false,
+  "mobilePass": false,
+  "editorialQualityPass": false,
+  "leakagePass": true,
+  "duplicateCheck": "PENDING_REMOTE",
+  "duplicateUncertainty": true,
+  "articleFingerprint": "",
+  "commerceEnabled": false,
+  "verifiedAt": "2026-10-14T08:10:02.467Z",
+  "sourceAuditIds": [],
+  "crossVerification": null
+}

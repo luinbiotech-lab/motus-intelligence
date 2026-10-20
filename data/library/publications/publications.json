@@ -1,0 +1,117 @@
+[
+  {
+    "recordType": "PUBLICATION",
+    "canonicalId": "motus-daily-intelligence-2026-09-29",
+    "canonicalName": "국채금리 5%대의 압박과 AI 에이전트 경쟁",
+    "displayName": "국채금리 5%대의 압박과 AI 에이전트 경쟁",
+    "aliases": [],
+    "summary": "미국 장기금리 부담으로 주요 지수가 소폭 밀린 가운데 AI 산업은 에이전트 실행 환경·보안·과학 연구로 적용 범위를 넓혔다. 한국시장에서는 외국인 매도가 지수 상단을 눌렀다.",
+    "status": "ACTIVE",
+    "verificationStatus": "VERIFIED",
+    "confidence": null,
+    "sourceRefs": [
+      "source:02483f80431a21af",
+      "source:097dd4926e5cb359",
+      "source:110e8e26550eddab",
+      "source:3b960f3ca7c5f68d",
+      "source:48d126d9d9877b2b",
+      "source:4b15991b9e2930ef",
+      "source:5248fdb3ba75d77c",
+      "source:637f78c2396e4eed",
+      "source:7ee79eecb360c6d0",
+      "source:a640107c7e713e6d",
+      "source:b623893b395d1f8a",
+      "source:dec620cb7225d243",
+      "source:e5145426af47238c",
+      "source:f33c539a6ad0bf3c",
+      "source:fc083cd0ad774d94"
+    ],
+    "evidenceRefs": [],
+    "originRecordIds": [
+      "newsletter:motus:2026-09-29"
+    ],
+    "internalMetadata": {
+      "issueDate": "2026-09-29",
+      "decision": "SELECTED"
+    },
+    "publicMetadata": {
+      "issueDate": "2026-09-29"
+    },
+    "libraryId": "library:publication:motus-daily-intelligence-2026-09-29",
+    "firstSeenAt": "2026-09-29T23:59:00Z",
+    "lastSeenAt": "2026-09-29T23:59:00Z",
+    "createdAt": "2026-09-29T23:59:00Z",
+    "updatedAt": "2026-09-29T23:59:00Z"
+  },
+  {
+    "recordType": "PUBLICATION",
+    "canonicalId": "motus-us-market-2026-09-30",
+    "canonicalName": "미국 증시 마감: 장기금리 부담에 다우 약세, 나스닥은 소폭 상승 (2026년 9월 30일)",
+    "displayName": "미국 증시 마감: 장기금리 부담에 다우 약세, 나스닥은 소폭 상승 (2026년 9월 30일)",
+    "aliases": [],
+    "summary": "9월 마지막 거래일에는 지수 내부의 온도 차가 컸다. 나스닥은 0.24% 올랐지만 S&P 500과 러셀2000은 하락했고, 다우는 0.86% 밀렸다. 예상보다 완만한 물가 지표로 시작한 안도감은 견조한 성장 지표와 5.29%까지 오른 10년물 금리에 눌렸다.",
+    "status": "ACTIVE",
+    "verificationStatus": "VERIFIED",
+    "confidence": null,
+    "sourceRefs": [
+      "source:29a07ab3ee191f5d",
+      "source:634601952cfcccbc",
+      "source:a8bfcc6803e874a0",
+      "source:d6ff3ff59270a263",
+      "source:f14e8f2db1e52e24"
+    ],
+    "evidenceRefs": [],
+    "originRecordIds": [
+      "motus-us-market-2026-09-30"
+    ],
+    "internalMetadata": {
+      "issueDate": "2026-09-30",
+      "decision": "SELECTED"
+    },
+    "publicMetadata": {
+      "issueDate": "2026-09-30"
+    },
+    "libraryId": "library:publication:motus-us-market-2026-09-30",
+    "firstSeenAt": "2026-09-30T23:59:00Z",
+    "lastSeenAt": "2026-09-30T23:59:00Z",
+    "createdAt": "2026-09-30T23:59:00Z",
+    "updatedAt": "2026-09-30T23:59:00Z"
+  },
+  {
+    "recordType": "PUBLICATION",
+    "canonicalId": "motus-korea-market-2026-09-30",
+    "canonicalName": "국내 증시 마감: 외국인·기관 매도에 코스피 하락, 코스닥은 반등 (2026년 9월 30일)",
+    "displayName": "국내 증시 마감: 외국인·기관 매도에 코스피 하락, 코스닥은 반등 (2026년 9월 30일)",
+    "aliases": [],
+    "summary": "코스피는 외국인과 기관의 동반 순매도에 0.48% 하락한 6,838.04로 마감했다. 반면 코스닥은 기관 순매수와 일부 반도체·장비주의 강세에 0.72% 올랐다. 원·달러 환율은 1,352.8원으로 3.9원 내려 환율 부담은 다소 완화됐지만, 대형주 수급은 여전히 무거웠다.",
+    "status": "ACTIVE",
+    "verificationStatus": "VERIFIED",
+    "confidence": null,
+    "sourceRefs": [
+      "source:3b960f3ca7c5f68d",
+      "source:5248fdb3ba75d77c",
+      "source:637f78c2396e4eed",
+      "source:669ab915e7e3ea94",
+      "source:7e576ecf0c83e93f",
+      "source:dc19ef3ea4436f19",
+      "source:f33c539a6ad0bf3c",
+      "source:fc083cd0ad774d94"
+    ],
+    "evidenceRefs": [],
+    "originRecordIds": [
+      "motus-korea-market-2026-09-30"
+    ],
+    "internalMetadata": {
+      "issueDate": "2026-09-30",
+      "decision": "SELECTED"
+    },
+    "publicMetadata": {
+      "issueDate": "2026-09-30"
+    },
+    "libraryId": "library:publication:motus-korea-market-2026-09-30",
+    "firstSeenAt": "2026-09-30T23:59:30Z",
+    "lastSeenAt": "2026-09-30T23:59:30Z",
+    "createdAt": "2026-09-30T23:59:30Z",
+    "updatedAt": "2026-09-30T23:59:30Z"
+  }
+]

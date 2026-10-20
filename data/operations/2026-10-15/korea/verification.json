@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "1.1",
+  "category": "KOREA_MARKET",
+  "operationDate": "2026-10-15",
+  "observedDate": "2026-10-15",
+  "sourceMode": "internal",
+  "verification": "FAILED",
+  "unresolvedConflicts": [
+    "KOSPI_MARKET_NOT_CLOSED"
+  ],
+  "provenancePass": false,
+  "sourceDiversityPass": false,
+  "sourceLinksPass": false,
+  "mobilePass": false,
+  "editorialQualityPass": false,
+  "leakagePass": true,
+  "duplicateCheck": "PENDING_REMOTE",
+  "duplicateUncertainty": true,
+  "articleFingerprint": "",
+  "commerceEnabled": false,
+  "verifiedAt": "2026-10-14T23:45:00Z",
+  "expiresAt": "2026-10-15T01:15:00.000Z",
+  "sourceAuditIds": [
+    "naver:kospi"
+  ],
+  "sourceAuditFingerprint": "sha256:cf65e0463ef75b9ba6e7521b1588ed899ec74addbd15282d5b1e529b14119fa6",
+  "crossVerificationFingerprint": null,
+  "crossVerification": null
+}

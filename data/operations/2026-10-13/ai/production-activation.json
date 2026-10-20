@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "1.0",
+  "project": "MOTUS Intelligence",
+  "category": "AI_INTELLIGENCE",
+  "operationDate": "2026-10-13",
+  "observedDate": "2026-10-13",
+  "state": "READY_FOR_SCHEDULED_PRODUCTION",
+  "controlledPublish": {
+    "postId": "9164842084025804267",
+    "state": "PUBLISHED",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/ai_02030153127.html",
+    "publishedAt": "2026-10-13T19:31:00+09:00",
+    "httpStatus": 200,
+    "duplicateCheck": "PASS",
+    "publishCallCount": 1,
+    "contentFingerprint": "sha256:68193d4bb82ff4751fdd28918b526046bfd9ba9ede9d5b06f9cdaf2db237c7e3"
+  },
+  "downstream": {
+    "searchRegistration": "QUEUED",
+    "library": "REGISTERED",
+    "weeklyFeed": "REGISTERED",
+    "pdfCandidate": "PRIVATE_PENDING"
+  },
+  "commerce": {
+    "enabled": false
+  },
+  "scheduledProductionPublishEnabled": false,
+  "recordedAt": "2026-10-13T10:32:50.486Z"
+}

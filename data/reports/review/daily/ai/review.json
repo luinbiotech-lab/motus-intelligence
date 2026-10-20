@@ -1,0 +1,39 @@
+{
+  "artifactId": "pdf:motus-ai-intelligence-2026-09-29:e0c995c3f87f",
+  "reportType": "AI_DAILY",
+  "issueDate": "2026-09-29",
+  "fileName": "motus-ai-daily-2026-09-29.pdf",
+  "pageCount": 1,
+  "fileSizeBytes": 90409,
+  "contentFingerprint": "e0c995c3f87f1c64fae36e40074e788a1bd91af6a45ccb037e0e29a57d5e0594",
+  "sourceFingerprint": "fcd8554217c17bd2009779f1675569a462b58364c35a2112841a451933ce4d0e",
+  "validationSummary": {
+    "status": "PASS",
+    "warnings": [],
+    "errors": []
+  },
+  "contactSheetPath": "data/reports/review/daily/ai/contact-sheet.png",
+  "visualChecks": {
+    "titleHierarchy": "PENDING",
+    "typography": "PENDING",
+    "chartReadability": "PENDING",
+    "spacing": "PENDING",
+    "pageBalance": "PENDING",
+    "sourceReadability": "PENDING",
+    "footer": "PENDING",
+    "colorConvention": "PENDING",
+    "KoreanRendering": "PENDING"
+  },
+  "contentChecks": {
+    "headlineAccuracy": "PENDING",
+    "dataAccuracy": "PENDING",
+    "explanationSufficiency": "PENDING",
+    "sourceCoverage": "PENDING",
+    "noUnsupportedClaim": "PENDING",
+    "articlePdfConsistency": "PENDING"
+  },
+  "reviewState": "PENDING",
+  "reviewNotes": null,
+  "reviewedAt": null,
+  "reviewedBy": null
+}

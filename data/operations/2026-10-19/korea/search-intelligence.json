@@ -1,0 +1,29 @@
+{
+  "collectedAt": "2026-10-19T14:01:06.120Z",
+  "signalDate": null,
+  "provider": null,
+  "freshness": "NO_SEARCH_SIGNAL",
+  "fallbackReason": "SEARCH_PROVIDER_NOT_CONFIGURED",
+  "warnings": [],
+  "orderedTopicIds": [
+    "mover:0",
+    "mover:1",
+    "mover:2",
+    "mover:3",
+    "mover:4",
+    "mover:5",
+    "mover:6",
+    "mover:7",
+    "sector:0",
+    "sector:1",
+    "sector:2",
+    "sector:3",
+    "sector:4",
+    "sector:5",
+    "sector:6",
+    "sector:7"
+  ],
+  "selectedSecondaryTopicId": null,
+  "factsChanged": false,
+  "gateOverride": false
+}

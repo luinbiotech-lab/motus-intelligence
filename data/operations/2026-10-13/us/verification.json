@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0",
+  "category": "US_MARKET",
+  "observedDate": "2026-10-13",
+  "sourceMode": "internal",
+  "verification": "FAILED",
+  "unresolvedConflicts": [
+    "TWELVE_DATA_API_KEY_MISSING"
+  ],
+  "provenancePass": false,
+  "sourceDiversityPass": false,
+  "sourceLinksPass": false,
+  "mobilePass": false,
+  "editorialQualityPass": false,
+  "leakagePass": true,
+  "duplicateCheck": "PENDING_REMOTE",
+  "duplicateUncertainty": true,
+  "articleFingerprint": "",
+  "commerceEnabled": false,
+  "verifiedAt": "2026-10-13T18:00:00+09:00",
+  "sourceAuditIds": [
+    "fred:sp500",
+    "fred:nasdaq",
+    "fred:dow-jones"
+  ],
+  "crossVerification": null
+}

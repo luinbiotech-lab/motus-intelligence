@@ -1,0 +1,117 @@
+{
+  "reportId": "SAMPLE-INVALID-INPUT-cc77099b7d6d",
+  "tradingDate": "INVALID_INPUT",
+  "generatedAt": "2026-09-13T05:32:02.215Z",
+  "publishedAt": null,
+  "templateVersion": "1.0.0",
+  "analysisRuleVersion": "1.0.0",
+  "status": "BLOCKED",
+  "sample": true,
+  "sections": [
+    {
+      "id": "section-1",
+      "title": "SEO 제목 + 기준일",
+      "items": [
+        {
+          "text": "BLOCKED — 입력 형식 오류로 생성 불가",
+          "nature": "CONFIRMED_FACT",
+          "evidenceIds": []
+        }
+      ]
+    },
+    {
+      "id": "section-2",
+      "title": "3줄 요약",
+      "items": [
+        {
+          "text": "BLOCKED — 입력 형식 오류로 생성 불가",
+          "nature": "CONFIRMED_FACT",
+          "evidenceIds": []
+        }
+      ]
+    },
+    {
+      "id": "section-3",
+      "title": "미국시장 마감",
+      "items": [
+        {
+          "text": "BLOCKED — 입력 형식 오류로 생성 불가",
+          "nature": "CONFIRMED_FACT",
+          "evidenceIds": []
+        }
+      ]
+    },
+    {
+      "id": "section-4",
+      "title": "시장을 움직인 원인",
+      "items": [
+        {
+          "text": "BLOCKED — 입력 형식 오류로 생성 불가",
+          "nature": "CONFIRMED_FACT",
+          "evidenceIds": []
+        }
+      ]
+    },
+    {
+      "id": "section-5",
+      "title": "주요 기업과 산업",
+      "items": [
+        {
+          "text": "BLOCKED — 입력 형식 오류로 생성 불가",
+          "nature": "CONFIRMED_FACT",
+          "evidenceIds": []
+        }
+      ]
+    },
+    {
+      "id": "section-6",
+      "title": "한국시장 영향",
+      "items": [
+        {
+          "text": "BLOCKED — 입력 형식 오류로 생성 불가",
+          "nature": "CONFIRMED_FACT",
+          "evidenceIds": []
+        }
+      ]
+    },
+    {
+      "id": "section-7",
+      "title": "오늘의 일정과 체크리스트",
+      "items": [
+        {
+          "text": "BLOCKED — 입력 형식 오류로 생성 불가",
+          "nature": "CONFIRMED_FACT",
+          "evidenceIds": []
+        }
+      ]
+    },
+    {
+      "id": "section-8",
+      "title": "출처 및 관련 기사",
+      "items": [
+        {
+          "text": "BLOCKED — 입력 형식 오류로 생성 불가",
+          "nature": "CONFIRMED_FACT",
+          "evidenceIds": []
+        }
+      ]
+    },
+    {
+      "id": "section-9",
+      "title": "해시태그",
+      "items": [
+        {
+          "text": "BLOCKED — 입력 형식 오류로 생성 불가",
+          "nature": "CONFIRMED_FACT",
+          "evidenceIds": []
+        }
+      ]
+    }
+  ],
+  "seoTitle": "BLOCKED — 입력 형식 오류",
+  "threeLineSummary": [
+    "입력 형식 오류",
+    "시장 해석 생성 안 함",
+    "근거 패키지의 원본 및 검증 오류 확인"
+  ]
+}

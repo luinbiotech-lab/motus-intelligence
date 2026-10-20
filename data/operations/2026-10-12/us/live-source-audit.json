@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "1.0",
+  "sourceMode": "internal",
+  "category": "US_MARKET",
+  "operationDate": "2026-10-12",
+  "entries": [
+    {
+      "sourceId": "fred:sp500",
+      "category": "US_MARKET",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=SP500&cosd=2019-02-21",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-12T18:00:00+09:00",
+      "error": null
+    },
+    {
+      "sourceId": "fred:nasdaq",
+      "category": "US_MARKET",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=NASDAQCOM&cosd=2019-02-21",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-12T18:00:00+09:00",
+      "error": null
+    },
+    {
+      "sourceId": "fred:dow-jones",
+      "category": "US_MARKET",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-02-21",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-12T18:00:00+09:00",
+      "error": null
+    },
+    {
+      "sourceId": "twelve:russell-2000",
+      "category": "US_MARKET",
+      "url": "https://api.twelvedata.com/time_series?symbol=RUT&interval=1day",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-10-12T18:00:00+09:00",
+      "error": "TWELVE_DATA_API_KEY_MISSING"
+    }
+  ]
+}

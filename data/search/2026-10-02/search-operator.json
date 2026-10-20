@@ -1,0 +1,70 @@
+{
+  "generatedAt": "2026-10-01T15:58:18.384Z",
+  "site": {
+    "googlePropertyState": "NOT_CONFIGURED",
+    "naverPropertyState": "MANUAL_REQUIRED",
+    "sitemapState": "UNKNOWN",
+    "rssState": "UNKNOWN"
+  },
+  "articles": {
+    "publishedCount": 1,
+    "indexedKnown": 0,
+    "indexUnknown": 1,
+    "indexIssues": 0
+  },
+  "performance": {
+    "latestAvailableDate": null,
+    "clicks": null,
+    "impressions": null,
+    "ctr": null,
+    "topLandingPages": [],
+    "topQueries": []
+  },
+  "alerts": {
+    "notIndexed": [],
+    "crawlErrors": [],
+    "canonicalMismatch": [],
+    "mobileIssue": [],
+    "sitemapIssue": [
+      "https://motusnova.blogspot.com/sitemap.xml"
+    ]
+  },
+  "recommendedHumanActions": [
+    "Google Search Console property와 OAuth2 read-only credential 연결 확인",
+    "Naver Search Advisor에서 사이트 소유권과 제출 상태 수동 확인",
+    "Blogger sitemap HTTP/XML 상태 확인"
+  ],
+  "remoteCalls": {
+    "blogger": 0,
+    "indexNow": 0,
+    "googleIndexingApi": 0
+  },
+  "commerce": {
+    "enabled": false
+  },
+  "request": {
+    "provider": "all",
+    "dateRange": "28d",
+    "publication": null,
+    "dryRun": true,
+    "audit": true
+  },
+  "credentialAudit": {
+    "googleClientId": {
+      "present": false,
+      "fingerprint": null
+    },
+    "googleClientSecret": {
+      "present": false,
+      "fingerprint": null
+    },
+    "googleRefreshToken": {
+      "present": false,
+      "fingerprint": null
+    },
+    "naverKey": {
+      "present": false,
+      "fingerprint": null
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "state": "HOLD",
+  "gate": {
+    "state": "HOLD",
+    "reasons": [
+      "verification is not VERIFIED",
+      "unresolved verification conflict",
+      "duplicate state uncertain",
+      "provenance validation failed"
+    ],
+    "approval": null,
+    "checkedAt": "2026-10-12T14:26:59.964Z"
+  },
+  "publishCallCount": 0,
+  "execution": "SIMULATED",
+  "commerce": {
+    "enabled": false
+  }
+}

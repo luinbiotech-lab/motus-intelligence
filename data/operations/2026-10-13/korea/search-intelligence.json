@@ -1,0 +1,34 @@
+{
+  "mode": "LIVE_DEGRADED_OK",
+  "publicationActions": {
+    "insert": 0,
+    "patch": 0,
+    "publish": 0
+  },
+  "normalDailyBlocked": false,
+  "snapshot": {
+    "generatedAt": "2026-10-13T09:46:38.921Z",
+    "topics": [],
+    "signals": [],
+    "providerStates": {
+      "NAVER_DATALAB": "NOT_CONFIGURED",
+      "GOOGLE_SEARCH_CONSOLE": "NOT_CONFIGURED"
+    },
+    "warnings": [
+      "VERIFIED_LIVE_UNIT_CONTEXT_MISMATCH"
+    ],
+    "policy": {
+      "verificationPrecedesDemand": true,
+      "providerFailureNonBlocking": true,
+      "internalMetricsPublic": false,
+      "commerce": {
+        "enabled": false
+      }
+    },
+    "snapshotId": "search-intelligence:d793adf76da1e8e6"
+  },
+  "performanceLearning": [],
+  "commerce": {
+    "enabled": false
+  }
+}

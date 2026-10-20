@@ -1,0 +1,23 @@
+{
+  "category": "AI_INTELLIGENCE",
+  "operationDate": "2026-10-13",
+  "observedDate": "2026-10-13",
+  "state": "AUTO_POLICY_CANDIDATE",
+  "searchDemandMayOverride": false,
+  "articleFingerprint": "sha256:68193d4bb82ff4751fdd28918b526046bfd9ba9ede9d5b06f9cdaf2db237c7e3",
+  "commerce": {
+    "enabled": false
+  },
+  "titleCandidates": [
+    "AI 인프라 경쟁, 엔비디아 개방형 설계와 마이크로소프트 자체 칩으로 확산",
+    "엔비디아와 마이크로소프트가 보여준 AI 인프라 확장의 다음 단계",
+    "AI 경쟁의 무게중심, 모델에서 전력·네트워크·자체 칩으로 이동"
+  ],
+  "selectedTitle": "AI 인프라 경쟁, 엔비디아 개방형 설계와 마이크로소프트 자체 칩으로 확산",
+  "titleSelection": {
+    "searchSignalCount": 0,
+    "searchProviderState": "NOT_CONFIGURED",
+    "basis": "VERIFIED_ARTICLE_THESIS",
+    "reason": "검색 provider 신호가 없어 수요를 추정하지 않고 공식 발표 세 건의 공통 인프라 논지를 선택"
+  }
+}

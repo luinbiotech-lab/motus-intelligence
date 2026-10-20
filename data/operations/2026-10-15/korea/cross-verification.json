@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "1.0",
+  "category": "KOREA_MARKET",
+  "observedDate": null,
+  "comparisonResult": "UNAVAILABLE",
+  "sourceDiversityPass": false,
+  "verification": "REVIEW_REQUIRED",
+  "reasonCodes": [
+    "KOSPI_MARKET_NOT_CLOSED"
+  ],
+  "verifiedAt": "2026-10-14T23:45:00Z"
+}

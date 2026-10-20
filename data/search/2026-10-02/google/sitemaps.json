@@ -1,0 +1,15 @@
+{
+  "state": "NOT_CONFIGURED",
+  "records": [
+    {
+      "url": "https://motusnova.blogspot.com/sitemap.xml",
+      "status": "UNKNOWN",
+      "lastCheckedAt": "2026-10-01T15:58:18.384Z",
+      "httpStatus": null,
+      "entryCount": null,
+      "lastModified": null,
+      "submissionState": "UNKNOWN",
+      "provenance": "network verification not requested in read-only foundation run"
+    }
+  ]
+}
