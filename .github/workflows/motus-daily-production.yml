@@ -30,7 +30,7 @@ concurrency:
 
 jobs:
   verified-production-gate:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 30
     env:
       TZ: Asia/Seoul
@@ -52,6 +52,17 @@ jobs:
       SEARCH_CONSOLE_REFRESH_TOKEN: ${{ secrets.SEARCH_CONSOLE_REFRESH_TOKEN }}
     steps:
       - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Hydrate durable operations state from ops-data
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git fetch origin ops-data:refs/remotes/origin/ops-data; then
+            git archive origin/ops-data data | tar -xf -
+            find data -name .publish-lock -type f -delete
+          else
+            echo '::warning title=ops-data unavailable::continuing without hydrated operations state'
+          fi
       - uses: actions/setup-node@v4
         with: {node-version: 22, cache: npm}
       - run: npm ci
@@ -116,5 +127,62 @@ jobs:
             data/library/publications/
             data/reports/daily/${{ env.RUN_DATE }}/
             data/operations/${{ env.RUN_DATE }}/weekly-monthly-feed-auto.json
+            !data/**/.publish-lock
           if-no-files-found: warn
           retention-days: 90
+      - name: Upload persistence bundle
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: motus-persistence-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            data/operations/${{ env.RUN_DATE }}/${{ env.CATEGORY }}/
+            data/operations/${{ env.RUN_DATE }}/weekly-monthly-feed-auto.json
+            data/library/publications/
+            data/search/${{ env.RUN_DATE }}/
+            data/reports/daily/${{ env.RUN_DATE }}/${{ env.CATEGORY }}/
+            !data/**/.publish-lock
+          if-no-files-found: warn
+          retention-days: 7
+
+  persist-operations-state:
+    if: always()
+    needs: verified-production-gate
+    permissions:
+      contents: write
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ops-data
+          fetch-depth: 0
+          path: ops-data
+      - uses: actions/download-artifact@v4
+        with:
+          name: motus-persistence-${{ github.run_id }}-${{ github.run_attempt }}
+          path: persistence-bundle
+      - name: Persist operation artifacts without runtime locks
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p ops-data/data
+          rsync -a --exclude='.publish-lock' persistence-bundle/ ops-data/data/
+          find ops-data/data -name .publish-lock -type f -delete
+          if grep -RIlE -- '-----BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY-----|BLOGGER_(CLIENT_SECRET|REFRESH_TOKEN)=' ops-data/data; then
+            echo '::error title=Secret scan failed::persistence bundle contains credential material'
+            exit 1
+          fi
+          cd ops-data
+          git config user.name 'motus-operations-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add README.md data
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "ops: persist ${GITHUB_RUN_ID}/${GITHUB_RUN_ATTEMPT}"
+          if ! git push origin HEAD:ops-data; then
+            git fetch origin ops-data
+            git rebase origin/ops-data
+            if ! git push origin HEAD:ops-data; then
+              echo '::warning title=ops-data persistence failed::publication state is unchanged; manual persistence recovery required'
+            fi
+          fi

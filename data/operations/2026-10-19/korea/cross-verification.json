@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "1.0",
+  "category": "KOREA_MARKET",
+  "observedDate": "2026-10-19",
+  "primarySource": {
+    "provider": "Naver Finance",
+    "domain": "naver.com",
+    "urls": [
+      "https://m.stock.naver.com/api/index/KOSPI/basic",
+      "https://m.stock.naver.com/api/index/KOSDAQ/basic"
+    ]
+  },
+  "independentSource": {
+    "providers": [
+      "YAHOO_FINANCE"
+    ],
+    "domains": [
+      "yahoo.com"
+    ],
+    "urls": [
+      "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?period1=1792368000&period2=1792627200&interval=1d",
+      "https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?period1=1792368000&period2=1792627200&interval=1d"
+    ]
+  },
+  "comparedFields": [
+    {
+      "field": "KOSPI",
+      "primaryValue": 5768.01,
+      "independentValue": 5768.009765625,
+      "difference": 0.00023437500021827873,
+      "tolerance": 0.05,
+      "result": "PASS",
+      "primarySourceUrl": "https://m.stock.naver.com/api/index/KOSPI/basic",
+      "independentSourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?period1=1792368000&period2=1792627200&interval=1d",
+      "metricBasis": "SESSION_CLOSE"
+    },
+    {
+      "field": "KOSDAQ",
+      "primaryValue": 808.89,
+      "independentValue": 808.8900146484375,
+      "difference": 0.00001464843751364242,
+      "tolerance": 0.05,
+      "result": "PASS",
+      "primarySourceUrl": "https://m.stock.naver.com/api/index/KOSDAQ/basic",
+      "independentSourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?period1=1792368000&period2=1792627200&interval=1d",
+      "metricBasis": "SESSION_CLOSE"
+    }
+  ],
+  "tolerance": {
+    "KOSPI": 0.05,
+    "KOSDAQ": 0.05,
+    "USD_KRW": 2
+  },
+  "comparisonResult": "PASS",
+  "sourceDiversityPass": true,
+  "verification": "VERIFIED",
+  "reasonCodes": [],
+  "verifiedAt": "2026-10-19T14:01:06.120Z",
+  "officialPhase": "PRE_PUBLICATION",
+  "reconciliation": {
+    "status": "NOT_REQUIRED",
+    "officialObservedDates": [
+      "2026-10-19"
+    ]
+  }
+}

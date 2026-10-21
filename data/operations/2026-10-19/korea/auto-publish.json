@@ -1,0 +1,74 @@
+{
+  "gate": {
+    "state": "AUTO_PUBLISH_READY",
+    "reasons": [],
+    "approval": "AUTO_POLICY_APPROVAL",
+    "checkedAt": "2026-10-19T14:01:42.069Z"
+  },
+  "searchRegistration": {
+    "publicationId": "motus-live-2026-10-19:korea",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/kbi.html",
+    "registeredAt": "2026-10-19T23:01:51+09:00",
+    "trigger": "PUBLICATION_PUBLISHED",
+    "googleInspectionState": "QUEUED",
+    "naverDiscoveryState": "PENDING",
+    "visibility": {
+      "publicationId": "motus-live-2026-10-19:korea",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/10/kbi.html",
+      "google": {
+        "discovered": null,
+        "indexed": null,
+        "lastCrawl": null,
+        "coverageState": null,
+        "inspectionAt": null
+      },
+      "naver": {
+        "discovered": null,
+        "indexed": null,
+        "collectionState": null,
+        "inspectionAt": null
+      },
+      "sitemapIncluded": null,
+      "rssIncluded": null
+    }
+  },
+  "libraryRegistration": {
+    "idempotencyKey": "library:motus-live-2026-10-19:korea|https://motusnova.blogspot.com/2026/10/kbi.html"
+  },
+  "weeklyFeed": {
+    "idempotencyKey": "weekly:motus-live-2026-10-19:korea"
+  },
+  "pdfCandidate": {
+    "idempotencyKey": "pdf:motus-live-2026-10-19:korea:sha256:6da582449a7527baf077f6b19e9ba785eb6ccbbfd17337a1fed9d67404a97c98",
+    "visibility": "PRIVATE"
+  },
+  "audit": [
+    {
+      "at": "2026-10-19T14:01:42.069Z",
+      "event": "AUTO_PUBLISH_STATIC_GATE",
+      "detail": "AUTO_PUBLISH_READY"
+    },
+    {
+      "at": "2026-10-19T14:01:42.069Z",
+      "event": "REMOTE_DUPLICATE_CHECK",
+      "detail": "PASS"
+    },
+    {
+      "at": "2026-10-19T14:01:42.069Z",
+      "event": "FINAL_REMOTE_DUPLICATE_CHECK",
+      "detail": "PASS"
+    },
+    {
+      "at": "2026-10-19T23:01:51+09:00",
+      "event": "PUBLISHED",
+      "detail": "AUTO_POLICY_APPROVAL"
+    }
+  ],
+  "state": "PUBLISHED",
+  "draftPostId": "1329969301383262104",
+  "publicPostUrl": "https://motusnova.blogspot.com/2026/10/kbi.html",
+  "publishedAt": "2026-10-19T23:01:51+09:00",
+  "insertCallCount": 1,
+  "publishCallCount": 1,
+  "error": null
+}
