@@ -58,7 +58,10 @@ jobs:
           if [[ -n "$DISPATCH_RUN_DATE" ]]; then
             RUN_DATE="$DISPATCH_RUN_DATE"
           else
-            RUN_DATE="$(node -e "const p=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());const v=Object.fromEntries(p.map(x=>[x.type,x.value]));console.log(`${v.year}-${v.month}-${v.day}`)")"
+            # Plain `date` avoids embedding a JS template literal inside a
+            # double-quoted bash string (backticks there are command
+            # substitution and `${v.year}` is a bash "bad substitution").
+            RUN_DATE="$(TZ=Asia/Seoul date +%F)"
           fi
           case "$SCHEDULE_EXPRESSION" in
             "45 21 * * 1-5") CATEGORY="us" ;;
