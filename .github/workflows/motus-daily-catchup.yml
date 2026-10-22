@@ -36,18 +36,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with: {fetch-depth: 0}
-      - name: Hydrate published ledger from ops-data
-        shell: bash
-        run: |
-          set -euo pipefail
-          if git fetch origin ops-data:refs/remotes/origin/ops-data; then
-            git archive origin/ops-data data | tar -xf -
-            find data -name .publish-lock -type f -delete
-          fi
-      - uses: actions/setup-node@v4
-        with: {node-version: 22, cache: npm}
-      - run: npm ci
-      - name: Restore durable production operations state
+      - name: Restore cached production operations state
         uses: actions/cache@v4
         with:
           path: |
@@ -58,6 +47,19 @@ jobs:
           key: motus-ops-${{ runner.os }}-${{ github.run_id }}-${{ github.run_attempt }}
           restore-keys: |
             motus-ops-${{ runner.os }}-
+      - name: Hydrate canonical published state from ops-data
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git fetch origin ops-data:refs/remotes/origin/ops-data; then
+            git archive origin/ops-data data | tar -xf -
+            find data -name .publish-lock -type f -delete
+          else
+            echo '::warning title=ops-data unavailable::continuing with repository/cache state only'
+          fi
+      - uses: actions/setup-node@v4
+        with: {node-version: 22, cache: npm}
+      - run: npm ci
       - name: Resolve KST operation window
         shell: bash
         run: |
