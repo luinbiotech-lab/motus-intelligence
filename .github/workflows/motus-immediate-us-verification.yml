@@ -30,6 +30,18 @@ jobs:
       - run: npm run typecheck
       - run: npm run build
       - run: node --test --experimental-test-isolation=none --test-name-pattern="FRED CSV parser" dist/tests/claude-review-hardening.test.js
+      - name: Inspect public FRED SP500 response shape
+        shell: bash
+        run: |
+          set -euo pipefail
+          URL='https://fred.stlouisfed.org/graph/fredgraph.csv?id=SP500&cosd=2026-07-01'
+          curl -fsSL -D /tmp/fred-headers.txt -o /tmp/fred-body.txt "$URL"
+          echo '--- headers ---'
+          sed -n '1,20p' /tmp/fred-headers.txt
+          echo '--- body first lines ---'
+          sed -n '1,8p' /tmp/fred-body.txt
+          echo '--- byte count ---'
+          wc -c /tmp/fred-body.txt
       - name: Verify US live collection without publication
         shell: bash
         run: |
