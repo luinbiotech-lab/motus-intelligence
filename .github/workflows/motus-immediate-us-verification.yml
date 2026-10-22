@@ -1,4 +1,5 @@
 name: MOTUS Immediate US Verification
+# verification revision: yahoo-symbol-encoding
 
 on:
   push:
