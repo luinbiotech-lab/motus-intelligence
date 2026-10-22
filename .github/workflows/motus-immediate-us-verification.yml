@@ -52,9 +52,19 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for URL in             'https://m.stock.naver.com/api/index/KOSPI/price?pageSize=3&page=1'             'https://m.stock.naver.com/api/index/KOSPI/trend'             'https://m.stock.naver.com/api/index/KOSPI/integration'; do
+          SESSION_DATE="$(TZ=Asia/Seoul date -d 'yesterday' +%Y%m%d)"
+          URLS=(
+            'https://m.stock.naver.com/api/index/KOSPI/price?pageSize=3&page=1'
+            'https://m.stock.naver.com/api/index/KOSDAQ/price?pageSize=3&page=1'
+            "https://stock.naver.com/api/domestic/market/trend/daily?tradeType=KRX&marketType=ALL&bizdate=$SESSION_DATE&startIdx=0&pageSize=20"
+          )
+          i=0
+          for URL in "${URLS[@]}"; do
+            i=$((i+1))
+            FILE="/tmp/naver-$i.json"
             echo "--- $URL ---"
-            curl -fsSL -A 'MOTUS-Internal-Collector/1.0' "$URL" | head -c 2500
+            curl -fsSL -A 'MOTUS-Internal-Collector/1.0' "$URL" -o "$FILE"
+            head -c 4000 "$FILE"
             echo
           done
       - name: Inspect NVIDIA article evidence markers
@@ -67,9 +77,9 @@ jobs:
           echo '--- meta description markers ---'
           grep -Eio '<meta[^>]+(description|og:description)[^>]*>' "$BODY" | head -n 8 || true
           echo '--- JSON-LD markers ---'
-          grep -Eio '"(headline|description|articleBody)"[[:space:]]*:[[:space:]]*"[^"]{1,240}"' "$BODY" | head -n 10 || true
+          grep -Eio '"(headline|description|articleBody)"[[:space:]]*:[[:space:]]*"[^"]{1,400}"' "$BODY" | head -n 10 || true
           echo '--- paragraph markers ---'
-          grep -Eio '<p[^>]*>[^<]{60,300}</p>' "$BODY" | head -n 5 || true
+          grep -Eio '<p[^>]*>[^<]{60,500}</p>' "$BODY" | head -n 8 || true
       - name: Verify AI live collection without publication
         shell: bash
         run: |
