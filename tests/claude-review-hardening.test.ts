@@ -2,9 +2,10 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {createFirstSplitDailyProductionRun} from '../src/intelligence/split-daily-production.js';
-import type {USMarketDailyViewModel} from '../src/intelligence/daily-masters.js';
+import type {KoreaMarketDailyViewModel,USMarketDailyViewModel} from '../src/intelligence/daily-masters.js';
 import {buildUSEditorialTitleCandidates,parseFredCsv,parseYahooUsChart,parseTreasuryTenYearXml} from '../src/operations/internal-live-daily.js';
 import {synthesizeKoreanAIEvent} from '../src/operations/ai-editorial-synthesis.js';
+import {validateLiveDailyPayload,type LiveDailyPayload} from '../src/operations/live-daily.js';
 import {evaluateEditorialQuality,titleContainsCalendarDate} from '../src/production/editorial-quality.js';
 import {buildProductionSummary} from '../src/production/production-summary.js';
 import {persistedPublicationDecision,publicationIdentity,type PublishLedgerEntry} from '../src/production/publication-operation.js';
@@ -43,6 +44,14 @@ test('exact US secondary parsers preserve session dates and values',()=>{
 test('verified NVIDIA Vera Rubin source page synthesizes a Korean AI event',()=>{
  const event=synthesizeKoreanAIEvent({topicId:'ai:vera',publisher:'NVIDIA',title:'Google Cloud and NVIDIA Announce General Availability of NVIDIA Vera Rubin Infrastructure',pageEvidence:'Google Cloud A5X instances, accelerated by NVIDIA Vera Rubin NVL72 systems, support European innovators with next-generation agentic and reinforcement learning infrastructure.',link:'https://blogs.nvidia.com/example',publishedAt:'2026-10-22T00:00:00Z'});
  assert.ok(event);assert.match(event!.topic,/베라 루빈/);assert.match(event!.facts.join(' '),/Google Cloud A5X/);assert.match(event!.facts.join(' '),/에이전트형 AI|강화학습/);
+});
+
+test('Korea previous-session morning contract allows only verified-date core metrics when current-session support data is excluded',()=>{
+ const base=structuredClone(createFirstSplitDailyProductionRun().units.find(item=>item.category==='KOREA_MARKET')!);const view=base.viewModel as KoreaMarketDailyViewModel;
+ base.observedDate='2026-10-21';base.readiness='READY';base.readinessReasons=[];view.operationDate='2026-10-22';view.sessionDate='2026-10-21';view.edition='PREVIOUS_SESSION_MORNING';view.investorFlows=[];view.sectors=[];view.movers=[];
+ const payload={schemaVersion:'1.0',session:{state:'COMPLETED',observedDate:'2026-10-21',completedAt:'2026-10-22T00:30:00Z'},unit:base} satisfies LiveDailyPayload;
+ const reasons=validateLiveDailyPayload('KOREA_MARKET',payload,'2026-10-22T01:00:00Z');assert.doesNotMatch(reasons.join('; '),/investor flows sectors and movers required/);
+ view.sessionDate='2026-10-20';assert.match(validateLiveDailyPayload('KOREA_MARKET',payload,'2026-10-22T01:00:00Z').join('; '),/sessionDate must match observedDate/);
 });
 
 test('production summary exposes real reason session and failed source while HOLD stays exit zero',()=>{
