@@ -33,7 +33,7 @@ export class RepositoryInternalDailyBuilder implements InternalDailyBuilder {
  constructor(private readonly fetcher:typeof fetch=fetch,private readonly environment:NodeJS.ProcessEnv=process.env,private readonly koreaOfficial:KoreaOfficialSourceAdapter=new KrxBokOfficialSourceAdapter(fetcher,environment),private readonly twelveProvider:MarketTimeSeriesProvider=new TwelveDataTimeSeriesProvider(environment,fetcher),private readonly koreaSecondary:KoreaOfficialSourceAdapter=new YahooKoreaSecondarySourceAdapter(fetcher)){}
  async build(category:DailyCategory,requestedAt:string,options:InternalBuildOptions={}):Promise<InternalBuildResult>{if(category==='US_MARKET')return this.us(requestedAt);if(category==='AI_INTELLIGENCE')return this.ai(requestedAt);return this.korea(requestedAt,options)}
  private async us(at:string):Promise<InternalBuildResult>{const audit:InternalSourceAuditEntry[]=[];try{
-   const expectedSession=latestCompletedSession('US',at),specs=[['sp500','S&P 500','SP500','%5EGSPC'],['nasdaq','Nasdaq','NASDAQCOM','%5EIXIC'],['dow-jones','Dow Jones','DJIA','%5EDJI']] as const;
+   const expectedSession=latestCompletedSession('US',at),specs=[['sp500','S&P 500','SP500','^GSPC'],['nasdaq','Nasdaq','NASDAQCOM','^IXIC'],['dow-jones','Dow Jones','DJIA','^DJI']] as const;
    // Russell 2000 and DXY remain optional when the provider does not license the exact index. Proxies are never substituted.
    const twelveResults=await Promise.allSettled([this.twelve('RUT','US_MARKET',at,audit,'russell-2000','Russell 2000',90),this.twelve('DXY','US_MARKET',at,audit,'dxy','DXY (달러인덱스)',2)]);
    const rut=twelveResults[0]?.status==='fulfilled'?twelveResults[0].value:null,dxy=twelveResults[1]?.status==='fulfilled'?twelveResults[1].value:null;
