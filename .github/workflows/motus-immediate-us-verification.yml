@@ -29,7 +29,7 @@ jobs:
       - run: npm ci
       - run: npm run typecheck
       - run: npm run build
-      - run: node --test --experimental-test-isolation=none --test-name-pattern="FRED CSV parser" dist/tests/claude-review-hardening.test.js
+      - run: node --test --experimental-test-isolation=none --test-name-pattern="FRED CSV parser|exact US secondary" dist/tests/claude-review-hardening.test.js
       - name: Inspect public FRED SP500 response shape
         shell: bash
         run: |
