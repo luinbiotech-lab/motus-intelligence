@@ -4,6 +4,7 @@ import {readFile} from 'node:fs/promises';
 import {createFirstSplitDailyProductionRun} from '../src/intelligence/split-daily-production.js';
 import type {USMarketDailyViewModel} from '../src/intelligence/daily-masters.js';
 import {buildUSEditorialTitleCandidates,parseFredCsv,parseYahooUsChart,parseTreasuryTenYearXml} from '../src/operations/internal-live-daily.js';
+import {synthesizeKoreanAIEvent} from '../src/operations/ai-editorial-synthesis.js';
 import {evaluateEditorialQuality,titleContainsCalendarDate} from '../src/production/editorial-quality.js';
 import {buildProductionSummary} from '../src/production/production-summary.js';
 import {persistedPublicationDecision,publicationIdentity,type PublishLedgerEntry} from '../src/production/publication-operation.js';
@@ -37,6 +38,11 @@ test('exact US secondary parsers preserve session dates and values',()=>{
  assert.equal(yahoo.length,2);assert.equal(yahoo[0]?.date,'2026-10-20');assert.equal(yahoo[0]?.value,7690.73);
  const xml='<feed><entry><content><m:properties><d:NEW_DATE>2026-10-20T00:00:00</d:NEW_DATE><d:BC_10YEAR>5.24</d:BC_10YEAR></m:properties></content></entry><entry><content><m:properties><d:NEW_DATE>2026-10-21T00:00:00</d:NEW_DATE><d:BC_10YEAR>5.21</d:BC_10YEAR></m:properties></content></entry></feed>';
  const treasury=parseTreasuryTenYearXml(xml,'https://home.treasury.gov/feed');assert.equal(treasury.length,2);assert.equal(treasury[1]?.date,'2026-10-21');assert.equal(treasury[1]?.value,5.21);
+});
+
+test('verified NVIDIA Vera Rubin source page synthesizes a Korean AI event',()=>{
+ const event=synthesizeKoreanAIEvent({topicId:'ai:vera',publisher:'NVIDIA',title:'Google Cloud and NVIDIA Announce General Availability of NVIDIA Vera Rubin Infrastructure',pageEvidence:'Google Cloud A5X instances, accelerated by NVIDIA Vera Rubin NVL72 systems, support European innovators with next-generation agentic and reinforcement learning infrastructure.',link:'https://blogs.nvidia.com/example',publishedAt:'2026-10-22T00:00:00Z'});
+ assert.ok(event);assert.match(event!.topic,/베라 루빈/);assert.match(event!.facts.join(' '),/Google Cloud A5X/);assert.match(event!.facts.join(' '),/에이전트형 AI|강화학습/);
 });
 
 test('production summary exposes real reason session and failed source while HOLD stays exit zero',()=>{
