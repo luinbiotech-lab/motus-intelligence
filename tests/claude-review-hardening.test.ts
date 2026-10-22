@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {createFirstSplitDailyProductionRun} from '../src/intelligence/split-daily-production.js';
 import type {USMarketDailyViewModel} from '../src/intelligence/daily-masters.js';
-import {buildUSEditorialTitleCandidates} from '../src/operations/internal-live-daily.js';
+import {buildUSEditorialTitleCandidates,parseFredCsv} from '../src/operations/internal-live-daily.js';
 import {evaluateEditorialQuality,titleContainsCalendarDate} from '../src/production/editorial-quality.js';
 import {buildProductionSummary} from '../src/production/production-summary.js';
 import {persistedPublicationDecision,publicationIdentity,type PublishLedgerEntry} from '../src/production/publication-operation.js';
@@ -21,6 +21,15 @@ test('U.S. editorial title candidates use verified displayed metrics and contain
  const staleRateCandidates=buildUSEditorialTitleCandidates(view.marketHistory,[{label:'U.S. 10Y Treasury Yield (미국 10년물 국채금리, 2026-10-13 기준)',value:'4.10',change:'-0.02%',direction:'DOWN'}]);
  for(const title of staleRateCandidates)assert.doesNotMatch(title,/장기금리/);
  assert.throws(()=>buildUSEditorialTitleCandidates({...view.marketHistory,series:view.marketHistory.series.slice(0,2)},[]),/US_EDITORIAL_TITLE_INPUT_INSUFFICIENT/);
+});
+
+test('FRED CSV parser accepts current observation_date format, BOM and quoted values without weakening date validation',()=>{
+ const url='https://fred.stlouisfed.org/graph/fredgraph.csv?id=SP500';
+ const csv='\uFEFFobservation_date,SP500\n2026-10-19,"7,690.73"\n2026-10-20,"7,712.57"\n2026-10-21,.\n';
+ const points=parseFredCsv(csv,'SP500',url);
+ assert.equal(points.length,2);assert.equal(points[0]?.date,'2026-10-19');assert.equal(points[0]?.value,7690.73);assert.equal(points[1]?.date,'2026-10-20');assert.equal(points[1]?.value,7712.57);
+ assert.equal(parseFredCsv('unexpected,value\n2026-10-20,7712.57','SP500',url).length,0);
+ assert.equal(parseFredCsv('observation_date,SP500\n10/20/2026,7712.57','SP500',url).length,0);
 });
 
 test('production summary exposes real reason session and failed source while HOLD stays exit zero',()=>{
