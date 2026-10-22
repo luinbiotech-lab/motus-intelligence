@@ -1,0 +1,15 @@
+{
+  "collectedAt": "2026-10-22T01:52:14.898Z",
+  "signalDate": null,
+  "provider": null,
+  "freshness": "NO_SEARCH_SIGNAL",
+  "fallbackReason": "SEARCH_PROVIDER_NOT_CONFIGURED",
+  "warnings": [],
+  "orderedTopicIds": [
+    "index:KOSPI",
+    "index:KOSDAQ"
+  ],
+  "selectedSecondaryTopicId": null,
+  "factsChanged": false,
+  "gateOverride": false
+}

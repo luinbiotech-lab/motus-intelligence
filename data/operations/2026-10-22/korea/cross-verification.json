@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "1.0",
+  "category": "KOREA_MARKET",
+  "observedDate": "2026-10-21",
+  "primarySource": {
+    "provider": "Naver Finance",
+    "domain": "naver.com",
+    "urls": [
+      "https://m.stock.naver.com/api/index/KOSPI/price?pageSize=10&page=1",
+      "https://m.stock.naver.com/api/index/KOSDAQ/price?pageSize=10&page=1"
+    ]
+  },
+  "independentSource": {
+    "providers": [
+      "YAHOO_FINANCE"
+    ],
+    "domains": [
+      "yahoo.com"
+    ],
+    "urls": [
+      "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?period1=1792540800&period2=1792800000&interval=1d",
+      "https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?period1=1792540800&period2=1792800000&interval=1d"
+    ]
+  },
+  "comparedFields": [
+    {
+      "field": "KOSPI",
+      "primaryValue": 5735.66,
+      "independentValue": 5735.66015625,
+      "difference": 0.00015625000014551915,
+      "tolerance": 0.05,
+      "result": "PASS",
+      "primarySourceUrl": "https://m.stock.naver.com/api/index/KOSPI/price?pageSize=10&page=1",
+      "independentSourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?period1=1792540800&period2=1792800000&interval=1d",
+      "metricBasis": "SESSION_CLOSE"
+    },
+    {
+      "field": "KOSDAQ",
+      "primaryValue": 792.76,
+      "independentValue": 792.760009765625,
+      "difference": 0.000009765625009094947,
+      "tolerance": 0.05,
+      "result": "PASS",
+      "primarySourceUrl": "https://m.stock.naver.com/api/index/KOSDAQ/price?pageSize=10&page=1",
+      "independentSourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?period1=1792540800&period2=1792800000&interval=1d",
+      "metricBasis": "SESSION_CLOSE"
+    }
+  ],
+  "tolerance": {
+    "KOSPI": 0.05,
+    "KOSDAQ": 0.05,
+    "USD_KRW": 2
+  },
+  "comparisonResult": "PASS",
+  "sourceDiversityPass": true,
+  "verification": "VERIFIED",
+  "reasonCodes": [],
+  "verifiedAt": "2026-10-22T01:52:14.898Z",
+  "officialPhase": "PRE_PUBLICATION",
+  "reconciliation": {
+    "status": "NOT_REQUIRED",
+    "officialObservedDates": [
+      "2026-10-21"
+    ]
+  }
+}
