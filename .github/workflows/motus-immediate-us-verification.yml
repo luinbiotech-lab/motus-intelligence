@@ -1,0 +1,45 @@
+name: MOTUS Immediate US Verification
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/motus-immediate-us-verification.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-us-live-collection:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      TZ: Asia/Seoul
+      MOTUS_LIVE_PUBLISH_ENABLED: 'false'
+      MOTUS_PRODUCTION_RUN: 'true'
+      MOTUS_COMMERCE_ENABLED: 'false'
+      TWELVE_DATA_API_KEY: ${{ secrets.TWELVE_DATA_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run build
+      - run: node --test --experimental-test-isolation=none dist/tests/claude-review-hardening.test.js
+      - name: Verify US live collection without publication
+        shell: bash
+        run: |
+          RUN_DATE="$(TZ=Asia/Seoul date +%F)"
+          npm run motus:live -- --date "$RUN_DATE" --category us --source internal
+      - name: Upload diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: motus-immediate-us-verification-${{ github.run_id }}
+          path: data/operations/
+          if-no-files-found: warn
+          retention-days: 7
