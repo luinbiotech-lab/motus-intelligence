@@ -1,5 +1,5 @@
 name: MOTUS Immediate Daily Readiness
-# verification revision: ai-korea-response-diagnostic
+# verification revision: ai-korea-response-diagnostic-v2
 
 on:
   push:
