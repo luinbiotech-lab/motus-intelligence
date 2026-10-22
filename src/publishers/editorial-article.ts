@@ -37,7 +37,8 @@ export function renderUSEditorialArticle(view:USMarketDailyViewModel):DailyMaste
 }
 
 export function renderKoreaEditorialArticle(view:KoreaMarketDailyViewModel):DailyMasterRenderResult {
-  const parts=[masthead(view.title,view.subtitle,view.displayLabel,view.issueDate),lead([view.marketSummary,...view.marketCommentary].join(' '))];
+  const parts=[masthead(view.title,view.subtitle,view.displayLabel,view.issueDate),lead(view.marketSummary)];
+  if(view.marketCommentary.length)parts.push(section(view.edition==='PREVIOUS_SESSION_MORNING'?'전일 장을 읽는 기준':'마감 흐름을 읽는 기준',paragraphs(view.marketCommentary)));
   if(view.indexMetrics.length)parts.push(section('코스피와 코스닥',metricProse(view.indexMetrics)));
   if(view.fxAndSupporting.length)parts.push(section('환율과 시장 여건',metricProse(view.fxAndSupporting)));
   if(view.investorFlows.length)parts.push(section('수급이 가리킨 방향',flow(view.investorFlows)));
