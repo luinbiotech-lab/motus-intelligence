@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {createFirstSplitDailyProductionRun} from '../src/intelligence/split-daily-production.js';
 import type {USMarketDailyViewModel} from '../src/intelligence/daily-masters.js';
-import {buildUSEditorialTitleCandidates,parseFredCsv} from '../src/operations/internal-live-daily.js';
+import {buildUSEditorialTitleCandidates,parseFredCsv,parseYahooUsChart,parseTreasuryTenYearXml} from '../src/operations/internal-live-daily.js';
 import {evaluateEditorialQuality,titleContainsCalendarDate} from '../src/production/editorial-quality.js';
 import {buildProductionSummary} from '../src/production/production-summary.js';
 import {persistedPublicationDecision,publicationIdentity,type PublishLedgerEntry} from '../src/production/publication-operation.js';
@@ -30,6 +30,13 @@ test('FRED CSV parser accepts current observation_date format, BOM and quoted va
  assert.equal(points.length,2);assert.equal(points[0]?.date,'2026-10-19');assert.equal(points[0]?.value,7690.73);assert.equal(points[1]?.date,'2026-10-20');assert.equal(points[1]?.value,7712.57);
  assert.equal(parseFredCsv('unexpected,value\n2026-10-20,7712.57','SP500',url).length,0);
  assert.equal(parseFredCsv('observation_date,SP500\n10/20/2026,7712.57','SP500',url).length,0);
+});
+
+test('exact US secondary parsers preserve session dates and values',()=>{
+ const yahoo=parseYahooUsChart({chart:{result:[{timestamp:[1792454400,1792540800],indicators:{quote:[{close:[7690.73,7712.57]}]}}]}},'^GSPC','https://query1.finance.yahoo.com/example');
+ assert.equal(yahoo.length,2);assert.equal(yahoo[0]?.date,'2026-10-20');assert.equal(yahoo[0]?.value,7690.73);
+ const xml='<feed><entry><content><m:properties><d:NEW_DATE>2026-10-20T00:00:00</d:NEW_DATE><d:BC_10YEAR>5.24</d:BC_10YEAR></m:properties></content></entry><entry><content><m:properties><d:NEW_DATE>2026-10-21T00:00:00</d:NEW_DATE><d:BC_10YEAR>5.21</d:BC_10YEAR></m:properties></content></entry></feed>';
+ const treasury=parseTreasuryTenYearXml(xml,'https://home.treasury.gov/feed');assert.equal(treasury.length,2);assert.equal(treasury[1]?.date,'2026-10-21');assert.equal(treasury[1]?.value,5.21);
 });
 
 test('production summary exposes real reason session and failed source while HOLD stays exit zero',()=>{
