@@ -29,7 +29,7 @@ jobs:
       - run: npm ci
       - run: npm run typecheck
       - run: npm run build
-      - run: node --test --experimental-test-isolation=none dist/tests/claude-review-hardening.test.js
+      - run: node --test --experimental-test-isolation=none --test-name-pattern="FRED CSV parser" dist/tests/claude-review-hardening.test.js
       - name: Verify US live collection without publication
         shell: bash
         run: |
