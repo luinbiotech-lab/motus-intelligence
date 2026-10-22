@@ -33,13 +33,13 @@ export class RepositoryInternalDailyBuilder implements InternalDailyBuilder {
  constructor(private readonly fetcher:typeof fetch=fetch,private readonly environment:NodeJS.ProcessEnv=process.env,private readonly koreaOfficial:KoreaOfficialSourceAdapter=new KrxBokOfficialSourceAdapter(fetcher,environment),private readonly twelveProvider:MarketTimeSeriesProvider=new TwelveDataTimeSeriesProvider(environment,fetcher),private readonly koreaSecondary:KoreaOfficialSourceAdapter=new YahooKoreaSecondarySourceAdapter(fetcher)){}
  async build(category:DailyCategory,requestedAt:string,options:InternalBuildOptions={}):Promise<InternalBuildResult>{if(category==='US_MARKET')return this.us(requestedAt);if(category==='AI_INTELLIGENCE')return this.ai(requestedAt);return this.korea(requestedAt,options)}
  private async us(at:string):Promise<InternalBuildResult>{const audit:InternalSourceAuditEntry[]=[];try{
-   const specs=[['sp500','S&P 500','SP500'],['nasdaq','Nasdaq','NASDAQCOM'],['dow-jones','Dow Jones','DJIA']] as const;
+   const expectedSession=latestCompletedSession('US',at),specs=[['sp500','S&P 500','SP500','%5EGSPC'],['nasdaq','Nasdaq','NASDAQCOM','%5EIXIC'],['dow-jones','Dow Jones','DJIA','%5EDJI']] as const;
    // Russell 2000 and DXY remain optional when the provider does not license the exact index. Proxies are never substituted.
    const twelveResults=await Promise.allSettled([this.twelve('RUT','US_MARKET',at,audit,'russell-2000','Russell 2000',90),this.twelve('DXY','US_MARKET',at,audit,'dxy','DXY (달러인덱스)',2)]);
    const rut=twelveResults[0]?.status==='fulfilled'?twelveResults[0].value:null,dxy=twelveResults[1]?.status==='fulfilled'?twelveResults[1].value:null;
    const histories=[] as Array<{label:string;url:string;points:Point[]}>;
-  for(const [key,label,id] of specs)histories.push(await this.fred(id,'US_MARKET',at,audit,key,label,90));if(rut&&rut.points.length>=63)histories.push(rut);
-   const tenYear=await this.fred('DGS10','US_MARKET',at,audit,'DGS10','U.S. 10Y Treasury Yield (미국 10년물 국채금리)',10);
+   for(const [key,label,id,yahooSymbol] of specs)histories.push(await this.usIndexSeries({id,yahooSymbol,key,label,at,audit,expectedDate:expectedSession.date}));if(rut&&rut.points.length>=63)histories.push(rut);
+   const tenYear=await this.usTenYearSeries(at,audit);
    const optionalMetricResults=await Promise.allSettled([this.fred('VIXCLS','US_MARKET',at,audit,'VIXCLS','VIX (변동성지수)',10),this.fred('DCOILBRENTEU','US_MARKET',at,audit,'DCOILBRENTEU','Brent (브렌트유)',10)]);
    const vix=optionalMetricResults[0]?.status==='fulfilled'?optionalMetricResults[0].value:null,brent=optionalMetricResults[1]?.status==='fulfilled'?optionalMetricResults[1].value:null;
    if(histories.some(item=>item.points.length<63))throw new Error('US_63_SESSION_HISTORY_INCOMPLETE');
