@@ -1,0 +1,14 @@
+{
+  "mode": "LIVE",
+  "sourceMode": "internal",
+  "date": "2026-10-22",
+  "observedDate": null,
+  "category": "US_MARKET",
+  "state": "HOLD",
+  "reasonCode": "SP500_OBSERVATIONS_INSUFFICIENT",
+  "verification": "FAILED",
+  "publishCallCount": 0,
+  "commerce": {
+    "enabled": false
+  }
+}

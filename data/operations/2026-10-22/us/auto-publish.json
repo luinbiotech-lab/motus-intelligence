@@ -1,0 +1,10 @@
+{
+  "state": "HOLD",
+  "reasonCode": "SP500_OBSERVATIONS_INSUFFICIENT",
+  "reasonCodes": [
+    "SP500_OBSERVATIONS_INSUFFICIENT"
+  ],
+  "reason": "SP500_OBSERVATIONS_INSUFFICIENT",
+  "insertCallCount": 0,
+  "publishCallCount": 0
+}
