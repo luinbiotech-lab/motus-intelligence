@@ -1,0 +1,7 @@
+{
+  "state": "HOLD",
+  "reasonCode": "BLOGGER_CREDENTIALS_MISSING",
+  "reason": "required Blogger credentials missing: BLOGGER_BLOG_ID, BLOGGER_CLIENT_ID, BLOGGER_CLIENT_SECRET, BLOGGER_REFRESH_TOKEN",
+  "insertCallCount": 0,
+  "publishCallCount": 0
+}
