@@ -1,0 +1,16 @@
+{
+  "state": "HOLD",
+  "gate": {
+    "state": "HOLD",
+    "reasons": [
+      "duplicate state uncertain"
+    ],
+    "approval": null,
+    "checkedAt": "2026-10-23T01:58:11.793Z"
+  },
+  "publishCallCount": 0,
+  "execution": "SIMULATED",
+  "commerce": {
+    "enabled": false
+  }
+}

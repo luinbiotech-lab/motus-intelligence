@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "1.1",
+  "category": "KOREA_MARKET",
+  "operationDate": "2026-10-23",
+  "observedDate": "2026-10-22",
+  "sourceMode": "internal",
+  "verification": "VERIFIED",
+  "unresolvedConflicts": [],
+  "provenancePass": true,
+  "sourceDiversityPass": true,
+  "sourceLinksPass": true,
+  "mobilePass": true,
+  "editorialQualityPass": true,
+  "leakagePass": true,
+  "duplicateCheck": "PENDING_REMOTE",
+  "duplicateUncertainty": true,
+  "articleFingerprint": "sha256:deb439d4c3a9235eaaa1d552379142a5b3b98623b3296bc57a67403bdeaa6ffe",
+  "commerceEnabled": false,
+  "verifiedAt": "2026-10-23T01:58:06.756Z",
+  "expiresAt": "2026-10-23T03:28:06.756Z",
+  "sourceAuditIds": [
+    "naver:kosdaq:history",
+    "naver:kospi:history",
+    "naver:usd-krw",
+    "yahoo-finance:kosdaq",
+    "yahoo-finance:kospi"
+  ],
+  "sourceAuditFingerprint": "sha256:8621ca87343262bd7066d00f86f9969c229a841478a1ffd98d075802af1b11c4",
+  "crossVerificationFingerprint": "sha256:146ca276291f6a1f1b94a33e519debcc6154e3a8f55d5f00def8442e43b7d22a",
+  "crossVerification": {
+    "schemaVersion": "1.0",
+    "category": "KOREA_MARKET",
+    "observedDate": "2026-10-22",
+    "primarySource": {
+      "provider": "Naver Finance",
+      "domain": "naver.com",
+      "urls": [
+        "https://m.stock.naver.com/api/index/KOSPI/price?pageSize=10&page=1",
+        "https://m.stock.naver.com/api/index/KOSDAQ/price?pageSize=10&page=1"
+      ]
+    },
+    "independentSource": {
+      "providers": [
+        "YAHOO_FINANCE"
+      ],
+      "domains": [
+        "yahoo.com"
+      ],
+      "urls": [
+        "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?period1=1792627200&period2=1792886400&interval=1d",
+        "https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?period1=1792627200&period2=1792886400&interval=1d"
+      ]
+    },
+    "comparedFields": [
+      {
+        "field": "KOSPI",
+        "primaryValue": 5533.77,
+        "independentValue": 5533.77001953125,
+        "difference": 0.000019531249563442543,
+        "tolerance": 0.05,
+        "result": "PASS",
+        "primarySourceUrl": "https://m.stock.naver.com/api/index/KOSPI/price?pageSize=10&page=1",
+        "independentSourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?period1=1792627200&period2=1792886400&interval=1d",
+        "metricBasis": "SESSION_CLOSE"
+      },
+      {
+        "field": "KOSDAQ",
+        "primaryValue": 764.1,
+        "independentValue": 764.0999755859375,
+        "difference": 0.000024414062522737368,
+        "tolerance": 0.05,
+        "result": "PASS",
+        "primarySourceUrl": "https://m.stock.naver.com/api/index/KOSDAQ/price?pageSize=10&page=1",
+        "independentSourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?period1=1792627200&period2=1792886400&interval=1d",
+        "metricBasis": "SESSION_CLOSE"
+      }
+    ],
+    "tolerance": {
+      "KOSPI": 0.05,
+      "KOSDAQ": 0.05,
+      "USD_KRW": 2
+    },
+    "comparisonResult": "PASS",
+    "sourceDiversityPass": true,
+    "verification": "VERIFIED",
+    "reasonCodes": [],
+    "verifiedAt": "2026-10-23T01:58:06.756Z",
+    "officialPhase": "PRE_PUBLICATION",
+    "reconciliation": {
+      "status": "NOT_REQUIRED",
+      "officialObservedDates": [
+        "2026-10-22"
+      ]
+    }
+  }
+}
