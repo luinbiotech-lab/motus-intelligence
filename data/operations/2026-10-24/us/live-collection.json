@@ -1,0 +1,14 @@
+{
+  "mode": "LIVE",
+  "sourceMode": "internal",
+  "date": "2026-10-24",
+  "observedDate": null,
+  "category": "US_MARKET",
+  "state": "HOLD",
+  "reasonCode": "YAHOO_US_HTTP_429",
+  "verification": "FAILED",
+  "publishCallCount": 0,
+  "commerce": {
+    "enabled": false
+  }
+}
