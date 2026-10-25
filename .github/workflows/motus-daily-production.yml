@@ -25,7 +25,10 @@ permissions:
   contents: read
 
 concurrency:
-  group: motus-production-global
+  # One queue per category: a delayed run of one category must never be cancelled as the
+  # superseded "pending" run when another category's schedule fires (GitHub keeps only one
+  # pending run per group). Same-category runs still serialize.
+  group: motus-production-${{ github.event.schedule == '45 21 * * 1-5' && 'us' || github.event.schedule == '30 3 * * 1-5' && 'ai' || github.event.schedule == '45 23 * * 0-4' && 'korea' || inputs.category || 'manual' }}
   cancel-in-progress: false
 
 jobs:
@@ -68,11 +71,19 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if git fetch origin ops-data:refs/remotes/origin/ops-data; then
+          hydrated=false
+          for attempt in 1 2 3; do
+            if git fetch origin ops-data:refs/remotes/origin/ops-data; then hydrated=true; break; fi
+            sleep $((attempt * 5))
+          done
+          if [[ "$hydrated" == true ]]; then
             git archive origin/ops-data data | tar -xf -
-            find data -name .publish-lock -type f -delete
+            find data -name .publish-lock -prune -exec rm -rf {} +
+            # The publish CLI refuses live publication without this marker, because the persisted
+            # ledger is what blocks same-session duplicates across operation dates.
+            git rev-parse origin/ops-data > data/.ops-data-hydrated
           else
-            echo '::warning title=ops-data unavailable::continuing with repository/cache state only'
+            echo '::warning title=ops-data unavailable::live publication will HOLD (OPS_DATA_NOT_HYDRATED); simulation continues'
           fi
       - uses: actions/setup-node@v4
         with: {node-version: 22, cache: npm}
@@ -142,6 +153,16 @@ jobs:
             !data/**/.publish-lock
           if-no-files-found: warn
           retention-days: 90
+      - name: Upload ops-data merge tool
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: motus-persist-tool-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            dist/src/ops-data-merge-cli.js
+            dist/src/production/ops-data-merge.js
+          if-no-files-found: error
+          retention-days: 7
       - name: Upload persistence bundle
         if: always()
         uses: actions/upload-artifact@v4
@@ -174,27 +195,34 @@ jobs:
         with:
           name: motus-persistence-${{ github.run_id }}-${{ github.run_attempt }}
           path: persistence-bundle
+      - uses: actions/download-artifact@v4
+        with:
+          name: motus-persist-tool-${{ github.run_id }}-${{ github.run_attempt }}
+          path: persist-tool
       - name: Persist operation artifacts without runtime locks
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p ops-data/data
-          rsync -a --exclude='.publish-lock' persistence-bundle/ ops-data/data/
-          find ops-data/data -name .publish-lock -type f -delete
-          if grep -RIlE -- '-----BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY-----|BLOGGER_(CLIENT_SECRET|REFRESH_TOKEN)=' ops-data/data; then
-            echo '::error title=Secret scan failed::persistence bundle contains credential material'
-            exit 1
-          fi
-          cd ops-data
-          git config user.name 'motus-operations-bot'
-          git config user.email 'actions@users.noreply.github.com'
-          git add README.md data
-          if git diff --cached --quiet; then exit 0; fi
-          git commit -m "ops: persist ${GITHUB_RUN_ID}/${GITHUB_RUN_ATTEMPT}"
-          if ! git push origin HEAD:ops-data; then
-            git fetch origin ops-data
-            git rebase origin/ops-data
-            if ! git push origin HEAD:ops-data; then
-              echo '::warning title=ops-data persistence failed::publication state is unchanged; manual persistence recovery required'
+          # Merge (never overwrite) so ledgers and Library/Search registrations can only grow.
+          echo '{"type":"module"}' > persist-tool/package.json
+          git -C ops-data config user.name 'motus-operations-bot'
+          git -C ops-data config user.email 'actions@users.noreply.github.com'
+          for attempt in 1 2 3 4 5; do
+            git -C ops-data fetch origin ops-data
+            git -C ops-data reset --hard origin/ops-data
+            mkdir -p ops-data/data
+            node persist-tool/ops-data-merge-cli.js persistence-bundle ops-data/data
+            find ops-data/data -name .publish-lock -prune -exec rm -rf {} +
+            if grep -RIlE -- '-----BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY-----|BLOGGER_(CLIENT_SECRET|REFRESH_TOKEN)=' ops-data/data; then
+              echo '::error title=Secret scan failed::persistence bundle contains credential material'
+              exit 1
             fi
-          fi
+            git -C ops-data add data
+            if git -C ops-data diff --cached --quiet; then echo 'ops-data already up to date'; exit 0; fi
+            git -C ops-data commit -q -m "ops: persist ${GITHUB_RUN_ID}/${GITHUB_RUN_ATTEMPT}"
+            if git -C ops-data push origin HEAD:ops-data; then exit 0; fi
+            echo "::warning title=ops-data push retry::attempt ${attempt} lost a race; re-merging onto the latest ops-data"
+            sleep $((attempt * 5))
+          done
+          echo '::error title=ops-data persistence failed::publication state was not persisted; manual recovery required'
+          exit 1
