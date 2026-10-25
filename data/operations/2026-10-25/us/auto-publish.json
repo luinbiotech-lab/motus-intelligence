@@ -1,0 +1,74 @@
+{
+  "gate": {
+    "state": "AUTO_PUBLISH_READY",
+    "reasons": [],
+    "approval": "AUTO_POLICY_APPROVAL",
+    "checkedAt": "2026-10-25T13:13:33.266Z"
+  },
+  "searchRegistration": {
+    "publicationId": "motus-live-2026-10-23:us",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/dow-jones.html",
+    "registeredAt": "2026-10-25T22:13:35+09:00",
+    "trigger": "PUBLICATION_PUBLISHED",
+    "googleInspectionState": "QUEUED",
+    "naverDiscoveryState": "PENDING",
+    "visibility": {
+      "publicationId": "motus-live-2026-10-23:us",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/10/dow-jones.html",
+      "google": {
+        "discovered": null,
+        "indexed": null,
+        "lastCrawl": null,
+        "coverageState": null,
+        "inspectionAt": null
+      },
+      "naver": {
+        "discovered": null,
+        "indexed": null,
+        "collectionState": null,
+        "inspectionAt": null
+      },
+      "sitemapIncluded": null,
+      "rssIncluded": null
+    }
+  },
+  "libraryRegistration": {
+    "idempotencyKey": "library:motus-live-2026-10-23:us|https://motusnova.blogspot.com/2026/10/dow-jones.html"
+  },
+  "weeklyFeed": {
+    "idempotencyKey": "weekly:motus-live-2026-10-23:us"
+  },
+  "pdfCandidate": {
+    "idempotencyKey": "pdf:motus-live-2026-10-23:us:sha256:3c186e5fd51f3700ce50d8a91dc630bef68a5d201b8860e60e0ccf70a298c1a1",
+    "visibility": "PRIVATE"
+  },
+  "audit": [
+    {
+      "at": "2026-10-25T13:13:33.266Z",
+      "event": "AUTO_PUBLISH_STATIC_GATE",
+      "detail": "AUTO_PUBLISH_READY"
+    },
+    {
+      "at": "2026-10-25T13:13:33.266Z",
+      "event": "REMOTE_DUPLICATE_CHECK",
+      "detail": "PASS"
+    },
+    {
+      "at": "2026-10-25T13:13:33.266Z",
+      "event": "FINAL_REMOTE_DUPLICATE_CHECK",
+      "detail": "PASS"
+    },
+    {
+      "at": "2026-10-25T22:13:35+09:00",
+      "event": "PUBLISHED",
+      "detail": "AUTO_POLICY_APPROVAL"
+    }
+  ],
+  "state": "PUBLISHED",
+  "draftPostId": "2224110527358191460",
+  "publicPostUrl": "https://motusnova.blogspot.com/2026/10/dow-jones.html",
+  "publishedAt": "2026-10-25T22:13:35+09:00",
+  "insertCallCount": 1,
+  "publishCallCount": 1,
+  "error": null
+}

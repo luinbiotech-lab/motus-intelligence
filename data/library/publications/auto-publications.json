@@ -22,5 +22,11 @@
     "publicationId": "motus-live-2026-10-19:korea",
     "publicPostUrl": "https://motusnova.blogspot.com/2026/10/kbi.html",
     "publishedAt": "2026-10-19T23:01:51+09:00"
+  },
+  {
+    "idempotencyKey": "library:motus-live-2026-10-23:us|https://motusnova.blogspot.com/2026/10/dow-jones.html",
+    "publicationId": "motus-live-2026-10-23:us",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/dow-jones.html",
+    "publishedAt": "2026-10-25T22:13:35+09:00"
   }
 ]

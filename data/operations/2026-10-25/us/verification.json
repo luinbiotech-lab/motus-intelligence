@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "1.1",
+  "category": "US_MARKET",
+  "operationDate": "2026-10-25",
+  "observedDate": "2026-10-23",
+  "sourceMode": "internal",
+  "verification": "VERIFIED",
+  "unresolvedConflicts": [],
+  "provenancePass": true,
+  "sourceDiversityPass": true,
+  "sourceLinksPass": true,
+  "mobilePass": true,
+  "editorialQualityPass": true,
+  "leakagePass": true,
+  "duplicateCheck": "PENDING_REMOTE",
+  "duplicateUncertainty": true,
+  "articleFingerprint": "sha256:3c186e5fd51f3700ce50d8a91dc630bef68a5d201b8860e60e0ccf70a298c1a1",
+  "commerceEnabled": false,
+  "verifiedAt": "2026-10-25T13:13:28.066Z",
+  "expiresAt": "2026-10-25T14:43:28.066Z",
+  "sourceAuditIds": [
+    "calendar:nyse",
+    "fred:DCOILBRENTEU",
+    "fred:DGS10",
+    "fred:VIXCLS",
+    "fred:dow-jones",
+    "fred:nasdaq",
+    "yahoo-us:sp500"
+  ],
+  "sourceAuditFingerprint": "sha256:e43ac3680ca6e21e2d7accd48b752902135df1dd18d29b241c2e3399c34f101e",
+  "crossVerificationFingerprint": null,
+  "crossVerification": null
+}
