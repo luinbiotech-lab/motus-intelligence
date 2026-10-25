@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "1.0",
+  "category": "KOREA_MARKET",
+  "observedDate": null,
+  "comparisonResult": "UNAVAILABLE",
+  "sourceDiversityPass": false,
+  "verification": "REVIEW_REQUIRED",
+  "reasonCodes": [
+    "KOREA_OPERATION_DATE_HOLIDAY"
+  ],
+  "verifiedAt": "2026-10-25T13:16:30.892Z"
+}

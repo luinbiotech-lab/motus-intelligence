@@ -1,0 +1,9 @@
+{
+  "schemaVersion": "1.0",
+  "sourceMode": "internal",
+  "category": "KOREA_MARKET",
+  "operationDate": "2026-10-25",
+  "status": "SKIP",
+  "reasonCode": "KOREA_OPERATION_DATE_HOLIDAY",
+  "entries": []
+}

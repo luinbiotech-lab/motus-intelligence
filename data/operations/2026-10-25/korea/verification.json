@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.1",
+  "category": "KOREA_MARKET",
+  "operationDate": "2026-10-25",
+  "observedDate": "2026-10-25",
+  "sourceMode": "internal",
+  "verification": "FAILED",
+  "unresolvedConflicts": [
+    "KOREA_OPERATION_DATE_HOLIDAY"
+  ],
+  "provenancePass": false,
+  "sourceDiversityPass": false,
+  "sourceLinksPass": false,
+  "mobilePass": false,
+  "editorialQualityPass": false,
+  "leakagePass": true,
+  "duplicateCheck": "PENDING_REMOTE",
+  "duplicateUncertainty": true,
+  "articleFingerprint": "",
+  "commerceEnabled": false,
+  "verifiedAt": "2026-10-25T13:16:30.892Z",
+  "expiresAt": "2026-10-25T14:46:30.892Z",
+  "sourceAuditIds": [],
+  "sourceAuditFingerprint": "sha256:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "crossVerificationFingerprint": null,
+  "crossVerification": null
+}

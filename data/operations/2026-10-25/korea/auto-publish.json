@@ -1,0 +1,10 @@
+{
+  "state": "SKIP",
+  "reasonCode": "KOREA_OPERATION_DATE_HOLIDAY",
+  "reasonCodes": [
+    "KOREA_OPERATION_DATE_HOLIDAY"
+  ],
+  "reason": "KOREA_OPERATION_DATE_HOLIDAY",
+  "insertCallCount": 0,
+  "publishCallCount": 0
+}
