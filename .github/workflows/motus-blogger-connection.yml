@@ -49,11 +49,18 @@ jobs:
               const safeCode = ['invalid_grant', 'invalid_client', 'access_denied', 'unauthorized_client'].includes(token.error) ? token.error : 'TOKEN_REQUEST_FAILED';
               throw new Error('OAUTH_HTTP_' + response.status + ':' + safeCode);
             }
+            console.log('OAUTH_REFRESH_PASS');
             const headers = {authorization: 'Bearer ' + token.access_token};
             const blogResponse = await fetch('https://www.googleapis.com/blogger/v3/blogs/' + expectedBlogId + '?fields=id,url', {
               headers, redirect: 'error', signal: AbortSignal.timeout(20000)
             });
-            if (!blogResponse.ok) throw new Error('BLOG_ACCESS_HTTP_' + blogResponse.status);
+            if (!blogResponse.ok) {
+              const failure = await blogResponse.json();
+              const evidence = JSON.stringify(failure);
+              if (/SERVICE_DISABLED|accessNotConfigured/.test(evidence)) throw new Error('BLOGGER_API_DISABLED');
+              if (/insufficientPermissions|ACCESS_TOKEN_SCOPE_INSUFFICIENT/.test(evidence)) throw new Error('BLOGGER_SCOPE_INSUFFICIENT');
+              throw new Error('BLOG_ACCESS_HTTP_' + blogResponse.status);
+            }
             const blog = await blogResponse.json();
             if (blog.id !== expectedBlogId || new URL(blog.url).hostname !== 'motusnova.blogspot.com') throw new Error('MOTUS_TARGET_MISMATCH');
             let member = false, pageToken = '';
@@ -71,7 +78,7 @@ jobs:
             console.log(JSON.stringify({oauth: 'PASS', targetBlog: 'MATCH', accountBlogAccess: 'PASS', publicUrl: blog.url, checkedAt: new Date().toISOString(), publishCallCount: 0}));
           } catch (error) {
             const message = error instanceof Error ? error.message : '';
-            console.error(/^(OAUTH_HTTP_\d+:\w+|BLOG_ACCESS_HTTP_\d+|BLOG_MEMBERSHIP_HTTP_\d+|MOTUS_TARGET_MISMATCH|MOTUS_BLOG_NOT_IN_AUTHORIZED_ACCOUNT)$/.test(message) ? message : 'BLOGGER_CONNECTION_CHECK_FAILED');
+            console.error(/^(OAUTH_HTTP_\d+:\w+|BLOG_ACCESS_HTTP_\d+|BLOG_MEMBERSHIP_HTTP_\d+|MOTUS_TARGET_MISMATCH|MOTUS_BLOG_NOT_IN_AUTHORIZED_ACCOUNT|BLOGGER_API_DISABLED|BLOGGER_SCOPE_INSUFFICIENT)$/.test(message) ? message : 'BLOGGER_CONNECTION_CHECK_FAILED');
             process.exitCode = 1;
           }
           NODE
