@@ -116,7 +116,7 @@ function formatKoreanDate(value:string,first?:string):string {const [year,month,
 function validateMarketHistory(history:MajorIndexHistory|undefined):MajorIndexHistorySeries[] {
   if(!history||history.sessionCount<5||!/^\d{4}-\d{2}-\d{2}$/.test(history.asOf)) throw new Error('missing verified market history');
   const order=['sp500','nasdaq','dow-jones','russell-2000'];
-  if(history.series.length!==4||history.series.some((item,index)=>item.key!==order[index]||item.dates.length!==history.sessionCount||item.closes.length!==history.sessionCount||item.provenance.length!==history.sessionCount||item.dates.some(date=>!/^\d{4}-\d{2}-\d{2}$/.test(date))||item.closes.some(value=>!Number.isFinite(value))||item.closes.at(-1)!==item.latestClose||!Number.isFinite(item.latestChangePct)||!/^https:\/\//.test(item.sourceUrl))) throw new Error('invalid verified market history');
+  if((history.series.length!==3&&history.series.length!==4)||history.series.some((item,index)=>item.key!==order[index]||item.dates.length!==history.sessionCount||item.closes.length!==history.sessionCount||item.provenance.length!==history.sessionCount||item.dates.some(date=>!/^\d{4}-\d{2}-\d{2}$/.test(date))||item.closes.some(value=>!Number.isFinite(value))||item.closes.at(-1)!==item.latestClose||!Number.isFinite(item.latestChangePct)||!/^https:\/\//.test(item.sourceUrl))) throw new Error('invalid verified market history');
   return history.series;
 }
 
