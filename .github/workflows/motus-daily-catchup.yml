@@ -12,7 +12,9 @@ permissions:
   contents: read
 
 concurrency:
-  group: motus-production-global
+  # Simulation-only: kept out of the production queues so a pending catch-up can never
+  # supersede (cancel) a pending publishing run.
+  group: motus-catchup
   cancel-in-progress: false
 
 jobs:
