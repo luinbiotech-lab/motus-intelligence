@@ -63,18 +63,15 @@ jobs:
             }
             const blog = await blogResponse.json();
             if (blog.id !== expectedBlogId || new URL(blog.url).hostname !== 'motusnova.blogspot.com') throw new Error('MOTUS_TARGET_MISMATCH');
-            let member = false, pageToken = '';
-            do {
+            {
               const url = new URL('https://www.googleapis.com/blogger/v3/users/self/blogs');
-              url.searchParams.set('fields', 'items(id),nextPageToken');
-              if (pageToken) url.searchParams.set('pageToken', pageToken);
+              url.searchParams.set('fields', 'items(id)');
               const membershipResponse = await fetch(url, {headers, redirect: 'error', signal: AbortSignal.timeout(20000)});
               if (!membershipResponse.ok) throw new Error('BLOG_MEMBERSHIP_HTTP_' + membershipResponse.status);
               const membership = await membershipResponse.json();
-              member = (membership.items ?? []).some(item => item.id === expectedBlogId);
-              pageToken = membership.nextPageToken ?? '';
-            } while (!member && pageToken);
-            if (!member) throw new Error('MOTUS_BLOG_NOT_IN_AUTHORIZED_ACCOUNT');
+              const member = (membership.items ?? []).some(item => item.id === expectedBlogId);
+              if (!member) throw new Error('MOTUS_BLOG_NOT_IN_AUTHORIZED_ACCOUNT');
+            }
             console.log(JSON.stringify({oauth: 'PASS', targetBlog: 'MATCH', accountBlogAccess: 'PASS', publicUrl: blog.url, checkedAt: new Date().toISOString(), publishCallCount: 0}));
           } catch (error) {
             const message = error instanceof Error ? error.message : '';
