@@ -1,0 +1,31 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {createFirstSplitDailyProductionRun} from '../src/intelligence/split-daily-production.js';
+import type {USMarketDailyViewModel} from '../src/intelligence/daily-masters.js';
+import {renderUSEditorialArticle} from '../src/publishers/editorial-article.js';
+
+function coreView() {
+  const unit = createFirstSplitDailyProductionRun().units.find(item => item.category === 'US_MARKET')!;
+  const view = structuredClone(unit.viewModel) as USMarketDailyViewModel;
+  view.marketHistory.series = view.marketHistory.series.slice(0, 3);
+  return view;
+}
+test('verified three-core-index history renders when optional Russell is unavailable', () => {
+  const view = coreView();
+  const html = renderUSEditorialArticle(view).html;
+  assert.equal((html.match(/<svg\b/g) ?? []).length, 3);
+  for (const series of view.marketHistory.series) {
+    assert.ok(html.includes(series.label));
+    assert.ok(html.includes(String(series.latestClose)));
+    assert.ok(html.includes(series.sourceUrl.replaceAll('&', '&amp;')));
+  }
+  assert.doesNotMatch(html, /data-chart-status="fallback"|data-index="russell-2000"/);
+});
+test('missing core index and invalid series still fail closed in renderer', () => {
+  const missing = coreView();
+  missing.marketHistory.series.pop();
+  assert.match(renderUSEditorialArticle(missing).html, /data-chart-status="fallback"/);
+  const invalid = coreView();
+  invalid.marketHistory.series[0]!.closes.pop();
+  assert.match(renderUSEditorialArticle(invalid).html, /data-chart-status="fallback"/);
+});
