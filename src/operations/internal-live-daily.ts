@@ -80,7 +80,10 @@ export class RepositoryInternalDailyBuilder implements InternalDailyBuilder {
    const [flowResult,sectorResult,moverResult]=await Promise.allSettled([this.koreaFlows(NAVER.flow,at,audit),this.koreaRows(NAVER.sector,'SECTOR',at,audit),this.koreaRows(NAVER.movers,'MOVER',at,audit)]);
    const observedDate=kospi.date;if(kosdaq.date!==observedDate)throw new Error('KOREA_REFERENCE_DATE_MISMATCH');
    if(observedDate!==expectedSession.date)throw new Error('KOREA_COMPLETED_SESSION_MISMATCH:'+observedDate+':'+expectedSession.date);
-   if(![observedDate,operationDate].includes(fx.date))throw new Error('KOREA_FX_REFERENCE_DATE_MISMATCH:'+fx.date+':'+observedDate+':'+operationDate);
+   // Seoul FX trades until 02:00 KST, so after a Friday session the latest quote is stamped Saturday.
+   // Accept the latest quote dated from the completed session through the operation date; older (stale)
+   // or later (future) quotes still HOLD.
+   if(!(/^\d{4}-\d{2}-\d{2}$/.test(fx.date)&&fx.date>=observedDate&&fx.date<=operationDate))throw new Error('KOREA_FX_REFERENCE_DATE_MISMATCH:'+fx.date+':'+observedDate+':'+operationDate);
    const sameSession=<T extends {date:string;metrics:KoreaMarketNewsletterMetric[]}>(result:PromiseSettledResult<T>,sourceIds:string[])=>{if(result.status!=='fulfilled')return [] as KoreaMarketNewsletterMetric[];if(result.value.date===observedDate)return result.value.metrics;for(const sourceId of sourceIds){const entry=[...audit].reverse().find(item=>item.sourceId===sourceId);if(entry){entry.status='FAILED';entry.error='CURRENT_SESSION_DATA_EXCLUDED';entry.referenceDate=observedDate}}return [] as KoreaMarketNewsletterMetric[]},flows=sameSession(flowResult,['naver:flows']),sectorMetrics=sameSession(sectorResult,['naver:sector']),moverMetrics=sameSession(moverResult,['naver:mover']);
    for(const entry of audit)if(entry.observedDate!==undefined)entry.referenceDate=entry.sourceId==='naver:usd-krw'?fx.date:observedDate;
    const preferredOfficial=await this.koreaOfficial.fetch(observedDate,at),official=!preferredOfficial.requiredProviderAvailable?await this.koreaSecondary.fetch(observedDate,at):preferredOfficial;

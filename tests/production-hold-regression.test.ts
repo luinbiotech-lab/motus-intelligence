@@ -80,6 +80,38 @@ test('Korea 08:45 KST production model uses prior session, explicit FX basis and
  const view=result.payload!.unit.viewModel as import('../src/intelligence/daily-masters.js').KoreaMarketDailyViewModel;
  assert.equal(view.operationDate,'2026-10-15');assert.equal(view.sessionDate,'2026-10-14');assert.equal(view.issueDate,'2026-10-15');assert.equal(view.edition,'PREVIOUS_SESSION_MORNING');assert.equal(view.fxBasis,'CURRENT_AT_COLLECTION');assert.ok(view.indexMetrics.every(item=>item.source.label==='한국거래소'));assert.match(view.marketSummary,/전일 국내증시/);assert.doesNotMatch(view.title,/^\d{4}-\d{2}-\d{2}/);assert.match(result.payload!.unit.render.html,/오늘 체크포인트/);assert.match(result.payload!.unit.render.html,/USD\/KRW 수집 시점 현재가/);
 });
+test('Korea Monday morning accepts the Saturday-stamped FX quote from the extended Friday session',async()=>{
+ const morning='2026-10-25T21:20:00Z';
+ const official={adapterId:'test-krx',async fetch(){return {requiredProviderAvailable:true,reasonCode:null,phase:'PRE_PUBLICATION' as const,audit:[],observations:[{field:'KOSPI' as const,observedDate:'2026-10-23',value:3000,provider:'KRX' as const,sourceUrl:'https://openapi.krx.co.kr/kospi',metricBasis:'SESSION_CLOSE' as const},{field:'KOSDAQ' as const,observedDate:'2026-10-23',value:900,provider:'KRX' as const,sourceUrl:'https://openapi.krx.co.kr/kosdaq',metricBasis:'SESSION_CLOSE' as const}]}}};
+ const fetcher=(async(input:RequestInfo|URL)=>{const url=String(input);let data:unknown;
+  if(url.includes('/index/KOSPI/price?'))data=[{localTradedAt:'2026-10-23',closePrice:'3000',fluctuationsRatio:'1'}];
+  else if(url.includes('/index/KOSDAQ/price?'))data=[{localTradedAt:'2026-10-23',closePrice:'900',fluctuationsRatio:'-0.5'}];
+  else if(url.includes('/index/KOSPI/basic'))data={localTradedAt:'2026-10-23T20:15:00+09:00',closePrice:'3000',fluctuationsRatio:'1',marketStatus:'CLOSE'};
+  else if(url.includes('/index/KOSDAQ/basic'))data={localTradedAt:'2026-10-23T20:15:00+09:00',closePrice:'900',fluctuationsRatio:'-0.5',marketStatus:'CLOSE'};
+  else if(url.includes('FX_USDKRW'))data={exchangeInfo:{localTradedAt:'2026-10-24T02:00:00+09:00',closePrice:'1343.10',fluctuations:'7.10'}};
+  else if(url.includes('/trend'))data={bizdate:'20261023',personalValue:'100',foreignValue:'200',institutionalValue:'-300'};
+  else if(url.includes('/upjong/'))data=[{name:'반도체',changeRate:'2.4',thistime:'20261023200504'}];
+  else data={stocks:[{stockName:'대표 종목',fluctuationsRatio:'1.2',localTradedAt:'2026-10-23T20:20:18+09:00'}]};
+  return new Response(JSON.stringify(data));}) as typeof fetch;
+ const result=await new RepositoryInternalDailyBuilder(fetcher,{},official).build('KOREA_MARKET',morning);
+ assert.equal(result.state,'LIVE_READY',String(result.reason));assert.equal(result.payload?.session.observedDate,'2026-10-23');
+});
+test('Korea morning still rejects an FX quote older than the completed session',async()=>{
+ const morning='2026-10-25T21:20:00Z';
+ const official={adapterId:'test-krx',async fetch(){return {requiredProviderAvailable:true,reasonCode:null,phase:'PRE_PUBLICATION' as const,audit:[],observations:[{field:'KOSPI' as const,observedDate:'2026-10-23',value:3000,provider:'KRX' as const,sourceUrl:'https://openapi.krx.co.kr/kospi',metricBasis:'SESSION_CLOSE' as const},{field:'KOSDAQ' as const,observedDate:'2026-10-23',value:900,provider:'KRX' as const,sourceUrl:'https://openapi.krx.co.kr/kosdaq',metricBasis:'SESSION_CLOSE' as const}]}}};
+ const fetcher=(async(input:RequestInfo|URL)=>{const url=String(input);let data:unknown;
+  if(url.includes('/index/KOSPI/price?'))data=[{localTradedAt:'2026-10-23',closePrice:'3000',fluctuationsRatio:'1'}];
+  else if(url.includes('/index/KOSDAQ/price?'))data=[{localTradedAt:'2026-10-23',closePrice:'900',fluctuationsRatio:'-0.5'}];
+  else if(url.includes('/index/KOSPI/basic'))data={localTradedAt:'2026-10-23T20:15:00+09:00',closePrice:'3000',fluctuationsRatio:'1',marketStatus:'CLOSE'};
+  else if(url.includes('/index/KOSDAQ/basic'))data={localTradedAt:'2026-10-23T20:15:00+09:00',closePrice:'900',fluctuationsRatio:'-0.5',marketStatus:'CLOSE'};
+  else if(url.includes('FX_USDKRW'))data={exchangeInfo:{localTradedAt:'2026-10-22T15:30:00+09:00',closePrice:'1343.10',fluctuations:'7.10'}};
+  else if(url.includes('/trend'))data={bizdate:'20261023',personalValue:'100',foreignValue:'200',institutionalValue:'-300'};
+  else if(url.includes('/upjong/'))data=[{name:'반도체',changeRate:'2.4',thistime:'20261023200504'}];
+  else data={stocks:[{stockName:'대표 종목',fluctuationsRatio:'1.2',localTradedAt:'2026-10-23T20:20:18+09:00'}]};
+  return new Response(JSON.stringify(data));}) as typeof fetch;
+ const result=await new RepositoryInternalDailyBuilder(fetcher,{},official).build('KOREA_MARKET',morning);
+ assert.equal(result.state,'HOLD');assert.match(String(result.reason),/KOREA_FX_REFERENCE_DATE_MISMATCH:2026-10-22:2026-10-23:2026-10-26/);
+});
 test('all three approved schedules enable live publication with credential preflight',async()=>{
  const workflow=await readFile('.github/workflows/motus-daily-production.yml','utf8');
  assert.match(workflow,/MOTUS_LIVE_PUBLISH_ENABLED:\s*'false'/);
