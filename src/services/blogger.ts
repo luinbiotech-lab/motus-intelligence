@@ -218,7 +218,7 @@ export class GoogleBloggerApiAdapter implements BloggerAdapter {
     const status=post.status==='DRAFT'?'DRAFT':post.status==='LIVE'?'PUBLISHED':'UNKNOWN';return {postId:post.id,title:post.title,content:post.content,status,url:status==='PUBLISHED'&&isPublicBloggerPostUrl(post.url)?post.url!:null,labels:Array.isArray(post.labels)?post.labels:[],...(post.published?{publishedAt:post.published}:{}),...(post.updated?{updatedAt:post.updated}:{})};
   }
 
-  async findMatchingPosts(input:{title:string;label:string;operationDate?:string;sessionDate?:string;publicationFingerprint?:string},config:BloggerPublishingConfig):Promise<BloggerPostReadback[]> {
+  async findMatchingPosts(input:{title:string;label:string;operationDate?:string;publicationFingerprint?:string},config:BloggerPublishingConfig):Promise<BloggerPostReadback[]> {
     const blogId=config.blogId?.trim();if(!blogId)throw new Error('missing Blogger blogId');
     const accessToken=await this.resolveAccessToken(config);const matches:BloggerPostReadback[]=[];
     for(const requestedStatus of ['draft','live'] as const){let pageToken:string|undefined;do{
@@ -404,21 +404,13 @@ function safeGoogleApiError(body:string):string {
     return [parsed.error?.status,parsed.error?.message].filter(Boolean).join(' - ').slice(0,300)||'request failed';
   } catch { return 'request failed'; }
 }
-function identityMatches(post:GoogleBloggerPost,input:{title:string;operationDate?:string;sessionDate?:string}):boolean {
+function identityMatches(post:GoogleBloggerPost,input:{title:string;operationDate?:string}):boolean {
   if(post.title===input.title)return true;
-  const text=`${post.title} ${post.content??''}`;
-  // Same market session / event date already covered by an existing post in this label is a duplicate,
-  // even when it was published under a different operationDate (e.g. manual close edition vs next-morning edition).
-  if(input.sessionDate&&containsDate(text,input.sessionDate))return true;
   if(!input.operationDate)return false;
-  if(containsDate(text,input.operationDate))return true;
+  const body=post.content??'';
+  const korean=input.operationDate.replace(/^(\d{4})-(\d{2})-(\d{2})$/,(_,year,month,day)=>`${year}년 ${Number(month)}월 ${Number(day)}일`);
+  if(`${post.title} ${body}`.includes(input.operationDate)||`${post.title} ${body}`.includes(korean))return true;
   return [post.published,post.updated].some(value=>value&&kstDate(value)===input.operationDate);
-}
-
-function containsDate(text:string,isoDate:string):boolean {
-  if(!/^\d{4}-\d{2}-\d{2}$/.test(isoDate))return false;
-  const korean=isoDate.replace(/^(\d{4})-(\d{2})-(\d{2})$/,(_,year,month,day)=>`${year}년 ${Number(month)}월 ${Number(day)}일`);
-  return text.includes(isoDate)||text.includes(korean);
 }
 function kstDate(value:string):string {
   const parts=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date(value));

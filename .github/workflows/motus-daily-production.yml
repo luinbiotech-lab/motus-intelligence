@@ -71,11 +71,19 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if git fetch origin ops-data:refs/remotes/origin/ops-data; then
+          hydrated=false
+          for attempt in 1 2 3; do
+            if git fetch origin ops-data:refs/remotes/origin/ops-data; then hydrated=true; break; fi
+            sleep $((attempt * 5))
+          done
+          if [[ "$hydrated" == true ]]; then
             git archive origin/ops-data data | tar -xf -
-            find data -name .publish-lock -type f -delete
+            find data -name .publish-lock -prune -exec rm -rf {} +
+            # The publish CLI refuses live publication without this marker, because the persisted
+            # ledger is what blocks same-session duplicates across operation dates.
+            git rev-parse origin/ops-data > data/.ops-data-hydrated
           else
-            echo '::warning title=ops-data unavailable::continuing with repository/cache state only'
+            echo '::warning title=ops-data unavailable::live publication will HOLD (OPS_DATA_NOT_HYDRATED); simulation continues'
           fi
       - uses: actions/setup-node@v4
         with: {node-version: 22, cache: npm}

@@ -34,8 +34,10 @@ export async function readPublishLedger(root:string):Promise<PublishLedgerEntry[
 
 /**
  * Finds an already PUBLISHED operation of the same category that covers the same session date,
- * regardless of the operationDate it ran under. Uses the ledger's sessionDate when recorded and
- * falls back to the persisted live unit's observedDate for legacy entries.
+ * regardless of the operationDate it ran under. Uses the ledger's sessionDate when recorded. A legacy
+ * entry without sessionDate is resolved from the persisted live unit only when that unit is provably the
+ * published one (its content fingerprint equals the ledger fingerprint); a unit re-collected by a later
+ * rerun is never trusted.
  */
 export async function findPublishedSameSession(operationsRoot:string,categoryDir:string,category:DailyCategory,sessionDate:string):Promise<{operationDate:string;postId:string|null;publicPostUrl:string|null}|null> {
   let dates:string[];
@@ -43,9 +45,12 @@ export async function findPublishedSameSession(operationsRoot:string,categoryDir
   for(const operationDate of dates){
     const root=join(operationsRoot,operationDate,categoryDir),published=(await readPublishLedger(root)).filter(entry=>entry.event==='PUBLISHED'&&entry.category===category);
     if(!published.length)continue;
-    let unitSession:string|null=null;
-    try{const unit=JSON.parse(await readFile(join(root,'live-unit.json'),'utf8')) as {observedDate?:unknown};unitSession=typeof unit.observedDate==='string'?unit.observedDate:null}catch{unitSession=null}
-    for(const entry of published)if((entry.sessionDate??unitSession)===sessionDate)return {operationDate,postId:entry.postId,publicPostUrl:entry.publicPostUrl};
+    let unit:{observedDate:string;fingerprint:string}|null=null;
+    try{const raw=JSON.parse(await readFile(join(root,'live-unit.json'),'utf8')) as {observedDate?:unknown;contentFingerprint?:unknown};if(typeof raw.observedDate==='string'&&typeof raw.contentFingerprint==='string'&&raw.contentFingerprint)unit={observedDate:raw.observedDate,fingerprint:'sha256:'+raw.contentFingerprint}}catch{unit=null}
+    for(const entry of published){
+      const session=entry.sessionDate??(unit&&unit.fingerprint===entry.fingerprint?unit.observedDate:null);
+      if(session===sessionDate)return {operationDate,postId:entry.postId,publicPostUrl:entry.publicPostUrl};
+    }
   }
   return null;
 }

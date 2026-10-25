@@ -6,13 +6,16 @@ market session (or AI event) date, regardless of the operationDate it ran under.
 Korea close edition for session D (operationDate D) followed by the next-morning edition for the same
 session D (operationDate D+1).
 
-- Ledger: `motus-publish-cli` scans every persisted `data/operations/*/<category>/publish-ledger.jsonl`
-  for a `PUBLISHED` entry of the same category whose `sessionDate` (new entries) or persisted
-  `live-unit.json` `observedDate` (legacy entries) equals the unit's `observedDate`, and finishes with
-  `SKIP` / `ALREADY_PUBLISHED_SAME_SESSION` before any Blogger call.
-- Remote: `findMatchingPosts` also treats a same-label post whose title/body contains the session date
-  (ISO or Korean form) as a match, so both remote duplicate checks HOLD before insert/publish.
-- New ledger entries record `sessionDate`.
+- Ledger (SSOT): `motus-publish-cli` scans every persisted `data/operations/*/<category>/publish-ledger.jsonl`
+  for a `PUBLISHED` entry of the same category covering the unit's `observedDate` and finishes with
+  `SKIP` / `ALREADY_PUBLISHED_SAME_SESSION` before any Blogger call. New entries record `sessionDate`;
+  legacy entries are resolved from the persisted `live-unit.json` only when its content fingerprint
+  equals the ledger fingerprint (a unit re-collected by a later rerun is never trusted).
+- The remote check is unchanged (title / operationDate). Matching arbitrary dates in post bodies was
+  rejected because charts and prior-session references contain older session dates (false HOLDs).
+- In GitHub Actions, live publication HOLDs with `OPS_DATA_NOT_HYDRATED` unless the ops-data ledger was
+  hydrated (marker `data/.ops-data-hydrated`, written after a successful fetch with up to 3 retries),
+  so the ledger guard can never be silently skipped.
 
 ## ops-data persistence
 The persist job no longer overwrites ops-data with the runner bundle. It merges:
