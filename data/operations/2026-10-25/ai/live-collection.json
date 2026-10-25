@@ -1,0 +1,14 @@
+{
+  "mode": "LIVE",
+  "sourceMode": "internal",
+  "date": "2026-10-25",
+  "observedDate": null,
+  "category": "AI_INTELLIGENCE",
+  "state": "SKIP",
+  "reasonCode": "AI_VERIFIED_EVENTS_INSUFFICIENT",
+  "verification": "FAILED",
+  "publishCallCount": 0,
+  "commerce": {
+    "enabled": false
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "schemaVersion": "1.0",
+  "sourceMode": "internal",
+  "category": "AI_INTELLIGENCE",
+  "operationDate": "2026-10-25",
+  "status": "SKIP",
+  "reasonCode": "AI_VERIFIED_EVENTS_INSUFFICIENT",
+  "entries": [
+    {
+      "sourceId": "openai",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/news/rss.xml",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-25T13:15:30.167Z",
+      "error": null
+    },
+    {
+      "sourceId": "google-ai",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blog.google/technology/ai/rss/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-25T13:15:30.167Z",
+      "error": null
+    },
+    {
+      "sourceId": "nvidia",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blogs.nvidia.com/feed/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-25T13:15:30.167Z",
+      "error": null
+    },
+    {
+      "sourceId": "microsoft",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blogs.microsoft.com/feed/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-25T13:15:30.167Z",
+      "error": null
+    },
+    {
+      "sourceId": "ai:page:1",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/scaling-storage-one-billion-users-part-two",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-10-25T13:15:30.167Z",
+      "error": "HTTP_403"
+    },
+    {
+      "sourceId": "ai:page:2",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/securing-our-frontier-model-training-environment",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-10-25T13:15:30.167Z",
+      "error": "HTTP_403"
+    },
+    {
+      "sourceId": "ai:page:3",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blogs.nvidia.com/blog/kazakhstan-ai-compute-ecosystem/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-25T13:15:30.167Z",
+      "error": null
+    },
+    {
+      "sourceId": "ai:page:4",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/openai-nask-ai-safety-security-partnership",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-10-25T13:15:30.167Z",
+      "error": "HTTP_403"
+    },
+    {
+      "sourceId": "ai:page:5",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/decisions-api",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-10-25T13:15:30.167Z",
+      "error": "HTTP_403"
+    },
+    {
+      "sourceId": "ai:page:6",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blogs.nvidia.com/blog/minerva-platform-infrastructure/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-25T13:15:30.167Z",
+      "error": null
+    }
+  ]
+}
