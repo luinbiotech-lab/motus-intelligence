@@ -2,33 +2,98 @@
   "schemaVersion": "1.1",
   "category": "KOREA_MARKET",
   "operationDate": "2026-10-26",
-  "observedDate": "2026-10-26",
+  "observedDate": "2026-10-23",
   "sourceMode": "internal",
-  "verification": "FAILED",
-  "unresolvedConflicts": [
-    "KOREA_FX_REFERENCE_DATE_MISMATCH:2026-10-24:2026-10-23:2026-10-26"
-  ],
-  "provenancePass": false,
-  "sourceDiversityPass": false,
-  "sourceLinksPass": false,
-  "mobilePass": false,
-  "editorialQualityPass": false,
+  "verification": "VERIFIED",
+  "unresolvedConflicts": [],
+  "provenancePass": true,
+  "sourceDiversityPass": true,
+  "sourceLinksPass": true,
+  "mobilePass": true,
+  "editorialQualityPass": true,
   "leakagePass": true,
   "duplicateCheck": "PENDING_REMOTE",
   "duplicateUncertainty": true,
-  "articleFingerprint": "",
+  "articleFingerprint": "sha256:247f653924a79d8ac13159b758adafcb87fa310e76ad60f2f74900a753c47281",
   "commerceEnabled": false,
-  "verifiedAt": "2026-10-25T15:21:26.267Z",
-  "expiresAt": "2026-10-25T16:51:26.267Z",
+  "verifiedAt": "2026-10-25T15:25:46.365Z",
+  "expiresAt": "2026-10-25T16:55:46.365Z",
   "sourceAuditIds": [
-    "naver:kospi:history",
-    "naver:kosdaq:history",
-    "naver:usd-krw",
     "naver:flows",
+    "naver:kosdaq:history",
+    "naver:kospi:history",
     "naver:mover",
-    "naver:sector"
+    "naver:sector",
+    "naver:usd-krw",
+    "yahoo-finance:kosdaq",
+    "yahoo-finance:kospi"
   ],
-  "sourceAuditFingerprint": "sha256:1bf0c76a8d29a3c3dd8092a19991fd7664c8f5159e58309bc60b1a022c81630a",
-  "crossVerificationFingerprint": null,
-  "crossVerification": null
+  "sourceAuditFingerprint": "sha256:017c2f5c219666a69e69c1442d826b5573e4299eda697334b4e69cf90c0c0aae",
+  "crossVerificationFingerprint": "sha256:85852619505bed7c630c5b0434b93d01f759554857de182f3aa6964629e455b9",
+  "crossVerification": {
+    "schemaVersion": "1.0",
+    "category": "KOREA_MARKET",
+    "observedDate": "2026-10-23",
+    "primarySource": {
+      "provider": "Naver Finance",
+      "domain": "naver.com",
+      "urls": [
+        "https://m.stock.naver.com/api/index/KOSPI/price?pageSize=10&page=1",
+        "https://m.stock.naver.com/api/index/KOSDAQ/price?pageSize=10&page=1"
+      ]
+    },
+    "independentSource": {
+      "providers": [
+        "YAHOO_FINANCE"
+      ],
+      "domains": [
+        "yahoo.com"
+      ],
+      "urls": [
+        "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?period1=1792713600&period2=1792972800&interval=1d",
+        "https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?period1=1792713600&period2=1792972800&interval=1d"
+      ]
+    },
+    "comparedFields": [
+      {
+        "field": "KOSPI",
+        "primaryValue": 5550.3,
+        "independentValue": 5550.2998046875,
+        "difference": 0.00019531250018189894,
+        "tolerance": 0.05,
+        "result": "PASS",
+        "primarySourceUrl": "https://m.stock.naver.com/api/index/KOSPI/price?pageSize=10&page=1",
+        "independentSourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?period1=1792713600&period2=1792972800&interval=1d",
+        "metricBasis": "SESSION_CLOSE"
+      },
+      {
+        "field": "KOSDAQ",
+        "primaryValue": 751.69,
+        "independentValue": 751.6900024414062,
+        "difference": 0.000002441406195430318,
+        "tolerance": 0.05,
+        "result": "PASS",
+        "primarySourceUrl": "https://m.stock.naver.com/api/index/KOSDAQ/price?pageSize=10&page=1",
+        "independentSourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?period1=1792713600&period2=1792972800&interval=1d",
+        "metricBasis": "SESSION_CLOSE"
+      }
+    ],
+    "tolerance": {
+      "KOSPI": 0.05,
+      "KOSDAQ": 0.05,
+      "USD_KRW": 2
+    },
+    "comparisonResult": "PASS",
+    "sourceDiversityPass": true,
+    "verification": "VERIFIED",
+    "reasonCodes": [],
+    "verifiedAt": "2026-10-25T15:25:46.365Z",
+    "officialPhase": "PRE_PUBLICATION",
+    "reconciliation": {
+      "status": "NOT_REQUIRED",
+      "officialObservedDates": [
+        "2026-10-23"
+      ]
+    }
+  }
 }

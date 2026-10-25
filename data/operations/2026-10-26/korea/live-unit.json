@@ -1,9 +1,292 @@
 {
-  "schemaVersion": "1.0",
+  "publicationId": "motus-live-2026-10-26:korea",
   "category": "KOREA_MARKET",
-  "operationDate": "2026-10-26",
-  "status": "HOLD",
-  "observedDate": null,
-  "reasonCode": "KOREA_FX_REFERENCE_DATE_MISMATCH:2026-10-24:2026-10-23:2026-10-26",
-  "unit": null
+  "observedDate": "2026-10-23",
+  "title": "진양화학으로 읽는 전일 국내증시",
+  "label": "국내증시",
+  "sourceCount": 8,
+  "itemCount": 15,
+  "readiness": "READY",
+  "readinessReasons": [],
+  "review": {
+    "state": "PENDING",
+    "reviewer": null,
+    "reviewedAt": null,
+    "history": []
+  },
+  "publicationState": "PREVIEW_READY",
+  "draftPostId": null,
+  "publicPostUrl": null,
+  "duplicateCount": 0,
+  "contentFingerprint": "247f653924a79d8ac13159b758adafcb87fa310e76ad60f2f74900a753c47281",
+  "render": {
+    "html": "<!doctype html><html lang=\"ko\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>진양화학으로 읽는 전일 국내증시</title></head><body><article data-product=\"motus-korea-market\" data-layout=\"editorial-article-4q\" style=\"font-family:Arial,&quot;Noto Sans KR&quot;,sans-serif;color:#172033;line-height:1.78;font-size:17px;width:100%;max-width:820px;box-sizing:border-box;margin:0 auto;overflow-x:hidden;overflow-wrap:anywhere\"><header style=\"width:100%;max-width:100%;box-sizing:border-box;background:#03162e;color:#fff;padding:26px 22px;margin:0 0 22px\"><p style=\"margin:0 0 9px;color:#c7d8ea;font-size:14px;font-weight:800\">MOTUS | What Moves the World</p><div role=\"heading\" aria-level=\"2\" style=\"font-size:clamp(25px,7vw,34px);line-height:1.22;font-weight:850;word-break:keep-all\">진양화학으로 읽는 전일 국내증시</div><p style=\"margin:10px 0 0;color:#e6edf5\">전일 마감 데이터와 오늘 아침 변수를 함께 읽는 국내증시</p><p style=\"margin:11px 0 0;color:#b7c8da;font-size:13px\">국내증시 (Korea Market) · 2026-10-26</p></header>\n<p data-section=\"editorial-lead\" style=\"margin:0 0 24px;font-size:18px;line-height:1.82;color:#172033\">2026-10-23 마감한 전일 국내증시는 KOSPI 5,550.3, KOSDAQ 751.69를 기록했다. 오늘 아침에는 전일 지수 흐름과 환율, 확인 가능한 보조 신호를 함께 놓고 장의 성격을 다시 짚는다.</p>\n<section style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><h2 style=\"margin:0 0 12px;padding:0 0 8px;border-bottom:2px solid #173a63;color:#03162e;font-size:clamp(19px,4.8vw,23px);line-height:1.35;font-weight:850;word-break:keep-all;overflow-wrap:normal\">전일 장을 읽는 기준</h2><p style=\"margin:0 0 13px\">전일 국내증시의 지수 종가는 네이버금융 마감값을 Yahoo Finance의 독립 비교값과 대조해 확인했다. 원·달러 환율은 수집 시점 현재가으로 표시해 지수 종가와 혼용하지 않았다.</p><p style=\"margin:0 0 13px\">같은 세션으로 검증된 투자자 수급과 업종·종목 흐름만 보조 신호로 사용했다. 오늘 장 데이터가 이미 시작된 경우 전일 기사에 섞이지 않도록 자동 제외한다.</p></section>\n<section style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><h2 style=\"margin:0 0 12px;padding:0 0 8px;border-bottom:2px solid #173a63;color:#03162e;font-size:clamp(19px,4.8vw,23px);line-height:1.35;font-weight:850;word-break:keep-all;overflow-wrap:normal\">코스피와 코스닥</h2><p style=\"margin:0\">KOSPI 5,550.3 · KOSDAQ 751.69</p></section>\n<section style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><h2 style=\"margin:0 0 12px;padding:0 0 8px;border-bottom:2px solid #173a63;color:#03162e;font-size:clamp(19px,4.8vw,23px);line-height:1.35;font-weight:850;word-break:keep-all;overflow-wrap:normal\">환율과 시장 여건</h2><p style=\"margin:0\">USD/KRW 수집 시점 현재가 1,326.9</p></section>\n<section style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><h2 style=\"margin:0 0 12px;padding:0 0 8px;border-bottom:2px solid #173a63;color:#03162e;font-size:clamp(19px,4.8vw,23px);line-height:1.35;font-weight:850;word-break:keep-all;overflow-wrap:normal\">수급이 가리킨 방향</h2><div data-visualization=\"korea-investor-flow\" style=\"width:100%;max-width:100%;box-sizing:border-box\"><div style=\"margin:0 0 12px;width:100%;max-width:100%;box-sizing:border-box\"><div style=\"display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap\"><strong>개인</strong><span style=\"color:#c62828;font-weight:800\">+422</span></div><div style=\"height:8px;background:#eef2f6\"><span style=\"display:block;width:4%;height:100%;background:#c62828\"></span></div></div><div style=\"margin:0 0 12px;width:100%;max-width:100%;box-sizing:border-box\"><div style=\"display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap\"><strong>외국인</strong><span style=\"color:#1565c0;font-weight:800\">-9,811</span></div><div style=\"height:8px;background:#eef2f6\"><span style=\"display:block;width:46%;height:100%;background:#1565c0\"></span></div></div><div style=\"margin:0 0 12px;width:100%;max-width:100%;box-sizing:border-box\"><div style=\"display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap\"><strong>기관</strong><span style=\"color:#c62828;font-weight:800\">+8,682</span></div><div style=\"height:8px;background:#eef2f6\"><span style=\"display:block;width:41%;height:100%;background:#c62828\"></span></div></div></div></section>\n<section style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><h2 style=\"margin:0 0 12px;padding:0 0 8px;border-bottom:2px solid #173a63;color:#03162e;font-size:clamp(19px,4.8vw,23px);line-height:1.35;font-weight:850;word-break:keep-all;overflow-wrap:normal\">업종과 종목의 온도차</h2><p style=\"margin:0\">제약 +2.26 · 건설 +1.05 · 도로와철도운송 +0.9 · 반도체와반도체장비 +0.89 · 레저용장비와제품 +0.85 · 진양화학 +29.81 · 진양폴리 +29.81 · 진양산업 +29.79 · 서울식품우 +15.79 · 우성머티리얼스 +12.55</p></section>\n<section style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><h2 style=\"margin:0 0 12px;padding:0 0 8px;border-bottom:2px solid #173a63;color:#03162e;font-size:clamp(19px,4.8vw,23px);line-height:1.35;font-weight:850;word-break:keep-all;overflow-wrap:normal\">오늘 체크포인트</h2><p style=\"margin:0 0 13px\">오늘 체크포인트: 외국인 수급과 원·달러 환율, 직전 주도 업종의 연속성을 확인</p></section>\n<section style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><h2 style=\"margin:0 0 12px;padding:0 0 8px;border-bottom:2px solid #173a63;color:#03162e;font-size:clamp(19px,4.8vw,23px);line-height:1.35;font-weight:850;word-break:keep-all;overflow-wrap:normal\">자료</h2><ul style=\"margin:0;padding-left:20px\"><li style=\"margin:5px 0\"><a href=\"https://m.stock.naver.com/api/index/KOSPI/price?pageSize=10&amp;page=1\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">네이버금융 KOSPI 전일 마감</a></li><li style=\"margin:5px 0\"><a href=\"https://m.stock.naver.com/api/index/KOSDAQ/price?pageSize=10&amp;page=1\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">네이버금융 KOSDAQ 전일 마감</a></li><li style=\"margin:5px 0\"><a href=\"https://api.stock.naver.com/marketindex/exchange/FX_USDKRW\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">네이버금융 USD/KRW 현재가</a></li><li style=\"margin:5px 0\"><a href=\"https://m.stock.naver.com/api/index/KOSPI/trend\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">네이버금융 투자자 수급</a></li><li style=\"margin:5px 0\"><a href=\"https://stock.naver.com/api/domestic/market/upjong/list?startIdx=0&amp;pageSize=100&amp;sortType=changeRate\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">네이버금융 업종</a></li><li style=\"margin:5px 0\"><a href=\"https://m.stock.naver.com/api/stocks/up/KOSPI?page=1&amp;pageSize=20\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">네이버금융 상승종목</a></li><li style=\"margin:5px 0\"><a href=\"https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?period1=1792713600&amp;period2=1792972800&amp;interval=1d\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">YAHOO_FINANCE KOSPI</a></li><li style=\"margin:5px 0\"><a href=\"https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?period1=1792713600&amp;period2=1792972800&amp;interval=1d\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">YAHOO_FINANCE KOSDAQ</a></li></ul></section></article></body></html>",
+    "renderedSections": [
+      "masthead",
+      "lead",
+      "indexes",
+      "fx",
+      "flows",
+      "sectors",
+      "research",
+      "watch",
+      "sources"
+    ],
+    "label": "국내증시"
+  },
+  "viewModel": {
+    "publicationId": "motus-live-2026-10-26:korea",
+    "issueDate": "2026-10-26",
+    "issueNumber": 20261026,
+    "operationDate": "2026-10-26",
+    "sessionDate": "2026-10-23",
+    "edition": "PREVIOUS_SESSION_MORNING",
+    "fxBasis": "CURRENT_AT_COLLECTION",
+    "title": "진양화학으로 읽는 전일 국내증시",
+    "subtitle": "전일 마감 데이터와 오늘 아침 변수를 함께 읽는 국내증시",
+    "category": "KOREA_MARKET",
+    "canonicalLabel": "Korea Market",
+    "displayLabel": "국내증시 (Korea Market)",
+    "marketSummary": "2026-10-23 마감한 전일 국내증시는 KOSPI 5,550.3, KOSDAQ 751.69를 기록했다. 오늘 아침에는 전일 지수 흐름과 환율, 확인 가능한 보조 신호를 함께 놓고 장의 성격을 다시 짚는다.",
+    "indexMetrics": [
+      {
+        "factId": "index:KOSPI",
+        "group": "INDEX",
+        "label": "KOSPI",
+        "displayValue": "5,550.3",
+        "direction": "UP",
+        "source": {
+          "label": "Yahoo Finance 독립 비교값",
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?period1=1792713600&period2=1792972800&interval=1d"
+        }
+      },
+      {
+        "factId": "index:KOSDAQ",
+        "group": "INDEX",
+        "label": "KOSDAQ",
+        "displayValue": "751.69",
+        "direction": "DOWN",
+        "source": {
+          "label": "Yahoo Finance 독립 비교값",
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?period1=1792713600&period2=1792972800&interval=1d"
+        }
+      }
+    ],
+    "fxAndSupporting": [
+      {
+        "factId": "fx:usd-krw",
+        "group": "FX",
+        "label": "USD/KRW 수집 시점 현재가",
+        "displayValue": "1,326.9",
+        "direction": "UP",
+        "source": {
+          "label": "네이버금융",
+          "url": "https://api.stock.naver.com/marketindex/exchange/FX_USDKRW"
+        }
+      }
+    ],
+    "investorFlows": [
+      {
+        "factId": "flow:0",
+        "group": "FLOW",
+        "label": "개인",
+        "displayValue": "+422",
+        "direction": "UP",
+        "source": {
+          "label": "네이버금융",
+          "url": "https://m.stock.naver.com/api/index/KOSPI/trend"
+        }
+      },
+      {
+        "factId": "flow:1",
+        "group": "FLOW",
+        "label": "외국인",
+        "displayValue": "-9,811",
+        "direction": "DOWN",
+        "source": {
+          "label": "네이버금융",
+          "url": "https://m.stock.naver.com/api/index/KOSPI/trend"
+        }
+      },
+      {
+        "factId": "flow:2",
+        "group": "FLOW",
+        "label": "기관",
+        "displayValue": "+8,682",
+        "direction": "UP",
+        "source": {
+          "label": "네이버금융",
+          "url": "https://m.stock.naver.com/api/index/KOSPI/trend"
+        }
+      }
+    ],
+    "sectors": [
+      {
+        "factId": "sector:0",
+        "group": "SECTOR",
+        "label": "제약",
+        "displayValue": "+2.26",
+        "direction": "UP",
+        "source": {
+          "label": "네이버금융",
+          "url": "https://stock.naver.com/api/domestic/market/upjong/list?startIdx=0&pageSize=100&sortType=changeRate"
+        }
+      },
+      {
+        "factId": "sector:1",
+        "group": "SECTOR",
+        "label": "건설",
+        "displayValue": "+1.05",
+        "direction": "UP",
+        "source": {
+          "label": "네이버금융",
+          "url": "https://stock.naver.com/api/domestic/market/upjong/list?startIdx=0&pageSize=100&sortType=changeRate"
+        }
+      },
+      {
+        "factId": "sector:2",
+        "group": "SECTOR",
+        "label": "도로와철도운송",
+        "displayValue": "+0.9",
+        "direction": "UP",
+        "source": {
+          "label": "네이버금융",
+          "url": "https://stock.naver.com/api/domestic/market/upjong/list?startIdx=0&pageSize=100&sortType=changeRate"
+        }
+      },
+      {
+        "factId": "sector:3",
+        "group": "SECTOR",
+        "label": "반도체와반도체장비",
+        "displayValue": "+0.89",
+        "direction": "UP",
+        "source": {
+          "label": "네이버금융",
+          "url": "https://stock.naver.com/api/domestic/market/upjong/list?startIdx=0&pageSize=100&sortType=changeRate"
+        }
+      },
+      {
+        "factId": "sector:4",
+        "group": "SECTOR",
+        "label": "레저용장비와제품",
+        "displayValue": "+0.85",
+        "direction": "UP",
+        "source": {
+          "label": "네이버금융",
+          "url": "https://stock.naver.com/api/domestic/market/upjong/list?startIdx=0&pageSize=100&sortType=changeRate"
+        }
+      }
+    ],
+    "movers": [
+      {
+        "factId": "mover:0",
+        "group": "MOVER",
+        "label": "진양화학",
+        "displayValue": "+29.81",
+        "direction": "UP",
+        "source": {
+          "label": "네이버금융",
+          "url": "https://m.stock.naver.com/api/stocks/up/KOSPI?page=1&pageSize=20"
+        }
+      },
+      {
+        "factId": "mover:1",
+        "group": "MOVER",
+        "label": "진양폴리",
+        "displayValue": "+29.81",
+        "direction": "UP",
+        "source": {
+          "label": "네이버금융",
+          "url": "https://m.stock.naver.com/api/stocks/up/KOSPI?page=1&pageSize=20"
+        }
+      },
+      {
+        "factId": "mover:2",
+        "group": "MOVER",
+        "label": "진양산업",
+        "displayValue": "+29.79",
+        "direction": "UP",
+        "source": {
+          "label": "네이버금융",
+          "url": "https://m.stock.naver.com/api/stocks/up/KOSPI?page=1&pageSize=20"
+        }
+      },
+      {
+        "factId": "mover:3",
+        "group": "MOVER",
+        "label": "서울식품우",
+        "displayValue": "+15.79",
+        "direction": "UP",
+        "source": {
+          "label": "네이버금융",
+          "url": "https://m.stock.naver.com/api/stocks/up/KOSPI?page=1&pageSize=20"
+        }
+      },
+      {
+        "factId": "mover:4",
+        "group": "MOVER",
+        "label": "우성머티리얼스",
+        "displayValue": "+12.55",
+        "direction": "UP",
+        "source": {
+          "label": "네이버금융",
+          "url": "https://m.stock.naver.com/api/stocks/up/KOSPI?page=1&pageSize=20"
+        }
+      }
+    ],
+    "research": [],
+    "marketCommentary": [
+      "전일 국내증시의 지수 종가는 네이버금융 마감값을 Yahoo Finance의 독립 비교값과 대조해 확인했다. 원·달러 환율은 수집 시점 현재가으로 표시해 지수 종가와 혼용하지 않았다.",
+      "같은 세션으로 검증된 투자자 수급과 업종·종목 흐름만 보조 신호로 사용했다. 오늘 장 데이터가 이미 시작된 경우 전일 기사에 섞이지 않도록 자동 제외한다."
+    ],
+    "checkpoints": [
+      {
+        "headline": "오늘 체크포인트",
+        "watchFor": "외국인 수급과 원·달러 환율, 직전 주도 업종의 연속성을 확인",
+        "validityHorizon": "TODAY"
+      }
+    ],
+    "sources": [
+      {
+        "label": "네이버금융 KOSPI 전일 마감",
+        "url": "https://m.stock.naver.com/api/index/KOSPI/price?pageSize=10&page=1",
+        "publisher": "네이버금융"
+      },
+      {
+        "label": "네이버금융 KOSDAQ 전일 마감",
+        "url": "https://m.stock.naver.com/api/index/KOSDAQ/price?pageSize=10&page=1",
+        "publisher": "네이버금융"
+      },
+      {
+        "label": "네이버금융 USD/KRW 현재가",
+        "url": "https://api.stock.naver.com/marketindex/exchange/FX_USDKRW",
+        "publisher": "네이버금융"
+      },
+      {
+        "label": "네이버금융 투자자 수급",
+        "url": "https://m.stock.naver.com/api/index/KOSPI/trend",
+        "publisher": "네이버금융"
+      },
+      {
+        "label": "네이버금융 업종",
+        "url": "https://stock.naver.com/api/domestic/market/upjong/list?startIdx=0&pageSize=100&sortType=changeRate",
+        "publisher": "네이버금융"
+      },
+      {
+        "label": "네이버금융 상승종목",
+        "url": "https://m.stock.naver.com/api/stocks/up/KOSPI?page=1&pageSize=20",
+        "publisher": "네이버금융"
+      },
+      {
+        "label": "YAHOO_FINANCE KOSPI",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?period1=1792713600&period2=1792972800&interval=1d",
+        "publisher": "Yahoo Finance"
+      },
+      {
+        "label": "YAHOO_FINANCE KOSDAQ",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?period1=1792713600&period2=1792972800&interval=1d",
+        "publisher": "Yahoo Finance"
+      }
+    ]
+  }
 }
