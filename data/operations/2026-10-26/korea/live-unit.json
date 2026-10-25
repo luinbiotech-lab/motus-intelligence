@@ -1,0 +1,9 @@
+{
+  "schemaVersion": "1.0",
+  "category": "KOREA_MARKET",
+  "operationDate": "2026-10-26",
+  "status": "HOLD",
+  "observedDate": null,
+  "reasonCode": "KOREA_FX_REFERENCE_DATE_MISMATCH:2026-10-24:2026-10-23:2026-10-26",
+  "unit": null
+}

@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "1.1",
+  "category": "KOREA_MARKET",
+  "operationDate": "2026-10-26",
+  "observedDate": "2026-10-26",
+  "sourceMode": "internal",
+  "verification": "FAILED",
+  "unresolvedConflicts": [
+    "KOREA_FX_REFERENCE_DATE_MISMATCH:2026-10-24:2026-10-23:2026-10-26"
+  ],
+  "provenancePass": false,
+  "sourceDiversityPass": false,
+  "sourceLinksPass": false,
+  "mobilePass": false,
+  "editorialQualityPass": false,
+  "leakagePass": true,
+  "duplicateCheck": "PENDING_REMOTE",
+  "duplicateUncertainty": true,
+  "articleFingerprint": "",
+  "commerceEnabled": false,
+  "verifiedAt": "2026-10-25T15:21:26.267Z",
+  "expiresAt": "2026-10-25T16:51:26.267Z",
+  "sourceAuditIds": [
+    "naver:kospi:history",
+    "naver:kosdaq:history",
+    "naver:usd-krw",
+    "naver:flows",
+    "naver:mover",
+    "naver:sector"
+  ],
+  "sourceAuditFingerprint": "sha256:1bf0c76a8d29a3c3dd8092a19991fd7664c8f5159e58309bc60b1a022c81630a",
+  "crossVerificationFingerprint": null,
+  "crossVerification": null
+}

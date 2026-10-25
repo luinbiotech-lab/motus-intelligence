@@ -1,0 +1,10 @@
+{
+  "state": "HOLD",
+  "reasonCode": "KOREA_FX_REFERENCE_DATE_MISMATCH:2026-10-24:2026-10-23:2026-10-26",
+  "reasonCodes": [
+    "KOREA_FX_REFERENCE_DATE_MISMATCH:2026-10-24:2026-10-23:2026-10-26"
+  ],
+  "reason": "KOREA_FX_REFERENCE_DATE_MISMATCH:2026-10-24:2026-10-23:2026-10-26",
+  "insertCallCount": 0,
+  "publishCallCount": 0
+}
