@@ -1,0 +1,16 @@
+name: MOTUS AI Source Probe (temporary)
+on:
+  pull_request:
+    branches: [main]
+    paths: ['scripts/probe-ai-sources.mjs', '.github/workflows/motus-ai-source-probe.yml']
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 22}
+      - run: node scripts/probe-ai-sources.mjs
