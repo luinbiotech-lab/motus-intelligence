@@ -1,7 +1,7 @@
 import {chromium} from 'playwright';
 import {mkdirSync,writeFileSync,readFileSync} from 'node:fs';
 mkdirSync('qa/out',{recursive:true});
-const urls=readFileSync('qa/urls.txt','utf8').split('\n').map(s=>s.trim()).filter(Boolean);
+const urls=readFileSync('qa/urls.txt','utf8').split('\n').map(s=>s.trim()).filter(s=>s.startsWith('http'));
 const browser=await chromium.launch();
 for(const [i,url] of urls.entries()){
   for(const [name,vp,mobile] of [['mobile',{width:390,height:844},true],['desktop',{width:1366,height:900},false]]){
