@@ -116,8 +116,8 @@ test('all three approved schedules enable live publication with credential prefl
  const workflow=await readFile('.github/workflows/motus-daily-production.yml','utf8');
  assert.match(workflow,/MOTUS_LIVE_PUBLISH_ENABLED:\s*'false'/);
  assert.match(workflow,/SCHEDULE" == "30 3 \* \* 1-5" && "\$CATEGORY" == "ai"/);
- assert.match(workflow,/45 23 \* \* 0-4/);
- assert.match(workflow,/45 21 \* \* 1-5[^\n]*CATEGORY=us/);assert.match(workflow,/30 3 \* \* 1-5[^\n]*CATEGORY=ai/);assert.match(workflow,/SCHEDULE" == "45 23 \* \* 0-4" && "\$CATEGORY" == "korea"/);
+ assert.match(workflow,/17 21 \* \* 0-4/);
+ assert.match(workflow,/45 21 \* \* 1-5[^\n]*CATEGORY=us/);assert.match(workflow,/30 3 \* \* 1-5[^\n]*CATEGORY=ai/);assert.match(workflow,/SCHEDULE" == "17 21 \* \* 0-4" && "\$CATEGORY" == "korea"/);
  assert.match(workflow,/Require Blogger credentials before live publication/);
  assert.match(workflow,/INPUT_EXECUTE_PUBLISH" == "true"/);
 });

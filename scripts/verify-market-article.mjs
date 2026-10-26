@@ -7,7 +7,7 @@ const now=Date.now(),cases=[['US_MARKET',new Date(now).toISOString()],['KOREA_MA
 for(const [category,at] of cases){
  const result=await new RepositoryInternalDailyBuilder(fetch,process.env,undefined,undefined,undefined,'/tmp/no-ops').build(category,at);
  if(!result.payload){console.log(`::notice title=${category} state::${result.state} ${result.reason} at=${at}`);if(result.crossVerification)console.log(`::notice title=${category} cross::${JSON.stringify(result.crossVerification)}`);continue}
- const unit=result.payload.unit,quality=evaluateEditorialQuality(unit.title,unit.render.html),verification=buildProductionVerification(result.payload,'internal',result.audit,at);
+ const unit=result.payload.unit,quality=evaluateEditorialQuality(unit.title,unit.render.html),verification=buildProductionVerification(result.payload,'internal',result.audit,at,result.crossVerification??null);
  console.log(`::notice title=${category} summary::at=${at} ${unit.title} | len=${quality.visibleText.length} blocks=${quality.proseBlockCount} pass=${quality.pass} ${quality.reasons.join(';')} | verification=${verification.verification} ${verification.unresolvedConflicts.join(';')}`);
  if(result.crossVerification)console.log(`::notice title=${category} cross::${JSON.stringify({verification:result.crossVerification.verification,reasons:result.crossVerification.reasonCodes,compared:result.crossVerification.comparedFields,providers:result.crossVerification.independentSource})}`);
  const text=quality.visibleText;for(let i=0;i<text.length&&i<6000;i+=1800)console.log(`::notice title=${category} text ${i/1800+1}::${text.slice(i,i+1800)}`);

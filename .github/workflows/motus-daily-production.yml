@@ -18,8 +18,10 @@ on:
   schedule:
     - cron: '45 21 * * 1-5'
     - cron: '30 3 * * 1-5'
-    # Korea previous-session morning edition, 08:45 KST Monday-Friday
-    - cron: '45 23 * * 0-4'
+    # Korea previous-session morning edition, 06:17 KST Monday-Friday. GitHub delivered the former 08:45 KST
+    # slot about two hours late (after the 09:00 open), which excluded the previous session's flows, sectors and
+    # movers. Since the Saturday-stamped Monday FX quote is accepted (#26), the pre-open slot is safe.
+    - cron: '17 21 * * 0-4'
 
 permissions:
   contents: read
@@ -28,7 +30,7 @@ concurrency:
   # One queue per category: a delayed run of one category must never be cancelled as the
   # superseded "pending" run when another category's schedule fires (GitHub keeps only one
   # pending run per group). Same-category runs still serialize.
-  group: motus-production-${{ github.event.schedule == '45 21 * * 1-5' && 'us' || github.event.schedule == '30 3 * * 1-5' && 'ai' || github.event.schedule == '45 23 * * 0-4' && 'korea' || inputs.category || 'manual' }}
+  group: motus-production-${{ github.event.schedule == '45 21 * * 1-5' && 'us' || github.event.schedule == '30 3 * * 1-5' && 'ai' || github.event.schedule == '17 21 * * 0-4' && 'korea' || inputs.category || 'manual' }}
   cancel-in-progress: false
 
 jobs:
@@ -99,13 +101,13 @@ jobs:
           case "$SCHEDULE" in
             "45 21 * * 1-5") CATEGORY=us ;;
             "30 3 * * 1-5") CATEGORY=ai ;;
-            "45 23 * * 0-4") CATEGORY=korea ;;
+            "17 21 * * 0-4") CATEGORY=korea ;;
             *) CATEGORY="${INPUT_CATEGORY:-us}" ;;
           esac
           RUN_DATE="${INPUT_DATE:-$(date +%F)}"
           [[ "$RUN_DATE" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]] || exit 1
           LIVE_PUBLISH=false
-          if [[ ( "$SCHEDULE" == "30 3 * * 1-5" && "$CATEGORY" == "ai" ) || ( "$SCHEDULE" == "45 21 * * 1-5" && "$CATEGORY" == "us" ) || ( "$SCHEDULE" == "45 23 * * 0-4" && "$CATEGORY" == "korea" ) ]]; then
+          if [[ ( "$SCHEDULE" == "30 3 * * 1-5" && "$CATEGORY" == "ai" ) || ( "$SCHEDULE" == "45 21 * * 1-5" && "$CATEGORY" == "us" ) || ( "$SCHEDULE" == "17 21 * * 0-4" && "$CATEGORY" == "korea" ) ]]; then
             LIVE_PUBLISH=true
           elif [[ "$INPUT_EXECUTE_PUBLISH" == "true" ]]; then
             LIVE_PUBLISH=true
