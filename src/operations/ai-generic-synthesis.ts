@@ -105,7 +105,11 @@ export function extractFigures(text:string):string[] {
     const value=Number(match[1]),unit=match[2]!.toLowerCase();
     out.push(unit==='trillion'?`${trim(value)}조 달러`:unit==='billion'?(value*10>=10000?`${trim(value/1000)}조 달러`:`${trim(value*10)}억 달러`):`${koreanCount(value*1000000)} 달러`);
   }
-  for(const match of text.matchAll(/(\d{1,3}(?:,\d{3})+|\d+(?:\.\d+)?)\s*(billion|million|thousand)?\+?\s+(?:(?:new|more|additional|than)\s+)?(?:[A-Z][\w-]*\s+){0,2}(GPUs?|chips?|countries|languages|customers|users|developers|startups|employees|students|businesses|companies|organizations|partners|data cent(?:er|re)s|hospitals|schools|cities|people)\b/gi)){
+  // The noun must directly follow the number, optionally after a known qualifier or product/brand token;
+  // arbitrary words are never skipped ("10 tools for developers" yields nothing).
+  const qualifier='(?:(?:new|more|additional|NVIDIA|AMD|Intel|Arm|Google|Microsoft|AWS|Amazon|Meta|Blackwell|Hopper|Rubin|Vera Rubin|Grace|H100|H200|B200|B300|GB200|GB300|TPU|AI|Copilot|ChatGPT|Gemini|Claude|Bedrock)\\s+){0,2}';
+  const counted=new RegExp(`(\\d{1,3}(?:,\\d{3})+|\\d+(?:\\.\\d+)?)\\s*(billion|million|thousand)?\\+?\\s+${qualifier}([Gg][Pp][Uu]s?|[Cc]hips?|[Cc]ountries|[Ll]anguages|[Cc]ustomers|[Uu]sers|[Dd]evelopers|[Ss]tartups|[Ee]mployees|[Ss]tudents|[Bb]usinesses|[Cc]ompanies|[Oo]rganizations|[Pp]artners|[Dd]ata cent(?:er|re)s|[Hh]ospitals|[Ss]chools|[Cc]ities|[Pp]eople)\\b`,'g');
+  for(const match of text.matchAll(counted)){
     let value=Number(match[1]!.replaceAll(',',''));const scale=match[2]?.toLowerCase();if(scale==='billion')value*=1000000000;if(scale==='million')value*=1000000;if(scale==='thousand')value*=1000;
     const noun=COUNT_NOUNS.find(([pattern])=>pattern.test(match[3]!));if(!noun||!Number.isFinite(value)||value<2)continue;
     out.push(noun[1]==='명'?`${koreanCount(value)}명`:`${noun[1]} ${koreanCount(value)}${noun[2]}`);

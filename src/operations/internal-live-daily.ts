@@ -66,8 +66,10 @@ export class RepositoryInternalDailyBuilder implements InternalDailyBuilder {
     if(source.kind==='rss'){const xml=await this.text(source.url,'AI_INTELLIGENCE',source.id,at,audit);for(const item of parseFeed(xml).slice(0,40))pool.push({source,item})}
     else{const html=await this.text(source.url,'AI_INTELLIGENCE',source.id,at,audit);for(const link of parseAnthropicIndex(html).slice(0,4))pool.push({source,item:{title:'',link,publishedAt:'',summary:'',fullText:''}})}
    }catch{}}
-   const seenTitles=new Set<string>(),screened=pool.filter(({source,item})=>{
-    if(!isOfficialLink(item.link,source.domains)||alreadyCovered.has(canonical(item.link)))return false;
+   const seenTitles=new Set<string>(),seenLinks=new Set<string>(),screened=pool.filter(({source,item})=>{
+    const link=canonical(item.link);
+    if(!isOfficialLink(item.link,source.domains)||alreadyCovered.has(link)||seenLinks.has(link))return false;
+    seenLinks.add(link);
     if(item.title){const key=item.title.toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();if(seenTitles.has(key)||!isNewsLike(item.title))return false;if(source.aiFilter&&!isAIHeadline(item.title))return false;seenTitles.add(key)}
     return !item.publishedAt||withinWindow(item.publishedAt);
    }).sort((a,b)=>(Date.parse(b.item.publishedAt)||0)-(Date.parse(a.item.publishedAt)||0));
@@ -85,7 +87,9 @@ export class RepositoryInternalDailyBuilder implements InternalDailyBuilder {
      const body=[extractPageEvidence(html),pageBodyText(html)].filter(Boolean).join(' ');if(body.length>=80){evidence=body;basis='OFFICIAL_PAGE'}else fallbackReason='PAGE_TEXT_INSUFFICIENT'
     }catch{}
     if(!basis){
-     const fallback=item.fullText.length>=300?{text:item.fullText,basis:'OFFICIAL_RSS_FULLTEXT' as const}:item.summary.length>=100?{text:item.summary,basis:'OFFICIAL_RSS_SUMMARY' as const}:null;
+     // Feed bodies (content:encoded, Atom content) may be excerpts; without the page they are never treated as
+     // full first-party text, so RSS-based items can support an issue but never lead it.
+     const rssText=[item.fullText,item.summary].sort((a,b)=>b.length-a.length)[0]??'',fallback=rssText.length>=100?{text:rssText,basis:'OFFICIAL_RSS_SUMMARY' as const}:null;
      if(!fallback||!publishedAt)continue;
      evidence=fallback.text;basis=fallback.basis;
      audit.push({sourceId:'ai:rss-evidence:'+(index+1),category:'AI_INTELLIGENCE',url:item.link,status:'PASS',recordCount:1,collectedAt:at,error:null,observedDate:publishedAt.slice(0,10),sourceTimestamp:publishedAt,dateField:'rss.pubDate'});
@@ -208,14 +212,21 @@ export function selectAIEvents<T extends SelectableAIEvent>(events:T[]):T[] {
  for(const event of ranked)if(chosen.length<AI_MAX_ISSUES&&!chosen.includes(event))chosen.push(event);
  return chosen;
 }
-/** Source links already covered by a PUBLISHED AI operation (persisted ops-data), so news is never repeated. */
+/**
+ * Source links already covered by a PUBLISHED AI operation. Read from the immutable publish ledger
+ * (sourceUrls recorded at publication); a legacy entry without them falls back to the persisted live unit
+ * only when that unit is provably the published one (content fingerprint equals the ledger fingerprint).
+ */
 async function previouslyPublishedAILinks(operationsRoot:string):Promise<Set<string>> {
  const links=new Set<string>();let dates:string[]=[];
  try{dates=(await readdir(operationsRoot)).filter(name=>/^\d{4}-\d{2}-\d{2}$/.test(name))}catch{return links}
  for(const date of dates){
   const root=join(operationsRoot,date,'ai');let ledger='';try{ledger=await readFile(join(root,'publish-ledger.jsonl'),'utf8')}catch{continue}
-  if(!/"event":"PUBLISHED"/.test(ledger))continue;
-  try{const unit=JSON.parse(await readFile(join(root,'live-unit.json'),'utf8')) as {viewModel?:{sources?:Array<{url?:unknown}>}};for(const source of unit.viewModel?.sources??[])if(typeof source.url==='string')links.add(canonical(source.url))}catch{}
+  const published=ledger.split(/\r?\n/).filter(Boolean).map(line=>{try{return JSON.parse(line) as {event?:string;fingerprint?:string;sourceUrls?:unknown}}catch{return null}}).filter((entry):entry is {event?:string;fingerprint?:string;sourceUrls?:unknown}=>Boolean(entry&&entry.event==='PUBLISHED'));
+  for(const entry of published){
+   if(Array.isArray(entry.sourceUrls)){for(const url of entry.sourceUrls)if(typeof url==='string')links.add(canonical(url));continue}
+   try{const unit=JSON.parse(await readFile(join(root,'live-unit.json'),'utf8')) as {contentFingerprint?:unknown;viewModel?:{sources?:Array<{url?:unknown}>}};if(typeof unit.contentFingerprint==='string'&&'sha256:'+unit.contentFingerprint===entry.fingerprint)for(const source of unit.viewModel?.sources??[])if(typeof source.url==='string')links.add(canonical(source.url))}catch{}
+  }
  }
  return links;
 }

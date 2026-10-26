@@ -49,6 +49,8 @@ test('figures are only reported with a recognised noun and converted to Korean u
   assert.deepEqual(extractFigures('a $5 billion investment, $1.2 trillion market, $300 million fund'),['50억 달러','1.2조 달러','3억 달러']);
   assert.deepEqual(extractFigures('2,000 NVIDIA Blackwell GPUs and 50 megawatts, 3x faster, serving 1.5 million users'),['GPU 2,000개','이용자 150만명','50메가와트','3배 빠른 처리']);
   assert.deepEqual(extractFigures('In 2026 we saw 40% growth and 12 new features'),[]);
+  assert.deepEqual(extractFigures('There are 10 tools for developers. After 3 years customers can deploy the model.'),[],'arbitrary words between a number and a noun are never skipped');
+  assert.deepEqual(extractFigures('more than 2,000 new GPUs for 30 countries'),['GPU 2,000개','국가 30개국']);
 });
 
 test('event type comes from the title first and needs repeated body evidence otherwise',()=>{
@@ -91,7 +93,7 @@ const vw='Volkswagen Group is putting Microsoft 365 Copilot to work across the c
 const item=(t:string,l:string,d:string,s:string,c='')=>`<item><title>${t}</title><link>${l}</link><pubDate>${d}</pubDate><description><![CDATA[${s}]]></description>${c?`<content:encoded><![CDATA[${c}]]></content:encoded>`:''}</item>`;
 function fetcherFor(extra:Record<string,string>={}){
   const feeds:Record<string,string>={
-    'blogs.nvidia.com/feed/':`<rss>${item('Kazakhstan Expands Compute for Its AI Future','https://blogs.nvidia.com/blog/kazakhstan-ai-compute-ecosystem/','Fri, 23 Oct 2026 02:00:13 +0000','Kazakhstan builds national AI compute.',kz)}${item('Old Covered Story About AI Factories','https://blogs.nvidia.com/blog/covered/','Fri, 23 Oct 2026 01:00:00 +0000','Covered.',kz)}</rss>`,
+    'blogs.nvidia.com/feed/':`<rss>${item('Kazakhstan Expands Compute for Its AI Future','https://blogs.nvidia.com/blog/kazakhstan-ai-compute-ecosystem/','Fri, 23 Oct 2026 02:00:13 +0000','Kazakhstan builds national AI compute.',kz)}${item('Old Covered Story About AI Factories','https://blogs.nvidia.com/blog/covered/','Fri, 23 Oct 2026 01:00:00 +0000','Covered.',kz)}${item('Kazakhstan AI compute (republished headline)','https://blogs.nvidia.com/blog/kazakhstan-ai-compute-ecosystem/?utm_source=feed','Fri, 23 Oct 2026 02:00:13 +0000','Same story.',kz)}</rss>`,
     'news.microsoft.com/source/feed/':`<rss>${item('Volkswagen Group putting Copilot to work across the company','https://news.microsoft.com/source/features/ai/volkswagen-copilot/','Fri, 23 Oct 2026 17:58:00 +0000',vw)}${item('Copilot news mirrored elsewhere','https://example.com/copilot-mirror','Fri, 23 Oct 2026 18:00:00 +0000',vw)}</rss>`,
     'openai.com/news/rss.xml':`<rss>${item('Securing our frontier model training environment','https://openai.com/index/securing','Fri, 23 Oct 2026 17:00:00 GMT','We describe new security controls protecting the infrastructure we use to train frontier models, including hardware isolation and continuous monitoring.')}</rss>`,
     'deepmind.google/blog/rss.xml':`<rss>${item('Mapping forest types with AI models','https://deepmind.google/blog/forest-types/','Thu, 22 Oct 2026 14:30:24 +0000','A new AI research model maps forest types.')}</rss>`,
@@ -113,8 +115,9 @@ test('official-source AI pipeline publishes a verified, evidence-bound Korean ar
   const root=await mkdtemp(join(tmpdir(),'motus-ai-ops-'));
   try{
     const covered=join(root,'2026-10-24','ai');await mkdir(covered,{recursive:true});
-    await writeFile(join(covered,'publish-ledger.jsonl'),JSON.stringify({event:'PUBLISHED',category:'AI_INTELLIGENCE'})+'\n','utf8');
-    await writeFile(join(covered,'live-unit.json'),JSON.stringify({viewModel:{sources:[{url:'https://blogs.nvidia.com/blog/covered/'}]}}),'utf8');
+    await writeFile(join(covered,'publish-ledger.jsonl'),JSON.stringify({event:'PUBLISHED',category:'AI_INTELLIGENCE',fingerprint:'sha256:published',sourceUrls:['https://blogs.nvidia.com/blog/covered/']})+'\n','utf8');
+    // A later failed rerun overwrote live-unit.json; the immutable ledger record still excludes the covered link.
+    await writeFile(join(covered,'live-unit.json'),JSON.stringify({contentFingerprint:'rerun',viewModel:{sources:[]}}),'utf8');
     const result=await new RepositoryInternalDailyBuilder(fetcherFor(),{},undefined,undefined,undefined,root).build('AI_INTELLIGENCE',at);
     assert.equal(result.state,'LIVE_READY',String(result.reason));
     const unit=result.payload!.unit,view=unit.viewModel as AIIntelligenceDailyViewModel,links=view.sources.map(source=>source.url);
@@ -122,6 +125,7 @@ test('official-source AI pipeline publishes a verified, evidence-bound Korean ar
     assert.deepEqual(new Set(links),new Set(['https://blogs.nvidia.com/blog/kazakhstan-ai-compute-ecosystem/','https://news.microsoft.com/source/features/ai/volkswagen-copilot/']));
     assert.ok(!links.some(link=>link.includes('example.com')||link.includes('covered')||link.includes('forest-types')),'non-official, already-covered and date-mismatched items are excluded');
     assert.ok(view.issues[0]!.evidenceRefs[0]!.includes('kazakhstan'),'full-text verified item leads');
+    assert.equal(view.issues.filter(issue=>issue.evidenceRefs[0]!.includes('kazakhstan')).length,1,'the same article URL under another headline is not a second issue');
     assert.ok(result.audit.some(entry=>entry.status==='FAILED'&&entry.error==='AI_PUBLICATION_DATE_MISMATCH'));
     assert.ok(result.audit.some(entry=>entry.sourceId.startsWith('ai:rss-evidence:')&&entry.url==='https://openai.com/index/securing'&&entry.status==='PASS'),'403 pages fall back to recorded official RSS evidence');
     assert.ok(!links.includes('https://openai.com/index/securing'),'but a thin RSS-only item is not published');
@@ -130,6 +134,16 @@ test('official-source AI pipeline publishes a verified, evidence-bound Korean ar
     assert.match(quality.visibleText,/MOTUS 분석: /);assert.doesNotMatch(quality.visibleText,/rolling out the AI assistant|will provide 50 megawatts/);
     assert.equal(buildProductionVerification(result.payload!,'internal',result.audit,at).verification,'VERIFIED');
   }finally{await rm(root,{recursive:true,force:true})}
+});
+
+test('RSS content that may be an excerpt cannot lead when the page is blocked',async()=>{
+  const long='Contoso announces Azure AI capacity in Germany with 5,000 GPUs for 300 customers. '.repeat(8);
+  const fetcher=(async(input:RequestInfo|URL)=>{const url=String(input);
+    if(url.includes('blogs.microsoft.com/feed/'))return new Response(`<rss>${item('Microsoft expands Azure AI capacity in Germany','https://blogs.microsoft.com/blog/azure-germany/','Sun, 25 Oct 2026 17:00:00 GMT','Short.',long)}</rss>`);
+    if(url.includes('blogs.microsoft.com/blog/'))return new Response('Forbidden',{status:403});
+    return new Response('<rss></rss>');}) as typeof fetch;
+  const result=await new RepositoryInternalDailyBuilder(fetcher,{},undefined,undefined,undefined,join(tmpdir(),'motus-none-'+Date.now())).build('AI_INTELLIGENCE',at);
+  assert.equal(result.state,'SKIP');assert.equal(result.reason,'AI_VERIFIED_EVENTS_INSUFFICIENT');
 });
 
 test('only RSS summaries available is a SKIP, not a forced article',async()=>{
