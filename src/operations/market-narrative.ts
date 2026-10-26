@@ -24,8 +24,13 @@ export function seriesStats(series:ClosingSeries,name=US_NAMES[series.key]??seri
   return {name,close,day:pct(closes[count-2]!,close),week:count>=6?pct(closes[count-6]!,close):null,month:count>=21?pct(closes[count-21]!,close):null,high:closes[highIndex]!,highDate:series.dates[highIndex]??'',fromHigh:pct(closes[highIndex]!,close)};
 }
 
+/** 로/으로 after a number, by how its last digit is read (영·삼·육 take 으로; ㄹ-final 일·칠·팔 take 로). */
+export function numberWithRo(value:string):string {const last=value.replace(/[^0-9]/g,'').slice(-1);return value+('036'.includes(last)&&last!==''?'으로':'로')}
+/** 을/를 after a number. */
+export function numberWithEul(value:string):string {const last=value.replace(/[^0-9]/g,'').slice(-1);return value+('013678'.includes(last)&&last!==''?'을':'를')}
+
 function indexFact(stats:SeriesStats,horizonLabel:string):string {
-  const parts=[`${josa(stats.name,'은','는')} ${formatLevel(stats.close)}로 마감해 전 거래일보다 ${moveText(stats.day)}했다.`];
+  const parts=[`${josa(stats.name,'은','는')} ${numberWithRo(formatLevel(stats.close))} 마감해 전 거래일보다 ${moveText(stats.day)}했다.`];
   if(stats.week!==null&&stats.month!==null)parts.push(`최근 5거래일 기준으로는 ${moveText(stats.week)}, 20거래일 기준으로는 ${moveText(stats.month)}했다.`);
   else if(stats.week!==null)parts.push(`최근 5거래일 기준으로는 ${moveText(stats.week)}했다.`);
   parts.push(stats.fromHigh>-0.005?`${horizonLabel} 종가 가운데 가장 높은 수준이다.`:`${horizonLabel} 종가 고점(${formatLevel(stats.high)}, ${stats.highDate})보다 ${Math.abs(stats.fromHigh).toFixed(2)}% 낮다.`);
@@ -54,7 +59,8 @@ export function buildUSMarketNarrative(series:ClosingSeries[],tenYear:RateObserv
     const lead=stats[0]!;
     if(lead.fromHigh>-1)analysis.push(`${josa(lead.name,'이','가')} 3개월 고점 부근에 있어, 다음 구간에서는 고점 돌파 여부와 거래 강도를 함께 확인할 필요가 있다.`);
     else if(lead.fromHigh<=-5)analysis.push(`${josa(lead.name,'이','가')} 3개월 고점보다 5% 이상 낮은 구간에 있어, 하루 반등만으로 조정이 끝났다고 판단하기는 이르다.`);
-    if(rateChange!==null&&rateChange!==0&&Math.abs(lead.day)>=0.005){
+    // Rates and equities are compared only when the yield is observed on the same session date.
+    if(rateChange!==null&&rateChange!==0&&tenYear?.date===tenYear?.sessionDate&&Math.abs(lead.day)>=0.005){
       analysis.push(rateChange<0&&lead.day>0?'장기금리 하락과 주가 상승이 같은 방향으로 움직여 금리 부담 완화가 주가를 지지한 흐름과 맞물린다.'
         :rateChange>0&&lead.day<0?'장기금리 상승과 주가 하락이 함께 나타나 금리 부담이 주식 평가에 압력으로 작용한 흐름과 맞물린다.'
         :'장기금리와 주가가 같은 방향으로 움직여, 이날 주가 흐름을 금리 하나로 설명하기는 어렵다.');
