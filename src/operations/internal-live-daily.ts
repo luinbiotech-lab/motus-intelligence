@@ -84,7 +84,8 @@ export class RepositoryInternalDailyBuilder implements InternalDailyBuilder {
      if(!publishedAt&&pageDate)publishedAt=pageDate;
      if(pageDate&&publishedAt&&!datesAgree(pageDate,publishedAt)){if(entry){entry.status='FAILED';entry.error='AI_PUBLICATION_DATE_MISMATCH'}continue}
      if(entry&&publishedAt){entry.observedDate=publishedAt.slice(0,10);entry.sourceTimestamp=publishedAt;entry.dateField=pageDate?'page.datePublished':'rss.pubDate'}
-     const body=[extractPageEvidence(html),pageBodyText(html)].filter(Boolean).join(' ');if(body.length>=80){evidence=body;basis='OFFICIAL_PAGE'}else fallbackReason='PAGE_TEXT_INSUFFICIENT'
+     // Lead-grade evidence needs real article paragraphs; a meta description alone (e.g. a JS-rendered shell) is summary-grade.
+     const meta=extractPageEvidence(html),paragraphs=pageBodyText(html);if(paragraphs.length>=200){evidence=[meta,paragraphs].filter(Boolean).join(' ');basis='OFFICIAL_PAGE'}else if(meta.length>=80){evidence=[meta,paragraphs].filter(Boolean).join(' ');basis='OFFICIAL_PAGE_SUMMARY'}else fallbackReason='PAGE_TEXT_INSUFFICIENT'
     }catch{}
     if(!basis){
      // Feed bodies (content:encoded, Atom content) may be excerpts; without the page they are never treated as
@@ -96,7 +97,7 @@ export class RepositoryInternalDailyBuilder implements InternalDailyBuilder {
     }
     if(!title||!publishedAt||!withinWindow(publishedAt)||!isAIRelevant(title,evidence)||!isNewsLike(title))continue;
     const topicId=`ai:${index}`,legacy=synthesizeKoreanAIEvent({topicId,publisher:source.publisher,title,pageEvidence:evidence,link:item.link,publishedAt});
-    const event=legacy?{...legacy,basis,eventType:'launch' as const,evidenceBound:false,richness:2}:evidence.length>=(basis==='OFFICIAL_RSS_SUMMARY'?100:200)?synthesizeEvidenceBoundAIEvent({topicId,publisher:source.publisher,sourceId:source.id,title,link:item.link,publishedAt,evidence,basis,...(basis==='OFFICIAL_PAGE'?{}:{fallbackReason})}):null;
+    const event=legacy?{...legacy,basis,eventType:'launch' as const,evidenceBound:false,richness:2}:evidence.length>=(basis==='OFFICIAL_PAGE'?200:100)?synthesizeEvidenceBoundAIEvent({topicId,publisher:source.publisher,sourceId:source.id,title,link:item.link,publishedAt,evidence,basis,...(basis==='OFFICIAL_PAGE'||basis==='OFFICIAL_PAGE_SUMMARY'?{}:{fallbackReason})}):null;
     if(event)events.push(event);
    }
    const synthesized=selectAIEvents(events);if(!synthesized.length)throw new Error('AI_VERIFIED_EVENTS_INSUFFICIENT');
@@ -204,8 +205,8 @@ const AI_TYPE_WEIGHT:Record<AIEventType,number>={infrastructure:3,launch:3,partn
 type SelectableAIEvent={topicId:string;publisher:string;publishedAt:string;basis:AIEvidenceBasis;eventType:AIEventType;richness?:number};
 /** Lead must rest on full first-party text; RSS-summary items may only support. One item per publisher first, then fill. */
 export function selectAIEvents<T extends SelectableAIEvent>(events:T[]):T[] {
- const score=(event:T)=>(event.basis==='OFFICIAL_RSS_SUMMARY'?0:4)+AI_TYPE_WEIGHT[event.eventType]+(event.richness??0)+Math.max(0,1-(Date.now()-Date.parse(event.publishedAt))/AI_WINDOW_MS);
- const ranked=[...events].sort((a,b)=>score(b)-score(a)),lead=ranked.find(event=>event.basis!=='OFFICIAL_RSS_SUMMARY');
+ const score=(event:T)=>(event.basis==='OFFICIAL_PAGE'?4:0)+AI_TYPE_WEIGHT[event.eventType]+(event.richness??0)+Math.max(0,1-(Date.now()-Date.parse(event.publishedAt))/AI_WINDOW_MS);
+ const ranked=[...events].sort((a,b)=>score(b)-score(a)),lead=ranked.find(event=>event.basis==='OFFICIAL_PAGE');
  if(!lead)return [];
  const chosen=[lead];
  for(const event of ranked)if(chosen.length<AI_MAX_ISSUES&&!chosen.includes(event)&&!chosen.some(item=>item.publisher===event.publisher))chosen.push(event);

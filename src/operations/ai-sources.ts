@@ -7,7 +7,8 @@
  * fallback evidence and recorded as such; such RSS-only items may support an issue but never lead it.
  */
 
-export type AIEvidenceBasis='OFFICIAL_PAGE'|'OFFICIAL_RSS_FULLTEXT'|'OFFICIAL_RSS_SUMMARY';
+/** Only OFFICIAL_PAGE (article body paragraphs) is lead-grade; every other basis is summary-grade. */
+export type AIEvidenceBasis='OFFICIAL_PAGE'|'OFFICIAL_PAGE_SUMMARY'|'OFFICIAL_RSS_FULLTEXT'|'OFFICIAL_RSS_SUMMARY';
 
 export interface OfficialAISource {
   id:string;publisher:string;url:string;domains:string[];

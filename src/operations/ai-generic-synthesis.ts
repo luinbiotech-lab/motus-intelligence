@@ -101,21 +101,22 @@ function trim(value:number){return Number.isInteger(value)?String(value):value.t
 /** Explicit figures stated in the text, rendered in Korean units. Figures without a recognisable noun are ignored. */
 export function extractFigures(text:string):string[] {
   const out:string[]=[];
-  for(const match of text.matchAll(/\$\s?(\d+(?:\.\d+)?)\s*(trillion|billion|million)\b/gi)){
+  for(const match of text.matchAll(/(?<![A-Za-z0-9])\$\s?(\d+(?:\.\d+)?)\s*(trillion|billion|million)\b/gi)){
     const value=Number(match[1]),unit=match[2]!.toLowerCase();
     out.push(unit==='trillion'?`${trim(value)}조 달러`:unit==='billion'?(value*10>=10000?`${trim(value/1000)}조 달러`:`${trim(value*10)}억 달러`):`${koreanCount(value*1000000)} 달러`);
   }
   // The noun must directly follow the number, optionally after a known qualifier or product/brand token;
   // arbitrary words are never skipped ("10 tools for developers" yields nothing).
   const qualifier='(?:(?:new|more|additional|NVIDIA|AMD|Intel|Arm|Google|Microsoft|AWS|Amazon|Meta|Blackwell|Hopper|Rubin|Vera Rubin|Grace|H100|H200|B200|B300|GB200|GB300|TPU|AI|Copilot|ChatGPT|Gemini|Claude|Bedrock)\\s+){0,2}';
-  const counted=new RegExp(`(\\d{1,3}(?:,\\d{3})+|\\d+(?:\\.\\d+)?)\\s*(billion|million|thousand)?\\+?\\s+${qualifier}([Gg][Pp][Uu]s?|[Cc]hips?|[Cc]ountries|[Ll]anguages|[Cc]ustomers|[Uu]sers|[Dd]evelopers|[Ss]tartups|[Ee]mployees|[Ss]tudents|[Bb]usinesses|[Cc]ompanies|[Oo]rganizations|[Pp]artners|[Dd]ata cent(?:er|re)s|[Hh]ospitals|[Ss]chools|[Cc]ities|[Pp]eople)\\b`,'g');
+  // A number right after a capitalised token is usually a model/version identifier ("Gemini 3 users"), not a count.
+  const counted=new RegExp(`(?<![A-Za-z0-9.,$-])(?<![A-Z][\\w-]*\\s)(\\d{1,3}(?:,\\d{3})+|\\d+(?:\\.\\d+)?)\\s*(billion|million|thousand)?\\+?\\s+${qualifier}([Gg][Pp][Uu]s?|[Cc]hips?|[Cc]ountries|[Ll]anguages|[Cc]ustomers|[Uu]sers|[Dd]evelopers|[Ss]tartups|[Ee]mployees|[Ss]tudents|[Bb]usinesses|[Cc]ompanies|[Oo]rganizations|[Pp]artners|[Dd]ata cent(?:er|re)s|[Hh]ospitals|[Ss]chools|[Cc]ities|[Pp]eople)\\b`,'g');
   for(const match of text.matchAll(counted)){
     let value=Number(match[1]!.replaceAll(',',''));const scale=match[2]?.toLowerCase();if(scale==='billion')value*=1000000000;if(scale==='million')value*=1000000;if(scale==='thousand')value*=1000;
     const noun=COUNT_NOUNS.find(([pattern])=>pattern.test(match[3]!));if(!noun||!Number.isFinite(value)||value<2)continue;
     out.push(noun[1]==='명'?`${koreanCount(value)}명`:`${noun[1]} ${koreanCount(value)}${noun[2]}`);
   }
-  for(const match of text.matchAll(/(\d+(?:\.\d+)?)\s*(gigawatts?|GW|megawatts?|MW)\b/g)){out.push(`${trim(Number(match[1]))}${/^g/i.test(match[2]!)?'기가와트':'메가와트'}`)}
-  for(const match of text.matchAll(/(\d+(?:\.\d+)?)\s*(?:x|times)\s+(faster|more efficient|more energy[- ]efficient|lower cost|cheaper|higher throughput)/gi)){
+  for(const match of text.matchAll(/(?<![A-Za-z0-9.,])(\d+(?:\.\d+)?)\s*(gigawatts?|GW|megawatts?|MW)\b/g)){out.push(`${trim(Number(match[1]))}${/^g/i.test(match[2]!)?'기가와트':'메가와트'}`)}
+  for(const match of text.matchAll(/(?<![A-Za-z0-9.,])(\d+(?:\.\d+)?)\s*(?:x|times)\s+(faster|more efficient|more energy[- ]efficient|lower cost|cheaper|higher throughput)/gi)){
     const kind=match[2]!.toLowerCase();out.push(`${trim(Number(match[1]))}배 ${kind.startsWith('faster')?'빠른 처리':kind.includes('efficient')?'높은 효율':kind.includes('throughput')?'높은 처리량':'낮은 비용'}`);
   }
   return [...new Set(out)].slice(0,4);
@@ -171,7 +172,8 @@ export function synthesizeEvidenceBoundAIEvent(input:EvidenceBoundAIInput):(Kore
   if(subjects.length)detail.push(`원문에서 함께 언급된 국가·기업은 ${subjects.join(', ')}이다.`);
   facts.push(detail.join(' '));
   if(figures.length)facts.push(`원문은 ${figures.join(', ')} 등의 수치를 명시했다.`);
-  if(input.basis!=='OFFICIAL_PAGE')facts.push(`${input.fallbackReason==='PAGE_TEXT_INSUFFICIENT'?'원문 페이지에서 본문을 충분히 추출하지 못해':'원문 페이지가 자동 수집을 허용하지 않아'} 이 항목은 ${company} 공식 RSS에 게시된 ${input.basis==='OFFICIAL_RSS_FULLTEXT'?'본문':'요약'}을 근거로 정리했으며, 발표일은 공식 RSS 기록으로 확인했다.`);
+  if(input.basis==='OFFICIAL_PAGE_SUMMARY')facts.push(`원문 페이지에서 기사 본문을 추출하지 못해 이 항목은 ${company} 공식 페이지의 요약 설명을 근거로 정리했다.`);
+  else if(input.basis!=='OFFICIAL_PAGE')facts.push(`${input.fallbackReason==='PAGE_TEXT_INSUFFICIENT'?'원문 페이지에서 본문을 충분히 추출하지 못해':'원문 페이지가 자동 수집을 허용하지 않아'} 이 항목은 ${company} 공식 RSS에 게시된 ${input.basis==='OFFICIAL_RSS_FULLTEXT'?'본문':'요약'}을 근거로 정리했으며, 발표일은 공식 RSS 기록으로 확인했다.`);
   const richness=(productInTitle?1:product?0.5:0)+(place?1:0)+(org?1:0)+Math.min(figures.length,2);
   // Short product-update notices (e.g. AWS What's New) rank below announcements from blogs and newsrooms.
   const priority=input.sourceId==='aws-whats-new'?-2:0;

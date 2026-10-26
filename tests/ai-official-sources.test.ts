@@ -51,6 +51,7 @@ test('figures are only reported with a recognised noun and converted to Korean u
   assert.deepEqual(extractFigures('In 2026 we saw 40% growth and 12 new features'),[]);
   assert.deepEqual(extractFigures('There are 10 tools for developers. After 3 years customers can deploy the model.'),[],'arbitrary words between a number and a noun are never skipped');
   assert.deepEqual(extractFigures('more than 2,000 new GPUs for 30 countries'),['GPU 2,000개','국가 30개국']);
+  assert.deepEqual(extractFigures('NVIDIA H100 GPUs and GB200 chips power Gemini 3 users'),[],'digits inside product identifiers are not quantities');
 });
 
 test('event type comes from the title first and needs repeated body evidence otherwise',()=>{
@@ -134,6 +135,16 @@ test('official-source AI pipeline publishes a verified, evidence-bound Korean ar
     assert.match(quality.visibleText,/MOTUS 분석: /);assert.doesNotMatch(quality.visibleText,/rolling out the AI assistant|will provide 50 megawatts/);
     assert.equal(buildProductionVerification(result.payload!,'internal',result.audit,at).verification,'VERIFIED');
   }finally{await rm(root,{recursive:true,force:true})}
+});
+
+test('a page that only exposes a meta description cannot lead',async()=>{
+  const desc='Microsoft expands Azure AI capacity in Germany with 5,000 GPUs available to 300 customers across the region this year.';
+  const fetcher=(async(input:RequestInfo|URL)=>{const url=String(input);
+    if(url.includes('blogs.microsoft.com/feed/'))return new Response(`<rss>${item('Microsoft expands Azure AI capacity in Germany','https://blogs.microsoft.com/blog/azure-germany/','Sun, 25 Oct 2026 17:00:00 GMT','Short.')}</rss>`);
+    if(url.includes('blogs.microsoft.com/blog/'))return new Response(`<html><head><meta name="description" content="${desc}"></head><body><div id="root"></div></body></html>`);
+    return new Response('<rss></rss>');}) as typeof fetch;
+  const result=await new RepositoryInternalDailyBuilder(fetcher,{},undefined,undefined,undefined,join(tmpdir(),'motus-none-'+Date.now())).build('AI_INTELLIGENCE',at);
+  assert.equal(result.state,'SKIP');
 });
 
 test('RSS content that may be an excerpt cannot lead when the page is blocked',async()=>{
