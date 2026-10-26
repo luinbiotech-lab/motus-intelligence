@@ -1,0 +1,19 @@
+name: QA render check (temporary)
+on:
+  push:
+    branches: [qa/ai-render-check]
+    paths: ['qa/urls.txt']
+permissions:
+  contents: write
+jobs:
+  render:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 22}
+      - run: npm i --no-save playwright@1.48.2 && npx playwright install --with-deps chromium
+      - run: node qa/render.mjs
+      - run: |
+          git config user.name qa-bot && git config user.email qa-bot@users.noreply.github.com
+          git add qa/out && git commit -m "qa: render output [skip ci]" && git push
