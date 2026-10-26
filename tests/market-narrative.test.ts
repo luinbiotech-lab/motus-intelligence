@@ -34,7 +34,7 @@ test('US narrative states verified facts and keeps interpretation separate',()=>
 test('Korea narrative uses the session history and same-session foreign flow',()=>{
   const histories=[{label:'KOSPI' as const,dates:dates(10),closes:[...ramp(9,100,1),105]},{label:'KOSDAQ' as const,dates:dates(10),closes:[...ramp(9,50,1),60]}];
   const result=buildKoreaMarketNarrative(histories,[{label:'외국인',direction:'DOWN'}]);
-  assert.match(result.facts[0]!,/^코스피는 105\.00으로 마감해 전 거래일보다 3\.67% 하락했다\. 최근 5거래일 기준으로는 [\d.]+% (상승|하락)했다\. 최근 10거래일 종가 고점/);
+  assert.match(result.facts[0]!,/^코스피는 105\.00으로 마감해 전 거래일보다 2\.78% 하락했다\. 최근 5거래일 기준으로는 [\d.]+% (상승|하락)했다\. 최근 10거래일 종가 고점/);
   assert.match(result.analysis[0]!,/코스피와 코스닥의 방향이 엇갈려/);
   assert.ok(result.analysis.some(line=>line.startsWith('외국인이 순매도로')));
   assert.deepEqual(buildKoreaMarketNarrative([],[]),{facts:[],analysis:[]});
