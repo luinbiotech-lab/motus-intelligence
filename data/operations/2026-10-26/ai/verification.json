@@ -14,10 +14,10 @@
   "leakagePass": true,
   "duplicateCheck": "PENDING_REMOTE",
   "duplicateUncertainty": true,
-  "articleFingerprint": "sha256:bd41e6100326451bd87225a0713197305ef9d1280036fb1809f64e8c15908d36",
+  "articleFingerprint": "sha256:767ffe123fb059023d20e221dee71528772d35174fec565ec6b2f411ffc46cf6",
   "commerceEnabled": false,
-  "verifiedAt": "2026-10-26T06:43:00.994Z",
-  "expiresAt": "2026-10-26T08:13:00.994Z",
+  "verifiedAt": "2026-10-26T06:46:05.487Z",
+  "expiresAt": "2026-10-26T08:16:05.487Z",
   "sourceAuditIds": [
     "ai:page:1",
     "ai:page:10",
@@ -26,9 +26,9 @@
     "ai:page:5",
     "ai:page:6",
     "ai:page:7",
-    "ai:page:8",
+    "ai:page:9",
     "ai:rss-evidence:2",
-    "ai:rss-evidence:9",
+    "ai:rss-evidence:8",
     "anthropic",
     "aws-news",
     "aws-whats-new",
@@ -41,7 +41,7 @@
     "nvidia-newsroom",
     "openai"
   ],
-  "sourceAuditFingerprint": "sha256:5b59236517507c22aa5cf6da0bbc9ba87f6b0c9a84a0c24b92c6bf246e2a1d44",
+  "sourceAuditFingerprint": "sha256:fdb546e7ea274d6a1bea42c4b88ec010ab3658bf0528474e0b72c9635e3d74e1",
   "crossVerificationFingerprint": null,
   "crossVerification": null
 }
