@@ -147,6 +147,27 @@ test('a page that only exposes a meta description cannot lead',async()=>{
   assert.equal(result.state,'SKIP');
 });
 
+test('an article URL that redirects off the publisher domain is excluded',async()=>{
+  const body=`<article><p>${'Kazakhstan expands AI compute with 2,000 NVIDIA Blackwell GPUs in a sovereign data center. '.repeat(4)}</p></article>`;
+  const fetcher=(async(input:RequestInfo|URL)=>{const url=String(input);
+    if(url.includes('blogs.nvidia.com/feed/'))return new Response(`<rss>${item('Kazakhstan Expands Compute for Its AI Future','https://blogs.nvidia.com/blog/kz/','Sun, 25 Oct 2026 02:00:13 +0000','x')}</rss>`);
+    if(url.includes('blogs.nvidia.com/blog/kz')){const response=new Response(body);Object.defineProperty(response,'url',{value:'https://lookalike.example/kz'});return response}
+    return new Response('<rss></rss>');}) as typeof fetch;
+  const result=await new RepositoryInternalDailyBuilder(fetcher,{},undefined,undefined,undefined,join(tmpdir(),'motus-none-'+Date.now())).build('AI_INTELLIGENCE',at);
+  assert.equal(result.state,'SKIP');assert.ok(result.audit.some(entry=>entry.error==='AI_REDIRECT_OFF_OFFICIAL_DOMAIN'));
+});
+
+test('a single verified event still meets the 900-character / 4-block depth gate',async()=>{
+  const fetcher=(async(input:RequestInfo|URL)=>{const url=String(input);
+    if(url.includes('blogs.nvidia.com/feed/'))return new Response(`<rss>${item('Kazakhstan Expands Compute for Its AI Future','https://blogs.nvidia.com/blog/kz/','Sun, 25 Oct 2026 02:00:13 +0000','x')}</rss>`);
+    if(url.includes('blogs.nvidia.com/blog/kz'))return new Response(`<article><p>${kz}</p></article>`);
+    return new Response('<rss></rss>');}) as typeof fetch;
+  const result=await new RepositoryInternalDailyBuilder(fetcher,{},undefined,undefined,undefined,join(tmpdir(),'motus-none-'+Date.now())).build('AI_INTELLIGENCE',at);
+  assert.equal(result.state,'LIVE_READY');const quality=evaluateEditorialQuality(result.payload!.unit.title,result.payload!.unit.render.html);
+  assert.ok(quality.visibleText.length>=900&&quality.proseBlockCount>=4,`len=${quality.visibleText.length} blocks=${quality.proseBlockCount}`);
+  assert.match(quality.visibleText,/공식 AI 채널 \d+곳에서 최근 4일간 게시된 AI 발표 \d+건을 확인했고, 원문 출처와 발표일이 검증된 1건/);
+});
+
 test('RSS content that may be an excerpt cannot lead when the page is blocked',async()=>{
   const long='Contoso announces Azure AI capacity in Germany with 5,000 GPUs for 300 customers. '.repeat(8);
   const fetcher=(async(input:RequestInfo|URL)=>{const url=String(input);
