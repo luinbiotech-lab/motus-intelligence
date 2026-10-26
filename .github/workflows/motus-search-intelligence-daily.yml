@@ -79,7 +79,7 @@ jobs:
         run: |
           npm run motus:daily -- --date "$RUN_DATE" --category "$CATEGORY" --dry-run --review-package
       - name: Build Search Intelligence dry-run artifact
-        run: npm run search:intelligence
+        run: npm run search:intelligence -- --exclude-ai
       - uses: actions/upload-artifact@v4
         with:
           name: motus-daily-dry-run-${{ env.RUN_DATE }}-${{ env.CATEGORY }}
