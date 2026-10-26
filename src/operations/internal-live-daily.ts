@@ -13,7 +13,7 @@ import type {VerifiedSearchTopic} from '../search/intelligence.js';
 import {fetchWithTransientRetry} from './http-retry.js';
 import {isCompletedSession,latestCompletedSession,marketSession} from './market-calendar.js';
 import {buildAIEditorialDecision,synthesizeKoreanAIEvent} from './ai-editorial-synthesis.js';
-import {OFFICIAL_AI_SOURCES,datesAgree,isAIHeadline,isAIRelevant,isNewsLike,isOfficialLink,pageBodyText,pagePublishedDate,pageTitle,parseAnthropicIndex,parseFeed,type AIEvidenceBasis,type FeedItem,type OfficialAISource} from './ai-sources.js';
+import {OFFICIAL_AI_SOURCES,datesAgree,isAIHeadline,isAIRelevant,isNewsLike,isOfficialLink,pageBodyText,pagePublishedDateDetail,pageTitle,parseAnthropicIndex,parseFeed,type AIEvidenceBasis,type FeedItem,type OfficialAISource} from './ai-sources.js';
 import {synthesizeEvidenceBoundAIEvent,type AIEventType} from './ai-generic-synthesis.js';
 import {readFile,readdir} from 'node:fs/promises';
 import {join} from 'node:path';
@@ -79,11 +79,14 @@ export class RepositoryInternalDailyBuilder implements InternalDailyBuilder {
    const events:Array<NonNullable<ReturnType<typeof synthesizeKoreanAIEvent>>&{basis:AIEvidenceBasis;eventType:AIEventType;evidenceBound:boolean;richness:number}>=[];
    for(const [index,{source,item}] of order.entries()){
     const pageId='ai:page:'+(index+1);let title=item.title,publishedAt=item.publishedAt,evidence='',basis:AIEvidenceBasis|null=null,fallbackReason:'PAGE_BLOCKED'|'PAGE_TEXT_INSUFFICIENT'='PAGE_BLOCKED';
-    try{const html=await this.text(item.link,'AI_INTELLIGENCE',pageId,at,audit,source.domains),pageDate=pagePublishedDate(html),entry=[...audit].reverse().find(value=>value.sourceId===pageId);
+    try{const html=await this.text(item.link,'AI_INTELLIGENCE',pageId,at,audit,source.domains),pageDateDetail=pagePublishedDateDetail(html),pageDate=pageDateDetail?.iso??null,entry=[...audit].reverse().find(value=>value.sourceId===pageId);
      if(!title)title=pageTitle(html);
      if(!publishedAt&&pageDate)publishedAt=pageDate;
      if(pageDate&&publishedAt&&!datesAgree(pageDate,publishedAt)){if(entry){entry.status='FAILED';entry.error='AI_PUBLICATION_DATE_MISMATCH'}continue}
-     if(entry&&publishedAt){entry.observedDate=publishedAt.slice(0,10);entry.sourceTimestamp=publishedAt;entry.dateField=pageDate?'page.datePublished':'rss.pubDate'}
+     // A timestamped page field is the publisher's own statement of when the article went out; feed dates can
+     // reflect a later edit, so they only stand in when the page has no structured timestamp.
+     const fromPage=Boolean(pageDateDetail&&(pageDateDetail.structured||!item.publishedAt));if(fromPage)publishedAt=pageDate!;
+     if(entry&&publishedAt){entry.observedDate=publishedAt.slice(0,10);entry.sourceTimestamp=publishedAt;entry.dateField=fromPage?'page.datePublished':'rss.pubDate'}
      // Lead-grade evidence needs real article paragraphs; a meta description alone (e.g. a JS-rendered shell) is summary-grade.
      const meta=extractPageEvidence(html),paragraphs=pageBodyText(html);if(paragraphs.length>=200){evidence=[meta,paragraphs].filter(Boolean).join(' ');basis='OFFICIAL_PAGE'}else if(meta.length>=80){evidence=[meta,paragraphs].filter(Boolean).join(' ');basis='OFFICIAL_PAGE_SUMMARY'}else fallbackReason='PAGE_TEXT_INSUFFICIENT'
     }catch(error){if(message(error)==='AI_REDIRECT_OFF_OFFICIAL_DOMAIN')continue}

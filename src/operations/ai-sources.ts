@@ -73,16 +73,19 @@ export function isAIHeadline(title:string):boolean {return AI_HEADLINE.test(titl
 export function isNewsLike(title:string):boolean {return !NON_NEWS.test(title)}
 
 /** Publication date stated by the article page itself (meta, JSON-LD or <time>). */
-export function pagePublishedDate(html:string):string|null {
+export function pagePublishedDate(html:string):string|null {return pagePublishedDateDetail(html)?.iso??null}
+
+/** Page publication date plus whether it came from a timestamped structured field (meta / JSON-LD / time) rather than a printed date-only line. */
+export function pagePublishedDateDetail(html:string):{iso:string;structured:boolean}|null {
   const patterns=[
     /<meta\b[^>]*(?:property|name|itemprop)=["'](?:article:published_time|og:article:published_time|datePublished|publish[-_]?date|date)["'][^>]*content=["']([^"']+)["']/i,
     /<meta\b[^>]*content=["']([^"']+)["'][^>]*(?:property|name|itemprop)=["'](?:article:published_time|datePublished)["']/i,
     /"datePublished"\s*:\s*"([^"]+)"/i,
     /<time\b[^>]*datetime=["']([^"']+)["']/i,
   ];
-  for(const pattern of patterns){const raw=html.match(pattern)?.[1];if(raw&&Number.isFinite(Date.parse(raw)))return new Date(Date.parse(raw)).toISOString()}
+  for(const pattern of patterns){const raw=html.match(pattern)?.[1];if(raw&&Number.isFinite(Date.parse(raw)))return {iso:new Date(Date.parse(raw)).toISOString(),structured:/T\d{2}:\d{2}/.test(raw)}}
   const text=decodeText(html.slice(0,60000)).match(/\b(Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:t(?:ember)?)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\.? (\d{1,2}), (20\d{2})\b/);
-  if(text){const parsed=Date.parse(`${text[1]} ${text[2]}, ${text[3]} 12:00:00 UTC`);if(Number.isFinite(parsed))return new Date(parsed).toISOString()}
+  if(text){const parsed=Date.parse(`${text[1]} ${text[2]}, ${text[3]} 12:00:00 UTC`);if(Number.isFinite(parsed))return {iso:new Date(parsed).toISOString(),structured:false}}
   return null;
 }
 

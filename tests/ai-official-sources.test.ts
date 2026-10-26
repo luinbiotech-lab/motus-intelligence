@@ -186,3 +186,20 @@ test('only RSS summaries available is a SKIP, not a forced article',async()=>{
   const result=await new RepositoryInternalDailyBuilder(fetcher,{},undefined,undefined,undefined,join(tmpdir(),'motus-none-'+Date.now())).build('AI_INTELLIGENCE',at);
   assert.equal(result.state,'SKIP');assert.equal(result.reason,'AI_VERIFIED_EVENTS_INSUFFICIENT');
 });
+
+test('stated date comes from the page timestamp, channel from the article URL, and API names are not partners',async()=>{
+  const literacy='Public libraries have served as trusted centers of community learning across the United States for generations. Today, we are announcing a new initiative with the Public Library Association to expand no-cost AI literacy and skills training for public library workers and their patrons across 50 cities.';
+  const fetcher=(async(input:RequestInfo|URL)=>{const url=String(input);
+    // The feed stamps the post after a later edit (KST 10/23); the page itself says 2026-10-22T14:00Z (KST 10/22 23:00).
+    if(url.includes('news.microsoft.com/source/feed/'))return new Response(`<rss>${item('Microsoft and the Public Library Association expand free AI literacy training','https://blogs.microsoft.com/on-the-issues/2026/10/22/ai-literacy/','Thu, 22 Oct 2026 21:14:56 +0000','x')}</rss>`);
+    if(url.includes('blogs.microsoft.com/on-the-issues/'))return new Response(`<html><head><meta property="article:published_time" content="2026-10-22T14:00:32+00:00"></head><body><article><p>${literacy}</p></article></body></html>`);
+    return new Response('<rss></rss>');}) as typeof fetch;
+  const result=await new RepositoryInternalDailyBuilder(fetcher,{},undefined,undefined,undefined,join(tmpdir(),'motus-none-'+Date.now())).build('AI_INTELLIGENCE',at);
+  assert.equal(result.state,'LIVE_READY',String(result.reason));
+  const text=evaluateEditorialQuality(result.payload!.unit.title,result.payload!.unit.render.html).visibleText;
+  assert.match(text,/2026년 10월 22일\(한국 시간\) 공식 블로그에/);assert.doesNotMatch(text,/10월 23일\(한국 시간\)|공식 뉴스룸에/);
+  const page=result.audit.find(entry=>entry.sourceId==='ai:page:1')!;assert.equal(page.dateField,'page.datePublished');assert.equal(page.sourceTimestamp,'2026-10-22T14:00:32.000Z');
+
+  const aws=synthesizeEvidenceBoundAIEvent({topicId:'a',publisher:'Amazon AWS',sourceId:'aws-whats-new',title:'Web Search on Amazon Bedrock now supports domain filtering and user location controls',link:'https://aws.amazon.com/about-aws/whats-new/2026/10/bedrock-web-search/',publishedAt:'2026-10-23T18:00:00Z',evidence:'Web Search on Amazon Bedrock now gives you more control over the results that ground a model response. Both are configured directly on the web_search tool in your existing OpenAI Responses API request, and work with OpenAI-compatible clients.',basis:'OFFICIAL_PAGE'})!;
+  assert.doesNotMatch(aws.facts.join(' '),/오픈AI/);assert.match(aws.facts[0]!,/공식 What’s New 공지에/);
+});

@@ -141,7 +141,20 @@ export function companyKorean(publisher:string):string {
   return ({OpenAI:'오픈AI','Google AI':'구글','Google DeepMind':'구글 딥마인드',NVIDIA:'엔비디아',Microsoft:'마이크로소프트',Anthropic:'앤트로픽','Amazon AWS':'아마존웹서비스(AWS)',Meta:'메타'} as Record<string,string>)[publisher]??publisher;
 }
 
-const CHANNEL:Record<string,string>={'aws-whats-new':'What’s New 공지','nvidia-newsroom':'뉴스룸','microsoft-source':'뉴스룸',meta:'뉴스룸',anthropic:'뉴스 페이지'};
+/** The channel is named from the article URL itself, since one feed can carry posts from several of the publisher's sites. */
+export function channelLabel(link:string,sourceId:string):string {
+  let host='',path='';try{const url=new URL(link);host=url.hostname.toLowerCase();path=url.pathname}catch{}
+  if(host==='aws.amazon.com')return path.startsWith('/about-aws/whats-new/')?'What’s New 공지':'블로그';
+  if(/^(?:news\.microsoft\.com|nvidianews\.nvidia\.com|about\.fb\.com)$/.test(host))return '뉴스룸';
+  if(host.endsWith('anthropic.com'))return '뉴스 페이지';
+  if(host)return '블로그';
+  return ({'aws-whats-new':'What’s New 공지','nvidia-newsroom':'뉴스룸','microsoft-source':'뉴스룸',meta:'뉴스룸',anthropic:'뉴스 페이지'} as Record<string,string>)[sourceId]??'블로그';
+}
+
+/** A company named only as part of an API or SDK name ("OpenAI Responses API") is a compatibility detail, not a party to the announcement. */
+function withoutApiMentions(text:string):string {
+  return text.replace(/\b(?:OpenAI|Anthropic|Google|Microsoft|Meta|NVIDIA|Amazon)(?:[-‑ ]compatible|(?:'s)? (?:Responses |Chat Completions |Messages |Agents )?(?:API|SDK)s?)\b/g,' ');
+}
 
 export function kstDateLabel(iso:string):string {
   const parts=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'numeric',day:'numeric'}).formatToParts(new Date(iso)),get=(type:string)=>parts.find(part=>part.type===type)?.value??'';
@@ -154,7 +167,7 @@ export function synthesizeEvidenceBoundAIEvent(input:EvidenceBoundAIInput):(Kore
   const text=`${input.title}. ${input.evidence.slice(0,1500)}`,classified=classifyAIEvent(input.title,input.evidence,input.link);
   if(!classified)return null;
   const company=companyKorean(input.publisher),type=TYPE_KO[classified.type];
-  const places=findAll(text,PLACES),orgs=findAll(text,COMPANIES).filter(name=>name!==company&&!company.startsWith(name)&&!name.startsWith(company));
+  const places=findAll(text,PLACES),orgs=findAll(withoutApiMentions(text),COMPANIES).filter(name=>name!==company&&!company.startsWith(name)&&!name.startsWith(company));
   const product=(input.title.match(PRODUCT)??input.evidence.match(PRODUCT))?.[0]??null,figures=extractFigures(text);
   const place=places[0]??null,org=orgs[0]??null;
   const productInTitle=Boolean(product&&input.title.includes(product));
@@ -165,7 +178,7 @@ export function synthesizeEvidenceBoundAIEvent(input:EvidenceBoundAIInput):(Kore
     :classified.type==='adoption'&&org?`${org}의 AI 도입`
     :productInTitle&&classified.type!=='research'?`${product} 관련 ${type.short}`
     :type.topic;
-  const channel=CHANNEL[input.sourceId]??'블로그';
+  const channel=channelLabel(input.link,input.sourceId);
   const facts:string[]=[`${josa(company,'은','는')} ${kstDateLabel(input.publishedAt)}(한국 시간) 공식 ${channel}에 「${input.title}」 제목의 발표를 게시했다.`];
   const subjects=[...places.slice(0,3),...orgs.slice(0,3)],detail=[`${classified.fromTitle?'발표 제목과 본문은':'원문 본문은'} ${type.topic}${classified.type==='launch'?' 공개':''}에 관한 내용을 다룬다.`];
   if(product)detail.push(productInTitle?`발표의 중심 제품·플랫폼은 ${product}이다.`:`원문에서 언급된 제품·플랫폼은 ${product}이다.`);
