@@ -11,7 +11,7 @@ export function evaluateEditorialQuality(title:string,html:string):EditorialQual
   if(/<(?:script|style)\b/i.test(decoded))reasons.push('script or style payload present');
   if(/(?:^|[>\s])https?:\/\//i.test(visible))reasons.push('plain or encoded raw URL exposed');
   if(/(무슨 일이 있었나|왜 중요한가|핵심 내용|산업 연결|시장 연결)\s*:?/i.test(visible))reasons.push('internal editorial label exposed');
-  if(visible.length<500||blocks.length<3)reasons.push('article depth insufficient');
+  if(visible.length<900||blocks.length<4)reasons.push('article depth insufficient');
   if(blocks.length&&new Set(blocks.map(normalize)).size!==blocks.length)reasons.push('boilerplate prose repetition detected');
   const koreanTextRatio=bodyKorean/Math.max(bodyKorean+bodyLatin,1),englishCopiedTextRatio=bodyLatin/Math.max(bodyKorean+bodyLatin,1);
   if(koreanTextRatio<0.43||englishCopiedTextRatio>0.57)reasons.push('body contains excessive English copied text');
