@@ -13,7 +13,7 @@ const value=(flag:string)=>{const index=args.indexOf(flag);return index>=0?args[
 
 async function main(){
   const generatedAt=new Date().toISOString(),live=args.includes('--live');
-  const input=await publicationUnits(live,generatedAt),topics=topicsFromUnits(input.units),providers:SearchDemandProvider[]=[];
+  const input=await publicationUnits(live,generatedAt),units=args.includes('--exclude-ai')?input.units.filter(unit=>unit.category!=='AI_INTELLIGENCE'):input.units,topics=topicsFromUnits(units),providers:SearchDemandProvider[]=[];
   if(live&&topics.length){
     const clientId=process.env.NAVER_DATALAB_CLIENT_ID?.trim(),clientSecret=process.env.NAVER_DATALAB_CLIENT_SECRET?.trim(),end=generatedAt.slice(0,10),start=new Date(Date.parse(end+'T00:00:00Z')-6*86400000).toISOString().slice(0,10);
     if(clientId&&clientSecret)providers.push(new NaverDataLabProvider({startDate:start,endDate:end,timeUnit:'date',keywordGroups:topics.map(topic=>({groupName:topic.label,keywords:[topic.label,...topic.aliases]}))},{clientId,clientSecret}));
