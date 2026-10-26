@@ -168,9 +168,11 @@ export function synthesizeEvidenceBoundAIEvent(input:EvidenceBoundAIInput):(Kore
   facts.push(detail.join(' '));
   if(figures.length)facts.push(`원문은 ${figures.join(', ')} 등의 수치를 명시했다.`);
   if(input.basis!=='OFFICIAL_PAGE')facts.push(`${input.fallbackReason==='PAGE_TEXT_INSUFFICIENT'?'원문 페이지에서 본문을 충분히 추출하지 못해':'원문 페이지가 자동 수집을 허용하지 않아'} 이 항목은 ${company} 공식 RSS에 게시된 ${input.basis==='OFFICIAL_RSS_FULLTEXT'?'본문':'요약'}을 근거로 정리했으며, 발표일은 공식 RSS 기록으로 확인했다.`);
-  const richness=(product?1:0)+(place?1:0)+(org?1:0)+Math.min(figures.length,2);
+  const richness=(productInTitle?1:product?0.5:0)+(place?1:0)+(org?1:0)+Math.min(figures.length,2);
+  // Short product-update notices (e.g. AWS What's New) rank below announcements from blogs and newsrooms.
+  const priority=input.sourceId==='aws-whats-new'?-2:0;
   // Too little first-party detail to state anything beyond the headline: not an article item.
   if(richness===0)return null;
   const interpretation=type.analysis({place,product,orgs:orgs.slice(0,2).join('·')||null});
-  return {topicId:input.topicId,publisher:input.publisher,company,topic,headline:`${company}, ${topic}${classified.type==='launch'?' 공개':''}`,facts,interpretation,watch:type.watch,link:input.link,publishedAt:input.publishedAt,basis:input.basis,eventType:classified.type,evidenceBound:true,richness};
+  return {topicId:input.topicId,publisher:input.publisher,company,topic,headline:`${company}, ${topic}${classified.type==='launch'?' 공개':''}`,facts,interpretation,watch:type.watch,link:input.link,publishedAt:input.publishedAt,basis:input.basis,eventType:classified.type,evidenceBound:true,richness:richness+priority};
 }
