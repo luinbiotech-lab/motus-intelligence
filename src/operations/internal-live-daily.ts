@@ -12,7 +12,11 @@ import {collectPreRenderSearch,type PreRenderSearchContext} from '../search/edit
 import type {VerifiedSearchTopic} from '../search/intelligence.js';
 import {fetchWithTransientRetry} from './http-retry.js';
 import {isCompletedSession,latestCompletedSession,marketSession} from './market-calendar.js';
-import {buildAIEditorialDecision,synthesizeKoreanAIEvent,type VerifiedAIEventInput} from './ai-editorial-synthesis.js';
+import {buildAIEditorialDecision,synthesizeKoreanAIEvent} from './ai-editorial-synthesis.js';
+import {OFFICIAL_AI_SOURCES,datesAgree,isAIRelevant,isNewsLike,isOfficialLink,pageBodyText,pagePublishedDate,pageTitle,parseAnthropicIndex,parseFeed,type AIEvidenceBasis,type FeedItem,type OfficialAISource} from './ai-sources.js';
+import {synthesizeEvidenceBoundAIEvent,type AIEventType} from './ai-generic-synthesis.js';
+import {readFile,readdir} from 'node:fs/promises';
+import {join} from 'node:path';
 
 export interface InternalSourceAuditEntry {sourceId:string;category:DailyCategory;url:string;status:'PASS'|'FAILED';recordCount:number;collectedAt:string;error:string|null;observedDate?:string;referenceDate?:string;sourceTimestamp?:string;dateField?:string}
 export interface InternalBuildResult {payload:LiveDailyPayload|null;audit:InternalSourceAuditEntry[];crossVerification?:KoreaCrossVerificationArtifact|null;searchContext?:PreRenderSearchContext|null;reason:string|null;state:'LIVE_READY'|'HOLD'|'SKIP'}
@@ -26,13 +30,12 @@ export class InternalLiveDailyAdapter implements LiveDailyAdapter {
 }
 
 const FRED='https://fred.stlouisfed.org/graph/fredgraph.csv';
-const FEEDS=[['openai','OpenAI','https://openai.com/news/rss.xml'],['google-ai','Google AI','https://blog.google/technology/ai/rss/'],['nvidia','NVIDIA','https://blogs.nvidia.com/feed/'],['microsoft','Microsoft','https://blogs.microsoft.com/feed/']] as const;
 const AI_CORROBORATION={veraRubinGoogleCloud:'https://cloud.google.com/blog/topics/ai-infrastructure/google-cloud-infrastructure-at-nvidia-gtc-berlin-2026'} as const;
 const NAVER={kospi:'https://m.stock.naver.com/api/index/KOSPI/basic',kosdaq:'https://m.stock.naver.com/api/index/KOSDAQ/basic',kospiHistory:'https://m.stock.naver.com/api/index/KOSPI/price?pageSize=10&page=1',kosdaqHistory:'https://m.stock.naver.com/api/index/KOSDAQ/price?pageSize=10&page=1',fx:'https://api.stock.naver.com/marketindex/exchange/FX_USDKRW',flow:'https://m.stock.naver.com/api/index/KOSPI/trend',sector:'https://stock.naver.com/api/domestic/market/upjong/list?startIdx=0&pageSize=100&sortType=changeRate',movers:'https://m.stock.naver.com/api/stocks/up/KOSPI?page=1&pageSize=20'} as const;
 
 type Point=MarketSeriesPoint;
 export class RepositoryInternalDailyBuilder implements InternalDailyBuilder {
- constructor(private readonly fetcher:typeof fetch=fetch,private readonly environment:NodeJS.ProcessEnv=process.env,private readonly koreaOfficial:KoreaOfficialSourceAdapter=new KrxBokOfficialSourceAdapter(fetcher,environment),private readonly twelveProvider:MarketTimeSeriesProvider=new TwelveDataTimeSeriesProvider(environment,fetcher),private readonly koreaSecondary:KoreaOfficialSourceAdapter=new YahooKoreaSecondarySourceAdapter(fetcher)){}
+ constructor(private readonly fetcher:typeof fetch=fetch,private readonly environment:NodeJS.ProcessEnv=process.env,private readonly koreaOfficial:KoreaOfficialSourceAdapter=new KrxBokOfficialSourceAdapter(fetcher,environment),private readonly twelveProvider:MarketTimeSeriesProvider=new TwelveDataTimeSeriesProvider(environment,fetcher),private readonly koreaSecondary:KoreaOfficialSourceAdapter=new YahooKoreaSecondarySourceAdapter(fetcher),private readonly operationsRoot:string=join(process.cwd(),'data','operations')){}
  async build(category:DailyCategory,requestedAt:string,options:InternalBuildOptions={}):Promise<InternalBuildResult>{if(category==='US_MARKET')return this.us(requestedAt);if(category==='AI_INTELLIGENCE')return this.ai(requestedAt);return this.korea(requestedAt,options)}
  private async us(at:string):Promise<InternalBuildResult>{const audit:InternalSourceAuditEntry[]=[];try{
    const expectedSession=latestCompletedSession('US',at),specs=[['sp500','S&P 500','SP500','^GSPC'],['nasdaq','Nasdaq','NASDAQCOM','^IXIC'],['dow-jones','Dow Jones','DJIA','^DJI']] as const;
@@ -56,14 +59,46 @@ export class RepositoryInternalDailyBuilder implements InternalDailyBuilder {
  private async ai(at:string):Promise<InternalBuildResult>{
   const audit:InternalSourceAuditEntry[]=[];
   try{
-   const items:Array<{publisher:string;title:string;link:string;publishedAt:string}>=[];
-   for(const [id,publisher,url] of FEEDS)try{const xml=await this.text(url,'AI_INTELLIGENCE',id,at,audit);for(const item of rss(xml).slice(0,5))items.push({publisher,title:item.title,link:item.link,publishedAt:item.publishedAt})}catch{}
-   const requested=Date.parse(at),recent=items.filter(item=>Number.isFinite(Date.parse(item.publishedAt))&&requested-Date.parse(item.publishedAt)>=0&&requested-Date.parse(item.publishedAt)<=72*3600000),candidates=[...new Map(recent.map(item=>[canonical(item.link||item.title),item])).values()].sort((a,b)=>Date.parse(b.publishedAt)-Date.parse(a.publishedAt)).slice(0,8),verified:VerifiedAIEventInput[]=[];
-   for(const [index,item] of candidates.entries()){try{const html=await this.text(item.link,'AI_INTELLIGENCE','ai:page:'+(index+1),at,audit),pageEvidence=extractPageEvidence(html),topicId=`ai:${index}`;if(pageEvidence.length>=80)verified.push({...item,pageEvidence,topicId})}catch{}if(verified.length===4)break}
-   const synthesized=verified.map(synthesizeKoreanAIEvent).filter((item):item is NonNullable<typeof item>=>Boolean(item));if(!synthesized.length)throw new Error('AI_VERIFIED_EVENTS_INSUFFICIENT');
+   const requested=Date.parse(at),withinWindow=(iso:string)=>{const value=Date.parse(iso);return Number.isFinite(value)&&requested-value>=-3600000&&requested-value<=AI_WINDOW_MS};
+   const alreadyCovered=await previouslyPublishedAILinks(this.operationsRoot);
+   const pool:Array<{source:OfficialAISource;item:FeedItem}>=[];
+   for(const source of OFFICIAL_AI_SOURCES){try{
+    if(source.kind==='rss'){const xml=await this.text(source.url,'AI_INTELLIGENCE',source.id,at,audit);for(const item of parseFeed(xml).slice(0,40))pool.push({source,item})}
+    else{const html=await this.text(source.url,'AI_INTELLIGENCE',source.id,at,audit);for(const link of parseAnthropicIndex(html).slice(0,4))pool.push({source,item:{title:'',link,publishedAt:'',summary:'',fullText:''}})}
+   }catch{}}
+   const seenTitles=new Set<string>(),screened=pool.filter(({source,item})=>{
+    if(!isOfficialLink(item.link,source.domains)||alreadyCovered.has(canonical(item.link)))return false;
+    if(item.title){const key=item.title.toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();if(seenTitles.has(key)||!isNewsLike(item.title))return false;if(source.aiFilter&&!isAIRelevant(item.title,`${item.summary} ${item.fullText}`))return false;seenTitles.add(key)}
+    return !item.publishedAt||withinWindow(item.publishedAt);
+   }).sort((a,b)=>(Date.parse(b.item.publishedAt)||0)-(Date.parse(a.item.publishedAt)||0));
+   // Round-robin across publishers so one prolific channel cannot crowd out the others.
+   const byPublisher=new Map<string,typeof screened>();for(const entry of screened){const list=byPublisher.get(entry.source.publisher)??[];list.push(entry);byPublisher.set(entry.source.publisher,list)}
+   const order:typeof screened=[];for(let round=0;order.length<AI_MAX_PAGE_FETCHES&&[...byPublisher.values()].some(list=>list.length>round);round++)for(const list of byPublisher.values())if(list[round]&&order.length<AI_MAX_PAGE_FETCHES)order.push(list[round]!);
+   const events:Array<NonNullable<ReturnType<typeof synthesizeKoreanAIEvent>>&{basis:AIEvidenceBasis;eventType:AIEventType;evidenceBound:boolean}>=[];
+   for(const [index,{source,item}] of order.entries()){
+    const pageId='ai:page:'+(index+1);let title=item.title,publishedAt=item.publishedAt,evidence='',basis:AIEvidenceBasis|null=null,fallbackReason:'PAGE_BLOCKED'|'PAGE_TEXT_INSUFFICIENT'='PAGE_BLOCKED';
+    try{const html=await this.text(item.link,'AI_INTELLIGENCE',pageId,at,audit),pageDate=pagePublishedDate(html),entry=[...audit].reverse().find(value=>value.sourceId===pageId);
+     if(!title)title=pageTitle(html);
+     if(!publishedAt&&pageDate)publishedAt=pageDate;
+     if(pageDate&&publishedAt&&!datesAgree(pageDate,publishedAt)){if(entry){entry.status='FAILED';entry.error='AI_PUBLICATION_DATE_MISMATCH'}continue}
+     if(entry&&publishedAt){entry.observedDate=publishedAt.slice(0,10);entry.sourceTimestamp=publishedAt;entry.dateField=pageDate?'page.datePublished':'rss.pubDate'}
+     const body=[extractPageEvidence(html),pageBodyText(html)].filter(Boolean).join(' ');if(body.length>=80){evidence=body;basis='OFFICIAL_PAGE'}else fallbackReason='PAGE_TEXT_INSUFFICIENT'
+    }catch{}
+    if(!basis){
+     const fallback=item.fullText.length>=300?{text:item.fullText,basis:'OFFICIAL_RSS_FULLTEXT' as const}:item.summary.length>=100?{text:item.summary,basis:'OFFICIAL_RSS_SUMMARY' as const}:null;
+     if(!fallback||!publishedAt)continue;
+     evidence=fallback.text;basis=fallback.basis;
+     audit.push({sourceId:'ai:rss-evidence:'+(index+1),category:'AI_INTELLIGENCE',url:item.link,status:'PASS',recordCount:1,collectedAt:at,error:null,observedDate:publishedAt.slice(0,10),sourceTimestamp:publishedAt,dateField:'rss.pubDate'});
+    }
+    if(!title||!publishedAt||!withinWindow(publishedAt)||!isAIRelevant(title,evidence)||!isNewsLike(title))continue;
+    const topicId=`ai:${index}`,legacy=synthesizeKoreanAIEvent({topicId,publisher:source.publisher,title,pageEvidence:evidence,link:item.link,publishedAt});
+    const event=legacy?{...legacy,basis,eventType:'launch' as const,evidenceBound:false}:evidence.length>=(basis==='OFFICIAL_RSS_SUMMARY'?100:200)?synthesizeEvidenceBoundAIEvent({topicId,publisher:source.publisher,sourceId:source.id,title,link:item.link,publishedAt,evidence,basis,...(basis==='OFFICIAL_PAGE'?{}:{fallbackReason})}):null;
+    if(event)events.push(event);
+   }
+   const synthesized=selectAIEvents(events);if(!synthesized.length)throw new Error('AI_VERIFIED_EVENTS_INSUFFICIENT');
    const corroboratingSources:NewsletterSourceLink[]=[];if(synthesized.some(item=>/베라 루빈/.test(item.topic))){try{const html=await this.text(AI_CORROBORATION.veraRubinGoogleCloud,'AI_INTELLIGENCE','ai:corroboration:google-cloud-vera-rubin',at,audit),plain=clean(html),lower=plain.toLowerCase();if(/vera\s+rubin/.test(lower)&&/a5x/.test(lower)){corroboratingSources.push(source('구글 클라우드 A5X·Vera Rubin 공식 발표',AI_CORROBORATION.veraRubinGoogleCloud,'Google Cloud'))}else throw new Error('AI_CORROBORATION_CONTENT_MISMATCH')}catch{}}
-   const topics:VerifiedSearchTopic[]=synthesized.map(item=>({topicId:item.topicId,label:item.company,aliases:[item.publisher,item.topic],category:'AI_INTELLIGENCE',claimRefs:[item.link],sourceRefs:[item.link,...corroboratingSources.map(source=>source.url)],verificationStatus:'VERIFIED'})),searchContext=await collectPreRenderSearch(topics,at,this.environment),decision=buildAIEditorialDecision(synthesized,searchContext),observedDate=new Date(decision.ordered[0]!.publishedAt).toISOString().slice(0,10),sources=dedupe([...decision.ordered.map(item=>source(item.company+' 공식 발표',item.link,item.publisher)),...corroboratingSources]);
-   const view:AIIntelligenceDailyViewModel={publicationId:`motus-live-${observedDate}:ai`,issueDate:observedDate,issueNumber:Number(observedDate.replaceAll('-','')),title:decision.title,subtitle:'공식 원문에서 확인한 사실과 MOTUS 해석을 구분해 읽는 AI 산업',category:'AI_INTELLIGENCE',canonicalLabel:'AI Intelligence',displayLabel:'AI 인텔리전스 (AI Intelligence)',todayCore:{headline:decision.ordered[0]!.headline,summary:decision.lead,bullets:decision.ordered.map(item=>item.headline)},issues:decision.ordered.map(item=>({headline:item.headline,whatHappened:item.facts.slice(0,decision.depthByTopic[item.topicId]??1),coreContent:`공식 원문에서 확인된 사실은 ${item.topic}에 관한 발표다.`,whyItMatters:item.interpretation,relatedCompaniesIndustries:[item.company,'AI 산업'],marketConnection:'시장 평가는 발표 이후 고객 채택, 매출 기여와 인프라 투자 자료가 확인된 뒤 판단해야 한다.',institutionView:null,evidenceRefs:[item.link]})),industryFlow:['AI 제품 적용','AI 인프라','기업 도입'],industryConnections:decision.ordered.map(item=>({title:item.company+' 발표의 산업 연결',explanation:item.interpretation,connectedCompanies:[item.company],connectedIndustries:['AI 산업'],evidenceRefs:[item.link],optionalWatchPoint:item.watch})),whatToWatch:[{headline:'공식 후속 지표',watchFor:decision.ordered[0]!.watch,validityHorizon:'NEXT_30_DAYS'}],sources};
+   const topics:VerifiedSearchTopic[]=synthesized.map(item=>({topicId:item.topicId,label:item.company,aliases:[item.publisher,item.topic],category:'AI_INTELLIGENCE',claimRefs:[item.link],sourceRefs:[item.link,...corroboratingSources.map(source=>source.url)],verificationStatus:'VERIFIED'})),searchContext=await collectPreRenderSearch(topics,at,this.environment),decision=buildAIEditorialDecision(synthesized,searchContext),observedDate=new Date(at).toISOString().slice(0,10),sources=dedupe([...decision.ordered.map(item=>source(item.company+' 공식 발표',item.link,item.publisher)),...corroboratingSources]);
+   const view:AIIntelligenceDailyViewModel={publicationId:`motus-live-${observedDate}:ai`,issueDate:observedDate,issueNumber:Number(observedDate.replaceAll('-','')),title:decision.title,subtitle:'공식 원문에서 확인한 사실과 MOTUS 해석을 구분해 읽는 AI 산업',category:'AI_INTELLIGENCE',canonicalLabel:'AI Intelligence',displayLabel:'AI 인텔리전스 (AI Intelligence)',todayCore:{headline:decision.ordered[0]!.headline,summary:decision.lead,bullets:decision.ordered.map(item=>item.headline)},issues:decision.ordered.map(item=>({headline:item.headline,whatHappened:item.facts.slice(0,Math.max(decision.depthByTopic[item.topicId]??1,4)),coreContent:item.evidenceBound?'':`공식 원문에서 확인된 사실은 ${item.topic}에 관한 발표다.`,whyItMatters:item.interpretation,relatedCompaniesIndustries:[item.company,'AI 산업'],marketConnection:'시장 평가는 발표 이후 고객 채택, 매출 기여와 인프라 투자 자료가 확인된 뒤 판단해야 한다.',institutionView:null,evidenceRefs:[item.link]})),industryFlow:['AI 제품 적용','AI 인프라','기업 도입'],industryConnections:decision.ordered.map(item=>({title:item.company+' 발표의 산업 연결',explanation:item.interpretation,connectedCompanies:[item.company],connectedIndustries:['AI 산업'],evidenceRefs:[item.link],optionalWatchPoint:item.evidenceBound?'':item.watch})),whatToWatch:decision.ordered.some(item=>item.evidenceBound)?decision.ordered.map(item=>({headline:`${item.company} ${item.topic}`,watchFor:item.watch,validityHorizon:'NEXT_30_DAYS' as const})):[{headline:'공식 후속 지표',watchFor:decision.ordered[0]!.watch,validityHorizon:'NEXT_30_DAYS'}],sources};
    return {...ready(view,renderAIEditorialArticle(view),observedDate,audit,at),searchContext};
   }catch(error){return ['AI_VERIFIED_EVENTS_INSUFFICIENT','AI_KOREAN_SYNTHESIS_UNAVAILABLE'].includes(message(error))?skip(audit,error):hold(audit,error)}
  }
@@ -158,4 +193,29 @@ function recordKoreaDate(audit:InternalSourceAuditEntry[],sourceId:string,dateFi
  const observedDate=koreaReferenceDate(sourceTimestamp),entry=[...audit].reverse().find(item=>item.sourceId===sourceId);
  if(entry){entry.dateField=dateField;entry.sourceTimestamp=sourceTimestamp??'';entry.observedDate=observedDate;}
  return observedDate;
+}
+
+const AI_WINDOW_MS=96*3600000,AI_MAX_PAGE_FETCHES=10,AI_MAX_ISSUES=3;
+const AI_TYPE_WEIGHT:Record<AIEventType,number>={infrastructure:3,launch:3,partnership:3,investment:3,adoption:2,policy:2,security:2,research:1};
+type SelectableAIEvent={topicId:string;publisher:string;publishedAt:string;basis:AIEvidenceBasis;eventType:AIEventType};
+/** Lead must rest on full first-party text; RSS-summary items may only support. One item per publisher first, then fill. */
+export function selectAIEvents<T extends SelectableAIEvent>(events:T[]):T[] {
+ const score=(event:T)=>(event.basis==='OFFICIAL_RSS_SUMMARY'?0:4)+AI_TYPE_WEIGHT[event.eventType]+Math.max(0,1-(Date.now()-Date.parse(event.publishedAt))/AI_WINDOW_MS);
+ const ranked=[...events].sort((a,b)=>score(b)-score(a)),lead=ranked.find(event=>event.basis!=='OFFICIAL_RSS_SUMMARY');
+ if(!lead)return [];
+ const chosen=[lead];
+ for(const event of ranked)if(chosen.length<AI_MAX_ISSUES&&!chosen.includes(event)&&!chosen.some(item=>item.publisher===event.publisher))chosen.push(event);
+ for(const event of ranked)if(chosen.length<AI_MAX_ISSUES&&!chosen.includes(event))chosen.push(event);
+ return chosen;
+}
+/** Source links already covered by a PUBLISHED AI operation (persisted ops-data), so news is never repeated. */
+async function previouslyPublishedAILinks(operationsRoot:string):Promise<Set<string>> {
+ const links=new Set<string>();let dates:string[]=[];
+ try{dates=(await readdir(operationsRoot)).filter(name=>/^\d{4}-\d{2}-\d{2}$/.test(name))}catch{return links}
+ for(const date of dates){
+  const root=join(operationsRoot,date,'ai');let ledger='';try{ledger=await readFile(join(root,'publish-ledger.jsonl'),'utf8')}catch{continue}
+  if(!/"event":"PUBLISHED"/.test(ledger))continue;
+  try{const unit=JSON.parse(await readFile(join(root,'live-unit.json'),'utf8')) as {viewModel?:{sources?:Array<{url?:unknown}>}};for(const source of unit.viewModel?.sources??[])if(typeof source.url==='string')links.add(canonical(source.url))}catch{}
+ }
+ return links;
 }
