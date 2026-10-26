@@ -25,8 +25,8 @@ const TYPE_RULES:Array<{type:AIEventType;pattern:RegExp}>=[
   {type:'partnership',pattern:/\b(?:partner(?:s|ship|ships)?|collaborat\w*|teams? up|alliance|joins? forces|agreement with)\b/i},
   {type:'investment',pattern:/\b(?:invest(?:s|ment|ments|ing)?|funding|fund\b|commits? \$|\$\d[\d.,]* (?:billion|million|trillion))\b/i},
   {type:'education',pattern:/\b(?:literacy|skilling|upskill\w*|training programs?|skills? (?:training|programs?)|curricul\w*|educators?|teachers?|classrooms?|librar(?:y|ies))\b/i},
-  {type:'launch',pattern:/\b(?:launch(?:es|ed)?|introduc(?:es|ed|ing)|unveil(?:s|ed)?|now (?:generally )?available|general availability|releas(?:es|ed)|debuts?|rolls? out)\b/i},
-  {type:'adoption',pattern:/\b(?:customers?|deploy(?:s|ed|ing|ment)?|adopt(?:s|ed|ion)?|enterprises?|to work|transform(?:s|ing)?|use cases?)\b/i},
+  {type:'launch',pattern:/\b(?:launch(?:es|ed)?|introduc(?:es|ed|ing)|unveil(?:s|ed)?|announc(?:es|ed|ing)|now (?:generally )?available|general availability|now supports?|adds? support|releas(?:es|ed)|debuts?|rolls? out)\b/i},
+  {type:'adoption',pattern:/\b(?:deploy(?:s|ed|ing|ment)? (?:across|to|at)|adopt(?:s|ed|ion)?|putting [\w\s]+ to work|selects?|chooses?|case study)\b/i},
   {type:'research',pattern:/\b(?:research|paper|study|benchmark|scientists?|discover(?:y|ies)|breakthrough|mapping)\b/i},
   {type:'policy',pattern:/\b(?:government|public sector|policy|regulat\w*|nation(?:al|s)?|sovereignty|ministry)\b/i},
 ];
@@ -153,7 +153,8 @@ export function synthesizeEvidenceBoundAIEvent(input:EvidenceBoundAIInput):(Kore
   const product=(input.title.match(PRODUCT)??input.evidence.match(PRODUCT))?.[0]??null,figures=extractFigures(text);
   const place=places[0]??null,org=orgs[0]??null;
   const productInTitle=Boolean(product&&input.title.includes(product));
-  const topic=classified.type==='launch'&&productInTitle?`${product}`
+  const newProduct=productInTitle&&/^(?:introducing|meet|announcing|launching)\b/i.test(input.title);
+  const topic=classified.type==='launch'&&productInTitle?(newProduct?`${product}`:`${product} 신규 기능`)
     :(classified.type==='infrastructure'||classified.type==='policy')&&place?`${place} ${type.topic}`
     :classified.type==='partnership'&&org?`${josa(org,'과','와')}의 AI 협력`
     :classified.type==='adoption'&&org?`${org}의 AI 도입`
