@@ -39,3 +39,23 @@ test('Korea narrative uses the session history and same-session foreign flow',()
   assert.ok(result.analysis.some(line=>line.startsWith('외국인이 순매도로')));
   assert.deepEqual(buildKoreaMarketNarrative([],[]),{facts:[],analysis:[]});
 });
+
+test('flat moves are never read as a direction, and index-only data supports no size or flow claims',()=>{
+  const flat=(key:string,label:string)=>({key,label,dates:dates(7),closes:[100,100,100,100,100,100,100]});
+  const allFlat=buildUSMarketNarrative([flat('sp500','S&P 500'),flat('nasdaq','Nasdaq'),flat('dow-jones','Dow Jones')],null);
+  assert.ok(!allFlat.analysis.some(line=>line.includes('엇갈려')));assert.match(allFlat.analysis[0]!,/모두 보합권/);
+  const upAndFlat=buildUSMarketNarrative([{key:'sp500',label:'S&P 500',dates:dates(7),closes:[100,100,100,100,100,100,101]},flat('nasdaq','Nasdaq'),flat('dow-jones','Dow Jones')],null);
+  assert.ok(!upAndFlat.analysis.some(line=>line.includes('엇갈려')));assert.match(upAndFlat.analysis[0]!,/일부 지수만 오르고/);
+
+  const korea=buildKoreaMarketNarrative([{label:'KOSPI',dates:dates(6),closes:[100,101,101,101,101,100]},{label:'KOSDAQ',dates:dates(6),closes:[100,100,100,100,100,101]}],[]);
+  assert.ok(!korea.analysis.some(line=>/대형주|중소형주|수급/.test(line)),korea.analysis.join(' '));
+  assert.ok(korea.analysis.some(line=>line.includes('엇갈려 두 시장 사이의 온도차')));
+  assert.ok(!korea.analysis.some(line=>line.includes('5거래일 흐름과 반대')),'a flat 5-session change has no opposite direction');
+});
+
+test('only the period high itself is called the highest close',()=>{
+  const near=seriesStats({key:'sp500',label:'S&P 500',dates:dates(3),closes:[9000,10000,9999.6]})!;
+  const narrative=buildUSMarketNarrative([{key:'sp500',label:'S&P 500',dates:dates(3),closes:[9000,10000,9999.6]}],null);
+  assert.ok(near.fromHigh<0);assert.doesNotMatch(narrative.facts[0]!,/가장 높은 수준/);assert.match(narrative.facts[0]!,/고점 부근/);
+  assert.match(buildUSMarketNarrative([{key:'sp500',label:'S&P 500',dates:dates(3),closes:[9000,10000,10001]}],null).facts[0]!,/가장 높은 수준/);
+});
