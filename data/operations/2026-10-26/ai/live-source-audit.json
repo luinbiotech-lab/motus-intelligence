@@ -12,7 +12,7 @@
       "url": "https://openai.com/news/rss.xml",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-26T06:46:05.487Z",
+      "collectedAt": "2026-10-26T07:12:46.077Z",
       "error": null
     },
     {
@@ -21,7 +21,7 @@
       "url": "https://blog.google/technology/ai/rss/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-26T06:46:05.487Z",
+      "collectedAt": "2026-10-26T07:12:46.077Z",
       "error": null
     },
     {
@@ -30,7 +30,7 @@
       "url": "https://deepmind.google/blog/rss.xml",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-26T06:46:05.487Z",
+      "collectedAt": "2026-10-26T07:12:46.077Z",
       "error": null
     },
     {
@@ -39,7 +39,7 @@
       "url": "https://blogs.nvidia.com/feed/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-26T06:46:05.487Z",
+      "collectedAt": "2026-10-26T07:12:46.077Z",
       "error": null
     },
     {
@@ -48,7 +48,7 @@
       "url": "https://nvidianews.nvidia.com/releases.xml",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-26T06:46:05.487Z",
+      "collectedAt": "2026-10-26T07:12:46.077Z",
       "error": null
     },
     {
@@ -57,7 +57,7 @@
       "url": "https://blogs.microsoft.com/feed/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-26T06:46:05.487Z",
+      "collectedAt": "2026-10-26T07:12:46.077Z",
       "error": null
     },
     {
@@ -66,7 +66,7 @@
       "url": "https://news.microsoft.com/source/feed/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-26T06:46:05.487Z",
+      "collectedAt": "2026-10-26T07:12:46.077Z",
       "error": null
     },
     {
@@ -75,7 +75,7 @@
       "url": "https://aws.amazon.com/blogs/aws/feed/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-26T06:46:05.487Z",
+      "collectedAt": "2026-10-26T07:12:46.077Z",
       "error": null
     },
     {
@@ -84,7 +84,7 @@
       "url": "https://aws.amazon.com/about-aws/whats-new/recent/feed/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-26T06:46:05.487Z",
+      "collectedAt": "2026-10-26T07:12:46.077Z",
       "error": null
     },
     {
@@ -93,7 +93,7 @@
       "url": "https://about.fb.com/news/feed/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-26T06:46:05.487Z",
+      "collectedAt": "2026-10-26T07:12:46.077Z",
       "error": null
     },
     {
@@ -102,7 +102,7 @@
       "url": "https://www.anthropic.com/news",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-26T06:46:05.487Z",
+      "collectedAt": "2026-10-26T07:12:46.077Z",
       "error": null
     },
     {
@@ -111,7 +111,7 @@
       "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/bedrock-web-search-domain-user-location/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-26T06:46:05.487Z",
+      "collectedAt": "2026-10-26T07:12:46.077Z",
       "error": null,
       "observedDate": "Fri, 23 Oc",
       "sourceTimestamp": "Fri, 23 Oct 2026 21:04:00 GMT",
@@ -123,7 +123,7 @@
       "url": "https://openai.com/index/scaling-storage-one-billion-users-part-two",
       "status": "FAILED",
       "recordCount": 0,
-      "collectedAt": "2026-10-26T06:46:05.487Z",
+      "collectedAt": "2026-10-26T07:12:46.077Z",
       "error": "HTTP_403"
     },
     {
@@ -132,7 +132,7 @@
       "url": "https://openai.com/index/scaling-storage-one-billion-users-part-two",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-26T06:46:05.487Z",
+      "collectedAt": "2026-10-26T07:12:46.077Z",
       "error": null,
       "observedDate": "Fri, 23 Oc",
       "sourceTimestamp": "Fri, 23 Oct 2026 17:00:00 GMT",
@@ -144,7 +144,7 @@
       "url": "https://blogs.nvidia.com/blog/kazakhstan-ai-compute-ecosystem/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-26T06:46:05.487Z",
+      "collectedAt": "2026-10-26T07:12:46.077Z",
       "error": null,
       "observedDate": "Fri, 23 Oc",
       "sourceTimestamp": "Fri, 23 Oct 2026 02:00:13 +0000",
@@ -156,7 +156,7 @@
       "url": "https://www.microsoft.com/en-us/research/blog/flint-interactive-a-language-for-creating-interactive-data-visualizations/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-26T06:46:05.487Z",
+      "collectedAt": "2026-10-26T07:12:46.077Z",
       "error": null,
       "observedDate": "Thu, 22 Oc",
       "sourceTimestamp": "Thu, 22 Oct 2026 21:22:46 +0000",
@@ -168,7 +168,7 @@
       "url": "https://deepmind.google/blog/beyond-tree-cover-mapping-the-worlds-forest-types/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-26T06:46:05.487Z",
+      "collectedAt": "2026-10-26T07:12:46.077Z",
       "error": null,
       "observedDate": "Thu, 22 Oc",
       "sourceTimestamp": "Thu, 22 Oct 2026 14:30:24 +0000",
@@ -180,7 +180,7 @@
       "url": "https://www.anthropic.com/news/public-benefit-fund",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-26T06:46:05.487Z",
+      "collectedAt": "2026-10-26T07:12:46.077Z",
       "error": null,
       "observedDate": "2026-10-18",
       "sourceTimestamp": "2026-10-18T00:00:00.000Z",
@@ -189,13 +189,13 @@
     {
       "sourceId": "ai:page:7",
       "category": "AI_INTELLIGENCE",
-      "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/connect-customer-customize-cp",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/training-session-apis-on-sagemaker-ai",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-26T06:46:05.487Z",
+      "collectedAt": "2026-10-26T07:12:46.077Z",
       "error": null,
       "observedDate": "Thu, 22 Oc",
-      "sourceTimestamp": "Thu, 22 Oct 2026 21:10:00 GMT",
+      "sourceTimestamp": "Thu, 22 Oct 2026 16:30:00 GMT",
       "dateField": "rss.pubDate"
     },
     {
@@ -204,7 +204,7 @@
       "url": "https://openai.com/index/securing-our-frontier-model-training-environment",
       "status": "FAILED",
       "recordCount": 0,
-      "collectedAt": "2026-10-26T06:46:05.487Z",
+      "collectedAt": "2026-10-26T07:12:46.077Z",
       "error": "HTTP_403"
     },
     {
@@ -213,7 +213,7 @@
       "url": "https://openai.com/index/securing-our-frontier-model-training-environment",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-26T06:46:05.487Z",
+      "collectedAt": "2026-10-26T07:12:46.077Z",
       "error": null,
       "observedDate": "Fri, 23 Oc",
       "sourceTimestamp": "Fri, 23 Oct 2026 10:00:00 GMT",
@@ -225,7 +225,7 @@
       "url": "https://blogs.nvidia.com/blog/minerva-platform-infrastructure/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-26T06:46:05.487Z",
+      "collectedAt": "2026-10-26T07:12:46.077Z",
       "error": null,
       "observedDate": "Thu, 22 Oc",
       "sourceTimestamp": "Thu, 22 Oct 2026 15:00:02 +0000",
@@ -237,7 +237,7 @@
       "url": "https://blogs.microsoft.com/on-the-issues/2026/10/22/expanding-ai-literacy-with-the-american-library-association-and-community-based-programs/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-26T06:46:05.487Z",
+      "collectedAt": "2026-10-26T07:12:46.077Z",
       "error": null,
       "observedDate": "Thu, 22 Oc",
       "sourceTimestamp": "Thu, 22 Oct 2026 21:12:21 +0000",

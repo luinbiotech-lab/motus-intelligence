@@ -1,5 +1,5 @@
 {
-  "collectedAt": "2026-10-26T06:46:05.487Z",
+  "collectedAt": "2026-10-26T07:12:46.077Z",
   "signalDate": null,
   "provider": null,
   "freshness": "NO_SEARCH_SIGNAL",
@@ -7,8 +7,8 @@
   "warnings": [],
   "orderedTopicIds": [
     "ai:2",
-    "ai:9",
-    "ai:6"
+    "ai:0",
+    "ai:9"
   ],
   "selectedSecondaryTopicId": null,
   "factsChanged": false,
