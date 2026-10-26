@@ -1,14 +1,11 @@
 {
-  "collectedAt": "2026-10-26T01:43:32.024Z",
+  "collectedAt": "2026-10-26T07:24:26.351Z",
   "signalDate": null,
   "provider": null,
   "freshness": "NO_SEARCH_SIGNAL",
-  "fallbackReason": "SEARCH_PROVIDER_NOT_CONFIGURED",
+  "fallbackReason": "NO_PRE_RENDER_SEARCH_CONTEXT",
   "warnings": [],
-  "orderedTopicIds": [
-    "index:KOSPI",
-    "index:KOSDAQ"
-  ],
+  "orderedTopicIds": [],
   "selectedSecondaryTopicId": null,
   "factsChanged": false,
   "gateOverride": false

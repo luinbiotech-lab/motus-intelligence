@@ -1,74 +1,10 @@
 {
-  "gate": {
-    "state": "AUTO_PUBLISH_READY",
-    "reasons": [],
-    "approval": "AUTO_POLICY_APPROVAL",
-    "checkedAt": "2026-10-26T01:43:36.143Z"
-  },
-  "searchRegistration": {
-    "publicationId": "motus-live-2026-10-26:korea",
-    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/blog-post.html",
-    "registeredAt": "2026-10-26T10:43:39+09:00",
-    "trigger": "PUBLICATION_PUBLISHED",
-    "googleInspectionState": "QUEUED",
-    "naverDiscoveryState": "PENDING",
-    "visibility": {
-      "publicationId": "motus-live-2026-10-26:korea",
-      "publicPostUrl": "https://motusnova.blogspot.com/2026/10/blog-post.html",
-      "google": {
-        "discovered": null,
-        "indexed": null,
-        "lastCrawl": null,
-        "coverageState": null,
-        "inspectionAt": null
-      },
-      "naver": {
-        "discovered": null,
-        "indexed": null,
-        "collectionState": null,
-        "inspectionAt": null
-      },
-      "sitemapIncluded": null,
-      "rssIncluded": null
-    }
-  },
-  "libraryRegistration": {
-    "idempotencyKey": "library:motus-live-2026-10-26:korea|https://motusnova.blogspot.com/2026/10/blog-post.html"
-  },
-  "weeklyFeed": {
-    "idempotencyKey": "weekly:motus-live-2026-10-26:korea"
-  },
-  "pdfCandidate": {
-    "idempotencyKey": "pdf:motus-live-2026-10-26:korea:sha256:fcceb72799d07dcc352ea9fc50398157d0fa6d00dfcd4828af8905f3ecf06ed2",
-    "visibility": "PRIVATE"
-  },
-  "audit": [
-    {
-      "at": "2026-10-26T01:43:36.143Z",
-      "event": "AUTO_PUBLISH_STATIC_GATE",
-      "detail": "AUTO_PUBLISH_READY"
-    },
-    {
-      "at": "2026-10-26T01:43:36.143Z",
-      "event": "REMOTE_DUPLICATE_CHECK",
-      "detail": "PASS"
-    },
-    {
-      "at": "2026-10-26T01:43:36.143Z",
-      "event": "FINAL_REMOTE_DUPLICATE_CHECK",
-      "detail": "PASS"
-    },
-    {
-      "at": "2026-10-26T10:43:39+09:00",
-      "event": "PUBLISHED",
-      "detail": "AUTO_POLICY_APPROVAL"
-    }
+  "state": "HOLD",
+  "reasonCode": "KOREA_MORNING_WINDOW_NOT_ELIGIBLE",
+  "reasonCodes": [
+    "KOREA_MORNING_WINDOW_NOT_ELIGIBLE"
   ],
-  "state": "PUBLISHED",
-  "draftPostId": "496319119090085372",
-  "publicPostUrl": "https://motusnova.blogspot.com/2026/10/blog-post.html",
-  "publishedAt": "2026-10-26T10:43:39+09:00",
-  "insertCallCount": 1,
-  "publishCallCount": 1,
-  "error": null
+  "reason": "KOREA_MORNING_WINDOW_NOT_ELIGIBLE",
+  "insertCallCount": 0,
+  "publishCallCount": 0
 }
