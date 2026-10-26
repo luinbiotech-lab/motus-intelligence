@@ -196,7 +196,7 @@ function recordKoreaDate(audit:InternalSourceAuditEntry[],sourceId:string,dateFi
 }
 
 const AI_WINDOW_MS=96*3600000,AI_MAX_PAGE_FETCHES=10,AI_MAX_ISSUES=3;
-const AI_TYPE_WEIGHT:Record<AIEventType,number>={infrastructure:3,launch:3,partnership:3,investment:3,adoption:2,policy:2,security:2,research:1};
+const AI_TYPE_WEIGHT:Record<AIEventType,number>={infrastructure:3,launch:3,partnership:3,investment:3,adoption:2,policy:2,security:2,education:1,research:1};
 type SelectableAIEvent={topicId:string;publisher:string;publishedAt:string;basis:AIEvidenceBasis;eventType:AIEventType;richness?:number};
 /** Lead must rest on full first-party text; RSS-summary items may only support. One item per publisher first, then fill. */
 export function selectAIEvents<T extends SelectableAIEvent>(events:T[]):T[] {

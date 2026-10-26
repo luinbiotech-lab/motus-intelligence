@@ -17,14 +17,15 @@ export interface EvidenceBoundAIInput {
   fallbackReason?:'PAGE_BLOCKED'|'PAGE_TEXT_INSUFFICIENT';
 }
 
-export type AIEventType='infrastructure'|'launch'|'partnership'|'adoption'|'investment'|'research'|'security'|'policy';
+export type AIEventType='infrastructure'|'launch'|'partnership'|'adoption'|'investment'|'research'|'security'|'policy'|'education';
 
 const TYPE_RULES:Array<{type:AIEventType;pattern:RegExp}>=[
   {type:'infrastructure',pattern:/\b(?:data ?cent(?:er|re)s?|supercomput\w*|compute capacity|expands? compute|ai factor(?:y|ies)|gpu clusters?|gigawatts?|infrastructure|sovereign (?:ai|cloud)|compute for)\b/i},
   {type:'security',pattern:/\b(?:secur\w*|safety|vulnerabilit\w*|threats?|cyber\w*|fraud|abuse)\b/i},
   {type:'partnership',pattern:/\b(?:partner(?:s|ship|ships)?|collaborat\w*|teams? up|alliance|joins? forces|agreement with)\b/i},
   {type:'investment',pattern:/\b(?:invest(?:s|ment|ments|ing)?|funding|fund\b|commits? \$|\$\d[\d.,]* (?:billion|million|trillion))\b/i},
-  {type:'launch',pattern:/\b(?:launch(?:es|ed)?|introduc(?:es|ed|ing)|unveil(?:s|ed)?|announc(?:es|ed|ing)|now (?:generally )?available|general availability|releas(?:es|ed)|debuts?|rolls? out|new\b)\b/i},
+  {type:'education',pattern:/\b(?:literacy|skilling|upskill\w*|training programs?|skills? (?:training|programs?)|curricul\w*|educators?|teachers?|classrooms?|librar(?:y|ies))\b/i},
+  {type:'launch',pattern:/\b(?:launch(?:es|ed)?|introduc(?:es|ed|ing)|unveil(?:s|ed)?|now (?:generally )?available|general availability|releas(?:es|ed)|debuts?|rolls? out)\b/i},
   {type:'adoption',pattern:/\b(?:customers?|deploy(?:s|ed|ing|ment)?|adopt(?:s|ed|ion)?|enterprises?|to work|transform(?:s|ing)?|use cases?)\b/i},
   {type:'research',pattern:/\b(?:research|paper|study|benchmark|scientists?|discover(?:y|ies)|breakthrough|mapping)\b/i},
   {type:'policy',pattern:/\b(?:government|public sector|policy|regulat\w*|nation(?:al|s)?|sovereignty|ministry)\b/i},
@@ -45,6 +46,8 @@ const TYPE_KO:Record<AIEventType,{topic:string;short:string;analysis:(ctx:Analys
     analysis:()=>'MOTUS 분석: 연구 성과는 곧바로 매출로 이어지지는 않지만, 공개된 데이터·모델이 다른 연구자와 기업에 활용될 때 산업적 의미가 생긴다. 제품 적용 일정이 제시되는지가 다음 확인 지점이다.'},
   security:{topic:'AI 보안·안전 강화',short:'AI 보안',watch:'적용 대상 서비스와 시점, 외부 검증 결과가 공개되는지 확인할 필요가 있다.',
     analysis:()=>'MOTUS 분석: AI 서비스 이용자가 늘수록 보안과 안전 체계는 기업 고객의 도입 여부를 가르는 조건이 된다. 공개된 조치가 실제 사고 예방이나 인증 획득으로 이어지는지가 신뢰도의 기준이다.'},
+  education:{topic:'AI 교육·역량 강화',short:'AI 교육',watch:'교육 대상과 규모, 참여 기관 확대와 이수·활용 성과가 공개되는지 확인할 필요가 있다.',
+    analysis:ctx=>`MOTUS 분석: AI 교육 프로그램은 당장의 매출보다 이용자 저변과 기업·공공 부문의 도입 준비도를 넓히는 장기 투자에 가깝다.${ctx.orgs?` ${ctx.orgs} 등 참여 기관이 늘어나는지가 프로그램의 실제 파급력을 가늠하는 기준이 된다.`:''}`},
   policy:{topic:'공공·주권 AI 협력',short:'공공 AI',watch:'정부 예산과 조달 일정, 참여 기업과 실제 서비스 적용 범위를 확인할 필요가 있다.',
     analysis:ctx=>`MOTUS 분석: 공공·국가 단위 AI 사업은 예산 집행과 조달 일정에 따라 속도가 정해진다.${ctx.place?` ${ctx.place}의 사례는 각국이 AI 역량을 자국 내에 확보하려는 흐름의 연장선으로 볼 수 있다.`:''}`},
 };
@@ -115,6 +118,7 @@ export function extractFigures(text:string):string[] {
 }
 
 export function classifyAIEvent(title:string,text:string,link=''):{type:AIEventType;fromTitle:boolean}|null {
+  if(/^[A-Z][\w.&-]*(?: [A-Z][\w.&-]*)* and (?:the )?[A-Z][\w.&-]*(?: [A-Z][\w.&-]*)* [a-z]+s\b/.test(title)&&!/\b(?:data ?cent|supercomput|compute)\w*/i.test(title))return {type:'partnership',fromTitle:true};
   if(/\/research\//i.test(link)&&!/\b(?:launch|available|introduc\w*|announc\w*)\b/i.test(title))return {type:'research',fromTitle:false};
   for(const rule of TYPE_RULES)if(rule.pattern.test(title))return {type:rule.type,fromTitle:true};
   let best:{type:AIEventType;hits:number}|null=null;
@@ -140,7 +144,9 @@ export function kstDateLabel(iso:string):string {
 }
 
 export function synthesizeEvidenceBoundAIEvent(input:EvidenceBoundAIInput):(KoreanAIEvent&{basis:AIEvidenceBasis;eventType:AIEventType;evidenceBound:true;richness:number})|null {
-  const text=`${input.title}. ${input.evidence}`,classified=classifyAIEvent(input.title,input.evidence,input.link);
+  // Entities and figures are read from the title and the opening of the official body only, so page
+  // chrome (related posts, footers, region lists) cannot be presented as part of the announcement.
+  const text=`${input.title}. ${input.evidence.slice(0,1500)}`,classified=classifyAIEvent(input.title,input.evidence,input.link);
   if(!classified)return null;
   const company=companyKorean(input.publisher),type=TYPE_KO[classified.type];
   const places=findAll(text,PLACES),orgs=findAll(text,COMPANIES).filter(name=>name!==company&&!company.startsWith(name)&&!name.startsWith(company));

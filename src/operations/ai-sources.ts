@@ -66,7 +66,9 @@ const NON_NEWS=/\b(?:how to|hands-on|step[- ]by[- ]step|tutorial|walkthrough|bes
 
 export function isAIRelevant(title:string,text:string):boolean {return AI_TERMS.test(title)||(text.match(new RegExp(AI_TERMS.source,'gi'))??[]).length>=3}
 /** Mixed-topic channels (newsroom, corporate blog, product updates) must name AI in the headline itself. */
-export function isAIHeadline(title:string):boolean {return AI_TERMS.test(title)}
+const AI_HEADLINE=/\b(?:ai|a\.i\.|artificial intelligence|machine learning|generative|genai|llms?|large language models?|foundation models?|frontier models?|ai agents?|agentic|copilot|gemini|gemma|claude|chatgpt|gpt-?\d|llama|bedrock|sagemaker|amazon nova|amazon q|trainium|inferentia|gpus?|supercomput\w*|ai factor(?:y|ies)|deep learning|reasoning models?|multimodal|blackwell|vera rubin|dgx|omniverse)\b/i;
+/** Mixed-topic channels (newsroom, corporate blog, product updates) must name AI explicitly in the headline. */
+export function isAIHeadline(title:string):boolean {return AI_HEADLINE.test(title)}
 export function isNewsLike(title:string):boolean {return !NON_NEWS.test(title)}
 
 /** Publication date stated by the article page itself (meta, JSON-LD or <time>). */

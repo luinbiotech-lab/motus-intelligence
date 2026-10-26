@@ -1,0 +1,19 @@
+name: MOTUS AI Article Accuracy Check (temporary)
+on:
+  pull_request:
+    branches: [main]
+    paths: ['src/operations/ai-*.ts', 'src/operations/internal-live-daily.ts', 'scripts/verify-ai-article.mjs', '.github/workflows/motus-ai-article-check.yml']
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env: {TZ: Asia/Seoul}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 22, cache: npm}
+      - run: npm ci
+      - run: npm run build
+      - run: node scripts/verify-ai-article.mjs
