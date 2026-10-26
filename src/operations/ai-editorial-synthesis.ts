@@ -1,7 +1,8 @@
 import type {PreRenderSearchContext} from '../search/editorial-demand.js';
+import {josa} from './ai-generic-synthesis.js';
 
 export interface VerifiedAIEventInput {topicId:string;publisher:string;title:string;pageEvidence:string;link:string;publishedAt:string}
-export interface KoreanAIEvent {topicId:string;publisher:string;company:string;topic:string;headline:string;facts:string[];interpretation:string;watch:string;link:string;publishedAt:string}
+export interface KoreanAIEvent {topicId:string;publisher:string;company:string;topic:string;headline:string;facts:string[];interpretation:string;watch:string;link:string;publishedAt:string;evidenceBound?:boolean}
 export interface AIEditorialDecision {ordered:KoreanAIEvent[];title:string;lead:string;depthByTopic:Record<string,number>;searchEffects:Array<'TITLE'|'LEAD'|'ORDERING'|'DEPTH'>}
 
 export function synthesizeKoreanAIEvent(input:VerifiedAIEventInput):KoreanAIEvent|null {
@@ -21,13 +22,14 @@ export function buildAIEditorialDecision(events:KoreanAIEvent[],search:PreRender
   const byId=new Map(events.map(event=>[event.topicId,event])),ordered=search.orderedTopicIds.map(id=>byId.get(id)).filter((event):event is KoreanAIEvent=>Boolean(event));for(const event of events)if(!ordered.some(item=>item.topicId===event.topicId))ordered.push(event);
   const major=ordered[0]!,selected=search.selectedSecondaryTopicId?byId.get(search.selectedSecondaryTopicId):undefined,effects:Array<'TITLE'|'LEAD'|'ORDERING'|'DEPTH'>=[];
   const original=events.map(item=>item.topicId).join('|');if(ordered.map(item=>item.topicId).join('|')!==original)effects.push('ORDERING');
-  const title=selected&&selected.topicId!==major.topicId?`${major.company}가 공개한 ${major.topic}, ${selected.company} 움직임까지 읽기`:`${major.company}가 공개한 ${major.topic}, 실제 산업 변화로 이어질까`;
-  const lead=selected&&selected.topicId!==major.topicId?`${major.company}가 공개한 ${major.topic}이 오늘 AI 산업의 중심축이다. 여기에 ${selected.company}의 ${selected.topic}을 함께 보면 경쟁이 제품 발표를 넘어 실제 도입과 운영 성과로 이동하는 흐름이 선명해진다.`:`${major.company}가 공개한 ${major.topic}이 오늘 AI 산업의 핵심이다. 공식 원문에서 확인된 사실과 실제 도입·운영 성과에서 추가로 확인할 변수를 나눠 살펴본다.`;
+  const second=selected&&selected.topicId!==major.topicId?selected:undefined;
+  const title=second?`${josa(major.company,'이','가')} 공개한 ${major.topic}, ${second.company} 움직임까지 읽기`:`${josa(major.company,'이','가')} 공개한 ${major.topic}, 실제 산업 변화로 이어질까`;
+  const lead=second?`${josa(major.company,'이','가')} 공개한 ${josa(major.topic,'이','가')} 오늘 AI 산업의 중심축이다. 여기에 ${second.company}의 ${josa(second.topic,'을','를')} 함께 보면 경쟁이 제품 발표를 넘어 실제 도입과 운영 성과로 이동하는 흐름이 선명해진다. 각 항목은 공식 원문에서 확인한 사실과 MOTUS 분석을 나눠 적었다.`:`${josa(major.company,'이','가')} 공개한 ${josa(major.topic,'이','가')} 오늘 AI 산업의 핵심이다.${ordered.length>1?` ${ordered.slice(1).map(item=>`${item.company}의 ${item.topic}`).join(', ')} 발표도 함께 정리했다.`:''} 공식 원문에서 확인된 사실과 실제 도입·운영 성과에서 추가로 확인할 변수를 나눠 살펴본다.`;
   const depthByTopic=Object.fromEntries(ordered.map((event,index)=>[event.topicId,index===0||event.topicId===search.selectedSecondaryTopicId?2:1]));
   if(selected){effects.push('TITLE','LEAD','DEPTH')}
   return {ordered,title,lead,depthByTopic,searchEffects:[...new Set(effects)]};
 }
 
 function productName(value:string,pattern:RegExp,fallback:string){return value.match(pattern)?.[0]?.replace(/\s+/g,' ').trim()??fallback}
-function koreanCompany(value:string):string {return ({OpenAI:'오픈AI','Google AI':'구글',NVIDIA:'엔비디아',Microsoft:'마이크로소프트',Anthropic:'앤트로픽','Amazon AWS':'아마존웹서비스'} as Record<string,string>)[value]??value}
+function koreanCompany(value:string):string {return ({OpenAI:'오픈AI','Google AI':'구글','Google DeepMind':'구글 딥마인드',NVIDIA:'엔비디아',Microsoft:'마이크로소프트',Anthropic:'앤트로픽','Amazon AWS':'아마존웹서비스(AWS)',Meta:'메타'} as Record<string,string>)[value]??value}
 
