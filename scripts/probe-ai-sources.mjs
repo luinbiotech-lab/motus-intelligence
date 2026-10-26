@@ -18,9 +18,12 @@ const candidates=[
  ['anthropic-news','https://www.anthropic.com/news'],
  ['anthropic-rss','https://www.anthropic.com/rss.xml'],
  ['anthropic-feed','https://www.anthropic.com/news/rss.xml'],
+ ['openai-api','https://openai.com/api/v1/news'],
+ ['aws-ml-news','https://aws.amazon.com/about-aws/whats-new/recent/feed/'],
 ];
 const ua={'user-agent':'MOTUS-Internal-Collector/1.0',accept:'application/rss+xml,application/atom+xml,application/xml,text/xml,text/html'};
-for(const [id,url] of candidates){
+const only=process.argv[2]?new Set(process.argv[2].split(',')):null;
+for(const [id,url] of candidates){if(only&&!only.has(id))continue;
   try{
     const r=await fetch(url,{headers:ua,signal:AbortSignal.timeout(20000),redirect:'follow'});const t=await r.text();
     const items=[...t.matchAll(/<(item|entry)\b[\s\S]*?<\/\1>/gi)].map(m=>m[0]);

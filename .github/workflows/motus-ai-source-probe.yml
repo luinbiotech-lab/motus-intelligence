@@ -13,4 +13,5 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with: {node-version: 22}
-      - run: node scripts/probe-ai-sources.mjs
+      - run: node scripts/probe-ai-sources.mjs aws-news,aws-ml,amazon-news,meta-news,meta-ai,aws-ml-news
+      - run: node scripts/probe-ai-sources.mjs anthropic-news,anthropic-rss,anthropic-feed,openai-api
