@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "1.0",
+  "sourceMode": "internal",
+  "category": "AI_INTELLIGENCE",
+  "operationDate": "2026-10-26",
+  "status": "SKIP",
+  "reasonCode": "AI_VERIFIED_EVENTS_INSUFFICIENT",
+  "entries": [
+    {
+      "sourceId": "openai",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/news/rss.xml",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-26T06:25:49.693Z",
+      "error": null
+    },
+    {
+      "sourceId": "google-ai",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blog.google/technology/ai/rss/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-26T06:25:49.693Z",
+      "error": null
+    },
+    {
+      "sourceId": "nvidia",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blogs.nvidia.com/feed/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-26T06:25:49.693Z",
+      "error": null
+    },
+    {
+      "sourceId": "microsoft",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blogs.microsoft.com/feed/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-26T06:25:49.693Z",
+      "error": null
+    },
+    {
+      "sourceId": "ai:page:1",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/scaling-storage-one-billion-users-part-two",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-10-26T06:25:49.693Z",
+      "error": "HTTP_403"
+    },
+    {
+      "sourceId": "ai:page:2",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/securing-our-frontier-model-training-environment",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-10-26T06:25:49.693Z",
+      "error": "HTTP_403"
+    }
+  ]
+}
