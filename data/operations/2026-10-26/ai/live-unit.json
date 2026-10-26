@@ -1,9 +1,193 @@
 {
-  "schemaVersion": "1.0",
+  "publicationId": "motus-live-2026-10-26:ai",
   "category": "AI_INTELLIGENCE",
-  "operationDate": "2026-10-26",
-  "status": "SKIP",
-  "observedDate": null,
-  "reasonCode": "AI_VERIFIED_EVENTS_INSUFFICIENT",
-  "unit": null
+  "observedDate": "2026-10-26",
+  "title": "메타가 공개한 신규 AI 제품·기능 공개, 실제 산업 변화로 이어질까",
+  "label": "AI 인텔리전스",
+  "sourceCount": 3,
+  "itemCount": 3,
+  "readiness": "READY",
+  "readinessReasons": [],
+  "review": {
+    "state": "PENDING",
+    "reviewer": null,
+    "reviewedAt": null,
+    "history": []
+  },
+  "publicationState": "PREVIEW_READY",
+  "draftPostId": null,
+  "publicPostUrl": null,
+  "duplicateCount": 0,
+  "contentFingerprint": "bd41e6100326451bd87225a0713197305ef9d1280036fb1809f64e8c15908d36",
+  "render": {
+    "html": "<!doctype html><html lang=\"ko\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>메타가 공개한 신규 AI 제품·기능 공개, 실제 산업 변화로 이어질까</title></head><body><article data-product=\"motus-ai-intelligence\" data-layout=\"editorial-article-4q\" style=\"font-family:Arial,&quot;Noto Sans KR&quot;,sans-serif;color:#172033;line-height:1.78;font-size:17px;width:100%;max-width:820px;box-sizing:border-box;margin:0 auto;overflow-x:hidden;overflow-wrap:anywhere\"><header style=\"width:100%;max-width:100%;box-sizing:border-box;background:#03162e;color:#fff;padding:26px 22px;margin:0 0 22px\"><p style=\"margin:0 0 9px;color:#c7d8ea;font-size:14px;font-weight:800\">MOTUS | What Moves the World</p><div role=\"heading\" aria-level=\"2\" style=\"font-size:clamp(25px,7vw,34px);line-height:1.22;font-weight:850;word-break:keep-all\">메타가 공개한 신규 AI 제품·기능 공개, 실제 산업 변화로 이어질까</div><p style=\"margin:10px 0 0;color:#e6edf5\">공식 원문에서 확인한 사실과 MOTUS 해석을 구분해 읽는 AI 산업</p><p style=\"margin:11px 0 0;color:#b7c8da;font-size:13px\">AI 인텔리전스 (AI Intelligence) · 2026-10-26</p></header>\n<p data-section=\"editorial-lead\" style=\"margin:0 0 24px;font-size:18px;line-height:1.82;color:#172033\">메타가 공개한 신규 AI 제품·기능 공개가 오늘 AI 산업의 핵심이다. 엔비디아의 카자흐스탄 AI 컴퓨팅 인프라 확충, 마이크로소프트의 신규 AI 제품·기능 공개 발표도 함께 정리했다. 공식 원문에서 확인된 사실과 실제 도입·운영 성과에서 추가로 확인할 변수를 나눠 살펴본다.</p>\n<section style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><h2 style=\"margin:0 0 12px;padding:0 0 8px;border-bottom:2px solid #173a63;color:#03162e;font-size:clamp(19px,4.8vw,23px);line-height:1.35;font-weight:850;word-break:keep-all;overflow-wrap:normal\">메타, 신규 AI 제품·기능 공개</h2><p style=\"margin:0 0 13px\">메타는 2026년 10월 24일(한국 시간) 공식 뉴스룸에 「New Tools for the Admins Who Build Communities on Forum」 제목의 발표를 게시했다.</p><p style=\"margin:0 0 13px\">발표 제목과 본문은 신규 AI 제품·기능 공개에 관한 내용을 다룬다.</p><p style=\"margin:0 0 13px\">MOTUS 분석: 신규 기능 공개의 의미는 기술 사양보다 실제로 쓰는 고객이 얼마나 빨리 늘어나는지와 과금 구조에 달려 있다.</p><p style=\"margin:0 0 13px\">시장 평가는 발표 이후 고객 채택, 매출 기여와 인프라 투자 자료가 확인된 뒤 판단해야 한다.</p></section>\n<section style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><h2 style=\"margin:0 0 12px;padding:0 0 8px;border-bottom:2px solid #173a63;color:#03162e;font-size:clamp(19px,4.8vw,23px);line-height:1.35;font-weight:850;word-break:keep-all;overflow-wrap:normal\">엔비디아, 카자흐스탄 AI 컴퓨팅 인프라 확충</h2><p style=\"margin:0 0 13px\">엔비디아는 2026년 10월 23일(한국 시간) 공식 블로그에 「Kazakhstan Expands Compute for Its AI Future」 제목의 발표를 게시했다.</p><p style=\"margin:0 0 13px\">발표 제목과 본문은 AI 컴퓨팅 인프라 확충에 관한 내용을 다룬다. 발표의 중심 제품·플랫폼은 Vera Rubin이다. 원문에서 함께 언급된 국가·기업은 카자흐스탄, 미국이다.</p><p style=\"margin:0 0 13px\">원문은 500메가와트 등의 수치를 명시했다.</p><p style=\"margin:0 0 13px\">MOTUS 분석: AI 인프라 발표의 가치는 발표 규모보다 실제 가동 시점과 전력·부지 확보, 그리고 그 위에서 돌아갈 고객 수요가 확인되는지에 달려 있다. 카자흐스탄처럼 국가·지역 단위로 컴퓨팅 자원을 확보하려는 움직임이 이어지면 GPU·네트워크·전력 설비 공급망 전반의 수요가 함께 움직일 수 있다.</p></section>\n<section style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><h2 style=\"margin:0 0 12px;padding:0 0 8px;border-bottom:2px solid #173a63;color:#03162e;font-size:clamp(19px,4.8vw,23px);line-height:1.35;font-weight:850;word-break:keep-all;overflow-wrap:normal\">마이크로소프트, 신규 AI 제품·기능 공개</h2><p style=\"margin:0 0 13px\">마이크로소프트는 2026년 10월 23일(한국 시간) 공식 뉴스룸에 「Beyond static charts: Helping AI create visualizations you can explore」 제목의 발표를 게시했다.</p><p style=\"margin:0 0 13px\">원문 본문은 신규 AI 제품·기능 공개에 관한 내용을 다룬다.</p></section>\n<section style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><h2 style=\"margin:0 0 12px;padding:0 0 8px;border-bottom:2px solid #173a63;color:#03162e;font-size:clamp(19px,4.8vw,23px);line-height:1.35;font-weight:850;word-break:keep-all;overflow-wrap:normal\">앞으로 볼 지점</h2><p style=\"margin:0 0 13px\">메타 신규 AI 제품·기능 공개: 제공 지역과 가격, 기존 고객의 실제 사용량과 경쟁 서비스 대비 차별점을 확인할 필요가 있다.</p><p style=\"margin:0 0 13px\">엔비디아 카자흐스탄 AI 컴퓨팅 인프라 확충: 실제 가동 시점, 전력·부지 확보, 확보된 고객 계약과 가동률 자료를 확인할 필요가 있다.</p><p style=\"margin:0 0 13px\">마이크로소프트 신규 AI 제품·기능 공개: 제공 지역과 가격, 기존 고객의 실제 사용량과 경쟁 서비스 대비 차별점을 확인할 필요가 있다.</p></section>\n<section style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><h2 style=\"margin:0 0 12px;padding:0 0 8px;border-bottom:2px solid #173a63;color:#03162e;font-size:clamp(19px,4.8vw,23px);line-height:1.35;font-weight:850;word-break:keep-all;overflow-wrap:normal\">자료</h2><ul style=\"margin:0;padding-left:20px\"><li style=\"margin:5px 0\"><a href=\"https://about.fb.com/news/2026/10/new-tools-for-the-admins-who-build-communities-on-forum/\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">메타 공식 발표</a></li><li style=\"margin:5px 0\"><a href=\"https://blogs.nvidia.com/blog/kazakhstan-ai-compute-ecosystem/\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">엔비디아 공식 발표</a></li><li style=\"margin:5px 0\"><a href=\"https://www.microsoft.com/en-us/research/blog/flint-interactive-a-language-for-creating-interactive-data-visualizations/\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">마이크로소프트 공식 발표</a></li></ul></section></article></body></html>",
+    "renderedSections": [
+      "masthead",
+      "lead",
+      "issues",
+      "connections",
+      "watch",
+      "sources"
+    ],
+    "label": "AI 인텔리전스"
+  },
+  "viewModel": {
+    "publicationId": "motus-live-2026-10-26:ai",
+    "issueDate": "2026-10-26",
+    "issueNumber": 20261026,
+    "title": "메타가 공개한 신규 AI 제품·기능 공개, 실제 산업 변화로 이어질까",
+    "subtitle": "공식 원문에서 확인한 사실과 MOTUS 해석을 구분해 읽는 AI 산업",
+    "category": "AI_INTELLIGENCE",
+    "canonicalLabel": "AI Intelligence",
+    "displayLabel": "AI 인텔리전스 (AI Intelligence)",
+    "todayCore": {
+      "headline": "메타, 신규 AI 제품·기능 공개",
+      "summary": "메타가 공개한 신규 AI 제품·기능 공개가 오늘 AI 산업의 핵심이다. 엔비디아의 카자흐스탄 AI 컴퓨팅 인프라 확충, 마이크로소프트의 신규 AI 제품·기능 공개 발표도 함께 정리했다. 공식 원문에서 확인된 사실과 실제 도입·운영 성과에서 추가로 확인할 변수를 나눠 살펴본다.",
+      "bullets": [
+        "메타, 신규 AI 제품·기능 공개",
+        "엔비디아, 카자흐스탄 AI 컴퓨팅 인프라 확충",
+        "마이크로소프트, 신규 AI 제품·기능 공개"
+      ]
+    },
+    "issues": [
+      {
+        "headline": "메타, 신규 AI 제품·기능 공개",
+        "whatHappened": [
+          "메타는 2026년 10월 24일(한국 시간) 공식 뉴스룸에 「New Tools for the Admins Who Build Communities on Forum」 제목의 발표를 게시했다.",
+          "발표 제목과 본문은 신규 AI 제품·기능 공개에 관한 내용을 다룬다."
+        ],
+        "coreContent": "",
+        "whyItMatters": "MOTUS 분석: 신규 기능 공개의 의미는 기술 사양보다 실제로 쓰는 고객이 얼마나 빨리 늘어나는지와 과금 구조에 달려 있다.",
+        "relatedCompaniesIndustries": [
+          "메타",
+          "AI 산업"
+        ],
+        "marketConnection": "시장 평가는 발표 이후 고객 채택, 매출 기여와 인프라 투자 자료가 확인된 뒤 판단해야 한다.",
+        "institutionView": null,
+        "evidenceRefs": [
+          "https://about.fb.com/news/2026/10/new-tools-for-the-admins-who-build-communities-on-forum/"
+        ]
+      },
+      {
+        "headline": "엔비디아, 카자흐스탄 AI 컴퓨팅 인프라 확충",
+        "whatHappened": [
+          "엔비디아는 2026년 10월 23일(한국 시간) 공식 블로그에 「Kazakhstan Expands Compute for Its AI Future」 제목의 발표를 게시했다.",
+          "발표 제목과 본문은 AI 컴퓨팅 인프라 확충에 관한 내용을 다룬다. 발표의 중심 제품·플랫폼은 Vera Rubin이다. 원문에서 함께 언급된 국가·기업은 카자흐스탄, 미국이다.",
+          "원문은 500메가와트 등의 수치를 명시했다."
+        ],
+        "coreContent": "",
+        "whyItMatters": "MOTUS 분석: AI 인프라 발표의 가치는 발표 규모보다 실제 가동 시점과 전력·부지 확보, 그리고 그 위에서 돌아갈 고객 수요가 확인되는지에 달려 있다. 카자흐스탄처럼 국가·지역 단위로 컴퓨팅 자원을 확보하려는 움직임이 이어지면 GPU·네트워크·전력 설비 공급망 전반의 수요가 함께 움직일 수 있다.",
+        "relatedCompaniesIndustries": [
+          "엔비디아",
+          "AI 산업"
+        ],
+        "marketConnection": "시장 평가는 발표 이후 고객 채택, 매출 기여와 인프라 투자 자료가 확인된 뒤 판단해야 한다.",
+        "institutionView": null,
+        "evidenceRefs": [
+          "https://blogs.nvidia.com/blog/kazakhstan-ai-compute-ecosystem/"
+        ]
+      },
+      {
+        "headline": "마이크로소프트, 신규 AI 제품·기능 공개",
+        "whatHappened": [
+          "마이크로소프트는 2026년 10월 23일(한국 시간) 공식 뉴스룸에 「Beyond static charts: Helping AI create visualizations you can explore」 제목의 발표를 게시했다.",
+          "원문 본문은 신규 AI 제품·기능 공개에 관한 내용을 다룬다."
+        ],
+        "coreContent": "",
+        "whyItMatters": "MOTUS 분석: 신규 기능 공개의 의미는 기술 사양보다 실제로 쓰는 고객이 얼마나 빨리 늘어나는지와 과금 구조에 달려 있다.",
+        "relatedCompaniesIndustries": [
+          "마이크로소프트",
+          "AI 산업"
+        ],
+        "marketConnection": "시장 평가는 발표 이후 고객 채택, 매출 기여와 인프라 투자 자료가 확인된 뒤 판단해야 한다.",
+        "institutionView": null,
+        "evidenceRefs": [
+          "https://www.microsoft.com/en-us/research/blog/flint-interactive-a-language-for-creating-interactive-data-visualizations/"
+        ]
+      }
+    ],
+    "industryFlow": [
+      "AI 제품 적용",
+      "AI 인프라",
+      "기업 도입"
+    ],
+    "industryConnections": [
+      {
+        "title": "메타 발표의 산업 연결",
+        "explanation": "MOTUS 분석: 신규 기능 공개의 의미는 기술 사양보다 실제로 쓰는 고객이 얼마나 빨리 늘어나는지와 과금 구조에 달려 있다.",
+        "connectedCompanies": [
+          "메타"
+        ],
+        "connectedIndustries": [
+          "AI 산업"
+        ],
+        "evidenceRefs": [
+          "https://about.fb.com/news/2026/10/new-tools-for-the-admins-who-build-communities-on-forum/"
+        ],
+        "optionalWatchPoint": ""
+      },
+      {
+        "title": "엔비디아 발표의 산업 연결",
+        "explanation": "MOTUS 분석: AI 인프라 발표의 가치는 발표 규모보다 실제 가동 시점과 전력·부지 확보, 그리고 그 위에서 돌아갈 고객 수요가 확인되는지에 달려 있다. 카자흐스탄처럼 국가·지역 단위로 컴퓨팅 자원을 확보하려는 움직임이 이어지면 GPU·네트워크·전력 설비 공급망 전반의 수요가 함께 움직일 수 있다.",
+        "connectedCompanies": [
+          "엔비디아"
+        ],
+        "connectedIndustries": [
+          "AI 산업"
+        ],
+        "evidenceRefs": [
+          "https://blogs.nvidia.com/blog/kazakhstan-ai-compute-ecosystem/"
+        ],
+        "optionalWatchPoint": ""
+      },
+      {
+        "title": "마이크로소프트 발표의 산업 연결",
+        "explanation": "MOTUS 분석: 신규 기능 공개의 의미는 기술 사양보다 실제로 쓰는 고객이 얼마나 빨리 늘어나는지와 과금 구조에 달려 있다.",
+        "connectedCompanies": [
+          "마이크로소프트"
+        ],
+        "connectedIndustries": [
+          "AI 산업"
+        ],
+        "evidenceRefs": [
+          "https://www.microsoft.com/en-us/research/blog/flint-interactive-a-language-for-creating-interactive-data-visualizations/"
+        ],
+        "optionalWatchPoint": ""
+      }
+    ],
+    "whatToWatch": [
+      {
+        "headline": "메타 신규 AI 제품·기능 공개",
+        "watchFor": "제공 지역과 가격, 기존 고객의 실제 사용량과 경쟁 서비스 대비 차별점을 확인할 필요가 있다.",
+        "validityHorizon": "NEXT_30_DAYS"
+      },
+      {
+        "headline": "엔비디아 카자흐스탄 AI 컴퓨팅 인프라 확충",
+        "watchFor": "실제 가동 시점, 전력·부지 확보, 확보된 고객 계약과 가동률 자료를 확인할 필요가 있다.",
+        "validityHorizon": "NEXT_30_DAYS"
+      },
+      {
+        "headline": "마이크로소프트 신규 AI 제품·기능 공개",
+        "watchFor": "제공 지역과 가격, 기존 고객의 실제 사용량과 경쟁 서비스 대비 차별점을 확인할 필요가 있다.",
+        "validityHorizon": "NEXT_30_DAYS"
+      }
+    ],
+    "sources": [
+      {
+        "label": "메타 공식 발표",
+        "url": "https://about.fb.com/news/2026/10/new-tools-for-the-admins-who-build-communities-on-forum/",
+        "publisher": "Meta"
+      },
+      {
+        "label": "엔비디아 공식 발표",
+        "url": "https://blogs.nvidia.com/blog/kazakhstan-ai-compute-ecosystem/",
+        "publisher": "NVIDIA"
+      },
+      {
+        "label": "마이크로소프트 공식 발표",
+        "url": "https://www.microsoft.com/en-us/research/blog/flint-interactive-a-language-for-creating-interactive-data-visualizations/",
+        "publisher": "Microsoft"
+      }
+    ]
+  }
 }

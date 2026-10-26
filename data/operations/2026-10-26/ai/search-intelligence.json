@@ -1,11 +1,15 @@
 {
-  "collectedAt": "2026-10-26T06:25:49.693Z",
+  "collectedAt": "2026-10-26T06:43:00.994Z",
   "signalDate": null,
   "provider": null,
   "freshness": "NO_SEARCH_SIGNAL",
-  "fallbackReason": "NO_PRE_RENDER_SEARCH_CONTEXT",
+  "fallbackReason": "SEARCH_PROVIDER_NOT_CONFIGURED",
   "warnings": [],
-  "orderedTopicIds": [],
+  "orderedTopicIds": [
+    "ai:2",
+    "ai:3",
+    "ai:4"
+  ],
   "selectedSecondaryTopicId": null,
   "factsChanged": false,
   "gateOverride": false
