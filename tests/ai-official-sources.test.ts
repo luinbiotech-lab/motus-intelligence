@@ -69,8 +69,13 @@ test('evidence-bound synthesis separates facts from labelled analysis and never 
   assert.ok(event.facts.some(fact=>fact.includes('직원 5만명')));
   assert.ok(event.facts.every(fact=>!fact.startsWith('MOTUS 분석')&&!fact.includes('rolling out the AI assistant')));
   assert.match(event.interpretation,/^MOTUS 분석: /);
-  const rss=synthesizeEvidenceBoundAIEvent({topicId:'o',publisher:'OpenAI',sourceId:'openai',title:'Securing our frontier model training environment',link:'https://openai.com/index/x',publishedAt:'2026-10-23T17:00:00Z',evidence:'We describe new security controls protecting the infrastructure we use to train frontier models, including hardware isolation.',basis:'OFFICIAL_RSS_SUMMARY',fallbackReason:'PAGE_BLOCKED'})!;
-  assert.equal(rss.eventType,'security');assert.ok(rss.facts.some(fact=>fact.includes('자동 수집을 허용하지 않아')&&fact.includes('공식 RSS에 게시된 요약')));
+  const thin=synthesizeEvidenceBoundAIEvent({topicId:'o',publisher:'OpenAI',sourceId:'openai',title:'Securing our frontier model training environment',link:'https://openai.com/index/x',publishedAt:'2026-10-23T17:00:00Z',evidence:'We describe new security controls protecting the infrastructure we use to train frontier models, including hardware isolation.',basis:'OFFICIAL_RSS_SUMMARY',fallbackReason:'PAGE_BLOCKED'});
+  assert.equal(thin,null,'an item with no product, place, organisation or figure is too thin to state as news');
+  const rss=synthesizeEvidenceBoundAIEvent({topicId:'p',publisher:'OpenAI',sourceId:'openai',title:'Introducing ChatGPT Atlas',link:'https://openai.com/index/y',publishedAt:'2026-10-23T17:00:00Z',evidence:'ChatGPT Atlas is now available to more than 1 billion users worldwide, bringing the assistant directly into the browser.',basis:'OFFICIAL_RSS_SUMMARY',fallbackReason:'PAGE_BLOCKED'})!;
+  assert.ok(rss.facts.some(fact=>fact.includes('자동 수집을 허용하지 않아')&&fact.includes('공식 RSS에 게시된 요약')));assert.ok(rss.facts.some(fact=>fact.includes('이용자 10억명')));
+  const bodyOnly=synthesizeEvidenceBoundAIEvent({topicId:'q',publisher:'NVIDIA',sourceId:'nvidia',title:'Kazakhstan Expands Compute for Its AI Future',link:'https://blogs.nvidia.com/blog/k/',publishedAt:'2026-10-23T02:00:00Z',evidence:'The country plans future systems based on Vera Rubin.',basis:'OFFICIAL_PAGE'})!;
+  assert.ok(bodyOnly.facts.some(fact=>fact.includes('원문에서 언급된 제품·플랫폼은 Vera Rubin')),'a product only mentioned in the body is not called the centre of the announcement');
+  assert.equal(bodyOnly.topic,'카자흐스탄 AI 컴퓨팅 인프라 확충');
 });
 
 test('an RSS-summary-only item can support but never lead the AI issue',()=>{
@@ -114,11 +119,12 @@ test('official-source AI pipeline publishes a verified, evidence-bound Korean ar
     assert.equal(result.state,'LIVE_READY',String(result.reason));
     const unit=result.payload!.unit,view=unit.viewModel as AIIntelligenceDailyViewModel,links=view.sources.map(source=>source.url);
     assert.equal(unit.observedDate,'2026-10-26');
-    assert.deepEqual(new Set(links),new Set(['https://blogs.nvidia.com/blog/kazakhstan-ai-compute-ecosystem/','https://news.microsoft.com/source/features/ai/volkswagen-copilot/','https://openai.com/index/securing']));
+    assert.deepEqual(new Set(links),new Set(['https://blogs.nvidia.com/blog/kazakhstan-ai-compute-ecosystem/','https://news.microsoft.com/source/features/ai/volkswagen-copilot/']));
     assert.ok(!links.some(link=>link.includes('example.com')||link.includes('covered')||link.includes('forest-types')),'non-official, already-covered and date-mismatched items are excluded');
     assert.ok(view.issues[0]!.evidenceRefs[0]!.includes('kazakhstan'),'full-text verified item leads');
     assert.ok(result.audit.some(entry=>entry.status==='FAILED'&&entry.error==='AI_PUBLICATION_DATE_MISMATCH'));
-    assert.ok(result.audit.some(entry=>entry.sourceId.startsWith('ai:rss-evidence:')&&entry.url==='https://openai.com/index/securing'&&entry.status==='PASS'));
+    assert.ok(result.audit.some(entry=>entry.sourceId.startsWith('ai:rss-evidence:')&&entry.url==='https://openai.com/index/securing'&&entry.status==='PASS'),'403 pages fall back to recorded official RSS evidence');
+    assert.ok(!links.includes('https://openai.com/index/securing'),'but a thin RSS-only item is not published');
     const quality=evaluateEditorialQuality(unit.title,unit.render.html);
     assert.equal(quality.pass,true,quality.reasons.join(';'));assert.ok(quality.visibleText.length>=900&&quality.proseBlockCount>=4,'meets the proposed 900-char/4-block depth gate');
     assert.match(quality.visibleText,/MOTUS 분석: /);assert.doesNotMatch(quality.visibleText,/rolling out the AI assistant|will provide 50 megawatts/);

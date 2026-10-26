@@ -33,7 +33,7 @@ const TYPE_RULES:Array<{type:AIEventType;pattern:RegExp}>=[
 const TYPE_KO:Record<AIEventType,{topic:string;short:string;analysis:(ctx:AnalysisContext)=>string;watch:string}>={
   infrastructure:{topic:'AI 컴퓨팅 인프라 확충',short:'AI 인프라',watch:'실제 가동 시점, 전력·부지 확보, 확보된 고객 계약과 가동률 자료를 확인할 필요가 있다.',
     analysis:ctx=>`MOTUS 분석: AI 인프라 발표의 가치는 발표 규모보다 실제 가동 시점과 전력·부지 확보, 그리고 그 위에서 돌아갈 고객 수요가 확인되는지에 달려 있다.${ctx.place?` ${ctx.place}처럼 국가·지역 단위로 컴퓨팅 자원을 확보하려는 움직임이 이어지면 GPU·네트워크·전력 설비 공급망 전반의 수요가 함께 움직일 수 있다.`:''}`},
-  launch:{topic:'신규 AI 제품·기능 공개',short:'신규 AI 제품',watch:'제공 지역과 가격, 기존 고객의 실제 사용량과 경쟁 서비스 대비 차별점을 확인할 필요가 있다.',
+  launch:{topic:'신규 AI 제품·기능',short:'신규 AI 제품',watch:'제공 지역과 가격, 기존 고객의 실제 사용량과 경쟁 서비스 대비 차별점을 확인할 필요가 있다.',
     analysis:ctx=>`MOTUS 분석: 신규 기능 공개의 의미는 기술 사양보다 실제로 쓰는 고객이 얼마나 빨리 늘어나는지와 과금 구조에 달려 있다.${ctx.product?` ${ctx.product} 같은 제품이 기존 고객 기반에 기본 기능으로 붙으면 확산 속도가 빨라질 수 있지만, 사용량 지표가 공개되기 전까지는 효과를 단정하기 어렵다.`:''}`},
   partnership:{topic:'AI 협력 확대',short:'AI 협력',watch:'협력의 계약 기간과 범위, 공동 고객 사례와 매출 기여가 공개되는지 확인할 필요가 있다.',
     analysis:ctx=>`MOTUS 분석: 협력 발표는 실제 공동 고객과 매출로 이어질 때 의미가 커진다.${ctx.orgs?` ${ctx.orgs} 등이 함께 언급된 만큼, 각 사의 제품이 어떤 고객층에 함께 공급되는지가 후속 판단의 기준이 된다.`:''}`},
@@ -102,8 +102,8 @@ export function extractFigures(text:string):string[] {
     const value=Number(match[1]),unit=match[2]!.toLowerCase();
     out.push(unit==='trillion'?`${trim(value)}조 달러`:unit==='billion'?(value*10>=10000?`${trim(value/1000)}조 달러`:`${trim(value*10)}억 달러`):`${koreanCount(value*1000000)} 달러`);
   }
-  for(const match of text.matchAll(/(\d{1,3}(?:,\d{3})+|\d+(?:\.\d+)?)\s*(million|thousand)?\+?\s+(?:(?:new|more|additional|than)\s+)?(?:[A-Z][\w-]*\s+){0,2}(GPUs?|chips?|countries|languages|customers|users|developers|startups|employees|students|businesses|companies|organizations|partners|data cent(?:er|re)s|hospitals|schools|cities|people)\b/gi)){
-    let value=Number(match[1]!.replaceAll(',',''));const scale=match[2]?.toLowerCase();if(scale==='million')value*=1000000;if(scale==='thousand')value*=1000;
+  for(const match of text.matchAll(/(\d{1,3}(?:,\d{3})+|\d+(?:\.\d+)?)\s*(billion|million|thousand)?\+?\s+(?:(?:new|more|additional|than)\s+)?(?:[A-Z][\w-]*\s+){0,2}(GPUs?|chips?|countries|languages|customers|users|developers|startups|employees|students|businesses|companies|organizations|partners|data cent(?:er|re)s|hospitals|schools|cities|people)\b/gi)){
+    let value=Number(match[1]!.replaceAll(',',''));const scale=match[2]?.toLowerCase();if(scale==='billion')value*=1000000000;if(scale==='million')value*=1000000;if(scale==='thousand')value*=1000;
     const noun=COUNT_NOUNS.find(([pattern])=>pattern.test(match[3]!));if(!noun||!Number.isFinite(value)||value<2)continue;
     out.push(noun[1]==='명'?`${koreanCount(value)}명`:`${noun[1]} ${koreanCount(value)}${noun[2]}`);
   }
@@ -114,7 +114,8 @@ export function extractFigures(text:string):string[] {
   return [...new Set(out)].slice(0,4);
 }
 
-export function classifyAIEvent(title:string,text:string):{type:AIEventType;fromTitle:boolean}|null {
+export function classifyAIEvent(title:string,text:string,link=''):{type:AIEventType;fromTitle:boolean}|null {
+  if(/\/research\//i.test(link)&&!/\b(?:launch|available|introduc\w*|announc\w*)\b/i.test(title))return {type:'research',fromTitle:false};
   for(const rule of TYPE_RULES)if(rule.pattern.test(title))return {type:rule.type,fromTitle:true};
   let best:{type:AIEventType;hits:number}|null=null;
   for(const rule of TYPE_RULES){const hits=(text.match(new RegExp(rule.pattern.source,'gi'))??[]).length;if(hits>=2&&(!best||hits>best.hits))best={type:rule.type,hits}}
@@ -138,27 +139,31 @@ export function kstDateLabel(iso:string):string {
   return `${get('year')}년 ${get('month')}월 ${get('day')}일`;
 }
 
-export function synthesizeEvidenceBoundAIEvent(input:EvidenceBoundAIInput):(KoreanAIEvent&{basis:AIEvidenceBasis;eventType:AIEventType;evidenceBound:true})|null {
-  const text=`${input.title}. ${input.evidence}`,classified=classifyAIEvent(input.title,input.evidence);
+export function synthesizeEvidenceBoundAIEvent(input:EvidenceBoundAIInput):(KoreanAIEvent&{basis:AIEvidenceBasis;eventType:AIEventType;evidenceBound:true;richness:number})|null {
+  const text=`${input.title}. ${input.evidence}`,classified=classifyAIEvent(input.title,input.evidence,input.link);
   if(!classified)return null;
   const company=companyKorean(input.publisher),type=TYPE_KO[classified.type];
   const places=findAll(text,PLACES),orgs=findAll(text,COMPANIES).filter(name=>name!==company&&!company.startsWith(name)&&!name.startsWith(company));
   const product=(input.title.match(PRODUCT)??input.evidence.match(PRODUCT))?.[0]??null,figures=extractFigures(text);
   const place=places[0]??null,org=orgs[0]??null;
-  const topic=classified.type==='launch'&&product?`${product} 공개`
+  const productInTitle=Boolean(product&&input.title.includes(product));
+  const topic=classified.type==='launch'&&productInTitle?`${product}`
     :(classified.type==='infrastructure'||classified.type==='policy')&&place?`${place} ${type.topic}`
     :classified.type==='partnership'&&org?`${josa(org,'과','와')}의 AI 협력`
     :classified.type==='adoption'&&org?`${org}의 AI 도입`
-    :product&&classified.type!=='research'?`${product} 관련 ${type.short}`
+    :productInTitle&&classified.type!=='research'?`${product} 관련 ${type.short}`
     :type.topic;
   const channel=CHANNEL[input.sourceId]??'블로그';
   const facts:string[]=[`${josa(company,'은','는')} ${kstDateLabel(input.publishedAt)}(한국 시간) 공식 ${channel}에 「${input.title}」 제목의 발표를 게시했다.`];
-  const subjects=[...places.slice(0,3),...orgs.slice(0,3)],detail=[`${classified.fromTitle?'발표 제목과 본문은':'원문 본문은'} ${type.topic}에 관한 내용을 다룬다.`];
-  if(product)detail.push(`발표의 중심 제품·플랫폼은 ${product}이다.`);
+  const subjects=[...places.slice(0,3),...orgs.slice(0,3)],detail=[`${classified.fromTitle?'발표 제목과 본문은':'원문 본문은'} ${type.topic}${classified.type==='launch'?' 공개':''}에 관한 내용을 다룬다.`];
+  if(product)detail.push(productInTitle?`발표의 중심 제품·플랫폼은 ${product}이다.`:`원문에서 언급된 제품·플랫폼은 ${product}이다.`);
   if(subjects.length)detail.push(`원문에서 함께 언급된 국가·기업은 ${subjects.join(', ')}이다.`);
   facts.push(detail.join(' '));
   if(figures.length)facts.push(`원문은 ${figures.join(', ')} 등의 수치를 명시했다.`);
   if(input.basis!=='OFFICIAL_PAGE')facts.push(`${input.fallbackReason==='PAGE_TEXT_INSUFFICIENT'?'원문 페이지에서 본문을 충분히 추출하지 못해':'원문 페이지가 자동 수집을 허용하지 않아'} 이 항목은 ${company} 공식 RSS에 게시된 ${input.basis==='OFFICIAL_RSS_FULLTEXT'?'본문':'요약'}을 근거로 정리했으며, 발표일은 공식 RSS 기록으로 확인했다.`);
+  const richness=(product?1:0)+(place?1:0)+(org?1:0)+Math.min(figures.length,2);
+  // Too little first-party detail to state anything beyond the headline: not an article item.
+  if(richness===0)return null;
   const interpretation=type.analysis({place,product,orgs:orgs.slice(0,2).join('·')||null});
-  return {topicId:input.topicId,publisher:input.publisher,company,topic,headline:`${company}, ${topic}`,facts,interpretation,watch:type.watch,link:input.link,publishedAt:input.publishedAt,basis:input.basis,eventType:classified.type,evidenceBound:true};
+  return {topicId:input.topicId,publisher:input.publisher,company,topic,headline:`${company}, ${topic}${classified.type==='launch'?' 공개':''}`,facts,interpretation,watch:type.watch,link:input.link,publishedAt:input.publishedAt,basis:input.basis,eventType:classified.type,evidenceBound:true,richness};
 }

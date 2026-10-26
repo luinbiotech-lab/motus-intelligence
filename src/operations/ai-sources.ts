@@ -65,6 +65,8 @@ const AI_TERMS=/\b(?:ai|a\.i\.|artificial intelligence|machine learning|generati
 const NON_NEWS=/\b(?:how to|hands-on|step[- ]by[- ]step|tutorial|walkthrough|best practices|deep dive into|getting started|webinar|podcast|career advice|recipe|quiz)\b/i;
 
 export function isAIRelevant(title:string,text:string):boolean {return AI_TERMS.test(title)||(text.match(new RegExp(AI_TERMS.source,'gi'))??[]).length>=3}
+/** Mixed-topic channels (newsroom, corporate blog, product updates) must name AI in the headline itself. */
+export function isAIHeadline(title:string):boolean {return AI_TERMS.test(title)}
 export function isNewsLike(title:string):boolean {return !NON_NEWS.test(title)}
 
 /** Publication date stated by the article page itself (meta, JSON-LD or <time>). */

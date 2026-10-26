@@ -13,7 +13,7 @@ import type {VerifiedSearchTopic} from '../search/intelligence.js';
 import {fetchWithTransientRetry} from './http-retry.js';
 import {isCompletedSession,latestCompletedSession,marketSession} from './market-calendar.js';
 import {buildAIEditorialDecision,synthesizeKoreanAIEvent} from './ai-editorial-synthesis.js';
-import {OFFICIAL_AI_SOURCES,datesAgree,isAIRelevant,isNewsLike,isOfficialLink,pageBodyText,pagePublishedDate,pageTitle,parseAnthropicIndex,parseFeed,type AIEvidenceBasis,type FeedItem,type OfficialAISource} from './ai-sources.js';
+import {OFFICIAL_AI_SOURCES,datesAgree,isAIHeadline,isAIRelevant,isNewsLike,isOfficialLink,pageBodyText,pagePublishedDate,pageTitle,parseAnthropicIndex,parseFeed,type AIEvidenceBasis,type FeedItem,type OfficialAISource} from './ai-sources.js';
 import {synthesizeEvidenceBoundAIEvent,type AIEventType} from './ai-generic-synthesis.js';
 import {readFile,readdir} from 'node:fs/promises';
 import {join} from 'node:path';
@@ -68,13 +68,13 @@ export class RepositoryInternalDailyBuilder implements InternalDailyBuilder {
    }catch{}}
    const seenTitles=new Set<string>(),screened=pool.filter(({source,item})=>{
     if(!isOfficialLink(item.link,source.domains)||alreadyCovered.has(canonical(item.link)))return false;
-    if(item.title){const key=item.title.toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();if(seenTitles.has(key)||!isNewsLike(item.title))return false;if(source.aiFilter&&!isAIRelevant(item.title,`${item.summary} ${item.fullText}`))return false;seenTitles.add(key)}
+    if(item.title){const key=item.title.toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();if(seenTitles.has(key)||!isNewsLike(item.title))return false;if(source.aiFilter&&!isAIHeadline(item.title))return false;seenTitles.add(key)}
     return !item.publishedAt||withinWindow(item.publishedAt);
    }).sort((a,b)=>(Date.parse(b.item.publishedAt)||0)-(Date.parse(a.item.publishedAt)||0));
    // Round-robin across publishers so one prolific channel cannot crowd out the others.
    const byPublisher=new Map<string,typeof screened>();for(const entry of screened){const list=byPublisher.get(entry.source.publisher)??[];list.push(entry);byPublisher.set(entry.source.publisher,list)}
    const order:typeof screened=[];for(let round=0;order.length<AI_MAX_PAGE_FETCHES&&[...byPublisher.values()].some(list=>list.length>round);round++)for(const list of byPublisher.values())if(list[round]&&order.length<AI_MAX_PAGE_FETCHES)order.push(list[round]!);
-   const events:Array<NonNullable<ReturnType<typeof synthesizeKoreanAIEvent>>&{basis:AIEvidenceBasis;eventType:AIEventType;evidenceBound:boolean}>=[];
+   const events:Array<NonNullable<ReturnType<typeof synthesizeKoreanAIEvent>>&{basis:AIEvidenceBasis;eventType:AIEventType;evidenceBound:boolean;richness:number}>=[];
    for(const [index,{source,item}] of order.entries()){
     const pageId='ai:page:'+(index+1);let title=item.title,publishedAt=item.publishedAt,evidence='',basis:AIEvidenceBasis|null=null,fallbackReason:'PAGE_BLOCKED'|'PAGE_TEXT_INSUFFICIENT'='PAGE_BLOCKED';
     try{const html=await this.text(item.link,'AI_INTELLIGENCE',pageId,at,audit),pageDate=pagePublishedDate(html),entry=[...audit].reverse().find(value=>value.sourceId===pageId);
@@ -92,7 +92,7 @@ export class RepositoryInternalDailyBuilder implements InternalDailyBuilder {
     }
     if(!title||!publishedAt||!withinWindow(publishedAt)||!isAIRelevant(title,evidence)||!isNewsLike(title))continue;
     const topicId=`ai:${index}`,legacy=synthesizeKoreanAIEvent({topicId,publisher:source.publisher,title,pageEvidence:evidence,link:item.link,publishedAt});
-    const event=legacy?{...legacy,basis,eventType:'launch' as const,evidenceBound:false}:evidence.length>=(basis==='OFFICIAL_RSS_SUMMARY'?100:200)?synthesizeEvidenceBoundAIEvent({topicId,publisher:source.publisher,sourceId:source.id,title,link:item.link,publishedAt,evidence,basis,...(basis==='OFFICIAL_PAGE'?{}:{fallbackReason})}):null;
+    const event=legacy?{...legacy,basis,eventType:'launch' as const,evidenceBound:false,richness:2}:evidence.length>=(basis==='OFFICIAL_RSS_SUMMARY'?100:200)?synthesizeEvidenceBoundAIEvent({topicId,publisher:source.publisher,sourceId:source.id,title,link:item.link,publishedAt,evidence,basis,...(basis==='OFFICIAL_PAGE'?{}:{fallbackReason})}):null;
     if(event)events.push(event);
    }
    const synthesized=selectAIEvents(events);if(!synthesized.length)throw new Error('AI_VERIFIED_EVENTS_INSUFFICIENT');
@@ -197,10 +197,10 @@ function recordKoreaDate(audit:InternalSourceAuditEntry[],sourceId:string,dateFi
 
 const AI_WINDOW_MS=96*3600000,AI_MAX_PAGE_FETCHES=10,AI_MAX_ISSUES=3;
 const AI_TYPE_WEIGHT:Record<AIEventType,number>={infrastructure:3,launch:3,partnership:3,investment:3,adoption:2,policy:2,security:2,research:1};
-type SelectableAIEvent={topicId:string;publisher:string;publishedAt:string;basis:AIEvidenceBasis;eventType:AIEventType};
+type SelectableAIEvent={topicId:string;publisher:string;publishedAt:string;basis:AIEvidenceBasis;eventType:AIEventType;richness?:number};
 /** Lead must rest on full first-party text; RSS-summary items may only support. One item per publisher first, then fill. */
 export function selectAIEvents<T extends SelectableAIEvent>(events:T[]):T[] {
- const score=(event:T)=>(event.basis==='OFFICIAL_RSS_SUMMARY'?0:4)+AI_TYPE_WEIGHT[event.eventType]+Math.max(0,1-(Date.now()-Date.parse(event.publishedAt))/AI_WINDOW_MS);
+ const score=(event:T)=>(event.basis==='OFFICIAL_RSS_SUMMARY'?0:4)+AI_TYPE_WEIGHT[event.eventType]+(event.richness??0)+Math.max(0,1-(Date.now()-Date.parse(event.publishedAt))/AI_WINDOW_MS);
  const ranked=[...events].sort((a,b)=>score(b)-score(a)),lead=ranked.find(event=>event.basis!=='OFFICIAL_RSS_SUMMARY');
  if(!lead)return [];
  const chosen=[lead];
