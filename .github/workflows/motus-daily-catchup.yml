@@ -68,8 +68,8 @@ jobs:
           RUN_DATE="$(TZ=Asia/Seoul date +%F)"
           HOUR="$(TZ=Asia/Seoul date +%H)"
           echo "RUN_DATE=$RUN_DATE" >> "$GITHUB_ENV"
-          if (( 10#$HOUR >= 18 )); then echo 'CATEGORIES=korea ai us' >> "$GITHUB_ENV"
-          elif (( 10#$HOUR >= 13 )); then echo 'CATEGORIES=ai us' >> "$GITHUB_ENV"
+          if (( 10#$HOUR >= 18 )); then echo 'CATEGORIES=korea us' >> "$GITHUB_ENV"
+          elif (( 10#$HOUR >= 13 )); then echo 'CATEGORIES=us' >> "$GITHUB_ENV"
           elif (( 10#$HOUR >= 7 )); then echo 'CATEGORIES=us' >> "$GITHUB_ENV"
           else echo 'CATEGORIES=' >> "$GITHUB_ENV"; fi
       - run: npm run typecheck
