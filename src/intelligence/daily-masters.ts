@@ -36,6 +36,8 @@ export interface USMarketDailyViewModel extends DailyMasterBase {
   supportingMetrics:NewsletterMarketMetric[];marketCommentary:string[];sectorsCompanies:string[];
   wallStreetResearch:{headline:string;institutionView:string|null;motusInterpretation:string|null;facts:string[]}[];
   checkpoints:NewsletterWatchItem[];
+  /** Facts computed from verified closes and separately rendered rule-based analysis. */
+  narrative?:{facts:string[];analysis:string[]};
 }
 export interface KoreaMarketDailyViewModel extends DailyMasterBase {
   category:'KOREA_MARKET';marketSummary:string;indexMetrics:KoreaMarketNewsletterMetric[];
@@ -43,6 +45,7 @@ export interface KoreaMarketDailyViewModel extends DailyMasterBase {
   fxAndSupporting:KoreaMarketNewsletterMetric[];investorFlows:KoreaMarketNewsletterMetric[];
   sectors:KoreaMarketNewsletterMetric[];movers:KoreaMarketNewsletterMetric[];research:KoreaResearchNewsletterEntry[];
   marketCommentary:string[];checkpoints:NewsletterWatchItem[];marketHistory?:MajorIndexHistory;
+  narrative?:{facts:string[];analysis:string[]};
 }
 export interface DailyMasterSplit { ai:AIIntelligenceDailyViewModel;us:USMarketDailyViewModel;korea:KoreaMarketDailyViewModel }
 export interface DailyMasterRenderResult { html:string;renderedSections:string[];label:string }

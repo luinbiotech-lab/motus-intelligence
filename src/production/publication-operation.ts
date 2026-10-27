@@ -9,6 +9,8 @@ export interface PublishLedgerEntry {
   postId:string|null;publicPostUrl:string|null;fingerprint:string;detail:string;
   /** Market session (or AI event) date the published unit covers. Absent on legacy entries. */
   sessionDate?:string;
+  /** Source URLs of the published unit (immutable record used to avoid re-reporting the same news). */
+  sourceUrls?:string[];
 }
 type PublishLedgerInput=Omit<PublishLedgerEntry,'publicationIdentity'|'attemptId'|'gateState'|'publishAttempted'|'duplicateState'|'finalState'|'reason'|'commitSha'>&{identity:string;gateState?:string;publishAttempted?:boolean;duplicateState?:PublishLedgerEntry['duplicateState'];finalState?:string;reason?:string};
 
@@ -24,7 +26,7 @@ export async function acquirePublicationLock(root:string,operationDate:string,ca
 
 export async function appendPublishLedger(root:string,entry:PublishLedgerInput):Promise<void> {
   await mkdir(root,{recursive:true});
-  const record:PublishLedgerEntry={publicationIdentity:entry.identity,identity:entry.identity,attemptId:process.env.GITHUB_RUN_ID?.trim()||`${entry.operationDate}-${entry.category}-${Date.parse(entry.at)}`,operationDate:entry.operationDate,category:entry.category,at:entry.at,gateState:entry.gateState??(entry.event==='GATE_HOLD'?'HOLD':'PENDING'),publishAttempted:entry.publishAttempted??['PUBLISH_ATTEMPT','PUBLISHED','FAILED'].includes(entry.event),duplicateState:entry.duplicateState??(entry.event==='PUBLISHED'?'RESOLVED':'PENDING'),finalState:entry.finalState??entry.event,reason:entry.reason??entry.detail,commitSha:process.env.GITHUB_SHA?.trim()||'LOCAL',event:entry.event,postId:entry.postId,publicPostUrl:entry.publicPostUrl,fingerprint:entry.fingerprint,detail:entry.detail,...(entry.sessionDate?{sessionDate:entry.sessionDate}:{})};
+  const record:PublishLedgerEntry={publicationIdentity:entry.identity,identity:entry.identity,attemptId:process.env.GITHUB_RUN_ID?.trim()||`${entry.operationDate}-${entry.category}-${Date.parse(entry.at)}`,operationDate:entry.operationDate,category:entry.category,at:entry.at,gateState:entry.gateState??(entry.event==='GATE_HOLD'?'HOLD':'PENDING'),publishAttempted:entry.publishAttempted??['PUBLISH_ATTEMPT','PUBLISHED','FAILED'].includes(entry.event),duplicateState:entry.duplicateState??(entry.event==='PUBLISHED'?'RESOLVED':'PENDING'),finalState:entry.finalState??entry.event,reason:entry.reason??entry.detail,commitSha:process.env.GITHUB_SHA?.trim()||'LOCAL',event:entry.event,postId:entry.postId,publicPostUrl:entry.publicPostUrl,fingerprint:entry.fingerprint,detail:entry.detail,...(entry.sessionDate?{sessionDate:entry.sessionDate}:{}),...(entry.sourceUrls?.length?{sourceUrls:entry.sourceUrls}:{})};
   await appendFile(join(root,'publish-ledger.jsonl'),JSON.stringify(record)+'\n','utf8');
 }
 

@@ -1,6 +1,6 @@
 import {createHash} from 'node:crypto';
 import type {SplitPublicationUnit} from '../intelligence/split-daily-production.js';
-import type {AIIntelligenceDailyViewModel} from '../intelligence/daily-masters.js';
+import type {AIIntelligenceDailyViewModel,USMarketDailyViewModel} from '../intelligence/daily-masters.js';
 import type {DailyCategory} from '../operations/daily-orchestrator.js';
 import type {InternalSourceAuditEntry} from '../operations/internal-live-daily.js';
 import type {KoreaCrossVerificationArtifact} from '../operations/korea-official.js';
@@ -22,7 +22,8 @@ export function buildProductionVerification(payload:LiveDailyPayload,sourceMode:
  const provenancePass=sourceMode!=='snapshot'&&urls.length>0&&urls.every(url=>passed.has(canonical(url)))&&sourceDiversityPass;
  const renderedLinks=new Set([...html.matchAll(/<a\b[^>]*href=["'](https?:\/\/[^"']+)["']/gi)].map(match=>canonical(decode(match[1]!)))),sourceLinksPass=urls.length>0&&urls.every(url=>renderedLinks.has(canonical(url)));
  const mobilePass=/max-width\s*:\s*100%/i.test(html)&&/(overflow-x\s*:\s*hidden|word-break\s*:\s*keep-all)/i.test(html);
- const quality=evaluateEditorialQuality(unit.title,html),editorialQualityPass=quality.pass;
+ const quality=evaluateEditorialQuality(unit.title,html),sectorCoveragePass=unit.category!=='US_MARKET'||(unit.viewModel as USMarketDailyViewModel).sectorsCompanies.some(item=>item.trim()),editorialQualityPass=quality.pass&&sectorCoveragePass;
+ if(!sectorCoveragePass)reasons.push('editorial quality: US sector/company evidence missing');
  const concentration=unit.category==='AI_INTELLIGENCE'?publisherConcentrationWarning(unit.viewModel.sources.map(item=>item.publisher).filter((value):value is string=>Boolean(value)),(unit.viewModel as AIIntelligenceDailyViewModel).issues.length===1):null,editorialWarnings=[...quality.notes,...(concentration?[concentration]:[])];
  const leakagePass=!/(eventId|themeId|companyId|publicationId|verificationStatus|confidenceScore|claimId|reportId|fixture|placeholder)/i.test(html);
  if(unit.category==='KOREA_MARKET'&&crossVerification?.verification!=='VERIFIED')reasons.push('Korea official cross-verification failed');if(!sourceDiversityPass)reasons.push('independent source diversity failed');if(!provenancePass)reasons.push('production provenance audit failed');if(!sourceLinksPass)reasons.push('public source links failed');if(!mobilePass)reasons.push('mobile validation failed');if(!editorialQualityPass)reasons.push(...quality.reasons.map(reason=>'editorial quality: '+reason));if(concentration?.includes('requires editorial review'))reasons.push('editorial quality: publisher concentration requires editorial review');if(!leakagePass)reasons.push('public leakage validation failed');

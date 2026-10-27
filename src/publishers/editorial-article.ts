@@ -26,10 +26,13 @@ export function renderAIEditorialArticle(view:AIIntelligenceDailyViewModel):Dail
 
 export function renderUSEditorialArticle(view:USMarketDailyViewModel):DailyMasterRenderResult {
   const terms=new Set<string>();const describe=(value:string)=>explainTerms(value,terms);
-  const parts=[masthead(view.title,view.subtitle,view.displayLabel,view.issueDate),lead(describe([view.marketSummary,...view.marketCommentary].join(' ')))];
+  const parts=[masthead(view.title,view.subtitle,view.displayLabel,view.issueDate),lead(describe(view.marketSummary))];
   const period=view.marketHistory.sessionCount>=60?'3개월':`${view.marketHistory.sessionCount}거래일`;
   parts.push(renderMarketTrendSection(view.marketHistory).replace('미국 주요 증시 추이',`미국 주요지수 ${period} 흐름`));
   if(view.supportingMetrics.length)parts.push(section('금리·달러·변동성',`<p style="margin:0">${view.supportingMetrics.map(item=>`${esc(describe(item.label))} ${esc(item.value)}${item.change?` (${esc(item.change)})`:''}`).join(' · ')}</p>`));
+  if(view.marketCommentary.length)parts.push(section('시장 변수의 연결과 한계',paragraphs(view.marketCommentary)));
+  if(view.narrative?.facts.length)parts.push(section('지수별 흐름과 위치',paragraphs(view.narrative.facts)));
+  if(view.narrative?.analysis.length)parts.push(section('MOTUS 분석',paragraphs(view.narrative.analysis)));
   if(view.sectorsCompanies.length)parts.push(section('종목과 업종에서 읽힌 신호',paragraphs(view.sectorsCompanies)));
   if(view.wallStreetResearch.length)parts.push(section('실적 기대와 금리의 줄다리기',paragraphs(view.wallStreetResearch.flatMap(item=>[item.institutionView??'',item.motusInterpretation??'']))));
   if(view.checkpoints.length)parts.push(section('다음 거래일',paragraphs(view.checkpoints.map(item=>`${item.headline}: ${item.watchFor}`))));
@@ -40,9 +43,11 @@ export function renderKoreaEditorialArticle(view:KoreaMarketDailyViewModel):Dail
   const parts=[masthead(view.title,view.subtitle,view.displayLabel,view.issueDate),lead(view.marketSummary)];
   if(view.marketCommentary.length)parts.push(section(view.edition==='PREVIOUS_SESSION_MORNING'?'전일 장을 읽는 기준':'마감 흐름을 읽는 기준',paragraphs(view.marketCommentary)));
   if(view.indexMetrics.length)parts.push(section('코스피와 코스닥',metricProse(view.indexMetrics)));
+  if(view.narrative?.facts.length)parts.push(section('지수 흐름',paragraphs(view.narrative.facts)));
   if(view.fxAndSupporting.length)parts.push(section('환율과 시장 여건',metricProse(view.fxAndSupporting)));
   if(view.investorFlows.length)parts.push(section('수급이 가리킨 방향',flow(view.investorFlows)));
   if(view.sectors.length||view.movers.length)parts.push(section('업종과 종목의 온도차',metricProse([...view.sectors,...view.movers])));
+  if(view.narrative?.analysis.length)parts.push(section('MOTUS 분석',paragraphs(view.narrative.analysis)));
   if(view.research.length)parts.push(section('증권사 시각',paragraphs(view.research.map(item=>`${item.publisher}: ${item.institutionView}`))));
   if(view.checkpoints.length)parts.push(section(view.edition==='PREVIOUS_SESSION_MORNING'?'오늘 체크포인트':'다음 거래일',paragraphs(view.checkpoints.map(item=>`${item.headline}: ${item.watchFor}`))));
   parts.push(sources(view.sources));return finish('korea-market',view.title,BLOGGER_EDITORIAL_CATEGORIES.KOREA_MARKET.publicLabel,parts,['masthead','lead','indexes','fx','flows','sectors','research','watch','sources']);

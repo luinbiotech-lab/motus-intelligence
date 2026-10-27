@@ -11,7 +11,7 @@ test('encoded RSS image markup cannot leak into AI prose while citation and sent
  const fetcher=(async(input:RequestInfo|URL)=>{
   const parsed=new URL(String(input)),host=parsed.hostname;
   if(!['blog.google','blogs.nvidia.com'].includes(host))return new Response('<rss/>');
-  if(parsed.pathname==='/announcement'){const evidence=host==='blog.google'?'Developers, enterprises, scientists, and consumers gain access to Gemini 4 Argon, the latest frontier model for research and enterprise deployment.':'European partners are using accelerated computing and models to build AI agent applications that improve city operations and public services.';return new Response(`<html><head><meta name="description" content="${evidence}"></head></html>`);}
+  if(parsed.pathname==='/announcement'){const evidence=host==='blog.google'?'Developers, enterprises, scientists, and consumers gain access to Gemini 4 Argon, the latest frontier model for research and enterprise deployment.':'European partners are using accelerated computing and models to build AI agent applications that improve city operations and public services.';return new Response(`<html><head><meta name="description" content="${evidence}"></head><body><article><p>${evidence} ${evidence}</p></article></body></html>`);}
   const description=host==='blog.google'?'&lt;img src="https://images.example/image.webp"&gt;Developers gain access to the new model.':'<![CDATA[<a href="https://example.com/context">Infrastructure capacity expands.</a>]]>';
   const title=host==='blog.google'?'Gemini 4 Argon: Built to solve hard problems':'European Cities Deploy NVIDIA-Powered AI Agents';
   return new Response(`<rss><item><title>${title}</title><link>https://${host}/announcement</link><pubDate>Tue, 13 Oct 2026 16:00:00 GMT</pubDate><description>${description}</description></item></rss>`);
@@ -22,7 +22,9 @@ test('encoded RSS image markup cannot leak into AI prose while citation and sent
  assert.ok(view.issues.every(item=>item.whatHappened.join(' ').length>=80)); assert.ok(view.issues.every(item=>/[가-힣]/.test(item.whatHappened.join(' ')))); assert.doesNotMatch(view.issues.flatMap(item=>item.whatHappened).join(' '),/Developers, enterprises|European partners are using/i);
  assert.doesNotMatch(payload.unit.render.html,/images\.example|&amp;lt;img/);
  for(const source of view.sources){assert.ok(payload.unit.render.html.includes(`href="${source.url}"`));assert.ok(view.issues.some(issue=>issue.evidenceRefs.includes(source.url)));}
- assert.equal(buildProductionVerification(payload,'internal',result.audit,at).verification,'VERIFIED');
+ // A sanitized short fixture remains below the strengthened editorial depth gate.
+ // Clean markup alone must never be promoted to a publishable deep analysis.
+ assert.equal(buildProductionVerification(payload,'internal',result.audit,at).verification,'REVIEW_REQUIRED');
 });
 
 for(const [http,code,reason] of [[404,404,'DATA_NOT_FOUND'],[403,403,'ACCESS_DENIED'],[200,404,'DATA_NOT_FOUND'],[429,429,'RATE_LIMITED']] as const){
@@ -116,8 +118,8 @@ test('all three approved schedules enable live publication with credential prefl
  const workflow=await readFile('.github/workflows/motus-daily-production.yml','utf8');
  assert.match(workflow,/MOTUS_LIVE_PUBLISH_ENABLED:\s*'false'/);
  assert.match(workflow,/SCHEDULE" == "30 3 \* \* 1-5" && "\$CATEGORY" == "ai"/);
- assert.match(workflow,/45 23 \* \* 0-4/);
- assert.match(workflow,/45 21 \* \* 1-5[^\n]*CATEGORY=us/);assert.match(workflow,/30 3 \* \* 1-5[^\n]*CATEGORY=ai/);assert.match(workflow,/SCHEDULE" == "45 23 \* \* 0-4" && "\$CATEGORY" == "korea"/);
+ assert.match(workflow,/17 21 \* \* 0-4/);
+ assert.match(workflow,/45 21 \* \* 1-5[^\n]*CATEGORY=us/);assert.match(workflow,/30 3 \* \* 1-5[^\n]*CATEGORY=ai/);assert.match(workflow,/SCHEDULE" == "17 21 \* \* 0-4" && "\$CATEGORY" == "korea"/);
  assert.match(workflow,/Require Blogger credentials before live publication/);
  assert.match(workflow,/INPUT_EXECUTE_PUBLISH" == "true"/);
 });

@@ -22,8 +22,8 @@ on:
     - cron: '45 21 * * 1-5'
     # AI Intelligence 12:30 KST (Monday-Friday)
     - cron: '30 3 * * 1-5'
-    # Korea previous-session morning edition, 08:45 KST (Monday-Friday)
-    - cron: '45 23 * * 0-4'
+    # Korea previous-session morning edition, 06:17 KST (Monday-Friday)
+    - cron: '17 21 * * 0-4'
 
 permissions:
   contents: read
@@ -66,7 +66,7 @@ jobs:
           case "$SCHEDULE_EXPRESSION" in
             "45 21 * * 1-5") CATEGORY="us" ;;
             "30 3 * * 1-5") CATEGORY="ai" ;;
-            "45 23 * * 0-4") CATEGORY="korea" ;;
+            "17 21 * * 0-4") CATEGORY="korea" ;;
             *) CATEGORY="${DISPATCH_CATEGORY:-all}" ;;
           esac
           if [[ ! "$RUN_DATE" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then

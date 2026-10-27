@@ -3,7 +3,7 @@ export type KoreaComparedField='KOSPI'|'KOSDAQ'|'USD_KRW';
 export type KoreaMetricBasis='SESSION_CLOSE'|'CURRENT_AT_COLLECTION'|'REFERENCE_RATE';
 export interface KoreaPrimaryMarketSnapshot {observedDate:string;values:Partial<Record<KoreaComparedField,number>>;sourceUrls:string[];metricBasis?:Partial<Record<KoreaComparedField,KoreaMetricBasis>>}
 export interface KoreaOfficialObservation {field:KoreaComparedField;observedDate:string;value:number;provider:'KRX'|'BOK_ECOS'|'YAHOO_FINANCE';sourceUrl:string;metricBasis?:KoreaMetricBasis}
-export interface KoreaOfficialAudit {sourceId:string;url:string;status:'PASS'|'FAILED'|'SKIPPED';recordCount:number;error:string|null}
+export interface KoreaOfficialAudit {sourceId:string;url:string;status:'PASS'|'FAILED'|'SKIPPED';recordCount:number;error:string|null;requestedDate?:string;availableDates?:string[]}
 export interface KoreaOfficialFetchResult {observations:KoreaOfficialObservation[];audit:KoreaOfficialAudit[];requiredProviderAvailable:boolean;reasonCode:string|null;phase?:'PRE_PUBLICATION'|'POST_PUBLICATION_RECONCILIATION'}
 export interface KoreaOfficialSourceAdapter {readonly adapterId:string;fetch(observedDate:string,collectedAt:string):Promise<KoreaOfficialFetchResult>}
 export interface KoreaFieldComparison {field:KoreaComparedField;primaryValue:number;independentValue:number;difference:number;tolerance:number;result:'PASS'|'FAIL';primarySourceUrl:string;independentSourceUrl:string;metricBasis?:KoreaMetricBasis|undefined}
@@ -41,7 +41,22 @@ export class YahooKoreaSecondarySourceAdapter implements KoreaOfficialSourceAdap
  constructor(private readonly fetcher:typeof fetch=fetch){}
  async fetch(observedDate:string,_collectedAt:string):Promise<KoreaOfficialFetchResult>{
   const observations:KoreaOfficialObservation[]=[],audit:KoreaOfficialAudit[]=[],from=Math.floor(Date.parse(observedDate+'T00:00:00Z')/1000),to=from+3*86400;
-  try{for(const [field,symbol] of [['KOSPI','%5EKS11'],['KOSDAQ','%5EKQ11']] as const){const url=`https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?period1=${from}&period2=${to}&interval=1d`,response=await fetchWithTransientRetry(this.fetcher,url,()=>({headers:{accept:'application/json','user-agent':'MOTUS-Internal-Collector/1.0'},signal:AbortSignal.timeout(20000)}));if(!response.ok)throw new Error('YAHOO_FINANCE_HTTP_'+response.status);const body=await response.json() as {chart?:{result?:Array<{timestamp?:number[];indicators?:{quote?:Array<{close?:Array<number|null>}>}}>}},result=body.chart?.result?.[0],timestamps=result?.timestamp??[],closes=result?.indicators?.quote?.[0]?.close??[],index=timestamps.findIndex(value=>new Date(value*1000).toISOString().slice(0,10)===observedDate),value=index>=0?closes[index]:null;if(typeof value!=='number'||!Number.isFinite(value))throw new Error('YAHOO_FINANCE_'+field+'_ROW_MISSING');observations.push({field,observedDate,value,provider:'YAHOO_FINANCE',sourceUrl:url,metricBasis:'SESSION_CLOSE'});audit.push({sourceId:'yahoo-finance:'+field.toLowerCase(),url,status:'PASS',recordCount:1,error:null})}return {observations,audit,requiredProviderAvailable:true,reasonCode:null,phase:'PRE_PUBLICATION'}}
+  try{
+   for(const [field,symbol] of [['KOSPI','%5EKS11'],['KOSDAQ','%5EKQ11']] as const){
+    const url=`https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?period1=${from}&period2=${to}&interval=1d`;
+    const response=await fetchWithTransientRetry(this.fetcher,url,()=>({headers:{accept:'application/json','user-agent':'MOTUS-Internal-Collector/1.0'},signal:AbortSignal.timeout(20000)}));
+    if(!response.ok)throw new Error('YAHOO_FINANCE_HTTP_'+response.status);
+    const body=await response.json() as {chart?:{error?:unknown;result?:Array<{timestamp?:number[];indicators?:{quote?:Array<{close?:Array<number|null>}>}}>}};
+    const result=body.chart?.result?.[0],timestamps=result?.timestamp??[],closes=result?.indicators?.quote?.[0]?.close??[];
+    const dates=timestamps.map(value=>Number.isFinite(value)&&Number.isFinite(new Date(value*1000).getTime())?new Date(value*1000).toISOString().slice(0,10):'');
+    const index=dates.indexOf(observedDate),value=index>=0?closes[index]:null;
+    const code=body.chart?.error?'YAHOO_FINANCE_PROVIDER_ERROR':index<0||value==null?'YAHOO_FINANCE_'+field+'_ROW_MISSING':typeof value!=='number'||!Number.isFinite(value)||value<=0?'YAHOO_FINANCE_'+field+'_INVALID_CLOSE':null;
+    audit.push({sourceId:'yahoo-finance:'+field.toLowerCase(),url,status:code?'FAILED':'PASS',recordCount:code?0:1,error:code,requestedDate:observedDate,availableDates:[...new Set(dates.filter(Boolean))].slice(-8)});
+    if(code)throw new Error(code);
+    observations.push({field,observedDate,value:value as number,provider:'YAHOO_FINANCE',sourceUrl:url,metricBasis:'SESSION_CLOSE'});
+   }
+   return {observations,audit,requiredProviderAvailable:true,reasonCode:null,phase:'PRE_PUBLICATION'};
+  }
   catch(error){return {observations,audit:[...audit,{sourceId:'yahoo-finance:secondary',url:'https://finance.yahoo.com/',status:'FAILED',recordCount:0,error:errorMessage(error)}],requiredProviderAvailable:false,reasonCode:errorMessage(error),phase:'PRE_PUBLICATION'}}
  }
 }
