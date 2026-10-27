@@ -1,0 +1,193 @@
+{
+  "publicationId": "motus-live-2026-10-27:ai",
+  "category": "AI_INTELLIGENCE",
+  "observedDate": "2026-10-27",
+  "title": "아마존웹서비스(AWS)가 공개한 GPT-6.1 신규 기능, 실제 산업 변화로 이어질까",
+  "label": "AI 인텔리전스",
+  "sourceCount": 3,
+  "itemCount": 3,
+  "readiness": "READY",
+  "readinessReasons": [],
+  "review": {
+    "state": "PENDING",
+    "reviewer": null,
+    "reviewedAt": null,
+    "history": []
+  },
+  "publicationState": "PREVIEW_READY",
+  "draftPostId": null,
+  "publicPostUrl": null,
+  "duplicateCount": 0,
+  "contentFingerprint": "09d655a8efe3330591d078b477f1a35e31b4e65e40898a901452dd10c089506c",
+  "render": {
+    "html": "<!doctype html><html lang=\"ko\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>아마존웹서비스(AWS)가 공개한 GPT-6.1 신규 기능, 실제 산업 변화로 이어질까</title></head><body><article data-product=\"motus-ai-intelligence\" data-layout=\"editorial-article-4q\" style=\"font-family:Arial,&quot;Noto Sans KR&quot;,sans-serif;color:#172033;line-height:1.78;font-size:17px;width:100%;max-width:820px;box-sizing:border-box;margin:0 auto;overflow-x:hidden;overflow-wrap:anywhere\"><header style=\"width:100%;max-width:100%;box-sizing:border-box;background:#03162e;color:#fff;padding:26px 22px;margin:0 0 22px\"><p style=\"margin:0 0 9px;color:#c7d8ea;font-size:14px;font-weight:800\">MOTUS | What Moves the World</p><div role=\"heading\" aria-level=\"2\" style=\"font-size:clamp(25px,7vw,34px);line-height:1.22;font-weight:850;word-break:keep-all\">아마존웹서비스(AWS)가 공개한 GPT-6.1 신규 기능, 실제 산업 변화로 이어질까</div><p style=\"margin:10px 0 0;color:#e6edf5\">공식 원문에서 확인한 사실과 MOTUS 해석을 구분해 읽는 AI 산업</p><p style=\"margin:11px 0 0;color:#b7c8da;font-size:13px\">AI 인텔리전스 (AI Intelligence) · 2026-10-27</p></header>\n<p data-section=\"editorial-lead\" style=\"margin:0 0 24px;font-size:18px;line-height:1.82;color:#172033\">아마존웹서비스(AWS)가 공개한 GPT-6.1 신규 기능이 오늘 AI 산업의 핵심이다. 마이크로소프트의 AI 교육·역량 강화, 오픈AI의 GPT-6.1 관련 AI 보안 발표도 함께 정리했다. 공식 원문에서 확인된 사실과 실제 도입·운영 성과에서 추가로 확인할 변수를 나눠 살펴본다. 공식 AI 채널 11곳에서 최근 4일간 게시된 AI 발표 20건을 확인했고, 원문 출처와 발표일이 검증된 3건을 골라 정리했다.</p>\n<section style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><h2 style=\"margin:0 0 12px;padding:0 0 8px;border-bottom:2px solid #173a63;color:#03162e;font-size:clamp(19px,4.8vw,23px);line-height:1.35;font-weight:850;word-break:keep-all;overflow-wrap:normal\">아마존웹서비스(AWS), GPT-6.1 신규 기능 공개</h2><p style=\"margin:0 0 13px\">아마존웹서비스(AWS)는 2026년 10월 27일(한국 시간) 공식 What’s New 공지에 「OpenAI GPT-6.1 Terra is now generally available on Amazon Bedrock」 제목의 발표를 게시했다.</p><p style=\"margin:0 0 13px\">발표 제목과 본문은 신규 AI 제품·기능 공개에 관한 내용을 다룬다. 발표의 중심 제품·플랫폼은 GPT-6.1이다. 원문에서 함께 언급된 국가·기업은 오픈AI이다.</p><p style=\"margin:0 0 13px\">MOTUS 분석: 신규 기능 공개의 의미는 기술 사양보다 실제로 쓰는 고객이 얼마나 빨리 늘어나는지와 과금 구조에 달려 있다. GPT-6.1 같은 제품이 기존 고객 기반에 기본 기능으로 붙으면 확산 속도가 빨라질 수 있지만, 사용량 지표가 공개되기 전까지는 효과를 단정하기 어렵다.</p><p style=\"margin:0 0 13px\">시장 평가는 발표 이후 고객 채택, 매출 기여와 인프라 투자 자료가 확인된 뒤 판단해야 한다.</p></section>\n<section style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><h2 style=\"margin:0 0 12px;padding:0 0 8px;border-bottom:2px solid #173a63;color:#03162e;font-size:clamp(19px,4.8vw,23px);line-height:1.35;font-weight:850;word-break:keep-all;overflow-wrap:normal\">마이크로소프트, AI 교육·역량 강화</h2><p style=\"margin:0 0 13px\">마이크로소프트는 2026년 10월 27일(한국 시간) 공식 블로그에 「From classrooms to careers: The future of education in an AI-driven world」 제목의 발표를 게시했다.</p><p style=\"margin:0 0 13px\">발표 제목과 본문은 AI 교육·역량 강화에 관한 내용을 다룬다. 원문에서 함께 언급된 국가·기업은 아랍에미리트, 아프리카이다.</p><p style=\"margin:0 0 13px\">MOTUS 분석: AI 교육 프로그램은 당장의 매출보다 이용자 저변과 기업·공공 부문의 도입 준비도를 넓히는 장기 투자에 가깝다.</p></section>\n<section style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><h2 style=\"margin:0 0 12px;padding:0 0 8px;border-bottom:2px solid #173a63;color:#03162e;font-size:clamp(19px,4.8vw,23px);line-height:1.35;font-weight:850;word-break:keep-all;overflow-wrap:normal\">오픈AI, GPT-6.1 관련 AI 보안</h2><p style=\"margin:0 0 13px\">오픈AI는 2026년 10월 26일(한국 시간) 공식 블로그에 「GPT-6.1 Sol helps CodeRabbit strengthen security across complex codebases」 제목의 발표를 게시했다.</p><p style=\"margin:0 0 13px\">발표 제목과 본문은 AI 보안·안전 강화에 관한 내용을 다룬다. 발표의 중심 제품·플랫폼은 GPT-6.1이다.</p><p style=\"margin:0 0 13px\">원문 페이지가 자동 수집을 허용하지 않아 이 항목은 오픈AI 공식 RSS에 게시된 요약을 근거로 정리했으며, 발표일은 공식 RSS 기록으로 확인했다.</p><p style=\"margin:0 0 13px\">MOTUS 분석: AI 서비스 이용자가 늘수록 보안과 안전 체계는 기업 고객의 도입 여부를 가르는 조건이 된다. 공개된 조치가 실제 사고 예방이나 인증 획득으로 이어지는지가 신뢰도의 기준이다.</p></section>\n<section style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><h2 style=\"margin:0 0 12px;padding:0 0 8px;border-bottom:2px solid #173a63;color:#03162e;font-size:clamp(19px,4.8vw,23px);line-height:1.35;font-weight:850;word-break:keep-all;overflow-wrap:normal\">앞으로 볼 지점</h2><p style=\"margin:0 0 13px\">아마존웹서비스(AWS) GPT-6.1 신규 기능: 제공 지역과 가격, 기존 고객의 실제 사용량과 경쟁 서비스 대비 차별점을 확인할 필요가 있다.</p><p style=\"margin:0 0 13px\">마이크로소프트 AI 교육·역량 강화: 교육 대상과 규모, 참여 기관 확대와 이수·활용 성과가 공개되는지 확인할 필요가 있다.</p><p style=\"margin:0 0 13px\">오픈AI GPT-6.1 관련 AI 보안: 적용 대상 서비스와 시점, 외부 검증 결과가 공개되는지 확인할 필요가 있다.</p></section>\n<section style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><h2 style=\"margin:0 0 12px;padding:0 0 8px;border-bottom:2px solid #173a63;color:#03162e;font-size:clamp(19px,4.8vw,23px);line-height:1.35;font-weight:850;word-break:keep-all;overflow-wrap:normal\">자료</h2><ul style=\"margin:0;padding-left:20px\"><li style=\"margin:5px 0\"><a href=\"https://aws.amazon.com/about-aws/whats-new/2026/10/openai-gpt-6-1-terra-on-amazon-bedrock/\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">아마존웹서비스(AWS) 공식 발표</a></li><li style=\"margin:5px 0\"><a href=\"https://blogs.microsoft.com/on-the-issues/2026/10/26/learning-curves-the-future-of-education-from-classrooms-to-careers-in-an-ai-driven-world/\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">마이크로소프트 공식 발표</a></li><li style=\"margin:5px 0\"><a href=\"https://openai.com/index/gpt-6-1-sol-coderabbit-code-security\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">오픈AI 공식 발표</a></li></ul></section></article></body></html>",
+    "renderedSections": [
+      "masthead",
+      "lead",
+      "issues",
+      "connections",
+      "watch",
+      "sources"
+    ],
+    "label": "AI 인텔리전스"
+  },
+  "viewModel": {
+    "publicationId": "motus-live-2026-10-27:ai",
+    "issueDate": "2026-10-27",
+    "issueNumber": 20261027,
+    "title": "아마존웹서비스(AWS)가 공개한 GPT-6.1 신규 기능, 실제 산업 변화로 이어질까",
+    "subtitle": "공식 원문에서 확인한 사실과 MOTUS 해석을 구분해 읽는 AI 산업",
+    "category": "AI_INTELLIGENCE",
+    "canonicalLabel": "AI Intelligence",
+    "displayLabel": "AI 인텔리전스 (AI Intelligence)",
+    "todayCore": {
+      "headline": "아마존웹서비스(AWS), GPT-6.1 신규 기능 공개",
+      "summary": "아마존웹서비스(AWS)가 공개한 GPT-6.1 신규 기능이 오늘 AI 산업의 핵심이다. 마이크로소프트의 AI 교육·역량 강화, 오픈AI의 GPT-6.1 관련 AI 보안 발표도 함께 정리했다. 공식 원문에서 확인된 사실과 실제 도입·운영 성과에서 추가로 확인할 변수를 나눠 살펴본다. 공식 AI 채널 11곳에서 최근 4일간 게시된 AI 발표 20건을 확인했고, 원문 출처와 발표일이 검증된 3건을 골라 정리했다.",
+      "bullets": [
+        "아마존웹서비스(AWS), GPT-6.1 신규 기능 공개",
+        "마이크로소프트, AI 교육·역량 강화",
+        "오픈AI, GPT-6.1 관련 AI 보안"
+      ]
+    },
+    "issues": [
+      {
+        "headline": "아마존웹서비스(AWS), GPT-6.1 신규 기능 공개",
+        "whatHappened": [
+          "아마존웹서비스(AWS)는 2026년 10월 27일(한국 시간) 공식 What’s New 공지에 「OpenAI GPT-6.1 Terra is now generally available on Amazon Bedrock」 제목의 발표를 게시했다.",
+          "발표 제목과 본문은 신규 AI 제품·기능 공개에 관한 내용을 다룬다. 발표의 중심 제품·플랫폼은 GPT-6.1이다. 원문에서 함께 언급된 국가·기업은 오픈AI이다."
+        ],
+        "coreContent": "",
+        "whyItMatters": "MOTUS 분석: 신규 기능 공개의 의미는 기술 사양보다 실제로 쓰는 고객이 얼마나 빨리 늘어나는지와 과금 구조에 달려 있다. GPT-6.1 같은 제품이 기존 고객 기반에 기본 기능으로 붙으면 확산 속도가 빨라질 수 있지만, 사용량 지표가 공개되기 전까지는 효과를 단정하기 어렵다.",
+        "relatedCompaniesIndustries": [
+          "아마존웹서비스(AWS)",
+          "AI 산업"
+        ],
+        "marketConnection": "시장 평가는 발표 이후 고객 채택, 매출 기여와 인프라 투자 자료가 확인된 뒤 판단해야 한다.",
+        "institutionView": null,
+        "evidenceRefs": [
+          "https://aws.amazon.com/about-aws/whats-new/2026/10/openai-gpt-6-1-terra-on-amazon-bedrock/"
+        ]
+      },
+      {
+        "headline": "마이크로소프트, AI 교육·역량 강화",
+        "whatHappened": [
+          "마이크로소프트는 2026년 10월 27일(한국 시간) 공식 블로그에 「From classrooms to careers: The future of education in an AI-driven world」 제목의 발표를 게시했다.",
+          "발표 제목과 본문은 AI 교육·역량 강화에 관한 내용을 다룬다. 원문에서 함께 언급된 국가·기업은 아랍에미리트, 아프리카이다."
+        ],
+        "coreContent": "",
+        "whyItMatters": "MOTUS 분석: AI 교육 프로그램은 당장의 매출보다 이용자 저변과 기업·공공 부문의 도입 준비도를 넓히는 장기 투자에 가깝다.",
+        "relatedCompaniesIndustries": [
+          "마이크로소프트",
+          "AI 산업"
+        ],
+        "marketConnection": "시장 평가는 발표 이후 고객 채택, 매출 기여와 인프라 투자 자료가 확인된 뒤 판단해야 한다.",
+        "institutionView": null,
+        "evidenceRefs": [
+          "https://blogs.microsoft.com/on-the-issues/2026/10/26/learning-curves-the-future-of-education-from-classrooms-to-careers-in-an-ai-driven-world/"
+        ]
+      },
+      {
+        "headline": "오픈AI, GPT-6.1 관련 AI 보안",
+        "whatHappened": [
+          "오픈AI는 2026년 10월 26일(한국 시간) 공식 블로그에 「GPT-6.1 Sol helps CodeRabbit strengthen security across complex codebases」 제목의 발표를 게시했다.",
+          "발표 제목과 본문은 AI 보안·안전 강화에 관한 내용을 다룬다. 발표의 중심 제품·플랫폼은 GPT-6.1이다.",
+          "원문 페이지가 자동 수집을 허용하지 않아 이 항목은 오픈AI 공식 RSS에 게시된 요약을 근거로 정리했으며, 발표일은 공식 RSS 기록으로 확인했다."
+        ],
+        "coreContent": "",
+        "whyItMatters": "MOTUS 분석: AI 서비스 이용자가 늘수록 보안과 안전 체계는 기업 고객의 도입 여부를 가르는 조건이 된다. 공개된 조치가 실제 사고 예방이나 인증 획득으로 이어지는지가 신뢰도의 기준이다.",
+        "relatedCompaniesIndustries": [
+          "오픈AI",
+          "AI 산업"
+        ],
+        "marketConnection": "시장 평가는 발표 이후 고객 채택, 매출 기여와 인프라 투자 자료가 확인된 뒤 판단해야 한다.",
+        "institutionView": null,
+        "evidenceRefs": [
+          "https://openai.com/index/gpt-6-1-sol-coderabbit-code-security"
+        ]
+      }
+    ],
+    "industryFlow": [
+      "AI 제품 적용",
+      "AI 인프라",
+      "기업 도입"
+    ],
+    "industryConnections": [
+      {
+        "title": "아마존웹서비스(AWS) 발표의 산업 연결",
+        "explanation": "MOTUS 분석: 신규 기능 공개의 의미는 기술 사양보다 실제로 쓰는 고객이 얼마나 빨리 늘어나는지와 과금 구조에 달려 있다. GPT-6.1 같은 제품이 기존 고객 기반에 기본 기능으로 붙으면 확산 속도가 빨라질 수 있지만, 사용량 지표가 공개되기 전까지는 효과를 단정하기 어렵다.",
+        "connectedCompanies": [
+          "아마존웹서비스(AWS)"
+        ],
+        "connectedIndustries": [
+          "AI 산업"
+        ],
+        "evidenceRefs": [
+          "https://aws.amazon.com/about-aws/whats-new/2026/10/openai-gpt-6-1-terra-on-amazon-bedrock/"
+        ],
+        "optionalWatchPoint": ""
+      },
+      {
+        "title": "마이크로소프트 발표의 산업 연결",
+        "explanation": "MOTUS 분석: AI 교육 프로그램은 당장의 매출보다 이용자 저변과 기업·공공 부문의 도입 준비도를 넓히는 장기 투자에 가깝다.",
+        "connectedCompanies": [
+          "마이크로소프트"
+        ],
+        "connectedIndustries": [
+          "AI 산업"
+        ],
+        "evidenceRefs": [
+          "https://blogs.microsoft.com/on-the-issues/2026/10/26/learning-curves-the-future-of-education-from-classrooms-to-careers-in-an-ai-driven-world/"
+        ],
+        "optionalWatchPoint": ""
+      },
+      {
+        "title": "오픈AI 발표의 산업 연결",
+        "explanation": "MOTUS 분석: AI 서비스 이용자가 늘수록 보안과 안전 체계는 기업 고객의 도입 여부를 가르는 조건이 된다. 공개된 조치가 실제 사고 예방이나 인증 획득으로 이어지는지가 신뢰도의 기준이다.",
+        "connectedCompanies": [
+          "오픈AI"
+        ],
+        "connectedIndustries": [
+          "AI 산업"
+        ],
+        "evidenceRefs": [
+          "https://openai.com/index/gpt-6-1-sol-coderabbit-code-security"
+        ],
+        "optionalWatchPoint": ""
+      }
+    ],
+    "whatToWatch": [
+      {
+        "headline": "아마존웹서비스(AWS) GPT-6.1 신규 기능",
+        "watchFor": "제공 지역과 가격, 기존 고객의 실제 사용량과 경쟁 서비스 대비 차별점을 확인할 필요가 있다.",
+        "validityHorizon": "NEXT_30_DAYS"
+      },
+      {
+        "headline": "마이크로소프트 AI 교육·역량 강화",
+        "watchFor": "교육 대상과 규모, 참여 기관 확대와 이수·활용 성과가 공개되는지 확인할 필요가 있다.",
+        "validityHorizon": "NEXT_30_DAYS"
+      },
+      {
+        "headline": "오픈AI GPT-6.1 관련 AI 보안",
+        "watchFor": "적용 대상 서비스와 시점, 외부 검증 결과가 공개되는지 확인할 필요가 있다.",
+        "validityHorizon": "NEXT_30_DAYS"
+      }
+    ],
+    "sources": [
+      {
+        "label": "아마존웹서비스(AWS) 공식 발표",
+        "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/openai-gpt-6-1-terra-on-amazon-bedrock/",
+        "publisher": "Amazon AWS"
+      },
+      {
+        "label": "마이크로소프트 공식 발표",
+        "url": "https://blogs.microsoft.com/on-the-issues/2026/10/26/learning-curves-the-future-of-education-from-classrooms-to-careers-in-an-ai-driven-world/",
+        "publisher": "Microsoft"
+      },
+      {
+        "label": "오픈AI 공식 발표",
+        "url": "https://openai.com/index/gpt-6-1-sol-coderabbit-code-security",
+        "publisher": "OpenAI"
+      }
+    ]
+  }
+}

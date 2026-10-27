@@ -1,0 +1,256 @@
+{
+  "schemaVersion": "1.0",
+  "sourceMode": "internal",
+  "category": "AI_INTELLIGENCE",
+  "operationDate": "2026-10-27",
+  "status": "LIVE_READY",
+  "reasonCode": null,
+  "entries": [
+    {
+      "sourceId": "openai",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/news/rss.xml",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-27T09:14:44.222Z",
+      "error": null
+    },
+    {
+      "sourceId": "google-ai",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blog.google/technology/ai/rss/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-27T09:14:44.222Z",
+      "error": null
+    },
+    {
+      "sourceId": "google-deepmind",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://deepmind.google/blog/rss.xml",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-27T09:14:44.222Z",
+      "error": null
+    },
+    {
+      "sourceId": "nvidia",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blogs.nvidia.com/feed/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-27T09:14:44.222Z",
+      "error": null
+    },
+    {
+      "sourceId": "nvidia-newsroom",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://nvidianews.nvidia.com/releases.xml",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-27T09:14:44.222Z",
+      "error": null
+    },
+    {
+      "sourceId": "microsoft",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blogs.microsoft.com/feed/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-27T09:14:44.222Z",
+      "error": null
+    },
+    {
+      "sourceId": "microsoft-source",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://news.microsoft.com/source/feed/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-27T09:14:44.222Z",
+      "error": null
+    },
+    {
+      "sourceId": "aws-news",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://aws.amazon.com/blogs/aws/feed/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-27T09:14:44.222Z",
+      "error": null
+    },
+    {
+      "sourceId": "aws-whats-new",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://aws.amazon.com/about-aws/whats-new/recent/feed/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-27T09:14:44.222Z",
+      "error": null
+    },
+    {
+      "sourceId": "meta",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://about.fb.com/news/feed/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-27T09:14:44.222Z",
+      "error": null
+    },
+    {
+      "sourceId": "anthropic",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://www.anthropic.com/news",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-27T09:14:44.222Z",
+      "error": null
+    },
+    {
+      "sourceId": "ai:page:1",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/greptile-code-review-codex-astra",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-10-27T09:14:44.222Z",
+      "error": "HTTP_403"
+    },
+    {
+      "sourceId": "ai:rss-evidence:1",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/greptile-code-review-codex-astra",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-27T09:14:44.222Z",
+      "error": null,
+      "observedDate": "Mon, 26 Oc",
+      "sourceTimestamp": "Mon, 26 Oct 2026 22:00:00 GMT",
+      "dateField": "rss.pubDate"
+    },
+    {
+      "sourceId": "ai:page:2",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://commandline.microsoft.com/agentic-software-engineering-large-scale-code-migration-language-modernization-spec-driven-development/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-27T09:14:44.222Z",
+      "error": null,
+      "observedDate": "2026-10-26",
+      "sourceTimestamp": "2026-10-26T13:35:44.000Z",
+      "dateField": "page.datePublished"
+    },
+    {
+      "sourceId": "ai:page:3",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/openai-gpt-6-1-terra-on-amazon-bedrock/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-27T09:14:44.222Z",
+      "error": null,
+      "observedDate": "Mon, 26 Oc",
+      "sourceTimestamp": "Mon, 26 Oct 2026 18:27:00 GMT",
+      "dateField": "rss.pubDate"
+    },
+    {
+      "sourceId": "ai:page:4",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blog.google/products-and-platforms/products/education/ai-quests-polar-peaks/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-27T09:14:44.222Z",
+      "error": null,
+      "observedDate": "Mon, 26 Oc",
+      "sourceTimestamp": "Mon, 26 Oct 2026 16:00:00 +0000",
+      "dateField": "rss.pubDate"
+    },
+    {
+      "sourceId": "ai:page:5",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://www.anthropic.com/news/public-benefit-fund",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-27T09:14:44.222Z",
+      "error": null,
+      "observedDate": "2026-10-18",
+      "sourceTimestamp": "2026-10-18T00:00:00.000Z",
+      "dateField": "page.datePublished"
+    },
+    {
+      "sourceId": "ai:page:6",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/building-scientific-understanding-with-academic-communities",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-10-27T09:14:44.222Z",
+      "error": "HTTP_403"
+    },
+    {
+      "sourceId": "ai:rss-evidence:6",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/building-scientific-understanding-with-academic-communities",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-27T09:14:44.222Z",
+      "error": null,
+      "observedDate": "Mon, 26 Oc",
+      "sourceTimestamp": "Mon, 26 Oct 2026 14:30:00 GMT",
+      "dateField": "rss.pubDate"
+    },
+    {
+      "sourceId": "ai:page:7",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blogs.microsoft.com/on-the-issues/2026/10/26/learning-curves-the-future-of-education-from-classrooms-to-careers-in-an-ai-driven-world/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-27T09:14:44.222Z",
+      "error": null,
+      "observedDate": "2026-10-26",
+      "sourceTimestamp": "2026-10-26T15:00:05.000Z",
+      "dateField": "page.datePublished"
+    },
+    {
+      "sourceId": "ai:page:8",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/smus-light-mode",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-27T09:14:44.222Z",
+      "error": null,
+      "observedDate": "Mon, 26 Oc",
+      "sourceTimestamp": "Mon, 26 Oct 2026 15:32:00 GMT",
+      "dateField": "rss.pubDate"
+    },
+    {
+      "sourceId": "ai:page:9",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://www.anthropic.com/news/cyber-verification-program",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-27T09:14:44.222Z",
+      "error": null,
+      "observedDate": "2026-10-06",
+      "sourceTimestamp": "2026-10-06T00:00:00.000Z",
+      "dateField": "page.datePublished"
+    },
+    {
+      "sourceId": "ai:page:10",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/gpt-6-1-sol-coderabbit-code-security",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-10-27T09:14:44.222Z",
+      "error": "HTTP_403"
+    },
+    {
+      "sourceId": "ai:rss-evidence:10",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/gpt-6-1-sol-coderabbit-code-security",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-27T09:14:44.222Z",
+      "error": null,
+      "observedDate": "Mon, 26 Oc",
+      "sourceTimestamp": "Mon, 26 Oct 2026 13:45:00 GMT",
+      "dateField": "rss.pubDate"
+    }
+  ]
+}

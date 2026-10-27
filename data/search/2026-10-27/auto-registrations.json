@@ -25,5 +25,32 @@
       "sitemapIncluded": null,
       "rssIncluded": null
     }
+  },
+  {
+    "publicationId": "motus-live-2026-10-27:ai",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/aws-gpt-61.html",
+    "registeredAt": "2026-10-27T18:14:49+09:00",
+    "trigger": "PUBLICATION_PUBLISHED",
+    "googleInspectionState": "QUEUED",
+    "naverDiscoveryState": "PENDING",
+    "visibility": {
+      "publicationId": "motus-live-2026-10-27:ai",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/10/aws-gpt-61.html",
+      "google": {
+        "discovered": null,
+        "indexed": null,
+        "lastCrawl": null,
+        "coverageState": null,
+        "inspectionAt": null
+      },
+      "naver": {
+        "discovered": null,
+        "indexed": null,
+        "collectionState": null,
+        "inspectionAt": null
+      },
+      "sitemapIncluded": null,
+      "rssIncluded": null
+    }
   }
 ]
