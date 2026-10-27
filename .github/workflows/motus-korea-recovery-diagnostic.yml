@@ -42,6 +42,22 @@ jobs:
             head -c 1200 "$tmp" | tr '\n' ' '; echo
             rm -f "$tmp"
           done
+      - name: Probe Daum Finance public page
+        shell: bash
+        run: |
+          set -euo pipefail
+          tmp="$(mktemp)"
+          code="$(curl -L -sS -o "$tmp" -w '%{http_code}' -H 'User-Agent: Mozilla/5.0 MOTUS/1.0' 'https://finance.daum.net/' || true)"
+          echo "DAUM_PUBLIC_HTTP=$code"
+          python3 - "$tmp" <<'PY'
+          import re,sys
+          t=open(sys.argv[1],encoding='utf-8',errors='ignore').read()
+          print('DAUM_PUBLIC_BYTES',len(t))
+          for key in ['KOSPI','KOSDAQ','코스피','코스닥']:
+              m=re.search(key,t,re.I)
+              print(key, (re.sub(r'\s+',' ',t[max(0,m.start()-300):m.start()+800]) if m else 'NOT_FOUND')[:1100])
+          PY
+          rm -f "$tmp"
       - name: Recheck 2026-10-28 Korea collection without publish
         run: npm run motus:live -- --date 2026-10-28 --category korea --source internal --at 2026-10-28T00:25:00Z
       - name: Print safe diagnostics
