@@ -2,6 +2,9 @@
 
 Status: preview-only; NOT deployed. Owner approved theme design and verification, not production theme application or main merge.
 
+### Authorization update — 2026-10-27 handoff
+The owner has subsequently explicitly requested completion and actual application of the MOTUS theme. Theme-only application is authorized; the earlier preview-only permission statement above is retained as historical context and is superseded for this scope. Main merge, publication, OAuth/credential changes, paid services and schedule changes are not included. Backup, preservation, validation and same-PR Claude cross-review gates still apply. Application remains NOT performed until evidenced by the real Blogger state.
+
 ## Brand
 - Name: MOTUS INTELLIGENCE; strapline: What Moves the World.
 - Editorial proposition: 세상의 변화를 읽고, 그 흐름을 해석하다.
