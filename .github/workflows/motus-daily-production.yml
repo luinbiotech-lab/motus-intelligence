@@ -140,6 +140,30 @@ jobs:
       - name: Record production outcome
         if: always()
         run: npm run motus:production-summary -- --date "$RUN_DATE" --category "$CATEGORY"
+      - name: Capture Blogger page-view baseline
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "data/search/$RUN_DATE"
+          if [[ -z "${BLOGGER_BLOG_ID:-}" || -z "${BLOGGER_CLIENT_ID:-}" || -z "${BLOGGER_CLIENT_SECRET:-}" || -z "${BLOGGER_REFRESH_TOKEN:-}" ]]; then
+            printf '%s\n' '{"state":"NOT_CONFIGURED","counts":[]}' > "data/search/$RUN_DATE/blogger-pageviews.json"
+            exit 0
+          fi
+          TOKEN_JSON="$(curl -fsS https://oauth2.googleapis.com/token \
+            -d "client_id=$BLOGGER_CLIENT_ID" \
+            -d "client_secret=$BLOGGER_CLIENT_SECRET" \
+            -d "refresh_token=$BLOGGER_REFRESH_TOKEN" \
+            -d "grant_type=refresh_token")"
+          ACCESS_TOKEN="$(printf '%s' "$TOKEN_JSON" | python3 -c 'import json,sys; print(json.load(sys.stdin)["access_token"])')"
+          curl -fsS -G \
+            -H "Authorization: Bearer $ACCESS_TOKEN" \
+            --data-urlencode "range=7DAYS" \
+            --data-urlencode "range=30DAYS" \
+            --data-urlencode "range=all" \
+            "https://www.googleapis.com/blogger/v3/blogs/$BLOGGER_BLOG_ID/pageviews" \
+            | python3 -c 'import json,sys; d=json.load(sys.stdin); print(json.dumps({"state":"PASS","capturedAt":"'"$(date -u +%FT%TZ)"'","counts":d.get("counts",[])},ensure_ascii=False,indent=2))' \
+            > "data/search/$RUN_DATE/blogger-pageviews.json"
       - name: Upload gate and HOLD diagnostics
         if: always()
         uses: actions/upload-artifact@v4
