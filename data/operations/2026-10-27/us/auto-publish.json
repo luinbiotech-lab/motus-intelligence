@@ -1,0 +1,74 @@
+{
+  "gate": {
+    "state": "AUTO_PUBLISH_READY",
+    "reasons": [],
+    "approval": "AUTO_POLICY_APPROVAL",
+    "checkedAt": "2026-10-27T00:51:38.070Z"
+  },
+  "searchRegistration": {
+    "publicationId": "motus-live-2026-10-26:us",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/nasdaq.html",
+    "registeredAt": "2026-10-27T09:51:43+09:00",
+    "trigger": "PUBLICATION_PUBLISHED",
+    "googleInspectionState": "QUEUED",
+    "naverDiscoveryState": "PENDING",
+    "visibility": {
+      "publicationId": "motus-live-2026-10-26:us",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/10/nasdaq.html",
+      "google": {
+        "discovered": null,
+        "indexed": null,
+        "lastCrawl": null,
+        "coverageState": null,
+        "inspectionAt": null
+      },
+      "naver": {
+        "discovered": null,
+        "indexed": null,
+        "collectionState": null,
+        "inspectionAt": null
+      },
+      "sitemapIncluded": null,
+      "rssIncluded": null
+    }
+  },
+  "libraryRegistration": {
+    "idempotencyKey": "library:motus-live-2026-10-26:us|https://motusnova.blogspot.com/2026/10/nasdaq.html"
+  },
+  "weeklyFeed": {
+    "idempotencyKey": "weekly:motus-live-2026-10-26:us"
+  },
+  "pdfCandidate": {
+    "idempotencyKey": "pdf:motus-live-2026-10-26:us:sha256:d0f096640394531540414be3e8c1b927f1492b9ec0f4d44022ce1e3b2d3c1cea",
+    "visibility": "PRIVATE"
+  },
+  "audit": [
+    {
+      "at": "2026-10-27T00:51:38.070Z",
+      "event": "AUTO_PUBLISH_STATIC_GATE",
+      "detail": "AUTO_PUBLISH_READY"
+    },
+    {
+      "at": "2026-10-27T00:51:38.070Z",
+      "event": "REMOTE_DUPLICATE_CHECK",
+      "detail": "PASS"
+    },
+    {
+      "at": "2026-10-27T00:51:38.070Z",
+      "event": "FINAL_REMOTE_DUPLICATE_CHECK",
+      "detail": "PASS"
+    },
+    {
+      "at": "2026-10-27T09:51:43+09:00",
+      "event": "PUBLISHED",
+      "detail": "AUTO_POLICY_APPROVAL"
+    }
+  ],
+  "state": "PUBLISHED",
+  "draftPostId": "1430670859649785573",
+  "publicPostUrl": "https://motusnova.blogspot.com/2026/10/nasdaq.html",
+  "publishedAt": "2026-10-27T09:51:43+09:00",
+  "insertCallCount": 1,
+  "publishCallCount": 1,
+  "error": null
+}

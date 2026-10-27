@@ -40,5 +40,11 @@
     "publicationId": "motus-live-2026-10-26:ai",
     "publicPostUrl": "https://motusnova.blogspot.com/2026/10/ai_0953310071.html",
     "publishedAt": "2026-10-26T16:12:53+09:00"
+  },
+  {
+    "idempotencyKey": "library:motus-live-2026-10-26:us|https://motusnova.blogspot.com/2026/10/nasdaq.html",
+    "publicationId": "motus-live-2026-10-26:us",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/nasdaq.html",
+    "publishedAt": "2026-10-27T09:51:43+09:00"
   }
 ]

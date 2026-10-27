@@ -1,0 +1,29 @@
+[
+  {
+    "publicationId": "motus-live-2026-10-26:us",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/nasdaq.html",
+    "registeredAt": "2026-10-27T09:51:43+09:00",
+    "trigger": "PUBLICATION_PUBLISHED",
+    "googleInspectionState": "QUEUED",
+    "naverDiscoveryState": "PENDING",
+    "visibility": {
+      "publicationId": "motus-live-2026-10-26:us",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/10/nasdaq.html",
+      "google": {
+        "discovered": null,
+        "indexed": null,
+        "lastCrawl": null,
+        "coverageState": null,
+        "inspectionAt": null
+      },
+      "naver": {
+        "discovered": null,
+        "indexed": null,
+        "collectionState": null,
+        "inspectionAt": null
+      },
+      "sitemapIncluded": null,
+      "rssIncluded": null
+    }
+  }
+]
