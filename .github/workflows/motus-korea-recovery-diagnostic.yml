@@ -24,6 +24,24 @@ jobs:
         with: {node-version: 22, cache: npm}
       - run: npm ci
       - run: npm run build
+      - name: Probe independent Daum Finance index endpoints
+        shell: bash
+        run: |
+          set -euo pipefail
+          for url in \
+            'https://finance.daum.net/api/quotes/KOSPI' \
+            'https://finance.daum.net/api/quotes/KOSDAQ' \
+            'https://finance.daum.net/api/quotes/KOSPI/days?symbolCode=KOSPI&page=1&perPage=10&pagination=true' \
+            'https://finance.daum.net/api/quote/KOSPI/days?symbolCode=KOSPI&page=1&perPage=10&pagination=true' \
+            'https://finance.daum.net/api/quotes/KOSDAQ/days?symbolCode=KOSDAQ&page=1&perPage=10&pagination=true' \
+            'https://finance.daum.net/api/quote/KOSDAQ/days?symbolCode=KOSDAQ&page=1&perPage=10&pagination=true'; do
+            echo "PROBE_URL=$url"
+            tmp="$(mktemp)"
+            code="$(curl -L -sS -o "$tmp" -w '%{http_code}' -H 'Accept: application/json, text/plain, */*' -H 'Referer: https://finance.daum.net/' -H 'User-Agent: Mozilla/5.0 MOTUS/1.0' "$url" || true)"
+            echo "HTTP=$code"
+            head -c 1200 "$tmp" | tr '\n' ' '; echo
+            rm -f "$tmp"
+          done
       - name: Recheck 2026-10-28 Korea collection without publish
         run: npm run motus:live -- --date 2026-10-28 --category korea --source internal --at 2026-10-28T00:25:00Z
       - name: Print safe diagnostics
