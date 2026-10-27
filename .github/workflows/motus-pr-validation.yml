@@ -15,3 +15,19 @@ jobs:
       - run: npm ci
       - run: npm run typecheck
       - run: npm test
+      - name: Read Blogger page views for owner diagnostic
+        if: github.head_ref == 'fix/editorial-depth-gate-20261026'
+        shell: bash
+        env:
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+        run: |
+          set -euo pipefail
+          for key in BLOGGER_BLOG_ID BLOGGER_CLIENT_ID BLOGGER_CLIENT_SECRET BLOGGER_REFRESH_TOKEN; do
+            [[ -n "${!key}" ]] || { echo "::warning::pageview diagnostic skipped; missing $key"; exit 0; }
+          done
+          TOKEN_JSON="$(curl -fsS https://oauth2.googleapis.com/token             -d "client_id=$BLOGGER_CLIENT_ID"             -d "client_secret=$BLOGGER_CLIENT_SECRET"             -d "refresh_token=$BLOGGER_REFRESH_TOKEN"             -d "grant_type=refresh_token")"
+          ACCESS_TOKEN="$(printf '%s' "$TOKEN_JSON" | python3 -c 'import json,sys; print(json.load(sys.stdin)["access_token"])')"
+          curl -fsS -G             -H "Authorization: Bearer $ACCESS_TOKEN"             --data-urlencode "range=7DAYS"             --data-urlencode "range=30DAYS"             --data-urlencode "range=all"             "https://www.googleapis.com/blogger/v3/blogs/$BLOGGER_BLOG_ID/pageviews"             | python3 -c 'import json,sys; d=json.load(sys.stdin); print("BLOGGER_PAGEVIEWS="+json.dumps({"blogId":d.get("blogId"),"counts":d.get("counts",[])},ensure_ascii=False))'
