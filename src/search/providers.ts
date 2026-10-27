@@ -13,7 +13,7 @@ export class NaverDataLabProvider implements SearchDemandProvider {
     const allowed=new Set(topics.flatMap(topic=>[topic.label,...topic.aliases].map(normalize)));
     const keywordGroups=this.request.keywordGroups.filter(group=>[group.groupName,...group.keywords].some(value=>allowed.has(normalize(value))));
     if(!keywordGroups.length)return [];
-    const response=await this.fetcher('https://openapi.naver.com/v1/datalab/search',{method:'POST',headers:{'content-type':'application/json','x-naver-client-id':this.credentials.clientId,'x-naver-client-secret':this.credentials.clientSecret},body:JSON.stringify({...this.request,keywordGroups})});
+    const response=await this.fetcher('https://naverapihub.apigw.ntruss.com/search-trend/v1/search',{method:'POST',headers:{'content-type':'application/json','X-NCP-APIGW-API-KEY-ID':this.credentials.clientId,'X-NCP-APIGW-API-KEY':this.credentials.clientSecret},body:JSON.stringify({...this.request,keywordGroups})});
     if(!response.ok)throw new Error(`NAVER_DATALAB_HTTP_${response.status}`);
     return normalizeNaverDataLab({response:await response.json() as NaverDataLabResponse,topics,collectedAt});
   }
