@@ -1,0 +1,28 @@
+name: MOTUS Blogger Traffic Diagnostic
+on:
+  push:
+    branches:
+      - fix/editorial-depth-gate-20261026
+    paths:
+      - .github/workflows/motus-blogger-traffic-diagnostic.yml
+permissions:
+  contents: read
+jobs:
+  pageviews:
+    runs-on: ubuntu-24.04
+    env:
+      BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+      BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+      BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+      BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+    steps:
+      - name: Read Blogger page views only
+        shell: bash
+        run: |
+          set -euo pipefail
+          for key in BLOGGER_BLOG_ID BLOGGER_CLIENT_ID BLOGGER_CLIENT_SECRET BLOGGER_REFRESH_TOKEN; do
+            [[ -n "${!key}" ]] || { echo "::error::missing $key"; exit 1; }
+          done
+          TOKEN_JSON="$(curl -fsS https://oauth2.googleapis.com/token             -d "client_id=$BLOGGER_CLIENT_ID"             -d "client_secret=$BLOGGER_CLIENT_SECRET"             -d "refresh_token=$BLOGGER_REFRESH_TOKEN"             -d "grant_type=refresh_token")"
+          ACCESS_TOKEN="$(printf '%s' "$TOKEN_JSON" | python3 -c 'import json,sys; print(json.load(sys.stdin)["access_token"])')"
+          curl -fsS -G             -H "Authorization: Bearer $ACCESS_TOKEN"             --data-urlencode "range=7DAYS"             --data-urlencode "range=30DAYS"             --data-urlencode "range=all"             "https://www.googleapis.com/blogger/v3/blogs/$BLOGGER_BLOG_ID/pageviews"             | python3 -c 'import json,sys; d=json.load(sys.stdin); print(json.dumps({"blogId":d.get("blogId"),"counts":d.get("counts",[])},ensure_ascii=False))'
