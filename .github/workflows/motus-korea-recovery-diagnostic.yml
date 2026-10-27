@@ -1,0 +1,41 @@
+name: MOTUS Korea Recovery Diagnostic
+on:
+  push:
+    branches:
+      - fix/search-demand-korea-publish-20261028
+    paths:
+      - .github/workflows/motus-korea-recovery-diagnostic.yml
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    env:
+      TZ: Asia/Seoul
+      MOTUS_PRODUCTION_RUN: 'false'
+      MOTUS_LIVE_PUBLISH_ENABLED: 'false'
+      KRX_AUTH_KEY: ${{ secrets.KRX_AUTH_KEY }}
+      BOK_ECOS_API_KEY: ${{ secrets.BOK_ECOS_API_KEY }}
+      NAVER_DATALAB_CLIENT_ID: ${{ secrets.NAVER_DATALAB_CLIENT_ID }}
+      NAVER_DATALAB_CLIENT_SECRET: ${{ secrets.NAVER_DATALAB_CLIENT_SECRET }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 22, cache: npm}
+      - run: npm ci
+      - run: npm run build
+      - name: Recheck 2026-10-27 Korea collection without publish
+        run: npm run motus:live -- --date 2026-10-27 --category korea --source internal --at 2026-10-27T00:24:58Z
+      - name: Print safe diagnostics
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json
+          root='data/operations/2026-10-27/korea'
+          for name in ['live-collection.json','cross-verification.json','search-intelligence.json']:
+              try:
+                  d=json.load(open(f'{root}/{name}',encoding='utf-8'))
+                  print(name, json.dumps(d,ensure_ascii=False)[:6000])
+              except Exception as e:
+                  print(name, 'ERROR', type(e).__name__)
+          PY
