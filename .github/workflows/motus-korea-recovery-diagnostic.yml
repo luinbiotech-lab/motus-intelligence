@@ -69,6 +69,18 @@ jobs:
             curl -fsS -G 'https://api.twelvedata.com/symbol_search' --data-urlencode "symbol=$q" --data-urlencode "apikey=$TWELVE_DATA_API_KEY" \
               | python3 -c 'import json,sys; d=json.load(sys.stdin); print(json.dumps({"status":d.get("status"),"data":(d.get("data") or [])[:8]},ensure_ascii=False))'
           done
+      - name: Probe direct official KRX endpoints without key
+        shell: bash
+        run: |
+          set -euo pipefail
+          for path in idx/kospi_dd_trd idx/kosdaq_dd_trd; do
+            url="https://openapi.krx.co.kr/svc/apis/$path?basDd=20261027"
+            tmp="$(mktemp)"
+            code="$(curl -sS -o "$tmp" -w '%{http_code}' -H 'Accept: application/json' -H 'User-Agent: MOTUS-Internal-Collector/1.0' "$url" || true)"
+            echo "KRX_PROBE=$path HTTP=$code"
+            head -c 1000 "$tmp" | tr '\n' ' '; echo
+            rm -f "$tmp"
+          done
       - name: Recheck 2026-10-28 Korea collection without publish
         run: npm run motus:live -- --date 2026-10-28 --category korea --source internal --at 2026-10-28T00:25:00Z
       - name: Print safe diagnostics
