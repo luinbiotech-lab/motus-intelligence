@@ -3,7 +3,7 @@ export type KoreaComparedField='KOSPI'|'KOSDAQ'|'USD_KRW';
 export type KoreaMetricBasis='SESSION_CLOSE'|'CURRENT_AT_COLLECTION'|'REFERENCE_RATE';
 export interface KoreaPrimaryMarketSnapshot {observedDate:string;values:Partial<Record<KoreaComparedField,number>>;sourceUrls:string[];metricBasis?:Partial<Record<KoreaComparedField,KoreaMetricBasis>>}
 export interface KoreaOfficialObservation {field:KoreaComparedField;observedDate:string;value:number;provider:'KRX'|'BOK_ECOS'|'YAHOO_FINANCE';sourceUrl:string;metricBasis?:KoreaMetricBasis}
-export interface KoreaOfficialAudit {sourceId:string;url:string;status:'PASS'|'FAILED'|'SKIPPED';recordCount:number;error:string|null}
+export interface KoreaOfficialAudit {sourceId:string;url:string;status:'PASS'|'FAILED'|'SKIPPED';recordCount:number;error:string|null;requestedDate?:string;availableDates?:string[]}
 export interface KoreaOfficialFetchResult {observations:KoreaOfficialObservation[];audit:KoreaOfficialAudit[];requiredProviderAvailable:boolean;reasonCode:string|null;phase?:'PRE_PUBLICATION'|'POST_PUBLICATION_RECONCILIATION'}
 export interface KoreaOfficialSourceAdapter {readonly adapterId:string;fetch(observedDate:string,collectedAt:string):Promise<KoreaOfficialFetchResult>}
 export interface KoreaFieldComparison {field:KoreaComparedField;primaryValue:number;independentValue:number;difference:number;tolerance:number;result:'PASS'|'FAIL';primarySourceUrl:string;independentSourceUrl:string;metricBasis?:KoreaMetricBasis|undefined}
