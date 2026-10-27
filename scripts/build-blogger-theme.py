@@ -21,7 +21,13 @@ def block(name, content):
     return f'<!-- MOTUS-{name}-START -->{content}<!-- MOTUS-{name}-END -->'
 
 def strip_overlay(text):
+    present = [name for name in BLOCKS if f'MOTUS-{name}-' in text]
+    if present and len(present) != len(BLOCKS):
+        raise ValueError('INCOMPLETE_MOTUS_OVERLAY')
     for name in BLOCKS:
+        start, end = f'<!-- MOTUS-{name}-START -->', f'<!-- MOTUS-{name}-END -->'
+        if name in present and (text.count(start) != 1 or text.count(end) != 1 or text.index(end) < text.index(start)):
+            raise ValueError('MOTUS_OVERLAY_MARKERS_INVALID')
         text = re.sub(r'<!-- MOTUS-' + name + r'-START -->[\s\S]*?<!-- MOTUS-' + name + r'-END -->', '', text)
     return text
 
@@ -29,7 +35,7 @@ def parse(text):
     if re.search(r'<!ENTITY\b|<!DOCTYPE\s+[^>]*\[', text, re.I):
         raise ValueError('DTD_ENTITIES_UNSUPPORTED')
     root = ET.fromstring(text)
-    if not root.tag.endswith('html'):
+    if root.tag not in ('html', '{http://www.w3.org/1999/xhtml}html'):
         raise ValueError('BLOGGER_HTML_REQUIRED')
     widgets = root.findall('.//' + B + 'widget')
     if not any(w.get('id') == 'Blog1' and w.get('type') == 'Blog' for w in widgets):
@@ -67,14 +73,39 @@ def build_theme(original):
                     'xmlParse': 'PASS', 'bloggerImport': 'NOT_VERIFIED', 'liveApplied': False,
                     'claudeReview': 'PENDING'}
 
+def verify_candidate(original, candidate, manifest):
+    """Read-only pre-upload check; refuse changed backups, files, or stale design assets."""
+    if manifest.get('inputSha256') != digest(original):
+        raise ValueError('BACKUP_HASH_MISMATCH')
+    if manifest.get('outputSha256') != digest(candidate):
+        raise ValueError('CANDIDATE_HASH_MISMATCH')
+    if strip_overlay(candidate) != strip_overlay(original):
+        raise ValueError('ORIGINAL_TEMPLATE_CHANGED')
+    expected, report = build_theme(original)
+    if candidate != expected:
+        raise ValueError('CANDIDATE_ASSETS_OUTDATED')
+    if manifest.get('baselineSha256') != report['baselineSha256'] or manifest.get('widgetIds') != report['widgetIds']:
+        raise ValueError('VERIFICATION_MANIFEST_MISMATCH')
+    return {'backupMatches': True, 'candidateMatches': True, 'originalBytesPreserved': True,
+            'currentDesignMatches': True, 'bloggerImport': 'NOT_VERIFIED', 'liveApplied': False}
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--input', type=Path, required=True, help='Real exported Blogger XML backup')
     parser.add_argument('--output', type=Path, required=True, help='New candidate XML; must not already exist')
+    parser.add_argument('--verify-manifest', type=Path, help='Verify an existing candidate and manifest without writing files')
     args = parser.parse_args()
     if args.input.resolve() == args.output.resolve():
         parser.error('Backup must never be overwritten')
     report = args.output.with_suffix('.verification.json')
+    if args.verify_manifest:
+        with args.input.open('r', encoding='utf-8', newline='') as source:
+            original = source.read()
+        with args.output.open('r', encoding='utf-8', newline='') as source:
+            candidate = source.read()
+        manifest = json.loads(args.verify_manifest.read_text(encoding='utf-8'))
+        print(json.dumps(verify_candidate(original, candidate, manifest), ensure_ascii=False))
+        return
     if args.output.exists() or report.exists():
         parser.error('Output or verification already exists; choose a new version path')
     # newline="" preserves original CRLF and permits an exact inverse patch.
