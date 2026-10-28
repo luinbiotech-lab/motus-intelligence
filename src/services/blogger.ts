@@ -404,13 +404,14 @@ function safeGoogleApiError(body:string):string {
     return [parsed.error?.status,parsed.error?.message].filter(Boolean).join(' - ').slice(0,300)||'request failed';
   } catch { return 'request failed'; }
 }
-function identityMatches(post:GoogleBloggerPost,input:{title:string;operationDate?:string}):boolean {
-  if(post.title===input.title)return true;
-  if(!input.operationDate)return false;
-  const body=post.content??'';
-  const korean=input.operationDate.replace(/^(\d{4})-(\d{2})-(\d{2})$/,(_,year,month,day)=>`${year}년 ${Number(month)}월 ${Number(day)}일`);
-  if(`${post.title} ${body}`.includes(input.operationDate)||`${post.title} ${body}`.includes(korean))return true;
-  return [post.published,post.updated].some(value=>value&&kstDate(value)===input.operationDate);
+export function identityMatches(post:GoogleBloggerPost,input:{title:string;operationDate?:string}):boolean {
+  if(post.title!==input.title)return false;
+  if(!input.operationDate)return true;
+  // Recurring market headlines may have exactly the same title on consecutive
+  // days. Scope remote lookup to the current operation's creation day.
+  // Same-session duplicates across operation days are handled by the ledger.
+  const postDate=post.published??post.updated;
+  return !postDate||kstDate(postDate)===input.operationDate;
 }
 function kstDate(value:string):string {
   const parts=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date(value));

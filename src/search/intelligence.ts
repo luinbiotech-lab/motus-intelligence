@@ -54,7 +54,7 @@ export function normalizeNaverDataLab(input:{response:NaverDataLabResponse;topic
     if(!topic)return [];
     if(!result.data.length||result.data.some(item=>!dateLike(item.period)||!Number.isFinite(item.ratio)||item.ratio<0||item.ratio>100))throw new Error('NAVER_DATALAB_RESPONSE_INVALID');
     const query=result.keywords.find(value=>matchesTopic(value,topic))??result.title;
-    return [{signalId:id('naver',topic.topicId,input.response.startDate,input.response.endDate),provider:'NAVER_DATALAB',topicId:topic.topicId,query,periodStart:input.response.startDate,periodEnd:input.response.endDate,observedAt:result.data.at(-1)!.period,collectedAt:input.collectedAt,metrics:{relativeRatios:result.data.map(item=>item.ratio),clicks:null,impressions:null,ctr:null,averagePosition:null},provenance:{provider:'NAVER_DATALAB',method:'POST /v1/datalab/search',propertyId:null,sourceUrl:'https://openapi.naver.com/v1/datalab/search'},verificationStatus:'VERIFIED' as const}];
+    return [{signalId:id('naver',topic.topicId,input.response.startDate,input.response.endDate),provider:'NAVER_DATALAB',topicId:topic.topicId,query,periodStart:input.response.startDate,periodEnd:input.response.endDate,observedAt:result.data.at(-1)!.period,collectedAt:input.collectedAt,metrics:{relativeRatios:result.data.map(item=>item.ratio),clicks:null,impressions:null,ctr:null,averagePosition:null},provenance:{provider:'NAVER_DATALAB',method:'POST /search-trend/v1/search',propertyId:null,sourceUrl:'https://naverapihub.apigw.ntruss.com/search-trend/v1/search'},verificationStatus:'VERIFIED' as const}];
   });
 }
 

@@ -204,6 +204,21 @@ jobs:
           if-no-files-found: warn
           retention-days: 7
 
+      - name: Report withheld or failed live publication as a failed operation
+        if: always() && env.MOTUS_LIVE_PUBLISH_ENABLED == 'true'
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import {readFileSync,existsSync} from 'node:fs';
+          const path='data/operations/'+process.env.RUN_DATE+'/'+process.env.CATEGORY+'/auto-publish.json';
+          if(!existsSync(path)){console.error('::error title=Production not verified::Missing auto-publish outcome');process.exit(1)}
+          const outcome=JSON.parse(readFileSync(path,'utf8'));
+          const allowedSkip=outcome.state==='SKIP' && ['ALREADY_PUBLISHED_SAME_SESSION','ALREADY_PUBLISHED_IN_PERSISTED_LEDGER'].includes(outcome.reasonCode);
+          if(outcome.state==='PUBLISHED'||allowedSkip){console.log('Verified production outcome: '+outcome.state);process.exit(0)}
+          console.error('::error title=Production publication not completed::'+JSON.stringify({state:outcome.state,reasonCode:outcome.reasonCode??null,reason:outcome.reason??outcome.error??null,publishCallCount:outcome.publishCallCount??0}));
+          process.exit(1);
+          NODE
+
   persist-operations-state:
     if: always()
     needs: verified-production-gate

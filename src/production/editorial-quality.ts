@@ -12,6 +12,7 @@ export function evaluateEditorialQuality(title:string,html:string):EditorialQual
   if(/<(?:script|style)\b/i.test(decoded))reasons.push('script or style payload present');
   if(/(?:^|[>\s])https?:\/\//i.test(visible))reasons.push('plain or encoded raw URL exposed');
   if(/(무슨 일이 있었나|왜 중요한가|핵심 내용|산업 연결|시장 연결)\s*:?/i.test(visible))reasons.push('internal editorial label exposed');
+  if(/주요 지수가 함께 오른 만큼 특정 업종보다 시장 전반의 위험 선호가 개선|발표 제목과 본문은.{0,80}관한 내용을 다룬다|원문에서 언급된 제품·플랫폼은|원문에서 함께 언급된 국가·기업은/.test(visible))reasons.push('generic template prose or unsupported market breadth inference detected');
   const proseTextLength=blocks.reduce((sum,block)=>sum+block.length,0);
   if(proseTextLength<900||blocks.length<4)reasons.push('article depth insufficient');
   if(blocks.length&&new Set(blocks.map(normalize)).size!==blocks.length)reasons.push('boilerplate prose repetition detected');
