@@ -40,6 +40,9 @@ body .bg-photo,body .bg-photo-container,body .bg-photo-overlay{background:none}
 body .centered{max-width:1200px;margin-inline:auto}
 body .centered-top-container{background:transparent;color:var(--motus-ink)}
 body .centered-top-container .Header{display:none}
+body .page_body .centered{min-height:0;padding-top:16px}
+body .centered-top-container .blog-name{margin-top:0;margin-bottom:0}
+body .centered-top-container .svg-icon-24{fill:var(--motus-navy)}
 body .main-container,body .main,.blog-posts,.post-outer-container,.post-body{min-width:0;max-width:100%;box-sizing:border-box}
 body .post-outer-container{background:white;border:1px solid var(--motus-line);box-shadow:none;border-radius:0;margin-bottom:22px}
 body .post-title{font-size:clamp(23px,4vw,34px);line-height:1.4;letter-spacing:-.035em;overflow-wrap:anywhere}
@@ -53,3 +56,6 @@ body .post-body svg{height:auto}
 @media(max-width:768px){.motus-wrap{width:calc(100% - 40px)}.motus-masthead{padding:28px 0 24px}.motus-brand-row{align-items:start;flex-direction:column;gap:18px}.motus-tagline{font-size:17px}.motus-nav-row{flex-wrap:wrap;gap:0;padding-bottom:14px}.motus-links{gap:20px}.motus-search{width:100%}.motus-search input{flex:1;width:auto}.motus-intro{padding-top:30px}.motus-categories{gap:10px}.motus-category{padding:16px}.motus-category h3{font-size:17px}body .post-outer-container{padding:20px}}
 @media(max-width:480px){.motus-wrap{width:calc(100% - 32px)}.motus-logo{font-size:48px}.motus-logo span{font-size:10px}.motus-kicker{font-size:9px}.motus-links{width:100%;justify-content:space-between;gap:10px;font-size:12px}.motus-categories{grid-template-columns:1fr}.motus-category{padding:18px}.motus-category h3{margin-top:4px}.motus-category p{margin-bottom:9px}.motus-archive-bar{align-items:start;flex-direction:column;gap:6px}body .post-outer-container{padding:16px}body .post-body{font-size:16px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+/* Contempo pins its desktop sidebar to the original photo header. Keep the
+   preserved gadgets below the journal when that wide layout is active. */
+@media(min-width:1440px){body .page_body{margin-left:0;margin-right:0}body .sidebar-container{position:static;margin:24px auto 0;min-height:0;max-width:1200px;width:calc(100% - 64px);overflow:visible}body .sidebar-container .sidebar_top_wrapper{height:auto;margin-top:0}body .sidebar-container .sidebar_top{height:auto;max-height:none}body .sidebar-container .sidebar_bottom{width:auto;max-width:none}body .sidebar-container .Profile .individual{max-width:360px;margin:auto}}
