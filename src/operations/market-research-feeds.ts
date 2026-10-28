@@ -20,7 +20,7 @@ const relevant={
  KOREA_MARKET:/(?:증시|증권|코스피|코스닥|주가|주식|투자|수급|금리|환율|시장|실적|반도체|외국인|기관|리포트|목표주가|증권사)/,
 } as const;
 /** Only published headlines and attributed links are retained; no scraped full articles or invented analyst opinions. */
-export function selectMarketResearch(xml:string,feed:ResearchFeed,at:string,limit=4):MarketResearchEntry[]{
+export function selectMarketResearch(xml:string,feed:ResearchFeed,at:string,limit=2):MarketResearchEntry[]{
  const now=Date.parse(at);if(!Number.isFinite(now))return [];
  return parseFeed(xml).filter(item=>{
   if(!isOfficialLink(item.link,feed.domains)||!relevant[feed.region].test(item.title))return false;
