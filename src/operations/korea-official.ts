@@ -16,7 +16,7 @@ export interface KoreaCrossVerificationArtifact {
  verification:'VERIFIED'|'REVIEW_REQUIRED';reasonCodes:string[];verifiedAt:string;officialPhase?:'PRE_PUBLICATION'|'POST_PUBLICATION_RECONCILIATION';reconciliation?:{status:'NOT_REQUIRED'|'PENDING'|'PASS'|'MISMATCH';officialObservedDates:string[]};
 }
 
-const KRX_ENDPOINTS={KOSPI:'https://openapi.krx.co.kr/svc/apis/idx/kospi_dd_trd',KOSDAQ:'https://openapi.krx.co.kr/svc/apis/idx/kosdaq_dd_trd'} as const;
+const KRX_ENDPOINTS={KOSPI:'https://data-dbg.krx.co.kr/svc/apis/idx/kospi_dd_trd',KOSDAQ:'https://data-dbg.krx.co.kr/svc/apis/idx/kosdaq_dd_trd'} as const;
 const BOK_ENDPOINT='https://ecos.bok.or.kr/api/StatisticSearch';
 
 export class KrxBokOfficialSourceAdapter implements KoreaOfficialSourceAdapter {
