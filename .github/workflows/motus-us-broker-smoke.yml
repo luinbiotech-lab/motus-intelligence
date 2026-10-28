@@ -1,0 +1,27 @@
+name: MOTUS US Broker Research Real HTTP Smoke
+on:
+  push:
+    branches: [feat/goldman-broker-research-intake-20261028]
+permissions:
+  contents: read
+jobs:
+  broker-check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 22, cache: npm}
+      - run: npm ci
+      - run: npm run build
+      - name: Read-only Goldman and KB first-party broker collection
+        run: |
+          node --input-type=module <<'NODE'
+          import {collectGoldmanBrokerResearch,collectKbBrokerResearch} from './dist/src/operations/market-research-feeds.js';
+          const at=new Date().toISOString();
+          for(const [name,fn] of [['US Goldman Sachs',collectGoldmanBrokerResearch],['Korea KB Securities',collectKbBrokerResearch]]){
+            const result=await fn(at);
+            console.log(JSON.stringify({name,at,audit:result.audit,entries:result.entries}));
+            if(result.entries.length===0)process.exitCode=1;
+          }
+          NODE
