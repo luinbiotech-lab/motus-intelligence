@@ -29,15 +29,20 @@
       "at": "2026-10-28T10:24:32.367Z",
       "event": "PUBLISH_POSTFLIGHT_FAILED",
       "detail": "remote readback required before retry"
+    },
+    {
+      "at": "2026-10-28T10:25:51.615Z",
+      "event": "REMOTE_BLOGGER_API_LIVE_CONFIRMED",
+      "detail": "Blogger API HTTP 200, status LIVE, original post URL recovered; prior public page request returned HTTP 429"
     }
   ],
-  "state": "FAILED",
+  "state": "PUBLISHED",
   "draftPostId": "5988254098180174856",
-  "publicPostUrl": null,
-  "publishedAt": null,
+  "publicPostUrl": "https://motusnova.blogspot.com/2026/10/ai_01909993953.html",
+  "publishedAt": "2026-10-28T19:24:35+09:00",
   "insertCallCount": 1,
   "publishCallCount": 1,
-  "error": "public page validation failed: HTTP 429",
-  "reasonCode": "PUBLISH_POSTFLIGHT_FAILED",
-  "remoteMayExist": true
+  "error": null,
+  "reasonCode": "REMOTE_READBACK_RECOVERED_AFTER_PUBLIC_HTTP_429",
+  "remoteMayExist": false
 }
