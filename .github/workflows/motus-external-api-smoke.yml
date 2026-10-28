@@ -1,4 +1,4 @@
-name: MOTUS External API Credential Smoke Test
+name: MOTUS External API Credential Smoke Test (KRX approval recheck)
 on:
   push:
     branches: [diagnostics/real-api-smoke-20261028]
