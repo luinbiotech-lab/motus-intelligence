@@ -36,3 +36,13 @@ jobs:
           const html=await r.text();
           console.log(JSON.stringify({provider:'KB Securities Research',http:r.status,bytes:html.length,links:[...html.matchAll(/href=["']([^"']+\\.able[^"']*)["']/gi)].map(x=>x[1]).filter(x=>/research|report|detail|today|daily/i.test(x)).slice(0,15),hasCoreView:html.includes('KB Core View'),hasTitle:html.includes('리서치')}));
           NODE
+
+      - name: Probe broker report page metadata without downloading PDFs
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          const r=await fetch('https://rc.kbsec.com/today/index.able',{signal:AbortSignal.timeout(12000)});
+          const html=await r.text();
+          const terms=['KB Core View','KB 월간 전략','데일리 리포트','리서치'];
+          for(const word of terms){const i=html.indexOf(word);console.log(JSON.stringify({term:word,offset:i,near:i>=0?html.slice(Math.max(0,i-120),i+850).replace(/\\s+/g,' ').slice(0,850):null}));}
+          NODE
