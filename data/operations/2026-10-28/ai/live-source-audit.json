@@ -3,8 +3,8 @@
   "sourceMode": "internal",
   "category": "AI_INTELLIGENCE",
   "operationDate": "2026-10-28",
-  "status": "HOLD",
-  "reasonCode": "NAVER_DATALAB_SIGNAL_REQUIRED",
+  "status": "LIVE_READY",
+  "reasonCode": null,
   "entries": [
     {
       "sourceId": "openai",
@@ -12,7 +12,7 @@
       "url": "https://openai.com/news/rss.xml",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-28T09:55:32.678Z",
+      "collectedAt": "2026-10-28T10:24:27.323Z",
       "error": null
     },
     {
@@ -21,7 +21,7 @@
       "url": "https://blog.google/technology/ai/rss/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-28T09:55:32.678Z",
+      "collectedAt": "2026-10-28T10:24:27.323Z",
       "error": null
     },
     {
@@ -30,7 +30,7 @@
       "url": "https://deepmind.google/blog/rss.xml",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-28T09:55:32.678Z",
+      "collectedAt": "2026-10-28T10:24:27.323Z",
       "error": null
     },
     {
@@ -39,7 +39,7 @@
       "url": "https://blogs.nvidia.com/feed/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-28T09:55:32.678Z",
+      "collectedAt": "2026-10-28T10:24:27.323Z",
       "error": null
     },
     {
@@ -48,7 +48,7 @@
       "url": "https://nvidianews.nvidia.com/releases.xml",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-28T09:55:32.678Z",
+      "collectedAt": "2026-10-28T10:24:27.323Z",
       "error": null
     },
     {
@@ -57,7 +57,7 @@
       "url": "https://blogs.microsoft.com/feed/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-28T09:55:32.678Z",
+      "collectedAt": "2026-10-28T10:24:27.323Z",
       "error": null
     },
     {
@@ -66,7 +66,7 @@
       "url": "https://news.microsoft.com/source/feed/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-28T09:55:32.678Z",
+      "collectedAt": "2026-10-28T10:24:27.323Z",
       "error": null
     },
     {
@@ -75,7 +75,7 @@
       "url": "https://aws.amazon.com/blogs/aws/feed/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-28T09:55:32.678Z",
+      "collectedAt": "2026-10-28T10:24:27.323Z",
       "error": null
     },
     {
@@ -84,7 +84,7 @@
       "url": "https://aws.amazon.com/about-aws/whats-new/recent/feed/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-28T09:55:32.678Z",
+      "collectedAt": "2026-10-28T10:24:27.323Z",
       "error": null
     },
     {
@@ -93,7 +93,7 @@
       "url": "https://about.fb.com/news/feed/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-28T09:55:32.678Z",
+      "collectedAt": "2026-10-28T10:24:27.323Z",
       "error": null
     },
     {
@@ -102,76 +102,76 @@
       "url": "https://www.anthropic.com/news",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-28T09:55:32.678Z",
+      "collectedAt": "2026-10-28T10:24:27.323Z",
       "error": null
     },
     {
       "sourceId": "ai:page:1",
       "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/legora-agentic-operating-system-for-legal-work",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-10-28T10:24:27.323Z",
+      "error": "HTTP_403"
+    },
+    {
+      "sourceId": "ai:rss-evidence:1",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/legora-agentic-operating-system-for-legal-work",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-28T10:24:27.323Z",
+      "error": null,
+      "observedDate": "Wed, 28 Oc",
+      "sourceTimestamp": "Wed, 28 Oct 2026 09:30:00 GMT",
+      "dateField": "rss.pubDate"
+    },
+    {
+      "sourceId": "ai:page:2",
+      "category": "AI_INTELLIGENCE",
       "url": "https://about.fb.com/news/2026/10/muse-is-now-available-in-singapore-the-worlds-first-personal-ai-agent-built-for-everyone/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-28T09:55:32.678Z",
+      "collectedAt": "2026-10-28T10:24:27.323Z",
       "error": null,
       "observedDate": "2026-10-28",
       "sourceTimestamp": "2026-10-28T00:00:03.000Z",
       "dateField": "page.datePublished"
     },
     {
-      "sourceId": "ai:page:2",
+      "sourceId": "ai:page:3",
       "category": "AI_INTELLIGENCE",
       "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-ecs-gpu-sharing-nvidia-mps/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-28T09:55:32.678Z",
+      "collectedAt": "2026-10-28T10:24:27.323Z",
       "error": null,
       "observedDate": "Tue, 27 Oc",
       "sourceTimestamp": "Tue, 27 Oct 2026 23:31:00 GMT",
       "dateField": "rss.pubDate"
     },
     {
-      "sourceId": "ai:page:3",
+      "sourceId": "ai:page:4",
       "category": "AI_INTELLIGENCE",
       "url": "https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-28T09:55:32.678Z",
+      "collectedAt": "2026-10-28T10:24:27.323Z",
       "error": null,
       "observedDate": "2026-10-27",
       "sourceTimestamp": "2026-10-27T16:13:00.000Z",
       "dateField": "page.datePublished"
     },
     {
-      "sourceId": "ai:page:4",
+      "sourceId": "ai:page:5",
       "category": "AI_INTELLIGENCE",
       "url": "https://nvidianews.nvidia.com/news/nvidia-and-oracle-expand-nvidia-vera-rubin-to-multi-gigawatt-scale-and-bring-nvidia-vera-cpu-to-oracle-cloud-infrastructure",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-28T09:55:32.678Z",
+      "collectedAt": "2026-10-28T10:24:27.323Z",
       "error": null,
       "observedDate": "Tue, 27 Oc",
       "sourceTimestamp": "Tue, 27 Oct 2026 16:00:00 GMT",
-      "dateField": "rss.pubDate"
-    },
-    {
-      "sourceId": "ai:page:5",
-      "category": "AI_INTELLIGENCE",
-      "url": "https://openai.com/index/retell-ai",
-      "status": "FAILED",
-      "recordCount": 0,
-      "collectedAt": "2026-10-28T09:55:32.678Z",
-      "error": "HTTP_403"
-    },
-    {
-      "sourceId": "ai:rss-evidence:5",
-      "category": "AI_INTELLIGENCE",
-      "url": "https://openai.com/index/retell-ai",
-      "status": "PASS",
-      "recordCount": 1,
-      "collectedAt": "2026-10-28T09:55:32.678Z",
-      "error": null,
-      "observedDate": "Tue, 27 Oc",
-      "sourceTimestamp": "Tue, 27 Oct 2026 15:00:00 GMT",
       "dateField": "rss.pubDate"
     },
     {
@@ -180,7 +180,7 @@
       "url": "https://commandline.microsoft.com/agentic-software-engineering-large-scale-code-migration-language-modernization-spec-driven-development/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-28T09:55:32.678Z",
+      "collectedAt": "2026-10-28T10:24:27.323Z",
       "error": null,
       "observedDate": "2026-10-26",
       "sourceTimestamp": "2026-10-26T13:35:44.000Z",
@@ -192,7 +192,7 @@
       "url": "https://blog.google/products-and-platforms/products/education/ai-quests-polar-peaks/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-28T09:55:32.678Z",
+      "collectedAt": "2026-10-28T10:24:27.323Z",
       "error": null,
       "observedDate": "Mon, 26 Oc",
       "sourceTimestamp": "Mon, 26 Oct 2026 16:00:00 +0000",
@@ -204,7 +204,7 @@
       "url": "https://www.anthropic.com/news/public-benefit-fund",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-28T09:55:32.678Z",
+      "collectedAt": "2026-10-28T10:24:27.323Z",
       "error": null,
       "observedDate": "2026-10-18",
       "sourceTimestamp": "2026-10-18T00:00:00.000Z",
@@ -213,26 +213,35 @@
     {
       "sourceId": "ai:page:9",
       "category": "AI_INTELLIGENCE",
-      "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/mflow-version-3-16/",
+      "url": "https://openai.com/index/retell-ai",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-10-28T10:24:27.323Z",
+      "error": "HTTP_403"
+    },
+    {
+      "sourceId": "ai:rss-evidence:9",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/retell-ai",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-28T09:55:32.678Z",
+      "collectedAt": "2026-10-28T10:24:27.323Z",
       "error": null,
       "observedDate": "Tue, 27 Oc",
-      "sourceTimestamp": "Tue, 27 Oct 2026 20:40:00 GMT",
+      "sourceTimestamp": "Tue, 27 Oct 2026 15:00:00 GMT",
       "dateField": "rss.pubDate"
     },
     {
       "sourceId": "ai:page:10",
       "category": "AI_INTELLIGENCE",
-      "url": "https://blogs.nvidia.com/blog/open-source-ai-tools-cbrain-dementia/",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/mflow-version-3-16/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-28T09:55:32.678Z",
+      "collectedAt": "2026-10-28T10:24:27.323Z",
       "error": null,
-      "observedDate": "2026-10-27",
-      "sourceTimestamp": "2026-10-27T15:00:20.000Z",
-      "dateField": "page.datePublished"
+      "observedDate": "Tue, 27 Oc",
+      "sourceTimestamp": "Tue, 27 Oct 2026 20:40:00 GMT",
+      "dateField": "rss.pubDate"
     }
   ]
 }

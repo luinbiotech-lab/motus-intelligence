@@ -1,5 +1,5 @@
 {
-  "collectedAt": "2026-10-28T09:55:32.678Z",
+  "collectedAt": "2026-10-28T10:24:27.323Z",
   "signalDate": null,
   "provider": null,
   "freshness": "NO_SEARCH_SIGNAL",
@@ -8,9 +8,9 @@
     "NAVER_DATALAB:NAVER_DATALAB_HTTP_401"
   ],
   "orderedTopicIds": [
-    "ai:0",
-    "ai:9",
-    "ai:1"
+    "ai:1",
+    "ai:2",
+    "ai:4"
   ],
   "selectedSecondaryTopicId": null,
   "factsChanged": false,

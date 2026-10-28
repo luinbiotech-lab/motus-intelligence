@@ -1,10 +1,43 @@
 {
-  "state": "HOLD",
-  "reasonCode": "NAVER_DATALAB_SIGNAL_REQUIRED",
-  "reasonCodes": [
-    "NAVER_DATALAB_SIGNAL_REQUIRED"
+  "gate": {
+    "state": "AUTO_PUBLISH_READY",
+    "reasons": [],
+    "approval": "AUTO_POLICY_APPROVAL",
+    "checkedAt": "2026-10-28T10:24:32.367Z"
+  },
+  "searchRegistration": null,
+  "libraryRegistration": null,
+  "weeklyFeed": null,
+  "pdfCandidate": null,
+  "audit": [
+    {
+      "at": "2026-10-28T10:24:32.367Z",
+      "event": "AUTO_PUBLISH_STATIC_GATE",
+      "detail": "AUTO_PUBLISH_READY"
+    },
+    {
+      "at": "2026-10-28T10:24:32.367Z",
+      "event": "REMOTE_DUPLICATE_CHECK",
+      "detail": "PASS"
+    },
+    {
+      "at": "2026-10-28T10:24:32.367Z",
+      "event": "FINAL_REMOTE_DUPLICATE_CHECK",
+      "detail": "PASS"
+    },
+    {
+      "at": "2026-10-28T10:24:32.367Z",
+      "event": "PUBLISH_POSTFLIGHT_FAILED",
+      "detail": "remote readback required before retry"
+    }
   ],
-  "reason": "NAVER_DATALAB_SIGNAL_REQUIRED",
-  "insertCallCount": 0,
-  "publishCallCount": 0
+  "state": "FAILED",
+  "draftPostId": "5988254098180174856",
+  "publicPostUrl": null,
+  "publishedAt": null,
+  "insertCallCount": 1,
+  "publishCallCount": 1,
+  "error": "public page validation failed: HTTP 429",
+  "reasonCode": "PUBLISH_POSTFLIGHT_FAILED",
+  "remoteMayExist": true
 }
