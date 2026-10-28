@@ -74,17 +74,132 @@ test('evidence-bound synthesis separates facts from labelled analysis and never 
   assert.match(event.interpretation,/^MOTUS 분석: /);
   const thin=synthesizeEvidenceBoundAIEvent({topicId:'o',publisher:'OpenAI',sourceId:'openai',title:'Securing our frontier model training environment',link:'https://openai.com/index/x',publishedAt:'2026-10-23T17:00:00Z',evidence:'We describe new security controls protecting the infrastructure we use to train frontier models, including hardware isolation.',basis:'OFFICIAL_RSS_SUMMARY',fallbackReason:'PAGE_BLOCKED'});
   assert.equal(thin,null,'an item with no product, place, organisation or figure is too thin to state as news');
-  const rss=synthesizeEvidenceBoundAIEvent({topicId:'p',publisher:'OpenAI',sourceId:'openai',title:'Introducing ChatGPT Atlas',link:'https://openai.com/index/y',publishedAt:'2026-10-23T17:00:00Z',eviden…7154 tokens truncated…ck -prune -exec rm -rf {} +
-            if grep -RIlE -- '-----BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY-----|BLOGGER_(CLIENT_SECRET|REFRESH_TOKEN)=' ops-data/data; then
-              echo '::error title=Secret scan failed::persistence bundle contains credential material'
-              exit 1
-            fi
-            git -C ops-data add data
-            if git -C ops-data diff --cached --quiet; then echo 'ops-data already up to date'; exit 0; fi
-            git -C ops-data commit -q -m "ops: persist ${GITHUB_RUN_ID}/${GITHUB_RUN_ATTEMPT}"
-            if git -C ops-data push origin HEAD:ops-data; then exit 0; fi
-            echo "::warning title=ops-data push retry::attempt ${attempt} lost a race; re-merging onto the latest ops-data"
-            sleep $((attempt * 5))
-          done
-          echo '::error title=ops-data persistence failed::publication state was not persisted; manual recovery required'
-          exit 1
+  const rss=synthesizeEvidenceBoundAIEvent({topicId:'p',publisher:'OpenAI',sourceId:'openai',title:'Introducing ChatGPT Atlas',link:'https://openai.com/index/y',publishedAt:'2026-10-23T17:00:00Z',evidence:'ChatGPT Atlas is now available to more than 1 billion users worldwide, bringing the assistant directly into the browser.',basis:'OFFICIAL_RSS_SUMMARY',fallbackReason:'PAGE_BLOCKED'})!;
+  assert.ok(rss.facts.some(fact=>fact.includes('자동 수집을 허용하지 않아')&&fact.includes('공식 RSS에 게시된 요약')));assert.ok(rss.facts.some(fact=>fact.includes('이용자 10억명')));
+  const bodyOnly=synthesizeEvidenceBoundAIEvent({topicId:'q',publisher:'NVIDIA',sourceId:'nvidia',title:'Kazakhstan Expands Compute for Its AI Future',link:'https://blogs.nvidia.com/blog/k/',publishedAt:'2026-10-23T02:00:00Z',evidence:'The country plans future systems based on Vera Rubin.',basis:'OFFICIAL_PAGE'})!;
+  assert.ok(bodyOnly.facts.some(fact=>fact.includes('원문에서 언급된 제품·플랫폼은 Vera Rubin')),'a product only mentioned in the body is not called the centre of the announcement');
+  assert.equal(bodyOnly.topic,'카자흐스탄 AI 컴퓨팅 인프라 확충');
+});
+
+test('an RSS-summary-only item can support but never lead the AI issue',()=>{
+  const base={publisher:'OpenAI',publishedAt:new Date().toISOString(),eventType:'launch' as const};
+  assert.deepEqual(selectAIEvents([{...base,topicId:'a',basis:'OFFICIAL_RSS_SUMMARY'}]),[]);
+  const picked=selectAIEvents([{...base,topicId:'a',basis:'OFFICIAL_RSS_SUMMARY'},{...base,topicId:'b',publisher:'NVIDIA',basis:'OFFICIAL_PAGE',eventType:'research'}]);
+  assert.deepEqual(picked.map(item=>item.topicId),['b','a']);
+});
+
+const at='2026-10-26T03:30:00Z';
+const kz='Kazakhstan is building national AI infrastructure. The government and partners announced a new AI supercomputer powered by 2,000 NVIDIA Blackwell GPUs that will serve researchers, startups and public agencies across the country. The system, hosted in a sovereign data center in Almaty, will provide 50 megawatts of capacity for training and inference workloads.';
+const vw='Volkswagen Group is putting Microsoft 365 Copilot to work across the company, rolling out the AI assistant to 50,000 employees in Germany and other markets after a pilot that showed faster document drafting and meeting summaries.';
+const item=(t:string,l:string,d:string,s:string,c='')=>`<item><title>${t}</title><link>${l}</link><pubDate>${d}</pubDate><description><![CDATA[${s}]]></description>${c?`<content:encoded><![CDATA[${c}]]></content:encoded>`:''}</item>`;
+function fetcherFor(extra:Record<string,string>={}){
+  const feeds:Record<string,string>={
+    'blogs.nvidia.com/feed/':`<rss>${item('Kazakhstan Expands Compute for Its AI Future','https://blogs.nvidia.com/blog/kazakhstan-ai-compute-ecosystem/','Fri, 23 Oct 2026 02:00:13 +0000','Kazakhstan builds national AI compute.',kz)}${item('Old Covered Story About AI Factories','https://blogs.nvidia.com/blog/covered/','Fri, 23 Oct 2026 01:00:00 +0000','Covered.',kz)}${item('Kazakhstan AI compute (republished headline)','https://blogs.nvidia.com/blog/kazakhstan-ai-compute-ecosystem/?utm_source=feed','Fri, 23 Oct 2026 02:00:13 +0000','Same story.',kz)}</rss>`,
+    'news.microsoft.com/source/feed/':`<rss>${item('Volkswagen Group putting Copilot to work across the company','https://news.microsoft.com/source/features/ai/volkswagen-copilot/','Fri, 23 Oct 2026 17:58:00 +0000',vw)}${item('Copilot news mirrored elsewhere','https://example.com/copilot-mirror','Fri, 23 Oct 2026 18:00:00 +0000',vw)}</rss>`,
+    'openai.com/news/rss.xml':`<rss>${item('Securing our frontier model training environment','https://openai.com/index/securing','Fri, 23 Oct 2026 17:00:00 GMT','We describe new security controls protecting the infrastructure we use to train frontier models, including hardware isolation and continuous monitoring.')}</rss>`,
+    'deepmind.google/blog/rss.xml':`<rss>${item('Mapping forest types with AI models','https://deepmind.google/blog/forest-types/','Thu, 22 Oct 2026 14:30:24 +0000','A new AI research model maps forest types.')}</rss>`,
+    ...extra,
+  };
+  return (async(input:RequestInfo|URL)=>{const url=String(input);
+    for(const [key,value] of Object.entries(feeds))if(url.includes(key))return new Response(value);
+    if(url.includes('openai.com/index'))return new Response('Forbidden',{status:403});
+    if(url.includes('blogs.nvidia.com/blog/kazakhstan'))return new Response(`<html><head><meta property="article:published_time" content="2026-10-23T02:00:13+00:00"></head><body><article>${kz.split('. ').map(sentence=>`<p>${sentence}.</p>`).join('')}</article></body></html>`);
+    if(url.includes('blogs.nvidia.com/blog/covered'))return new Response(`<article><p>${kz}</p></article>`);
+    if(url.includes('news.microsoft.com/source/features'))return new Response(`<html><head><meta property="article:published_time" content="2026-10-23T17:58:00+00:00"></head><body><article><p>${vw}</p></article></body></html>`);
+    // DeepMind page claims a different publication date than its feed: rejected.
+    if(url.includes('deepmind.google/blog/forest-types'))return new Response(`<html><head><meta property="article:published_time" content="2026-09-01T10:00:00Z"></head><body><article><p>${kz}</p></article></body></html>`);
+    return new Response('<rss></rss>');
+  }) as typeof fetch;
+}
+
+test('verified official AI sources still require substantive prose before publication',async()=>{
+  const root=await mkdtemp(join(tmpdir(),'motus-ai-ops-'));
+  try{
+    const covered=join(root,'2026-10-24','ai');await mkdir(covered,{recursive:true});
+    await writeFile(join(covered,'publish-ledger.jsonl'),JSON.stringify({event:'PUBLISHED',category:'AI_INTELLIGENCE',fingerprint:'sha256:published',sourceUrls:['https://blogs.nvidia.com/blog/covered/']})+'\n','utf8');
+    // A later failed rerun overwrote live-unit.json; the immutable ledger record still excludes the covered link.
+    await writeFile(join(covered,'live-unit.json'),JSON.stringify({contentFingerprint:'rerun',viewModel:{sources:[]}}),'utf8');
+    const result=await new RepositoryInternalDailyBuilder(fetcherFor(),{},undefined,undefined,undefined,root).build('AI_INTELLIGENCE',at);
+    assert.equal(result.state,'LIVE_READY',String(result.reason));
+    const unit=result.payload!.unit,view=unit.viewModel as AIIntelligenceDailyViewModel,links=view.sources.map(source=>source.url);
+    assert.equal(unit.observedDate,'2026-10-26');
+    assert.deepEqual(new Set(links),new Set(['https://blogs.nvidia.com/blog/kazakhstan-ai-compute-ecosystem/','https://news.microsoft.com/source/features/ai/volkswagen-copilot/']));
+    assert.ok(!links.some(link=>link.includes('example.com')||link.includes('covered')||link.includes('forest-types')),'non-official, already-covered and date-mismatched items are excluded');
+    assert.ok(view.issues[0]!.evidenceRefs[0]!.includes('kazakhstan'),'full-text verified item leads');
+    assert.equal(view.issues.filter(issue=>issue.evidenceRefs[0]!.includes('kazakhstan')).length,1,'the same article URL under another headline is not a second issue');
+    assert.ok(result.audit.some(entry=>entry.status==='FAILED'&&entry.error==='AI_PUBLICATION_DATE_MISMATCH'));
+    assert.ok(result.audit.some(entry=>entry.sourceId.startsWith('ai:rss-evidence:')&&entry.url==='https://openai.com/index/securing'&&entry.status==='PASS'),'403 pages fall back to recorded official RSS evidence');
+    assert.ok(!links.includes('https://openai.com/index/securing'),'but a thin RSS-only item is not published');
+    const quality=evaluateEditorialQuality(unit.title,unit.render.html);
+    assert.equal(quality.pass,false,'source verification and padded length cannot certify editorial quality');assert.ok(quality.reasons.some(reason=>reason.includes('generic template')));assert.ok(quality.visibleText.length>=900&&quality.proseBlockCount>=4,'regression: even a long template must be blocked');
+    assert.match(quality.visibleText,/MOTUS 분석: /);assert.doesNotMatch(quality.visibleText,/rolling out the AI assistant|will provide 50 megawatts/);
+    assert.equal(buildProductionVerification(result.payload!,'internal',result.audit,at).verification,'REVIEW_REQUIRED');
+  }finally{await rm(root,{recursive:true,force:true})}
+});
+
+test('a page that only exposes a meta description cannot lead',async()=>{
+  const desc='Microsoft expands Azure AI capacity in Germany with 5,000 GPUs available to 300 customers across the region this year.';
+  const fetcher=(async(input:RequestInfo|URL)=>{const url=String(input);
+    if(url.includes('blogs.microsoft.com/feed/'))return new Response(`<rss>${item('Microsoft expands Azure AI capacity in Germany','https://blogs.microsoft.com/blog/azure-germany/','Sun, 25 Oct 2026 17:00:00 GMT','Short.')}</rss>`);
+    if(url.includes('blogs.microsoft.com/blog/'))return new Response(`<html><head><meta name="description" content="${desc}"></head><body><div id="root"></div></body></html>`);
+    return new Response('<rss></rss>');}) as typeof fetch;
+  const result=await new RepositoryInternalDailyBuilder(fetcher,{},undefined,undefined,undefined,join(tmpdir(),'motus-none-'+Date.now())).build('AI_INTELLIGENCE',at);
+  assert.equal(result.state,'SKIP');
+});
+
+test('an article URL that redirects off the publisher domain is excluded',async()=>{
+  const body=`<article><p>${'Kazakhstan expands AI compute with 2,000 NVIDIA Blackwell GPUs in a sovereign data center. '.repeat(4)}</p></article>`;
+  const fetcher=(async(input:RequestInfo|URL)=>{const url=String(input);
+    if(url.includes('blogs.nvidia.com/feed/'))return new Response(`<rss>${item('Kazakhstan Expands Compute for Its AI Future','https://blogs.nvidia.com/blog/kz/','Sun, 25 Oct 2026 02:00:13 +0000','x')}</rss>`);
+    if(url.includes('blogs.nvidia.com/blog/kz')){const response=new Response(body);Object.defineProperty(response,'url',{value:'https://lookalike.example/kz'});return response}
+    return new Response('<rss></rss>');}) as typeof fetch;
+  const result=await new RepositoryInternalDailyBuilder(fetcher,{},undefined,undefined,undefined,join(tmpdir(),'motus-none-'+Date.now())).build('AI_INTELLIGENCE',at);
+  assert.equal(result.state,'SKIP');assert.ok(result.audit.some(entry=>entry.error==='AI_REDIRECT_OFF_OFFICIAL_DOMAIN'));
+});
+
+test('a single verified event still meets the 900-character / 4-block depth gate',async()=>{
+  const fetcher=(async(input:RequestInfo|URL)=>{const url=String(input);
+    if(url.includes('blogs.nvidia.com/feed/'))return new Response(`<rss>${item('Kazakhstan Expands Compute for Its AI Future','https://blogs.nvidia.com/blog/kz/','Sun, 25 Oct 2026 02:00:13 +0000','x')}</rss>`);
+    if(url.includes('blogs.nvidia.com/blog/kz'))return new Response(`<article><p>${kz}</p></article>`);
+    return new Response('<rss></rss>');}) as typeof fetch;
+  const result=await new RepositoryInternalDailyBuilder(fetcher,{},undefined,undefined,undefined,join(tmpdir(),'motus-none-'+Date.now())).build('AI_INTELLIGENCE',at);
+  assert.equal(result.state,'LIVE_READY');const quality=evaluateEditorialQuality(result.payload!.unit.title,result.payload!.unit.render.html);
+  assert.ok(quality.visibleText.length>=900&&quality.proseBlockCount>=4,`len=${quality.visibleText.length} blocks=${quality.proseBlockCount}`);
+  assert.match(quality.visibleText,/공식 AI 채널 \d+곳에서 최근 4일간 게시된 AI 발표 \d+건을 확인했고, 원문 출처와 발표일이 검증된 1건/);
+});
+
+test('RSS content that may be an excerpt cannot lead when the page is blocked',async()=>{
+  const long='Contoso announces Azure AI capacity in Germany with 5,000 GPUs for 300 customers. '.repeat(8);
+  const fetcher=(async(input:RequestInfo|URL)=>{const url=String(input);
+    if(url.includes('blogs.microsoft.com/feed/'))return new Response(`<rss>${item('Microsoft expands Azure AI capacity in Germany','https://blogs.microsoft.com/blog/azure-germany/','Sun, 25 Oct 2026 17:00:00 GMT','Short.',long)}</rss>`);
+    if(url.includes('blogs.microsoft.com/blog/'))return new Response('Forbidden',{status:403});
+    return new Response('<rss></rss>');}) as typeof fetch;
+  const result=await new RepositoryInternalDailyBuilder(fetcher,{},undefined,undefined,undefined,join(tmpdir(),'motus-none-'+Date.now())).build('AI_INTELLIGENCE',at);
+  assert.equal(result.state,'SKIP');assert.equal(result.reason,'AI_VERIFIED_EVENTS_INSUFFICIENT');
+});
+
+test('only RSS summaries available is a SKIP, not a forced article',async()=>{
+  const fetcher=(async(input:RequestInfo|URL)=>{const url=String(input);
+    if(url.includes('openai.com/news/rss.xml'))return new Response(`<rss>${item('Securing our frontier model training environment','https://openai.com/index/securing','Sun, 25 Oct 2026 17:00:00 GMT','We describe new security controls protecting the infrastructure we use to train frontier models, including hardware isolation and continuous monitoring.')}</rss>`);
+    if(url.includes('openai.com/index'))return new Response('Forbidden',{status:403});
+    return new Response('<rss></rss>');}) as typeof fetch;
+  const result=await new RepositoryInternalDailyBuilder(fetcher,{},undefined,undefined,undefined,join(tmpdir(),'motus-none-'+Date.now())).build('AI_INTELLIGENCE',at);
+  assert.equal(result.state,'SKIP');assert.equal(result.reason,'AI_VERIFIED_EVENTS_INSUFFICIENT');
+});
+
+test('stated date comes from the page timestamp, channel from the article URL, and API names are not partners',async()=>{
+  const literacy='Public libraries have served as trusted centers of community learning across the United States for generations. Today, we are announcing a new initiative with the Public Library Association to expand no-cost AI literacy and skills training for public library workers and their patrons across 50 cities.';
+  const fetcher=(async(input:RequestInfo|URL)=>{const url=String(input);
+    // The feed stamps the post after a later edit (KST 10/23); the page itself says 2026-10-22T14:00Z (KST 10/22 23:00).
+    if(url.includes('news.microsoft.com/source/feed/'))return new Response(`<rss>${item('Microsoft and the Public Library Association expand free AI literacy training','https://blogs.microsoft.com/on-the-issues/2026/10/22/ai-literacy/','Thu, 22 Oct 2026 21:14:56 +0000','x')}</rss>`);
+    if(url.includes('blogs.microsoft.com/on-the-issues/'))return new Response(`<html><head><meta property="article:published_time" content="2026-10-22T14:00:32+00:00"></head><body><article><p>${literacy}</p></article></body></html>`);
+    return new Response('<rss></rss>');}) as typeof fetch;
+  const result=await new RepositoryInternalDailyBuilder(fetcher,{},undefined,undefined,undefined,join(tmpdir(),'motus-none-'+Date.now())).build('AI_INTELLIGENCE',at);
+  assert.equal(result.state,'LIVE_READY',String(result.reason));
+  const text=evaluateEditorialQuality(result.payload!.unit.title,result.payload!.unit.render.html).visibleText;
+  assert.match(text,/2026년 10월 22일\(한국 시간\) 공식 블로그에/);assert.doesNotMatch(text,/10월 23일\(한국 시간\)|공식 뉴스룸에/);
+  const page=result.audit.find(entry=>entry.sourceId==='ai:page:1')!;assert.equal(page.dateField,'page.datePublished');assert.equal(page.sourceTimestamp,'2026-10-22T14:00:32.000Z');
+
+  const aws=synthesizeEvidenceBoundAIEvent({topicId:'a',publisher:'Amazon AWS',sourceId:'aws-whats-new',title:'Web Search on Amazon Bedrock now supports domain filtering and user location controls',link:'https://aws.amazon.com/about-aws/whats-new/2026/10/bedrock-web-search/',publishedAt:'2026-10-23T18:00:00Z',evidence:'Web Search on Amazon Bedrock now gives you more control over the results that ground a model response. Both are configured directly on the web_search tool in your existing OpenAI Responses API request, and work with OpenAI-compatible clients.',basis:'OFFICIAL_PAGE'})!;
+  assert.doesNotMatch(aws.facts.join(' '),/오픈AI/);assert.match(aws.facts[0]!,/공식 What’s New 공지에/);
+});
