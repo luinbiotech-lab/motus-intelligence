@@ -36,7 +36,7 @@ body{margin:0;background:var(--motus-bg);color:var(--motus-ink);font-family:Aria
 .motus-footer strong{display:block;font-family:Georgia,serif;font-size:24px;color:var(--motus-navy);margin-bottom:12px}
 .motus-footer p{max-width:850px;margin:8px 0}
 /* Contempo content surfaces; never reset inline chart or direction colors. */
-body .bg-photo-container,body .bg-photo-overlay{background:none}
+body .bg-photo,body .bg-photo-container,body .bg-photo-overlay{background:none}
 body .centered{max-width:1200px;margin-inline:auto}
 body .centered-top-container{background:transparent;color:var(--motus-ink)}
 body .centered-top-container .Header{display:none}
