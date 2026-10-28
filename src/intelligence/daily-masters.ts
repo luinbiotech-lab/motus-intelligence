@@ -32,7 +32,7 @@ export interface AIIntelligenceDailyViewModel extends DailyMasterBase {
   industryFlow:string[];industryConnections:AIIndustryConnection[];whatToWatch:NewsletterWatchItem[];
 }
 export interface USMarketDailyViewModel extends DailyMasterBase {
-  marketResearch?:{publisher:string;headline:string;url:string;publishedAt:string;kind:'FINANCIAL_MEDIA'|'BROKER_RESEARCH'}[];
+  marketResearch?:{publisher:string;headline:string;url:string;publishedAt:string;kind:'FINANCIAL_MEDIA'|'BROKER_RESEARCH';evidence?:string[]}[];
   category:'US_MARKET';marketSummary:string;marketHistory:MajorIndexHistory;
   supportingMetrics:NewsletterMarketMetric[];marketCommentary:string[];sectorsCompanies:string[];
   wallStreetResearch:{headline:string;institutionView:string|null;motusInterpretation:string|null;facts:string[]}[];
@@ -41,7 +41,7 @@ export interface USMarketDailyViewModel extends DailyMasterBase {
   narrative?:{facts:string[];analysis:string[]};
 }
 export interface KoreaMarketDailyViewModel extends DailyMasterBase {
-  marketResearch?:{publisher:string;headline:string;url:string;publishedAt:string;kind:'FINANCIAL_MEDIA'|'BROKER_RESEARCH'}[];
+  marketResearch?:{publisher:string;headline:string;url:string;publishedAt:string;kind:'FINANCIAL_MEDIA'|'BROKER_RESEARCH';evidence?:string[]}[];
   category:'KOREA_MARKET';marketSummary:string;indexMetrics:KoreaMarketNewsletterMetric[];
   operationDate?:string;sessionDate?:string;edition?:'PREVIOUS_SESSION_MORNING'|'MANUAL_RECOVERY_CLOSE';fxBasis?:'BOK_REFERENCE_RATE'|'CURRENT_AT_COLLECTION';
   fxAndSupporting:KoreaMarketNewsletterMetric[];investorFlows:KoreaMarketNewsletterMetric[];
