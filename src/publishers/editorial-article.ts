@@ -33,8 +33,7 @@ export function renderUSEditorialArticle(view:USMarketDailyViewModel):DailyMaste
   if(view.narrative?.facts.length)parts.push(section('지수별 흐름과 위치',paragraphs(view.narrative.facts)));
   if(view.narrative?.analysis.length)parts.push(section('MOTUS 분석',paragraphs(view.narrative.analysis)));
   if(view.sectorsCompanies.length)parts.push(section('종목과 업종에서 읽힌 신호',paragraphs(view.sectorsCompanies)));
-  if(view.wallStreetResearch.length)parts.push(section('월가 증권사 공식 리서치',paragraphs(view.wallStreetResearch.flatMap(item=>[item.institutionView??'',item.motusInterpretation??'']))));
-  if(view.marketResearch?.length)parts.push(section('금융 전문 언론 원문 모니터링',paragraphs(view.marketResearch.map(item=>item.publisher+' · '+item.publishedAt.slice(0,10)+' 공개 시장 보도. 원문 제목·출처는 별도 수집·검증 기록으로 보관하며, 기사 하단의 링크에서 확인할 수 있다.'))));
+  if(view.marketResearch?.length)parts.push(renderMarketResearchEntries(view.marketResearch,view.issueDate));
   if(view.checkpoints.length)parts.push(section('다음 거래일',paragraphs(view.checkpoints.map(item=>`${item.headline}: ${item.watchFor}`))));
   parts.push(sources(view.sources));return finish('us-market',view.title,BLOGGER_EDITORIAL_CATEGORIES.US_MARKET.publicLabel,parts,['masthead','lead','charts','macro','companies','research','watch','sources']);
 }
@@ -48,10 +47,27 @@ export function renderKoreaEditorialArticle(view:KoreaMarketDailyViewModel):Dail
   if(view.investorFlows.length)parts.push(section('수급이 가리킨 방향',flow(view.investorFlows)));
   if(view.sectors.length||view.movers.length)parts.push(section('업종과 종목의 온도차',metricProse([...view.sectors,...view.movers])));
   if(view.narrative?.analysis.length)parts.push(section('MOTUS 분석',paragraphs(view.narrative.analysis)));
-  if(view.research.length)parts.push(section('증권사 시각',paragraphs(view.research.map(item=>`${item.publisher}: ${item.institutionView}`))));
-  if(view.marketResearch?.length)parts.push(section('국내 금융 언론 원문 모니터링',paragraphs(view.marketResearch.map(item=>item.publisher+' · '+item.publishedAt.slice(0,10)+' 공개 시장 보도. 원문 제목·출처는 별도 수집·검증 기록으로 보관하며, 기사 하단의 링크에서 확인할 수 있다.'))));
+  if(view.marketResearch?.length)parts.push(renderMarketResearchEntries(view.marketResearch,view.operationDate??view.issueDate));
   if(view.checkpoints.length)parts.push(section(view.edition==='PREVIOUS_SESSION_MORNING'?'오늘 체크포인트':'다음 거래일',paragraphs(view.checkpoints.map(item=>`${item.headline}: ${item.watchFor}`))));
   parts.push(sources(view.sources));return finish('korea-market',view.title,BLOGGER_EDITORIAL_CATEGORIES.KOREA_MARKET.publicLabel,parts,['masthead','lead','indexes','fx','flows','sectors','research','watch','sources']);
+}
+
+/** Show what the publisher actually published, without manufacturing a brokerage opinion.
+ * Report dates older than a week are reference context, never same-session commentary. */
+export function renderMarketResearchEntries(entries:ReadonlyArray<{publisher:string;headline:string;url:string;publishedAt:string;kind:'FINANCIAL_MEDIA'|'BROKER_RESEARCH'}>,issueDate:string):string {
+ const issued=Date.parse(issueDate+'T23:59:59Z');
+ const filtered=entries.filter(item=>/^https:\/\/[^\s]+$/.test(item.url)&&Number.isFinite(Date.parse(item.publishedAt))&&Date.parse(item.publishedAt)<=issued);
+ const make=(kind:'FINANCIAL_MEDIA'|'BROKER_RESEARCH')=>{
+  const rows=filtered.filter(item=>item.kind===kind);if(!rows.length)return '';
+  const list=rows.map(item=>{
+   const age=Math.floor((issued-Date.parse(item.publishedAt))/86400000),older=age>7;
+   const korean=(item.headline.match(/[가-힣]/g)??[]).length;
+   const title=korean>=3?item.headline:'공식 원문 확인';
+   return `<li style="margin:0 0 11px"><strong>${esc(item.publisher)}</strong> · ${esc(item.publishedAt.slice(0,10))}${older?' · 과거 자료':''}<div><a href="${attr(item.url)}" target="_blank" rel="nofollow noopener noreferrer" style="${LINK}">${esc(title)}</a></div></li>`;
+  }).join('');
+  return section(kind==='BROKER_RESEARCH'?'증권사 공개 리서치 자료':'금융 전문 언론 원문',`<p style="margin:0 0 12px">아래는 각 발행처에서 직접 확인된 자료입니다. 제목만으로 투자 의견이나 목표주가를 추정하지 않으며, 과거 자료는 당일 전망의 근거로 사용하지 않습니다.</p><ul style="margin:0;padding-left:20px">${list}</ul>`);
+ };
+ return make('BROKER_RESEARCH')+make('FINANCIAL_MEDIA');
 }
 
 function masthead(title:string,subtitle:string,label:string,date:string){return `<header style="width:100%;max-width:100%;box-sizing:border-box;background:#03162e;color:#fff;padding:26px 22px;margin:0 0 22px"><p style="margin:0 0 9px;color:#c7d8ea;font-size:14px;font-weight:800">${esc(MOTUS_DISPLAY_NAME)}</p><div role="heading" aria-level="2" style="font-size:clamp(25px,7vw,34px);line-height:1.22;font-weight:850;word-break:keep-all">${esc(title)}</div><p style="margin:10px 0 0;color:#e6edf5">${esc(subtitle)}</p><p style="margin:11px 0 0;color:#b7c8da;font-size:13px">${esc(label)} · ${esc(date)}</p></header>`;}
