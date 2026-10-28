@@ -22,3 +22,12 @@ test('unverifiable or future-dated market research never appears in Blogger HTML
  ],'2026-10-29');
  assert.equal(html,'');
 });
+
+test('Blogger renders dated first-party KB published evidence, not an inferred analyst rating',()=>{
+ const html=renderMarketResearchEntries([{publisher:'KB증권 리서치',headline:'금리와 인플레이션 전망',url:'https://rc.kbsec.com/detailView.able?documentid=20261021144128693K',publishedAt:'2026-10-21T00:00:00Z',kind:'BROKER_RESEARCH',evidence:['주식: 견조한 실적 흐름과 AI 투자','채권: 금리 변동성에 유의']}],'2026-10-29');
+ assert.match(html,/공식 공개 요약/);
+ assert.match(html,/견조한 실적 흐름/);
+ assert.match(html,/금리 변동성/);
+ assert.match(html,/과거 자료/);
+ assert.doesNotMatch(html,/강력매수|목표주가 상향/);
+});
