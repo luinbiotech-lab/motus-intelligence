@@ -1,0 +1,10 @@
+{
+  "state": "HOLD",
+  "reasonCode": "NAVER_DATALAB_SIGNAL_REQUIRED",
+  "reasonCodes": [
+    "NAVER_DATALAB_SIGNAL_REQUIRED"
+  ],
+  "reason": "NAVER_DATALAB_SIGNAL_REQUIRED",
+  "insertCallCount": 0,
+  "publishCallCount": 0
+}
