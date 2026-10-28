@@ -1,0 +1,31 @@
+name: MOTUS Blogger US Duplicate Readback
+on:
+  push:
+    branches: [diagnostics/real-api-smoke-20261028]
+permissions: {contents: read}
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+      CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+      CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+      REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+    steps:
+      - name: List matching title and label metadata without exposing content
+        run: |
+          node --input-type=module <<'NODE'
+          const form=new URLSearchParams({client_id:process.env.CLIENT_ID,client_secret:process.env.CLIENT_SECRET,refresh_token:process.env.REFRESH_TOKEN,grant_type:'refresh_token'});
+          const auth=await fetch('https://oauth2.googleapis.com/token',{method:'POST',body:form});if(!auth.ok)throw Error('oauth '+auth.status);const access=(await auth.json()).access_token;
+          for(const status of ['draft','live']){
+            let token='',pages=0;do{
+              const endpoint=new URL('https://www.googleapis.com/blogger/v3/blogs/'+encodeURIComponent(process.env.BLOG_ID)+'/posts');
+              endpoint.searchParams.set('status',status);endpoint.searchParams.set('maxResults','50');endpoint.searchParams.set('fetchBodies','false');if(token)endpoint.searchParams.set('pageToken',token);
+              const r=await fetch(endpoint,{headers:{Authorization:'Bearer '+access}});if(!r.ok)throw Error('list '+status+' '+r.status);
+              const page=await r.json();
+              for(const p of page.items??[])if((p.labels??[]).includes('미국증시'))console.log(JSON.stringify({status,id:p.id,title:p.title,published:p.published,updated:p.updated,url:p.url??null}));
+              token=page.nextPageToken||'';pages++;
+            }while(token&&pages<10);
+          }
+          NODE
