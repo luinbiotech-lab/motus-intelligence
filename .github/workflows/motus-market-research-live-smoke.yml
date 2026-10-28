@@ -1,0 +1,28 @@
+name: MOTUS Research Intake Live Smoke (read-only)
+on:
+  push:
+    branches: [feat/verified-market-research-intake-20261028]
+permissions:
+  contents: read
+jobs:
+  research-intake:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 22, cache: npm}
+      - run: npm ci
+      - run: npm run build
+      - name: Inspect research data from real publisher RSS feeds without publishing
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import {collectMarketResearch} from './dist/src/operations/market-research-feeds.js';
+          const at=new Date().toISOString();
+          for(const category of ['US_MARKET','KOREA_MARKET']){
+            const result=await collectMarketResearch(category,at);
+            console.log(JSON.stringify({category,at,feeds:result.audit,articleCount:result.entries.length,articles:result.entries.map(x=>({publisher:x.publisher,headline:x.headline,url:x.url,publishedAt:x.publishedAt,kind:x.kind}))}));
+            if(!result.entries.length)process.exitCode=1;
+          }
+          NODE
