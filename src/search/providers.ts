@@ -13,8 +13,8 @@ export class NaverDataLabProvider implements SearchDemandProvider {
     const allowed=new Set(topics.flatMap(topic=>[topic.label,...topic.aliases].map(normalize)));
     const keywordGroups=this.request.keywordGroups.filter(group=>[group.groupName,...group.keywords].some(value=>allowed.has(normalize(value))));
     if(!keywordGroups.length)return [];
-    const response=await this.fetcher('https://naverapihub.apigw.ntruss.com/search-trend/v1/search',{method:'POST',headers:{'content-type':'application/json','X-NCP-APIGW-API-KEY-ID':this.credentials.clientId,'X-NCP-APIGW-API-KEY':this.credentials.clientSecret},body:JSON.stringify({...this.request,keywordGroups})});
-    if(!response.ok)throw new Error(`NAVER_DATALAB_HTTP_${response.status}`);
+    const response=await this.fetcher('https://naverapihub.apigw.ntruss.com/search-trend/v1/search',{method:'POST',headers:{'content-type':'application/json','X-NCP-APIGW-API-KEY-ID':this.credentials.clientId.trim(),'X-NCP-APIGW-API-KEY':this.credentials.clientSecret.trim()},body:JSON.stringify({...this.request,keywordGroups})});
+    if(!response.ok)throw new Error(await naverHubHttpError(response));
     return normalizeNaverDataLab({response:await response.json() as NaverDataLabResponse,topics,collectedAt});
   }
 }
@@ -35,3 +35,13 @@ export async function collectDemandSignals(providers:SearchDemandProvider[],topi
   return {signals,states:mutable,warnings};
 }
 function normalize(value:string):string{return value.normalize('NFKC').toLowerCase().replace(/[^a-z0-9가-힣]+/g,' ').trim();}
+
+/**
+ * API HUB error detail without secrets. errorCode 200 "Authentication Failed" means the gateway rejected the Client ID/Secret pair itself
+ * (wrong or mismatched pair, or Developers Center keys); a pair without Search Trend permission is reported separately by the gateway.
+ */
+export async function naverHubHttpError(response:Response):Promise<string> {
+  let code='';try{const body=await response.json() as {error?:{errorCode?:unknown};errorCode?:unknown};const raw=body.error?.errorCode??body.errorCode;code=typeof raw==='string'||typeof raw==='number'?String(raw):''}catch{}
+  const safe=code.replace(/[^A-Za-z0-9]/g,'').slice(0,12);
+  return `NAVER_DATALAB_HTTP_${response.status}${safe?':'+safe:''}`;
+}
