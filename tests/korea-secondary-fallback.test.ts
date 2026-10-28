@@ -48,3 +48,18 @@ for(const failure of ['NETWORK','MALFORMED_JSON','INVALID_TIMESTAMP'] as const){
   assert.doesNotMatch(JSON.stringify(result),/sentinel-private-provider-message/);
  });
 }
+test('KRX official adapter requests the actual approved data host and preserves authentication',async()=>{
+  const {KrxBokOfficialSourceAdapter}=await import('../src/operations/korea-official.js');
+  const calls:Array<{url:string;auth:string|null}>=[];
+  const fetcher=(async(input:string|URL,init?:RequestInit)=>{
+    const url=String(input);calls.push({url,auth:new Headers(init?.headers).get('AUTH_KEY')});
+    const field=url.includes('kospi_dd_trd')?'코스피':'코스닥';
+    return new Response(JSON.stringify({OutBlock_1:[{BAS_DD:'20261027',IDX_NM:field,CLSPRC_IDX:field==='코스피'?'4100.15':'925.40'}]}),{status:200});
+  }) as typeof fetch;
+  const result=await new KrxBokOfficialSourceAdapter(fetcher,{KRX_AUTH_KEY:'local-test-key'} as NodeJS.ProcessEnv).fetch('2026-10-27','2026-10-28T01:00:00Z');
+  assert.equal(result.requiredProviderAvailable,true);
+  assert.deepEqual(result.observations.map(item=>item.field),['KOSPI','KOSDAQ']);
+  assert.equal(calls.length,2);
+  assert.ok(calls.every(item=>item.url.startsWith('https://data-dbg.krx.co.kr/svc/apis/idx/')));
+  assert.ok(calls.every(item=>item.url.endsWith('?basDd=20261027')&&item.auth==='local-test-key'));
+});

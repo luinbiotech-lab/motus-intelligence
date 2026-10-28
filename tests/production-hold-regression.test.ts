@@ -45,6 +45,25 @@ test('Korea reference dates use KST for offset timestamps, preserve explicit pro
  assert.equal(koreaReferenceDate('20261013200504'),'2026-10-13');
  assert.equal(koreaReferenceDate('20261013'),'2026-10-13');
 });
+test('Korea failed cross-check retains requested and returned dates through the production audit',async()=>{
+ const morning='2026-10-14T23:45:00Z';
+ const failed=(sourceId:string)=>({adapterId:sourceId,async fetch(){return {requiredProviderAvailable:false,reasonCode:'YAHOO_FINANCE_KOSPI_ROW_MISSING',observations:[],audit:[{sourceId,url:'https://finance.yahoo.com/',status:'FAILED' as const,recordCount:0,error:'YAHOO_FINANCE_KOSPI_ROW_MISSING',requestedDate:'2026-10-14',availableDates:['2026-10-13']}]}}});
+ const fetcher=(async(input:RequestInfo|URL)=>{
+  const url=String(input);let data:unknown;
+  if(url.includes('/price?'))data=[{localTradedAt:'2026-10-14',closePrice:url.includes('KOSDAQ')?'900':'3000',fluctuationsRatio:'1'}];
+  else if(url.includes('FX_USDKRW'))data={exchangeInfo:{localTradedAt:'2026-10-15T08:40:00+09:00',closePrice:'1343.10',fluctuations:'7.10'}};
+  else if(url.includes('/trend'))data={bizdate:'20261014',personalValue:'100',foreignValue:'200',institutionalValue:'-300'};
+  else if(url.includes('/upjong/'))data=[{name:'반도체',changeRate:'2.4',thistime:'20261014200504'}];
+  else data={stocks:[{stockName:'대표 종목',fluctuationsRatio:'1.2',localTradedAt:'2026-10-14T20:20:18+09:00'}]};
+  return new Response(JSON.stringify(data));
+ }) as typeof fetch;
+ const result=await new RepositoryInternalDailyBuilder(fetcher,{},failed('preferred'),undefined,failed('secondary')).build('KOREA_MARKET',morning);
+ assert.equal(result.state,'HOLD');assert.equal(result.payload,null);
+ for(const sourceId of ['preferred','secondary']){
+  const entry=result.audit.find(item=>item.sourceId===sourceId)!;
+  assert.equal(entry.requestedDate,'2026-10-14');assert.deepEqual(entry.availableDates,['2026-10-13']);
+ }
+});
 test('Korea morning edition accepts current FX separately from prior-session close',async()=>{
  let officialCalls=0;
  const official={adapterId:'test',async fetch(){officialCalls++;throw Error('must not cross-verify different days');}};
