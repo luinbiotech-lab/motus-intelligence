@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "1.1",
+  "category": "KOREA_MARKET",
+  "operationDate": "2026-10-28",
+  "observedDate": "2026-10-28",
+  "sourceMode": "internal",
+  "verification": "FAILED",
+  "unresolvedConflicts": [
+    "YAHOO_FINANCE_KOSPI_ROW_MISSING"
+  ],
+  "provenancePass": false,
+  "sourceDiversityPass": false,
+  "sourceLinksPass": false,
+  "mobilePass": false,
+  "editorialQualityPass": false,
+  "leakagePass": true,
+  "duplicateCheck": "PENDING_REMOTE",
+  "duplicateUncertainty": true,
+  "articleFingerprint": "",
+  "commerceEnabled": false,
+  "verifiedAt": "2026-10-28T00:30:17.828Z",
+  "expiresAt": "2026-10-28T02:00:17.828Z",
+  "sourceAuditIds": [
+    "naver:kospi:history",
+    "naver:kosdaq:history",
+    "naver:usd-krw"
+  ],
+  "sourceAuditFingerprint": "sha256:a7fee5d61495a87b87d5f7934b1a42a42c9e916991883aef50eecb615bb5c778",
+  "crossVerificationFingerprint": "sha256:1d2209967d4e7bb2219947efc47762ea29abe9e32e3c8774cc15357ac3985e3a",
+  "crossVerification": {
+    "schemaVersion": "1.0",
+    "category": "KOREA_MARKET",
+    "observedDate": "2026-10-27",
+    "primarySource": {
+      "provider": "Naver Finance",
+      "domain": "naver.com",
+      "urls": [
+        "https://m.stock.naver.com/api/index/KOSPI/price?pageSize=10&page=1",
+        "https://m.stock.naver.com/api/index/KOSDAQ/price?pageSize=10&page=1"
+      ]
+    },
+    "independentSource": {
+      "providers": [],
+      "domains": [],
+      "urls": []
+    },
+    "comparedFields": [],
+    "tolerance": {
+      "KOSPI": 0.05,
+      "KOSDAQ": 0.05,
+      "USD_KRW": 2
+    },
+    "comparisonResult": "UNAVAILABLE",
+    "sourceDiversityPass": false,
+    "verification": "REVIEW_REQUIRED",
+    "reasonCodes": [
+      "YAHOO_FINANCE_KOSPI_ROW_MISSING",
+      "KOREA_OFFICIAL_INDEX_COMPARISON_INCOMPLETE",
+      "KOREA_INDEPENDENT_SOURCE_DIVERSITY_FAILED"
+    ],
+    "verifiedAt": "2026-10-28T00:30:17.828Z",
+    "officialPhase": "PRE_PUBLICATION",
+    "reconciliation": {
+      "status": "NOT_REQUIRED",
+      "officialObservedDates": []
+    }
+  }
+}

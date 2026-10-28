@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "1.0",
+  "category": "KOREA_MARKET",
+  "observedDate": "2026-10-27",
+  "primarySource": {
+    "provider": "Naver Finance",
+    "domain": "naver.com",
+    "urls": [
+      "https://m.stock.naver.com/api/index/KOSPI/price?pageSize=10&page=1",
+      "https://m.stock.naver.com/api/index/KOSDAQ/price?pageSize=10&page=1"
+    ]
+  },
+  "independentSource": {
+    "providers": [],
+    "domains": [],
+    "urls": []
+  },
+  "comparedFields": [],
+  "tolerance": {
+    "KOSPI": 0.05,
+    "KOSDAQ": 0.05,
+    "USD_KRW": 2
+  },
+  "comparisonResult": "UNAVAILABLE",
+  "sourceDiversityPass": false,
+  "verification": "REVIEW_REQUIRED",
+  "reasonCodes": [
+    "YAHOO_FINANCE_KOSPI_ROW_MISSING",
+    "KOREA_OFFICIAL_INDEX_COMPARISON_INCOMPLETE",
+    "KOREA_INDEPENDENT_SOURCE_DIVERSITY_FAILED"
+  ],
+  "verifiedAt": "2026-10-28T00:30:17.828Z",
+  "officialPhase": "PRE_PUBLICATION",
+  "reconciliation": {
+    "status": "NOT_REQUIRED",
+    "officialObservedDates": []
+  }
+}
