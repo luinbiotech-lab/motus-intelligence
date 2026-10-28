@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {collectMarketResearch,collectKbBrokerResearch,selectMarketResearch,type ResearchFeed} from '../src/operations/market-research-feeds.js';
+import {collectMarketResearch,collectKbBrokerResearch,collectGoldmanBrokerResearch,selectMarketResearch,type ResearchFeed} from '../src/operations/market-research-feeds.js';
 const feed:ResearchFeed={publisher:'Test Finance',url:'https://news.example.com/rss',domains:['news.example.com'],region:'US_MARKET',kind:'FINANCIAL_MEDIA'};
 const xml='<rss><channel>'+
 '<item><title>Nasdaq stocks rise as analysts study earnings</title><link>https://news.example.com/markets/article-1</link><pubDate>Wed, 28 Oct 2026 13:00:00 GMT</pubDate><description>Headlines only</description></item>'+
@@ -27,4 +27,12 @@ test('first-party KB research site yields broker-labeled dated report reference 
  assert.equal(result.entries.length,1);assert.equal(result.entries[0]?.kind,'BROKER_RESEARCH');assert.equal(result.entries[0]?.publisher,'KB증권 리서치');
  assert.equal(result.entries[0]?.publishedAt,'2026-10-21T00:00:00.000Z');
  assert.ok(result.entries[0]?.url.endsWith('documentid=20261021144128693K'));
+});
+
+test('Goldman Sachs first-party insights are dated and broker-labeled without invented targets',async()=>{
+ const html='<a href="/insights/articles/will-30-year-us-treasury-yields-climb-higher"><div>Markets</div><h3>Will 30-Year US Treasury Yields Climb Higher?</h3><div>Oct 6, 2026</div></a>';
+ const result=await collectGoldmanBrokerResearch('2026-10-28T14:00:00Z',(async()=>new Response(html)) as typeof fetch);
+ assert.equal(result.entries.length,1);assert.equal(result.entries[0]?.kind,'BROKER_RESEARCH');
+ assert.equal(result.entries[0]?.publisher,'Goldman Sachs');assert.equal(result.entries[0]?.publishedAt,'2026-10-06T00:00:00.000Z');
+ assert.ok(result.entries[0]?.url.startsWith('https://www.goldmansachs.com/insights/articles/'));
 });
