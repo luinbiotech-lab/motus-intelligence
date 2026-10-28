@@ -1,0 +1,14 @@
+{
+  "mode": "LIVE",
+  "sourceMode": "internal",
+  "date": "2026-10-28",
+  "observedDate": "2026-10-27",
+  "category": "US_MARKET",
+  "state": "HOLD",
+  "reasonCode": "NAVER_DATALAB_SIGNAL_REQUIRED",
+  "verification": "REVIEW_REQUIRED",
+  "publishCallCount": 0,
+  "commerce": {
+    "enabled": false
+  }
+}
