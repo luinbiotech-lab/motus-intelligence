@@ -28,6 +28,6 @@ These are corrections to already published articles, not evidence that the origi
 - Correct Naver provenance to the API Hub endpoint actually called.
 - Integrate main ac1d8df9a6f0b04d842515258bd0ab1929d4730e's three incremental production workflow, duplicate lookup and test changes without discarding prior branch work.
 
-Validation: npm test, 552 passed, 0 failed. Includes a real publisher CLI subprocess with a legacy VERIFIED unit and missing search proof; result HOLD with insertCallCount=0 and publishCallCount=0. The prior AI pipeline test now proves that verified sources plus long template prose still require editorial review.
+Validation: npm test, 553 passed, 0 failed. Includes a real publisher CLI subprocess with a legacy VERIFIED unit and missing search proof; result HOLD with insertCallCount=0 and publishCallCount=0. The prior AI pipeline test now proves that verified sources plus long template prose still require editorial review.
 
 Production automation remains on main. These PR changes cannot protect subsequent scheduled publication until deployed. Preserve the user's prior main-merge restriction, existing credentials and schedules. Do not claim that keyword authentication, scheduled production quality, Korea collection or market-wide trending rank has been recovered by these article corrections.

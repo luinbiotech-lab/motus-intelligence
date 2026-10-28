@@ -25,8 +25,9 @@ export function evaluatePublicationDemand(input:unknown,html:string,date:string,
   const previous=new Date(Date.parse(date+'T00:00:00Z')-86400000).toISOString().slice(0,10),rows=evidence.ranking;
   if(rows.some((r,i)=>r.rank!==i+1||!Number.isFinite(r.ratio)||r.ratio<0||r.ratio>100||i>0&&r.ratio>rows[i-1]!.ratio||![date,previous].includes(r.signalDate)||r.signalDate!==rows[0]!.signalDate||!r.signalId||!r.claimRefs?.length||!r.sourceRefs?.length||!/^https:\/\/naverapihub\.apigw\.ntruss\.com\/search-trend\/v1\/search$/.test(r.sourceUrl)))reasons.push('SEARCH_RANKING_PROVENANCE_INVALID');
   const selected=rows.find(r=>r.topicId===evidence.selectedTopicId);
-  const text=html.replace(/<(script|style|svg)\b[^>]*>[\s\S]*?<\/\1>/gi,' ').replace(/<[^>]+>/g,' ').replaceAll('&amp;','&').toLowerCase();
-  if(!selected||selected.ratio<=0||!selected.terms?.some(term=>term.length>=2&&text.includes(term.toLowerCase())))reasons.push('SEARCH_SELECTED_TOPIC_NOT_USED_IN_ARTICLE');
+  const prose=html.replace(/<(script|style|svg|header|ul)\b[^>]*>[\s\S]*?<\/\1>/gi,' ');
+  const text=[...prose.matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/gi)].map(match=>match[1]!.replace(/<[^>]+>/g,' ')).join(' ').replaceAll('&amp;','&').toLowerCase();
+  if(!selected||selected.ratio<=0||![selected.query,selected.terms?.[0]??''].some(term=>term.length>=2&&text.includes(term.toLowerCase())))reasons.push('SEARCH_SELECTED_TOPIC_NOT_USED_IN_ARTICLE');
  }
  return {pass:reasons.length===0,reasons};
 }
