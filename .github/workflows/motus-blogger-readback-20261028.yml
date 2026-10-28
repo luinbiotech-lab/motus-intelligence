@@ -1,0 +1,30 @@
+name: MOTUS Blogger Readback 2026-10-28
+on:
+  push:
+    branches: [diagnostics/real-api-smoke-20261028]
+permissions:
+  contents: read
+jobs:
+  readback:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    env:
+      BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+      CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+      CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+      REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+    steps:
+      - name: Confirm existing post without changing Blogger
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          const form=new URLSearchParams({client_id:process.env.CLIENT_ID,client_secret:process.env.CLIENT_SECRET,refresh_token:process.env.REFRESH_TOKEN,grant_type:'refresh_token'});
+          const auth=await fetch('https://oauth2.googleapis.com/token',{method:'POST',body:form});
+          if(!auth.ok){console.log(JSON.stringify({tokenHttp:auth.status}));process.exit(1)}
+          const token=(await auth.json()).access_token;
+          const id='5988254098180174856';
+          const response=await fetch('https://www.googleapis.com/blogger/v3/blogs/'+encodeURIComponent(process.env.BLOG_ID)+'/posts/'+id+'?view=ADMIN',{headers:{Authorization:'Bearer '+token}});
+          if(!response.ok){console.log(JSON.stringify({postId:id,readHttp:response.status}));process.exit(1)}
+          const p=await response.json();
+          console.log(JSON.stringify({postId:id,readHttp:response.status,status:p.status,url:p.url,published:p.published,title:p.title}));
+          NODE
