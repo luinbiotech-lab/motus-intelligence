@@ -17,3 +17,11 @@ jobs:
             catch(e){console.log(JSON.stringify({name,error:e.name}))}
           }
           NODE
+
+      - name: Inspect Goldman Insights article card metadata
+        run: |
+          node --input-type=module <<'NODE'
+          const r=await fetch('https://www.goldmansachs.com/insights',{signal:AbortSignal.timeout(12000)}),html=await r.text();
+          const refs=[...html.matchAll(/href="([^"]*\/insights\/(?:articles|topics|series)\/[^"]+)"/g)].map(m=>({href:m[1],near:html.slice(Math.max(0,m.index-130),m.index+400).replace(/\s+/g,' ').slice(0,530)}));
+          console.log(JSON.stringify({refs:refs.slice(0,8),count:refs.length,dateFormats:[...new Set([...html.matchAll(/(?:Oct|October)\s+\d{1,2},?\s+2026/gi)].map(m=>m[0]))].slice(0,5)}));
+          NODE
