@@ -1,0 +1,34 @@
+name: MOTUS External API Credential Smoke Test
+on:
+  push:
+    branches: [diagnostics/real-api-smoke-20261028]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  credential-smoke:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    env:
+      NAVER_ID: ${{ secrets.NAVER_DATALAB_CLIENT_ID }}
+      NAVER_SECRET: ${{ secrets.NAVER_DATALAB_CLIENT_SECRET }}
+      KRX_KEY: ${{ secrets.KRX_AUTH_KEY }}
+    steps:
+      - name: Verify actual provider responses without logging secrets
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          const check=async(name,url,init)=>{
+            try{
+              const r=await fetch(url,{...init,signal:AbortSignal.timeout(15000)});
+              const body=await r.text();
+              let parsed=null;try{parsed=JSON.parse(body)}catch{}
+              const rows=parsed?.OutBlock_1;
+              console.log(JSON.stringify({provider:name,httpStatus:r.status,ok:r.ok,validJson:parsed!==null,rowCount:Array.isArray(rows)?rows.length:null,searchTrendResultCount:Array.isArray(parsed?.results)?parsed.results.length:null,providerCode:parsed?.code??parsed?.error?.code??null}));
+            }catch(error){console.log(JSON.stringify({provider:name,networkError:error?.name??'UNKNOWN'}))}
+          };
+          const id=process.env.NAVER_ID??'',secret=process.env.NAVER_SECRET??'',krx=process.env.KRX_KEY??'';
+          console.log(JSON.stringify({secretsPresent:{naverId:Boolean(id),naverSecret:Boolean(secret),krx:Boolean(krx)}}));
+          if(id&&secret)await check('NAVER_SEARCH_TREND','https://naverapihub.apigw.ntruss.com/search-trend/v1/search',{method:'POST',headers:{'content-type':'application/json','X-NCP-APIGW-API-KEY-ID':id,'X-NCP-APIGW-API-KEY':secret},body:JSON.stringify({startDate:'2026-10-20',endDate:'2026-10-27',timeUnit:'date',keywordGroups:[{groupName:'코스피',keywords:['코스피']}]})});
+          if(krx){for(const [name,path] of [['KRX_KOSPI','kospi_dd_trd'],['KRX_KOSDAQ','kosdaq_dd_trd']])await check(name,'https://openapi.krx.co.kr/svc/apis/idx/'+path+'?basDd=20261027',{headers:{accept:'application/json',AUTH_KEY:krx}})}
+          NODE
