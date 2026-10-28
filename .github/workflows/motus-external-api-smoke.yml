@@ -24,7 +24,7 @@ jobs:
               const body=await r.text();
               let parsed=null;try{parsed=JSON.parse(body)}catch{}
               const rows=parsed?.OutBlock_1;
-              console.log(JSON.stringify({provider:name,httpStatus:r.status,ok:r.ok,validJson:parsed!==null,rowCount:Array.isArray(rows)?rows.length:null,searchTrendResultCount:Array.isArray(parsed?.results)?parsed.results.length:null,providerCode:parsed?.code??parsed?.error?.code??null}));
+              console.log(JSON.stringify({provider:name,httpStatus:r.status,ok:r.ok,validJson:parsed!==null,rowCount:Array.isArray(rows)?rows.length:null,searchTrendResultCount:Array.isArray(parsed?.results)?parsed.results.length:null,providerCode:parsed?.code??parsed?.error?.code??parsed?.errorCode??null,errorType:typeof parsed?.message==='string'?parsed.message.slice(0,90):typeof parsed?.error?.message==='string'?parsed.error.message.slice(0,90):null}));
             }catch(error){console.log(JSON.stringify({provider:name,networkError:error?.name??'UNKNOWN'}))}
           };
           const id=process.env.NAVER_ID??'',secret=process.env.NAVER_SECRET??'',krx=process.env.KRX_KEY??'';
