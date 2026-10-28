@@ -24,8 +24,8 @@ jobs:
         with: {node-version: 22, cache: npm}
       - run: npm ci
       - run: npm run build
-      - name: Collect and verify completed 2026-10-27 Korea session without publishing
-        run: npm run motus:live -- --date 2026-10-28 --category korea --source internal
+      - name: Inspect latest completed Korea session in controlled recovery mode without publishing
+        run: npm run motus:live -- --date 2026-10-28 --category korea --source internal --controlled-recovery
       - name: Report safe source outcomes
         if: always()
         shell: bash
