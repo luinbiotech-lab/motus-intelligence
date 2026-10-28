@@ -36,3 +36,10 @@ test('Goldman Sachs first-party insights are dated and broker-labeled without in
  assert.equal(result.entries[0]?.publisher,'Goldman Sachs');assert.equal(result.entries[0]?.publishedAt,'2026-10-06T00:00:00.000Z');
  assert.ok(result.entries[0]?.url.startsWith('https://www.goldmansachs.com/insights/articles/'));
 });
+
+test('KB public report-card bullets become first-party evidence for the same dated report',async()=>{
+ const html='<div class="grp__item"><h2>KB Core View</h2><a onclick="toParent(\'/detailView.able?documentid=20261021144128693K\');"><div class="tit">금리와 물가 전망</div><div class="date">2026. 10. 21</div><ul class="has-dot"><li>주식: 견조한 실적 흐름과 AI 투자</li><li>채권: 금리 변동성에 유의</li><li>대체: 과도한 추가 문장은 제외</li></ul></a></div>';
+ const result=await collectKbBrokerResearch('2026-10-28T14:00:00Z',(async()=>new Response(html)) as typeof fetch);
+ assert.deepEqual(result.entries[0]?.evidence,['주식: 견조한 실적 흐름과 AI 투자','채권: 금리 변동성에 유의']);
+ assert.equal(result.entries[0]?.publishedAt,'2026-10-21T00:00:00.000Z');
+});
