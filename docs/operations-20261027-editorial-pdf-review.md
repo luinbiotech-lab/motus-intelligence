@@ -25,3 +25,15 @@ AI/labor suspension versus the later one-off request remains as scoped in the su
 Blogger Manager #29 exact SHA `94cc509db2d29a5d46e261ec7093be058d16d468`: remote checks SUCCESS; local exact gateway module/tests 7/7 PASS, including receipt fingerprint mismatch blocking. The source-referenced diagnostic URL returned HTTP 200 `text/html`, not the expected diagnostic JSON. Its deployment/configuration equivalence to PR #29 is unproven. Registered Google redirect, cookie state and account permission were not accessible; OAuth 400 root cause remains unresolved. No token values were inspected or changed.
 
 Claude's existing #28 comments were read, including the SVG-depth warning and producer compatibility concern. This implementation responds on the same PR and preserves its earlier thin-article test. Share exact HEAD, CI and this operational impact for independent review. A comment does not constitute actual Claude execution or approval; that remains PENDING.
+
+## 2026-10-28 — preserve subsequently merged PR #32
+
+During the pending Blogger account selection, main advanced to `027e6c6263006ae43a37c404e7de6d9796dbc006` via PR #32. Existing #28 had advanced to `dac7171` through temporary diagnostic commits with no net source difference from our prior `325a680`. This continuation integrates the current main into the SAME #28 branch without rewriting history or merging #28 to main.
+
+Preserved #32 behavior: wider Yahoo request window, exchange-timezone session dates, query1/query2 fallback, requested/available date diagnostics, verified Naver demand context in U.S. pre-render selection, production Naver signal HOLD policy and Blogger pageview baseline capture. The U.S. dated yield/bp fix, commentary and missing sector/company evidence gate from #28 are retained. No credentials, schedules, operational data, theme or article publication was changed by this continuation.
+
+Cross-review finding: the new per-host Yahoo loop still let a network exception, malformed JSON, or out-of-range timestamp exit before trying query2. The #28 integration contains per-host failure isolation, a bounded generic error code without provider prose, and invalid-Date rejection. Three regression cases prove fallback succeeds while preserving an audit of the failed first host and rejecting unverified data. The existing fail-closed and timezone tests remain.
+
+PR #32's operational diagnostic comment reports missing Naver DataLab and KRX credentials and unsuccessful independent market-provider recovery on the production runner. These are reported operational findings, not secret values independently inspected in this session. A successful local Yahoo replay is not proof that the production runner has recovered. Do not certify production collection or Naver demand integration until the actual configured runtime is verified.
+
+Blogger theme management remains unavailable under the currently connected account. The secure account-selection request did not complete; no retry or alternate account assumption was made. Theme PR #31 latest `e510701` passed CI and contains 11 offline XML safety tests, but production application is still NOT performed.

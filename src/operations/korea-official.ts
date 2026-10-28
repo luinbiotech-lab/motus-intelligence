@@ -37,27 +37,45 @@ export class KrxBokOfficialSourceAdapter implements KoreaOfficialSourceAdapter {
 }
 
 export class YahooKoreaSecondarySourceAdapter implements KoreaOfficialSourceAdapter {
- readonly adapterId='yahoo-korea-secondary-v1';
+ readonly adapterId='yahoo-korea-secondary-v2';
  constructor(private readonly fetcher:typeof fetch=fetch){}
  async fetch(observedDate:string,_collectedAt:string):Promise<KoreaOfficialFetchResult>{
-  const observations:KoreaOfficialObservation[]=[],audit:KoreaOfficialAudit[]=[],from=Math.floor(Date.parse(observedDate+'T00:00:00Z')/1000),to=from+3*86400;
+  const observations:KoreaOfficialObservation[]=[],audit:KoreaOfficialAudit[]=[],center=Date.parse(observedDate+'T00:00:00Z'),from=Math.floor((center-2*86400000)/1000),to=Math.floor((center+3*86400000)/1000);
   try{
    for(const [field,symbol] of [['KOSPI','%5EKS11'],['KOSDAQ','%5EKQ11']] as const){
-    const url=`https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?period1=${from}&period2=${to}&interval=1d`;
-    const response=await fetchWithTransientRetry(this.fetcher,url,()=>({headers:{accept:'application/json','user-agent':'MOTUS-Internal-Collector/1.0'},signal:AbortSignal.timeout(20000)}));
-    if(!response.ok)throw new Error('YAHOO_FINANCE_HTTP_'+response.status);
-    const body=await response.json() as {chart?:{error?:unknown;result?:Array<{timestamp?:number[];indicators?:{quote?:Array<{close?:Array<number|null>}>}}>}};
-    const result=body.chart?.result?.[0],timestamps=result?.timestamp??[],closes=result?.indicators?.quote?.[0]?.close??[];
-    const dates=timestamps.map(value=>Number.isFinite(value)&&Number.isFinite(new Date(value*1000).getTime())?new Date(value*1000).toISOString().slice(0,10):'');
-    const index=dates.indexOf(observedDate),value=index>=0?closes[index]:null;
-    const code=body.chart?.error?'YAHOO_FINANCE_PROVIDER_ERROR':index<0||value==null?'YAHOO_FINANCE_'+field+'_ROW_MISSING':typeof value!=='number'||!Number.isFinite(value)||value<=0?'YAHOO_FINANCE_'+field+'_INVALID_CLOSE':null;
-    audit.push({sourceId:'yahoo-finance:'+field.toLowerCase(),url,status:code?'FAILED':'PASS',recordCount:code?0:1,error:code,requestedDate:observedDate,availableDates:[...new Set(dates.filter(Boolean))].slice(-8)});
-    if(code)throw new Error(code);
-    observations.push({field,observedDate,value:value as number,provider:'YAHOO_FINANCE',sourceUrl:url,metricBasis:'SESSION_CLOSE'});
+    let accepted:{value:number;url:string;availableDates:string[]}|null=null,lastCode='YAHOO_FINANCE_'+field+'_ROW_MISSING';
+    for(const host of ['query1.finance.yahoo.com','query2.finance.yahoo.com']){
+     const url=`https://${host}/v8/finance/chart/${symbol}?period1=${from}&period2=${to}&interval=1d`;
+     try{
+     const response=await fetchWithTransientRetry(this.fetcher,url,()=>({headers:{accept:'application/json','user-agent':'MOTUS-Internal-Collector/1.0'},signal:AbortSignal.timeout(20000)}));
+     if(!response.ok){lastCode='YAHOO_FINANCE_HTTP_'+response.status;audit.push({sourceId:'yahoo-finance:'+field.toLowerCase()+':'+host,url,status:'FAILED',recordCount:0,error:lastCode,requestedDate:observedDate,availableDates:[]});continue}
+     const body=await response.json() as {chart?:{error?:unknown;result?:Array<{meta?:{exchangeTimezoneName?:string;timezone?:string};timestamp?:number[];indicators?:{quote?:Array<{close?:Array<number|null>}>}}>}};
+     const result=body.chart?.result?.[0],timestamps=result?.timestamp??[],closes=result?.indicators?.quote?.[0]?.close??[],zone=result?.meta?.exchangeTimezoneName||result?.meta?.timezone||'Asia/Seoul';
+     const dates=timestamps.map(value=>yahooSessionDate(value,zone)),index=dates.indexOf(observedDate),value=index>=0?closes[index]:null;
+     const code=body.chart?.error?'YAHOO_FINANCE_PROVIDER_ERROR':index<0||value==null?'YAHOO_FINANCE_'+field+'_ROW_MISSING':typeof value!=='number'||!Number.isFinite(value)||value<=0?'YAHOO_FINANCE_'+field+'_INVALID_CLOSE':null;
+     audit.push({sourceId:'yahoo-finance:'+field.toLowerCase()+':'+host,url,status:code?'FAILED':'PASS',recordCount:code?0:1,error:code,requestedDate:observedDate,availableDates:[...new Set(dates.filter(Boolean))].slice(-8)});
+     if(!code){accepted={value:value as number,url,availableDates:dates};break}
+     lastCode=code;
+     }catch{
+      lastCode='YAHOO_FINANCE_FETCH_FAILED';
+      audit.push({sourceId:'yahoo-finance:'+field.toLowerCase()+':'+host,url,status:'FAILED',recordCount:0,error:lastCode,requestedDate:observedDate,availableDates:[]});
+     }
+    }
+    if(!accepted)throw new Error(lastCode);
+    observations.push({field,observedDate,value:accepted.value,provider:'YAHOO_FINANCE',sourceUrl:accepted.url,metricBasis:'SESSION_CLOSE'});
    }
    return {observations,audit,requiredProviderAvailable:true,reasonCode:null,phase:'PRE_PUBLICATION'};
   }
-  catch(error){return {observations,audit:[...audit,{sourceId:'yahoo-finance:secondary',url:'https://finance.yahoo.com/',status:'FAILED',recordCount:0,error:errorMessage(error)}],requiredProviderAvailable:false,reasonCode:errorMessage(error),phase:'PRE_PUBLICATION'}}
+  catch(error){return {observations,audit:[...audit,{sourceId:'yahoo-finance:secondary',url:'https://finance.yahoo.com/',status:'FAILED',recordCount:0,error:errorMessage(error),requestedDate:observedDate,availableDates:[...new Set(audit.flatMap(item=>item.availableDates??[]))].slice(-8)}],requiredProviderAvailable:false,reasonCode:errorMessage(error),phase:'PRE_PUBLICATION'}}
+ }
+}
+
+function yahooSessionDate(value:number|undefined,timeZone:string):string {
+ if(typeof value!=='number'||!Number.isFinite(value)||!Number.isFinite(new Date(value*1000).getTime()))return '';
+ try{
+  return new Intl.DateTimeFormat('en-CA',{timeZone,year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date(value*1000));
+ }catch{
+  return new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date(value*1000));
  }
 }
 
