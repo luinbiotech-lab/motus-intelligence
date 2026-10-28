@@ -15,8 +15,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: shape
+        if: false
         run: node diag/probe.mjs shape
       - name: naver
+        if: false
         run: node diag/probe.mjs naver
       - name: krx
+        if: false
         run: node diag/probe.mjs krx
+      - name: yahoo
+        run: node diag/yahoo.mjs
