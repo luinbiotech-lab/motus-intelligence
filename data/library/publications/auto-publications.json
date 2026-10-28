@@ -52,5 +52,11 @@
     "publicationId": "motus-live-2026-10-27:ai",
     "publicPostUrl": "https://motusnova.blogspot.com/2026/10/aws-gpt-61.html",
     "publishedAt": "2026-10-27T18:14:49+09:00"
+  },
+  {
+    "idempotencyKey": "library:motus-live-2026-10-27:us|https://motusnova.blogspot.com/2026/10/nasdaq_02017334565.html",
+    "publicationId": "motus-live-2026-10-27:us",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/nasdaq_02017334565.html",
+    "publishedAt": "2026-10-28T21:46:42+09:00"
   }
 ]
