@@ -42,10 +42,21 @@ def parse(text):
         raise ValueError('BLOG1_WIDGET_REQUIRED')
     if len(root.findall('.//' + B + 'skin')) != 1:
         raise ValueError('ONE_BLOGGER_SKIN_REQUIRED')
-    # b:includable IDs such as "main" are local to each widget, not DOM IDs.
-    ids = [node.get('id') for node in root.iter() if node.get('id') and node.tag != B + 'includable']
-    if len(ids) != len(set(ids)):
-        raise ValueError('DUPLICATE_ID')
+    # Includables are template definitions, not simultaneously rendered DOM.
+    # Contempo's commentForm/threadedCommentForm legitimately share HTML IDs.
+    # Keep widget/section identities global; validate HTML IDs per definition.
+    global_ids = set()
+    def check_ids(node, scope):
+        if node.tag == B + 'includable':
+            scope = set()
+        elif node.get('id'):
+            target = global_ids if node.tag in (B + 'widget', B + 'section') else scope
+            if node.get('id') in target:
+                raise ValueError('DUPLICATE_ID')
+            target.add(node.get('id'))
+        for child in node:
+            check_ids(child, scope)
+    check_ids(root, global_ids)
     return root, widgets
 
 def build_theme(original):
@@ -55,7 +66,9 @@ def build_theme(original):
     css = (ASSETS / 'motus.css').read_text(encoding='utf-8')
     if ']]>' in css:
         raise ValueError('CSS_CDATA_TERMINATOR')
-    head = block('HEAD', "<style id='motus-theme-overlay' type='text/css'><![CDATA[" + css + ']]></style>')
+    # Blogger preserves CDATA delimiters in the HTML response. CSS comments
+    # make them harmless in HTML while remaining valid XML CDATA wrappers.
+    head = block('HEAD', "<style id='motus-theme-overlay' type='text/css'>/*<![CDATA[*/" + css + '/*]]>*/</style>')
     top = block('TOP', (ASSETS / 'masthead.xml').read_text(encoding='utf-8'))
     foot = block('FOOTER', (ASSETS / 'footer.xml').read_text(encoding='utf-8'))
     if len(re.findall(r'</head\s*>', baseline)) != 1 or len(re.findall(r'<body\b[^>]*>', baseline)) != 1 or len(re.findall(r'</body\s*>', baseline)) != 1:
