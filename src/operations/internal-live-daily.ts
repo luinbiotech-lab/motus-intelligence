@@ -118,7 +118,10 @@ export class RepositoryInternalDailyBuilder implements InternalDailyBuilder {
   try{
    const operationDate=kstDate(at),todaySession=marketSession('KOREA',operationDate),controlledRecovery=options.mode==='ADMIN_CONTROLLED_RECOVERY';
    if(todaySession.state==='HOLIDAY'&&!controlledRecovery)return skip(audit,new Error('KOREA_OPERATION_DATE_HOLIDAY'));
-   const expectedSession=latestCompletedSession('KOREA',at);
+   // Keep the morning edition anchored to the previous completed session when
+   // GitHub schedule execution is delayed past market close; manually controlled
+   // closing recovery intentionally uses the current execution timestamp.
+   const expectedSession=latestCompletedSession('KOREA',controlledRecovery?at:operationDate+'T06:17:00+09:00');
    if(!isCompletedSession(expectedSession,at))throw new Error('KOREA_SESSION_NOT_COMPLETED');
    if(expectedSession.date>operationDate)throw new Error('KOREA_FUTURE_SESSION_REJECTED');
    if(expectedSession.date===operationDate&&!controlledRecovery)throw new Error('KOREA_MORNING_WINDOW_NOT_ELIGIBLE');
