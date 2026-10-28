@@ -1,0 +1,37 @@
+name: MOTUS US Broker Editorial End-to-End Readonly
+on:
+  push:
+    branches: [feat/goldman-broker-research-intake-20261028]
+permissions:
+  contents: read
+jobs:
+  us-editorial:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 16
+    env:
+      TZ: Asia/Seoul
+      MOTUS_PRODUCTION_RUN: 'true'
+      MOTUS_LIVE_PUBLISH_ENABLED: 'false'
+      TWELVE_DATA_API_KEY: ${{ secrets.TWELVE_DATA_API_KEY }}
+      NAVER_DATALAB_CLIENT_ID: ${{ secrets.NAVER_DATALAB_CLIENT_ID }}
+      NAVER_DATALAB_CLIENT_SECRET: ${{ secrets.NAVER_DATALAB_CLIENT_SECRET }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 22, cache: npm}
+      - run: npm ci
+      - run: npm run build
+      - run: npm run motus:live -- --date 2026-10-29 --category us --source internal --at 2026-10-28T15:08:00Z
+      - name: Verify actual US broker evidence in rendered article and provenance
+        run: |
+          node --input-type=module <<'NODE'
+          import {readFileSync} from 'node:fs';
+          const root='data/operations/2026-10-29/us/';
+          const u=JSON.parse(readFileSync(root+'live-unit.json','utf8'));
+          const v=JSON.parse(readFileSync(root+'verification.json','utf8'));
+          const brokers=u.viewModel?.wallStreetResearch??[];
+          const refs=(u.viewModel?.marketResearch??[]).filter(x=>x.kind==='BROKER_RESEARCH');
+          const evidence=refs.every(x=>u.render.html.includes(x.url)&&u.render.html.includes(x.publisher));
+          console.log(JSON.stringify({verification:v.verification,reasons:v.unresolvedConflicts,brokers:brokers.length,brokerRefs:refs.length,evidence,marketSources:(u.viewModel?.marketResearch??[]).length}));
+          if(v.verification!=='VERIFIED'||brokers.length===0||!evidence||refs.length===0)process.exit(1);
+          NODE
