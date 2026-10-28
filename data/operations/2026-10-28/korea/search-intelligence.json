@@ -1,11 +1,32 @@
 {
-  "collectedAt": "2026-10-28T00:30:17.828Z",
+  "collectedAt": "2026-10-28T12:51:26.243Z",
   "signalDate": null,
   "provider": null,
   "freshness": "NO_SEARCH_SIGNAL",
-  "fallbackReason": "NO_PRE_RENDER_SEARCH_CONTEXT",
-  "warnings": [],
-  "orderedTopicIds": [],
+  "fallbackReason": "NO_MATCHING_VERIFIED_TOPIC",
+  "warnings": [
+    "NAVER_DATALAB:NAVER_DATALAB_HTTP_401:200"
+  ],
+  "orderedTopicIds": [
+    "index:KOSPI",
+    "index:KOSDAQ",
+    "mover:0",
+    "mover:1",
+    "mover:2",
+    "mover:3",
+    "mover:4",
+    "mover:5",
+    "mover:6",
+    "mover:7",
+    "sector:0",
+    "sector:1",
+    "sector:2",
+    "sector:3",
+    "sector:4",
+    "sector:5",
+    "sector:6",
+    "sector:7"
+  ],
   "selectedSecondaryTopicId": null,
   "factsChanged": false,
   "gateOverride": false

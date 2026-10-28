@@ -4,65 +4,96 @@
   "operationDate": "2026-10-28",
   "observedDate": "2026-10-28",
   "sourceMode": "internal",
-  "verification": "FAILED",
-  "unresolvedConflicts": [
-    "YAHOO_FINANCE_KOSPI_ROW_MISSING"
-  ],
-  "provenancePass": false,
-  "sourceDiversityPass": false,
-  "sourceLinksPass": false,
-  "mobilePass": false,
-  "editorialQualityPass": false,
+  "verification": "VERIFIED",
+  "unresolvedConflicts": [],
+  "provenancePass": true,
+  "sourceDiversityPass": true,
+  "sourceLinksPass": true,
+  "mobilePass": true,
+  "editorialQualityPass": true,
   "leakagePass": true,
   "duplicateCheck": "PENDING_REMOTE",
   "duplicateUncertainty": true,
-  "articleFingerprint": "",
+  "articleFingerprint": "sha256:c52bfa3619ea772f466e3e693fa360a1ed19982cd4448db63ea4af18189bd304",
   "commerceEnabled": false,
-  "verifiedAt": "2026-10-28T00:30:17.828Z",
-  "expiresAt": "2026-10-28T02:00:17.828Z",
+  "verifiedAt": "2026-10-28T12:51:26.243Z",
+  "expiresAt": "2026-10-28T14:21:26.243Z",
   "sourceAuditIds": [
-    "naver:kospi:history",
-    "naver:kosdaq:history",
-    "naver:usd-krw"
+    "naver:flows",
+    "naver:kosdaq",
+    "naver:kospi",
+    "naver:mover",
+    "naver:sector",
+    "naver:usd-krw",
+    "yahoo-finance:kosdaq:query1.finance.yahoo.com",
+    "yahoo-finance:kospi:query1.finance.yahoo.com"
   ],
-  "sourceAuditFingerprint": "sha256:a7fee5d61495a87b87d5f7934b1a42a42c9e916991883aef50eecb615bb5c778",
-  "crossVerificationFingerprint": "sha256:1d2209967d4e7bb2219947efc47762ea29abe9e32e3c8774cc15357ac3985e3a",
+  "sourceAuditFingerprint": "sha256:d4296a87ff159483298b5d5bb908cd2b1af050de9d315358ccd05019347593fa",
+  "crossVerificationFingerprint": "sha256:b1d8a447013d447cd506d056dd332134da84b53907fae3dd3e21b713ef92eb86",
   "crossVerification": {
     "schemaVersion": "1.0",
     "category": "KOREA_MARKET",
-    "observedDate": "2026-10-27",
+    "observedDate": "2026-10-28",
     "primarySource": {
       "provider": "Naver Finance",
       "domain": "naver.com",
       "urls": [
-        "https://m.stock.naver.com/api/index/KOSPI/price?pageSize=10&page=1",
-        "https://m.stock.naver.com/api/index/KOSDAQ/price?pageSize=10&page=1"
+        "https://m.stock.naver.com/api/index/KOSPI/basic",
+        "https://m.stock.naver.com/api/index/KOSDAQ/basic"
       ]
     },
     "independentSource": {
-      "providers": [],
-      "domains": [],
-      "urls": []
+      "providers": [
+        "YAHOO_FINANCE"
+      ],
+      "domains": [
+        "yahoo.com"
+      ],
+      "urls": [
+        "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?period1=1792972800&period2=1793404800&interval=1d",
+        "https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?period1=1792972800&period2=1793404800&interval=1d"
+      ]
     },
-    "comparedFields": [],
+    "comparedFields": [
+      {
+        "field": "KOSPI",
+        "primaryValue": 6012.44,
+        "independentValue": 6012.43994140625,
+        "difference": 0.00005859374959982233,
+        "tolerance": 0.05,
+        "result": "PASS",
+        "primarySourceUrl": "https://m.stock.naver.com/api/index/KOSPI/basic",
+        "independentSourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?period1=1792972800&period2=1793404800&interval=1d",
+        "metricBasis": "SESSION_CLOSE"
+      },
+      {
+        "field": "KOSDAQ",
+        "primaryValue": 771.28,
+        "independentValue": 771.280029296875,
+        "difference": 0.00002929687502728484,
+        "tolerance": 0.05,
+        "result": "PASS",
+        "primarySourceUrl": "https://m.stock.naver.com/api/index/KOSDAQ/basic",
+        "independentSourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?period1=1792972800&period2=1793404800&interval=1d",
+        "metricBasis": "SESSION_CLOSE"
+      }
+    ],
     "tolerance": {
       "KOSPI": 0.05,
       "KOSDAQ": 0.05,
       "USD_KRW": 2
     },
-    "comparisonResult": "UNAVAILABLE",
-    "sourceDiversityPass": false,
-    "verification": "REVIEW_REQUIRED",
-    "reasonCodes": [
-      "YAHOO_FINANCE_KOSPI_ROW_MISSING",
-      "KOREA_OFFICIAL_INDEX_COMPARISON_INCOMPLETE",
-      "KOREA_INDEPENDENT_SOURCE_DIVERSITY_FAILED"
-    ],
-    "verifiedAt": "2026-10-28T00:30:17.828Z",
+    "comparisonResult": "PASS",
+    "sourceDiversityPass": true,
+    "verification": "VERIFIED",
+    "reasonCodes": [],
+    "verifiedAt": "2026-10-28T12:51:26.243Z",
     "officialPhase": "PRE_PUBLICATION",
     "reconciliation": {
       "status": "NOT_REQUIRED",
-      "officialObservedDates": []
+      "officialObservedDates": [
+        "2026-10-28"
+      ]
     }
   }
 }
