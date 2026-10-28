@@ -16,8 +16,8 @@
   "duplicateUncertainty": true,
   "articleFingerprint": "sha256:a65dee73f575c9c9fa72f1860dc2361d0c2659494c86b5f89cdf9d0a648c1709",
   "commerceEnabled": false,
-  "verifiedAt": "2026-10-28T12:39:06.291Z",
-  "expiresAt": "2026-10-28T14:09:06.291Z",
+  "verifiedAt": "2026-10-28T12:43:00.906Z",
+  "expiresAt": "2026-10-28T14:13:00.906Z",
   "sourceAuditIds": [
     "calendar:nyse",
     "fred:DCOILBRENTEU",
@@ -27,7 +27,7 @@
     "fred:nasdaq",
     "fred:sp500"
   ],
-  "sourceAuditFingerprint": "sha256:58efd9fcf8a3a749152a1b47169e2dd5ceaf0e4a2912dcf40f995a8a613ad58f",
+  "sourceAuditFingerprint": "sha256:88c9a115f2602ededb6dcb0980da197a86b87862b36fe522b1f5869e98f3f789",
   "crossVerificationFingerprint": null,
   "crossVerification": null
 }

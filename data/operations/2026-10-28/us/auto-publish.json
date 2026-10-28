@@ -5,7 +5,7 @@
       "final remote duplicate recheck failed"
     ],
     "approval": null,
-    "checkedAt": "2026-10-28T12:39:10.693Z"
+    "checkedAt": "2026-10-28T12:43:06.397Z"
   },
   "searchRegistration": null,
   "libraryRegistration": null,
@@ -13,17 +13,17 @@
   "pdfCandidate": null,
   "audit": [
     {
-      "at": "2026-10-28T12:39:10.693Z",
+      "at": "2026-10-28T12:43:06.397Z",
       "event": "AUTO_PUBLISH_STATIC_GATE",
       "detail": "AUTO_PUBLISH_READY"
     },
     {
-      "at": "2026-10-28T12:39:10.693Z",
+      "at": "2026-10-28T12:43:06.397Z",
       "event": "REMOTE_DUPLICATE_CHECK",
       "detail": "PASS"
     },
     {
-      "at": "2026-10-28T12:39:10.693Z",
+      "at": "2026-10-28T12:43:06.397Z",
       "event": "FINAL_REMOTE_DUPLICATE_CHECK",
       "detail": "HOLD"
     }
@@ -32,7 +32,7 @@
   "draftPostId": "805110169936465754",
   "publicPostUrl": null,
   "publishedAt": null,
-  "insertCallCount": 1,
+  "insertCallCount": 0,
   "publishCallCount": 0,
   "error": "final remote duplicate recheck failed"
 }
