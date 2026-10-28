@@ -1,0 +1,22 @@
+name: Claude API root-cause diagnosis (temporary)
+on:
+  push:
+    branches: [diagnostics/claude-api-root-cause-20261028]
+permissions:
+  contents: read
+jobs:
+  diagnose:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    env:
+      NAVER_ID: ${{ secrets.NAVER_DATALAB_CLIENT_ID }}
+      NAVER_SECRET: ${{ secrets.NAVER_DATALAB_CLIENT_SECRET }}
+      KRX_KEY: ${{ secrets.KRX_AUTH_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: shape
+        run: node diag/probe.mjs shape
+      - name: naver
+        run: node diag/probe.mjs naver
+      - name: krx
+        run: node diag/probe.mjs krx
