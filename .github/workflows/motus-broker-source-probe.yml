@@ -1,0 +1,19 @@
+name: MOTUS Broker Public Research Source Probe
+on:
+  push:
+    branches: [diagnostics/market-broker-sources-20261028]
+permissions: {contents: read}
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    steps:
+      - run: |
+          node --input-type=module <<'NODE'
+          for(const [name,url,terms] of [
+            ['JPMorgan','https://am.jpmorgan.com/us/en/asset-management/adv/insights/market-insights/',['A Season of Moderation','Economic Update','When will higher Treasury yields']],
+            ['GoldmanSachs','https://www.goldmansachs.com/insights',['2026','market','Global Investment Research']]]){
+            try{const r=await fetch(url,{headers:{'user-agent':'Mozilla/5.0'},signal:AbortSignal.timeout(15000)});const h=await r.text();console.log(JSON.stringify({name,status:r.status,bytes:h.length}));for(const term of terms){const i=h.indexOf(term);console.log(JSON.stringify({name,term,offset:i,near:i>=0?h.slice(Math.max(0,i-280),i+440).replace(/\\s+/g,' ').slice(0,700):null}));}}
+            catch(e){console.log(JSON.stringify({name,error:e.name}))}
+          }
+          NODE
