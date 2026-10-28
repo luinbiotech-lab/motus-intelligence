@@ -54,7 +54,7 @@ export function renderKoreaEditorialArticle(view:KoreaMarketDailyViewModel):Dail
 
 /** Show what the publisher actually published, without manufacturing a brokerage opinion.
  * Report dates older than a week are reference context, never same-session commentary. */
-export function renderMarketResearchEntries(entries:ReadonlyArray<{publisher:string;headline:string;url:string;publishedAt:string;kind:'FINANCIAL_MEDIA'|'BROKER_RESEARCH'}>,issueDate:string):string {
+export function renderMarketResearchEntries(entries:ReadonlyArray<{publisher:string;headline:string;url:string;publishedAt:string;kind:'FINANCIAL_MEDIA'|'BROKER_RESEARCH';evidence?:string[]}>,issueDate:string):string {
  const issued=Date.parse(issueDate+'T23:59:59Z');
  const filtered=entries.filter(item=>/^https:\/\/[^\s]+$/.test(item.url)&&Number.isFinite(Date.parse(item.publishedAt))&&Date.parse(item.publishedAt)<=issued);
  const make=(kind:'FINANCIAL_MEDIA'|'BROKER_RESEARCH')=>{
@@ -63,7 +63,7 @@ export function renderMarketResearchEntries(entries:ReadonlyArray<{publisher:str
    const age=Math.floor((issued-Date.parse(item.publishedAt))/86400000),older=age>7;
    const korean=(item.headline.match(/[가-힣]/g)??[]).length;
    const title=korean>=3?item.headline:'공식 원문 확인';
-   return `<li style="margin:0 0 11px"><strong>${esc(item.publisher)}</strong> · ${esc(item.publishedAt.slice(0,10))}${older?' · 과거 자료':''}<div><a href="${attr(item.url)}" target="_blank" rel="nofollow noopener noreferrer" style="${LINK}">${esc(title)}</a></div></li>`;
+   return `<li style="margin:0 0 11px"><strong>${esc(item.publisher)}</strong> · ${esc(item.publishedAt.slice(0,10))}${older?' · 과거 자료':''}<div><a href="${attr(item.url)}" target="_blank" rel="nofollow noopener noreferrer" style="${LINK}">${esc(title)}</a></div>${kind==='BROKER_RESEARCH'&&item.evidence?.length?`<p style="margin:6px 0 0">공식 공개 요약: ${esc(item.evidence.slice(0,2).join(' / '))}</p>`:''}</li>`;
   }).join('');
   return section(kind==='BROKER_RESEARCH'?'증권사 공개 리서치 자료':'금융 전문 언론 원문',`<p style="margin:0 0 12px">아래는 각 발행처에서 직접 확인된 자료입니다. 제목만으로 투자 의견이나 목표주가를 추정하지 않으며, 과거 자료는 당일 전망의 근거로 사용하지 않습니다.</p><ul style="margin:0;padding-left:20px">${list}</ul>`);
  };
