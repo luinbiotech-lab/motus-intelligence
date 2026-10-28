@@ -18,8 +18,10 @@ jobs:
         shell: bash
         run: |
           node --input-type=module <<'NODE'
-          import {collectMarketResearch} from './dist/src/operations/market-research-feeds.js';
+          import {collectMarketResearch,collectKbBrokerResearch} from './dist/src/operations/market-research-feeds.js';
           const at=new Date().toISOString();
+          const broker=await collectKbBrokerResearch(at);
+          console.log(JSON.stringify({category:'BROKER_RESEARCH',audit:broker.audit,entries:broker.entries}));
           for(const category of ['US_MARKET','KOREA_MARKET']){
             const result=await collectMarketResearch(category,at);
             console.log(JSON.stringify({category,at,feeds:result.audit,articleCount:result.entries.length,articles:result.entries.map(x=>({publisher:x.publisher,headline:x.headline,url:x.url,publishedAt:x.publishedAt,kind:x.kind}))}));
