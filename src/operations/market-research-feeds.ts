@@ -2,7 +2,7 @@ import {parseFeed,isOfficialLink} from './ai-sources.js';
 
 export type MarketResearchRegion='US_MARKET'|'KOREA_MARKET';
 export type MarketResearchClass='FINANCIAL_MEDIA'|'BROKER_RESEARCH';
-export interface MarketResearchEntry {publisher:string;headline:string;url:string;publishedAt:string;kind:MarketResearchClass;sourceFeed:string}
+export interface MarketResearchEntry {publisher:string;headline:string;url:string;publishedAt:string;kind:MarketResearchClass;sourceFeed:string;evidence?:string[]}
 export interface ResearchFeed {publisher:string;url:string;domains:string[];region:MarketResearchRegion;kind:MarketResearchClass}
 export interface MarketResearchAudit {publisher:string;url:string;status:'PASS'|'FAILED';count:number;error:string|null}
 export interface MarketResearchResult {entries:MarketResearchEntry[];audit:MarketResearchAudit[]}
@@ -60,7 +60,10 @@ export async function collectKbBrokerResearch(at:string,fetcher:typeof fetch=fet
    const iso=new Date(Date.UTC(date[0]!,date[1]!-1,date[2]!,0,0,0)).toISOString();
    const elapsed=Date.parse(at)-Date.parse(iso);
    if(elapsed<0||elapsed>21*86400000)continue;
-   entries.push({publisher:'KB증권 리서치',headline:kind+' · '+title.slice(0,180),url:'https://rc.kbsec.com/detailView.able?documentid='+id,publishedAt:iso,kind:'BROKER_RESEARCH',sourceFeed:feed});
+   // The public index itself publishes short bullets for this exact report card.
+   // Keep only two concise, same-card statements; never parse PDFs or synthesize target prices.
+   const bullets=[...block.matchAll(/<li\b[^>]*>([\s\S]*?)<\/li>/gi)].map(match=>match[1]!.replace(/<[^>]*>/g,' ').replace(/&(?:nbsp|amp|lt|gt|quot);/g,' ').replace(/\s+/g,' ').trim()).filter(Boolean).slice(0,2).map(text=>text.slice(0,85));
+   entries.push({publisher:'KB증권 리서치',headline:kind+' · '+title.slice(0,180),url:'https://rc.kbsec.com/detailView.able?documentid='+id,publishedAt:iso,kind:'BROKER_RESEARCH',sourceFeed:feed,...(bullets.length?{evidence:bullets}:{})});
   }
   return {entries,audit:[{publisher:'KB증권 리서치',url:feed,status:'PASS',count:entries.length,error:null}]};
  }catch(error){return {entries:[],audit:[{publisher:'KB증권 리서치',url:feed,status:'FAILED',count:0,error:error instanceof Error&&/^FEED_(?:HTTP_\d{3}|OVERSIZED)$/.test(error.message)?error.message:'FEED_FETCH_FAILED'}]}}
