@@ -65,3 +65,27 @@ export async function collectKbBrokerResearch(at:string,fetcher:typeof fetch=fet
   return {entries,audit:[{publisher:'KB증권 리서치',url:feed,status:'PASS',count:entries.length,error:null}]};
  }catch(error){return {entries:[],audit:[{publisher:'KB증권 리서치',url:feed,status:'FAILED',count:0,error:error instanceof Error&&/^FEED_(?:HTTP_\d{3}|OVERSIZED)$/.test(error.message)?error.message:'FEED_FETCH_FAILED'}]}}
 }
+
+/** First-party Goldman Sachs public Insights article references. The HTML card's
+ * own date/title/URL are the only supported claims; no inferred analyst rating. */
+export async function collectGoldmanBrokerResearch(at:string,fetcher:typeof fetch=fetch):Promise<MarketResearchResult>{
+ const feed='https://www.goldmansachs.com/insights';
+ try{
+  const response=await fetcher(feed,{headers:{accept:'text/html','user-agent':'MOTUS-ResearchCollector/1.0'},signal:AbortSignal.timeout(12000)});
+  if(!response.ok)throw new Error('FEED_HTTP_'+response.status);
+  const html=await response.text();if(html.length>3000000)throw new Error('FEED_OVERSIZED');
+  const entries:MarketResearchEntry[]=[];
+  for(const match of html.matchAll(/<a\b[^>]*href="(\/insights\/articles\/[^"]+)"[^>]*>([\s\S]*?)<\/a>/gi)){
+   const text=match[2]!.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
+   const rawDate=text.match(/\b(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+\d{1,2},\s+20\d{2}\b/i)?.[0];
+   if(!rawDate)continue;
+   const date=Date.parse(rawDate);if(!Number.isFinite(date)||date>Date.parse(at)||Date.parse(at)-date>30*86400000)continue;
+   const headline=text.slice(0,text.indexOf(rawDate)).replace(/^(?:Markets|Economy|Artificial Intelligence|Europe|Americas)\s+/i,'').trim();
+   if(!/\b(?:market|bonds?|treasury|yield|equity|equities|stock|fed|inflation|economic|earnings|investment|portfolios?)\b/i.test(headline))continue;
+   const path=match[1]!;
+   entries.push({publisher:'Goldman Sachs',headline:headline.slice(0,190),url:'https://www.goldmansachs.com'+path,publishedAt:new Date(date).toISOString(),kind:'BROKER_RESEARCH',sourceFeed:feed});
+   if(entries.length>=3)break;
+  }
+  return {entries,audit:[{publisher:'Goldman Sachs',url:feed,status:'PASS',count:entries.length,error:null}]};
+ }catch(error){return {entries:[],audit:[{publisher:'Goldman Sachs',url:feed,status:'FAILED',count:0,error:error instanceof Error&&/^FEED_(?:HTTP_\d{3}|OVERSIZED)$/.test(error.message)?error.message:'FEED_FETCH_FAILED'}]}}
+}
