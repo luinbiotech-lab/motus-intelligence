@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {RepositoryInternalDailyBuilder,koreaReferenceDate} from '../src/operations/internal-live-daily.js';
+import {RepositoryInternalDailyBuilder,koreaPublicationSession,koreaReferenceDate} from '../src/operations/internal-live-daily.js';
 import {TwelveDataTimeSeriesProvider} from '../src/operations/market-source-providers.js';
 import {buildProductionVerification} from '../src/production/verification-artifact.js';
 import type {AIIntelligenceDailyViewModel} from '../src/intelligence/daily-masters.js';
@@ -120,4 +120,10 @@ test('all three approved schedules enable live publication with credential prefl
  assert.match(workflow,/45 21 \* \* 1-5[^\n]*CATEGORY=us/);assert.match(workflow,/30 3 \* \* 1-5[^\n]*CATEGORY=ai/);assert.match(workflow,/SCHEDULE" == "17 21 \* \* 0-4" && "\$CATEGORY" == "korea"/);
  assert.match(workflow,/Require Blogger credentials before live publication/);
  assert.match(workflow,/INPUT_EXECUTE_PUBLISH" == "true"/);
+});
+
+test('Korea preopen session remains fixed to previous completed day even when GitHub runs after close',()=>{
+ const runAt='2026-10-28T13:00:00Z'; // 22:00 KST on 2026-10-28
+ assert.equal(koreaPublicationSession('2026-10-28',runAt,false).date,'2026-10-27');
+ assert.equal(koreaPublicationSession('2026-10-28',runAt,true).date,'2026-10-28');
 });
