@@ -20,11 +20,11 @@ export interface KoreaCrossVerificationArtifact {
 const KRX_API_HOST='https://data-dbg.krx.co.kr';
 const KRX_ENDPOINTS={KOSPI:KRX_API_HOST+'/svc/apis/idx/kospi_dd_trd',KOSDAQ:KRX_API_HOST+'/svc/apis/idx/kosdaq_dd_trd'} as const;
 
-/** Provider error detail without secrets: KRX answers e.g. {"respCode":"401","respMsg":"Unauthorized API Call"} when the key is not approved for that API. */
+/** Known KRX messages only (e.g. {"respMsg":"Unauthorized API Call"} = key not approved for that API); anything else keeps the HTTP status alone so a reflected key can never be recorded. */
+const KRX_KNOWN_MESSAGES:Record<string,string>={'unauthorized api call':'Unauthorized_API_Call'};
 export async function krxHttpError(response:Response):Promise<string> {
-  let detail='';try{const body=await response.json() as {respMsg?:unknown;respCode?:unknown};detail=typeof body.respMsg==='string'?body.respMsg:''}catch{}
-  const safe=detail.replace(/[^A-Za-z0-9 ]/g,'').trim().replace(/\s+/g,'_').slice(0,60);
-  return 'KRX_HTTP_'+response.status+(safe?':'+safe:'');
+  let detail='';try{const body=await response.json() as {respMsg?:unknown};detail=typeof body.respMsg==='string'?KRX_KNOWN_MESSAGES[body.respMsg.trim().toLowerCase()]??'':''}catch{}
+  return 'KRX_HTTP_'+response.status+(detail?':'+detail:'');
 }
 const BOK_ENDPOINT='https://ecos.bok.or.kr/api/StatisticSearch';
 

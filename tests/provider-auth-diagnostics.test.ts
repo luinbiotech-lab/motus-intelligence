@@ -25,3 +25,13 @@ test('Naver API HUB authentication failure carries the gateway error code and ne
   await assert.rejects(provider.collect([{label:'AI 인프라',aliases:[]} as never],'2026-10-28T00:00:00Z'),(error:Error)=>{assert.equal(error.message,'NAVER_DATALAB_HTTP_401:200');assert.ok(!error.message.includes('secret'));return true});
   assert.equal(headers!.get('X-NCP-APIGW-API-KEY-ID'),'id-value');assert.equal(headers!.get('X-NCP-APIGW-API-KEY'),'secret-value');
 });
+
+test('provider messages that reflect the submitted key are never recorded',async()=>{
+  const key='0123456789ABCDEF0123456789ABCDEF01234567';
+  const krx=(async()=>new Response(JSON.stringify({respMsg:`Invalid AUTH_KEY ${key}`,respCode:'401'}),{status:401})) as typeof fetch;
+  const result=await new KrxBokOfficialSourceAdapter(krx,{KRX_AUTH_KEY:key}).fetch('2026-10-27','2026-10-28T09:00:00+09:00');
+  assert.equal(result.reasonCode,'KRX_HTTP_401');assert.ok(!JSON.stringify(result).includes(key.slice(0,8)));
+  const naver=(async()=>new Response(JSON.stringify({error:{errorCode:key,message:key}}),{status:401})) as typeof fetch;
+  const provider=new NaverDataLabProvider({startDate:'2026-10-01',endDate:'2026-10-12',timeUnit:'date',keywordGroups:[{groupName:'AI 인프라',keywords:['AI 데이터센터']}]},{clientId:key,clientSecret:key},naver);
+  await assert.rejects(provider.collect([{label:'AI 인프라',aliases:[]} as never],'2026-10-28T00:00:00Z'),(error:Error)=>{assert.equal(error.message,'NAVER_DATALAB_HTTP_401');return true});
+});

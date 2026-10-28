@@ -42,6 +42,7 @@ function normalize(value:string):string{return value.normalize('NFKC').toLowerCa
  */
 export async function naverHubHttpError(response:Response):Promise<string> {
   let code='';try{const body=await response.json() as {error?:{errorCode?:unknown};errorCode?:unknown};const raw=body.error?.errorCode??body.errorCode;code=typeof raw==='string'||typeof raw==='number'?String(raw):''}catch{}
-  const safe=code.replace(/[^A-Za-z0-9]/g,'').slice(0,12);
+  // Gateway error codes are short numerics (200 auth failed, 210 permission denied, 300 not found, 4xx quota...); anything else is dropped.
+  const safe=/^\d{3}$/.test(code)?code:'';
   return `NAVER_DATALAB_HTTP_${response.status}${safe?':'+safe:''}`;
 }
