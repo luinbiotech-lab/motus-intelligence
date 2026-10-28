@@ -1,0 +1,49 @@
+name: MOTUS Korea Read-only Live Source Check 2026-10-28
+on:
+  push:
+    branches: [diagnostics/korea-live-check-20261028]
+permissions:
+  contents: read
+jobs:
+  korea-source-check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      TZ: Asia/Seoul
+      MOTUS_PRODUCTION_RUN: 'true'
+      MOTUS_LIVE_PUBLISH_ENABLED: 'false'
+      MOTUS_COMMERCE_ENABLED: 'false'
+      KRX_AUTH_KEY: ${{ secrets.KRX_AUTH_KEY }}
+      BOK_ECOS_API_KEY: ${{ secrets.BOK_ECOS_API_KEY }}
+      NAVER_DATALAB_CLIENT_ID: ${{ secrets.NAVER_DATALAB_CLIENT_ID }}
+      NAVER_DATALAB_CLIENT_SECRET: ${{ secrets.NAVER_DATALAB_CLIENT_SECRET }}
+      TWELVE_DATA_API_KEY: ${{ secrets.TWELVE_DATA_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 22, cache: npm}
+      - run: npm ci
+      - run: npm run build
+      - name: Collect and verify completed 2026-10-27 Korea session without publishing
+        run: npm run motus:live -- --date 2026-10-28 --category korea --source internal
+      - name: Report safe source outcomes
+        if: always()
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import {readFileSync,existsSync} from 'node:fs';
+          const root='data/operations/2026-10-28/korea/';
+          for(const key of ['live-collection.json','live-source-audit.json','cross-verification.json']){
+            if(!existsSync(root+key))continue;
+            const data=JSON.parse(readFileSync(root+key,'utf8'));
+            if(key==='live-collection.json')console.log(JSON.stringify({file:key,state:data.state,reasonCode:data.reasonCode,observedDate:data.observedDate,verification:data.verification}));
+            if(key==='live-source-audit.json')for(const x of data.entries??[])if(x.sourceId?.startsWith('krx:')||x.sourceId?.startsWith('yahoo-finance:'))console.log(JSON.stringify({file:key,id:x.sourceId,status:x.status,error:x.error,requestedDate:x.requestedDate,availableDates:x.availableDates}));
+            if(key==='cross-verification.json')console.log(JSON.stringify({file:key,verification:data.verification,result:data.comparisonResult,reasonCodes:data.reasonCodes}));
+          }
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: korea-read-only-sources-20261028
+          path: data/operations/2026-10-28/korea/
+          if-no-files-found: warn
