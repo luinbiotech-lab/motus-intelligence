@@ -41,3 +41,27 @@ export async function collectMarketResearch(region:MarketResearchRegion,at:strin
  }
  return {entries:[...new Map(entries.map(e=>[e.url,e])).values()].slice(0,8),audit};
 }
+
+/** An actual broker-owned public research index. This parser records only the broker's
+ * publication title/date/link; never interprets a title as a recommendation or target. */
+export async function collectKbBrokerResearch(at:string,fetcher:typeof fetch=fetch):Promise<MarketResearchResult>{
+ const feed='https://rc.kbsec.com/today/index.able';
+ try{
+  const response=await fetcher(feed,{headers:{accept:'text/html','user-agent':'MOTUS-ResearchCollector/1.0'},signal:AbortSignal.timeout(12000)});
+  if(!response.ok)throw new Error('FEED_HTTP_'+response.status);
+  const html=await response.text();if(html.length>2000000)throw new Error('FEED_OVERSIZED');
+  const entries:MarketResearchEntry[]=[];
+  for(const kind of ['KB Core View','KB 월간 전략']){
+   const start=html.indexOf('<h2>'+kind+'</h2>');if(start<0)continue;
+   const next=html.indexOf('grp__item',start+100),block=html.slice(start,next>start?next:start+1900);
+   const id=block.match(/documentid=(\d{17}[A-Z])/)?.[1],title=block.match(/class="tit"[^>]*>([^<]+)</)?.[1]?.trim();
+   const date=block.match(/class="date"[^>]*>\s*(\d{4})\.\s*(\d{1,2})\.\s*(\d{1,2})/)?.slice(1).map(Number);
+   if(!id||!title||!date||date.length!==3)continue;
+   const iso=new Date(Date.UTC(date[0]!,date[1]!-1,date[2]!,0,0,0)).toISOString();
+   const elapsed=Date.parse(at)-Date.parse(iso);
+   if(elapsed<0||elapsed>21*86400000)continue;
+   entries.push({publisher:'KB증권 리서치',headline:kind+' · '+title.slice(0,180),url:'https://rc.kbsec.com/detailView.able?documentid='+id,publishedAt:iso,kind:'BROKER_RESEARCH',sourceFeed:feed});
+  }
+  return {entries,audit:[{publisher:'KB증권 리서치',url:feed,status:'PASS',count:entries.length,error:null}]};
+ }catch(error){return {entries:[],audit:[{publisher:'KB증권 리서치',url:feed,status:'FAILED',count:0,error:error instanceof Error&&/^FEED_(?:HTTP_\d{3}|OVERSIZED)$/.test(error.message)?error.message:'FEED_FETCH_FAILED'}]}}
+}
