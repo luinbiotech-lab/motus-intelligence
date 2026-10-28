@@ -28,6 +28,10 @@ class ThemeTests(unittest.TestCase):
         first, _ = theme.build_theme(FIXTURE)
         second, _ = theme.build_theme(first)
         self.assertEqual(first, second)
+    def test_style_cdata_delimiters_are_valid_css_comments_in_html(self):
+        output, _ = theme.build_theme(FIXTURE)
+        self.assertIn("type='text/css'>/*<![CDATA[*/", output)
+        self.assertIn('/*]]>*/</style>', output)
     def test_crlf_round_trip(self):
         xml = FIXTURE.replace('\n', '\r\n')
         self.assertEqual(theme.strip_overlay(theme.build_theme(xml)[0]), xml)
@@ -50,6 +54,14 @@ class ThemeTests(unittest.TestCase):
     def test_includable_ids_are_scoped_to_each_widget(self):
         xml = FIXTURE.replace("<b:widget id='Label1' type='Label'/>", "<b:widget id='Label1' type='Label'><b:includable id='main'><span>Labels</span></b:includable></b:widget>")
         self.assertEqual(theme.strip_overlay(theme.build_theme(xml)[0]), xml)
+    def test_alternative_comment_templates_may_share_html_ids(self):
+        definitions = "<b:includable id='commentForm'><iframe id='comment-editor'/></b:includable><b:includable id='threadedCommentForm'><iframe id='comment-editor'/></b:includable>"
+        xml = FIXTURE.replace('</b:widget>', definitions + '</b:widget>', 1)
+        self.assertEqual(theme.strip_overlay(theme.build_theme(xml)[0]), xml)
+    def test_duplicate_html_in_one_definition_is_rejected(self):
+        xml = FIXTURE.replace('<data:post.body/>', "<div id='same'/><div id='same'/>")
+        with self.assertRaisesRegex(ValueError, 'DUPLICATE_ID'):
+            theme.build_theme(xml)
     def test_preupload_verification_detects_modified_candidate_and_backup(self):
         output, manifest = theme.build_theme(FIXTURE)
         manifest['inputSha256'] = theme.digest(FIXTURE)
