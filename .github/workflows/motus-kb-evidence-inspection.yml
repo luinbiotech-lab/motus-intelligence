@@ -1,0 +1,19 @@
+name: MOTUS KB Evidence HTML Inspection
+on:
+  push:
+    branches: [feat/blogger-broker-evidence-extraction-20261029]
+permissions: {contents: read}
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 4
+    steps:
+      - name: Read public broker index HTML near verified report
+        run: |
+          node --input-type=module <<'NODE'
+          const u='https://rc.kbsec.com/today/index.able';
+          const r=await fetch(u,{signal:AbortSignal.timeout(12000)});
+          const h=await r.text();
+          const i=h.indexOf('<h2>KB Core View</h2>');
+          console.log(JSON.stringify({http:r.status,found:i>=0,fragment:i>=0?h.slice(i,i+4700):null}));
+          NODE
