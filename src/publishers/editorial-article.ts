@@ -33,7 +33,7 @@ export function renderUSEditorialArticle(view:USMarketDailyViewModel):DailyMaste
   if(view.narrative?.facts.length)parts.push(section('지수별 흐름과 위치',paragraphs(view.narrative.facts)));
   if(view.narrative?.analysis.length)parts.push(section('MOTUS 분석',paragraphs(view.narrative.analysis)));
   if(view.sectorsCompanies.length)parts.push(section('종목과 업종에서 읽힌 신호',paragraphs(view.sectorsCompanies)));
-  if(view.wallStreetResearch.length)parts.push(section('실적 기대와 금리의 줄다리기',paragraphs(view.wallStreetResearch.flatMap(item=>[item.institutionView??'',item.motusInterpretation??'']))));
+  if(view.wallStreetResearch.length)parts.push(section('월가 증권사 공식 리서치',paragraphs(view.wallStreetResearch.flatMap(item=>[item.institutionView??'',item.motusInterpretation??'']))));
   if(view.marketResearch?.length)parts.push(section('금융 전문 언론 원문 모니터링',paragraphs(view.marketResearch.map(item=>item.publisher+' · '+item.publishedAt.slice(0,10)+' 공개 시장 보도. 원문 제목·출처는 별도 수집·검증 기록으로 보관하며, 기사 하단의 링크에서 확인할 수 있다.'))));
   if(view.checkpoints.length)parts.push(section('다음 거래일',paragraphs(view.checkpoints.map(item=>`${item.headline}: ${item.watchFor}`))));
   parts.push(sources(view.sources));return finish('us-market',view.title,BLOGGER_EDITORIAL_CATEGORIES.US_MARKET.publicLabel,parts,['masthead','lead','charts','macro','companies','research','watch','sources']);
