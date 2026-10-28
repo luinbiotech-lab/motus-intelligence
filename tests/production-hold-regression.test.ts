@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {RepositoryInternalDailyBuilder,koreaReferenceDate} from '../src/operations/internal-live-daily.js';
+import {RepositoryInternalDailyBuilder,koreaPublicationSession,koreaReferenceDate} from '../src/operations/internal-live-daily.js';
 import {TwelveDataTimeSeriesProvider} from '../src/operations/market-source-providers.js';
 import {buildProductionVerification} from '../src/production/verification-artifact.js';
 import type {AIIntelligenceDailyViewModel} from '../src/intelligence/daily-masters.js';
@@ -112,12 +112,18 @@ test('Korea morning still rejects an FX quote older than the completed session',
  const result=await new RepositoryInternalDailyBuilder(fetcher,{},official).build('KOREA_MARKET',morning);
  assert.equal(result.state,'HOLD');assert.match(String(result.reason),/KOREA_FX_REFERENCE_DATE_MISMATCH:2026-10-22:2026-10-23:2026-10-26/);
 });
-test('all three approved schedules enable live publication with credential preflight',async()=>{
+test('approved schedules including Korea recovery enable live publication with credential preflight',async()=>{
  const workflow=await readFile('.github/workflows/motus-daily-production.yml','utf8');
  assert.match(workflow,/MOTUS_LIVE_PUBLISH_ENABLED:\s*'false'/);
  assert.match(workflow,/SCHEDULE" == "30 3 \* \* 1-5" && "\$CATEGORY" == "ai"/);
  assert.match(workflow,/17 21 \* \* 0-4/);
- assert.match(workflow,/45 21 \* \* 1-5[^\n]*CATEGORY=us/);assert.match(workflow,/30 3 \* \* 1-5[^\n]*CATEGORY=ai/);assert.match(workflow,/SCHEDULE" == "17 21 \* \* 0-4" && "\$CATEGORY" == "korea"/);
+ assert.match(workflow,/45 21 \* \* 1-5[^\n]*CATEGORY=us/);assert.match(workflow,/30 3 \* \* 1-5[^\n]*CATEGORY=ai/);assert.match(workflow,/SCHEDULE" == "17 21 \* \* 0-4"/);assert.match(workflow,/SCHEDULE" == "25 23 \* \* 0-4"/);assert.match(workflow,/CATEGORY=korea/);
  assert.match(workflow,/Require Blogger credentials before live publication/);
  assert.match(workflow,/INPUT_EXECUTE_PUBLISH" == "true"/);
+});
+
+test('Korea preopen session remains fixed to previous completed day even when GitHub runs after close',()=>{
+ const runAt='2026-10-28T13:00:00Z'; // 22:00 KST on 2026-10-28
+ assert.equal(koreaPublicationSession('2026-10-28',runAt,false).date,'2026-10-27');
+ assert.equal(koreaPublicationSession('2026-10-28',runAt,true).date,'2026-10-28');
 });

@@ -19,6 +19,8 @@ import {synthesizeEvidenceBoundAIEvent,type AIEventType} from './ai-generic-synt
 import {readFile,readdir} from 'node:fs/promises';
 import {join} from 'node:path';
 
+export function koreaPublicationSession(operationDate:string,at:string,controlledRecovery:boolean){return latestCompletedSession('KOREA',controlledRecovery?at:operationDate+'T06:17:00+09:00')}
+
 export interface InternalSourceAuditEntry {sourceId:string;category:DailyCategory;url:string;status:'PASS'|'FAILED';recordCount:number;collectedAt:string;error:string|null;observedDate?:string;referenceDate?:string;sourceTimestamp?:string;dateField?:string}
 export interface InternalBuildResult {payload:LiveDailyPayload|null;audit:InternalSourceAuditEntry[];crossVerification?:KoreaCrossVerificationArtifact|null;searchContext?:PreRenderSearchContext|null;reason:string|null;state:'LIVE_READY'|'HOLD'|'SKIP'}
 export interface InternalBuildOptions {mode?:'SCHEDULED'|'ADMIN_CONTROLLED_RECOVERY'}
@@ -118,7 +120,10 @@ export class RepositoryInternalDailyBuilder implements InternalDailyBuilder {
   try{
    const operationDate=kstDate(at),todaySession=marketSession('KOREA',operationDate),controlledRecovery=options.mode==='ADMIN_CONTROLLED_RECOVERY';
    if(todaySession.state==='HOLIDAY'&&!controlledRecovery)return skip(audit,new Error('KOREA_OPERATION_DATE_HOLIDAY'));
-   const expectedSession=latestCompletedSession('KOREA',at);
+   // Keep the morning edition anchored to the previous completed session when
+   // GitHub schedule execution is delayed past market close; manually controlled
+   // closing recovery intentionally uses the current execution timestamp.
+   const expectedSession=koreaPublicationSession(operationDate,at,controlledRecovery);
    if(!isCompletedSession(expectedSession,at))throw new Error('KOREA_SESSION_NOT_COMPLETED');
    if(expectedSession.date>operationDate)throw new Error('KOREA_FUTURE_SESSION_REJECTED');
    if(expectedSession.date===operationDate&&!controlledRecovery)throw new Error('KOREA_MORNING_WINDOW_NOT_ELIGIBLE');
