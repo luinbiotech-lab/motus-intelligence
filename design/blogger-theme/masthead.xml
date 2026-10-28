@@ -1,0 +1,39 @@
+<a class='motus-shell motus-skip' href='#Blog1'>본문 바로가기</a>
+<header class='motus-shell motus-masthead'>
+  <div class='motus-wrap'>
+    <p class='motus-kicker'>Digital Research Journal · AI / Industry / Capital</p>
+    <div class='motus-brand-row'>
+      <a class='motus-logo' expr:href='data:blog.homepageUrl' aria-label='MOTUS Intelligence 홈'>MOTUS<span>INTELLIGENCE</span></a>
+      <p class='motus-tagline'>What Moves the World.</p>
+    </div>
+  </div>
+</header>
+<nav class='motus-shell motus-nav' aria-label='주요 카테고리'>
+  <div class='motus-wrap motus-nav-row'>
+    <div class='motus-links'>
+      <a href='/search/label/미국증시'>미국증시</a>
+      <a href='/search/label/국내증시'>국내증시</a>
+      <a href='/search/label/AI%20인텔리전스'>AI 인텔리전스</a>
+      <a href='/search/label/리포트'>리포트</a>
+    </div>
+    <form action='/search' class='motus-search' method='get' role='search'>
+      <input aria-label='기사 검색' name='q' placeholder='기사 검색' type='search'/>
+      <button type='submit'>검색</button>
+    </form>
+  </div>
+</nav>
+<b:if cond='data:blog.url == data:blog.homepageUrl'>
+  <section class='motus-shell motus-wrap motus-intro' aria-label='MOTUS 소개'>
+    <p class='motus-kicker'>Intelligence, in context</p>
+    <h2>세상의 변화를 읽고,<br/>그 흐름을 해석하다.</h2>
+    <p>기술의 변화가 산업과 기업을 거쳐 시장과 자본으로 이어지는 과정. MOTUS는 확인된 자료를 바탕으로 그 연결과 다음 질문을 살펴봅니다.</p>
+  </section>
+  <div class='motus-shell motus-wrap'>
+    <div class='motus-categories'>
+      <a class='motus-category' href='/search/label/미국증시'><small>01 / U.S. MARKET</small><h3>미국증시</h3><p>시장 흐름과 금리, 기업과 산업의 연결을 읽습니다.</p><strong>기사 모아보기 →</strong></a>
+      <a class='motus-category' href='/search/label/국내증시'><small>02 / KOREA MARKET</small><h3>국내증시</h3><p>국내 시장의 수급과 글로벌 변화의 접점을 짚습니다.</p><strong>기사 모아보기 →</strong></a>
+      <a class='motus-category' href='/search/label/AI%20인텔리전스'><small>03 / AI INTELLIGENCE</small><h3>AI 인텔리전스</h3><p>기술 발표의 사실과 산업·사업화의 의미를 구분합니다.</p><strong>기존 기사 모아보기 →</strong></a>
+    </div>
+    <div class='motus-archive-bar'><strong>LATEST JOURNAL</strong><span>새로운 기사부터 · <a href='/search'>전체 아카이브 →</a></span></div>
+  </div>
+</b:if>
