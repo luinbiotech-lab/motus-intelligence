@@ -405,10 +405,13 @@ function safeGoogleApiError(body:string):string {
   } catch { return 'request failed'; }
 }
 export function identityMatches(post:GoogleBloggerPost,input:{title:string;operationDate?:string}):boolean {
-  // Date/updatedAt alone is not an identity: multiple distinct articles share a
-  // publication date. Cross-operation same-session duplicates are caught by the
-  // persisted publication ledger before this remote lookup.
-  return post.title===input.title;
+  if(post.title!==input.title)return false;
+  if(!input.operationDate)return true;
+  // Recurring market headlines may have exactly the same title on consecutive
+  // days. Scope remote lookup to the current operation's creation day.
+  // Same-session duplicates across operation days are handled by the ledger.
+  const postDate=post.published??post.updated;
+  return !postDate||kstDate(postDate)===input.operationDate;
 }
 function kstDate(value:string):string {
   const parts=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Seoul',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date(value));
