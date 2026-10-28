@@ -25,3 +25,14 @@ jobs:
           const refs=[...html.matchAll(/href="([^"]*\/insights\/(?:articles|topics|series)\/[^"]+)"/g)].map(m=>({href:m[1],near:html.slice(Math.max(0,m.index-130),m.index+400).replace(/\s+/g,' ').slice(0,530)}));
           console.log(JSON.stringify({refs:refs.slice(0,8),count:refs.length,dateFormats:[...new Set([...html.matchAll(/(?:Oct|October)\s+\d{1,2},?\s+2026/gi)].map(m=>m[0]))].slice(0,5)}));
           NODE
+
+      - name: Inspect Goldman dated article cards
+        run: |
+          node --input-type=module <<'NODE'
+          const r=await fetch('https://www.goldmansachs.com/insights',{signal:AbortSignal.timeout(12000)});const html=await r.text();
+          for(const m of [...html.matchAll(/<a\\b[^>]*href="(\\/insights\\/articles\\/[^"]+)"[^>]*>([\\s\\S]*?)<\\/a>/gi)].slice(0,8)){
+            const text=m[2].replace(/<[^>]+>/g,' ').replace(/\\s+/g,' ').slice(0,450);
+            const near=html.slice(m.index,m.index+m[0].length+300);
+            console.log(JSON.stringify({href:m[1],text,date:(near.match(/(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\\s+\\d{1,2},?\\s+2026/i)||[])[0]??null}));
+          }
+          NODE
