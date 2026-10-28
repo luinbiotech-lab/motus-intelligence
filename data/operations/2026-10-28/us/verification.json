@@ -4,10 +4,8 @@
   "operationDate": "2026-10-28",
   "observedDate": "2026-10-27",
   "sourceMode": "internal",
-  "verification": "REVIEW_REQUIRED",
-  "unresolvedConflicts": [
-    "NAVER_DATALAB_SIGNAL_REQUIRED"
-  ],
+  "verification": "VERIFIED",
+  "unresolvedConflicts": [],
   "provenancePass": true,
   "sourceDiversityPass": true,
   "sourceLinksPass": true,
@@ -16,20 +14,20 @@
   "leakagePass": true,
   "duplicateCheck": "PENDING_REMOTE",
   "duplicateUncertainty": true,
-  "articleFingerprint": "sha256:90a342095049cce2d9b30dbf869d69f3e27817ebff24beb90c42fabcf9aeb6aa",
+  "articleFingerprint": "sha256:a65dee73f575c9c9fa72f1860dc2361d0c2659494c86b5f89cdf9d0a648c1709",
   "commerceEnabled": false,
-  "verifiedAt": "2026-10-28T00:45:44.172Z",
-  "expiresAt": "2026-10-28T02:15:44.172Z",
+  "verifiedAt": "2026-10-28T12:39:06.291Z",
+  "expiresAt": "2026-10-28T14:09:06.291Z",
   "sourceAuditIds": [
     "calendar:nyse",
     "fred:DCOILBRENTEU",
     "fred:DGS10",
     "fred:VIXCLS",
     "fred:dow-jones",
-    "fred:sp500",
-    "yahoo-us:nasdaq"
+    "fred:nasdaq",
+    "fred:sp500"
   ],
-  "sourceAuditFingerprint": "sha256:79f2cf1987a556aa2d3393ba306d18ffd2d544270ad2b33dea7e1669ebbcc009",
+  "sourceAuditFingerprint": "sha256:58efd9fcf8a3a749152a1b47169e2dd5ceaf0e4a2912dcf40f995a8a613ad58f",
   "crossVerificationFingerprint": null,
   "crossVerification": null
 }

@@ -3,26 +3,26 @@
   "sourceMode": "internal",
   "category": "US_MARKET",
   "operationDate": "2026-10-28",
-  "status": "HOLD",
-  "reasonCode": "NAVER_DATALAB_SIGNAL_REQUIRED",
+  "status": "LIVE_READY",
+  "reasonCode": null,
   "entries": [
-    {
-      "sourceId": "twelve:russell-2000",
-      "category": "US_MARKET",
-      "url": "https://api.twelvedata.com/time_series?symbol=RUT&interval=1day",
-      "status": "FAILED",
-      "recordCount": 0,
-      "collectedAt": "2026-10-28T00:45:44.172Z",
-      "error": "TWELVE_DATA_DATA_NOT_FOUND symbol=RUT endpoint=/time_series http=404 providerCode=404"
-    },
     {
       "sourceId": "twelve:dxy",
       "category": "US_MARKET",
       "url": "https://api.twelvedata.com/time_series?symbol=DXY&interval=1day",
       "status": "FAILED",
       "recordCount": 0,
-      "collectedAt": "2026-10-28T00:45:44.172Z",
+      "collectedAt": "2026-10-28T12:39:06.291Z",
       "error": "TWELVE_DATA_DATA_NOT_FOUND symbol=DXY endpoint=/time_series http=404 providerCode=404"
+    },
+    {
+      "sourceId": "twelve:russell-2000",
+      "category": "US_MARKET",
+      "url": "https://api.twelvedata.com/time_series?symbol=RUT&interval=1day",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-10-28T12:39:06.291Z",
+      "error": "TWELVE_DATA_DATA_NOT_FOUND symbol=RUT endpoint=/time_series http=404 providerCode=404"
     },
     {
       "sourceId": "fred:sp500",
@@ -30,7 +30,7 @@
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=SP500&cosd=2019-03-09",
       "status": "PASS",
       "recordCount": 1920,
-      "collectedAt": "2026-10-28T00:45:44.172Z",
+      "collectedAt": "2026-10-28T12:39:06.291Z",
       "error": null,
       "observedDate": "2026-10-27"
     },
@@ -38,23 +38,11 @@
       "sourceId": "fred:nasdaq",
       "category": "US_MARKET",
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=NASDAQCOM&cosd=2019-03-09",
-      "status": "FAILED",
-      "recordCount": 1920,
-      "collectedAt": "2026-10-28T00:45:44.172Z",
-      "error": "FRED_STALE_OR_INCOMPLETE",
-      "observedDate": "2026-10-26",
-      "referenceDate": "2026-10-27"
-    },
-    {
-      "sourceId": "yahoo-us:nasdaq",
-      "category": "US_MARKET",
-      "url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1767314744&period2=1793234744&interval=1d",
       "status": "PASS",
-      "recordCount": 206,
-      "collectedAt": "2026-10-28T00:45:44.172Z",
+      "recordCount": 1921,
+      "collectedAt": "2026-10-28T12:39:06.291Z",
       "error": null,
-      "observedDate": "2026-10-27",
-      "referenceDate": "2026-10-27"
+      "observedDate": "2026-10-27"
     },
     {
       "sourceId": "fred:dow-jones",
@@ -62,7 +50,7 @@
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-09",
       "status": "PASS",
       "recordCount": 1920,
-      "collectedAt": "2026-10-28T00:45:44.172Z",
+      "collectedAt": "2026-10-28T12:39:06.291Z",
       "error": null,
       "observedDate": "2026-10-27"
     },
@@ -72,7 +60,7 @@
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2025-12-22",
       "status": "PASS",
       "recordCount": 212,
-      "collectedAt": "2026-10-28T00:45:44.172Z",
+      "collectedAt": "2026-10-28T12:39:06.291Z",
       "error": null,
       "observedDate": "2026-10-26"
     },
@@ -82,7 +70,7 @@
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILBRENTEU&cosd=2025-12-22",
       "status": "PASS",
       "recordCount": 209,
-      "collectedAt": "2026-10-28T00:45:44.172Z",
+      "collectedAt": "2026-10-28T12:39:06.291Z",
       "error": null,
       "observedDate": "2026-10-20"
     },
@@ -92,7 +80,7 @@
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS&cosd=2025-12-22",
       "status": "PASS",
       "recordCount": 218,
-      "collectedAt": "2026-10-28T00:45:44.172Z",
+      "collectedAt": "2026-10-28T12:39:06.291Z",
       "error": null,
       "observedDate": "2026-10-26"
     },
@@ -102,7 +90,7 @@
       "url": "https://www.nyse.com/trade/hours-calendars",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-10-28T00:45:44.172Z",
+      "collectedAt": "2026-10-28T12:39:06.291Z",
       "error": null,
       "observedDate": "2026-10-27",
       "referenceDate": "2026-10-27"
@@ -113,7 +101,7 @@
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS&cosd=2025-12-22",
       "status": "FAILED",
       "recordCount": 0,
-      "collectedAt": "2026-10-28T00:45:44.172Z",
+      "collectedAt": "2026-10-28T12:39:06.291Z",
       "error": "OPTIONAL_METRIC_STALE",
       "observedDate": "2026-10-26",
       "referenceDate": "2026-10-27"
@@ -124,7 +112,7 @@
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILBRENTEU&cosd=2025-12-22",
       "status": "FAILED",
       "recordCount": 0,
-      "collectedAt": "2026-10-28T00:45:44.172Z",
+      "collectedAt": "2026-10-28T12:39:06.291Z",
       "error": "OPTIONAL_METRIC_STALE",
       "observedDate": "2026-10-20",
       "referenceDate": "2026-10-27"

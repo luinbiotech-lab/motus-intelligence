@@ -1,10 +1,12 @@
 {
-  "collectedAt": "2026-10-28T00:45:44.172Z",
+  "collectedAt": "2026-10-28T12:39:06.291Z",
   "signalDate": null,
   "provider": null,
   "freshness": "NO_SEARCH_SIGNAL",
-  "fallbackReason": "SEARCH_PROVIDER_NOT_CONFIGURED",
-  "warnings": [],
+  "fallbackReason": "NO_MATCHING_VERIFIED_TOPIC",
+  "warnings": [
+    "NAVER_DATALAB:NAVER_DATALAB_HTTP_401:200"
+  ],
   "orderedTopicIds": [
     "us:index:nasdaq",
     "us:index:sp500",

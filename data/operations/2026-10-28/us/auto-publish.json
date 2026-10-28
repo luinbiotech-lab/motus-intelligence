@@ -1,10 +1,38 @@
 {
-  "state": "HOLD",
-  "reasonCode": "NAVER_DATALAB_SIGNAL_REQUIRED",
-  "reasonCodes": [
-    "NAVER_DATALAB_SIGNAL_REQUIRED"
+  "gate": {
+    "state": "HOLD",
+    "reasons": [
+      "final remote duplicate recheck failed"
+    ],
+    "approval": null,
+    "checkedAt": "2026-10-28T12:39:10.693Z"
+  },
+  "searchRegistration": null,
+  "libraryRegistration": null,
+  "weeklyFeed": null,
+  "pdfCandidate": null,
+  "audit": [
+    {
+      "at": "2026-10-28T12:39:10.693Z",
+      "event": "AUTO_PUBLISH_STATIC_GATE",
+      "detail": "AUTO_PUBLISH_READY"
+    },
+    {
+      "at": "2026-10-28T12:39:10.693Z",
+      "event": "REMOTE_DUPLICATE_CHECK",
+      "detail": "PASS"
+    },
+    {
+      "at": "2026-10-28T12:39:10.693Z",
+      "event": "FINAL_REMOTE_DUPLICATE_CHECK",
+      "detail": "HOLD"
+    }
   ],
-  "reason": "NAVER_DATALAB_SIGNAL_REQUIRED",
-  "insertCallCount": 0,
-  "publishCallCount": 0
+  "state": "HOLD",
+  "draftPostId": "805110169936465754",
+  "publicPostUrl": null,
+  "publishedAt": null,
+  "insertCallCount": 1,
+  "publishCallCount": 0,
+  "error": "final remote duplicate recheck failed"
 }
