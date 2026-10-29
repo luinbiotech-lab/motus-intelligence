@@ -145,6 +145,8 @@ test('MOTUS synthesis names themes shared by several brokers and flags divergent
   assert.match(text,/MOTUS 정리: 증권사 3곳의 아침 리포트를 대조하면 반도체 업황·실적\(A증권·B증권\)/);
   assert.match(text,/C증권은 환율·달러를 따로 짚었다/);
   assert.match(text,/경계 요인도 제시됐다\. B증권 리서치센터는 “FOMC 대기 속 경계감 공존”이라고 짚었다/);
+});
+
 test('AI article adds bellwether moves and AI-specific broker analysis only',async()=>{
   const {composeAIDeepSections}=await import('../src/operations/market-deep-sections.js');
   const {statements,digests}=extractBriefContent(brief);
