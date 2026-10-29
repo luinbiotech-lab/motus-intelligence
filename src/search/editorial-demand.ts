@@ -1,12 +1,13 @@
 import {collectDemandSignals,GoogleSearchConsoleSignalProvider,NaverDataLabProvider,type SearchDemandProvider} from './providers.js';
 import {searchConsoleFromEnvironment} from './google-console-live.js';
 import type {DemandSignal,VerifiedSearchTopic} from './intelligence.js';
-import {buildSearchRankingEvidence,type SearchRankingEvidence} from './publication-demand.js';
+import {buildSearchRankingEvidence,prepareSearchComparisonTopics,type SearchRankingEvidence} from './publication-demand.js';
 
 export type SearchFreshness='SAME_DAY_NAVER_SIGNAL'|'PREVIOUS_DAY_NAVER_SIGNAL'|'GSC_HISTORICAL'|'NO_SEARCH_SIGNAL';
 export interface PreRenderSearchContext {collectedAt:string;signalDate:string|null;provider:string|null;freshness:SearchFreshness;fallbackReason:string|null;warnings:string[];orderedTopicIds:string[];selectedSecondaryTopicId:string|null;factsChanged:false;gateOverride:false;rankingEvidence?:SearchRankingEvidence}
 
 export async function collectPreRenderSearch(topics:VerifiedSearchTopic[],at:string,environment:NodeJS.ProcessEnv=process.env):Promise<PreRenderSearchContext>{
+ topics=prepareSearchComparisonTopics(topics);
  const providers:SearchDemandProvider[]=[],operationDate=kstDate(at),previousDate=new Date(Date.parse(operationDate+'T00:00:00Z')-86400000).toISOString().slice(0,10);
  const clientId=environment.NAVER_DATALAB_CLIENT_ID?.trim(),clientSecret=environment.NAVER_DATALAB_CLIENT_SECRET?.trim();
  if(clientId&&clientSecret)providers.push(new NaverDataLabProvider({startDate:previousDate,endDate:operationDate,timeUnit:'date',keywordGroups:topics.map(topic=>({groupName:topic.label,keywords:[topic.label,...topic.aliases]}))},{clientId,clientSecret}));

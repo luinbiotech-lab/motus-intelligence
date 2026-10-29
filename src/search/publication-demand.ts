@@ -1,5 +1,13 @@
 import type {DemandSignal,VerifiedSearchTopic} from './intelligence.js';
 
+const termKey=(value:string)=>value.normalize('NFKC').toLowerCase().replace(/\s+/g,'').trim();
+/** Shared category aliases obscure the difference between candidate queries. */
+export function prepareSearchComparisonTopics(topics:VerifiedSearchTopic[]):VerifiedSearchTopic[]{
+ const owners=new Map<string,Set<string>>();
+ for(const topic of topics)for(const term of [topic.label,...topic.aliases]){const key=termKey(term);if(!key)continue;const ids=owners.get(key)??new Set<string>();ids.add(topic.topicId);owners.set(key,ids)}
+ return topics.map(topic=>{const seen=new Set([termKey(topic.label)]);return {...topic,aliases:topic.aliases.filter(term=>{const key=termKey(term);if(!key||seen.has(key)||owners.get(key)!.size>1)return false;seen.add(key);return true})}});
+}
+
 // DataLab ranks only the compared, verified topic candidates. It is not a
 // market-wide trending-search ranking, and GSC position is not demand rank.
 export interface SearchRankingEvidence {
@@ -23,6 +31,8 @@ export function evaluatePublicationDemand(input:unknown,html:string,date:string,
  if(evidence?.scope!=='VERIFIED_CANDIDATE_COMPARISON'||evidence?.metric!=='NAVER_RELATIVE_INTEREST'||!Array.isArray(evidence.ranking)||evidence.ranking.length<2)reasons.push('SEARCH_CANDIDATE_RANKING_MISSING');
  else {
   const previous=new Date(Date.parse(date+'T00:00:00Z')-86400000).toISOString().slice(0,10),rows=evidence.ranking;
+  const termOwners=new Map<string,string>();
+  for(const row of rows)for(const term of row.terms??[]){const key=termKey(term),prior=termOwners.get(key);if(prior&&prior!==row.topicId)reasons.push('SEARCH_COMPARISON_TERMS_OVERLAP');termOwners.set(key,row.topicId)}
   if(rows.some((r,i)=>r.rank!==i+1||!Number.isFinite(r.ratio)||r.ratio<0||r.ratio>100||i>0&&r.ratio>rows[i-1]!.ratio||![date,previous].includes(r.signalDate)||r.signalDate!==rows[0]!.signalDate||!r.signalId||!r.claimRefs?.length||!r.sourceRefs?.length||!/^https:\/\/naverapihub\.apigw\.ntruss\.com\/search-trend\/v1\/search$/.test(r.sourceUrl)))reasons.push('SEARCH_RANKING_PROVENANCE_INVALID');
   const selected=rows.find(r=>r.topicId===evidence.selectedTopicId);
   const prose=html.replace(/<(script|style|svg|header|ul)\b[^>]*>[\s\S]*?<\/\1>/gi,' ');
