@@ -26,7 +26,8 @@ async function json<T>(fetcher:typeof fetch,url:string):Promise<T>{
   return await response.json() as T;
 }
 const errorCode=(error:unknown)=>error instanceof Error&&/^ATTENTION_HTTP_\d{3}$/.test(error.message)?error.message:'ATTENTION_FETCH_FAILED';
-const num=(value:unknown)=>Number(String(value??'').replace(/,/g,''));
+/** Missing, null or blank provider fields are not numbers (Number('') would silently become 0). */
+const num=(value:unknown)=>value===null||value===undefined||String(value).trim()===''?Number.NaN:Number(String(value).replace(/,/g,''));
 
 /** Most-searched Korean stocks, each priced on the covered session from its own daily history. */
 export async function collectKoreaSearchTop(sessionDate:string,fetcher:typeof fetch=fetch,limit=6):Promise<{stocks:KoreaSearchStock[];audit:AttentionAudit[]}>{

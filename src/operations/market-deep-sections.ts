@@ -34,7 +34,9 @@ function ratingSentence(report:BrokerReport):string {
   return `${subject(report)} ${koreanDateLabel(report.date)} 「${headline}」 리포트에서 ${parts.length?parts.join(', ')+'을 제시했다':'관련 분석을 내놨다'}${report.summary.length?`. 요약: ${report.summary.slice(0,2).map(quote).join(', ')}`:''}.`;
 }
 
-const THEMES:Array<[string,RegExp]>=[['반도체 업황·실적',/반도체|하이닉스|HBM|메모리|필라델피아/],['AI 투자 기대',/AI|인공지능|빅테크/],['FOMC·통화정책',/FOMC|연준|금리|기준금리|Fed/],['기업 실적',/실적|어닝|영업이익/],['외국인·기관 수급',/외국인|기관|순매수|순매도|사이드카/],['환율·달러',/환율|달러/],['국제유가',/유가|원유/],['주주환원',/주주환원|배당|자사주/]];
+// Theme names are neutral: keyword matches carry no direction, so a shared theme never turns concerns into optimism.
+const THEMES:Array<[string,RegExp]>=[['반도체',/반도체|하이닉스|HBM|메모리|필라델피아/],['AI 투자',/AI|인공지능|빅테크/],['FOMC·통화정책',/FOMC|연준|금리|기준금리|Fed/],['기업 실적',/실적|어닝|영업이익/],['외국인·기관 수급',/외국인|기관|순매수|순매도|사이드카/],['환율·달러',/환율|달러/],['국제유가',/유가|원유/],['주주환원',/주주환원|배당|자사주/]];
+const CAUSAL=/힘입|기대|우려|영향|때문|따른|따라|반영|부담|속에?\s|에\s?(?:상승|하락|급등|급락|강세|약세|반등)|실적|FOMC|연준|금리|동결|인상|인하|유가|달러|환율|수급|순매수|순매도|매수세|매도세|사이드카|발표|주주환원|정책|관세|지표|물가|고용|투자심리/;
 const CAUTION=/우려|경계|부담|리스크|불확실|하락 전환|차익실현|관망|둔화|대기|엇갈|급락/;
 type Pick={text:string;brief:BrokerBrief};
 
@@ -43,7 +45,11 @@ function causes(briefs:BrokerBrief[],region:'US'|'KOREA'){
   const drivers:Pick[]=[],cautions:Pick[]=[];
   for(const brief of briefs){
     const items=brief.statements.filter(item=>item.region===region&&item.text.length<=130);
-    const caution=items.find(item=>CAUTION.test(item.text)),driver=items.filter(item=>item!==caution&&!CAUTION.test(item.text)).sort((a,b)=>marketScore(b.text)-marketScore(a.text))[0];
+    // The best explanation of the session is the driver whatever its direction (a bearish close explained by
+    // 'concerns' is still the explanation); a caution is a different statement that flags a risk.
+    // Only a statement that gives a reason counts; a restatement of index moves explains nothing.
+    const driver=[...items].filter(item=>CAUSAL.test(item.text)).sort((a,b)=>marketScore(b.text)-marketScore(a.text))[0];
+    const caution=items.find(item=>item!==driver&&CAUTION.test(item.text));
     if(driver)drivers.push({text:driver.text,brief});if(caution)cautions.push({text:caution.text,brief});
   }
   return {drivers:drivers.slice(0,4),cautions:cautions.slice(0,2)};
@@ -89,17 +95,23 @@ export function composeUSDeepSections(input:{bundle:BrokerResearchBundle|null;st
   let titleFocus:string|null=null;const market:DeepParagraph[]=[];
   if(input.sectors.length>=6){
     const best=input.sectors[0]!,worst=input.sectors.at(-1)!,up=input.sectors.filter(item=>item.changePct>0.005).length;
-    market.push({text:`S&P 500 업종을 추종하는 SPDR 업종 ETF 11종 가운데 ${up}종이 올랐다. ${best.label}(${best.symbol}) ${signedPct(best.changePct)}가 가장 강했고 ${worst.label}(${worst.symbol}) ${signedPct(worst.changePct)}가 가장 약했다. 업종별 등락: ${input.sectors.map(item=>`${item.label} ${signedPct(item.changePct)}`).join(', ')}.`});
+    const scope=input.sectors.length===11?'11종':`11종 중 종가가 확인된 ${input.sectors.length}종`;
+    market.push({text:`S&P 500 업종을 추종하는 SPDR 업종 ETF ${scope} 가운데 ${up}종이 올랐다. ${best.label}(${best.symbol}) ${signedPct(best.changePct)}가 가장 강했고 ${worst.label}(${worst.symbol}) ${signedPct(worst.changePct)}가 가장 약했다${input.sectors.length===11?'':'(확인된 업종 기준)'}. 업종별 등락: ${input.sectors.map(item=>`${item.label} ${signedPct(item.changePct)}`).join(', ')}.`});
   }
   if(ranked.length){
-    const mentions=(stock:USAttentionStock)=>briefs.flatMap(brief=>brief.statements.filter(item=>item.region==='US'&&(stock.koreanName&&item.text.includes(stock.koreanName)||item.text.includes(stock.symbol))).map(item=>({item,brief})))[0];
+    const mentions=(stock:USAttentionStock)=>{
+      // A ticker counts only as a whole token (C must not match the C in FOMC); a Korean company name counts as written.
+      const ticker=stock.symbol.length>=2?new RegExp(`(?<![A-Za-z])${stock.symbol.replace(/[.^$*+?()[\]{}|\\]/g,'\\$&')}(?![A-Za-z])`):null;
+      return briefs.flatMap(brief=>brief.statements.filter(item=>item.region==='US'&&(Boolean(stock.koreanName&&stock.koreanName.length>=2&&item.text.includes(stock.koreanName))||Boolean(ticker?.test(item.text)))).map(item=>({item,brief})))[0];
+    };
     for(const stock of ranked){
       const name=displayName(stock),particle=josa(name,'은','는').slice(name.length),linked=mentions(stock);
       const rank=[stock.trendingRank?`야후 파이낸스 검색 ${stock.trendingRank}위`:'',stock.mostActiveRank?`대형주 거래량 ${stock.mostActiveRank}위`:''].filter(Boolean).join(', ');
       market.push({text:`${name}(${stock.symbol})${particle} ${usd(stock.close)}달러로 ${absPct(stock.changePct)} ${moveWord(stock.changePct)}했다(${rank}).${linked?` ${josa(linked.brief.report.broker,'은','는')} ${said([quote(linked.item.text)])} 설명했다.`:''}`,...(linked?{source:reportSource(linked.brief.report)}:{})});
     }
-    const focus=ranked.find(stock=>Math.abs(stock.changePct)>=3)??ranked[0]!;
-    titleFocus=`${displayName(focus)} ${Math.abs(focus.changePct).toFixed(Math.abs(focus.changePct)>=10?0:1)}% ${moveWord(focus.changePct)}`;
+    // Titles use Korean company names only (the headline policy holds English names in titles).
+    const named=ranked.filter(stock=>stock.koreanName),focus=named.find(stock=>Math.abs(stock.changePct)>=3)??named[0];
+    if(focus)titleFocus=`${displayName(focus)} ${Math.abs(focus.changePct).toFixed(Math.abs(focus.changePct)>=10?0:1)}% ${moveWord(focus.changePct)}`;
   }
   if(market.length)sections.push({key:'us-sectors-stocks',placement:'early',title:'업종과 종목',intro:'종목 순위는 투자자 관심도를 보여 줄 뿐 주가 변동의 원인을 뜻하지 않는다. 등락은 해당 거래일 종가 기준이다.',paragraphs:market});
   const rateDigests=briefs.flatMap(brief=>brief.digests.filter(item=>/FOMC|연준|Fed|美|미국|달러/.test(item.heading)&&!/프랑스|유럽|ECB|중국|일본|독일|영국|국고채|코스피|KOSPI|하이닉스|퀀틴전시|국내/.test(item.heading)).map(item=>({item,brief}))).slice(0,2);
@@ -129,7 +141,7 @@ export function composeKoreaDeepSections(input:{bundle:BrokerResearchBundle|null
       return {text:`검색 ${stock.rank}위 ${josa(stock.name,'은','는')} ${won(stock.close)}원으로 ${absPct(stock.changePct)} ${moveWord(stock.changePct)}했다.${research}`,...(report?{source:reportSource(report)}:digest?{source:reportSource(digest.brief.report)}:{})};
     });
     sections.push({key:'korea-stocks',placement:'early',title:'업종과 종목: 투자자 검색 상위',intro:'네이버페이 증권 검색 상위 종목(ETF·ETN·레버리지 제외)의 전일 종가 기준 등락과 최근 증권사 리포트다. 검색 순위는 관심도 지표이며 주가 변동의 원인이 아니다.',paragraphs});
-    const top=input.searchTop[0]!;titleFocus=`검색 1위 ${top.name} ${Math.abs(top.changePct).toFixed(1)}% ${moveWord(top.changePct)}`;
+    const top=input.searchTop[0]!;titleFocus=`검색 ${top.rank}위 ${top.name} ${Math.abs(top.changePct).toFixed(1)}% ${moveWord(top.changePct)}`;
   }
   const shown=new Set(input.searchTop.map(item=>item.code));
   const reviewDigests=digests.filter(({item})=>/Review|Preview|실적|목표주가|리뷰/.test(item.heading)&&!input.searchTop.some(stock=>item.heading.replace(/\s+/g,'').includes(stock.name.replace(/\s+/g,'')))).slice(0,3);

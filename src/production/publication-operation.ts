@@ -56,3 +56,22 @@ export async function findPublishedSameSession(operationsRoot:string,categoryDir
   }
   return null;
 }
+
+export async function findPublishedTitle(operationsRoot:string,categoryDir:string,currentOperationDate:string,title:string):Promise<{operationDate:string;publicPostUrl:string|null}|null> {
+  const wanted=normalizeTitle(title);if(!wanted)return null;
+  let dates:string[];
+  try{dates=(await readdir(operationsRoot)).filter(name=>/^\d{4}-\d{2}-\d{2}$/.test(name)&&name!==currentOperationDate).sort().reverse()}catch{return null}
+  for(const operationDate of dates){
+    const root=join(operationsRoot,operationDate,categoryDir),published=(await readPublishLedger(root)).filter(entry=>entry.event==='PUBLISHED');
+    if(!published.length)continue;
+    try{const raw=JSON.parse(await readFile(join(root,'live-unit.json'),'utf8')) as {title?:unknown};if(typeof raw.title==='string'&&normalizeTitle(raw.title)===wanted)return {operationDate,publicPostUrl:published.at(-1)!.publicPostUrl}}catch{}
+  }
+  return null;
+}
+function normalizeTitle(value:string):string{return value.normalize('NFKC').replace(/\s+/g,' ').trim()}
+
+// A PUBLISHED record for this identity is authoritative: later simulations or HOLD runs are written beside it.
+export async function outcomeFileFor(root:string,state:unknown):Promise<'auto-publish.json'|'auto-publish-latest-run.json'> {
+  if(state==='PUBLISHED')return 'auto-publish.json';
+  return (await readPublishLedger(root)).some(entry=>entry.event==='PUBLISHED')?'auto-publish-latest-run.json':'auto-publish.json';
+}

@@ -67,6 +67,7 @@ const CATEGORY_LINE=/^(?:[A-Za-z][A-Za-z &/]{2,30}|산업 및 종목 분석|기�
 
 function hangul(value:string){return (value.match(/[가-힣]/g)??[]).length}
 function quotable(value:string){return value.length>=18&&value.length<=200&&hangul(value)>=8&&!/@|https?:|\.com\b/.test(value)&&(value.match(/\d/g)??[]).length<=value.length*0.3}
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const SENTENCE_END=/(?:다|함|음|임|됨|마감|전망|예상|지속|필요|유지|상승|하락|강세|약세|확대|축소|전환|발동|기록|주목|부각|반등|급등|급락|우려|기대|\)|%)\.?$/;
 
 /** Extracts verbatim single-line bullets, region headlines and titled bullet digests from a broker brief's text. */
@@ -75,6 +76,8 @@ export function extractBriefContent(text:string):{statements:BrokerStatement[];d
   const statements:BrokerStatement[]=[],digests:BrokerDigest[]=[],events:BrokerEvent[]=[];let eventMode=false;
   let region:'US'|'KOREA'|'OTHER'|null=null,pendingHeadline:'US'|'KOREA'|null=null,digest:BrokerDigest|null=null;
   const flush=()=>{if(digest&&digest.bullets.length)digests.push(digest);digest=null};
+  // An unmarked Korean line right after a quoted line may be its continuation; such a line is never quoted.
+  const continues=(next:string)=>Boolean(next)&&!MARKER.test(next)&&!ANALYST_LINE.test(next)&&!CATEGORY_LINE.test(next)&&!EVENT_HEADING.test(next)&&!/^(?:▶|■|\[)/.test(next)&&hangul(next)>=2&&!REGION_HEADING.some(([pattern])=>pattern.test(next));
   const previousNonEmpty=(index:number)=>{for(let j=index-1;j>=0;j--)if(lines[j])return {line:lines[j]!,gap:j<index-1};return {line:'',gap:true}};
   for(let i=0;i<lines.length;i++){
     const line=lines[i]!;if(!line){if(eventMode&&!(lines[i+1]??'').match(MARKER))eventMode=false;continue}
@@ -91,7 +94,8 @@ export function extractBriefContent(text:string):{statements:BrokerStatement[];d
       const body=bullet[1]!.trim(),next=lines[i+1]??'';
       if(eventMode){const item=body.replace(/^(?:미|美)\s*-\s*/,'미국: ').replace(/^(?:한|국내)\s*-\s*/,'국내: ');if(item.length>=6&&item.length<=120&&hangul(item)>=2)events.push({region:/^미국:|美|미국|FOMC|연준/.test(item)?'US':'KOREA',text:item});continue}
       // A following unmarked prose line means the printed bullet wrapped; skip it rather than guess the join.
-      const wrapped=Boolean(next)&&!MARKER.test(next)&&!ANALYST_LINE.test(next)&&hangul(next)>=2&&!REGION_HEADING.some(([pattern])=>pattern.test(next))&&!SENTENCE_END.test(body);
+      // Any following unmarked Korean line may be the rest of this bullet; a plausible-looking ending never overrides that.
+      const wrapped=continues(next);
       if(wrapped||!quotable(body)||region==='OTHER')continue;
       if(digest)digest.bullets.push(body);
       // Bullets inside a titled report digest count as market commentary only when the report itself is a market/rates piece.
@@ -100,7 +104,7 @@ export function extractBriefContent(text:string):{statements:BrokerStatement[];d
       if(classified)statements.push({region:classified,text:body,heading:digest?.heading??null});
       continue;
     }
-    if(pendingHeadline&&quotable(line)&&/(?:마감|상승|하락|강세|약세|반등|급등|급락|혼조|보합)$/.test(line)){statements.push({region:pendingHeadline,text:line,heading:null});pendingHeadline=null;continue}
+    if(pendingHeadline&&quotable(line)&&!continues(lines[i+1]??'')&&/(?:마감|상승|하락|강세|약세|반등|급등|급락|혼조|보합)$/.test(line)){statements.push({region:pendingHeadline,text:line,heading:null});pendingHeadline=null;continue}
     // A digest heading is a short title line that starts a block (after a blank, category, analyst or another block)
     // and is immediately followed by bullets; wrapped sentence fragments never qualify.
     const prior=previousNonEmpty(i),next=lines[i+1]??'';
@@ -113,7 +117,9 @@ export function extractBriefContent(text:string):{statements:BrokerStatement[];d
 /** A Korea brief that prints a KOSPI level different from the verified close describes another session. */
 export function contradictsKospi(statements:BrokerStatement[],verifiedClose:number):boolean {
   for(const item of statements.filter(entry=>entry.region==='KOREA'&&/코스피|KOSPI/i.test(entry.text))){
-    for(const match of item.text.matchAll(/(\d{1,2},\d{3}(?:\.\d+)?)\s*(?:P|pt|포인트)?/g)){
+    // Only a level printed right after the KOSPI name is compared (a KOSDAQ level in the same bullet is not KOSPI).
+    for(const mention of item.text.matchAll(/KOSPI|코스피/gi)){
+      const rest=item.text.slice(mention.index!+mention[0].length),stop=rest.search(/KOSDAQ|코스닥|KOSPI|코스피/i),scope=(stop>=0?rest.slice(0,stop):rest).slice(0,60),match=scope.match(/(\d{1,2},\d{3}(?:\.\d+)?)/);if(!match)continue;
       const value=Number(match[1]!.replace(/,/g,''));if(value>1000&&Math.abs(value-verifiedClose)/verifiedClose>0.002)return true;
     }
   }
@@ -164,9 +170,15 @@ export async function collectBrokerResearch(input:{sessionDate:string;operationD
       const buffer=Buffer.from(await response.arrayBuffer());if(buffer.subarray(0,5).toString()!=='%PDF-')throw new Error('CONSENSUS_NOT_PDF');
       const text=await pdfText(buffer);if(!text)throw new Error('PDF_TEXT_UNAVAILABLE');
       const content=extractBriefContent(text);
-      let statements=content.statements;
-      if(input.verifiedKospiClose&&contradictsKospi(statements,input.verifiedKospiClose))statements=statements.filter(item=>item.region!=='KOREA');
-      briefs.push({report,statements,digests:content.digests,events:content.events});
+      let statements=content.statements,digests=content.digests;
+      const close=input.verifiedKospiClose;
+      if(close){
+        const asStatements=(digest:BrokerDigest)=>[digest.heading,...digest.bullets].map(text=>({region:'KOREA' as const,text,heading:null}));
+        const mismatched=contradictsKospi(statements,close)||digests.some(digest=>contradictsKospi(asStatements(digest),close));
+        // A brief describing another session must not contribute any Korean market commentary, in statements or digests.
+        if(mismatched){statements=statements.filter(item=>item.region!=='KOREA');digests=digests.filter(digest=>!/코스피|KOSPI|코스닥|KOSDAQ|국내 증시|국내증시|시황|전략|퀀틴전시/i.test([digest.heading,...digest.bullets].join(' ')))}
+      }
+      briefs.push({report,statements,digests,events:content.events});
       audit.push({sourceId:'consensus:pdf:'+report.url.split('=').pop(),url:report.url,status:'PASS',count:statements.length+content.digests.length,error:null});
     }catch(error){audit.push({sourceId:'consensus:pdf:'+report.url.split('=').pop(),url:report.url,status:'FAILED',count:0,error:error instanceof Error&&/^(?:CONSENSUS_HTTP_\d{3}|CONSENSUS_NOT_PDF|PDF_TEXT_UNAVAILABLE)$/.test(error.message)?error.message:'CONSENSUS_PDF_FAILED'})}
   }
