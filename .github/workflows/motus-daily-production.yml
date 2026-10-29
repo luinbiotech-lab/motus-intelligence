@@ -212,13 +212,18 @@ jobs:
         shell: bash
         run: |
           node --input-type=module <<'NODE'
-          import {readFileSync,existsSync} from 'node:fs';
+          import {readFileSync,existsSync,appendFileSync} from 'node:fs';
+          import {assessProductionGateOutcome} from './dist/src/production/production-gate-outcome.js';
           const path='data/operations/'+process.env.RUN_DATE+'/'+process.env.CATEGORY+'/auto-publish.json';
           if(!existsSync(path)){console.error('::error title=Production not verified::Missing auto-publish outcome');process.exit(1)}
           const outcome=JSON.parse(readFileSync(path,'utf8'));
-          const allowedSkip=outcome.state==='SKIP' && ['ALREADY_PUBLISHED_SAME_SESSION','ALREADY_PUBLISHED_IN_PERSISTED_LEDGER'].includes(outcome.reasonCode);
-          if(outcome.state==='PUBLISHED'||allowedSkip){console.log('Verified production outcome: '+outcome.state);process.exit(0)}
-          console.error('::error title=Production publication not completed::'+JSON.stringify({state:outcome.state,reasonCode:outcome.reasonCode??null,reason:outcome.reason??outcome.error??null,publishCallCount:outcome.publishCallCount??0}));
+          const result=assessProductionGateOutcome(outcome);
+          const label=result.disposition==='PUBLISHED'?'NEW PUBLICATION':result.disposition==='EXISTING_SESSION_POST'?'ALREADY PUBLISHED / NO NEW ARTICLE':'PUBLICATION FAILED';
+          const summary=['### MOTUS production result', '- Category: '+process.env.CATEGORY, '- Operation date: '+process.env.RUN_DATE, '- Outcome: **'+label+'**', '- Detail: '+result.message, ...(result.url?['- Existing/public Blogger URL: '+result.url]:[]), ''].join('\n');
+          if(process.env.GITHUB_STEP_SUMMARY)appendFileSync(process.env.GITHUB_STEP_SUMMARY,summary);
+          if(result.disposition==='EXISTING_SESSION_POST'){console.log('::notice title=No new Blogger article::'+result.message+' '+result.url);process.exit(0)}
+          if(result.disposition==='PUBLISHED'){console.log('Verified NEW Blogger publication: '+result.url);process.exit(0)}
+          console.error('::error title=Production publication not completed::'+JSON.stringify({state:outcome.state,reasonCode:outcome.reasonCode??null,reason:outcome.reason??outcome.error??null,publishCallCount:outcome.publishCallCount??0,assessment:result.message}));
           process.exit(1);
           NODE
 
