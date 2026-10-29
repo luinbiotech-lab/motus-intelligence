@@ -93,3 +93,18 @@ test('wire collection records failed feeds without throwing', async () => {
   assert.ok(result.audit.some(item=>item.status==='FAILED'&&item.error==='WIRE_FETCH_FAILED'));
   assert.ok(result.audit.some(item=>item.status==='PASS'&&item.url==='https://example.test/wire/b1'));
 });
+
+test('wire paragraphs link as articles; Latin names take the particle by sound', async () => {
+  const {deepSection}=await import('../src/publishers/editorial-article.js');
+  const {josa}=await import('../src/operations/ai-generic-synthesis.js');
+  const composed=composeUSDeepSections({bundle:null,stocks:[],sectors:[],checkpoint:'다음 확인 지표.',wire});
+  const html=deepSection(composed.sections.find(item=>item.key==='us-causes')!);
+  assert.match(html,/\[기사 원문\]/);
+  assert.doesNotMatch(html,/\[리포트 원문\]/);
+  assert.equal(josa('NAVER','은','는'),'NAVER는');
+  assert.equal(josa('Sandisk(SNDK)','은','는'),'Sandisk(SNDK)는');
+  assert.equal(josa('IBM','은','는'),'IBM은');
+  assert.equal(josa('Intel','은','는'),'Intel은');
+  assert.equal(josa('Microsoft','은','는'),'Microsoft는');
+  assert.equal(josa('삼성전자(005930)','은','는'),'삼성전자(005930)는');
+});

@@ -8,7 +8,7 @@ import {analystLabel,koreanDateLabel,type BrokerBrief,type BrokerDigest,type Bro
 import {displayName,moveWord,signedPct,absPct,type KoreaSearchStock,type SectorMove,type USAttentionStock} from './market-attention.js';
 import type {WireReport} from './market-wire.js';
 
-export interface DeepParagraph {text:string;source?:{label:string;url:string}}
+export interface DeepParagraph {text:string;source?:{label:string;url:string;kind?:'article'}}
 export interface DeepSection {key:string;title:string;intro?:string;placement?:'early'|'late'|'risks';paragraphs:DeepParagraph[]}
 export interface DeepComposition {sections:DeepSection[];leadAddition:string[];titleFocus:string|null;sources:Array<{label:string;url:string;publisher:string;date?:string}>;hasCoreCommentary?:boolean}
 
@@ -80,7 +80,7 @@ function causeParagraphs(briefs:BrokerBrief[],region:'US'|'KOREA'):{paragraphs:D
 const kstDay=(iso:string)=>new Date(Date.parse(iso)+9*3600000).toISOString().slice(0,10);
 /** Wire edition tags such as (종합) are not part of what the report says. */
 const wireHeadline=(title:string)=>title.replace(/\s*\((?:종합|\d+보)[^)]*\)\s*$/,'').trim();
-const wireSource=(report:WireReport)=>({label:`${report.publisher} 「${report.title}」 (${koreanDateLabel(kstDay(report.publishedAt))})`,url:report.url});
+const wireSource=(report:WireReport)=>({label:`${report.publisher} 「${report.title}」 (${koreanDateLabel(kstDay(report.publishedAt))})`,url:report.url,kind:'article' as const});
 /** Fallback core commentary: news-wire close reports, quoted with publisher and date, used only when no broker brief explains the session. */
 function wireCause(reports:WireReport[],key:string,sources:DeepComposition['sources']):{section:DeepSection;lead:string}|null{
   if(!reports.length)return null;
