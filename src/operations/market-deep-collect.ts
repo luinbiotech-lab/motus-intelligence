@@ -7,6 +7,12 @@ import {composeKoreaDeepSections,composeUSDeepSections,indexMove,type DeepCompos
 interface AuditSink {sourceId:string;category:DailyCategory;url:string;status:'PASS'|'FAILED';recordCount:number;collectedAt:string;error:string|null;observedDate?:string}
 export interface DeepCollection {composition:DeepComposition;title:string|null;sources:Array<{label:string;url:string;publisher:string}>}
 
+/** Reports cited from a fetched consensus list (not opened as PDFs) are verified as listed on that page. */
+function recordListed(audit:AuditSink[],sources:Array<{url:string}>,category:DailyCategory,at:string,sessionDate:string){
+  const passed=new Set(audit.filter(item=>item.status==='PASS').map(item=>item.url));
+  for(const source of sources)if(source.url.startsWith('https://consensus.hankyung.com/analysis/downpdf')&&!passed.has(source.url)){audit.push({sourceId:'deep:consensus:listed:'+source.url.split('=').pop(),category,url:source.url,status:'PASS',recordCount:1,collectedAt:at,error:null,observedDate:sessionDate});passed.add(source.url)}
+}
+
 function record(audit:AuditSink[],items:Array<BrokerAudit|AttentionAudit>,category:DailyCategory,at:string,sessionDate:string){
   for(const item of items)audit.push({sourceId:'deep:'+item.sourceId,category,url:item.url,status:item.status,recordCount:item.count,collectedAt:at,error:item.error,...(item.status==='PASS'?{observedDate:sessionDate}:{})});
 }
@@ -22,6 +28,7 @@ export async function collectUSDeep(input:{sessionDate:string;operationDate:stri
     const sources=[...composition.sources];
     if(composition.sections.some(section=>section.key==='us-attention')){sources.push({label:'Yahoo Finance 검색 상위 종목',url:YAHOO_TRENDING,publisher:'Yahoo Finance'});for(const url of attention?.stockUrls??[])sources.push({label:'Yahoo Finance 종목 일별 종가',url,publisher:'Yahoo Finance'})}
     if(composition.sections.some(section=>section.key==='us-sectors'))for(const url of attention?.sectorUrls??[])sources.push({label:'Yahoo Finance SPDR 업종 ETF 일별 종가',url,publisher:'Yahoo Finance'});
+    recordListed(input.audit,sources,'US_MARKET',input.at,input.sessionDate);
     const ups=input.indexChanges.filter(value=>value>0.005).length,downs=input.indexChanges.filter(value=>value<-0.005).length;
     const indexPhrase=ups===input.indexChanges.length?'3대 지수 상승':downs===input.indexChanges.length?'3대 지수 하락':'3대 지수 혼조';
     return {composition,title:composition.titleFocus?`뉴욕증시 ${indexPhrase}…${composition.titleFocus}`:null,sources};
@@ -37,6 +44,7 @@ export async function collectKoreaDeep(input:{sessionDate:string;operationDate:s
     const composition=composeKoreaDeepSections({bundle,searchTop:search?.stocks??[]});
     const sources=[...composition.sources];
     if(composition.sections.some(section=>section.key==='korea-search-top')){sources.push({label:'네이버페이 증권 검색 상위 종목',url:NAVER_SEARCH_TOP,publisher:'네이버페이 증권'});for(const stock of search?.stocks??[])sources.push({label:`네이버페이 증권 ${stock.name} 일별 시세`,url:stock.url,publisher:'네이버페이 증권'})}
+    recordListed(input.audit,sources,'KOREA_MARKET',input.at,input.sessionDate);
     const change=input.kospiChangePct,level=new Intl.NumberFormat('en-US',{maximumFractionDigits:0}).format(Math.floor(input.kospiClose));
     const head=change===null?null:`코스피 ${Math.abs(change).toFixed(2)}% ${indexMove(change)} ${level}`;
     return {composition,title:head&&composition.titleFocus?`${head}…${composition.titleFocus}`:null,sources};

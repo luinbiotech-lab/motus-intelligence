@@ -11,7 +11,11 @@ export interface DeepParagraph {text:string;source?:{label:string;url:string}}
 export interface DeepSection {key:string;title:string;intro?:string;paragraphs:DeepParagraph[]}
 export interface DeepComposition {sections:DeepSection[];leadAddition:string[];titleFocus:string|null;sources:Array<{label:string;url:string;publisher:string}>}
 
-const quote=(value:string)=>`“${value.replace(/[“”"]/g,'').replace(/\s+/g,' ').trim().replace(/[.。]$/,'')}”`;
+const quote=(value:string)=>`“${value.replace(/[“"]/g,'‘').replace(/[”]/g,'’').replace(/\s+/g,' ').trim().replace(/[.。]$/,'')}”`;
+/** “…”라고 / “…”이라고 by the final syllable of the quotation. */
+function said(quotes:string[]):string {const last=quotes.at(-1)??'',char=last.replace(/[”’\s]+$/,'').slice(-1),code=char.charCodeAt(0)-0xac00;const batchim=code>=0&&code<11172&&code%28!==0;return `${quotes.join(', ')}${batchim?'이라고':'라고'}`}
+/** Statements that describe the market as a whole lead; side notes (FX, oil) follow. */
+function marketScore(text:string){return (/마감|지수|증시|코스피|KOSPI|나스닥|S&P|다우|3대/.test(text)?2:0)+(/상승|하락|강세|약세|급등|급락|반등/.test(text)?1:0)}
 const reportSource=(report:BrokerReport)=>({label:`${report.broker} ${report.title} (${koreanDateLabel(report.date)})`,url:report.url});
 const sourceEntry=(report:BrokerReport)=>({label:`${report.broker} 「${report.title}」 (${report.date})`,url:report.url,publisher:report.broker});
 function subject(report:BrokerReport):string {return josa(analystLabel(report),'은','는')}
@@ -23,22 +27,22 @@ function briefParagraphs(briefs:BrokerBrief[],region:'US'|'KOREA',maxBriefs=3,pe
   const paragraphs:DeepParagraph[]=[];let first:{text:string;brief:BrokerBrief}|null=null;const used=new Set<string>();
   for(const brief of briefs){
     if(paragraphs.length>=maxBriefs)break;
-    const statements=brief.statements.filter(item=>item.region===region&&!used.has(item.text)).slice(0,perBrief);if(!statements.length)continue;
-    statements.forEach(item=>used.add(item.text));if(!first)first={text:statements[0]!.text,brief};
-    paragraphs.push({text:`${subject(brief.report)} ${koreanDateLabel(brief.report.date)} 아침 리포트 「${brief.report.title}」에서 ${statements.map(item=>quote(item.text)).join(', ')}라고 정리했다.`,source:reportSource(brief.report)});
+    const statements=brief.statements.filter(item=>item.region===region&&!used.has(item.text)).map((item,index)=>({item,index})).sort((a,b)=>marketScore(b.item.text)-marketScore(a.item.text)||a.index-b.index).slice(0,perBrief).map(entry=>entry.item);if(!statements.length)continue;
+    statements.forEach(item=>used.add(item.text));if(!first||marketScore(statements[0]!.text)>marketScore(first.text))first={text:statements[0]!.text,brief};
+    paragraphs.push({text:`${subject(brief.report)} ${koreanDateLabel(brief.report.date)} 아침 리포트 「${brief.report.title}」에서 ${said(statements.map(item=>quote(item.text)))} 정리했다.`,source:reportSource(brief.report)});
   }
   return {paragraphs,first};
 }
 
 function digestParagraph(digest:BrokerDigest,brief:BrokerBrief):DeepParagraph {
   const who=digest.analyst?`${brief.report.broker} ${digest.analyst} 연구원`:analystLabel(brief.report);
-  return {text:`${josa(who,'은','는')} 「${digest.heading.replace(/\s+/g,' ')}」에서 ${digest.bullets.slice(0,3).map(quote).join(', ')}라고 밝혔다.`,source:reportSource(brief.report)};
+  return {text:`${josa(who,'은','는')} 「${digest.heading.replace(/\s+/g,' ')}」에서 ${said(digest.bullets.slice(0,3).map(quote))} 밝혔다.`,source:reportSource(brief.report)};
 }
 
 function ratingSentence(report:BrokerReport):string {
   const parts=[report.rating?`투자의견 ${report.rating}`:'',report.targetPrice?`목표주가 ${report.targetPrice}원`:''].filter(Boolean);
   const headline=report.company?report.title.replace(/^.+?\(\d{6}\)\s*/,''):report.title;
-  return `${subject(report)} ${koreanDateLabel(report.date)} 「${headline}」 리포트에서 ${parts.length?parts.join(', ')+'을 제시했다':'분석을 내놓았다'}${report.summary.length?`. 요약: ${report.summary.slice(0,2).map(quote).join(', ')}`:''}.`;
+  return `${subject(report)} ${koreanDateLabel(report.date)} 「${headline}」 리포트에서 ${parts.length?parts.join(', ')+'을 제시했다':'관련 분석을 내놨다'}${report.summary.length?`. 요약: ${report.summary.slice(0,2).map(quote).join(', ')}`:''}.`;
 }
 
 export function composeUSDeepSections(input:{bundle:BrokerResearchBundle|null;stocks:USAttentionStock[];sectors:SectorMove[]}):DeepComposition {
@@ -47,7 +51,7 @@ export function composeUSDeepSections(input:{bundle:BrokerResearchBundle|null;st
   const commentary=briefParagraphs(briefs,'US');
   if(commentary.paragraphs.length){
     sections.push({key:'us-broker-commentary',title:'증권가가 본 간밤 뉴욕증시',intro:'국내 증권사가 이 거래일을 정리한 아침 리포트의 문장을 그대로 옮겼다. 해석은 각 증권사의 판단이다.',paragraphs:commentary.paragraphs});
-    leadAddition.push(`${subject(commentary.first!.brief.report)} 이날 장을 ${quote(commentary.first!.text)}라고 요약했다.`);
+    leadAddition.push(`${subject(commentary.first!.brief.report)} 이날 장을 ${said([quote(commentary.first!.text)])} 요약했다.`);
   }
   const ranked=[...input.stocks].sort((a,b)=>(a.trendingRank??99)-(b.trendingRank??99)||(a.mostActiveRank??99)-(b.mostActiveRank??99)).slice(0,6);
   let titleFocus:string|null=null;
@@ -57,7 +61,7 @@ export function composeUSDeepSections(input:{bundle:BrokerResearchBundle|null;st
       const rank=[stock.trendingRank?`야후 파이낸스 검색 상위 ${stock.trendingRank}위`:'',stock.mostActiveRank?`대형주 거래량 상위 ${stock.mostActiveRank}위`:''].filter(Boolean).join(', ');
       const linked=mentions(stock);
       const name=displayName(stock),particle=josa(name,'은','는').slice(name.length);
-      return {text:`${name}(${stock.symbol})${particle} ${usd(stock.close)}달러로 마감해 전 거래일보다 ${absPct(stock.changePct)} ${moveWord(stock.changePct)}했다(${rank}).${linked?` ${josa(linked.brief.report.broker,'은','는')} ${quote(linked.item.text)}라고 설명했다.`:''}`,...(linked?{source:reportSource(linked.brief.report)}:{})};
+      return {text:`${name}(${stock.symbol})${particle} ${usd(stock.close)}달러로 마감해 전 거래일보다 ${absPct(stock.changePct)} ${moveWord(stock.changePct)}했다(${rank}).${linked?` ${josa(linked.brief.report.broker,'은','는')} ${said([quote(linked.item.text)])} 설명했다.`:''}`,...(linked?{source:reportSource(linked.brief.report)}:{})};
     });
     sections.push({key:'us-attention',title:'투자자 관심이 몰린 종목',intro:'야후 파이낸스에서 많이 검색된 종목과 시가총액 200억 달러 이상 거래량 상위 종목의 해당 거래일 종가 기준 등락이다.',paragraphs});
     const focus=ranked.find(stock=>Math.abs(stock.changePct)>=3)??ranked[0]!;
@@ -71,7 +75,7 @@ export function composeUSDeepSections(input:{bundle:BrokerResearchBundle|null;st
       {text:input.sectors.map(item=>`${item.label} ${signedPct(item.changePct)}`).join(' · ')},
     ]});
   }
-  const rateDigests=briefs.flatMap(brief=>brief.digests.filter(item=>/FOMC|연준|금리|국채|Fed|美/.test(item.heading)).map(item=>({item,brief}))).slice(0,2);
+  const rateDigests=briefs.flatMap(brief=>brief.digests.filter(item=>/FOMC|연준|Fed|美|미국|달러/.test(item.heading)&&!/프랑스|유럽|ECB|중국|일본|독일|영국|국고채/.test(item.heading)).map(item=>({item,brief}))).slice(0,2);
   const economy=(input.bundle?.economy??[]).filter(item=>/FOMC|연준|금리|미국|美|달러|물가|고용|Fed/.test(item.title)).slice(0,3);
   if(rateDigests.length||economy.length){
     sections.push({key:'us-rates-research',title:'금리·통화정책에 대한 증권가 시각',paragraphs:[...rateDigests.map(({item,brief})=>digestParagraph(item,brief)),...economy.map(report=>({text:ratingSentence(report),source:reportSource(report)}))]});
@@ -87,7 +91,7 @@ export function composeKoreaDeepSections(input:{bundle:BrokerResearchBundle|null
   const commentary=briefParagraphs(briefs,'KOREA',3,3);
   if(commentary.paragraphs.length){
     sections.push({key:'korea-broker-commentary',title:'증권가가 본 전일 국내 증시',intro:'국내 증권사가 전일 장을 정리한 아침 리포트의 문장을 그대로 옮겼다. 원인에 대한 해석은 각 증권사의 판단이다.',paragraphs:commentary.paragraphs});
-    leadAddition.push(`${subject(commentary.first!.brief.report)} ${quote(commentary.first!.text)}라고 정리했다.`);
+    leadAddition.push(`${subject(commentary.first!.brief.report)} 전일 장을 ${said([quote(commentary.first!.text)])} 정리했다.`);
   }
   const digests=briefs.flatMap(brief=>brief.digests.map(item=>({item,brief})));
   const companyDigest=(name:string)=>digests.find(({item})=>item.heading.replace(/\s+/g,'').includes(name.replace(/\s+/g,'')));
