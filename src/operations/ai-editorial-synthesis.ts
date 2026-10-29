@@ -23,7 +23,7 @@ export function buildAIEditorialDecision(events:KoreanAIEvent[],search:PreRender
   const major=ordered[0]!,selected=search.selectedSecondaryTopicId?byId.get(search.selectedSecondaryTopicId):undefined,effects:Array<'TITLE'|'LEAD'|'ORDERING'|'DEPTH'>=[];
   const original=events.map(item=>item.topicId).join('|');if(ordered.map(item=>item.topicId).join('|')!==original)effects.push('ORDERING');
   const second=selected&&selected.topicId!==major.topicId?selected:undefined;
-  const title=second?`${josa(major.company,'이','가')} 공개한 ${major.topic}, ${second.company} 움직임까지 읽기`:`${josa(major.company,'이','가')} 공개한 ${major.topic}, 실제 산업 변화로 이어질까`;
+  const title=second?`${josa(major.company,'이','가')} 공개한 ${major.topic}, ${second.company} 움직임까지 읽기`:aiHeadline(major);
   const lead=second?`${josa(major.company,'이','가')} 공개한 ${josa(major.topic,'이','가')} 오늘 AI 산업의 중심축이다. 여기에 ${second.company}의 ${josa(second.topic,'을','를')} 함께 보면 경쟁이 제품 발표를 넘어 실제 도입과 운영 성과로 이동하는 흐름이 선명해진다. 각 항목은 공식 원문에서 확인한 사실과 MOTUS 분석을 나눠 적었다.`:`${josa(major.company,'이','가')} 공개한 ${josa(major.topic,'이','가')} 오늘 AI 산업의 핵심이다.${ordered.length>1?` ${ordered.slice(1).map(item=>`${item.company}의 ${item.topic}`).join(', ')} 발표도 함께 정리했다.`:''} 공식 원문에서 확인된 사실과 실제 도입·운영 성과에서 추가로 확인할 변수를 나눠 살펴본다.`;
   const depthByTopic=Object.fromEntries(ordered.map((event,index)=>[event.topicId,index===0||event.topicId===search.selectedSecondaryTopicId?2:1]));
   if(selected){effects.push('TITLE','LEAD','DEPTH')}
@@ -33,3 +33,20 @@ export function buildAIEditorialDecision(events:KoreanAIEvent[],search:PreRender
 function productName(value:string,pattern:RegExp,fallback:string){return value.match(pattern)?.[0]?.replace(/\s+/g,' ').trim()??fallback}
 function koreanCompany(value:string):string {return ({OpenAI:'오픈AI','Google AI':'구글','Google DeepMind':'구글 딥마인드',NVIDIA:'엔비디아',Microsoft:'마이크로소프트',Anthropic:'앤트로픽','Amazon AWS':'아마존웹서비스(AWS)',Meta:'메타'} as Record<string,string>)[value]??value}
 
+
+// The headline follows what kind of event it is, so a launch, a partnership and an infrastructure deal do not all read the same.
+const HEADLINE_BY_TYPE:Record<string,(company:string,topic:string)=>string>={
+  launch:(company,topic)=>`${josa(company,'이','가')} 공개한 ${topic}, 실제 도입으로 이어질까`,
+  infrastructure:(company,topic)=>`${company}의 ${topic}, AI 인프라 경쟁의 다음 단계`,
+  partnership:(company,topic)=>`${company}의 ${topic}, 협력이 바꿀 AI 시장 구도`,
+  adoption:(company,topic)=>`${company}의 ${topic}, 현장 도입이 보여 준 AI 활용 방식`,
+  investment:(company,topic)=>`${company}의 ${topic}, 투자 확대가 가리키는 방향`,
+  research:(company,topic)=>`${company}의 ${topic}, 연구 성과가 제품으로 이어질 시점`,
+  security:(company,topic)=>`${company}의 ${topic}, AI 보안 기준이 달라지는 지점`,
+  policy:(company,topic)=>`${company}의 ${topic}, 정책 변화가 AI 산업에 미칠 영향`,
+  education:(company,topic)=>`${company}의 ${topic}, AI 인재 양성 경쟁`,
+};
+export function aiHeadline(event:KoreanAIEvent&{eventType?:string}):string {
+  const build=event.eventType?HEADLINE_BY_TYPE[event.eventType]:undefined;
+  return build?build(event.company,event.topic):`${josa(event.company,'이','가')} 공개한 ${event.topic}, 실제 산업 변화로 이어질까`;
+}
