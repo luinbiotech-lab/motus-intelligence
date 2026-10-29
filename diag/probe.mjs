@@ -1,34 +1,24 @@
 import {mkdirSync,writeFileSync} from 'node:fs';
-mkdirSync('diag/out',{recursive:true});
+import {execFileSync} from 'node:child_process';
+mkdirSync('diag/out2',{recursive:true});
 const UA='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36';
-const targets={
- naver_market_list:'https://finance.naver.com/research/market_info_list.naver',
- naver_invest_list:'https://finance.naver.com/research/invest_list.naver',
- naver_company_list:'https://finance.naver.com/research/company_list.naver',
- naver_industry_list:'https://finance.naver.com/research/industry_list.naver',
- naver_economy_list:'https://finance.naver.com/research/economy_list.naver',
- naver_lastsearch:'https://finance.naver.com/sise/lastsearch2.naver',
- naver_m_research:'https://m.stock.naver.com/api/research/category/market?pageSize=5',
- hankyung_consensus:'https://consensus.hankyung.com/analysis/list',
- google_trends_kr:'https://trends.google.com/trending/rss?geo=KR',
- google_trends_us:'https://trends.google.com/trending/rss?geo=US',
- yahoo_trending_us:'https://query1.finance.yahoo.com/v1/finance/trending/US?count=10',
- yahoo_gainers:'https://query1.finance.yahoo.com/v1/finance/screener/predefined/saved?scrIds=day_gainers&count=10',
- nasdaq_movers:'https://api.nasdaq.com/api/marketmovers?assetclass=stocks',
- blackrock_weekly:'https://www.blackrock.com/corporate/insights/blackrock-investment-institute/publications/weekly-commentary',
- ms_ideas:'https://www.morganstanley.com/insights',
- jpm_insights:'https://am.jpmorgan.com/us/en/asset-management/adv/insights/market-insights/market-updates/on-the-minds-of-investors/',
- schwab_rss:'https://www.schwab.com/learn/rss.xml',
- hankyung_global_rss:'https://www.hankyung.com/feed/international',
- mk_global_rss:'https://www.mk.co.kr/rss/50300009/',
- yna_market_rss:'https://www.yna.co.kr/rss/market.xml',
- einfomax:'https://news.einfomax.co.kr/rss/S1N2.xml',
-};
+const get=async(url,opt={})=>{const r=await fetch(url,{headers:{'user-agent':UA,'accept-language':'ko-KR,ko;q=0.9',...(opt.headers||{})},signal:AbortSignal.timeout(25000)});return {status:r.status,ct:r.headers.get('content-type')||'',buf:Buffer.from(await r.arrayBuffer())}};
 const out={};
-for(const [k,url] of Object.entries(targets)){
- try{const r=await fetch(url,{headers:{'user-agent':UA,'accept-language':'ko-KR,ko;q=0.9,en;q=0.8'},signal:AbortSignal.timeout(20000)});const buf=Buffer.from(await r.arrayBuffer());
-  const ct=r.headers.get('content-type')||'';let text=buf.toString('utf8');if(/euc-kr/i.test(ct)||/charset=euc-kr/i.test(text.slice(0,2000)))text=new TextDecoder('euc-kr').decode(buf);
-  out[k]={status:r.status,ct,len:text.length,finalUrl:r.url};writeFileSync(`diag/out/${k}.txt`,text.slice(0,200000));
- }catch(e){out[k]={error:String(e?.cause?.code??e)}}
-}
-writeFileSync('diag/out/summary.json',JSON.stringify(out,null,1));
+for(const t of ['MK','CO','IN','EC']){const u=`https://consensus.hankyung.com/analysis/list?skinType=business&report_type=${t}&sdate=2026-10-28&edate=2026-10-30&now_page=1&pagenum=80`;try{const r=await get(u);writeFileSync(`diag/out2/hk_${t}.html`,r.buf);out['hk_'+t]={status:r.status,len:r.buf.length}}catch(e){out['hk_'+t]={error:String(e)}}}
+// PDF download test: first market report
+
+const mk=(await import('node:fs')).readFileSync('diag/out2/hk_MK.html','utf8');const ids=[...mk.matchAll(/downpdf\?report_idx=(\d+)/g)].map(m=>m[1]);out.mkIds=[...new Set(ids)].slice(0,5);
+for(const id of out.mkIds.slice(0,2)){try{const r=await get(`https://consensus.hankyung.com/analysis/downpdf?report_idx=${id}`,{headers:{referer:'https://consensus.hankyung.com/analysis/list'}});writeFileSync(`diag/out2/r${id}.pdf`,r.buf);out['pdf'+id]={status:r.status,ct:r.ct,len:r.buf.length,magic:r.buf.subarray(0,5).toString()};try{const txt=execFileSync('pdftotext',['-layout',`diag/out2/r${id}.pdf`,'-'],{maxBuffer:1e8}).toString();writeFileSync(`diag/out2/r${id}.txt`,txt);out['pdf'+id].textLen=txt.length}catch(e){out['pdf'+id].pdftotext=String(e).slice(0,200)}}catch(e){out['pdf'+id]={error:String(e)}}}
+for(const [k,u] of Object.entries({
+ y_losers:'https://query1.finance.yahoo.com/v1/finance/screener/predefined/saved?scrIds=day_losers&count=10',
+ y_active:'https://query1.finance.yahoo.com/v1/finance/screener/predefined/saved?scrIds=most_actives&count=15',
+ y_trending:'https://query1.finance.yahoo.com/v1/finance/trending/US?count=15',
+ nv_searchtop:'https://m.stock.naver.com/api/stocks/searchTop/all?page=1&pageSize=20',
+ nv_popular:'https://m.stock.naver.com/api/home/popularStocks',
+ nv_front_search:'https://m.stock.naver.com/front-api/search/popularStocks?nationType=KOR',
+ nv_up:'https://m.stock.naver.com/api/stocks/up/KOSPI?page=1&pageSize=10',
+ nv_kospi_basic:'https://m.stock.naver.com/api/index/KOSPI/basic',
+ gtrends_kr:'https://trends.google.com/trending/rss?geo=KR',
+ sp_sectors:'https://query1.finance.yahoo.com/v7/finance/spark?symbols=XLK,XLF,XLE,XLV,XLY,XLP,XLI,XLB,XLU,XLRE,XLC&range=5d&interval=1d',
+})){try{const r=await get(u);writeFileSync(`diag/out2/${k}.txt`,r.buf);out[k]={status:r.status,len:r.buf.length,head:r.buf.subarray(0,300).toString()}}catch(e){out[k]={error:String(e)}}}
+writeFileSync('diag/out2/summary.json',JSON.stringify(out,null,1));
