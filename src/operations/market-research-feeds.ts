@@ -82,7 +82,8 @@ export async function collectGoldmanBrokerResearch(at:string,fetcher:typeof fetc
    const text=match[2]!.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
    const rawDate=text.match(/\b(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+\d{1,2},\s+20\d{2}\b/i)?.[0];
    if(!rawDate)continue;
-   const date=Date.parse(rawDate+" 00:00:00 UTC");if(!Number.isFinite(date)||date>Date.parse(at)||Date.parse(at)-date>30*86400000)continue;
+   // Goldman prints a calendar date without a zone; anchor it to UTC midnight so the runner TZ never shifts the day.
+   const date=Date.parse(rawDate+' 00:00:00 UTC');if(!Number.isFinite(date)||date>Date.parse(at)||Date.parse(at)-date>30*86400000)continue;
    const headline=text.slice(0,text.indexOf(rawDate)).replace(/^(?:Markets|Economy|Artificial Intelligence|Europe|Americas)\s+/i,'').trim();
    if(!/\b(?:market|bonds?|treasury|yield|equity|equities|stock|fed|inflation|economic|earnings|investment|portfolios?)\b/i.test(headline))continue;
    const path=match[1]!;

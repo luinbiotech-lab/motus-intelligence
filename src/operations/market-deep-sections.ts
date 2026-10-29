@@ -109,8 +109,9 @@ export function composeUSDeepSections(input:{bundle:BrokerResearchBundle|null;st
       const rank=[stock.trendingRank?`야후 파이낸스 검색 ${stock.trendingRank}위`:'',stock.mostActiveRank?`대형주 거래량 ${stock.mostActiveRank}위`:''].filter(Boolean).join(', ');
       market.push({text:`${name}(${stock.symbol})${particle} ${usd(stock.close)}달러로 ${absPct(stock.changePct)} ${moveWord(stock.changePct)}했다(${rank}).${linked?` ${josa(linked.brief.report.broker,'은','는')} ${said([quote(linked.item.text)])} 설명했다.`:''}`,...(linked?{source:reportSource(linked.brief.report)}:{})});
     }
-    const focus=ranked.find(stock=>Math.abs(stock.changePct)>=3)??ranked[0]!;
-    titleFocus=`${displayName(focus)} ${Math.abs(focus.changePct).toFixed(Math.abs(focus.changePct)>=10?0:1)}% ${moveWord(focus.changePct)}`;
+    // Titles use Korean company names only (the headline policy holds English names in titles).
+    const named=ranked.filter(stock=>stock.koreanName),focus=named.find(stock=>Math.abs(stock.changePct)>=3)??named[0];
+    if(focus)titleFocus=`${displayName(focus)} ${Math.abs(focus.changePct).toFixed(Math.abs(focus.changePct)>=10?0:1)}% ${moveWord(focus.changePct)}`;
   }
   if(market.length)sections.push({key:'us-sectors-stocks',placement:'early',title:'업종과 종목',intro:'종목 순위는 투자자 관심도를 보여 줄 뿐 주가 변동의 원인을 뜻하지 않는다. 등락은 해당 거래일 종가 기준이다.',paragraphs:market});
   const rateDigests=briefs.flatMap(brief=>brief.digests.filter(item=>/FOMC|연준|Fed|美|미국|달러/.test(item.heading)&&!/프랑스|유럽|ECB|중국|일본|독일|영국|국고채|코스피|KOSPI|하이닉스|퀀틴전시|국내/.test(item.heading)).map(item=>({item,brief}))).slice(0,2);

@@ -7,6 +7,7 @@ export function evaluateEditorialQuality(title:string,html:string):EditorialQual
   const korean=(title.match(/[가-힣]/g)??[]).length,latin=(title.match(/[A-Za-z]/g)??[]).length,bodyKorean=(visible.match(/[가-힣]/g)??[]).length,bodyLatin=(visible.match(/[A-Za-z]/g)??[]).length;
   if(title.length<12||!korean||latin>korean*1.5)reasons.push('title is not natural Korean-first editorial copy');
   if(titleContainsCalendarDate(title))reasons.push('calendar date exposed in title');
+  reasons.push(...titlePolicyViolations(title));
   if(/^\s*(?:MOTUS\b|AI 인텔리전스\s*:|미국증시 마감\s*:)/i.test(title))reasons.push('mechanical title prefix exposed');
   if(/<(?:script|style)\b/i.test(decoded))reasons.push('script or style payload present');
   if(/(?:^|[>\s])https?:\/\//i.test(visible))reasons.push('plain or encoded raw URL exposed');
@@ -28,3 +29,28 @@ export function publisherConcentrationWarning(publishers:string[],majorIssueVeri
 
 function decodeRepeated(value:string){let result=value;for(let i=0;i<3;i++){const next=result.replaceAll('&amp;','&').replaceAll('&lt;','<').replaceAll('&gt;','>').replaceAll('&quot;','"').replaceAll('&#39;',"'");if(next===result)break;result=next}return result}
 function normalize(value:string){return value.toLowerCase().replace(/[^\p{L}\p{N}]+/gu,' ').trim()}
+
+// Public headline rules (editorial policy): Korean market usage, no trading-product names, correct particles.
+const ENGLISH_INDEX_NAMES=/\b(?:Nasdaq|NASDAQ|Dow(?:\s+Jones)?|DJIA|KOSPI|KOSDAQ|Russell(?:\s*2000)?)\b/;
+const TRADING_PRODUCT_NAMES=/(?:레버리지|인버스|선물단일종목|단일종목|곱버스|\bETF\b|\bETN\b|\b(?:KODEX|TIGER|KBSTAR|HANARO|ARIRANG)\b)/i;
+// Nouns that legitimately end in 과/와/을 after a syllable whose batchim would otherwise mismatch.
+const PARTICLE_EXCEPTIONS=new Set(['효과','부과','초과','사과','교과','치과','외과','의과','이과','학과','마을','가을','노을','고을','기와']);
+export function titlePolicyViolations(title:string):string[]{
+  const reasons:string[]=[];
+  if(ENGLISH_INDEX_NAMES.test(title))reasons.push('English market index name in title (use 나스닥·다우존스·코스피·코스닥·러셀)');
+  if(TRADING_PRODUCT_NAMES.test(title))reasons.push('leveraged, inverse or ETF product name used as headline');
+  if(titleParticleMismatch(title))reasons.push('Korean particle does not match the preceding word');
+  return reasons;
+}
+export function titleParticleMismatch(title:string):boolean{
+  for(const match of title.matchAll(/([가-힣])(과|와|을|를|은|는|이|가)(?=[\s,·.!?]|$)/gu)){
+    const syllable=match[1]!,particle=match[2]!,index=match.index??0,word=(title.slice(0,index+2).match(/[가-힣]+$/u)?.[0])??'';
+    if(PARTICLE_EXCEPTIONS.has(word.slice(-2))||word.length<2)continue;
+    // 이/가 and 은/는 are often word-final syllables (나이, 국가, 금은); only judge the clear 과/와 and 을/를 pairs.
+    if(!['과','와','을','를'].includes(particle))continue;
+    const batchim=(syllable.charCodeAt(0)-0xac00)%28!==0;
+    if((particle==='과'||particle==='을')&&!batchim)return true;
+    if((particle==='와'||particle==='를')&&batchim)return true;
+  }
+  return false;
+}

@@ -6,7 +6,7 @@ import type {KoreaMarketDailyViewModel,USMarketDailyViewModel} from '../src/inte
 import {buildUSEditorialTitleCandidates,parseFredCsv,parseYahooUsChart,parseTreasuryTenYearXml} from '../src/operations/internal-live-daily.js';
 import {synthesizeKoreanAIEvent} from '../src/operations/ai-editorial-synthesis.js';
 import {validateLiveDailyPayload,type LiveDailyPayload} from '../src/operations/live-daily.js';
-import {evaluateEditorialQuality,titleContainsCalendarDate} from '../src/production/editorial-quality.js';
+import {evaluateEditorialQuality,titleContainsCalendarDate,titlePolicyViolations} from '../src/production/editorial-quality.js';
 import {buildProductionSummary} from '../src/production/production-summary.js';
 import {persistedPublicationDecision,publicationIdentity,type PublishLedgerEntry} from '../src/production/publication-operation.js';
 
@@ -19,9 +19,9 @@ test('calendar dates anywhere in AI U.S. or Korea titles are rejected',()=>{
 
 test('U.S. editorial title candidates use verified displayed metrics and contain no date',()=>{
  const unit=createFirstSplitDailyProductionRun().units.find(item=>item.category==='US_MARKET')!,view=unit.viewModel as USMarketDailyViewModel,candidates=buildUSEditorialTitleCandidates(view.marketHistory,[{label:'U.S. 10Y Treasury Yield (미국 10년물 국채금리)',value:'4.10',change:'-0.02%',direction:'DOWN'}]);
- assert.equal(candidates.length,3);for(const title of candidates){assert.equal(titleContainsCalendarDate(title),false);assert.doesNotMatch(title,/MOTUS Daily|미국증시 마감\s*:/);assert.match(title,/S&P 500|Nasdaq|Dow Jones|미국 주요 지수|장기금리/)}
+ assert.equal(candidates.length,3);for(const title of candidates){assert.equal(titleContainsCalendarDate(title),false);assert.doesNotMatch(title,/MOTUS Daily|미국증시 마감\s*:/);assert.match(title,/S&P 500|나스닥|다우존스|3대 지수/);assert.deepEqual(titlePolicyViolations(title),[])}
  const staleRateCandidates=buildUSEditorialTitleCandidates(view.marketHistory,[{label:'U.S. 10Y Treasury Yield (미국 10년물 국채금리, 2026-10-13 기준)',value:'4.10',change:'-0.02%',direction:'DOWN'}]);
- for(const title of staleRateCandidates)assert.doesNotMatch(title,/장기금리/);
+ for(const title of staleRateCandidates)assert.doesNotMatch(title,/장기금리|10년물 금리/);
  assert.throws(()=>buildUSEditorialTitleCandidates({...view.marketHistory,series:view.marketHistory.series.slice(0,2)},[]),/US_EDITORIAL_TITLE_INPUT_INSUFFICIENT/);
 });
 
