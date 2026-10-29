@@ -1,0 +1,14 @@
+{
+  "mode": "LIVE",
+  "sourceMode": "internal",
+  "date": "2026-10-30",
+  "observedDate": "2026-10-28",
+  "category": "US_MARKET",
+  "state": "HOLD",
+  "reasonCode": "production provenance audit failed",
+  "verification": "REVIEW_REQUIRED",
+  "publishCallCount": 0,
+  "commerce": {
+    "enabled": false
+  }
+}

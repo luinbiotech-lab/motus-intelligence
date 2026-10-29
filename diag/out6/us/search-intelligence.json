@@ -1,0 +1,19 @@
+{
+  "collectedAt": "2026-10-29T15:53:06.978Z",
+  "signalDate": null,
+  "provider": null,
+  "freshness": "NO_SEARCH_SIGNAL",
+  "fallbackReason": "NO_MATCHING_VERIFIED_TOPIC",
+  "warnings": [
+    "NAVER_DATALAB:NAVER_DATALAB_RESPONSE_INVALID"
+  ],
+  "orderedTopicIds": [
+    "us:index:sp500",
+    "us:index:nasdaq",
+    "us:index:dow-jones",
+    "us:10y"
+  ],
+  "selectedSecondaryTopicId": null,
+  "factsChanged": false,
+  "gateOverride": false
+}
