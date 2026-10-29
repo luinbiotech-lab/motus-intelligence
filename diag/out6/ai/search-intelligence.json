@@ -1,0 +1,18 @@
+{
+  "collectedAt": "2026-10-29T17:40:56.884Z",
+  "signalDate": null,
+  "provider": null,
+  "freshness": "NO_SEARCH_SIGNAL",
+  "fallbackReason": "NO_MATCHING_VERIFIED_TOPIC",
+  "warnings": [
+    "NAVER_DATALAB:NAVER_DATALAB_RESPONSE_INVALID"
+  ],
+  "orderedTopicIds": [
+    "ai:5",
+    "ai:4",
+    "ai:0"
+  ],
+  "selectedSecondaryTopicId": null,
+  "factsChanged": false,
+  "gateOverride": false
+}

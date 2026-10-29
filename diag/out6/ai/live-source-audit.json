@@ -1,0 +1,330 @@
+{
+  "schemaVersion": "1.0",
+  "sourceMode": "internal",
+  "category": "AI_INTELLIGENCE",
+  "operationDate": "2026-10-30",
+  "status": "LIVE_READY",
+  "reasonCode": null,
+  "entries": [
+    {
+      "sourceId": "openai",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/news/rss.xml",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T17:40:56.884Z",
+      "error": null
+    },
+    {
+      "sourceId": "google-ai",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blog.google/technology/ai/rss/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T17:40:56.884Z",
+      "error": null
+    },
+    {
+      "sourceId": "google-deepmind",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://deepmind.google/blog/rss.xml",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T17:40:56.884Z",
+      "error": null
+    },
+    {
+      "sourceId": "nvidia",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blogs.nvidia.com/feed/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T17:40:56.884Z",
+      "error": null
+    },
+    {
+      "sourceId": "nvidia-newsroom",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://nvidianews.nvidia.com/releases.xml",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T17:40:56.884Z",
+      "error": null
+    },
+    {
+      "sourceId": "microsoft",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blogs.microsoft.com/feed/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T17:40:56.884Z",
+      "error": null
+    },
+    {
+      "sourceId": "microsoft-source",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://news.microsoft.com/source/feed/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T17:40:56.884Z",
+      "error": null
+    },
+    {
+      "sourceId": "aws-news",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://aws.amazon.com/blogs/aws/feed/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T17:40:56.884Z",
+      "error": null
+    },
+    {
+      "sourceId": "aws-whats-new",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://aws.amazon.com/about-aws/whats-new/recent/feed/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T17:40:56.884Z",
+      "error": null
+    },
+    {
+      "sourceId": "meta",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://about.fb.com/news/feed/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T17:40:56.884Z",
+      "error": null
+    },
+    {
+      "sourceId": "anthropic",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://www.anthropic.com/news",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T17:40:56.884Z",
+      "error": null
+    },
+    {
+      "sourceId": "ai:page:1",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blogs.nvidia.com/blog/developers-simulation-frontier-ai-agents/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T17:40:56.884Z",
+      "error": null,
+      "observedDate": "2026-10-29",
+      "sourceTimestamp": "2026-10-29T16:00:35.000Z",
+      "dateField": "page.datePublished"
+    },
+    {
+      "sourceId": "ai:page:2",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/how-we-detect-frontier-model-misalignment",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-10-29T17:40:56.884Z",
+      "error": "HTTP_403"
+    },
+    {
+      "sourceId": "ai:rss-evidence:2",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/how-we-detect-frontier-model-misalignment",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T17:40:56.884Z",
+      "error": null,
+      "observedDate": "Thu, 29 Oc",
+      "sourceTimestamp": "Thu, 29 Oct 2026 09:00:00 GMT",
+      "dateField": "rss.pubDate"
+    },
+    {
+      "sourceId": "ai:page:3",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-bedrock-agentcore-cli-version-1-0-available/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T17:40:56.884Z",
+      "error": null,
+      "observedDate": "Wed, 28 Oc",
+      "sourceTimestamp": "Wed, 28 Oct 2026 20:00:00 GMT",
+      "dateField": "rss.pubDate"
+    },
+    {
+      "sourceId": "ai:page:4",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://deepmind.google/blog/gemini-4-carbon-our-next-frontier-model/",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-10-29T17:40:56.884Z",
+      "error": "AI_REDIRECT_OFF_OFFICIAL_DOMAIN"
+    },
+    {
+      "sourceId": "ai:page:5",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blogs.microsoft.com/blog/2026/10/28/introducing-the-microsoft-copilot-harness-unlocking-the-potential-of-truly-multi-model-agentic-work/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T17:40:56.884Z",
+      "error": null,
+      "observedDate": "2026-10-28",
+      "sourceTimestamp": "2026-10-28T16:51:35.000Z",
+      "dateField": "page.datePublished"
+    },
+    {
+      "sourceId": "ai:page:6",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://about.fb.com/news/2026/10/muse-is-now-available-in-singapore-the-worlds-first-personal-ai-agent-built-for-everyone/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T17:40:56.884Z",
+      "error": null,
+      "observedDate": "2026-10-28",
+      "sourceTimestamp": "2026-10-28T00:00:03.000Z",
+      "dateField": "page.datePublished"
+    },
+    {
+      "sourceId": "ai:page:7",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blog.google/products-and-platforms/products/education/ai-quests-polar-peaks/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T17:40:56.884Z",
+      "error": null,
+      "observedDate": "Mon, 26 Oc",
+      "sourceTimestamp": "Mon, 26 Oct 2026 16:00:00 +0000",
+      "dateField": "rss.pubDate"
+    },
+    {
+      "sourceId": "ai:page:8",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://www.anthropic.com/news/public-benefit-fund",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T17:40:56.884Z",
+      "error": null,
+      "observedDate": "2026-10-18",
+      "sourceTimestamp": "2026-10-18T00:00:00.000Z",
+      "dateField": "page.datePublished"
+    },
+    {
+      "sourceId": "ai:page:9",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blogs.nvidia.com/blog/geforce-now-thursday-phantom-blade-zero/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T17:40:56.884Z",
+      "error": null,
+      "observedDate": "2026-10-29",
+      "sourceTimestamp": "2026-10-29T13:00:16.000Z",
+      "dateField": "page.datePublished"
+    },
+    {
+      "sourceId": "ai:page:10",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/openai-servicenow-partnership-expansion",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-10-29T17:40:56.884Z",
+      "error": "HTTP_403"
+    },
+    {
+      "sourceId": "ai:rss-evidence:10",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/openai-servicenow-partnership-expansion",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T17:40:56.884Z",
+      "error": null,
+      "observedDate": "Wed, 28 Oc",
+      "sourceTimestamp": "Wed, 28 Oct 2026 13:15:00 GMT",
+      "dateField": "rss.pubDate"
+    },
+    {
+      "sourceId": "deep:consensus:list:market",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://consensus.hankyung.com/analysis/list?skinType=market&report_type=MK&sdate=2026-10-23&edate=2026-10-31&now_page=1&pagenum=80",
+      "status": "PASS",
+      "recordCount": 41,
+      "collectedAt": "2026-10-29T17:40:56.884Z",
+      "error": null
+    },
+    {
+      "sourceId": "deep:consensus:list:company",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://consensus.hankyung.com/analysis/list?skinType=business&report_type=CO&sdate=2026-10-23&edate=2026-10-31&now_page=1&pagenum=80",
+      "status": "PASS",
+      "recordCount": 78,
+      "collectedAt": "2026-10-29T17:40:56.884Z",
+      "error": null
+    },
+    {
+      "sourceId": "deep:consensus:list:industry",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://consensus.hankyung.com/analysis/list?skinType=industry&report_type=IN&sdate=2026-10-23&edate=2026-10-31&now_page=1&pagenum=80",
+      "status": "PASS",
+      "recordCount": 44,
+      "collectedAt": "2026-10-29T17:40:56.884Z",
+      "error": null
+    },
+    {
+      "sourceId": "deep:consensus:list:economy",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://consensus.hankyung.com/analysis/list?report_type=EC&sdate=2026-10-23&edate=2026-10-31&now_page=1&pagenum=80",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T17:40:56.884Z",
+      "error": null
+    },
+    {
+      "sourceId": "deep:yahoo:spark:ai-bellwethers",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://query1.finance.yahoo.com/v7/finance/spark?symbols=NVDA,MSFT,GOOGL,AMZN,META,AVGO,AMD,TSM,ORCL,PLTR&range=5d&interval=1d",
+      "status": "PASS",
+      "recordCount": 10,
+      "collectedAt": "2026-10-29T17:40:56.884Z",
+      "error": null,
+      "observedDate": "2026-10-28"
+    },
+    {
+      "sourceId": "deep:consensus:listed:653412",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653412",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T17:40:56.884Z",
+      "error": null,
+      "observedDate": "2026-10-29"
+    },
+    {
+      "sourceId": "deep:consensus:listed:653392",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653392",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T17:40:56.884Z",
+      "error": null,
+      "observedDate": "2026-10-28"
+    },
+    {
+      "sourceId": "deep:consensus:listed:653369",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653369",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T17:40:56.884Z",
+      "error": null,
+      "observedDate": "2026-10-28"
+    },
+    {
+      "sourceId": "deep:consensus:listed:653330",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653330",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T17:40:56.884Z",
+      "error": null,
+      "observedDate": "2026-10-27"
+    }
+  ]
+}
