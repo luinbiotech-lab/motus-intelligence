@@ -27,11 +27,14 @@ export function renderAIEditorialArticle(view:AIIntelligenceDailyViewModel):Dail
 export function renderUSEditorialArticle(view:USMarketDailyViewModel):DailyMasterRenderResult {
   const terms=new Set<string>();const describe=(value:string)=>explainTerms(value,terms);
   const parts=[masthead(view.title,view.subtitle,view.displayLabel,view.issueDate),lead(describe([view.marketSummary,...view.marketCommentary].join(' ')))];
+  const later=new Set(['us-rates-research']);
+  for(const item of view.deepSections??[])if(!later.has(item.key))parts.push(deepSection(item));
   const period=view.marketHistory.sessionCount>=60?'3개월':`${view.marketHistory.sessionCount}거래일`;
   parts.push(renderMarketTrendSection(view.marketHistory).replace('미국 주요 증시 추이',`미국 주요지수 ${period} 흐름`));
   if(view.supportingMetrics.length)parts.push(section('금리·달러·변동성',`<p style="margin:0">${view.supportingMetrics.map(item=>`${esc(describe(item.label))} ${esc(item.value)}${item.change?` (${esc(item.change)})`:''}`).join(' · ')}</p>`));
   if(view.narrative?.facts.length)parts.push(section('지수별 흐름과 위치',paragraphs(view.narrative.facts)));
   if(view.narrative?.analysis.length)parts.push(section('MOTUS 분석',paragraphs(view.narrative.analysis)));
+  for(const item of view.deepSections??[])if(later.has(item.key))parts.push(deepSection(item));
   if(view.sectorsCompanies.length)parts.push(section('종목과 업종에서 읽힌 신호',paragraphs(view.sectorsCompanies)));
   if(view.marketResearch?.length)parts.push(renderMarketResearchEntries(view.marketResearch,view.issueDate));
   if(view.checkpoints.length)parts.push(section('다음 거래일',paragraphs(view.checkpoints.map(item=>`${item.headline}: ${item.watchFor}`))));
@@ -40,7 +43,9 @@ export function renderUSEditorialArticle(view:USMarketDailyViewModel):DailyMaste
 
 export function renderKoreaEditorialArticle(view:KoreaMarketDailyViewModel):DailyMasterRenderResult {
   const parts=[masthead(view.title,view.subtitle,view.displayLabel,view.issueDate),lead(view.marketSummary)];
-  if(view.marketCommentary.length)parts.push(section(view.edition==='PREVIOUS_SESSION_MORNING'?'전일 장을 읽는 기준':'마감 흐름을 읽는 기준',paragraphs(view.marketCommentary)));
+  const deep=view.deepSections??[];
+  for(const item of deep)parts.push(deepSection(item));
+  if(view.marketCommentary.length&&!deep.length)parts.push(section(view.edition==='PREVIOUS_SESSION_MORNING'?'전일 장을 읽는 기준':'마감 흐름을 읽는 기준',paragraphs(view.marketCommentary)));
   if(view.indexMetrics.length)parts.push(section('코스피와 코스닥',metricProse(view.indexMetrics)));
   if(view.narrative?.facts.length)parts.push(section('지수 흐름',paragraphs(view.narrative.facts)));
   if(view.fxAndSupporting.length)parts.push(section('환율과 시장 여건',metricProse(view.fxAndSupporting)));
@@ -51,6 +56,7 @@ export function renderKoreaEditorialArticle(view:KoreaMarketDailyViewModel):Dail
   if(view.narrative?.analysis.length)parts.push(section('MOTUS 분석',paragraphs(view.narrative.analysis)));
   if(view.marketResearch?.length)parts.push(renderMarketResearchEntries(view.marketResearch,view.operationDate??view.issueDate));
   if(view.checkpoints.length)parts.push(section(view.edition==='PREVIOUS_SESSION_MORNING'?'오늘 체크포인트':'다음 거래일',paragraphs(view.checkpoints.map(item=>`${item.headline}: ${item.watchFor}`))));
+  if(view.marketCommentary.length&&deep.length)parts.push(section('자료 기준',paragraphs(view.marketCommentary)));
   parts.push(sources(view.sources));return finish('korea-market',view.title,BLOGGER_EDITORIAL_CATEGORIES.KOREA_MARKET.publicLabel,parts,['masthead','lead','indexes','fx','flows','sectors','research','watch','sources']);
 }
 
@@ -72,6 +78,11 @@ export function renderMarketResearchEntries(entries:ReadonlyArray<{publisher:str
  return make('BROKER_RESEARCH')+make('FINANCIAL_MEDIA');
 }
 
+/** Attributed expert/search-ranked section: each paragraph keeps a visible link to its own source document. */
+export function deepSection(item:{key:string;title:string;intro?:string;paragraphs:Array<{text:string;source?:{label:string;url:string}}>}):string {
+  const body=item.paragraphs.filter(p=>p.text.trim()).map(p=>`<p style="margin:0 0 13px">${esc(p.text)}${p.source&&/^https:\/\//.test(p.source.url)?` <a href="${attr(p.source.url)}" target="_blank" rel="nofollow noopener noreferrer" style="${LINK};font-size:14px">[리포트 원문]</a>`:''}</p>`).join('');
+  return `<section data-section="${attr(item.key)}" style="${SECTION}"><h2 style="${HEADING}">${esc(item.title)}</h2>${item.intro?`<p style="margin:0 0 12px;color:#4a5a6e;font-size:15px">${esc(item.intro)}</p>`:''}${body}</section>`;
+}
 function masthead(title:string,subtitle:string,label:string,date:string){return `<header style="width:100%;max-width:100%;box-sizing:border-box;background:#03162e;color:#fff;padding:26px 22px;margin:0 0 22px"><p style="margin:0 0 9px;color:#c7d8ea;font-size:14px;font-weight:800">${esc(MOTUS_DISPLAY_NAME)}</p><div role="heading" aria-level="2" style="font-size:clamp(25px,7vw,34px);line-height:1.22;font-weight:850;word-break:keep-all">${esc(title)}</div><p style="margin:10px 0 0;color:#e6edf5">${esc(subtitle)}</p><p style="margin:11px 0 0;color:#b7c8da;font-size:13px">${esc(label)} · ${esc(date)}</p></header>`;}
 function lead(value:string){return `<p data-section="editorial-lead" style="margin:0 0 24px;font-size:18px;line-height:1.82;color:#172033">${esc(value)}</p>`;}
 function section(title:string,content:string){return `<section style="${SECTION}"><h2 style="${HEADING}">${esc(title)}</h2>${content}</section>`;}
