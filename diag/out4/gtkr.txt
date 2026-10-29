@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:ht="https://trends.google.com/trending/rss" version="2.0">
+	<channel>
+		<title>Daily Search Trends</title>
+		<description>Recent searches</description>
+		<link>https://trends.google.com/trending/rss?geo=KR</link>
+		<atom:link href="https://trends.google.com/trending/rss?geo=KR" rel="self" type="application/rss+xml"/>
+		<item>
+			<title>성과급</title>
+			<ht:approx_traffic>2000+</ht:approx_traffic>
+			<description/>
+			<link>https://trends.google.com/trending/rss?geo=KR</link>
+			<pubDate>Thu, 29 Oct 2026 06:50:00 -0700</pubDate>
+			<ht:picture>https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQB6YIRnd8V0N47oS8o7c93P6KrJchDqpVafJtAn9ddE9y0umG2lWRogDiqmpU</ht:picture>
+			<ht:picture_source>뉴스토마토</ht:picture_source>
+			<ht:news_item>
+				<ht:news_item_title>(단독)삼성전자 성과급 합의 무효 넘어 &apos;부존재&apos; 다툰다…주주단체 소송 추진</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://www.newstomato.com/readnews.aspx?no=1318464</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQB6YIRnd8V0N47oS8o7c93P6KrJchDqpVafJtAn9ddE9y0umG2lWRogDiqmpU</ht:news_item_picture>
+				<ht:news_item_source>뉴스토마토</ht:news_item_source>
+			</ht:news_item>
+			<ht:news_item>
+				<ht:news_item_title>[단독] &quot;삼전닉스 면접날 단체 연차&quot;…‘슈퍼갑 3대장’ 이탈 조짐</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://news.jtbc.co.kr/article/NB12325313</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSkIpjwkzX6c9OlcSjgOaPeICZzhEcAX0BM9hT4oQjU5iY2_f6uCipFE496YxU</ht:news_item_picture>
+				<ht:news_item_source>JTBC</ht:news_item_source>
+			</ht:news_item>
+			<ht:news_item>
+				<ht:news_item_title>“팀장님, 오늘 연차 쓸게요”…삼전·하닉 면접날 벌어진 일</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://marketin.edaily.co.kr/News/ReadE?newsId=01134886645617840</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyk8i8YDtbg1bdFFkqsqwpQRghdSzdgyXo2k2p9c9W_xWiBdGWXZoRIiI12Kw</ht:news_item_picture>
+				<ht:news_item_source>마켓인</ht:news_item_source>
+			</ht:news_item>
+		</item>
+		<item>
+			<title>장경수</title>
+			<ht:approx_traffic>500+</ht:approx_traffic>
+			<description/>
+			<link>https://trends.google.com/trending/rss?geo=KR</link>
+			<pubDate>Thu, 29 Oct 2026 06:40:00 -0700</pubDate>
+			<ht:picture>https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTtv9mQz56f-7P8Jh5mgo_Y7NrgcQAGCjd0_gUUaCXOjWUzBhKUp-g8lq096Lc</ht:picture>
+			<ht:picture_source>경향신문</ht:picture_source>
+			<ht:news_item>
+				<ht:news_item_title>조용필 ‘상처’·송대관 ‘정 때문에’ 작사가 장경수 별세</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://www.khan.co.kr/article/202610292018045</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTtv9mQz56f-7P8Jh5mgo_Y7NrgcQAGCjd0_gUUaCXOjWUzBhKUp-g8lq096Lc</ht:news_item_picture>
+				<ht:news_item_source>경향신문</ht:news_item_source>
+			</ht:news_item>
+			<ht:news_item>
+				<ht:news_item_title>장기하 커버 &apos;풍문으로 들었소&apos; 작사가 장경수 별세, 향년 73세</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://www.newsis.com/view/NISX20261029_0003846756</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLXdqyitBs-9v7lX5iQ3s9A16gxyS_y0u-3T_wmS8fwWx_JyevPE4KxSO5uUc</ht:news_item_picture>
+				<ht:news_item_source>뉴시스</ht:news_item_source>
+			</ht:news_item>
+			<ht:news_item>
+				<ht:news_item_title>조용필 ‘상처’ 작사가 장경수, 간암으로 별세… 향년 73세</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://biz.chosun.com/entertainment/enter_general/2026/10/29/KJWRJZBUU5AQZKUX33DSH5OVXA/</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWmPAlobTgtMJ-yJLOfLD15zyQLGG6uO_P8PYUwOC8zQ2AMkZTGqBW6bdySYs</ht:news_item_picture>
+				<ht:news_item_source>Chosunbiz</ht:news_item_source>
+			</ht:news_item>
+		</item>
+		<item>
+			<title>인공지능</title>
+			<ht:approx_traffic>1000+</ht:approx_traffic>
+			<description/>
+			<link>https://trends.google.com/trending/rss?geo=KR</link>
+			<pubDate>Thu, 29 Oct 2026 06:40:00 -0700</pubDate>
+			<ht:picture>https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRk55fsO0M6jDBzWqRIVFyMWMtIzRxi9VskToiRPuPLRUT1FNfb8lmv0rgvFww</ht:picture>
+			<ht:picture_source>전자신문</ht:picture_source>
+			<ht:news_item>
+				<ht:news_item_title>강원정보문화산업진흥원·강릉과학산업진흥원, AI 헬스케어 글로벌 거점 조성 추진</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://www.etnews.com/20261029000223</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRk55fsO0M6jDBzWqRIVFyMWMtIzRxi9VskToiRPuPLRUT1FNfb8lmv0rgvFww</ht:news_item_picture>
+				<ht:news_item_source>전자신문</ht:news_item_source>
+			</ht:news_item>
+			<ht:news_item>
+				<ht:news_item_title>춘천시 첫 인공지능 기본계획 윤곽…돌봄·안전·바이오 9개 중점사업</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://www.fnnews.com/news/202610291811356546</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcT0uhTwPwRSkr92jyhj34OG5O0FsihVEijk-qdYRz4c6d2WgiAnRyhqfOAVexE</ht:news_item_picture>
+				<ht:news_item_source>파이낸셜뉴스</ht:news_item_source>
+			</ht:news_item>
+			<ht:news_item>
+				<ht:news_item_title>[글로컬픽]춘천·강릉, AI 헬스케어 글로벌 거점 육성 나선다</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://news.mtn.co.kr/video/2026102911082435807</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRijm9gsXVoOeiJ17fmiu_56vAOrJg_H8TdiRfHmKbKMNcrGXy9vFf-YjbP83U</ht:news_item_picture>
+				<ht:news_item_source>MTN 머니투데이방송</ht:news_item_source>
+			</ht:news_item>
+		</item>
+		<item>
+			<title>이상미</title>
+			<ht:approx_traffic>100+</ht:approx_traffic>
+			<description/>
+			<link>https://trends.google.com/trending/rss?geo=KR</link>
+			<pubDate>Thu, 29 Oct 2026 06:40:00 -0700</pubDate>
+			<ht:picture>https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRwdJXY79gWFvYIoYq_SkNpt0aD_-tDXdzW8YLjw1xhiQwrkDjYU76JwHu4X2w</ht:picture>
+			<ht:picture_source>국제뉴스</ht:picture_source>
+			<ht:news_item>
+				<ht:news_item_title>&apos;전원일기 개똥엄마&apos; 이상미, 2년 전 이별 슬픔</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://www.gukjenews.com/news/articleView.html?idxno=3736948</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRwdJXY79gWFvYIoYq_SkNpt0aD_-tDXdzW8YLjw1xhiQwrkDjYU76JwHu4X2w</ht:news_item_picture>
+				<ht:news_item_source>국제뉴스</ht:news_item_source>
+			</ht:news_item>
+			<ht:news_item>
+				<ht:news_item_title>국호, 배우 생활 30년에도 생활고…&quot;15년째 건설 현장 출근&quot; (특종세상)</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://www.xportsnews.com/article/2213139</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcT_TdhbShwUXUvPWPiUY2YHeGaTnT_p2deBz5wW4AGfggRXPmoaGocJZNsNCto</ht:news_item_picture>
+				<ht:news_item_source>www.xportsnews.com</ht:news_item_source>
+			</ht:news_item>
+			<ht:news_item>
+				<ht:news_item_title>&apos;특종세상&apos; 국호, 베테랑 액션 배우의 산속 수련 근황</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://enter.etoday.co.kr/news/view/304471</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQZLBUqHSoKOFmFhcaJuApujOPa5pCj9OoHFL_zm-GhEKTaO4t7gcGD2T-QgcY</ht:news_item_picture>
+				<ht:news_item_source>비즈엔터</ht:news_item_source>
+			</ht:news_item>
+		</item>
+		<item>
+			<title>유해진</title>
+			<ht:approx_traffic>2000+</ht:approx_traffic>
+			<description/>
+			<link>https://trends.google.com/trending/rss?geo=KR</link>
+			<pubDate>Thu, 29 Oct 2026 06:30:00 -0700</pubDate>
+			<ht:picture>https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSpK4Bg9rXPvk4qLQJUd89yA7x2_NQTUB2xZcRKpboPbwFpiCj3j0NlF7qj9Z0</ht:picture>
+			<ht:picture_source>매일경제</ht:picture_source>
+			<ht:news_item>
+				<ht:news_item_title>‘대통령 표창’ 유해진 “‘왕사남’ 덕분…좋은 영화로 보답”</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://www.mk.co.kr/news/hot-issues/12190556</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSpK4Bg9rXPvk4qLQJUd89yA7x2_NQTUB2xZcRKpboPbwFpiCj3j0NlF7qj9Z0</ht:news_item_picture>
+				<ht:news_item_source>매일경제</ht:news_item_source>
+			</ht:news_item>
+			<ht:news_item>
+				<ht:news_item_title>[포토] 대통령 표창 받은 배우 소지섭</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://www.viva100.com/article/20261029501489</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSB6ahFUCUS26mbJuikgsHwm1Aa9NbXNANo9bLTNSovS1gh5QcxFY4Ijd8F-qQ</ht:news_item_picture>
+				<ht:news_item_source>브릿지경제</ht:news_item_source>
+			</ht:news_item>
+			<ht:news_item>
+				<ht:news_item_title>유해진, &apos;신변보호 해제&apos; 후 첫 공식석상서 대통령 표창…&quot;좋은 영화로 보답&quot;</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://www.newsis.com/view/NISX20261029_0003847330</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQuGcTBKh_0fPqtfev1uK0zhlaede-FUf-0GQhWhLgRZj_SkOIQ7WJVl8l3cT8</ht:news_item_picture>
+				<ht:news_item_source>뉴시스</ht:news_item_source>
+			</ht:news_item>
+		</item>
+		<item>
+			<title>진에어</title>
+			<ht:approx_traffic>500+</ht:approx_traffic>
+			<description/>
+			<link>https://trends.google.com/trending/rss?geo=KR</link>
+			<pubDate>Thu, 29 Oct 2026 06:20:00 -0700</pubDate>
+			<ht:picture>https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTEfJOB5a1ab4ZRhES2CXl7YPy2YRxH1yt7KaW3bd9zuZa5SpMH6Tpd6yngStY</ht:picture>
+			<ht:picture_source>경향신문</ht:picture_source>
+			<ht:news_item>
+				<ht:news_item_title>대한항공·아시아나항공 이어···진에어, 해킹공격으로 1454명 개인회원 정보 유출</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://www.khan.co.kr/article/202610291909001</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTEfJOB5a1ab4ZRhES2CXl7YPy2YRxH1yt7KaW3bd9zuZa5SpMH6Tpd6yngStY</ht:news_item_picture>
+				<ht:news_item_source>경향신문</ht:news_item_source>
+			</ht:news_item>
+			<ht:news_item>
+				<ht:news_item_title>진에어 고객 1454명 개인정보 유출… 이름·전화번호 등 8개 항목 - 머니투데이</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://www.mt.co.kr/industry/2026/10/29/2026102920573248577</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcS07dHxBk_W32FJxxUChsuTKFgEtXzFGbIT1iFuCQtKhgERKdCdRYw3XjMjjQo</ht:news_item_picture>
+				<ht:news_item_source>머니투데이</ht:news_item_source>
+			</ht:news_item>
+			<ht:news_item>
+				<ht:news_item_title>일본항공 예약시스템 뚫렸다…9만명 개인정보 노출</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://zdnet.co.kr/view/?no=20261029143545</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSsCgvQx8vmmv-cwPYXBgmd4Y1G_u8ALJyP6vCpzfDqFKEk3qQVt6M3_-swczo</ht:news_item_picture>
+				<ht:news_item_source>지디넷코리아</ht:news_item_source>
+			</ht:news_item>
+		</item>
+		<item>
+			<title>사토시</title>
+			<ht:approx_traffic>500+</ht:approx_traffic>
+			<description/>
+			<link>https://trends.google.com/trending/rss?geo=KR</link>
+			<pubDate>Thu, 29 Oct 2026 06:10:00 -0700</pubDate>
+			<ht:picture>https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS4TE4C5YzeTZWDbW-ynBlrTGZgqsN8aTdQX8YPBTavSPwRJvexoSj0Max_kFI</ht:picture>
+			<ht:picture_source>마켓인</ht:picture_source>
+			<ht:news_item>
+				<ht:news_item_title>팀 드레이퍼 &quot;비트코인 채택 확대시 은행 대규모 뱅크런 현실로&quot;</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://marketin.edaily.co.kr/News/ReadE?newsId=02676486645617840</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS4TE4C5YzeTZWDbW-ynBlrTGZgqsN8aTdQX8YPBTavSPwRJvexoSj0Max_kFI</ht:news_item_picture>
+				<ht:news_item_source>마켓인</ht:news_item_source>
+			</ht:news_item>
+			<ht:news_item>
+				<ht:news_item_title>사토시를 찾아서</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://www.vietnam.vn/ko/truy-tim-satoshi</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSeXahWN_knyXv2aki4T4oSkt6_ME_jpXJa0GM1o_OUu07-uxjbIhwf74GRzn8</ht:news_item_picture>
+				<ht:news_item_source>Vietnam.vn</ht:news_item_source>
+			</ht:news_item>
+			<ht:news_item>
+				<ht:news_item_title>팀 드레이퍼, 사토시의 혁신 극찬...&quot;금융 질서에 도전한 낙관주의자&quot;</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://www.coinreaders.com/265743</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRjZdL5n46vR3Nnu-7jywyJzLWmcuid5jUbPmGLFZzcf1rkhwnYrm8S6HFExxM</ht:news_item_picture>
+				<ht:news_item_source>코인리더스</ht:news_item_source>
+			</ht:news_item>
+		</item>
+		<item>
+			<title>김헌곤</title>
+			<ht:approx_traffic>200+</ht:approx_traffic>
+			<description/>
+			<link>https://trends.google.com/trending/rss?geo=KR</link>
+			<pubDate>Thu, 29 Oct 2026 06:00:00 -0700</pubDate>
+			<ht:picture>https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4FKP8FlUtRpPY39t6gFRmiEjBQAXrZXwn6wm2SK9vfwfL8f9_AsC1ByFKrYk</ht:picture>
+			<ht:picture_source>조선일보</ht:picture_source>
+			<ht:news_item>
+				<ht:news_item_title>[사진] 김헌곤, 안타 성공</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://www.chosun.com/sports/sports_photo/2026/10/29/MUYDMM3FMJTDON3DGIZDGMLCMY/</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4FKP8FlUtRpPY39t6gFRmiEjBQAXrZXwn6wm2SK9vfwfL8f9_AsC1ByFKrYk</ht:news_item_picture>
+				<ht:news_item_source>조선일보</ht:news_item_source>
+			</ht:news_item>
+			<ht:news_item>
+				<ht:news_item_title>[사진]김헌곤, 8회 선두타자 안타</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>http://www.osen.co.kr/article/G1112900779</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTOuCl30EdeEY1d4G56x0hszOpPoQ_hF-cpKcmWf5AHMP7uUYYYlS3FJMeLwuw</ht:news_item_picture>
+				<ht:news_item_source>OSEN</ht:news_item_source>
+			</ht:news_item>
+			<ht:news_item>
+				<ht:news_item_title>“네일에게 강하다고? 그건 오해” 2년 전 KS 홈런 영웅의 뜻밖의 고백…“긴 휴식? 다 핑계다” [PO2]</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://www.koreadaily.com/article/20261027003122366</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcT0vqFUUjQnOYuEuWjYVu4PJ3s9JkkuYKOjxtHE-38CUBorga8WBcPWtNUxlOI</ht:news_item_picture>
+				<ht:news_item_source>미주중앙일보</ht:news_item_source>
+			</ht:news_item>
+		</item>
+		<item>
+			<title>슈퍼맨이 돌아왔다</title>
+			<ht:approx_traffic>200+</ht:approx_traffic>
+			<description/>
+			<link>https://trends.google.com/trending/rss?geo=KR</link>
+			<pubDate>Thu, 29 Oct 2026 06:00:00 -0700</pubDate>
+			<ht:picture>https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLSwxnVEKD_lJzZ0FiUltsNAILXu09lliSdh55bLWqDxsMR8JsJ_uuLVNEO9E</ht:picture>
+			<ht:picture_source>Chosunbiz</ht:picture_source>
+			<ht:news_item>
+				<ht:news_item_title>기욤, 39개월 딸 ‘칼질’ 도전에도 안 말린다..“무섭지만, NO 없어” (‘슈돌’)[순간포착]</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://biz.chosun.com/entertainment/enter_general/2026/10/29/GQ4WINRWGBSTKZRWGQYTSOBRMU/</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLSwxnVEKD_lJzZ0FiUltsNAILXu09lliSdh55bLWqDxsMR8JsJ_uuLVNEO9E</ht:news_item_picture>
+				<ht:news_item_source>Chosunbiz</ht:news_item_source>
+			</ht:news_item>
+			<ht:news_item>
+				<ht:news_item_title>기욤 80세 母, 손녀 앞에서 결국 눈물…“다음엔 프랑스어로 대화했으면”</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://www.donga.com/news/Culture/article/all/20261029/134930441/2</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRQx7kmy7bTVG-sByTYoNrZE_0rA8iX4c5IZR3xnW4q929ubEAS3_BU8zISKek</ht:news_item_picture>
+				<ht:news_item_source>동아일보</ht:news_item_source>
+			</ht:news_item>
+			<ht:news_item>
+				<ht:news_item_title>‘슈퍼맨이 돌아왔다’ 레아, 할머니와 한옥 찜질방 만끽</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://enter.etoday.co.kr/news/view/304417</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcT0Yw7VTagzW8vlkwJYEUmAXbdkakK8hu4_Y-BSPri5f-01L9Xt0vtpmh6Ui1w</ht:news_item_picture>
+				<ht:news_item_source>비즈엔터</ht:news_item_source>
+			</ht:news_item>
+		</item>
+		<item>
+			<title>지하철</title>
+			<ht:approx_traffic>2000+</ht:approx_traffic>
+			<description/>
+			<link>https://trends.google.com/trending/rss?geo=KR</link>
+			<pubDate>Thu, 29 Oct 2026 05:50:00 -0700</pubDate>
+			<ht:picture>https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLWeBBDLHwna7j1rDX594-DpqmnjCxu3CVwyxs4mLt0TShy3610kJU1LImUQ8</ht:picture>
+			<ht:picture_source>MBC 뉴스</ht:picture_source>
+			<ht:news_item>
+				<ht:news_item_title>수도권 후속대책 7.67만 호 공급‥&quot;교통 해결 선행돼야&quot;</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://imnews.imbc.com/replay/2026/nwdesk/article/6861753_37004.html</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLWeBBDLHwna7j1rDX594-DpqmnjCxu3CVwyxs4mLt0TShy3610kJU1LImUQ8</ht:news_item_picture>
+				<ht:news_item_source>MBC 뉴스</ht:news_item_source>
+			</ht:news_item>
+			<ht:news_item>
+				<ht:news_item_title>김포시, 정부 신규택지 반발…&quot;일방 발표 깊은 유감&quot;</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://www.yonhapnewstv.co.kr/news/MYH20261030000001DwM</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTMLBfoO5RwVDy-IychiVORRlgIbLlcx3dUdxq0wp-zaltIZaXp2BysITVE9mg</ht:news_item_picture>
+				<ht:news_item_source>연합뉴스TV</ht:news_item_source>
+			</ht:news_item>
+			<ht:news_item>
+				<ht:news_item_title>고삐 풀린 경기 집값, 상승률 서울 2배 &apos;질주&apos;</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://www.mk.co.kr/news/realestate/12190119</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNTGfJ4T4GCQRcKYHnqthZWD03Gj6vrkNRWIWlbERunkb-oJZK7DEdi7Dyk3E</ht:news_item_picture>
+				<ht:news_item_source>매일경제</ht:news_item_source>
+			</ht:news_item>
+		</item>
+	</channel>
+</rss>
