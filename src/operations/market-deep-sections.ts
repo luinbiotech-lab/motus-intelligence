@@ -9,7 +9,7 @@ import {displayName,moveWord,signedPct,absPct,type KoreaSearchStock,type SectorM
 
 export interface DeepParagraph {text:string;source?:{label:string;url:string}}
 export interface DeepSection {key:string;title:string;intro?:string;placement?:'early'|'late'|'risks';paragraphs:DeepParagraph[]}
-export interface DeepComposition {sections:DeepSection[];leadAddition:string[];titleFocus:string|null;sources:Array<{label:string;url:string;publisher:string}>;hasCoreCommentary?:boolean}
+export interface DeepComposition {sections:DeepSection[];leadAddition:string[];titleFocus:string|null;sources:Array<{label:string;url:string;publisher:string;date?:string}>;hasCoreCommentary?:boolean}
 
 const quote=(value:string)=>`“${value.replace(/[“"]/g,'‘').replace(/[”]/g,'’').replace(/\s+/g,' ').trim().replace(/[.。]$/,'')}”`;
 /** “…”라고 / “…”이라고 by the final syllable of the quotation. */
@@ -17,7 +17,7 @@ function said(quotes:string[]):string {const last=quotes.at(-1)??'',char=last.re
 /** Statements that describe the market as a whole lead; side notes (FX, oil) follow. */
 function marketScore(text:string){const digits=(text.match(/\d/g)??[]).length/Math.max(text.length,1);return (/마감|지수|증시|코스피|KOSPI|나스닥|S&P|다우|3대/.test(text)?2:0)+(/상승|하락|강세|약세|급등|급락|반등/.test(text)?1:0)+(/힘입|기대|영향|덕분|때문|배경|속에?\s|에\s?(?:상승|하락|급등|급락|강세|약세)/.test(text)?3:0)-(digits>0.12?3:0)}
 const reportSource=(report:BrokerReport)=>({label:`${report.broker} ${report.title} (${koreanDateLabel(report.date)})`,url:report.url});
-const sourceEntry=(report:BrokerReport)=>({label:`${report.broker} 「${report.title}」 (${report.date})`,url:report.url,publisher:report.broker});
+const sourceEntry=(report:BrokerReport)=>({label:`${report.broker} 「${report.title}」 (${report.date})`,url:report.url,publisher:report.broker,date:report.date});
 function subject(report:BrokerReport):string {return josa(analystLabel(report),'은','는')}
 function won(value:number){return new Intl.NumberFormat('ko-KR',{maximumFractionDigits:0}).format(value)}
 function usd(value:number){return new Intl.NumberFormat('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}).format(value)}

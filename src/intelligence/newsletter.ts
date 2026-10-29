@@ -10,7 +10,9 @@ export type NewsletterAssetLayer=typeof newsletterAssetLayers[number];
 export const legacyAINewsSourceKinds=['GOOGLE_ALERTS','GMAIL','RSS','OFFICIAL_SOURCES','EXISTING_DAILY_COLLECTION','CONTENT_LIBRARY'] as const;
 export type LegacyAINewsSourceKind=typeof legacyAINewsSourceKinds[number];
 
-export interface NewsletterSourceLink { label:string; url:string; publisher:string|null }
+export interface NewsletterSourceLink { label:string; url:string; publisher:string|null;
+  /** Supplementary context (prices, broker notes) is listed and audited but never counts toward the core-evidence diversity checks. */
+  role?:'SUPPLEMENTARY' }
 export interface NewsletterContentAsset {
   assetId:string; layer:NewsletterAssetLayer; title:string;
   companyIds:CompanyId[]; themeIds:ThemeId[]; eventIds:EventId[]; intelligenceIds:string[];

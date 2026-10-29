@@ -232,3 +232,10 @@ test('AI article adds bellwether moves and AI-specific broker analysis only',asy
   assert.match(html,/가장 강한 종목은 엔비디아\(NVDA, \+2\.50%\)/);
   assert.match(html,/삼성전기/);assert.doesNotMatch(html,/프랑스|OEM/);
 });
+
+test('supplementary sources never satisfy the core-evidence diversity or concentration checks',async()=>{
+  const {coreEvidenceSources}=await import('../src/production/verification-artifact.js');
+  const core={label:'엔비디아 공식 발표',url:'https://blogs.nvidia.com/blog/a/',publisher:'NVIDIA'};
+  const extra={label:'Yahoo Finance AI 대표 종목 일별 종가',url:'https://query1.finance.yahoo.com/v7/finance/spark?symbols=NVDA',publisher:'Yahoo Finance',role:'SUPPLEMENTARY' as const};
+  assert.deepEqual(coreEvidenceSources([core,extra]),[core]);
+});
