@@ -1,5 +1,5 @@
 {
-  "collectedAt": "2026-10-29T01:15:37.395Z",
+  "collectedAt": "2026-10-29T08:23:01.762Z",
   "signalDate": "2026-10-28",
   "provider": "NAVER_DATALAB",
   "freshness": "PREVIOUS_DAY_NAVER_SIGNAL",
@@ -13,5 +13,97 @@
   ],
   "selectedSecondaryTopicId": "us:index:nasdaq",
   "factsChanged": false,
-  "gateOverride": false
+  "gateOverride": false,
+  "rankingEvidence": {
+    "scope": "VERIFIED_CANDIDATE_COMPARISON",
+    "metric": "NAVER_RELATIVE_INTEREST",
+    "selectedTopicId": "us:index:nasdaq",
+    "ranking": [
+      {
+        "rank": 1,
+        "topicId": "us:index:nasdaq",
+        "query": "나스닥",
+        "terms": [
+          "나스닥",
+          "Nasdaq",
+          "NASDAQ",
+          "미국증시"
+        ],
+        "ratio": 100,
+        "signalDate": "2026-10-28",
+        "signalId": "demand:e6fdc604902d169a1a4f",
+        "sourceUrl": "https://naverapihub.apigw.ntruss.com/search-trend/v1/search",
+        "claimRefs": [
+          "https://fred.stlouisfed.org/graph/fredgraph.csv?id=NASDAQCOM&cosd=2019-03-10"
+        ],
+        "sourceRefs": [
+          "https://fred.stlouisfed.org/graph/fredgraph.csv?id=NASDAQCOM&cosd=2019-03-10"
+        ]
+      },
+      {
+        "rank": 2,
+        "topicId": "us:10y",
+        "query": "미국 10년물",
+        "terms": [
+          "미국 10년물",
+          "미국 국채금리",
+          "10년물 국채금리",
+          "미국증시"
+        ],
+        "ratio": 78.98391,
+        "signalDate": "2026-10-28",
+        "signalId": "demand:2c2fa56bde77baa91067",
+        "sourceUrl": "https://naverapihub.apigw.ntruss.com/search-trend/v1/search",
+        "claimRefs": [
+          "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2025-12-23"
+        ],
+        "sourceRefs": [
+          "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2025-12-23"
+        ]
+      },
+      {
+        "rank": 3,
+        "topicId": "us:index:sp500",
+        "query": "S&P 500",
+        "terms": [
+          "S&P 500",
+          "S&P 500",
+          "S&P500",
+          "미국증시"
+        ],
+        "ratio": 78.85843,
+        "signalDate": "2026-10-28",
+        "signalId": "demand:46ec563890c4e6976384",
+        "sourceUrl": "https://naverapihub.apigw.ntruss.com/search-trend/v1/search",
+        "claimRefs": [
+          "https://fred.stlouisfed.org/graph/fredgraph.csv?id=SP500&cosd=2019-03-10"
+        ],
+        "sourceRefs": [
+          "https://fred.stlouisfed.org/graph/fredgraph.csv?id=SP500&cosd=2019-03-10"
+        ]
+      },
+      {
+        "rank": 4,
+        "topicId": "us:index:dow-jones",
+        "query": "다우존스",
+        "terms": [
+          "다우존스",
+          "Dow Jones",
+          "Dow Jones",
+          "미국증시"
+        ],
+        "ratio": 78.11111,
+        "signalDate": "2026-10-28",
+        "signalId": "demand:3727c4b065a703df1a08",
+        "sourceUrl": "https://naverapihub.apigw.ntruss.com/search-trend/v1/search",
+        "claimRefs": [
+          "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-10"
+        ],
+        "sourceRefs": [
+          "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-10"
+        ]
+      }
+    ]
+  },
+  "articleFingerprint": "sha256:90c26d61110884cee7eb1d42d1a53d66f353d96e8e6d28672688ed6bd146497e"
 }

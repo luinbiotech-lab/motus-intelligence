@@ -1,30 +1,16 @@
 {
+  "state": "HOLD",
   "gate": {
     "state": "HOLD",
     "reasons": [
-      "verification is not VERIFIED",
-      "unresolved verification conflict",
-      "boilerplate prose repetition detected"
+      "duplicate state uncertain"
     ],
     "approval": null,
-    "checkedAt": "2026-10-29T01:15:44.838Z"
+    "checkedAt": "2026-10-29T08:23:07.799Z"
   },
-  "searchRegistration": null,
-  "libraryRegistration": null,
-  "weeklyFeed": null,
-  "pdfCandidate": null,
-  "audit": [
-    {
-      "at": "2026-10-29T01:15:44.838Z",
-      "event": "AUTO_PUBLISH_STATIC_GATE",
-      "detail": "HOLD"
-    }
-  ],
-  "state": "HOLD",
-  "draftPostId": null,
-  "publicPostUrl": null,
-  "publishedAt": null,
-  "insertCallCount": 0,
   "publishCallCount": 0,
-  "error": "verification is not VERIFIED; unresolved verification conflict; boilerplate prose repetition detected"
+  "execution": "SIMULATED",
+  "commerce": {
+    "enabled": false
+  }
 }
