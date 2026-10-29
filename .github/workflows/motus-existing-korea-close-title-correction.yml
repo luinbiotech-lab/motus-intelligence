@@ -27,7 +27,7 @@ jobs:
       BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
       BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
       BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
-      CORRECTION_ACTION: ${{ github.event_name == 'push' && 'apply' || inputs.action }}
+      CORRECTION_ACTION: ${{ github.event_name == 'push' && 'preview' || inputs.action }}
     steps:
       - name: 'Preflight: exact post identity and read-only preview'
         shell: bash
@@ -59,6 +59,7 @@ jobs:
             return response.json();
           }
           const post=await getPost();
+          console.log(JSON.stringify({identityCheck:{idMatch:String(post.id)===postId,urlMatch:post.url===expectedUrl,status:post.status,urlHost:typeof post.url==='string'?new URL(post.url).host:null,urlPath:typeof post.url==='string'?new URL(post.url).pathname:null}}));
           if(String(post.id)!==postId||post.url!==expectedUrl||post.status!=='LIVE')throw Error('POST_IDENTITY_OR_PUBLIC_STATUS_MISMATCH');
           if(typeof post.content!=='string'||post.content.length<1000)throw Error('POST_CONTENT_UNEXPECTED');
           if(post.title!==oldTitle && post.title!==newTitle)throw Error('UNEXPECTED_EXISTING_TITLE');
