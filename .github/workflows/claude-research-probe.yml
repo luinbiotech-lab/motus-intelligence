@@ -30,9 +30,9 @@ jobs:
           npm ci && npm run build
           D=$(TZ=Asia/Seoul date +%F)
           node dist/src/live-daily-cli.js --date "$D" --category us --source internal || true
-          node dist/src/live-daily-cli.js --date 2026-10-29 --at 2026-10-29T00:40:00Z --category korea --source internal || true
-          rm -rf ../diag/diag/out6 && mkdir -p ../diag/diag/out6 && cp -r data/operations/$D/us ../diag/diag/out6/ && cp -r data/operations/2026-10-29/korea ../diag/diag/out6/ || true
+          node ../diag/diag/korea-preview.mjs || true
+          rm -rf ../diag/diag/out6 && mkdir -p ../diag/diag/out6 && cp -r data/operations/$D/us ../diag/diag/out6/ || true
       - working-directory: diag
         run: |
           git config user.name probe && git config user.email probe@users.noreply.github.com
-          git add diag/out6 && git commit -m "preview output [skip ci]" && git push
+          git add diag/out6 diag/out7 && git commit -m "preview output [skip ci]" && git push
