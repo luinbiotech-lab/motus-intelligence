@@ -14,10 +14,10 @@
   "leakagePass": true,
   "duplicateCheck": "PENDING_REMOTE",
   "duplicateUncertainty": true,
-  "articleFingerprint": "sha256:11f18dbb7994277550744099bce6fe69f6fdc35c320e1da1024dd59fc3bf4dbc",
+  "articleFingerprint": "sha256:a99eabd2d9479efb5ef2c347c9af56019df970cf770fe64d77373680061fffce",
   "commerceEnabled": false,
-  "verifiedAt": "2026-10-29T16:29:40.438Z",
-  "expiresAt": "2026-10-29T17:59:40.438Z",
+  "verifiedAt": "2026-10-29T16:32:15.550Z",
+  "expiresAt": "2026-10-29T18:02:15.550Z",
   "sourceAuditIds": [
     "calendar:nyse",
     "deep:consensus:list:company",
@@ -50,7 +50,7 @@
     "market-research:article:https://www.goldmansachs.com/insights/articles/are-bonds-becoming-a-better-investment-for-portfolios",
     "market-research:article:https://www.goldmansachs.com/insights/articles/will-30-year-us-treasury-yields-climb-higher"
   ],
-  "sourceAuditFingerprint": "sha256:341c779a1497582b5af1a816b87b64ac9a0bde9b6a31d53c03355ebd7dccb763",
+  "sourceAuditFingerprint": "sha256:41f1a7273d93e98042208d3f00495840b1322f08d82ce0ed75083a3b7e154e67",
   "crossVerificationFingerprint": null,
   "crossVerification": null
 }
