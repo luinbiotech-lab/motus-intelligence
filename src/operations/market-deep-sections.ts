@@ -96,7 +96,11 @@ export function composeUSDeepSections(input:{bundle:BrokerResearchBundle|null;st
     market.push({text:`S&P 500 업종을 추종하는 SPDR 업종 ETF ${scope} 가운데 ${up}종이 올랐다. ${best.label}(${best.symbol}) ${signedPct(best.changePct)}가 가장 강했고 ${worst.label}(${worst.symbol}) ${signedPct(worst.changePct)}가 가장 약했다${input.sectors.length===11?'':'(확인된 업종 기준)'}. 업종별 등락: ${input.sectors.map(item=>`${item.label} ${signedPct(item.changePct)}`).join(', ')}.`});
   }
   if(ranked.length){
-    const mentions=(stock:USAttentionStock)=>briefs.flatMap(brief=>brief.statements.filter(item=>item.region==='US'&&(stock.koreanName&&item.text.includes(stock.koreanName)||item.text.includes(stock.symbol))).map(item=>({item,brief})))[0];
+    const mentions=(stock:USAttentionStock)=>{
+      // A ticker counts only as a whole token (C must not match the C in FOMC); a Korean company name counts as written.
+      const ticker=stock.symbol.length>=2?new RegExp(`(?<![A-Za-z])${stock.symbol.replace(/[.^$*+?()[\]{}|\\]/g,'\\$&')}(?![A-Za-z])`):null;
+      return briefs.flatMap(brief=>brief.statements.filter(item=>item.region==='US'&&(Boolean(stock.koreanName&&stock.koreanName.length>=2&&item.text.includes(stock.koreanName))||Boolean(ticker?.test(item.text)))).map(item=>({item,brief})))[0];
+    };
     for(const stock of ranked){
       const name=displayName(stock),particle=josa(name,'은','는').slice(name.length),linked=mentions(stock);
       const rank=[stock.trendingRank?`야후 파이낸스 검색 ${stock.trendingRank}위`:'',stock.mostActiveRank?`대형주 거래량 ${stock.mostActiveRank}위`:''].filter(Boolean).join(', ');

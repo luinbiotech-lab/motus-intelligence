@@ -171,3 +171,13 @@ test('the session check compares only the level printed for KOSPI, and the title
   const korea=composeKoreaDeepSections({bundle:null,searchTop:[{rank:2,name:'SK하이닉스',code:'000660',close:1508000,changePct:12.45,date:'2026-10-28',url:'https://m.stock.naver.com/api/stock/000660/price?pageSize=5&page=1'}]});
   assert.equal(korea.titleFocus,'검색 2위 SK하이닉스 12.4% 급등');
 });
+
+test('broker commentary is linked to a stock only by a whole ticker token or its Korean name',async()=>{
+  const {composeUSDeepSections}=await import('../src/operations/market-deep-sections.js');
+  const report={kind:'MARKET' as const,date:'2026-10-29',title:'brief',broker:'A증권',analysts:'리서치센터',url:'https://consensus.hankyung.com/analysis/downpdf?report_idx=1',summary:[],targetPrice:null,rating:null,stockCode:null,company:null};
+  const bundle={briefs:[{report,statements:[{region:'US' as const,text:'FOMC 동결 속 연준 의장 인플레 낙관론에 상승 마감',heading:null},{region:'US' as const,text:'오라클이 매출 전망 상향에 급등하며 AI 인프라 우려 완화',heading:null}],digests:[]}],company:[],industry:[],economy:[],audit:[]};
+  const stock=(symbol:string,koreanName:string|null)=>({symbol,name:symbol,koreanName,changePct:1,close:10,date:'2026-10-28',trendingRank:1,mostActiveRank:null,marketCap:null});
+  const text=(us:{sections:Array<{paragraphs:Array<{text:string}>}>})=>us.sections.flatMap(section=>section.paragraphs.map(p=>p.text)).join(' ');
+  assert.doesNotMatch(text(composeUSDeepSections({bundle,stocks:[stock('C','씨티그룹')],sectors:[]})),/씨티그룹\(C\)[\s\S]*설명했다/);
+  assert.match(text(composeUSDeepSections({bundle,stocks:[stock('ORCL','오라클')],sectors:[]})),/오라클\(ORCL\)[\s\S]*A증권은 “오라클이 매출 전망 상향에/);
+});
