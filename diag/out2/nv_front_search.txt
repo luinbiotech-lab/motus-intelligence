@@ -1,0 +1,1 @@
+{"message":"Route GET:/front-api/search/popularStocks?nationType=KOR not found","error":"Not Found","statusCode":404}

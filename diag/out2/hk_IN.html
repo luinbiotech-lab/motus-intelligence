@@ -1,0 +1,2412 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>한경 컨센서스</title>
+    <meta http-equiv="Content-Type" content="text/html;">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex">
+    <link rel="stylesheet" href="/css/common.css?v=20171065" type="text/css">
+    <link rel="stylesheet" href="/js/datePicker/css/ui-lightness/jquery-ui-1.10.2.custom.css" type="text/css">
+    <link rel="stylesheet" href="/js/datePicker/css/ui.daterangepicker.css" type="text/css">
+    <link rel="shortcut icon" href="https://www.hankyung.com/favicon.ico">
+	<script type="text/javascript" src="/js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="/js/common.js?v=20231221"></script>
+    <script type="text/javascript" src="/js/datePicker/jquery-calendar.js"></script>
+    <script type="text/javascript" src="/js/datePicker/daterangepicker.jQuery.js?v=20231221"></script>
+
+    <script src="//hkstatic.hankyung.com/js/ga/googleTagManager.js?v=20231221"></script>
+	<!-- GoogleAnalyticsObject -->
+	<!-- <script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-74932633-1', 'auto');
+		ga('require', 'linkid');
+		ga('require', 'displayfeatures');
+		ga('send', 'pageview');
+	</script> -->
+	<!-- //GoogleAnalyticsObject -->
+
+</head>
+<body>
+    <div id="wrap">
+<script type="text/javascript">
+    $(function(){
+        $('#sdate,#edate').daterangepicker({
+            arrows:false,
+            changeMonth: true,
+            changeYear: true
+        });
+
+        $( "#datepicker" ).datepicker({
+            inline: true,
+            changeMonth: true,
+            changeYear: true
+        });
+
+        $( "#dialog-link, #icons li" ).hover(
+            function() {
+                $( this ).addClass( "ui-state-hover" );
+            },
+            function() {
+                $( this ).removeClass( "ui-state-hover" );
+            }
+        );
+/*
+		$('#container .tabT01 li a').unbind('click').click(function(){
+			$('#f_search').attr('action', $(this).attr('href'));
+			$('#f_search').submit();
+			return false;
+		});
+*/
+    });
+
+    function _select_code(code,name){
+        document.getElementById('search_text').value = name;
+        document.getElementById('business_code').value = code;
+
+        $("#business_list").html("");
+        $("#business_list").hide();
+    }
+
+    function _text_change(type, value, name){
+        var key = "";
+        if(type=="1"){
+            key = "search_value";
+        }else if(type=="2"){
+            key = "report_type";
+        }
+
+        $("#_"+key).text(name);
+        document.getElementById(key).value = value;
+        if(document.getElementById(key).value!=""){
+            $(".fie0"+type+" dd").slideToggle();
+        }
+    }
+
+    function _search_text(){
+        var search_value = document.getElementById('search_value').value;
+        document.getElementById('business_code').value = "";
+        if(search_value=="BUSINESS"){
+            var search_text = document.getElementById('search_text').value;
+            if(search_text.length>=2){
+                $.getJSON('/analysis/search?callback=?&search_text='+search_text, function(data) {
+                    var str = "";
+                    $.each(data, function(key, val) {
+                        var index = val.BUSINESS_NAME.indexOf(search_text);
+                        str = str + '<a href="javascript:_select_code(\''+val.BUSINESS_CODE+'\',\''+val.BUSINESS_NAME+'\')">';
+                        if(index==0){
+                            str = str + '<strong>' + search_text + '</strong>';
+                            str = str + val.BUSINESS_NAME.substring(search_text.length, val.BUSINESS_NAME.length);
+                        }else if(index==-1){
+                            str = str + val.BUSINESS_NAME;
+                        }else{
+                            str = str + val.BUSINESS_NAME.substring(0, index);
+                            str = str + '<strong>' + search_text + '</strong>';
+                            str = str + val.BUSINESS_NAME.substring(search_text.length, val.BUSINESS_NAME.length);
+                        }
+                        str = str + '</a>';
+                    });
+                    $("#business_list").show();
+                    $("#business_list").html(str);
+                });
+            }else{
+                $("#business_list").html("");
+                $("#business_list").hide();
+            }
+        }
+    }
+$(function(){
+    _text_change('2','CO','기업');
+    $('.fieldset.fie02 dd').hide();
+});
+</script>
+        <!-- header -->
+        <div id="header">
+            <form id="f_search" name="f_search" method="GET">
+            <div class="hd_con">
+                <div class="logo"><a href="/"><img src="/images/bg_logo01.png" alt="한경컨센서스" /></a></div>
+                <!-- hd_top -->
+                <div class="hd_top">
+                    <!-- hd_inList -->
+                    <div class="hd_inList">
+                        <div class="top_input">
+                            <input id="sdate" type="text" value="2026-10-28" name="sdate" readonly> <span>~</span>
+                            <input id="edate" type="text" value="2026-10-30" name="edate" readonly>
+                            <input type="hidden" id="now_page" name="now_page" value="1">
+                            <input type="hidden" id="search_value" name="search_value" value="">
+                            <input type="hidden" id="report_type" name="report_type" value="IN">
+                            <input type="hidden" id="pagenum" name="pagenum" value="80">
+                        </div>
+                        <div class="fieldset fie01">
+                            <dl>
+                                <dt>
+                                    <a href="javascript:_text_change('1','','전체')" id="_search_value" data-value="">
+전체                                    </a>
+                                </dt>
+                                <dd class="disNone" id="search_value_select">
+                                    <a href="javascript:_text_change('1','REPORT_TITLE','제목')">제목(종목명)</a>
+                                    <a href="javascript:_text_change('1','REPORT_WRITER','작성자')">작성자</a>
+                                    <a href="javascript:_text_change('1','OFFICE_NAME','제공출처')">제공출처</a>
+                                </dd>
+                            </dl>
+                        </div>
+                        <script>
+                            $(".fie01 dt a").click(function(){
+                                $(".fie01 dd").slideToggle();
+                            });
+                        </script>
+                        <div class="fieldset fie02">
+                            <dl>
+                                <dt>
+                                    <a href="javascript:_text_change('2','','분류선택')" id="_report_type">
+산업                                    </a>
+                                </dt>
+                                <dd class="disNone" id="report_type_select">
+                                    <a href="javascript:_text_change('2','CO','기업')">기업</a>
+                                    <a href="javascript:_text_change('2','IN','산업')">산업</a>
+                                    <a href="javascript:_text_change('2','MA','시장')">시장</a>
+                                    <a href="javascript:_text_change('2','EC','경제')">경제</a>
+                                    <a href="javascript:_text_change('2','DE','파생')">파생</a>
+                                    <a href="javascript:_text_change('2','FE','[파생]외환')">[파생]외환</a>
+                                    <a href="javascript:_text_change('2','BO','[파생]채권')">[파생]채권</a>
+                                    <a href="javascript:_text_change('2','FU','[파생]펀드')">[파생]펀드</a>
+                                    <a href="javascript:_text_change('2','QU','[파생]퀀트')">[파생]퀀트</a>
+                                    <a href="javascript:_text_change('2','FC','[파생]해외')">[파생]해외</a>
+                                    <a href="javascript:_text_change('2','ET','[파생]기타')">[파생]기타</a>
+                                    <a href="javascript:_text_change('2','UP','상향')">상향</a>
+                                    <a href="javascript:_text_change('2','DW','하향')">하향</a>
+                                </dd>
+                            </dl>
+                        </div>
+                        <script>
+                            $(".fie02 dt a").click(function(){
+                                $(".fie02 dd").slideToggle();
+                            });
+                        </script>
+                        <div class="search01">
+                            <dl>
+                                <dt>
+                                    <input type="text" id="search_text" name="search_text" value="" autocomplete="off" onkeyup="_search_text()" onkeydown="javascript:_return(event);">
+                                    <input type="hidden" id="business_code" name="business_code" value="">
+                                </dt>
+                                <dd class="disNone" id="business_list"><!-- disNone disBlock -->
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <!-- //hd_inList -->
+                    <!-- btn_r -->
+                    <div class="btn_r">
+
+                       <a href="javascript:_search('/analysis/list')"><img src="/images/btn_search01.gif" alt="검색" /></a>
+                       <a href="javascript:_popup_open('/business/search?frame=analysis/layer',380,600, 'no')"><img src="/images/btn_event01.gif" alt="종목" /></a>
+                    </div>
+                    <!-- //btn_r -->
+                </div>
+                <!-- //hd_top -->
+            </div>
+            </form>
+        </div>
+        <!-- //header -->
+        <!-- container -->
+        <div id="container">
+            <!-- top_con -->
+            <div class="top_con">
+                <ul class="tabT01">
+                    <li class="tab01 "><a href="/analysis/list">전체</a></li>
+                    <li class="tab02 on"><a href="/analysis/list?skinType=business">기업</a></li>
+                    <li class="tab03 on"><a href="/analysis/list?skinType=industry">산업</a></li>
+                    <li class="tab04 "><a href="/analysis/list?skinType=market">시장</a></li>
+                    <li class="tab05 "><a href="/analysis/list?skinType=derivative">파생</a></li>
+                    <li class="tab06 "><a href="/analysis/list?skinType=economy">경제</a></li>
+                    <li class="tab07 "><a href="/analysis/list?skinType=stock_good">상향</a></li>
+                    <li class="tab08 "><a href="/analysis/list?skinType=stock_bad">하향</a></li>
+                    <li class="tab09 "><a href="/business/list">기업정보</a></li>
+                </ul>
+            </div>
+            <!-- //top_con -->
+<div class="chart_popup" style="display:none;">
+    <div class="btn_wrap">
+        <button class="layer_close"></button>
+    </div>
+    <iframe src="" style="width:100%;height: 480px;border:none;" scrolling="no"></iframe>
+</div>
+<!-- contents -->
+            <div id="contents">
+                <div class="top_list">
+                    <div class="list_r">
+                        <p>LIST</p>
+                        <ul>
+                            <li ><a href="javascript:_Page_Link('/analysis/list?skinType=business&sdate=2026-10-28&edate=2026-10-30&report_type=IN&pagenum=80&order_type=&pagenum=20')">20</a></li>
+                            <li ><a href="javascript:_Page_Link('/analysis/list?skinType=business&sdate=2026-10-28&edate=2026-10-30&report_type=IN&pagenum=80&order_type=&pagenum=50')">50</a></li>
+                            <li class="on"><a href="javascript:_Page_Link('/analysis/list?skinType=business&sdate=2026-10-28&edate=2026-10-30&report_type=IN&pagenum=80&order_type=&pagenum=80')">80</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- table_style01 -->
+                <div class="table_style01">
+                    <table>
+                        <colgroup>
+                            <col width="78px"/>
+                            <col width="*"/>
+                            <col width="140px"/>
+                            <col width="125px"/>
+                            <col width="136px"/>
+                            <col width="42px"/>
+                            <col width="65px"/>
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th class="first"><a href="javascript:_Order_Link(10000000,1000000,'/analysis/list?skinType=business&sdate=2026-10-28&edate=2026-10-30&report_type=IN&pagenum=80&order_type=&now_page=1')">작성일 <img src="/images/bg_table01.gif" alt="" /></a></th>
+                                <th><a href="javascript:_Order_Link(10000000,10000,'/analysis/list?skinType=business&sdate=2026-10-28&edate=2026-10-30&report_type=IN&pagenum=80&order_type=&now_page=1')">제목 <img src="/images/bg_table01.gif" alt="" /></a></th>
+                                <th><a href="javascript:_Order_Link(10000000,1,'/analysis/list?skinType=business&sdate=2026-10-28&edate=2026-10-30&report_type=IN&pagenum=80&order_type=&now_page=1')">투자의견 <img src="/images/bg_table01.gif" alt="" /></a></th>
+                                <th><a href="javascript:_Order_Link(10000000,1000,'/analysis/list?skinType=business&sdate=2026-10-28&edate=2026-10-30&report_type=IN&pagenum=80&order_type=&now_page=1')">작성자 <img src="/images/bg_table01.gif" alt="" /></a></th>
+                                <th><a href="javascript:_Order_Link(10000000,100,'/analysis/list?skinType=business&sdate=2026-10-28&edate=2026-10-30&report_type=IN&pagenum=80&order_type=&now_page=1')">제공출처 <img src="/images/bg_table01.gif" alt="" /></a></th>
+                                <th>차트</th>
+                                <th>첨부파일</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                    <tr class="first">
+                                <td class="first txt_number">2026-10-29</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653461" onmouseover="$('#content_653461').show();" onmouseout="$('#content_653461').hide();" target="_blank">HD현대중공업(329180) 피크아웃 우려를 이겨낼 조선사</a>
+                                    <div class="layerPop">
+                                        <div id="content_653461" class="pop01 disNone">
+                                            <strong>HD현대중공업(329180) 피크아웃 우려를 이겨낼 조선사</strong>
+                                            <ul>
+                                                <li>피크아웃 우려를 이겨낼 조선사</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>양승윤</td>
+                                <td>유진투자증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653461" title="20261029_329180_syyang0901_549.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261029_329180_syyang0901_549.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-29</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653460" onmouseover="$('#content_653460').show();" onmouseout="$('#content_653460').hide();" target="_blank">파마리서치(214450) 3Q26 Preview: 성장 모멘텀은 여전히 유효</a>
+                                    <div class="layerPop">
+                                        <div id="content_653460" class="pop01 disNone">
+                                            <strong>파마리서치(214450) 3Q26 Preview: 성장 모멘텀은 여전히 유효</strong>
+                                            <ul>
+                                                <li>3Q26 Preview: 성장 모멘텀은 여전히 유효</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>이다빈</td>
+                                <td>LS증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653460" title="20261029_214450_db23_10.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261029_214450_db23_10.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-29</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653459" onmouseover="$('#content_653459').show();" onmouseout="$('#content_653459').hide();" target="_blank">삼성물산(028260) 바이오 부문 감익 불구 컨센서스 상회한 실적</a>
+                                    <div class="layerPop">
+                                        <div id="content_653459" class="pop01 disNone">
+                                            <strong>삼성물산(028260) 바이오 부문 감익 불구 컨센서스 상회한 실적</strong>
+                                            <ul>
+                                                <li>바이오 부문 감익 불구 컨센서스 상회한 실적</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>한병화</td>
+                                <td>LS증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653459" title="20261029_028260_bhh1026_1353.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261029_028260_bhh1026_1353.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-29</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653458" onmouseover="$('#content_653458').show();" onmouseout="$('#content_653458').hide();" target="_blank">삼성물산(028260) 기다려지는 미래 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653458" class="pop01 disNone">
+                                            <strong>삼성물산(028260) 기다려지는 미래  </strong>
+                                            <ul>
+                                                <li>기다려지는 미래 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>김세련</td>
+                                <td>LS증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653458" title="[20261029_삼성물산_3Q26 Review_김세련_v1]김세련_906_Online report _ 6~10p_삼성물산.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="[20261029_삼성물산_3Q26 Review_김세련_v1]김세련_906_Online report _ 6~10p_삼성물산.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                <tr class="last">
+                                <td class="first txt_number">2026-10-29</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653457" onmouseover="$('#content_653457').show();" onmouseout="$('#content_653457').hide();" target="_blank">한화시스템(272210) 투자포인트 재설정 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653457" class="pop01 disNone">
+                                            <strong>한화시스템(272210) 투자포인트 재설정 </strong>
+                                            <ul>
+                                                <li>투자포인트 재설정 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>이재광</td>
+                                <td>LS증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653457" title="[261029_한화시스템]이재광_15_Online report _ 6~10p_한화시스템.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="[261029_한화시스템]이재광_15_Online report _ 6~10p_한화시스템.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                    <tr class="first">
+                                <td class="first txt_number">2026-10-29</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653456" onmouseover="$('#content_653456').show();" onmouseout="$('#content_653456').hide();" target="_blank">LG전자(066570) 냉각솔루션, 로보틱스 사업 전개에 주목 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653456" class="pop01 disNone">
+                                            <strong>LG전자(066570) 냉각솔루션, 로보틱스 사업 전개에 주목 </strong>
+                                            <ul>
+                                                <li>냉각솔루션, 로보틱스 사업 전개에 주목 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>고의영,박정하</td>
+                                <td>iM증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653456" title="[29072745]_066570.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="[29072745]_066570.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-29</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653455" onmouseover="$('#content_653455').show();" onmouseout="$('#content_653455').hide();" target="_blank">HD현대중공업(329180) 3Q26: 조선사는 우직해야 한다 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653455" class="pop01 disNone">
+                                            <strong>HD현대중공업(329180) 3Q26: 조선사는 우직해야 한다  </strong>
+                                            <ul>
+                                                <li>3Q26: 조선사는 우직해야 한다 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>변용진,이주원</td>
+                                <td>iM증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653455" title="[29073307]_329180.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="[29073307]_329180.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-29</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653454" onmouseover="$('#content_653454').show();" onmouseout="$('#content_653454').hide();" target="_blank">삼성전기(009150) 2027년까지 매 분기 QoQ 증익 구간 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653454" class="pop01 disNone">
+                                            <strong>삼성전기(009150) 2027년까지 매 분기 QoQ 증익 구간 </strong>
+                                            <ul>
+                                                <li>2027년까지 매 분기 QoQ 증익 구간 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>고의영,박정하</td>
+                                <td>iM증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653454" title="[29072716]_009150.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="[29072716]_009150.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-29</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653450" onmouseover="$('#content_653450').show();" onmouseout="$('#content_653450').hide();" target="_blank">HD현대중공업(329180) 3Q26 Review: 악재 소멸 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653450" class="pop01 disNone">
+                                            <strong>HD현대중공업(329180)  3Q26 Review: 악재 소멸 </strong>
+                                            <ul>
+                                                <li> 3Q26 Review: 악재 소멸 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+매수                                </td>
+                                <td>장성호</td>
+                                <td>IBK투자증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653450" title="20261029073036373_ko.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261029073036373_ko.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                <tr class="last">
+                                <td class="first txt_number">2026-10-29</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653448" onmouseover="$('#content_653448').show();" onmouseout="$('#content_653448').hide();" target="_blank">삼성전기(009150) 부진한 주가를 날려버릴 실적과 전망 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653448" class="pop01 disNone">
+                                            <strong>삼성전기(009150)  부진한 주가를 날려버릴 실적과 전망 </strong>
+                                            <ul>
+                                                <li> 부진한 주가를 날려버릴 실적과 전망 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+매수                                </td>
+                                <td>김운호</td>
+                                <td>IBK투자증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653448" title="20261028152033580_ko.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261028152033580_ko.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                    <tr class="first">
+                                <td class="first txt_number">2026-10-29</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653447" onmouseover="$('#content_653447').show();" onmouseout="$('#content_653447').hide();" target="_blank">HD한국조선해양(009540) 3Q26 Review: 결산배당만 받아도 배당수익률 6% </a>
+                                    <div class="layerPop">
+                                        <div id="content_653447" class="pop01 disNone">
+                                            <strong>HD한국조선해양(009540)  3Q26 Review: 결산배당만 받아도 배당수익률 6% </strong>
+                                            <ul>
+                                                <li> 3Q26 Review: 결산배당만 받아도 배당수익률 6% </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+매수                                </td>
+                                <td>장성호</td>
+                                <td>IBK투자증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653447" title="20261028105956547_ko.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261028105956547_ko.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-29</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653446" onmouseover="$('#content_653446').show();" onmouseout="$('#content_653446').hide();" target="_blank">SK하이닉스(000660) 실적은 우려를 불식시킬 것 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653446" class="pop01 disNone">
+                                            <strong>SK하이닉스(000660)  실적은 우려를 불식시킬 것 </strong>
+                                            <ul>
+                                                <li> 실적은 우려를 불식시킬 것 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+매수                                </td>
+                                <td>김운호</td>
+                                <td>IBK투자증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653446" title="20261027155209200_ko.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261027155209200_ko.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-29</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653445" onmouseover="$('#content_653445').show();" onmouseout="$('#content_653445').hide();" target="_blank">LG전자(066570) 아직은 계절성 문턱이 높다 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653445" class="pop01 disNone">
+                                            <strong>LG전자(066570)  아직은 계절성 문턱이 높다 </strong>
+                                            <ul>
+                                                <li> 아직은 계절성 문턱이 높다 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+매수                                </td>
+                                <td>김운호</td>
+                                <td>IBK투자증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653445" title="20261028203657217_ko.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261028203657217_ko.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-29</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653444" onmouseover="$('#content_653444').show();" onmouseout="$('#content_653444').hide();" target="_blank">SK스퀘어(402340) SK하이닉스 최대주주 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653444" class="pop01 disNone">
+                                            <strong>SK스퀘어(402340) SK하이닉스 최대주주 </strong>
+                                            <ul>
+                                                <li>SK하이닉스 최대주주 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+매수                                </td>
+                                <td>최관순</td>
+                                <td>SK증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653444" title="20261028132646663_0_ko.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261028132646663_0_ko.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                <tr class="last">
+                                <td class="first txt_number">2026-10-29</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653442" onmouseover="$('#content_653442').show();" onmouseout="$('#content_653442').hide();" target="_blank">HD한국조선해양(009540) 단기 실적 우려 해소, 4Q부터 성장 재개 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653442" class="pop01 disNone">
+                                            <strong>HD한국조선해양(009540) 단기 실적 우려 해소, 4Q부터 성장 재개 </strong>
+                                            <ul>
+                                                <li>단기 실적 우려 해소, 4Q부터 성장 재개 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+매수                                </td>
+                                <td>한승한,고서영</td>
+                                <td>SK증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653442" title="20261029085455789_0_ko.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261029085455789_0_ko.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                    <tr class="first">
+                                <td class="first txt_number">2026-10-29</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653440" onmouseover="$('#content_653440').show();" onmouseout="$('#content_653440').hide();" target="_blank">SK하이닉스(000660) 여전히 강력하다 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653440" class="pop01 disNone">
+                                            <strong>SK하이닉스(000660) 여전히 강력하다 </strong>
+                                            <ul>
+                                                <li>여전히 강력하다 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+매수                                </td>
+                                <td>한동희</td>
+                                <td>SK증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653440" title="20261029082350454_0_ko.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261029082350454_0_ko.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-29</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653437" onmouseover="$('#content_653437').show();" onmouseout="$('#content_653437').hide();" target="_blank">삼성전기(009150) 풀캐파, 재고 3주, ASP 6불: 쇼티지가 숫자로 왔다 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653437" class="pop01 disNone">
+                                            <strong>삼성전기(009150) 풀캐파, 재고 3주, ASP 6불: 쇼티지가 숫자로 왔다 </strong>
+                                            <ul>
+                                                <li>풀캐파, 재고 3주, ASP 6불: 쇼티지가 숫자로 왔다 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+매수                                </td>
+                                <td>박형우,정영환</td>
+                                <td>SK증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653437" title="20261029023847506_0_ko.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261029023847506_0_ko.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-29</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653436" onmouseover="$('#content_653436').show();" onmouseout="$('#content_653436').hide();" target="_blank">LG전자(066570) 경쟁사의 위기는 LG전자의 기회 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653436" class="pop01 disNone">
+                                            <strong>LG전자(066570) 경쟁사의 위기는 LG전자의 기회 </strong>
+                                            <ul>
+                                                <li>경쟁사의 위기는 LG전자의 기회 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+매수                                </td>
+                                <td>박형우,정영환</td>
+                                <td>SK증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653436" title="20261029022919029_0_ko.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261029022919029_0_ko.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-29</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653435" onmouseover="$('#content_653435').show();" onmouseout="$('#content_653435').hide();" target="_blank">SKC(011790) 눈높이가 높아진 동박, 가격 인상률에 달렸다 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653435" class="pop01 disNone">
+                                            <strong>SKC(011790) 눈높이가 높아진 동박, 가격 인상률에 달렸다 </strong>
+                                            <ul>
+                                                <li>눈높이가 높아진 동박, 가격 인상률에 달렸다 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+매수                                </td>
+                                <td>박형우,정영환</td>
+                                <td>SK증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653435" title="20261028214758435_0_ko.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261028214758435_0_ko.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                <tr class="last">
+                                <td class="first txt_number">2026-10-29</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653434" onmouseover="$('#content_653434').show();" onmouseout="$('#content_653434').hide();" target="_blank">삼성물산(028260) 자체사업, 밸류에이션, 삼성전자 주가 반등 가능성을 보자 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653434" class="pop01 disNone">
+                                            <strong>삼성물산(028260) 자체사업, 밸류에이션, 삼성전자 주가 반등 가능성을 보자 </strong>
+                                            <ul>
+                                                <li>자체사업, 밸류에이션, 삼성전자 주가 반등 가능성을 보자 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+매수                                </td>
+                                <td>최관순</td>
+                                <td>SK증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653434" title="20261028214730816_0_ko.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261028214730816_0_ko.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                    <tr class="first">
+                                <td class="first txt_number">2026-10-29</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653433" onmouseover="$('#content_653433').show();" onmouseout="$('#content_653433').hide();" target="_blank">HD현대중공업(329180) 실적&임단협 우려 해소, 발전엔진 수요 폭발적 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653433" class="pop01 disNone">
+                                            <strong>HD현대중공업(329180) 실적&임단협 우려 해소, 발전엔진 수요 폭발적 </strong>
+                                            <ul>
+                                                <li>실적&임단협 우려 해소, 발전엔진 수요 폭발적 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+매수                                </td>
+                                <td>한승한,고서영</td>
+                                <td>SK증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653433" title="20261028210701359_0_ko.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261028210701359_0_ko.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-29</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653432" onmouseover="$('#content_653432').show();" onmouseout="$('#content_653432').hide();" target="_blank">HD현대마린엔진(071970) 시장의 예상 및 사측 가이던스 모두 상회 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653432" class="pop01 disNone">
+                                            <strong>HD현대마린엔진(071970) 시장의 예상 및 사측 가이던스 모두 상회 </strong>
+                                            <ul>
+                                                <li>시장의 예상 및 사측 가이던스 모두 상회 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+매수                                </td>
+                                <td>한승한,고서영</td>
+                                <td>SK증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653432" title="20261028184835926_0_ko.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261028184835926_0_ko.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-29</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653431" onmouseover="$('#content_653431').show();" onmouseout="$('#content_653431').hide();" target="_blank">JYP Ent.(035900) 이겨내야 할 시간 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653431" class="pop01 disNone">
+                                            <strong>JYP Ent.(035900) 이겨내야 할 시간 </strong>
+                                            <ul>
+                                                <li>이겨내야 할 시간 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+매수                                </td>
+                                <td>박준형</td>
+                                <td>SK증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653431" title="20261028163622144_0_ko.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261028163622144_0_ko.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-29</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653430" onmouseover="$('#content_653430').show();" onmouseout="$('#content_653430').hide();" target="_blank">에프엔에스테크(083500) 이익 체력 강화 전망 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653430" class="pop01 disNone">
+                                            <strong>에프엔에스테크(083500) 이익 체력 강화 전망 </strong>
+                                            <ul>
+                                                <li>이익 체력 강화 전망 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+매수                                </td>
+                                <td>허선재</td>
+                                <td>SK증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653430" title="20261028141820350_0_ko.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261028141820350_0_ko.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                <tr class="last">
+                                <td class="first txt_number">2026-10-29</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653428" onmouseover="$('#content_653428').show();" onmouseout="$('#content_653428').hide();" target="_blank">HD현대중공업(329180) 하방보다 상방을 볼 시점</a>
+                                    <div class="layerPop">
+                                        <div id="content_653428" class="pop01 disNone">
+                                            <strong>HD현대중공업(329180) 하방보다 상방을 볼 시점</strong>
+                                            <ul>
+                                                <li>하방보다 상방을 볼 시점</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>이지니</td>
+                                <td>대신증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653428" title="59977_HHI_3Q26_R.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="59977_HHI_3Q26_R.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                    <tr class="first">
+                                <td class="first txt_number">2026-10-29</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653427" onmouseover="$('#content_653427').show();" onmouseout="$('#content_653427').hide();" target="_blank">삼성에피스홀딩스(0126Z0) 단기 실적 변동성 속 개발 경쟁력에 주목</a>
+                                    <div class="layerPop">
+                                        <div id="content_653427" class="pop01 disNone">
+                                            <strong>삼성에피스홀딩스(0126Z0) 단기 실적 변동성 속   개발 경쟁력에 주목</strong>
+                                            <ul>
+                                                <li>단기 실적 변동성 속 개발 경쟁력에 주목</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>홍가혜,성하원</td>
+                                <td>대신증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653427" title="59973_EPIS_1029.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="59973_EPIS_1029.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-29</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653426" onmouseover="$('#content_653426').show();" onmouseout="$('#content_653426').hide();" target="_blank">파마리서치(214450) PER 10배 실화?</a>
+                                    <div class="layerPop">
+                                        <div id="content_653426" class="pop01 disNone">
+                                            <strong>파마리서치(214450) PER 10배 실화?</strong>
+                                            <ul>
+                                                <li>PER 10배 실화?</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>한송협</td>
+                                <td>대신증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653426" title="59969_Earnings_Preview_PMR_3Q26.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="59969_Earnings_Preview_PMR_3Q26.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-29</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653423" onmouseover="$('#content_653423').show();" onmouseout="$('#content_653423').hide();" target="_blank">삼성전기(009150) 길어지는 이익의 활주로 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653423" class="pop01 disNone">
+                                            <strong>삼성전기(009150) 길어지는 이익의 활주로   </strong>
+                                            <ul>
+                                                <li>길어지는 이익의 활주로 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>양승수</td>
+                                <td>메리츠증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653423" title="20261028170349462K_02.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261028170349462K_02.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-29</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653421" onmouseover="$('#content_653421').show();" onmouseout="$('#content_653421').hide();" target="_blank">유한양행(000100) 로열티 눈높이 조정, 유한화학 성장에 주목 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653421" class="pop01 disNone">
+                                            <strong>유한양행(000100) 로열티 눈높이 조정, 유한화학 성장에 주목  </strong>
+                                            <ul>
+                                                <li>로열티 눈높이 조정, 유한화학 성장에 주목 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>김준영,김현비</td>
+                                <td>메리츠증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653421" title="20261028130703286K_02.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261028130703286K_02.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                <tr class="last">
+                                <td class="first txt_number">2026-10-29</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653418" onmouseover="$('#content_653418').show();" onmouseout="$('#content_653418').hide();" target="_blank">HD한국조선해양(009540) 기말주주환원 수익률만 6%, 이건 엄중하다 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653418" class="pop01 disNone">
+                                            <strong>HD한국조선해양(009540) 기말주주환원 수익률만 6%, 이건 엄중하다 </strong>
+                                            <ul>
+                                                <li>기말주주환원 수익률만 6%, 이건 엄중하다 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>김용민</td>
+                                <td>유안타증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653418" title="20261029070022100_0_ko.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261029070022100_0_ko.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                    <tr class="first">
+                                <td class="first txt_number">2026-10-29</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653417" onmouseover="$('#content_653417').show();" onmouseout="$('#content_653417').hide();" target="_blank">삼성물산(028260) 실적도 좋고! 가이던스 상향까지 자신감 뿜뿜!</a>
+                                    <div class="layerPop">
+                                        <div id="content_653417" class="pop01 disNone">
+                                            <strong>삼성물산(028260) 실적도 좋고! 가이던스 상향까지 자신감 뿜뿜!</strong>
+                                            <ul>
+                                                <li>실적도 좋고! 가이던스 상향까지 자신감 뿜뿜!</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>김도엽</td>
+                                <td>유안타증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653417" title="20261028232804240_0_ko.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261028232804240_0_ko.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-29</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653416" onmouseover="$('#content_653416').show();" onmouseout="$('#content_653416').hide();" target="_blank">JB금융지주(175330) 2026년은 계획대로 가고 있다 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653416" class="pop01 disNone">
+                                            <strong>JB금융지주(175330) 2026년은 계획대로 가고 있다 </strong>
+                                            <ul>
+                                                <li>2026년은 계획대로 가고 있다 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>우도형</td>
+                                <td>유안타증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653416" title="20261028202231573_0_ko.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261028202231573_0_ko.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-29</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653412" onmouseover="$('#content_653412').show();" onmouseout="$('#content_653412').hide();" target="_blank">SK하이닉스(000660) 높아지는 이익의 눈높이, 달라지는 메모리 사이클 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653412" class="pop01 disNone">
+                                            <strong>SK하이닉스(000660) 높아지는 이익의 눈높이, 달라지는 메모리 사이클 </strong>
+                                            <ul>
+                                                <li>높아지는 이익의 눈높이, 달라지는 메모리 사이클 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>박준영,김나우</td>
+                                <td>한화투자증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653412" title="SKÃ_Ã_Ã_Ã_Â´Ã_Â½Âº 3Q26 Review Ã_Ã_Â¸Ã Ã_Â®[202503058_39_A2_1].pdf" target="_blank"><img src="/images/btn_attached.gif" alt="SKÃ_Ã_Ã_Ã_Â´Ã_Â½Âº 3Q26 Review Ã_Ã_Â¸Ã Ã_Â®[202503058_39_A2_1].pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-29</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653411" onmouseover="$('#content_653411').show();" onmouseout="$('#content_653411').hide();" target="_blank">호텔신라(008770) 3Q26 Review : 면세점 외형 성장이 필요한 시점 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653411" class="pop01 disNone">
+                                            <strong>호텔신라(008770) 3Q26 Review : 면세점 외형 성장이 필요한 시점 </strong>
+                                            <ul>
+                                                <li>3Q26 Review : 면세점 외형 성장이 필요한 시점 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>이진협</td>
+                                <td>한화투자증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653411" title="Ã_Â£Ã_Ã_Â½Ã_Â¶Ã³ 3Q26 Review(1)[202203969_414_A2_2].pdf" target="_blank"><img src="/images/btn_attached.gif" alt="Ã_Â£Ã_Ã_Â½Ã_Â¶Ã³ 3Q26 Review(1)[202203969_414_A2_2].pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                <tr class="last">
+                                <td class="first txt_number">2026-10-29</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653410" onmouseover="$('#content_653410').show();" onmouseout="$('#content_653410').hide();" target="_blank">삼성물산(028260) [3Q26 Review] 전자가 좋으면, 나도 좋다 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653410" class="pop01 disNone">
+                                            <strong>삼성물산(028260) [3Q26 Review] 전자가 좋으면, 나도 좋다 </strong>
+                                            <ul>
+                                                <li>[3Q26 Review] 전자가 좋으면, 나도 좋다 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>송유림</td>
+                                <td>한화투자증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653410" title="3Q26 Review Cmt_Â»Ã¯Â¼ÂºÂ¹Â°Â»Ãª_F.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="3Q26 Review Cmt_Â»Ã¯Â¼ÂºÂ¹Â°Â»Ãª_F.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                    <tr class="first">
+                                <td class="first txt_number">2026-10-29</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653409" onmouseover="$('#content_653409').show();" onmouseout="$('#content_653409').hide();" target="_blank">HMM(011200) 예상 외의 시황 강세로 실적 호조 전망</a>
+                                    <div class="layerPop">
+                                        <div id="content_653409" class="pop01 disNone">
+                                            <strong>HMM(011200) 예상 외의 시황 강세로 실적 호조 전망</strong>
+                                            <ul>
+                                                <li>예상 외의 시황 강세로 실적 호조 전망</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>이서연</td>
+                                <td>상상인증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653409" title="CM0079_4660_1.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="CM0079_4660_1.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-29</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653408" onmouseover="$('#content_653408').show();" onmouseout="$('#content_653408').hide();" target="_blank">HD현대마린엔진(071970) 3Q26 Review: 우린 조금 달라</a>
+                                    <div class="layerPop">
+                                        <div id="content_653408" class="pop01 disNone">
+                                            <strong>HD현대마린엔진(071970) 3Q26 Review: 우린 조금 달라</strong>
+                                            <ul>
+                                                <li>3Q26 Review: 우린 조금 달라</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>이서연</td>
+                                <td>상상인증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653408" title="CM0079_4659_1.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="CM0079_4659_1.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653405" onmouseover="$('#content_653405').show();" onmouseout="$('#content_653405').hide();" target="_blank">더핑크퐁컴퍼니(403850) Worldwide 부캉이 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653405" class="pop01 disNone">
+                                            <strong>더핑크퐁컴퍼니(403850) Worldwide 부캉이 </strong>
+                                            <ul>
+                                                <li>Worldwide 부캉이 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+투자의견없음                                </td>
+                                <td>서진경,이금민</td>
+                                <td>한국IR협의회</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653405" title="★261028_더핑크퐁컴퍼니_Final.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="★261028_더핑크퐁컴퍼니_Final.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653404" onmouseover="$('#content_653404').show();" onmouseout="$('#content_653404').hide();" target="_blank">레드캡투어(038390) 안정적인 실적과 적극적인 주주환원 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653404" class="pop01 disNone">
+                                            <strong>레드캡투어(038390) 안정적인 실적과 적극적인 주주환원 </strong>
+                                            <ul>
+                                                <li>안정적인 실적과 적극적인 주주환원 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+투자의견없음                                </td>
+                                <td>채윤석,정수현</td>
+                                <td>한국IR협의회</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653404" title="261028_레드캡투어.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="261028_레드캡투어.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                <tr class="last">
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653403" onmouseover="$('#content_653403').show();" onmouseout="$('#content_653403').hide();" target="_blank">에스티팜(237690) 성장의 방향은 여전히 유효하다</a>
+                                    <div class="layerPop">
+                                        <div id="content_653403" class="pop01 disNone">
+                                            <strong>에스티팜(237690) 성장의 방향은 여전히 유효하다</strong>
+                                            <ul>
+                                                <li>성장의 방향은 여전히 유효하다</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>이달미</td>
+                                <td>상상인증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653403" title="CM0079_4658_1.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="CM0079_4658_1.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                    <tr class="first">
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653402" onmouseover="$('#content_653402').show();" onmouseout="$('#content_653402').hide();" target="_blank">동아에스티(170900) 3분기 실적은 기대 이상, 센제품은 이제 시작</a>
+                                    <div class="layerPop">
+                                        <div id="content_653402" class="pop01 disNone">
+                                            <strong>동아에스티(170900) 3분기 실적은 기대 이상, 센제품은 이제 시작</strong>
+                                            <ul>
+                                                <li>3분기 실적은 기대 이상, 센제품은 이제 시작</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>이달미</td>
+                                <td>상상인증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653402" title="CM0079_4657_1.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="CM0079_4657_1.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653401" onmouseover="$('#content_653401').show();" onmouseout="$('#content_653401').hide();" target="_blank">셀트리온(068270) 신제품이 이끄는 성장의 가속화</a>
+                                    <div class="layerPop">
+                                        <div id="content_653401" class="pop01 disNone">
+                                            <strong>셀트리온(068270) 신제품이 이끄는 성장의 가속화</strong>
+                                            <ul>
+                                                <li>신제품이 이끄는 성장의 가속화</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>이달미</td>
+                                <td>상상인증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653401" title="CM0079_4656_1.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="CM0079_4656_1.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653400" onmouseover="$('#content_653400').show();" onmouseout="$('#content_653400').hide();" target="_blank">한화시스템(272210) 3Q26 Review: 수출 성장은 지속된다</a>
+                                    <div class="layerPop">
+                                        <div id="content_653400" class="pop01 disNone">
+                                            <strong>한화시스템(272210) 3Q26 Review: 수출 성장은 지속된다</strong>
+                                            <ul>
+                                                <li>3Q26 Review: 수출 성장은 지속된다</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>이서연</td>
+                                <td>상상인증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653400" title="CM0079_4655_1.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="CM0079_4655_1.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653394" onmouseover="$('#content_653394').show();" onmouseout="$('#content_653394').hide();" target="_blank">한화시스템(272210) 3Q26 Review: 기대치 상회. 구체화되는 중장기 성장 전략 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653394" class="pop01 disNone">
+                                            <strong>한화시스템(272210) 3Q26 Review: 기대치 상회. 구체화되는 중장기 성장 전략 </strong>
+                                            <ul>
+                                                <li>3Q26 Review: 기대치 상회. 구체화되는 중장기 성장 전략 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>채운샘</td>
+                                <td>한화투자증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653394" title="Ã_Ã_Ã_Â_Â½Ã_Â½ÂºÃ_Ã__3Q26(1).pdf" target="_blank"><img src="/images/btn_attached.gif" alt="Ã_Ã_Ã_Â_Â½Ã_Â½ÂºÃ_Ã__3Q26(1).pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                <tr class="last">
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653393" onmouseover="$('#content_653393').show();" onmouseout="$('#content_653393').hide();" target="_blank">신한지주(055550) 잘 관리된 대손 및 연체 지표 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653393" class="pop01 disNone">
+                                            <strong>신한지주(055550) 잘 관리된 대손 및 연체 지표 </strong>
+                                            <ul>
+                                                <li>잘 관리된 대손 및 연체 지표 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>김도하</td>
+                                <td>한화투자증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653393" title="20261028 Â½Ã_Ã_Ã_Ã_Ã¶Ã_Ã_ 3Q26 Review.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261028 Â½Ã_Ã_Ã_Ã_Ã¶Ã_Ã_ 3Q26 Review.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                    <tr class="first">
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653392" onmouseover="$('#content_653392').show();" onmouseout="$('#content_653392').hide();" target="_blank">HD현대일렉트릭(267260) 3Q26 Review: 커지는 데이터센터의 존재감 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653392" class="pop01 disNone">
+                                            <strong>HD현대일렉트릭(267260) 3Q26 Review: 커지는 데이터센터의 존재감 </strong>
+                                            <ul>
+                                                <li>3Q26 Review: 커지는 데이터센터의 존재감 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>김예인</td>
+                                <td>한화투자증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653392" title="3Q26 Review_HDÃ_Ã¶Â´Ã«Ã_Ã_Â·ÂºÃ_Â®Â¸Â¯.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="3Q26 Review_HDÃ_Ã¶Â´Ã«Ã_Ã_Â·ÂºÃ_Â®Â¸Â¯.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653391" onmouseover="$('#content_653391').show();" onmouseout="$('#content_653391').hide();" target="_blank">대우건설(047040) [3Q26 Review] 수주를 손에 쥔 자의 여유 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653391" class="pop01 disNone">
+                                            <strong>대우건설(047040) [3Q26 Review] 수주를 손에 쥔 자의 여유 </strong>
+                                            <ul>
+                                                <li>[3Q26 Review] 수주를 손에 쥔 자의 여유 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>송유림</td>
+                                <td>한화투자증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653391" title="3Q26 Review Cmt_Â´Ã«Â¿Ã¬Â°Ã_Â¼Â³(1).pdf" target="_blank"><img src="/images/btn_attached.gif" alt="3Q26 Review Cmt_Â´Ã«Â¿Ã¬Â°Ã_Â¼Â³(1).pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653389" onmouseover="$('#content_653389').show();" onmouseout="$('#content_653389').hide();" target="_blank">하나금융지주(086790) 실적 안정과 주주환원을 겸비 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653389" class="pop01 disNone">
+                                            <strong>하나금융지주(086790) 실적 안정과 주주환원을 겸비 </strong>
+                                            <ul>
+                                                <li>실적 안정과 주주환원을 겸비 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>우도형</td>
+                                <td>유안타증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653389" title="20261028073839563_0_ko.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261028073839563_0_ko.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653388" onmouseover="$('#content_653388').show();" onmouseout="$('#content_653388').hide();" target="_blank">신한지주(055550) 비이자는 부진했으나 주주환원은 기대 이상 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653388" class="pop01 disNone">
+                                            <strong>신한지주(055550) 비이자는 부진했으나 주주환원은 기대 이상 </strong>
+                                            <ul>
+                                                <li>비이자는 부진했으나 주주환원은 기대 이상 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>우도형</td>
+                                <td>유안타증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653388" title="20261028073708083_0_ko.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261028073708083_0_ko.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                <tr class="last">
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653387" onmouseover="$('#content_653387').show();" onmouseout="$('#content_653387').hide();" target="_blank">대우건설(047040) 눈부신 수익성! 이제 남은 것은 수주뿐 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653387" class="pop01 disNone">
+                                            <strong>대우건설(047040) 눈부신 수익성! 이제 남은 것은 수주뿐 </strong>
+                                            <ul>
+                                                <li>눈부신 수익성! 이제 남은 것은 수주뿐 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>김도엽</td>
+                                <td>유안타증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653387" title="20261028073432593_0_ko.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261028073432593_0_ko.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                    <tr class="first">
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653386" onmouseover="$('#content_653386').show();" onmouseout="$('#content_653386').hide();" target="_blank">iM금융지주(139130) 실적과 주주환원 모두 좋아지고 있다 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653386" class="pop01 disNone">
+                                            <strong>iM금융지주(139130) 실적과 주주환원 모두 좋아지고 있다 </strong>
+                                            <ul>
+                                                <li>실적과 주주환원 모두 좋아지고 있다 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>우도형</td>
+                                <td>유안타증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653386" title="20261028073312963_0_ko.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261028073312963_0_ko.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653384" onmouseover="$('#content_653384').show();" onmouseout="$('#content_653384').hide();" target="_blank">한화시스템(272210) 3Q26 Re: 멀티플 부담↓, 리레이팅 기대감↑ </a>
+                                    <div class="layerPop">
+                                        <div id="content_653384" class="pop01 disNone">
+                                            <strong>한화시스템(272210) 3Q26 Re: 멀티플 부담↓, 리레이팅 기대감↑ </strong>
+                                            <ul>
+                                                <li>3Q26 Re: 멀티플 부담↓, 리레이팅 기대감↑ </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>백종민</td>
+                                <td>유안타증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653384" title="20261028071057887_0_ko.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261028071057887_0_ko.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653382" onmouseover="$('#content_653382').show();" onmouseout="$('#content_653382').hide();" target="_blank">동아에스티(170900) 비용 효율화로 챙긴 수익성 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653382" class="pop01 disNone">
+                                            <strong>동아에스티(170900) 비용 효율화로 챙긴 수익성 </strong>
+                                            <ul>
+                                                <li>비용 효율화로 챙긴 수익성 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>하현수</td>
+                                <td>유안타증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653382" title="20261027160540580_0_ko.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261027160540580_0_ko.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653381" onmouseover="$('#content_653381').show();" onmouseout="$('#content_653381').hide();" target="_blank">에스티팜(237690) 3Q26Re: 아쉬운 수익성 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653381" class="pop01 disNone">
+                                            <strong>에스티팜(237690) 3Q26Re: 아쉬운 수익성 </strong>
+                                            <ul>
+                                                <li>3Q26Re: 아쉬운 수익성 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>하현수</td>
+                                <td>유안타증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653381" title="20261027150626710_0_ko.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261027150626710_0_ko.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                <tr class="last">
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653380" onmouseover="$('#content_653380').show();" onmouseout="$('#content_653380').hide();" target="_blank">HD현대일렉트릭(267260) 빅테크 수요가 이끄는 추가 증설 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653380" class="pop01 disNone">
+                                            <strong>HD현대일렉트릭(267260) 빅테크 수요가 이끄는 추가 증설 </strong>
+                                            <ul>
+                                                <li>빅테크 수요가 이끄는 추가 증설 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>손현정,김고은</td>
+                                <td>유안타증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653380" title="20261019133736000_0_ko.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261019133736000_0_ko.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                    <tr class="first">
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653377" onmouseover="$('#content_653377').show();" onmouseout="$('#content_653377').hide();" target="_blank">ISC(095340) 아쉬운 실적에도 증대되는 기대감 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653377" class="pop01 disNone">
+                                            <strong>ISC(095340) 아쉬운 실적에도 증대되는 기대감  </strong>
+                                            <ul>
+                                                <li>아쉬운 실적에도 증대되는 기대감 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>김동관</td>
+                                <td>메리츠증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653377" title="20261027203418809K_02.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261027203418809K_02.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653376" onmouseover="$('#content_653376').show();" onmouseout="$('#content_653376').hide();" target="_blank">셀트리온(068270) 3Q26 Re: 신제품 성장이 이끄는 이익 레버리지 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653376" class="pop01 disNone">
+                                            <strong>셀트리온(068270) 3Q26 Re: 신제품 성장이 이끄는 이익 레버리지 </strong>
+                                            <ul>
+                                                <li>3Q26 Re: 신제품 성장이 이끄는 이익 레버리지 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+투자의견없음                                </td>
+                                <td>김준영,김현비</td>
+                                <td>메리츠증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653376" title="20261027194350562K_02.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261027194350562K_02.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653375" onmouseover="$('#content_653375').show();" onmouseout="$('#content_653375').hide();" target="_blank">한국타이어앤테크놀로지(161390) 피하지 못한 EU 관세, 영향 점검 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653375" class="pop01 disNone">
+                                            <strong>한국타이어앤테크놀로지(161390) 피하지 못한 EU 관세, 영향 점검  </strong>
+                                            <ul>
+                                                <li>피하지 못한 EU 관세, 영향 점검 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>김준성,배현서</td>
+                                <td>메리츠증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653375" title="20261027193919627K_02.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261027193919627K_02.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653374" onmouseover="$('#content_653374').show();" onmouseout="$('#content_653374').hide();" target="_blank">LS(006260) 재평가의 조건 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653374" class="pop01 disNone">
+                                            <strong>LS(006260) 재평가의 조건  </strong>
+                                            <ul>
+                                                <li>재평가의 조건 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>장재혁</td>
+                                <td>메리츠증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653374" title="20261027175249913K_02.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261027175249913K_02.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                <tr class="last">
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653373" onmouseover="$('#content_653373').show();" onmouseout="$('#content_653373').hide();" target="_blank">샘씨엔에스(252990) DRAM 타고 고공행진 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653373" class="pop01 disNone">
+                                            <strong>샘씨엔에스(252990) DRAM 타고 고공행진   </strong>
+                                            <ul>
+                                                <li>DRAM 타고 고공행진 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Not Rated                                </td>
+                                <td>양승수</td>
+                                <td>메리츠증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653373" title="20261027170600823K_02.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261027170600823K_02.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                    <tr class="first">
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653372" onmouseover="$('#content_653372').show();" onmouseout="$('#content_653372').hide();" target="_blank">한미약품(128940) 북경한미의 부담, 비만 신약의 진전 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653372" class="pop01 disNone">
+                                            <strong>한미약품(128940) 북경한미의 부담, 비만 신약의 진전  </strong>
+                                            <ul>
+                                                <li>북경한미의 부담, 비만 신약의 진전 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>김준영,김현비</td>
+                                <td>메리츠증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653372" title="20261023193132427K_02.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261023193132427K_02.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653371" onmouseover="$('#content_653371').show();" onmouseout="$('#content_653371').hide();" target="_blank">에스티팜(237690) 성장 방향성은 유지, 수익성 회복은 점진적 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653371" class="pop01 disNone">
+                                            <strong>에스티팜(237690) 성장 방향성은 유지, 수익성 회복은 점진적  </strong>
+                                            <ul>
+                                                <li>성장 방향성은 유지, 수익성 회복은 점진적 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>김준영,김현비</td>
+                                <td>메리츠증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653371" title="20261023192824084K_02.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261023192824084K_02.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653369" onmouseover="$('#content_653369').show();" onmouseout="$('#content_653369').hide();" target="_blank">한화시스템(272210) 3Q26 Review: 우주, 국방AI 기업으로 도약</a>
+                                    <div class="layerPop">
+                                        <div id="content_653369" class="pop01 disNone">
+                                            <strong>한화시스템(272210) 3Q26 Review:  우주, 국방AI 기업으로 도약</strong>
+                                            <ul>
+                                                <li>3Q26 Review: 우주, 국방AI 기업으로 도약</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>최정환</td>
+                                <td>대신증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653369" title="59942_3Q26_HWS_Review_261028020942.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="59942_3Q26_HWS_Review_261028020942.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653367" onmouseover="$('#content_653367').show();" onmouseout="$('#content_653367').hide();" target="_blank">셀트리온(068270) 신제품 성장 가속화, 높아지는 2027년 기대감 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653367" class="pop01 disNone">
+                                            <strong>셀트리온(068270) 신제품 성장 가속화,   높아지는 2027년 기대감 </strong>
+                                            <ul>
+                                                <li>신제품 성장 가속화, 높아지는 2027년 기대감 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>홍가혜,성하원</td>
+                                <td>대신증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653367" title="59940_Cellt_1028.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="59940_Cellt_1028.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                <tr class="last">
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653366" onmouseover="$('#content_653366').show();" onmouseout="$('#content_653366').hide();" target="_blank">에스티팜(237690) 제품 믹스 및 환율 부담, 신규 수주는 지속</a>
+                                    <div class="layerPop">
+                                        <div id="content_653366" class="pop01 disNone">
+                                            <strong>에스티팜(237690) 제품 믹스 및 환율 부담,   신규 수주는 지속</strong>
+                                            <ul>
+                                                <li>제품 믹스 및 환율 부담, 신규 수주는 지속</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>홍가혜,성하원</td>
+                                <td>대신증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653366" title="59939_STPHARM_1028.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="59939_STPHARM_1028.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                    <tr class="first">
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653365" onmouseover="$('#content_653365').show();" onmouseout="$('#content_653365').hide();" target="_blank">대우건설(047040) 수주 시계는 연말을 향해 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653365" class="pop01 disNone">
+                                            <strong>대우건설(047040) 수주 시계는 연말을 향해 </strong>
+                                            <ul>
+                                                <li>수주 시계는 연말을 향해 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>이혜진</td>
+                                <td>대신증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653365" title="59937_dw_3Q26.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="59937_dw_3Q26.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653364" onmouseover="$('#content_653364').show();" onmouseout="$('#content_653364').hide();" target="_blank">HD현대일렉트릭(267260) 지나간 실적보다, 긍정적 사업 전략 구체화에 주목</a>
+                                    <div class="layerPop">
+                                        <div id="content_653364" class="pop01 disNone">
+                                            <strong>HD현대일렉트릭(267260) 지나간 실적보다, 긍정적 사업  전략 구체화에 주목</strong>
+                                            <ul>
+                                                <li>지나간 실적보다, 긍정적 사업 전략 구체화에 주목</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>허민호</td>
+                                <td>대신증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653364" title="59935_HDELEC_3Q26RE_FF_261027190724.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="59935_HDELEC_3Q26RE_FF_261027190724.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653360" onmouseover="$('#content_653360').show();" onmouseout="$('#content_653360').hide();" target="_blank">LG이노텍(011070) 아직은 높은 모바일 비중이 부담이 된다 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653360" class="pop01 disNone">
+                                            <strong>LG이노텍(011070)  아직은 높은 모바일 비중이 부담이 된다 </strong>
+                                            <ul>
+                                                <li> 아직은 높은 모바일 비중이 부담이 된다 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+매수                                </td>
+                                <td>김운호</td>
+                                <td>IBK투자증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653360" title="20261027193531580_ko.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261027193531580_ko.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653359" onmouseover="$('#content_653359').show();" onmouseout="$('#content_653359').hide();" target="_blank">HD현대일렉트릭(267260) 증설 기반 성장성은 유효 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653359" class="pop01 disNone">
+                                            <strong>HD현대일렉트릭(267260)  증설 기반 성장성은 유효 </strong>
+                                            <ul>
+                                                <li> 증설 기반 성장성은 유효 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+매수                                </td>
+                                <td>김태현, 고혁진</td>
+                                <td>IBK투자증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653359" title="20261027181941130_ko.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261027181941130_ko.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                <tr class="last">
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653356" onmouseover="$('#content_653356').show();" onmouseout="$('#content_653356').hide();" target="_blank">한화오션(042660) 3Q26 Review: 첫 고비는 넘겼다 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653356" class="pop01 disNone">
+                                            <strong>한화오션(042660)  3Q26 Review: 첫 고비는 넘겼다 </strong>
+                                            <ul>
+                                                <li> 3Q26 Review: 첫 고비는 넘겼다 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+매수                                </td>
+                                <td>장성호</td>
+                                <td>IBK투자증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653356" title="20261027160636023_ko.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261027160636023_ko.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                    <tr class="first">
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653355" onmouseover="$('#content_653355').show();" onmouseout="$('#content_653355').hide();" target="_blank">에스티팜(237690) 아쉬운 이익, 두터워진 수주 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653355" class="pop01 disNone">
+                                            <strong>에스티팜(237690)  아쉬운 이익, 두터워진 수주 </strong>
+                                            <ul>
+                                                <li> 아쉬운 이익, 두터워진 수주 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+매수                                </td>
+                                <td>정이수</td>
+                                <td>IBK투자증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653355" title="20261027134552120_ko.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261027134552120_ko.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653354" onmouseover="$('#content_653354').show();" onmouseout="$('#content_653354').hide();" target="_blank">셀트리온(068270) 실적으로 증명한 성장성 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653354" class="pop01 disNone">
+                                            <strong>셀트리온(068270)  실적으로 증명한 성장성 </strong>
+                                            <ul>
+                                                <li> 실적으로 증명한 성장성 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+매수                                </td>
+                                <td>정이수</td>
+                                <td>IBK투자증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653354" title="20261027130433837_ko.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261027130433837_ko.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653353" onmouseover="$('#content_653353').show();" onmouseout="$('#content_653353').hide();" target="_blank">ISC(095340) 잠시 늦춘 걸음, 성장 방향은 그대로 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653353" class="pop01 disNone">
+                                            <strong>ISC(095340)  잠시 늦춘 걸음, 성장 방향은 그대로 </strong>
+                                            <ul>
+                                                <li> 잠시 늦춘 걸음, 성장 방향은 그대로 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+매수                                </td>
+                                <td>이건재,민지윤</td>
+                                <td>IBK투자증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653353" title="20261027165446057_ko.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261027165446057_ko.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653352" onmouseover="$('#content_653352').show();" onmouseout="$('#content_653352').hide();" target="_blank">NAVER(035420) 가시화되는 신성장 동력 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653352" class="pop01 disNone">
+                                            <strong>NAVER(035420) 가시화되는 신성장 동력 </strong>
+                                            <ul>
+                                                <li>가시화되는 신성장 동력 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>선유진</td>
+                                <td>LS증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653352" title="261028 NAVER_가시화되는 신성장 동력.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="261028 NAVER_가시화되는 신성장 동력.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                <tr class="last">
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653351" onmouseover="$('#content_653351').show();" onmouseout="$('#content_653351').hide();" target="_blank">HD현대일렉트릭(267260) 실적/수주/증설 등 여러 요인 감안해도 밸류 할인 과도 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653351" class="pop01 disNone">
+                                            <strong>HD현대일렉트릭(267260) 실적/수주/증설 등 여러 요인 감안해도 밸류 할인 과도 </strong>
+                                            <ul>
+                                                <li>실적/수주/증설 등 여러 요인 감안해도 밸류 할인 과도 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>성종화</td>
+                                <td>LS증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653351" title="[HD현대일렉트릭_3Q26 Review_261028☆]성종화_2133_Online report _ 6~10p_HD현대일렉트릭.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="[HD현대일렉트릭_3Q26 Review_261028☆]성종화_2133_Online report _ 6~10p_HD현대일렉트릭.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                    <tr class="first">
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653350" onmouseover="$('#content_653350').show();" onmouseout="$('#content_653350').hide();" target="_blank">대우건설(047040) 건축이 이끄는 실적 호조 지속 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653350" class="pop01 disNone">
+                                            <strong>대우건설(047040) 건축이 이끄는 실적 호조 지속 </strong>
+                                            <ul>
+                                                <li>건축이 이끄는 실적 호조 지속 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>김세련</td>
+                                <td>LS증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653350" title="[20261028_대우건설_3Q26 Review_김세련]김세련_905_Online report _ 6~10p_대우건설.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="[20261028_대우건설_3Q26 Review_김세련]김세련_905_Online report _ 6~10p_대우건설.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653349" onmouseover="$('#content_653349').show();" onmouseout="$('#content_653349').hide();" target="_blank">한화오션(042660) 3Q26 Review: 이 모든 고난에도 상선 OPM 17% </a>
+                                    <div class="layerPop">
+                                        <div id="content_653349" class="pop01 disNone">
+                                            <strong>한화오션(042660) 3Q26 Review: 이 모든 고난에도 상선 OPM 17% </strong>
+                                            <ul>
+                                                <li>3Q26 Review: 이 모든 고난에도 상선 OPM 17% </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>이재혁</td>
+                                <td>LS증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653349" title="[261028_한화오션_3Q26_Review]이재혁_313_Online report _ 6~10p_한화오션.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="[261028_한화오션_3Q26_Review]이재혁_313_Online report _ 6~10p_한화오션.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653348" onmouseover="$('#content_653348').show();" onmouseout="$('#content_653348').hide();" target="_blank">신한지주(055550) 일시적 모멘텀 공백 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653348" class="pop01 disNone">
+                                            <strong>신한지주(055550) 일시적 모멘텀 공백 </strong>
+                                            <ul>
+                                                <li>일시적 모멘텀 공백 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>전배승</td>
+                                <td>LS증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653348" title="[261028 신한지주]전배승_970_Online report _ 6~10p_신한지주.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="[261028 신한지주]전배승_970_Online report _ 6~10p_신한지주.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653347" onmouseover="$('#content_653347').show();" onmouseout="$('#content_653347').hide();" target="_blank">샘씨엔에스(252990) 3Q26 Review: 영업이익 +105.9% YoY </a>
+                                    <div class="layerPop">
+                                        <div id="content_653347" class="pop01 disNone">
+                                            <strong>샘씨엔에스(252990) 3Q26 Review: 영업이익 +105.9% YoY  </strong>
+                                            <ul>
+                                                <li>3Q26 Review: 영업이익 +105.9% YoY </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>정홍식</td>
+                                <td>LS증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653347" title="[261028 샘씨엔에스_온라인 - 3Q26 Review]정홍식_1460_Online report _ 6~10p_샘씨엔에스.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="[261028 샘씨엔에스_온라인 - 3Q26 Review]정홍식_1460_Online report _ 6~10p_샘씨엔에스.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                <tr class="last">
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653346" onmouseover="$('#content_653346').show();" onmouseout="$('#content_653346').hide();" target="_blank">JB금융지주(175330) 비이자이익 둔화에도 고수익성 지속 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653346" class="pop01 disNone">
+                                            <strong>JB금융지주(175330) 비이자이익 둔화에도 고수익성 지속 </strong>
+                                            <ul>
+                                                <li>비이자이익 둔화에도 고수익성 지속 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+Buy                                </td>
+                                <td>전배승</td>
+                                <td>LS증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653346" title="[261028 JB금융]전배승_972_Online report _ 6~10p_JB금융지주.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="[261028 JB금융]전배승_972_Online report _ 6~10p_JB금융지주.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- //table_style01 -->
+                <!-- paging -->
+                <div class="paging">
+<a href="/analysis/list?skinType=business&sdate=2026-10-28&edate=2026-10-30&report_type=IN&pagenum=80&order_type=&now_page=1" class="btn first"><img src="/images/icon_first.gif" alt="처음으로"></a>                    <span>1</span>
+                    <a href="/analysis/list?skinType=business&sdate=2026-10-28&edate=2026-10-30&report_type=IN&pagenum=80&order_type=&now_page=2">2</a>
+<a href="/analysis/list?skinType=business&sdate=2026-10-28&edate=2026-10-30&report_type=IN&pagenum=80&order_type=&now_page=2" class="btn last"><img src="/images/icon_last.gif" alt="끝으로"></a>                </div>
+                <!-- //paging -->
+                <!-- btn_pgbBtom -->
+                <div class="btn_pgbBtom">
+                    <a href="https://get.adobe.com/kr/reader/" target="_new"><img src="/images/btn_download01.gif" alt="첨부파일" /></a>
+                </div>
+                <!-- //btn_pgbBtom -->
+            </div>
+            <!-- //contents -->
+        <div class="notify">
+		본 자료는  투자자의 증권 투자를 돕기위한 참고자료이며, 따라서 본 자료에 의한 투자자의 투자결과에 대해 어떠한 목적의 증빙자료로 사용 될 수 없으며, <br />
+		어떠한 경우에도 작성자 및 당사의 허가 없이 전재, 복사 또는 대여 될 수 없습니다. 무단전재등으로 인한 분쟁발생시 법적 책임이 있음을 사전에 고지 합니다.
+	</div>
+        </div>
+        <!-- //container -->
+        <div id="footer">
+            <div class="short_copy"><img src="/images/txt_ingFooter02.gif" alt="Copyright Hankyung.com All rights reserved." /></div>
+        </div>
+        <!-- 2023.06.07 배너 추가 -->
+        <!-- <div class="banner-area" style="margin: 20px 0; text-align: center;">
+            <a href="https://bit.ly/42sopSg" target="_blank">
+                <img src="https://hkstatic.hankyung.com/img/www/w/koreamarket/consensus/banners/banner-eureka-970250-20230605.jpg" alt="한경 유레카 - 내가 본 리포트 종목, AI의 진단 결과는?">
+            </a>
+        </div> -->
+        <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+        <script>
+          window.googletag = window.googletag || {cmd: []};
+          googletag.cmd.push(function() {
+            googletag.defineSlot('/3448900/http:////hkconsensus.hankyung.com//apps.analysis//analysis.list', [970, 250], 'div-gpt-ad-1686617306429-0').addService(googletag.pubads());
+        
+            googletag.pubads().enableSingleRequest();
+        
+            googletag.enableServices();
+        
+        });        
+        </script>
+        
+        <!-- /3448900/http:////hkconsensus.hankyung.com//apps.analysis//analysis.list -->
+        
+        <div id='div-gpt-ad-1686617306429-0' class="banner-area" style='margin: 20px 0; text-align: center; min-width: 970px; min-height: 250px;'>
+        
+          <script>
+        
+            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1686617306429-0'); });
+        
+          </script>
+        
+        </div>
+    </div>
+</body>
+</html>

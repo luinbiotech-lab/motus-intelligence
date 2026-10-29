@@ -1,0 +1,89 @@
+{
+ "hk_MK": {
+  "status": 200,
+  "len": 236228
+ },
+ "hk_CO": {
+  "status": 200,
+  "len": 236234
+ },
+ "hk_IN": {
+  "status": 200,
+  "len": 164804
+ },
+ "hk_EC": {
+  "status": 200,
+  "len": 147627
+ },
+ "mkIds": [
+  "653461",
+  "653460",
+  "653459",
+  "653458",
+  "653457"
+ ],
+ "pdf653461": {
+  "status": 200,
+  "ct": "application/pdf",
+  "len": 697969,
+  "magic": "%PDF-",
+  "textLen": 23903
+ },
+ "pdf653460": {
+  "status": 200,
+  "ct": "application/pdf",
+  "len": 943202,
+  "magic": "%PDF-",
+  "textLen": 34071
+ },
+ "y_losers": {
+  "status": 200,
+  "len": 29145,
+  "head": "{\"finance\":{\"result\":[{\"id\":\"8ecefa87-a8b0-434a-9b39-e061a0baef9b\",\"title\":\"Day Losers\",\"description\":\"Discover the equities with the greatest losses in the trading day.\",\"canonicalName\":\"DAY_LOSERS\",\"criteriaMeta\":{\"size\":10,\"offset\":0,\"sortField\":\"percentchange\",\"sortType\":\"ASC\",\"quoteType\":\"EQUIT"
+ },
+ "y_active": {
+  "status": 200,
+  "len": 41577,
+  "head": "{\"finance\":{\"result\":[{\"id\":\"437465ef-980e-4d8c-a860-de7cbfbab373\",\"title\":\"Most Actives\",\"description\":\"Discover the most traded equities in the trading day.\",\"canonicalName\":\"MOST_ACTIVES\",\"criteriaMeta\":{\"size\":15,\"offset\":0,\"sortField\":\"dayvolume\",\"sortType\":\"DESC\",\"quoteType\":\"EQUITY\",\"includeF"
+ },
+ "y_trending": {
+  "status": 200,
+  "len": 403,
+  "head": "{\"finance\":{\"result\":[{\"count\":15,\"quotes\":[{\"symbol\":\"GOOG\"},{\"symbol\":\"NOW\"},{\"symbol\":\"GOOGL\"},{\"symbol\":\"MSFT\"},{\"symbol\":\"CAT\"},{\"symbol\":\"MRVL\"},{\"symbol\":\"AMZN\"},{\"symbol\":\"LLY\"},{\"symbol\":\"FTNT\"},{\"symbol\":\"IOVA\"},{\"symbol\":\"ADT\"},{\"symbol\":\"CROX\"},{\"symbol\":\"AAPL\"},{\"symbol\":\"LITE\"},{\"symbo"
+ },
+ "nv_searchtop": {
+  "status": 200,
+  "len": 39485,
+  "head": "{\"stockListSortType\":\"SEARCH_TOP\",\"stockListCategoryType\":\"ALL\",\"stocks\":[{\"stockType\":\"domestic\",\"stockEndType\":\"stock\",\"itemCode\":\"005930\",\"reutersCode\":\"005930\",\"stockName\":\"삼성전자\",\"sosok\":\"0\",\"closePrice\":\"230,500\",\"compareToPreviousClosePrice\":\"-11,500\",\"compareToPreviousPrice\":{\"code\":\""
+ },
+ "nv_popular": {
+  "status": 404,
+  "len": 4209,
+  "head": "<!doctype html>\n<html lang=\"ko\">\n<head>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no\">\n    <title>Npay 증권</title>\n    <link rel=\"shortcut icon\" href=\"https://ssl.pstatic.net/imgstock/favico"
+ },
+ "nv_front_search": {
+  "status": 404,
+  "len": 117,
+  "head": "{\"message\":\"Route GET:/front-api/search/popularStocks?nationType=KOR not found\",\"error\":\"Not Found\",\"statusCode\":404}"
+ },
+ "nv_up": {
+  "status": 200,
+  "len": 17472,
+  "head": "{\"stockListSortType\":\"UP\",\"stockListCategoryType\":\"KOSPI\",\"stocks\":[{\"stockType\":\"domestic\",\"stockEndType\":\"stock\",\"itemCode\":\"308170\",\"reutersCode\":\"308170\",\"stockName\":\"씨티알모빌리티\",\"sosok\":\"0\",\"closePrice\":\"5,110\",\"compareToPreviousClosePrice\":\"1,175\",\"compareToPreviousPrice\":{\"code\":\"1"
+ },
+ "nv_kospi_basic": {
+  "status": 200,
+  "len": 3202,
+  "head": "{\"stockEndType\":\"index\",\"itemCode\":\"KOSPI\",\"reutersCode\":\"KOSPI\",\"symbolCode\":\"KOSPI\",\"stockName\":\"코스피\",\"itemLogoUrl\":\"https://ssl.pstatic.net/imgstock/fn/real/logo/index/IndexKOSPI.svg\",\"itemLogoPngUrl\":\"https://ssl.pstatic.net/imgstock/fn/real/logo/png/index/IndexKOSPI.png\",\"closePrice\":\"5,9"
+ },
+ "gtrends_kr": {
+  "status": 200,
+  "len": 20269,
+  "head": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<rss xmlns:atom=\"http://www.w3.org/2005/Atom\" xmlns:ht=\"https://trends.google.com/trending/rss\" version=\"2.0\">\n\t<channel>\n\t\t<title>Daily Search Trends</title>\n\t\t<description>Recent searches</description>\n\t\t<link>https://trends.google.com/trendi"
+ },
+ "sp_sectors": {
+  "status": 200,
+  "len": 13849,
+  "head": "{\"spark\":{\"result\":[{\"symbol\":\"XLE\",\"response\":[{\"meta\":{\"currency\":\"USD\",\"symbol\":\"XLE\",\"exchangeName\":\"PCX\",\"fullExchangeName\":\"NYSEArca\",\"instrumentType\":\"ETF\",\"firstTradeDate\":914337000,\"regularMarketTime\":1793288264,\"hasPrePostMarketData\":true,\"gmtoffset\":-14400,\"timezone\":\"EDT\",\"exchangeTimezo"
+ }
+}
