@@ -1,46 +1,134 @@
-## https://finance.naver.com/research/market_info_list.naver 200 125285
-## https://finance.naver.com/research/invest_list.naver 200 125294
-## https://finance.naver.com/research/economy_list.naver 200 125301
-## https://consensus.hankyung.com/analysis/list?skinType=market&sdate=2026-10-29&edate=2026-10-30&now_page=1&pagenum=80 200 30413
-no 10-30
-## https://www.schwab.com/learn/story/stock-market-update-close 200 ->https://www.schwab.com/learn/story/stock-market-update-open 924667
- Stocks Dip on Mixed Microsoft, Alphabet, PCE Data | Charles Schwab Loading navigation Menu Learn Learn Home Market Insights &amp; News Explore by Topic Learn by Goal Browse by Media Search Learn Markets and Economy Stocks Dip on Mixed Microsoft, Alphabet, PCE Data PCE inflation rose as expected last month while the government's first estimate for third quarter GDP topped estimates. Alphabet's disappointing results caused a sell-off in tech. October 29, 2026 • Joe Mazzola Published as of: October 29, 2026, 9:15 a.m. ET Listen to this article Listen here or subscribe to the Schwab Market Update in your favorite podcast app. Current time: 0 seconds, 0:00 / Duration: 0 seconds 0:00 1 X Current time: 0 seconds, 0:00 / Duration: 0 seconds 0:00 Read Transcript The markets Last price Change % change S&amp;P 500 ® Index 7,743.98 +21.38 +0.28% Dow Jones Industrial Average ® 52,475.10 +97.53 +0.19% Nasdaq Composite ® 26,549.85 +72.04 +0.27% 10-year Treasury yield 5.01% -0.03 -- U.S. Dollar Index 102.20 +0.05 +0.05% Cboe Volatility Index ® 17.07 +0.16 +0.95% Gold $4,038 -$16.80 -0.41% WTI Crude Oil $101.33 -$1.43 -1.37% Bitcoin $80,000 -$1,525 -1.87% Disclosure (Thursday market open) Investor
-## https://www.schwab.com/learn/story/stock-market-update-open 200  924743
- Stocks Dip on Mixed Microsoft, Alphabet, PCE Data | Charles Schwab Loading navigation Menu Learn Learn Home Market Insights &amp; News Explore by Topic Learn by Goal Browse by Media Search all articles, videos, and podcasts Markets and Economy Stocks Dip on Mixed Microsoft, Alphabet, PCE Data PCE inflation rose as expected last month while the government's first estimate for third quarter GDP topped estimates. Alphabet's disappointing results caused a sell-off in tech. October 29, 2026 • Joe Mazzola Published as of: October 29, 2026, 9:15 a.m. ET Listen to this article Listen here or subscribe to the Schwab Market Update in your favorite podcast app. Current time: 0 seconds, 0:00 / Duration: 0 seconds 0:00 1 X Current time: 0 seconds, 0:00 / Duration: 0 seconds 0:00 Read Transcript The markets Last price Change % change S&amp;P 500 ® Index 7,743.98 +21.38 +0.28% Dow Jones Industrial Average ® 52,475.10 +97.53 +0.19% Nasdaq Composite ® 26,549.85 +72.04 +0.27% 10-year Treasury yield 5.01% -0.03 -- U.S. Dollar Index 102.20 +0.05 +0.05% Cboe Volatility Index ® 17.07 +0.16 +0.95% Gold $4,038 -$16.80 -0.41% WTI Crude Oil $101.33 -$1.43 -1.37% Bitcoin $80,000 -$1,525 -1.87% Disclosure (T
-## https://www.lpl.com/research/blog.html 403  4541
- Attention Required! | Cloudflare Please enable cookies. Sorry, you have been blocked You are unable to access lpl.com Why have I been blocked? This website is using a security service to protect itself from online attacks. The action you just performed triggered the security solution. There are several actions that could trigger this block including submitting a certain word or phrase, a SQL command or malformed data. What can I do to resolve this? You can email the site owner to let them know you were blocked. Please include what you were doing when this page came up and the Cloudflare Ray ID found at the bottom of this page. Cloudflare Ray ID: a5261a810ed2a1c9 &bull; Your IP: Click to reveal 20.221.79.70 &bull; Performance &amp; security by Cloudflare 
-## https://www.edwardjones.com/us-en/market-news-insights/stock-market-news/daily-market-recap 200  91962
- Stock Market News Today | Edward Jones United States | English Canada | English Canada | French Important information: This is for informational&nbsp;purposes only and should not be interpreted as specific investment advice. Investors should make&nbsp;investment decisions based on their unique investment objectives and financial situation. While the information is believed to be accurate, it is not guaranteed and is subject to change without notice. Investors should understand the risks involved in owning investments, including interest rate risk, credit risk and market risk. The value of investments fluctuates and investors can lose some or all of their principal. Past performance does not guarantee future results. Market indexes are unmanaged and cannot be invested into directly and are not meant to depict an actual investment. Diversification does not guarantee a profit or protect against loss. Systematic investing does not guarantee a profit or protect against loss. Investors should consider their willingness to keep investing when share prices are declining. Dividends may be increased, decreased or eliminated at any time without notice. Special risks are inherent in internati
-## https://www.morganstanley.com/insights 200  824405
- Our Latest Investment Ideas and Insights | Morgan Stanley of every page of site, ideally before other scripts in this section.--> Investor Relations Newsroom Alumni Global All Americas Asia-Pacific Europe, Middle East, and Africa Japan × Client Login Morgan Stanley Online Morgan Stanley at Work Matrix Research Portal E*TRADE from Morgan Stanley Morgan Stanley Online Morgan Stanley at Work Matrix Research Portal E*TRADE from Morgan Stanley What We Do What We Do We raise, manage and allocate capital—bringing together advice, market access, investing expertise and technology to help you pursue your goals. View All Businesses View All Businesses Institutional Securities Wealth Management Investment Management All Institutional Securities We advise global institutions on strategy, capital and markets execution. Investment Banking &amp; Global Capital Markets Raise capital, evaluate strategic opportunities and execute transactions. Sales and Trading Access sales, trading and market-making services to manage exposure. Research Get timely analysis of companies, sectors, and global markets. Featured ────────────────── --> Investment Banking What’s Driving Healthcare Growth? ───────────────
-## https://www.goldmansachs.com/insights 200  1116874
- Insights | Goldman Sachs What We Do Learn more about how we cultivate and harness world-class intellectual capital and expertise to solve our clients’ most complex challenges. Explore Our Businesses GLOBAL BANKING &amp; MARKETS Investment Banking FICC and Equities Marquee Transaction Banking ASSET &amp; WEALTH MANAGEMENT Asset Management Private Wealth Management Private Banking and Lending Ayco Marcus PLATFORM SOLUTIONS Enterprise Partnerships RESEARCH &amp; PERSPECTIVES Global Investment Research Global Institute Serving Clients We harness every resource, insight, relationship, and competitive advantage to drive superior results for our clients. Insights Analysis and perspectives on the global economy and markets, from across Goldman Sachs Explore Insights OUR SERIES Exchanges The Markets Talks at GS Top of Mind TOPICS IN FOCUS Outlooks Markets Macroeconomics Artificial Intelligence Alternative and Private Markets IPOs and M&amp;A Europe FORMATS Videos Podcasts Articles Reports Newsletter Briefings Goldman Sachs’ weekly newsletter, offering economic and markets analysis from across the firm. Subscribe now. Our Firm We aspire to be the world’s most exceptional financial instituti
-## https://am.jpmorgan.com/us/en/asset-management/adv/insights/market-insights/market-updates/on-the-minds-of-investors/ 200  231004
- On the Minds of Investors | J.P. Morgan Asset Management --> --> TM&lt;/sup> for a fund is derived from a weighted average of the performance figures associated with its three-, five-, and 10-year (if applicable) Morningstar Rating metrics.&#34;,&#34;pdpCardPerformance&#34;:&#34;&lt;sup>*&lt;/sup>Fund performance inception: 5/20/2020~~DLM~~A fund&#39;s NAV is the sum of all its assets less any liabilities, divided by the number of shares outstanding.~~DLM~~Currently, the yield is unaffected by a fee waiver.~~DLM~~ETFs have fees that reduce their performance: indexes do not. You cannot invest directly in an index.&#34;,&#34;pdpCardFees&#34;:&#34;Performance may reflect the waiver of a portion of the Funds&#39; advisory or administrative fees for certain periods since the inception date. If fees had not been waived, performance would have been less favorable.~~DLM~~The Fund&#39;s management agreement provides that the adviser will pay substantially all expenses of the Fund, except for the management fees, payments under the Fund&#39;s 12b-1 plan (if any), interest expenses, dividend and interest expenses related to short sales, taxes, acquired fund fees and expenses (other than fees
-## https://www.wellsfargo.com/investment-institute/ 404  9663
- Wells Fargo - Page Not Found Skip to content Sign On Customer Service ATMs/Locations Español Search Enter search term, then press down arrow to navigate suggestions Personal Investing &amp; Wealth Management Business Business. Serving businesses with up to $5 million in annual revenue. Commercial Banking Corporate &amp; Investment Banking We can't find your page What should I do? This may have happened due to an incorrect URL, or because a page expired or moved. You can check the spelling and capitalization of your URL or use the search box at the top of the page to try again. Go to the homepage Helpful links Sitemap Customer Service &nbsp; Apply for an Account or Service Privacy, Cookies, Security &amp; Legal Do Not Sell or Share My Personal Information Notice of Data Collection General Terms of Use Report Fraud Sitemap About Wells Fargo Careers Inclusion and Accessibility Home &copy; 1999 - 2026 Wells Fargo. NMLSR ID 399801 Navegó a una página que no está disponible en español en este momento. Seleccione el enlace si desea ver otro contenido en español. Página principal Comienzo de ventana emergente Esta página solo está disponible en inglés Selecione Cancele para permanecer en 
-## https://www.blackrock.com/corporate/insights/blackrock-investment-institute/weekly-commentary 404  244940
- Error | BlackRock BlackRock iShares Aladdin Our Company Home About Us About Us About Us Who we are About BlackRock Principles Leadership History Contacts and Locations BlackRock iShares Aladdin Our Company Newsroom Newsroom Newsroom Global Media Media contacts BlackRock iShares Aladdin Our Company Insights Insights Insights Thought Leadership Global Insights Investment Stewardship Our approach to sustainability Public Policy BlackRock Investment Institute Weekly market Commentary Global investment outlook Mega forces Portfolio research and return expectations Views BlackRock iShares Aladdin Our Company Investor Relations Investor Relations Investor Relations Investor Relations Overview Annual Reports &amp; Proxy Information SEC Filings Stock Information Dividend History Events &amp; Presentations Corporate Governance BlackRock iShares Aladdin Our Company Corporate Sustainability Corporate Sustainability Corporate Sustainability BlackRock Sustainability Corporate Sustainability Human Capital Environmental Sustainability Ethics and integrity Health and safety Social Impact BlackRock iShares Aladdin Our Company Careers Careers Careers Careers at BlackRock Search Jobs Life at BlackRoc
-## https://www.ml.com/capital-market-outlook.html 200  89932
- Capital Market Outlook: Weekly Market Insights From the CIO Skip To Content 3.2.7 About us Contact us Log in Menu About us Contact us Working with us Make your goals a priority For us, success is about helping you reach your goals, not a number Find an advisor Why Merrill Plan with Merrill Bank of America &#43; Merrill Awards &amp; recognition Our services Helping to make your goals a reality Access to a wide range of investment solutions from Merrill and banking products from Bank of America. Take a look Personal banking Lending Investments Retirement &amp; savings accounts Insurance Wealth planning Resources &amp; insights The BullPen Timely insights to help stay ahead of the curve September 9, 2026 Today&#39;s Markets Market briefs August 18, 2026 Financial Planning Planning for college: Investment accounts to help you pay for education View all Planning tools Articles Events &amp; podcasts Portfolio Strategies Find an advisor Find an advisor your way Choose how you’d like to connect with us. Get started Get matched with an advisor Search by need or advisor name Search by office location Have an advisor call me Capital Market Outlook This timely commentary from our Chief Invest
-## https://www.ubs.com/global/en/wealthmanagement/insights/chief-investment-office/house-view/daily.html 403  486
- Access Denied Access Denied You don't have permission to access "http&#58;&#47;&#47;www&#46;ubs&#46;com&#47;global&#47;en&#47;wealthmanagement&#47;insights&#47;chief&#45;investment&#45;office&#47;house&#45;view&#47;daily&#46;html" on this server. Reference&#32;&#35;18&#46;2f51db17&#46;1793318050&#46;1e6e6ae0 https&#58;&#47;&#47;errors&#46;edgesuite&#46;net&#47;18&#46;2f51db17&#46;1793318050&#46;1e6e6ae0 
-## https://www.fidelity.com/learning-center/trading-investing/markets-sectors/stock-market-today 200 ->https://www.fidelity.com/learning-center/overview 361651
- Fidelity Learn | Financial articles, webinars, and more | Fidelity Skip to main content Fidelity.com Home Customer Support Log in Accounts &amp; Trade Portfolio Account Positions Trade Fidelity Trader+ Web Fidelity Trader+ Transfers Cash Management Bill Pay Full View ® Security Settings Account Features Documents Tax Forms &amp; Information Retirement Distributions Refer a Friend Investing Self-Directed Investing Advanced Trading Investing for a Child Managing Cash &amp; Credit Investment Accounts &amp; Products Investing &amp; Trading Education Retirement Retirement Planning 401(k) Rollovers &amp; IRA Transfers Retirement Accounts Retirement Education Wealth Management Wealth Management Offerings Financial Advisors Financial Planning Investment Management Wealth Management Insights News &amp; Research News Wealth Management Insights Watchlist Alerts Stocks, ETFs, Crypto Mutual Funds Fixed Income, Bonds &amp; CDs Options IPOs Annuities Learn Fidelity Assistant Open an account Log in Fidelity.com Home Fidelity Assistant Customer Support Open an account Log in Accounts &amp; Trade Portfolio Account Positions Trade Fidelity Trader+ Web Fidelity Trader+ Transfers Cash Management Bill 
-## https://advisors.vanguard.com/insights/ 404  10830
- 404 page GLOBAL SUBSCRIBER --> Page not found The page you are looking for may no longer exist.&amp;nbsp; Try a search or return to the homepage.&lt;/p>\r\n&#34;}}" id="axs-text-ade7e881bf" class="cmp-text" x-data="text()"> The page you are looking for may no longer exist. Try a search or return to the homepage. Return home 
-## https://www.raymondjames.com/wealth-management/market-commentary-and-insights ERR TimeoutError: The operation was aborted due to timeout
-## https://www.troweprice.com/personal-investing/resources/insights.html 200 ->https://www.troweprice.com/personal-investing/resources/insights/index.html 101265
- Investment and Market Insights | T. Rowe Price Personal Investing Choose a site Enterprise Personal Investing Workplace Retirement Financial Advisors/Intermediaries Institutional Investors/Consultants Retirement Plan Sponsors / Consultants Close Localization Settings Current Selection Americas (1) United States English Help Search Log In Account Types Close Account Types Whether you’re saving for retirement, planning for your family’s future, or investing your extra cash, we can help you get started. Explore All Account Types Retirement IRAs Roth IRA Traditional IRA Rollover 401(k) &amp; Transfer IRA Small Business, Self-Employed &amp; 403(b) Plans Retirement Guidance Essentials of a Retirement Plan Balancing Your Portfolio for Retirement Approaching Retirement Living in Retirement Roth vs. Traditional IRA Rollover 401(k) Options General Investing Explore General Investing Individual Joint Trust Minor College Savings Explore College Savings T. Rowe Price 529 Maryland College Investment Plan Alaska 529 Brokerage Explore Brokerage Funds Close Funds Our wide selection of mutual funds and ETFs provides you with the building blocks for a diversified portfolio. Explore Funds Mutual Fund
-## https://www.nasdaq.com/feed/rssoutbound?category=Markets 200  11711
- Markets Feed https://www.nasdaq.com/feed/rssoutbound This feed is responsible for generating the rss feed related to the topic Markets en Fulton Financial: 3 Key Takeaways for Long-Term Investors https://www.nasdaq.com/articles/fulton-financial-3-key-takeaways-long-term-investors Key PointsCommercial sales force grew 14% year to date. Thu, 29 Oct 2026 23:20:02 +0000 https://www.nasdaq.com/articles/fulton-financial-3-key-takeaways-long-term-investors?time=1793316002 The Motley Fool Markets FULT,FULT CACI: 3 Key Takeaways for Long-Term Investors https://www.nasdaq.com/articles/caci-3-key-takeaways-long-term-investors Key PointsExisting program contracts account for 94% of projected full-year revenue. Thu, 29 Oct 2026 23:20:02 +0000 https://www.nasdaq.com/articles/caci-3-key-takeaways-long-term-investors?time=1793316002 The Motley Fool Markets CACI,CACI 20 Years of S&amp;P 500 History Show: This Simple Strategy Is Only 8.3% Less Than &amp;quot;Perfect&amp;quot; https://www.nasdaq.com/articles/20-years-sp-500-history-show-simple-strategy-only-83-less-perfect Key PointsStock market volatility can make people feel tempted to time the market by waiting for a better time to invest. Thu, 2
-## https://www.cnbc.com/id/20409666/device/rss/rss.html 200  3145
- en-us 60 Market Insider 20409666 franchise section https://www.cnbc.com/market-insider/ Thu, 29 Oct 2026 22:50 GMT Thu, 29 Oct 2026 22:50 GMT https://www.cnbc.com/market-insider/ https://www.cnbc.com/2026/10/12/the-bull-market-just-turned-four-after-climbing-a-wall-of-worry.html 108398226 cnbcnewsstory 108398226 false The bull market turned 4 years old on Monday. Investors say reaching a fifth birthday could be challenging Mon, 12 Oct 2026 18:18:39 GMT https://www.cnbc.com/2026/07/21/iran-war-economy-markets-trump.html 108337483 cnbcnewsstory 108337483 false As the U.S.-Iran war heats up again, these parts of the stock market and economy could be affected Tue, 21 Jul 2026 14:37:08 GMT https://www.cnbc.com/2026/07/15/warren-buffett-on-the-market-today-its-tough-to-find-values-when-everybody-is-preferring-gambling.html 108335173 cnbcnewsstory 108335173 false Warren Buffett on the market today: &apos;It&apos;s tough to find values when everybody is preferring gambling&apos; Wed, 15 Jul 2026 15:08:40 GMT 
-## https://feeds.content.dowjones.io/public/rss/mw_marketpulse 200  13275
- MarketWatch.com - MarketPulse MarketWatch, a leading publisher of business and financial news, offers users up-to-the minute news, investment tools, and subscription products. https://www.marketwatch.com/column/market-pulse en-us Copyright &#169; Dow Jones &amp; Company, Inc. All rights reserved. Thu, 29 Oct 2026 23:54:26 GMT 60 MarketWatch.com - MarketPulse https://www.marketwatch.com/rss/marketwatch.gif https://www.marketwatch.com/column/market-pulse WP-MKTW-0004302286 Jobless claims fall to lowest level since mid-May https://www.marketwatch.com/story/jobless-claims-fall-to-lowest-level-since-mid-may-bda58e3b?mod=mw_rss_marketpulse Thu, 03 Jul 2025 12:36:00 GMT Greg Robb WP-MKTW-0003986044 Jobless claims stay low in latest week https://www.marketwatch.com/story/jobless-claims-stay-low-in-latest-week-27b4b50b?mod=mw_rss_marketpulse Thu, 13 Feb 2025 13:33:00 GMT Greg Robb WP-MKTW-0003973830 Consumer credit growth soars in December https://www.marketwatch.com/story/consumer-credit-growth-soars-in-december-d405d18e?mod=mw_rss_marketpulse Fri, 07 Feb 2025 20:26:00 GMT Greg Robb WP-MKTW-0003968586 U.S. productivity slows down in fourth quarter while unit labor costs accelerate https:/
-## https://www.investing.com/rss/news_25.rss 200  4875
- Stock Market News https://www.investing.com Reddit puts logged in experience first as Google AI hits traffic 2026-10-29 23:42:22 Reuters https://www.investing.com/news/stock-market-news/reddit-puts-logged-in-experience-first-as-google-ai-hits-traffic-4985602 Chinese EVs win over some in South Korea, but Japan is proving to be a rougher road 2026-10-29 23:30:29 Reuters https://www.investing.com/news/stock-market-news/chinese-evs-win-over-some-in-south-korea-but-japan-is-proving-to-be-a-rougher-road-4985581 Rivian says it’s on track for $250 million Uber funding by year-end, R2 demand strong 2026-10-29 23:06:20 Reuters https://www.investing.com/news/stock-market-news/rivian-says-its-on-track-for-250-million-uber-funding-by-yearend-r2-demand-strong-4985570 Starbucks sees annual profit above estimates as turnaround gains traction 2026-10-29 22:54:22 Reuters https://www.investing.com/news/stock-market-news/starbucks-beats-quarterly-sales-and-profit-expectations-4984998 Coinbase returns to profit as crypto investment gains offset trading weakness 2026-10-29 22:42:25 Reuters https://www.investing.com/news/stock-market-news/coinbase-snaps-losing-streak-with-thirdquarter-profit-on-crypto-t
-## https://seekingalpha.com/market_currents.xml 200  5638
- Breaking News on Seeking Alpha https://seekingalpha.com/news/all &#xA9; seekingalpha.com. Use of this feed is limited to personal, non-commercial use and is governed by Seeking Alpha's Terms of Use (https://about.seekingalpha.com/terms). Publishing this feed for public or commercial use and/or misrepresentation by a third party is prohibited. Schneider projects 2026 adjusted EPS of $1-$1.10 as it plans Norfolk Southern as primary Eastern Intermodal rail provider from January 1, 2027 https://seekingalpha.com/news/4661057-schneider-projects-2026-adjusted-eps-of-1-1_10-as-it-plans-norfolk-southern-as-primary?utm_source=feed_news_all&amp;utm_medium=referral&amp;feed_item_type=news sndr Thu, 29 Oct 2026 19:49:46 -0400 https://seekingalpha.com/news/4661057-schneider-projects-2026-adjusted-eps-of-1-1_10-as-it-plans-norfolk-southern-as-primary?utm_source=feed_news_all&amp;utm_medium=referral&amp;feed_item_type=news A. O. Smith expects 2026 sales up ~4% excluding China as it plans to close CPE deal in H1 2027 https://seekingalpha.com/news/4661056-a-o-smith-expects-2026-sales-up-4-percent-excluding-china-as-it-plans-to-close-cpe-deal-in-h1?utm_source=feed_news_all&amp;utm_medium=referral&am
-## https://finance.yahoo.com/news/rssindex 404  4514
- Yahoo Will be right back... Thank you for your patience. Our engineers are working quickly to resolve the issue. 
+## https://finance.naver.com/research/market_info_list.naver
+
+## https://finance.naver.com/research/invest_list.naver
+
+## https://finance.naver.com/research/company_list.naver
+
+## schwab
+Stocks Dip on Mixed Microsoft, Alphabet, PCE Data | Charles Schwab
+Loading navigation
+Menu
+Learn
+Learn Home
+Market Insights &amp; News
+Explore by Topic
+Learn by Goal
+Browse by Media
+Search Insights &amp; Education
+Markets and Economy
+Stocks Dip on Mixed Microsoft, Alphabet, PCE Data
+PCE inflation rose as expected last month while the government's first estimate for third quarter GDP topped estimates. Alphabet's disappointing results caused a sell-off in tech. 
+October 29, 2026
+•
+Joe Mazzola
+Published as of: October 29, 2026, 9:15 a.m. ET
+Listen to this article
+Listen here or subscribe to the Schwab Market Update in your favorite podcast app.
+Current time: 0 seconds, 
+0:00
+ / 
+Duration: 0 seconds
+0:00
+1
+X
+Current time: 0 seconds, 
+0:00
+ / 
+Duration: 0 seconds
+0:00
+Read Transcript
+The markets
+Last price
+Change
+% change
+S&amp;P 500
+® 
+Index
+7,743.98
++21.38
++0.28%
+Dow Jones Industrial Average
+®
+52,475.10
++97.53
++0.19%
+Nasdaq Composite
+®
+26,549.85
++72.04
++0.27%
+10-year Treasury yield
+5.01%
+-0.03
+--
+U.S. Dollar Index
+102.20
++0.05
++0.05%
+Cboe Volatility Index
+®
+17.07
++0.16
++0.95%
+Gold
+$4,038
+-$16.80
+-0.41%
+WTI Crude Oil
+$101.33
+-$1.43
+-1.37%
+Bitcoin
+$80,000
+-$1,525
+-1.87%
+Disclosure
+(Thursday market open)
+ Investors might feel like they're drowning in data and earnings and today won't throw them a life jacket. Instead, it began with the September 
+Personal Consumption Expenditures
+ (PCE) price index that came in just as Wall Street expected at 3.6% on an annual basis and 3.1% for core excluding food and energy.
+"This is still elevated and too high for the Fed's liking," said Cooper Howard, director of fixed income research and strategy at the Schwab Center for Financial Research (SCFR). "For the Fed, I think it means that December is very much in play. The economy is strong, the labor market is resilient, and inflation is high, which all point to the Fed needing to tighten further."
+The 
+Federal Reserve's
+10-2 vote to pause rates
+ yesterday drew little market reaction as stocks finished mostly higher, led by tech. Fed Chairman Kevin Warsh declined to hint where rates are headed but noted it's an "information rich" environment—meaning data and other events could shape the next move. Tech crumbled early today after a dramatic miss from 
+Alphabet
+ (GOOGL), where heavy capital expenditures took a large bite out of free cash flow. 
+Microsoft's
+ (MSFT) results impressed and 
+Amazon
+ (AMZN) reports later.
+To get the Schwab Market Update in your inbox every morning, 
+subscribe on Schwab.com
+.
+Three things to watch
+GDP/PCE deeper dive:
+ In addition to PCE, investors eyed the government's first estimate of third quarter 
+gross domestic product
+ (GDP). "GDP was the bright spot, up 3.4% vs. 3.2% expectations, driven mostly by personal consumption," Howard said. Though consumption rose on a nominal basis, spending softened in real terms, coming in flat. This suggests consumers are spending more for the same or less output. GDP, calculated on a seasonally adjusted annual basis, rose from 2.2% in the second quarter. The GDP chain deflator, which measures price increases across the economy for domestically produced goods, rose 2.2%, less than the 3.5% Briefing.com consensus and far below the 6.1% second-quarter increase. Digging in more, PCE rose 0.5% and core PCE rose 0.3% monthly, both meeting analysts' estimates. Core growth was the same as in August, but headline rose from August's 0.3%, while annual numbers rose from August's 3.4% and 3%. Energy prices drove headline PCE growth, no surprise considering crude's strength. On an annual basis, goods PCE rose 3.9% year over year and services rose 3.5%. Under the surface, about 48% of the subcomponents of PCE are still rising at 3% or more.
+Alphabet and Microsoft earnings assessed: Microsoft
+ topped analysts' expectations for both earnings per share and revenue. Diving deeper, cloud revenue rose 30%, topping the Street's estimate, while Azure revenue surged 49%, well above expectations. Free cash flow fell year- over-year but easily surpassed Wall Street's estimates. Shares gained nearly 1.5% before the open but felt pressure from overall tech weakness after initially jumping 4%. It was a tough quarter for 
+Alphabet
+ as earnings per share of $2.12 fell well short of the $3.01 consensus and Search revenue and YouTube ad revenue both missed estimates. The miss on Search—which came as more queries were directed to "AI mode," Alphabet said—raised concerns about AI hurting Alphabet's key product. Google Cloud revenue of $30.7 billion rose 103% annually, beating estimates. Results—which included negative 
+free cash flow
+ exceeding $9 billion and a prediction that capital expenditures would rise again next year—appeared to make investors question Alphabet's return on invested capital, while Microsoft's quarter triggered positive thinking on that metric. Alphabet's 11% plunge reverberated through the AI sector early today as the 
+Nasdaq-100
+®
+ (NDX) fell more than 1%.
+Amazon on deck: 
+AI 
+## edwardjones
+Stock Market News Today | Edward Jones
+United States | English
+Canada | English
+Canada | French
+Important information:
+This is for informational&nbsp;purposes only and should not be interpreted as specific investment advice. Investors should make&nbsp;investment decisions based on their unique investment objectives and financial situation. While the information is believed to be accurate, it is not guaranteed and is subject to change without notice.
+Investors should understand the risks involved in owning investments, including interest rate risk, credit risk and market risk. The value of investments fluctuates and investors can lose some or all of their principal.
+Past performance does not guarantee future results.
+Market indexes are unmanaged and cannot be invested into directly and are not meant to depict an actual investment.
+Diversification does not guarantee a profit or protect against loss.
+Systematic investing does not guarantee a profit or protect against loss. Investors should consider their willingness to keep investing when share prices are declining.
+Dividends may be increased, decreased or eliminated at any time without notice.
+Special risks are inherent in international investing, including those related to currency fluctuations and foreign political and economic events.
+Back to Top
