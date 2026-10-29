@@ -25,15 +25,9 @@ jobs:
       - uses: actions/setup-node@v4
         with: {node-version: 22}
       - run: command -v pdftotext || (sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils)
-      - working-directory: app
-        run: |
-          npm ci && npm run build
-          D=$(TZ=Asia/Seoul date +%F)
-          node dist/src/live-daily-cli.js --date "$D" --category us --source internal || true
-          node dist/src/live-daily-cli.js --date "$D" --category ai --source internal || true
-          node ../diag/diag/korea-preview.mjs || true
-          rm -rf ../diag/diag/out6 && mkdir -p ../diag/diag/out6 && cp -r data/operations/$D/us data/operations/$D/ai ../diag/diag/out6/ || true
+      - working-directory: diag
+        run: node diag/listcheck.mjs
       - working-directory: diag
         run: |
           git config user.name probe && git config user.email probe@users.noreply.github.com
-          git add diag/out6 diag/out7 && git commit -m "preview output [skip ci]" && git push
+          true || git commit -m "preview output [skip ci]" && git push
