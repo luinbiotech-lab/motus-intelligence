@@ -1,11 +1,18 @@
 {
-  "collectedAt": "2026-10-29T23:06:39.367Z",
+  "collectedAt": "2026-10-29T23:28:23.758Z",
   "signalDate": null,
   "provider": null,
   "freshness": "NO_SEARCH_SIGNAL",
-  "fallbackReason": "NO_PRE_RENDER_SEARCH_CONTEXT",
-  "warnings": [],
-  "orderedTopicIds": [],
+  "fallbackReason": "NO_MATCHING_VERIFIED_TOPIC",
+  "warnings": [
+    "NAVER_DATALAB:NAVER_DATALAB_RESPONSE_INVALID"
+  ],
+  "orderedTopicIds": [
+    "us:index:nasdaq",
+    "us:index:sp500",
+    "us:index:dow-jones",
+    "us:10y"
+  ],
   "selectedSecondaryTopicId": null,
   "factsChanged": false,
   "gateOverride": false

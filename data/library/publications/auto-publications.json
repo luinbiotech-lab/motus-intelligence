@@ -76,5 +76,11 @@
     "publicationId": "motus-live-2026-10-28:us",
     "publicPostUrl": "https://motusnova.blogspot.com/2026/10/s-500.html",
     "publishedAt": "2026-10-29T20:01:00+09:00"
+  },
+  {
+    "idempotencyKey": "library:motus-live-2026-10-29:us|https://motusnova.blogspot.com/2026/10/3-42.html",
+    "publicationId": "motus-live-2026-10-29:us",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/3-42.html",
+    "publishedAt": "2026-10-30T08:28:42+09:00"
   }
 ]
