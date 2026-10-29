@@ -1,8 +1,8 @@
 /** Collection wrapper that turns broker research and attention signals into audited deep sections. */
 import type {DailyCategory} from './daily-orchestrator.js';
 import {collectBrokerResearch,type BrokerAudit,type PdfTextReader} from './broker-briefs.js';
-import {collectKoreaSearchTop,collectUSAttention,NAVER_SEARCH_TOP,YAHOO_TRENDING,type AttentionAudit} from './market-attention.js';
-import {composeKoreaDeepSections,composeUSDeepSections,indexMove,type DeepComposition} from './market-deep-sections.js';
+import {collectAIBellwethers,collectKoreaSearchTop,collectUSAttention,NAVER_SEARCH_TOP,YAHOO_TRENDING,type AttentionAudit} from './market-attention.js';
+import {composeAIDeepSections,composeKoreaDeepSections,composeUSDeepSections,indexMove,type DeepComposition} from './market-deep-sections.js';
 
 interface AuditSink {sourceId:string;category:DailyCategory;url:string;status:'PASS'|'FAILED';recordCount:number;collectedAt:string;error:string|null;observedDate?:string}
 export interface DeepCollection {composition:DeepComposition;title:string|null;sources:Array<{label:string;url:string;publisher:string}>}
@@ -48,5 +48,20 @@ export async function collectKoreaDeep(input:{sessionDate:string;operationDate:s
     const change=input.kospiChangePct,level=new Intl.NumberFormat('en-US',{maximumFractionDigits:0}).format(Math.floor(input.kospiClose));
     const head=change===null?null:`코스피 ${Math.abs(change).toFixed(2)}% ${indexMove(change)} ${level}`;
     return {composition,title:head&&composition.titleFocus?`${head}…${composition.titleFocus}`:null,sources};
+  }catch{return empty}
+}
+
+export async function collectAIDeep(input:{operationDate:string;candidateUSSessions:string[];at:string;fetcher:typeof fetch;audit:AuditSink[];pdfText?:PdfTextReader}):Promise<DeepCollection>{
+  const empty:DeepCollection={composition:{sections:[],leadAddition:[],titleFocus:null,sources:[]},title:null,sources:[]};
+  try{
+    const previous=new Date(Date.parse(input.operationDate+'T00:00:00Z')-86400000).toISOString().slice(0,10);
+    const [bundle,bellwethers]=await Promise.all([collectBrokerResearch({sessionDate:previous,operationDate:input.operationDate,fetcher:input.fetcher,...(input.pdfText?{pdfText:input.pdfText}:{})}).catch(()=>null),collectAIBellwethers(input.candidateUSSessions,input.fetcher).catch(()=>null)]);
+    if(bundle)record(input.audit,bundle.audit,'AI_INTELLIGENCE',input.at,previous);
+    if(bellwethers)record(input.audit,bellwethers.audit,'AI_INTELLIGENCE',input.at,bellwethers.sessionDate??previous);
+    const composition=composeAIDeepSections({bundle,stocks:bellwethers?.stocks??[],sessionDate:bellwethers?.sessionDate??null});
+    const sources=[...composition.sources];
+    if(composition.sections.some(section=>section.key==='ai-stocks'))for(const url of bellwethers?.urls??[])sources.push({label:'Yahoo Finance AI 대표 종목 일별 종가',url,publisher:'Yahoo Finance'});
+    recordListed(input.audit,sources,'AI_INTELLIGENCE',input.at,previous);
+    return {composition,title:null,sources};
   }catch{return empty}
 }

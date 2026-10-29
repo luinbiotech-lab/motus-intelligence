@@ -145,4 +145,13 @@ test('MOTUS synthesis names themes shared by several brokers and flags divergent
   assert.match(text,/MOTUS 정리: 증권사 3곳의 아침 리포트를 대조하면 반도체 업황·실적\(A증권·B증권\)/);
   assert.match(text,/C증권은 환율·달러를 따로 짚었다/);
   assert.match(text,/경계 요인도 제시됐다\. B증권 리서치센터는 “FOMC 대기 속 경계감 공존”이라고 짚었다/);
+test('AI article adds bellwether moves and AI-specific broker analysis only',async()=>{
+  const {composeAIDeepSections}=await import('../src/operations/market-deep-sections.js');
+  const {statements,digests}=extractBriefContent(brief);
+  const report={kind:'MARKET' as const,date:'2026-10-29',title:'morning meeting brief',broker:'대신증권',analysts:'리서치센터',url:'https://consensus.hankyung.com/analysis/downpdf?report_idx=902',summary:[],targetPrice:null,rating:null,stockCode:null,company:null};
+  const stock=(symbol:string,changePct:number)=>({symbol,name:symbol,koreanName:symbol==='NVDA'?'엔비디아':null,changePct,close:100,date:'2026-10-29',trendingRank:null,mostActiveRank:null,marketCap:null});
+  const ai=composeAIDeepSections({bundle:{briefs:[{report,statements,digests}],company:[],industry:[],economy:[],audit:[]},stocks:[stock('NVDA',2.5),stock('MSFT',-1),stock('AMD',0.4)],sessionDate:'2026-10-29'});
+  const html=ai.sections.map(deepSection).join('');
+  assert.match(html,/가장 강한 종목은 엔비디아\(NVDA, \+2\.50%\)/);
+  assert.match(html,/삼성전기/);assert.doesNotMatch(html,/프랑스|OEM/);
 });

@@ -93,3 +93,18 @@ export function signedPct(value:number):string {return `${value>0?'+':value<0?'-
 export function absPct(value:number):string {return `${Math.abs(value).toFixed(2)}%`}
 export function moveWord(value:number):string {const size=Math.abs(value);if(size<0.005)return '보합';if(value>0)return size>=5?'급등':'상승';return size>=5?'급락':'하락'}
 export function displayName(stock:USAttentionStock):string {return stock.koreanName??stock.name}
+
+export const AI_BELLWETHERS=['NVDA','MSFT','GOOGL','AMZN','META','AVGO','AMD','TSM','ORCL','PLTR'];
+/** Latest completed U.S. session close-to-close change for AI bellwethers (the session is taken from the data itself). */
+export async function collectAIBellwethers(candidateSessions:string[],fetcher:typeof fetch=fetch):Promise<{stocks:USAttentionStock[];sessionDate:string|null;audit:AttentionAudit[];urls:string[]}>{
+  const audit:AttentionAudit[]=[],urls:string[]=[];
+  for(const sessionDate of candidateSessions){
+    try{
+      const fetched:string[]=[];const changes=await sessionChanges(AI_BELLWETHERS,sessionDate,fetcher,fetched);
+      if(changes.size<AI_BELLWETHERS.length-2)continue;
+      for(const url of fetched){audit.push({sourceId:'yahoo:spark:ai-bellwethers',url,status:'PASS',count:changes.size,error:null});urls.push(url)}
+      return {stocks:AI_BELLWETHERS.flatMap(symbol=>{const change=changes.get(symbol);return change?[{symbol,name:change.name,koreanName:US_KOREAN_NAMES[symbol]??null,changePct:change.changePct,close:change.close,date:sessionDate,trendingRank:null,mostActiveRank:null,marketCap:null}]:[]}),sessionDate,audit,urls};
+    }catch(error){audit.push({sourceId:'yahoo:spark:ai-bellwethers',url:yahooSparkUrl(AI_BELLWETHERS),status:'FAILED',count:0,error:errorCode(error)});break}
+  }
+  return {stocks:[],sessionDate:null,audit,urls};
+}
