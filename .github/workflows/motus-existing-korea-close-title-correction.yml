@@ -1,8 +1,5 @@
 name: MOTUS Controlled Existing Blogger Title Correction
 on:
-  push:
-    branches: [main]
-    paths: ['.github/workflows/motus-existing-korea-close-title-correction.yml']
   workflow_dispatch:
     inputs:
       action:
@@ -27,7 +24,7 @@ jobs:
       BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
       BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
       BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
-      CORRECTION_ACTION: ${{ github.event_name == 'push' && 'apply' || inputs.action }}
+      CORRECTION_ACTION: ${{ inputs.action }}
     steps:
       - name: 'Preflight: exact post identity and read-only preview'
         shell: bash
