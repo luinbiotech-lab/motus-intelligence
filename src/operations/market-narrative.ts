@@ -56,8 +56,8 @@ export function buildUSMarketNarrative(series:ClosingSeries[],tenYear:RateObserv
   const analysis:string[]=[],core=stats.slice(0,3);
   if(core.length>=2){
     const ups=core.filter(item=>direction(item.day)>0).length,downs=core.filter(item=>direction(item.day)<0).length;
-    analysis.push(ups===core.length?'주요 지수가 함께 오른 만큼 특정 업종보다 시장 전반의 위험 선호가 개선된 하루로 볼 수 있다.'
-      :downs===core.length?'주요 지수가 함께 내린 만큼 개별 종목 이슈보다 시장 전반의 위험 회피 심리가 작용한 하루로 볼 수 있다.'
+    analysis.push(ups===core.length?'주요 지수가 함께 올랐지만, 지수 등락만으로 구성 종목 전반의 상승이나 매수 주체를 판단할 수는 없다.'
+      :downs===core.length?'주요 지수가 함께 내렸지만, 지수 등락만으로 구성 종목 전반의 하락이나 매도 주체를 판단할 수는 없다.'
       :ups>0&&downs>0?'주요 지수의 방향이 엇갈려 시장 전체의 방향성보다 업종·종목별 차별화가 두드러진 하루로 볼 수 있다.'
       :ups>0?'일부 지수만 오르고 나머지는 보합에 그쳐, 상승이 시장 전반으로 넓게 퍼진 하루로 보기는 어렵다.'
       :downs>0?'일부 지수만 내리고 나머지는 보합에 머물러, 하락 압력이 시장 전반으로 번진 하루로 보기는 어렵다.'
