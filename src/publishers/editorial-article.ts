@@ -44,7 +44,7 @@ export function renderKoreaEditorialArticle(view:KoreaMarketDailyViewModel):Dail
   if(view.indexMetrics.length)parts.push(section('코스피와 코스닥',metricProse(view.indexMetrics)));
   if(view.narrative?.facts.length)parts.push(section('지수 흐름',paragraphs(view.narrative.facts)));
   if(view.fxAndSupporting.length)parts.push(section('환율과 시장 여건',metricProse(view.fxAndSupporting)));
-  if(view.investorFlows.length)parts.push(section('투자자별 순매수 (원천 자료 기준)',metricProse(view.investorFlows.map(item=>({label:item.label,displayValue:item.displayValue})))));
+  if(view.investorFlows.length)parts.push(section('투자자별 순매수 (원천 자료 기준)',`<div data-visualization="korea-investor-flow">${metricProse(view.investorFlows.map(item=>({label:item.label,displayValue:item.displayValue})))}</div>`));
   if(view.sectors.length)parts.push(section('업종별 등락',metricProse(view.sectors)));
   const ordinaryMovers=view.movers.filter(item=>!isStructuredLeveragedProduct(item.label));
   if(ordinaryMovers.length)parts.push(section('주요 종목 흐름',metricProse(ordinaryMovers)));
@@ -78,7 +78,7 @@ function section(title:string,content:string){return `<section style="${SECTION}
 function paragraphs(values:string[]){return values.map(value=>value.trim()).filter(Boolean).map(value=>`<p style="margin:0 0 13px">${esc(value)}</p>`).join('');}
 function uniqueProse(values:string[],seen:Set<string>):string[]{const result:string[]=[];for(const value of values){const key=normalized(value);if(!key||seen.has(key))continue;seen.add(key);result.push(value)}return result}
 function normalized(value:string){return value.replace(/\s+/g,' ').trim()}
-export function isStructuredLeveragedProduct(label:string):boolean {return /레버리지|인버스|선물단일종목|ETN|\\bETF\\b|\\b[23]X\\b/i.test(label)}
+export function isStructuredLeveragedProduct(label:string):boolean {return /레버리지|인버스|선물단일종목|ETN|ETF|[23]X/i.test(label)}
 function metricProse(values:Array<{label:string;displayValue:string}>){return `<p style="margin:0">${values.map(item=>`${esc(item.label)} ${esc(item.displayValue)}`).join(' · ')}</p>`;}
 function flow(values:Array<{label:string;displayValue:string;direction:'UP'|'DOWN'|'FLAT'}>){const max=Math.max(...values.map(item=>Math.abs(Number(item.displayValue.replace(/[^0-9.-]/g,'')))),1);return `<div data-visualization="korea-investor-flow" style="width:100%;max-width:100%;box-sizing:border-box">${values.map(item=>{const size=Math.max(4,Math.round(Math.abs(Number(item.displayValue.replace(/[^0-9.-]/g,'')))/max*46));const color=item.direction==='UP'?'#c62828':item.direction==='DOWN'?'#1565c0':'#59697d';return `<div style="margin:0 0 12px;width:100%;max-width:100%;box-sizing:border-box"><div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap"><strong>${esc(item.label)}</strong><span style="color:${color};font-weight:800">${esc(item.displayValue)}</span></div><div style="height:8px;background:#eef2f6"><span style="display:block;width:${size}%;height:100%;background:${color}"></span></div></div>`;}).join('')}</div>`;}
 function sources(values:NewsletterSourceLink[]){const unique=[...new Map(values.map(item=>[item.url,item])).values()];return section('자료',`<ul style="margin:0;padding-left:20px">${unique.map(item=>`<li style="margin:5px 0"><a href="${attr(item.url)}" target="_blank" rel="nofollow noopener noreferrer" style="${LINK}">${esc(item.label)}</a></li>`).join('')}</ul>`);}
