@@ -16,14 +16,16 @@ export interface ProductionVerificationArtifact {
  commerceEnabled:false;verifiedAt:string;expiresAt:string;sourceAuditIds:string[];sourceAuditFingerprint:string;crossVerificationFingerprint:string|null;crossVerification:KoreaCrossVerificationArtifact|null;
  editorialWarnings?:string[];
 }
+/** Sources that can corroborate the article's core claims; supplementary context is excluded. */
+export function coreEvidenceSources<T extends {url:string;role?:'SUPPLEMENTARY'}>(sources:readonly T[]):T[]{return sources.filter(source=>source.role!=='SUPPLEMENTARY')}
 export function buildProductionVerification(payload:LiveDailyPayload,sourceMode:LiveSourceMode,audit:InternalSourceAuditEntry[],verifiedAt:string,crossVerification:KoreaCrossVerificationArtifact|null=null,operationDate=payload.unit.observedDate):ProductionVerificationArtifact {
  const unit=payload.unit,reasons=validateLiveDailyPayload(unit.category,payload,verifiedAt),urls=unit.viewModel.sources.map(source=>source.url),passed=new Set(audit.filter(item=>item.status==='PASS').map(item=>canonical(item.url))),html=unit.render.html;
- const sourceDomains=new Set(urls.map(providerDomain)),sourceDiversityPass=sourceDomains.size>=2;
+ const coreSources=coreEvidenceSources(unit.viewModel.sources),sourceDomains=new Set(coreSources.map(source=>providerDomain(source.url))),sourceDiversityPass=sourceDomains.size>=2;
  const provenancePass=sourceMode!=='snapshot'&&urls.length>0&&urls.every(url=>passed.has(canonical(url)))&&sourceDiversityPass;
  const renderedLinks=new Set([...html.matchAll(/<a\b[^>]*href=["'](https?:\/\/[^"']+)["']/gi)].map(match=>canonical(decode(match[1]!)))),sourceLinksPass=urls.length>0&&urls.every(url=>renderedLinks.has(canonical(url)));
  const mobilePass=/max-width\s*:\s*100%/i.test(html)&&/(overflow-x\s*:\s*hidden|word-break\s*:\s*keep-all)/i.test(html);
  const quality=evaluateEditorialQuality(unit.title,html),editorialQualityPass=quality.pass;
- const concentration=unit.category==='AI_INTELLIGENCE'?publisherConcentrationWarning(unit.viewModel.sources.map(item=>item.publisher).filter((value):value is string=>Boolean(value)),(unit.viewModel as AIIntelligenceDailyViewModel).issues.length===1):null,editorialWarnings=[...quality.notes,...(concentration?[concentration]:[])];
+ const concentration=unit.category==='AI_INTELLIGENCE'?publisherConcentrationWarning(coreSources.map(item=>item.publisher).filter((value):value is string=>Boolean(value)),(unit.viewModel as AIIntelligenceDailyViewModel).issues.length===1):null,editorialWarnings=[...quality.notes,...(concentration?[concentration]:[])];
  const leakagePass=!/(eventId|themeId|companyId|publicationId|verificationStatus|confidenceScore|claimId|reportId|fixture|placeholder)/i.test(html);
  if(unit.category==='KOREA_MARKET'&&crossVerification?.verification!=='VERIFIED')reasons.push('Korea official cross-verification failed');if(!sourceDiversityPass)reasons.push('independent source diversity failed');if(!provenancePass)reasons.push('production provenance audit failed');if(!sourceLinksPass)reasons.push('public source links failed');if(!mobilePass)reasons.push('mobile validation failed');if(!editorialQualityPass)reasons.push(...quality.reasons.map(reason=>'editorial quality: '+reason));if(concentration?.includes('requires editorial review'))reasons.push('editorial quality: publisher concentration requires editorial review');if(!leakagePass)reasons.push('public leakage validation failed');
  const unresolvedConflicts=[...new Set(reasons)],verification=unresolvedConflicts.length?'REVIEW_REQUIRED':'VERIFIED';

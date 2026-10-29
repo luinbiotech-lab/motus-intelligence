@@ -9,7 +9,7 @@ import {displayName,moveWord,signedPct,absPct,type KoreaSearchStock,type SectorM
 
 export interface DeepParagraph {text:string;source?:{label:string;url:string}}
 export interface DeepSection {key:string;title:string;intro?:string;placement?:'early'|'late'|'risks';paragraphs:DeepParagraph[]}
-export interface DeepComposition {sections:DeepSection[];leadAddition:string[];titleFocus:string|null;sources:Array<{label:string;url:string;publisher:string}>;hasCoreCommentary?:boolean}
+export interface DeepComposition {sections:DeepSection[];leadAddition:string[];titleFocus:string|null;sources:Array<{label:string;url:string;publisher:string;date?:string}>;hasCoreCommentary?:boolean}
 
 const quote=(value:string)=>`“${value.replace(/[“"]/g,'‘').replace(/[”]/g,'’').replace(/\s+/g,' ').trim().replace(/[.。]$/,'')}”`;
 /** “…”라고 / “…”이라고 by the final syllable of the quotation. */
@@ -17,7 +17,7 @@ function said(quotes:string[]):string {const last=quotes.at(-1)??'',char=last.re
 /** Statements that describe the market as a whole lead; side notes (FX, oil) follow. */
 function marketScore(text:string){const digits=(text.match(/\d/g)??[]).length/Math.max(text.length,1);return (/마감|지수|증시|코스피|KOSPI|나스닥|S&P|다우|3대/.test(text)?2:0)+(/상승|하락|강세|약세|급등|급락|반등/.test(text)?1:0)+(/힘입|기대|영향|덕분|때문|배경|속에?\s|에\s?(?:상승|하락|급등|급락|강세|약세)/.test(text)?3:0)-(digits>0.12?3:0)}
 const reportSource=(report:BrokerReport)=>({label:`${report.broker} ${report.title} (${koreanDateLabel(report.date)})`,url:report.url});
-const sourceEntry=(report:BrokerReport)=>({label:`${report.broker} 「${report.title}」 (${report.date})`,url:report.url,publisher:report.broker});
+const sourceEntry=(report:BrokerReport)=>({label:`${report.broker} 「${report.title}」 (${report.date})`,url:report.url,publisher:report.broker,date:report.date});
 function subject(report:BrokerReport):string {return josa(analystLabel(report),'은','는')}
 function won(value:number){return new Intl.NumberFormat('ko-KR',{maximumFractionDigits:0}).format(value)}
 function usd(value:number){return new Intl.NumberFormat('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}).format(value)}
@@ -154,6 +154,35 @@ export function composeKoreaDeepSections(input:{bundle:BrokerResearchBundle|null
   const used=new Set(sections.flatMap(section=>section.paragraphs.map(p=>p.source?.url).filter(Boolean)));
   for(const report of [...briefs.map(item=>item.report),...companyReports,...industry])if(used.has(report.url))sources.push(sourceEntry(report));
   return {sections,leadAddition,titleFocus,sources:[...new Map(sources.map(item=>[item.url,item])).values()],hasCoreCommentary:Boolean(cause.first)};
+}
+
+const AI_WORDS=/AI|인공지능|반도체|HBM|데이터센터|GPU|엔비디아|LLM|클라우드|전력기기|인터커넥트|로봇|휴머노이드|파운드리|메모리|서버|MLCC|FC ?BGA/;
+
+/** AI article: AI bellwether moves on the latest U.S. session and broker research that names AI demand. */
+export function composeAIDeepSections(input:{bundle:BrokerResearchBundle|null;stocks:USAttentionStock[];sessionDate:string|null}):DeepComposition {
+  const sections:DeepSection[]=[],sources:DeepComposition['sources']=[];
+  if(input.stocks.length>=3&&input.sessionDate){
+    const sorted=[...input.stocks].sort((a,b)=>b.changePct-a.changePct),best=sorted[0]!,worst=sorted.at(-1)!;
+    const up=sorted.filter(item=>item.changePct>0.005).length;
+    sections.push({key:'ai-stocks',title:'AI 대표 종목의 주가 흐름',intro:`미국 AI 대표 종목 ${sorted.length}개의 직전 정규장(${input.sessionDate}) 종가 기준 등락이다.`,paragraphs:[
+      {text:`${sorted.length}개 종목 가운데 ${up}개가 올랐다. 가장 강한 종목은 ${displayName(best)}(${best.symbol}, ${signedPct(best.changePct)}), 가장 약한 종목은 ${displayName(worst)}(${worst.symbol}, ${signedPct(worst.changePct)})였다.`},
+      {text:sorted.map(item=>`${displayName(item)} ${signedPct(item.changePct)}`).join(' · ')},
+    ]});
+  }
+  const briefs=input.bundle?.briefs??[];
+  const digests=briefs.flatMap(brief=>brief.digests.filter(item=>AI_WORDS.test(item.heading)||item.bullets.some(bullet=>AI_WORDS.test(bullet))).map(item=>({item,brief}))).slice(0,3);
+  const companies=[...new Map((input.bundle?.company??[]).filter(item=>AI_WORDS.test(item.title)&&(item.rating||item.targetPrice)).map(item=>[item.stockCode??item.url,item])).values()].slice(0,4);
+  const industry=(input.bundle?.industry??[]).filter(item=>AI_WORDS.test(item.title)&&!/daily|데일리|weekly|위클리/i.test(item.title)).slice(0,3);
+  if(digests.length||companies.length||industry.length){
+    sections.push({key:'ai-broker-research',title:'증권가가 본 AI 산업',intro:'국내 증권사가 최근 공개한 리포트 가운데 AI 수요를 직접 다룬 분석의 문장과 투자의견을 그대로 옮겼다.',paragraphs:[
+      ...digests.map(({item,brief})=>digestParagraph(item,brief)),
+      ...companies.map(report=>({text:`${report.company??report.title}: ${ratingSentence(report)}`,source:reportSource(report)})),
+      ...industry.map(report=>({text:`${subject(report)} ${koreanDateLabel(report.date)} 산업 리포트 「${report.title}」를 냈다.${report.summary.length?` 요약: ${report.summary.slice(0,2).map(quote).join(', ')}.`:''}`,source:reportSource(report)})),
+    ]});
+  }
+  const used=new Set(sections.flatMap(section=>section.paragraphs.map(p=>p.source?.url).filter(Boolean)));
+  for(const report of [...briefs.map(item=>item.report),...companies,...industry])if(used.has(report.url))sources.push(sourceEntry(report));
+  return {sections,leadAddition:[],titleFocus:null,sources:[...new Map(sources.map(item=>[item.url,item])).values()]};
 }
 
 export {indexMove};

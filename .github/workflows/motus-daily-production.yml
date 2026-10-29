@@ -139,7 +139,6 @@ jobs:
       - run: npm run build
       - run: node --test --experimental-test-isolation=none dist/tests/auto-publish-live.test.js dist/tests/daily-operations.test.js dist/tests/live-editorial-publish.test.js
       - name: Install PDF text extraction for broker research
-        if: env.CATEGORY == 'us' || env.CATEGORY == 'korea'
         continue-on-error: true
         run: command -v pdftotext >/dev/null || (sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils)
       - run: npm run motus:live -- --date "$RUN_DATE" --category "$CATEGORY" --source internal

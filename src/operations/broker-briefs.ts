@@ -21,7 +21,7 @@ export interface BrokerStatement {region:'US'|'KOREA';text:string;heading:string
 export interface BrokerDigest {heading:string;bullets:string[];analyst:string|null}
 export interface BrokerEvent {region:'US'|'KOREA';text:string}
 export interface BrokerBrief {report:BrokerReport;statements:BrokerStatement[];digests:BrokerDigest[];events?:BrokerEvent[]}
-export interface BrokerAudit {sourceId:string;url:string;status:'PASS'|'FAILED';count:number;error:string|null}
+export interface BrokerAudit {sourceId:string;url:string;status:'PASS'|'FAILED';count:number;error:string|null;date?:string}
 export interface BrokerResearchBundle {briefs:BrokerBrief[];company:BrokerReport[];industry:BrokerReport[];economy:BrokerReport[];audit:BrokerAudit[]}
 
 export const CONSENSUS_HOST='https://consensus.hankyung.com';
@@ -179,7 +179,7 @@ export async function collectBrokerResearch(input:{sessionDate:string;operationD
         if(mismatched){statements=statements.filter(item=>item.region!=='KOREA');digests=digests.filter(digest=>!/코스피|KOSPI|코스닥|KOSDAQ|국내 증시|국내증시|시황|전략|퀀틴전시/i.test([digest.heading,...digest.bullets].join(' ')))}
       }
       briefs.push({report,statements,digests,events:content.events});
-      audit.push({sourceId:'consensus:pdf:'+report.url.split('=').pop(),url:report.url,status:'PASS',count:statements.length+content.digests.length,error:null});
+      audit.push({sourceId:'consensus:pdf:'+report.url.split('=').pop(),url:report.url,status:'PASS',count:statements.length+content.digests.length,error:null,date:report.date});
     }catch(error){audit.push({sourceId:'consensus:pdf:'+report.url.split('=').pop(),url:report.url,status:'FAILED',count:0,error:error instanceof Error&&/^(?:CONSENSUS_HTTP_\d{3}|CONSENSUS_NOT_PDF|PDF_TEXT_UNAVAILABLE)$/.test(error.message)?error.message:'CONSENSUS_PDF_FAILED'})}
   }
   const recent=(items:BrokerReport[]|undefined,days:number)=>(items??[]).filter(item=>item.date<=input.operationDate&&item.date>=addDays(input.sessionDate,-days));

@@ -221,3 +221,21 @@ test('a stock with a missing session change is skipped, never shown as 0%',async
   const result=await collectKoreaSearchTop('2026-10-28',fetcher);
   assert.equal(result.stocks.length,0);assert.ok(result.audit.some(item=>item.error==='ATTENTION_SESSION_ROW_MISSING'));
 });
+
+test('AI article adds bellwether moves and AI-specific broker analysis only',async()=>{
+  const {composeAIDeepSections}=await import('../src/operations/market-deep-sections.js');
+  const {statements,digests}=extractBriefContent(brief);
+  const report={kind:'MARKET' as const,date:'2026-10-29',title:'morning meeting brief',broker:'대신증권',analysts:'리서치센터',url:'https://consensus.hankyung.com/analysis/downpdf?report_idx=902',summary:[],targetPrice:null,rating:null,stockCode:null,company:null};
+  const stock=(symbol:string,changePct:number)=>({symbol,name:symbol,koreanName:symbol==='NVDA'?'엔비디아':null,changePct,close:100,date:'2026-10-29',trendingRank:null,mostActiveRank:null,marketCap:null});
+  const ai=composeAIDeepSections({bundle:{briefs:[{report,statements,digests}],company:[],industry:[],economy:[],audit:[]},stocks:[stock('NVDA',2.5),stock('MSFT',-1),stock('AMD',0.4)],sessionDate:'2026-10-29'});
+  const html=ai.sections.map(deepSection).join('');
+  assert.match(html,/가장 강한 종목은 엔비디아\(NVDA, \+2\.50%\)/);
+  assert.match(html,/삼성전기/);assert.doesNotMatch(html,/프랑스|OEM/);
+});
+
+test('supplementary sources never satisfy the core-evidence diversity or concentration checks',async()=>{
+  const {coreEvidenceSources}=await import('../src/production/verification-artifact.js');
+  const core={label:'엔비디아 공식 발표',url:'https://blogs.nvidia.com/blog/a/',publisher:'NVIDIA'};
+  const extra={label:'Yahoo Finance AI 대표 종목 일별 종가',url:'https://query1.finance.yahoo.com/v7/finance/spark?symbols=NVDA',publisher:'Yahoo Finance',role:'SUPPLEMENTARY' as const};
+  assert.deepEqual(coreEvidenceSources([core,extra]),[core]);
+});

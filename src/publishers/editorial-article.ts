@@ -19,6 +19,7 @@ export const BLOGGER_EDITORIAL_CATEGORIES={
 export function renderAIEditorialArticle(view:AIIntelligenceDailyViewModel):DailyMasterRenderResult {
   const seen=new Set<string>([normalized(view.todayCore.summary)]),parts=[masthead(view.title,view.subtitle,view.displayLabel,view.issueDate),lead(view.todayCore.summary)];
   for(const issue of view.issues){const content=paragraphs(uniqueProse([...issue.whatHappened,issue.coreContent,issue.whyItMatters??'',issue.marketConnection??''],seen));if(content)parts.push(section(issue.headline,content));}
+  for(const item of view.deepSections??[])parts.push(deepSection(item));
   const connections=paragraphs(uniqueProse(view.industryConnections.flatMap(item=>[item.explanation,item.optionalWatchPoint??'']),seen));if(connections)parts.push(section('기업 AI가 실제 업무로 들어가는 경로',connections));
   const watch=paragraphs(uniqueProse(view.whatToWatch.map(item=>`${item.headline}: ${item.watchFor}`),seen));if(watch)parts.push(section('앞으로 볼 지점',watch));
   parts.push(sources(view.sources));return finish('ai-intelligence',view.title,BLOGGER_EDITORIAL_CATEGORIES.AI_INTELLIGENCE.publicLabel,parts,['masthead','lead','issues','connections','watch','sources']);
