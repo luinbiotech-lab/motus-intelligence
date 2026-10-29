@@ -1,0 +1,337 @@
+{
+  "schemaVersion": "1.0",
+  "sourceMode": "internal",
+  "category": "US_MARKET",
+  "operationDate": "2026-10-30",
+  "status": "LIVE_READY",
+  "reasonCode": null,
+  "entries": [
+    {
+      "sourceId": "twelve:russell-2000",
+      "category": "US_MARKET",
+      "url": "https://api.twelvedata.com/time_series?symbol=RUT&interval=1day",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-10-29T16:29:40.438Z",
+      "error": "TWELVE_DATA_DATA_NOT_FOUND symbol=RUT endpoint=/time_series http=404 providerCode=404"
+    },
+    {
+      "sourceId": "twelve:dxy",
+      "category": "US_MARKET",
+      "url": "https://api.twelvedata.com/time_series?symbol=DXY&interval=1day",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-10-29T16:29:40.438Z",
+      "error": "TWELVE_DATA_DATA_NOT_FOUND symbol=DXY endpoint=/time_series http=404 providerCode=404"
+    },
+    {
+      "sourceId": "fred:sp500",
+      "category": "US_MARKET",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=SP500&cosd=2019-03-10",
+      "status": "PASS",
+      "recordCount": 1921,
+      "collectedAt": "2026-10-29T16:29:40.438Z",
+      "error": null,
+      "observedDate": "2026-10-28"
+    },
+    {
+      "sourceId": "fred:nasdaq",
+      "category": "US_MARKET",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=NASDAQCOM&cosd=2019-03-10",
+      "status": "PASS",
+      "recordCount": 1922,
+      "collectedAt": "2026-10-29T16:29:40.438Z",
+      "error": null,
+      "observedDate": "2026-10-28"
+    },
+    {
+      "sourceId": "fred:dow-jones",
+      "category": "US_MARKET",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-10",
+      "status": "PASS",
+      "recordCount": 1921,
+      "collectedAt": "2026-10-29T16:29:40.438Z",
+      "error": null,
+      "observedDate": "2026-10-28"
+    },
+    {
+      "sourceId": "fred:DGS10",
+      "category": "US_MARKET",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2025-12-23",
+      "status": "PASS",
+      "recordCount": 212,
+      "collectedAt": "2026-10-29T16:29:40.438Z",
+      "error": null,
+      "observedDate": "2026-10-27"
+    },
+    {
+      "sourceId": "fred:VIXCLS",
+      "category": "US_MARKET",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS&cosd=2025-12-23",
+      "status": "PASS",
+      "recordCount": 219,
+      "collectedAt": "2026-10-29T16:29:40.438Z",
+      "error": null,
+      "observedDate": "2026-10-28"
+    },
+    {
+      "sourceId": "fred:DCOILBRENTEU",
+      "category": "US_MARKET",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILBRENTEU&cosd=2025-12-23",
+      "status": "PASS",
+      "recordCount": 213,
+      "collectedAt": "2026-10-29T16:29:40.438Z",
+      "error": null,
+      "observedDate": "2026-10-27"
+    },
+    {
+      "sourceId": "calendar:nyse",
+      "category": "US_MARKET",
+      "url": "https://www.nyse.com/trade/hours-calendars",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T16:29:40.438Z",
+      "error": null,
+      "observedDate": "2026-10-28",
+      "referenceDate": "2026-10-28"
+    },
+    {
+      "sourceId": "freshness:brent",
+      "category": "US_MARKET",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILBRENTEU&cosd=2025-12-23",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-10-29T16:29:40.438Z",
+      "error": "OPTIONAL_METRIC_STALE",
+      "observedDate": "2026-10-27",
+      "referenceDate": "2026-10-28"
+    },
+    {
+      "sourceId": "market-research:Goldman Sachs",
+      "category": "US_MARKET",
+      "url": "https://www.goldmansachs.com/insights",
+      "status": "PASS",
+      "recordCount": 2,
+      "collectedAt": "2026-10-29T16:29:40.438Z",
+      "error": null
+    },
+    {
+      "sourceId": "market-research:CNBC Investing",
+      "category": "US_MARKET",
+      "url": "https://www.cnbc.com/id/15839069/device/rss/rss.html",
+      "status": "PASS",
+      "recordCount": 2,
+      "collectedAt": "2026-10-29T16:29:40.438Z",
+      "error": null
+    },
+    {
+      "sourceId": "market-research:Bloomberg Markets",
+      "category": "US_MARKET",
+      "url": "https://feeds.bloomberg.com/markets/news.rss",
+      "status": "PASS",
+      "recordCount": 2,
+      "collectedAt": "2026-10-29T16:29:40.438Z",
+      "error": null
+    },
+    {
+      "sourceId": "market-research:article:https://www.goldmansachs.com/insights/articles/are-bonds-becoming-a-better-investment-for-portfolios",
+      "category": "US_MARKET",
+      "url": "https://www.goldmansachs.com/insights/articles/are-bonds-becoming-a-better-investment-for-portfolios",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T16:29:40.438Z",
+      "error": null,
+      "observedDate": "2026-10-08"
+    },
+    {
+      "sourceId": "market-research:article:https://www.goldmansachs.com/insights/articles/will-30-year-us-treasury-yields-climb-higher",
+      "category": "US_MARKET",
+      "url": "https://www.goldmansachs.com/insights/articles/will-30-year-us-treasury-yields-climb-higher",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T16:29:40.438Z",
+      "error": null,
+      "observedDate": "2026-10-06"
+    },
+    {
+      "sourceId": "market-research:article:https://www.cnbc.com/2026/10/27/robinhood-hood-q3-2026-earnings.html",
+      "category": "US_MARKET",
+      "url": "https://www.cnbc.com/2026/10/27/robinhood-hood-q3-2026-earnings.html",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T16:29:40.438Z",
+      "error": null,
+      "observedDate": "2026-10-28"
+    },
+    {
+      "sourceId": "market-research:article:https://www.cnbc.com/2026/10/26/prediction-markets-think-anthropic-ipo-near-certain-in-2026.html",
+      "category": "US_MARKET",
+      "url": "https://www.cnbc.com/2026/10/26/prediction-markets-think-anthropic-ipo-near-certain-in-2026.html",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T16:29:40.438Z",
+      "error": null,
+      "observedDate": "2026-10-26"
+    },
+    {
+      "sourceId": "market-research:article:https://www.bloomberg.com/news/articles/2026-10-29/us-stock-futures-fall-as-alphabet-sales-miss-revives-ai-fears",
+      "category": "US_MARKET",
+      "url": "https://www.bloomberg.com/news/articles/2026-10-29/us-stock-futures-fall-as-alphabet-sales-miss-revives-ai-fears",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T16:29:40.438Z",
+      "error": null,
+      "observedDate": "2026-10-29"
+    },
+    {
+      "sourceId": "market-research:article:https://www.bloomberg.com/news/articles/2026-10-28/stock-market-today-dow-s-p-live-updates",
+      "category": "US_MARKET",
+      "url": "https://www.bloomberg.com/news/articles/2026-10-28/stock-market-today-dow-s-p-live-updates",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T16:29:40.438Z",
+      "error": null,
+      "observedDate": "2026-10-28"
+    },
+    {
+      "sourceId": "deep:consensus:list:market",
+      "category": "US_MARKET",
+      "url": "https://consensus.hankyung.com/analysis/list?skinType=market&report_type=MK&sdate=2026-10-22&edate=2026-10-31&now_page=1&pagenum=80",
+      "status": "PASS",
+      "recordCount": 50,
+      "collectedAt": "2026-10-29T16:29:40.438Z",
+      "error": null,
+      "observedDate": "2026-10-28"
+    },
+    {
+      "sourceId": "deep:consensus:list:company",
+      "category": "US_MARKET",
+      "url": "https://consensus.hankyung.com/analysis/list?skinType=business&report_type=CO&sdate=2026-10-22&edate=2026-10-31&now_page=1&pagenum=80",
+      "status": "PASS",
+      "recordCount": 78,
+      "collectedAt": "2026-10-29T16:29:40.438Z",
+      "error": null,
+      "observedDate": "2026-10-28"
+    },
+    {
+      "sourceId": "deep:consensus:list:industry",
+      "category": "US_MARKET",
+      "url": "https://consensus.hankyung.com/analysis/list?skinType=industry&report_type=IN&sdate=2026-10-22&edate=2026-10-31&now_page=1&pagenum=80",
+      "status": "PASS",
+      "recordCount": 49,
+      "collectedAt": "2026-10-29T16:29:40.438Z",
+      "error": null,
+      "observedDate": "2026-10-28"
+    },
+    {
+      "sourceId": "deep:consensus:list:economy",
+      "category": "US_MARKET",
+      "url": "https://consensus.hankyung.com/analysis/list?report_type=EC&sdate=2026-10-22&edate=2026-10-31&now_page=1&pagenum=80",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T16:29:40.438Z",
+      "error": null,
+      "observedDate": "2026-10-28"
+    },
+    {
+      "sourceId": "deep:consensus:pdf:653452",
+      "category": "US_MARKET",
+      "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653452",
+      "status": "PASS",
+      "recordCount": 2,
+      "collectedAt": "2026-10-29T16:29:40.438Z",
+      "error": null,
+      "observedDate": "2026-10-28"
+    },
+    {
+      "sourceId": "deep:consensus:pdf:653451",
+      "category": "US_MARKET",
+      "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653451",
+      "status": "PASS",
+      "recordCount": 4,
+      "collectedAt": "2026-10-29T16:29:40.438Z",
+      "error": null,
+      "observedDate": "2026-10-28"
+    },
+    {
+      "sourceId": "deep:consensus:pdf:653439",
+      "category": "US_MARKET",
+      "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653439",
+      "status": "PASS",
+      "recordCount": 4,
+      "collectedAt": "2026-10-29T16:29:40.438Z",
+      "error": null,
+      "observedDate": "2026-10-28"
+    },
+    {
+      "sourceId": "deep:consensus:pdf:653429",
+      "category": "US_MARKET",
+      "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653429",
+      "status": "PASS",
+      "recordCount": 20,
+      "collectedAt": "2026-10-29T16:29:40.438Z",
+      "error": null,
+      "observedDate": "2026-10-28"
+    },
+    {
+      "sourceId": "deep:consensus:pdf:653420",
+      "category": "US_MARKET",
+      "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653420",
+      "status": "PASS",
+      "recordCount": 0,
+      "collectedAt": "2026-10-29T16:29:40.438Z",
+      "error": null,
+      "observedDate": "2026-10-28"
+    },
+    {
+      "sourceId": "deep:yahoo:trending",
+      "category": "US_MARKET",
+      "url": "https://query1.finance.yahoo.com/v1/finance/trending/US?count=20",
+      "status": "PASS",
+      "recordCount": 20,
+      "collectedAt": "2026-10-29T16:29:40.438Z",
+      "error": null,
+      "observedDate": "2026-10-28"
+    },
+    {
+      "sourceId": "deep:yahoo:most-active",
+      "category": "US_MARKET",
+      "url": "https://query1.finance.yahoo.com/v1/finance/screener/predefined/saved?scrIds=most_actives&count=25",
+      "status": "PASS",
+      "recordCount": 25,
+      "collectedAt": "2026-10-29T16:29:40.438Z",
+      "error": null,
+      "observedDate": "2026-10-28"
+    },
+    {
+      "sourceId": "deep:yahoo:spark:stocks",
+      "category": "US_MARKET",
+      "url": "https://query1.finance.yahoo.com/v7/finance/spark?symbols=GOOG,NOW,CAT,MSFT,MRVL,AMZN,FTNT,LLY,ADT,CROX,IOVA,NOK,BBD,SPCX,INTC,NU,HLN,SOFI&range=5d&interval=1d",
+      "status": "PASS",
+      "recordCount": 18,
+      "collectedAt": "2026-10-29T16:29:40.438Z",
+      "error": null,
+      "observedDate": "2026-10-28"
+    },
+    {
+      "sourceId": "deep:yahoo:spark:sectors",
+      "category": "US_MARKET",
+      "url": "https://query1.finance.yahoo.com/v7/finance/spark?symbols=XLK,XLC,XLY,XLF,XLV,XLI,XLE,XLB,XLP,XLU,XLRE&range=5d&interval=1d",
+      "status": "PASS",
+      "recordCount": 11,
+      "collectedAt": "2026-10-29T16:29:40.438Z",
+      "error": null,
+      "observedDate": "2026-10-28"
+    },
+    {
+      "sourceId": "deep:consensus:listed:653424",
+      "category": "US_MARKET",
+      "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653424",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T16:29:40.438Z",
+      "error": null,
+      "observedDate": "2026-10-28"
+    }
+  ]
+}
