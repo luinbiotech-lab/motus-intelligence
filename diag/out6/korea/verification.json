@@ -1,12 +1,12 @@
 {
   "schemaVersion": "1.1",
   "category": "KOREA_MARKET",
-  "operationDate": "2026-10-30",
-  "observedDate": "2026-10-30",
+  "operationDate": "2026-10-29",
+  "observedDate": "2026-10-29",
   "sourceMode": "internal",
   "verification": "FAILED",
   "unresolvedConflicts": [
-    "YAHOO_FINANCE_KOSPI_ROW_MISSING"
+    "KOREA_FX_REFERENCE_DATE_MISMATCH:2026-10-30:2026-10-28:2026-10-29"
   ],
   "provenancePass": false,
   "sourceDiversityPass": false,
@@ -18,8 +18,8 @@
   "duplicateUncertainty": true,
   "articleFingerprint": "",
   "commerceEnabled": false,
-  "verifiedAt": "2026-10-29T15:53:34.211Z",
-  "expiresAt": "2026-10-29T17:23:34.211Z",
+  "verifiedAt": "2026-10-29T00:40:00Z",
+  "expiresAt": "2026-10-29T02:10:00.000Z",
   "sourceAuditIds": [
     "naver:kospi:history",
     "naver:kosdaq:history",
@@ -28,44 +28,7 @@
     "naver:mover",
     "naver:sector"
   ],
-  "sourceAuditFingerprint": "sha256:17a79a60d7bf70b3333396e65a8fe88ada67a4a3063bb9ca3b4915c9e6ca9260",
-  "crossVerificationFingerprint": "sha256:5705f71ed01015dc56118d67a4c980418d9e2796f1338473d5c8c9006087a736",
-  "crossVerification": {
-    "schemaVersion": "1.0",
-    "category": "KOREA_MARKET",
-    "observedDate": "2026-10-29",
-    "primarySource": {
-      "provider": "Naver Finance",
-      "domain": "naver.com",
-      "urls": [
-        "https://m.stock.naver.com/api/index/KOSPI/price?pageSize=10&page=1",
-        "https://m.stock.naver.com/api/index/KOSDAQ/price?pageSize=10&page=1"
-      ]
-    },
-    "independentSource": {
-      "providers": [],
-      "domains": [],
-      "urls": []
-    },
-    "comparedFields": [],
-    "tolerance": {
-      "KOSPI": 0.05,
-      "KOSDAQ": 0.05,
-      "USD_KRW": 2
-    },
-    "comparisonResult": "UNAVAILABLE",
-    "sourceDiversityPass": false,
-    "verification": "REVIEW_REQUIRED",
-    "reasonCodes": [
-      "YAHOO_FINANCE_KOSPI_ROW_MISSING",
-      "KOREA_OFFICIAL_INDEX_COMPARISON_INCOMPLETE",
-      "KOREA_INDEPENDENT_SOURCE_DIVERSITY_FAILED"
-    ],
-    "verifiedAt": "2026-10-29T15:53:34.211Z",
-    "officialPhase": "PRE_PUBLICATION",
-    "reconciliation": {
-      "status": "NOT_REQUIRED",
-      "officialObservedDates": []
-    }
-  }
+  "sourceAuditFingerprint": "sha256:e74f589fa2fdc2ebff30cc37a47b39ad76f3434afc1f24da1c7d97d8e7472d0b",
+  "crossVerificationFingerprint": null,
+  "crossVerification": null
 }

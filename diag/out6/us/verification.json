@@ -4,11 +4,9 @@
   "operationDate": "2026-10-30",
   "observedDate": "2026-10-28",
   "sourceMode": "internal",
-  "verification": "REVIEW_REQUIRED",
-  "unresolvedConflicts": [
-    "production provenance audit failed"
-  ],
-  "provenancePass": false,
+  "verification": "VERIFIED",
+  "unresolvedConflicts": [],
+  "provenancePass": true,
   "sourceDiversityPass": true,
   "sourceLinksPass": true,
   "mobilePass": true,
@@ -16,16 +14,17 @@
   "leakagePass": true,
   "duplicateCheck": "PENDING_REMOTE",
   "duplicateUncertainty": true,
-  "articleFingerprint": "sha256:231043b01cf711bae81e017bbe2a731f3cd9ccb9bda8fed41f8adb0ead4af787",
+  "articleFingerprint": "sha256:b6a3a3ed6f3f0ad9ce4df69d051d060cb7b6f278dab994208319f098b6cfeaf6",
   "commerceEnabled": false,
-  "verifiedAt": "2026-10-29T15:53:06.978Z",
-  "expiresAt": "2026-10-29T17:23:06.978Z",
+  "verifiedAt": "2026-10-29T15:56:04.936Z",
+  "expiresAt": "2026-10-29T17:26:04.936Z",
   "sourceAuditIds": [
     "calendar:nyse",
     "deep:consensus:list:company",
     "deep:consensus:list:economy",
     "deep:consensus:list:industry",
     "deep:consensus:list:market",
+    "deep:consensus:listed:653424",
     "deep:consensus:pdf:653420",
     "deep:consensus:pdf:653429",
     "deep:consensus:pdf:653439",
@@ -51,7 +50,7 @@
     "market-research:article:https://www.goldmansachs.com/insights/articles/are-bonds-becoming-a-better-investment-for-portfolios",
     "market-research:article:https://www.goldmansachs.com/insights/articles/will-30-year-us-treasury-yields-climb-higher"
   ],
-  "sourceAuditFingerprint": "sha256:9a7f7175a65316a52befba1f0cd7614bba9c1bf1ef1cec8ef76d4cd1f821c2fd",
+  "sourceAuditFingerprint": "sha256:481d25709593a89c97f0d3b7cbd5c242d0f81399fbdfc61723ff525722783bbe",
   "crossVerificationFingerprint": null,
   "crossVerification": null
 }

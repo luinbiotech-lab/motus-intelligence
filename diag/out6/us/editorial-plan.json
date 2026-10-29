@@ -2,9 +2,9 @@
   "category": "US_MARKET",
   "operationDate": "2026-10-30",
   "observedDate": "2026-10-28",
-  "state": "HOLD",
+  "state": "AUTO_POLICY_CANDIDATE",
   "searchDemandMayOverride": false,
-  "articleFingerprint": "sha256:231043b01cf711bae81e017bbe2a731f3cd9ccb9bda8fed41f8adb0ead4af787",
+  "articleFingerprint": "sha256:b6a3a3ed6f3f0ad9ce4df69d051d060cb7b6f278dab994208319f098b6cfeaf6",
   "commerce": {
     "enabled": false
   }
