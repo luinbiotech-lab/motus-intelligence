@@ -1,0 +1,15 @@
+# 뉴욕증시 3대 지수 하락&#8230;아마존 4.2% 하락
+https://motusnova.blogspot.com/2026/10/3-42.html
+.separator:first-child>a[imageanchor="1"]:first-child{
+margin-top:20px
+}
+.
+
+==========
+
+# 코스피 1.24% 하락 5,937&#8230;검색 1위 삼성전자 4.8% 하락
+https://motusnova.blogspot.com/2026/10/124-5937-1-48.html
+.separator:first-child>a[imageanchor="1"]:first-child{
+margin-top:20px
+}
+.
