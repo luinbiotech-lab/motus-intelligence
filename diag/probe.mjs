@@ -23,7 +23,7 @@ if(mode==='naver'){
 if(mode==='krx'){
   const K=krx.trim(),base='https://data-dbg.krx.co.kr/svc/apis';
   for(const [label,path] of [['krx-kospi-idx','idx/kospi_dd_trd'],['krx-kosdaq-idx','idx/kosdaq_dd_trd'],['krx-krx-idx','idx/krx_dd_trd'],['krx-stk-bydd','sto/stk_bydd_trd'],['krx-ksq-bydd','sto/ksq_bydd_trd']])
-    await call(label,`${base}/${path}?basDd=20261027`,{headers:{accept:'application/json',AUTH_KEY:K}});
-  await call('krx-kospi-idx-queryparam',`${base}/idx/kospi_dd_trd?basDd=20261027&AUTH_KEY=${encodeURIComponent(K)}`,{headers:{accept:'application/json'}});
-  await call('krx-kospi-idx-oldhost',`https://openapi.krx.co.kr/svc/apis/idx/kospi_dd_trd?basDd=20261027`,{headers:{accept:'application/json',AUTH_KEY:K}});
+    await call(label,`${base}/${path}?basDd=20261028`,{headers:{accept:'application/json',AUTH_KEY:K}});
+  await call('krx-kospi-idx-queryparam',`${base}/idx/kospi_dd_trd?basDd=20261028&AUTH_KEY=${encodeURIComponent(K)}`,{headers:{accept:'application/json'}});
+  await call('krx-kospi-idx-oldhost',`https://openapi.krx.co.kr/svc/apis/idx/kospi_dd_trd?basDd=20261028`,{headers:{accept:'application/json',AUTH_KEY:K}});
 }

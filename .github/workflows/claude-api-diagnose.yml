@@ -21,7 +21,6 @@ jobs:
         if: false
         run: node diag/probe.mjs naver
       - name: krx
-        if: false
         run: node diag/probe.mjs krx
       - name: yahoo
         run: node diag/yahoo.mjs
