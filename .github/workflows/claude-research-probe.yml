@@ -19,7 +19,7 @@ jobs:
       NAVER_DATALAB_CLIENT_SECRET: ${{ secrets.NAVER_DATALAB_CLIENT_SECRET }}
     steps:
       - uses: actions/checkout@v4
-        with: {ref: feat/ai-broker-depth-20261030, path: app}
+        with: {ref: feat/broker-research-search-rank-20261030, path: app}
       - uses: actions/checkout@v4
         with: {path: diag}
       - uses: actions/setup-node@v4
@@ -29,8 +29,9 @@ jobs:
         run: |
           npm ci && npm run build
           D=$(TZ=Asia/Seoul date +%F)
-          node dist/src/live-daily-cli.js --date "$D" --category ai --source internal || true
-          rm -rf ../diag/diag/out6 && mkdir -p ../diag/diag/out6 && cp -r data/operations/$D/ai ../diag/diag/out6/ || true
+          node dist/src/live-daily-cli.js --date "$D" --category us --source internal || true
+          node ../diag/diag/korea-preview.mjs || true
+          rm -rf ../diag/diag/out6 && mkdir -p ../diag/diag/out6 && cp -r data/operations/$D/us ../diag/diag/out6/ || true
       - working-directory: diag
         run: |
           git config user.name probe && git config user.email probe@users.noreply.github.com
