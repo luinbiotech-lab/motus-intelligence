@@ -1,0 +1,70 @@
+name: MOTUS Controlled Existing Blogger Title Correction
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'preview only (read-only) or apply (patch exact existing title only)'
+        required: true
+        type: choice
+        options:
+          - preview
+          - apply
+        default: preview
+permissions:
+  contents: read
+concurrency:
+  group: motus-blogger-existing-20261028-korea-title-correction
+  cancel-in-progress: false
+jobs:
+  correct-existing-title:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    env:
+      BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+      BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+      BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+      BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+      CORRECTION_ACTION: ${{ inputs.action }}
+    steps:
+      - name: Preflight: exact post identity and read-only preview
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          const expectedBlog='3015267553244608361';
+          const postId='310165270483019628';
+          const expectedUrl='https://motusnova.blogspot.com/2026/10/1q-sk.html';
+          const oldTitle='국내증시 마감: 1Q SK하이닉스선물단일종목레버리지과 다음 거래일 체크포인트';
+          const newTitle='국내증시 마감: 코스피 상승과 코스닥·수급 흐름 점검';
+          const action=process.env.CORRECTION_ACTION;
+          if(!['preview','apply'].includes(action))throw Error('INVALID_ACTION');
+          for(const key of ['BLOGGER_BLOG_ID','BLOGGER_CLIENT_ID','BLOGGER_CLIENT_SECRET','BLOGGER_REFRESH_TOKEN'])
+            if(!process.env[key])throw Error('MISSING_SECRET_'+key);
+          if(process.env.BLOGGER_BLOG_ID!==expectedBlog)throw Error('BLOG_ID_MISMATCH');
+          const tokenResponse=await fetch('https://oauth2.googleapis.com/token',{
+            method:'POST',redirect:'error',headers:{'content-type':'application/x-www-form-urlencoded'},
+            body:new URLSearchParams({
+              grant_type:'refresh_token',client_id:process.env.BLOGGER_CLIENT_ID,
+              client_secret:process.env.BLOGGER_CLIENT_SECRET,refresh_token:process.env.BLOGGER_REFRESH_TOKEN
+            }),signal:AbortSignal.timeout(15000)});
+          if(!tokenResponse.ok)throw Error('TOKEN_REQUEST_HTTP_'+tokenResponse.status);
+          const token=(await tokenResponse.json()).access_token;
+          if(typeof token!=='string'||!token)throw Error('EMPTY_ACCESS_TOKEN');
+          const endpoint='https://www.googleapis.com/blogger/v3/blogs/'+expectedBlog+'/posts/'+postId;
+          async function getPost(){
+            const response=await fetch(endpoint,{headers:{authorization:'Bearer '+token},redirect:'error',signal:AbortSignal.timeout(15000)});
+            if(!response.ok)throw Error('BLOGGER_READ_HTTP_'+response.status);
+            return response.json();
+          }
+          const post=await getPost();
+          if(String(post.id)!==postId||post.url!==expectedUrl||post.status!=='LIVE')throw Error('POST_IDENTITY_OR_PUBLIC_STATUS_MISMATCH');
+          if(typeof post.content!=='string'||post.content.length<1000)throw Error('POST_CONTENT_UNEXPECTED');
+          if(post.title!==oldTitle && post.title!==newTitle)throw Error('UNEXPECTED_EXISTING_TITLE');
+          const contentBefore=post.content;
+          console.log(JSON.stringify({action,postId,canonicalUrl:post.url,expectedOperation:'2026-10-28 Korea CLOSE',beforeTitle:post.title,proposedTitle:newTitle,bodyChange:false}));
+          if(action==='preview'||post.title===newTitle){console.log('READ_ONLY_OR_ALREADY_CORRECTED');process.exit(0)}
+          const response=await fetch(endpoint,{method:'PATCH',redirect:'error',headers:{authorization:'Bearer '+token,'content-type':'application/json'},body:JSON.stringify({title:newTitle}),signal:AbortSignal.timeout(15000)});
+          if(!response.ok)throw Error('BLOGGER_PATCH_HTTP_'+response.status);
+          const after=await getPost();
+          if(after.title!==newTitle||after.content!==contentBefore||after.url!==expectedUrl||after.status!=='LIVE')throw Error('POST_CORRECTION_READBACK_MISMATCH');
+          console.log('TITLE_CORRECTION_VERIFIED: existing post unchanged except title; no new publication');
+          NODE
