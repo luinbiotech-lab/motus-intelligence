@@ -67,6 +67,7 @@ const CATEGORY_LINE=/^(?:[A-Za-z][A-Za-z &/]{2,30}|산업 및 종목 분석|기�
 
 function hangul(value:string){return (value.match(/[가-힣]/g)??[]).length}
 function quotable(value:string){return value.length>=18&&value.length<=200&&hangul(value)>=8&&!/@|https?:|\.com\b/.test(value)&&(value.match(/\d/g)??[]).length<=value.length*0.3}
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const SENTENCE_END=/(?:다|함|음|임|됨|마감|전망|예상|지속|필요|유지|상승|하락|강세|약세|확대|축소|전환|발동|기록|주목|부각|반등|급등|급락|우려|기대|\)|%)\.?$/;
 
 /** Extracts verbatim single-line bullets, region headlines and titled bullet digests from a broker brief's text. */
@@ -91,7 +92,8 @@ export function extractBriefContent(text:string):{statements:BrokerStatement[];d
       const body=bullet[1]!.trim(),next=lines[i+1]??'';
       if(eventMode){const item=body.replace(/^(?:미|美)\s*-\s*/,'미국: ').replace(/^(?:한|국내)\s*-\s*/,'국내: ');if(item.length>=6&&item.length<=120&&hangul(item)>=2)events.push({region:/^미국:|美|미국|FOMC|연준/.test(item)?'US':'KOREA',text:item});continue}
       // A following unmarked prose line means the printed bullet wrapped; skip it rather than guess the join.
-      const wrapped=Boolean(next)&&!MARKER.test(next)&&!ANALYST_LINE.test(next)&&hangul(next)>=2&&!REGION_HEADING.some(([pattern])=>pattern.test(next))&&!SENTENCE_END.test(body);
+      // Any following unmarked Korean line may be the rest of this bullet; a plausible-looking ending never overrides that.
+      const wrapped=Boolean(next)&&!MARKER.test(next)&&!ANALYST_LINE.test(next)&&!CATEGORY_LINE.test(next)&&!EVENT_HEADING.test(next)&&!/^(?:▶|■|\[)/.test(next)&&hangul(next)>=2&&!REGION_HEADING.some(([pattern])=>pattern.test(next));
       if(wrapped||!quotable(body)||region==='OTHER')continue;
       if(digest)digest.bullets.push(body);
       // Bullets inside a titled report digest count as market commentary only when the report itself is a market/rates piece.

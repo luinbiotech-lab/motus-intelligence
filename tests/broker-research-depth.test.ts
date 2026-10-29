@@ -146,3 +146,19 @@ test('MOTUS synthesis names themes shared by several brokers and flags divergent
   assert.match(text,/C증권은 환율·달러를 따로 짚었다/);
   assert.match(text,/경계 요인도 제시됐다\. B증권 리서치센터는 “FOMC 대기 속 경계감 공존”이라고 짚었다/);
 });
+
+test('a bullet followed by an unmarked line is never quoted, even if its first line looks complete',()=>{
+  const {statements}=extractBriefContent(['▶ 미국증시','- 미국 증시는 대형 기술주 실적 기대에 힘입어 상승','했으나 장 후반 매물이 출회되며 하락 마감함','- 달러인덱스는 기준금리 동결에 하락 마감'].join('\n'));
+  assert.ok(!statements.some(item=>item.text.includes('힘입어 상승')));
+  assert.ok(statements.some(item=>item.text==='달러인덱스는 기준금리 동결에 하락 마감'));
+});
+
+test('a bearish session explained with caution words still counts as core commentary',async()=>{
+  const {composeUSDeepSections}=await import('../src/operations/market-deep-sections.js');
+  const report={kind:'MARKET' as const,date:'2026-10-29',title:'brief',broker:'A증권',analysts:'리서치센터',url:'https://consensus.hankyung.com/analysis/downpdf?report_idx=1',summary:[],targetPrice:null,rating:null,stockCode:null,company:null};
+  const us=composeUSDeepSections({bundle:{briefs:[{report,statements:[{region:'US',text:'미국 증시는 인플레이션 우려와 금리 부담에 하락 마감',heading:null}],digests:[]}],company:[],industry:[],economy:[],audit:[]},stocks:[],sectors:[{symbol:'XLK',label:'기술',changePct:1,date:'2026-10-28'},{symbol:'XLF',label:'금융',changePct:0.5,date:'2026-10-28'},{symbol:'XLE',label:'에너지',changePct:0.2,date:'2026-10-28'},{symbol:'XLV',label:'헬스케어',changePct:-0.1,date:'2026-10-28'},{symbol:'XLI',label:'산업재',changePct:-0.3,date:'2026-10-28'},{symbol:'XLU',label:'유틸리티',changePct:-1,date:'2026-10-28'}]});
+  assert.equal(us.hasCoreCommentary,true);
+  const text=us.sections.flatMap(section=>section.paragraphs.map(p=>p.text)).join(' ');
+  assert.match(text,/“미국 증시는 인플레이션 우려와 금리 부담에 하락 마감”이라고 진단했다/);
+  assert.match(text,/11종 중 종가가 확인된 6종 가운데 3종이 올랐다/);assert.match(text,/\(확인된 업종 기준\)/);
+});

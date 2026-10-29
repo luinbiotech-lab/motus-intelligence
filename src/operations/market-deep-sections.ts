@@ -43,7 +43,10 @@ function causes(briefs:BrokerBrief[],region:'US'|'KOREA'){
   const drivers:Pick[]=[],cautions:Pick[]=[];
   for(const brief of briefs){
     const items=brief.statements.filter(item=>item.region===region&&item.text.length<=130);
-    const caution=items.find(item=>CAUTION.test(item.text)),driver=items.filter(item=>item!==caution&&!CAUTION.test(item.text)).sort((a,b)=>marketScore(b.text)-marketScore(a.text))[0];
+    // The best explanation of the session is the driver whatever its direction (a bearish close explained by
+    // 'concerns' is still the explanation); a caution is a different statement that flags a risk.
+    const driver=[...items].sort((a,b)=>marketScore(b.text)-marketScore(a.text))[0];
+    const caution=items.find(item=>item!==driver&&CAUTION.test(item.text));
     if(driver)drivers.push({text:driver.text,brief});if(caution)cautions.push({text:caution.text,brief});
   }
   return {drivers:drivers.slice(0,4),cautions:cautions.slice(0,2)};
@@ -89,7 +92,8 @@ export function composeUSDeepSections(input:{bundle:BrokerResearchBundle|null;st
   let titleFocus:string|null=null;const market:DeepParagraph[]=[];
   if(input.sectors.length>=6){
     const best=input.sectors[0]!,worst=input.sectors.at(-1)!,up=input.sectors.filter(item=>item.changePct>0.005).length;
-    market.push({text:`S&P 500 업종을 추종하는 SPDR 업종 ETF 11종 가운데 ${up}종이 올랐다. ${best.label}(${best.symbol}) ${signedPct(best.changePct)}가 가장 강했고 ${worst.label}(${worst.symbol}) ${signedPct(worst.changePct)}가 가장 약했다. 업종별 등락: ${input.sectors.map(item=>`${item.label} ${signedPct(item.changePct)}`).join(', ')}.`});
+    const scope=input.sectors.length===11?'11종':`11종 중 종가가 확인된 ${input.sectors.length}종`;
+    market.push({text:`S&P 500 업종을 추종하는 SPDR 업종 ETF ${scope} 가운데 ${up}종이 올랐다. ${best.label}(${best.symbol}) ${signedPct(best.changePct)}가 가장 강했고 ${worst.label}(${worst.symbol}) ${signedPct(worst.changePct)}가 가장 약했다${input.sectors.length===11?'':'(확인된 업종 기준)'}. 업종별 등락: ${input.sectors.map(item=>`${item.label} ${signedPct(item.changePct)}`).join(', ')}.`});
   }
   if(ranked.length){
     const mentions=(stock:USAttentionStock)=>briefs.flatMap(brief=>brief.statements.filter(item=>item.region==='US'&&(stock.koreanName&&item.text.includes(stock.koreanName)||item.text.includes(stock.symbol))).map(item=>({item,brief})))[0];
