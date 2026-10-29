@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {causalSentence,collectWireCloses,contradictsDirection,isCloseReport,parseWireFeed,selectWireReports,wireTime,type WireReport} from '../src/operations/market-wire.js';
+import {causalSentence,collectWireCloses,contradictsDirection,isCloseReport,parseWireFeed,selectWireReports,wireTime,wireWindow,type WireReport} from '../src/operations/market-wire.js';
 import {composeKoreaDeepSections,composeUSDeepSections} from '../src/operations/market-deep-sections.js';
 
 // Synthetic fixtures in the feed formats observed on the wire RSS endpoints (RFC 822 dates; bare KST dates).
@@ -33,6 +33,17 @@ test('only close reports qualify: openings, flashes and first takes do not', () 
   assert.equal(isCloseReport('KOREA','[증시-마감] 코스피, 대형주 실망에 1.24% 하락'),true);
   assert.equal(isCloseReport('KOREA','[코스피·코스닥 전 거래일(29일) 주요공시]'),false);
   assert.equal(isCloseReport('KOREA','코스피, 외국인 매도에 하락 출발'),false);
+  assert.equal(isCloseReport('US','코스피, 뉴욕증시 하락에 2%대 급락'),false);
+  assert.equal(isCloseReport('KOREA','뉴욕증시 상승에 코스피도 오를까'),false);
+  assert.equal(isCloseReport('KOREA','코스피 반등할까?'),false);
+});
+
+test('windows follow the U.S. close across daylight time and stop at Korean midnight', () => {
+  assert.deepEqual(wireWindow('US','2026-10-29').map(value=>new Date(value).toISOString()),['2026-10-29T20:00:00.000Z','2026-10-30T03:00:00.000Z']);
+  assert.equal(new Date(wireWindow('US','2026-11-02')[0]).toISOString(),'2026-11-02T21:00:00.000Z');
+  assert.equal(new Date(wireWindow('US','2026-03-09')[0]).toISOString(),'2026-03-09T20:00:00.000Z');
+  assert.equal(new Date(wireWindow('US','2026-03-06')[0]).toISOString(),'2026-03-06T21:00:00.000Z');
+  assert.deepEqual(wireWindow('KOREA','2026-10-29').map(value=>new Date(value).toISOString()),['2026-10-29T06:30:00.000Z','2026-10-29T15:00:00.000Z']);
 });
 
 test('a headline naming only the opposite direction is dropped', () => {

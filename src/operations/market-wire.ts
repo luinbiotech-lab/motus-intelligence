@@ -52,15 +52,20 @@ export function parseWireFeed(xml:string,feed:{url:string;publisher:string}):Wir
 }
 
 const addDays=(date:string,days:number)=>new Date(Date.parse(date+'T00:00:00Z')+days*86400000).toISOString().slice(0,10);
-/** Close window in UTC: U.S. close (≥19:30Z covers both DST and standard time) to the next Korean noon; Korea 15:30 KST close to next 09:00 KST. */
+/** U.S. daylight time runs from the second Sunday of March to the first Sunday of November. */
+function usDaylight(date:string):boolean {
+  const year=Number(date.slice(0,4)),sunday=(month:number,nth:number)=>{const first=new Date(Date.UTC(year,month,1)).getUTCDay();return new Date(Date.UTC(year,month,1+((7-first)%7)+(nth-1)*7)).toISOString().slice(0,10)};
+  return date>=sunday(2,2)&&date<sunday(10,1);
+}
+/** Close window in UTC: the U.S. 16:00 ET close to the next Korean noon; the Korea 15:30 KST close to Korean midnight (next-morning previews fall outside). */
 export function wireWindow(region:WireRegion,sessionDate:string):[number,number] {
-  return region==='US'?[Date.parse(sessionDate+'T19:30:00Z'),Date.parse(addDays(sessionDate,1)+'T03:00:00Z')]:[Date.parse(sessionDate+'T06:30:00Z'),Date.parse(addDays(sessionDate,1)+'T00:00:00Z')];
+  return region==='US'?[Date.parse(sessionDate+(usDaylight(sessionDate)?'T20:00:00Z':'T21:00:00Z')),Date.parse(addDays(sessionDate,1)+'T03:00:00Z')]:[Date.parse(sessionDate+'T06:30:00Z'),Date.parse(sessionDate+'T15:00:00Z')];
 }
 
-/** Close reports only: openings, intraday and flash items are not explanations of the session. */
+/** Close reports only: openings, intraday, flash, preview and question headlines are not explanations of the session. */
 export function isCloseReport(region:WireRegion,title:string):boolean {
-  if(/출발|개장|장중|오전|전망|주요공시|\[속보\]|1보/.test(title))return false;
-  return region==='US'?/뉴욕증시|뉴욕 증시|미 증시|미국 증시/.test(title)&&/마감|하락|상승|혼조|일제히|급락|급등|↓|↑/.test(title):/코스피/.test(title)&&/마감|하락|상승|급락|급등|반납|↓|↑|내려|올라/.test(title)&&!/코스닥(?:만|은)/.test(title);
+  if(/출발|개장|장중|오전|전망|주요공시|\[속보\]|1보|까\s*[?？]?$|[?？]/.test(title.replace(/\([^)]*\)\s*$/,'').trim()))return false;
+  return region==='US'?/뉴욕증시|뉴욕 증시|미 증시|미국 증시/.test(title)&&!/코스피|코스닥|국내 증시|아시아/.test(title)&&/마감|하락|상승|혼조|일제히|급락|급등|↓|↑/.test(title):/코스피/.test(title)&&/마감|하락|상승|급락|급등|반납|↓|↑|내려|올라/.test(title)&&!/코스닥(?:만|은)/.test(title);
 }
 
 /** A headline that names only the opposite direction of the verified move is dropped. */
