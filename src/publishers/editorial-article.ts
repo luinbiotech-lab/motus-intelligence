@@ -44,7 +44,7 @@ export function renderKoreaEditorialArticle(view:KoreaMarketDailyViewModel):Dail
   if(view.indexMetrics.length)parts.push(section('코스피와 코스닥',metricProse(view.indexMetrics)));
   if(view.narrative?.facts.length)parts.push(section('지수 흐름',paragraphs(view.narrative.facts)));
   if(view.fxAndSupporting.length)parts.push(section('환율과 시장 여건',metricProse(view.fxAndSupporting)));
-  if(view.investorFlows.length)parts.push(section('수급이 가리킨 방향',flow(view.investorFlows)));
+  if(view.investorFlows.length)parts.push(section('투자자별 순매수 (원천 자료 기준)',metricProse(view.investorFlows.map(item=>({label:item.label,displayValue:item.displayValue})))));
   if(view.sectors.length)parts.push(section('업종별 등락',metricProse(view.sectors)));
   const ordinaryMovers=view.movers.filter(item=>!isStructuredLeveragedProduct(item.label));
   if(ordinaryMovers.length)parts.push(section('주요 종목 흐름',metricProse(ordinaryMovers)));
