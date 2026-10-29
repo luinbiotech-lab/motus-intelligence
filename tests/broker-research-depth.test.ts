@@ -162,3 +162,12 @@ test('a bearish session explained with caution words still counts as core commen
   assert.match(text,/“미국 증시는 인플레이션 우려와 금리 부담에 하락 마감”이라고 진단했다/);
   assert.match(text,/11종 중 종가가 확인된 6종 가운데 3종이 올랐다/);assert.match(text,/\(확인된 업종 기준\)/);
 });
+
+test('the session check compares only the level printed for KOSPI, and the title keeps the collected rank',async()=>{
+  const statements=[{region:'KOREA' as const,text:'KOSPI는 6,012.4P로 마감, KOSDAQ은 1,071.3P로 마감',heading:null}];
+  assert.equal(contradictsKospi(statements,6012.44),false);
+  assert.equal(contradictsKospi([{region:'KOREA',text:'코스피는 전 거래일 대비 2.1% 오른 5,638.3P로 마감',heading:null}],6012.44),true);
+  const {composeKoreaDeepSections}=await import('../src/operations/market-deep-sections.js');
+  const korea=composeKoreaDeepSections({bundle:null,searchTop:[{rank:2,name:'SK하이닉스',code:'000660',close:1508000,changePct:12.45,date:'2026-10-28',url:'https://m.stock.naver.com/api/stock/000660/price?pageSize=5&page=1'}]});
+  assert.equal(korea.titleFocus,'검색 2위 SK하이닉스 12.4% 급등');
+});

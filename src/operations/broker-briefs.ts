@@ -115,7 +115,9 @@ export function extractBriefContent(text:string):{statements:BrokerStatement[];d
 /** A Korea brief that prints a KOSPI level different from the verified close describes another session. */
 export function contradictsKospi(statements:BrokerStatement[],verifiedClose:number):boolean {
   for(const item of statements.filter(entry=>entry.region==='KOREA'&&/코스피|KOSPI/i.test(entry.text))){
-    for(const match of item.text.matchAll(/(\d{1,2},\d{3}(?:\.\d+)?)\s*(?:P|pt|포인트)?/g)){
+    // Only a level printed right after the KOSPI name is compared (a KOSDAQ level in the same bullet is not KOSPI).
+    for(const mention of item.text.matchAll(/KOSPI|코스피/gi)){
+      const rest=item.text.slice(mention.index!+mention[0].length),stop=rest.search(/KOSDAQ|코스닥|KOSPI|코스피/i),scope=(stop>=0?rest.slice(0,stop):rest).slice(0,60),match=scope.match(/(\d{1,2},\d{3}(?:\.\d+)?)/);if(!match)continue;
       const value=Number(match[1]!.replace(/,/g,''));if(value>1000&&Math.abs(value-verifiedClose)/verifiedClose>0.002)return true;
     }
   }

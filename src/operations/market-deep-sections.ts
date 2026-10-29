@@ -133,7 +133,7 @@ export function composeKoreaDeepSections(input:{bundle:BrokerResearchBundle|null
       return {text:`검색 ${stock.rank}위 ${josa(stock.name,'은','는')} ${won(stock.close)}원으로 ${absPct(stock.changePct)} ${moveWord(stock.changePct)}했다.${research}`,...(report?{source:reportSource(report)}:digest?{source:reportSource(digest.brief.report)}:{})};
     });
     sections.push({key:'korea-stocks',placement:'early',title:'업종과 종목: 투자자 검색 상위',intro:'네이버페이 증권 검색 상위 종목(ETF·ETN·레버리지 제외)의 전일 종가 기준 등락과 최근 증권사 리포트다. 검색 순위는 관심도 지표이며 주가 변동의 원인이 아니다.',paragraphs});
-    const top=input.searchTop[0]!;titleFocus=`검색 1위 ${top.name} ${Math.abs(top.changePct).toFixed(1)}% ${moveWord(top.changePct)}`;
+    const top=input.searchTop[0]!;titleFocus=`검색 ${top.rank}위 ${top.name} ${Math.abs(top.changePct).toFixed(1)}% ${moveWord(top.changePct)}`;
   }
   const shown=new Set(input.searchTop.map(item=>item.code));
   const reviewDigests=digests.filter(({item})=>/Review|Preview|실적|목표주가|리뷰/.test(item.heading)&&!input.searchTop.some(stock=>item.heading.replace(/\s+/g,'').includes(stock.name.replace(/\s+/g,'')))).slice(0,3);
