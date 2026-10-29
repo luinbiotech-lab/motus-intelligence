@@ -5,7 +5,7 @@
   "observedDate": null,
   "category": "KOREA_MARKET",
   "state": "HOLD",
-  "reasonCode": "YAHOO_FINANCE_KOSPI_ROW_MISSING",
+  "reasonCode": "BROKER_MARKET_COMMENTARY_UNAVAILABLE",
   "verification": "FAILED",
   "publishCallCount": 0,
   "commerce": {

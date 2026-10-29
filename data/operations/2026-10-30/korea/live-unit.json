@@ -4,6 +4,6 @@
   "operationDate": "2026-10-30",
   "status": "HOLD",
   "observedDate": null,
-  "reasonCode": "YAHOO_FINANCE_KOSPI_ROW_MISSING",
+  "reasonCode": "BROKER_MARKET_COMMENTARY_UNAVAILABLE",
   "unit": null
 }
