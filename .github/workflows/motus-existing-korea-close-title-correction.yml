@@ -1,15 +1,27 @@
-name: MOTUS Controlled Existing Blogger Title Correction
+name: MOTUS Controlled Existing Blogger Correction
 on:
   workflow_dispatch:
     inputs:
       action:
-        description: 'preview only (read-only) or apply (patch exact existing title only)'
+        description: 'Title-only legacy actions, or exact existing-content preview/apply with hash guard'
         required: true
         type: choice
         options:
           - preview
           - apply
+          - preview_content
+          - apply_content
         default: preview
+      target:
+        description: 'Exact existing post for content correction'
+        required: false
+        type: choice
+        options: [korea, us]
+        default: korea
+      expected_content_hash:
+        description: 'SHA-256 from preview; required for apply_content'
+        required: false
+        type: string
 permissions:
   contents: read
 concurrency:
@@ -25,8 +37,34 @@ jobs:
       BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
       BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
       CORRECTION_ACTION: ${{ inputs.action }}
+      CORRECTION_TARGET: ${{ inputs.target }}
+      EXPECTED_CONTENT_HASH: ${{ inputs.expected_content_hash }}
     steps:
+      - uses: actions/checkout@v4
+      - name: Preview exact existing content correction
+        if: inputs.action == 'preview_content' || inputs.action == 'apply_content'
+        run: node scripts/correct-existing-market-content.mjs prepare
+      - name: Preserve original post before content patch
+        if: inputs.action == 'preview_content' || inputs.action == 'apply_content'
+        uses: actions/upload-artifact@v4
+        with:
+          name: motus-existing-content-before-${{ inputs.target }}-${{ github.run_id }}
+          path: correction-audit/
+          retention-days: 90
+          if-no-files-found: error
+      - name: Apply once and verify same-post content
+        if: inputs.action == 'apply_content'
+        run: node scripts/correct-existing-market-content.mjs apply
+      - name: Preserve content correction receipt
+        if: always() && (inputs.action == 'preview_content' || inputs.action == 'apply_content')
+        uses: actions/upload-artifact@v4
+        with:
+          name: motus-existing-content-after-${{ inputs.target }}-${{ github.run_id }}
+          path: correction-audit/
+          retention-days: 90
+          if-no-files-found: error
       - name: 'Preflight: exact post identity and read-only preview'
+        if: inputs.action == 'preview' || inputs.action == 'apply'
         shell: bash
         run: |
           node --input-type=module <<'NODE'
