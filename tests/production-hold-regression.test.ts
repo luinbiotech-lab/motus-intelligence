@@ -1,3 +1,4 @@
+import {withBrokerBrief,briefFixtureText} from './broker-fixture.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {RepositoryInternalDailyBuilder,koreaPublicationSession,koreaReferenceDate} from '../src/operations/internal-live-daily.js';
@@ -75,10 +76,10 @@ test('Korea 08:45 KST production model uses prior session, explicit FX basis and
   else if(url.includes('/upjong/'))data=[{name:'반도체',changeRate:'2.4',thistime:'20261014200504'}];
   else data={stocks:[{stockName:'대표 종목',fluctuationsRatio:'1.2',localTradedAt:'2026-10-14T20:20:18+09:00'}]};
   return new Response(JSON.stringify(data));}) as typeof fetch;
- const result=await new RepositoryInternalDailyBuilder(fetcher,{},official).build('KOREA_MARKET',morning);
- assert.equal(result.state,'LIVE_READY');assert.equal(result.payload?.session.observedDate,'2026-10-14');assert.equal(result.crossVerification?.verification,'VERIFIED');
+ const builder=new RepositoryInternalDailyBuilder(withBrokerBrief(fetcher,'2026-10-15'),{},official);builder.pdfText=async()=>briefFixtureText('3,000');const result=await builder.build('KOREA_MARKET',morning);
+ assert.equal(result.state,'LIVE_READY',String(result.reason));assert.equal(result.payload?.session.observedDate,'2026-10-14');assert.equal(result.crossVerification?.verification,'VERIFIED');
  const view=result.payload!.unit.viewModel as import('../src/intelligence/daily-masters.js').KoreaMarketDailyViewModel;
- assert.equal(view.operationDate,'2026-10-15');assert.equal(view.sessionDate,'2026-10-14');assert.equal(view.issueDate,'2026-10-15');assert.equal(view.edition,'PREVIOUS_SESSION_MORNING');assert.equal(view.fxBasis,'CURRENT_AT_COLLECTION');assert.ok(view.indexMetrics.every(item=>item.source.label==='한국거래소'));assert.match(view.marketSummary,/전일 국내증시/);assert.doesNotMatch(view.title,/^\d{4}-\d{2}-\d{2}/);assert.match(result.payload!.unit.render.html,/오늘 체크포인트/);assert.match(result.payload!.unit.render.html,/USD\/KRW 수집 시점 현재가/);
+ assert.equal(view.operationDate,'2026-10-15');assert.equal(view.sessionDate,'2026-10-14');assert.equal(view.issueDate,'2026-10-15');assert.equal(view.edition,'PREVIOUS_SESSION_MORNING');assert.equal(view.fxBasis,'CURRENT_AT_COLLECTION');assert.ok(view.indexMetrics.every(item=>item.source.label==='한국거래소'));assert.match(view.marketSummary,/전일 국내증시/);assert.doesNotMatch(view.title,/^\d{4}-\d{2}-\d{2}/);assert.match(result.payload!.unit.render.html,/오늘 체크포인트|위험 요인과 다음 확인 지표/);assert.match(result.payload!.unit.render.html,/USD\/KRW 수집 시점 현재가/);
 });
 test('Korea Monday morning accepts the Saturday-stamped FX quote from the extended Friday session',async()=>{
  const morning='2026-10-25T21:20:00Z';
@@ -93,7 +94,7 @@ test('Korea Monday morning accepts the Saturday-stamped FX quote from the extend
   else if(url.includes('/upjong/'))data=[{name:'반도체',changeRate:'2.4',thistime:'20261023200504'}];
   else data={stocks:[{stockName:'대표 종목',fluctuationsRatio:'1.2',localTradedAt:'2026-10-23T20:20:18+09:00'}]};
   return new Response(JSON.stringify(data));}) as typeof fetch;
- const result=await new RepositoryInternalDailyBuilder(fetcher,{},official).build('KOREA_MARKET',morning);
+ const builder=new RepositoryInternalDailyBuilder(withBrokerBrief(fetcher,'2026-10-24'),{},official);builder.pdfText=async()=>briefFixtureText('3,000');const result=await builder.build('KOREA_MARKET',morning);
  assert.equal(result.state,'LIVE_READY',String(result.reason));assert.equal(result.payload?.session.observedDate,'2026-10-23');
 });
 test('Korea morning still rejects an FX quote older than the completed session',async()=>{

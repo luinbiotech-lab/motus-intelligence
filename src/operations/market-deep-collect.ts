@@ -24,7 +24,7 @@ export async function collectUSDeep(input:{sessionDate:string;operationDate:stri
     const [bundle,attention]=await Promise.all([collectBrokerResearch({sessionDate:input.sessionDate,operationDate:input.operationDate,fetcher:input.fetcher,...(input.pdfText?{pdfText:input.pdfText}:{})}).catch(()=>null),collectUSAttention(input.sessionDate,input.fetcher).catch(()=>null)]);
     if(bundle)record(input.audit,bundle.audit,'US_MARKET',input.at,input.sessionDate);
     if(attention)record(input.audit,attention.audit,'US_MARKET',input.at,input.sessionDate);
-    const composition=composeUSDeepSections({bundle,stocks:attention?.stocks??[],sectors:attention?.sectors??[]});
+    const composition=composeUSDeepSections({bundle,stocks:attention?.stocks??[],sectors:attention?.sectors??[],checkpoint:'다음 정규장에서는 미국 10년물 금리 방향과 함께, 증권사들이 짚은 경계 요인이 주요 지수와 업종 등락에 실제로 반영되는지가 확인 대상이다.'});
     const sources=[...composition.sources];
     if(composition.sections.some(section=>section.key==='us-attention')){sources.push({label:'Yahoo Finance 검색 상위 종목',url:YAHOO_TRENDING,publisher:'Yahoo Finance'});for(const url of attention?.stockUrls??[])sources.push({label:'Yahoo Finance 종목 일별 종가',url,publisher:'Yahoo Finance'})}
     if(composition.sections.some(section=>section.key==='us-sectors'))for(const url of attention?.sectorUrls??[])sources.push({label:'Yahoo Finance SPDR 업종 ETF 일별 종가',url,publisher:'Yahoo Finance'});
@@ -41,7 +41,7 @@ export async function collectKoreaDeep(input:{sessionDate:string;operationDate:s
     const [bundle,search]=await Promise.all([collectBrokerResearch({sessionDate:input.sessionDate,operationDate:input.operationDate,fetcher:input.fetcher,verifiedKospiClose:input.kospiClose,...(input.pdfText?{pdfText:input.pdfText}:{})}).catch(()=>null),collectKoreaSearchTop(input.sessionDate,input.fetcher).catch(()=>null)]);
     if(bundle)record(input.audit,bundle.audit,'KOREA_MARKET',input.at,input.sessionDate);
     if(search)record(input.audit,search.audit,'KOREA_MARKET',input.at,input.sessionDate);
-    const composition=composeKoreaDeepSections({bundle,searchTop:search?.stocks??[]});
+    const composition=composeKoreaDeepSections({bundle,searchTop:search?.stocks??[],checkpoint:'오늘 장에서는 외국인·기관 수급의 연속성, 원·달러 환율, 전일 강세 업종이 이어지는지가 확인 대상이다.'});
     const sources=[...composition.sources];
     if(composition.sections.some(section=>section.key==='korea-search-top')){sources.push({label:'네이버페이 증권 검색 상위 종목',url:NAVER_SEARCH_TOP,publisher:'네이버페이 증권'});for(const stock of search?.stocks??[])sources.push({label:`네이버페이 증권 ${stock.name} 일별 시세`,url:stock.url,publisher:'네이버페이 증권'})}
     recordListed(input.audit,sources,'KOREA_MARKET',input.at,input.sessionDate);

@@ -19,7 +19,8 @@ export type BrokerReportKind='MARKET'|'COMPANY'|'INDUSTRY'|'ECONOMY';
 export interface BrokerReport {kind:BrokerReportKind;date:string;title:string;broker:string;analysts:string;url:string;summary:string[];targetPrice:string|null;rating:string|null;stockCode:string|null;company:string|null}
 export interface BrokerStatement {region:'US'|'KOREA';text:string;heading:string|null}
 export interface BrokerDigest {heading:string;bullets:string[];analyst:string|null}
-export interface BrokerBrief {report:BrokerReport;statements:BrokerStatement[];digests:BrokerDigest[]}
+export interface BrokerEvent {region:'US'|'KOREA';text:string}
+export interface BrokerBrief {report:BrokerReport;statements:BrokerStatement[];digests:BrokerDigest[];events?:BrokerEvent[]}
 export interface BrokerAudit {sourceId:string;url:string;status:'PASS'|'FAILED';count:number;error:string|null}
 export interface BrokerResearchBundle {briefs:BrokerBrief[];company:BrokerReport[];industry:BrokerReport[];economy:BrokerReport[];audit:BrokerAudit[]}
 
@@ -57,7 +58,8 @@ export function parseConsensusList(html:string,kind:BrokerReportKind):BrokerRepo
 }
 
 const MARKER=/^(?:[-•ㆍ·▪]\s*)(.+)$/;
-const REGION_HEADING:[RegExp,'US'|'KOREA'|'OTHER'][]=[[/^(?:▶\s*)?(?:미국|미국증시|미국 증시|뉴욕|뉴욕증시|\[\s*미국증시\s*\]|\[\s*해외증시\s*\]|Global Market)$/,'US'],[/^(?:▶\s*)?(?:한국증시|국내|국내증시|한국|\[\s*국내증시\s*\]|\[\s*한국증시\s*\])$/,'KOREA'],[/^(?:▶\s*)?(?:중국|중국증시|유럽|유럽증시|일본|아시아|신흥국)$|Event|일정|캘린더|Calendar|Schedule/i,'OTHER']];
+const REGION_HEADING:[RegExp,'US'|'KOREA'|'OTHER'][]=[[/^(?:▶\s*)?(?:미국|미국증시|미국 증시|뉴욕|뉴욕증시|\[\s*미국증시\s*\]|\[\s*해외증시\s*\]|Global Market)$/,'US'],[/^(?:▶\s*)?(?:한국증시|국내|국내증시|한국|\[\s*국내증시\s*\]|\[\s*한국증시\s*\])$/,'KOREA'],[/^(?:▶\s*)?(?:중국|중국증시|유럽|유럽증시|일본|아시아|신흥국)$/i,'OTHER']];
+const EVENT_HEADING=/Event|일정|캘린더|Calendar|Schedule/i;
 const US_WORDS=/미국|뉴욕|美|미 증시|S&P|나스닥|다우|연준|FOMC|빅테크|필라델피아|월가|Fed/;
 const KOREA_WORDS=/코스피|KOSPI|코스닥|KOSDAQ|국내 증시|국내증시|사이드카|외국인과 기관|유가증권시장/;
 const ANALYST_LINE=/^([가-힣]{2,4}(?:[,·][가-힣]{2,4})*)\s*\.\s*\S+@\S+$/;
@@ -68,24 +70,26 @@ function quotable(value:string){return value.length>=18&&value.length<=200&&hang
 const SENTENCE_END=/(?:다|함|음|임|됨|마감|전망|예상|지속|필요|유지|상승|하락|강세|약세|확대|축소|전환|발동|기록|주목|부각|반등|급등|급락|우려|기대|\)|%)\.?$/;
 
 /** Extracts verbatim single-line bullets, region headlines and titled bullet digests from a broker brief's text. */
-export function extractBriefContent(text:string):{statements:BrokerStatement[];digests:BrokerDigest[]} {
+export function extractBriefContent(text:string):{statements:BrokerStatement[];digests:BrokerDigest[];events:BrokerEvent[]} {
   const lines=text.split(/\r?\n/).map(line=>line.replace(/\u00a0/g,' ').trim());
-  const statements:BrokerStatement[]=[],digests:BrokerDigest[]=[];
+  const statements:BrokerStatement[]=[],digests:BrokerDigest[]=[],events:BrokerEvent[]=[];let eventMode=false;
   let region:'US'|'KOREA'|'OTHER'|null=null,pendingHeadline:'US'|'KOREA'|null=null,digest:BrokerDigest|null=null;
   const flush=()=>{if(digest&&digest.bullets.length)digests.push(digest);digest=null};
   const previousNonEmpty=(index:number)=>{for(let j=index-1;j>=0;j--)if(lines[j])return {line:lines[j]!,gap:j<index-1};return {line:'',gap:true}};
   for(let i=0;i<lines.length;i++){
-    const line=lines[i]!;if(!line)continue;
+    const line=lines[i]!;if(!line){if(eventMode&&!(lines[i+1]??'').match(MARKER))eventMode=false;continue}
+    if(/^(?:▶|■)?\s*\S.*$/.test(line)&&EVENT_HEADING.test(line)&&line.length<=40&&!MARKER.test(line)){eventMode=true;region=null;pendingHeadline=null;flush();continue}
     const heading=REGION_HEADING.find(([pattern])=>pattern.test(line));
-    if(heading){region=heading[1];pendingHeadline=heading[1]==='OTHER'?null:heading[1];flush();continue}
-    if(/^(?:▶|■)/.test(line)||/^\[[^\]]{1,24}\]$/.test(line)){region=null;pendingHeadline=null;flush();continue}
+    if(heading){eventMode=false;region=heading[1];pendingHeadline=heading[1]==='OTHER'?null:heading[1];flush();continue}
+    if(/^(?:▶|■)/.test(line)||/^\[[^\]]{1,24}\]$/.test(line)){eventMode=false;region=null;pendingHeadline=null;flush();continue}
     const analyst=line.match(ANALYST_LINE);
-    if(analyst){if(digest)digest.analyst=analyst[1]!;flush();continue}
-    if(CATEGORY_LINE.test(line)){flush();region=null;pendingHeadline=null;continue}
+    if(analyst){eventMode=false;if(digest)digest.analyst=analyst[1]!;flush();continue}
+    if(CATEGORY_LINE.test(line)){eventMode=false;flush();region=null;pendingHeadline=null;continue}
     const bullet=line.match(MARKER);
     if(bullet){
       pendingHeadline=null;
       const body=bullet[1]!.trim(),next=lines[i+1]??'';
+      if(eventMode){const item=body.replace(/^(?:미|美)\s*-\s*/,'미국: ').replace(/^(?:한|국내)\s*-\s*/,'국내: ');if(item.length>=6&&item.length<=120&&hangul(item)>=2)events.push({region:/^미국:|美|미국|FOMC|연준/.test(item)?'US':'KOREA',text:item});continue}
       // A following unmarked prose line means the printed bullet wrapped; skip it rather than guess the join.
       const wrapped=Boolean(next)&&!MARKER.test(next)&&!ANALYST_LINE.test(next)&&hangul(next)>=2&&!REGION_HEADING.some(([pattern])=>pattern.test(next))&&!SENTENCE_END.test(body);
       if(wrapped||!quotable(body)||region==='OTHER')continue;
@@ -100,10 +104,10 @@ export function extractBriefContent(text:string):{statements:BrokerStatement[];d
     // A digest heading is a short title line that starts a block (after a blank, category, analyst or another block)
     // and is immediately followed by bullets; wrapped sentence fragments never qualify.
     const prior=previousNonEmpty(i),next=lines[i+1]??'';
-    if(hangul(line)>=4&&line.length<=80&&MARKER.test(next)&&(prior.gap||ANALYST_LINE.test(prior.line)||CATEGORY_LINE.test(prior.line)||!prior.line)){flush();digest={heading:line,bullets:[],analyst:null};region=region==='OTHER'?null:region;continue}
+    if(hangul(line)>=4&&line.length<=80&&MARKER.test(next)&&(prior.gap||ANALYST_LINE.test(prior.line)||CATEGORY_LINE.test(prior.line)||!prior.line)){eventMode=false;flush();digest={heading:line,bullets:[],analyst:null};region=region==='OTHER'?null:region;continue}
   }
   flush();
-  return {statements:[...new Map(statements.map(item=>[item.region+item.text,item])).values()],digests};
+  return {statements:[...new Map(statements.map(item=>[item.region+item.text,item])).values()],digests,events:[...new Map(events.map(item=>[item.text,item])).values()]};
 }
 
 /** A Korea brief that prints a KOSPI level different from the verified close describes another session. */
@@ -162,7 +166,7 @@ export async function collectBrokerResearch(input:{sessionDate:string;operationD
       const content=extractBriefContent(text);
       let statements=content.statements;
       if(input.verifiedKospiClose&&contradictsKospi(statements,input.verifiedKospiClose))statements=statements.filter(item=>item.region!=='KOREA');
-      briefs.push({report,statements,digests:content.digests});
+      briefs.push({report,statements,digests:content.digests,events:content.events});
       audit.push({sourceId:'consensus:pdf:'+report.url.split('=').pop(),url:report.url,status:'PASS',count:statements.length+content.digests.length,error:null});
     }catch(error){audit.push({sourceId:'consensus:pdf:'+report.url.split('=').pop(),url:report.url,status:'FAILED',count:0,error:error instanceof Error&&/^(?:CONSENSUS_HTTP_\d{3}|CONSENSUS_NOT_PDF|PDF_TEXT_UNAVAILABLE)$/.test(error.message)?error.message:'CONSENSUS_PDF_FAILED'})}
   }

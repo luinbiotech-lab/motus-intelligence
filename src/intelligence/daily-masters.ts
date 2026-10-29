@@ -35,7 +35,7 @@ export interface USMarketDailyViewModel extends DailyMasterBase {
   marketResearch?:{publisher:string;headline:string;url:string;publishedAt:string;kind:'FINANCIAL_MEDIA'|'BROKER_RESEARCH';evidence?:string[]}[];
   category:'US_MARKET';marketSummary:string;marketHistory:MajorIndexHistory;
   /** Expert (broker-quoted) and search-ranked sections composed from attributed evidence. */
-  deepSections?:Array<{key:string;title:string;intro?:string;paragraphs:Array<{text:string;source?:{label:string;url:string}}>}>;
+  deepSections?:Array<{key:string;title:string;intro?:string;placement?:'early'|'late'|'risks';paragraphs:Array<{text:string;source?:{label:string;url:string}}>}>;
   supportingMetrics:NewsletterMarketMetric[];marketCommentary:string[];sectorsCompanies:string[];
   wallStreetResearch:{headline:string;institutionView:string|null;motusInterpretation:string|null;facts:string[]}[];
   checkpoints:NewsletterWatchItem[];
@@ -46,7 +46,7 @@ export interface KoreaMarketDailyViewModel extends DailyMasterBase {
   marketResearch?:{publisher:string;headline:string;url:string;publishedAt:string;kind:'FINANCIAL_MEDIA'|'BROKER_RESEARCH';evidence?:string[]}[];
   category:'KOREA_MARKET';marketSummary:string;indexMetrics:KoreaMarketNewsletterMetric[];
   /** Expert (broker-quoted) and search-ranked sections composed from attributed evidence. */
-  deepSections?:Array<{key:string;title:string;intro?:string;paragraphs:Array<{text:string;source?:{label:string;url:string}}>}>;
+  deepSections?:Array<{key:string;title:string;intro?:string;placement?:'early'|'late'|'risks';paragraphs:Array<{text:string;source?:{label:string;url:string}}>}>;
   operationDate?:string;sessionDate?:string;edition?:'PREVIOUS_SESSION_MORNING'|'MANUAL_RECOVERY_CLOSE';fxBasis?:'BOK_REFERENCE_RATE'|'CURRENT_AT_COLLECTION';
   fxAndSupporting:KoreaMarketNewsletterMetric[];investorFlows:KoreaMarketNewsletterMetric[];
   sectors:KoreaMarketNewsletterMetric[];movers:KoreaMarketNewsletterMetric[];research:KoreaResearchNewsletterEntry[];

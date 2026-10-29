@@ -27,24 +27,25 @@ export function renderAIEditorialArticle(view:AIIntelligenceDailyViewModel):Dail
 export function renderUSEditorialArticle(view:USMarketDailyViewModel):DailyMasterRenderResult {
   const terms=new Set<string>();const describe=(value:string)=>explainTerms(value,terms);
   const parts=[masthead(view.title,view.subtitle,view.displayLabel,view.issueDate),lead(describe([view.marketSummary,...view.marketCommentary].join(' ')))];
-  const later=new Set(['us-rates-research']);
-  for(const item of view.deepSections??[])if(!later.has(item.key))parts.push(deepSection(item));
+  const deep=view.deepSections??[],place=(where:'early'|'late'|'risks')=>deep.filter(item=>(item.placement??'early')===where).map(deepSection);
+  parts.push(...place('early'));
   const period=view.marketHistory.sessionCount>=60?'3개월':`${view.marketHistory.sessionCount}거래일`;
   parts.push(renderMarketTrendSection(view.marketHistory).replace('미국 주요 증시 추이',`미국 주요지수 ${period} 흐름`));
   if(view.supportingMetrics.length)parts.push(section('금리·달러·변동성',`<p style="margin:0">${view.supportingMetrics.map(item=>`${esc(describe(item.label))} ${esc(item.value)}${item.change?` (${esc(item.change)})`:''}`).join(' · ')}</p>`));
   if(view.narrative?.facts.length)parts.push(section('지수별 흐름과 위치',paragraphs(view.narrative.facts)));
   if(view.narrative?.analysis.length)parts.push(section('MOTUS 분석',paragraphs(view.narrative.analysis)));
-  for(const item of view.deepSections??[])if(later.has(item.key))parts.push(deepSection(item));
+  parts.push(...place('late'));
   if(view.sectorsCompanies.length)parts.push(section('종목과 업종에서 읽힌 신호',paragraphs(view.sectorsCompanies)));
   if(view.marketResearch?.length)parts.push(renderMarketResearchEntries(view.marketResearch,view.issueDate));
-  if(view.checkpoints.length)parts.push(section('다음 거래일',paragraphs(view.checkpoints.map(item=>`${item.headline}: ${item.watchFor}`))));
+  const risks=place('risks');
+  if(risks.length)parts.push(...risks);else if(view.checkpoints.length)parts.push(section('다음 거래일',paragraphs(view.checkpoints.map(item=>`${item.headline}: ${item.watchFor}`))));
   parts.push(sources(view.sources));return finish('us-market',view.title,BLOGGER_EDITORIAL_CATEGORIES.US_MARKET.publicLabel,parts,['masthead','lead','charts','macro','companies','research','watch','sources']);
 }
 
 export function renderKoreaEditorialArticle(view:KoreaMarketDailyViewModel):DailyMasterRenderResult {
   const parts=[masthead(view.title,view.subtitle,view.displayLabel,view.issueDate),lead(view.marketSummary)];
-  const deep=view.deepSections??[];
-  for(const item of deep)parts.push(deepSection(item));
+  const deep=view.deepSections??[],place=(where:'early'|'late'|'risks')=>deep.filter(item=>(item.placement??'early')===where).map(deepSection);
+  parts.push(...place('early'));
   if(view.marketCommentary.length&&!deep.length)parts.push(section(view.edition==='PREVIOUS_SESSION_MORNING'?'전일 장을 읽는 기준':'마감 흐름을 읽는 기준',paragraphs(view.marketCommentary)));
   if(view.indexMetrics.length)parts.push(section('코스피와 코스닥',metricProse(view.indexMetrics)));
   if(view.narrative?.facts.length)parts.push(section('지수 흐름',paragraphs(view.narrative.facts)));
@@ -54,8 +55,10 @@ export function renderKoreaEditorialArticle(view:KoreaMarketDailyViewModel):Dail
   const ordinaryMovers=view.movers.filter(item=>!isStructuredLeveragedProduct(item.label));
   if(ordinaryMovers.length)parts.push(section('주요 종목 흐름',metricProse(ordinaryMovers)));
   if(view.narrative?.analysis.length)parts.push(section('MOTUS 분석',paragraphs(view.narrative.analysis)));
+  parts.push(...place('late'));
   if(view.marketResearch?.length)parts.push(renderMarketResearchEntries(view.marketResearch,view.operationDate??view.issueDate));
-  if(view.checkpoints.length)parts.push(section(view.edition==='PREVIOUS_SESSION_MORNING'?'오늘 체크포인트':'다음 거래일',paragraphs(view.checkpoints.map(item=>`${item.headline}: ${item.watchFor}`))));
+  const risks=place('risks');
+  if(risks.length)parts.push(...risks);else if(view.checkpoints.length)parts.push(section(view.edition==='PREVIOUS_SESSION_MORNING'?'오늘 체크포인트':'다음 거래일',paragraphs(view.checkpoints.map(item=>`${item.headline}: ${item.watchFor}`))));
   if(view.marketCommentary.length&&deep.length)parts.push(section('자료 기준',paragraphs(view.marketCommentary)));
   parts.push(sources(view.sources));return finish('korea-market',view.title,BLOGGER_EDITORIAL_CATEGORIES.KOREA_MARKET.publicLabel,parts,['masthead','lead','indexes','fx','flows','sectors','research','watch','sources']);
 }
@@ -66,14 +69,13 @@ export function renderMarketResearchEntries(entries:ReadonlyArray<{publisher:str
  const issued=Date.parse(issueDate+'T23:59:59Z');
  const filtered=entries.filter(item=>/^https:\/\/[^\s]+$/.test(item.url)&&Number.isFinite(Date.parse(item.publishedAt))&&Date.parse(item.publishedAt)<=issued);
  const make=(kind:'FINANCIAL_MEDIA'|'BROKER_RESEARCH')=>{
-  const rows=filtered.filter(item=>item.kind===kind);if(!rows.length)return '';
+  const rows=filtered.filter(item=>item.kind===kind&&item.headline.trim().length>=8);if(!rows.length)return '';
   const list=rows.map(item=>{
    const age=Math.floor((issued-Date.parse(item.publishedAt))/86400000),older=age>7;
-   const korean=(item.headline.match(/[가-힣]/g)??[]).length;
-   const title=korean>=3?item.headline:'공식 원문 확인';
+   const title=item.headline;
    return `<li style="margin:0 0 11px"><strong>${esc(item.publisher)}</strong> · ${esc(item.publishedAt.slice(0,10))}${older?' · 과거 자료':''}<div><a href="${attr(item.url)}" target="_blank" rel="nofollow noopener noreferrer" style="${LINK}">${esc(title)}</a></div>${kind==='BROKER_RESEARCH'&&item.evidence?.length?`<p style="margin:6px 0 0">공식 공개 요약: ${esc(item.evidence.slice(0,2).join(' / '))}</p>`:''}</li>`;
   }).join('');
-  return section(kind==='BROKER_RESEARCH'?'증권사 공개 리서치 자료':'금융 전문 언론 원문',`<p style="margin:0 0 12px">${kind==='BROKER_RESEARCH'?'증권사 공식 공개 자료의 제목·발행일과 검증된 요약만 제공합니다. 과거 자료는 현재 투자의견으로 해석하지 않습니다.':'금융 전문 언론이 보도한 시장 관련 원문을 수집일 기준으로 정리했습니다. 기사 제목은 원문 링크에서 확인할 수 있습니다.'}</p><ul style="margin:0;padding-left:20px">${list}</ul>`);
+  return section(kind==='BROKER_RESEARCH'?'증권사 공개 리서치 자료':'금융 전문 언론 원문',`<p style="margin:0 0 12px">${kind==='BROKER_RESEARCH'?'증권사가 공식 사이트에 공개한 자료의 제목과 발행일이다. 발행일이 일주일을 넘은 자료는 참고용이다.':'해외·국내 금융 매체가 같은 시기에 보도한 시장 기사다. 해외 기사는 원문 제목을 그대로 적었다.'}</p><ul style="margin:0;padding-left:20px">${list}</ul>`);
  };
  return make('BROKER_RESEARCH')+make('FINANCIAL_MEDIA');
 }

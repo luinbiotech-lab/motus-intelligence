@@ -11,7 +11,7 @@ test('Blogger cites concrete publisher, date and official link without invented 
  assert.match(html,/금리와 인플레이션 전망/);
  assert.match(html,/과거 자료/);
  assert.match(html,/금융 전문 언론 원문/);
- assert.match(html,/공식 원문 확인/);
+ assert.match(html,/Stocks rally after earnings beat/);assert.doesNotMatch(html,/공식 원문 확인/);
  assert.match(html,/https:\/\/www.cnbc.com/);
  assert.doesNotMatch(html,/목표주가 상향|강력 매수|실적 기대와 금리의 줄다리기/);
 });
