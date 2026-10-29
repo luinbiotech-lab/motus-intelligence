@@ -1,0 +1,18 @@
+{
+ "mk_default": {
+  "status": 200,
+  "len": 16618
+ },
+ "mk_market": {
+  "status": 200,
+  "len": 58730
+ },
+ "ec_default": {
+  "status": 200,
+  "len": 19383
+ },
+ "in_industry": {
+  "status": 200,
+  "len": 64995
+ }
+}

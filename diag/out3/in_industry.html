@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>한경 컨센서스</title>
+    <meta http-equiv="Content-Type" content="text/html;">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex">
+    <link rel="stylesheet" href="/css/common.css?v=20171065" type="text/css">
+    <link rel="stylesheet" href="/js/datePicker/css/ui-lightness/jquery-ui-1.10.2.custom.css" type="text/css">
+    <link rel="stylesheet" href="/js/datePicker/css/ui.daterangepicker.css" type="text/css">
+    <link rel="shortcut icon" href="https://www.hankyung.com/favicon.ico">
+	<script type="text/javascript" src="/js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="/js/common.js?v=20231221"></script>
+    <script type="text/javascript" src="/js/datePicker/jquery-calendar.js"></script>
+    <script type="text/javascript" src="/js/datePicker/daterangepicker.jQuery.js?v=20231221"></script>
+
+    <script src="//hkstatic.hankyung.com/js/ga/googleTagManager.js?v=20231221"></script>
+	<!-- GoogleAnalyticsObject -->
+	<!-- <script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-74932633-1', 'auto');
+		ga('require', 'linkid');
+		ga('require', 'displayfeatures');
+		ga('send', 'pageview');
+	</script> -->
+	<!-- //GoogleAnalyticsObject -->
+
+</head>
+<body>
+    <div id="wrap">
+<script type="text/javascript">
+    $(function(){
+        $('#sdate,#edate').daterangepicker({
+            arrows:false,
+            changeMonth: true,
+            changeYear: true
+        });
+
+        $( "#datepicker" ).datepicker({
+            inline: true,
+            changeMonth: true,
+            changeYear: true
+        });
+
+        $( "#dialog-link, #icons li" ).hover(
+            function() {
+                $( this ).addClass( "ui-state-hover" );
+            },
+            function() {
+                $( this ).removeClass( "ui-state-hover" );
+            }
+        );
+/*
+		$('#container .tabT01 li a').unbind('click').click(function(){
+			$('#f_search').attr('action', $(this).attr('href'));
+			$('#f_search').submit();
+			return false;
+		});
+*/
+    });
+
+    function _select_code(code,name){
+        document.getElementById('search_text').value = name;
+        document.getElementById('business_code').value = code;
+
+        $("#business_list").html("");
+        $("#business_list").hide();
+    }
+
+    function _text_change(type, value, name){
+        var key = "";
+        if(type=="1"){
+            key = "search_value";
+        }else if(type=="2"){
+            key = "report_type";
+        }
+
+        $("#_"+key).text(name);
+        document.getElementById(key).value = value;
+        if(document.getElementById(key).value!=""){
+            $(".fie0"+type+" dd").slideToggle();
+        }
+    }
+
+    function _search_text(){
+        var search_value = document.getElementById('search_value').value;
+        document.getElementById('business_code').value = "";
+        if(search_value=="BUSINESS"){
+            var search_text = document.getElementById('search_text').value;
+            if(search_text.length>=2){
+                $.getJSON('/analysis/search?callback=?&search_text='+search_text, function(data) {
+                    var str = "";
+                    $.each(data, function(key, val) {
+                        var index = val.BUSINESS_NAME.indexOf(search_text);
+                        str = str + '<a href="javascript:_select_code(\''+val.BUSINESS_CODE+'\',\''+val.BUSINESS_NAME+'\')">';
+                        if(index==0){
+                            str = str + '<strong>' + search_text + '</strong>';
+                            str = str + val.BUSINESS_NAME.substring(search_text.length, val.BUSINESS_NAME.length);
+                        }else if(index==-1){
+                            str = str + val.BUSINESS_NAME;
+                        }else{
+                            str = str + val.BUSINESS_NAME.substring(0, index);
+                            str = str + '<strong>' + search_text + '</strong>';
+                            str = str + val.BUSINESS_NAME.substring(search_text.length, val.BUSINESS_NAME.length);
+                        }
+                        str = str + '</a>';
+                    });
+                    $("#business_list").show();
+                    $("#business_list").html(str);
+                });
+            }else{
+                $("#business_list").html("");
+                $("#business_list").hide();
+            }
+        }
+    }
+$(function(){
+    _text_change('2','IN','산업');
+    $('.fieldset.fie02 dd').hide();
+});
+</script>
+        <!-- header -->
+        <div id="header">
+            <form id="f_search" name="f_search" method="GET">
+            <div class="hd_con">
+                <div class="logo"><a href="/"><img src="/images/bg_logo01.png" alt="한경컨센서스" /></a></div>
+                <!-- hd_top -->
+                <div class="hd_top">
+                    <!-- hd_inList -->
+                    <div class="hd_inList">
+                        <div class="top_input">
+                            <input id="sdate" type="text" value="2026-10-27" name="sdate" readonly> <span>~</span>
+                            <input id="edate" type="text" value="2026-10-30" name="edate" readonly>
+                            <input type="hidden" id="now_page" name="now_page" value="1">
+                            <input type="hidden" id="search_value" name="search_value" value="">
+                            <input type="hidden" id="report_type" name="report_type" value="IN">
+                            <input type="hidden" id="pagenum" name="pagenum" value="80">
+                        </div>
+                        <div class="fieldset fie01">
+                            <dl>
+                                <dt>
+                                    <a href="javascript:_text_change('1','','전체')" id="_search_value" data-value="">
+전체                                    </a>
+                                </dt>
+                                <dd class="disNone" id="search_value_select">
+                                    <a href="javascript:_text_change('1','REPORT_TITLE','제목')">제목(종목명)</a>
+                                    <a href="javascript:_text_change('1','REPORT_WRITER','작성자')">작성자</a>
+                                    <a href="javascript:_text_change('1','OFFICE_NAME','제공출처')">제공출처</a>
+                                </dd>
+                            </dl>
+                        </div>
+                        <script>
+                            $(".fie01 dt a").click(function(){
+                                $(".fie01 dd").slideToggle();
+                            });
+                        </script>
+                        <div class="fieldset fie02">
+                            <dl>
+                                <dt>
+                                    <a href="javascript:_text_change('2','','분류선택')" id="_report_type">
+산업                                    </a>
+                                </dt>
+                                <dd class="disNone" id="report_type_select">
+                                    <a href="javascript:_text_change('2','CO','기업')">기업</a>
+                                    <a href="javascript:_text_change('2','IN','산업')">산업</a>
+                                    <a href="javascript:_text_change('2','MA','시장')">시장</a>
+                                    <a href="javascript:_text_change('2','EC','경제')">경제</a>
+                                    <a href="javascript:_text_change('2','DE','파생')">파생</a>
+                                    <a href="javascript:_text_change('2','FE','[파생]외환')">[파생]외환</a>
+                                    <a href="javascript:_text_change('2','BO','[파생]채권')">[파생]채권</a>
+                                    <a href="javascript:_text_change('2','FU','[파생]펀드')">[파생]펀드</a>
+                                    <a href="javascript:_text_change('2','QU','[파생]퀀트')">[파생]퀀트</a>
+                                    <a href="javascript:_text_change('2','FC','[파생]해외')">[파생]해외</a>
+                                    <a href="javascript:_text_change('2','ET','[파생]기타')">[파생]기타</a>
+                                    <a href="javascript:_text_change('2','UP','상향')">상향</a>
+                                    <a href="javascript:_text_change('2','DW','하향')">하향</a>
+                                </dd>
+                            </dl>
+                        </div>
+                        <script>
+                            $(".fie02 dt a").click(function(){
+                                $(".fie02 dd").slideToggle();
+                            });
+                        </script>
+                        <div class="search01">
+                            <dl>
+                                <dt>
+                                    <input type="text" id="search_text" name="search_text" value="" autocomplete="off" onkeyup="_search_text()" onkeydown="javascript:_return(event);">
+                                    <input type="hidden" id="business_code" name="business_code" value="">
+                                </dt>
+                                <dd class="disNone" id="business_list"><!-- disNone disBlock -->
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <!-- //hd_inList -->
+                    <!-- btn_r -->
+                    <div class="btn_r">
+
+                       <a href="javascript:_search('/analysis/list')"><img src="/images/btn_search01.gif" alt="검색" /></a>
+                       <a href="javascript:_popup_open('/business/search?frame=analysis/layer',380,600, 'no')"><img src="/images/btn_event01.gif" alt="종목" /></a>
+                    </div>
+                    <!-- //btn_r -->
+                </div>
+                <!-- //hd_top -->
+            </div>
+            </form>
+        </div>
+        <!-- //header -->
+        <!-- container -->
+        <div id="container">
+            <!-- top_con -->
+            <div class="top_con">
+                <ul class="tabT01">
+                    <li class="tab01 "><a href="/analysis/list">전체</a></li>
+                    <li class="tab02 "><a href="/analysis/list?skinType=business">기업</a></li>
+                    <li class="tab03 on"><a href="/analysis/list?skinType=industry">산업</a></li>
+                    <li class="tab04 "><a href="/analysis/list?skinType=market">시장</a></li>
+                    <li class="tab05 "><a href="/analysis/list?skinType=derivative">파생</a></li>
+                    <li class="tab06 "><a href="/analysis/list?skinType=economy">경제</a></li>
+                    <li class="tab07 "><a href="/analysis/list?skinType=stock_good">상향</a></li>
+                    <li class="tab08 "><a href="/analysis/list?skinType=stock_bad">하향</a></li>
+                    <li class="tab09 "><a href="/business/list">기업정보</a></li>
+                </ul>
+            </div>
+            <!-- //top_con -->
+<div class="chart_popup" style="display:none;">
+    <div class="btn_wrap">
+        <button class="layer_close"></button>
+    </div>
+    <iframe src="" style="width:100%;height: 480px;border:none;" scrolling="no"></iframe>
+</div>
+<!-- contents -->
+            <div id="contents">
+                <div class="top_list">
+                    <div class="list_r">
+                        <p>LIST</p>
+                        <ul>
+                            <li ><a href="javascript:_Page_Link('/analysis/list?skinType=industry&sdate=2026-10-27&edate=2026-10-30&report_type=IN&pagenum=80&order_type=&pagenum=20')">20</a></li>
+                            <li ><a href="javascript:_Page_Link('/analysis/list?skinType=industry&sdate=2026-10-27&edate=2026-10-30&report_type=IN&pagenum=80&order_type=&pagenum=50')">50</a></li>
+                            <li class="on"><a href="javascript:_Page_Link('/analysis/list?skinType=industry&sdate=2026-10-27&edate=2026-10-30&report_type=IN&pagenum=80&order_type=&pagenum=80')">80</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- table_style01 -->
+                <div class="table_style01">
+                    <table>
+                        <colgroup>
+                            <col width="78px"/>
+                            <col width="*"/>
+                            <col width="140px"/>
+                            <col width="125px"/>
+                            <col width="136px"/>
+                            <col width="42px"/>
+                            <col width="65px"/>
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th class="first"><a href="javascript:_Order_Link(10000000,1000000,'/analysis/list?skinType=industry&sdate=2026-10-27&edate=2026-10-30&report_type=IN&pagenum=80&order_type=&now_page=1')">작성일 <img src="/images/bg_table01.gif" alt="" /></a></th>
+                                <th><a href="javascript:_Order_Link(10000000,10000,'/analysis/list?skinType=industry&sdate=2026-10-27&edate=2026-10-30&report_type=IN&pagenum=80&order_type=&now_page=1')">제목 <img src="/images/bg_table01.gif" alt="" /></a></th>
+                                <th><a href="javascript:_Order_Link(10000000,1,'/analysis/list?skinType=industry&sdate=2026-10-27&edate=2026-10-30&report_type=IN&pagenum=80&order_type=&now_page=1')">투자의견 <img src="/images/bg_table01.gif" alt="" /></a></th>
+                                <th><a href="javascript:_Order_Link(10000000,1000,'/analysis/list?skinType=industry&sdate=2026-10-27&edate=2026-10-30&report_type=IN&pagenum=80&order_type=&now_page=1')">작성자 <img src="/images/bg_table01.gif" alt="" /></a></th>
+                                <th><a href="javascript:_Order_Link(10000000,100,'/analysis/list?skinType=industry&sdate=2026-10-27&edate=2026-10-30&report_type=IN&pagenum=80&order_type=&now_page=1')">제공출처 <img src="/images/bg_table01.gif" alt="" /></a></th>
+                                <th>차트</th>
+                                <th>첨부파일</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                    <tr class="first">
+                                <td class="first txt_number">2026-10-29</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653462" onmouseover="$('#content_653462').show();" onmouseout="$('#content_653462').hide();" target="_blank">안녕하세요 데일리에요</a>
+                                    <div class="layerPop">
+                                        <div id="content_653462" class="pop01 disNone">
+                                            <strong>안녕하세요 데일리에요</strong>
+                                            <ul>
+                                                <li>안녕하세요 데일리에요</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+-                                </td>
+                                <td>양승윤</td>
+                                <td>유진투자증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                        <a href="/chart/view_frame?report_type=IN&industry_code=012&market_type=1" class="chart_btn"><img src="/images/btn_chart.gif" alt="차트" /></a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653462" title="20261029_B2030_syyang0901_550.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261029_B2030_syyang0901_550.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-29</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653449" onmouseover="$('#content_653449').show();" onmouseout="$('#content_653449').hide();" target="_blank">[인터넷/게임] IBKS Daily </a>
+                                    <div class="layerPop">
+                                        <div id="content_653449" class="pop01 disNone">
+                                            <strong>[인터넷/게임] IBKS Daily </strong>
+                                            <ul>
+                                                <li>[인터넷/게임] IBKS Daily </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+-                                </td>
+                                <td>이승훈,박상준</td>
+                                <td>IBK투자증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                        <a href="/chart/view_frame?report_type=IN&industry_code=153&market_type=2" class="chart_btn"><img src="/images/btn_chart.gif" alt="차트" /></a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653449" title="20261028164804377_ko.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261028164804377_ko.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-29</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653422" onmouseover="$('#content_653422').show();" onmouseout="$('#content_653422').hide();" target="_blank">3Q26 리뷰: K-조선 바닥 잡기 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653422" class="pop01 disNone">
+                                            <strong>3Q26 리뷰: K-조선 바닥 잡기 </strong>
+                                            <ul>
+                                                <li>3Q26 리뷰: K-조선 바닥 잡기 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+-                                </td>
+                                <td>배기연,김현비</td>
+                                <td>메리츠증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                        <a href="/chart/view_frame?report_type=IN&industry_code=152&market_type=1" class="chart_btn"><img src="/images/btn_chart.gif" alt="차트" /></a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653422" title="20261028131340805K_02.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261028131340805K_02.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653379" onmouseover="$('#content_653379').show();" onmouseout="$('#content_653379').hide();" target="_blank">통신 weekly</a>
+                                    <div class="layerPop">
+                                        <div id="content_653379" class="pop01 disNone">
+                                            <strong>통신 weekly</strong>
+                                            <ul>
+                                                <li>통신 weekly</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+-                                </td>
+                                <td>이승웅,김고은</td>
+                                <td>유안타증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                        <a href="/chart/view_frame?report_type=IN&industry_code=020&market_type=1" class="chart_btn"><img src="/images/btn_chart.gif" alt="차트" /></a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653379" title="20261028063336553_0_ko.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261028063336553_0_ko.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                <tr class="last">
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653378" onmouseover="$('#content_653378').show();" onmouseout="$('#content_653378').hide();" target="_blank">HD 계열사 격변: EB 발행 시점 해석기 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653378" class="pop01 disNone">
+                                            <strong>HD 계열사 격변: EB 발행 시점 해석기 </strong>
+                                            <ul>
+                                                <li>HD 계열사 격변: EB 발행 시점 해석기 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+-                                </td>
+                                <td>김용민</td>
+                                <td>유안타증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                        <a href="/chart/view_frame?report_type=IN&industry_code=152&market_type=1" class="chart_btn"><img src="/images/btn_chart.gif" alt="차트" /></a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653378" title="20261027203431293_0_ko.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261027203431293_0_ko.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                    <tr class="first">
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653363" onmouseover="$('#content_653363').show();" onmouseout="$('#content_653363').hide();" target="_blank">인프라를가진지주, 데이터를가진지주</a>
+                                    <div class="layerPop">
+                                        <div id="content_653363" class="pop01 disNone">
+                                            <strong>인프라를가진지주, 데이터를가진지주</strong>
+                                            <ul>
+                                                <li>인프라를가진지주, 데이터를가진지주 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+-                                </td>
+                                <td>이경연</td>
+                                <td>대신증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                        <a href="/chart/view_frame?report_type=IN&industry_code=002&market_type=1" class="chart_btn"><img src="/images/btn_chart.gif" alt="차트" /></a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653363" title="59930_2027_Holdings.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="59930_2027_Holdings.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653362" onmouseover="$('#content_653362').show();" onmouseout="$('#content_653362').hide();" target="_blank">조선에서해운으로바통터치</a>
+                                    <div class="layerPop">
+                                        <div id="content_653362" class="pop01 disNone">
+                                            <strong>조선에서해운으로바통터치</strong>
+                                            <ul>
+                                                <li>조선에서해운으로바통터치</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+-                                </td>
+                                <td>이지니</td>
+                                <td>대신증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                        <a href="/chart/view_frame?report_type=IN&industry_code=152&market_type=1" class="chart_btn"><img src="/images/btn_chart.gif" alt="차트" /></a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653362" title="59930_2027_Holdings.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="59930_2027_Holdings.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653357" onmouseover="$('#content_653357').show();" onmouseout="$('#content_653357').hide();" target="_blank">ibks daily [인터넷/게임]</a>
+                                    <div class="layerPop">
+                                        <div id="content_653357" class="pop01 disNone">
+                                            <strong>ibks daily [인터넷/게임]</strong>
+                                            <ul>
+                                                <li>ibks daily [인터넷/게임]</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+-                                </td>
+                                <td>이승훈,박상준</td>
+                                <td>IBK투자증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                        <a href="/chart/view_frame?report_type=IN&industry_code=153&market_type=2" class="chart_btn"><img src="/images/btn_chart.gif" alt="차트" /></a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653357" title="20261027180800783_ko.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261027180800783_ko.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653344" onmouseover="$('#content_653344').show();" onmouseout="$('#content_653344').hide();" target="_blank">시장 위험 반영 일괄 밸류 조정. 그러나, 상승여력 충분 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653344" class="pop01 disNone">
+                                            <strong>시장 위험 반영 일괄 밸류 조정. 그러나, 상승여력 충분 </strong>
+                                            <ul>
+                                                <li>시장 위험 반영 일괄 밸류 조정. 그러나, 상승여력 충분 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+-                                </td>
+                                <td>성종화</td>
+                                <td>LS증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                        <a href="/chart/view_frame?report_type=IN&industry_code=013&market_type=1" class="chart_btn"><img src="/images/btn_chart.gif" alt="차트" /></a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653344" title="[유틸리티_산업 Online(전력기기 4사 TP 조정)_261028☆]성종화_2134_Online report _ 6~10p_유틸리티.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="[유틸리티_산업 Online(전력기기 4사 TP 조정)_261028☆]성종화_2134_Online report _ 6~10p_유틸리티.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                <tr class="last">
+                                <td class="first txt_number">2026-10-28</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653337" onmouseover="$('#content_653337').show();" onmouseout="$('#content_653337').hide();" target="_blank">안녕하세요 데일리에요</a>
+                                    <div class="layerPop">
+                                        <div id="content_653337" class="pop01 disNone">
+                                            <strong>안녕하세요 데일리에요</strong>
+                                            <ul>
+                                                <li>안녕하세요 데일리에요</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+-                                </td>
+                                <td>양승윤</td>
+                                <td>유진투자증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                        <a href="/chart/view_frame?report_type=IN&industry_code=012&market_type=1" class="chart_btn"><img src="/images/btn_chart.gif" alt="차트" /></a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653337" title="20261028_B2030_syyang0901_548.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261028_B2030_syyang0901_548.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                    <tr class="first">
+                                <td class="first txt_number">2026-10-27</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653335" onmouseover="$('#content_653335').show();" onmouseout="$('#content_653335').hide();" target="_blank">스페이스X 3Q 실적 시사점</a>
+                                    <div class="layerPop">
+                                        <div id="content_653335" class="pop01 disNone">
+                                            <strong>스페이스X 3Q 실적 시사점</strong>
+                                            <ul>
+                                                <li>스페이스X 3Q 실적 시사점</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+-                                </td>
+                                <td>이재광</td>
+                                <td>LS증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                        <a href="/chart/view_frame?report_type=IN&industry_code=029&market_type=2" class="chart_btn"><img src="/images/btn_chart.gif" alt="차트" /></a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653335" title="[261027_SPCX]이재광_14_이슈브리프_기계.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="[261027_SPCX]이재광_14_이슈브리프_기계.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-27</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653330" onmouseover="$('#content_653330').show();" onmouseout="$('#content_653330').hide();" target="_blank">AI 인터커넥트 트렌드 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653330" class="pop01 disNone">
+                                            <strong>AI 인터커넥트 트렌드 </strong>
+                                            <ul>
+                                                <li>AI 인터커넥트 트렌드 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+-                                </td>
+                                <td>정우성</td>
+                                <td>LS증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                        <a href="/chart/view_frame?report_type=IN&industry_code=159&market_type=2" class="chart_btn"><img src="/images/btn_chart.gif" alt="차트" /></a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653330" title="[261022 CPO와HB_v4-1]정우성_69_Online report _ 6~10p_반도체.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="[261022 CPO와HB_v4-1]정우성_69_Online report _ 6~10p_반도체.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-27</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653329" onmouseover="$('#content_653329').show();" onmouseout="$('#content_653329').hide();" target="_blank">Value&Growth</a>
+                                    <div class="layerPop">
+                                        <div id="content_653329" class="pop01 disNone">
+                                            <strong>Value&Growth</strong>
+                                            <ul>
+                                                <li>Value&Growth</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+-                                </td>
+                                <td>정홍식,권태훈</td>
+                                <td>LS증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                        <a href="/chart/view_frame?report_type=IN&industry_code=159&market_type=2" class="chart_btn"><img src="/images/btn_chart.gif" alt="차트" /></a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653329" title="[★261027_스몰캡_11월_월보(완)_최종]정홍식_1459_Indepth report _ 12p이상_스몰캡.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="[★261027_스몰캡_11월_월보(완)_최종]정홍식_1459_Indepth report _ 12p이상_스몰캡.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-27</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653322" onmouseover="$('#content_653322').show();" onmouseout="$('#content_653322').hide();" target="_blank">버블은 수요가 먼저 꺼지면서 종료 되었다</a>
+                                    <div class="layerPop">
+                                        <div id="content_653322" class="pop01 disNone">
+                                            <strong>버블은 수요가 먼저 꺼지면서 종료 되었다</strong>
+                                            <ul>
+                                                <li>버블은 수요가 먼저 꺼지면서 종료 되었다</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+-                                </td>
+                                <td>강대승</td>
+                                <td>SK증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                        <a href="/chart/view_frame?report_type=IN&industry_code=159&market_type=2" class="chart_btn"><img src="/images/btn_chart.gif" alt="차트" /></a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653322" title="20261027080331709_0_ko.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261027080331709_0_ko.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                <tr class="last">
+                                <td class="first txt_number">2026-10-27</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653321" onmouseover="$('#content_653321').show();" onmouseout="$('#content_653321').hide();" target="_blank">증설의 병목, 새롭지 않다</a>
+                                    <div class="layerPop">
+                                        <div id="content_653321" class="pop01 disNone">
+                                            <strong>증설의 병목, 새롭지 않다</strong>
+                                            <ul>
+                                                <li>증설의 병목, 새롭지 않다</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+-                                </td>
+                                <td>이동주</td>
+                                <td>SK증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                        <a href="/chart/view_frame?report_type=IN&industry_code=159&market_type=2" class="chart_btn"><img src="/images/btn_chart.gif" alt="차트" /></a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653321" title="20261026163037246_0_ko.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261026163037246_0_ko.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                    <tr class="first">
+                                <td class="first txt_number">2026-10-27</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653320" onmouseover="$('#content_653320').show();" onmouseout="$('#content_653320').hide();" target="_blank">Global Carbon Daily</a>
+                                    <div class="layerPop">
+                                        <div id="content_653320" class="pop01 disNone">
+                                            <strong>Global Carbon Daily</strong>
+                                            <ul>
+                                                <li>Global Carbon Daily</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+-                                </td>
+                                <td>최관순</td>
+                                <td>SK증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                        <a href="/chart/view_frame?report_type=IN&industry_code=154&market_type=1" class="chart_btn"><img src="/images/btn_chart.gif" alt="차트" /></a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653320" title="20261027070626617_0_ko.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261027070626617_0_ko.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-27</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653315" onmouseover="$('#content_653315').show();" onmouseout="$('#content_653315').hide();" target="_blank">[인터넷/게임] IBKS Daily</a>
+                                    <div class="layerPop">
+                                        <div id="content_653315" class="pop01 disNone">
+                                            <strong>[인터넷/게임] IBKS Daily</strong>
+                                            <ul>
+                                                <li>[인터넷/게임] IBKS Daily</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+-                                </td>
+                                <td>이승훈, 박상준</td>
+                                <td>IBK투자증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                        <a href="/chart/view_frame?report_type=IN&industry_code=153&market_type=2" class="chart_btn"><img src="/images/btn_chart.gif" alt="차트" /></a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653315" title="20261026162114953_ko.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261026162114953_ko.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-27</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653309" onmouseover="$('#content_653309').show();" onmouseout="$('#content_653309').hide();" target="_blank">PCB Tracker #2 전방위적 공급부족</a>
+                                    <div class="layerPop">
+                                        <div id="content_653309" class="pop01 disNone">
+                                            <strong>PCB Tracker #2 전방위적 공급부족</strong>
+                                            <ul>
+                                                <li>PCB Tracker #2 전방위적 공급부족</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+-                                </td>
+                                <td>고의영, 박정하</td>
+                                <td>iM증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                        <a href="/chart/view_frame?report_type=IN&industry_code=013&market_type=1" class="chart_btn"><img src="/images/btn_chart.gif" alt="차트" /></a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653309" title="[27073932]_261716.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="[27073932]_261716.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-27</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653303" onmouseover="$('#content_653303').show();" onmouseout="$('#content_653303').hide();" target="_blank">숨 고르기 중 </a>
+                                    <div class="layerPop">
+                                        <div id="content_653303" class="pop01 disNone">
+                                            <strong>숨 고르기 중 </strong>
+                                            <ul>
+                                                <li>숨 고르기 중 </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+-                                </td>
+                                <td>한유정</td>
+                                <td>한화투자증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                        <a href="/chart/view_frame?report_type=IN&industry_code=158&market_type=1" class="chart_btn"><img src="/images/btn_chart.gif" alt="차트" /></a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653303" title="Ã_Ã_Ã_Â_ Ã_Ã_Ã_Â¯Ã_Â¤ Ã_Â_Ã_Ã¥Ã_Â° Â»ÃªÂ¾Ã·Ã_Ã_Â¸Ã Ã_Â®_Â¼Ã» Â°Ã_Â¸Â£Â±Ã¢ Ã_Ã__20261027_F.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="Ã_Ã_Ã_Â_ Ã_Ã_Ã_Â¯Ã_Â¤ Ã_Â_Ã_Ã¥Ã_Â° Â»ÃªÂ¾Ã·Ã_Ã_Â¸Ã Ã_Â®_Â¼Ã» Â°Ã_Â¸Â£Â±Ã¢ Ã_Ã__20261027_F.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                <tr class="last">
+                                <td class="first txt_number">2026-10-27</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653293" onmouseover="$('#content_653293').show();" onmouseout="$('#content_653293').hide();" target="_blank">안녕하세요 데일리에요</a>
+                                    <div class="layerPop">
+                                        <div id="content_653293" class="pop01 disNone">
+                                            <strong>안녕하세요 데일리에요</strong>
+                                            <ul>
+                                                <li>안녕하세요 데일리에요</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+-                                </td>
+                                <td>양승윤</td>
+                                <td>유진투자증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                        <a href="/chart/view_frame?report_type=IN&industry_code=012&market_type=1" class="chart_btn"><img src="/images/btn_chart.gif" alt="차트" /></a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653293" title="20261027_B2030_syyang0901_544.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261027_B2030_syyang0901_544.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                    <tr class="first">
+                                <td class="first txt_number">2026-10-27</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653292" onmouseover="$('#content_653292').show();" onmouseout="$('#content_653292').hide();" target="_blank">프랑스 시위 확산, 항공 수요는 여전히 견조</a>
+                                    <div class="layerPop">
+                                        <div id="content_653292" class="pop01 disNone">
+                                            <strong>프랑스 시위 확산, 항공 수요는 여전히 견조</strong>
+                                            <ul>
+                                                <li>프랑스 시위 확산, 항공 수요는 여전히 견조</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+-                                </td>
+                                <td>양승윤,임범수</td>
+                                <td>유진투자증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                        <a href="/chart/view_frame?report_type=IN&industry_code=029&market_type=2" class="chart_btn"><img src="/images/btn_chart.gif" alt="차트" /></a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653292" title="20261027_B2020_syyang0901_545.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261027_B2020_syyang0901_545.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-27</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653291" onmouseover="$('#content_653291').show();" onmouseout="$('#content_653291').hide();" target="_blank">프론티어 신뢰 회복이 우선</a>
+                                    <div class="layerPop">
+                                        <div id="content_653291" class="pop01 disNone">
+                                            <strong>프론티어 신뢰 회복이 우선</strong>
+                                            <ul>
+                                                <li>프론티어 신뢰 회복이 우선</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+-                                </td>
+                                <td>박재환</td>
+                                <td>유진투자증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                        <a href="/chart/view_frame?report_type=IN&industry_code=042&market_type=2" class="chart_btn"><img src="/images/btn_chart.gif" alt="차트" /></a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653291" title="20261027_B45_jaehwan124_47.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261027_B45_jaehwan124_47.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr>
+                                <td class="first txt_number">2026-10-27</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653290" onmouseover="$('#content_653290').show();" onmouseout="$('#content_653290').hide();" target="_blank">아연도금냉연(CGI) AD관세 효과</a>
+                                    <div class="layerPop">
+                                        <div id="content_653290" class="pop01 disNone">
+                                            <strong>아연도금냉연(CGI) AD관세 효과</strong>
+                                            <ul>
+                                                <li>아연도금냉연(CGI) AD관세 효과</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+-                                </td>
+                                <td>김소정</td>
+                                <td>유진투자증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                        <a href="/chart/view_frame?report_type=IN&industry_code=011&market_type=1" class="chart_btn"><img src="/images/btn_chart.gif" alt="차트" /></a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653290" title="20261027_B1520_smalljung_9.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261027_B1520_smalljung_9.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                                        <tr class="last">
+                                <td class="first txt_number">2026-10-27</td>
+                                <td class="text_l">
+                                    <a href="/analysis/downpdf?report_idx=653289" onmouseover="$('#content_653289').show();" onmouseout="$('#content_653289').hide();" target="_blank">호르무즈 다시 정체 시작</a>
+                                    <div class="layerPop">
+                                        <div id="content_653289" class="pop01 disNone">
+                                            <strong>호르무즈 다시 정체 시작</strong>
+                                            <ul>
+                                                <li>호르무즈 다시 정체 시작</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+-                                </td>
+                                <td>황성현</td>
+                                <td>유진투자증권</td>
+                                <td>
+                                    <div class="dv_input">
+                                        <a href="/chart/view_frame?report_type=IN&industry_code=008&market_type=1" class="chart_btn"><img src="/images/btn_chart.gif" alt="차트" /></a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="dv_input">
+<a href="/analysis/downpdf?report_idx=653289" title="20261027_B1010_tjdgus2009_1037.pdf" target="_blank"><img src="/images/btn_attached.gif" alt="20261027_B1010_tjdgus2009_1037.pdf" /></a>                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- //table_style01 -->
+                <!-- paging -->
+                <div class="paging">
+<a href="/analysis/list?skinType=industry&sdate=2026-10-27&edate=2026-10-30&report_type=IN&pagenum=80&order_type=&now_page=1" class="btn first"><img src="/images/icon_first.gif" alt="처음으로"></a>                    <span>1</span>
+<a href="/analysis/list?skinType=industry&sdate=2026-10-27&edate=2026-10-30&report_type=IN&pagenum=80&order_type=&now_page=1" class="btn last"><img src="/images/icon_last.gif" alt="끝으로"></a>                </div>
+                <!-- //paging -->
+                <!-- btn_pgbBtom -->
+                <div class="btn_pgbBtom">
+                    <a href="https://get.adobe.com/kr/reader/" target="_new"><img src="/images/btn_download01.gif" alt="첨부파일" /></a>
+                </div>
+                <!-- //btn_pgbBtom -->
+            </div>
+            <!-- //contents -->
+        <div class="notify">
+		본 자료는  투자자의 증권 투자를 돕기위한 참고자료이며, 따라서 본 자료에 의한 투자자의 투자결과에 대해 어떠한 목적의 증빙자료로 사용 될 수 없으며, <br />
+		어떠한 경우에도 작성자 및 당사의 허가 없이 전재, 복사 또는 대여 될 수 없습니다. 무단전재등으로 인한 분쟁발생시 법적 책임이 있음을 사전에 고지 합니다.
+	</div>
+        </div>
+        <!-- //container -->
+        <div id="footer">
+            <div class="short_copy"><img src="/images/txt_ingFooter02.gif" alt="Copyright Hankyung.com All rights reserved." /></div>
+        </div>
+        <!-- 2023.06.07 배너 추가 -->
+        <!-- <div class="banner-area" style="margin: 20px 0; text-align: center;">
+            <a href="https://bit.ly/42sopSg" target="_blank">
+                <img src="https://hkstatic.hankyung.com/img/www/w/koreamarket/consensus/banners/banner-eureka-970250-20230605.jpg" alt="한경 유레카 - 내가 본 리포트 종목, AI의 진단 결과는?">
+            </a>
+        </div> -->
+        <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+        <script>
+          window.googletag = window.googletag || {cmd: []};
+          googletag.cmd.push(function() {
+            googletag.defineSlot('/3448900/http:////hkconsensus.hankyung.com//apps.analysis//analysis.list', [970, 250], 'div-gpt-ad-1686617306429-0').addService(googletag.pubads());
+        
+            googletag.pubads().enableSingleRequest();
+        
+            googletag.enableServices();
+        
+        });        
+        </script>
+        
+        <!-- /3448900/http:////hkconsensus.hankyung.com//apps.analysis//analysis.list -->
+        
+        <div id='div-gpt-ad-1686617306429-0' class="banner-area" style='margin: 20px 0; text-align: center; min-width: 970px; min-height: 250px;'>
+        
+          <script>
+        
+            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1686617306429-0'); });
+        
+          </script>
+        
+        </div>
+    </div>
+</body>
+</html>
