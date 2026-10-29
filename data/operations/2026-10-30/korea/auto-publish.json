@@ -1,0 +1,10 @@
+{
+  "state": "HOLD",
+  "reasonCode": "YAHOO_FINANCE_KOSPI_ROW_MISSING",
+  "reasonCodes": [
+    "YAHOO_FINANCE_KOSPI_ROW_MISSING"
+  ],
+  "reason": "YAHOO_FINANCE_KOSPI_ROW_MISSING",
+  "insertCallCount": 0,
+  "publishCallCount": 0
+}
