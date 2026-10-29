@@ -1,0 +1,14 @@
+{
+  "mode": "LIVE",
+  "sourceMode": "internal",
+  "date": "2026-10-29",
+  "observedDate": "2026-10-29",
+  "category": "AI_INTELLIGENCE",
+  "state": "LIVE_READY",
+  "reasonCode": null,
+  "verification": "VERIFIED",
+  "publishCallCount": 0,
+  "commerce": {
+    "enabled": false
+  }
+}

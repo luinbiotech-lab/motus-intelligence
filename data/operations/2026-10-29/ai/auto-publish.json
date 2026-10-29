@@ -1,0 +1,74 @@
+{
+  "gate": {
+    "state": "AUTO_PUBLISH_READY",
+    "reasons": [],
+    "approval": "AUTO_POLICY_APPROVAL",
+    "checkedAt": "2026-10-29T10:18:14.614Z"
+  },
+  "searchRegistration": {
+    "publicationId": "motus-live-2026-10-29:ai",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/rtx-spark.html",
+    "registeredAt": "2026-10-29T19:18:16+09:00",
+    "trigger": "PUBLICATION_PUBLISHED",
+    "googleInspectionState": "QUEUED",
+    "naverDiscoveryState": "PENDING",
+    "visibility": {
+      "publicationId": "motus-live-2026-10-29:ai",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/10/rtx-spark.html",
+      "google": {
+        "discovered": null,
+        "indexed": null,
+        "lastCrawl": null,
+        "coverageState": null,
+        "inspectionAt": null
+      },
+      "naver": {
+        "discovered": null,
+        "indexed": null,
+        "collectionState": null,
+        "inspectionAt": null
+      },
+      "sitemapIncluded": null,
+      "rssIncluded": null
+    }
+  },
+  "libraryRegistration": {
+    "idempotencyKey": "library:motus-live-2026-10-29:ai|https://motusnova.blogspot.com/2026/10/rtx-spark.html"
+  },
+  "weeklyFeed": {
+    "idempotencyKey": "weekly:motus-live-2026-10-29:ai"
+  },
+  "pdfCandidate": {
+    "idempotencyKey": "pdf:motus-live-2026-10-29:ai:sha256:bac8d3ffd0da1e4eb7345166037782838d2b26f41d76b341347c25519ceae43f",
+    "visibility": "PRIVATE"
+  },
+  "audit": [
+    {
+      "at": "2026-10-29T10:18:14.614Z",
+      "event": "AUTO_PUBLISH_STATIC_GATE",
+      "detail": "AUTO_PUBLISH_READY"
+    },
+    {
+      "at": "2026-10-29T10:18:14.614Z",
+      "event": "REMOTE_DUPLICATE_CHECK",
+      "detail": "PASS"
+    },
+    {
+      "at": "2026-10-29T10:18:14.614Z",
+      "event": "FINAL_REMOTE_DUPLICATE_CHECK",
+      "detail": "PASS"
+    },
+    {
+      "at": "2026-10-29T19:18:16+09:00",
+      "event": "PUBLISHED",
+      "detail": "AUTO_POLICY_APPROVAL"
+    }
+  ],
+  "state": "PUBLISHED",
+  "draftPostId": "4705111700726011743",
+  "publicPostUrl": "https://motusnova.blogspot.com/2026/10/rtx-spark.html",
+  "publishedAt": "2026-10-29T19:18:16+09:00",
+  "insertCallCount": 1,
+  "publishCallCount": 1,
+  "error": null
+}

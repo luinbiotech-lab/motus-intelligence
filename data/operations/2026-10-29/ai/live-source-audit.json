@@ -1,0 +1,235 @@
+{
+  "schemaVersion": "1.0",
+  "sourceMode": "internal",
+  "category": "AI_INTELLIGENCE",
+  "operationDate": "2026-10-29",
+  "status": "LIVE_READY",
+  "reasonCode": null,
+  "entries": [
+    {
+      "sourceId": "openai",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/news/rss.xml",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T10:18:08.334Z",
+      "error": null
+    },
+    {
+      "sourceId": "google-ai",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blog.google/technology/ai/rss/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T10:18:08.334Z",
+      "error": null
+    },
+    {
+      "sourceId": "google-deepmind",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://deepmind.google/blog/rss.xml",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T10:18:08.334Z",
+      "error": null
+    },
+    {
+      "sourceId": "nvidia",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blogs.nvidia.com/feed/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T10:18:08.334Z",
+      "error": null
+    },
+    {
+      "sourceId": "nvidia-newsroom",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://nvidianews.nvidia.com/releases.xml",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T10:18:08.334Z",
+      "error": null
+    },
+    {
+      "sourceId": "microsoft",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blogs.microsoft.com/feed/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T10:18:08.334Z",
+      "error": null
+    },
+    {
+      "sourceId": "microsoft-source",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://news.microsoft.com/source/feed/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T10:18:08.334Z",
+      "error": null
+    },
+    {
+      "sourceId": "aws-news",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://aws.amazon.com/blogs/aws/feed/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T10:18:08.334Z",
+      "error": null
+    },
+    {
+      "sourceId": "aws-whats-new",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://aws.amazon.com/about-aws/whats-new/recent/feed/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T10:18:08.334Z",
+      "error": null
+    },
+    {
+      "sourceId": "meta",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://about.fb.com/news/feed/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T10:18:08.334Z",
+      "error": null
+    },
+    {
+      "sourceId": "anthropic",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://www.anthropic.com/news",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T10:18:08.334Z",
+      "error": null
+    },
+    {
+      "sourceId": "ai:page:1",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-bedrock-agentcore-cli-version-1-0-available/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T10:18:08.334Z",
+      "error": null,
+      "observedDate": "Wed, 28 Oc",
+      "sourceTimestamp": "Wed, 28 Oct 2026 20:00:00 GMT",
+      "dateField": "rss.pubDate"
+    },
+    {
+      "sourceId": "ai:page:2",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://deepmind.google/blog/gemini-4-carbon-our-next-frontier-model/",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-10-29T10:18:08.334Z",
+      "error": "AI_REDIRECT_OFF_OFFICIAL_DOMAIN"
+    },
+    {
+      "sourceId": "ai:page:3",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blogs.microsoft.com/blog/2026/10/28/introducing-the-microsoft-copilot-harness-unlocking-the-potential-of-truly-multi-model-agentic-work/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T10:18:08.334Z",
+      "error": null,
+      "observedDate": "2026-10-28",
+      "sourceTimestamp": "2026-10-28T16:51:35.000Z",
+      "dateField": "page.datePublished"
+    },
+    {
+      "sourceId": "ai:page:4",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blogs.nvidia.com/blog/local-ai-rtx-spark-laptops-updates-models-agents-games/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T10:18:08.334Z",
+      "error": null,
+      "observedDate": "2026-10-28",
+      "sourceTimestamp": "2026-10-28T15:00:46.000Z",
+      "dateField": "page.datePublished"
+    },
+    {
+      "sourceId": "ai:page:5",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/openai-servicenow-partnership-expansion",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-10-29T10:18:08.334Z",
+      "error": "HTTP_403"
+    },
+    {
+      "sourceId": "ai:rss-evidence:5",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/openai-servicenow-partnership-expansion",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T10:18:08.334Z",
+      "error": null,
+      "observedDate": "Wed, 28 Oc",
+      "sourceTimestamp": "Wed, 28 Oct 2026 13:15:00 GMT",
+      "dateField": "rss.pubDate"
+    },
+    {
+      "sourceId": "ai:page:6",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blog.google/products-and-platforms/products/education/ai-quests-polar-peaks/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T10:18:08.334Z",
+      "error": null,
+      "observedDate": "Mon, 26 Oc",
+      "sourceTimestamp": "Mon, 26 Oct 2026 16:00:00 +0000",
+      "dateField": "rss.pubDate"
+    },
+    {
+      "sourceId": "ai:page:7",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://www.anthropic.com/news/public-benefit-fund",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T10:18:08.334Z",
+      "error": null,
+      "observedDate": "2026-10-18",
+      "sourceTimestamp": "2026-10-18T00:00:00.000Z",
+      "dateField": "page.datePublished"
+    },
+    {
+      "sourceId": "ai:page:8",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/10/quick-smart-approvals-agentic-actions/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T10:18:08.334Z",
+      "error": null,
+      "observedDate": "Wed, 28 Oc",
+      "sourceTimestamp": "Wed, 28 Oct 2026 18:28:00 GMT",
+      "dateField": "rss.pubDate"
+    },
+    {
+      "sourceId": "ai:page:9",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T10:18:08.334Z",
+      "error": null,
+      "observedDate": "2026-10-27",
+      "sourceTimestamp": "2026-10-27T16:13:00.000Z",
+      "dateField": "page.datePublished"
+    },
+    {
+      "sourceId": "ai:page:10",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://commandline.microsoft.com/agentic-software-engineering-large-scale-code-migration-language-modernization-spec-driven-development/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T10:18:08.334Z",
+      "error": null,
+      "observedDate": "2026-10-26",
+      "sourceTimestamp": "2026-10-26T13:35:44.000Z",
+      "dateField": "page.datePublished"
+    }
+  ]
+}

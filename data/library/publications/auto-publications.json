@@ -64,5 +64,11 @@
     "publicationId": "motus-live-2026-10-28:korea",
     "publicPostUrl": "https://motusnova.blogspot.com/2026/10/1q-sk.html",
     "publishedAt": "2026-10-28T21:51:35+09:00"
+  },
+  {
+    "idempotencyKey": "library:motus-live-2026-10-29:ai|https://motusnova.blogspot.com/2026/10/rtx-spark.html",
+    "publicationId": "motus-live-2026-10-29:ai",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/rtx-spark.html",
+    "publishedAt": "2026-10-29T19:18:16+09:00"
   }
 ]
