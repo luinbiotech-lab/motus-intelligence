@@ -1,11 +1,10 @@
-import {mkdirSync,writeFileSync,readFileSync} from 'node:fs';
-import {execFileSync} from 'node:child_process';
-mkdirSync('diag/out4',{recursive:true});
+import {mkdirSync,writeFileSync} from 'node:fs';
+mkdirSync('diag/out5',{recursive:true});
 const UA='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36';
-const get=async(url)=>{const r=await fetch(url,{headers:{'user-agent':UA,'accept-language':'ko-KR,ko;q=0.9',referer:'https://consensus.hankyung.com/analysis/list'},signal:AbortSignal.timeout(25000)});return {status:r.status,buf:Buffer.from(await r.arrayBuffer())}};
-const list=(await get('https://consensus.hankyung.com/analysis/list?skinType=market&report_type=MK&sdate=2026-10-28&edate=2026-10-30&now_page=1&pagenum=80')).buf.toString('utf8');
-writeFileSync('diag/out4/market.html',list);
-const ids=[...new Set([...list.matchAll(/downpdf\?report_idx=(\d+)/g)].map(m=>m[1]))].slice(0,6);
-for(const id of ids){const r=await get(`https://consensus.hankyung.com/analysis/downpdf?report_idx=${id}`);writeFileSync(`diag/out4/m${id}.pdf`,r.buf);for(const [mode,args] of [['raw',[]],['layout',['-layout']]]){try{writeFileSync(`diag/out4/m${id}.${mode}.txt`,execFileSync('pdftotext',[...args,'-l','3',`diag/out4/m${id}.pdf`,'-'],{maxBuffer:1e8}))}catch(e){writeFileSync(`diag/out4/m${id}.${mode}.err`,String(e))}}}
-const ec=(await get('https://consensus.hankyung.com/analysis/list?report_type=EC&sdate=2026-10-27&edate=2026-10-30&now_page=1&pagenum=80')).buf.toString('utf8');writeFileSync('diag/out4/economy.html',ec);
-for(const [k,u] of Object.entries({searchtop:'https://m.stock.naver.com/api/stocks/searchTop/all?page=1&pageSize=20',ytrend:'https://query1.finance.yahoo.com/v1/finance/trending/US?count=15',gainers:'https://query1.finance.yahoo.com/v1/finance/screener/predefined/saved?scrIds=day_gainers&count=10',actives:'https://query1.finance.yahoo.com/v1/finance/screener/predefined/saved?scrIds=most_actives&count=15',spark:'https://query1.finance.yahoo.com/v7/finance/spark?symbols=XLK,XLF,XLE,XLV,XLY,XLP,XLI,XLB,XLU,XLRE,XLC,GOOG,MSFT&range=5d&interval=1d',chart_goog:'https://query1.finance.yahoo.com/v8/finance/chart/GOOG?range=5d&interval=1d',gtkr:'https://trends.google.com/trending/rss?geo=KR'})){const r=await get(u);writeFileSync(`diag/out4/${k}.txt`,r.buf)}
+for(const [k,u] of Object.entries({
+ p1:'https://m.stock.naver.com/api/stock/005930/price?pageSize=3&page=1',
+ p2:'https://m.stock.naver.com/api/stock/005930/basic',
+ p3:'https://api.stock.naver.com/chart/domestic/item/005930/day?startDateTime=202610200000&endDateTime=202610300000',
+ st_kospi:'https://m.stock.naver.com/api/stocks/searchTop/KOSPI?page=1&pageSize=10',
+ spark2:'https://query1.finance.yahoo.com/v7/finance/spark?symbols=GOOG,NOW,XLK&range=5d&interval=1d',
+})){try{const r=await fetch(u,{headers:{'user-agent':UA},signal:AbortSignal.timeout(20000)});writeFileSync(`diag/out5/${k}.txt`,`${r.status}\n`+(await r.text()).slice(0,6000))}catch(e){writeFileSync(`diag/out5/${k}.txt`,String(e))}}
