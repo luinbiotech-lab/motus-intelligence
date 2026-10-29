@@ -64,21 +64,21 @@ export function buildUSMarketNarrative(series:ClosingSeries[],tenYear:RateObserv
   const analysis:string[]=[],core=stats.slice(0,3);
   if(core.length>=2){
     const ups=core.filter(item=>direction(item.day)>0).length,downs=core.filter(item=>direction(item.day)<0).length;
-    analysis.push(ups===core.length?'주요 지수가 함께 오른 만큼 특정 업종보다 시장 전반의 위험 선호가 개선된 하루로 볼 수 있다.'
-      :downs===core.length?'주요 지수가 함께 내린 만큼 개별 종목 이슈보다 시장 전반의 위험 회피 심리가 작용한 하루로 볼 수 있다.'
-      :ups>0&&downs>0?'주요 지수의 방향이 엇갈려 시장 전체의 방향성보다 업종·종목별 차별화가 두드러진 하루로 볼 수 있다.'
+    analysis.push(ups===core.length?'주요 지수가 함께 올랐지만, 이 수치만으로 구성 종목 전반의 상승이나 매수 주체를 판단할 수는 없다.'
+      :downs===core.length?'주요 지수가 함께 내린 날이다. 종목별 하락 범위와 매매 주체는 별도의 자료로 확인해야 한다.'
+      :ups>0&&downs>0?'주요 지수의 방향이 엇갈렸다. 지수 간 차이는 확인되지만 업종·종목별 원인을 이 수치만으로 확정할 수는 없다.'
       :ups>0?'일부 지수만 오르고 나머지는 보합에 그쳐, 상승이 시장 전반으로 넓게 퍼진 하루로 보기는 어렵다.'
       :downs>0?'일부 지수만 내리고 나머지는 보합에 머물러, 하락 압력이 시장 전반으로 번진 하루로 보기는 어렵다.'
       :'주요 지수가 모두 보합권에 머물러 뚜렷한 방향성이 나타나지 않은 하루였다.');
     const nasdaq=stats.find(item=>item.name===US_NAMES.nasdaq),dow=stats.find(item=>item.name===US_NAMES['dow-jones']);
-    if(nasdaq&&dow&&Math.abs(nasdaq.day-dow.day)>=0.5)analysis.push(`기술주 비중이 큰 나스닥 종합지수가 다우존스 산업평균지수보다 ${Math.abs(nasdaq.day-dow.day).toFixed(2)}%p ${nasdaq.day>dow.day?'강했다':'약했다'}는 점은 성장주와 전통 업종 사이의 온도차를 보여 준다.`);
+    if(nasdaq&&dow&&Math.abs(nasdaq.day-dow.day)>=0.5)analysis.push(`기술주 비중이 큰 나스닥 종합지수가 다우존스 산업평균지수보다 ${Math.abs(nasdaq.day-dow.day).toFixed(2)}%p ${nasdaq.day>dow.day?'강했다':'약했다'}는 지수 간 수익률 차이가 확인됐다.`);
     const lead=stats[0]!;
     if(lead.fromHigh>-1)analysis.push(`${josa(lead.name,'이','가')} 3개월 고점 부근에 있어, 다음 구간에서는 고점 돌파 여부와 거래 강도를 함께 확인할 필요가 있다.`);
     else if(lead.fromHigh<=-5)analysis.push(`${josa(lead.name,'이','가')} 3개월 고점보다 5% 이상 낮은 구간에 있어, 하루 반등만으로 조정이 끝났다고 판단하기는 이르다.`);
     // Rates and equities are compared only when the yield is observed on the same session date.
     if(rateChange!==null&&rateChange!==0&&tenYear?.date===tenYear?.sessionDate&&direction(lead.day)!==0){
-      analysis.push(rateChange<0&&lead.day>0?'장기금리 하락과 주가 상승이 같은 방향으로 움직여 금리 부담 완화가 주가를 지지한 흐름과 맞물린다.'
-        :rateChange>0&&lead.day<0?'장기금리 상승과 주가 하락이 함께 나타나 금리 부담이 주식 평가에 압력으로 작용한 흐름과 맞물린다.'
+      analysis.push(rateChange<0&&lead.day>0?'장기금리는 하락하고 주가는 상승했다. 같은 날의 동행만으로 금리 하락이 주가 상승의 원인이었다고 단정할 수는 없다.'
+        :rateChange>0&&lead.day<0?'장기금리는 상승하고 주가는 하락했다. 금리 부담의 영향을 판단하려면 업종별 반응과 다른 시장 재료를 추가로 대조해야 한다.'
         :'장기금리와 주가가 같은 방향으로 움직여, 이날 주가 흐름을 금리 하나로 설명하기는 어렵다.');
     }
     analysis.push('하루 등락보다 5거래일·20거래일 흐름이 같은 방향으로 이어지는지가 추세 판단의 기준이 된다.');

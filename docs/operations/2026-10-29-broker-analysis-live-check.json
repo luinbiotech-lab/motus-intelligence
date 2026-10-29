@@ -1,0 +1,30 @@
+{
+  "generatedAt": "2026-10-29T08:17:59.441Z",
+  "scope": "actual public HTTP source parsing and article rendering; not a publication",
+  "results": [
+    {
+      "source": "ms",
+      "fetchedAt": "2026-10-29T08:07:14.216Z",
+      "reports": 1,
+      "publisher": "Morgan Stanley",
+      "author": "Mike Wilson",
+      "publishedAt": "2026-10-26",
+      "sourceUrl": "https://www.morganstanley.com/insights/podcasts/thoughts-on-the-market/equity-market-correction-outlook-mike-wilson",
+      "sourceHash": "sha256:6e8377aff29ade838aa23bd0523c6191dbf2baf19de5e72171fdf0a9144b87e8",
+      "coverage": [],
+      "basis": "OFFICIAL_TRANSCRIPT"
+    },
+    {
+      "source": "hana",
+      "fetchedAt": "2026-10-29T08:07:22.986Z",
+      "reports": 1,
+      "publisher": "하나증권",
+      "author": "이경수",
+      "publishedAt": "2026-10-27T22:38:17+09:00",
+      "sourceUrl": "https://www.hanaw.com/main/research/research/list.cmd?cid=2&pid=2#1260_1289308",
+      "sourceHash": "sha256:67b0e7c78f73b40e5418de941836ec389a172dc2735e14b2ffc5efaafbe25e7f",
+      "coverage": [],
+      "basis": "OFFICIAL_REPORT_ABSTRACT"
+    }
+  ]
+}
