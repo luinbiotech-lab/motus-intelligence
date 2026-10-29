@@ -121,6 +121,8 @@ jobs:
             LIVE_PUBLISH=true
           fi
           echo "CATEGORY=$CATEGORY" >> "$GITHUB_ENV"
+          echo "RUN_STARTED_AT=$(date -u +%FT%TZ)" >> "$GITHUB_ENV"
+          echo "SCHEDULE_CRON=$SCHEDULE" >> "$GITHUB_ENV"
           echo "RUN_DATE=$RUN_DATE" >> "$GITHUB_ENV"
           echo "MOTUS_LIVE_PUBLISH_ENABLED=$LIVE_PUBLISH" >> "$GITHUB_ENV"
       - name: Require Blogger credentials before live publication
@@ -151,6 +153,10 @@ jobs:
       - name: Record production outcome
         if: always()
         run: npm run motus:production-summary -- --date "$RUN_DATE" --category "$CATEGORY"
+      - name: Record run timing and daily status
+        if: always()
+        continue-on-error: true
+        run: npm run motus:run-record -- --date "$RUN_DATE" --category "$CATEGORY"
       - name: Capture Blogger page-view baseline
         if: always()
         shell: bash
@@ -187,6 +193,7 @@ jobs:
             data/library/publications/
             data/reports/daily/${{ env.RUN_DATE }}/
             data/operations/${{ env.RUN_DATE }}/weekly-monthly-feed-auto.json
+            data/operations/${{ env.RUN_DATE }}/daily-status.md
             !data/**/.publish-lock
           if-no-files-found: warn
           retention-days: 90
