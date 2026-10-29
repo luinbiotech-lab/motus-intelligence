@@ -1,0 +1,220 @@
+{
+  "schemaVersion": "1.0",
+  "sourceMode": "internal",
+  "category": "US_MARKET",
+  "operationDate": "2026-10-29",
+  "status": "HOLD",
+  "reasonCode": "editorial quality: boilerplate prose repetition detected",
+  "entries": [
+    {
+      "sourceId": "twelve:dxy",
+      "category": "US_MARKET",
+      "url": "https://api.twelvedata.com/time_series?symbol=DXY&interval=1day",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-10-29T01:15:37.395Z",
+      "error": "TWELVE_DATA_DATA_NOT_FOUND symbol=DXY endpoint=/time_series http=404 providerCode=404"
+    },
+    {
+      "sourceId": "twelve:russell-2000",
+      "category": "US_MARKET",
+      "url": "https://api.twelvedata.com/time_series?symbol=RUT&interval=1day",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-10-29T01:15:37.395Z",
+      "error": "TWELVE_DATA_DATA_NOT_FOUND symbol=RUT endpoint=/time_series http=404 providerCode=404"
+    },
+    {
+      "sourceId": "fred:sp500",
+      "category": "US_MARKET",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=SP500&cosd=2019-03-10",
+      "status": "PASS",
+      "recordCount": 1921,
+      "collectedAt": "2026-10-29T01:15:37.395Z",
+      "error": null,
+      "observedDate": "2026-10-28"
+    },
+    {
+      "sourceId": "fred:nasdaq",
+      "category": "US_MARKET",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=NASDAQCOM&cosd=2019-03-10",
+      "status": "FAILED",
+      "recordCount": 1921,
+      "collectedAt": "2026-10-29T01:15:37.395Z",
+      "error": "FRED_STALE_OR_INCOMPLETE",
+      "observedDate": "2026-10-27",
+      "referenceDate": "2026-10-28"
+    },
+    {
+      "sourceId": "yahoo-us:nasdaq",
+      "category": "US_MARKET",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1767402937&period2=1793322937&interval=1d",
+      "status": "PASS",
+      "recordCount": 206,
+      "collectedAt": "2026-10-29T01:15:37.395Z",
+      "error": null,
+      "observedDate": "2026-10-28",
+      "referenceDate": "2026-10-28"
+    },
+    {
+      "sourceId": "fred:dow-jones",
+      "category": "US_MARKET",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-10",
+      "status": "PASS",
+      "recordCount": 1921,
+      "collectedAt": "2026-10-29T01:15:37.395Z",
+      "error": null,
+      "observedDate": "2026-10-28"
+    },
+    {
+      "sourceId": "fred:DGS10",
+      "category": "US_MARKET",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2025-12-23",
+      "status": "PASS",
+      "recordCount": 212,
+      "collectedAt": "2026-10-29T01:15:37.395Z",
+      "error": null,
+      "observedDate": "2026-10-27"
+    },
+    {
+      "sourceId": "fred:DCOILBRENTEU",
+      "category": "US_MARKET",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILBRENTEU&cosd=2025-12-23",
+      "status": "PASS",
+      "recordCount": 213,
+      "collectedAt": "2026-10-29T01:15:37.395Z",
+      "error": null,
+      "observedDate": "2026-10-27"
+    },
+    {
+      "sourceId": "fred:VIXCLS",
+      "category": "US_MARKET",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS&cosd=2025-12-23",
+      "status": "PASS",
+      "recordCount": 218,
+      "collectedAt": "2026-10-29T01:15:37.395Z",
+      "error": null,
+      "observedDate": "2026-10-27"
+    },
+    {
+      "sourceId": "calendar:nyse",
+      "category": "US_MARKET",
+      "url": "https://www.nyse.com/trade/hours-calendars",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T01:15:37.395Z",
+      "error": null,
+      "observedDate": "2026-10-28",
+      "referenceDate": "2026-10-28"
+    },
+    {
+      "sourceId": "freshness:vix",
+      "category": "US_MARKET",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS&cosd=2025-12-23",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-10-29T01:15:37.395Z",
+      "error": "OPTIONAL_METRIC_STALE",
+      "observedDate": "2026-10-27",
+      "referenceDate": "2026-10-28"
+    },
+    {
+      "sourceId": "freshness:brent",
+      "category": "US_MARKET",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILBRENTEU&cosd=2025-12-23",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-10-29T01:15:37.395Z",
+      "error": "OPTIONAL_METRIC_STALE",
+      "observedDate": "2026-10-27",
+      "referenceDate": "2026-10-28"
+    },
+    {
+      "sourceId": "market-research:Goldman Sachs",
+      "category": "US_MARKET",
+      "url": "https://www.goldmansachs.com/insights",
+      "status": "PASS",
+      "recordCount": 2,
+      "collectedAt": "2026-10-29T01:15:37.395Z",
+      "error": null
+    },
+    {
+      "sourceId": "market-research:CNBC Investing",
+      "category": "US_MARKET",
+      "url": "https://www.cnbc.com/id/15839069/device/rss/rss.html",
+      "status": "PASS",
+      "recordCount": 2,
+      "collectedAt": "2026-10-29T01:15:37.395Z",
+      "error": null
+    },
+    {
+      "sourceId": "market-research:Bloomberg Markets",
+      "category": "US_MARKET",
+      "url": "https://feeds.bloomberg.com/markets/news.rss",
+      "status": "PASS",
+      "recordCount": 2,
+      "collectedAt": "2026-10-29T01:15:37.395Z",
+      "error": null
+    },
+    {
+      "sourceId": "market-research:article:https://www.goldmansachs.com/insights/articles/are-bonds-becoming-a-better-investment-for-portfolios",
+      "category": "US_MARKET",
+      "url": "https://www.goldmansachs.com/insights/articles/are-bonds-becoming-a-better-investment-for-portfolios",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T01:15:37.395Z",
+      "error": null,
+      "observedDate": "2026-10-07"
+    },
+    {
+      "sourceId": "market-research:article:https://www.goldmansachs.com/insights/articles/will-30-year-us-treasury-yields-climb-higher",
+      "category": "US_MARKET",
+      "url": "https://www.goldmansachs.com/insights/articles/will-30-year-us-treasury-yields-climb-higher",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T01:15:37.395Z",
+      "error": null,
+      "observedDate": "2026-10-05"
+    },
+    {
+      "sourceId": "market-research:article:https://www.cnbc.com/2026/10/27/robinhood-hood-q3-2026-earnings.html",
+      "category": "US_MARKET",
+      "url": "https://www.cnbc.com/2026/10/27/robinhood-hood-q3-2026-earnings.html",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T01:15:37.395Z",
+      "error": null,
+      "observedDate": "2026-10-28"
+    },
+    {
+      "sourceId": "market-research:article:https://www.cnbc.com/2026/10/26/prediction-markets-think-anthropic-ipo-near-certain-in-2026.html",
+      "category": "US_MARKET",
+      "url": "https://www.cnbc.com/2026/10/26/prediction-markets-think-anthropic-ipo-near-certain-in-2026.html",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T01:15:37.395Z",
+      "error": null,
+      "observedDate": "2026-10-26"
+    },
+    {
+      "sourceId": "market-research:article:https://www.bloomberg.com/news/articles/2026-10-28/stock-market-today-dow-s-p-live-updates",
+      "category": "US_MARKET",
+      "url": "https://www.bloomberg.com/news/articles/2026-10-28/stock-market-today-dow-s-p-live-updates",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T01:15:37.395Z",
+      "error": null,
+      "observedDate": "2026-10-28"
+    },
+    {
+      "sourceId": "market-research:article:https://www.bloomberg.com/news/articles/2026-10-28/gold-edges-lower-after-fed-holds-rates-with-limited-guidance",
+      "category": "US_MARKET",
+      "url": "https://www.bloomberg.com/news/articles/2026-10-28/gold-edges-lower-after-fed-holds-rates-with-limited-guidance",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T01:15:37.395Z",
+      "error": null,
+      "observedDate": "2026-10-28"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "category": "US_MARKET",
+  "operationDate": "2026-10-29",
+  "observedDate": "2026-10-28",
+  "state": "HOLD",
+  "searchDemandMayOverride": false,
+  "articleFingerprint": "sha256:0e8e801ef1f87b31cbe3a933a2389673ed3f85e2c88780a5d9923445029339f2",
+  "commerce": {
+    "enabled": false
+  }
+}
