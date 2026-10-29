@@ -29,8 +29,9 @@ jobs:
         run: |
           npm ci && npm run build
           D=$(TZ=Asia/Seoul date +%F)
-          for c in us korea; do node dist/src/live-daily-cli.js --date "$D" --category $c --source internal || true; done
-          mkdir -p ../diag/diag/out6 && for c in us korea; do cp -r data/operations/$D/$c ../diag/diag/out6/ || true; done
+          node dist/src/live-daily-cli.js --date "$D" --category us --source internal || true
+          node dist/src/live-daily-cli.js --date 2026-10-29 --at 2026-10-29T00:40:00Z --category korea --source internal || true
+          rm -rf ../diag/diag/out6 && mkdir -p ../diag/diag/out6 && cp -r data/operations/$D/us ../diag/diag/out6/ && cp -r data/operations/2026-10-29/korea ../diag/diag/out6/ || true
       - working-directory: diag
         run: |
           git config user.name probe && git config user.email probe@users.noreply.github.com
