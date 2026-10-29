@@ -1,0 +1,454 @@
+{
+ "title": "코스피 6.63% 급등 6,012…검색 1위 삼성전자 10.4% 급등",
+ "lead": [
+  "IBK투자증권 리서치센터는 전일 장을 “KOSPI는 전 거래일 대비 6.6% 상승한 6,012.4P로 마감, KOSDAQ은 전 거래일 대비 3.7% 상승한 771.3P로 마감”이라고 정리했다.",
+  "투자자 검색 1위 삼성전자는 10.36% 급등했다."
+ ],
+ "sections": [
+  {
+   "key": "korea-broker-commentary",
+   "title": "증권가가 본 전일 국내 증시",
+   "intro": "국내 증권사가 전일 장을 정리한 아침 리포트의 문장을 그대로 옮겼다. 원인에 대한 해석은 각 증권사의 판단이다.",
+   "paragraphs": [
+    {
+     "text": "IBK투자증권 리서치센터는 10월 29일 아침 리포트 「ibks morning brief」에서 “KOSPI는 전 거래일 대비 6.6% 상승한 6,012.4P로 마감, KOSDAQ은 전 거래일 대비 3.7% 상승한 771.3P로 마감”, “국내 증시는 SK하이닉스의 사상 최대 실적 발표와 미국 AI 투자심리 회복에 힘입어 코스피와 코스닥 모두 상승 마감함”, “미국 FOMC를 앞두고 글로벌 달러 강세와 외국인 달러 매수 등이 맞물리며 원/달러 환율은 1,337.7원으로 상승 마감함”이라고 정리했다.",
+     "source": {
+      "label": "IBK투자증권 ibks morning brief (10월 29일)",
+      "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653451"
+     }
+    },
+    {
+     "text": "SK증권 리서치센터는 10월 29일 아침 리포트 「wake up! 아침에 슼」에서 “반도체 호실적·주주환원 기대에 급등 마감”, “외국인·기관 동반 순매수, 휴머노이드·증권 강세 속 이틀 연속 매수 사이드카 발동”이라고 정리했다.",
+     "source": {
+      "label": "SK증권 wake up! 아침에 슼 (10월 29일)",
+      "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653439"
+     }
+    },
+    {
+     "text": "대신증권 리서치센터는 10월 29일 아침 리포트 「morning meeting brief」에서 “KOSPI 이틀 연속 매수 사이드카, FOMC와 주요 기업 실적 대기”라고 정리했다.",
+     "source": {
+      "label": "대신증권 morning meeting brief (10월 29일)",
+      "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653429"
+     }
+    }
+   ]
+  },
+  {
+   "key": "korea-search-top",
+   "title": "검색 상위 종목과 증권사 의견",
+   "intro": "네이버페이 증권에서 투자자 검색이 많은 종목의 전일 종가와, 해당 종목에 대한 최근 증권사 리포트다.",
+   "paragraphs": [
+    {
+     "text": "검색 1위 삼성전자는 245,000원으로 마감해 10.36% 급등했다."
+    },
+    {
+     "text": "검색 2위 SK하이닉스는 1,508,000원으로 마감해 12.45% 급등했다. IBK투자증권 김운호 연구원은 10월 29일 「실적은 우려를 불식시킬 것」 리포트에서 투자의견 매수, 목표주가 3,200,000원을 제시했다.",
+     "source": {
+      "label": "IBK투자증권 SK하이닉스(000660) 실적은 우려를 불식시킬 것 (10월 29일)",
+      "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653446"
+     }
+    },
+    {
+     "text": "검색 3위 두산에너빌리티는 62,000원으로 마감해 5.26% 급등했다."
+    },
+    {
+     "text": "검색 4위 현대차는 297,000원으로 마감해 2.24% 상승했다."
+    },
+    {
+     "text": "검색 5위 대우건설은 14,210원으로 마감해 1.66% 하락했다. 한화투자증권 송유림 연구원은 10월 28일 「[3Q26 Review] 수주를 손에 쥔 자의 여유」 리포트에서 투자의견 Buy, 목표주가 14,450원을 제시했다.",
+     "source": {
+      "label": "한화투자증권 대우건설(047040) [3Q26 Review] 수주를 손에 쥔 자의 여유 (10월 28일)",
+      "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653391"
+     }
+    },
+    {
+     "text": "검색 6위 삼성SDI는 533,000원으로 마감해 4.92% 상승했다."
+    }
+   ]
+  },
+  {
+   "key": "korea-company-research",
+   "title": "증권사 기업 리포트",
+   "intro": "최근 증권사들이 공개한 기업 분석 리포트의 투자의견·목표주가와 핵심 문장이다.",
+   "paragraphs": [
+    {
+     "text": "대신증권 박강호 연구원은 「[3Q26 Review] LG 전자: 2027 년 신성장(AI 향 공조, 로보틱스) 가시화가 예상」에서 “3Q26 영업이익은 7,819억원(+13.5% yoy/-51% QoQ), 컨센서스 하회”, “LG이노텍과 HS(가전), VS(공조)에서 영업이익이 추정대비 하회”, “AI/데이터센터향 공조 관련한 수주 확대, 로보틱스 확대에 초점”이라고 밝혔다.",
+     "source": {
+      "label": "대신증권 morning meeting brief (10월 29일)",
+      "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653429"
+     }
+    },
+    {
+     "text": "대신증권 박강호 연구원은 「[3Q26 Review] 삼성전기: 3Q 거침없는 이익 증가! 2027 년 AI 수혜는 본격화!」에서 “3Q 영업이익은 6,910억원(+57% qoq)으로 컨센서스 상회, 호실적”, “FC BGA, MLCC에서 AI향 매출 증가 및 믹스 효과 확대”, “2027년 영업이익은 4.82조원(+112% yoy) 추정, 최고 및 재평가 전망”이라고 밝혔다.",
+     "source": {
+      "label": "대신증권 morning meeting brief (10월 29일)",
+      "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653429"
+     }
+    },
+    {
+     "text": "대신증권 이경연 연구원은 「[3Q26 Review] HD 현대: 정유 정상화를 조선·전력기기가 메운다」에서 “자회사 주가 하락에 따른 지분가치 감소로 목표주가 -27.6% 하향”, “3Q26 영업이익 2조 9197억원(+71.5% YoY, -29.2% QoQ)으로 컨센서스 하회”, “정유 이익은 정상화 구간. HD현대오일뱅크 배당 재개는 여전히 후순위”라고 밝혔다.",
+     "source": {
+      "label": "대신증권 morning meeting brief (10월 29일)",
+      "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653429"
+     }
+    },
+    {
+     "text": "대신증권 리서치센터는 「[3Q26 Review] 삼성에피스홀딩스: 단기 실적 변동성 속 개발 경쟁력에 주목」에서 “마일스톤 및 일회성 비용 환입으로 3Q 수익성 호조”라고 밝혔다.",
+     "source": {
+      "label": "대신증권 morning meeting brief (10월 29일)",
+      "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653429"
+     }
+    },
+    {
+     "text": "HD현대중공업: 대신증권 이지니 연구원은 10월 29일 「하방보다 상방을 볼 시점」 리포트에서 투자의견 Buy, 목표주가 540,000원을 제시했다.",
+     "source": {
+      "label": "대신증권 HD현대중공업(329180) 하방보다 상방을 볼 시점 (10월 29일)",
+      "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653428"
+     }
+    },
+    {
+     "text": "파마리서치: 대신증권 한송협 연구원은 10월 29일 「PER 10배 실화?」 리포트에서 투자의견 Buy, 목표주가 460,000원을 제시했다.",
+     "source": {
+      "label": "대신증권 파마리서치(214450) PER 10배 실화? (10월 29일)",
+      "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653426"
+     }
+    },
+    {
+     "text": "삼성물산: 한화투자증권 송유림 연구원은 10월 29일 「[3Q26 Review] 전자가 좋으면, 나도 좋다」 리포트에서 투자의견 Buy, 목표주가 520,000원을 제시했다.",
+     "source": {
+      "label": "한화투자증권 삼성물산(028260) [3Q26 Review] 전자가 좋으면, 나도 좋다 (10월 29일)",
+      "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653410"
+     }
+    },
+    {
+     "text": "한화시스템: 대신증권 최정환 연구원은 10월 28일 「3Q26 Review: 우주, 국방AI 기업으로 도약」 리포트에서 투자의견 Buy, 목표주가 96,000원을 제시했다.",
+     "source": {
+      "label": "대신증권 한화시스템(272210) 3Q26 Review: 우주, 국방AI 기업으로 도약 (10월 28일)",
+      "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653369"
+     }
+    },
+    {
+     "text": "LG전자: SK증권 박형우·정영환 연구원은 10월 29일 「경쟁사의 위기는 LG전자의 기회」 리포트에서 투자의견 매수, 목표주가 195,000원을 제시했다.",
+     "source": {
+      "label": "SK증권 LG전자(066570) 경쟁사의 위기는 LG전자의 기회 (10월 29일)",
+      "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653436"
+     }
+    }
+   ]
+  },
+  {
+   "key": "korea-strategy-industry",
+   "title": "전략·산업 리포트",
+   "paragraphs": [
+    {
+     "text": "대신증권 이경민 연구원은 「[퀀틴전시 플랜] SK 하이닉스의 손색없는 성적표, FOMC·주요 기업 실적에 주목」에서 “SK하이닉스의 완벽한 성적표, 실적부터 주주환원까지”, “KOSPI 이틀 연속 매수 사이드카, FOMC와 주요 기업 실적 대기”, “SK하이닉스 훈풍에 반도체 급등, 증시 전반으로 상승세 확산”이라고 밝혔다.",
+     "source": {
+      "label": "대신증권 morning meeting brief (10월 29일)",
+      "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653429"
+     }
+    },
+    {
+     "text": "메리츠증권 배기연·김현비 연구원은 10월 29일 산업 리포트 「3Q26 리뷰: K-조선 바닥 잡기」를 냈다.",
+     "source": {
+      "label": "메리츠증권 3Q26 리뷰: K-조선 바닥 잡기 (10월 29일)",
+      "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653422"
+     }
+    },
+    {
+     "text": "유안타증권 김용민 연구원은 10월 28일 산업 리포트 「HD 계열사 격변: EB 발행 시점 해석기」를 냈다.",
+     "source": {
+      "label": "유안타증권 HD 계열사 격변: EB 발행 시점 해석기 (10월 28일)",
+      "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653378"
+     }
+    },
+    {
+     "text": "대신증권 이경연 연구원은 10월 28일 산업 리포트 「인프라를가진지주, 데이터를가진지주」를 냈다.",
+     "source": {
+      "label": "대신증권 인프라를가진지주, 데이터를가진지주 (10월 28일)",
+      "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653363"
+     }
+    },
+    {
+     "text": "대신증권 이지니 연구원은 10월 28일 산업 리포트 「조선에서해운으로바통터치」를 냈다.",
+     "source": {
+      "label": "대신증권 조선에서해운으로바통터치 (10월 28일)",
+      "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653362"
+     }
+    }
+   ]
+  }
+ ],
+ "html": "<section data-section=\"korea-broker-commentary\" style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><h2 style=\"margin:0 0 12px;padding:0 0 8px;border-bottom:2px solid #173a63;color:#03162e;font-size:clamp(19px,4.8vw,23px);line-height:1.35;font-weight:850;word-break:keep-all;overflow-wrap:normal\">증권가가 본 전일 국내 증시</h2><p style=\"margin:0 0 12px;color:#4a5a6e;font-size:15px\">국내 증권사가 전일 장을 정리한 아침 리포트의 문장을 그대로 옮겼다. 원인에 대한 해석은 각 증권사의 판단이다.</p><p style=\"margin:0 0 13px\">IBK투자증권 리서치센터는 10월 29일 아침 리포트 「ibks morning brief」에서 “KOSPI는 전 거래일 대비 6.6% 상승한 6,012.4P로 마감, KOSDAQ은 전 거래일 대비 3.7% 상승한 771.3P로 마감”, “국내 증시는 SK하이닉스의 사상 최대 실적 발표와 미국 AI 투자심리 회복에 힘입어 코스피와 코스닥 모두 상승 마감함”, “미국 FOMC를 앞두고 글로벌 달러 강세와 외국인 달러 매수 등이 맞물리며 원/달러 환율은 1,337.7원으로 상승 마감함”이라고 정리했다. <a href=\"https://consensus.hankyung.com/analysis/downpdf?report_idx=653451\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></p><p style=\"margin:0 0 13px\">SK증권 리서치센터는 10월 29일 아침 리포트 「wake up! 아침에 슼」에서 “반도체 호실적·주주환원 기대에 급등 마감”, “외국인·기관 동반 순매수, 휴머노이드·증권 강세 속 이틀 연속 매수 사이드카 발동”이라고 정리했다. <a href=\"https://consensus.hankyung.com/analysis/downpdf?report_idx=653439\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></p><p style=\"margin:0 0 13px\">대신증권 리서치센터는 10월 29일 아침 리포트 「morning meeting brief」에서 “KOSPI 이틀 연속 매수 사이드카, FOMC와 주요 기업 실적 대기”라고 정리했다. <a href=\"https://consensus.hankyung.com/analysis/downpdf?report_idx=653429\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></p></section>\n<section data-section=\"korea-search-top\" style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><h2 style=\"margin:0 0 12px;padding:0 0 8px;border-bottom:2px solid #173a63;color:#03162e;font-size:clamp(19px,4.8vw,23px);line-height:1.35;font-weight:850;word-break:keep-all;overflow-wrap:normal\">검색 상위 종목과 증권사 의견</h2><p style=\"margin:0 0 12px;color:#4a5a6e;font-size:15px\">네이버페이 증권에서 투자자 검색이 많은 종목의 전일 종가와, 해당 종목에 대한 최근 증권사 리포트다.</p><p style=\"margin:0 0 13px\">검색 1위 삼성전자는 245,000원으로 마감해 10.36% 급등했다.</p><p style=\"margin:0 0 13px\">검색 2위 SK하이닉스는 1,508,000원으로 마감해 12.45% 급등했다. IBK투자증권 김운호 연구원은 10월 29일 「실적은 우려를 불식시킬 것」 리포트에서 투자의견 매수, 목표주가 3,200,000원을 제시했다. <a href=\"https://consensus.hankyung.com/analysis/downpdf?report_idx=653446\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></p><p style=\"margin:0 0 13px\">검색 3위 두산에너빌리티는 62,000원으로 마감해 5.26% 급등했다.</p><p style=\"margin:0 0 13px\">검색 4위 현대차는 297,000원으로 마감해 2.24% 상승했다.</p><p style=\"margin:0 0 13px\">검색 5위 대우건설은 14,210원으로 마감해 1.66% 하락했다. 한화투자증권 송유림 연구원은 10월 28일 「[3Q26 Review] 수주를 손에 쥔 자의 여유」 리포트에서 투자의견 Buy, 목표주가 14,450원을 제시했다. <a href=\"https://consensus.hankyung.com/analysis/downpdf?report_idx=653391\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></p><p style=\"margin:0 0 13px\">검색 6위 삼성SDI는 533,000원으로 마감해 4.92% 상승했다.</p></section>\n<section data-section=\"korea-company-research\" style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><h2 style=\"margin:0 0 12px;padding:0 0 8px;border-bottom:2px solid #173a63;color:#03162e;font-size:clamp(19px,4.8vw,23px);line-height:1.35;font-weight:850;word-break:keep-all;overflow-wrap:normal\">증권사 기업 리포트</h2><p style=\"margin:0 0 12px;color:#4a5a6e;font-size:15px\">최근 증권사들이 공개한 기업 분석 리포트의 투자의견·목표주가와 핵심 문장이다.</p><p style=\"margin:0 0 13px\">대신증권 박강호 연구원은 「[3Q26 Review] LG 전자: 2027 년 신성장(AI 향 공조, 로보틱스) 가시화가 예상」에서 “3Q26 영업이익은 7,819억원(+13.5% yoy/-51% QoQ), 컨센서스 하회”, “LG이노텍과 HS(가전), VS(공조)에서 영업이익이 추정대비 하회”, “AI/데이터센터향 공조 관련한 수주 확대, 로보틱스 확대에 초점”이라고 밝혔다. <a href=\"https://consensus.hankyung.com/analysis/downpdf?report_idx=653429\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></p><p style=\"margin:0 0 13px\">대신증권 박강호 연구원은 「[3Q26 Review] 삼성전기: 3Q 거침없는 이익 증가! 2027 년 AI 수혜는 본격화!」에서 “3Q 영업이익은 6,910억원(+57% qoq)으로 컨센서스 상회, 호실적”, “FC BGA, MLCC에서 AI향 매출 증가 및 믹스 효과 확대”, “2027년 영업이익은 4.82조원(+112% yoy) 추정, 최고 및 재평가 전망”이라고 밝혔다. <a href=\"https://consensus.hankyung.com/analysis/downpdf?report_idx=653429\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></p><p style=\"margin:0 0 13px\">대신증권 이경연 연구원은 「[3Q26 Review] HD 현대: 정유 정상화를 조선·전력기기가 메운다」에서 “자회사 주가 하락에 따른 지분가치 감소로 목표주가 -27.6% 하향”, “3Q26 영업이익 2조 9197억원(+71.5% YoY, -29.2% QoQ)으로 컨센서스 하회”, “정유 이익은 정상화 구간. HD현대오일뱅크 배당 재개는 여전히 후순위”라고 밝혔다. <a href=\"https://consensus.hankyung.com/analysis/downpdf?report_idx=653429\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></p><p style=\"margin:0 0 13px\">대신증권 리서치센터는 「[3Q26 Review] 삼성에피스홀딩스: 단기 실적 변동성 속 개발 경쟁력에 주목」에서 “마일스톤 및 일회성 비용 환입으로 3Q 수익성 호조”라고 밝혔다. <a href=\"https://consensus.hankyung.com/analysis/downpdf?report_idx=653429\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></p><p style=\"margin:0 0 13px\">HD현대중공업: 대신증권 이지니 연구원은 10월 29일 「하방보다 상방을 볼 시점」 리포트에서 투자의견 Buy, 목표주가 540,000원을 제시했다. <a href=\"https://consensus.hankyung.com/analysis/downpdf?report_idx=653428\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></p><p style=\"margin:0 0 13px\">파마리서치: 대신증권 한송협 연구원은 10월 29일 「PER 10배 실화?」 리포트에서 투자의견 Buy, 목표주가 460,000원을 제시했다. <a href=\"https://consensus.hankyung.com/analysis/downpdf?report_idx=653426\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></p><p style=\"margin:0 0 13px\">삼성물산: 한화투자증권 송유림 연구원은 10월 29일 「[3Q26 Review] 전자가 좋으면, 나도 좋다」 리포트에서 투자의견 Buy, 목표주가 520,000원을 제시했다. <a href=\"https://consensus.hankyung.com/analysis/downpdf?report_idx=653410\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></p><p style=\"margin:0 0 13px\">한화시스템: 대신증권 최정환 연구원은 10월 28일 「3Q26 Review: 우주, 국방AI 기업으로 도약」 리포트에서 투자의견 Buy, 목표주가 96,000원을 제시했다. <a href=\"https://consensus.hankyung.com/analysis/downpdf?report_idx=653369\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></p><p style=\"margin:0 0 13px\">LG전자: SK증권 박형우·정영환 연구원은 10월 29일 「경쟁사의 위기는 LG전자의 기회」 리포트에서 투자의견 매수, 목표주가 195,000원을 제시했다. <a href=\"https://consensus.hankyung.com/analysis/downpdf?report_idx=653436\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></p></section>\n<section data-section=\"korea-strategy-industry\" style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><h2 style=\"margin:0 0 12px;padding:0 0 8px;border-bottom:2px solid #173a63;color:#03162e;font-size:clamp(19px,4.8vw,23px);line-height:1.35;font-weight:850;word-break:keep-all;overflow-wrap:normal\">전략·산업 리포트</h2><p style=\"margin:0 0 13px\">대신증권 이경민 연구원은 「[퀀틴전시 플랜] SK 하이닉스의 손색없는 성적표, FOMC·주요 기업 실적에 주목」에서 “SK하이닉스의 완벽한 성적표, 실적부터 주주환원까지”, “KOSPI 이틀 연속 매수 사이드카, FOMC와 주요 기업 실적 대기”, “SK하이닉스 훈풍에 반도체 급등, 증시 전반으로 상승세 확산”이라고 밝혔다. <a href=\"https://consensus.hankyung.com/analysis/downpdf?report_idx=653429\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></p><p style=\"margin:0 0 13px\">메리츠증권 배기연·김현비 연구원은 10월 29일 산업 리포트 「3Q26 리뷰: K-조선 바닥 잡기」를 냈다. <a href=\"https://consensus.hankyung.com/analysis/downpdf?report_idx=653422\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></p><p style=\"margin:0 0 13px\">유안타증권 김용민 연구원은 10월 28일 산업 리포트 「HD 계열사 격변: EB 발행 시점 해석기」를 냈다. <a href=\"https://consensus.hankyung.com/analysis/downpdf?report_idx=653378\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></p><p style=\"margin:0 0 13px\">대신증권 이경연 연구원은 10월 28일 산업 리포트 「인프라를가진지주, 데이터를가진지주」를 냈다. <a href=\"https://consensus.hankyung.com/analysis/downpdf?report_idx=653363\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></p><p style=\"margin:0 0 13px\">대신증권 이지니 연구원은 10월 28일 산업 리포트 「조선에서해운으로바통터치」를 냈다. <a href=\"https://consensus.hankyung.com/analysis/downpdf?report_idx=653362\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></p></section>",
+ "audit": [
+  {
+   "sourceId": "deep:consensus:list:market",
+   "category": "KOREA_MARKET",
+   "url": "https://consensus.hankyung.com/analysis/list?skinType=market&report_type=MK&sdate=2026-10-22&edate=2026-10-30&now_page=1&pagenum=80",
+   "status": "PASS",
+   "recordCount": 50,
+   "collectedAt": "2026-10-29T15:58:25.976Z",
+   "error": null,
+   "observedDate": "2026-10-28"
+  },
+  {
+   "sourceId": "deep:consensus:list:company",
+   "category": "KOREA_MARKET",
+   "url": "https://consensus.hankyung.com/analysis/list?skinType=business&report_type=CO&sdate=2026-10-22&edate=2026-10-30&now_page=1&pagenum=80",
+   "status": "PASS",
+   "recordCount": 78,
+   "collectedAt": "2026-10-29T15:58:25.976Z",
+   "error": null,
+   "observedDate": "2026-10-28"
+  },
+  {
+   "sourceId": "deep:consensus:list:industry",
+   "category": "KOREA_MARKET",
+   "url": "https://consensus.hankyung.com/analysis/list?skinType=industry&report_type=IN&sdate=2026-10-22&edate=2026-10-30&now_page=1&pagenum=80",
+   "status": "PASS",
+   "recordCount": 49,
+   "collectedAt": "2026-10-29T15:58:25.976Z",
+   "error": null,
+   "observedDate": "2026-10-28"
+  },
+  {
+   "sourceId": "deep:consensus:list:economy",
+   "category": "KOREA_MARKET",
+   "url": "https://consensus.hankyung.com/analysis/list?report_type=EC&sdate=2026-10-22&edate=2026-10-30&now_page=1&pagenum=80",
+   "status": "PASS",
+   "recordCount": 1,
+   "collectedAt": "2026-10-29T15:58:25.976Z",
+   "error": null,
+   "observedDate": "2026-10-28"
+  },
+  {
+   "sourceId": "deep:consensus:pdf:653452",
+   "category": "KOREA_MARKET",
+   "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653452",
+   "status": "PASS",
+   "recordCount": 2,
+   "collectedAt": "2026-10-29T15:58:25.976Z",
+   "error": null,
+   "observedDate": "2026-10-28"
+  },
+  {
+   "sourceId": "deep:consensus:pdf:653451",
+   "category": "KOREA_MARKET",
+   "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653451",
+   "status": "PASS",
+   "recordCount": 4,
+   "collectedAt": "2026-10-29T15:58:25.976Z",
+   "error": null,
+   "observedDate": "2026-10-28"
+  },
+  {
+   "sourceId": "deep:consensus:pdf:653439",
+   "category": "KOREA_MARKET",
+   "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653439",
+   "status": "PASS",
+   "recordCount": 4,
+   "collectedAt": "2026-10-29T15:58:25.976Z",
+   "error": null,
+   "observedDate": "2026-10-28"
+  },
+  {
+   "sourceId": "deep:consensus:pdf:653429",
+   "category": "KOREA_MARKET",
+   "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653429",
+   "status": "PASS",
+   "recordCount": 20,
+   "collectedAt": "2026-10-29T15:58:25.976Z",
+   "error": null,
+   "observedDate": "2026-10-28"
+  },
+  {
+   "sourceId": "deep:consensus:pdf:653420",
+   "category": "KOREA_MARKET",
+   "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653420",
+   "status": "PASS",
+   "recordCount": 0,
+   "collectedAt": "2026-10-29T15:58:25.976Z",
+   "error": null,
+   "observedDate": "2026-10-28"
+  },
+  {
+   "sourceId": "deep:naver:search-top",
+   "category": "KOREA_MARKET",
+   "url": "https://m.stock.naver.com/api/stocks/searchTop/all?page=1&pageSize=20",
+   "status": "PASS",
+   "recordCount": 19,
+   "collectedAt": "2026-10-29T15:58:25.976Z",
+   "error": null,
+   "observedDate": "2026-10-28"
+  },
+  {
+   "sourceId": "deep:naver:stock-price:005930",
+   "category": "KOREA_MARKET",
+   "url": "https://m.stock.naver.com/api/stock/005930/price?pageSize=5&page=1",
+   "status": "PASS",
+   "recordCount": 1,
+   "collectedAt": "2026-10-29T15:58:25.976Z",
+   "error": null,
+   "observedDate": "2026-10-28"
+  },
+  {
+   "sourceId": "deep:naver:stock-price:000660",
+   "category": "KOREA_MARKET",
+   "url": "https://m.stock.naver.com/api/stock/000660/price?pageSize=5&page=1",
+   "status": "PASS",
+   "recordCount": 1,
+   "collectedAt": "2026-10-29T15:58:25.976Z",
+   "error": null,
+   "observedDate": "2026-10-28"
+  },
+  {
+   "sourceId": "deep:naver:stock-price:034020",
+   "category": "KOREA_MARKET",
+   "url": "https://m.stock.naver.com/api/stock/034020/price?pageSize=5&page=1",
+   "status": "PASS",
+   "recordCount": 1,
+   "collectedAt": "2026-10-29T15:58:25.976Z",
+   "error": null,
+   "observedDate": "2026-10-28"
+  },
+  {
+   "sourceId": "deep:naver:stock-price:005380",
+   "category": "KOREA_MARKET",
+   "url": "https://m.stock.naver.com/api/stock/005380/price?pageSize=5&page=1",
+   "status": "PASS",
+   "recordCount": 1,
+   "collectedAt": "2026-10-29T15:58:25.976Z",
+   "error": null,
+   "observedDate": "2026-10-28"
+  },
+  {
+   "sourceId": "deep:naver:stock-price:047040",
+   "category": "KOREA_MARKET",
+   "url": "https://m.stock.naver.com/api/stock/047040/price?pageSize=5&page=1",
+   "status": "PASS",
+   "recordCount": 1,
+   "collectedAt": "2026-10-29T15:58:25.976Z",
+   "error": null,
+   "observedDate": "2026-10-28"
+  },
+  {
+   "sourceId": "deep:naver:stock-price:006400",
+   "category": "KOREA_MARKET",
+   "url": "https://m.stock.naver.com/api/stock/006400/price?pageSize=5&page=1",
+   "status": "PASS",
+   "recordCount": 1,
+   "collectedAt": "2026-10-29T15:58:25.976Z",
+   "error": null,
+   "observedDate": "2026-10-28"
+  },
+  {
+   "sourceId": "deep:consensus:listed:653446",
+   "category": "KOREA_MARKET",
+   "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653446",
+   "status": "PASS",
+   "recordCount": 1,
+   "collectedAt": "2026-10-29T15:58:25.976Z",
+   "error": null,
+   "observedDate": "2026-10-28"
+  },
+  {
+   "sourceId": "deep:consensus:listed:653436",
+   "category": "KOREA_MARKET",
+   "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653436",
+   "status": "PASS",
+   "recordCount": 1,
+   "collectedAt": "2026-10-29T15:58:25.976Z",
+   "error": null,
+   "observedDate": "2026-10-28"
+  },
+  {
+   "sourceId": "deep:consensus:listed:653428",
+   "category": "KOREA_MARKET",
+   "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653428",
+   "status": "PASS",
+   "recordCount": 1,
+   "collectedAt": "2026-10-29T15:58:25.976Z",
+   "error": null,
+   "observedDate": "2026-10-28"
+  },
+  {
+   "sourceId": "deep:consensus:listed:653426",
+   "category": "KOREA_MARKET",
+   "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653426",
+   "status": "PASS",
+   "recordCount": 1,
+   "collectedAt": "2026-10-29T15:58:25.976Z",
+   "error": null,
+   "observedDate": "2026-10-28"
+  },
+  {
+   "sourceId": "deep:consensus:listed:653410",
+   "category": "KOREA_MARKET",
+   "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653410",
+   "status": "PASS",
+   "recordCount": 1,
+   "collectedAt": "2026-10-29T15:58:25.976Z",
+   "error": null,
+   "observedDate": "2026-10-28"
+  },
+  {
+   "sourceId": "deep:consensus:listed:653391",
+   "category": "KOREA_MARKET",
+   "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653391",
+   "status": "PASS",
+   "recordCount": 1,
+   "collectedAt": "2026-10-29T15:58:25.976Z",
+   "error": null,
+   "observedDate": "2026-10-28"
+  },
+  {
+   "sourceId": "deep:consensus:listed:653369",
+   "category": "KOREA_MARKET",
+   "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653369",
+   "status": "PASS",
+   "recordCount": 1,
+   "collectedAt": "2026-10-29T15:58:25.976Z",
+   "error": null,
+   "observedDate": "2026-10-28"
+  },
+  {
+   "sourceId": "deep:consensus:listed:653422",
+   "category": "KOREA_MARKET",
+   "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653422",
+   "status": "PASS",
+   "recordCount": 1,
+   "collectedAt": "2026-10-29T15:58:25.976Z",
+   "error": null,
+   "observedDate": "2026-10-28"
+  },
+  {
+   "sourceId": "deep:consensus:listed:653378",
+   "category": "KOREA_MARKET",
+   "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653378",
+   "status": "PASS",
+   "recordCount": 1,
+   "collectedAt": "2026-10-29T15:58:25.976Z",
+   "error": null,
+   "observedDate": "2026-10-28"
+  },
+  {
+   "sourceId": "deep:consensus:listed:653363",
+   "category": "KOREA_MARKET",
+   "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653363",
+   "status": "PASS",
+   "recordCount": 1,
+   "collectedAt": "2026-10-29T15:58:25.976Z",
+   "error": null,
+   "observedDate": "2026-10-28"
+  },
+  {
+   "sourceId": "deep:consensus:listed:653362",
+   "category": "KOREA_MARKET",
+   "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653362",
+   "status": "PASS",
+   "recordCount": 1,
+   "collectedAt": "2026-10-29T15:58:25.976Z",
+   "error": null,
+   "observedDate": "2026-10-28"
+  }
+ ]
+}

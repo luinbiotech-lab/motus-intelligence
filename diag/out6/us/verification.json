@@ -14,10 +14,10 @@
   "leakagePass": true,
   "duplicateCheck": "PENDING_REMOTE",
   "duplicateUncertainty": true,
-  "articleFingerprint": "sha256:b6a3a3ed6f3f0ad9ce4df69d051d060cb7b6f278dab994208319f098b6cfeaf6",
+  "articleFingerprint": "sha256:35c2364590bc9acfaf41578111366903420ea0c3c78acc5f049ae517a8752064",
   "commerceEnabled": false,
-  "verifiedAt": "2026-10-29T15:56:04.936Z",
-  "expiresAt": "2026-10-29T17:26:04.936Z",
+  "verifiedAt": "2026-10-29T15:58:00.277Z",
+  "expiresAt": "2026-10-29T17:28:00.277Z",
   "sourceAuditIds": [
     "calendar:nyse",
     "deep:consensus:list:company",
@@ -44,13 +44,13 @@
     "market-research:CNBC Investing",
     "market-research:Goldman Sachs",
     "market-research:article:https://www.bloomberg.com/news/articles/2026-10-29/fed-s-path-to-a-repo-based-framework-faces-a-familiar-roadblock",
-    "market-research:article:https://www.bloomberg.com/news/articles/2026-10-29/monte-paschi-investors-reject-banco-bpm-bid-in-win-for-intesa",
+    "market-research:article:https://www.bloomberg.com/news/articles/2026-10-29/sec-eyes-manipulation-insider-risk-in-prediction-markets",
     "market-research:article:https://www.cnbc.com/2026/10/26/prediction-markets-think-anthropic-ipo-near-certain-in-2026.html",
     "market-research:article:https://www.cnbc.com/2026/10/27/robinhood-hood-q3-2026-earnings.html",
     "market-research:article:https://www.goldmansachs.com/insights/articles/are-bonds-becoming-a-better-investment-for-portfolios",
     "market-research:article:https://www.goldmansachs.com/insights/articles/will-30-year-us-treasury-yields-climb-higher"
   ],
-  "sourceAuditFingerprint": "sha256:481d25709593a89c97f0d3b7cbd5c242d0f81399fbdfc61723ff525722783bbe",
+  "sourceAuditFingerprint": "sha256:57fd9fe7d89e47da0f411b3cda09173968aebe6f46473fbd65238c4196d00c3c",
   "crossVerificationFingerprint": null,
   "crossVerification": null
 }
