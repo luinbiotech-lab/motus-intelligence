@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "1.1",
+  "category": "KOREA_MARKET",
+  "operationDate": "2026-10-29",
+  "observedDate": "2026-10-28",
+  "sourceMode": "internal",
+  "verification": "REVIEW_REQUIRED",
+  "unresolvedConflicts": [
+    "editorial quality: boilerplate prose repetition detected"
+  ],
+  "provenancePass": true,
+  "sourceDiversityPass": true,
+  "sourceLinksPass": true,
+  "mobilePass": true,
+  "editorialQualityPass": false,
+  "leakagePass": true,
+  "duplicateCheck": "PENDING_REMOTE",
+  "duplicateUncertainty": true,
+  "articleFingerprint": "sha256:a587a86b8fa27ad2255a18a20579ff73a828f1cc32ca3c1ee66dc13967454b61",
+  "commerceEnabled": false,
+  "verifiedAt": "2026-10-29T00:53:54.010Z",
+  "expiresAt": "2026-10-29T02:23:54.010Z",
+  "sourceAuditIds": [
+    "krx:kosdaq",
+    "krx:kospi",
+    "market-research:KB증권 리서치",
+    "market-research:article:https://rc.kbsec.com/detailView.able?documentid=20261021144128693K",
+    "market-research:article:https://www.hankyung.com/article/2026102924356",
+    "market-research:article:https://www.hankyung.com/article/2026102924786",
+    "market-research:article:https://www.mk.co.kr/news/stock/12189547",
+    "market-research:article:https://www.mk.co.kr/news/stock/12189564",
+    "market-research:매일경제 증권",
+    "market-research:한국경제 증권",
+    "naver:kosdaq:history",
+    "naver:kospi:history",
+    "naver:usd-krw"
+  ],
+  "sourceAuditFingerprint": "sha256:51c4b6ff028320d152554e2469ba44915a5e469774447013d5048a66f0e1d57d",
+  "crossVerificationFingerprint": "sha256:d57224cbbd22bceb040a01b0620bf5f88ff789cd5647d3d3d05255712d9682cf",
+  "crossVerification": {
+    "schemaVersion": "1.0",
+    "category": "KOREA_MARKET",
+    "observedDate": "2026-10-28",
+    "primarySource": {
+      "provider": "Naver Finance",
+      "domain": "naver.com",
+      "urls": [
+        "https://m.stock.naver.com/api/index/KOSPI/price?pageSize=10&page=1",
+        "https://m.stock.naver.com/api/index/KOSDAQ/price?pageSize=10&page=1"
+      ]
+    },
+    "independentSource": {
+      "providers": [
+        "KRX"
+      ],
+      "domains": [
+        "co.kr"
+      ],
+      "urls": [
+        "https://data-dbg.krx.co.kr/svc/apis/idx/kospi_dd_trd?basDd=20261028",
+        "https://data-dbg.krx.co.kr/svc/apis/idx/kosdaq_dd_trd?basDd=20261028"
+      ]
+    },
+    "comparedFields": [
+      {
+        "field": "KOSPI",
+        "primaryValue": 6012.44,
+        "independentValue": 6012.44,
+        "difference": 0,
+        "tolerance": 0.05,
+        "result": "PASS",
+        "primarySourceUrl": "https://m.stock.naver.com/api/index/KOSPI/price?pageSize=10&page=1",
+        "independentSourceUrl": "https://data-dbg.krx.co.kr/svc/apis/idx/kospi_dd_trd?basDd=20261028",
+        "metricBasis": "SESSION_CLOSE"
+      },
+      {
+        "field": "KOSDAQ",
+        "primaryValue": 771.28,
+        "independentValue": 771.28,
+        "difference": 0,
+        "tolerance": 0.05,
+        "result": "PASS",
+        "primarySourceUrl": "https://m.stock.naver.com/api/index/KOSDAQ/price?pageSize=10&page=1",
+        "independentSourceUrl": "https://data-dbg.krx.co.kr/svc/apis/idx/kosdaq_dd_trd?basDd=20261028",
+        "metricBasis": "SESSION_CLOSE"
+      }
+    ],
+    "tolerance": {
+      "KOSPI": 0.05,
+      "KOSDAQ": 0.05,
+      "USD_KRW": 2
+    },
+    "comparisonResult": "PASS",
+    "sourceDiversityPass": true,
+    "verification": "VERIFIED",
+    "reasonCodes": [],
+    "verifiedAt": "2026-10-29T00:53:54.010Z",
+    "officialPhase": "PRE_PUBLICATION",
+    "reconciliation": {
+      "status": "NOT_REQUIRED",
+      "officialObservedDates": [
+        "2026-10-28"
+      ]
+    }
+  }
+}

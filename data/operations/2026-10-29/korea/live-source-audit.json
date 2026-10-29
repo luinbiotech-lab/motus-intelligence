@@ -1,0 +1,185 @@
+{
+  "schemaVersion": "1.0",
+  "sourceMode": "internal",
+  "category": "KOREA_MARKET",
+  "operationDate": "2026-10-29",
+  "status": "HOLD",
+  "reasonCode": "editorial quality: boilerplate prose repetition detected",
+  "entries": [
+    {
+      "sourceId": "naver:kospi:history",
+      "category": "KOREA_MARKET",
+      "url": "https://m.stock.naver.com/api/index/KOSPI/price?pageSize=10&page=1",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T00:53:54.010Z",
+      "error": null,
+      "observedDate": "2026-10-28",
+      "referenceDate": "2026-10-28",
+      "dateField": "localTradedAt",
+      "sourceTimestamp": "2026-10-28"
+    },
+    {
+      "sourceId": "naver:kosdaq:history",
+      "category": "KOREA_MARKET",
+      "url": "https://m.stock.naver.com/api/index/KOSDAQ/price?pageSize=10&page=1",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T00:53:54.010Z",
+      "error": null,
+      "observedDate": "2026-10-28",
+      "referenceDate": "2026-10-28",
+      "dateField": "localTradedAt",
+      "sourceTimestamp": "2026-10-28"
+    },
+    {
+      "sourceId": "naver:usd-krw",
+      "category": "KOREA_MARKET",
+      "url": "https://api.stock.naver.com/marketindex/exchange/FX_USDKRW",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T00:53:54.010Z",
+      "error": null,
+      "dateField": "exchangeInfo.localTradedAt",
+      "sourceTimestamp": "2026-10-29T09:52:52+09:00",
+      "observedDate": "2026-10-29",
+      "referenceDate": "2026-10-29"
+    },
+    {
+      "sourceId": "naver:flows",
+      "category": "KOREA_MARKET",
+      "url": "https://m.stock.naver.com/api/index/KOSPI/trend",
+      "status": "FAILED",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T00:53:54.010Z",
+      "error": "CURRENT_SESSION_DATA_EXCLUDED",
+      "dateField": "bizdate",
+      "sourceTimestamp": "20261029",
+      "observedDate": "2026-10-29",
+      "referenceDate": "2026-10-28"
+    },
+    {
+      "sourceId": "naver:mover",
+      "category": "KOREA_MARKET",
+      "url": "https://m.stock.naver.com/api/stocks/up/KOSPI?page=1&pageSize=20",
+      "status": "FAILED",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T00:53:54.010Z",
+      "error": "CURRENT_SESSION_DATA_EXCLUDED",
+      "dateField": "localTradedAt",
+      "sourceTimestamp": "2026-10-29T09:53:20+09:00",
+      "observedDate": "2026-10-29",
+      "referenceDate": "2026-10-28"
+    },
+    {
+      "sourceId": "naver:sector",
+      "category": "KOREA_MARKET",
+      "url": "https://stock.naver.com/api/domestic/market/upjong/list?startIdx=0&pageSize=100&sortType=changeRate",
+      "status": "FAILED",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T00:53:54.010Z",
+      "error": "CURRENT_SESSION_DATA_EXCLUDED",
+      "dateField": "thistime",
+      "sourceTimestamp": "20261029095302",
+      "observedDate": "2026-10-29",
+      "referenceDate": "2026-10-28"
+    },
+    {
+      "sourceId": "krx:kospi",
+      "category": "KOREA_MARKET",
+      "url": "https://data-dbg.krx.co.kr/svc/apis/idx/kospi_dd_trd?basDd=20261028",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T00:53:54.010Z",
+      "error": null,
+      "referenceDate": "2026-10-28"
+    },
+    {
+      "sourceId": "krx:kosdaq",
+      "category": "KOREA_MARKET",
+      "url": "https://data-dbg.krx.co.kr/svc/apis/idx/kosdaq_dd_trd?basDd=20261028",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T00:53:54.010Z",
+      "error": null,
+      "referenceDate": "2026-10-28"
+    },
+    {
+      "sourceId": "market-research:KB증권 리서치",
+      "category": "KOREA_MARKET",
+      "url": "https://rc.kbsec.com/today/index.able",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T00:53:54.010Z",
+      "error": null
+    },
+    {
+      "sourceId": "market-research:한국경제 증권",
+      "category": "KOREA_MARKET",
+      "url": "https://www.hankyung.com/feed/finance",
+      "status": "PASS",
+      "recordCount": 2,
+      "collectedAt": "2026-10-29T00:53:54.010Z",
+      "error": null
+    },
+    {
+      "sourceId": "market-research:매일경제 증권",
+      "category": "KOREA_MARKET",
+      "url": "https://www.mk.co.kr/rss/50200011/",
+      "status": "PASS",
+      "recordCount": 2,
+      "collectedAt": "2026-10-29T00:53:54.010Z",
+      "error": null
+    },
+    {
+      "sourceId": "market-research:article:https://rc.kbsec.com/detailView.able?documentid=20261021144128693K",
+      "category": "KOREA_MARKET",
+      "url": "https://rc.kbsec.com/detailView.able?documentid=20261021144128693K",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T00:53:54.010Z",
+      "error": null,
+      "observedDate": "2026-10-21"
+    },
+    {
+      "sourceId": "market-research:article:https://www.hankyung.com/article/2026102924786",
+      "category": "KOREA_MARKET",
+      "url": "https://www.hankyung.com/article/2026102924786",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T00:53:54.010Z",
+      "error": null,
+      "observedDate": "2026-10-29"
+    },
+    {
+      "sourceId": "market-research:article:https://www.hankyung.com/article/2026102924356",
+      "category": "KOREA_MARKET",
+      "url": "https://www.hankyung.com/article/2026102924356",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T00:53:54.010Z",
+      "error": null,
+      "observedDate": "2026-10-29"
+    },
+    {
+      "sourceId": "market-research:article:https://www.mk.co.kr/news/stock/12189564",
+      "category": "KOREA_MARKET",
+      "url": "https://www.mk.co.kr/news/stock/12189564",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T00:53:54.010Z",
+      "error": null,
+      "observedDate": "2026-10-29"
+    },
+    {
+      "sourceId": "market-research:article:https://www.mk.co.kr/news/stock/12189547",
+      "category": "KOREA_MARKET",
+      "url": "https://www.mk.co.kr/news/stock/12189547",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-10-29T00:53:54.010Z",
+      "error": null,
+      "observedDate": "2026-10-29"
+    }
+  ]
+}

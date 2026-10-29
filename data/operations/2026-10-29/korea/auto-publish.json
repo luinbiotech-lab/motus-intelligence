@@ -1,0 +1,15 @@
+{
+  "state": "SKIP",
+  "reasonCode": "ALREADY_PUBLISHED_SAME_SESSION",
+  "reasonCodes": [
+    "ALREADY_PUBLISHED_SAME_SESSION"
+  ],
+  "identity": "2026-10-29|KOREA_MARKET",
+  "sessionDate": "2026-10-28",
+  "previousOperationDate": "2026-10-28",
+  "postId": "310165270483019628",
+  "publicPostUrl": "https://motusnova.blogspot.com/2026/10/1q-sk.html",
+  "reason": "a publication for this category and session date is already recorded in the persistent ledger",
+  "insertCallCount": 0,
+  "publishCallCount": 0
+}

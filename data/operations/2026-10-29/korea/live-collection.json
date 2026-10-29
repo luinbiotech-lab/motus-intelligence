@@ -1,0 +1,14 @@
+{
+  "mode": "LIVE",
+  "sourceMode": "internal",
+  "date": "2026-10-29",
+  "observedDate": "2026-10-28",
+  "category": "KOREA_MARKET",
+  "state": "HOLD",
+  "reasonCode": "editorial quality: boilerplate prose repetition detected",
+  "verification": "REVIEW_REQUIRED",
+  "publishCallCount": 0,
+  "commerce": {
+    "enabled": false
+  }
+}
