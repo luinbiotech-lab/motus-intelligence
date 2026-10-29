@@ -35,6 +35,7 @@ function ratingSentence(report:BrokerReport):string {
 }
 
 const THEMES:Array<[string,RegExp]>=[['반도체 업황·실적',/반도체|하이닉스|HBM|메모리|필라델피아/],['AI 투자 기대',/AI|인공지능|빅테크/],['FOMC·통화정책',/FOMC|연준|금리|기준금리|Fed/],['기업 실적',/실적|어닝|영업이익/],['외국인·기관 수급',/외국인|기관|순매수|순매도|사이드카/],['환율·달러',/환율|달러/],['국제유가',/유가|원유/],['주주환원',/주주환원|배당|자사주/]];
+const CAUSAL=/힘입|기대|우려|영향|때문|따른|따라|반영|부담|속에?\s|에\s?(?:상승|하락|급등|급락|강세|약세|반등)|실적|FOMC|연준|금리|동결|인상|인하|유가|달러|환율|수급|순매수|순매도|매수세|매도세|사이드카|발표|주주환원|정책|관세|지표|물가|고용|투자심리/;
 const CAUTION=/우려|경계|부담|리스크|불확실|하락 전환|차익실현|관망|둔화|대기|엇갈|급락/;
 type Pick={text:string;brief:BrokerBrief};
 
@@ -45,7 +46,8 @@ function causes(briefs:BrokerBrief[],region:'US'|'KOREA'){
     const items=brief.statements.filter(item=>item.region===region&&item.text.length<=130);
     // The best explanation of the session is the driver whatever its direction (a bearish close explained by
     // 'concerns' is still the explanation); a caution is a different statement that flags a risk.
-    const driver=[...items].sort((a,b)=>marketScore(b.text)-marketScore(a.text))[0];
+    // Only a statement that gives a reason counts; a restatement of index moves explains nothing.
+    const driver=[...items].filter(item=>CAUSAL.test(item.text)).sort((a,b)=>marketScore(b.text)-marketScore(a.text))[0];
     const caution=items.find(item=>item!==driver&&CAUTION.test(item.text));
     if(driver)drivers.push({text:driver.text,brief});if(caution)cautions.push({text:caution.text,brief});
   }

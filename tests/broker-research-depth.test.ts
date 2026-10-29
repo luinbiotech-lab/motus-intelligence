@@ -190,3 +190,11 @@ test('a brief describing another session contributes no Korean market digest eit
   assert.ok(!brief0.digests.some(item=>/코스피/.test(item.heading)),JSON.stringify(brief0.digests));
   assert.ok(brief0.digests.some(item=>item.heading.includes('삼성전기')),'company reviews are kept');
 });
+
+test('an index-move restatement is not core commentary',async()=>{
+  const {composeUSDeepSections}=await import('../src/operations/market-deep-sections.js');
+  const {statements}=extractBriefContent(['▶ 미국증시','- 미국 증시는 나스닥과 다우지수가 모두 상승 마감함'].join('\n'));
+  const report={kind:'MARKET' as const,date:'2026-10-29',title:'brief',broker:'A증권',analysts:'리서치센터',url:'https://consensus.hankyung.com/analysis/downpdf?report_idx=1',summary:[],targetPrice:null,rating:null,stockCode:null,company:null};
+  const us=composeUSDeepSections({bundle:{briefs:[{report,statements,digests:[]}],company:[],industry:[],economy:[],audit:[]},stocks:[],sectors:[]});
+  assert.equal(statements.length,1);assert.equal(us.hasCoreCommentary,false);
+});
