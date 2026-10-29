@@ -82,5 +82,11 @@
     "publicationId": "motus-live-2026-10-29:us",
     "publicPostUrl": "https://motusnova.blogspot.com/2026/10/3-42.html",
     "publishedAt": "2026-10-30T08:28:42+09:00"
+  },
+  {
+    "idempotencyKey": "library:motus-live-2026-10-30:korea|https://motusnova.blogspot.com/2026/10/124-5937-1-48.html",
+    "publicationId": "motus-live-2026-10-30:korea",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/124-5937-1-48.html",
+    "publishedAt": "2026-10-30T08:28:55+09:00"
   }
 ]
