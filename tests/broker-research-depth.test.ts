@@ -181,3 +181,12 @@ test('broker commentary is linked to a stock only by a whole ticker token or its
   assert.doesNotMatch(text(composeUSDeepSections({bundle,stocks:[stock('C','씨티그룹')],sectors:[]})),/씨티그룹\(C\)[\s\S]*설명했다/);
   assert.match(text(composeUSDeepSections({bundle,stocks:[stock('ORCL','오라클')],sectors:[]})),/오라클\(ORCL\)[\s\S]*A증권은 “오라클이 매출 전망 상향에/);
 });
+
+test('a brief describing another session contributes no Korean market digest either',async()=>{
+  const stale=['[ 국내증시 ]','• 코스피는 전 거래일 대비 하락해 5,638.3P로 마감','','Strategy','[퀀틴전시 플랜] 코스피 시황 전략','- 코스피는 전 거래일 대비 하락해 5,638.3P로 마감','- 외국인 순매도 확대','이경민. kyoungmin.lee@daishin.com','[3Q26 Review] 삼성전기: 이익 증가','- 3Q 영업이익은 6,910억원(+57% qoq)으로 컨센서스 상회, 호실적','- FC BGA, MLCC에서 AI향 매출 증가 및 믹스 효과 확대','박강호. kangho.park@daishin.com'].join('\n');
+  const bundle=await collectBrokerResearch({sessionDate:'2026-10-28',operationDate:'2026-10-29',fetcher:fixtureFetcher({'902':'2026-10-29'}),pdfText:async()=>stale,verifiedKospiClose:6012.44});
+  const brief0=bundle.briefs[0]!;
+  assert.ok(!brief0.statements.some(item=>item.region==='KOREA'));
+  assert.ok(!brief0.digests.some(item=>/코스피/.test(item.heading)),JSON.stringify(brief0.digests));
+  assert.ok(brief0.digests.some(item=>item.heading.includes('삼성전기')),'company reviews are kept');
+});

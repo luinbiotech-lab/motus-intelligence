@@ -168,9 +168,15 @@ export async function collectBrokerResearch(input:{sessionDate:string;operationD
       const buffer=Buffer.from(await response.arrayBuffer());if(buffer.subarray(0,5).toString()!=='%PDF-')throw new Error('CONSENSUS_NOT_PDF');
       const text=await pdfText(buffer);if(!text)throw new Error('PDF_TEXT_UNAVAILABLE');
       const content=extractBriefContent(text);
-      let statements=content.statements;
-      if(input.verifiedKospiClose&&contradictsKospi(statements,input.verifiedKospiClose))statements=statements.filter(item=>item.region!=='KOREA');
-      briefs.push({report,statements,digests:content.digests,events:content.events});
+      let statements=content.statements,digests=content.digests;
+      const close=input.verifiedKospiClose;
+      if(close){
+        const asStatements=(digest:BrokerDigest)=>[digest.heading,...digest.bullets].map(text=>({region:'KOREA' as const,text,heading:null}));
+        const mismatched=contradictsKospi(statements,close)||digests.some(digest=>contradictsKospi(asStatements(digest),close));
+        // A brief describing another session must not contribute any Korean market commentary, in statements or digests.
+        if(mismatched){statements=statements.filter(item=>item.region!=='KOREA');digests=digests.filter(digest=>!/코스피|KOSPI|코스닥|KOSDAQ|국내 증시|국내증시|시황|전략|퀀틴전시/i.test([digest.heading,...digest.bullets].join(' ')))}
+      }
+      briefs.push({report,statements,digests,events:content.events});
       audit.push({sourceId:'consensus:pdf:'+report.url.split('=').pop(),url:report.url,status:'PASS',count:statements.length+content.digests.length,error:null});
     }catch(error){audit.push({sourceId:'consensus:pdf:'+report.url.split('=').pop(),url:report.url,status:'FAILED',count:0,error:error instanceof Error&&/^(?:CONSENSUS_HTTP_\d{3}|CONSENSUS_NOT_PDF|PDF_TEXT_UNAVAILABLE)$/.test(error.message)?error.message:'CONSENSUS_PDF_FAILED'})}
   }
