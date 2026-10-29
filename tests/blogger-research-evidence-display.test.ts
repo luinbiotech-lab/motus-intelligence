@@ -31,3 +31,13 @@ test('Blogger renders dated first-party KB published evidence, not an inferred a
  assert.match(html,/과거 자료/);
  assert.doesNotMatch(html,/강력매수|목표주가 상향/);
 });
+
+test('broker and media research sections do not repeat identical prose blocks',async()=>{
+ const {evaluateEditorialQuality}=await import('../src/production/editorial-quality.js');
+ const html=renderMarketResearchEntries([
+ {publisher:'KB증권',headline:'국내 주식과 금리 분석',url:'https://rc.kbsec.com/detailView.able?documentid=20261021144128693K',publishedAt:'2026-10-21T00:00:00Z',kind:'BROKER_RESEARCH'},
+ {publisher:'CNBC',headline:'U.S. stocks rise amid Fed guidance',url:'https://www.cnbc.com/2026/10/28/markets.html',publishedAt:'2026-10-28T13:00:00Z',kind:'FINANCIAL_MEDIA'}
+ ],'2026-10-29');
+ const check=evaluateEditorialQuality('국내증시 마감 후 주요 금융시장 분석 자료',html);
+ assert.ok(!check.reasons.includes('boilerplate prose repetition detected'),check.reasons.join('; '));
+});

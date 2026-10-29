@@ -65,7 +65,7 @@ export function renderMarketResearchEntries(entries:ReadonlyArray<{publisher:str
    const title=korean>=3?item.headline:'공식 원문 확인';
    return `<li style="margin:0 0 11px"><strong>${esc(item.publisher)}</strong> · ${esc(item.publishedAt.slice(0,10))}${older?' · 과거 자료':''}<div><a href="${attr(item.url)}" target="_blank" rel="nofollow noopener noreferrer" style="${LINK}">${esc(title)}</a></div>${kind==='BROKER_RESEARCH'&&item.evidence?.length?`<p style="margin:6px 0 0">공식 공개 요약: ${esc(item.evidence.slice(0,2).join(' / '))}</p>`:''}</li>`;
   }).join('');
-  return section(kind==='BROKER_RESEARCH'?'증권사 공개 리서치 자료':'금융 전문 언론 원문',`<p style="margin:0 0 12px">아래는 각 발행처에서 직접 확인된 자료입니다. 제목만으로 투자 의견이나 목표주가를 추정하지 않으며, 과거 자료는 당일 전망의 근거로 사용하지 않습니다.</p><ul style="margin:0;padding-left:20px">${list}</ul>`);
+  return section(kind==='BROKER_RESEARCH'?'증권사 공개 리서치 자료':'금융 전문 언론 원문',`<p style="margin:0 0 12px">${kind==='BROKER_RESEARCH'?'증권사 공식 공개 자료의 제목·발행일과 검증된 요약만 제공합니다. 과거 자료는 현재 투자의견으로 해석하지 않습니다.':'금융 전문 언론이 보도한 시장 관련 원문을 수집일 기준으로 정리했습니다. 기사 제목은 원문 링크에서 확인할 수 있습니다.'}</p><ul style="margin:0;padding-left:20px">${list}</ul>`);
  };
  return make('BROKER_RESEARCH')+make('FINANCIAL_MEDIA');
 }
