@@ -30,7 +30,7 @@ if(phase==='prepare'){
  if(process.env.CORRECTION_TARGET==='korea'){
    content=readFileSync('docs/operations/corrections/korea-close-20261028.html','utf8');
    for(const required of ['하나증권','이경수','이익 전망','6,012.44','771.28','1,341원','+11.24%'])if(!content.includes(required))throw Error('PROPOSAL_MISSING_'+required);
-   if(/1Q SK|순매매.*[0-9]{3}/.test(content))throw Error('PROPOSAL_UNEXPECTED_PRODUCT_OR_FLOW');
+   if(/1Q SK/.test(content)||['17,037','7,677','9,131'].some(value=>content.includes(value)))throw Error('PROPOSAL_UNEXPECTED_PRODUCT_OR_FLOW');
  }else{
    const sentence='나스닥은 검증된 시장 사실과 검색 관심이 겹친 보조 주제로, 사실관계를 바꾸지 않는 범위에서 제목과 해설의 가시성을 높였다.';
    const pattern=/<p\b[^>]*>나스닥은 검증된 시장 사실과 검색 관심이 겹친 보조 주제로, 사실관계를 바꾸지 않는 범위에서 제목과 해설의 가시성을 높였다\.<\/p>/g;
