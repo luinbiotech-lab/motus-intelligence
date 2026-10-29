@@ -1,134 +1,19 @@
 ## https://finance.naver.com/research/market_info_list.naver
-
+<!DOCTYPE html><html lang="ko" class="" data-theme="light"><head><meta charSet="utf-8"/><meta name="viewport" content="width=1366, initial-scale=1.0, user-scalable=yes"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="https://ssl.pstatic.net/imgstock/fn/real/pc/_next/static/css/9349f3b462cc41d1.css" data-precedence="next"/><link rel="stylesheet" href="https://ssl.pstatic.net/imgstock/fn/real/pc/_next/static/css/5b7b19cfec1ddb73.css" data-precedence="next"/><link rel="stylesheet" href="https://ssl.pstatic.net/imgstock/fn/real/pc/_next/static/css/675e7cf3522e752a.css" data-precedence="next"/><link rel="stylesheet" href="https://ssl.pstatic.net/imgstock/fn/real/pc/_next/static/css/17479d6767bc94ce.css" data-precedence="next"/><link rel="stylesheet" href="https://ssl.pstatic.net/imgstock/fn/real/pc/_next/static/css/0d05b0d30c572f7d.css" data-precedence="next"/><link rel="stylesheet" href="https://ssl.pstatic.net/imgstock/fn/real/pc/_next/static/css/7185478cce7f2f61.css" data-precedence="next"/><link rel="stylesheet" href="https://ssl.pstatic.net/imgstock/fn/real/pc/_next/static/css/98b7048a207b1c83.css" data-precedence="next"/><link rel="stylesheet" href="https://ssl.pstatic.net/imgstock/fn/real/pc/_next/static/css/8b17d94463501b27.css" data-precedence="next"/><link rel="stylesheet" href="https://ssl.pstatic.net/imgstock/fn/real/pc/_next/static/css/4984fd6eb1b228f2.css" data-precedence="next"/><link rel="stylesheet" href="https://ssl.pstatic.net/imgstock/fn/real/pc/_next/static/css/afd0986da7021696.css" data-precedence="next"/><link rel="stylesheet" href="https://ssl.pstatic.net/imgstock/fn/real/pc/_next/static/css/83dea39cca28cca3.css" data-precedence="next"/><link rel="stylesheet" href="https://ssl.pstatic.net/imgstock/fn/real/pc/_next/static/css/09265a3b8b3d8a0e.css" data-precedence="next"/><link rel="stylesheet" href="https://ssl.pstatic.net/imgstock/fn/real/pc/_next/static/css/19a5b6f53c0264b0.css" data-precedence="next"/><link rel="stylesheet" href="https://ssl.pstatic.net/imgstock/fn/real/pc/_next/static/css/720ffb26e01ddb73.css" data-precedence="next"/><link rel="stylesheet" href="https://ssl.pstatic.net/imgstock/fn/real/pc/_next/static/css/eaec88efaee6d4d8.css" data-precedence="next"/><link rel="stylesheet" href="https://ssl.pstatic.net/imgstock/fn/real/pc/_next/static/css/2961919bad9d2927.css" data-precedence="next"/><link rel="stylesheet" href="https://ssl.pstatic.net/imgstock/fn/real/pc/_next/stati
 ## https://finance.naver.com/research/invest_list.naver
+<!DOCTYPE html><html lang="ko" class="" data-theme="light"><head><meta charSet="utf-8"/><meta name="viewport" content="width=1366, initial-scale=1.0, user-scalable=yes"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="https://ssl.pstatic.net/imgstock/fn/real/pc/_next/static/css/9349f3b462cc41d1.css" data-precedence="next"/><link rel="stylesheet" href="https://ssl.pstatic.net/imgstock/fn/real/pc/_next/static/css/5b7b19cfec1ddb73.css" data-precedence="next"/><link rel="stylesheet" href="https://ssl.pstatic.net/imgstock/fn/real/pc/_next/static/css/675e7cf3522e752a.css" data-precedence="next"/><link rel="stylesheet" href="https://ssl.pstatic.net/imgstock/fn/real/pc/_next/static/css/17479d6767bc94ce.css" data-precedence="next"/><link rel="stylesheet" href="https://ssl.pstatic.net/imgstock/fn/real/pc/_next/static/css/0d05b0d30c572f7d.css" data-precedence="next"/><link rel="stylesheet" href="https://ssl.pstatic.net/imgstock/fn/real/pc/_next/static/css/7185478cce7f2f61.css" data-precedence="next"/><link rel="stylesheet" href="https://ssl.pstatic.net/imgstock/fn/real/pc/_next/static/css/98b7048a207b1c83.css" data-precedence="next"/><link rel="stylesheet" href="https://ssl.pstatic.net/imgstock/fn/real/pc/_next/static/css/8b17d94463501b27.css" data-precedence="next"/><link rel="stylesheet" href="https://ssl.pstatic.net/imgstock/fn/real/pc/_next/static/css/4984fd6eb1b228f2.css" data-precedence="next"/><link rel="stylesheet" href="https://ssl.pstatic.net/imgstock/fn/real/pc/_next/static/css/afd0986da7021696.css" data-precedence="next"/><link rel="stylesheet" href="https://ssl.pstatic.net/imgstock/fn/real/pc/_next/static/css/83dea39cca28cca3.css" data-precedence="next"/><link rel="stylesheet" href="https://ssl.pstatic.net/imgstock/fn/real/pc/_next/static/css/09265a3b8b3d8a0e.css" data-precedence="next"/><link rel="stylesheet" href="https://ssl.pstatic.net/imgstock/fn/real/pc/_next/static/css/19a5b6f53c0264b0.css" data-precedence="next"/><link rel="stylesheet" href="https://ssl.pstatic.net/imgstock/fn/real/pc/_next/static/css/720ffb26e01ddb73.css" data-precedence="next"/><link rel="stylesheet" href="https://ssl.pstatic.net/imgstock/fn/real/pc/_next/static/css/eaec88efaee6d4d8.css" data-precedence="next"/><link rel="stylesheet" href="https://ssl.pstatic.net/imgstock/fn/real/pc/_next/static/css/2961919bad9d2927.css" data-precedence="next"/><link rel="stylesheet" href="https://ssl.pstatic.net/imgstock/fn/real/pc/_next/stati
+## hk market
+2026-10-29 start with ibks start with ibks start with ibks �ъ��듯 IBK�ъ利沅 2026-10-29 ibks 
+2026-10-29 wake up! �移⑥ �� wake up! �移⑥ �� wake up! �移⑥ �� 由ъ移�쇳� SK利沅 2026-10-
+2026-10-29 YUANTA DAILY MARKET VIEW YUANTA DAILY MARKET VIEW YUANTA DAILY MARKET VIEW 由ъ移�쇳� ��
+2026-10-29 [���� �댁 �留 ] 濡遊� �吏泥! [���� �댁 �留 ] 濡遊� �吏泥! [���
+2026-10-29 [���� �댁 �留 ] �댄�! �댄�! �댄�! [���� �댁 �留 ] �댄�! �댄�! �댄�
+2026-10-29 ���� Macro Daily ���� Macro Daily ���� Macro Daily �ъ��듯 ���몄�
+## hk industry
+2026-10-29 ����몄 �곗쇰━�� ����몄 �곗쇰━�� ����몄 �곗쇰━�� - ��
+2026-10-29 [�명곕�/寃�] IBKS Daily [�명곕�/寃�] IBKS Daily [�명곕�/寃�] IBKS Daily - �댁뱁
+2026-10-29 3Q26 由щ럭: K-議곗� 諛�� �↔린 3Q26 由щ럭: K-議곗� 諛�� �↔린 3Q26 由щ럭: K-議곗� 諛�� �↔린 - 諛곌린�
+## hk company
 
-## https://finance.naver.com/research/company_list.naver
-
-## schwab
-Stocks Dip on Mixed Microsoft, Alphabet, PCE Data | Charles Schwab
-Loading navigation
-Menu
-Learn
-Learn Home
-Market Insights &amp; News
-Explore by Topic
-Learn by Goal
-Browse by Media
-Search Insights &amp; Education
-Markets and Economy
-Stocks Dip on Mixed Microsoft, Alphabet, PCE Data
-PCE inflation rose as expected last month while the government's first estimate for third quarter GDP topped estimates. Alphabet's disappointing results caused a sell-off in tech. 
-October 29, 2026
-•
-Joe Mazzola
-Published as of: October 29, 2026, 9:15 a.m. ET
-Listen to this article
-Listen here or subscribe to the Schwab Market Update in your favorite podcast app.
-Current time: 0 seconds, 
-0:00
- / 
-Duration: 0 seconds
-0:00
-1
-X
-Current time: 0 seconds, 
-0:00
- / 
-Duration: 0 seconds
-0:00
-Read Transcript
-The markets
-Last price
-Change
-% change
-S&amp;P 500
-® 
-Index
-7,743.98
-+21.38
-+0.28%
-Dow Jones Industrial Average
-®
-52,475.10
-+97.53
-+0.19%
-Nasdaq Composite
-®
-26,549.85
-+72.04
-+0.27%
-10-year Treasury yield
-5.01%
--0.03
---
-U.S. Dollar Index
-102.20
-+0.05
-+0.05%
-Cboe Volatility Index
-®
-17.07
-+0.16
-+0.95%
-Gold
-$4,038
--$16.80
--0.41%
-WTI Crude Oil
-$101.33
--$1.43
--1.37%
-Bitcoin
-$80,000
--$1,525
--1.87%
-Disclosure
-(Thursday market open)
- Investors might feel like they're drowning in data and earnings and today won't throw them a life jacket. Instead, it began with the September 
-Personal Consumption Expenditures
- (PCE) price index that came in just as Wall Street expected at 3.6% on an annual basis and 3.1% for core excluding food and energy.
-"This is still elevated and too high for the Fed's liking," said Cooper Howard, director of fixed income research and strategy at the Schwab Center for Financial Research (SCFR). "For the Fed, I think it means that December is very much in play. The economy is strong, the labor market is resilient, and inflation is high, which all point to the Fed needing to tighten further."
-The 
-Federal Reserve's
-10-2 vote to pause rates
- yesterday drew little market reaction as stocks finished mostly higher, led by tech. Fed Chairman Kevin Warsh declined to hint where rates are headed but noted it's an "information rich" environment—meaning data and other events could shape the next move. Tech crumbled early today after a dramatic miss from 
-Alphabet
- (GOOGL), where heavy capital expenditures took a large bite out of free cash flow. 
-Microsoft's
- (MSFT) results impressed and 
-Amazon
- (AMZN) reports later.
-To get the Schwab Market Update in your inbox every morning, 
-subscribe on Schwab.com
-.
-Three things to watch
-GDP/PCE deeper dive:
- In addition to PCE, investors eyed the government's first estimate of third quarter 
-gross domestic product
- (GDP). "GDP was the bright spot, up 3.4% vs. 3.2% expectations, driven mostly by personal consumption," Howard said. Though consumption rose on a nominal basis, spending softened in real terms, coming in flat. This suggests consumers are spending more for the same or less output. GDP, calculated on a seasonally adjusted annual basis, rose from 2.2% in the second quarter. The GDP chain deflator, which measures price increases across the economy for domestically produced goods, rose 2.2%, less than the 3.5% Briefing.com consensus and far below the 6.1% second-quarter increase. Digging in more, PCE rose 0.5% and core PCE rose 0.3% monthly, both meeting analysts' estimates. Core growth was the same as in August, but headline rose from August's 0.3%, while annual numbers rose from August's 3.4% and 3%. Energy prices drove headline PCE growth, no surprise considering crude's strength. On an annual basis, goods PCE rose 3.9% year over year and services rose 3.5%. Under the surface, about 48% of the subcomponents of PCE are still rising at 3% or more.
-Alphabet and Microsoft earnings assessed: Microsoft
- topped analysts' expectations for both earnings per share and revenue. Diving deeper, cloud revenue rose 30%, topping the Street's estimate, while Azure revenue surged 49%, well above expectations. Free cash flow fell year- over-year but easily surpassed Wall Street's estimates. Shares gained nearly 1.5% before the open but felt pressure from overall tech weakness after initially jumping 4%. It was a tough quarter for 
-Alphabet
- as earnings per share of $2.12 fell well short of the $3.01 consensus and Search revenue and YouTube ad revenue both missed estimates. The miss on Search—which came as more queries were directed to "AI mode," Alphabet said—raised concerns about AI hurting Alphabet's key product. Google Cloud revenue of $30.7 billion rose 103% annually, beating estimates. Results—which included negative 
-free cash flow
- exceeding $9 billion and a prediction that capital expenditures would rise again next year—appeared to make investors question Alphabet's return on invested capital, while Microsoft's quarter triggered positive thinking on that metric. Alphabet's 11% plunge reverberated through the AI sector early today as the 
-Nasdaq-100
-®
- (NDX) fell more than 1%.
-Amazon on deck: 
-AI 
-## edwardjones
-Stock Market News Today | Edward Jones
-United States | English
-Canada | English
-Canada | French
-Important information:
-This is for informational&nbsp;purposes only and should not be interpreted as specific investment advice. Investors should make&nbsp;investment decisions based on their unique investment objectives and financial situation. While the information is believed to be accurate, it is not guaranteed and is subject to change without notice.
-Investors should understand the risks involved in owning investments, including interest rate risk, credit risk and market risk. The value of investments fluctuates and investors can lose some or all of their principal.
-Past performance does not guarantee future results.
-Market indexes are unmanaged and cannot be invested into directly and are not meant to depict an actual investment.
-Diversification does not guarantee a profit or protect against loss.
-Systematic investing does not guarantee a profit or protect against loss. Investors should consider their willingness to keep investing when share prices are declining.
-Dividends may be increased, decreased or eliminated at any time without notice.
-Special risks are inherent in international investing, including those related to currency fluctuations and foreign political and economic events.
-Back to Top
+## hk economy
+2026-10-29 寃쎌� 10� FOMC: ��ㅼ��� � 12�� 留吏留 �몄 10� FOMC: ��ㅼ��� � 12��
