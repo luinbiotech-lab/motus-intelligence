@@ -75,7 +75,7 @@ export function composeUSDeepSections(input:{bundle:BrokerResearchBundle|null;st
       {text:input.sectors.map(item=>`${item.label} ${signedPct(item.changePct)}`).join(' · ')},
     ]});
   }
-  const rateDigests=briefs.flatMap(brief=>brief.digests.filter(item=>/FOMC|연준|Fed|美|미국|달러/.test(item.heading)&&!/프랑스|유럽|ECB|중국|일본|독일|영국|국고채/.test(item.heading)).map(item=>({item,brief}))).slice(0,2);
+  const rateDigests=briefs.flatMap(brief=>brief.digests.filter(item=>/FOMC|연준|Fed|美|미국|달러/.test(item.heading)&&!/프랑스|유럽|ECB|중국|일본|독일|영국|국고채|코스피|KOSPI|하이닉스|퀀틴전시|국내/.test(item.heading)).map(item=>({item,brief}))).slice(0,2);
   const economy=(input.bundle?.economy??[]).filter(item=>/FOMC|연준|금리|미국|美|달러|물가|고용|Fed/.test(item.title)).slice(0,3);
   if(rateDigests.length||economy.length){
     sections.push({key:'us-rates-research',title:'금리·통화정책에 대한 증권가 시각',paragraphs:[...rateDigests.map(({item,brief})=>digestParagraph(item,brief)),...economy.map(report=>({text:ratingSentence(report),source:reportSource(report)}))]});
