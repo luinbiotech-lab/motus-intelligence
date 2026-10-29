@@ -132,7 +132,7 @@ test('composed sections quote named brokers with dates and links, and lead with 
   const us=composeUSDeepSections({bundle,stocks:[{symbol:'GOOG',name:'Alphabet',koreanName:'알파벳',changePct:-11.15,close:251.2,date:'2026-10-29',trendingRank:1,mostActiveRank:null,marketCap:3.5e12}],sectors:[]});
   assert.equal(us.titleFocus,'알파벳 11% 급락');
   const usHtml=us.sections.map(deepSection).join('');
-  assert.match(usHtml,/“FOMC 동결 속 연준 의장 인플레 낙관론에 상승 마감”/);assert.match(usHtml,/반대 시각도 있다\./);
+  assert.match(usHtml,/“FOMC 동결 속 연준 의장 인플레 낙관론에 상승 마감”/);assert.match(usHtml,/경계 요인도 제시됐다\./);
   assert.match(usHtml,/알파벳\(GOOG\)은 251\.20달러로 11\.15% 급락했다\(야후 파이낸스 검색 1위\)/);
   assert.match(usHtml,/공동락 연구원은 「10 월 FOMC: 금리 인상 잠시 쉬어가기」에서/);
 });
@@ -144,5 +144,5 @@ test('MOTUS synthesis names themes shared by several brokers and flags divergent
   const text=korea.sections.flatMap(section=>section.paragraphs.map(p=>p.text)).join(' ');
   assert.match(text,/MOTUS 정리: 증권사 3곳의 아침 리포트를 대조하면 반도체 업황·실적\(A증권·B증권\)/);
   assert.match(text,/C증권은 환율·달러를 따로 짚었다/);
-  assert.match(text,/반대 시각도 있다\. B증권 리서치센터는 “FOMC 대기 속 경계감 공존”이라고 짚었다/);
+  assert.match(text,/경계 요인도 제시됐다\. B증권 리서치센터는 “FOMC 대기 속 경계감 공존”이라고 짚었다/);
 });

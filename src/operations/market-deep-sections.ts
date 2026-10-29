@@ -15,7 +15,7 @@ const quote=(value:string)=>`“${value.replace(/[“"]/g,'‘').replace(/[”]/
 /** “…”라고 / “…”이라고 by the final syllable of the quotation. */
 function said(quotes:string[]):string {const last=quotes.at(-1)??'',char=last.replace(/[”’\s]+$/,'').slice(-1),code=char.charCodeAt(0)-0xac00;const batchim=code>=0&&code<11172&&code%28!==0;return `${quotes.join(', ')}${batchim?'이라고':'라고'}`}
 /** Statements that describe the market as a whole lead; side notes (FX, oil) follow. */
-function marketScore(text:string){return (/마감|지수|증시|코스피|KOSPI|나스닥|S&P|다우|3대/.test(text)?2:0)+(/상승|하락|강세|약세|급등|급락|반등/.test(text)?1:0)}
+function marketScore(text:string){const digits=(text.match(/\d/g)??[]).length/Math.max(text.length,1);return (/마감|지수|증시|코스피|KOSPI|나스닥|S&P|다우|3대/.test(text)?2:0)+(/상승|하락|강세|약세|급등|급락|반등/.test(text)?1:0)+(/힘입|기대|영향|덕분|때문|배경|속에?\s|에\s?(?:상승|하락|급등|급락|강세|약세)/.test(text)?3:0)-(digits>0.12?3:0)}
 const reportSource=(report:BrokerReport)=>({label:`${report.broker} ${report.title} (${koreanDateLabel(report.date)})`,url:report.url});
 const sourceEntry=(report:BrokerReport)=>({label:`${report.broker} 「${report.title}」 (${report.date})`,url:report.url,publisher:report.broker});
 function subject(report:BrokerReport):string {return josa(analystLabel(report),'은','는')}
@@ -67,7 +67,7 @@ function causeParagraphs(briefs:BrokerBrief[],region:'US'|'KOREA'):{paragraphs:D
   const {drivers,cautions}=causes(briefs,region),all=briefs.flatMap(brief=>brief.statements.filter(item=>item.region===region).map(item=>({text:item.text,brief})));
   const paragraphs:DeepParagraph[]=[];const summary=consensus(drivers,all);if(summary)paragraphs.push({text:'MOTUS 정리: '+summary});
   for(const pick of drivers)paragraphs.push({text:`${subject(pick.brief.report)} ${koreanDateLabel(pick.brief.report.date)} 아침 리포트 「${pick.brief.report.title}」에서 ${said([quote(pick.text)])} 진단했다.`,source:reportSource(pick.brief.report)});
-  for(const pick of cautions)paragraphs.push({text:`반대 시각도 있다. ${subject(pick.brief.report)} ${said([quote(pick.text)])} 짚었다.`,source:reportSource(pick.brief.report)});
+  for(const pick of cautions)paragraphs.push({text:`경계 요인도 제시됐다. ${subject(pick.brief.report)} ${said([quote(pick.text)])} 짚었다.`,source:reportSource(pick.brief.report)});
   return {paragraphs,first:[...drivers].sort((a,b)=>marketScore(b.text)-marketScore(a.text))[0]??null};
 }
 function riskParagraphs(briefs:BrokerBrief[],region:'US'|'KOREA',checkpoint:string):DeepParagraph[]{
