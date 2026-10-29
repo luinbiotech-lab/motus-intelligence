@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8" ?>
+		<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" xmlns:admin="http://webns.net/mvcb/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+		<channel>
+			<title>연합인포맥스 - 증권</title>
+			<link>https://news.einfomax.co.kr</link>
+			<description>연합인포맥스</description>
+			<language>ko</language>
+			<copyright>Copyright (c) https://news.einfomax.co.kr All rights reserved</copyright>
+			<lastBuildDate>2026-10-30 00:30:21</lastBuildDate>
+		<item>
+			<nsid>AKR20261029203800016</nsid>
+			<title>하준경, 野 국민연금 리밸런싱 손실 지적 반박…&amp;quot;해외 연기금보다 수익률 높아&amp;quot;</title>
+			<link>https://news.einfomax.co.kr/news/articleView.html?idxno=4442031</link>
+			<description><![CDATA[하준경 청와대 정책실장이 29일 국민연금의 국내주식 리밸런싱 유예 조치가 대규모 손실로 이어졌다는 야당의 비판에 대해 올해 7월까지 219조원가량의 투자 수익을 거뒀다며 정면으로 반박했다.특히 국내 주식에서만 159조원에 달하는 수익이 발생했다는 점을 강조하며 국민연금의 운용 성과가 해외 주요 연기금과 비교해도 높은 수준이라고 평가했다.하 실장은 이날 국회 운영위원회의 대통령비서실 등에 대한 국정감사에서 "올해 1월부터 7월 말까지 국민연금 수익이 219조원 정도 된다"며 "그중 국내 주식에서 나온 수익이 159조원 정도로, 상당]]></description>
+			<author><![CDATA[정지서 기자]]></author>
+			<pubDate>2026-10-29 20:41:18</pubDate>
+			</item>
+			<item>
+			<nsid>AKR20261029195700016</nsid>
+			<title>빗썸, 고객 844명 주민번호 등 개인정보 유출…대표 공식 사과(종합)</title>
+			<link>https://news.einfomax.co.kr/news/articleView.html?idxno=4442018</link>
+			<description><![CDATA[가상자산 거래소 빗썸의 사내 모바일 그룹웨어 해킹 사고로 고객 6천444명과 임직원 715명 등 총 7천159명의 정보가 유출됐다. 이 가운데 고객 844명은 주민등록번호와 신분증 사본 등 주요 개인정보가 노출된 것으로 파악됐다.거래소 서비스나 고객 데이터베이스가 직접 침해된 정황은 확인되지 않았지만, 신분증 사본 등 본인 확인에 쓰이는 정보가 유출되면서 명의도용과 금융사기 등 2차 피해 우려가 커지고 있다.금융감독원은 현장 점검을 통해 사고 경위와 피해 범위를 파악하고 있다는 입장이다.빗썸은 지난 27일 사내 모바일 그룹웨어 ']]></description>
+			<author><![CDATA[전병훈 기자]]></author>
+			<pubDate>2026-10-29 18:28:53</pubDate>
+			</item>
+			<item>
+			<nsid>AKR20261029192700016</nsid>
+			<title>빗썸, 고객 844명 주민번호 등 개인정보 유출…대표 공식 사과</title>
+			<link>https://news.einfomax.co.kr/news/articleView.html?idxno=4442015</link>
+			<description><![CDATA[가상자산 거래소 빗썸의 사내 모바일 그룹웨어 해킹 사고로 고객 6천444명과 임직원 715명 등 총 7천159명의 정보가 유출됐다. 이 가운데 주민등록번호 등 주요 개인정보가 유출된 고객은 844명이다.빗썸은 29일 사내 모바일 그룹웨어 '다우오피스'에 외부 비인가자가 접근해 일부 고객과 임직원의 개인정보가 유출됐다며 공식 사과했다.빗썸에 따르면 유출 대상 고객은 총 6천444명이다. 다만 이 가운데 5천600명의 정보는 외부에서 접근할 수 없도록 암호화(DRM)된 파일에 담겨 있어 실제 개인정보가 노출된 고객은 844명이라고 설]]></description>
+			<author><![CDATA[전병훈 기자]]></author>
+			<pubDate>2026-10-29 18:12:25</pubDate>
+			</item>
+			<item>
+			<nsid>AKR20261029190100016</nsid>
+			<title>빗썸 &amp;quot;고객 844명 중요 개인정보 유출…주민번호·신분증 사본 등 포함&amp;quot;</title>
+			<link>https://news.einfomax.co.kr/news/articleView.html?idxno=4442006</link>
+			<description><![CDATA[<저작권자 (c) 연합인포맥스, 무단전재 및 재배포 금지, AI 학습 및 활용 금지>]]></description>
+			<author><![CDATA[전병훈 기자]]></author>
+			<pubDate>2026-10-29 17:52:40</pubDate>
+			</item>
+			<item>
+			<nsid>AKR20261029167100016</nsid>
+			<title>[재팬위크 2026] 상폐기준 강화에 변화 시작된 日거래소…국내와 온도차</title>
+			<link>https://news.einfomax.co.kr/news/articleView.html?idxno=4441983</link>
+			<description><![CDATA[일본 벤처투자업계가 도쿄증권거래소(TSE)의 그로쓰(Growth) 시장 상장 유지 기준 강화 방안이 시행 전부터 주식시장 선진화를 촉진하고 있다고 평가했다.한국과 일본이 나란히 증시의 상장 문턱을 높이는 가운데, 앞선 정책 발표 이후 일본 시장에 찾아온 변화에 관심이 쏠린다.리노베이트 파트너스는 29일 일본 자본시장의 최대 설명회(IR)인 '재팬위크'를 맞아 도쿄아메리칸클럽 멘하탄3 홀에서 '새로운 일본 회수시장 시대'를 주제로 간담회를 개최했다.이날 간담회는 벤처캐피탈(VC)과 신탁은행 등 다양한 벤처투자 전문가가 참여해 도쿄증]]></description>
+			<author><![CDATA[노요빈 기자]]></author>
+			<pubDate>2026-10-29 16:30:13</pubDate>
+			</item>
+			<item>
+			<nsid>AKR20261029167300016</nsid>
+			<title>[재팬위크 2026] &amp;quot;현실 직시할 때&amp;quot;…高금리에 연기금 자산방어 나섰다</title>
+			<link>https://news.einfomax.co.kr/news/articleView.html?idxno=4441984</link>
+			<description><![CDATA[글로벌 고금리 국면이 도래하면서 글로벌 기관 투자자들이 자산가치 방어를 위한 포트폴리오 조정에 나서고 있다.일본의 대형 연기금은 주식 비중을 줄이고 채권 투자를 늘리기 시작했고, 주요 투자기관들은 사모시장과 부동산 등 대체투자 부문에서도 자산가치 하락에 대비해야 한다고 입을 모았다.29일 일본 자본시장의 최대 설명회(IR)인 재팬위크의 핵심 주간인 '코어위크'를 맞아 도쿄에 모인 글로벌 기관 투자자들은 고금리 환경이 장기간 이어질 수 있다는 견해에 동의하며 대응 방안을 공유했다.최근 미국과 일본 등 주요국 금리는 급등했다. 미국]]></description>
+			<author><![CDATA[노요빈 기자]]></author>
+			<pubDate>2026-10-29 16:30:11</pubDate>
+			</item>
+			<item>
+			<nsid>AKR20261029168200016</nsid>
+			<title>권순일 前대법관 장인 '젠투펀드 10억 소송' 최종 패소</title>
+			<link>https://news.einfomax.co.kr/news/articleView.html?idxno=4441981</link>
+			<description><![CDATA[권순일 전(前) 대법관의 장인이 금융회사들을 상대로 제기한 10억 원 규모의 투자금 반환 소송에서 최종 패소했다.29일 금융투자업계에 따르면 대법원은 지난 27일 안경상 전 감사원 사무총장이 하나은행과 삼성헤지자산운용을 상대로 낸 부당이득금 반환 청구 소송 상고심에서 원고의 상고를 모두 기각했다.대법원이 금융회사 측의 투자자 보호 의무 위반을 인정하지 않은 하급심 판단이 정당하다고 보면서, 2021년 4월부터 이어진 5년 6개월간의 법적 다툼도 원고 패소로 마무리됐다.사건의 발단은 2019년 4월로 거슬러 올라간다. 당시 권 전]]></description>
+			<author><![CDATA[이규선 기자]]></author>
+			<pubDate>2026-10-29 16:27:33</pubDate>
+			</item>
+			<item>
+			<nsid>AKR20261029163900016</nsid>
+			<title>KB증권, 3분기 순이익 2천730억…전년比 70.5% 증가</title>
+			<link>https://news.einfomax.co.kr/news/articleView.html?idxno=4441976</link>
+			<description><![CDATA[KB증권의 올해 3분기 당기순이익이 전년 동기 대비 70% 이상 증가했다. 주식시장 변동성 확대에도 자산관리(WM)와 투자은행(IB), 자본시장 등 주요 사업 부문에서 영업력을 강화했다.29일 KB증권은 올해 3분기 연결 기준 당기순이익은 2천730억원으로 전년 동기 1천601억원보다 70.5% 증가했다고 밝혔다. 영업이익은 3천810억원으로 지난해 2천253억원 대비 69.1% 늘었다. 매출액은 5조4천415억원으로 전년 동기 2조7천465억원보다 98.1% 불었다.올해 3분기 누적 기준으로는 영업이익 1조4천347억원, 세전이]]></description>
+			<author><![CDATA[양용비 기자]]></author>
+			<pubDate>2026-10-29 16:11:51</pubDate>
+			</item>
+			<item>
+			<nsid>AKR20261029162400016</nsid>
+			<title>&amp;quot;퇴직연금 새 먹거리 열린다&amp;quot;…정부 개편안에 증권가 '반색'</title>
+			<link>https://news.einfomax.co.kr/news/articleView.html?idxno=4441975</link>
+			<description><![CDATA[정부가 퇴직급여 사외적립 의무화와 기금형 퇴직연금 도입을 골자로 한 제도 개편안을 내놓자 금융투자 업계는 크게 반기는 분위기다. 퇴직연금 시장으로 유입되는 자금이 확대되는 데다 기금 운용·투자상품 판매 등 새로운 수익 기회를 확보할 수 있단 기대에서다.반면 일각에서는 대형 금융사와 중소형 금융사 간 양극화가 심화할 수 있단 우려도 나온다.29일 금융투자 업계에 따르면 증권사와 자산운용사들은 이날 발표된 '퇴직연금 기능 강화 방안' 중 사외적립 의무화와 기금형 퇴직연금 도입 등에 주목하고 있다.앞서 이날 고용노동부와 재정경제부, 금]]></description>
+			<author><![CDATA[신민경 기자]]></author>
+			<pubDate>2026-10-29 16:08:08</pubDate>
+			</item>
+			<item>
+			<nsid>AKR20261029161700016</nsid>
+			<title>[증시-마감] 코스피, 삼성전자 실망에 1.24% 하락…6천선 하루 만에 반납</title>
+			<link>https://news.einfomax.co.kr/news/articleView.html?idxno=4441974</link>
+			<description><![CDATA[코스피가 삼성전자의 실적 발표 이후 쏟아진 실망 매물에 1% 넘게 하락하며 6,000선을 하루 만에 반납했다.삼성전자가 사상 최대 분기 실적을 기록했지만 시장이 기대했던 구체적인 주주환원 계획은 내년 1월로 미뤄지면서 투자심리가 위축됐다.체코 원전 시공계약 협상 결렬과 LG에너지솔루션 지분 매각 등 개별 악재까지 겹치며 장중 지수가 5,800선 초반까지 밀렸다.다만 오후 들어 기관의 매도세가 진정되고 SK하이닉스와 금융주가 강세를 보이면서 낙폭을 일부 만회했다.29일 코스피는 전 거래일보다 74.78포인트(1.24%) 하락한 5,]]></description>
+			<author><![CDATA[이규선 기자]]></author>
+			<pubDate>2026-10-29 16:05:48</pubDate>
+			</item>
+			<item>
+			<nsid>AKR20261029154900016</nsid>
+			<title>[도쿄증시-마감] 닛케이, AI주 강세에 상승</title>
+			<link>https://news.einfomax.co.kr/news/articleView.html?idxno=4441965</link>
+			<description><![CDATA[29일 일본 증시는 인공지능(AI)주 강세에 힘입어 64,000선을 회복했다.연합인포맥스 세계주가지수(화면번호 6511)에 따르면 닛케이225지수는 전 거래일 대비 705.25포인트(1.10%) 상승한 64,659.47로 장을 마쳤다. 닛케이지수는 3거래일 연속 상승했다.토픽스지수는 11.57포인트(0.29%) 오른 4,003.28로 거래를 끝냈다.닛케이지수는 상승 개장한 뒤 장 중 한때 하락 반전했으나 이내 다시 상승 폭을 확대하며 상승 마감했다.전일 어드밴테스트가 2027년 3월로 끝나는 회계연도의 실적 전망치를 상향 조정함에]]></description>
+			<author><![CDATA[김지연 기자]]></author>
+			<pubDate>2026-10-29 15:40:35</pubDate>
+			</item>
+			<item>
+			<nsid>AKR20261029101100016</nsid>
+			<title>신진창 &amp;quot;국민성장펀드, 단기 성과보다 긴 호흡&amp;quot;…안전장치 강조</title>
+			<link>https://news.einfomax.co.kr/news/articleView.html?idxno=4441951</link>
+			<description><![CDATA[금융위원회가 1조 원 넘는 자금이 몰린 '국민참여성장펀드'의 본격적인 투자 집행을 앞두고 운용사들과 만나 책임 있는 자금 운용을 당부했다. 최근 불거진 1차 펀드의 단기 수익률 부진 우려에 대해서는 중장기 투자가 필요한 펀드 특성을 고려해 긴 호흡으로 지켜봐 달라고 짚었다.금융위는 29일 오후 서울 여의도 금융투자협회에서 신진창 부위원장 주재로 '제2차 국민참여성장펀드 운용사 간담회'를 개최했다.국민참여성장펀드는 인공지능(AI), 반도체, 바이오 등 첨단전략산업 육성을 위해 정부와 민간이 합동으로 조성하는 장기 프로젝트다. 지난]]></description>
+			<author><![CDATA[이규선 기자]]></author>
+			<pubDate>2026-10-29 15:00:24</pubDate>
+			</item>
+			<item>
+			<nsid>AKR20261029132500016</nsid>
+			<title>&amp;quot;증권·운용·보험까지 번진 해킹 사태&amp;quot;…이억원, 내주 全금융권 만난다</title>
+			<link>https://news.einfomax.co.kr/news/articleView.html?idxno=4441944</link>
+			<description><![CDATA[최근 은행권을 시작으로 해킹 여파가 증권·자산운용·보험·가상자산 등으로 확산하고 있는 가운데, 이억원 금융위원장이 전(全) 금융권을 만나 대응방안 모색에 나선다.29일 금융권에 따르면 금융위는 오는 5일 금융협회장과 5대 시중은행장 등을 소집해 인공지능(AI) 기반 보안 대응 체계를 점검할 예정이다.해당 간담회는 이 위원장이 직접 주재한다. 이찬진 금융감독원장과 박상원 금융보안원장을 비롯해 국무조정실·과학기술정보통신부·개인정보보호위원회·경찰청 관계자 등도 참석할 예정이다.당초 이번 행사는 은행권과 주요 금융협회장을 대상으로 현 단]]></description>
+			<author><![CDATA[정원 기자]]></author>
+			<pubDate>2026-10-29 14:42:00</pubDate>
+			</item>
+			<item>
+			<nsid>AKR20261029125500016</nsid>
+			<title>서학개미 기대 모으는 앤트로픽…투자 전 짚어봐야 할 지배구조</title>
+			<link>https://news.einfomax.co.kr/news/articleView.html?idxno=4441938</link>
+			<description><![CDATA[인공지능(AI) 모델 '클로드' 개발사인 앤트로픽의 기업공개(IPO)를 앞두고 서학개미의 관심이 커지는 가운데, 앤트로픽의 독특한 지배구조가 눈길을 끈다.투자 판단의 핵심은 여전히 실적과 밸류에이션이지만, 창업자와 이사회 과반의 선임권을 가진 별도 신탁의 경영 판단이 엇갈릴 경우 일반 주주가 갈등을 해소할 수단은 제한적이기 때문이다.이진경 DB증권 연구원은 29일 보고서에서 "앤트로픽은 IPO 이후에도 창업자 7인으로 구성된 파운더 LLC(Founder LLC)가 전체 의결권의 50.1%를, AI 안전과 장기 공익을 목적으로 하는]]></description>
+			<author><![CDATA[전병훈 기자]]></author>
+			<pubDate>2026-10-29 14:21:00</pubDate>
+			</item>
+			<item>
+			<nsid>AKR20261029092300016</nsid>
+			<title>인텔, 내일 실적 발표…데이터센터 CPU 수요 확대·파운드리 반등 시험대</title>
+			<link>https://news.einfomax.co.kr/news/articleView.html?idxno=4441926</link>
+			<description><![CDATA[미국 반도체 기업 인텔(NAS:INTC)이 29일(현지 시각) 장 마감 후 3분기 실적을 발표한다.최근 한 달간 인텔 주가는 20% 이상 급락했으며 마이크론(NAS:MU)과 AMD(NAS:AMD)도 약 10%, 엔비디아(NAS:NVDA)는 3%가량 하락했다.그러나 앞서 SK하이닉스(NAS:SKHY)가 매출 328% 급증, 영업이익 632% 폭증이라는 기록적인 3분기 어닝 서프라이즈를 발표하면서 AI 시장의 실질 수요에 대한 시장의 우려가 한층 완화된 상태다.야후 파이낸스 등에 따르면, 인텔의 3분기 주당순이익(EPS)은 0.40달]]></description>
+			<author><![CDATA[이장원 기자]]></author>
+			<pubDate>2026-10-29 13:36:27</pubDate>
+			</item>
+			<item>
+			<nsid>AKR20261029026251016</nsid>
+			<title>미래에셋, 日산코증권 인수한다…현지 리테일시장 진출 '속도'(종합)</title>
+			<link>https://news.einfomax.co.kr/news/articleView.html?idxno=4441890</link>
+			<description><![CDATA[미래에셋증권이 일본 산코증권 인수를 통해 현지 리테일시장 공략에 나선다.현지 증권사 인수를 통해 라이센스를 확보한 만큼, 기존 일본사업과 연계해 이르면 내년부터 본격적인 영업에 나설 것으로 보인다.29일 니혼게이자이신문(닛케이)과 현지 금융권에 따르면 미래에셋증권은 미국 중간지주회사를 통해 산코증권 지분 100%를 인수한다.양사는 이날 오전 이사회를 열고 인수안을 최종 의결하기로 했다.인수액은 50억엔(420억원) 안팎이다. 이번 거래를 위해 미래에셋은 미국 자회사인 US홀딩스에 약 120억엔(1천6억원)을 출자할 예정이다.출자금]]></description>
+			<author><![CDATA[정원 기자]]></author>
+			<pubDate>2026-10-29 11:38:06</pubDate>
+			</item>
+			<item>
+			<nsid>AKR20261029093200016</nsid>
+			<title>코스피, 삼성전자 실적 발표 후 2%대 급락…6천선 다시 하회</title>
+			<link>https://news.einfomax.co.kr/news/articleView.html?idxno=4441877</link>
+			<description><![CDATA[코스피가 상승 폭을 모두 반납하고 2% 넘게 급락했다.삼성전자가 사상 최대 분기 실적을 발표했지만 반도체 부문 이익과 주주환원 규모가 높아진 시장 기대에 미치지 못했다는 평가가 나오면서 차익실현 매물이 쏟아졌다.여기에 한국수력원자력과 대우건설·두산에너빌리티 컨소시엄의 체코 원전 시공계약 협상 결렬 소식까지 겹치며 투자심리가 급격히 위축됐다.29일 코스피는 전 거래일보다 145.14포인트(2.41%) 하락한 5,867.30을 나타냈다.지수는 장중 6,100.11까지 올랐다. 그러나 오전 10시를 전후해 하락 전환한 뒤 낙폭을 확대하]]></description>
+			<author><![CDATA[이규선 기자]]></author>
+			<pubDate>2026-10-29 11:10:00</pubDate>
+			</item>
+			<item>
+			<nsid>AKR20261029087300016</nsid>
+			<title>中 로봇기업 유니트리, 3분기 매출 70% 급증…AI 투자 부담에 순이익은 감소</title>
+			<link>https://news.einfomax.co.kr/news/articleView.html?idxno=4441860</link>
+			<description><![CDATA[중국 로봇기업 유니트리가 3분기 매출이 70% 가까이 급증한 것으로 나타났다. 다만, 연구개발(R&D) 확대로 순이익은 감소했다.29일(현지시간) SCMP 등에 따르면 유니트리는 3분기 매출이 전년 동기 대비 69.93% 늘어난 6억6천504만 위안(약 1천335억원)을 기록했다고 공시했다.반면 순이익은 1억1천269만 위안(약 226억원)으로, 전년동기 대비 17.37% 감소했다.3분기 R&D 비용은 전년 동기 대비 249.58% 늘어난 1억2천700만 위안(약 255억원)에 이르러 실적에 부담으로 작용한 것으로 풀이된다. 이는]]></description>
+			<author><![CDATA[김지연 기자]]></author>
+			<pubDate>2026-10-29 10:51:26</pubDate>
+			</item>
+			<item>
+			<nsid>AKR20261029087500016</nsid>
+			<title>코인 거래소 프라뱅 &amp;quot;해킹으로 약 1억원 피해 발생…서비스 잠정 중단&amp;quot;</title>
+			<link>https://news.einfomax.co.kr/news/articleView.html?idxno=4441861</link>
+			<description><![CDATA[가상자산 거래소 프라뱅이 해킹으로 약 1억원의 자산 피해가 발생해 서비스를 잠정 중단했다. 지난달 말부터 이어진 금융권 침해사고 가운데 실제 자산 유출 피해가 확인된 첫 사례다.29일 가상자산업계에 따르면 프라뱅은 지난 26일 공지를 통해 "10월 24일경 외부 비인가자의 접근에 의해 침해사고가 발생했다"며 "관계 기관에 사고 사실을 신고하고 현재 사고 원인과 규모 등을 조사하고 있다"고 밝혔다. 프라뱅은 원화 거래를 지원하지 않고 가상자산 간 거래만 제공하는 코인마켓 거래소다.프라뱅은 거래소 핫월렛에서 비정상적인 출금을 탐지한]]></description>
+			<author><![CDATA[전병훈 기자]]></author>
+			<pubDate>2026-10-29 10:51:09</pubDate>
+			</item>
+			<item>
+			<nsid>AKR20261029069900016</nsid>
+			<title>금감원, 미래에셋 지배구조 들여다본다…내달 정기검사 착수</title>
+			<link>https://news.einfomax.co.kr/news/articleView.html?idxno=4441824</link>
+			<description><![CDATA[금융감독원이 다음 달 중순 미래에셋그룹에 대한 금융복합기업집단 정기 검사에 나선다. 증권·운용·보험·캐피탈 등 금융계열사 전반의 내부통제와 위험관리 체계를 들여다볼 예정이다.올 하반기 미래에셋 금융계열사에 대한 당국의 검사와 점검이 잇따르면서 그룹 내부 긴장감이 한층 고조되고 있다.29일 금융투자 업계에 따르면 금감원은 다음 달 중순 미래에셋그룹을 대상으로 금융복합기업집단 위험관리실태평가를 위한 현장검사에 나선다.이번 검사는 금융복합기업집단법에 따라 약 3년 주기로 진행되는 정기검사다.금감원은 올해 검사 대상으로는 교보그룹과 미래]]></description>
+			<author><![CDATA[신민경 기자]]></author>
+			<pubDate>2026-10-29 10:02:33</pubDate>
+			</item>
+				</channel>
+		</rss>
+		

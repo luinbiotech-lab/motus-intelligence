@@ -1,0 +1,128 @@
+{
+ "naver_market_list": {
+  "status": 200,
+  "ct": "text/html; charset=utf-8",
+  "len": 124095,
+  "finalUrl": "https://stock.naver.com/research/daily"
+ },
+ "naver_invest_list": {
+  "status": 200,
+  "ct": "text/html; charset=utf-8",
+  "len": 124101,
+  "finalUrl": "https://stock.naver.com/research/invest"
+ },
+ "naver_company_list": {
+  "status": 200,
+  "ct": "text/html; charset=utf-8",
+  "len": 124109,
+  "finalUrl": "https://stock.naver.com/research/company"
+ },
+ "naver_industry_list": {
+  "status": 200,
+  "ct": "text/html; charset=utf-8",
+  "len": 125106,
+  "finalUrl": "https://stock.naver.com/research/industry"
+ },
+ "naver_economy_list": {
+  "status": 200,
+  "ct": "text/html; charset=utf-8",
+  "len": 124109,
+  "finalUrl": "https://stock.naver.com/research/economy"
+ },
+ "naver_lastsearch": {
+  "status": 200,
+  "ct": "text/html; charset=utf-8",
+  "len": 129479,
+  "finalUrl": "https://stock.naver.com/market/stock/kr/stocklist/top"
+ },
+ "naver_m_research": {
+  "status": 404,
+  "ct": "",
+  "len": 0,
+  "finalUrl": "https://m.stock.naver.com/api/research/category/market?pageSize=5"
+ },
+ "hankyung_consensus": {
+  "status": 200,
+  "ct": "text/html; charset=UTF-8",
+  "len": 41368,
+  "finalUrl": "https://consensus.hankyung.com/analysis/list"
+ },
+ "google_trends_kr": {
+  "status": 200,
+  "ct": "text/xml; charset=utf-8",
+  "len": 18490,
+  "finalUrl": "https://trends.google.com/trending/rss?geo=KR"
+ },
+ "google_trends_us": {
+  "status": 200,
+  "ct": "text/xml; charset=utf-8",
+  "len": 21524,
+  "finalUrl": "https://trends.google.com/trending/rss?geo=US"
+ },
+ "yahoo_trending_us": {
+  "status": 200,
+  "ct": "application/json;charset=utf-8",
+  "len": 315,
+  "finalUrl": "https://query1.finance.yahoo.com/v1/finance/trending/US?count=10"
+ },
+ "yahoo_gainers": {
+  "status": 200,
+  "ct": "application/json;charset=utf-8",
+  "len": 28795,
+  "finalUrl": "https://query1.finance.yahoo.com/v1/finance/screener/predefined/saved?scrIds=day_gainers&count=10"
+ },
+ "nasdaq_movers": {
+  "status": 200,
+  "ct": "application/json; charset=utf-8",
+  "len": 8968,
+  "finalUrl": "https://api.nasdaq.com/api/marketmovers?assetclass=stocks"
+ },
+ "blackrock_weekly": {
+  "status": 200,
+  "ct": "text/html; charset=utf-8",
+  "len": 332150,
+  "finalUrl": "https://www.blackrock.com/corporate/insights/blackrock-investment-institute/global-weekly-commentary"
+ },
+ "ms_ideas": {
+  "status": 200,
+  "ct": "text/html;charset=utf-8",
+  "len": 824405,
+  "finalUrl": "https://www.morganstanley.com/insights"
+ },
+ "jpm_insights": {
+  "status": 200,
+  "ct": "text/html;charset=utf-8",
+  "len": 231004,
+  "finalUrl": "https://am.jpmorgan.com/us/en/asset-management/adv/insights/market-insights/market-updates/on-the-minds-of-investors/"
+ },
+ "schwab_rss": {
+  "status": 404,
+  "ct": "text/html; charset=utf-8",
+  "len": 360057,
+  "finalUrl": "https://www.schwab.com/learn/rss.xml"
+ },
+ "hankyung_global_rss": {
+  "status": 403,
+  "ct": "text/html; charset=UTF-8",
+  "len": 5859,
+  "finalUrl": "https://www.hankyung.com/feed/international"
+ },
+ "mk_global_rss": {
+  "status": 200,
+  "ct": "application/xml;charset=UTF-8",
+  "len": 28947,
+  "finalUrl": "https://www.mk.co.kr/rss/50300009/"
+ },
+ "yna_market_rss": {
+  "status": 200,
+  "ct": "application/xml;charset=UTF-8",
+  "len": 69069,
+  "finalUrl": "https://www.yna.co.kr/rss/market.xml"
+ },
+ "einfomax": {
+  "status": 200,
+  "ct": "application/xml",
+  "len": 12943,
+  "finalUrl": "https://news.einfomax.co.kr/rss/S1N2.xml"
+ }
+}

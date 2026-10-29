@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:ht="https://trends.google.com/trending/rss" version="2.0">
+	<channel>
+		<title>Daily Search Trends</title>
+		<description>Recent searches</description>
+		<link>https://trends.google.com/trending/rss?geo=US</link>
+		<atom:link href="https://trends.google.com/trending/rss?geo=US" rel="self" type="application/rss+xml"/>
+		<item>
+			<title>dylan larkin</title>
+			<ht:approx_traffic>500+</ht:approx_traffic>
+			<description/>
+			<link>https://trends.google.com/trending/rss?geo=US</link>
+			<pubDate>Thu, 29 Oct 2026 08:20:00 -0700</pubDate>
+			<ht:picture>https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSOS2i7ngHSeSWuTpOrqrrU-HX1oeg3xNLS3tuqIFBi7BdhvEW-mr498yWqM4</ht:picture>
+			<ht:picture_source>The New York Times</ht:picture_source>
+			<ht:news_item>
+				<ht:news_item_title>Ranking which NHL teams on Dylan Larkin’s trade list can pull off a deal - The Athletic</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://www.nytimes.com/athletic/7715375/2026/10/26/detroit-red-wings-dylan-larkin-trade-list-ranking/</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSOS2i7ngHSeSWuTpOrqrrU-HX1oeg3xNLS3tuqIFBi7BdhvEW-mr498yWqM4</ht:news_item_picture>
+				<ht:news_item_source>The New York Times</ht:news_item_source>
+			</ht:news_item>
+			<ht:news_item>
+				<ht:news_item_title>Source: Red Wings&apos; Dylan Larkin stretches list of trade options to 10 teams</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://www.espn.com/nhl/story/_/id/50233721/red-wings-dylan-larkin-stretches-trade-list-10-teams</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQo-zRXT51F-tXVwl1rDxWV2hL7y-GXPDu_ofELlUp753qzPELymOe5lBQRnDU</ht:news_item_picture>
+				<ht:news_item_source>ESPN</ht:news_item_source>
+			</ht:news_item>
+			<ht:news_item>
+				<ht:news_item_title>Larkin Absence Today Was False Alarm</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://detroithockeynow.com/dylan-larkin-nhl-trade-todaymaintenance-day-misses-practive/</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRpBIr1LNTPzjZBIyZBWd5JD-K4siH5yy7QWgMBervDXK03cvkpvj33kFFSeh8</ht:news_item_picture>
+				<ht:news_item_source>Detroit Hockey Now</ht:news_item_source>
+			</ht:news_item>
+		</item>
+		<item>
+			<title>coby bryant</title>
+			<ht:approx_traffic>500+</ht:approx_traffic>
+			<description/>
+			<link>https://trends.google.com/trending/rss?geo=US</link>
+			<pubDate>Thu, 29 Oct 2026 08:10:00 -0700</pubDate>
+			<ht:picture>https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRQhWcpbPKg-cd-6ACZtAWXt_nSXnbsKplP9L6JyylTRXj80XiWA44B45zLP3Y</ht:picture>
+			<ht:picture_source>Chicago Sun-Times</ht:picture_source>
+			<ht:news_item>
+				<ht:news_item_title>Bears report: Injured Coby Bryant progressing but without an exact return date</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://chicago.suntimes.com/bears/2026/10/28/bears-report-injured-coby-bryant-progressing-but-without-an-exact-return-date</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRQhWcpbPKg-cd-6ACZtAWXt_nSXnbsKplP9L6JyylTRXj80XiWA44B45zLP3Y</ht:news_item_picture>
+				<ht:news_item_source>Chicago Sun-Times</ht:news_item_source>
+			</ht:news_item>
+			<ht:news_item>
+				<ht:news_item_title>Bears HC Ben Johnson gives Coby Bryant injury update that features ‘big hurdle’</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://sports.yahoo.com/articles/bears-hc-ben-johnson-gives-134144214.html</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTwAbFx1g_IbW0KtGxShTAPEZHXqPsXYFZhklWaxZbW8-mHyzfUFJEdvYAYArY</ht:news_item_picture>
+				<ht:news_item_source>Yahoo Sports</ht:news_item_source>
+			</ht:news_item>
+			<ht:news_item>
+				<ht:news_item_title>Bears coach reveals timeline for Coby Bryant&apos;s return</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://dawindycity.com/bears-coach-reveals-timeline-for-coby-bryant-s-return</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTUkqqY4OPxAs6avDP-luDBpCFgRdOmtPzYCfj9vdWfsCcRFewaz4XOXe7Q708</ht:news_item_picture>
+				<ht:news_item_source>Da Windy City</ht:news_item_source>
+			</ht:news_item>
+		</item>
+		<item>
+			<title>duskbloods</title>
+			<ht:approx_traffic>200+</ht:approx_traffic>
+			<description/>
+			<link>https://trends.google.com/trending/rss?geo=US</link>
+			<pubDate>Thu, 29 Oct 2026 08:10:00 -0700</pubDate>
+			<ht:picture>https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTJ4WGrQFE8qYAZgTyG8HrFn7CfhMOfnZASiOWSdRehS_gndXXlxhtZUJnDAXY</ht:picture>
+			<ht:picture_source>IGN</ht:picture_source>
+			<ht:news_item>
+				<ht:news_item_title>FromSoftware&apos;s Nintendo Switch 2 Exclusive The Duskbloods Officially Delayed Into 2027</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://www.ign.com/articles/fromsoftwares-nintendo-switch-2-exclusive-the-duskbloods-officially-delayed-into-2027</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTJ4WGrQFE8qYAZgTyG8HrFn7CfhMOfnZASiOWSdRehS_gndXXlxhtZUJnDAXY</ht:news_item_picture>
+				<ht:news_item_source>IGN</ht:news_item_source>
+			</ht:news_item>
+			<ht:news_item>
+				<ht:news_item_title>From Software Delays Its Switch 2 Exclusive, The Duskbloods</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://www.gamespot.com/articles/switch-2-exclusives-the-duskbloods-delayed-to-2027/</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTB2Bt3a9C4uSQ25VYVIhQhDxld4H1UxRBrXUZRaurkdWIKjcxv1YFEvleL5Bc</ht:news_item_picture>
+				<ht:news_item_source>GameSpot</ht:news_item_source>
+			</ht:news_item>
+			<ht:news_item>
+				<ht:news_item_title>The Duskbloods delayed to 2027, FromSoftware shares statement</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://nintendoeverything.com/the-duskbloods-delayed-to-2027-fromsoftware-shares-statement/</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQye9RQmij7rCgT5QHVwSyAuOxRe42bJdjTy7wcTg1gN9_h_OB_SIv0XXzIel0</ht:news_item_picture>
+				<ht:news_item_source>Nintendo Everything</ht:news_item_source>
+			</ht:news_item>
+		</item>
+		<item>
+			<title>maxx crosby</title>
+			<ht:approx_traffic>1000+</ht:approx_traffic>
+			<description/>
+			<link>https://trends.google.com/trending/rss?geo=US</link>
+			<pubDate>Thu, 29 Oct 2026 08:00:00 -0700</pubDate>
+			<ht:picture>https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ4sbSMXw3FEPYUuGjJ35kk6NXPNHMz1hKgD2ejNoTvSwLjHJKYuLyuGZfUQzo</ht:picture>
+			<ht:picture_source>Casino.org</ht:picture_source>
+			<ht:news_item>
+				<ht:news_item_title>NFL Insider Jason La Canfora: Maxx Crosby Trade Price Revealed as Raiders Face Deadline Dilemma</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://www.casino.org/news/maxx-crosby-raiders-trade-price-nfl-deadline/</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ4sbSMXw3FEPYUuGjJ35kk6NXPNHMz1hKgD2ejNoTvSwLjHJKYuLyuGZfUQzo</ht:news_item_picture>
+				<ht:news_item_source>Casino.org</ht:news_item_source>
+			</ht:news_item>
+			<ht:news_item>
+				<ht:news_item_title>Cowboys Trade For Maxx Crosby? Rumors Return As &apos;Bidding War&apos; Competition Grows</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://sports.yahoo.com/videos/cowboys-trade-maxx-crosby-rumors-121326189.html</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTzOyNDRnAyWMkCsjsoPWsNUXWtuAPLcJwkGZmiEovqY9jDtfUnoQMoWgecbfI</ht:news_item_picture>
+				<ht:news_item_source>Yahoo Sports</ht:news_item_source>
+			</ht:news_item>
+			<ht:news_item>
+				<ht:news_item_title>Blockbuster Trade Pitch Sees Giants Land Superstar Maxx Crosby</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://heavy.com/sports/nfl/new-york-giants/blockbuster-trade-maxx-crosby-giants/</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRdj9XQEOCvE4va1p9h4hf91Y-sIsC4oYMYg5E7xXi199Z6zqfEeKZayrtoY4Y</ht:news_item_picture>
+				<ht:news_item_source>Heavy.com</ht:news_item_source>
+			</ht:news_item>
+		</item>
+		<item>
+			<title>west apostle mountain</title>
+			<ht:approx_traffic>2000+</ht:approx_traffic>
+			<description/>
+			<link>https://trends.google.com/trending/rss?geo=US</link>
+			<pubDate>Thu, 29 Oct 2026 07:50:00 -0700</pubDate>
+			<ht:picture>https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcR5MzfP1lNslCxUatF1sh7GLdzS19TNAazbxu5ZBstmr0rW6M60jMhWTAkwhIA</ht:picture>
+			<ht:picture_source>KKTV</ht:picture_source>
+			<ht:news_item>
+				<ht:news_item_title>Chaffee County Sheriff says missing Colorado Mountain College hikers have been found dead</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://www.kktv.com/2026/10/29/chaffee-county-sheriff-says-missing-colorado-mountain-college-hikers-have-been-found-dead/</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcR5MzfP1lNslCxUatF1sh7GLdzS19TNAazbxu5ZBstmr0rW6M60jMhWTAkwhIA</ht:news_item_picture>
+				<ht:news_item_source>KKTV</ht:news_item_source>
+			</ht:news_item>
+			<ht:news_item>
+				<ht:news_item_title>20-year-old New Yorker, fellow college student found dead after Colorado hiking trip</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://cbs6albany.com/news/local/20-year-old-new-yorker-fellow-college-student-found-dead-after-colorado-hiking-trip-jackson-donlon-kaden-matsuda-colorado-mountain-colleges-leadville-chaffee-county-sheriffs-office-hikers-tent-search-efforts-west-apostle-mountain-ridgway-cbs6-wrgb</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQDvKBwNOxI79H18rB4XIr0TIiZDP5RrvZyMzTCOlAxpu3yBTsDUsf9rrP3MiY</ht:news_item_picture>
+				<ht:news_item_source>WRGB</ht:news_item_source>
+			</ht:news_item>
+			<ht:news_item>
+				<ht:news_item_title>2 college students found dead after going missing while hiking, police say</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://abcnews.com/US/2-college-students-hiking-remain-missing-tent-found/story?id=137641736</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6N9HDiuD4OPGwONpEn4gSEqYlMPPPPj0-YpaOFv1-oPaOyHFol7r0flXY2ZY</ht:news_item_picture>
+				<ht:news_item_source>ABC News - Breaking News, Latest News and Videos</ht:news_item_source>
+			</ht:news_item>
+		</item>
+		<item>
+			<title>when is the nfl trade deadline</title>
+			<ht:approx_traffic>1000+</ht:approx_traffic>
+			<description/>
+			<link>https://trends.google.com/trending/rss?geo=US</link>
+			<pubDate>Thu, 29 Oct 2026 07:50:00 -0700</pubDate>
+			<ht:picture>https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRdg11uOu23PVm-gxhUG1n4q_WZ6Kb8o2D6BhrIwB2qmxnE2czk3XkEAeU7E48</ht:picture>
+			<ht:picture_source>The New York Times</ht:picture_source>
+			<ht:news_item>
+				<ht:news_item_title>Ten hypothetical NFL trade deadline deals that could swing the Super Bowl race - The Athletic</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://www.nytimes.com/athletic/7730894/2026/10/29/nfl-trade-deadline-super-bowl/</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRdg11uOu23PVm-gxhUG1n4q_WZ6Kb8o2D6BhrIwB2qmxnE2czk3XkEAeU7E48</ht:news_item_picture>
+				<ht:news_item_source>The New York Times</ht:news_item_source>
+			</ht:news_item>
+			<ht:news_item>
+				<ht:news_item_title>2026 NFL trade deadline candidates: Ranking big-name players possibly on the move into tiers</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://www.cbssports.com/nfl/news/2026-nfl-trade-deadline-candidates-impact-tiers/</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQjYVp8tHnjjLLXsXFJ0XCDtRa1l5VAbyhpq63cu4l7K6PVgtzz4mfqKaCEY88</ht:news_item_picture>
+				<ht:news_item_source>CBS Sports</ht:news_item_source>
+			</ht:news_item>
+			<ht:news_item>
+				<ht:news_item_title>NFL Trade Deadline: 1 Player Every Playoff Hopeful Should Target</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://www.foxsports.com/stories/nfl/nfl-trade-deadline-rumors-1-player-every-playoff-hopeful-should-target</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRDxcfcawj5602uSjqXmKcwHbOy_tEI5dSrhv__wBXvZzq6KoeZiyL-TSxeLjA</ht:news_item_picture>
+				<ht:news_item_source>FOX Sports</ht:news_item_source>
+			</ht:news_item>
+		</item>
+		<item>
+			<title>montez sweat</title>
+			<ht:approx_traffic>1000+</ht:approx_traffic>
+			<description/>
+			<link>https://trends.google.com/trending/rss?geo=US</link>
+			<pubDate>Thu, 29 Oct 2026 07:40:00 -0700</pubDate>
+			<ht:picture>https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbNdwa5hvCYdLKxrZ_NIXYN2Q_qpEVdPjwivsxVcmPQDDk3NHAfuTsuObZpEo</ht:picture>
+			<ht:picture_source>The New York Times</ht:picture_source>
+			<ht:news_item>
+				<ht:news_item_title>Bears have help on the way with Montez Sweat, T.J. Edwards, others returning</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://www.nytimes.com/athletic/7733510/2026/10/29/bears-defensive-reinforcements-montez-sweat-tj-edwards/</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbNdwa5hvCYdLKxrZ_NIXYN2Q_qpEVdPjwivsxVcmPQDDk3NHAfuTsuObZpEo</ht:news_item_picture>
+				<ht:news_item_source>The New York Times</ht:news_item_source>
+			</ht:news_item>
+			<ht:news_item>
+				<ht:news_item_title>Montez Sweat returns to Bears following &apos;devastating&apos; 2-game suspension</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://www.espn.com/nfl/story/_/id/50301493/montez-sweat-back-bears-devastating-2-game-suspension</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTKiyScmruoRjfiJDJu5F5dpTW285JEDpWTL67mR1gBI2O0JS2N4cL4PJvOfKY</ht:news_item_picture>
+				<ht:news_item_source>ESPN</ht:news_item_source>
+			</ht:news_item>
+			<ht:news_item>
+				<ht:news_item_title>Montez Sweat returns to Bears following &apos;devastating&apos; two-game suspension</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://www.nfl.com/news/montez-sweat-returns-to-bears-devastating-two-game-suspension</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTJUupozsclzqNC8sMaRR24ia0j3Ez5Xlkjxvo72_QEr2HaUNIpk1XsOldPHiE</ht:news_item_picture>
+				<ht:news_item_source>NFL.com</ht:news_item_source>
+			</ht:news_item>
+		</item>
+		<item>
+			<title>khalil mack</title>
+			<ht:approx_traffic>2000+</ht:approx_traffic>
+			<description/>
+			<link>https://trends.google.com/trending/rss?geo=US</link>
+			<pubDate>Thu, 29 Oct 2026 07:30:00 -0700</pubDate>
+			<ht:picture>https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSoB8T5X7D5hhSoaV3Y7IIx0ipHV737HngWVuQeJvQkBq-M-JA2m0Bs8ttleaY</ht:picture>
+			<ht:picture_source>Yahoo Sports</ht:picture_source>
+			<ht:news_item>
+				<ht:news_item_title>Bills Named Fit for Khalil Mack, and His $8 Million Salary Is a Day 3 Bargain at the Deadline</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://sports.yahoo.com/articles/bills-named-fit-khalil-mack-115400916.html</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSoB8T5X7D5hhSoaV3Y7IIx0ipHV737HngWVuQeJvQkBq-M-JA2m0Bs8ttleaY</ht:news_item_picture>
+				<ht:news_item_source>Yahoo Sports</ht:news_item_source>
+			</ht:news_item>
+			<ht:news_item>
+				<ht:news_item_title>The Bills need budget-friendly options at the 2026 NFL Trade Deadline</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://www.buffalorumblings.com/buffalo-bills-salary-cap-contracts/143799/buffalo-bills-trade-deadline-expectations-should-be-dampened-by-salary-cap-space</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTPMRIw5gihzQq7qQx0MY3VsteY7NJB6RpRwC3CymIMse9kxjlbAOHyXDHsyDM</ht:news_item_picture>
+				<ht:news_item_source>Buffalo Rumblings</ht:news_item_source>
+			</ht:news_item>
+			<ht:news_item>
+				<ht:news_item_title>With contenders swinging trades, urgency ramps up on Brandon Beane to find a deal</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://auburnpub.com/sports/professional/nfl/bills/article_a4ef3b44-6e8d-50ee-8067-fd2f24ae704d.html</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSV6Lno-m0qpCYIpF51cDS2L6h5967RqHnJywncOAH0fQJx9jVCRMxQnNnbZhc</ht:news_item_picture>
+				<ht:news_item_source>Auburn Citizen</ht:news_item_source>
+			</ht:news_item>
+		</item>
+		<item>
+			<title>dexter lawrence</title>
+			<ht:approx_traffic>1000+</ht:approx_traffic>
+			<description/>
+			<link>https://trends.google.com/trending/rss?geo=US</link>
+			<pubDate>Thu, 29 Oct 2026 07:30:00 -0700</pubDate>
+			<ht:picture>https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1foR1shD0tNHFBYBcQ6UZaOTeSFDvROFoRFz91zdZkU5qpvb7rQx460Q5b1o</ht:picture>
+			<ht:picture_source>Cincinnati Enquirer</ht:picture_source>
+			<ht:news_item>
+				<ht:news_item_title>&apos;It&apos;s a three-man Sexy Dexy!&apos; Watch Dexter Lawrence&apos;s mic&apos;d-up sack</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://www.cincinnati.com/story/sports/nfl/bengals/2026/10/26/dexter-lawrence-three-man-sexy-dexy-bengals-ravens/92449980007/</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1foR1shD0tNHFBYBcQ6UZaOTeSFDvROFoRFz91zdZkU5qpvb7rQx460Q5b1o</ht:news_item_picture>
+				<ht:news_item_source>Cincinnati Enquirer</ht:news_item_source>
+			</ht:news_item>
+			<ht:news_item>
+				<ht:news_item_title>&apos;It&apos;s a three-man Sexy Dexy!&apos; Watch Dexter Lawrence&apos;s mic&apos;d-up sack</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://sports.yahoo.com/articles/three-man-sexy-dexy-watch-205827484.html</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQIhWUwGmGT59ee-qBX9PD2TNUQ0QSDrR3_IG9H_iNCnhNDUvEIo3MxHVE_hhE</ht:news_item_picture>
+				<ht:news_item_source>Yahoo Sports</ht:news_item_source>
+			</ht:news_item>
+			<ht:news_item>
+				<ht:news_item_title>The Bengals&apos; BEST Defensive Addition Isn&apos;t Dexter Lawrence...</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://sports.yahoo.com/videos/bengals-best-defensive-addition-isnt-123441766.html</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS4JqzGkNu900j1p9gAIYyQ5omSDeRYyVhbzX-XXBhmb_pcPwqmqAZj3cg4YBI</ht:news_item_picture>
+				<ht:news_item_source>Yahoo Sports</ht:news_item_source>
+			</ht:news_item>
+		</item>
+		<item>
+			<title>micah parsons trade</title>
+			<ht:approx_traffic>1000+</ht:approx_traffic>
+			<description/>
+			<link>https://trends.google.com/trending/rss?geo=US</link>
+			<pubDate>Thu, 29 Oct 2026 07:30:00 -0700</pubDate>
+			<ht:picture>https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQcLLH19UZSnFzVPJfl9rzRIh_FtclYNe1ToDBxLrnXN_LvK4GtFhe9i3M2SPo</ht:picture>
+			<ht:picture_source>The New York Times</ht:picture_source>
+			<ht:news_item>
+				<ht:news_item_title>Why didn’t Giants QB J.J. McCarthy wear his signature eye black vs. Texans? - The Athletic</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://www.nytimes.com/athletic/7727326/2026/10/27/new-york-giants-j-j-mccarthy-eye-black-michigan-ohio-state-c-j-stroud/</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQcLLH19UZSnFzVPJfl9rzRIh_FtclYNe1ToDBxLrnXN_LvK4GtFhe9i3M2SPo</ht:news_item_picture>
+				<ht:news_item_source>The New York Times</ht:news_item_source>
+			</ht:news_item>
+			<ht:news_item>
+				<ht:news_item_title>The Third-String Castoff Quarterback Sparking a Giant Turnaround</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://www.wsj.com/sports/football/jj-mccarthy-giants-0c041275</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRdeuomPVNoyxYt70LGZTHnvgwLKxFJNICGcNTGLcPYlABCdvj0iNkhGC_AWgU</ht:news_item_picture>
+				<ht:news_item_source>WSJ</ht:news_item_source>
+			</ht:news_item>
+			<ht:news_item>
+				<ht:news_item_title>Micah Parsons Gets Blunt on J.J. McCarthy’s Success After Vikings Trade</ht:news_item_title>
+				<ht:news_item_snippet/>
+				<ht:news_item_url>https://sports.yahoo.com/articles/micah-parsons-gets-blunt-j-090808158.html</ht:news_item_url>
+				<ht:news_item_picture>https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcwDwvWA_q4c4eByQ-kiiBQis8TvrxmE6g-8-mLw19Xh2yeWF9cQpmvdR_eC4</ht:news_item_picture>
+				<ht:news_item_source>Yahoo Sports</ht:news_item_source>
+			</ht:news_item>
+		</item>
+	</channel>
+</rss>

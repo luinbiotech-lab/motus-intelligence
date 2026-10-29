@@ -1,0 +1,640 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:nyt="http://www.nytimes.com/namespaces/rss/2.0" version="2.0">
+<channel>
+  <title><![CDATA[매일경제 : 부동산]]></title> 
+  <link>https://www.mk.co.kr/</link> 
+  <description><![CDATA[매일경제 : 부동산]]></description> 
+  <language>ko</language> 
+  <copyright>Copyright 2026 MK</copyright>
+  <lastBuildDate>Fri, 30 Oct 2026 00:36:08 +09:00</lastBuildDate>
+
+  <item>
+    <no>12190259</no>
+    <title><![CDATA[똘똘한 한 채 말고 꼬마빌딩 사라고?...고가 주택 당분간 피해야할 이유는]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12190259]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 18:31:38 +09:00</pubDate>
+    <description><![CDATA[이재명 정부 시대 … 2027년 내집 마련 전략은 전세난에 비강남 매수세 지속 금리·집값 상승에 부담은 커져 저렴한 경기북부는 매수 기회 일각선 ‘서울 조정’ 신중론도“이번 세제 ..]]></description>
+  
+    <media:content medium="image" url="https://pimg.mk.co.kr/news/cms/202610/29/news-p.v1.20261029.e4b768d1d32544e4b7a352f148ca337b_R.png" />
+  
+  </item>
+
+  <item>
+    <no>12190249</no>
+    <title><![CDATA[종로 보령 사옥 새 주인에 코람코·한화갤러리아]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12190249]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 18:21:38 +09:00</pubDate>
+    <description><![CDATA[매각가 2000억원 안팎 한화갤러리아 지분 투자코람코자산신탁과 한화갤러리아가 서울 종로구 보령 사옥 인수에 나선다. 거래 규모는 2000억원 안팎으로 거론된다. 29일 투자은행(I..]]></description>
+  
+    <media:content medium="image" url="https://pimg.mk.co.kr/news/cms/202610/29/news-p.v1.20261029.8a14e165164c4ebdbdb4ee471ccdd2ab_R.jpg" />
+  
+  </item>
+
+  <item>
+    <no>12190227</no>
+    <title><![CDATA[마곡 가까운 김포에 물량 절반 … 지하철 5호선 연장 '발등에 불']]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12190227]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 17:52:03 +09:00</pubDate>
+    <description><![CDATA[정부가 새로 발표한 수도권 공공 택지 6곳은 모두 서울 경계에서 약 5㎞ 이내에 자리한다. 서울과 가까운 경기권 그린벨트를 풀어 도심 출퇴근 수요를 흡수하겠다는 구상이다. 특히 서..]]></description>
+  
+    <media:content medium="image" url="https://pimg.mk.co.kr/news/cms/202610/30/20261030_01110103000003_L00.jpg" />
+  
+  </item>
+
+  <item>
+    <no>12190226</no>
+    <title><![CDATA[기대 모았지만 서울 택지는 빠져 … 국토장관 "서울시 답변 기다려"]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12190226]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 17:52:02 +09:00</pubDate>
+    <description><![CDATA[정부가 29일 수도권 신규 택지 7만6700가구를 발표했지만 서울 공급 물량은 한 가구도 포함되지 않았다. 다만 국토교통부가 서울시와 추가 공급 용지를 놓고 실무협의를 진행 중이고..]]></description>
+  
+    <media:content medium="image" url="https://pimg.mk.co.kr/news/cms/202610/30/20261030_01110103000002_L00.jpg" />
+  
+  </item>
+
+  <item>
+    <no>12190222</no>
+    <title><![CDATA[김포·구리 그린벨트 풀어 … 7.7만가구 추가공급 속도]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12190222]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 17:51:25 +09:00</pubDate>
+    <description><![CDATA[정부가 서울과 인접한 경기 김포·하남·구리 등 6곳에 주택 7만6700가구를 공급한다. 지난 8월 공개한 2만7200가구까지 합치면 총 10만3900가구 규모다. 이번 신규 택지는..]]></description>
+  
+  </item>
+
+  <item>
+    <no>12190188</no>
+    <title><![CDATA[가격 떨어진 지금이 적기 … 빌딩 CEO 돼라]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12190188]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 17:46:23 +09:00</pubDate>
+    <description><![CDATA["이번 세제 개편으로 초고가 주택은 투자 자산이 아니라 유지 비용을 지불해야 하는 소비재가 됐습니다."
+서울 핵심 입지의 이른바 '똘똘한 한 채' 아파트로 거주와 투자를 모두 해결..]]></description>
+  
+    <media:content medium="image" url="https://pimg.mk.co.kr/news/cms/202610/30/20261030_01110113000004_M00.jpg" />
+  
+  </item>
+
+  <item>
+    <no>12190186</no>
+    <title><![CDATA[교통·수요 '탄탄'한 단지로 … 하락기때도 팔릴 집 매수를]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12190186]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 17:46:22 +09:00</pubDate>
+    <description><![CDATA["지금 9억원 이하 아파트 시장에 저평가 단지는 없습니다. 숨은 진주를 찾아 헤매지 말고 이미 알려진 탄탄한 단지를 매수해야 합니다."
+29일 서울 코엑스 마곡에서 개막한 '202..]]></description>
+  
+    <media:content medium="image" url="https://pimg.mk.co.kr/news/cms/202610/30/20261030_01160113000001_L00.jpg" />
+  
+  </item>
+
+  <item>
+    <no>12190185</no>
+    <title><![CDATA[강남 약세·강북 강세 내년까지 계속…"稅규제 완화는 기대 접어야"]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12190185]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 17:46:21 +09:00</pubDate>
+    <description><![CDATA["강남 약세·강북 강세의 '양극화'는 내년에도 지속된다. '강남불패' 신화를 깨려는 정부가 세금 규제를 풀어주길 기대하지 마라."
+29일 서울 코엑스 마곡에서 개막한 '2026 서..]]></description>
+  
+    <media:content medium="image" url="https://pimg.mk.co.kr/news/cms/202610/30/20261030_01160113000002_L00.jpg" />
+  
+  </item>
+
+  <item>
+    <no>12190125</no>
+    <title><![CDATA['S70 성수 르엘' 팝업관 오픈 롯데건설 미래주거기술 체험]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12190125]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 17:32:03 +09:00</pubDate>
+    <description><![CDATA[롯데건설이 서울 성수전략정비구역 4지구(성수4지구) 재개발사업에 적용할 주거 설계와 스마트 기술 등을 소개하는 팝업관을 다음달 2일까지 운영한다.
+29일 롯데건설에 따르면 지난 2..]]></description>
+  
+    <media:content medium="image" url="https://pimg.mk.co.kr/news/cms/202610/30/20261030_01110125000008_L00.jpg" />
+  
+  </item>
+
+  <item>
+    <no>12190126</no>
+    <title><![CDATA['서울 자가'의 꿈 더 어렵겠네 … 입주 물량 13년 만에 '최저']]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12190126]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 17:32:03 +09:00</pubDate>
+    <description><![CDATA[올해 서울 아파트 입주 물량이 2013년 이후 13년 만에 가장 적은 수준으로 줄어들 전망이다. 다음달 서울에서 입주하는 아파트도 488가구에 그치는 것으로 집계됐다. 신규 아파트..]]></description>
+  
+  </item>
+
+  <item>
+    <no>12190124</no>
+    <title><![CDATA[디에이치 반포124 견본주택에 현대건설, 브랜드 체험관 조성]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12190124]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 17:32:02 +09:00</pubDate>
+    <description><![CDATA[현대건설이 다음달 일반분양 예정인 '디에이치 반포124' 견본주택(사진)에 브랜드 체험 공간을 마련한다.
+현대건설은 하이엔드 브랜드 '디에이치(THE H)'가 추구하는 주거 철학과..]]></description>
+  
+    <media:content medium="image" url="https://pimg.mk.co.kr/news/cms/202610/30/20261030_01110125000007_L00.jpg" />
+  
+  </item>
+
+  <item>
+    <no>12190122</no>
+    <title><![CDATA[세운지구 상가 줄여 주거공급 늘린다]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12190122]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 17:32:01 +09:00</pubDate>
+    <description><![CDATA[서울 세운재정비촉진지구에서 일반상업지역을 중심상업지역으로 상향할 때 의무적으로 확보해야 하는 업무·상업시설 비율이 50%에서 20%로 낮아진다. 주거시설을 더 많이 지을 수 있게 ..]]></description>
+  
+  </item>
+
+  <item>
+    <no>12190123</no>
+    <title><![CDATA[과천 8억짜리 새 아파트…또 로또 청약]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12190123]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 17:32:01 +09:00</pubDate>
+    <description><![CDATA['과천 디에트르 퍼스티지'(투시도) 전용면적 59㎡ 2가구가 8억원 중반대의 분양가로 무순위 청약에 나온다.
+29일 한국부동산원 청약홈에 따르면 경기도 과천시 지식정보타운 내 '과..]]></description>
+  
+    <media:content medium="image" url="https://pimg.mk.co.kr/news/cms/202610/30/20261030_01110125000006_L00.jpg" />
+  
+  </item>
+
+  <item>
+    <no>12190121</no>
+    <title><![CDATA[[포토] 포스코이앤씨 주거 브랜드 포럼]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12190121]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 17:32:00 +09:00</pubDate>
+    <description><![CDATA[]]></description>
+  
+    <media:content medium="image" url="https://pimg.mk.co.kr/news/cms/202610/30/20261030_01160125000003_L00.jpg" />
+  
+  </item>
+
+  <item>
+    <no>12190120</no>
+    <title><![CDATA[3분기 서울 국평 집값 하락 … 전세금은 3.8% 대폭 올라]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12190120]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 17:32:00 +09:00</pubDate>
+    <description><![CDATA[3분기 서울의 84㎡ 아파트 평균 매매가가 전년 동기 대비 2.5% 하락한 것으로 나타났다. 서초구 등 평균을 상회하는 자치구들의 거래량이 감소했기 때문이다. 다만 같은 기간 평균..]]></description>
+  
+  </item>
+
+  <item>
+    <no>12190119</no>
+    <title><![CDATA[고삐 풀린 경기 집값, 상승률 서울 2배 '질주']]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12190119]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 17:31:59 +09:00</pubDate>
+    <description><![CDATA[경기 아파트값 상승률이 5년 만에 서울의 두 배를 넘어섰다. 서울에서는 강남3구를 중심으로 가격 조정이 이어지며 상승세가 둔화한 반면, 경기에서는 교통과 일자리 여건이 좋은 남부 ..]]></description>
+  
+    <media:content medium="image" url="https://pimg.mk.co.kr/news/cms/202610/30/20261030_01110125000001_L00.jpg" />
+  
+  </item>
+
+  <item>
+    <no>12190090</no>
+    <title><![CDATA[“그냥 줍줍하라 해도 싫다고?”…찬밥신세 지방 청약시장]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12190090]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 17:21:04 +09:00</pubDate>
+    <description><![CDATA[한쪽에선 수천 대 일, 한쪽에선 ‘0명’ 아파트 ‘분양시장’도 양극화 시대최근 국내 주택 분양 시장이 핵심지 과열과 외곽·지방 냉각으로 나뉘며 침체와 열기가 공존하는 양상을 보이고..]]></description>
+  
+    <media:content medium="image" url="https://pimg.mk.co.kr/news/cms/202610/29/news-p.v1.20261029.1bbcd2dea0d848359f2c34814ec9a310_R.png" />
+  
+  </item>
+
+  <item>
+    <no>12190051</no>
+    <title><![CDATA[“이 평수에 방 3개·대형 드레스룸까지?”…실수요자들 59㎡에 몰리는 이유]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12190051]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 17:06:12 +09:00</pubDate>
+    <description><![CDATA[가구 규모 축소와 주거 공간의 효율성을 중시하는 흐름이 맞물리면서 전용면적 59㎡ 아파트의 설계 경쟁력이 주택 시장의 핵심 요소로 떠오르고 있다. 29일 대한민국 정책브리핑의 ‘2..]]></description>
+  
+    <media:content medium="image" url="https://pimg.mk.co.kr/news/cms/202610/29/news-p.v1.20261029.fbb5ab5e83c842c39760e158d561ded7_R.png" />
+  
+  </item>
+
+  <item>
+    <no>12189948</no>
+    <title><![CDATA[입주물량 13년만 최저인데 “2028년에 더 준다”…문턱 높아지는 서울 입성]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12189948]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 15:58:26 +09:00</pubDate>
+    <description><![CDATA[올해 입주 1만7천여 가구 2013년 이후 공급량 최저 분양가 3.3㎡당 5401만원 5년사이 두 배 가까이 올라서울 아파트 입주물량이 13년 만에 최저 수준으로 줄어든 데 이어 ..]]></description>
+  
+    <media:content medium="image" url="https://pimg.mk.co.kr/news/cms/202610/29/news-p.v1.20261008.820c7af08a674318aac7257be4b2081e_R.jpeg" />
+  
+  </item>
+
+  <item>
+    <no>12189908</no>
+    <title><![CDATA[8·13 대책 후속 신규택지 7.7만가구 발표 | 이재명 정부 여덟번째 부동산 대책]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12189908]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 15:30:46 +09:00</pubDate>
+    <description><![CDATA[진영화 매일경제신문 부동산부 기자가 매부리TV에서 8·13 부동산 대책 후속 차원으로 발표한 7만6700가구 규모 신규택지를 소개합니다. 당초 서울시 내 그린벨트 해제를 통한 택지..]]></description>
+  
+    <media:content medium="image" url="https://pimg.mk.co.kr/news/cms/202610/29/news-m.v1.20261029.61d910ed4f744ea48ef3863ab4c8bc7a_R.png" />
+  
+  </item>
+
+  <item>
+    <no>12189885</no>
+    <title><![CDATA[“옆 단지 11억인데 여긴 3억”…청약 시작된 부담가능주택, 어딘가 보니]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12189885]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 15:22:41 +09:00</pubDate>
+    <description><![CDATA[고덕강일3단지 전용 59㎡ 3억원대  토지 임대차 갱신땐 최장 80년 거주고덕강일3단지를 포함한 부담가능주택들이 다음달 청약에 나선다. 전세난 속 3억원대의 저렴한 분양가에 주거공..]]></description>
+  
+    <media:content medium="image" url="https://pimg.mk.co.kr/news/cms/202610/29/news-p.v1.20261029.10ce44d9b0c14d1dbb101ef0927c8786_R.png" />
+  
+  </item>
+
+  <item>
+    <no>12189836</no>
+    <title><![CDATA[세운지구 비주거 의무비율 50%→20%…도심 주택공급 늘린다]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12189836]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 14:41:51 +09:00</pubDate>
+    <description><![CDATA[2030 정비기본계획 반영 내달 12일까지 주민공람서울 세운재정비촉진지구에서 일반상업지역을 중심상업지역으로 상향할 때 의무적으로 확보해야 하는 업무·상업시설 비율이 50%에서 20..]]></description>
+  
+    <media:content medium="image" url="https://pimg.mk.co.kr/news/cms/202610/29/news-p.v1.20261029.13e05ee5d2f149709767fd4d6f0e945e_R.png" />
+  
+  </item>
+
+  <item>
+    <no>12189807</no>
+    <title><![CDATA[3분기 서울 84㎡ 평균 매매가 내렸지만...전세보증금은 3.8%↑]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12189807]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 14:24:23 +09:00</pubDate>
+    <description><![CDATA[국민평형 평균 매매가 12억7949억원 평균 상회하는 자치구 거래량 감소 영향 서초구가 29억2556만원으로 가장 비싸3분기 서울의 84㎡ 아파트 평균 매매가가 전년 동기 대비 2..]]></description>
+  
+    <media:content medium="image" url="https://pimg.mk.co.kr/news/cms/202610/29/news-p.v1.20261014.8bb765f45d1f47ffadd75a3fafc016c1_R.png" />
+  
+  </item>
+
+  <item>
+    <no>12189806</no>
+    <title><![CDATA[서울 새 아파트 입주 물량 13년 만에 최저…내년에도 공급 가뭄]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12189806]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 14:24:11 +09:00</pubDate>
+    <description><![CDATA[올해 입주 1만7698가구…작년보다 45% 감소 다음 달 입주 예정 물량은 488가구에 그쳐 분양가 부담도 커져..연말까지 서초 등 신규 분양 예정올해 서울 아파트 입주 물량이 2..]]></description>
+  
+    <media:content medium="image" url="https://pimg.mk.co.kr/news/cms/202610/29/news-p.v1.20261029.431cf8cd711648adba114373bdc53a6e_R.jpg" />
+  
+  </item>
+
+  <item>
+    <no>12189803</no>
+    <title><![CDATA[롯데건설, 성수 4지구 재개발 주거기술 선보이는 팝업관 운영]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12189803]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 14:23:28 +09:00</pubDate>
+    <description><![CDATA[다음 달 2일까지 광진구 르엘캐슬갤러리서 개최 AI·로봇 기술·특화 설계 전시...고객 참여형 프로그램 운영롯데건설이 서울 성수전략정비구역 4지구(성수4지구) 재개발사업에 적용할 ..]]></description>
+  
+    <media:content medium="image" url="https://pimg.mk.co.kr/news/cms/202610/29/news-p.v1.20261029.08c6cdfa81ea4f1ea365d40814dc89fd_R.jpg" />
+  
+  </item>
+
+  <item>
+    <no>12189796</no>
+    <title><![CDATA[금리에 얼어붙은 유럽 오피스…거래액 17년 만에 최저]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/world/12189796]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 14:17:53 +09:00</pubDate>
+    <description><![CDATA[3분기 88억유로…전년 대비 33% 감소 조달비용 부담에 매각 철회·조건 재협상유럽 오피스 거래액이 글로벌 금융위기 이후 최저 수준으로 줄었다. 채권금리 상승으로 매입자금 조달 부..]]></description>
+  
+    <media:content medium="image" url="https://pimg.mk.co.kr/news/cms/202610/29/rcv.YNA.20261019.PEP20261019175901009_R.jpg" />
+  
+  </item>
+
+  <item>
+    <no>12189785</no>
+    <title><![CDATA[“청라국제업무단지 분상제 단지”…‘청라 아크원 푸르지오’ 30일 견본주택 개관]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12189785]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 14:11:30 +09:00</pubDate>
+    <description><![CDATA[7호선 역세권·하나금융 그룹헤드쿼터 인접 약 10년 만의 청라 대단지 공급청라스마트시티(시행)이 오는 30일 ‘청라 아크원 푸르지오’의 견본주택을 열고 본격적인 분양일정에 들어간다..]]></description>
+  
+    <media:content medium="image" url="https://pimg.mk.co.kr/news/cms/202610/29/news-p.v1.20261029.d7d132f0da834268a60e7dd574af72a7_R.jpg" />
+  
+  </item>
+
+  <item>
+    <no>12189738</no>
+    <title><![CDATA[[속보] 서울 집값 90주째 상승 ‘신기록’…경기 상승률, 5년만에 서울 2배]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12189738]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 14:00:00 +09:00</pubDate>
+    <description><![CDATA[서울 0.09%·경기 0.20% ↑ 군포·영통 0.58%, 기흥 0.54%  비규제지역 병점도 0.44% 올라 서울 강남3구는 하락세 지속서울 아파트값이 90주 연속 상승했지만 오..]]></description>
+  
+    <media:content medium="image" url="https://pimg.mk.co.kr/news/cms/202610/29/news-p.v1.20261015.49a1dd740a6d4e98b2b5511f8da426d4_R.png" />
+  
+  </item>
+
+  <item>
+    <no>12189758</no>
+    <title><![CDATA[4일 만에 1억2천 올랐다…서울 90주 연속 아파트값 뛸 때 경기권도 ‘키맞추기’]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12189758]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 14:00:00 +09:00</pubDate>
+    <description><![CDATA[10월 넷째 주 전국 아파트값 동향 서울 아파트 90주 연속 ‘최장 상승’ 강남 3구는 세 부담 우려에 하락세 수원시 영통구 등서 줄줄이 신고가 살구골동아 101㎡, 10.7억에 ..]]></description>
+  
+    <media:content medium="image" url="https://pimg.mk.co.kr/news/cms/202610/29/rcv.YNA.20251015.PYH2025101512590006100_R.jpg" />
+  
+  </item>
+
+  <item>
+    <no>12189745</no>
+    <title><![CDATA[“집 사고팔며 편법 증여?”…위법 의심 직거래 40%는 강남 3구]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12189745]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 13:39:59 +09:00</pubDate>
+    <description><![CDATA[전국 351건 중 서울이 224건 차지 강남·서초·송파에만 140건 집중 편법 증여·특수관계인 차입금 과다편법 증여 등 위법 거래가 의심되는 주택 직거래 10건 중 4건이 서울 강..]]></description>
+  
+    <media:content medium="image" url="https://pimg.mk.co.kr/news/cms/202610/29/news-p.v1.20260907.51e47ed9d956444d9932ea8153e1afa7_R.png" />
+  
+  </item>
+
+  <item>
+    <no>12189683</no>
+    <title><![CDATA[높이 규제 막혔던 흑석동 재개발…23층 숲세권 아파트길 열려]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12189683]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 11:20:31 +09:00</pubDate>
+    <description><![CDATA[서울 동작구 흑석동에 재개발을 통해 23층 높이 숲세권 아파트가 들어선다. 서울시는 동작구 흑석동 204-104번지 일대(면적 4만8693㎡) 주택정비형 재개발사업의 신속통합기획 ..]]></description>
+  
+    <media:content medium="image" url="https://pimg.mk.co.kr/news/cms/202610/29/news-p.v1.20261029.73ab4abc7efa438e959ede92c2c84397_R.jpg" />
+  
+  </item>
+
+  <item>
+    <no>12189677</no>
+    <title><![CDATA[현대건설, ‘분양 최대어’ 반포124 견본주택에 ‘디에이치 하우스’ 선보여]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12189677]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 11:17:45 +09:00</pubDate>
+    <description><![CDATA[현대건설이 다음달 일반분양 예정인 ‘디에이치 반포124’ 견본주택에 브랜드 체험 공간을 마련한다. 현대건설은 하이엔드 브랜드 ‘디에이치(THE H)’가 추구하는 주거 철학과 라이프..]]></description>
+  
+    <media:content medium="image" url="https://pimg.mk.co.kr/news/cms/202610/29/news-p.v1.20261029.9aa0be43c29444d787ba76232b14dd69_R.jpeg" />
+  
+  </item>
+
+  <item>
+    <no>12189676</no>
+    <title><![CDATA[‘20억 로또’ 디에이치 반포124 출격…청약 성패는 ‘현금 동원력’]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12189676]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 11:17:44 +09:00</pubDate>
+    <description><![CDATA[수십억 원대의 시세 차익이 예상되는 강남권 최대어 ‘디에이치 반포124’가 오는 11월 말 본격적인 분양 일정에 돌입한다. 한강변 핵심 입지와 1800채가 넘는 대규모 일반분양 물..]]></description>
+  
+    <media:content medium="image" url="https://pimg.mk.co.kr/news/cms/202610/29/news-p.v1.20261029.be57622eac334dc6b8cdebcb61e44f21_R.png" />
+  
+  </item>
+
+  <item>
+    <no>12189661</no>
+    <title><![CDATA[“준법경영 강조”…DL건설, 전사적 준법문화 확산 위한 ‘컴플라이언스 데이’]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12189661]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 11:09:02 +09:00</pubDate>
+    <description><![CDATA[부서별 자율준수 담당자 임명 조직 단위 CP 운영체계 강화건설업계의 공정거래 리스크 관리 중요성이 커지는 가운데 DL건설이 임직원의 준법 의식을 높이고 자율준수 체계 강화에 나섰다..]]></description>
+  
+    <media:content medium="image" url="https://pimg.mk.co.kr/news/cms/202610/29/news-p.v1.20261029.622e03f3d9cf475b8c530624d6ec7df3_R.png" />
+  
+  </item>
+
+  <item>
+    <no>12189602</no>
+    <title><![CDATA[송치영 포스코이앤씨 사장 “고객 목소리 반영해 신뢰받는 브랜드로 자리매김할 것”]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12189602]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 10:32:50 +09:00</pubDate>
+    <description><![CDATA[포스코이앤씨는 고객과 전문가의 목소리를 직접 듣고 주거 상품 개선에 나섰다고 29일 밝혔다. 포스코이앤씨는 지난 27일 서울 강남구 더샵갤러리에서 ‘고객이 행복한 주거, 고객이 선..]]></description>
+  
+    <media:content medium="image" url="https://pimg.mk.co.kr/news/cms/202610/29/news-p.v1.20261029.4adf4c4a893442fabc4d37ef8c0cb55f_R.jpg" />
+  
+  </item>
+
+  <item>
+    <no>12189600</no>
+    <title><![CDATA[“입주 후에도 자이와 함께”…GS건설, ‘자이안데이’로 고객 접점 확대]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12189600]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 10:27:42 +09:00</pubDate>
+    <description><![CDATA[GS건설이 브랜드 체험 공간 및 입주민 참여 프로그램을 확대하며 고객과의 접점을 넓히고 있다. 단순한 주거 상품 안내를 넘어 입주 이후에도 가족 단위로 즐길 수 있는 생활·문화 체..]]></description>
+  
+    <media:content medium="image" url="https://pimg.mk.co.kr/news/cms/202610/29/news-p.v1.20261029.3a8a5d09ba1347889c0ad337505e3ebc_R.png" />
+  
+  </item>
+
+  <item>
+    <no>12189592</no>
+    <title><![CDATA[“고객 쓴소리가 정답”…포스코이앤씨, 실수요자 목소리로 브랜드 고도화]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12189592]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 10:22:38 +09:00</pubDate>
+    <description><![CDATA[포스코이앤씨가 고객과 전문가의 목소리를 직접 청취하며 미래 주거 패러다임 전환에 나섰다. 포스코이앤씨는 지난 27일 서울 강남구 더샵갤러리에서 ‘고객이 행복한 주거, 고객이 선택하..]]></description>
+  
+    <media:content medium="image" url="https://pimg.mk.co.kr/news/cms/202610/29/news-p.v1.20261029.15f764abccd64efcb827ca3706ecda22_R.png" />
+  
+  </item>
+
+  <item>
+    <no>12189591</no>
+    <title><![CDATA[“전셋값 어디까지 오르는 건가요”…강북도 결국 6억 넘었다]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12189591]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 10:20:41 +09:00</pubDate>
+    <description><![CDATA[서울 아파트 전셋값 39개월 연속 상승 올해만 9.5% 올라 7.3억원 역대 최고 강북 14개구 평균 전셋값 6억281만원 “실거주 집주인 늘면 전세물량 더 감소”서울 강북권 아파..]]></description>
+  
+    <media:content medium="image" url="https://pimg.mk.co.kr/news/cms/202610/29/news-p.v1.20261029.7dd5dc2922d249c09e345646c193ebce_R.jpg" />
+  
+  </item>
+
+  <item>
+    <no>12189577</no>
+    <title><![CDATA[대형 화재 잇따르는 구룡마을…일부 주민 ‘재개발 분양권’ 요구로 갈등]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12189577]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 10:09:14 +09:00</pubDate>
+    <description><![CDATA[서울시·SH, 구룡마을 화재에 임시 거주·대피소 마련해 운영 일부 주민 현장 주변서 천막생활 재개발사업 일정엔 영향 없을듯 내년 이주 마치고 3천세대 착공서울의 마지막 판자촌으로 ..]]></description>
+  
+    <media:content medium="image" url="https://pimg.mk.co.kr/news/cms/202610/29/news-p.v1.20261027.983a45401876407ca908d4fe14173d61_R.jpg" />
+  
+  </item>
+
+  <item>
+    <no>12189568</no>
+    <title><![CDATA[[속보] 수도권 신규택지 7만6700가구 추가 공급…서울 인접 교통 요지에 집중]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12189568]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 10:00:00 +09:00</pubDate>
+    <description><![CDATA[김포아라 3만7000가구로 최대 규모 구리·하남·의정부·고양 등 6곳 추가 기발표 2만7200가구 합쳐 10만3900가구 서울 경계 5km 이내…2030년 착공 목표정부가 수도권 ..]]></description>
+  
+    <media:content medium="image" url="https://pimg.mk.co.kr/news/cms/202610/29/news-p.v1.20261028.e9ff49aab88543c8ab8d8c8cbb16b591_R.jpg" />
+  
+  </item>
+
+  <item>
+    <no>12189502</no>
+    <title><![CDATA[중랑구 신내9진흥 전용 33.18㎡ 3억 5800만원… 최근 3년 신고가 [MAI부동산]]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12189502]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 09:07:19 +09:00</pubDate>
+    <description><![CDATA[MAI 부동산 2026년 10월 28일 국토부 실거래가 시스템에 신규 등록된 서울 중랑구 신내동 신내9진흥 전용 33.18㎡가 3억 5,800만원에 거래되며 최근 3년 내 신고가를..]]></description>
+  
+  </item>
+
+  <item>
+    <no>12189503</no>
+    <title><![CDATA[성북구 정릉2차e-편한세상 84.4㎡ 11억 9천만원 거래… 최근 3년 신고가 [MAI부동산]]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12189503]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 09:07:19 +09:00</pubDate>
+    <description><![CDATA[MAI 부동산 2026년 10월 28일 국토부 실거래가 시스템에 신규 등록된 서울 성북구 정릉동 정릉2차e-편한세상 전용 84.4㎡가 11억 9천만원에 거래되며 최근 3년 내 신고..]]></description>
+  
+  </item>
+
+  <item>
+    <no>12189504</no>
+    <title><![CDATA[노원구 상계주공14단지 45.55㎡ 5억 2700만원 거래… 최근 3년 신고가 [MAI부동산]]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12189504]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 09:07:19 +09:00</pubDate>
+    <description><![CDATA[MAI 부동산 2026년 10월 28일 국토부 실거래가 시스템에 신규 등록된 서울 노원구 상계동 상계주공14(고층) 전용 45.55㎡가 5억 2700만원에 거래되며 해당 단지·면적..]]></description>
+  
+  </item>
+
+  <item>
+    <no>12189505</no>
+    <title><![CDATA[노원구 하계동 현대 71.68㎡ 11억 2천만원… 최근 3년 신고가 [MAI부동산]]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12189505]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 09:07:19 +09:00</pubDate>
+    <description><![CDATA[MAI 부동산 2026년 10월 28일 국토부 실거래가 시스템에 신규 등록된 서울 노원구 하계동 현대 전용 71.68㎡가 11억 2,000만 원에 거래되며 최근 3년 신고가를 기록..]]></description>
+  
+  </item>
+
+  <item>
+    <no>12189506</no>
+    <title><![CDATA[은평구 백련산힐스테이트2차 84.59㎡ 10억 6800만원… 최근 3년 신고가 [MAI부동산]]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12189506]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 09:07:19 +09:00</pubDate>
+    <description><![CDATA[MAI 부동산 2026년 10월 28일 국토부 실거래가 시스템에 신규 등록된 서울 은평구 응암동 백련산힐스테이트2차 전용 84.59㎡가 10억 6,800만 원에 거래되며 최근 3년..]]></description>
+  
+  </item>
+
+  <item>
+    <no>12189507</no>
+    <title><![CDATA[강서구 방화동 동성 84.95㎡ 9억 7천만원… 최근 3년 신고가 [MAI부동산]]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12189507]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 09:07:19 +09:00</pubDate>
+    <description><![CDATA[MAI 부동산 2026년 10월 28일 국토부 실거래가 시스템에 신규 등록된 서울 강서구 방화동 동성아파트 전용 84.95㎡가 9억 7천만원에 거래되며 최근 3년 내 신고가를 기록..]]></description>
+  
+  </item>
+
+  <item>
+    <no>12189508</no>
+    <title><![CDATA[구로구 고척동 대우 59.97㎡ 7억 8천만원… 최근 3년 신고가 [MAI부동산]]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12189508]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 09:07:19 +09:00</pubDate>
+    <description><![CDATA[MAI 부동산 2026년 10월 28일 국토부 실거래가 시스템에 신규 등록된 서울 구로구 고척동 대우 아파트 전용 59.97㎡가 7억 8천만원에 거래됐다. 항목 내용 항목 내용 준..]]></description>
+  
+  </item>
+
+  <item>
+    <no>12189509</no>
+    <title><![CDATA[동작구 본동 신동아 59.89㎡ 14억 4500만원… 최근 3년 신고가 [MAI부동산]]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12189509]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 09:07:19 +09:00</pubDate>
+    <description><![CDATA[MAI 부동산 2026년 10월 28일 국토부 실거래가 시스템에 신규 등록된 서울 동작구 본동 신동아 전용 59.89㎡ 거래가 14억 4,500만 원으로 최근 3년 신고가를 기록했..]]></description>
+  
+  </item>
+
+  <item>
+    <no>12189510</no>
+    <title><![CDATA[강남구 수서동 강남데시앙포레 59.97㎡ 22억 8700만원… 최근 3년 신고가 [MAI부동산]]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12189510]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 09:07:19 +09:00</pubDate>
+    <description><![CDATA[MAI 부동산 2026년 10월 28일 국토부 실거래가 시스템에 신규 등록된 서울 강남구 수서동 강남데시앙포레 전용 59.97㎡가 22억 8700만원에 거래됐다. 이번 거래는 20..]]></description>
+  
+  </item>
+
+  <item>
+    <no>12189511</no>
+    <title><![CDATA[송파구 상아2차아파트 60㎡ 17억 3500만원… 최근 3년 신고가 [MAI부동산]]]></title>
+    <link><![CDATA[https://www.mk.co.kr/news/realestate/12189511]]></link>
+    <category><![CDATA[부동산]]></category>
+    <author>매일경제</author>
+    <pubDate>Thu, 29 Oct 2026 09:07:19 +09:00</pubDate>
+    <description><![CDATA[MAI 부동산 2026년 10월 28일 국토부 실거래가 시스템에 신규 등록된 서울 송파구 오금동 상아2차아파트 전용 60㎡가 17억 3500만원에 거래되며 최근 3년 신고가를 기록..]]></description>
+  
+  </item>
+
+</channel>
+</rss>

@@ -1,0 +1,1229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"  xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/">
+	<channel>
+		<title><![CDATA[연합뉴스 마켓+ 최신기사]]></title>
+		<link>https://www.yna.co.kr/market-plus/all</link>
+		<atom:link href="https://www.yna.co.kr/rss/market.xml" rel="self" type="application/rss+xml" />
+		<description><![CDATA[연합뉴스 실시간 마켓+ 최신뉴스입니다]]></description>
+		<language>ko-KR</language>
+		<copyright><![CDATA[저작권자(c) 연합뉴스, 무단 전재-재배포, AI 학습 및 활용 금지]]></copyright>
+		<sy:updatePeriod>hourly</sy:updatePeriod>
+		<sy:updateFrequency>1</sy:updateFrequency>
+		<lastBuildDate>Fri, 30 Oct 2026 00:15:46 +0900</lastBuildDate>
+		<pubDate>Fri, 30 Oct 2026 00:15:46 +0900</pubDate>
+		<item>
+			<title><![CDATA[미 연준 이어 ECB도 금리 동결…"인플레·경기둔화 위험 여전"(종합)]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029208552082</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029208552082</guid>
+			<pubDate>Fri, 30 Oct 2026 00:15:46 +0900</pubDate>
+			<dc:creator>김계연</dc:creator>
+			<description><![CDATA[(베를린=연합뉴스) 김계연 특파원 = 유럽중앙은행(ECB)이 29일(현지시간) 3대 정책금리를 동결했다.]]></description>
+			<media:content url="https://img.yna.co.kr/photo/reuters/2026/10/29/PRU20261029399301009_P2.jpg" type="image/jpeg">
+			</media:content>
+			<media:content url="https://img.yna.co.kr/photo/etc/af/2026/10/29/PAF20261029232001009_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[뉴욕증시, 알파벳 실적 소화하며 하락 출발]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029211000009</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029211000009</guid>
+			<pubDate>Thu, 29 Oct 2026 23:05:07 +0900</pubDate>
+			<dc:creator>국제뉴스공용1</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 윤정원 연합인포맥스 기자 = 뉴욕증시의 3대 주가지수는 알파벳 실적과 개인소비지출(PCE) 등 경제지표 발표를 소화하며 하락 ...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/ap/2026/10/29/PAP20261029057701009_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[[2보] ECB 금리 동결…예금금리 연 2.50％]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029208551082</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029208551082</guid>
+			<pubDate>Thu, 29 Oct 2026 22:38:28 +0900</pubDate>
+			<dc:creator>김계연</dc:creator>
+			<description><![CDATA[(베를린=연합뉴스) 김계연 특파원 = 유럽중앙은행(ECB)이 29일(현지시간) 3대 정책금리를 동결했다.]]></description>
+			<media:content url="https://img.yna.co.kr/photo/etc/af/2026/10/29/PAF20261029232001009_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[ECB 총재, 내년 2월 사임…마크롱에 후임 인선 기회(종합)]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029201951082</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029201951082</guid>
+			<pubDate>Thu, 29 Oct 2026 22:13:45 +0900</pubDate>
+			<dc:creator>김계연</dc:creator>
+			<description><![CDATA[(베를린=연합뉴스) 김계연 특파원 = 그동안 조기퇴진설이 끊이지 않은 크리스틴 라가르드(70) 유럽중앙은행(ECB) 총재가 내년 2월 임기를 8...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/ap/2026/01/20/PAP20260120213501009_P2.jpg" type="image/jpeg">
+			</media:content>
+			<media:content url="https://img.yna.co.kr/etc/inner/KR/2026/10/29/AKR20261029201951082_01_i_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[라가르드 ECB 총재, 내년 2월 조기 사임]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029201900082</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029201900082</guid>
+			<pubDate>Thu, 29 Oct 2026 19:46:38 +0900</pubDate>
+			<dc:creator>김계연</dc:creator>
+			<description><![CDATA[(베를린=연합뉴스) 김계연 특파원 = 그동안 조기퇴진설이 끊이지 않은 크리스틴 라가르드(70) 유럽중앙은행(ECB) 총재가 내년 2월 사임하기로...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/ap/2026/10/29/PAP20261029243101009_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA["인수 제안받은 기업, 주주에 검토결과·거절이유 밝히도록 해야"]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029192400008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029192400008</guid>
+			<pubDate>Thu, 29 Oct 2026 19:08:25 +0900</pubDate>
+			<dc:creator>강수지</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 강수지 기자 = 기업이 인수 제안을 받으면 이사회가 검토 결과와 판단 근거를 주주에게 밝혀야 한다는 제언이 나왔다.]]></description>
+			<media:content url="https://img.yna.co.kr/etc/inner/KR/2026/10/29/AKR20261029192400008_01_i_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[UBS, '8000→7500' 코스피 목표치 또 낮춰…"원화강세 부담"]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029196100008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029196100008</guid>
+			<pubDate>Thu, 29 Oct 2026 18:48:30 +0900</pubDate>
+			<dc:creator>정회인</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 정회인 기자 = 글로벌 투자은행(IB) UBS가 원화 강세에 따른 기업 실적 악화 우려를 반영해 코스피의 12개월 목표치를 기...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/yna/YH/2026/10/29/PYH2026102917650001300_P2.jpg" type="image/jpeg">
+			</media:content>
+			<media:content url="https://img.yna.co.kr/etc/inner/KR/2026/10/29/AKR20261029196100008_01_i_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[빗썸 해킹으로 고객 계좌번호·신분증 사본까지 털려(종합)]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029169152002</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029169152002</guid>
+			<pubDate>Thu, 29 Oct 2026 18:28:25 +0900</pubDate>
+			<dc:creator>박수현</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 박수현 강수련 유동현 기자 = 가상자산 거래소 빗썸이 사내 시스템 해킹 사고로 고객 6천444명의 개인정보가 유출됐다고 29일...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/yna/YH/2026/10/28/PYH2026102812170001300_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[시지트로닉스, 20억원 유상증자…케이앤인터내셔널에 제3자배정]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029195500008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029195500008</guid>
+			<pubDate>Thu, 29 Oct 2026 18:26:18 +0900</pubDate>
+			<dc:creator>증권부</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 코스닥 상장사 시지트로닉스[429270]는 운영자금 등 약 20억원을 조달하고자 제3자배정 유상증자를 결정했다고 29일 공시했...]]></description>
+		</item>
+		<item>
+			<title><![CDATA[폭스바겐, 3분기 8조원 적자…중국 판매량 38％ 급감]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029194100082</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029194100082</guid>
+			<pubDate>Thu, 29 Oct 2026 18:20:23 +0900</pubDate>
+			<dc:creator>김계연</dc:creator>
+			<description><![CDATA[(베를린=연합뉴스) 김계연 특파원 = 경영난을 겪고 있는 독일 자동차업체 폭스바겐그룹이 네 분기 만에 다시 적자를 기록했다.]]></description>
+			<media:content url="https://img.yna.co.kr/photo/ap/2026/10/29/PAP20261029235101009_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[금감원, '해킹으로 1억원 피해' 프라뱅 현장 검사 착수]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029172500002</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029172500002</guid>
+			<pubDate>Thu, 29 Oct 2026 18:09:48 +0900</pubDate>
+			<dc:creator>강류나</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 강류나 기자 = 금융감독원이 해킹 사고로 실제 자산 피해가 발생한 코인마켓 가상자산 거래소 프라뱅을 대상으로 현장 검사에 착수...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2024/07/21/36/PCM20240721000036990_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[큐리옥스바이오시스템즈, 애프터마켓서 10%대 급락]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029188700008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029188700008</guid>
+			<pubDate>Thu, 29 Oct 2026 18:09:25 +0900</pubDate>
+			<dc:creator>증권부</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 코스닥 상장사 큐리옥스바이오시스템즈[445680]가 29일 애프터마켓에서 10%대 급락 중이다.]]></description>
+		</item>
+		<item>
+			<title><![CDATA[일동제약, 애프터마켓서 10%대 급등]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029188100008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029188100008</guid>
+			<pubDate>Thu, 29 Oct 2026 18:09:11 +0900</pubDate>
+			<dc:creator>증권부</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 코스피 상장사 일동제약[249420]이 29일 애프터마켓에서 10%대 급등 중이다.]]></description>
+		</item>
+		<item>
+			<title><![CDATA[아모레퍼시픽그룹 3분기 영업익 1천301억원…24.7% 증가(종합)]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029183251527</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029183251527</guid>
+			<pubDate>Thu, 29 Oct 2026 17:44:56 +0900</pubDate>
+			<dc:creator>구정모</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 구정모 기자 = 아모레퍼시픽그룹이 국내 사업의 수익성 개선과 북미·일본 등 해외 주요 시장에서의 브랜드 성장에 힘입어 올해 3...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2026/10/06/84/PCM20261006000084030_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[현대차, 포티투닷에 2천852억 출자…"SDV 기술 내재화 박차"]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029188800003</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029188800003</guid>
+			<pubDate>Thu, 29 Oct 2026 17:44:13 +0900</pubDate>
+			<dc:creator>장하나</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 장하나 기자 = 현대차가 현대차그룹 글로벌 소프트웨어센터인 포티투닷에 추가 출자한다.
+]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2023/06/21/67/PCM20230621000167003_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[5대 금융 3분기 누적 이자이익 40조 넘어…순익 '역대 최대']]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029170500002</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029170500002</guid>
+			<pubDate>Thu, 29 Oct 2026 17:36:16 +0900</pubDate>
+			<dc:creator>이도흔</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 이도흔 기자 = 금리 인상기 이자 이익이 불어나며 5대 금융지주가 올해 3분기 누적 20조원에 육박하는 순이익을 올렸다. ]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2023/08/08/07/PCM20230808000007990_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[CJ대한통운, 자사주 5% 현물배당 결정…주주에 직접 환원]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029147100030</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029147100030</guid>
+			<pubDate>Thu, 29 Oct 2026 17:32:12 +0900</pubDate>
+			<dc:creator>조민정</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 조민정 기자 = CJ대한통운[000120]이 주주들에게 자사주를 직접 배분하는 현물배당을 추진한다.]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2017/08/03/02/C0A8CA3C0000015DA6E75DF7000CDCCA_P2.gif" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[메디포스트 "美종속회사 주식 200억원에 추가취득"]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029184600008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029184600008</guid>
+			<pubDate>Thu, 29 Oct 2026 17:23:14 +0900</pubDate>
+			<dc:creator>증권부</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 코스닥 상장사 메디포스트[078160]는 미국의 줄기세포치료제 개발 종속회사(MEDIPOST)의 주식 1천500만주를 약 20...]]></description>
+		</item>
+		<item>
+			<title><![CDATA[아모레퍼시픽홀딩스 3분기 영업익 1천301억…작년비 24.7% 증가]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029183200527</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029183200527</guid>
+			<pubDate>Thu, 29 Oct 2026 17:15:34 +0900</pubDate>
+			<dc:creator>공시뉴스</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 코스피 상장사 아모레퍼시픽홀딩스[002790]는 연결 기준 올해 3분기 영업이익이 1천301억원으로 지난해 동기보다 24.7%...]]></description>
+		</item>
+		<item>
+			<title><![CDATA[금호타이어 3분기 영업익 1천305억원…작년보다 20%↑(종합)]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029182600003</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029182600003</guid>
+			<pubDate>Thu, 29 Oct 2026 17:14:02 +0900</pubDate>
+			<dc:creator>홍규빈</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 홍규빈 기자 = 금호타이어는 연결 기준 올해 3분기 매출액이 1조2천374억원, 영업이익이 1천305억원으로 집계됐다고 29일...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2023/12/30/60/PCM20231230000260003_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[국고채 금리, 美 금리 연동하며 하락…완화적 FOMC 소화(종합)]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029173951008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029173951008</guid>
+			<pubDate>Thu, 29 Oct 2026 16:56:54 +0900</pubDate>
+			<dc:creator>강수지</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 강수지 기자 = 29일 국고채 금리는 일제히 하락했다.]]></description>
+			<media:content url="https://img.yna.co.kr/etc/inner/KR/2026/10/29/AKR20261029173951008_01_i_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA['큰손' 하이닉스, '반도체머니' 운용할 채권 전문인력 채용 주목]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029175600008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029175600008</guid>
+			<pubDate>Thu, 29 Oct 2026 16:55:13 +0900</pubDate>
+			<dc:creator>강수지</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 강수지 기자 = 올해 채권시장 &apos;큰손&apos;으로 주목받아 온 SK하이닉스[000660]가 자금 운용을 담당할 경력 인력을 선발한 것...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/yna/YH/2026/10/28/PYH2026102808710006100_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[아모레퍼시픽 3분기 영업익 1천152억원…작년 대비 25.4% 증가]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029177300527</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029177300527</guid>
+			<pubDate>Thu, 29 Oct 2026 16:54:30 +0900</pubDate>
+			<dc:creator>공시뉴스</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 코스피 상장사 아모레퍼시픽[090430]은 연결 기준 올해 3분기 영업이익이 1천152억원으로 지난해 동기보다 25.4% 증가...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2020/11/19/01/PCM20201119000001030_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[두산밥캣 3분기 영업이익 25％↑…전 지역·제품군 매출 성장(종합)]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029171851527</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029171851527</guid>
+			<pubDate>Thu, 29 Oct 2026 16:52:28 +0900</pubDate>
+			<dc:creator>홍규빈</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 홍규빈 기자 = 두산밥캣은 연결 기준 올해 3분기 영업이익이 1천674억원으로 지난해 동기보다 25.3% 증가했다고 29일 밝...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2022/02/11/69/PCM20220211000069003_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[삼성전자, 삼성바이오 유상증자 참여…6천662억원 출자]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029176300003</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029176300003</guid>
+			<pubDate>Thu, 29 Oct 2026 16:51:46 +0900</pubDate>
+			<dc:creator>임성호</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 임성호 기자 = 삼성전자는 29일 이사회를 열고 삼성바이오로직스의 유상증자 참여에 관한 안건을 가결했다고 공시했다.]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2024/12/26/34/PCM20241226000034017_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[대원제약, 애프터마켓서 10%대 급등]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029175300008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029175300008</guid>
+			<pubDate>Thu, 29 Oct 2026 16:47:19 +0900</pubDate>
+			<dc:creator>증권부</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 코스피 상장사 대원제약[003220]이 29일 애프터마켓에서 10%대 급등 중이다.]]></description>
+		</item>
+		<item>
+			<title><![CDATA[대한유화, 애프터마켓서 11%대 급등]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029174800008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029174800008</guid>
+			<pubDate>Thu, 29 Oct 2026 16:42:22 +0900</pubDate>
+			<dc:creator>증권부</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 코스피 상장사 대한유화[006650]가 29일 애프터마켓에서 11%대 급등 중이다.]]></description>
+		</item>
+		<item>
+			<title><![CDATA[대한유화 3분기 영업이익 448억원…작년 동기 대비 4.6%↑]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029174300527</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029174300527</guid>
+			<pubDate>Thu, 29 Oct 2026 16:41:49 +0900</pubDate>
+			<dc:creator>공시뉴스</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 코스피 상장사 대한유화[006650]는 연결 기준 올해 3분기 영업이익이 448억원으로 지난해 동기보다 4.6% 증가한 것으로...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2018/04/02/02/C0A8CA3D000001628393870B001E48F0_P2.jpeg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[금호타이어 3분기 영업이익 1천305억원…작년 동기 대비 20%↑]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029173700527</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029173700527</guid>
+			<pubDate>Thu, 29 Oct 2026 16:40:33 +0900</pubDate>
+			<dc:creator>공시뉴스</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 코스피 상장사 금호타이어[073240]는 연결 기준 올해 3분기 영업이익이 1천305억원으로 지난해 동기보다 20.3% 증가한...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2022/04/30/39/PCM20220430000039003_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[국고채 금리 일제히 하락…3년물 연 3.766%]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029173900008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029173900008</guid>
+			<pubDate>Thu, 29 Oct 2026 16:40:29 +0900</pubDate>
+			<dc:creator>증권부</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 29일 국고채 금리가 일제히 하락했다.]]></description>
+		</item>
+		<item>
+			<title><![CDATA[넥스트증권 김승연 대표 연임…"리테일 사업 출시 준비"]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029171700008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029171700008</guid>
+			<pubDate>Thu, 29 Oct 2026 16:37:42 +0900</pubDate>
+			<dc:creator>김유향</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 김유향 기자 = 김승연 넥스트증권 대표가 리테일 사업 출시를 앞두고 연임에 성공했다.]]></description>
+			<media:content url="https://img.yna.co.kr/etc/inner/KR/2026/10/29/AKR20261029171700008_01_i_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[두산밥캣 3분기 영업이익 1천674억원…작년 동기 대비 25.3%↑]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029171800527</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029171800527</guid>
+			<pubDate>Thu, 29 Oct 2026 16:35:55 +0900</pubDate>
+			<dc:creator>공시뉴스</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 코스피 상장사 두산밥캣[241560]은 연결 기준 올해 3분기 영업이익이 1천674억원으로 지난해 동기보다 25.3% 증가한 ...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2022/02/11/69/PCM20220211000069003_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[유티아이, 13억2천만원 제3자배정 유상증자]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029170300008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029170300008</guid>
+			<pubDate>Thu, 29 Oct 2026 16:31:19 +0900</pubDate>
+			<dc:creator>증권부</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 코스닥 상장사 유티아이[179900]는 운영자금 등 약 13억2천만원을 조달하고자 제3자배정 유상증자를 결정했다고 29일 공시...]]></description>
+		</item>
+		<item>
+			<title><![CDATA[빗썸 고객 정보 유출 뒤늦게 확인…사내 시스템 해킹 사고]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029169151002</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029169151002</guid>
+			<pubDate>Thu, 29 Oct 2026 16:30:55 +0900</pubDate>
+			<dc:creator>박수현</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 박수현 강수련 유동현 기자 = 가상자산 거래소 빗썸에서 일어난 사내 시스템 해킹으로 고객 개인정보도 유출된 것으로 알려졌다.]]></description>
+			<media:content url="https://img.yna.co.kr/photo/yna/YH/2026/10/28/PYH2026102812170001300_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[[표] 코스피 지수선물·옵션 시세표(29일)-3]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029170000008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029170000008</guid>
+			<pubDate>Thu, 29 Oct 2026 16:30:48 +0900</pubDate>
+			<dc:creator>증권부</dc:creator>
+			<description><![CDATA[◇주가지수옵션 
+(C:콜옵션,P:풋옵션) 
+(단위:포인트,계약)
+]]></description>
+		</item>
+		<item>
+			<title><![CDATA[[표] 코스피 지수선물·옵션 시세표(29일)-2]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029170200008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029170200008</guid>
+			<pubDate>Thu, 29 Oct 2026 16:30:37 +0900</pubDate>
+			<dc:creator>증권부</dc:creator>
+			<description><![CDATA[◇개별주식선물(기초자산 기준 시총 상위 100개) 
+(단위:원,계약)
+]]></description>
+		</item>
+		<item>
+			<title><![CDATA[[표] 코스피 지수선물·옵션 시세표(29일)-1]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029170100008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029170100008</guid>
+			<pubDate>Thu, 29 Oct 2026 16:30:21 +0900</pubDate>
+			<dc:creator>증권부</dc:creator>
+			<description><![CDATA[◇주가지수선물 
+(단위:포인트,계약)
+]]></description>
+		</item>
+		<item>
+			<title><![CDATA[에너지 엔지니어링 기업 영광, 내달 2일 코스닥 신규 상장]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029168800008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029168800008</guid>
+			<pubDate>Thu, 29 Oct 2026 16:28:59 +0900</pubDate>
+			<dc:creator>김유아</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 김유아 기자 = 한국거래소는 에너지·환경 엔지니어링 기업 영광의 코스닥 신규 상장을 승인했다고 29일 밝혔다.]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2026/06/22/24/PCM20260622000024990_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[100억대 코인사기 일당 총책 2심서 징역 18년 6개월]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029168500004</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029168500004</guid>
+			<pubDate>Thu, 29 Oct 2026 16:27:44 +0900</pubDate>
+			<dc:creator>이영섭</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 이영섭 기자 = 고수익을 미끼로 가상화폐 투자사기를 벌여 100억원 이상을 가로챈 일당 총책이 2심에서도 중형을 선고받았다.]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2022/08/23/22/PCM20220823000022990_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[[속보] 빗썸 해킹 사고로 직원 외 고객 정보도 수백건 유출]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029169100002</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029169100002</guid>
+			<pubDate>Thu, 29 Oct 2026 16:26:20 +0900</pubDate>
+			<dc:creator>박수현</dc:creator>
+			<description><![CDATA[(]]></description>
+			<media:content url="https://img.yna.co.kr/photo/yna/YH/2026/10/28/PYH2026102812170001300_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[영업이익 감소 막았지만…현대차, 환율 효과 빼면 '뒷걸음질']]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029161600003</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029161600003</guid>
+			<pubDate>Thu, 29 Oct 2026 16:23:06 +0900</pubDate>
+			<dc:creator>홍규빈</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 홍규빈 기자 = 현대차가 올해 3분기 판매 부진에도 영업이익 감소를 막았지만, 환율 효과가 없었다면 뒷걸음질을 면치 못했을 것...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/yna/YH/2026/10/29/PYH2026102907830001300_P2.jpg" type="image/jpeg">
+			</media:content>
+			<media:content url="https://img.yna.co.kr/photo/yna/YH/2026/10/29/PYH2026102907800001300_P2.jpg" type="image/jpeg">
+			</media:content>
+			<media:content url="https://img.yna.co.kr/photo/yna/YH/2026/10/29/PYH2026102913510001300_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA['대어' 앤트로픽 IPO에 국내증권사 줄줄이 불참…공모주 청약 난망]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029164200008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029164200008</guid>
+			<pubDate>Thu, 29 Oct 2026 16:22:34 +0900</pubDate>
+			<dc:creator>정회인</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 정회인 곽윤아 김유향 기자 = 미국 인공지능(AI) 기업 앤트로픽의 나스닥 상장을 앞두고 국내 주요 대형 증권사들이 기업공개(...]]></description>
+			<media:content url="https://img.yna.co.kr/etc/inner/KR/2026/10/29/AKR20261029164200008_01_i_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[슈프리마, 애프터마켓서 10%대 급락]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029166200008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029166200008</guid>
+			<pubDate>Thu, 29 Oct 2026 16:15:55 +0900</pubDate>
+			<dc:creator>증권부</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 코스닥 상장사 슈프리마[236200]가 29일 애프터마켓에서 10%대 급락 중이다.]]></description>
+		</item>
+		<item>
+			<title><![CDATA[태영건설, 271억원 유상증자…한국주택금융공사에 제3자배정]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029164100008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029164100008</guid>
+			<pubDate>Thu, 29 Oct 2026 16:15:43 +0900</pubDate>
+			<dc:creator>증권부</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 코스피 상장사 태영건설[009410]은 약 271억원 규모의 제3자배정 유상증자를 결정했다고 29일 공시했다.]]></description>
+		</item>
+		<item>
+			<title><![CDATA[현대차, 6년만에 매출 '후진'…연 판매목표 400만대로 낮춰(종합2보)]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029110153527</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029110153527</guid>
+			<pubDate>Thu, 29 Oct 2026 16:14:12 +0900</pubDate>
+			<dc:creator>장하나</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 장하나 기자 = 현대차가 3분기 파업에 따른 생산 차질과 글로벌 수요 감소 등 여파로 매출이 감소했다. 현대차의 분기 매출이 ...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/yna/YH/2026/10/29/PYH2026102907830001300_P2.jpg" type="image/jpeg">
+			</media:content>
+			<media:content url="https://img.yna.co.kr/photo/yna/YH/2026/10/21/PYH2026102101650001300_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[WSJ "1센트까지 쥐어짠 애플에 '복수'하는 메모리 공급사들"]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029144700009</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029144700009</guid>
+			<pubDate>Thu, 29 Oct 2026 16:14:10 +0900</pubDate>
+			<dc:creator>정주호</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 정주호 기자 = 인공지능(AI) 데이터센터 수요가 급증하면서 그동안 애플에 끌려다니던 플래시 메모리 업체들이 협상력을 쥐게 됐...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/etc/gt/2024/06/11/PGT20240611074301009_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[KB증권 3분기 영업익 3천810억원…약세장에 전분기보다 37%↓(종합)]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029149851527</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029149851527</guid>
+			<pubDate>Thu, 29 Oct 2026 16:13:22 +0900</pubDate>
+			<dc:creator>고은지</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 고은지 기자 = KB증권이 연결 기준 올해 3분기 영업이익 3천810억원으로 지난해 같은 기간보다 69.1% 증가한 것으로 잠...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2019/03/07/01/PCM20190307000201990_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[넷마블 자회사, 과천서 1조3천억 부동산 계약…시니어 주거사업]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029163100017</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029163100017</guid>
+			<pubDate>Thu, 29 Oct 2026 16:12:09 +0900</pubDate>
+			<dc:creator>김주환</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 김주환 기자 = 넷마블[251270]은 부동산 개발 및 자산관리 전문 자회사 엔탑자산관리가 경기 과천시 의료복합개발사업에 참여...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2025/10/20/02/PCM20251020000102990_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[원스토어 품은 넥써쓰, 사명 '원'으로 변경 추진]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029161500017</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029161500017</guid>
+			<pubDate>Thu, 29 Oct 2026 16:09:48 +0900</pubDate>
+			<dc:creator>김주환</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 김주환 기자 = 넥써쓰[205500]는 회사명을 &apos;주식회사 원(ONE Corp.)&apos;으로 변경하는 내용의 정관 변경안을 임시주주...]]></description>
+			<media:content url="https://img.yna.co.kr/etc/inner/KR/2026/10/29/AKR20261029161500017_01_i_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA["실적 당일 하락이 공식?"…삼전 역대급 발표마다 '하락 징크스'(종합)]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029106151008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029106151008</guid>
+			<pubDate>Thu, 29 Oct 2026 16:08:49 +0900</pubDate>
+			<dc:creator>임은진</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 임은진 기자 = 반도체 슈퍼 사이클로 삼성전자[005930]가 매 분기 신기록 행진을 이어가고 있지만 정작 실적 발표일에는 웃...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/yna/YH/2026/10/29/PYH2026102906020001300_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[코스피, 1.2% 내려 '6천피' 반납…최대실적 삼전 4.1% 급락(종합)]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029152851008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029152851008</guid>
+			<pubDate>Thu, 29 Oct 2026 16:06:21 +0900</pubDate>
+			<dc:creator>곽윤아</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 곽윤아 기자 = 코스피가 29일 1% 넘게 내려 하루 만에 6,000선을 반납했다.]]></description>
+			<media:content url="https://img.yna.co.kr/photo/yna/YH/2026/10/29/PYH2026102917580001300_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[[특징주] 대우건설, 한수원 체코 원전 시공계약 협상 결렬에 18%↓(종합)]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029057451008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029057451008</guid>
+			<pubDate>Thu, 29 Oct 2026 15:55:55 +0900</pubDate>
+			<dc:creator>임은진</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 임은진 기자 = 대우건설[047040] 주가가 29일 한국수력원자력과 체코 두코바니 원전사업 시공계약과 관련한 협상 결렬 소식...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2018/09/02/53/PCM20180902000153003_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[한화에어로 3분기 영업익 4천520억원…물량인도 지연에 46%↓(종합)]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029148951527</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029148951527</guid>
+			<pubDate>Thu, 29 Oct 2026 15:55:43 +0900</pubDate>
+			<dc:creator>장하나</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 장하나 기자 = 한화에어로스페이스가 폴란드 K9 수출 물량의 인도 지연 등으로 3분기 매출과 영업이익이 모두 감소했다.]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2026/09/14/48/PCM20260914000148003_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[역대급 실적·주주환원에도 기대 못미쳤나…삼전 4%대↓(종합2보)]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029046852008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029046852008</guid>
+			<pubDate>Thu, 29 Oct 2026 15:55:20 +0900</pubDate>
+			<dc:creator>임은진</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 임은진 기자 = 29일 삼성전자[005930] 주가가 역대급을 기록한 올해 3분기 실적 및 추가 주주환원 발표에도 급락 마감했...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2026/06/29/57/PCM20260629000557990_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[[표] 코스닥 외국인 순매수도 상위종목(29일)]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029157400008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029157400008</guid>
+			<pubDate>Thu, 29 Oct 2026 15:47:23 +0900</pubDate>
+			<dc:creator>증권부</dc:creator>
+			<description><![CDATA[(단위:만원, 주)
+]]></description>
+		</item>
+		<item>
+			<title><![CDATA[[표] 코스닥 기관 순매수도 상위종목(29일)]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029157300008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029157300008</guid>
+			<pubDate>Thu, 29 Oct 2026 15:47:13 +0900</pubDate>
+			<dc:creator>증권부</dc:creator>
+			<description><![CDATA[(단위:만원, 주)
+]]></description>
+		</item>
+		<item>
+			<title><![CDATA[[표] 거래소 외국인 순매수도 상위종목(29일)]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029157600008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029157600008</guid>
+			<pubDate>Thu, 29 Oct 2026 15:47:04 +0900</pubDate>
+			<dc:creator>증권부</dc:creator>
+			<description><![CDATA[(단위:억원, 만주)
+]]></description>
+		</item>
+		<item>
+			<title><![CDATA[[표] 거래소 기관 순매수도 상위종목(29일)]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029157500008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029157500008</guid>
+			<pubDate>Thu, 29 Oct 2026 15:46:40 +0900</pubDate>
+			<dc:creator>증권부</dc:creator>
+			<description><![CDATA[(단위:억원, 만주)
+]]></description>
+		</item>
+		<item>
+			<title><![CDATA[KB국민카드 3분기 당기순익 1천128억원…13.6% 증가]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029150300002</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029150300002</guid>
+			<pubDate>Thu, 29 Oct 2026 15:45:01 +0900</pubDate>
+			<dc:creator>김지연</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 김지연 기자 = KB국민카드는 3분기 당기순이익이 작년 같은 기간보다 13.6% 증가한 1천128억원을 기록했다고 29일 공시...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2025/07/31/74/PCM20250731000074990_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[[게시판] 세계여성이사협회 창립 10주년 아태 글로벌 포럼 개최]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029155600002</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029155600002</guid>
+			<pubDate>Thu, 29 Oct 2026 15:42:37 +0900</pubDate>
+			<dc:creator>배영경</dc:creator>
+			<description><![CDATA[▲ 세계여성이사협회(WCD 코리아·회장 정다미)는 창립 10주년을 맞아 28일 오후 그랜드 인터컨티넨탈 서울 파르나스에서 &apos;비전 있는 이사회와 ...]]></description>
+			<media:content url="https://img.yna.co.kr/etc/inner/KR/2026/10/29/AKR20261029155600002_01_i_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[외국환시세(10월29일·15:30 기준가)]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029153100002</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029153100002</guid>
+			<pubDate>Thu, 29 Oct 2026 15:40:22 +0900</pubDate>
+			<dc:creator>경제부</dc:creator>
+			<description><![CDATA[(15:30)
+]]></description>
+		</item>
+		<item>
+			<title><![CDATA[[특징주] 티앤이코리아, 거래 첫날 40% 상승…장중 '따블'(종합)]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029044651008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029044651008</guid>
+			<pubDate>Thu, 29 Oct 2026 15:39:48 +0900</pubDate>
+			<dc:creator>김유향</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 김유향 기자 = 29일 코스닥 시장에 입성한 티앤이코리아[0053F0] 주가는 장 초반 공모가 대비 2배의 상승세를 나타냈지만...]]></description>
+			<media:content url="https://img.yna.co.kr/etc/inner/KR/2026/10/29/AKR20261029044651008_01_i_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[[특징주] LG엔솔, 최대주주 '지분 매각' 공시에 8.6% 급락 마감(종합)]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029051551008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029051551008</guid>
+			<pubDate>Thu, 29 Oct 2026 15:38:39 +0900</pubDate>
+			<dc:creator>김유아</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 김유아 기자 = LG에너지솔루션[373220]이 모회사이자 최대 주주인 LG화학[051910]의 지분 대규모 매각 결정에 29...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2025/11/03/15/PCM20251103000115990_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[[표] 투자자별 매매동향(29일)]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029153000008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029153000008</guid>
+			<pubDate>Thu, 29 Oct 2026 15:36:37 +0900</pubDate>
+			<dc:creator>증권부</dc:creator>
+			<description><![CDATA[(단위:억원)
+]]></description>
+		</item>
+		<item>
+			<title><![CDATA[코스피, 1.2% 내려 하루만에 '6천피' 반납…코스닥도 2.3%↓]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029152800008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029152800008</guid>
+			<pubDate>Thu, 29 Oct 2026 15:36:28 +0900</pubDate>
+			<dc:creator>곽윤아</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 곽윤아 기자 = 코스피가 29일 1% 넘게 내려 하루 만에 6,000선을 반납했다.]]></description>
+			<media:content url="https://img.yna.co.kr/photo/yna/YH/2026/10/29/PYH2026102917580001300_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[두산에너빌리티 3분기 영업이익 2천612억원…작년 대비 91%↑]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029152600527</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029152600527</guid>
+			<pubDate>Thu, 29 Oct 2026 15:35:10 +0900</pubDate>
+			<dc:creator>공시뉴스</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 코스피 상장사 두산에너빌리티[034020]는 연결 기준 올해 3분기 영업이익이 2천612억원으로 지난해 동기보다 90.6% 증...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/yna/YH/2022/03/10/PYH2022031007760001300_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[OCI홀딩스 3분기 영업익 680억원…"연간기준 흑자전환 확실시"(종합)]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029141151527</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029141151527</guid>
+			<pubDate>Thu, 29 Oct 2026 15:34:21 +0900</pubDate>
+			<dc:creator>박초롱</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 박초롱 기자 = OCI홀딩스는 올해 3분기에 연결 기준 영업이익 680억원을 내며 흑자 전환했다고 29일 공시했다.]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2023/09/27/59/PCM20230927000059003_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[[코스닥] 18.05p(2.34%) 내린 753.23(장종료)]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029152200008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029152200008</guid>
+			<pubDate>Thu, 29 Oct 2026 15:33:23 +0900</pubDate>
+			<dc:creator>증권부</dc:creator>
+			<description><![CDATA[(]]></description>
+			<media:content url="https://img.yna.co.kr/etc/inner/KR/2026/10/29/AKR20261029152200008_01_i_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[[속보] 코스피 1.2%↓, 다시 6천피 밑으로…삼성전자 4%대 급락]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029151700008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029151700008</guid>
+			<pubDate>Thu, 29 Oct 2026 15:31:49 +0900</pubDate>
+			<dc:creator>임은진</dc:creator>
+			<description><![CDATA[(]]></description>
+			<media:content url="https://img.yna.co.kr/photo/yna/YH/2026/10/29/PYH2026102917590001300_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[[코스피] 74.78p(1.24%) 내린 5,937.66(장종료)]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029151500008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029151500008</guid>
+			<pubDate>Thu, 29 Oct 2026 15:31:16 +0900</pubDate>
+			<dc:creator>증권부</dc:creator>
+			<description><![CDATA[(]]></description>
+			<media:content url="https://img.yna.co.kr/etc/inner/KR/2026/10/29/AKR20261029151500008_01_i_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[[외환] 원/달러 환율 0.9원 내린 1,336.8원(15:30 기준가)]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029151400002</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029151400002</guid>
+			<pubDate>Thu, 29 Oct 2026 15:30:42 +0900</pubDate>
+			<dc:creator>경제부</dc:creator>
+			<description><![CDATA[(]]></description>
+			<media:content url="https://img.yna.co.kr/etc/inner/KR/2026/10/29/AKR20261029151400002_01_i_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[대한전선, 3분기 영업익 309억, 4.5%↑…동기 기준 역대 최대]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029150000003</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029150000003</guid>
+			<pubDate>Thu, 29 Oct 2026 15:29:54 +0900</pubDate>
+			<dc:creator>조성흠</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 조성흠 기자 = 대한전선이 올해 3분기 매출액 1조1천764억원, 영업이익 309억원을 기록했다고 29일 밝혔다.]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2026/07/03/45/PCM20260703000145003_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[국민은행 3분기 영업이익 1조5천732억원]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029150200527</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029150200527</guid>
+			<pubDate>Thu, 29 Oct 2026 15:28:41 +0900</pubDate>
+			<dc:creator>공시뉴스</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 코스피 상장사 KB금융[105560]은 자회사 국민은행이 연결 기준 올해 3분기 영업이익 1조5천732억원으로 지난해 동기보다...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2019/03/07/01/PCM20190307000201990_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[KB금융 3분기 누적 순익 5조7천921억원, 13.1%↑…역대 최대(종합)]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029126600002</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029126600002</guid>
+			<pubDate>Thu, 29 Oct 2026 15:27:08 +0900</pubDate>
+			<dc:creator>한지훈</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 한지훈 기자 = KB금융그룹이 올해 들어 3분기까지 5조8천억원에 가까운 역대 최대 순이익을 거뒀다.]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2026/05/04/35/PCM20260504000135002_P2.jpg" type="image/jpeg">
+			</media:content>
+			<media:content url="https://img.yna.co.kr/etc/inner/KR/2026/10/29/AKR20261029126600002_01_i_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[KB증권 3분기 영업이익 3천810억원…작년 동기 대비 69.1%↑]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029149800527</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029149800527</guid>
+			<pubDate>Thu, 29 Oct 2026 15:26:17 +0900</pubDate>
+			<dc:creator>공시뉴스</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 코스피 상장사 KB금융[105560]은 자회사 KB증권이 연결 기준 올해 3분기 영업이익 3천810억원으로 지난해 동기보다 6...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2019/03/07/01/PCM20190307000201990_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[KB금융 3분기 영업이익 2조3천673억원…작년 동기 대비 1.4%↑]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029149200527</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029149200527</guid>
+			<pubDate>Thu, 29 Oct 2026 15:26:04 +0900</pubDate>
+			<dc:creator>공시뉴스</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 코스피 상장사 KB금융[105560]은 연결 기준 올해 3분기 영업이익이 2조3천673억원으로 지난해 동기보다 1.4% 증가한...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2019/03/07/01/PCM20190307000201990_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[한화에어로 3분기 영업이익 4천520억원…작년 대비 46%↓]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029148900527</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029148900527</guid>
+			<pubDate>Thu, 29 Oct 2026 15:24:25 +0900</pubDate>
+			<dc:creator>공시뉴스</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 코스피 상장사 한화에어로스페이스[012450]는 연결 기준 올해 3분기 영업이익이 4천520억원으로 지난해 동기보다 46.2%...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2019/02/20/43/PCM20190220004043990_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[삼성SDS, 클라우드·물류 동반 성장…2027년 로봇 플랫폼 출시(종합2보)]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029070252527</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029070252527</guid>
+			<pubDate>Thu, 29 Oct 2026 15:22:25 +0900</pubDate>
+			<dc:creator>오지은</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 오지은 기자 = 삼성SDS가 클라우드와 물류 부문의 동반 성장에 힘입어 3분기 견조한 실적을 거두면서 2027년 로봇 오케스트...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/yna/YH/2026/09/08/PYH2026090808670001300_P2.jpg" type="image/jpeg">
+			</media:content>
+			<media:content url="https://img.yna.co.kr/photo/yna/YH/2026/09/08/PYH2026090808210001300_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA["中 Z.AI 최신 모델, 모의환경서 복잡한 사이버 공격 완수"]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029146600009</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029146600009</guid>
+			<pubDate>Thu, 29 Oct 2026 15:19:40 +0900</pubDate>
+			<dc:creator>이성한</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 이성한 기자 = 중국 인공지능(AI) 개발사 &apos;Z.AI&apos;(옛 지푸AI)의 최신 모델이 시뮬레 이션 환경에서 복잡한 사이버 공격...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/reuters/2026/10/29/PRU20261029275801009_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[농협금융, 1천억원 벤처모펀드 조성…미소금융재단도 곧 출범]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029144400002</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029144400002</guid>
+			<pubDate>Thu, 29 Oct 2026 15:14:31 +0900</pubDate>
+			<dc:creator>채새롬</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 채새롬 기자 = NH농협금융지주는 29일 서대문 본사에서 제4차 &apos;생산적·포용금융 특별위원회&apos;를 개최하고 1천억원 규모의 혁신...]]></description>
+			<media:content url="https://img.yna.co.kr/etc/inner/KR/2026/10/29/AKR20261029144400002_01_i_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA["딥시크·문샷, '아스트라'를 주된 증류 표적 삼아"]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029141000009</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029141000009</guid>
+			<pubDate>Thu, 29 Oct 2026 15:08:38 +0900</pubDate>
+			<dc:creator>주종국</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 주종국 기자 = 오픈AI가 9월 출시한 최첨단 인공지능(AI) 모델 &apos;GPT-6 아스트라&apos;가 딥시크와 문샷AI 등 중국 AI ...]]></description>
+			<media:content url="https://img.yna.co.kr/etc/inner/KR/2026/10/29/AKR20261029141000009_01_i_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[OCI홀딩스 3분기 영업이익 680억원…흑자 전환]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029141100527</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029141100527</guid>
+			<pubDate>Thu, 29 Oct 2026 15:01:21 +0900</pubDate>
+			<dc:creator>공시뉴스</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 코스피 상장사 OCI홀딩스[010060]는 연결 기준 올해 3분기 영업이익이 680억원으로 지난해 동기(영업손실 533억원)와...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2023/09/27/59/PCM20230927000059003_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[금융위 부위원장 "국성펀 가시적 성과까진 상당기간 소요"]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029129500002</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029129500002</guid>
+			<pubDate>Thu, 29 Oct 2026 15:00:01 +0900</pubDate>
+			<dc:creator>김지연</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 김지연 기자 = 금융위원회는 29일 1차 국민성장펀드의 수익률이 부진하다는 일각의 지적에 &quot;중장기적 투자가 필요한 첨단전략산업...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/yna/YH/2026/09/30/PYH2026093004020001303_P2.jpg" type="image/jpeg">
+			</media:content>
+			<media:content url="https://img.yna.co.kr/etc/inner/KR/2026/10/29/AKR20261029129500002_02_i_P2.jpg" type="image/jpeg">
+			</media:content>
+			<media:content url="https://img.yna.co.kr/photo/yna/YH/2026/09/30/PYH2026093004390001301_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[공소청, '사택지원금 사적유용 의혹' 빗썸 압수수색…1년7개월만]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029140200004</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029140200004</guid>
+			<pubDate>Thu, 29 Oct 2026 14:59:14 +0900</pubDate>
+			<dc:creator>윤민혁</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 윤민혁 기자 = 공소청이 가상자산 거래소 빗썸 전·현직 임원들의 사택지원금 사적 유용 의혹과 관련해 1년 7개월 만에 다시 강...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2019/01/22/53/PCM20190122000153011_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[현대카드, 3분기 누적 당기순익 2천758억원…8.2% 증가]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029137800002</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029137800002</guid>
+			<pubDate>Thu, 29 Oct 2026 14:58:11 +0900</pubDate>
+			<dc:creator>김지연</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 김지연 기자 = 현대카드는 3분기 누적 당기순이익이 작년 동기보다 8.2% 증가한 2천758억원을 기록했다고 29일 공시했다.]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2019/02/15/06/PCM20190215000306990_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[롯데정밀화학, 3분기 영업익 220억원…스페셜티 사업 강화(종합)]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029126951527</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029126951527</guid>
+			<pubDate>Thu, 29 Oct 2026 14:35:03 +0900</pubDate>
+			<dc:creator>강태우</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 강태우 기자 = 롯데정밀화학[004000]은 올해 3분기 연결 기준 영업이익이 220억원으로 지난해 동기보다 20.3% 감소한...]]></description>
+			<media:content url="https://img.yna.co.kr/etc/inner/KR/2026/10/29/AKR20261029126951527_02_i_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[한화솔루션 3분기 흑자전환…신재생에너지 수익성 개선 영향(종합)]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029121101527</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029121101527</guid>
+			<pubDate>Thu, 29 Oct 2026 14:26:23 +0900</pubDate>
+			<dc:creator>임성호</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 임성호 기자 = 한화솔루션[009830]은 연결 기준 올해 3분기 영업이익이 905억원으로 지난해 동기(영업손실 74억원)와 ...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2026/05/27/93/PCM20260527000093003_P2.jpg" type="image/jpeg">
+			</media:content>
+			<media:content url="https://img.yna.co.kr/etc/inner/KR/2026/10/29/AKR20261029121101527_02_i_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[현대차, 3분기 매출 3.4%↓…생산차질·판매부진에 6년만에 후진(종합)]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029110152527</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029110152527</guid>
+			<pubDate>Thu, 29 Oct 2026 14:25:43 +0900</pubDate>
+			<dc:creator>장하나</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 장하나 기자 = 현대차가 3분기 파업에 따른 생산 차질과 글로벌 수요 감소 등의 여파로 매출이 감소했다. 현대차의 분기 매출이...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/yna/YH/2026/10/29/PYH2026102907830001300_P2.jpg" type="image/jpeg">
+			</media:content>
+			<media:content url="https://img.yna.co.kr/photo/yna/YH/2026/10/21/PYH2026102101650001300_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[하락장에 올해 3분기 ETF 순자산총액 17분기 만 '역성장']]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029125400008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029125400008</guid>
+			<pubDate>Thu, 29 Oct 2026 14:20:43 +0900</pubDate>
+			<dc:creator>고은지</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 고은지 기자 = 국내 주식시장이 지난 6월 정점 후 조정을 맞으면서 국내 상장지수펀드(ETF) 순자산총액도 17분기 만에 역성...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2025/06/05/62/PCM20250605000062990_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[롯데정밀화학 3분기 영업이익 220억원…작년 동기 대비 20%↓]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029126900527</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029126900527</guid>
+			<pubDate>Thu, 29 Oct 2026 14:19:42 +0900</pubDate>
+			<dc:creator>공시뉴스</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 코스피 상장사 롯데정밀화학[004000]은 연결 기준 올해 3분기 영업이익이 220억원으로 지난해 동기보다 20.3% 감소한 ...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2018/05/18/01/C0A8CA3D00000163706FEFC1000813B5_P2.jpeg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[[부고] 맹정호(NH투자증권 스쿼드개발부 이사)씨 부친상]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029125100008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029125100008</guid>
+			<pubDate>Thu, 29 Oct 2026 14:15:11 +0900</pubDate>
+			<dc:creator>정회인</dc:creator>
+			<description><![CDATA[▲ 맹도재 씨 별세, 맹정호(NH투자증권 스쿼드개발부 이사)씨 부친상 = 28일, 대구파티마장례식장 501호실, 발인 30일. 장지 구미화장장 ...]]></description>
+		</item>
+		<item>
+			<title><![CDATA["실적 당일에 하락이 공식?"…삼전, 역대급 발표마다 '하락 징크스']]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029106100008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029106100008</guid>
+			<pubDate>Thu, 29 Oct 2026 14:08:32 +0900</pubDate>
+			<dc:creator>임은진</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 임은진 기자 = 반도체 슈퍼 사이클로 삼성전자[005930]가 매 분기 신기록 행진을 이어가고 있지만 정작 실적 발표일에는 웃...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/yna/YH/2026/10/29/PYH2026102906070001300_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[부산은행, 오늘부터 전국 우체국서 금융서비스]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029119500051</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029119500051</guid>
+			<pubDate>Thu, 29 Oct 2026 14:03:46 +0900</pubDate>
+			<dc:creator>오수희</dc:creator>
+			<description><![CDATA[(부산=연합뉴스) 오수희 기자 = BNK부산은행은 29일부터 전국 우체국 금융창구망을 활용한 공동 이용 서비스를 시작했다. ]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2023/02/28/45/PCM20230228000045990_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[삼성중공업, 3분기 영업이익 3천384억원…작년보다 42%↑(종합)]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029112051527</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029112051527</guid>
+			<pubDate>Thu, 29 Oct 2026 14:01:52 +0900</pubDate>
+			<dc:creator>홍규빈</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 홍규빈 기자 = 삼성중공업은 올해 3분기 영업이익이 3천384억원으로 지난해 동기보다 42.1% 증가했다고 29일 밝혔다.]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2021/12/17/56/PCM20211217000056003_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[[IPO챗] 넥스아이 "2030년까지 매년 1∼2건 기술이전 목표"]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029118300008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029118300008</guid>
+			<pubDate>Thu, 29 Oct 2026 14:00:13 +0900</pubDate>
+			<dc:creator>김유향</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 김유향 기자 = 코스닥 상장 예정인 항암 신약 개발 기업 넥스아이가 오는 2030년까지 매년 1∼2건의 글로벌 기술이전을 성사...]]></description>
+			<media:content url="https://img.yna.co.kr/etc/inner/KR/2026/10/29/AKR20261029118300008_01_i_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[이억원 "어떤 상황에도 금융서비스 중단 안 되는 '장애 제로'"]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029105700002</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029105700002</guid>
+			<pubDate>Thu, 29 Oct 2026 14:00:00 +0900</pubDate>
+			<dc:creator>강류나</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 강류나 기자 = 금융위원회는 대형 싱크홀(땅 꺼짐)로 인한 금융분야 재난에 대비하기 위해 &apos;2026년 금융분야 재난대응 안전한...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/yna/YH/2026/10/29/PYH2026102913960001300_P2.jpg" type="image/jpeg">
+			</media:content>
+			<media:content url="https://img.yna.co.kr/photo/yna/YH/2026/10/29/PYH2026102913970001300_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[한화솔루션 3분기 영업이익 905억원…흑자 전환]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029121100527</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029121100527</guid>
+			<pubDate>Thu, 29 Oct 2026 13:59:58 +0900</pubDate>
+			<dc:creator>공시뉴스</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 코스피 상장사 한화솔루션[009830]은 연결 기준 올해 3분기 영업이익이 905억원으로 지난해 동기(영업손실 74억원)와 비...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2022/04/30/11/PCM20220430000111505_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA['와신상담' 구글, 새 AI모델 '제미나이4 카본'으로 선두 탈환]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029111400091</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029111400091</guid>
+			<pubDate>Thu, 29 Oct 2026 13:55:35 +0900</pubDate>
+			<dc:creator>권영전</dc:creator>
+			<description><![CDATA[(샌프란시스코=연합뉴스) 권영전 특파원 = 한때 최첨단 인공지능(AI) 경쟁에서 밀리며 주도권 상실 우려를 받았던 구글이 새 모델을 내세워 선두...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/etc/gt/2026/05/20/PGT20260520012701009_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[[2보] 현대차, 생산 차질에 3분기 매출 3.4%↓…영업익은 5.5%↑]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029110151527</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029110151527</guid>
+			<pubDate>Thu, 29 Oct 2026 13:35:58 +0900</pubDate>
+			<dc:creator>장하나</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 장하나 기자 = 현대차가 3분기 파업에 따른 생산 차질과 글로벌 수요 감소 등의 여파로 매출이 감소했다. 다만 하이브리드차(H...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/yna/YH/2026/10/29/PYH2026102907850001300_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[삼성중공업 3분기 영업이익 3천384억원…작년 동기 대비 42.1%↑]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029112000527</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029112000527</guid>
+			<pubDate>Thu, 29 Oct 2026 13:31:37 +0900</pubDate>
+			<dc:creator>공시뉴스</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 코스피 상장사 삼성중공업[010140]은 연결 기준 올해 3분기 영업이익이 3천384억원으로 지난해 동기보다 42.1% 증가한...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2021/12/17/56/PCM20211217000056003_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[[1보] 현대차 3분기 영업이익 2조6천772억원…작년 동기 대비 5.5%↑]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029110100527</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029110100527</guid>
+			<pubDate>Thu, 29 Oct 2026 13:23:12 +0900</pubDate>
+			<dc:creator>공시뉴스</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 코스피 상장사 현대차[005380]는 연결 기준 올해 3분기 영업이익이 2조6천772억원으로 지난해 동기보다 5.5% 증가한 ...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/yna/YH/2026/10/29/PYH2026102907820001300_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[세아베스틸지주 3분기 영업이익 144억원…작년 대비 46%↓(종합)]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029098451527</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029098451527</guid>
+			<pubDate>Thu, 29 Oct 2026 13:15:10 +0900</pubDate>
+			<dc:creator>장보인</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 장보인 기자 = 코스피 상장사 세아베스틸지주[001430]는 연결 기준 올해 3분기 영업이익이 144억원으로 지난해 동기보다 ...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2022/04/30/34/PCM20220430000034003_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[SK이노, 영업익 3.7조…"유가급락 없다면 견조한 실적 유지"(종합2보)]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029088551003</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029088551003</guid>
+			<pubDate>Thu, 29 Oct 2026 12:29:44 +0900</pubDate>
+			<dc:creator>김민지</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 김민지 기자 = SK이노베이션[096770]이 석유제품 수출 수익성 개선과 윤활유 사업의 호실적에 힘입어 올해 3분기 역대 분...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2026/05/18/62/PCM20260518000062003_P2.jpg" type="image/jpeg">
+			</media:content>
+			<media:content url="https://img.yna.co.kr/photo/cms/2026/10/26/49/PCM20261026000049990_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[삼성전자, 대형 고객 10곳과 메모리 장기계약…내년 HBM '완판'(종합)]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029089951003</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029089951003</guid>
+			<pubDate>Thu, 29 Oct 2026 11:57:37 +0900</pubDate>
+			<dc:creator>강태우</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 박초롱 강태우 기자 = 삼성전자[005930]가 글로벌 대형 고객사 10곳과 메모리 반도체 장기공급계약(LTA)을 체결한 데 ...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/yna/YH/2026/10/29/PYH2026102906000001300_P2.jpg" type="image/jpeg">
+			</media:content>
+			<media:content url="https://img.yna.co.kr/photo/yna/YH/2026/02/12/PYH2026021218260001300_P2.jpg" type="image/jpeg">
+			</media:content>
+			<media:content url="https://img.yna.co.kr/photo/yna/YH/2025/02/14/PYH2025021411910001300_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[국고채 금리 대체로 하락…3년물 장중 연 3.755%]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029100700008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029100700008</guid>
+			<pubDate>Thu, 29 Oct 2026 11:41:00 +0900</pubDate>
+			<dc:creator>증권부</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 29일 국고채 금리가 대체로 하락하고 있다.]]></description>
+		</item>
+		<item>
+			<title><![CDATA[삼성전자 3분기 반도체 영업익 106조…"내년도 기록적 AI투자"(종합2보)]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029064853527</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029064853527</guid>
+			<pubDate>Thu, 29 Oct 2026 11:39:08 +0900</pubDate>
+			<dc:creator>조성흠</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 조성흠 기자 = 삼성전자가 올해 3분기 반도체 사업으로만 106조원이 넘는 영업이익을 거두며 4분기 연속 역대 최대 실적과 동...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/yna/YH/2026/10/29/PYH2026102906070001300_P2.jpg" type="image/jpeg">
+			</media:content>
+			<media:content url="https://img.yna.co.kr/photo/yna/YH/2026/10/29/PYH2026102906000001300_P2.jpg" type="image/jpeg">
+			</media:content>
+			<media:content url="https://img.yna.co.kr/etc/graphic/YH/2026/10/29/GYH2026102900050004402_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[미래에셋, 日 산코증권 품는다…글로벌 시장 영토 확장(종합)]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029082251008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029082251008</guid>
+			<pubDate>Thu, 29 Oct 2026 11:36:15 +0900</pubDate>
+			<dc:creator>곽윤아</dc:creator>
+			<description><![CDATA[(서울·도쿄=연합뉴스) 곽윤아 기자 조성미 특파원 = 미래에셋증권[006800]이 일본 산코증권 인수를 공식 발표했다.]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2026/10/29/02/PCM20261029000002990_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[세아베스틸지주 3분기 영업이익 144억원…작년 대비 46%↓]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029098400527</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029098400527</guid>
+			<pubDate>Thu, 29 Oct 2026 11:28:58 +0900</pubDate>
+			<dc:creator>공시뉴스</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 코스피 상장사 세아베스틸지주[001430]는 연결 기준 올해 3분기 영업이익이 144억원으로 지난해 동기보다 46.4% 감소한...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2022/04/30/34/PCM20220430000034003_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[삼성SDI, 영업익 4천78억원 깜짝실적…"2028년까지 수주 확보"(종합2보)]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029042651003</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029042651003</guid>
+			<pubDate>Thu, 29 Oct 2026 11:25:15 +0900</pubDate>
+			<dc:creator>김민지</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 김민지 기자 = 삼성SDI[006400]가 미국 에너지저장장치(ESS) 수주 성장에 힘입어 올해 3분기 흑자 전환한 가운데, ...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2024/07/06/13/PCM20240706000013003_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[씨아이테크, 20억원 유상증자…씨엔씨기술에 제3자배정]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029096900008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029096900008</guid>
+			<pubDate>Thu, 29 Oct 2026 11:22:17 +0900</pubDate>
+			<dc:creator>증권부</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 코스피 상장사 씨아이테크[004920]는 운영자금 등 약 20억원을 조달하고자 제3자배정 유상증자를 결정했다고 29일 공시했다...]]></description>
+		</item>
+		<item>
+			<title><![CDATA[삼성전자 "내년 HBM 완판…10개사와 메모리 장기계약 협상중"]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029089900003</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029089900003</guid>
+			<pubDate>Thu, 29 Oct 2026 11:19:30 +0900</pubDate>
+			<dc:creator>박초롱</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 박초롱 강태우 기자 = 삼성전자가 10개사와 추가로 메모리 반도체 장기공급계약(LTA) 협상을 진행 중이며, 고부가가치 제품인...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/yna/YH/2026/10/29/PYH2026102906090001300_P2.jpg" type="image/jpeg">
+			</media:content>
+			<media:content url="https://img.yna.co.kr/photo/yna/YH/2026/10/14/PYH2026101409940001300_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[코스피, '세부실적' 삼성전자 급락에 하락전환…2%대 하락세]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029091100008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029091100008</guid>
+			<pubDate>Thu, 29 Oct 2026 11:08:24 +0900</pubDate>
+			<dc:creator>김유향</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 김유향 기자 = 코스피가 29일 삼성전자[005930]의 세부 3분기 실적 발표 후 장중 하락세로 접어들었다.]]></description>
+			<media:content url="https://img.yna.co.kr/photo/yna/YH/2026/10/29/PYH2026102902790001300_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[SK이노, 3분기 영업익 3조7천억원…역대 최대 분기 실적(종합)]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029088500003</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029088500003</guid>
+			<pubDate>Thu, 29 Oct 2026 11:04:41 +0900</pubDate>
+			<dc:creator>김민지</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 김민지 기자 = SK이노베이션[096770]은 연결 기준 올해 3분기 영업이익이 3조7천43억원으로 지난해 동기보다 532.5...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2026/05/18/62/PCM20260518000062003_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA["적법절차" "일방적 매각"…골프존카운티 매각 놓고 1·2대주주 공방]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029080200008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029080200008</guid>
+			<pubDate>Thu, 29 Oct 2026 10:53:36 +0900</pubDate>
+			<dc:creator>정회인</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 정회인 기자 = 골프존카운티 매각을 둘러싸고 최대주주 MBK파트너스와 2대 주주 골프존홀딩스 간 공방이 이어지고 있다.]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2020/06/10/99/PCM20200610000299990_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[실리콘 밸리 '버그 홍수'…"AI가 판도라상자 열었다"]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029081100009</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029081100009</guid>
+			<pubDate>Thu, 29 Oct 2026 10:51:57 +0900</pubDate>
+			<dc:creator>주종국</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 주종국 기자 = 인공지능(AI)이 소프트웨어의 결함을 찾는데 동원되면서 업계에서는 엄청난 규모의 버그(결함)들이 빠르게 발견되...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/etc/epa/2025/10/31/PEP20251031140901009_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[SK이노베이션 3분기 영업이익 3조7천43억원…작년 대비 533%↑]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029084600527</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029084600527</guid>
+			<pubDate>Thu, 29 Oct 2026 10:42:52 +0900</pubDate>
+			<dc:creator>공시뉴스</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 코스피 상장사 SK이노베이션[096770]은 연결 기준 올해 3분기 영업이익이 3조7천43억원으로 지난해 동기보다 532.5%...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2022/12/13/94/PCM20221213000094003_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[미래에셋, 日 산코증권 품는다…"美법인 통해 지분 100% 취득"]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029082200008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029082200008</guid>
+			<pubDate>Thu, 29 Oct 2026 10:42:10 +0900</pubDate>
+			<dc:creator>곽윤아</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 곽윤아 기자 = 미래에셋증권[006800]이 일본 산코증권 인수를 공식 발표했다.]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2026/10/29/02/PCM20261029000002990_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[주주환원 기대 못미쳤나…삼전 4%대↓, 코스피도 2%대 하락(종합)]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029046851008</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029046851008</guid>
+			<pubDate>Thu, 29 Oct 2026 10:39:47 +0900</pubDate>
+			<dc:creator>임은진</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 임은진 기자 = 삼성전자[005930]가 29일 3분기 세부실적 및 추가 주주환원 발표후 하락 전환, 낙폭을 키우고 있다. ]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2026/06/29/57/PCM20260629000557990_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[포천시, 올해 공공비축미 292t 매입 완료]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261029083000060</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261029083000060</guid>
+			<pubDate>Thu, 29 Oct 2026 10:39:24 +0900</pubDate>
+			<dc:creator>노승혁</dc:creator>
+			<description><![CDATA[(포천=연합뉴스) 노승혁 기자 = 경기 포천시는 23일 관인면을 시작으로 28일 영중면과 영북면에서 진행한 &apos;2026년산 공공비축미(포대 벼) ...]]></description>
+			<media:content url="https://img.yna.co.kr/etc/inner/KR/2026/10/29/AKR20261029083000060_01_i_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+		<item>
+			<title><![CDATA[삼전닉스, 반도체 호황 타고 번 돈 210조 주주에 돌려준다]]></title>
+			<link>https://www.yna.co.kr/view/AKR20261028195100003</link>
+			<guid isPermaLink="true">https://www.yna.co.kr/view/AKR20261028195100003</guid>
+			<pubDate>Thu, 29 Oct 2026 10:34:39 +0900</pubDate>
+			<dc:creator>임성호</dc:creator>
+			<description><![CDATA[(서울=연합뉴스) 임성호 기자 = 국내 반도체 양강 삼성전자와 SK하이닉스가 올해 유례없는 초호황 속 210조원에 달하는 역대급 규모의 주주환원...]]></description>
+			<media:content url="https://img.yna.co.kr/photo/cms/2026/10/29/29/PCM20261029000029990_P2.jpg" type="image/jpeg">
+			</media:content>
+			<media:content url="https://img.yna.co.kr/etc/inner/KR/2026/10/28/AKR20261028195100003_01_i_P2.jpg" type="image/jpeg">
+			</media:content>
+			<media:content url="https://img.yna.co.kr/etc/graphic/YH/2026/10/28/GYH2026102800040004402_P2.jpg" type="image/jpeg">
+			</media:content>
+			<media:content url="https://img.yna.co.kr/photo/yna/YH/2026/10/28/PYH2026102820040001300_P2.jpg" type="image/jpeg">
+			</media:content>
+			<media:content url="https://img.yna.co.kr/etc/graphic/YH/2026/10/29/GYH2026102900050004402_P2.jpg" type="image/jpeg">
+			</media:content>
+		</item>
+	</channel>
+</rss>
