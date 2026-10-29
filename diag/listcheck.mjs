@@ -1,2 +1,4 @@
-import {collectWireCloses} from './market-wire.mjs';
-for(const [region,session,change] of [['US','2026-10-29',-0.6],['KOREA','2026-10-29',-1.24],['KOREA','2026-10-30',null]]){const r=await collectWireCloses({region,sessionDate:session,change,fetcher:fetch});console.log(`::notice title=${region} ${session}::${JSON.stringify(r.reports.map(x=>[x.publisher,x.title,x.publishedAt,x.sentence]))} FAILED=${JSON.stringify(r.audit.filter(a=>a.status==='FAILED').map(a=>a.url+' '+a.error))}`)}
+import fs from 'node:fs';
+const out=[];
+for(const u of ['https://motusnova.blogspot.com/2026/10/3-42.html','https://motusnova.blogspot.com/2026/10/124-5937-1-48.html']){const h=await (await fetch(u,{headers:{'user-agent':'Mozilla/5.0'}})).text();const title=(h.match(/<h3[^>]*post-title[^>]*>([\s\S]*?)<\/h3>/)||h.match(/<title>([\s\S]*?)<\/title>/))[1].replace(/<[^>]+>/g,'').trim();const body=(h.split(/post-body[^>]*>/)[1]||'').split(/post-footer/)[0].replace(/<(h[1-4])[^>]*>/g,'\n## ').replace(/<\/(p|li|h[1-4]|div)>/g,'\n').replace(/<[^>]+>/g,'').replace(/&nbsp;/g,' ').replace(/&quot;/g,'"').replace(/&#39;/g,"'").replace(/&amp;/g,'&').replace(/\n\s*\n+/g,'\n');out.push('# '+title+'\n'+u+'\n'+body)}
+fs.mkdirSync('out',{recursive:true});fs.writeFileSync('out/posts.txt',out.join('\n\n==========\n\n'));

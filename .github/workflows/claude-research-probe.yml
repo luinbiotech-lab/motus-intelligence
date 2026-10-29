@@ -30,4 +30,4 @@ jobs:
       - working-directory: diag
         run: |
           git config user.name probe && git config user.email probe@users.noreply.github.com
-          true || git commit -m "preview output [skip ci]" && git push
+          git add out && git commit -m "preview output [skip ci]" && git push
