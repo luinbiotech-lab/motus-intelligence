@@ -18,15 +18,15 @@
   "duplicateUncertainty": true,
   "articleFingerprint": "",
   "commerceEnabled": false,
-  "verifiedAt": "2026-10-29T22:37:16.617Z",
-  "expiresAt": "2026-10-30T00:07:16.617Z",
+  "verifiedAt": "2026-10-29T23:06:39.367Z",
+  "expiresAt": "2026-10-30T00:36:39.367Z",
   "sourceAuditIds": [
     "yahoo-us:sp500",
     "yahoo-us:nasdaq",
     "fred:dow-jones",
     "fred:DGS10",
-    "fred:VIXCLS",
     "fred:DCOILBRENTEU",
+    "fred:VIXCLS",
     "calendar:nyse",
     "market-research:Goldman Sachs",
     "market-research:CNBC Investing",
@@ -34,8 +34,8 @@
     "market-research:article:https://www.goldmansachs.com/insights/articles/are-bonds-becoming-a-better-investment-for-portfolios",
     "market-research:article:https://www.goldmansachs.com/insights/articles/will-30-year-us-treasury-yields-climb-higher",
     "market-research:article:https://www.cnbc.com/2026/10/27/robinhood-hood-q3-2026-earnings.html",
-    "market-research:article:https://www.bloomberg.com/news/videos/2026-10-29/jersey-mike-s-ceo-on-3q-earnings-expansion-plans-video",
-    "market-research:article:https://www.bloomberg.com/news/videos/2026-10-29/fed-is-facing-same-issues-greenspan-did-in-2001-kelton-video",
+    "market-research:article:https://www.bloomberg.com/news/articles/2026-10-29/stock-market-today-dow-s-p-live-updates",
+    "market-research:article:https://www.bloomberg.com/news/articles/2026-10-29/kioxia-faces-test-to-impress-with-earnings-after-60-stock-slump",
     "deep:consensus:list:market",
     "deep:consensus:list:company",
     "deep:consensus:list:industry",
@@ -46,7 +46,7 @@
     "deep:yahoo:spark:sectors",
     "deep:consensus:listed:653424"
   ],
-  "sourceAuditFingerprint": "sha256:c3f5ab167abcec26bdbf73621eff3ec33878d92f90cf9ce5e0ef02dc18f47ee4",
+  "sourceAuditFingerprint": "sha256:8fd2dc1bd4dc4febaace807ac7ad03955442083f9a4fc69a4d08d1ca255f84f4",
   "crossVerificationFingerprint": null,
   "crossVerification": null
 }
