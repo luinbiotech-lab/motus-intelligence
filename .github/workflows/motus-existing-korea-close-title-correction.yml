@@ -1,5 +1,8 @@
 name: MOTUS Controlled Existing Blogger Title Correction
 on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/motus-existing-korea-close-title-correction.yml']
   workflow_dispatch:
     inputs:
       action:
@@ -24,7 +27,7 @@ jobs:
       BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
       BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
       BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
-      CORRECTION_ACTION: ${{ inputs.action }}
+      CORRECTION_ACTION: ${{ github.event_name == 'push' && 'apply' || inputs.action }}
     steps:
       - name: 'Preflight: exact post identity and read-only preview'
         shell: bash
@@ -60,11 +63,14 @@ jobs:
           if(typeof post.content!=='string'||post.content.length<1000)throw Error('POST_CONTENT_UNEXPECTED');
           if(post.title!==oldTitle && post.title!==newTitle)throw Error('UNEXPECTED_EXISTING_TITLE');
           const contentBefore=post.content;
-          console.log(JSON.stringify({action,postId,canonicalUrl:post.url,expectedOperation:'2026-10-28 Korea CLOSE',beforeTitle:post.title,proposedTitle:newTitle,bodyChange:false}));
+          const replacementCount=contentBefore.split(oldTitle).length-1;
+          if(post.title===oldTitle && (replacementCount<1||replacementCount>2))throw Error('BODY_HEADLINE_EXPECTED_ONCE_NOT_FOUND');
+          const correctedContent=post.title===oldTitle?contentBefore.replaceAll(oldTitle,newTitle):contentBefore;
+          console.log(JSON.stringify({action,postId,canonicalUrl:post.url,expectedOperation:'2026-10-28 Korea CLOSE',beforeTitle:post.title,proposedTitle:newTitle,bodyChange:post.title===oldTitle,changedBodyFragment:'exact existing headline string only'}));
           if(action==='preview'||post.title===newTitle){console.log('READ_ONLY_OR_ALREADY_CORRECTED');process.exit(0)}
-          const response=await fetch(endpoint,{method:'PATCH',redirect:'error',headers:{authorization:'Bearer '+token,'content-type':'application/json'},body:JSON.stringify({title:newTitle}),signal:AbortSignal.timeout(15000)});
+          const response=await fetch(endpoint,{method:'PATCH',redirect:'error',headers:{authorization:'Bearer '+token,'content-type':'application/json'},body:JSON.stringify({title:newTitle,content:correctedContent}),signal:AbortSignal.timeout(15000)});
           if(!response.ok)throw Error('BLOGGER_PATCH_HTTP_'+response.status);
           const after=await getPost();
-          if(after.title!==newTitle||after.content!==contentBefore||after.url!==expectedUrl||after.status!=='LIVE')throw Error('POST_CORRECTION_READBACK_MISMATCH');
-          console.log('TITLE_CORRECTION_VERIFIED: existing post unchanged except title; no new publication');
+          if(after.title!==newTitle||after.content!==correctedContent||after.url!==expectedUrl||after.status!=='LIVE')throw Error('POST_CORRECTION_READBACK_MISMATCH');
+          console.log('TITLE_CORRECTION_VERIFIED: same post, headline-only body substitution, original permalink, no new publication');
           NODE
