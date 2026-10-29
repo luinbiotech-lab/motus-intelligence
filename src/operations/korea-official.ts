@@ -55,6 +55,7 @@ export class YahooKoreaSecondarySourceAdapter implements KoreaOfficialSourceAdap
     let accepted:{value:number;url:string;availableDates:string[]}|null=null,lastCode='YAHOO_FINANCE_'+field+'_ROW_MISSING';
     for(const host of ['query1.finance.yahoo.com','query2.finance.yahoo.com']){
      const url=`https://${host}/v8/finance/chart/${symbol}?period1=${from}&period2=${to}&interval=1d`;
+     try{
      const response=await fetchWithTransientRetry(this.fetcher,url,()=>({headers:{accept:'application/json','user-agent':'MOTUS-Internal-Collector/1.0'},signal:AbortSignal.timeout(20000)}));
      if(!response.ok){lastCode='YAHOO_FINANCE_HTTP_'+response.status;audit.push({sourceId:'yahoo-finance:'+field.toLowerCase()+':'+host,url,status:'FAILED',recordCount:0,error:lastCode,requestedDate:observedDate,availableDates:[]});continue}
      const body=await response.json() as {chart?:{error?:unknown;result?:Array<{meta?:{exchangeTimezoneName?:string;timezone?:string};timestamp?:number[];indicators?:{quote?:Array<{close?:Array<number|null>}>}}>}};
@@ -64,6 +65,10 @@ export class YahooKoreaSecondarySourceAdapter implements KoreaOfficialSourceAdap
      audit.push({sourceId:'yahoo-finance:'+field.toLowerCase()+':'+host,url,status:code?'FAILED':'PASS',recordCount:code?0:1,error:code,requestedDate:observedDate,availableDates:[...new Set(dates.filter(Boolean))].slice(-8)});
      if(!code){accepted={value:value as number,url,availableDates:dates};break}
      lastCode=code;
+     }catch{
+      lastCode='YAHOO_FINANCE_FETCH_FAILED';
+      audit.push({sourceId:'yahoo-finance:'+field.toLowerCase()+':'+host,url,status:'FAILED',recordCount:0,error:lastCode,requestedDate:observedDate,availableDates:[]});
+     }
     }
     if(!accepted)throw new Error(lastCode);
     observations.push({field,observedDate,value:accepted.value,provider:'YAHOO_FINANCE',sourceUrl:accepted.url,metricBasis:'SESSION_CLOSE'});
@@ -75,7 +80,7 @@ export class YahooKoreaSecondarySourceAdapter implements KoreaOfficialSourceAdap
 }
 
 function yahooSessionDate(value:number|undefined,timeZone:string):string {
- if(typeof value!=='number'||!Number.isFinite(value))return '';
+ if(typeof value!=='number'||!Number.isFinite(value)||!Number.isFinite(new Date(value*1000).getTime()))return '';
  try{
   return new Intl.DateTimeFormat('en-CA',{timeZone,year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date(value*1000));
  }catch{

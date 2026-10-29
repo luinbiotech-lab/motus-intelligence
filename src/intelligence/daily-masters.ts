@@ -1,3 +1,4 @@
+import type {VerifiedBrokerAnalysis} from '../operations/broker-analysis.js';
 import type { MajorIndexHistory } from '../content/publisher-schema.js';
 import { MOTUS_DISPLAY_NAME, MOTUS_PUBLIC_CATEGORY_MASTER, type MotusPublicCategoryKey } from '../content/publisher-schema.js';
 import type { KoreaMarketNewsletterMetric, KoreaMarketNewsletterView } from './korea-market.js';
@@ -32,6 +33,7 @@ export interface AIIntelligenceDailyViewModel extends DailyMasterBase {
   industryFlow:string[];industryConnections:AIIndustryConnection[];whatToWatch:NewsletterWatchItem[];
 }
 export interface USMarketDailyViewModel extends DailyMasterBase {
+  brokerAnalysis?:VerifiedBrokerAnalysis[];
   marketResearch?:{publisher:string;headline:string;url:string;publishedAt:string;kind:'FINANCIAL_MEDIA'|'BROKER_RESEARCH';evidence?:string[]}[];
   category:'US_MARKET';marketSummary:string;marketHistory:MajorIndexHistory;
   supportingMetrics:NewsletterMarketMetric[];marketCommentary:string[];sectorsCompanies:string[];
@@ -41,6 +43,7 @@ export interface USMarketDailyViewModel extends DailyMasterBase {
   narrative?:{facts:string[];analysis:string[]};
 }
 export interface KoreaMarketDailyViewModel extends DailyMasterBase {
+  brokerAnalysis?:VerifiedBrokerAnalysis[];
   marketResearch?:{publisher:string;headline:string;url:string;publishedAt:string;kind:'FINANCIAL_MEDIA'|'BROKER_RESEARCH';evidence?:string[]}[];
   category:'KOREA_MARKET';marketSummary:string;indexMetrics:KoreaMarketNewsletterMetric[];
   operationDate?:string;sessionDate?:string;edition?:'PREVIOUS_SESSION_MORNING'|'MANUAL_RECOVERY_CLOSE';fxBasis?:'BOK_REFERENCE_RATE'|'CURRENT_AT_COLLECTION';

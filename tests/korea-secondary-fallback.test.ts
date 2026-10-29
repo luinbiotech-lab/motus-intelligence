@@ -29,6 +29,25 @@ test('Yahoo Korea secondary remains fail-closed after both hosts miss the reques
   assert.ok(result.audit.every(x=>!JSON.stringify(x).includes('apikey=')));
 });
 
+for(const failure of ['NETWORK','MALFORMED_JSON','INVALID_TIMESTAMP'] as const){
+ test(`Yahoo query2 still runs after query1 ${failure}`,async()=>{
+  const calls:string[]=[];
+  const fetcher=(async(input:string|URL)=>{
+   const url=String(input);calls.push(url);
+   if(url.includes('query1.finance.yahoo.com')){
+    if(failure==='NETWORK')throw Error('sentinel-private-provider-message');
+    if(failure==='MALFORMED_JSON')return new Response('not JSON');
+    return new Response(JSON.stringify({chart:{result:[{timestamp:[Number.MAX_SAFE_INTEGER],indicators:{quote:[{close:[3000]}]}}]}}));
+   }
+   return new Response(JSON.stringify({chart:{result:[{meta:{exchangeTimezoneName:'Asia/Seoul'},timestamp:[Date.parse('2026-10-26T00:00:00Z')/1000],indicators:{quote:[{close:[url.includes('%5EKS11')?4200:900]}]}}]}}));
+  }) as typeof fetch;
+  const result=await new YahooKoreaSecondarySourceAdapter(fetcher).fetch('2026-10-26','2026-10-27T00:24:59Z');
+  assert.equal(result.requiredProviderAvailable,true);assert.equal(result.observations.length,2);
+  assert.equal(result.audit.filter(x=>x.status==='PASS').length,2);
+  assert.ok(calls.some(x=>x.includes('query2.finance.yahoo.com')));
+  assert.doesNotMatch(JSON.stringify(result),/sentinel-private-provider-message/);
+ });
+}
 test('KRX official adapter requests the actual approved data host and preserves authentication',async()=>{
   const {KrxBokOfficialSourceAdapter}=await import('../src/operations/korea-official.js');
   const calls:Array<{url:string;auth:string|null}>=[];

@@ -1,0 +1,57 @@
+{
+  "scope": "PRIVATE layout QA only; saved legacy observations, not a corrected or verified financial report",
+  "source": "ops-data data/operations/2026-10-27/us/live-unit.json",
+  "chartCount": 3,
+  "renderedPagesVisuallyInspected": [
+    1,
+    2
+  ],
+  "externalPublicationCalls": 0,
+  "validation": {
+    "status": "PASS",
+    "checks": {
+      "fileExists": true,
+      "nonZeroSize": true,
+      "validPdfSignature": true,
+      "pageCount": true,
+      "textExtraction": true,
+      "koreanText": true,
+      "motusTitle": true,
+      "issueDate": true,
+      "noInternalIds": true,
+      "noRawSecret": true,
+      "noLocalhost": true,
+      "noPlaceholder": true,
+      "noFixtureLabel": true,
+      "overflow": true,
+      "charts": true,
+      "sources": true,
+      "fontEmbedded": true,
+      "minimumBodyFontSize": true
+    },
+    "warnings": [
+      "Daily report uses 2 pages"
+    ],
+    "errors": [],
+    "extractedTextLength": 1826,
+    "fontNames": [
+      "/AAAAAA+NanumGothic",
+      "/AAAAAA+NanumGothicBold",
+      "/Helvetica",
+      "/Times-Roman"
+    ],
+    "fontPaths": [
+      "MOTUS-NanumGothic-Regular.ttf",
+      "MOTUS-NanumGothic-Bold.ttf"
+    ],
+    "pageCount": 2,
+    "fileSizeBytes": 101592
+  },
+  "syntheticRegression": "0 / 3 / 4 chart render subcases PASS; Korean TTF env overrides; 63-session heading; empty section omitted",
+  "limitations": [
+    "Legacy recorded supporting metric contains the prior percent/bp defect; actual source record is unchanged",
+    "Sector/company and institutional evidence remains absent",
+    "Article and PDF are not approved for publication",
+    "Live Blogger theme rendering has not been verified"
+  ]
+}

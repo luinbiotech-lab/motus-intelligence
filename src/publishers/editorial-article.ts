@@ -1,3 +1,4 @@
+import type {VerifiedBrokerAnalysis} from '../operations/broker-analysis.js';
 import type {AIIntelligenceDailyViewModel,KoreaMarketDailyViewModel,USMarketDailyViewModel,DailyMasterRenderResult} from '../intelligence/daily-masters.js';
 import type {NewsletterSourceLink} from '../intelligence/newsletter.js';
 import {MOTUS_DISPLAY_NAME} from '../content/publisher-schema.js';
@@ -26,10 +27,12 @@ export function renderAIEditorialArticle(view:AIIntelligenceDailyViewModel):Dail
 
 export function renderUSEditorialArticle(view:USMarketDailyViewModel):DailyMasterRenderResult {
   const terms=new Set<string>();const describe=(value:string)=>explainTerms(value,terms);
-  const parts=[masthead(view.title,view.subtitle,view.displayLabel,view.issueDate),lead(describe([view.marketSummary,...view.marketCommentary].join(' ')))];
+  const parts=[masthead(view.title,view.subtitle,view.displayLabel,view.issueDate),lead(describe(view.marketSummary))];
+  if(view.brokerAnalysis?.length)parts.push(renderBrokerAnalysis(view.brokerAnalysis));
   const period=view.marketHistory.sessionCount>=60?'3개월':`${view.marketHistory.sessionCount}거래일`;
   parts.push(renderMarketTrendSection(view.marketHistory).replace('미국 주요 증시 추이',`미국 주요지수 ${period} 흐름`));
   if(view.supportingMetrics.length)parts.push(section('금리·달러·변동성',`<p style="margin:0">${view.supportingMetrics.map(item=>`${esc(describe(item.label))} ${esc(item.value)}${item.change?` (${esc(item.change)})`:''}`).join(' · ')}</p>`));
+  if(view.marketCommentary.length)parts.push(section('시장 변수의 연결과 한계',paragraphs(view.marketCommentary)));
   if(view.narrative?.facts.length)parts.push(section('지수별 흐름과 위치',paragraphs(view.narrative.facts)));
   if(view.narrative?.analysis.length)parts.push(section('MOTUS 분석',paragraphs(view.narrative.analysis)));
   if(view.sectorsCompanies.length)parts.push(section('종목과 업종에서 읽힌 신호',paragraphs(view.sectorsCompanies)));
@@ -41,13 +44,14 @@ export function renderUSEditorialArticle(view:USMarketDailyViewModel):DailyMaste
 export function renderKoreaEditorialArticle(view:KoreaMarketDailyViewModel):DailyMasterRenderResult {
   const parts=[masthead(view.title,view.subtitle,view.displayLabel,view.issueDate),lead(view.marketSummary)];
   if(view.marketCommentary.length)parts.push(section(view.edition==='PREVIOUS_SESSION_MORNING'?'전일 장을 읽는 기준':'마감 흐름을 읽는 기준',paragraphs(view.marketCommentary)));
+  if(view.brokerAnalysis?.length)parts.push(renderBrokerAnalysis(view.brokerAnalysis));
   if(view.indexMetrics.length)parts.push(section('코스피와 코스닥',metricProse(view.indexMetrics)));
   if(view.narrative?.facts.length)parts.push(section('지수 흐름',paragraphs(view.narrative.facts)));
-  if(view.fxAndSupporting.length)parts.push(section('환율과 시장 여건',metricProse(view.fxAndSupporting)));
-  if(view.investorFlows.length)parts.push(section('투자자별 순매수 (원천 자료 기준)',`<div data-visualization="korea-investor-flow">${metricProse(view.investorFlows.map(item=>({label:item.label,displayValue:item.displayValue})))}</div>`));
-  if(view.sectors.length)parts.push(section('업종별 등락',metricProse(view.sectors)));
+  if(view.fxAndSupporting.length)parts.push(section('환율과 시장 여건',metricProse(view.fxAndSupporting.map(koreaMetricWithUnit))));
+  if(view.investorFlows.length)parts.push(section('투자자별 순매매',`<div data-visualization="korea-investor-flow">${metricProse(view.investorFlows.map(koreaMetricWithUnit))}</div>`));
+  if(view.sectors.length)parts.push(section('업종별 등락',metricProse(view.sectors.map(koreaMetricWithUnit))));
   const ordinaryMovers=view.movers.filter(item=>!isStructuredLeveragedProduct(item.label));
-  if(ordinaryMovers.length)parts.push(section('주요 종목 흐름',metricProse(ordinaryMovers)));
+  if(ordinaryMovers.length)parts.push(section('주요 종목 흐름',metricProse(ordinaryMovers.map(koreaMetricWithUnit))));
   if(view.narrative?.analysis.length)parts.push(section('MOTUS 분석',paragraphs(view.narrative.analysis)));
   if(view.marketResearch?.length)parts.push(renderMarketResearchEntries(view.marketResearch,view.operationDate??view.issueDate));
   if(view.checkpoints.length)parts.push(section(view.edition==='PREVIOUS_SESSION_MORNING'?'오늘 체크포인트':'다음 거래일',paragraphs(view.checkpoints.map(item=>`${item.headline}: ${item.watchFor}`))));
@@ -72,12 +76,16 @@ export function renderMarketResearchEntries(entries:ReadonlyArray<{publisher:str
  return make('BROKER_RESEARCH')+make('FINANCIAL_MEDIA');
 }
 
+
+export function renderBrokerAnalysis(items:VerifiedBrokerAnalysis[]):string {return items.map(item=>section(item.headline,`<p style="font-size:14px;color:#59697d">${esc(item.publisher)} · ${esc(item.author)} · ${esc(item.publishedAt.slice(0,10))} · ${item.basis==='OFFICIAL_TRANSCRIPT'?'공개 시장 해설':'보고서 공개 요약'}</p>`+paragraphs([...item.institutionView,item.interpretation,item.risks,item.watch])+`<p><a href="${attr(item.sourceUrl)}" target="_blank" rel="noopener noreferrer" style="${LINK}">${esc(item.publisher)} 근거 원문</a></p>`)).join('')}
+
 function masthead(title:string,subtitle:string,label:string,date:string){return `<header style="width:100%;max-width:100%;box-sizing:border-box;background:#03162e;color:#fff;padding:26px 22px;margin:0 0 22px"><p style="margin:0 0 9px;color:#c7d8ea;font-size:14px;font-weight:800">${esc(MOTUS_DISPLAY_NAME)}</p><div role="heading" aria-level="2" style="font-size:clamp(25px,7vw,34px);line-height:1.22;font-weight:850;word-break:keep-all">${esc(title)}</div><p style="margin:10px 0 0;color:#e6edf5">${esc(subtitle)}</p><p style="margin:11px 0 0;color:#b7c8da;font-size:13px">${esc(label)} · ${esc(date)}</p></header>`;}
 function lead(value:string){return `<p data-section="editorial-lead" style="margin:0 0 24px;font-size:18px;line-height:1.82;color:#172033">${esc(value)}</p>`;}
 function section(title:string,content:string){return `<section style="${SECTION}"><h2 style="${HEADING}">${esc(title)}</h2>${content}</section>`;}
 function paragraphs(values:string[]){return values.map(value=>value.trim()).filter(Boolean).map(value=>`<p style="margin:0 0 13px">${esc(value)}</p>`).join('');}
 function uniqueProse(values:string[],seen:Set<string>):string[]{const result:string[]=[];for(const value of values){const key=normalized(value);if(!key||seen.has(key))continue;seen.add(key);result.push(value)}return result}
 function normalized(value:string){return value.replace(/\s+/g,' ').trim()}
+export function koreaMetricWithUnit<T extends {group:string;label:string;displayValue:string;direction:'UP'|'DOWN'|'FLAT'}>(item:T):T {const value=item.displayValue.trim(),numeric=/^[+−-]?[\d,.]+$/.test(value);if(!numeric)return item;const displayValue=['SECTOR','MOVER'].includes(item.group)?value+'%':item.group==='FX'&&/USD\/KRW/.test(item.label)?value+'원':item.group==='FLOW'?(item.direction==='UP'?'순매수':item.direction==='DOWN'?'순매도':'순매매 균형'):value;return {...item,displayValue}}
 export function isStructuredLeveragedProduct(label:string):boolean {return /레버리지|인버스|선물단일종목|ETN|ETF|[23]X/i.test(label)}
 function metricProse(values:Array<{label:string;displayValue:string}>){return `<p style="margin:0">${values.map(item=>`${esc(item.label)} ${esc(item.displayValue)}`).join(' · ')}</p>`;}
 function flow(values:Array<{label:string;displayValue:string;direction:'UP'|'DOWN'|'FLAT'}>){const max=Math.max(...values.map(item=>Math.abs(Number(item.displayValue.replace(/[^0-9.-]/g,'')))),1);return `<div data-visualization="korea-investor-flow" style="width:100%;max-width:100%;box-sizing:border-box">${values.map(item=>{const size=Math.max(4,Math.round(Math.abs(Number(item.displayValue.replace(/[^0-9.-]/g,'')))/max*46));const color=item.direction==='UP'?'#c62828':item.direction==='DOWN'?'#1565c0':'#59697d';return `<div style="margin:0 0 12px;width:100%;max-width:100%;box-sizing:border-box"><div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap"><strong>${esc(item.label)}</strong><span style="color:${color};font-weight:800">${esc(item.displayValue)}</span></div><div style="height:8px;background:#eef2f6"><span style="display:block;width:${size}%;height:100%;background:${color}"></span></div></div>`;}).join('')}</div>`;}

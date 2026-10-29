@@ -112,7 +112,7 @@ function fetcherFor(extra:Record<string,string>={}){
   }) as typeof fetch;
 }
 
-test('official-source AI pipeline publishes a verified, evidence-bound Korean article and enforces source rules',async()=>{
+test('verified official AI sources still require substantive prose before publication',async()=>{
   const root=await mkdtemp(join(tmpdir(),'motus-ai-ops-'));
   try{
     const covered=join(root,'2026-10-24','ai');await mkdir(covered,{recursive:true});
@@ -131,9 +131,9 @@ test('official-source AI pipeline publishes a verified, evidence-bound Korean ar
     assert.ok(result.audit.some(entry=>entry.sourceId.startsWith('ai:rss-evidence:')&&entry.url==='https://openai.com/index/securing'&&entry.status==='PASS'),'403 pages fall back to recorded official RSS evidence');
     assert.ok(!links.includes('https://openai.com/index/securing'),'but a thin RSS-only item is not published');
     const quality=evaluateEditorialQuality(unit.title,unit.render.html);
-    assert.equal(quality.pass,true,quality.reasons.join(';'));assert.ok(quality.visibleText.length>=900&&quality.proseBlockCount>=4,'meets the proposed 900-char/4-block depth gate');
+    assert.equal(quality.pass,false,'source verification and padded length cannot certify editorial quality');assert.ok(quality.reasons.some(reason=>reason.includes('generic template')));assert.ok(quality.visibleText.length>=900&&quality.proseBlockCount>=4,'regression: even a long template must be blocked');
     assert.match(quality.visibleText,/MOTUS 분석: /);assert.doesNotMatch(quality.visibleText,/rolling out the AI assistant|will provide 50 megawatts/);
-    assert.equal(buildProductionVerification(result.payload!,'internal',result.audit,at).verification,'VERIFIED');
+    assert.equal(buildProductionVerification(result.payload!,'internal',result.audit,at).verification,'REVIEW_REQUIRED');
   }finally{await rm(root,{recursive:true,force:true})}
 });
 

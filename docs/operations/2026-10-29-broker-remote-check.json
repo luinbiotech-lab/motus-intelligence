@@ -1,0 +1,259 @@
+{
+  "verifiedCodeHead": "27ae6ea0d89bf37da38f058301c7163fbea0a375",
+  "originalPublicationCodeHead": "69d2d95404e1a31232670dfefd9bde25389c4028",
+  "localTests": {
+    "pass": 578,
+    "fail": 0,
+    "scope": "combined workspace including theme tests"
+  },
+  "ci": [
+    {
+      "id": 40863588259,
+      "name": "MOTUS Pull Request Validation",
+      "status": "completed",
+      "conclusion": "success",
+      "run_number": 100,
+      "jobs_url": "https://api.github.com/repos/luinbiotech-lab/motus-intelligence/actions/runs/40863588259/jobs",
+      "logs_url": "https://api.github.com/repos/luinbiotech-lab/motus-intelligence/actions/runs/40863588259/logs",
+      "workflow_id": 392558740
+    }
+  ],
+  "publication": {
+    "run": 40861970832,
+    "gate": {
+      "state": "AUTO_PUBLISH_READY",
+      "reasons": [],
+      "approval": "AUTO_POLICY_APPROVAL",
+      "checkedAt": "2026-10-29T11:00:57.204Z"
+    },
+    "searchRegistration": {
+      "publicationId": "motus-live-2026-10-28:us",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/10/s-500.html",
+      "registeredAt": "2026-10-29T20:01:00+09:00",
+      "trigger": "PUBLICATION_PUBLISHED",
+      "googleInspectionState": "QUEUED",
+      "naverDiscoveryState": "PENDING",
+      "visibility": {
+        "publicationId": "motus-live-2026-10-28:us",
+        "publicPostUrl": "https://motusnova.blogspot.com/2026/10/s-500.html",
+        "google": {
+          "discovered": null,
+          "indexed": null,
+          "lastCrawl": null,
+          "coverageState": null,
+          "inspectionAt": null
+        },
+        "naver": {
+          "discovered": null,
+          "indexed": null,
+          "collectionState": null,
+          "inspectionAt": null
+        },
+        "sitemapIncluded": null,
+        "rssIncluded": null
+      }
+    },
+    "libraryRegistration": {
+      "idempotencyKey": "library:motus-live-2026-10-28:us|https://motusnova.blogspot.com/2026/10/s-500.html"
+    },
+    "weeklyFeed": {
+      "idempotencyKey": "weekly:motus-live-2026-10-28:us"
+    },
+    "pdfCandidate": {
+      "idempotencyKey": "pdf:motus-live-2026-10-28:us:sha256:ad00649eec53dfd217986828af99cff4d4b9aba09ca2d1e5390221b6b7719ba6",
+      "visibility": "PRIVATE"
+    },
+    "audit": [
+      {
+        "at": "2026-10-29T11:00:57.204Z",
+        "event": "AUTO_PUBLISH_STATIC_GATE",
+        "detail": "AUTO_PUBLISH_READY"
+      },
+      {
+        "at": "2026-10-29T11:00:57.204Z",
+        "event": "REMOTE_DUPLICATE_CHECK",
+        "detail": "PASS"
+      },
+      {
+        "at": "2026-10-29T11:00:57.204Z",
+        "event": "FINAL_REMOTE_DUPLICATE_CHECK",
+        "detail": "PASS"
+      },
+      {
+        "at": "2026-10-29T20:01:00+09:00",
+        "event": "PUBLISHED",
+        "detail": "AUTO_POLICY_APPROVAL"
+      }
+    ],
+    "state": "PUBLISHED",
+    "draftPostId": "6139790651642929216",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/s-500.html",
+    "publishedAt": "2026-10-29T20:01:00+09:00",
+    "insertCallCount": 1,
+    "publishCallCount": 1,
+    "error": null
+  },
+  "koreaCorrection": {
+    "previewRun": 40862798214,
+    "applyRun": 40862953815,
+    "target": "korea",
+    "id": "310165270483019628",
+    "url": "https://motusnova.blogspot.com/2026/10/1q-sk.html",
+    "state": "EXISTING_CONTENT_CORRECTION_VERIFIED",
+    "beforeHash": "5c3cd5741a70a112470c2fcef34f21853d2d8058b3855a3a1ea3e48a5489a5ab",
+    "afterHash": "a4c8e335a6c8b8bb655b625cd7c5e7c63f1a41cbaa676ca62a594f3f0358c4c5",
+    "originalPublished": "2026-10-28T21:51:35+09:00",
+    "newPublications": 0,
+    "patchCallCount": 1,
+    "verifiedAt": "2026-10-29T11:07:48.710Z"
+  },
+  "usCorrection": {
+    "previewRun": 40863044632,
+    "applyRun": 40863248268,
+    "target": "us",
+    "id": "6139790651642929216",
+    "url": "https://motusnova.blogspot.com/2026/10/s-500.html",
+    "state": "EXISTING_CONTENT_CORRECTION_VERIFIED",
+    "beforeHash": "08794a3bb49816337eae16be0749efb03665bd02b968435bcbd47e1fd6e1ca38",
+    "afterHash": "73bd64dbbe1683e8e22f7b04ef8b7353fcc1d4066d0990db647e1dfc678f1f3f",
+    "originalPublished": "2026-10-29T20:01:00+09:00",
+    "newPublications": 0,
+    "patchCallCount": 1,
+    "verifiedAt": "2026-10-29T11:10:07.882Z"
+  },
+  "correctedSearchCheck": {
+    "run": 40863732232,
+    "collection": "LIVE_READY",
+    "verification": "VERIFIED",
+    "execution": "SIMULATED",
+    "publishCallCount": 0,
+    "gate": "HOLD",
+    "gateReasons": [
+      "duplicate state uncertain"
+    ],
+    "searchContext": {
+      "collectedAt": "2026-10-29T11:13:55.047Z",
+      "signalDate": "2026-10-28",
+      "provider": "NAVER_DATALAB",
+      "freshness": "PREVIOUS_DAY_NAVER_SIGNAL",
+      "fallbackReason": null,
+      "warnings": [],
+      "orderedTopicIds": [
+        "us:index:sp500",
+        "us:index:nasdaq",
+        "us:10y",
+        "us:index:dow-jones"
+      ],
+      "selectedSecondaryTopicId": "us:index:nasdaq",
+      "factsChanged": false,
+      "gateOverride": false,
+      "rankingEvidence": {
+        "scope": "VERIFIED_CANDIDATE_COMPARISON",
+        "metric": "NAVER_RELATIVE_INTEREST",
+        "selectedTopicId": "us:index:nasdaq",
+        "ranking": [
+          {
+            "rank": 1,
+            "topicId": "us:index:nasdaq",
+            "query": "나스닥",
+            "terms": [
+              "나스닥",
+              "Nasdaq"
+            ],
+            "ratio": 100,
+            "signalDate": "2026-10-28",
+            "signalId": "demand:e6fdc604902d169a1a4f",
+            "sourceUrl": "https://naverapihub.apigw.ntruss.com/search-trend/v1/search",
+            "claimRefs": [
+              "https://fred.stlouisfed.org/graph/fredgraph.csv?id=NASDAQCOM&cosd=2019-03-10"
+            ],
+            "sourceRefs": [
+              "https://fred.stlouisfed.org/graph/fredgraph.csv?id=NASDAQCOM&cosd=2019-03-10"
+            ]
+          },
+          {
+            "rank": 2,
+            "topicId": "us:10y",
+            "query": "미국 10년물",
+            "terms": [
+              "미국 10년물",
+              "미국 국채금리",
+              "10년물 국채금리"
+            ],
+            "ratio": 17.35838,
+            "signalDate": "2026-10-28",
+            "signalId": "demand:2c2fa56bde77baa91067",
+            "sourceUrl": "https://naverapihub.apigw.ntruss.com/search-trend/v1/search",
+            "claimRefs": [
+              "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2025-12-23"
+            ],
+            "sourceRefs": [
+              "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2025-12-23"
+            ]
+          },
+          {
+            "rank": 3,
+            "topicId": "us:index:sp500",
+            "query": "S&P 500",
+            "terms": [
+              "S&P 500"
+            ],
+            "ratio": 16.86494,
+            "signalDate": "2026-10-28",
+            "signalId": "demand:46ec563890c4e6976384",
+            "sourceUrl": "https://naverapihub.apigw.ntruss.com/search-trend/v1/search",
+            "claimRefs": [
+              "https://fred.stlouisfed.org/graph/fredgraph.csv?id=SP500&cosd=2019-03-10"
+            ],
+            "sourceRefs": [
+              "https://fred.stlouisfed.org/graph/fredgraph.csv?id=SP500&cosd=2019-03-10"
+            ]
+          },
+          {
+            "rank": 4,
+            "topicId": "us:index:dow-jones",
+            "query": "다우존스",
+            "terms": [
+              "다우존스",
+              "Dow Jones"
+            ],
+            "ratio": 13.92625,
+            "signalDate": "2026-10-28",
+            "signalId": "demand:3727c4b065a703df1a08",
+            "sourceUrl": "https://naverapihub.apigw.ntruss.com/search-trend/v1/search",
+            "claimRefs": [
+              "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-10"
+            ],
+            "sourceRefs": [
+              "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-10"
+            ]
+          }
+        ]
+      },
+      "articleFingerprint": "sha256:9795c6fcc2bf6a866948fa450a2742bd66ddb7e8cbd5b1d11cb0f4cd2bc38030"
+    }
+  },
+  "publicReadback": {
+    "us": {
+      "brokerAnalysis": true,
+      "sourceAuthorDate": true,
+      "svgCharts": 3,
+      "internalSearchNoteAbsent": true
+    },
+    "korea": {
+      "hanaAnalysis": true,
+      "authorDate": true,
+      "leveragedProductsAbsent": true,
+      "knownUnits": true,
+      "unknownFlowAmountsExcluded": true,
+      "originalPostAndDateRetained": true
+    }
+  },
+  "remaining": [
+    "PR 28 has not been merged; schedules use main.",
+    "Only reviewed MS/Hana passages are supported; other or stale passages HOLD.",
+    "Korea historical post has no established original search-ranking selection history.",
+    "Blogger editor account switch returned a generic error; no credentials/account changes.",
+    "Claude independent review not performed."
+  ]
+}

@@ -8,6 +8,8 @@ import {candidateFromVerification,type ProductionVerificationArtifact} from './p
 import {GoogleBloggerApiAdapter,type BloggerPublishingConfig} from './services/blogger.js';
 import {acquirePublicationLock,appendPublishLedger,findPublishedSameSession,persistedPublicationDecision,publicationIdentity,readPublishLedger} from './production/publication-operation.js';
 
+import {evaluatePublicationDemand} from './search/publication-demand.js';
+
 const args=process.argv.slice(2);const value=(flag:string)=>{const index=args.indexOf(flag);return index>=0?args[index+1]:undefined};
 const date=value('--date')??'',name=value('--category')??'';
 if(!/^\d{4}-\d{2}-\d{2}$/.test(date)||!['ai','us','korea'].includes(name))throw new Error('--date YYYY-MM-DD and --category ai|us|korea required');
@@ -20,6 +22,10 @@ if(!existsSync(sourceAuditPath))await finish({state:'HOLD',reason:'source audit 
 const sourceAudit=JSON.parse(await readFile(sourceAuditPath,'utf8')) as {entries?:unknown[]},sourceFingerprint=hash(sourceAudit.entries??[]);
 if(sourceFingerprint!==verification.sourceAuditFingerprint)await finish({state:'HOLD',reason:'source audit fingerprint mismatch',publishCallCount:0});
 if(verification.crossVerificationFingerprint){if(!existsSync(crossPath))await finish({state:'HOLD',reason:'cross-verification artifact missing',publishCallCount:0});const cross=JSON.parse(await readFile(crossPath,'utf8'));if(hash(cross)!==verification.crossVerificationFingerprint)await finish({state:'HOLD',reason:'cross-verification fingerprint mismatch',publishCallCount:0});}
+const demandPath=join(root,'search-intelligence.json');let demandArtifact:unknown=null;try{demandArtifact=JSON.parse(await readFile(demandPath,'utf8'))}catch{}
+const demand=evaluatePublicationDemand(demandArtifact,unit.render.html,date,new Date().toISOString());
+if(!demand.pass)await finish({state:'HOLD',reasonCode:'SEARCH_RANKING_EVIDENCE_REQUIRED',reasonCodes:demand.reasons,reason:demand.reasons.join('; '),insertCallCount:0,publishCallCount:0});
+if((demandArtifact as {articleFingerprint?:string}).articleFingerprint!==verification.articleFingerprint)await finish({state:'HOLD',reason:'search ranking evidence article fingerprint mismatch',insertCallCount:0,publishCallCount:0});
 const now=new Date().toISOString(),candidate=candidateFromVerification(unit,verification,now),identity=publicationIdentity(date,unit.category);
 const execute=args.includes('--execute');
 if(!execute||process.env.MOTUS_LIVE_PUBLISH_ENABLED!=='true'){const gate=evaluateAutoPublishGate(candidate);await finish({state:gate.state,gate,publishCallCount:0,execution:'SIMULATED',commerce:{enabled:false}});}

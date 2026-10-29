@@ -1,3 +1,4 @@
+import {brokerAnalysisReasons} from '../operations/broker-analysis.js';
 import {createHash} from 'node:crypto';
 import type {SplitPublicationUnit} from '../intelligence/split-daily-production.js';import type {BloggerPostReadback} from '../services/blogger.js';import {isPublicBloggerPostUrl} from '../services/blogger.js';import {createSearchTrackingRegistration} from '../search/measurement.js';import {evaluateEditorialQuality} from './editorial-quality.js';
 export type AutoPublishGateState='AUTO_PUBLISH_READY'|'HOLD'|'FAILED';
@@ -9,7 +10,7 @@ export const publicationFingerprint=(html:string)=>'sha256:'+createHash('sha256'
 export function evaluateAutoPublishGate(c:AutoPublishCandidate,at=new Date().toISOString()):AutoPublishGate {
  const u=c.unit,h=u.render.html;
  const quality=evaluateEditorialQuality(u.title,h);
- const r:string[]=[];
+ const r:string[]=brokerAnalysisReasons(u.category,'brokerAnalysis' in u.viewModel?u.viewModel.brokerAnalysis:undefined,h,at);
  if(c.verification!=='VERIFIED')r.push('verification is not VERIFIED');if(c.unresolvedConflicts.length)r.push('unresolved verification conflict');if(c.duplicateUncertainty)r.push('duplicate state uncertain');if(!c.provenancePass)r.push('provenance validation failed');if(!c.sourceLinksPass||!/<a\b[^>]*href=["']https:\/\//i.test(h))r.push('source link validation failed');if(c.commerceEnabled)r.push('commerce must be disabled');if(c.publicationFingerprint!==publicationFingerprint(h)||c.publicationFingerprint!=='sha256:'+u.contentFingerprint)r.push('publication fingerprint mismatch');if(!/max-width\s*:\s*100%/i.test(h)||!/(overflow-x\s*:\s*hidden|word-break\s*:\s*keep-all)/i.test(h))r.push('mobile-safe HTML missing');if(/(eventId|themeId|companyId|publicationId|verificationStatus|confidenceScore|claimId|reportId)/i.test(h))r.push('internal token leakage');if(/(fixture|placeholder|sample marker)/i.test(h))r.push('non-production content marker');if(!quality.pass)r.push(...quality.reasons);if(u.readiness!=='READY')r.push('publication unit is not ready');
  return {state:r.length?'HOLD':'AUTO_PUBLISH_READY',reasons:[...new Set(r)],approval:r.length?null:'AUTO_POLICY_APPROVAL',checkedAt:at};
 }
