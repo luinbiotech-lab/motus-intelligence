@@ -23,7 +23,7 @@ test('US narrative states verified facts and keeps interpretation separate',()=>
   assert.match(sameDay.facts[0]!,/^S&P 500은 127\.00으로 마감해 전 거래일보다 0\.78% 하락했다\./);
   assert.match(sameDay.facts[3]!,/^미국 10년물 국채금리는 4\.80%로 직전 관측치보다 17bp 내렸다\./);
   assert.ok(sameDay.facts.every(fact=>!fact.startsWith('MOTUS')));
-  assert.match(sameDay.analysis[0]!,/주요 지수가 함께 내린/);
+  assert.match(sameDay.analysis[0]!,/주요 지수가 함께 내렸지만, 지수 등락만으로/);
   assert.ok(sameDay.analysis.some(line=>/나스닥 종합지수가 다우존스 산업평균지수보다 [\d.]+%p 강했다/.test(line)));
   assert.ok(sameDay.analysis.some(line=>line.includes('장기금리')));
   const staleRate=buildUSMarketNarrative(series,{label:'10Y',latest:4.8,previous:4.97,date:'2026-08-29',sessionDate:'2026-08-30'});

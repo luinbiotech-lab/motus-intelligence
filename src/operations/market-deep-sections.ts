@@ -68,7 +68,7 @@ function causeParagraphs(briefs:BrokerBrief[],region:'US'|'KOREA'):{paragraphs:D
   const paragraphs:DeepParagraph[]=[];const summary=consensus(drivers,all);if(summary)paragraphs.push({text:'MOTUS 정리: '+summary});
   for(const pick of drivers)paragraphs.push({text:`${subject(pick.brief.report)} ${koreanDateLabel(pick.brief.report.date)} 아침 리포트 「${pick.brief.report.title}」에서 ${said([quote(pick.text)])} 진단했다.`,source:reportSource(pick.brief.report)});
   for(const pick of cautions)paragraphs.push({text:`반대 시각도 있다. ${subject(pick.brief.report)} ${said([quote(pick.text)])} 짚었다.`,source:reportSource(pick.brief.report)});
-  return {paragraphs,first:drivers[0]??null};
+  return {paragraphs,first:[...drivers].sort((a,b)=>marketScore(b.text)-marketScore(a.text))[0]??null};
 }
 function riskParagraphs(briefs:BrokerBrief[],region:'US'|'KOREA',checkpoint:string):DeepParagraph[]{
   const events=[...new Map(briefs.flatMap(brief=>(brief.events??[]).filter(item=>item.region===region).map(item=>[item.text,{item,brief}]))).values()].slice(0,4);
