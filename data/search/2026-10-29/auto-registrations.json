@@ -25,5 +25,32 @@
       "sitemapIncluded": null,
       "rssIncluded": null
     }
+  },
+  {
+    "publicationId": "motus-live-2026-10-28:us",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/s-500.html",
+    "registeredAt": "2026-10-29T20:01:00+09:00",
+    "trigger": "PUBLICATION_PUBLISHED",
+    "googleInspectionState": "QUEUED",
+    "naverDiscoveryState": "PENDING",
+    "visibility": {
+      "publicationId": "motus-live-2026-10-28:us",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/10/s-500.html",
+      "google": {
+        "discovered": null,
+        "indexed": null,
+        "lastCrawl": null,
+        "coverageState": null,
+        "inspectionAt": null
+      },
+      "naver": {
+        "discovered": null,
+        "indexed": null,
+        "collectionState": null,
+        "inspectionAt": null
+      },
+      "sitemapIncluded": null,
+      "rssIncluded": null
+    }
   }
 ]

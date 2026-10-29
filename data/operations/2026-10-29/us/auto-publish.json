@@ -1,16 +1,74 @@
 {
-  "state": "HOLD",
   "gate": {
-    "state": "HOLD",
-    "reasons": [
-      "duplicate state uncertain"
-    ],
-    "approval": null,
-    "checkedAt": "2026-10-29T08:23:07.799Z"
+    "state": "AUTO_PUBLISH_READY",
+    "reasons": [],
+    "approval": "AUTO_POLICY_APPROVAL",
+    "checkedAt": "2026-10-29T11:00:57.204Z"
   },
-  "publishCallCount": 0,
-  "execution": "SIMULATED",
-  "commerce": {
-    "enabled": false
-  }
+  "searchRegistration": {
+    "publicationId": "motus-live-2026-10-28:us",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/s-500.html",
+    "registeredAt": "2026-10-29T20:01:00+09:00",
+    "trigger": "PUBLICATION_PUBLISHED",
+    "googleInspectionState": "QUEUED",
+    "naverDiscoveryState": "PENDING",
+    "visibility": {
+      "publicationId": "motus-live-2026-10-28:us",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/10/s-500.html",
+      "google": {
+        "discovered": null,
+        "indexed": null,
+        "lastCrawl": null,
+        "coverageState": null,
+        "inspectionAt": null
+      },
+      "naver": {
+        "discovered": null,
+        "indexed": null,
+        "collectionState": null,
+        "inspectionAt": null
+      },
+      "sitemapIncluded": null,
+      "rssIncluded": null
+    }
+  },
+  "libraryRegistration": {
+    "idempotencyKey": "library:motus-live-2026-10-28:us|https://motusnova.blogspot.com/2026/10/s-500.html"
+  },
+  "weeklyFeed": {
+    "idempotencyKey": "weekly:motus-live-2026-10-28:us"
+  },
+  "pdfCandidate": {
+    "idempotencyKey": "pdf:motus-live-2026-10-28:us:sha256:ad00649eec53dfd217986828af99cff4d4b9aba09ca2d1e5390221b6b7719ba6",
+    "visibility": "PRIVATE"
+  },
+  "audit": [
+    {
+      "at": "2026-10-29T11:00:57.204Z",
+      "event": "AUTO_PUBLISH_STATIC_GATE",
+      "detail": "AUTO_PUBLISH_READY"
+    },
+    {
+      "at": "2026-10-29T11:00:57.204Z",
+      "event": "REMOTE_DUPLICATE_CHECK",
+      "detail": "PASS"
+    },
+    {
+      "at": "2026-10-29T11:00:57.204Z",
+      "event": "FINAL_REMOTE_DUPLICATE_CHECK",
+      "detail": "PASS"
+    },
+    {
+      "at": "2026-10-29T20:01:00+09:00",
+      "event": "PUBLISHED",
+      "detail": "AUTO_POLICY_APPROVAL"
+    }
+  ],
+  "state": "PUBLISHED",
+  "draftPostId": "6139790651642929216",
+  "publicPostUrl": "https://motusnova.blogspot.com/2026/10/s-500.html",
+  "publishedAt": "2026-10-29T20:01:00+09:00",
+  "insertCallCount": 1,
+  "publishCallCount": 1,
+  "error": null
 }

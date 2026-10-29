@@ -1,5 +1,5 @@
 {
-  "collectedAt": "2026-10-29T08:23:01.762Z",
+  "collectedAt": "2026-10-29T11:00:47.030Z",
   "signalDate": "2026-10-28",
   "provider": "NAVER_DATALAB",
   "freshness": "PREVIOUS_DAY_NAVER_SIGNAL",
@@ -105,5 +105,5 @@
       }
     ]
   },
-  "articleFingerprint": "sha256:90c26d61110884cee7eb1d42d1a53d66f353d96e8e6d28672688ed6bd146497e"
+  "articleFingerprint": "sha256:ad00649eec53dfd217986828af99cff4d4b9aba09ca2d1e5390221b6b7719ba6"
 }

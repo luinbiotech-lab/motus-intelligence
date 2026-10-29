@@ -14,10 +14,10 @@
   "leakagePass": true,
   "duplicateCheck": "PENDING_REMOTE",
   "duplicateUncertainty": true,
-  "articleFingerprint": "sha256:90c26d61110884cee7eb1d42d1a53d66f353d96e8e6d28672688ed6bd146497e",
+  "articleFingerprint": "sha256:ad00649eec53dfd217986828af99cff4d4b9aba09ca2d1e5390221b6b7719ba6",
   "commerceEnabled": false,
-  "verifiedAt": "2026-10-29T08:23:01.762Z",
-  "expiresAt": "2026-10-29T09:53:01.762Z",
+  "verifiedAt": "2026-10-29T11:00:47.030Z",
+  "expiresAt": "2026-10-29T12:30:47.030Z",
   "sourceAuditIds": [
     "broker-analysis:index",
     "broker-analysis:passage",
@@ -32,14 +32,14 @@
     "market-research:CNBC Investing",
     "market-research:Goldman Sachs",
     "market-research:article:https://www.bloomberg.com/news/articles/2026-10-28/stock-market-today-dow-s-p-live-updates",
-    "market-research:article:https://www.bloomberg.com/news/audio/2026-10-29/what-wall-street-really-thanks-about-the-ai-trade-podcast",
+    "market-research:article:https://www.bloomberg.com/news/newsletters/2026-10-29/investors-may-have-bought-all-the-ai-bonds-they-can-handle",
     "market-research:article:https://www.cnbc.com/2026/10/26/prediction-markets-think-anthropic-ipo-near-certain-in-2026.html",
     "market-research:article:https://www.cnbc.com/2026/10/27/robinhood-hood-q3-2026-earnings.html",
     "market-research:article:https://www.goldmansachs.com/insights/articles/are-bonds-becoming-a-better-investment-for-portfolios",
     "market-research:article:https://www.goldmansachs.com/insights/articles/will-30-year-us-treasury-yields-climb-higher"
   ],
-  "brokerAnalysisFingerprint": "sha256:c9842ed70bc44b0edadf9e56156b7d7c7fdcdfc9d3d50281d47eb6d5c3d3d263",
-  "sourceAuditFingerprint": "sha256:72201873129409db49d8da3fc1f1951badd539f87b15ff604d193583b17499d8",
+  "brokerAnalysisFingerprint": "sha256:80df20bd267e78530f9fd428c686fa8745ce6a997acb9c7ab265406cc4c07f6c",
+  "sourceAuditFingerprint": "sha256:c2f24c4c4b0174b2e610ec4227eb5f54181c703944911b605f2d9408cb9abe41",
   "crossVerificationFingerprint": null,
   "crossVerification": null
 }
