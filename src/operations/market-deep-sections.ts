@@ -6,6 +6,7 @@
 import {josa} from './ai-generic-synthesis.js';
 import {analystLabel,koreanDateLabel,type BrokerBrief,type BrokerDigest,type BrokerReport,type BrokerResearchBundle} from './broker-briefs.js';
 import {displayName,moveWord,signedPct,absPct,type KoreaSearchStock,type SectorMove,type USAttentionStock} from './market-attention.js';
+import type {WireReport} from './market-wire.js';
 
 export interface DeepParagraph {text:string;source?:{label:string;url:string}}
 export interface DeepSection {key:string;title:string;intro?:string;placement?:'early'|'late'|'risks';paragraphs:DeepParagraph[]}
@@ -76,6 +77,19 @@ function causeParagraphs(briefs:BrokerBrief[],region:'US'|'KOREA'):{paragraphs:D
   for(const pick of cautions)paragraphs.push({text:`경계 요인도 제시됐다. ${subject(pick.brief.report)} ${said([quote(pick.text)])} 짚었다.`,source:reportSource(pick.brief.report)});
   return {paragraphs,first:[...drivers].sort((a,b)=>marketScore(b.text)-marketScore(a.text))[0]??null};
 }
+const kstDay=(iso:string)=>new Date(Date.parse(iso)+9*3600000).toISOString().slice(0,10);
+/** Wire edition tags such as (종합) are not part of what the report says. */
+const wireHeadline=(title:string)=>title.replace(/\s*\((?:종합|\d+보)[^)]*\)\s*$/,'').trim();
+const wireSource=(report:WireReport)=>({label:`${report.publisher} 「${report.title}」 (${koreanDateLabel(kstDay(report.publishedAt))})`,url:report.url});
+/** Fallback core commentary: news-wire close reports, quoted with publisher and date, used only when no broker brief explains the session. */
+function wireCause(reports:WireReport[],key:string,sources:DeepComposition['sources']):{section:DeepSection;lead:string}|null{
+  if(!reports.length)return null;
+  const paragraphs:DeepParagraph[]=reports.map(report=>({text:report.sentence?`${josa(report.publisher,'은','는')} ${koreanDateLabel(kstDay(report.publishedAt))} 마감 기사 「${report.title}」에서 ${said([quote(report.sentence)])} 전했다.`:`${josa(report.publisher,'은','는')} ${koreanDateLabel(kstDay(report.publishedAt))} 마감 기사에서 ${said([quote(wireHeadline(report.title))])} 전했다.`,source:wireSource(report)}));
+  for(const report of reports)sources.push({label:`${report.publisher} 「${report.title}」 (${kstDay(report.publishedAt)})`,url:report.url,publisher:report.publisher,date:kstDay(report.publishedAt)});
+  const first=reports[0]!;
+  return {section:{key,placement:'early',title:'상승·하락 요인',intro:'증권사 아침 리포트 게시 전이어서 통신사 마감 기사를 인용했다.',paragraphs},lead:`${josa(first.publisher,'은','는')} 이날 장을 ${said([quote(first.sentence??wireHeadline(first.title))])} 전했다.`};
+}
+
 function riskParagraphs(briefs:BrokerBrief[],region:'US'|'KOREA',checkpoint:string):DeepParagraph[]{
   const events=[...new Map(briefs.flatMap(brief=>(brief.events??[]).filter(item=>item.region===region).map(item=>[item.text,{item,brief}]))).values()].slice(0,4);
   const paragraphs:DeepParagraph[]=events.map(({item,brief})=>({text:`예정 일정(${brief.report.broker} 집계): ${item.text}`,source:reportSource(brief.report)}));
@@ -83,14 +97,15 @@ function riskParagraphs(briefs:BrokerBrief[],region:'US'|'KOREA',checkpoint:stri
   return paragraphs;
 }
 
-export function composeUSDeepSections(input:{bundle:BrokerResearchBundle|null;stocks:USAttentionStock[];sectors:SectorMove[];checkpoint?:string}):DeepComposition {
+export function composeUSDeepSections(input:{bundle:BrokerResearchBundle|null;stocks:USAttentionStock[];sectors:SectorMove[];checkpoint?:string;wire?:WireReport[]}):DeepComposition {
   const sections:DeepSection[]=[],sources:DeepComposition['sources']=[],leadAddition:string[]=[];
   const briefs=input.bundle?.briefs??[];
   const cause=causeParagraphs(briefs,'US');
+  const wire=cause.first?null:wireCause(input.wire??[],'us-causes',sources);
   if(cause.first){
     sections.push({key:'us-causes',placement:'early',title:'상승·하락 요인과 반대 시각',paragraphs:cause.paragraphs});
     leadAddition.push(`${subject(cause.first.brief.report)} 이날 장을 ${said([quote(cause.first.text)])} 요약했다.`);
-  }
+  }else if(wire){sections.push(wire.section);leadAddition.push(wire.lead)}
   const ranked=[...input.stocks].sort((a,b)=>(a.trendingRank??99)-(b.trendingRank??99)||(a.mostActiveRank??99)-(b.mostActiveRank??99)).slice(0,5);
   let titleFocus:string|null=null;const market:DeepParagraph[]=[];
   if(input.sectors.length>=6){
@@ -120,17 +135,18 @@ export function composeUSDeepSections(input:{bundle:BrokerResearchBundle|null;st
   if(input.checkpoint&&sections.length)sections.push({key:'us-risks',placement:'risks',title:'위험 요인과 다음 확인 지표',paragraphs:riskParagraphs(briefs,'US',input.checkpoint)});
   const used=new Set(sections.flatMap(section=>section.paragraphs.map(p=>p.source?.url).filter(Boolean)));
   for(const report of [...briefs.map(item=>item.report),...economy])if(used.has(report.url))sources.push(sourceEntry(report));
-  return {sections,leadAddition,titleFocus,sources:[...new Map(sources.map(item=>[item.url,item])).values()],hasCoreCommentary:Boolean(cause.first)};
+  return {sections,leadAddition,titleFocus,sources:[...new Map(sources.map(item=>[item.url,item])).values()],hasCoreCommentary:Boolean(cause.first||wire)};
 }
 
-export function composeKoreaDeepSections(input:{bundle:BrokerResearchBundle|null;searchTop:KoreaSearchStock[];checkpoint?:string}):DeepComposition {
+export function composeKoreaDeepSections(input:{bundle:BrokerResearchBundle|null;searchTop:KoreaSearchStock[];checkpoint?:string;wire?:WireReport[]}):DeepComposition {
   const sections:DeepSection[]=[],sources:DeepComposition['sources']=[],leadAddition:string[]=[];
   const briefs=input.bundle?.briefs??[],companyReports=input.bundle?.company??[];
   const cause=causeParagraphs(briefs,'KOREA');
+  const wire=cause.first?null:wireCause(input.wire??[],'korea-causes',sources);
   if(cause.first){
     sections.push({key:'korea-causes',placement:'early',title:'상승·하락 요인과 반대 시각',paragraphs:cause.paragraphs});
     leadAddition.push(`${subject(cause.first.brief.report)} 전일 장을 ${said([quote(cause.first.text)])} 진단했다.`);
-  }
+  }else if(wire){sections.push(wire.section);leadAddition.push(wire.lead.replace('이날 장을','전일 장을'))}
   const digests=briefs.flatMap(brief=>brief.digests.map(item=>({item,brief})));
   const companyDigest=(name:string)=>digests.find(({item})=>item.heading.replace(/\s+/g,'').includes(name.replace(/\s+/g,'')));
   let titleFocus:string|null=null;
@@ -153,7 +169,7 @@ export function composeKoreaDeepSections(input:{bundle:BrokerResearchBundle|null
   if(input.checkpoint&&sections.length)sections.push({key:'korea-risks',placement:'risks',title:'위험 요인과 다음 확인 지표',paragraphs:riskParagraphs(briefs,'KOREA',input.checkpoint)});
   const used=new Set(sections.flatMap(section=>section.paragraphs.map(p=>p.source?.url).filter(Boolean)));
   for(const report of [...briefs.map(item=>item.report),...companyReports,...industry])if(used.has(report.url))sources.push(sourceEntry(report));
-  return {sections,leadAddition,titleFocus,sources:[...new Map(sources.map(item=>[item.url,item])).values()],hasCoreCommentary:Boolean(cause.first)};
+  return {sections,leadAddition,titleFocus,sources:[...new Map(sources.map(item=>[item.url,item])).values()],hasCoreCommentary:Boolean(cause.first||wire)};
 }
 
 const AI_WORDS=/AI|인공지능|반도체|HBM|데이터센터|GPU|엔비디아|LLM|클라우드|전력기기|인터커넥트|로봇|휴머노이드|파운드리|메모리|서버|MLCC|FC ?BGA/;
