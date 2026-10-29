@@ -39,6 +39,7 @@
     "motus:publish": "npm run build && node dist/src/motus-publish-cli.js",
     "motus:production-summary": "npm run build && node dist/src/production-summary-cli.js",
     "motus:run-record": "node dist/src/run-record-cli.js",
+    "motus:record-consistency": "node dist/src/record-consistency-cli.js",
     "search:intelligence:live": "npm run build && node dist/src/search-intelligence-cli.js --live"
   },
   "devDependencies": {
