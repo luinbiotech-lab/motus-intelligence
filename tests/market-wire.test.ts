@@ -107,4 +107,7 @@ test('wire paragraphs link as articles; Latin names take the particle by sound',
   assert.equal(josa('Intel','은','는'),'Intel은');
   assert.equal(josa('Microsoft','은','는'),'Microsoft는');
   assert.equal(josa('삼성전자(005930)','은','는'),'삼성전자(005930)는');
+  assert.equal(josa('Samsung','은','는'),'Samsung은','-ng is read with a final consonant (삼성)');
+  assert.equal(josa('Boeing(BA)','이','가'),'Boeing(BA)이');
+  assert.equal(josa('AMD','은','는'),'AMD는');assert.equal(josa('RTX Spark','은','는'),'RTX Spark는');
 });
