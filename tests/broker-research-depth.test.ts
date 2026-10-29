@@ -206,3 +206,18 @@ test('shared themes are named neutrally so concerns are never reported as optimi
   const text=us.sections.flatMap(section=>section.paragraphs.map(p=>p.text)).join(' ');
   assert.match(text,/AI 투자\(A증권·B증권\)/);assert.doesNotMatch(text,/기대/);
 });
+
+test('an unmarked region headline that continues on the next line is not quoted',()=>{
+  const {statements}=extractBriefContent(['▶ 미국증시','미국 증시는 대형 기술주 실적 기대에 힘입어 상승','했으나 장 후반 매물이 출회되며 하락 마감함'].join('\n'));
+  assert.ok(!statements.some(item=>item.text.includes('힘입어 상승')));
+});
+
+test('a stock with a missing session change is skipped, never shown as 0%',async()=>{
+  const fetcher=(async(input:RequestInfo|URL)=>{const url=String(input);
+    if(url.includes('searchTop'))return Response.json({stocks:[{stockName:'삼성전자',itemCode:'005930',stockEndType:'stock'}]});
+    if(url.includes('/stock/005930/price'))return Response.json([{localTradedAt:'2026-10-28',closePrice:'245,000',fluctuationsRatio:''}]);
+    return new Response('x',{status:404});
+  }) as typeof fetch;
+  const result=await collectKoreaSearchTop('2026-10-28',fetcher);
+  assert.equal(result.stocks.length,0);assert.ok(result.audit.some(item=>item.error==='ATTENTION_SESSION_ROW_MISSING'));
+});

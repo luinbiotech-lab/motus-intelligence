@@ -76,6 +76,8 @@ export function extractBriefContent(text:string):{statements:BrokerStatement[];d
   const statements:BrokerStatement[]=[],digests:BrokerDigest[]=[],events:BrokerEvent[]=[];let eventMode=false;
   let region:'US'|'KOREA'|'OTHER'|null=null,pendingHeadline:'US'|'KOREA'|null=null,digest:BrokerDigest|null=null;
   const flush=()=>{if(digest&&digest.bullets.length)digests.push(digest);digest=null};
+  // An unmarked Korean line right after a quoted line may be its continuation; such a line is never quoted.
+  const continues=(next:string)=>Boolean(next)&&!MARKER.test(next)&&!ANALYST_LINE.test(next)&&!CATEGORY_LINE.test(next)&&!EVENT_HEADING.test(next)&&!/^(?:▶|■|\[)/.test(next)&&hangul(next)>=2&&!REGION_HEADING.some(([pattern])=>pattern.test(next));
   const previousNonEmpty=(index:number)=>{for(let j=index-1;j>=0;j--)if(lines[j])return {line:lines[j]!,gap:j<index-1};return {line:'',gap:true}};
   for(let i=0;i<lines.length;i++){
     const line=lines[i]!;if(!line){if(eventMode&&!(lines[i+1]??'').match(MARKER))eventMode=false;continue}
@@ -93,7 +95,7 @@ export function extractBriefContent(text:string):{statements:BrokerStatement[];d
       if(eventMode){const item=body.replace(/^(?:미|美)\s*-\s*/,'미국: ').replace(/^(?:한|국내)\s*-\s*/,'국내: ');if(item.length>=6&&item.length<=120&&hangul(item)>=2)events.push({region:/^미국:|美|미국|FOMC|연준/.test(item)?'US':'KOREA',text:item});continue}
       // A following unmarked prose line means the printed bullet wrapped; skip it rather than guess the join.
       // Any following unmarked Korean line may be the rest of this bullet; a plausible-looking ending never overrides that.
-      const wrapped=Boolean(next)&&!MARKER.test(next)&&!ANALYST_LINE.test(next)&&!CATEGORY_LINE.test(next)&&!EVENT_HEADING.test(next)&&!/^(?:▶|■|\[)/.test(next)&&hangul(next)>=2&&!REGION_HEADING.some(([pattern])=>pattern.test(next));
+      const wrapped=continues(next);
       if(wrapped||!quotable(body)||region==='OTHER')continue;
       if(digest)digest.bullets.push(body);
       // Bullets inside a titled report digest count as market commentary only when the report itself is a market/rates piece.
@@ -102,7 +104,7 @@ export function extractBriefContent(text:string):{statements:BrokerStatement[];d
       if(classified)statements.push({region:classified,text:body,heading:digest?.heading??null});
       continue;
     }
-    if(pendingHeadline&&quotable(line)&&/(?:마감|상승|하락|강세|약세|반등|급등|급락|혼조|보합)$/.test(line)){statements.push({region:pendingHeadline,text:line,heading:null});pendingHeadline=null;continue}
+    if(pendingHeadline&&quotable(line)&&!continues(lines[i+1]??'')&&/(?:마감|상승|하락|강세|약세|반등|급등|급락|혼조|보합)$/.test(line)){statements.push({region:pendingHeadline,text:line,heading:null});pendingHeadline=null;continue}
     // A digest heading is a short title line that starts a block (after a blank, category, analyst or another block)
     // and is immediately followed by bullets; wrapped sentence fragments never qualify.
     const prior=previousNonEmpty(i),next=lines[i+1]??'';
