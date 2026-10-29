@@ -1,5 +1,5 @@
 {
-  "collectedAt": "2026-10-29T15:58:00.277Z",
+  "collectedAt": "2026-10-29T16:01:52.920Z",
   "signalDate": null,
   "provider": null,
   "freshness": "NO_SEARCH_SIGNAL",
@@ -8,10 +8,9 @@
     "NAVER_DATALAB:NAVER_DATALAB_RESPONSE_INVALID"
   ],
   "orderedTopicIds": [
-    "us:index:sp500",
-    "us:index:nasdaq",
-    "us:index:dow-jones",
-    "us:10y"
+    "ai:8",
+    "ai:5",
+    "ai:3"
   ],
   "selectedSecondaryTopicId": null,
   "factsChanged": false,
