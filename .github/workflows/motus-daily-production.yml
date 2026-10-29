@@ -215,6 +215,7 @@ jobs:
           path: |
             data/operations/${{ env.RUN_DATE }}/${{ env.CATEGORY }}/
             data/operations/${{ env.RUN_DATE }}/weekly-monthly-feed-auto.json
+            data/operations/${{ env.RUN_DATE }}/daily-status.md
             data/library/publications/
             data/search/${{ env.RUN_DATE }}/
             data/reports/daily/${{ env.RUN_DATE }}/${{ env.CATEGORY }}/
