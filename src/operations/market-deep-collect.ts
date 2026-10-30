@@ -8,17 +8,22 @@ import {composeAIDeepSections,composeKoreaDeepSections,composeUSDeepSections,ind
 interface AuditSink {sourceId:string;category:DailyCategory;url:string;status:'PASS'|'FAILED';recordCount:number;collectedAt:string;error:string|null;observedDate?:string}
 export interface DeepCollection {composition:DeepComposition;title:string|null;sources:Array<{label:string;url:string;publisher:string}>}
 
-/** Reports cited from a fetched consensus list (not opened as PDFs) are verified as listed on that page. */
 /** Reports cited from a fetched consensus list (not opened as PDFs) are verified as listed on that page; the audit keeps each report's own date. */
 function recordListed(audit:AuditSink[],sources:Array<{url:string;date?:string}>,category:DailyCategory,at:string){
   const passed=new Set(audit.filter(item=>item.status==='PASS').map(item=>item.url));
-  for(const source of sources)if(source.url.startsWith('https://consensus.hankyung.com/analysis/downpdf')&&!passed.has(source.url)){audit.push({sourceId:'deep:consensus:listed:'+source.url.split('=').pop(),category,url:source.url,status:'PASS',recordCount:1,collectedAt:at,error:null,...(source.date?{observedDate:source.date}:{})});passed.add(source.url)}
+  for(const source of sources)if(/^https:\/\/(?:consensus\.hankyung\.com\/analysis\/downpdf|stock\.pstatic\.net\/stock-research\/|m\.stock\.naver\.com\/research\/)/.test(source.url)&&!passed.has(source.url)){audit.push({sourceId:'deep:research:listed:'+source.url.replace(/^https:\/\//,''),category,url:source.url,status:'PASS',recordCount:1,collectedAt:at,error:null,...(source.date?{observedDate:source.date}:{})});passed.add(source.url)}
 }
 
 /** Broker entries carry their report date; market data entries carry the covered session; list pages carry none. */
 function record(audit:AuditSink[],items:Array<BrokerAudit|AttentionAudit>,category:DailyCategory,at:string,sessionDate:string|null){
   for(const item of items){const date=(item as BrokerAudit).date??sessionDate;audit.push({sourceId:'deep:'+item.sourceId,category,url:item.url,status:item.status,recordCount:item.count,collectedAt:at,error:item.error,...(item.status==='PASS'&&date?{observedDate:date}:{})})}
 }
+
+/**
+ * Wire close reports stand in for broker commentary only on the last retries of the morning (10:00 KST on):
+ * earlier runs wait for the brokers' own morning comments, which are normally listed by 08:00 KST.
+ */
+export function wireFallbackAllowed(at:string):boolean {return new Date(Date.parse(at)+9*3600000).getUTCHours()>=10}
 
 /** Never throws: missing research or rankings only drop the corresponding sections. */
 export async function collectUSDeep(input:{sessionDate:string;operationDate:string;at:string;fetcher:typeof fetch;audit:AuditSink[];pdfText?:PdfTextReader;indexChanges:number[]}):Promise<DeepCollection>{
@@ -31,7 +36,7 @@ export async function collectUSDeep(input:{sessionDate:string;operationDate:stri
     // Direction check only when the three indexes agree; a mixed session has no single direction to contradict.
     const agreed=input.indexChanges.length&&(input.indexChanges.every(value=>value>0.005)||input.indexChanges.every(value=>value<-0.005));
     const sp=agreed?input.indexChanges.reduce((sum,value)=>sum+value,0)/input.indexChanges.length:null;
-    const wire=usBriefed?null:await collectWireCloses({region:'US',sessionDate:input.sessionDate,change:sp,fetcher:input.fetcher}).catch(()=>null);
+    const wire=usBriefed||!wireFallbackAllowed(input.at)?null:await collectWireCloses({region:'US',sessionDate:input.sessionDate,change:sp,fetcher:input.fetcher}).catch(()=>null);
     if(wire)record(input.audit,wire.audit,'US_MARKET',input.at,input.sessionDate);
     const composition=composeUSDeepSections({bundle,stocks:attention?.stocks??[],sectors:attention?.sectors??[],wire:wire?.reports??[],checkpoint:'다음 정규장에서는 미국 10년물 금리 방향과 함께, 증권사들이 짚은 경계 요인이 주요 지수와 업종 등락에 실제로 반영되는지가 확인 대상이다.'});
     const sources=[...composition.sources];
@@ -47,11 +52,13 @@ export async function collectUSDeep(input:{sessionDate:string;operationDate:stri
 export async function collectKoreaDeep(input:{sessionDate:string;operationDate:string;at:string;fetcher:typeof fetch;audit:AuditSink[];pdfText?:PdfTextReader;kospiClose:number;kospiChangePct:number|null}):Promise<DeepCollection>{
   const empty:DeepCollection={composition:{sections:[],leadAddition:[],titleFocus:null,sources:[]},title:null,sources:[]};
   try{
-    const [bundle,search]=await Promise.all([collectBrokerResearch({sessionDate:input.sessionDate,operationDate:input.operationDate,fetcher:input.fetcher,verifiedKospiClose:input.kospiClose,...(input.pdfText?{pdfText:input.pdfText}:{})}).catch(()=>null),collectKoreaSearchTop(input.sessionDate,input.fetcher).catch(()=>null)]);
+    // The search ranking comes first so the research intake can fetch ratings for exactly those stocks.
+    const search=await collectKoreaSearchTop(input.sessionDate,input.fetcher).catch(()=>null);
+    const bundle=await collectBrokerResearch({sessionDate:input.sessionDate,operationDate:input.operationDate,fetcher:input.fetcher,verifiedKospiClose:input.kospiClose,focusCodes:(search?.stocks??[]).map(stock=>stock.code),...(input.pdfText?{pdfText:input.pdfText}:{})}).catch(()=>null);
     if(bundle)record(input.audit,bundle.audit,'KOREA_MARKET',input.at,null);
     if(search)record(input.audit,search.audit,'KOREA_MARKET',input.at,input.sessionDate);
     const krBriefed=Boolean(bundle?.briefs.some(brief=>brief.statements.some(item=>item.region==='KOREA')));
-    const wire=krBriefed?null:await collectWireCloses({region:'KOREA',sessionDate:input.sessionDate,change:input.kospiChangePct,fetcher:input.fetcher}).catch(()=>null);
+    const wire=krBriefed||!wireFallbackAllowed(input.at)?null:await collectWireCloses({region:'KOREA',sessionDate:input.sessionDate,change:input.kospiChangePct,fetcher:input.fetcher}).catch(()=>null);
     if(wire)record(input.audit,wire.audit,'KOREA_MARKET',input.at,input.sessionDate);
     const composition=composeKoreaDeepSections({bundle,searchTop:search?.stocks??[],wire:wire?.reports??[],checkpoint:'오늘 장에서는 외국인·기관 수급의 연속성, 원·달러 환율, 전일 강세 업종이 이어지는지가 확인 대상이다.'});
     const sources=[...composition.sources];
