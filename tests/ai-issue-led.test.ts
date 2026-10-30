@@ -38,3 +38,15 @@ test('the AI headline needs the printed stock section and a quoted mention', () 
   const composed=composeAIDeepSections({bundle:meta,stocks:[stock('META','메타',5.1),stock('MSFT','마이크로소프트',-0.2),stock('NVDA','엔비디아',-1.5)],sessionDate:'2026-10-29'});
   assert.equal(composed.titleFocus,null,'메타버스 is not Meta');
 });
+
+test('an issue-led AI article reports official announcements as facts, without template readings', async () => {
+  const {renderAIEditorialArticle}=await import('../src/publishers/editorial-article.js');
+  const issue={headline:'엔비디아, AI 교육 공개',whatHappened:['엔비디아는 10월 30일 공식 블로그에 교육 프로그램 발표를 게시했다.'],coreContent:'',whyItMatters:'MOTUS 분석: AI 교육 프로그램은 당장의 매출보다 장기 투자에 가깝다.',relatedCompaniesIndustries:['엔비디아'],marketConnection:'시장 평가는 발표 이후 고객 채택, 매출 기여와 인프라 투자 자료가 확인된 뒤 판단해야 한다.',institutionView:null,evidenceRefs:['https://blogs.nvidia.com/x']};
+  const base={publicationId:'p',issueDate:'2026-10-30',issueNumber:1,title:'알파벳 13% 급락…증권가가 짚은 AI 투자 쟁점',subtitle:'s',category:'AI_INTELLIGENCE',canonicalLabel:'AI Intelligence',displayLabel:'AI 인텔리전스',todayCore:{headline:'h',summary:'직전 미국 정규장(10월 29일)에서 알파벳(GOOGL)은 12.64% 급락했다.',bullets:[]},issues:[issue],industryFlow:[],industryConnections:[{title:'t',explanation:'MOTUS 분석: 신규 기능 공개의 의미는 과금 구조에 달려 있다.',connectedCompanies:[],connectedIndustries:[],evidenceRefs:[],optionalWatchPoint:''}],whatToWatch:[{headline:'엔비디아 교육',watchFor:'교육 대상과 규모가 공개되는지 확인할 필요가 있다.',validityHorizon:'NEXT_30_DAYS'}],sources:[{label:'엔비디아 공식 발표',url:'https://blogs.nvidia.com/x',publisher:'NVIDIA'}]} as never;
+  const led=renderAIEditorialArticle({...(base as object),deepSections:[{key:'ai-issue',placement:'early',title:'오늘의 AI 쟁점: 증권가 시각',paragraphs:[{text:'A증권은 “알파벳 급락”이라고 진단했다.'}]}]} as never).html;
+  assert.match(led,/엔비디아는 10월 30일 공식 블로그에/);
+  assert.doesNotMatch(led,/MOTUS 분석:|판단해야 한다|확인할 필요가 있다|과금 구조/);
+  assert.ok(led.indexOf('오늘의 AI 쟁점')<led.indexOf('엔비디아, AI 교육 공개'),'the market issue comes before announcements');
+  const plain=renderAIEditorialArticle(base).html;
+  assert.match(plain,/MOTUS 분석:/,'without a market issue the official-announcement article keeps its reading');
+});

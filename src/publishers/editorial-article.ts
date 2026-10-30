@@ -20,15 +20,20 @@ export function renderAIEditorialArticle(view:AIIntelligenceDailyViewModel):Dail
   const seen=new Set<string>([normalized(view.todayCore.summary)]),parts=[masthead(view.title,view.subtitle,view.displayLabel,view.issueDate),lead(view.todayCore.summary)];
   // The day's market issue and AI stock moves lead; official announcements follow.
   for(const item of (view.deepSections??[]).filter(item=>item.placement==='early'))parts.push(deepSection(item));
-  for(const issue of view.issues){const content=paragraphs(uniqueProse([...issue.whatHappened,issue.coreContent,issue.whyItMatters??'',issue.marketConnection??''],seen));if(content)parts.push(section(issue.headline,content));}
+  // With the day's market issue explained by brokers, official announcements are reported as facts only:
+  // the per-type template readings ('MOTUS 분석: …', '시장 평가는 … 판단해야 한다') and generic watch lists read as boilerplate.
+  const issueLed=(view.deepSections??[]).some(item=>item.key==='ai-issue');
+  for(const issue of view.issues){const content=paragraphs(uniqueProse(issueLed?[...issue.whatHappened,issue.coreContent]:[...issue.whatHappened,issue.coreContent,issue.whyItMatters??'',issue.marketConnection??''],seen));if(content)parts.push(section(issue.headline,content));}
   for(const item of (view.deepSections??[]).filter(item=>item.placement!=='early'))parts.push(deepSection(item));
-  const connections=paragraphs(uniqueProse(view.industryConnections.flatMap(item=>[item.explanation,item.optionalWatchPoint??'']),seen));if(connections)parts.push(section('기업 AI가 실제 업무로 들어가는 경로',connections));
-  const watch=paragraphs(uniqueProse(view.whatToWatch.map(item=>`${item.headline}: ${item.watchFor}`),seen));if(watch)parts.push(section('앞으로 볼 지점',watch));
+  if(!issueLed){
+    const connections=paragraphs(uniqueProse(view.industryConnections.flatMap(item=>[item.explanation,item.optionalWatchPoint??'']),seen));if(connections)parts.push(section('기업 AI가 실제 업무로 들어가는 경로',connections));
+    const watch=paragraphs(uniqueProse(view.whatToWatch.map(item=>`${item.headline}: ${item.watchFor}`),seen));if(watch)parts.push(section('앞으로 볼 지점',watch));
+  }
   parts.push(sources(view.sources));return finish('ai-intelligence',view.title,BLOGGER_EDITORIAL_CATEGORIES.AI_INTELLIGENCE.publicLabel,parts,['masthead','lead','issues','connections','watch','sources']);
 }
 
 export function renderUSEditorialArticle(view:USMarketDailyViewModel):DailyMasterRenderResult {
-  const terms=new Set<string>();const describe=(value:string)=>explainTerms(value,terms);
+  const terms=new Set<string>();const describe=(value:string)=>explainTerms(value.replace('U.S. 10Y Treasury Yield (미국 10년물 국채금리)','미국 10년물 국채금리'),terms);
   const parts=[masthead(view.title,view.subtitle,view.displayLabel,view.issueDate),lead(describe([view.marketSummary,...view.marketCommentary].join(' ')))];
   const deep=view.deepSections??[],place=(where:'early'|'late'|'risks')=>deep.filter(item=>(item.placement??'early')===where).map(deepSection);
   parts.push(...place('early'));
@@ -101,4 +106,4 @@ function flow(values:Array<{label:string;displayValue:string;direction:'UP'|'DOW
 function sources(values:NewsletterSourceLink[]){const unique=[...new Map(values.map(item=>[item.url,item])).values()];return section('자료',`<ul style="margin:0;padding-left:20px">${unique.map(item=>`<li style="margin:5px 0"><a href="${attr(item.url)}" target="_blank" rel="nofollow noopener noreferrer" style="${LINK}">${esc(item.label)}</a></li>`).join('')}</ul>`);}
 function finish(product:string,title:string,label:string,parts:string[],renderedSections:string[]):DailyMasterRenderResult {const html=`<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)}</title></head><body><article data-product="motus-${product}" data-layout="editorial-article-4q" style="${BODY}">${parts.join('\n')}</article></body></html>`;assertNewsletterPublicHtmlSafe(html);for(const forbidden of BLOGGER_EDITORIAL_MASTER.forbiddenPublicLabels)if(new RegExp(`>${forbidden}<`).test(html))throw new Error(`forbidden public analytical label: ${forbidden}`);return {html,renderedSections,label};}
 function esc(value:string){return value.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}function attr(value:string){return esc(value).replace(/'/g,'&#39;');}
-function explainTerms(value:string,seen:Set<string>):string {const terms:[string,string][]=[['VIX','VIX (변동성지수)'],['DXY','DXY (달러인덱스)'],['미국 10년물','U.S. 10Y Treasury Yield (미국 10년물 국채금리)']];let output=value;for(const [term,label] of terms){if(seen.has(term))continue;if(output.includes(label)){seen.add(term);continue;}const index=output.indexOf(term);if(index<0)continue;output=`${output.slice(0,index)}${label}${output.slice(index+term.length)}`;seen.add(term);}return output;}
+function explainTerms(value:string,seen:Set<string>):string {const terms:[string,string][]=[['VIX','VIX (변동성지수)'],['DXY','DXY (달러인덱스)'],['미국 10년물','미국 10년물 국채금리']];let output=value;for(const [term,label] of terms){if(seen.has(term))continue;if(output.includes(label)){seen.add(term);continue;}const index=output.indexOf(term);if(index<0)continue;output=`${output.slice(0,index)}${label}${output.slice(index+term.length)}`;seen.add(term);}return output;}
