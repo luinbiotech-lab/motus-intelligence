@@ -1,8 +1,9 @@
 import fs from 'node:fs';
-import {collectBrokerResearch} from './dist/src/operations/broker-briefs.js';
-import {composeUSDeepSections,composeKoreaDeepSections} from './dist/src/operations/market-deep-sections.js';
-import {collectKoreaSearchTop,collectUSAttention} from './dist/src/operations/market-attention.js';
 const out=[];const log=(...a)=>out.push(a.join(' '));
+try{
+const {collectBrokerResearch}=await import('./dist/src/operations/broker-briefs.js');
+const {composeUSDeepSections,composeKoreaDeepSections}=await import('./dist/src/operations/market-deep-sections.js');
+const {collectKoreaSearchTop,collectUSAttention}=await import('./dist/src/operations/market-attention.js');
 const show=(c)=>{for(const s of c.sections){log('##',s.title);for(const p of s.paragraphs)log('-',p.text,p.source?'<'+p.source.url+'>':'')}log('LEAD',c.leadAddition.join(' / '),'core=',c.hasCoreCommentary)};
 const us=await collectBrokerResearch({sessionDate:'2026-10-29',operationDate:'2026-10-30'});
 log('# US briefs',us.briefs.map(b=>b.report.broker+' '+b.report.title+' st='+b.statements.length+' dg='+b.digests.length).join(' | '));
@@ -15,4 +16,5 @@ const kr=await collectBrokerResearch({sessionDate:'2026-10-29',operationDate:'20
 log('# KR briefs',kr.briefs.map(b=>b.report.broker+' '+b.report.title+' st='+b.statements.length).join(' | '));
 log('# company',kr.company.length,kr.company.slice(0,8).map(r=>r.broker+' '+r.company+' '+r.rating+' '+r.targetPrice+' '+r.date).join(' | '));
 show(composeKoreaDeepSections({bundle:kr,searchTop:st?.stocks??[],checkpoint:'체크.'}));
+}catch(e){log('ERROR',e&&e.stack||e)}
 fs.mkdirSync('out',{recursive:true});fs.writeFileSync('out/probe.txt',out.join('\n'));
