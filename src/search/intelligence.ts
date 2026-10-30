@@ -52,7 +52,10 @@ export function normalizeNaverDataLab(input:{response:NaverDataLabResponse;topic
   return input.response.results.flatMap(result=>{
     const topic=byLabel.get(normalize(result.title))??result.keywords.map(value=>byLabel.get(normalize(value))).find(Boolean);
     if(!topic)return [];
-    if(!result.data.length||result.data.some(item=>!dateLike(item.period)||!Number.isFinite(item.ratio)||item.ratio<0||item.ratio>100))throw new Error('NAVER_DATALAB_RESPONSE_INVALID');
+    // DataLab returns an empty series for a keyword group with too little search volume: no signal for that topic, not a broken response.
+    if(!Array.isArray(result.data))throw new Error('NAVER_DATALAB_RESPONSE_INVALID');
+    if(!result.data.length)return [];
+    if(result.data.some(item=>!dateLike(item.period)||!Number.isFinite(item.ratio)||item.ratio<0||item.ratio>100))throw new Error('NAVER_DATALAB_RESPONSE_INVALID');
     const query=result.keywords.find(value=>matchesTopic(value,topic))??result.title;
     return [{signalId:id('naver',topic.topicId,input.response.startDate,input.response.endDate),provider:'NAVER_DATALAB',topicId:topic.topicId,query,periodStart:input.response.startDate,periodEnd:input.response.endDate,observedAt:result.data.at(-1)!.period,collectedAt:input.collectedAt,metrics:{relativeRatios:result.data.map(item=>item.ratio),clicks:null,impressions:null,ctr:null,averagePosition:null},provenance:{provider:'NAVER_DATALAB',method:'POST /v1/datalab/search',propertyId:null,sourceUrl:'https://openapi.naver.com/v1/datalab/search'},verificationStatus:'VERIFIED' as const}];
   });
