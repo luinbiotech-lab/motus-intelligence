@@ -14,10 +14,10 @@
   "leakagePass": true,
   "duplicateCheck": "PENDING_REMOTE",
   "duplicateUncertainty": true,
-  "articleFingerprint": "sha256:a825bbdb252c36f6bce50a315aff2f42c855c9bbab2f3c398f9bcb0d096c8587",
+  "articleFingerprint": "sha256:3e26494b3411dfab449cffddcb47e49ef62a51bd0446ddd88cc26ad837eb181c",
   "commerceEnabled": false,
-  "verifiedAt": "2026-10-30T05:42:10.550Z",
-  "expiresAt": "2026-10-30T07:12:10.550Z",
+  "verifiedAt": "2026-10-30T10:20:27.773Z",
+  "expiresAt": "2026-10-30T11:50:27.773Z",
   "sourceAuditIds": [
     "ai:page:10",
     "ai:page:2",
@@ -48,9 +48,7 @@
     "deep:naver-research:market:37985",
     "deep:naver-research:market:37987",
     "deep:naver-research:market:37998",
-    "deep:research:listed:m.stock.naver.com/research/industry/46710",
-    "deep:research:listed:m.stock.naver.com/research/industry/46720",
-    "deep:research:listed:m.stock.naver.com/research/industry/46724",
+    "deep:research:listed:stock.pstatic.net/stock-research/industry/-/20261030_industry_759973000.pdf",
     "deep:yahoo:spark:ai-bellwethers",
     "google-ai",
     "google-deepmind",
@@ -61,7 +59,7 @@
     "nvidia-newsroom",
     "openai"
   ],
-  "sourceAuditFingerprint": "sha256:8ed7ee9c3a84737e901cda0262381db3cb14d267f32ffc6e4e3d92e2724f0433",
+  "sourceAuditFingerprint": "sha256:4b5401eb66a0d651e7ba818656bd0d19aff792a3f6e16d43a2b7c57742c8cdad",
   "crossVerificationFingerprint": null,
   "crossVerification": null
 }
