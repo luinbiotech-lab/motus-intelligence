@@ -56,24 +56,21 @@ export function buildUSMarketNarrative(series:ClosingSeries[],tenYear:RateObserv
   const analysis:string[]=[],core=stats.slice(0,3);
   if(core.length>=2){
     const ups=core.filter(item=>direction(item.day)>0).length,downs=core.filter(item=>direction(item.day)<0).length;
-    analysis.push(ups===core.length?'주요 지수가 함께 올랐지만, 지수 등락만으로 구성 종목 전반의 상승이나 매수 주체를 판단할 수는 없다.'
-      :downs===core.length?'주요 지수가 함께 내렸지만, 지수 등락만으로 구성 종목 전반의 하락이나 매도 주체를 판단할 수는 없다.'
-      :ups>0&&downs>0?'주요 지수의 방향이 엇갈려 시장 전체의 방향성보다 업종·종목별 차별화가 두드러진 하루로 볼 수 있다.'
-      :ups>0?'일부 지수만 오르고 나머지는 보합에 그쳐, 상승이 시장 전반으로 넓게 퍼진 하루로 보기는 어렵다.'
-      :downs>0?'일부 지수만 내리고 나머지는 보합에 머물러, 하락 압력이 시장 전반으로 번진 하루로 보기는 어렵다.'
-      :'주요 지수가 모두 보합권에 머물러 뚜렷한 방향성이 나타나지 않은 하루였다.');
+    // Analysis states only what the verified closes show; no generic caveats, no inferred causes.
+    if(ups>0&&downs>0)analysis.push('주요 지수의 방향이 엇갈렸다.');
+    else if(ups>0&&ups<core.length)analysis.push('일부 지수만 오르고 나머지는 보합에 그쳤다.');
+    else if(downs>0&&downs<core.length)analysis.push('일부 지수만 내리고 나머지는 보합에 머물렀다.');
+    else if(!ups&&!downs)analysis.push('주요 지수가 모두 보합권에 머물렀다.');
     const nasdaq=stats.find(item=>item.name===US_NAMES.nasdaq),dow=stats.find(item=>item.name===US_NAMES['dow-jones']);
-    if(nasdaq&&dow&&Math.abs(nasdaq.day-dow.day)>=0.5)analysis.push(`기술주 비중이 큰 나스닥 종합지수가 다우존스 산업평균지수보다 ${Math.abs(nasdaq.day-dow.day).toFixed(2)}%p ${nasdaq.day>dow.day?'강했다':'약했다'}는 점은 성장주와 전통 업종 사이의 온도차를 보여 준다.`);
-    const lead=stats[0]!;
-    if(lead.fromHigh>-1)analysis.push(`${josa(lead.name,'이','가')} 3개월 고점 부근에 있어, 다음 구간에서는 고점 돌파 여부와 거래 강도를 함께 확인할 필요가 있다.`);
-    else if(lead.fromHigh<=-5)analysis.push(`${josa(lead.name,'이','가')} 3개월 고점보다 5% 이상 낮은 구간에 있어, 하루 반등만으로 조정이 끝났다고 판단하기는 이르다.`);
-    // Rates and equities are compared only when the yield is observed on the same session date.
-    if(rateChange!==null&&rateChange!==0&&tenYear?.date===tenYear?.sessionDate&&direction(lead.day)!==0){
-      analysis.push(rateChange<0&&lead.day>0?'장기금리 하락과 주가 상승이 같은 방향으로 움직여 금리 부담 완화가 주가를 지지한 흐름과 맞물린다.'
-        :rateChange>0&&lead.day<0?'장기금리 상승과 주가 하락이 함께 나타나 금리 부담이 주식 평가에 압력으로 작용한 흐름과 맞물린다.'
-        :'장기금리와 주가가 같은 방향으로 움직여, 이날 주가 흐름을 금리 하나로 설명하기는 어렵다.');
+    if(nasdaq&&dow&&Math.abs(nasdaq.day-dow.day)>=0.5){
+      const n=direction(nasdaq.day),d=direction(dow.day),gap=Math.abs(nasdaq.day-dow.day).toFixed(2),weaker=nasdaq.day<dow.day;
+      // A gap is read as 'more/less' only when both moved the same way; otherwise each move is stated as it was.
+      if(n!==0&&n===d)analysis.push(`기술주 비중이 큰 나스닥 종합지수가 다우존스 산업평균지수보다 ${gap}%p ${weaker?(n<0?'더 내렸다':'덜 올랐다'):(n>0?'더 올랐다':'덜 내렸다')}.`);
+      else{const word=(value:number)=>direction(value)>0?`${Math.abs(value).toFixed(2)}% 올랐다`:direction(value)<0?`${Math.abs(value).toFixed(2)}% 내렸다`:'보합이었다';analysis.push(`기술주 비중이 큰 나스닥 종합지수는 ${word(nasdaq.day).replace(/다$/,'고')} 다우존스 산업평균지수는 ${word(dow.day)}.`)}
     }
-    analysis.push('하루 등락보다 5거래일·20거래일 흐름이 같은 방향으로 이어지는지가 추세 판단의 기준이 된다.');
+    // Rates sit next to the lead index only when the yield is observed on the same session date; no cause is stated.
+    const lead=stats[0]!;
+    if(rateChange!==null&&rateChange!==0&&tenYear?.date===tenYear?.sessionDate&&direction(lead.day)!==0)analysis.push(`같은 날 미국 10년물 국채금리는 ${Math.abs(rateChange)}bp ${rateChange>0?'올랐고':'내렸고'} ${josa(lead.name,'은','는')} ${Math.abs(lead.day).toFixed(2)}% ${lead.day>0?'상승했다':'하락했다'}.`);
   }
   return {facts,analysis};
 }
@@ -88,12 +85,11 @@ export function buildKoreaMarketNarrative(histories:KoreaIndexHistory[],flows:Ar
   if(kospi&&kosdaq){
     // Only index closes are verified here, so the reading stays at the level of the two indices (no size or flow claims).
     const a=direction(kospi.day),b=direction(kosdaq.day);
-    if(a!==0&&a===b)analysis.push(`코스피와 코스닥이 같은 방향으로 움직여 두 시장이 한 방향으로 반응한 장으로 볼 수 있다.`);
-    else if(a!==0&&b!==0)analysis.push(`코스피와 코스닥의 방향이 엇갈려 두 시장 사이의 온도차가 나타난 장으로 볼 수 있다.`);
-    else if(a!==0||b!==0)analysis.push(`${a!==0?'코스피':'코스닥'}만 움직이고 ${a!==0?'코스닥':'코스피'}는 보합에 머물러, 시장 전반의 방향성은 뚜렷하지 않았다.`);
-    if(kospi.week!==null&&direction(kospi.week)!==0&&direction(kospi.day)!==0&&direction(kospi.week)!==direction(kospi.day))analysis.push(`코스피의 하루 방향이 최근 5거래일 흐름과 반대여서, 이 움직임이 추세 전환인지 단기 되돌림인지는 다음 거래일에서 확인해야 한다.`);
+    if(a!==0&&b!==0&&a!==b)analysis.push(`코스피와 코스닥의 방향이 엇갈렸다.`);
+    else if(a!==0&&a===b&&Math.abs(kospi.day-kosdaq.day)>=0.5){const weaker=Math.abs(kosdaq.day)>Math.abs(kospi.day)?'코스닥':'코스피',other=weaker==='코스닥'?'코스피':'코스닥';analysis.push(`${josa(weaker,'이','가')} ${other}보다 ${Math.abs(kospi.day-kosdaq.day).toFixed(2)}%p 더 크게 ${a>0?'올랐다':'내렸다'}.`)}
+    if(kospi.week!==null&&direction(kospi.week)!==0&&direction(kospi.day)!==0&&direction(kospi.week)!==direction(kospi.day))analysis.push(`코스피는 최근 5거래일 기준으로 ${kospi.week>0?'올랐지만':'내렸지만'} 이날은 ${kospi.day>0?'올랐다':'내렸다'}.`);
   }
   const foreign=flows.find(item=>/외국인/.test(item.label));
-  if(foreign&&foreign.direction!=='FLAT')analysis.push(`외국인이 순${foreign.direction==='UP'?'매수':'매도'}로 마감한 만큼 다음 거래일에도 같은 방향의 수급이 이어지는지가 지수 방향의 관건이다.`);
+  if(foreign&&foreign.direction!=='FLAT')analysis.push(`외국인은 순${foreign.direction==='UP'?'매수':'매도'}로 마감했다.`);
   return {facts,analysis};
 }
