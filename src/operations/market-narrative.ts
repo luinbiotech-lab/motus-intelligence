@@ -62,7 +62,12 @@ export function buildUSMarketNarrative(series:ClosingSeries[],tenYear:RateObserv
     else if(downs>0&&downs<core.length)analysis.push('일부 지수만 내리고 나머지는 보합에 머물렀다.');
     else if(!ups&&!downs)analysis.push('주요 지수가 모두 보합권에 머물렀다.');
     const nasdaq=stats.find(item=>item.name===US_NAMES.nasdaq),dow=stats.find(item=>item.name===US_NAMES['dow-jones']);
-    if(nasdaq&&dow&&Math.abs(nasdaq.day-dow.day)>=0.5){const gap=Math.abs(nasdaq.day-dow.day).toFixed(2),weaker=nasdaq.day<dow.day;analysis.push(`기술주 비중이 큰 나스닥 종합지수가 다우존스 산업평균지수보다 ${gap}%p ${weaker?(nasdaq.day<0?'더 내렸다':'덜 올랐다'):(nasdaq.day>0?'더 올랐다':'덜 내렸다')}.`)}
+    if(nasdaq&&dow&&Math.abs(nasdaq.day-dow.day)>=0.5){
+      const n=direction(nasdaq.day),d=direction(dow.day),gap=Math.abs(nasdaq.day-dow.day).toFixed(2),weaker=nasdaq.day<dow.day;
+      // A gap is read as 'more/less' only when both moved the same way; otherwise each move is stated as it was.
+      if(n!==0&&n===d)analysis.push(`기술주 비중이 큰 나스닥 종합지수가 다우존스 산업평균지수보다 ${gap}%p ${weaker?(n<0?'더 내렸다':'덜 올랐다'):(n>0?'더 올랐다':'덜 내렸다')}.`);
+      else{const word=(value:number)=>direction(value)>0?`${Math.abs(value).toFixed(2)}% 올랐다`:direction(value)<0?`${Math.abs(value).toFixed(2)}% 내렸다`:'보합이었다';analysis.push(`기술주 비중이 큰 나스닥 종합지수는 ${word(nasdaq.day).replace(/다$/,'고')} 다우존스 산업평균지수는 ${word(dow.day)}.`)}
+    }
     // Rates sit next to the lead index only when the yield is observed on the same session date; no cause is stated.
     const lead=stats[0]!;
     if(rateChange!==null&&rateChange!==0&&tenYear?.date===tenYear?.sessionDate&&direction(lead.day)!==0)analysis.push(`같은 날 미국 10년물 국채금리는 ${Math.abs(rateChange)}bp ${rateChange>0?'올랐고':'내렸고'} ${josa(lead.name,'은','는')} ${Math.abs(lead.day).toFixed(2)}% ${lead.day>0?'상승했다':'하락했다'}.`);

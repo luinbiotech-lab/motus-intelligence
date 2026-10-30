@@ -31,6 +31,15 @@ test('US narrative states verified facts and keeps interpretation separate',()=>
   assert.ok(!staleRate.analysis.some(line=>line.includes('국채금리')),'a yield from another date is never compared with the session');
 });
 
+test('a Nasdaq-Dow gap is read as more or less only when both moved the same way',()=>{
+  const day=(key:string,label:string,last:number)=>({key,label,dates:dates(7),closes:[100,100,100,100,100,100,last]});
+  const opposite=buildUSMarketNarrative([day('sp500','S&P 500',100.1),day('nasdaq','Nasdaq',99.7),day('dow-jones','Dow Jones',100.4)],null);
+  assert.ok(opposite.analysis.includes('기술주 비중이 큰 나스닥 종합지수는 0.30% 내렸고 다우존스 산업평균지수는 0.40% 올랐다.'),opposite.analysis.join(' | '));
+  const flatNasdaq=buildUSMarketNarrative([day('sp500','S&P 500',100.3),day('nasdaq','Nasdaq',99.998),day('dow-jones','Dow Jones',100.6)],null);
+  assert.ok(flatNasdaq.analysis.includes('기술주 비중이 큰 나스닥 종합지수는 보합이었고 다우존스 산업평균지수는 0.60% 올랐다.'),flatNasdaq.analysis.join(' | '));
+  assert.ok(!flatNasdaq.analysis.some(line=>/더 내렸다|더 올랐다/.test(line)));
+});
+
 test('Korea narrative uses the session history and same-session foreign flow',()=>{
   const histories=[{label:'KOSPI' as const,dates:dates(10),closes:[...ramp(9,100,1),105]},{label:'KOSDAQ' as const,dates:dates(10),closes:[...ramp(9,50,1),60]}];
   const result=buildKoreaMarketNarrative(histories,[{label:'외국인',direction:'DOWN'}]);
