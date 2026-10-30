@@ -23,20 +23,20 @@ test('US narrative states verified facts and keeps interpretation separate',()=>
   assert.match(sameDay.facts[0]!,/^S&P 500은 127\.00으로 마감해 전 거래일보다 0\.78% 하락했다\./);
   assert.match(sameDay.facts[3]!,/^미국 10년물 국채금리는 4\.80%로 직전 관측치보다 17bp 내렸다\./);
   assert.ok(sameDay.facts.every(fact=>!fact.startsWith('MOTUS')));
-  assert.match(sameDay.analysis[0]!,/주요 지수가 함께 내렸지만, 지수 등락만으로/);
-  assert.ok(sameDay.analysis.some(line=>/나스닥 종합지수가 다우존스 산업평균지수보다 [\d.]+%p 강했다/.test(line)));
-  assert.ok(sameDay.analysis.some(line=>line.includes('장기금리')));
+  assert.ok(!sameDay.analysis.some(line=>/판단할 수는 없다|볼 수 있다|기준이 된다|확인할 필요|맞물린다|보여 준다/.test(line)),'no generic caveats or inferred causes');
+  assert.ok(sameDay.analysis.some(line=>/나스닥 종합지수가 다우존스 산업평균지수보다 [\d.]+%p 덜 내렸다\./.test(line)));
+  assert.ok(sameDay.analysis.some(line=>/^같은 날 미국 10년물 국채금리는 17bp 내렸고 S&P 500은 0\.78% 하락했다\.$/.test(line)));
   const staleRate=buildUSMarketNarrative(series,{label:'10Y',latest:4.8,previous:4.97,date:'2026-08-29',sessionDate:'2026-08-30'});
   assert.match(staleRate.facts[3]!,/2026-08-29 기준 4\.80%/);
-  assert.ok(!staleRate.analysis.some(line=>line.includes('장기금리')),'a yield from another date is never compared with the session');
+  assert.ok(!staleRate.analysis.some(line=>line.includes('국채금리')),'a yield from another date is never compared with the session');
 });
 
 test('Korea narrative uses the session history and same-session foreign flow',()=>{
   const histories=[{label:'KOSPI' as const,dates:dates(10),closes:[...ramp(9,100,1),105]},{label:'KOSDAQ' as const,dates:dates(10),closes:[...ramp(9,50,1),60]}];
   const result=buildKoreaMarketNarrative(histories,[{label:'외국인',direction:'DOWN'}]);
   assert.match(result.facts[0]!,/^코스피는 105\.00으로 마감해 전 거래일보다 2\.78% 하락했다\. 최근 5거래일 기준으로는 [\d.]+% (상승|하락)했다\. 최근 10거래일 종가 고점/);
-  assert.match(result.analysis[0]!,/코스피와 코스닥의 방향이 엇갈려/);
-  assert.ok(result.analysis.some(line=>line.startsWith('외국인이 순매도로')));
+  assert.match(result.analysis[0]!,/^코스피와 코스닥의 방향이 엇갈렸다\.$/);
+  assert.ok(result.analysis.includes('외국인은 순매도로 마감했다.'));
   assert.deepEqual(buildKoreaMarketNarrative([],[]),{facts:[],analysis:[]});
 });
 
@@ -49,8 +49,8 @@ test('flat moves are never read as a direction, and index-only data supports no 
 
   const korea=buildKoreaMarketNarrative([{label:'KOSPI',dates:dates(6),closes:[100,101,101,101,101,100]},{label:'KOSDAQ',dates:dates(6),closes:[100,100,100,100,100,101]}],[]);
   assert.ok(!korea.analysis.some(line=>/대형주|중소형주|수급/.test(line)),korea.analysis.join(' '));
-  assert.ok(korea.analysis.some(line=>line.includes('엇갈려 두 시장 사이의 온도차')));
-  assert.ok(!korea.analysis.some(line=>line.includes('5거래일 흐름과 반대')),'a flat 5-session change has no opposite direction');
+  assert.ok(korea.analysis.includes('코스피와 코스닥의 방향이 엇갈렸다.'));
+  assert.ok(!korea.analysis.some(line=>line.includes('5거래일 기준으로')),'a flat 5-session change has no opposite direction');
 });
 
 test('only the period high itself is called the highest close',()=>{

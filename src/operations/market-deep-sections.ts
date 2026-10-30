@@ -107,8 +107,7 @@ export function composeUSDeepSections(input:{bundle:BrokerResearchBundle|null;st
   const wire=cause.first?null:wireCause(input.wire??[],'us-causes',sources);
   if(cause.first){
     sections.push({key:'us-causes',placement:'early',title:'상승·하락 요인과 반대 시각',paragraphs:cause.paragraphs});
-    leadAddition.push(`${subject(cause.first.brief.report)} 이날 장을 ${said([quote(cause.first.text)])} 요약했다.`);
-  }else if(wire){sections.push(wire.section);leadAddition.push(wire.lead)}
+  }else if(wire){sections.push(wire.section)}
   const ranked=[...input.stocks].sort((a,b)=>(a.trendingRank??99)-(b.trendingRank??99)||(a.mostActiveRank??99)-(b.mostActiveRank??99)).slice(0,5);
   let titleFocus:string|null=null;const market:DeepParagraph[]=[];
   if(input.sectors.length>=6){
@@ -148,8 +147,7 @@ export function composeKoreaDeepSections(input:{bundle:BrokerResearchBundle|null
   const wire=cause.first?null:wireCause(input.wire??[],'korea-causes',sources);
   if(cause.first){
     sections.push({key:'korea-causes',placement:'early',title:'상승·하락 요인과 반대 시각',paragraphs:cause.paragraphs});
-    leadAddition.push(`${subject(cause.first.brief.report)} 전일 장을 ${said([quote(cause.first.text)])} 진단했다.`);
-  }else if(wire){sections.push(wire.section);leadAddition.push(wire.lead.replace('이날 장을','전일 장을'))}
+  }else if(wire){sections.push(wire.section)}
   const digests=briefs.flatMap(brief=>brief.digests.map(item=>({item,brief})));
   const companyDigest=(name:string)=>digests.find(({item})=>item.heading.replace(/\s+/g,'').includes(name.replace(/\s+/g,'')));
   let titleFocus:string|null=null;

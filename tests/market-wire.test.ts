@@ -78,11 +78,11 @@ test('without a broker brief, wire close reports become the attributed core comm
   assert.equal(section.paragraphs[0]!.text,'연합인포맥스는 10월 30일 마감 기사 「[뉴욕증시] 대형 기술주 흔들린다…나스닥 1.38%↓」에서 “대형 기술주의 3분기 실적이 예상에 못 미치면서 시장에 충격을 줬다”라고 전했다.');
   assert.equal(section.paragraphs[1]!.text,'연합뉴스는 10월 30일 마감 기사에서 “AI 투자 우려 재점화…뉴욕증시 일제히 하락”이라고 전했다.');
   assert.equal(section.paragraphs[0]!.source!.url,'https://example.test/wire/b1');
-  assert.match(composed.leadAddition[0]!,/^연합인포맥스는 이날 장을 “/);
+  assert.deepEqual(composed.leadAddition,[],'the cause section follows the lead, so the lead does not repeat its first quote');
   assert.deepEqual(composed.sources.map(item=>[item.publisher,item.date]),[['연합인포맥스','2026-10-30'],['연합뉴스','2026-10-30']]);
   const korea=composeKoreaDeepSections({bundle:null,searchTop:[],checkpoint:'다음 확인 지표.',wire:[{...wire[0]!,title:'[증시-마감] 코스피, 대형주 실망에 1.24% 하락',publishedAt:'2026-10-29T06:41:00.000Z',sentence:'코스피가 대형 반도체주의 실적 실망에 하락 마감했다.'}]});
   assert.equal(korea.hasCoreCommentary,true);
-  assert.match(korea.leadAddition[0]!,/^연합인포맥스는 전일 장을 “코스피가 대형 반도체주의 실적 실망에 하락 마감했다”라고 전했다\.$/);
+  assert.deepEqual(korea.leadAddition,[]);
 });
 
 test('wire collection records failed feeds without throwing', async () => {
