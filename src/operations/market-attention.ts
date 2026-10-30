@@ -6,7 +6,7 @@
  *   SPDR sector ETFs, each with the change for the covered session computed from daily closes.
  */
 export interface KoreaSearchStock {rank:number;name:string;code:string;close:number;changePct:number;date:string;url:string}
-export interface USAttentionStock {symbol:string;name:string;koreanName:string|null;changePct:number;close:number;date:string;trendingRank:number|null;mostActiveRank:number|null;marketCap:number|null}
+export interface USAttentionStock {symbol:string;name:string;koreanName:string|null;changePct:number;close:number;date:string;trendingRank:number|null;mostActiveRank:number|null;marketCap:number|null;bigMover?:boolean}
 export interface SectorMove {symbol:string;label:string;changePct:number;date:string}
 export interface AttentionAudit {sourceId:string;url:string;status:'PASS'|'FAILED';count:number;error:string|null}
 
@@ -97,15 +97,18 @@ export function displayName(stock:USAttentionStock):string {return stock.koreanN
 
 export const AI_BELLWETHERS=['NVDA','MSFT','GOOGL','AMZN','META','AVGO','AMD','TSM','ORCL','PLTR'];
 /** Latest completed U.S. session close-to-close change for AI bellwethers (the session is taken from the data itself). */
-export async function collectAIBellwethers(candidateSessions:string[],fetcher:typeof fetch=fetch):Promise<{stocks:USAttentionStock[];sessionDate:string|null;audit:AttentionAudit[];urls:string[]}>{
+/** The largest U.S. companies: a big move in one of them is market news whether or not it trends. */
+export const US_MEGACAPS=[...AI_BELLWETHERS.filter(symbol=>symbol!=='PLTR'),'AAPL','TSLA'];
+export async function collectAIBellwethers(candidateSessions:string[],fetcher:typeof fetch=fetch,symbols:string[]=AI_BELLWETHERS):Promise<{stocks:USAttentionStock[];sessionDate:string|null;audit:AttentionAudit[];urls:string[]}>{
+  const AI_BELLWETHERS_LIST=symbols;
   const audit:AttentionAudit[]=[],urls:string[]=[];
   for(const sessionDate of candidateSessions){
     try{
-      const fetched:string[]=[];const changes=await sessionChanges(AI_BELLWETHERS,sessionDate,fetcher,fetched);
-      if(changes.size<AI_BELLWETHERS.length-2)continue;
+      const fetched:string[]=[];const changes=await sessionChanges(AI_BELLWETHERS_LIST,sessionDate,fetcher,fetched);
+      if(changes.size<AI_BELLWETHERS_LIST.length-2)continue;
       for(const url of fetched){audit.push({sourceId:'yahoo:spark:ai-bellwethers',url,status:'PASS',count:changes.size,error:null});urls.push(url)}
-      return {stocks:AI_BELLWETHERS.flatMap(symbol=>{const change=changes.get(symbol);return change?[{symbol,name:change.name,koreanName:US_KOREAN_NAMES[symbol]??null,changePct:change.changePct,close:change.close,date:sessionDate,trendingRank:null,mostActiveRank:null,marketCap:null}]:[]}),sessionDate,audit,urls};
-    }catch(error){audit.push({sourceId:'yahoo:spark:ai-bellwethers',url:yahooSparkUrl(AI_BELLWETHERS),status:'FAILED',count:0,error:errorCode(error)});break}
+      return {stocks:AI_BELLWETHERS_LIST.flatMap(symbol=>{const change=changes.get(symbol);return change?[{symbol,name:change.name,koreanName:US_KOREAN_NAMES[symbol]??null,changePct:change.changePct,close:change.close,date:sessionDate,trendingRank:null,mostActiveRank:null,marketCap:null}]:[]}),sessionDate,audit,urls};
+    }catch(error){audit.push({sourceId:'yahoo:spark:ai-bellwethers',url:yahooSparkUrl(AI_BELLWETHERS_LIST),status:'FAILED',count:0,error:errorCode(error)});break}
   }
   return {stocks:[],sessionDate:null,audit,urls};
 }

@@ -1,7 +1,7 @@
 /** Collection wrapper that turns broker research and attention signals into audited deep sections. */
 import type {DailyCategory} from './daily-orchestrator.js';
 import {collectBrokerResearch,type BrokerAudit,type PdfTextReader} from './broker-briefs.js';
-import {collectAIBellwethers,collectKoreaSearchTop,collectUSAttention,NAVER_SEARCH_TOP,YAHOO_TRENDING,type AttentionAudit} from './market-attention.js';
+import {collectAIBellwethers,collectKoreaSearchTop,collectUSAttention,US_MEGACAPS,NAVER_SEARCH_TOP,YAHOO_TRENDING,type AttentionAudit} from './market-attention.js';
 import {collectWireCloses} from './market-wire.js';
 import {composeAIDeepSections,composeKoreaDeepSections,composeUSDeepSections,indexMove,type DeepComposition} from './market-deep-sections.js';
 
@@ -29,7 +29,12 @@ export function wireFallbackAllowed(at:string):boolean {return new Date(Date.par
 export async function collectUSDeep(input:{sessionDate:string;operationDate:string;at:string;fetcher:typeof fetch;audit:AuditSink[];pdfText?:PdfTextReader;indexChanges:number[]}):Promise<DeepCollection>{
   const empty:DeepCollection={composition:{sections:[],leadAddition:[],titleFocus:null,sources:[]},title:null,sources:[]};
   try{
-    const [bundle,attention]=await Promise.all([collectBrokerResearch({sessionDate:input.sessionDate,operationDate:input.operationDate,fetcher:input.fetcher,...(input.pdfText?{pdfText:input.pdfText}:{})}).catch(()=>null),collectUSAttention(input.sessionDate,input.fetcher).catch(()=>null)]);
+    const [bundle,attention,mega]=await Promise.all([collectBrokerResearch({sessionDate:input.sessionDate,operationDate:input.operationDate,fetcher:input.fetcher,...(input.pdfText?{pdfText:input.pdfText}:{})}).catch(()=>null),collectUSAttention(input.sessionDate,input.fetcher).catch(()=>null),collectAIBellwethers([input.sessionDate],input.fetcher,US_MEGACAPS).catch(()=>null)]);
+    if(mega)record(input.audit,mega.audit.map(item=>({...item,sourceId:item.sourceId.replace('ai-bellwethers','megacaps')})),'US_MARKET',input.at,input.sessionDate);
+    // A 3%+ move in one of the largest companies is market news even when it is not trending.
+    const bigMovers=(mega?.stocks??[]).filter(stock=>Math.abs(stock.changePct)>=3);
+    const attentionStocks=(attention?.stocks??[]).map(stock=>bigMovers.some(item=>item.symbol===stock.symbol)?{...stock,bigMover:true}:stock);
+    const stocks=[...bigMovers.filter(item=>!attentionStocks.some(stock=>stock.symbol===item.symbol)).map(item=>({...item,bigMover:true})),...attentionStocks];
     if(bundle)record(input.audit,bundle.audit,'US_MARKET',input.at,null);
     if(attention)record(input.audit,attention.audit,'US_MARKET',input.at,input.sessionDate);
     const usBriefed=Boolean(bundle?.briefs.some(brief=>brief.statements.some(item=>item.region==='US')));
@@ -38,9 +43,9 @@ export async function collectUSDeep(input:{sessionDate:string;operationDate:stri
     const sp=agreed?input.indexChanges.reduce((sum,value)=>sum+value,0)/input.indexChanges.length:null;
     const wire=usBriefed||!wireFallbackAllowed(input.at)?null:await collectWireCloses({region:'US',sessionDate:input.sessionDate,change:sp,fetcher:input.fetcher}).catch(()=>null);
     if(wire)record(input.audit,wire.audit,'US_MARKET',input.at,input.sessionDate);
-    const composition=composeUSDeepSections({bundle,stocks:attention?.stocks??[],sectors:attention?.sectors??[],wire:wire?.reports??[],checkpoint:'다음 정규장에서는 미국 10년물 금리 방향과 함께, 증권사들이 짚은 경계 요인이 주요 지수와 업종 등락에 실제로 반영되는지가 확인 대상이다.'});
+    const composition=composeUSDeepSections({bundle,stocks,sectors:attention?.sectors??[],wire:wire?.reports??[],checkpoint:'다음 정규장에서는 미국 10년물 금리 방향과 함께, 증권사들이 짚은 경계 요인이 주요 지수와 업종 등락에 실제로 반영되는지가 확인 대상이다.'});
     const sources=[...composition.sources];
-    if(composition.sections.some(section=>section.key==='us-sectors-stocks')){sources.push({label:'Yahoo Finance 검색 상위 종목',url:YAHOO_TRENDING,publisher:'Yahoo Finance'});for(const url of attention?.stockUrls??[])sources.push({label:'Yahoo Finance 종목 일별 종가',url,publisher:'Yahoo Finance'})}
+    if(composition.sections.some(section=>section.key==='us-sectors-stocks')){sources.push({label:'Yahoo Finance 검색 상위 종목',url:YAHOO_TRENDING,publisher:'Yahoo Finance'});for(const url of attention?.stockUrls??[])sources.push({label:'Yahoo Finance 종목 일별 종가',url,publisher:'Yahoo Finance'});if(bigMovers.length)for(const url of mega?.urls??[])sources.push({label:'Yahoo Finance 미국 시가총액 상위 종목 일별 종가',url,publisher:'Yahoo Finance'})}
     if(composition.sections.some(section=>section.key==='us-sectors-stocks'))for(const url of attention?.sectorUrls??[])sources.push({label:'Yahoo Finance SPDR 업종 ETF 일별 종가',url,publisher:'Yahoo Finance'});
     recordListed(input.audit,sources,'US_MARKET',input.at);
     const ups=input.indexChanges.filter(value=>value>0.005).length,downs=input.indexChanges.filter(value=>value<-0.005).length;
@@ -65,7 +70,9 @@ export async function collectKoreaDeep(input:{sessionDate:string;operationDate:s
     if(composition.sections.some(section=>section.key==='korea-stocks')){sources.push({label:'네이버페이 증권 검색 상위 종목',url:NAVER_SEARCH_TOP,publisher:'네이버페이 증권'});for(const stock of search?.stocks??[])sources.push({label:`네이버페이 증권 ${stock.name} 일별 시세`,url:stock.url,publisher:'네이버페이 증권'})}
     recordListed(input.audit,sources,'KOREA_MARKET',input.at);
     const change=input.kospiChangePct,level=new Intl.NumberFormat('en-US',{maximumFractionDigits:0}).format(Math.floor(input.kospiClose));
-    const head=change===null?null:`코스피 ${Math.abs(change).toFixed(2)}% ${indexMove(change)} ${level}`;
+    // '코스피 1.24% 내려 5,937…검색 1위 삼성전자 4.8% 하락': the index verb differs from the stock's, so the headline does not repeat '하락…하락'.
+    const verb:Record<string,string>={상승:'올라',하락:'내려',급등:'급등해',급락:'급락해',보합:'보합'};
+    const head=change===null?null:`코스피 ${Math.abs(change).toFixed(2)}% ${verb[indexMove(change)]??indexMove(change)} ${level}`;
     return {composition,title:head&&composition.titleFocus?`${head}…${composition.titleFocus}`:null,sources};
   }catch{return empty}
 }
