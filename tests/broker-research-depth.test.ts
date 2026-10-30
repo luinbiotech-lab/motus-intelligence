@@ -142,7 +142,7 @@ test('MOTUS synthesis names themes shared by several brokers and flags divergent
   const mk=(broker:string,idx:string,texts:string[])=>({report:{kind:'MARKET' as const,date:'2026-10-29',title:'brief',broker,analysts:'리서치센터',url:'https://consensus.hankyung.com/analysis/downpdf?report_idx='+idx,summary:[],targetPrice:null,rating:null,stockCode:null,company:null},statements:texts.map(text=>({region:'KOREA' as const,text,heading:null})),digests:[]});
   const korea=composeKoreaDeepSections({bundle:{briefs:[mk('A증권','1',['반도체 대형주 실적 기대에 코스피 상승 마감']),mk('B증권','2',['SK하이닉스 호실적에 반도체 급등 마감','FOMC 대기 속 경계감 공존']),mk('C증권','3',['원/달러 환율 상승 마감'])],company:[],industry:[],economy:[],audit:[]},searchTop:[]});
   const text=korea.sections.flatMap(section=>section.paragraphs.map(p=>p.text)).join(' ');
-  assert.match(text,/MOTUS 정리: 증권사 3곳의 아침 리포트를 대조하면 반도체\(A증권·B증권\)/);
+  assert.match(text,/MOTUS 정리: 증권사 3곳의 리포트를 대조하면 반도체\(A증권·B증권\)/);
   assert.match(text,/C증권은 환율·달러를 따로 짚었다/);
   assert.match(text,/경계 요인도 제시됐다\. B증권 리서치센터는 “FOMC 대기 속 경계감 공존”이라고 짚었다/);
 });
