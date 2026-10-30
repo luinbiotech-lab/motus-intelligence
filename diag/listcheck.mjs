@@ -1,9 +1,4 @@
 import fs from 'node:fs';
-const out=[];const log=(...a)=>out.push(a.join(' '));
-const r=await fetch('https://www.schwab.com/learn/story/stock-market-update-open',{headers:{'user-agent':'Mozilla/5.0 (compatible; MOTUS-ResearchCollector/1.0; +https://motusnova.blogspot.com)'}});
-const h=await r.text();log('status',r.status,h.length,r.url);
-for(const m of h.matchAll(/<script[^>]*application\/ld\+json[^>]*>([\s\S]*?)<\/script>/g))log('LD',m[1].slice(0,1500));
-log('META',[...h.matchAll(/<meta[^>]+(?:property|name)="(?:og:title|og:description|description|article:published_time|author|og:url)"[^>]*>/g)].map(m=>m[0]).join('\n'));
-const i=h.indexOf('Published as of');log('AROUND',h.slice(i-1500,i+4000).replace(/\s+/g,' '));
-const j=h.indexOf('said ');log('SAID',h.slice(j-800,j+400).replace(/\s+/g,' '));
-fs.mkdirSync('out',{recursive:true});fs.writeFileSync('out/probe.txt',out.join('\n'));fs.writeFileSync('out/schwab.html',h);
+const j=await (await fetch('https://motusnova.blogspot.com/feeds/posts/default?alt=json&max-results=4',{headers:{'user-agent':'Mozilla/5.0'}})).json();
+const out=j.feed.entry.map(e=>'# '+e.title.$t+'\n'+e.published.$t+'\n'+e.content.$t.replace(/<style[\s\S]*?<\/style>/g,'').replace(/<svg[\s\S]*?<\/svg>/g,'[차트]').replace(/<(h[1-4])[^>]*>/g,'\n## ').replace(/<\/(p|li|h[1-4]|div|tr)>/g,'\n').replace(/<[^>]+>/g,' ').replace(/&nbsp;/g,' ').replace(/&quot;/g,'"').replace(/&#39;/g,"'").replace(/&amp;/g,'&').replace(/&#8230;/g,'…').replace(/[ \t]+/g,' ').replace(/\n\s*\n+/g,'\n'));
+fs.mkdirSync('out',{recursive:true});fs.writeFileSync('out/posts.txt',out.join('\n\n==========\n\n'));
