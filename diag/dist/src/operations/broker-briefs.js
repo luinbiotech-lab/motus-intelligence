@@ -172,6 +172,10 @@ export function contradictsKospi(statements, verifiedClose) {
             const rest = item.text.slice(mention.index + mention[0].length), stop = rest.search(/KOSDAQ|코스닥|KOSPI|코스피/i), scope = (stop >= 0 ? rest.slice(0, stop) : rest).slice(0, 60), match = scope.match(/(\d{1,2},\d{3}(?:\.\d+)?)/);
             if (!match)
                 continue;
+            // A round level ('6,000선') or an intraday print ('6,100p 터치', '회복', '하회') is not the close.
+            const after = scope.slice(scope.indexOf(match[1]) + match[1].length, scope.indexOf(match[1]) + match[1].length + 14);
+            if (/^\s*선|^\s*(?:p|pt|P)?\s*(?:대|터치|돌파|회복|하회|상회|탈환|이탈|부근|근처)/.test(after) || /장중|터치|고점|저점/.test(scope))
+                continue;
             const value = Number(match[1].replace(/,/g, ''));
             if (value > 1000 && Math.abs(value - verifiedClose) / verifiedClose > 0.002)
                 return true;

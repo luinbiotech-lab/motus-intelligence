@@ -1,9 +1,8 @@
 import fs from 'node:fs';
 const out=[];const log=(...a)=>out.push(a.join(' '));
+const show=(r)=>{log('TITLE',r.title);for(const s of r.composition.sections){log('##',s.title);for(const p of s.paragraphs)log('-',p.text)}};
 try{
-const {collectBrokerResearch}=await import('./dist/src/operations/broker-briefs.js');
-const kr=await collectBrokerResearch({sessionDate:'2026-10-29',operationDate:'2026-10-30',verifiedKospiClose:5937.66});
-for(const b of kr.briefs){log('#',b.report.broker,b.report.title,'st',b.statements.length);for(const s of b.statements)if(s.region==='KOREA')log('  K',s.text.slice(0,120))}
-log('FAILED',JSON.stringify(kr.audit.filter(a=>a.status==='FAILED').map(a=>a.sourceId+' '+a.error)));
+const m=await import('./dist/src/operations/market-deep-collect.js');
+show(await m.collectKoreaDeep({sessionDate:'2026-10-29',operationDate:'2026-10-30',at:new Date().toISOString(),fetcher:fetch,audit:[],kospiClose:5937.66,kospiChangePct:-1.24}));
 }catch(e){log('ERROR',e.stack)}
 fs.mkdirSync('out',{recursive:true});fs.writeFileSync('out/probe.txt',out.join('\n'));
