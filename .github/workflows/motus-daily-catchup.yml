@@ -2,12 +2,7 @@ name: MOTUS Daily Catch-up Simulation
 
 on:
   workflow_dispatch:
-  schedule:
-    # 07:20, 13:20 and 19:20 KST on weekdays
-    - cron: '20 22 * * 0-4'
-    - cron: '20 4 * * 1-5'
-    - cron: '20 10 * * 1-5'
-
+  # Schedule removed 2026-10-31 to save account-limited Actions minutes; run manually when needed.
 permissions:
   contents: read
 
