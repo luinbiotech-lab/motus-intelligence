@@ -252,3 +252,11 @@ test('a round level or an intraday KOSPI print is not read as a contradicting cl
   assert.equal(contradictsKospi(line('KOSPI 5,937pt (-1.24%), KOSDAQ 753pt (-2.34%)'),5937.66),false);
   assert.equal(contradictsKospi(line('KOSPI는 2.2% 하락한 5,877.9p로 마감'),5937.66),true);
 });
+
+test('a later close printed after an intraday or round level is still compared',async()=>{
+  const {contradictsKospi}=await import('../src/operations/broker-briefs.js');
+  const line=(text:string)=>[{region:'KOREA' as const,text,heading:null}];
+  assert.equal(contradictsKospi(line('코스피는 장중 6,100p 터치 후 6,050.12로 마감했다'),5937.66),true);
+  assert.equal(contradictsKospi(line('코스피는 6,000선 회복 후 6,050.12로 마감했다'),5937.66),true);
+  assert.equal(contradictsKospi(line('코스피는 5,937.66으로 마감했고 원/달러 환율은 1,336.8원'),5937.66),false);
+});

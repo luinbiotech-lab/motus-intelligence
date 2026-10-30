@@ -164,7 +164,9 @@ export function composeKoreaDeepSections(input:{bundle:BrokerResearchBundle|null
   let titleFocus:string|null=null;
   if(input.searchTop.length){
     // Why the stock moved: a broker comment on the session that names it, quoted with the broker; then the latest rating.
-    const why=(name:string)=>briefs.flatMap(brief=>brief.statements.filter(item=>item.region==='KOREA'&&item.text.length<=200&&item.text.replace(/\s+/g,'').includes(name.replace(/\s+/g,''))).map(item=>({item,brief})))[0];
+    // The name must stand on its own: 'SK' does not match 'SK하이닉스', '현대차' does not match '현대차증권'.
+    const named=(text:string,name:string)=>new RegExp(`(?<![가-힣A-Za-z0-9])${name.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}(?![가-힣A-Za-z0-9&])|(?<![가-힣A-Za-z0-9])${name.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}(?=[은는이가을를의와과도에])`).test(text);
+    const why=(name:string)=>briefs.flatMap(brief=>brief.statements.filter(item=>item.region==='KOREA'&&item.text.length<=200&&named(item.text,name)).map(item=>({item,brief})))[0];
     // One link per paragraph: the move with its reason (broker comment) and the rating (company report) are cited separately.
     const paragraphs:DeepParagraph[]=input.searchTop.flatMap(stock=>{
       const report=companyReports.find(item=>item.stockCode===stock.code),digest=companyDigest(stock.name),reason=why(stock.name);

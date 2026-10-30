@@ -39,3 +39,11 @@ test('a megacap big mover leads the U.S. stock list and the headline', () => {
   assert.match(market[0]!.text,/^알파벳\(GOOGL\)은 10\.00달러로 12\.64% 급락했다\(시가총액 상위 종목, 대형주 거래량 1위\)\.$/);
   assert.equal(composed.titleFocus,'알파벳 13% 급락');
 });
+
+test('a short stock name does not borrow a longer name\'s comment', () => {
+  const bundle:BrokerResearchBundle={...korea,briefs:[{...korea.briefs[0]!,statements:[{region:'KOREA',text:'코스피는 SK하이닉스가 HBM 기대에 5% 급등했지만 하락 마감',heading:null}]}]};
+  const composed=composeKoreaDeepSections({bundle,searchTop:[{rank:1,name:'SK',code:'034730',close:1,changePct:1,date:'2026-10-29',url:'https://m.stock.naver.com/api/stock/034730/price'},{rank:2,name:'SK하이닉스',code:'000660',close:1,changePct:5,date:'2026-10-29',url:'https://m.stock.naver.com/api/stock/000660/price'}],checkpoint:'체크.'});
+  const stocks=composed.sections.find(item=>item.key==='korea-stocks')!.paragraphs.map(p=>p.text);
+  assert.ok(!stocks.some(text=>text.startsWith('검색 1위 SK는')&&text.includes('HBM')),stocks.join('\n'));
+  assert.ok(stocks.some(text=>text.startsWith('검색 2위 SK하이닉스는')&&text.includes('HBM')),stocks.join('\n'));
+});
