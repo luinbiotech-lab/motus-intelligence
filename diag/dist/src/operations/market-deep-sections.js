@@ -108,11 +108,9 @@ export function composeUSDeepSections(input) {
     const wire = cause.first ? null : wireCause(input.wire ?? [], 'us-causes', sources);
     if (cause.first) {
         sections.push({ key: 'us-causes', placement: 'early', title: '상승·하락 요인과 반대 시각', paragraphs: cause.paragraphs });
-        leadAddition.push(`${subject(cause.first.brief.report)} 이날 장을 ${said([quote(cause.first.text)])} 요약했다.`);
     }
     else if (wire) {
         sections.push(wire.section);
-        leadAddition.push(wire.lead);
     }
     const ranked = [...input.stocks].sort((a, b) => (a.trendingRank ?? 99) - (b.trendingRank ?? 99) || (a.mostActiveRank ?? 99) - (b.mostActiveRank ?? 99)).slice(0, 5);
     let titleFocus = null;
@@ -159,11 +157,9 @@ export function composeKoreaDeepSections(input) {
     const wire = cause.first ? null : wireCause(input.wire ?? [], 'korea-causes', sources);
     if (cause.first) {
         sections.push({ key: 'korea-causes', placement: 'early', title: '상승·하락 요인과 반대 시각', paragraphs: cause.paragraphs });
-        leadAddition.push(`${subject(cause.first.brief.report)} 전일 장을 ${said([quote(cause.first.text)])} 진단했다.`);
     }
     else if (wire) {
         sections.push(wire.section);
-        leadAddition.push(wire.lead.replace('이날 장을', '전일 장을'));
     }
     const digests = briefs.flatMap(brief => brief.digests.map(item => ({ item, brief })));
     const companyDigest = (name) => digests.find(({ item }) => item.heading.replace(/\s+/g, '').includes(name.replace(/\s+/g, '')));
@@ -196,12 +192,25 @@ export function composeKoreaDeepSections(input) {
 }
 const AI_WORDS = /AI|인공지능|반도체|HBM|데이터센터|GPU|엔비디아|LLM|클라우드|전력기기|인터커넥트|로봇|휴머노이드|파운드리|메모리|서버|MLCC|FC ?BGA/;
 /** AI article: AI bellwether moves on the latest U.S. session and broker research that names AI demand. */
+const AI_ISSUE = /AI|인공지능|빅테크|알파벳|구글|마이크로소프트|\bMS\b|아마존|AWS|애저|Azure|메타|엔비디아|오라클|데이터센터|클라우드|설비투자|CapEx|반도체|HBM|GPU/;
+/** AI article: the day's AI issue as brokers explained the latest U.S. session, AI bellwether moves and AI research. */
 export function composeAIDeepSections(input) {
     const sections = [], sources = [];
+    // The day's AI issue: broker morning comments on the U.S. session that name AI companies or AI investment.
+    const issueBriefs = (input.bundle?.briefs ?? []).map(brief => ({ ...brief, statements: brief.statements.filter(item => item.region === 'US' && AI_ISSUE.test(item.text)) })).filter(brief => brief.statements.length);
+    const issue = causeParagraphs(issueBriefs, 'US');
+    let titleFocus = null;
+    if (issue.first) {
+        sections.push({ key: 'ai-issue', placement: 'early', title: '오늘의 AI 쟁점: 증권가 시각', intro: '직전 미국 정규장에서 AI 관련 기업의 주가를 움직인 사안을 증권사 아침 리포트 원문으로 정리했다.', paragraphs: issue.paragraphs });
+        // The headline names the AI bellwether with the largest move that the brokers themselves discussed.
+        const named = [...input.stocks].filter(stock => stock.koreanName && Math.abs(stock.changePct) >= 3 && issueBriefs.some(brief => brief.statements.some(item => item.text.includes(stock.koreanName)))).sort((a, b) => Math.abs(b.changePct) - Math.abs(a.changePct))[0];
+        if (named)
+            titleFocus = `${named.koreanName} ${Math.abs(named.changePct).toFixed(Math.abs(named.changePct) >= 10 ? 0 : 1)}% ${moveWord(named.changePct)}`;
+    }
     if (input.stocks.length >= 3 && input.sessionDate) {
         const sorted = [...input.stocks].sort((a, b) => b.changePct - a.changePct), best = sorted[0], worst = sorted.at(-1);
         const up = sorted.filter(item => item.changePct > 0.005).length;
-        sections.push({ key: 'ai-stocks', title: 'AI 대표 종목의 주가 흐름', intro: `미국 AI 대표 종목 ${sorted.length}개의 직전 정규장(${input.sessionDate}) 종가 기준 등락이다.`, paragraphs: [
+        sections.push({ key: 'ai-stocks', placement: 'early', title: 'AI 대표 종목의 주가 흐름', intro: `미국 AI 대표 종목 ${sorted.length}개의 직전 정규장(${input.sessionDate}) 종가 기준 등락이다.`, paragraphs: [
                 { text: `${sorted.length}개 종목 가운데 ${up}개가 올랐다. 가장 강한 종목은 ${displayName(best)}(${best.symbol}, ${signedPct(best.changePct)}), 가장 약한 종목은 ${displayName(worst)}(${worst.symbol}, ${signedPct(worst.changePct)})였다.` },
                 { text: sorted.map(item => `${displayName(item)} ${signedPct(item.changePct)}`).join(' · ') },
             ] });
@@ -221,6 +230,6 @@ export function composeAIDeepSections(input) {
     for (const report of [...briefs.map(item => item.report), ...companies, ...industry])
         if (used.has(report.url))
             sources.push(sourceEntry(report));
-    return { sections, leadAddition: [], titleFocus: null, sources: [...new Map(sources.map(item => [item.url, item])).values()] };
+    return { sections, leadAddition: [], titleFocus, hasCoreCommentary: Boolean(issue.first), sources: [...new Map(sources.map(item => [item.url, item])).values()] };
 }
 export { indexMove };

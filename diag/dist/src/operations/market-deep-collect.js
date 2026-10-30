@@ -103,7 +103,7 @@ export async function collectAIDeep(input) {
             for (const url of bellwethers?.urls ?? [])
                 sources.push({ label: 'Yahoo Finance AI 대표 종목 일별 종가', url, publisher: 'Yahoo Finance' });
         recordListed(input.audit, sources, 'AI_INTELLIGENCE', input.at);
-        return { composition, title: null, sources };
+        return { composition, title: composition.titleFocus ? `${composition.titleFocus}…증권가가 짚은 AI 투자 쟁점` : null, sources };
     }
     catch {
         return empty;

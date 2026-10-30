@@ -240,19 +240,23 @@ export async function collectBrokerResearch(input) {
             }
         }),
     ]);
-    const year = Number(input.sessionDate.slice(0, 4));
     // A date printed in the title must be the session or the report's own date (a 10/28 close note listed on 10/29 is not about 10/29).
-    const datedFor = (report, allowed) => { const printed = titleDates(report.title, year); return !printed.length || printed.some(date => allowed.includes(date)); };
+    const datedFor = (report, allowed) => { const printed = titleDates(report.title, report.date); return !printed.length || printed.some(date => allowed.includes(date)); };
+    /**
+     * A Korean closing comment describes the Korean session; the U.S. lines in it are the previous U.S. night.
+     * It is recognised by a title dated on the session but listed later, or by '마감'/'레이더' in a title that is
+     * neither about U.S./global markets nor dated on its own listing day (a morning '美 증시 마감' note is not one).
+     */
+    const closingComment = (report) => { const printed = titleDates(report.title, report.date); return (printed.includes(input.sessionDate) && report.date > input.sessionDate) || (/마감|레이더/.test(report.title) && !/美|미국|뉴욕|해외|글로벌|Global/i.test(report.title) && !printed.includes(report.date)) || (report.date === input.sessionDate && /마감|레이더/.test(report.title)); };
     const pool = [
         ...['market', 'invest', 'economy'].flatMap(category => (naverLists[category] ?? []).filter(isMarketComment).map(item => ({ report: naverReport(item, 'MARKET', null, category), naver: { item, category }, koreaOnly: false }))),
         ...(lists.MARKET ?? []).filter(item => /brief|daily|market|아침|모닝|morning|start|wake|view|데일리|시황|마감|코멘트/i.test(item.title)).map(report => ({ report, koreaOnly: false })),
-    ];
+    ].map(item => ({ ...item, koreaOnly: closingComment(item.report) }));
     // Morning briefs published after the session describe it; take the earliest such date only.
     const after = pool.filter(item => item.report.date > input.sessionDate && item.report.date <= addDays(input.sessionDate, 5));
     const briefDate = after.map(item => item.report.date).sort()[0];
-    const sameEvening = pool.filter(item => item.report.date === input.sessionDate && /마감|레이더/.test(item.report.title) && !/\(\d{2}\.\d{2}\.\d{2}\)/.test(item.report.title)).map(item => ({ ...item, koreaOnly: true }));
-    // A Korean closing comment describes the Korean session; the U.S. lines in it are the previous U.S. night.
-    const ordered = [...after.filter(item => item.report.date === briefDate).map(item => /마감|레이더/.test(item.report.title) ? { ...item, koreaOnly: true } : item), ...sameEvening].filter(item => datedFor(item.report, item.koreaOnly ? [input.sessionDate] : [input.sessionDate, item.report.date]));
+    const sameEvening = pool.filter(item => item.report.date === input.sessionDate && /마감|레이더/.test(item.report.title));
+    const ordered = [...after.filter(item => item.report.date === briefDate), ...sameEvening].filter(item => datedFor(item.report, item.koreaOnly ? [input.sessionDate] : [input.sessionDate, item.report.date]));
     const candidates = [];
     const seen = new Set();
     for (const item of ordered) {
@@ -263,9 +267,12 @@ export async function collectBrokerResearch(input) {
         candidates.push(item);
     }
     const briefs = [];
+    let attempts = 0;
     for (const candidate of candidates) {
-        if (briefs.length >= (input.maxBriefs ?? 8))
+        // Failed candidates count too, so a slow PDF host cannot stretch the run.
+        if (briefs.length >= (input.maxBriefs ?? 8) || attempts >= (input.maxBriefs ?? 8) * 2)
             break;
+        attempts++;
         let report = candidate.report;
         try {
             let statements = [], digests = [], events = [];
@@ -283,7 +290,7 @@ export async function collectBrokerResearch(input) {
             const pdfUrl = candidate.naver ? (report.url.endsWith('.pdf') ? report.url : null) : report.url;
             if (pdfUrl) {
                 try {
-                    const response = await fetcher(pdfUrl, { headers: { 'user-agent': UA, ...(candidate.naver ? {} : { referer: CONSENSUS_HOST + '/analysis/list' }) }, signal: AbortSignal.timeout(25000) });
+                    const response = await fetcher(pdfUrl, { headers: { 'user-agent': UA, ...(candidate.naver ? {} : { referer: CONSENSUS_HOST + '/analysis/list' }) }, signal: AbortSignal.timeout(candidate.naver ? 15000 : 25000) });
                     if (!response.ok)
                         throw new Error('CONSENSUS_HTTP_' + response.status);
                     const buffer = Buffer.from(await response.arrayBuffer());
@@ -303,7 +310,7 @@ export async function collectBrokerResearch(input) {
                 throw new Error('NAVER_RESEARCH_EMPTY');
             if (candidate.koreaOnly) {
                 statements = statements.filter(item => item.region === 'KOREA');
-                digests = digests.filter(digest => !/美|미국|뉴욕|FOMC|연준|Fed/.test(digest.heading));
+                digests = digests.filter(digest => !/美|미국|뉴욕|FOMC|연준|Fed|달러|국채|금리/.test(digest.heading));
                 events = events.filter(item => item.region === 'KOREA');
             }
             const close = input.verifiedKospiClose;

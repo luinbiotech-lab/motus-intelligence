@@ -13,12 +13,15 @@ export const BLOGGER_EDITORIAL_CATEGORIES = {
 };
 export function renderAIEditorialArticle(view) {
     const seen = new Set([normalized(view.todayCore.summary)]), parts = [masthead(view.title, view.subtitle, view.displayLabel, view.issueDate), lead(view.todayCore.summary)];
+    // The day's market issue and AI stock moves lead; official announcements follow.
+    for (const item of (view.deepSections ?? []).filter(item => item.placement === 'early'))
+        parts.push(deepSection(item));
     for (const issue of view.issues) {
         const content = paragraphs(uniqueProse([...issue.whatHappened, issue.coreContent, issue.whyItMatters ?? '', issue.marketConnection ?? ''], seen));
         if (content)
             parts.push(section(issue.headline, content));
     }
-    for (const item of view.deepSections ?? [])
+    for (const item of (view.deepSections ?? []).filter(item => item.placement !== 'early'))
         parts.push(deepSection(item));
     const connections = paragraphs(uniqueProse(view.industryConnections.flatMap(item => [item.explanation, item.optionalWatchPoint ?? '']), seen));
     if (connections)

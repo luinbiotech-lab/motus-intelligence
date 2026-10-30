@@ -53,22 +53,33 @@ export function summaryAsBullets(html) {
     }
     return out.join('\n');
 }
-/** Dates printed in a title: (10월 29일), 10/29, 26.10.28, 261030, 2026.10.30, 2026-10-30. */
-export function titleDates(title, year) {
-    const dates = new Set(), pad = (value) => String(value).padStart(2, '0');
-    const push = (y, m, d) => { if (m >= 1 && m <= 12 && d >= 1 && d <= 31)
-        dates.add(`${y}-${pad(m)}-${pad(d)}`); };
+/**
+ * Dates printed in a title: (10월 29일), 10/29, (26.10.28), (261030), _261030, 2026.10.30, 2026-10-30.
+ * Year-less dates take the report's year (the previous year when that would land after the report), and only
+ * dates within a week before to a day after the report count, so stock codes and '3/4분기' are not dates.
+ */
+export function titleDates(title, reportDate) {
+    const dates = new Set(), pad = (value) => String(value).padStart(2, '0'), reference = Date.parse(reportDate + 'T00:00:00Z'), year = Number(reportDate.slice(0, 4));
+    const push = (y, m, d, yearless = false) => {
+        if (m < 1 || m > 12 || d < 1 || d > 31)
+            return;
+        let date = `${y}-${pad(m)}-${pad(d)}`;
+        if (yearless && Date.parse(date + 'T00:00:00Z') > reference + 86400000)
+            date = `${y - 1}-${pad(m)}-${pad(d)}`;
+        const at = Date.parse(date + 'T00:00:00Z');
+        if (Number.isFinite(at) && at >= reference - 7 * 86400000 && at <= reference + 86400000)
+            dates.add(date);
+    };
     for (const match of title.matchAll(/(\d{1,2})월\s*(\d{1,2})일/g))
-        push(year, Number(match[1]), Number(match[2]));
-    for (const match of title.matchAll(/(?<![\d.])(20\d{2})[.\-](\d{1,2})[.\-](\d{1,2})(?![\d])/g))
+        push(year, Number(match[1]), Number(match[2]), true);
+    for (const match of title.matchAll(/(?<![\d.])(20\d{2})[.\-](\d{1,2})[.\-](\d{1,2})(?!\d)/g))
         push(Number(match[1]), Number(match[2]), Number(match[3]));
     for (const match of title.matchAll(/(?<![\d.])(\d{2})\.(\d{2})\.(\d{2})(?![\d.])/g))
         push(2000 + Number(match[1]), Number(match[2]), Number(match[3]));
-    for (const match of title.matchAll(/(?<!\d)(\d{2})(\d{2})(\d{2})(?!\d)/g))
-        if (Number(match[1]) >= 20)
-            push(2000 + Number(match[1]), Number(match[2]), Number(match[3]));
-    for (const match of title.matchAll(/(?<![\d./])(\d{1,2})\/(\d{1,2})(?![\d/])/g))
-        push(year, Number(match[1]), Number(match[2]));
+    for (const match of title.matchAll(/(?:^|[(_\s])(\d{2})(\d{2})(\d{2})(?=$|[)_\s])/g))
+        push(2000 + Number(match[1]), Number(match[2]), Number(match[3]));
+    for (const match of title.matchAll(/(?<![\d/.])(\d{1,2})\/(\d{1,2})(?![\d/]|분기|\s*분기)/g))
+        push(year, Number(match[1]), Number(match[2]), true);
     return [...dates];
 }
 const NOT_MARKET = /Carbon|ESG|Defense|ETF|탑픽|EPS LIVE|신한생각|Weekly|위클리|월간|Monthly|IPO|비상장|크레딧|Credit|채권|퀀트|Quant|원자재|Commodity/i;

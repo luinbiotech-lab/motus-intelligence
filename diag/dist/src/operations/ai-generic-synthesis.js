@@ -54,6 +54,8 @@ const COUNT_NOUNS = [
     [/startups/i, '스타트업', '곳'], [/employees/i, '직원', '명'], [/students/i, '학생', '명'], [/businesses|companies|organizations/i, '기업·기관', '곳'], [/partners/i, '파트너', '곳'], [/data cent(?:er|re)s/i, '데이터센터', '곳'],
     [/hospitals/i, '병원', '곳'], [/schools/i, '학교', '곳'], [/cities/i, '도시', '곳'], [/people/i, '명', '명'],
 ];
+// -ng also closes the syllable when read in Korean (삼성 Samsung, 보잉 Boeing).
+function stem(word) { return word.trim().replace(/\s*\([^()]*\)$/u, '').replace(/[)\]」』"'”’.,]+$/u, ''); }
 export function josa(word, withBatchim, withoutBatchim) {
     // A trailing ticker or note in parentheses is not read aloud before the particle: 샌디스크(SNDK)는.
     const last = word.trim().replace(/\s*\([^()]*\)$/u, '').replace(/[)\]」』"'”’.,]+$/u, '').slice(-1);
@@ -65,7 +67,7 @@ export function josa(word, withBatchim, withoutBatchim) {
         return word + ('013678'.includes(last) ? withBatchim : withoutBatchim);
     // Latin words are read by sound: only a final l/m/n closes the syllable (인텔은, IBM은, 네이버(NAVER)는, 샌디스크는).
     if (/[A-Za-z]/.test(last))
-        return word + (/[lmn]/i.test(last) ? withBatchim : withoutBatchim);
+        return word + (/[lmn]/i.test(last) || /ng$/i.test(stem(word)) ? withBatchim : withoutBatchim);
     return word + withoutBatchim;
 }
 function koreanCount(value) {
