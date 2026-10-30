@@ -17,14 +17,7 @@ on:
         description: KST run date (YYYY-MM-DD); blank uses current KST date
         required: false
         type: string
-  schedule:
-    # U.S. Market 06:45 KST (Tuesday-Saturday for Monday-Friday U.S. sessions)
-    - cron: '45 21 * * 1-5'
-    # AI Intelligence 12:30 KST (Monday-Friday)
-    - cron: '30 3 * * 1-5'
-    # Korea previous-session morning edition, 06:17 KST (Monday-Friday)
-    - cron: '17 21 * * 0-4'
-
+  # Schedule removed 2026-10-31 to save account-limited Actions minutes; run manually when needed.
 permissions:
   contents: read
 

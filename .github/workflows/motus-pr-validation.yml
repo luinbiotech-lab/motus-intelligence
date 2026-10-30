@@ -4,6 +4,10 @@ on:
     branches: [main]
 permissions:
   contents: read
+# A newer push to the same PR supersedes the older validation run (Actions minutes are account-limited).
+concurrency:
+  group: motus-pr-validation-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
 jobs:
   validate:
     runs-on: ubuntu-24.04
