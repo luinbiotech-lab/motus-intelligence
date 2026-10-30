@@ -12,5 +12,12 @@
     "publicationId": "motus-live-2026-10-30:korea",
     "publicPostUrl": "https://motusnova.blogspot.com/2026/10/124-5937-1-48.html",
     "publishedAt": "2026-10-30T08:28:55+09:00"
+  },
+  {
+    "idempotencyKey": "weekly:motus-live-2026-10-30:ai",
+    "category": "AI_INTELLIGENCE",
+    "publicationId": "motus-live-2026-10-30:ai",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/13-ai.html",
+    "publishedAt": "2026-10-30T14:42:29+09:00"
   }
 ]
