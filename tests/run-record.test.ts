@@ -51,3 +51,19 @@ test('run records survive the ops-data union merge from two runners',async()=>{
   assert.deepEqual((await readRunRecords(a)).map(item=>item.runId),['1','2']);
  }finally{await rm(a,{recursive:true,force:true});await rm(b,{recursive:true,force:true})}
 });
+
+test('the merge tool rebuilds daily status from the merged tree, so parallel runs see each other',async()=>{
+ const {mergeBundleIntoOpsData}=await import('../src/production/ops-data-merge.js');
+ const ops=await mkdtemp(join(tmpdir(),'motus-ops-')),bundle=await mkdtemp(join(tmpdir(),'motus-bundle-')),date='2026-10-30';
+ try{
+  // ops-data already has the U.S. publication from a parallel runner; this bundle only carries Korea.
+  const us=join(ops,'operations',date,'us');await mkdir(us,{recursive:true});
+  await appendPublishLedger(us,{identity:date+'|US_MARKET',operationDate:date,category:'US_MARKET',at:'2026-10-29T23:28:42Z',event:'PUBLISHED',postId:'u',publicPostUrl:'https://motusnova.blogspot.com/2026/10/3-42.html',fingerprint:'sha256:u',detail:'AUTO_POLICY_APPROVAL'});
+  const korea=join(bundle,'operations',date,'korea');await mkdir(korea,{recursive:true});
+  await appendPublishLedger(korea,{identity:date+'|KOREA_MARKET',operationDate:date,category:'KOREA_MARKET',at:'2026-10-29T23:28:56Z',event:'PUBLISHED',postId:'k',publicPostUrl:'https://motusnova.blogspot.com/2026/10/124-5937-1-48.html',fingerprint:'sha256:k',detail:'AUTO_POLICY_APPROVAL'});
+  await writeFile(join(bundle,'operations',date,'daily-status.md'),'| 미국증시 | HOLD | stale view from the Korea runner |');
+  await mergeBundleIntoOpsData(bundle,ops);
+  const status=await buildDailyStatus(join(ops,'operations'),date,'2026-10-29T23:30:00Z');
+  assert.match(status,/\| 미국증시 \| 발행 \|/);assert.match(status,/\| 국내증시 \| 발행 \|/);
+ }finally{await rm(ops,{recursive:true,force:true});await rm(bundle,{recursive:true,force:true})}
+});
