@@ -1,11 +1,18 @@
 import fs from 'node:fs';
-const UA={'user-agent':'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148','accept':'application/json'};
+import {collectBrokerResearch} from './dist/src/operations/broker-briefs.js';
+import {composeUSDeepSections,composeKoreaDeepSections} from './dist/src/operations/market-deep-sections.js';
+import {collectKoreaSearchTop,collectUSAttention} from './dist/src/operations/market-attention.js';
 const out=[];const log=(...a)=>out.push(a.join(' '));
-const j=async u=>{const r=await fetch(u,{headers:UA,signal:AbortSignal.timeout(20000)});return r.json()};
-const strip=t=>t.replace(/<br\s*\/?>/g,'\n').replace(/<\/p>/g,'\n').replace(/<[^>]+>/g,'').replace(/&nbsp;/g,' ');
-const m=await j('https://m.stock.naver.com/api/research/market?page=1&pageSize=40');
-for(const it of m.slice(0,14)){const d=await j(`https://m.stock.naver.com/api/research/market/${it.researchId}`);const c=d.researchContent;log('####',it.writeDate,it.brokerName,it.title,'|',c.attachUrl,'| keys',Object.keys(c).join(','));log(strip(c.content||'').slice(0,1500))}
-const c=await j('https://m.stock.naver.com/api/research/company?page=1&pageSize=3');const cd=await j(`https://m.stock.naver.com/api/research/company/${c[0].researchId}`);log('#### company detail',JSON.stringify(cd.researchContent).slice(0,1500));
-const ind=await j('https://m.stock.naver.com/api/research/industry?page=1&pageSize=3');log('#### industry',JSON.stringify(ind).slice(0,800));
-const inv=await j('https://m.stock.naver.com/api/research/invest?page=1&pageSize=12');for(const it of inv.slice(0,6)){const d=await j(`https://m.stock.naver.com/api/research/invest/${it.researchId}`);log('####',it.writeDate,it.brokerName,it.title);log(strip(d.researchContent.content||'').slice(0,800))}
+const show=(c)=>{for(const s of c.sections){log('##',s.title);for(const p of s.paragraphs)log('-',p.text,p.source?'<'+p.source.url+'>':'')}log('LEAD',c.leadAddition.join(' / '),'core=',c.hasCoreCommentary)};
+const us=await collectBrokerResearch({sessionDate:'2026-10-29',operationDate:'2026-10-30'});
+log('# US briefs',us.briefs.map(b=>b.report.broker+' '+b.report.title+' st='+b.statements.length+' dg='+b.digests.length).join(' | '));
+log('# audit failed',JSON.stringify(us.audit.filter(a=>a.status==='FAILED')));
+for(const b of us.briefs)for(const st of b.statements)log('  ST',b.report.broker,st.region,st.text);
+const att=await collectUSAttention('2026-10-29',fetch).catch(()=>null);
+show(composeUSDeepSections({bundle:us,stocks:att?.stocks??[],sectors:att?.sectors??[],checkpoint:'체크.'}));
+const st=await collectKoreaSearchTop('2026-10-29',fetch).catch(()=>null);
+const kr=await collectBrokerResearch({sessionDate:'2026-10-29',operationDate:'2026-10-30',verifiedKospiClose:5937.66,focusCodes:(st?.stocks??[]).map(s=>s.code)});
+log('# KR briefs',kr.briefs.map(b=>b.report.broker+' '+b.report.title+' st='+b.statements.length).join(' | '));
+log('# company',kr.company.length,kr.company.slice(0,8).map(r=>r.broker+' '+r.company+' '+r.rating+' '+r.targetPrice+' '+r.date).join(' | '));
+show(composeKoreaDeepSections({bundle:kr,searchTop:st?.stocks??[],checkpoint:'체크.'}));
 fs.mkdirSync('out',{recursive:true});fs.writeFileSync('out/probe.txt',out.join('\n'));
