@@ -176,7 +176,7 @@ export function composeKoreaDeepSections(input:{bundle:BrokerResearchBundle|null
 const AI_WORDS=/AI|인공지능|반도체|HBM|데이터센터|GPU|엔비디아|LLM|클라우드|전력기기|인터커넥트|로봇|휴머노이드|파운드리|메모리|서버|MLCC|FC ?BGA/;
 
 /** AI article: AI bellwether moves on the latest U.S. session and broker research that names AI demand. */
-const AI_ISSUE=/AI|인공지능|빅테크|알파벳|구글|마이크로소프트|\bMS\b|아마존|AWS|애저|Azure|메타|엔비디아|오라클|데이터센터|클라우드|설비투자|CapEx|반도체|HBM|GPU/;
+const AI_ISSUE=/AI|인공지능|빅테크|알파벳|구글|마이크로소프트|\bMS\b|아마존|AWS|애저|Azure|메타(?!버스)|엔비디아|오라클|데이터센터|클라우드|설비투자|CapEx|반도체|HBM|GPU/;
 
 /** AI article: the day's AI issue as brokers explained the latest U.S. session, AI bellwether moves and AI research. */
 export function composeAIDeepSections(input:{bundle:BrokerResearchBundle|null;stocks:USAttentionStock[];sessionDate:string|null}):DeepComposition {
@@ -188,7 +188,9 @@ export function composeAIDeepSections(input:{bundle:BrokerResearchBundle|null;st
   if(issue.first){
     sections.push({key:'ai-issue',placement:'early',title:'오늘의 AI 쟁점: 증권가 시각',intro:'직전 미국 정규장에서 AI 관련 기업의 주가를 움직인 사안을 증권사 아침 리포트 원문으로 정리했다.',paragraphs:issue.paragraphs});
     // The headline names the AI bellwether with the largest move that the brokers themselves discussed.
-    const named=[...input.stocks].filter(stock=>stock.koreanName&&Math.abs(stock.changePct)>=3&&issueBriefs.some(brief=>brief.statements.some(item=>item.text.includes(stock.koreanName!)))).sort((a,b)=>Math.abs(b.changePct)-Math.abs(a.changePct))[0];
+    // Only a stock whose move is printed in the stock section and whose name appears in a quoted paragraph qualifies.
+    const quoted=issue.paragraphs.map(p=>p.text).join('\n'),mentions=(name:string)=>new RegExp(`${name}(?!버스)`).test(quoted);
+    const named=input.stocks.length>=3&&input.sessionDate?[...input.stocks].filter(stock=>stock.koreanName&&Math.abs(stock.changePct)>=3&&mentions(stock.koreanName)).sort((a,b)=>Math.abs(b.changePct)-Math.abs(a.changePct))[0]:undefined;
     if(named)titleFocus=`${named.koreanName} ${Math.abs(named.changePct).toFixed(Math.abs(named.changePct)>=10?0:1)}% ${moveWord(named.changePct)}`;
   }
   if(input.stocks.length>=3&&input.sessionDate){

@@ -29,3 +29,11 @@ test('no AI commentary, no issue section and no market headline', () => {
   assert.equal(composed.hasCoreCommentary,false);assert.equal(composed.titleFocus,null);
   assert.ok(!composed.sections.some(item=>item.key==='ai-issue'));
 });
+
+test('the AI headline needs the printed stock section and a quoted mention', () => {
+  const two=composeAIDeepSections({bundle,stocks:[stock('GOOGL','알파벳',-12.64),stock('MSFT','마이크로소프트',-0.2)],sessionDate:'2026-10-29'});
+  assert.equal(two.titleFocus,null,'fewer than three stocks print no stock section, so no headline number');
+  const meta={...bundle,briefs:[{report:bundle.briefs[0]!.report,statements:[{region:'US' as const,text:'메타버스 관련 투자 기대에 AI 반도체가 강세를 보이며 상승 마감',heading:null}],digests:[]}]};
+  const composed=composeAIDeepSections({bundle:meta,stocks:[stock('META','메타',5.1),stock('MSFT','마이크로소프트',-0.2),stock('NVDA','엔비디아',-1.5)],sessionDate:'2026-10-29'});
+  assert.equal(composed.titleFocus,null,'메타버스 is not Meta');
+});
