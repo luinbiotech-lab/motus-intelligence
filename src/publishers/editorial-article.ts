@@ -82,8 +82,8 @@ export function renderMarketResearchEntries(entries:ReadonlyArray<{publisher:str
 }
 
 /** Attributed expert/search-ranked section: each paragraph keeps a visible link to its own source document. */
-export function deepSection(item:{key:string;title:string;intro?:string;paragraphs:Array<{text:string;source?:{label:string;url:string}}>}):string {
-  const body=item.paragraphs.filter(p=>p.text.trim()).map(p=>`<p style="margin:0 0 13px">${esc(p.text)}${p.source&&/^https:\/\//.test(p.source.url)?` <a href="${attr(p.source.url)}" target="_blank" rel="nofollow noopener noreferrer" style="${LINK};font-size:14px">[리포트 원문]</a>`:''}</p>`).join('');
+export function deepSection(item:{key:string;title:string;intro?:string;paragraphs:Array<{text:string;source?:{label:string;url:string;kind?:'article'}}>}):string {
+  const body=item.paragraphs.filter(p=>p.text.trim()).map(p=>`<p style="margin:0 0 13px">${esc(p.text)}${p.source&&/^https:\/\//.test(p.source.url)?` <a href="${attr(p.source.url)}" target="_blank" rel="nofollow noopener noreferrer" style="${LINK};font-size:14px">${p.source.kind==='article'?'[기사 원문]':'[리포트 원문]'}</a>`:''}</p>`).join('');
   return `<section data-section="${attr(item.key)}" style="${SECTION}"><h2 style="${HEADING}">${esc(item.title)}</h2>${item.intro?`<p style="margin:0 0 12px;color:#4a5a6e;font-size:15px">${esc(item.intro)}</p>`:''}${body}</section>`;
 }
 function masthead(title:string,subtitle:string,label:string,date:string){return `<header style="width:100%;max-width:100%;box-sizing:border-box;background:#03162e;color:#fff;padding:26px 22px;margin:0 0 22px"><p style="margin:0 0 9px;color:#c7d8ea;font-size:14px;font-weight:800">${esc(MOTUS_DISPLAY_NAME)}</p><div role="heading" aria-level="2" style="font-size:clamp(25px,7vw,34px);line-height:1.22;font-weight:850;word-break:keep-all">${esc(title)}</div><p style="margin:10px 0 0;color:#e6edf5">${esc(subtitle)}</p><p style="margin:11px 0 0;color:#b7c8da;font-size:13px">${esc(label)} · ${esc(date)}</p></header>`;}
