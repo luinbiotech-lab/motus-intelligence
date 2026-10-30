@@ -169,16 +169,16 @@ export function contradictsKospi(statements, verifiedClose) {
     for (const item of statements.filter(entry => entry.region === 'KOREA' && /코스피|KOSPI/i.test(entry.text))) {
         // Only a level printed right after the KOSPI name is compared (a KOSDAQ level in the same bullet is not KOSPI).
         for (const mention of item.text.matchAll(/KOSPI|코스피/gi)) {
-            const rest = item.text.slice(mention.index + mention[0].length), stop = rest.search(/KOSDAQ|코스닥|KOSPI|코스피/i), scope = (stop >= 0 ? rest.slice(0, stop) : rest).slice(0, 60), match = scope.match(/(\d{1,2},\d{3}(?:\.\d+)?)/);
-            if (!match)
-                continue;
-            // A round level ('6,000선') or an intraday print ('6,100p 터치', '회복', '하회') is not the close.
-            const after = scope.slice(scope.indexOf(match[1]) + match[1].length, scope.indexOf(match[1]) + match[1].length + 14);
-            if (/^\s*선|^\s*(?:p|pt|P)?\s*(?:대|터치|돌파|회복|하회|상회|탈환|이탈|부근|근처)/.test(after) || /장중|터치|고점|저점/.test(scope))
-                continue;
-            const value = Number(match[1].replace(/,/g, ''));
-            if (value > 1000 && Math.abs(value - verifiedClose) / verifiedClose > 0.002)
-                return true;
+            const rest = item.text.slice(mention.index + mention[0].length), stop = rest.search(/KOSDAQ|코스닥|KOSPI|코스피/i), scope = (stop >= 0 ? rest.slice(0, stop) : rest).slice(0, 60);
+            // Every level printed for KOSPI is checked, except a round level ('6,000선') or an intraday print ('장중 6,100p 터치').
+            for (const level of scope.matchAll(/(\d{1,2},\d{3}(?:\.\d+)?)/g)) {
+                const at = level.index, before = scope.slice(Math.max(0, at - 6), at), after = scope.slice(at + level[1].length, at + level[1].length + 10);
+                if (/^\s*(?:선|원|달러|억|조|만|%|주|건|명|bp)|^\s*(?:p|pt|P)?\s*(?:대|터치|돌파|회복|하회|상회|탈환|이탈|부근|근처|고점|저점)/.test(after) || /장중|고점|저점/.test(before))
+                    continue;
+                const value = Number(level[1].replace(/,/g, ''));
+                if (value > 1000 && Math.abs(value - verifiedClose) / verifiedClose > 0.002)
+                    return true;
+            }
         }
     }
     return false;

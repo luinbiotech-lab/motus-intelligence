@@ -19,6 +19,8 @@ function usd(value) { return new Intl.NumberFormat('en-US', { minimumFractionDig
 function indexMove(value) { const size = Math.abs(value); if (size < 0.005)
     return '보합'; if (value > 0)
     return size >= 2 ? '급등' : '상승'; return size >= 2 ? '급락' : '하락'; }
+/** A digest heading is a short title; a wrapped sentence fragment ('…상승한 반면 …에 급락') is not one. */
+function plausibleHeading(heading) { return heading.length <= 40 && !/(?:상승|하락|급락|급등|마감|약세|강세)$/.test(heading.trim()) && !/반면|했지만|하며\s/.test(heading); }
 function digestParagraph(digest, brief, limit = 3) {
     const who = digest.analyst ? `${brief.report.broker} ${digest.analyst} 연구원` : analystLabel(brief.report);
     return { text: `${josa(who, '은', '는')} 「${digest.heading.replace(/\s+/g, ' ')}」에서 ${said(digest.bullets.slice(0, limit).map(quote))} 밝혔다.`, source: reportSource(brief.report) };
@@ -33,7 +35,7 @@ const THEMES = [['반도체', /반도체|하이닉스|HBM|메모리|필라델피
 const CAUSAL = /힘입|기대|우려|영향|때문|따른|따라|반영|부담|속에?\s|에\s?(?:상승|하락|급등|급락|강세|약세|반등)|실적|FOMC|연준|금리|동결|인상|인하|유가|달러|환율|수급|순매수|순매도|매수세|매도세|사이드카|발표|주주환원|정책|관세|지표|물가|고용|투자심리/;
 const CAUTION = /우려|경계|부담|리스크|불확실|하락 전환|차익실현|관망|둔화|대기|엇갈|급락/;
 const KOREA_MARKET = /코스피|KOSPI|양대 지수|코스닥|KOSDAQ|국내 증시|국내증시|유가증권시장|외국인|기관|삼성전자|하이닉스|삼전/;
-const OTHER_FOR_KOREA = /뉴욕|미 증시|미국 증시|나스닥|S&P|다우|알파벳|마이크로소프트|\bMS\b|아마존|엔비디아|애플|메타|테슬라|인텔|구글/;
+const OTHER_FOR_KOREA = /뉴욕|미 증시|미국 증시|나스닥|S&P|다우|알파벳|마이크로소프트|\bMS\b|아마존|엔비디아|애플|메타|테슬라|인텔|구글|오라클|Oracle|Vertiv|Microsoft|Alphabet|Amazon|Nvidia|Apple|Tesla|Intel|Broadcom|\b[A-Z]{2,5}\(\+|\b[A-Z]{2,5}\(-|\b[A-Z]{2,5}\(시외/;
 /** Splits each broker's session commentary into drivers and cautions, one short quote per broker for each. */
 function causes(briefs, region) {
     const drivers = [], cautions = [];
@@ -171,12 +173,14 @@ export function composeKoreaDeepSections(input) {
     else if (wire) {
         sections.push(wire.section);
     }
-    const digests = briefs.flatMap(brief => brief.digests.map(item => ({ item, brief })));
+    const digests = briefs.flatMap(brief => brief.digests.filter(item => plausibleHeading(item.heading)).map(item => ({ item, brief })));
     const companyDigest = (name) => digests.find(({ item }) => item.heading.replace(/\s+/g, '').includes(name.replace(/\s+/g, '')));
     let titleFocus = null;
     if (input.searchTop.length) {
         // Why the stock moved: a broker comment on the session that names it, quoted with the broker; then the latest rating.
-        const why = (name) => briefs.flatMap(brief => brief.statements.filter(item => item.region === 'KOREA' && item.text.length <= 200 && item.text.replace(/\s+/g, '').includes(name.replace(/\s+/g, ''))).map(item => ({ item, brief })))[0];
+        // The name must stand on its own: 'SK' does not match 'SK하이닉스', '현대차' does not match '현대차증권'.
+        const named = (text, name) => new RegExp(`(?<![가-힣A-Za-z0-9])${name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?![가-힣A-Za-z0-9&])|(?<![가-힣A-Za-z0-9])${name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?=[은는이가을를의와과도에])`).test(text);
+        const why = (name) => briefs.flatMap(brief => brief.statements.filter(item => item.region === 'KOREA' && item.text.length <= 200 && named(item.text, name)).map(item => ({ item, brief })))[0];
         // One link per paragraph: the move with its reason (broker comment) and the rating (company report) are cited separately.
         const paragraphs = input.searchTop.flatMap(stock => {
             const report = companyReports.find(item => item.stockCode === stock.code), digest = companyDigest(stock.name), reason = why(stock.name);

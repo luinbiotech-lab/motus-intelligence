@@ -90,7 +90,9 @@ export async function collectKoreaDeep(input) {
         }
         recordListed(input.audit, sources, 'KOREA_MARKET', input.at);
         const change = input.kospiChangePct, level = new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(Math.floor(input.kospiClose));
-        const head = change === null ? null : `코스피 ${Math.abs(change).toFixed(2)}% ${indexMove(change)} ${level}`;
+        // '코스피 1.24% 내려 5,937…검색 1위 삼성전자 4.8% 하락': the index verb differs from the stock's, so the headline does not repeat '하락…하락'.
+        const verb = { 상승: '올라', 하락: '내려', 급등: '급등해', 급락: '급락해', 보합: '보합' };
+        const head = change === null ? null : `코스피 ${Math.abs(change).toFixed(2)}% ${verb[indexMove(change)] ?? indexMove(change)} ${level}`;
         return { composition, title: head && composition.titleFocus ? `${head}…${composition.titleFocus}` : null, sources };
     }
     catch {
