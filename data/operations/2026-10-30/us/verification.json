@@ -14,10 +14,10 @@
   "leakagePass": true,
   "duplicateCheck": "PENDING_REMOTE",
   "duplicateUncertainty": true,
-  "articleFingerprint": "sha256:184ae8a0a55ba1dde31684512506d07e81782852fa6001d72348b768c1d93fbf",
+  "articleFingerprint": "sha256:5720e2add88cbe4c2573ae9f9b1df99992a6bff9ce36369e75139fd706703281",
   "commerceEnabled": false,
-  "verifiedAt": "2026-10-30T01:21:56.163Z",
-  "expiresAt": "2026-10-30T02:51:56.163Z",
+  "verifiedAt": "2026-10-30T02:57:07.810Z",
+  "expiresAt": "2026-10-30T04:27:07.810Z",
   "sourceAuditIds": [
     "calendar:nyse",
     "deep:consensus:list:company",
@@ -51,15 +51,15 @@
     "market-research:Bloomberg Markets",
     "market-research:CNBC Investing",
     "market-research:Goldman Sachs",
-    "market-research:article:https://www.bloomberg.com/news/articles/2026-10-29/gold-steadies-near-4-000-as-inflation-keeps-rate-hike-bets-firm",
-    "market-research:article:https://www.bloomberg.com/news/articles/2026-10-29/stock-market-today-dow-s-p-live-updates",
+    "market-research:article:https://www.bloomberg.com/news/articles/2026-10-29/latest-oil-market-news-and-analysis-for-oct-30",
+    "market-research:article:https://www.bloomberg.com/news/articles/2026-10-29/prabowo-s-own-brother-sounds-alarm-over-indonesian-stock-market",
     "market-research:article:https://www.cnbc.com/2026/10/27/robinhood-hood-q3-2026-earnings.html",
     "market-research:article:https://www.goldmansachs.com/insights/articles/are-bonds-becoming-a-better-investment-for-portfolios",
     "market-research:article:https://www.goldmansachs.com/insights/articles/will-30-year-us-treasury-yields-climb-higher",
     "yahoo-us:nasdaq",
     "yahoo-us:sp500"
   ],
-  "sourceAuditFingerprint": "sha256:89deeabf942e20ccc3845417960e752eb37bf3ab02cb2803856f5cb6c37e6581",
+  "sourceAuditFingerprint": "sha256:80a4a0797308367ae4124e473d8e5f6ef16a8cf1f397d296165c155aaec77314",
   "crossVerificationFingerprint": null,
   "crossVerification": null
 }
