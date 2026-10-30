@@ -179,7 +179,11 @@ test('broker commentary is linked to a stock only by a whole ticker token or its
   const stock=(symbol:string,koreanName:string|null)=>({symbol,name:symbol,koreanName,changePct:1,close:10,date:'2026-10-28',trendingRank:1,mostActiveRank:null,marketCap:null});
   const text=(us:{sections:Array<{paragraphs:Array<{text:string}>}>})=>us.sections.flatMap(section=>section.paragraphs.map(p=>p.text)).join(' ');
   assert.doesNotMatch(text(composeUSDeepSections({bundle,stocks:[stock('C','씨티그룹')],sectors:[]})),/씨티그룹\(C\)[\s\S]*설명했다/);
-  assert.match(text(composeUSDeepSections({bundle,stocks:[stock('ORCL','오라클')],sectors:[]})),/오라클\(ORCL\)[\s\S]*A증권은 “오라클이 매출 전망 상향에/);
+  // The Oracle sentence is already quoted in the cause section, so it is not repeated under the stock.
+  const oracle=text(composeUSDeepSections({bundle,stocks:[stock('ORCL','오라클')],sectors:[]}));
+  assert.equal(oracle.split('오라클이 매출 전망 상향에').length-1,1,oracle);
+  const solo={...bundle,briefs:[{...bundle.briefs[0]!,statements:[bundle.briefs[0]!.statements[0]!,{region:'US' as const,text:'오라클은 클라우드 수주 잔고 확대 발표에 시간외 강세',heading:null}]}]};
+  assert.match(text(composeUSDeepSections({bundle:solo,stocks:[stock('ORCL','오라클')],sectors:[]})),/오라클\(ORCL\)[\s\S]*A증권은 “오라클은 클라우드 수주 잔고 확대 발표에 시간외 강세”라고 설명했다/);
 });
 
 test('a brief describing another session contributes no Korean market digest either',async()=>{
@@ -238,4 +242,21 @@ test('supplementary sources never satisfy the core-evidence diversity or concent
   const core={label:'엔비디아 공식 발표',url:'https://blogs.nvidia.com/blog/a/',publisher:'NVIDIA'};
   const extra={label:'Yahoo Finance AI 대표 종목 일별 종가',url:'https://query1.finance.yahoo.com/v7/finance/spark?symbols=NVDA',publisher:'Yahoo Finance',role:'SUPPLEMENTARY' as const};
   assert.deepEqual(coreEvidenceSources([core,extra]),[core]);
+});
+
+test('a round level or an intraday KOSPI print is not read as a contradicting close',async()=>{
+  const {contradictsKospi}=await import('../src/operations/broker-briefs.js');
+  const line=(text:string)=>[{region:'KOREA' as const,text,heading:null}];
+  assert.equal(contradictsKospi(line('KOSPI는 전일 회복한 6,000선을 하루 만에 재차 하회'),5937.66),false);
+  assert.equal(contradictsKospi(line('삼성전자 실적 기대에 KOSPI 6,100p 터치했지만, 컨콜 후 매물 출회'),5937.66),false);
+  assert.equal(contradictsKospi(line('KOSPI 5,937pt (-1.24%), KOSDAQ 753pt (-2.34%)'),5937.66),false);
+  assert.equal(contradictsKospi(line('KOSPI는 2.2% 하락한 5,877.9p로 마감'),5937.66),true);
+});
+
+test('a later close printed after an intraday or round level is still compared',async()=>{
+  const {contradictsKospi}=await import('../src/operations/broker-briefs.js');
+  const line=(text:string)=>[{region:'KOREA' as const,text,heading:null}];
+  assert.equal(contradictsKospi(line('코스피는 장중 6,100p 터치 후 6,050.12로 마감했다'),5937.66),true);
+  assert.equal(contradictsKospi(line('코스피는 6,000선 회복 후 6,050.12로 마감했다'),5937.66),true);
+  assert.equal(contradictsKospi(line('코스피는 5,937.66으로 마감했고 원/달러 환율은 1,336.8원'),5937.66),false);
 });

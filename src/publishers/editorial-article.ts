@@ -70,7 +70,8 @@ export function renderKoreaEditorialArticle(view:KoreaMarketDailyViewModel):Dail
  * Report dates older than a week are reference context, never same-session commentary. */
 export function renderMarketResearchEntries(entries:ReadonlyArray<{publisher:string;headline:string;url:string;publishedAt:string;kind:'FINANCIAL_MEDIA'|'BROKER_RESEARCH';evidence?:string[]}>,issueDate:string):string {
  const issued=Date.parse(issueDate+'T23:59:59Z');
- const filtered=entries.filter(item=>/^https:\/\/[^\s]+$/.test(item.url)&&Number.isFinite(Date.parse(item.publishedAt))&&Date.parse(item.publishedAt)<=issued);
+ // Material older than a week is not about this session and only crowds the article.
+ const filtered=entries.filter(item=>/^https:\/\/[^\s]+$/.test(item.url)&&Number.isFinite(Date.parse(item.publishedAt))&&Date.parse(item.publishedAt)<=issued&&issued-Date.parse(item.publishedAt)<=8*86400000);
  const make=(kind:'FINANCIAL_MEDIA'|'BROKER_RESEARCH')=>{
   const rows=filtered.filter(item=>item.kind===kind&&item.headline.trim().length>=8);if(!rows.length)return '';
   const list=rows.map(item=>{
@@ -78,7 +79,7 @@ export function renderMarketResearchEntries(entries:ReadonlyArray<{publisher:str
    const title=item.headline;
    return `<li style="margin:0 0 11px"><strong>${esc(item.publisher)}</strong> · ${esc(item.publishedAt.slice(0,10))}${older?' · 과거 자료':''}<div><a href="${attr(item.url)}" target="_blank" rel="nofollow noopener noreferrer" style="${LINK}">${esc(title)}</a></div>${kind==='BROKER_RESEARCH'&&item.evidence?.length?`<p style="margin:6px 0 0">공식 공개 요약: ${esc(item.evidence.slice(0,2).join(' / '))}</p>`:''}</li>`;
   }).join('');
-  return section(kind==='BROKER_RESEARCH'?'증권사 공개 리서치 자료':'금융 전문 언론 원문',`<p style="margin:0 0 12px">${kind==='BROKER_RESEARCH'?'증권사가 공식 사이트에 공개한 자료의 제목과 발행일이다. 발행일이 일주일을 넘은 자료는 참고용이다.':'해외·국내 금융 매체가 같은 시기에 보도한 시장 기사다. 해외 기사는 원문 제목을 그대로 적었다.'}</p><ul style="margin:0;padding-left:20px">${list}</ul>`);
+  return section(kind==='BROKER_RESEARCH'?'증권사 공개 리서치 자료':'금융 전문 언론 원문',`<p style="margin:0 0 12px">${kind==='BROKER_RESEARCH'?'증권사가 공식 사이트에 최근 일주일 안에 공개한 자료의 제목과 발행일이다.':'해외·국내 금융 매체가 같은 시기에 보도한 시장 기사다. 해외 기사는 원문 제목을 그대로 적었다.'}</p><ul style="margin:0;padding-left:20px">${list}</ul>`);
  };
  return make('BROKER_RESEARCH')+make('FINANCIAL_MEDIA');
 }

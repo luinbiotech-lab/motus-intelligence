@@ -20,6 +20,7 @@ test('the AI article leads with the day\'s AI issue as brokers explained it', ()
   assert.match(text,/B증권은 .*“미국 빅테크는 AI 매출 성장에도/);
   assert.doesNotMatch(text,/PCE|코스피/,'only AI-related U.S. commentary');
   assert.equal(composed.titleFocus,'알파벳 13% 급락');
+  assert.deepEqual(composed.leadAddition,['직전 미국 정규장(10월 29일)에서 알파벳(GOOGL)은 12.64% 급락했다.']);
   const stocks=composed.sections.find(item=>item.key==='ai-stocks')!;assert.equal(stocks.placement,'early');
   assert.match(stocks.paragraphs[0]!.text,/가장 약한 종목은 알파벳\(GOOGL, -12\.64%\)이었다\./);
 });
