@@ -1,0 +1,54 @@
+import { createHash } from 'node:crypto';
+import { createSearchTrackingRegistration } from '../search/measurement.js';
+export const productionLabels = { AI_INTELLIGENCE: 'AI 인텔리전스 (AI Intelligence)', US_MARKET: '미국증시 (U.S. Market)', KOREA_MARKET: '국내증시 (Korea Market)' };
+export async function publishSplitDailyUnit(input) {
+    const { unit, adapter, reviewedAt, pdfConsistency } = input;
+    const sourceDestinationValidation = input.sourceDestinationValidation ?? 'PASS';
+    const label = productionLabels[unit.category];
+    const articleFingerprint = sha(unit.render.html);
+    const audit = [{ at: reviewedAt, event: 'HUMAN_REVIEW_APPROVED', detail: 'explicit production publish instruction; verified production record and quality gate reviewed' }];
+    let insertCount = 0;
+    let publishCount = 0;
+    let knownDraftPostId = null;
+    let duplicateCount = 0;
+    const base = { publicationId: unit.publicationId, category: unit.category, issueDate: unit.observedDate, title: unit.title, label, review: { state: 'APPROVED', reviewer: 'human', reviewedAt, history: [{ at: reviewedAt, decision: 'APPROVED', reviewer: 'human', note: 'quality gate PASS publication unit approved for draft and one publish action' }] }, sourceDestinationValidation, articleFingerprint, pdfConsistency, audit, commerce: { enabled: false } };
+    try {
+        if (unit.readiness !== 'READY' || unit.review.state === 'REJECT' || pdfConsistency !== 'PASS' || sourceDestinationValidation !== 'PASS')
+            return { ...base, state: 'HOLD', draftPostId: null, publicPostUrl: null, publishedAt: null, remoteDuplicateCount: 0, postsInsertCallCount: 0, publishApiCallCount: 0, draftValidation: null, publicHttpStatus: null, publicValidation: null, searchTrackingRegistration: null, error: 'quality, source destination, or PDF consistency gate failed' };
+        const matches = await adapter.findMatches({ title: unit.title, label });
+        duplicateCount = matches.length;
+        if (matches.length > 1)
+            return { ...base, state: 'HOLD', draftPostId: null, publicPostUrl: null, publishedAt: null, remoteDuplicateCount: matches.length, postsInsertCallCount: 0, publishApiCallCount: 0, draftValidation: null, publicHttpStatus: null, publicValidation: null, searchTrackingRegistration: null, error: 'multiple remote duplicates require manual resolution' };
+        let post = matches[0] ?? null;
+        if (post?.status === 'PUBLISHED' && post.url) {
+            const validation = validateStoredContent(unit, post, label);
+            const fetched = await adapter.fetchPublic(post.url);
+            const pass = validation.pass && fetched.status === 200;
+            return { ...base, state: pass ? 'PUBLISHED' : 'HOLD', draftPostId: post.postId, publicPostUrl: pass ? post.url : null, publishedAt: null, remoteDuplicateCount: 1, postsInsertCallCount: 0, publishApiCallCount: 0, draftValidation: validation, publicHttpStatus: fetched.status, publicValidation: validation, searchTrackingRegistration: pass ? createSearchTrackingRegistration(unit.publicationId, post.url, reviewedAt) : null, error: pass ? null : 'existing published content failed validation' };
+        }
+        if (!post) {
+            post = await adapter.insertDraft({ title: unit.title, content: unit.render.html, labels: [label] });
+            insertCount = 1;
+            audit.push({ at: new Date().toISOString(), event: 'DRAFT_CREATED', detail: `Blogger draft ${post.postId} created` });
+        }
+        knownDraftPostId = post.postId;
+        const draft = await adapter.readPost(post.postId);
+        const draftValidation = validateStoredContent(unit, draft, label);
+        if (draft.status !== 'DRAFT' || !draftValidation.pass)
+            return { ...base, state: 'HOLD', draftPostId: draft.postId, publicPostUrl: null, publishedAt: null, remoteDuplicateCount: matches.length, postsInsertCallCount: insertCount, publishApiCallCount: 0, draftValidation, publicHttpStatus: null, publicValidation: null, searchTrackingRegistration: null, error: 'actual Blogger draft validation failed' };
+        publishCount = 1;
+        const published = await adapter.publishDraft(draft.postId);
+        audit.push({ at: published.publishedAt, event: 'PUBLISHED', detail: `Blogger post ${published.postId} published with verified article permalink` });
+        const stored = await adapter.readPost(draft.postId);
+        const publicValidation = validateStoredContent(unit, stored, label);
+        const fetched = await adapter.fetchPublic(published.publicPostUrl);
+        const publicPass = stored.status === 'PUBLISHED' && stored.url === published.publicPostUrl && publicValidation.pass && fetched.status === 200;
+        return { ...base, state: publicPass ? 'PUBLISHED' : 'FAILED', draftPostId: draft.postId, publicPostUrl: publicPass ? published.publicPostUrl : null, publishedAt: publicPass ? published.publishedAt : null, remoteDuplicateCount: matches.length, postsInsertCallCount: insertCount, publishApiCallCount: 1, draftValidation, publicHttpStatus: fetched.status, publicValidation, searchTrackingRegistration: publicPass ? createSearchTrackingRegistration(unit.publicationId, published.publicPostUrl, published.publishedAt) : null, error: publicPass ? null : 'published response or public page verification failed' };
+    }
+    catch (error) {
+        return { ...base, state: 'FAILED', draftPostId: knownDraftPostId, publicPostUrl: null, publishedAt: null, remoteDuplicateCount: duplicateCount, postsInsertCallCount: insertCount, publishApiCallCount: publishCount, draftValidation: null, publicHttpStatus: null, publicValidation: null, searchTrackingRegistration: null, error: error instanceof Error ? error.message : String(error) };
+    }
+}
+export function validateStoredContent(unit, post, label) { const html = post.content; const anchors = [...html.matchAll(/<a\b[^>]*href=["'](https?:\/\/[^"']+)["']/gi)]; const text = html.replace(/<a\b[^>]*>[\s\S]*?<\/a>/gi, '').replace(/<[^>]+>/g, ' '); const sourceUrls = new Set(unit.viewModel.sources.map(source => source.url.replace(/\/$/, ''))); const linked = new Set(anchors.map(match => decodeHtml(match[1]).replace(/\/$/, ''))); const sources = [...sourceUrls].every(url => linked.has(url)); const svgCount = (html.match(/<svg\b/gi) ?? []).length; const chart = unit.category === 'US_MARKET' ? svgCount === 4 && /data-layout=["']responsive-two-by-two["']/i.test(html) && (html.match(/<svg\b[^>]*width=["']100%["']/gi) ?? []).length === 4 : svgCount === 0; const mobile = /max-width\s*:\s*100%/i.test(html) && /box-sizing\s*:\s*border-box/i.test(html) && !/min-width\s*:\s*(?:[4-9]\d\d|\d{4,})px/i.test(html) && !/word-break\s*:\s*break-all/i.test(html); const colorRule = unit.category === 'AI_INTELLIGENCE' || (html.includes('#c62828') && html.includes('#1565c0')); const internalTokenSafe = !/\b(?:eventId|themeId|companyId|evidenceIds|verificationStatus|confidenceScore|publicationId|reportId)\b/i.test(html); const rawUrlSafe = !/https?:\/\/\S+/i.test(text); const inlineStyle = (html.match(/\sstyle=["']/gi) ?? []).length >= 5 && !/<style\b/i.test(html); const commerceDisabled = !/affiliate|제휴|광고|commerce/i.test(html); const result = { title: post.title === unit.title, label: post.labels.includes(label), sources, chart, mobile, colorRule, internalTokenSafe, rawUrlSafe, inlineStyle, commerceDisabled, pass: false, anchorCount: anchors.length, svgCount }; return { ...result, pass: Object.entries(result).filter(([key]) => !['pass', 'anchorCount', 'svgCount'].includes(key)).every(([, value]) => value === true) }; }
+function decodeHtml(value) { return value.replaceAll('&amp;', '&'); }
+function sha(value) { return `sha256:${createHash('sha256').update(value).digest('hex')}`; }

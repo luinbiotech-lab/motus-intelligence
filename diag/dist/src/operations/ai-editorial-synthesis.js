@@ -1,0 +1,71 @@
+import { josa } from './ai-generic-synthesis.js';
+export function synthesizeKoreanAIEvent(input) {
+    const company = koreanCompany(input.publisher), source = `${input.title} ${input.pageEvidence}`, lower = source.toLowerCase(), facts = [];
+    let topic = null;
+    if (/cities?/.test(lower) && /public services/.test(lower) && /partners?/.test(lower)) {
+        topic = '도시 운영에 적용되는 AI 에이전트';
+        facts.push(`${company}는 공식 발표에서 유럽 지역의 소프트웨어·인프라·통합 파트너들이 도시 운영과 공공서비스 개선을 위한 AI 에이전트 응용 프로그램을 구축하고 있다고 밝혔다.`);
+    }
+    else if (/uk/.test(lower) && /healthcare/.test(lower) && /finance/.test(lower) && /local government/.test(lower) && /climate science/.test(lower)) {
+        topic = '영국 산업·공공 영역의 AI 도입';
+        facts.push(`${company}는 공식 발표에서 영국의 의료·금융·지방정부·기후과학 기관들이 AI를 실제 업무에 적용하고 있으며, 적용 범위가 민간 기업뿐 아니라 공공 영역과 과학 연구까지 이어지고 있다고 밝혔다.`);
+    }
+    else if (/gemini/.test(lower) && /access/.test(lower) && /frontier model/.test(lower)) {
+        const product = productName(source, /Gemini\s+[A-Za-z0-9.-]+(?:\s+[A-Za-z0-9.-]+)?/i, 'Gemini');
+        topic = `${product} 공개와 이용 확대`;
+        facts.push(`${company}는 공식 발표에서 개발자·기업·과학자와 일반 사용자에게 ${product} 이용 기회를 제공하고, 이를 최신 프런티어 모델로 소개했다. 공개 범위에는 연구와 기업 활용이 함께 포함됐다.`);
+    }
+    else if (/rtx\s+spark/.test(lower) && /applications?/.test(lower) && /games?/.test(lower) && /models?/.test(lower)) {
+        topic = 'RTX Spark 생태계 출시 준비';
+        facts.push(`${company}는 공식 발표에서 RTX Spark 출시를 앞두고 관련 응용 프로그램·게임·모델 생태계의 준비 현황을 공개했으며, 출시 시점에 맞춘 소프트웨어와 콘텐츠 지원 범위를 함께 제시했다.`);
+        if (/friday|oct\.?\s*16/.test(lower))
+            facts.push('공식 원문은 출시 시점을 10월 16일로 제시했다.');
+    }
+    else if (/vera\s+rubin/.test(lower) && /google\s+cloud|a5x/.test(lower) && /infrastructure|instances?|general availability/.test(lower)) {
+        topic = '구글 클라우드의 베라 루빈 AI 인프라 상용화';
+        facts.push(`${company}는 공식 발표에서 Google Cloud A5X 인스턴스에 NVIDIA Vera Rubin NVL72 시스템을 적용한 차세대 AI 인프라의 일반 제공을 발표했다.`);
+        if (/agentic|reinforcement learning/.test(lower))
+            facts.push('공식 원문은 에이전트형 AI와 강화학습 워크로드를 주요 활용 대상으로 제시했다.');
+    }
+    if (!topic || !facts.length)
+        return null;
+    return { topicId: input.topicId, publisher: input.publisher, company, topic, headline: `${company}, ${topic}`, facts, interpretation: `이 발표의 산업적 의미는 기술 공개 자체보다 실제 고객 채택과 운영 성과로 이어지는지에 달려 있다.`, watch: '후속 제품 지표, 고객 채택 사례, 설비투자와 실적 자료를 확인할 필요가 있다.', link: input.link, publishedAt: input.publishedAt };
+}
+export function buildAIEditorialDecision(events, search) {
+    if (!events.length)
+        throw new Error('AI_KOREAN_SYNTHESIS_UNAVAILABLE');
+    const byId = new Map(events.map(event => [event.topicId, event])), ordered = search.orderedTopicIds.map(id => byId.get(id)).filter((event) => Boolean(event));
+    for (const event of events)
+        if (!ordered.some(item => item.topicId === event.topicId))
+            ordered.push(event);
+    const major = ordered[0], selected = search.selectedSecondaryTopicId ? byId.get(search.selectedSecondaryTopicId) : undefined, effects = [];
+    const original = events.map(item => item.topicId).join('|');
+    if (ordered.map(item => item.topicId).join('|') !== original)
+        effects.push('ORDERING');
+    const second = selected && selected.topicId !== major.topicId ? selected : undefined;
+    const title = second ? `${josa(major.company, '이', '가')} 공개한 ${major.topic}, ${second.company} 움직임까지 읽기` : aiHeadline(major);
+    const lead = second ? `${josa(major.company, '이', '가')} 공개한 ${josa(major.topic, '이', '가')} 오늘 AI 산업의 중심축이다. 여기에 ${second.company}의 ${josa(second.topic, '을', '를')} 함께 보면 경쟁이 제품 발표를 넘어 실제 도입과 운영 성과로 이동하는 흐름이 선명해진다. 각 항목은 공식 원문에서 확인한 사실과 MOTUS 분석을 나눠 적었다.` : `${josa(major.company, '이', '가')} 공개한 ${josa(major.topic, '이', '가')} 오늘 AI 산업의 핵심이다.${ordered.length > 1 ? ` ${ordered.slice(1).map(item => `${item.company}의 ${item.topic}`).join(', ')} 발표도 함께 정리했다.` : ''} 공식 원문에서 확인된 사실과 실제 도입·운영 성과에서 추가로 확인할 변수를 나눠 살펴본다.`;
+    const depthByTopic = Object.fromEntries(ordered.map((event, index) => [event.topicId, index === 0 || event.topicId === search.selectedSecondaryTopicId ? 2 : 1]));
+    if (selected) {
+        effects.push('TITLE', 'LEAD', 'DEPTH');
+    }
+    return { ordered, title, lead, depthByTopic, searchEffects: [...new Set(effects)] };
+}
+function productName(value, pattern, fallback) { return value.match(pattern)?.[0]?.replace(/\s+/g, ' ').trim() ?? fallback; }
+function koreanCompany(value) { return { OpenAI: '오픈AI', 'Google AI': '구글', 'Google DeepMind': '구글 딥마인드', NVIDIA: '엔비디아', Microsoft: '마이크로소프트', Anthropic: '앤트로픽', 'Amazon AWS': '아마존웹서비스(AWS)', Meta: '메타' }[value] ?? value; }
+// The headline follows what kind of event it is, so a launch, a partnership and an infrastructure deal do not all read the same.
+const HEADLINE_BY_TYPE = {
+    launch: (company, topic) => `${josa(company, '이', '가')} 공개한 ${topic}, 실제 도입으로 이어질까`,
+    infrastructure: (company, topic) => `${company}의 ${topic}, AI 인프라 경쟁의 다음 단계`,
+    partnership: (company, topic) => `${company}의 ${topic}, 협력이 바꿀 AI 시장 구도`,
+    adoption: (company, topic) => `${company}의 ${topic}, 현장 도입이 보여 준 AI 활용 방식`,
+    investment: (company, topic) => `${company}의 ${topic}, 투자 확대가 가리키는 방향`,
+    research: (company, topic) => `${company}의 ${topic}, 연구 성과가 제품으로 이어질 시점`,
+    security: (company, topic) => `${company}의 ${topic}, AI 보안 기준이 달라지는 지점`,
+    policy: (company, topic) => `${company}의 ${topic}, 정책 변화가 AI 산업에 미칠 영향`,
+    education: (company, topic) => `${company}의 ${topic}, AI 인재 양성 경쟁`,
+};
+export function aiHeadline(event) {
+    const build = event.eventType ? HEADLINE_BY_TYPE[event.eventType] : undefined;
+    return build ? build(event.company, event.topic) : `${josa(event.company, '이', '가')} 공개한 ${event.topic}, 실제 산업 변화로 이어질까`;
+}

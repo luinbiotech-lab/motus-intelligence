@@ -1,0 +1,112 @@
+import { MOTUS_DISPLAY_NAME } from '../content/publisher-schema.js';
+import { validateNewsletterViewModel } from '../intelligence/newsletter.js';
+import { renderMarketTrendSection } from './motus.js';
+const ARTICLE = 'font-family:Arial,&quot;Noto Sans KR&quot;,sans-serif;color:#172033;line-height:1.7;font-size:17px;width:100%;max-width:820px;box-sizing:border-box;margin:0 auto;overflow-x:hidden;overflow-wrap:anywhere';
+const SECTION = 'width:100%;max-width:100%;box-sizing:border-box;margin:22px 0 0';
+const TITLE = 'background:#03162e;color:#ffffff;border:1px solid #010b17;padding:14px 16px;font-size:clamp(18px,4.8vw,21px);font-weight:800;line-height:1.35;margin:0;width:100%;max-width:100%;box-sizing:border-box;word-break:keep-all;overflow-wrap:normal';
+const CONTENT = 'border:1px solid #aebed2;padding:21px 22px;background:#ffffff;margin:0 0 22px;width:100%;max-width:100%;box-sizing:border-box';
+const LINK = 'color:#0759a6;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere';
+export function renderMotusDailyNewsletter(model) {
+    const errors = validateNewsletterViewModel(model);
+    if (errors.length)
+        throw new Error(`invalid NewsletterViewModel: ${errors.join('; ')}`);
+    const sections = [];
+    const renderedSections = [];
+    const add = (key, html) => { sections.push(html); renderedSections.push(key); };
+    add('masthead', renderMasthead(model));
+    if (model.todayAtAGlance)
+        add('today-at-a-glance', section('Today at a Glance', `<h3 style="margin:0 0 8px;color:#03162e;font-size:22px;line-height:1.35">${escapeHtml(model.todayAtAGlance.headline)}</h3><p style="margin:0 0 12px">${escapeHtml(model.todayAtAGlance.summary)}</p>${list(model.todayAtAGlance.bullets)}`, '10-second'));
+    if (model.marketSnapshot) {
+        add('market-snapshot', section('Market Snapshot', `<p style="margin:0 0 14px">${escapeHtml(model.marketSnapshot.summary)}</p>${renderMetrics(model.marketSnapshot.metrics)}`, '10-second'));
+        if (model.marketSnapshot.marketHistory) {
+            sections.push(renderMarketTrendSection(model.marketSnapshot.marketHistory));
+            renderedSections.push('major-index-trend');
+        }
+    }
+    if (model.aiIntelligence)
+        add('ai-intelligence', intelligenceSection('AI & Industry Intelligence', model.aiIntelligence));
+    if (model.wallStreetIntelligence)
+        add('wall-street-intelligence', intelligenceSection('Wall Street Intelligence', model.wallStreetIntelligence));
+    if (model.koreaMarketFacts || model.koreaMarketIntelligence)
+        add('korea-market-intelligence', section('Korea Market Intelligence', `${model.koreaMarketFacts ? renderKoreaMarketFacts(model.koreaMarketFacts) : ''}${model.koreaMarketIntelligence ? model.koreaMarketIntelligence.map(renderIntelligenceCard).join('') : ''}`, '3-minute'));
+    if (model.koreaResearch)
+        add('korea-research', section('Korea Research', model.koreaResearch.map(renderKoreaResearchCard).join(''), '3-minute'));
+    if (model.crossIntelligenceChains || model.crossIntelligence)
+        add('cross-intelligence', section('Cross Intelligence', `${model.crossIntelligenceChains ? model.crossIntelligenceChains.map(renderCrossChain).join('') : ''}${model.crossIntelligence ? model.crossIntelligence.map(item => `<div style="border-left:4px solid #456b91;padding:10px 12px;margin:0 0 12px;background:#f5f8fb;width:100%;max-width:100%;box-sizing:border-box"><h3 style="margin:0 0 6px;font-size:18px;color:#102f50">${escapeHtml(item.headline)}</h3><p style="margin:0">${escapeHtml(item.summary)}</p></div>`).join('') : ''}`, '3-minute'));
+    if (model.investmentMapV1 || model.investmentMap)
+        add('investment-map', section('Investment Map', `${model.investmentMapV1 ? renderInvestmentMapV1(model.investmentMapV1) : ''}${model.investmentMap ? model.investmentMap.map(item => `<div style="border:1px solid #c4cfdb;padding:13px;margin:0 0 12px;background:#f8fafc;width:100%;max-width:100%;box-sizing:border-box"><h3 style="margin:0 0 8px;color:#102f50;font-size:18px">${escapeHtml(item.theme)}</h3>${labeledList('상류', item.upstream)}${labeledList('수혜 연결', item.beneficiaries)}${labeledList('리스크', item.risks)}</div>`).join('') : ''}`, '3-minute'));
+    if (model.whatToWatch)
+        add('what-to-watch', section('What to Watch', model.whatToWatch.map(item => `<div style="padding:11px 12px;margin:0 0 10px;background:#f7f9fc;border-left:4px solid #17283d;width:100%;max-width:100%;box-sizing:border-box"><strong style="display:block;color:#03162e">${escapeHtml(item.headline)}</strong><span>${escapeHtml(item.watchFor)}</span><small style="display:block;margin-top:5px;color:#59697d">${escapeHtml(item.validityHorizon)}</small></div>`).join(''), '3-minute'));
+    if (model.sources.length)
+        add('sources', section('Sources', renderSources(model.sources), 'deep-read'));
+    const html = `<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escapeHtml(model.title)}</title></head><body><article data-product="motus-daily-intelligence" data-layout="newsletter-inline-v1" style="${ARTICLE}">${sections.join('\n')}</article></body></html>`;
+    assertNewsletterPublicHtmlSafe(html);
+    return { html, renderedSections };
+}
+function renderMasthead(model) {
+    return `<header data-section="masthead" data-read-depth="10-second" style="width:100%;max-width:100%;box-sizing:border-box;background:#03162e;color:#ffffff;padding:28px 24px;border:1px solid #010b17;margin:0 0 22px"><p style="margin:0 0 12px;font-size:14px;font-weight:800;letter-spacing:.08em;color:#c7d8ea">${escapeHtml(MOTUS_DISPLAY_NAME)}</p><div role="heading" aria-level="2" style="margin:0 0 10px;font-size:32px;line-height:1.2;font-weight:850">${escapeHtml(model.title)}</div><p style="margin:0 0 14px;font-size:18px;line-height:1.45;color:#e6edf5">${escapeHtml(model.subtitle)}</p><p style="margin:0;font-size:16px;line-height:1.65;color:#ffffff">${escapeHtml(model.editorialSummary)}</p><div style="margin-top:14px;font-size:12px;color:#b7c8da">${escapeHtml(model.issueDate)} · Issue ${model.issueNumber}</div></header>`;
+}
+function section(title, content, depth) {
+    return `<section data-section="${slug(title)}" data-read-depth="${depth}" style="${SECTION}"><h2 style="${TITLE}">${escapeHtml(title)}</h2><div style="${CONTENT}">${content}</div></section>`;
+}
+function intelligenceSection(title, items) { return section(title, items.map(renderIntelligenceCard).join(''), '3-minute'); }
+function renderIntelligenceCard(item) {
+    const themeIds = [...(item.primaryThemeId ? [item.primaryThemeId] : []), ...item.relatedThemeIds].map(value => value.replace(/^theme:/, '')).join(' · ');
+    const meta = [item.company, themeIds].filter(Boolean).map(value => escapeHtml(value)).join(' · ');
+    const institution = item.institutionView ? `<div data-render-field="institution-view" style="margin:12px 0 0;padding:12px;background:#eef3f8;border-left:4px solid #405f7f;width:100%;max-width:100%;box-sizing:border-box"><strong style="display:block;color:#102f50;margin-bottom:4px">기관 관점</strong>${escapeHtml(item.institutionView)}</div>` : '';
+    const interpretation = item.aiInterpretation ? `<div data-render-field="ai-interpretation" style="margin:12px 0 0;padding:12px;background:#f4f1e9;border-left:4px solid #8c7441;width:100%;max-width:100%;box-sizing:border-box"><strong style="display:block;color:#59491f;margin-bottom:4px">MOTUS 해석</strong>${escapeHtml(item.aiInterpretation)}</div>` : '';
+    const deep = (item.sourceFacts.length || item.sources.length) ? `<div data-read-depth="deep-read" style="margin-top:13px;padding-top:12px;border-top:1px solid #d7e0ea;font-size:14px;color:#344860">${item.sourceFacts.length ? `<strong>확인된 사실</strong>${list(item.sourceFacts)}` : ''}${item.sources.length ? `<strong>근거</strong>${renderSources(item.sources)}` : ''}</div>` : '';
+    return `<article style="width:100%;max-width:100%;box-sizing:border-box;border:1px solid #c4cfdb;background:#ffffff;padding:16px;margin:0 0 14px"><h3 style="margin:0 0 7px;color:#03162e;font-size:20px;line-height:1.4">${escapeHtml(item.headline)}</h3>${meta ? `<p style="margin:0 0 8px;color:#59697d;font-size:13px;font-weight:700">${meta}</p>` : ''}<p style="margin:0">${escapeHtml(item.summary)}</p>${institution}${interpretation}${deep}</article>`;
+}
+function renderMetrics(metrics) {
+    if (!metrics.length)
+        return '';
+    return `<div data-layout="responsive-indicator-cards" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:8px;width:100%;max-width:100%;min-width:0;box-sizing:border-box">${metrics.map(metric => `<div style="border:1px solid #c4cfdb;background:#f7f9fc;padding:12px;width:100%;max-width:100%;min-width:0;box-sizing:border-box"><span style="display:block;color:#59697d;font-size:13px;word-break:keep-all">${escapeHtml(metric.label)}</span><strong style="display:block;color:#172033;font-size:19px;font-variant-numeric:tabular-nums;white-space:nowrap">${escapeHtml(metric.value)}</strong>${metric.change ? `<span style="color:${metric.direction === 'UP' ? '#c62828' : metric.direction === 'DOWN' ? '#1565c0' : '#59697d'};font-weight:800;font-size:14px;white-space:nowrap">${escapeHtml(metric.change)}</span>` : ''}</div>`).join('')}</div>`;
+}
+function renderKoreaMarketFacts(view) {
+    const order = ['INDEX', 'FX', 'FLOW', 'VALUE', 'PROGRAM', 'SECTOR', 'MOVER', 'BREADTH'];
+    const titles = { INDEX: '주요 지수', FX: '환율', FLOW: '투자자별 수급', VALUE: '거래대금', PROGRAM: '프로그램 매매', SECTOR: '주요 업종 흐름', MOVER: '주요 상승·하락 종목', BREADTH: '시장 등락 종목' };
+    return `<div data-render-field="korea-market-facts" style="width:100%;max-width:100%;box-sizing:border-box">${order.map(group => {
+        const metrics = view.metrics.filter(metric => metric.group === group);
+        if (!metrics.length)
+            return '';
+        return `<div style="margin:0 0 14px;width:100%;max-width:100%;box-sizing:border-box"><h3 style="margin:0 0 7px;color:#102f50;font-size:17px">${titles[group]}</h3><div data-layout="responsive-indicator-cards" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:8px;width:100%;max-width:100%;min-width:0;box-sizing:border-box">${metrics.map(metric => `<div style="border:1px solid #c4cfdb;background:#f7f9fc;padding:11px;width:100%;max-width:100%;min-width:0;box-sizing:border-box"><span style="display:block;color:#59697d;font-size:13px;word-break:keep-all">${escapeHtml(metric.label)}</span><strong style="display:block;color:${metric.direction === 'UP' ? '#c62828' : metric.direction === 'DOWN' ? '#1565c0' : '#59697d'};font-size:18px;font-variant-numeric:tabular-nums;white-space:nowrap">${escapeHtml(metric.displayValue)}</strong><a href="${escapeAttr(metric.source.url)}" target="_blank" rel="nofollow noopener noreferrer" style="${LINK};font-size:12px">${escapeHtml(metric.source.label)}</a></div>`).join('')}</div></div>`;
+    }).join('')}</div>`;
+}
+function renderKoreaResearchCard(item) {
+    const meta = [item.publisher, item.analyst].filter(Boolean).map(value => escapeHtml(value)).join(' · ');
+    const changes = [item.targetPriceLabel, item.ratingLabel].filter((value) => Boolean(value));
+    const institution = `<div data-render-field="institution-view" style="margin:12px 0 0;padding:12px;background:#eef3f8;border-left:4px solid #405f7f;width:100%;max-width:100%;box-sizing:border-box"><strong style="display:block;color:#102f50;margin-bottom:4px">기관 원문 관점</strong>${escapeHtml(item.institutionView)}</div>`;
+    const interpretation = item.aiInterpretation ? `<div data-render-field="ai-interpretation" style="margin:12px 0 0;padding:12px;background:#f4f1e9;border-left:4px solid #8c7441;width:100%;max-width:100%;box-sizing:border-box"><strong style="display:block;color:#59491f;margin-bottom:4px">MOTUS 해석</strong>${escapeHtml(item.aiInterpretation)}</div>` : '';
+    const detail = `${item.evidence.length ? `<strong>근거</strong>${list(item.evidence)}` : ''}${item.interests.length ? `<strong>관심 업종·종목</strong>${list(item.interests)}` : ''}${item.investmentStrategy.length ? `<strong>투자전략</strong>${list(item.investmentStrategy)}` : ''}${item.riskFactors.length ? `<strong>리스크</strong>${list(item.riskFactors)}` : ''}${changes.length ? `<strong>변경 사항</strong>${list(changes)}` : ''}<strong>원문</strong>${renderSources(item.sources)}`;
+    return `<article data-research-type="brokerage" style="width:100%;max-width:100%;box-sizing:border-box;border:1px solid #c4cfdb;background:#ffffff;padding:16px;margin:0 0 14px"><h3 style="margin:0 0 7px;color:#03162e;font-size:20px;line-height:1.4">${escapeHtml(item.headline)}</h3><p style="margin:0 0 8px;color:#59697d;font-size:13px;font-weight:700">${meta}</p><p style="margin:0">${escapeHtml(item.summary)}</p>${institution}${interpretation}<div data-read-depth="deep-read" style="margin-top:13px;padding-top:12px;border-top:1px solid #d7e0ea;font-size:14px;color:#344860">${detail}</div></article>`;
+}
+function renderCrossChain(item) {
+    const stages = [['AI & Industry', item.aiIndustry], ['Wall Street', item.wallStreet], ['Korea Research', item.koreaResearch], ['Korea Market Reaction', item.koreaMarketReaction]];
+    const renderedStages = stages.filter(([, values]) => values.length).map(([label, values], index) => `${index ? '<div aria-hidden="true" style="text-align:center;color:#708196;font-size:18px;line-height:1;margin:7px 0">↓</div>' : ''}<div data-cross-stage="${slug(label)}" style="border:1px solid #c4cfdb;background:#f7f9fc;padding:11px 13px;width:100%;max-width:100%;box-sizing:border-box"><strong style="display:block;color:#102f50;margin-bottom:4px">${escapeHtml(label)}</strong>${list(values)}</div>`).join('');
+    const signals = `${item.sharedSignals.length ? `<strong>공통 신호</strong>${list(item.sharedSignals)}` : ''}${item.divergentSignals.length ? `<strong>차이 신호</strong>${list(item.divergentSignals)}` : ''}${item.changedSignals.length ? `<strong>변화 신호</strong>${list(item.changedSignals)}` : ''}`;
+    const ai = item.aiSummary ? `<div data-render-field="ai-cross-summary" style="margin:12px 0 0;padding:12px;background:#f4f1e9;border-left:4px solid #8c7441;width:100%;max-width:100%;box-sizing:border-box"><strong style="display:block;color:#59491f;margin-bottom:4px">MOTUS 연결 해석</strong>${escapeHtml(item.aiSummary.summary)}${item.aiSummary.followUpChecks.length ? `<strong style="display:block;margin-top:8px">후속 확인</strong>${list(item.aiSummary.followUpChecks)}` : ''}</div>` : '';
+    return `<article data-cross-chain="true" style="width:100%;max-width:100%;box-sizing:border-box;border:1px solid #aebed2;background:#ffffff;padding:16px;margin:0 0 16px"><h3 style="margin:0 0 7px;color:#03162e;font-size:20px;line-height:1.4">${escapeHtml(item.themeEvent)}</h3><p style="margin:0 0 13px">${escapeHtml(item.connectionSummary)}</p>${renderedStages}${signals ? `<div style="margin-top:13px;padding-top:12px;border-top:1px solid #d7e0ea;font-size:14px;color:#344860">${signals}</div>` : ''}${ai}${item.sources.length ? `<div data-read-depth="deep-read" style="margin-top:12px;font-size:14px"><strong>근거</strong>${renderSources(item.sources)}</div>` : ''}</article>`;
+}
+function renderInvestmentMapV1(view) {
+    const focus = (title, items) => items.length ? `<div data-investment-map-group="${slug(title)}" style="margin:0 0 16px;width:100%;max-width:100%;box-sizing:border-box"><h3 style="margin:0 0 7px;color:#102f50;font-size:17px">${escapeHtml(title)}</h3>${items.map(item => `<div style="border:1px solid #c4cfdb;background:#f7f9fc;padding:11px 13px;margin:0 0 8px;width:100%;max-width:100%;box-sizing:border-box"><strong style="display:block;color:#03162e">${escapeHtml(item.label)}</strong><span style="font-size:13px;color:#59697d">언급 ${item.mentionCount}건 · 기관 ${item.institutionCount}곳</span>${item.supportingInstitutions.length ? `<span style="display:block;font-size:13px;color:#344860">${escapeHtml(item.supportingInstitutions.join(' · '))}</span>` : ''}</div>`).join('')}</div>` : '';
+    const stocks = view.mostDiscussedStocks.length ? `<div data-investment-map-group="most-discussed-stocks" style="margin:0 0 16px"><h3 style="margin:0 0 7px;color:#102f50;font-size:17px">Most Discussed Stocks</h3>${view.mostDiscussedStocks.map(item => `<div style="border-left:4px solid #405f7f;background:#f7f9fc;padding:10px 12px;margin:0 0 8px;width:100%;max-width:100%;box-sizing:border-box"><strong>${escapeHtml(item.label)}</strong><span style="display:block;font-size:13px;color:#59697d">언급 ${item.mentionCount}건 · 기관 ${item.institutionCount}곳</span>${item.majorReasons.length ? labeledList('주요 근거', item.majorReasons) : ''}${item.relatedThemes.length ? labeledList('관련 테마', item.relatedThemes) : ''}</div>`).join('')}</div>` : '';
+    const changes = view.changes.length ? `<div data-investment-map-group="changes" style="margin:0 0 16px"><h3 style="margin:0 0 7px;color:#102f50;font-size:17px">Target Price / Rating Changes</h3>${view.changes.map(item => `<div style="padding:9px 11px;margin:0 0 7px;border:1px solid #d7e0ea;background:#ffffff;width:100%;max-width:100%;box-sizing:border-box"><strong>${escapeHtml(item.label)}</strong><span style="display:block;font-size:14px;color:#344860">${escapeHtml(item.detail)}</span></div>`).join('')}</div>` : '';
+    const risks = view.majorRisks.length ? `<div data-investment-map-group="major-risks" style="margin:0"><h3 style="margin:0 0 7px;color:#102f50;font-size:17px">Major Risks</h3>${view.majorRisks.map(item => `<div style="padding:9px 11px;margin:0 0 7px;border-left:4px solid #8a4d45;background:#fbf7f6;width:100%;max-width:100%;box-sizing:border-box"><strong>${escapeHtml(item.label)}</strong><span style="display:block;font-size:13px;color:#59697d">명시적 언급 ${item.mentionCount}건${item.supportingInstitutions.length ? ` · ${escapeHtml(item.supportingInstitutions.join(' · '))}` : ''}</span></div>`).join('')}</div>` : '';
+    return `<div data-render-field="investment-map-v1" style="width:100%;max-width:100%;box-sizing:border-box">${focus('Institutional Focus', view.institutionalFocus)}${focus('Korea Research Focus', view.koreaResearchFocus)}${focus('Cross-Market Themes', view.crossMarketThemes)}${stocks}${changes}${risks}</div>`;
+}
+function renderSources(sources) { return `<ul style="margin:5px 0 0;padding-left:19px">${sources.map(source => `<li style="margin:4px 0"><a href="${escapeAttr(source.url)}" target="_blank" rel="nofollow noopener noreferrer" style="${LINK}">${escapeHtml(source.label)}</a>${source.publisher ? ` <span style="color:#65758a">· ${escapeHtml(source.publisher)}</span>` : ''}</li>`).join('')}</ul>`; }
+function labeledList(label, values) { return values.length ? `<div style="margin:6px 0"><strong>${escapeHtml(label)}</strong>${list(values)}</div>` : ''; }
+function list(values) { return values.length ? `<ul style="margin:7px 0 0;padding-left:20px">${values.map(value => `<li style="margin:4px 0">${escapeHtml(value)}</li>`).join('')}</ul>` : ''; }
+function slug(value) { return value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); }
+function escapeHtml(value) { return String(value).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+function escapeAttr(value) { return escapeHtml(value).replace(/'/g, '&#39;'); }
+export function assertNewsletterPublicHtmlSafe(html) {
+    if (/<script\b|<iframe\b|javascript:|<style\b/i.test(html))
+        throw new Error('newsletter contains Blogger-unsafe markup');
+    if (/investmentMapId|crossIntelligenceId|researchId|claimId|reportId|eventId|themeId|companyId|sectorId|confidenceScore|sourceTier|verificationStatus|MANUAL_VERIFIED|PENDING_HUMAN_APPROVAL/i.test(html))
+        throw new Error('newsletter contains internal token');
+    const visible = html.replace(/<[^>]+>/g, ' ');
+    if (/https?:\/\//i.test(visible))
+        throw new Error('newsletter exposes a raw URL');
+}

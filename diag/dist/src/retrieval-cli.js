@@ -1,0 +1,71 @@
+import { readLibrary } from './library/storage.js';
+import { buildVerifiedProductionLibrary } from './library/production-library.js';
+import { IntelligenceRetrievalService, createDefaultEditorialMemory, resolveRetrievalId, retrieveEditorialMemory } from './library/retrieval.js';
+import { buildSampleRetrievalRun } from './library/retrieval-production.js';
+import { readEditorialMemory, writeRetrievalPersistence } from './library/retrieval-storage.js';
+const args = process.argv.slice(2);
+const has = (name) => args.includes(name);
+const value = (name) => { const i = args.indexOf(name); return i >= 0 ? args[i + 1] ?? null : null; };
+const now = '2026-10-06T09:00:00+09:00';
+const store = await readLibrary() ?? buildVerifiedProductionLibrary().store;
+const memory = await readEditorialMemory() ?? createDefaultEditorialMemory(now);
+const service = new IntelligenceRetrievalService(store, now);
+const from = value('--from') ?? undefined;
+const to = value('--to') ?? undefined;
+const company = value('--company');
+const theme = value('--theme');
+const event = value('--event');
+const institution = value('--institution');
+const sector = value('--sector');
+const market = value('--market');
+let output = { schemaVersion: '1.0.0', mode: 'READ_ONLY', message: 'canonical subject option required' };
+let subjectType = null;
+let subjectId = null;
+if (company) {
+    subjectType = 'COMPANY';
+    subjectId = resolveRetrievalId('company', company);
+}
+else if (theme) {
+    subjectType = 'THEME';
+    subjectId = resolveRetrievalId('theme', theme);
+}
+else if (event) {
+    subjectType = 'EVENT';
+    subjectId = event.startsWith('event:') ? event : `event:${event}`;
+}
+else if (institution) {
+    subjectType = 'INSTITUTION';
+    subjectId = resolveRetrievalId('institution', institution);
+}
+else if (sector) {
+    subjectType = 'SECTOR';
+    subjectId = resolveRetrievalId('sector', sector);
+}
+else if (market) {
+    subjectType = 'MARKET';
+    subjectId = resolveRetrievalId('market', market);
+}
+if (has('--audit')) {
+    const run = buildSampleRetrievalRun(store, now, memory);
+    const files = await writeRetrievalPersistence({ memory: run.memory, sourceOperational: run.sourceOperational, conflicts: run.conflicts, run });
+    output = { mode: 'LOCAL_AUDIT_PERSISTED', files, operator: run.operator };
+}
+else if (has('--memory'))
+    output = retrieveEditorialMemory(memory, { ...(subjectType ? { subjectType } : {}), ...(subjectId ? { subjectId } : {}) }, now).records;
+else if (subjectType && subjectId) {
+    if (has('--timeline'))
+        output = service.timeline(subjectType, subjectId, { ...(from ? { from } : {}), ...(to ? { to } : {}) });
+    else if (has('--retrospective') && subjectType === 'COMPANY')
+        output = service.companyRetrospective(subjectId, from ?? '1900-01-01', to ?? now.slice(0, 10));
+    else if (has('--retrospective') && subjectType === 'THEME')
+        output = service.themeRetrospective(subjectId, from ?? '1900-01-01', to ?? now.slice(0, 10));
+    else if (has('--retrospective') && subjectType === 'INSTITUTION')
+        output = service.institutionViewHistory(subjectId, 'INSTITUTION', subjectId);
+    else if (has('--precedents') && subjectType === 'EVENT')
+        output = service.findPrecedents(subjectId);
+    else if (has('--prior-coverage') && subjectType === 'EVENT')
+        output = service.findPriorCoverage({ eventId: subjectId, observedAt: now });
+    else
+        output = service.query({ ...subjectType === 'COMPANY' ? { companyId: subjectId } : subjectType === 'THEME' ? { themeId: subjectId } : subjectType === 'EVENT' ? { eventId: subjectId } : subjectType === 'INSTITUTION' ? { institutionId: subjectId } : subjectType === 'SECTOR' ? { sectorId: subjectId } : { marketId: subjectId }, ...(from ? { from } : {}), ...(to ? { to } : {}) });
+}
+process.stdout.write(`${JSON.stringify(output, null, 2)}\n`);

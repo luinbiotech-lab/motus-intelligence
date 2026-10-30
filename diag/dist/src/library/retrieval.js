@@ -1,0 +1,188 @@
+import { createHash } from 'node:crypto';
+import { buildCompanyProfile, buildEventProfile, buildInstitutionProfile, buildThemeProfile, resolveCanonical } from './content-library.js';
+export const RETRIEVAL_SCHEMA_VERSION = '1.0.0';
+const DEFAULT_STALENESS = { MARKET: { currentDays: 1, staleDays: 5 }, EVENT: { currentDays: 14, staleDays: 60 }, RESEARCH: { currentDays: 30, staleDays: 120 }, COMPANY: { currentDays: 365, staleDays: 3650 }, THEME: { currentDays: 60, staleDays: 365 }, SECTOR: { currentDays: 180, staleDays: 730 }, INSTITUTION: { currentDays: 365, staleDays: 1825 }, PUBLICATION: { currentDays: 30, staleDays: 365 }, SOURCE: { currentDays: 90, staleDays: 730 } };
+const uniq = (values) => [...new Set(values.filter(Boolean))].sort();
+const hash = (value) => createHash('sha256').update(typeof value === 'string' ? value : stable(value)).digest('hex');
+const stable = (value) => JSON.stringify(sort(value));
+function sort(value) { if (Array.isArray(value))
+    return value.map(sort); if (value && typeof value === 'object') {
+    const obj = value;
+    return Object.fromEntries(Object.keys(obj).sort().map(k => [k, sort(obj[k])]));
+} return value; }
+const array = (value) => Array.isArray(value) ? value.filter((x) => typeof x === 'string') : [];
+export class IntelligenceRetrievalService {
+    store;
+    now;
+    stalenessConfig;
+    constructor(store, now = '2026-10-06T09:00:00+09:00', stalenessConfig = {}) {
+        this.store = store;
+        this.now = now;
+        this.stalenessConfig = stalenessConfig;
+    }
+    byCompany(companyId, range = {}) { return this.query({ ...range, companyId }); }
+    byTheme(themeId, range = {}) { return this.query({ ...range, themeId }); }
+    byEvent(eventId, range = {}) { return this.query({ ...range, eventId }); }
+    byInstitution(institutionId, range = {}) { return this.query({ ...range, institutionId }); }
+    bySector(sectorId, range = {}) { return this.query({ ...range, sectorId }); }
+    byMarket(marketId, range = {}) { return this.query({ ...range, marketId }); }
+    byPublication(publicationId, range = {}) { return this.query({ ...range, publicationId }); }
+    byDateRange(from, to) { return this.query({ from, to }); }
+    query(query) {
+        const subjects = subjectIds(query);
+        let selected;
+        if (!subjects.length)
+            selected = this.store.records.filter(record => inRange(record, query));
+        else {
+            const neighborhoods = subjects.map(id => neighborhood(this.store, id, 2));
+            const ids = neighborhoods.reduce((a, b) => new Set([...a].filter(id => b.has(id))));
+            selected = this.store.records.filter(record => ids.has(record.canonicalId) && inRange(record, query));
+        }
+        selected.sort(compareRecords);
+        const ids = new Set(selected.map(record => record.canonicalId));
+        const relationships = this.store.edges.filter(edge => ids.has(edge.fromId) && ids.has(edge.toId)).sort((a, b) => a.createdAt.localeCompare(b.createdAt) || a.edgeId.localeCompare(b.edgeId));
+        const timeline = timelineFrom(this.store, selected, relationships);
+        const sourceRefs = uniq(selected.flatMap(record => record.sourceRefs).concat(relationships.flatMap(edge => edge.sourceRefs)));
+        const sources = this.store.records.filter(record => record.recordType === 'SOURCE' && sourceRefs.includes(record.canonicalId)).sort(compareRecords);
+        const evidence = uniq(selected.flatMap(record => record.evidenceRefs).concat(relationships.flatMap(edge => edge.evidenceRefs)));
+        const provenance = { sourceRefs, evidenceRefs: evidence, originRecordIds: uniq(selected.flatMap(record => record.originRecordIds).concat(relationships.flatMap(edge => edge.originRecordIds))) };
+        const base = { schemaVersion: RETRIEVAL_SCHEMA_VERSION, query, records: selected, relationships, timeline, sources, evidence, provenance };
+        return { ...base, fingerprint: hash(base) };
+    }
+    timeline(subjectType, subjectId, range = {}) { const result = this.query({ ...range, ...queryKey(subjectType, subjectId) }); return { subjectType, subjectId, subjectName: this.store.records.find(r => r.canonicalId === subjectId)?.displayName ?? subjectId, periodStart: result.timeline[0]?.date ?? null, periodEnd: result.timeline.at(-1)?.date ?? null, timelineItems: result.timeline }; }
+    companyRetrospective(companyId, from, to) {
+        const company = buildCompanyProfile(this.store, companyId);
+        const histories = this.store.companyHistory.filter(h => h.companyId === companyId && h.periodEnd >= from && h.periodStart <= to).sort((a, b) => a.periodStart.localeCompare(b.periodStart));
+        const comparable = histories.length >= 2;
+        const result = this.byCompany(companyId, { from, to });
+        const research = result.records.filter(r => r.recordType === 'RESEARCH');
+        const institutions = uniq(research.flatMap(record => this.store.edges.filter(e => e.relationshipType === 'INSTITUTION_PUBLISHED_RESEARCH' && e.toId === record.canonicalId).map(e => e.fromId)));
+        const changed = comparable ? compareCompanyHistory(histories.at(-2), histories.at(-1)) : [];
+        const stayed = comparable ? intersection(companySignals(histories.at(-2)), companySignals(histories.at(-1))) : [];
+        return { company, period: { from, to }, keyEvents: result.records.filter(r => r.recordType === 'EVENT').map(r => buildEventProfile(this.store, r.canonicalId)), themeChanges: histories, institutionViews: institutions.map(id => buildInstitutionProfile(this.store, id)), researchMentions: research, marketReactions: histories.flatMap(h => h.marketReactions), relatedPublications: result.records.filter(r => r.recordType === 'PUBLICATION'), firstSeen: company.firstSeenAt, latestSeen: company.lastSeenAt, historyStatus: comparable ? 'COMPARABLE' : 'INSUFFICIENT_HISTORY', whatChanged: changed, whatStayedSame: stayed, unresolvedQuestions: comparable ? [] : ['INSUFFICIENT_HISTORY'] };
+    }
+    themeRetrospective(themeId, from, to) {
+        const theme = buildThemeProfile(this.store, themeId);
+        const histories = this.store.themeHistory.filter(h => h.themeId === themeId && h.periodEnd >= from && h.periodStart <= to).sort((a, b) => a.periodStart.localeCompare(b.periodStart));
+        const prior = histories.length >= 2 ? histories.at(-2) : null;
+        const current = histories.at(-1) ?? null;
+        const priorSignals = prior?.supportingRecordIds ?? [];
+        const currentSignals = current?.supportingRecordIds ?? [];
+        const events = theme.relatedEventIds.map(id => buildEventProfile(this.store, id));
+        return { theme, period: { from, to }, majorEvents: events, companies: theme.relatedCompanyIds, sectors: theme.relatedSectorIds, institutions: theme.relatedInstitutionIds, markets: uniq(events.flatMap(e => e.marketIds)), priorPeriod: prior, currentPeriod: current, newSignals: prior ? currentSignals.filter(x => !priorSignals.includes(x)) : [], persistentSignals: prior ? intersection(priorSignals, currentSignals) : [], resolvedSignals: prior ? priorSignals.filter(x => !currentSignals.includes(x)) : [], conflictingSignals: detectKnowledgeConflicts(this.store, this.now).filter(c => c.subjectId === themeId).map(c => c.conflictId), trendState: prior && current ? current.changeState : null };
+    }
+    institutionViewHistory(institutionId, subjectType, subjectId) {
+        const researchIds = this.store.edges.filter(e => e.relationshipType === 'INSTITUTION_PUBLISHED_RESEARCH' && e.fromId === institutionId).map(e => e.toId);
+        const subjectNeighborhood = neighborhood(this.store, subjectId, 2);
+        const records = this.store.records.filter(r => r.recordType === 'RESEARCH' && researchIds.includes(r.canonicalId) && subjectNeighborhood.has(r.canonicalId)).map(researchView).sort((a, b) => (a.publishedAt ?? '9999').localeCompare(b.publishedAt ?? '9999'));
+        const comparable = records.filter((record) => record.publishedAt !== null);
+        const first = comparable[0] ?? null;
+        const latest = comparable.at(-1) ?? null;
+        const changed = comparable.length >= 2 ? first?.stance !== latest?.stance : null;
+        const explicitEvidence = changed ? uniq(this.store.records.filter(r => r.recordType === 'RESEARCH' && researchIds.includes(r.canonicalId)).flatMap(r => array(r.internalMetadata.changeReasonEvidence))) : [];
+        return { institutionId, subjectType, subjectId, records, firstKnownView: first, latestKnownView: latest, viewChanged: changed, changeReasonEvidence: changed && explicitEvidence.length ? explicitEvidence : null };
+    }
+    similarEvents(eventId) { const target = buildEventProfile(this.store, eventId); return this.store.records.filter(r => r.recordType === 'EVENT' && r.canonicalId !== eventId).map(r => { const other = buildEventProfile(this.store, r.canonicalId); const sharedEntities = intersection(target.companyIds, other.companyIds); const sharedThemes = intersection(target.themeIds, other.themeIds); const sharedSectors = intersection(target.sectorIds, other.sectorIds); const basis = []; if (sharedEntities.length)
+        basis.push('SHARED_COMPANY'); if (sharedThemes.length)
+        basis.push('SHARED_THEME'); if (sharedSectors.length)
+        basis.push('SHARED_SECTOR'); if (intersection(target.marketIds, other.marketIds).length)
+        basis.push('SAME_MARKET'); if (target.eventType === other.eventType)
+        basis.push('SAME_EVENT_TYPE'); return { eventId: r.canonicalId, similarityBasis: basis, sharedEntities, sharedThemes, sharedSectors, confidence: basis.length >= 2 ? 'DETERMINISTIC_MATCH' : 'CANDIDATE' }; }).filter(candidate => candidate.similarityBasis.length >= 2).sort((a, b) => a.eventId.localeCompare(b.eventId)); }
+    findPrecedents(eventId) { const event = buildEventProfile(this.store, eventId); const prior = this.similarEvents(eventId).filter(candidate => buildEventProfile(this.store, candidate.eventId).eventDate < event.eventDate); const profiles = prior.map(candidate => buildEventProfile(this.store, candidate.eventId)); const market = profiles.some(p => Boolean(p.initialMarketReaction || p.subsequentMarketReaction)); const institution = profiles.some(p => p.wallStreetViews.length + p.koreaResearchViews.length > 0); const outcome = profiles.some(p => Boolean(p.subsequentMarketReaction)); return { eventId, priorEvents: prior, marketReactionAvailable: market, institutionViewsAvailable: institution, subsequentOutcomeAvailable: outcome, outcomeStatus: outcome ? 'VERIFIED_OUTCOME_AVAILABLE' : 'NO_VERIFIED_PRECEDENT_OUTCOME' }; }
+    findPriorCoverage(input) { return findPriorCoverage(this.store, input); }
+    contentReuse(subjectId) { return buildContentReusePackage(this.store, subjectId, this.now, this.stalenessConfig); }
+}
+export function createDefaultEditorialMemory(createdAt = '2026-10-06T09:00:00+09:00') { const entries = [['SOURCE_PATTERN', '동일 AP close source는 public footer에서 canonical URL 기준으로 중복 제거', 'IMPORTANT'], ['VISUALIZATION_RULE', '실제 historical series가 없으면 chart를 생성하지 않음', 'CRITICAL'], ['VISUALIZATION_RULE', '시장 등락 색상은 positive red, negative blue 규칙 유지', 'IMPORTANT'], ['EDITORIAL_DECISION', '기관 의견과 MOTUS interpretation을 별도 필드와 시각 영역으로 유지', 'CRITICAL'], ['VERIFICATION_LESSON', 'Cross Intelligence는 evidence가 없는 연결을 생성하지 않음', 'CRITICAL'], ['EDITORIAL_DECISION', 'Trend 판단은 비교 가능한 prior period가 있는 Weekly 또는 Monthly에서만 강화', 'IMPORTANT'], ['READER_EXPLANATION', 'Daily 본문은 fact, 의미, 산업·시장 연결 순서로 설명', 'NORMAL'], ['EDITORIAL_DECISION', 'Public article prose should not expose internal analytical labels.', 'IMPORTANT'], ['EDITORIAL_DECISION', 'Industry/company connection must explain why the connection exists.', 'IMPORTANT'], ['EDITORIAL_DECISION', 'Title-only thematic lists are insufficient for public publication.', 'IMPORTANT'], ['EDITORIAL_DECISION', 'Bullets are for scanning and comparison; core explanation should use prose.', 'IMPORTANT'], ['VISUALIZATION_RULE', 'Public renderers must not create horizontal overflow at 320–430px viewport widths.', 'CRITICAL'], ['VISUALIZATION_RULE', 'Chart cards must use responsive containers with no fixed mobile width.', 'CRITICAL'], ['VISUALIZATION_RULE', 'English chart titles must not use break-all wrapping.', 'IMPORTANT'], ['VISUALIZATION_RULE', 'Multi-column charts must collapse to one column when the container is too narrow.', 'CRITICAL'], ['VISUALIZATION_RULE', 'Every public card must remain fully contained inside its parent at mobile widths.', 'CRITICAL']]; return { schemaVersion: RETRIEVAL_SCHEMA_VERSION, records: entries.map(([memoryType, statement, importance]) => createMemory({ subjectType: 'GLOBAL', subjectId: 'global:editorial', memoryType, statement, evidenceRefs: [], sourceRefs: [], originSprint: '4L', originPublication: null, createdAt, lastUsedAt: null, usageCount: 0, importance, reviewState: 'ACTIVE' })) }; }
+export function addEditorialMemory(store, input) { validateMemory(input); const item = createMemory(input); if (store.records.some(r => r.memoryId === item.memoryId))
+    return structuredClone(store); return { ...structuredClone(store), records: [...store.records, item] }; }
+export function retrieveEditorialMemory(store, context, usedAt) { const next = structuredClone(store); const records = next.records.filter(r => (r.subjectType === 'GLOBAL' || (r.subjectType === context.subjectType && r.subjectId === context.subjectId)) && (!context.memoryTypes || context.memoryTypes.includes(r.memoryType))); for (const record of records) {
+    record.usageCount++;
+    record.lastUsedAt = usedAt;
+} return { store: next, records }; }
+export function findPriorCoverage(store, input) { const events = store.records.filter(r => r.recordType === 'EVENT'); if (input.continuationOfEventId && events.some(r => r.canonicalId === input.continuationOfEventId))
+    return { state: 'FOLLOW_UP', relatedRecordIds: [input.continuationOfEventId], basis: ['VERIFIED_CONTINUATION_RELATION'] }; const exact = input.eventId ? events.find(r => r.canonicalId === input.eventId) : undefined; if (exact) {
+    const sameSource = Boolean(input.sourceRefs?.some(source => exact.sourceRefs.includes(source)));
+    return { state: sameSource ? 'DUPLICATE' : 'SAME_EVENT', relatedRecordIds: [exact.canonicalId], basis: [sameSource ? 'CANONICAL_EVENT_AND_SOURCE' : 'CANONICAL_EVENT'] };
+} const companies = input.companyIds ?? []; const themes = input.themeIds ?? []; const related = events.filter(event => { const profile = buildEventProfile(store, event.canonicalId); return intersection(companies, profile.companyIds).length > 0 && intersection(themes, profile.themeIds).length > 0; }); return related.length ? { state: 'RELATED', relatedRecordIds: related.map(r => r.canonicalId), basis: ['COMPANY_AND_THEME_GRAPH_OVERLAP'] } : { state: 'NONE', relatedRecordIds: [], basis: [] }; }
+export function stalenessFor(record, at, config = {}) { const policy = config[record.recordType] ?? DEFAULT_STALENESS[record.recordType]; if (!policy || !Number.isFinite(Date.parse(record.lastSeenAt)) || !Number.isFinite(Date.parse(at)))
+    return 'UNKNOWN'; const days = Math.max(0, (Date.parse(at) - Date.parse(record.lastSeenAt)) / 86_400_000); return days <= policy.currentDays ? 'CURRENT' : days <= policy.staleDays ? 'AGING' : 'STALE'; }
+export function buildContentReusePackage(store, subjectId, at, config = {}) { const result = new IntelligenceRetrievalService(store, at, config).query(queryFromCanonical(subjectId)); const facts = result.records.filter(r => r.summary).map(r => ({ recordId: r.canonicalId, summary: r.summary, staleness: stalenessFor(r, at, config) })); const explanations = result.records.filter(r => r.recordType === 'PUBLICATION' && r.summary).map(r => ({ recordId: r.canonicalId, text: r.summary, staleness: stalenessFor(r, at, config) })); const charts = store.pdfArtifacts.filter(a => a.companyIds.includes(subjectId) || a.themeIds.includes(subjectId) || a.eventIds.includes(subjectId)).map(a => ({ artifactId: a.artifactId, path: a.path, staleness: 'UNKNOWN' })); const institutions = result.records.filter(r => r.recordType === 'RESEARCH').map(researchView); const relatedPublications = result.records.filter(r => r.recordType === 'PUBLICATION').map(r => r.canonicalId); const openQuestions = result.records.length ? ['과거 fact의 현재 유효성을 새 source로 재검증', '후속 market reaction과 institution view 확인'] : ['검증된 prior coverage 없음']; const base = { subjectId, generatedAt: at, priorFacts: facts, priorExplanations: explanations, priorCharts: charts, priorInstitutionViews: institutions, priorSources: result.provenance.sourceRefs, relatedPublications, openQuestions }; return { ...base, fingerprint: hash(base) }; }
+export function detectKnowledgeConflicts(store, detectedAt) {
+    const groups = new Map();
+    for (const record of store.records.filter(r => r.verificationStatus === 'VERIFIED')) {
+        const fields = record.internalMetadata.knowledgeFields;
+        if (!fields || typeof fields !== 'object' || Array.isArray(fields))
+            continue;
+        for (const [field, value] of Object.entries(fields)) {
+            const groupKey = `${record.canonicalId}|${field}`;
+            const group = groups.get(groupKey) ?? { subjectId: record.canonicalId, field, values: new Map() };
+            const valueKey = stable(value);
+            const item = group.values.get(valueKey) ?? { records: [], sources: [] };
+            item.records.push(record.libraryId);
+            item.sources.push(...record.sourceRefs);
+            group.values.set(valueKey, item);
+            groups.set(groupKey, group);
+        }
+    }
+    return [...groups.values()].filter(group => group.values.size > 1).map(group => ({ conflictId: `conflict:${hash(`${group.subjectId}|${group.field}`).slice(0, 16)}`, subjectId: group.subjectId, field: group.field, records: uniq([...group.values.values()].flatMap(v => v.records)), sources: uniq([...group.values.values()].flatMap(v => v.sources)), detectedAt, status: 'REVIEW_REQUIRED' }));
+}
+export function buildSourceOperationalProfiles(input) { const map = new Map(); for (const row of input) {
+    const id = `${row.publisher}|${row.sourceType}`;
+    const p = map.get(id) ?? { publisher: row.publisher, sourceType: row.sourceType, successCount: 0, failureCount: 0, parseChangeCount: 0, verificationConflictCount: 0, lastSeenAt: null };
+    if (row.status === 'SUCCESS')
+        p.successCount++;
+    else if (row.status === 'FAILURE')
+        p.failureCount++;
+    else if (row.status === 'PARSE_CHANGE')
+        p.parseChangeCount++;
+    else
+        p.verificationConflictCount++;
+    if (!p.lastSeenAt || p.lastSeenAt < row.observedAt)
+        p.lastSeenAt = row.observedAt;
+    map.set(id, p);
+} return [...map.values()].sort((a, b) => a.publisher.localeCompare(b.publisher)); }
+export function enhanceEvergreenReview(store, candidate, at) { const service = new IntelligenceRetrievalService(store, at); const event = candidate.supportingEvents[0]; const coverage = event ? service.findPriorCoverage({ eventId: event, observedAt: at }) : { state: 'NONE', relatedRecordIds: [], basis: [] }; const records = service.query(queryFromCanonical(candidate.topicId)).records; const stale = records.map(r => stalenessFor(r, at)); const state = stale.includes('STALE') ? 'STALE' : stale.includes('AGING') ? 'AGING' : stale.includes('CURRENT') ? 'CURRENT' : 'UNKNOWN'; return { candidate: { ...candidate, candidateState: 'REVIEW_REQUIRED' }, priorCoverage: coverage, supportingEvents: candidate.supportingEvents, supportingSources: candidate.sourceRefs, staleness: state, conflicts: detectKnowledgeConflicts(store, at).filter(c => c.subjectId === candidate.topicId), openQuestions: ['후속 사건과 최신 source로 설명의 현재 유효성 확인'] }; }
+export function buildRetrievalOperatorPackage(input) { const stale = input.results.flatMap(r => r.records).filter(r => stalenessFor(r, input.generatedAt) === 'STALE').length; const base = { schemaVersion: RETRIEVAL_SCHEMA_VERSION, generatedAt: input.generatedAt, queriesRun: input.results.length, recordsReturned: input.results.reduce((n, r) => n + r.records.length, 0), conflictsFound: input.conflicts.length, staleRecords: stale, followUpsFound: input.coverage.filter(c => c.state === 'FOLLOW_UP').length, duplicatesFound: input.coverage.filter(c => c.state === 'DUPLICATE').length, precedentsFound: input.precedents.reduce((n, p) => n + p.priorEvents.length, 0), editorialMemoryUsed: uniq(input.memoryUsed.map(m => m.memoryId)), warnings: input.warnings ?? [], externalActions: { bloggerInsert: 0, bloggerPatch: 0, bloggerPublish: 0, driveUpload: 0, publicPdf: 0 }, commerce: { enabled: false } }; return { ...base, fingerprint: hash(base) }; }
+export function buildPeriodicRetrievalContext(service, from, to, subjects, memory) { const retrieval = subjects.map(subject => service.query({ ...queryFromCanonical(subject), from, to })); const recalled = retrieveEditorialMemory(memory, { memoryTypes: ['EDITORIAL_DECISION', 'VERIFICATION_LESSON', 'READER_EXPLANATION'] }, service.now); return { retrieval, priorPeriod: { from, to }, editorialMemory: recalled.records, factsGenerated: 0, fingerprint: hash({ retrieval: retrieval.map(r => r.fingerprint), memory: recalled.records.map(r => r.memoryId) }) }; }
+function createMemory(input) { return { ...input, memoryId: `memory:${hash(`${input.subjectType}|${input.subjectId}|${input.memoryType}|${input.statement}`).slice(0, 16)}` }; }
+function validateMemory(input) { const serialized = JSON.stringify(input); if (/(?:oauth|api[ _-]?secret|password|refresh[ _-]?token|access[ _-]?token|authorization code|private key|filesystem credential|(?:[A-Za-z]:\\|\/home\/|\/Users\/)[^"\s]+)/i.test(serialized))
+    throw new Error('secret, credential, or local path content is forbidden in Editorial Memory'); if (!input.statement.trim())
+    throw new Error('memory statement required'); }
+function subjectIds(query) { return uniq([query.companyId, query.themeId, query.eventId, query.institutionId, query.sectorId, query.marketId, query.publicationId].filter((v) => Boolean(v))); }
+function neighborhood(store, id, depth) { const visited = new Set([id]); let frontier = new Set([id]); const typeById = new Map(store.records.map(record => [record.canonicalId, record.recordType])); for (let i = 0; i < depth; i++) {
+    const next = new Set();
+    for (const node of frontier) {
+        if (['PUBLICATION', 'SOURCE', 'MARKET'].includes(typeById.get(node) ?? ''))
+            continue;
+        for (const edge of store.edges) {
+            const adjacent = edge.fromId === node ? edge.toId : edge.toId === node ? edge.fromId : null;
+            if (adjacent && !visited.has(adjacent)) {
+                visited.add(adjacent);
+                next.add(adjacent);
+            }
+        }
+    }
+    frontier = next;
+} return visited; }
+function inRange(record, query) { const date = recordDate(record); return (!query.from || date >= query.from) && (!query.to || date <= query.to); }
+function recordDate(record) { for (const field of ['eventDate', 'publishedAt', 'observedAt']) {
+    const value = record.internalMetadata[field];
+    if (typeof value === 'string')
+        return value.slice(0, 10);
+} return record.lastSeenAt.slice(0, 10); }
+function compareRecords(a, b) { return recordDate(a).localeCompare(recordDate(b)) || a.canonicalId.localeCompare(b.canonicalId); }
+function timelineFrom(store, records, edges) { const events = records.filter(r => r.recordType === 'EVENT'); const seen = new Set(); const items = []; for (const event of events) {
+    if (seen.has(event.canonicalId))
+        continue;
+    seen.add(event.canonicalId);
+    const profile = buildEventProfile(store, event.canonicalId);
+    const eventEdges = edges.filter(e => e.fromId === event.canonicalId || e.toId === event.canonicalId);
+    items.push({ date: profile.eventDate, eventType: profile.eventType, title: profile.headline, summary: event.summary, companyIds: profile.companyIds, themeIds: profile.themeIds, institutionIds: uniq(eventEdges.filter(e => e.relationshipType === 'INSTITUTION_PUBLISHED_RESEARCH').map(e => e.fromId)), marketIds: profile.marketIds, publicationIds: profile.relatedPublications, sourceRefs: profile.sourceRefs, evidenceRefs: profile.evidenceRefs });
+} return items.sort((a, b) => a.date.localeCompare(b.date) || a.title.localeCompare(b.title)); }
+function queryKey(type, id) { return type === 'COMPANY' ? { companyId: id } : type === 'THEME' ? { themeId: id } : type === 'EVENT' ? { eventId: id } : type === 'INSTITUTION' ? { institutionId: id } : type === 'SECTOR' ? { sectorId: id } : type === 'MARKET' ? { marketId: id } : { publicationId: id }; }
+function queryFromCanonical(id) { const prefix = id.split(':')[0]; return prefix === 'company' ? { companyId: id } : prefix === 'theme' ? { themeId: id } : prefix === 'event' ? { eventId: id } : prefix === 'institution' ? { institutionId: id } : prefix === 'sector' ? { sectorId: id } : prefix === 'market' ? { marketId: id } : { publicationId: id }; }
+function researchView(record) { return { publishedAt: typeof record.internalMetadata.publishedAt === 'string' ? record.internalMetadata.publishedAt : null, researchType: typeof record.internalMetadata.researchType === 'string' ? record.internalMetadata.researchType : 'UNKNOWN', stance: typeof record.internalMetadata.institutionView === 'string' ? record.internalMetadata.institutionView : null, rating: typeof record.internalMetadata.rating === 'string' ? record.internalMetadata.rating : null, targetPrice: typeof record.internalMetadata.targetPrice === 'string' ? record.internalMetadata.targetPrice : null, evidenceRefs: record.evidenceRefs, sourceRefs: record.sourceRefs }; }
+function intersection(a, b) { const set = new Set(b); return uniq(a.filter(x => set.has(x))); }
+function companySignals(history) { return uniq([...history.events, ...history.researchMentions, ...history.institutionMentions, ...history.marketReactions, ...history.relatedThemes]); }
+function compareCompanyHistory(prior, current) { const a = companySignals(prior), b = companySignals(current); return uniq([...b.filter(x => !a.includes(x)).map(x => `ADDED:${x}`), ...a.filter(x => !b.includes(x)).map(x => `RESOLVED:${x}`)]); }
+export function resolveRetrievalId(type, value) { const direct = value.includes(':') ? value : null; return direct ?? resolveCanonical(type, value).canonicalId ?? `${type}:${value.toLowerCase().replace(/[^a-z0-9가-힣]+/g, '-')}`; }

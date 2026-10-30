@@ -1,0 +1,8 @@
+import { mkdir, writeFile } from 'node:fs/promises';
+import { join } from 'node:path';
+import { createPeriodicProductionRun } from './intelligence/periodic-production.js';
+const run = createPeriodicProductionRun();
+const root = join(process.cwd(), 'data', 'periodic', '2026-09');
+await mkdir(root, { recursive: true });
+await Promise.all([writeFile(join(root, 'weekly-preview.html'), run.weeklyRender.html, 'utf8'), writeFile(join(root, 'monthly-preview.html'), run.monthlyRender.html, 'utf8'), writeFile(join(root, 'reports-archive-preview.html'), run.reportsHtml, 'utf8'), writeFile(join(root, 'weekly-pdf-viewmodel.json'), JSON.stringify(run.weeklyPdf, null, 2), 'utf8'), writeFile(join(root, 'monthly-pdf-viewmodel.json'), JSON.stringify(run.monthlyPdf, null, 2), 'utf8'), writeFile(join(root, 'review-package.json'), JSON.stringify({ weekly: { metadata: run.weekly.metadata, fingerprint: run.weeklyRender.contentFingerprint }, monthly: { metadata: run.monthly.metadata, fingerprint: run.monthlyRender.contentFingerprint, eventToMarket: run.monthly.eventToMarketReview }, reports: run.reports, remoteCalls: run.remoteCalls, commerce: run.commerce }, null, 2), 'utf8')]);
+console.log(JSON.stringify({ root, weekly: run.weekly.metadata.readiness, monthly: run.monthly.metadata.readiness, remoteCalls: run.remoteCalls }, null, 2));

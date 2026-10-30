@@ -1,0 +1,173 @@
+import { fetchWithTransientRetry } from './http-retry.js';
+// KRX Open API data is served from data-dbg.krx.co.kr; openapi.krx.co.kr is the portal and answers 404 for API paths.
+const KRX_API_HOST = 'https://data-dbg.krx.co.kr';
+const KRX_ENDPOINTS = { KOSPI: KRX_API_HOST + '/svc/apis/idx/kospi_dd_trd', KOSDAQ: KRX_API_HOST + '/svc/apis/idx/kosdaq_dd_trd' };
+/** Known KRX messages only (e.g. {"respMsg":"Unauthorized API Call"} = key not approved for that API); anything else keeps the HTTP status alone so a reflected key can never be recorded. */
+const KRX_KNOWN_MESSAGES = { 'unauthorized api call': 'Unauthorized_API_Call' };
+export async function krxHttpError(response) {
+    let detail = '';
+    try {
+        const body = await response.json();
+        detail = typeof body.respMsg === 'string' ? KRX_KNOWN_MESSAGES[body.respMsg.trim().toLowerCase()] ?? '' : '';
+    }
+    catch { }
+    return 'KRX_HTTP_' + response.status + (detail ? ':' + detail : '');
+}
+const BOK_ENDPOINT = 'https://ecos.bok.or.kr/api/StatisticSearch';
+export class KrxBokOfficialSourceAdapter {
+    fetcher;
+    environment;
+    adapterId = 'krx-bok-official-v1';
+    constructor(fetcher = fetch, environment = process.env) {
+        this.fetcher = fetcher;
+        this.environment = environment;
+    }
+    async fetch(observedDate, _collectedAt) {
+        const observations = [], audit = [], krxKey = this.environment.KRX_AUTH_KEY?.trim(), compactDate = observedDate.replaceAll('-', '');
+        if (!krxKey) {
+            for (const [field, base] of Object.entries(KRX_ENDPOINTS))
+                audit.push({ sourceId: 'krx:' + field.toLowerCase(), url: base + '?basDd=' + compactDate, status: 'FAILED', recordCount: 0, error: 'KRX_AUTH_KEY_MISSING' });
+            return { observations, audit, requiredProviderAvailable: false, reasonCode: 'KRX_AUTH_KEY_MISSING' };
+        }
+        try {
+            for (const field of ['KOSPI', 'KOSDAQ']) {
+                const base = KRX_ENDPOINTS[field], url = base + '?basDd=' + compactDate, response = await this.fetcher(url, { headers: { accept: 'application/json', 'user-agent': 'MOTUS-Internal-Collector/1.0', AUTH_KEY: krxKey }, signal: AbortSignal.timeout(20000) });
+                if (!response.ok)
+                    throw new Error(await krxHttpError(response));
+                const body = await response.json(), rows = body.OutBlock_1 ?? [];
+                if (!rows.length)
+                    throw new Error('KRX_' + field + '_NO_ROWS_FOR_DATE');
+                const row = rows.find(item => canonicalIndexName(item.IDX_NM) === field);
+                if (!row)
+                    throw new Error('KRX_' + field + '_ROW_MISSING');
+                const date = normalizeDate(row.BAS_DD), value = numberValue(row.CLSPRC_IDX);
+                observations.push({ field, observedDate: date, value, provider: 'KRX', sourceUrl: url, metricBasis: 'SESSION_CLOSE' });
+                audit.push({ sourceId: 'krx:' + field.toLowerCase(), url, status: 'PASS', recordCount: 1, error: date === observedDate ? null : 'KRX_T_PLUS_ONE_RECONCILIATION_ONLY' });
+            }
+        }
+        catch (error) {
+            return { observations, audit: [...audit, { sourceId: 'krx:official', url: KRX_API_HOST, status: 'FAILED', recordCount: 0, error: errorMessage(error) }], requiredProviderAvailable: false, reasonCode: errorMessage(error) };
+        }
+        const bokKey = this.environment.BOK_ECOS_API_KEY?.trim();
+        if (!bokKey)
+            audit.push({ sourceId: 'bok:usd-krw', url: BOK_ENDPOINT, status: 'SKIPPED', recordCount: 0, error: 'BOK_ECOS_API_KEY_MISSING' });
+        else {
+            const statCode = this.environment.BOK_ECOS_USD_KRW_STAT_CODE?.trim() || '731Y001', itemCode = this.environment.BOK_ECOS_USD_KRW_ITEM_CODE?.trim() || '0000001', url = `${BOK_ENDPOINT}/${encodeURIComponent(bokKey)}/json/kr/1/100/${encodeURIComponent(statCode)}/D/${compactDate}/${compactDate}/${encodeURIComponent(itemCode)}`, safeUrl = 'https://ecos.bok.or.kr/';
+            try {
+                const response = await this.fetcher(url, { headers: { accept: 'application/json', 'user-agent': 'MOTUS-Internal-Collector/1.0' }, signal: AbortSignal.timeout(20000) });
+                if (!response.ok)
+                    throw new Error('BOK_HTTP_' + response.status);
+                const body = await response.json(), row = body.StatisticSearch?.row?.[0];
+                if (!row)
+                    throw new Error('BOK_USD_KRW_ROW_MISSING');
+                const date = normalizeDate(row.TIME), value = numberValue(row.DATA_VALUE);
+                if (date !== observedDate)
+                    throw new Error('BOK_USD_KRW_OBSERVED_DATE_MISMATCH');
+                observations.push({ field: 'USD_KRW', observedDate: date, value, provider: 'BOK_ECOS', sourceUrl: safeUrl, metricBasis: 'REFERENCE_RATE' });
+                audit.push({ sourceId: 'bok:usd-krw', url: safeUrl, status: 'PASS', recordCount: 1, error: null });
+            }
+            catch (error) {
+                audit.push({ sourceId: 'bok:usd-krw', url: safeUrl, status: 'FAILED', recordCount: 0, error: errorMessage(error) });
+            }
+        }
+        const sameDay = observations.filter(item => item.provider === 'KRX').every(item => item.observedDate === observedDate), phase = sameDay ? 'PRE_PUBLICATION' : 'POST_PUBLICATION_RECONCILIATION';
+        return { observations, audit, requiredProviderAvailable: sameDay, reasonCode: sameDay ? null : 'KRX_T_PLUS_ONE_RECONCILIATION_ONLY', phase };
+    }
+}
+export class YahooKoreaSecondarySourceAdapter {
+    fetcher;
+    adapterId = 'yahoo-korea-secondary-v2';
+    constructor(fetcher = fetch) {
+        this.fetcher = fetcher;
+    }
+    async fetch(observedDate, _collectedAt) {
+        const observations = [], audit = [], center = Date.parse(observedDate + 'T00:00:00Z'), from = Math.floor((center - 2 * 86400000) / 1000), to = Math.floor((center + 3 * 86400000) / 1000);
+        try {
+            for (const [field, symbol] of [['KOSPI', '%5EKS11'], ['KOSDAQ', '%5EKQ11']]) {
+                let accepted = null, lastCode = 'YAHOO_FINANCE_' + field + '_ROW_MISSING';
+                for (const host of ['query1.finance.yahoo.com', 'query2.finance.yahoo.com']) {
+                    const url = `https://${host}/v8/finance/chart/${symbol}?period1=${from}&period2=${to}&interval=1d`;
+                    const response = await fetchWithTransientRetry(this.fetcher, url, () => ({ headers: { accept: 'application/json', 'user-agent': 'MOTUS-Internal-Collector/1.0' }, signal: AbortSignal.timeout(20000) }));
+                    if (!response.ok) {
+                        lastCode = 'YAHOO_FINANCE_HTTP_' + response.status;
+                        audit.push({ sourceId: 'yahoo-finance:' + field.toLowerCase() + ':' + host, url, status: 'FAILED', recordCount: 0, error: lastCode, requestedDate: observedDate, availableDates: [] });
+                        continue;
+                    }
+                    const body = await response.json();
+                    const result = body.chart?.result?.[0], timestamps = result?.timestamp ?? [], closes = result?.indicators?.quote?.[0]?.close ?? [], zone = result?.meta?.exchangeTimezoneName || result?.meta?.timezone || 'Asia/Seoul';
+                    const dates = timestamps.map(value => yahooSessionDate(value, zone)), index = dates.indexOf(observedDate), value = index >= 0 ? closes[index] : null;
+                    const code = body.chart?.error ? 'YAHOO_FINANCE_PROVIDER_ERROR' : index < 0 || value == null ? 'YAHOO_FINANCE_' + field + '_ROW_MISSING' : typeof value !== 'number' || !Number.isFinite(value) || value <= 0 ? 'YAHOO_FINANCE_' + field + '_INVALID_CLOSE' : null;
+                    audit.push({ sourceId: 'yahoo-finance:' + field.toLowerCase() + ':' + host, url, status: code ? 'FAILED' : 'PASS', recordCount: code ? 0 : 1, error: code, requestedDate: observedDate, availableDates: [...new Set(dates.filter(Boolean))].slice(-8) });
+                    if (!code) {
+                        accepted = { value: value, url, availableDates: dates };
+                        break;
+                    }
+                    lastCode = code;
+                }
+                if (!accepted)
+                    throw new Error(lastCode);
+                observations.push({ field, observedDate, value: accepted.value, provider: 'YAHOO_FINANCE', sourceUrl: accepted.url, metricBasis: 'SESSION_CLOSE' });
+            }
+            return { observations, audit, requiredProviderAvailable: true, reasonCode: null, phase: 'PRE_PUBLICATION' };
+        }
+        catch (error) {
+            return { observations, audit: [...audit, { sourceId: 'yahoo-finance:secondary', url: 'https://finance.yahoo.com/', status: 'FAILED', recordCount: 0, error: errorMessage(error), requestedDate: observedDate, availableDates: [...new Set(audit.flatMap(item => item.availableDates ?? []))].slice(-8) }], requiredProviderAvailable: false, reasonCode: errorMessage(error), phase: 'PRE_PUBLICATION' };
+        }
+    }
+}
+function yahooSessionDate(value, timeZone) {
+    if (typeof value !== 'number' || !Number.isFinite(value))
+        return '';
+    try {
+        return new Intl.DateTimeFormat('en-CA', { timeZone, year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date(value * 1000));
+    }
+    catch {
+        return new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date(value * 1000));
+    }
+}
+export function crossVerifyKoreaMarket(primary, official, verifiedAt, tolerance = { KOSPI: 0.05, KOSDAQ: 0.05, USD_KRW: 2 }) {
+    const comparedFields = [], reasonCodes = [];
+    for (const observation of official.observations) {
+        if (observation.observedDate !== primary.observedDate) {
+            reasonCodes.push('KOREA_' + observation.field + '_OBSERVED_DATE_MISMATCH');
+            continue;
+        }
+        const primaryValue = primary.values[observation.field];
+        if (primaryValue === undefined)
+            continue;
+        const primaryBasis = primary.metricBasis?.[observation.field];
+        if (primaryBasis && observation.metricBasis && primaryBasis !== observation.metricBasis) {
+            reasonCodes.push('KOREA_' + observation.field + '_METRIC_DEFINITION_MISMATCH');
+            continue;
+        }
+        const difference = Math.abs(primaryValue - observation.value), limit = tolerance[observation.field], result = difference <= limit ? 'PASS' : 'FAIL';
+        comparedFields.push({ field: observation.field, primaryValue, independentValue: observation.value, difference, tolerance: limit, result, primarySourceUrl: primaryUrl(primary, observation.field), independentSourceUrl: observation.sourceUrl, metricBasis: primaryBasis ?? observation.metricBasis });
+        if (result === 'FAIL')
+            reasonCodes.push('KOREA_' + observation.field + '_CROSS_CHECK_MISMATCH');
+    }
+    const requiredFields = ['KOSPI', 'KOSDAQ'], hasRequired = requiredFields.every(field => comparedFields.some(item => item.field === field));
+    if (!official.requiredProviderAvailable)
+        reasonCodes.push(official.reasonCode ?? 'KOREA_OFFICIAL_SOURCE_UNAVAILABLE');
+    if (!hasRequired)
+        reasonCodes.push('KOREA_OFFICIAL_INDEX_COMPARISON_INCOMPLETE');
+    const independentDomains = [...new Set(official.observations.map(item => providerDomain(item.sourceUrl)).filter(Boolean))], sourceDiversityPass = independentDomains.some(domain => domain !== 'naver.com') && providerDomain(primary.sourceUrls[0] ?? '') === 'naver.com', comparisonResult = !comparedFields.length ? 'UNAVAILABLE' : reasonCodes.length ? 'FAIL' : 'PASS';
+    if (!sourceDiversityPass)
+        reasonCodes.push('KOREA_INDEPENDENT_SOURCE_DIVERSITY_FAILED');
+    const officialObservedDates = [...new Set(official.observations.map(item => item.observedDate))], officialPhase = official.phase ?? 'PRE_PUBLICATION', reconciliation = officialPhase === 'POST_PUBLICATION_RECONCILIATION' ? { status: (reasonCodes.some(code => code.includes('MISMATCH')) ? 'MISMATCH' : 'PENDING'), officialObservedDates } : { status: 'NOT_REQUIRED', officialObservedDates };
+    return { schemaVersion: '1.0', category: 'KOREA_MARKET', observedDate: primary.observedDate, primarySource: { provider: 'Naver Finance', domain: 'naver.com', urls: [...primary.sourceUrls] }, independentSource: { providers: [...new Set(official.observations.map(item => item.provider))], domains: independentDomains, urls: [...new Set(official.observations.map(item => item.sourceUrl))] }, comparedFields, tolerance, comparisonResult, sourceDiversityPass, verification: comparisonResult === 'PASS' && sourceDiversityPass && officialPhase === 'PRE_PUBLICATION' ? 'VERIFIED' : 'REVIEW_REQUIRED', reasonCodes: [...new Set(reasonCodes)], verifiedAt, officialPhase, reconciliation };
+}
+function canonicalIndexName(value) { const normalized = (value ?? '').replace(/\s+/g, '').toUpperCase(); if (normalized === '코스피' || normalized === 'KOSPI')
+    return 'KOSPI'; if (normalized === '코스닥' || normalized === 'KOSDAQ')
+    return 'KOSDAQ'; return null; }
+function normalizeDate(value) { const digits = (value ?? '').replace(/\D/g, ''); return digits.length === 8 ? digits.replace(/^(\d{4})(\d{2})(\d{2})$/, '$1-$2-$3') : ''; }
+function numberValue(value) { const parsed = Number((value ?? '').replaceAll(',', '')); if (!Number.isFinite(parsed))
+    throw new Error('OFFICIAL_NUMERIC_VALUE_INVALID'); return parsed; }
+function providerDomain(value) { try {
+    const parts = new URL(value).hostname.toLowerCase().split('.');
+    return parts.slice(-2).join('.');
+}
+catch {
+    return '';
+} }
+function primaryUrl(primary, field) { const index = { KOSPI: 0, KOSDAQ: 1, USD_KRW: 2 }[field]; return primary.sourceUrls[index] ?? primary.sourceUrls[0] ?? ''; }
+function errorMessage(error) { return error instanceof Error ? error.message : String(error); }

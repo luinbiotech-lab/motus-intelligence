@@ -1,0 +1,96 @@
+import { appendFile, mkdir, readFile, readdir, rm } from 'node:fs/promises';
+import { join } from 'node:path';
+export const publicationIdentity = (operationDate, category) => `${operationDate}|${category}`;
+export function persistedPublicationDecision(entries, operationDate, category) { const identity = publicationIdentity(operationDate, category), entry = entries.find(item => (item.publicationIdentity ?? item.identity) === identity && item.event === 'PUBLISHED'); return entry ? { state: 'SKIP', reasonCode: 'ALREADY_PUBLISHED_IN_PERSISTED_LEDGER', identity, postId: entry.postId, publicPostUrl: entry.publicPostUrl } : { state: 'CONTINUE', reasonCode: null, identity, postId: null, publicPostUrl: null }; }
+export async function acquirePublicationLock(root, operationDate, category) {
+    const lockPath = join(root, '.publish-lock');
+    try {
+        await mkdir(lockPath);
+    }
+    catch (error) {
+        if (error.code === 'EEXIST')
+            throw new Error(`publication lock already held for ${publicationIdentity(operationDate, category)}`);
+        throw error;
+    }
+    return async () => { await rm(lockPath, { recursive: true, force: true }); };
+}
+export async function appendPublishLedger(root, entry) {
+    await mkdir(root, { recursive: true });
+    const record = { publicationIdentity: entry.identity, identity: entry.identity, attemptId: process.env.GITHUB_RUN_ID?.trim() || `${entry.operationDate}-${entry.category}-${Date.parse(entry.at)}`, operationDate: entry.operationDate, category: entry.category, at: entry.at, gateState: entry.gateState ?? (entry.event === 'GATE_HOLD' ? 'HOLD' : 'PENDING'), publishAttempted: entry.publishAttempted ?? ['PUBLISH_ATTEMPT', 'PUBLISHED', 'FAILED'].includes(entry.event), duplicateState: entry.duplicateState ?? (entry.event === 'PUBLISHED' ? 'RESOLVED' : 'PENDING'), finalState: entry.finalState ?? entry.event, reason: entry.reason ?? entry.detail, commitSha: process.env.GITHUB_SHA?.trim() || 'LOCAL', event: entry.event, postId: entry.postId, publicPostUrl: entry.publicPostUrl, fingerprint: entry.fingerprint, detail: entry.detail, ...(entry.sessionDate ? { sessionDate: entry.sessionDate } : {}), ...(entry.sourceUrls?.length ? { sourceUrls: entry.sourceUrls } : {}) };
+    await appendFile(join(root, 'publish-ledger.jsonl'), JSON.stringify(record) + '\n', 'utf8');
+}
+export async function readPublishLedger(root) {
+    try {
+        return (await readFile(join(root, 'publish-ledger.jsonl'), 'utf8')).split(/\r?\n/).filter(Boolean).map(line => JSON.parse(line));
+    }
+    catch {
+        return [];
+    }
+}
+/**
+ * Finds an already PUBLISHED operation of the same category that covers the same session date,
+ * regardless of the operationDate it ran under. Uses the ledger's sessionDate when recorded. A legacy
+ * entry without sessionDate is resolved from the persisted live unit only when that unit is provably the
+ * published one (its content fingerprint equals the ledger fingerprint); a unit re-collected by a later
+ * rerun is never trusted.
+ */
+export async function findPublishedSameSession(operationsRoot, categoryDir, category, sessionDate) {
+    let dates;
+    try {
+        dates = (await readdir(operationsRoot)).filter(name => /^\d{4}-\d{2}-\d{2}$/.test(name)).sort();
+    }
+    catch {
+        return null;
+    }
+    for (const operationDate of dates) {
+        const root = join(operationsRoot, operationDate, categoryDir), published = (await readPublishLedger(root)).filter(entry => entry.event === 'PUBLISHED' && entry.category === category);
+        if (!published.length)
+            continue;
+        let unit = null;
+        try {
+            const raw = JSON.parse(await readFile(join(root, 'live-unit.json'), 'utf8'));
+            if (typeof raw.observedDate === 'string' && typeof raw.contentFingerprint === 'string' && raw.contentFingerprint)
+                unit = { observedDate: raw.observedDate, fingerprint: 'sha256:' + raw.contentFingerprint };
+        }
+        catch {
+            unit = null;
+        }
+        for (const entry of published) {
+            const session = entry.sessionDate ?? (unit && unit.fingerprint === entry.fingerprint ? unit.observedDate : null);
+            if (session === sessionDate)
+                return { operationDate, postId: entry.postId, publicPostUrl: entry.publicPostUrl };
+        }
+    }
+    return null;
+}
+export async function findPublishedTitle(operationsRoot, categoryDir, currentOperationDate, title) {
+    const wanted = normalizeTitle(title);
+    if (!wanted)
+        return null;
+    let dates;
+    try {
+        dates = (await readdir(operationsRoot)).filter(name => /^\d{4}-\d{2}-\d{2}$/.test(name) && name !== currentOperationDate).sort().reverse();
+    }
+    catch {
+        return null;
+    }
+    for (const operationDate of dates) {
+        const root = join(operationsRoot, operationDate, categoryDir), published = (await readPublishLedger(root)).filter(entry => entry.event === 'PUBLISHED');
+        if (!published.length)
+            continue;
+        try {
+            const raw = JSON.parse(await readFile(join(root, 'live-unit.json'), 'utf8'));
+            if (typeof raw.title === 'string' && normalizeTitle(raw.title) === wanted)
+                return { operationDate, publicPostUrl: published.at(-1).publicPostUrl };
+        }
+        catch { }
+    }
+    return null;
+}
+function normalizeTitle(value) { return value.normalize('NFKC').replace(/\s+/g, ' ').trim(); }
+// A PUBLISHED record for this identity is authoritative: later simulations or HOLD runs are written beside it.
+export async function outcomeFileFor(root, state) {
+    if (state === 'PUBLISHED')
+        return 'auto-publish.json';
+    return (await readPublishLedger(root)).some(entry => entry.event === 'PUBLISHED') ? 'auto-publish-latest-run.json' : 'auto-publish.json';
+}

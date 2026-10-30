@@ -1,0 +1,44 @@
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { join, resolve } from 'node:path';
+import { createLiveEditorialCycle } from './editorial/live-cycle.js';
+import { GoogleBloggerApiAdapter } from './services/blogger.js';
+const run = createLiveEditorialCycle(new Date().toISOString());
+const root = join(process.cwd(), 'data', 'live-editorial-cycle', '2026-10-06');
+await mkdir(root, { recursive: true });
+const executeDrafts = process.argv.includes('--execute-drafts');
+const adapter = executeDrafts ? new GoogleBloggerApiAdapter() : null;
+const config = executeDrafts ? await publishingConfig() : null;
+const operations = [];
+for (const unit of run.units) {
+    const key = unit.category === 'AI_INTELLIGENCE' ? 'ai' : unit.category === 'US_MARKET' ? 'us' : 'korea';
+    const folder = join(root, key);
+    await mkdir(folder, { recursive: true });
+    await Promise.all([writeFile(join(folder, 'editorial-plan.json'), JSON.stringify(unit.plan, null, 2), 'utf8'), writeFile(join(folder, 'preview.html'), unit.render.html, 'utf8')]);
+    let remoteMatches = [];
+    let insertCount = 0;
+    let draft = null;
+    let validation = null;
+    if (adapter && config) {
+        remoteMatches = await adapter.findMatchingPosts({ title: unit.title, label: unit.render.label }, config);
+        if (remoteMatches.length === 0 && unit.publicationReadiness === 'APPROVAL_REQUIRED') {
+            draft = await adapter.insertDraftContent({ title: unit.title, content: unit.render.html, labels: [unit.render.label] }, config);
+            insertCount = 1;
+        }
+        else
+            draft = remoteMatches[0] ?? null;
+        if (draft) {
+            const stored = await adapter.readPost(draft.postId, config);
+            validation = validate(unit.render.html, stored, unit.title, unit.render.label);
+            draft = stored;
+        }
+    }
+    const record = { category: unit.category, issueDate: unit.issueDate, title: unit.title, publicationReadiness: unit.publicationReadiness, humanReviewState: unit.plan.reviewState, remoteDuplicateCount: remoteMatches.length, draftPostId: draft?.postId ?? null, draftState: draft?.status ?? null, publicPostUrl: null, postsInsertCount: insertCount, publishCount: 0, validation, warnings: unit.warnings, commerce: { enabled: false } };
+    operations.push(record);
+    await writeFile(join(folder, 'operation.json'), JSON.stringify(record, null, 2), 'utf8');
+}
+const summary = { ...run, units: undefined, operations, externalActions: { bloggerLookup: executeDrafts ? run.units.length : 0, bloggerInsert: operations.reduce((n, item) => n + item.postsInsertCount, 0), bloggerPatch: 0, bloggerPublish: 0 } };
+await writeFile(join(root, 'run-summary.json'), JSON.stringify(summary, null, 2), 'utf8');
+console.log(JSON.stringify({ outputRoot: root, operations, externalActions: summary.externalActions }, null, 2));
+function validate(expected, post, title, label) { const anchors = (post.content.match(/<a\b[^>]*href=/gi) ?? []).length; const svg = (post.content.match(/<svg\b/gi) ?? []).length; const text = post.content.replace(/<a\b[^>]*>[\s\S]*?<\/a>/gi, '').replace(/<[^>]+>/g, ' '); const checks = { state: post.status === 'DRAFT', title: post.title === title, label: post.labels.includes(label), body: post.content.length >= expected.length * .85, sourceLinks: anchors > 0, mobile: /max-width\s*:\s*100%/i.test(post.content) && /box-sizing\s*:\s*border-box/i.test(post.content), inlineStyle: /\sstyle=["']/i.test(post.content) && !/<style\b/i.test(post.content), rawUrl: !/(?:https?:\/\/)[^\s<]+/i.test(text), internalToken: !/(?:eventId|themeId|companyId|publicationId|verificationStatus|confidenceScore)/i.test(post.content), commerce: !/(?:affiliate|제휴|광고|commerce)/i.test(post.content), svg }; return { ...checks, pass: Object.entries(checks).filter(([key]) => key !== 'svg').every(([, value]) => value === true) }; }
+async function publishingConfig() { const raw = JSON.parse(await readFile(resolve('config/publishing.json'), 'utf8')); const base = raw.blogger; const blogId = (base.blogIdEnvironmentVariable ? process.env[base.blogIdEnvironmentVariable] ?? base.blogId : base.blogId) ?? null; const available = Boolean(blogId && (base.clientIdEnvironmentVariable && process.env[base.clientIdEnvironmentVariable]) && (base.clientSecretEnvironmentVariable && process.env[base.clientSecretEnvironmentVariable]) && (base.refreshTokenEnvironmentVariable && process.env[base.refreshTokenEnvironmentVariable])); if (!available)
+    throw new Error('Blogger credentials unavailable'); return { ...base, blogId, credentialAvailable: true, publishAsDraft: true }; }

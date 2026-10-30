@@ -1,0 +1,77 @@
+import { mkdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
+import { homedir } from 'node:os';
+import { join, relative, resolve } from 'node:path';
+import { spawn } from 'node:child_process';
+import { applyPdfValidation, buildDailyPdfViewModels, buildLiveDailyPdfViewModels, buildPeriodicPdfFoundations, canonicalReportFileName, compareArticlePdfConsistency, createGeneratedArtifact } from './reports/pdf-production.js';
+const args = process.argv.slice(2);
+const value = (flag) => { const index = args.indexOf(flag); return index >= 0 ? args[index + 1] : undefined; };
+const candidateVersion = value('--candidate-version');
+if (candidateVersion && !/^[a-z0-9][a-z0-9._-]{0,63}$/i.test(candidateVersion))
+    throw new Error('invalid candidate version');
+const typeArg = value('--type');
+const supported = ['ai-daily', 'us-market-daily', 'korea-market-daily', 'weekly', 'monthly'];
+if (typeArg && !supported.includes(typeArg))
+    throw new Error(`unsupported report type: ${typeArg}`);
+if (args.includes('--upload'))
+    throw new Error('UPLOAD_BLOCKED: storage configuration and Human Review APPROVED required');
+const daily = args.includes('--live') ? buildLiveDailyPdfViewModels() : buildDailyPdfViewModels();
+const periodic = buildPeriodicPdfFoundations();
+const byCli = new Map([['ai-daily', daily.find(item => item.reportType === 'AI_DAILY')], ['us-market-daily', daily.find(item => item.reportType === 'US_MARKET_DAILY')], ['korea-market-daily', daily.find(item => item.reportType === 'KOREA_MARKET_DAILY')], ['weekly', periodic.weekly], ['monthly', periodic.monthly]]);
+const requestedDate = value('--date');
+const requestedPeriod = value('--period');
+let selected = typeArg ? [byCli.get(typeArg)] : daily;
+if (requestedDate)
+    selected = selected.filter(vm => vm.issueDate === requestedDate);
+if (requestedPeriod)
+    selected = selected.filter(vm => periodKey(vm) === requestedPeriod.toLowerCase());
+if (!selected.length)
+    throw new Error('NO_VERIFIED_REPORT_MATCHES_REQUEST');
+const generatedAt = new Date().toISOString();
+const python = resolvePython();
+const outputs = [];
+if (args.includes('--dry-run')) {
+    console.log(JSON.stringify({ generatedAt, dryRun: true, operations: { generate: true, validate: true, upload: false }, reports: selected.map(vm => ({ reportType: vm.reportType, issueDate: vm.issueDate, periodStart: vm.periodStart, periodEnd: vm.periodEnd, fileName: canonicalReportFileName(vm.reportType, vm.issueDate, vm.periodStart), previewOnly: vm.previewOnly })), storage: { provider: 'LOCAL_ONLY', googleDrive: 'NOT_CONFIGURED' }, bloggerCalls: { insert: 0, patch: 0, publish: 0, themeUpdate: 0, menuUpdate: 0 }, commerce: { enabled: false } }, null, 2));
+    process.exit(0);
+}
+for (const vm of selected) {
+    const root = outputRoot(vm);
+    await mkdir(root, { recursive: true });
+    const input = join(root, '.render-input.json');
+    const pdf = join(root, 'report.pdf');
+    const validationPath = join(root, 'validation.json');
+    const contactSheet = join(root, 'contact-sheet.png');
+    await writeFile(input, JSON.stringify(vm, null, 2), 'utf8');
+    await run(python, [resolve('scripts/render-motus-pdf.py'), '--input', input, '--output', pdf, '--validation', validationPath]);
+    const validation = JSON.parse(await readFile(validationPath, 'utf8'));
+    const file = await stat(pdf);
+    const artifactPath = relative(process.cwd(), pdf).replace(/\\/g, '/');
+    let artifact = createGeneratedArtifact(vm, artifactPath, file.size, validation.pageCount, generatedAt);
+    artifact = applyPdfValidation(artifact, validation);
+    const consistency = compareArticlePdfConsistency({ articleSourceFingerprint: vm.sourceFingerprint, pdfSourceFingerprint: artifact.sourceFingerprint, articleContentFingerprint: vm.contentFingerprint, pdfContentFingerprint: artifact.contentFingerprint });
+    if (consistency.state === 'HOLD')
+        artifact = { ...artifact, state: 'FAILED', reviewState: 'HOLD', failureReason: consistency.reason };
+    await run(python, [resolve('scripts/render-report-contact-sheet.py'), '--pdf', pdf, '--output', contactSheet, '--title', `${vm.displayTitle} · ${vm.issueDate}`]);
+    await Promise.all([writeFile(join(root, 'artifact.json'), JSON.stringify({ ...artifact, canonicalFileName: canonicalReportFileName(vm.reportType, vm.issueDate, vm.periodStart), candidateVersion: candidateVersion ?? null, publicDistribution: false, consistency, contactSheetPath: relative(process.cwd(), contactSheet).replace(/\\/g, '/') }, null, 2), 'utf8'), writeFile(join(root, 'review.json'), JSON.stringify({ publicationId: vm.publicationId, artifactId: artifact.artifactId, state: 'PENDING', reviewer: null, reviewedAt: null, history: [], articleReviewIndependent: true, publicUploadAllowed: false }, null, 2), 'utf8')]);
+    if (args.includes('--live') && !candidateVersion)
+        await updateLivePublicationPdf(vm, artifact, consistency.state);
+    await rm(input, { force: true });
+    outputs.push({ reportType: vm.reportType, publicationId: vm.publicationId, state: artifact.state, path: artifactPath, contactSheet: relative(process.cwd(), contactSheet).replace(/\\/g, '/'), pages: artifact.pageCount, bytes: artifact.fileSizeBytes, validation: validation.status, review: 'PENDING', previewOnly: vm.previewOnly, candidateVersion: candidateVersion ?? null });
+}
+console.log(JSON.stringify({ generatedAt, storage: { provider: 'LOCAL_ONLY', googleDrive: 'NOT_CONFIGURED' }, outputs, publicUrlCount: 0, uploadCount: 0, bloggerCalls: { insert: 0, patch: 0, publish: 0, themeUpdate: 0, menuUpdate: 0 }, commerce: { enabled: false } }, null, 2));
+function outputRoot(vm) { const base = join(process.cwd(), 'data', 'reports'); const root = vm.reportType === 'AI_DAILY' ? join(base, 'daily', vm.issueDate, 'ai') : vm.reportType === 'US_MARKET_DAILY' ? join(base, 'daily', vm.issueDate, 'us') : vm.reportType === 'KOREA_MARKET_DAILY' ? join(base, 'daily', vm.issueDate, 'korea') : vm.reportType === 'WEEKLY_INTELLIGENCE' ? join(base, 'weekly', canonicalReportFileName(vm.reportType, vm.issueDate, vm.periodStart).replace(/^motus-weekly-|\.pdf$/g, '').toUpperCase()) : join(base, 'monthly', vm.issueDate.slice(0, 7)); return candidateVersion ? join(root, 'versions', candidateVersion) : root; }
+function periodKey(vm) { if (vm.reportType === 'WEEKLY_INTELLIGENCE')
+    return canonicalReportFileName(vm.reportType, vm.issueDate, vm.periodStart).replace(/^motus-weekly-|\.pdf$/g, ''); if (vm.reportType === 'MONTHLY_INTELLIGENCE')
+    return vm.issueDate.slice(0, 7); return vm.issueDate; }
+function resolvePython() { const configured = process.env.MOTUS_PYTHON?.trim(); if (configured)
+    return configured; const bundled = join(homedir(), '.cache', 'codex-runtimes', 'codex-primary-runtime', 'dependencies', 'python', 'python.exe'); return existsSync(bundled) ? bundled : 'python'; }
+function run(command, commandArgs) { return new Promise((resolvePromise, reject) => { const child = spawn(command, commandArgs, { stdio: 'inherit' }); child.on('error', reject); child.on('exit', code => code === 0 ? resolvePromise() : reject(new Error(`PDF renderer failed with exit code ${code}`))); }); }
+async function updateLivePublicationPdf(vm, artifact, consistency) { const folder = vm.reportType === 'AI_DAILY' ? 'ai' : vm.reportType === 'US_MARKET_DAILY' ? 'us' : null; if (!folder)
+    return; const cycleRoot = join(process.cwd(), 'data', 'live-editorial-cycle', '2026-10-06'); const path = join(cycleRoot, folder, 'publication.json'); const publication = JSON.parse(await readFile(path, 'utf8')); if (publication.publicationId !== vm.publicationId || publication.state !== 'PUBLISHED' || publication.postPublishAudit !== 'PASS' || typeof publication.contentFingerprint !== 'string')
+    throw new Error('LIVE_PUBLICATION_PDF_TARGET_MISMATCH'); const pdf = { state: artifact.state, reviewState: 'PENDING', visibility: 'PRIVATE', consistency, localPath: artifact.localPath, contactSheetPath: `data/reports/daily/${vm.issueDate}/${folder}/contact-sheet.png`, pageCount: artifact.pageCount, fileSizeBytes: artifact.fileSizeBytes, contentFingerprint: artifact.contentFingerprint, sourceFingerprint: artifact.sourceFingerprint, articleContentFingerprint: publication.contentFingerprint }; publication.pdf = pdf; await writeFile(path, JSON.stringify(publication, null, 2), 'utf8'); const feedPath = join(process.cwd(), 'data', 'operations', '2026-10-06', 'weekly-monthly-feed.json'); const feed = JSON.parse(await readFile(feedPath, 'utf8')); const entry = feed.find(item => item.publicationId === vm.publicationId); if (entry)
+    entry.pdfConsistency = consistency; await writeFile(feedPath, JSON.stringify(feed, null, 2), 'utf8'); const summaryPath = join(cycleRoot, 'run-summary.json'); const summary = JSON.parse(await readFile(summaryPath, 'utf8')); summary.pdfStatus = 'VALIDATED_PRIVATE'; const production = summary.productionPublish; const record = production?.records?.find(item => item.publicationId === vm.publicationId); if (record)
+    record.pdf = pdf; const maintenance = summary.postPublishMaintenance; if (maintenance) {
+    const values = maintenance.pdfArtifacts ?? {};
+    values[folder] = pdf;
+    maintenance.pdfArtifacts = values;
+} await writeFile(summaryPath, JSON.stringify(summary, null, 2), 'utf8'); }

@@ -1,0 +1,80 @@
+import { OperationsError } from './daily-orchestrator.js';
+const envNames = { AI_INTELLIGENCE: 'MOTUS_LIVE_AI_URL', US_MARKET: 'MOTUS_LIVE_US_URL', KOREA_MARKET: 'MOTUS_LIVE_KOREA_URL' };
+export class HttpVerifiedDailyAdapter {
+    environment;
+    fetcher;
+    adapterId = 'verified-live-json-v1';
+    constructor(environment = process.env, fetcher = fetch) {
+        this.environment = environment;
+        this.fetcher = fetcher;
+    }
+    async fetch(category, requestedAt) { const endpoint = this.environment[envNames[category]]?.trim(); if (!endpoint)
+        return null; const url = new URL(endpoint); if (url.protocol !== 'https:')
+        throw new Error('LIVE_ENDPOINT_HTTPS_REQUIRED'); const response = await this.fetcher(url, { headers: { accept: 'application/json', 'user-agent': 'MOTUS-Live-Collector/1.0' }, signal: AbortSignal.timeout(20000) }); if (!response.ok)
+        throw new Error(`LIVE_SOURCE_HTTP_${response.status}`); const payload = await response.json(); if (payload.schemaVersion !== '1.0')
+        throw new Error('LIVE_SCHEMA_VERSION_UNSUPPORTED'); if (payload.session.completedAt && Date.parse(requestedAt) < Date.parse(payload.session.completedAt))
+        throw new Error('LIVE_SESSION_NOT_COMPLETED'); return payload; }
+}
+export class LiveDailyCollector {
+    adapter;
+    requestedAt;
+    adapterId;
+    constructor(adapter, requestedAt = () => new Date().toISOString()) {
+        this.adapter = adapter;
+        this.requestedAt = requestedAt;
+        this.adapterId = `live:${adapter.adapterId}`;
+    }
+    collect(category) { return this.collectCategory(category); }
+    collectUSMarket() { return this.collectCategory('US_MARKET'); }
+    collectAIIntelligence() { return this.collectCategory('AI_INTELLIGENCE'); }
+    collectKoreaMarket() { return this.collectCategory('KOREA_MARKET'); }
+    async collectCategory(category) { const at = this.requestedAt(); let payload; try {
+        payload = await this.adapter.fetch(category, at);
+    }
+    catch (error) {
+        throw new OperationsError(error instanceof Error ? error.message : String(error), 'NETWORK_TEMPORARY', category, this.adapterId);
+    } if (!payload)
+        throw new OperationsError('live source is not configured or returned no data', 'INSUFFICIENT_EVIDENCE', category, this.adapterId); if (payload.session.state === 'HOLIDAY')
+        throw new OperationsError('verified market holiday; no publication unit', 'INSUFFICIENT_EVIDENCE', category, this.adapterId); if (payload.session.state !== 'COMPLETED' || !payload.session.completedAt)
+        throw new OperationsError('market session is not completed', 'INSUFFICIENT_EVIDENCE', category, this.adapterId); const reasons = validateLiveDailyPayload(category, payload, at); if (reasons.length)
+        throw new OperationsError(reasons.join('; '), 'VERIFICATION_CONFLICT', category, this.adapterId); return structuredClone(payload.unit); }
+}
+export function validateLiveDailyPayload(category, payload, requestedAt) { const r = [], u = payload.unit; if (u.category !== category)
+    r.push('category mismatch'); if (u.observedDate !== payload.session.observedDate)
+    r.push('observed date mismatch'); if (u.readiness !== 'READY')
+    r.push(...u.readinessReasons); if (!u.sourceCount || !u.viewModel.sources.length)
+    r.push('verified sources missing'); if (u.viewModel.sources.some(s => !/^https:\/\//.test(s.url)))
+    r.push('invalid source URL'); const age = (Date.parse(requestedAt.slice(0, 10) + 'T00:00:00Z') - Date.parse(u.observedDate + 'T00:00:00Z')) / 86400000; if (age < 0 || age > (category === 'AI_INTELLIGENCE' ? 2 : 4))
+    r.push('stale or future observed date'); if (category === 'US_MARKET') {
+    const v = u.viewModel, h = v.marketHistory;
+    if (h.sessionCount < 63 || h.series.length < 3 || h.series.length > 4)
+        r.push('63-session three-core-index history required');
+    for (const s of h.series)
+        if (s.dates.length !== h.sessionCount || s.closes.length !== h.sessionCount || s.provenance.length !== h.sessionCount || s.closes.some(x => !Number.isFinite(x)))
+            r.push(s.label + ': incomplete actual history');
+    const l = v.supportingMetrics.map(x => x.label.toLowerCase());
+    if (!l.some(x => x.includes('미국 10년물')))
+        r.push('미국 10년물 missing');
+}
+else if (category === 'AI_INTELLIGENCE') {
+    const v = u.viewModel;
+    if (v.issues.length < 1)
+        r.push('at least one verified major AI event required');
+    if (v.issues.some(x => !x.evidenceRefs.length || x.whatHappened.join(' ').length < 80))
+        r.push('AI source-page evidence missing');
+}
+else {
+    const v = u.viewModel, l = [...v.indexMetrics, ...v.fxAndSupporting].map(x => x.label.toUpperCase());
+    if (!l.some(x => x.includes('KOSPI')) || !l.some(x => x.includes('KOSDAQ')) || !l.some(x => x.includes('USD/KRW')))
+        r.push('KOSPI KOSDAQ USD/KRW required');
+    const morning = v.edition === 'PREVIOUS_SESSION_MORNING';
+    if (morning) {
+        if (v.sessionDate !== u.observedDate)
+            r.push('Korea morning sessionDate must match observedDate');
+        if (!v.operationDate || v.operationDate <= u.observedDate)
+            r.push('Korea morning operationDate must follow completed session');
+    }
+    else if (v.investorFlows.length < 3 || !v.sectors.length || !v.movers.length)
+        r.push('investor flows sectors and movers required');
+} if (/fixture|placeholder/i.test(u.render.html))
+    r.push('non-production marker'); return [...new Set(r)]; }

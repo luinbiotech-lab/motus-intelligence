@@ -1,0 +1,649 @@
+import { createHash } from 'node:crypto';
+import { renderAIEditorialArticle, renderKoreaEditorialArticle, renderUSEditorialArticle } from '../publishers/editorial-article.js';
+import { KrxBokOfficialSourceAdapter, YahooKoreaSecondarySourceAdapter, crossVerifyKoreaMarket } from './korea-official.js';
+import { TwelveDataTimeSeriesProvider } from './market-source-providers.js';
+import { collectPreRenderSearch } from '../search/editorial-demand.js';
+import { collectMarketResearch, collectKbBrokerResearch, collectGoldmanBrokerResearch } from './market-research-feeds.js';
+import { collectAIDeep, collectKoreaDeep, collectUSDeep } from './market-deep-collect.js';
+import { fetchWithTransientRetry } from './http-retry.js';
+import { buildKoreaMarketNarrative, buildUSMarketNarrative, formatLevel, moveText, numberWithEul } from './market-narrative.js';
+import { isCompletedSession, latestCompletedSession, marketSession } from './market-calendar.js';
+import { buildAIEditorialDecision, synthesizeKoreanAIEvent } from './ai-editorial-synthesis.js';
+import { OFFICIAL_AI_SOURCES, datesAgree, isAIHeadline, isAIRelevant, isNewsLike, isOfficialLink, pageBodyText, pagePublishedDateDetail, pageTitle, parseAnthropicIndex, parseFeed } from './ai-sources.js';
+import { josa, synthesizeEvidenceBoundAIEvent } from './ai-generic-synthesis.js';
+import { readFile, readdir } from 'node:fs/promises';
+import { join } from 'node:path';
+export function koreaPublicationSession(operationDate, at, controlledRecovery) { return latestCompletedSession('KOREA', controlledRecovery ? at : operationDate + 'T06:17:00+09:00'); }
+export class InternalLiveDailyAdapter {
+    builder;
+    options;
+    adapterId = 'repository-internal-live-v1';
+    audit = [];
+    result = null;
+    constructor(builder = new RepositoryInternalDailyBuilder(), options = {}) {
+        this.builder = builder;
+        this.options = options;
+    }
+    async fetch(category, requestedAt) { this.result = await this.builder.build(category, requestedAt, this.options); this.audit = structuredClone(this.result.audit); return this.result.payload; }
+    lastAudit() { return structuredClone(this.audit); }
+    lastResult() { return this.result ? structuredClone(this.result) : null; }
+}
+const FRED = 'https://fred.stlouisfed.org/graph/fredgraph.csv';
+const AI_CORROBORATION = { veraRubinGoogleCloud: 'https://cloud.google.com/blog/topics/ai-infrastructure/google-cloud-infrastructure-at-nvidia-gtc-berlin-2026' };
+const NAVER = { kospi: 'https://m.stock.naver.com/api/index/KOSPI/basic', kosdaq: 'https://m.stock.naver.com/api/index/KOSDAQ/basic', kospiHistory: 'https://m.stock.naver.com/api/index/KOSPI/price?pageSize=10&page=1', kosdaqHistory: 'https://m.stock.naver.com/api/index/KOSDAQ/price?pageSize=10&page=1', fx: 'https://api.stock.naver.com/marketindex/exchange/FX_USDKRW', flow: 'https://m.stock.naver.com/api/index/KOSPI/trend', sector: 'https://stock.naver.com/api/domestic/market/upjong/list?startIdx=0&pageSize=100&sortType=changeRate', movers: 'https://m.stock.naver.com/api/stocks/up/KOSPI?page=1&pageSize=20' };
+export class RepositoryInternalDailyBuilder {
+    fetcher;
+    environment;
+    koreaOfficial;
+    twelveProvider;
+    koreaSecondary;
+    operationsRoot;
+    constructor(fetcher = fetch, environment = process.env, koreaOfficial = new KrxBokOfficialSourceAdapter(fetcher, environment), twelveProvider = new TwelveDataTimeSeriesProvider(environment, fetcher), koreaSecondary = new YahooKoreaSecondarySourceAdapter(fetcher), operationsRoot = join(process.cwd(), 'data', 'operations')) {
+        this.fetcher = fetcher;
+        this.environment = environment;
+        this.koreaOfficial = koreaOfficial;
+        this.twelveProvider = twelveProvider;
+        this.koreaSecondary = koreaSecondary;
+        this.operationsRoot = operationsRoot;
+    }
+    pdfText;
+    async build(category, requestedAt, options = {}) { if (category === 'US_MARKET')
+        return this.us(requestedAt); if (category === 'AI_INTELLIGENCE')
+        return this.ai(requestedAt); return this.korea(requestedAt, options); }
+    async us(at) {
+        const audit = [];
+        try {
+            const expectedSession = latestCompletedSession('US', at), specs = [['sp500', 'S&P 500', 'SP500', '^GSPC'], ['nasdaq', 'Nasdaq', 'NASDAQCOM', '^IXIC'], ['dow-jones', 'Dow Jones', 'DJIA', '^DJI']];
+            // Russell 2000 and DXY remain optional when the provider does not license the exact index. Proxies are never substituted.
+            const twelveResults = await Promise.allSettled([this.twelve('RUT', 'US_MARKET', at, audit, 'russell-2000', 'Russell 2000', 90), this.twelve('DXY', 'US_MARKET', at, audit, 'dxy', 'DXY (달러인덱스)', 2)]);
+            const rut = twelveResults[0]?.status === 'fulfilled' ? twelveResults[0].value : null, dxy = twelveResults[1]?.status === 'fulfilled' ? twelveResults[1].value : null;
+            const histories = [];
+            for (const [key, label, id, yahooSymbol] of specs)
+                histories.push(await this.usIndexSeries({ id, yahooSymbol, key, label, at, audit, expectedDate: expectedSession.date }));
+            if (rut && rut.points.length >= 63)
+                histories.push(rut);
+            const tenYear = await this.usTenYearSeries(at, audit);
+            const optionalMetricResults = await Promise.allSettled([this.fred('VIXCLS', 'US_MARKET', at, audit, 'VIXCLS', 'VIX (변동성지수)', 10), this.fred('DCOILBRENTEU', 'US_MARKET', at, audit, 'DCOILBRENTEU', 'Brent (브렌트유)', 10)]);
+            const vix = optionalMetricResults[0]?.status === 'fulfilled' ? optionalMetricResults[0].value : null, brent = optionalMetricResults[1]?.status === 'fulfilled' ? optionalMetricResults[1].value : null;
+            if (histories.some(item => item.points.length < 63))
+                throw new Error('US_63_SESSION_HISTORY_INCOMPLETE');
+            const latestDates = histories.slice(0, 3).map(item => item.points.at(-1).date);
+            if (new Set(latestDates).size !== 1)
+                throw new Error('US_INDEX_SESSION_DATE_MISMATCH');
+            const observedDate = latestDates[0];
+            if (observedDate !== expectedSession.date)
+                throw new Error(`US_COMPLETED_SESSION_MISMATCH:${observedDate}:${expectedSession.date}`);
+            audit.push({ sourceId: 'calendar:nyse', category: 'US_MARKET', url: expectedSession.sourceUrl, status: 'PASS', recordCount: 1, collectedAt: at, error: null, observedDate: expectedSession.date, referenceDate: observedDate });
+            if (histories[3]?.points.at(-1)?.date !== observedDate)
+                histories.splice(3, 1);
+            const metrics = [], displayedMetricSeries = [];
+            const tenYearLatest = tenYear.points.at(-1), tenYearPrevious = tenYear.points.at(-2);
+            if (!tenYearLatest || !tenYearPrevious || !recentObservation(tenYearLatest.date, observedDate))
+                throw new Error(`US_REQUIRED_METRIC_STALE:${tenYear.label}:${tenYearLatest?.date ?? 'missing'}:${observedDate}`);
+            metrics.push({ label: tenYear.label + (tenYearLatest.date === observedDate ? '' : ` (${tenYearLatest.date} 기준)`), value: tenYearLatest.value.toFixed(2) + '%', change: basisPoints(tenYearLatest.value, tenYearPrevious.value), direction: direction(tenYearLatest.value - tenYearPrevious.value) });
+            displayedMetricSeries.push(tenYear);
+            for (const [key, series] of [['vix', vix], ['brent', brent]]) {
+                if (series?.points.at(-1)?.date === observedDate) {
+                    const latest = series.points.at(-1), previous = series.points.at(-2);
+                    metrics.push({ label: series.label, value: format(latest.value), change: percent(latest.value, previous.value), direction: direction(latest.value - previous.value) });
+                    displayedMetricSeries.push(series);
+                }
+                else
+                    audit.push({ sourceId: `freshness:${key}`, category: 'US_MARKET', url: series?.url ?? FRED, status: 'FAILED', recordCount: 0, collectedAt: at, error: 'OPTIONAL_METRIC_STALE', ...(series?.points.at(-1)?.date ? { observedDate: series.points.at(-1).date } : {}), referenceDate: observedDate });
+            }
+            if (dxy?.points.at(-1)?.date === observedDate) {
+                const latest = dxy.points.at(-1), previous = dxy.points.at(-2);
+                metrics.push({ label: 'DXY (달러인덱스)', value: format(latest.value), change: percent(latest.value, previous.value), direction: direction(latest.value - previous.value) });
+            }
+            const historySpecs = [...specs.map(([key, label]) => ({ key, label })), ...(histories.length === 4 ? [{ key: 'russell-2000', label: 'Russell 2000' }] : [])], history = { asOf: observedDate, sessionCount: 63, series: histories.map((item, index) => { const points = item.points.slice(-63), previous = points.at(-2), latest = points.at(-1), twelve = item.url.includes('twelvedata'); return { key: historySpecs[index].key, label: historySpecs[index].label, dates: points.map(point => point.date), closes: points.map(point => point.value), latestClose: latest.value, latestChangePct: (latest.value - previous.value) / previous.value * 100, sourceLabel: usProvider(item.url).label, sourceUrl: item.url, provenance: points.map(point => ({ date: point.date, inputDate: point.date, field: 'close', sourceId: point.sourceId, sourceUrl: point.sourceUrl, collectionMode: 'API' })) }; }) };
+            const sources = dedupe(histories.map(item => { const provider = usProvider(item.url); return source(provider.label + ' ' + item.label, item.url, provider.publisher); }).concat(displayedMetricSeries.map(item => { const provider = usProvider(item.url); return source(provider.label + ' ' + item.label, item.url, provider.publisher); }), [source('NYSE 공식 거래일 캘린더', expectedSession.sourceUrl, 'New York Stock Exchange')], ...(dxy?.points.at(-1)?.date === observedDate ? [source('Twelve Data DXY', dxy.url, 'Twelve Data')] : [])));
+            const narrative = buildUSMarketNarrative(history.series.map(item => ({ key: item.key, label: item.label, dates: item.dates, closes: item.closes })), { label: tenYear.label, latest: tenYearLatest.value, previous: tenYearPrevious.value, date: tenYearLatest.date, sessionDate: observedDate });
+            const usSummary = `${observedDate} 미국 정규장에서 ${history.series.slice(0, 3).map(item => `${item.key === 'sp500' ? 'S&P 500' : item.key === 'nasdaq' ? '나스닥' : '다우존스'} ${formatLevel(item.latestClose)}(${moveText(item.latestChangePct)})`).join(', ')}로 마감했다. 아래에서 지수별 단기·3개월 흐름과 장기금리를 검증된 종가 기준으로 정리했다.`;
+            const marketMedia = await collectMarketResearch('US_MARKET', at, this.fetcher);
+            const brokerage = await collectGoldmanBrokerResearch(at, this.fetcher);
+            const researchResult = { entries: [...brokerage.entries, ...marketMedia.entries], audit: [...brokerage.audit, ...marketMedia.audit] };
+            for (const item of researchResult.audit)
+                audit.push({ sourceId: 'market-research:' + item.publisher, category: 'US_MARKET', url: item.url, status: item.status, recordCount: item.count, collectedAt: at, error: item.error });
+            for (const item of researchResult.entries)
+                audit.push({ sourceId: 'market-research:article:' + item.url, category: 'US_MARKET', url: item.url, status: 'PASS', recordCount: 1, collectedAt: at, error: null, observedDate: item.publishedAt.slice(0, 10) });
+            const deep = await collectUSDeep({ sessionDate: observedDate, operationDate: kstDate(at), at, fetcher: this.fetcher, audit, ...(this.pdfText ? { pdfText: this.pdfText } : {}), indexChanges: history.series.slice(0, 3).map(item => item.latestChangePct) });
+            // Owner standard: an article without broker analysis of the session's causes is not published (HOLD, retried later).
+            if (!deep.composition.hasCoreCommentary)
+                throw new Error('BROKER_MARKET_COMMENTARY_UNAVAILABLE');
+            const coreSeries = history.series.filter(item => ['sp500', 'nasdaq', 'dow-jones'].includes(item.key)), majorSeries = [...coreSeries].sort((a, b) => Math.abs(b.latestChangePct) - Math.abs(a.latestChangePct))[0], orderedSeries = [majorSeries, ...coreSeries.filter(item => item !== majorSeries)], topicLabel = (key) => key === 'sp500' ? 'S&P 500' : key === 'nasdaq' ? '나스닥' : '다우존스', topics = [...orderedSeries.map(item => ({ topicId: 'us:index:' + item.key, label: topicLabel(item.key), aliases: [item.label, item.key === 'sp500' ? 'S&P500' : item.key === 'nasdaq' ? 'NASDAQ' : 'Dow Jones', '미국증시'], category: 'US_MARKET', claimRefs: [item.sourceUrl], sourceRefs: [item.sourceUrl], verificationStatus: 'VERIFIED' })), { topicId: 'us:10y', label: '미국 10년물', aliases: ['미국 국채금리', '10년물 국채금리', '미국증시'], category: 'US_MARKET', claimRefs: [tenYear.url], sourceRefs: [tenYear.url], verificationStatus: 'VERIFIED' }], searchContext = await collectPreRenderSearch(topics, at, this.environment), searchFocus = topics.find(item => item.topicId === searchContext.selectedSecondaryTopicId)?.label, titleCandidates = buildUSEditorialTitleCandidates(history, metrics), searchedTitle = searchFocus ? `${topicLabel(majorSeries.key)} ${movePhrase(majorSeries.latestChangePct)}, ${josa(searchFocus, '과', '와')} 함께 보는 미국증시` : titleCandidates[0], view = { publicationId: `motus-live-${observedDate}:us`, issueDate: observedDate, issueNumber: Number(observedDate.replaceAll('-', '')), title: deep.title ?? searchedTitle, subtitle: deep.composition.sections.length ? '증권가 분석과 투자자 관심 종목으로 읽는 미국 정규장 마감' : '실제 시장 데이터로 읽는 미국 정규장 마감', category: 'US_MARKET', canonicalLabel: 'U.S. Market', displayLabel: '미국증시 (U.S. Market)', marketSummary: [usSummary.replace(' 아래에서 지수별 단기·3개월 흐름과 장기금리를 검증된 종가 기준으로 정리했다.', ''), ...deep.composition.leadAddition].join(' '), marketHistory: history, deepSections: deep.composition.sections, supportingMetrics: metrics, marketCommentary: deep.composition.sections.length ? [] : ['지수 방향만으로 결론을 내리지 않고 같은 기준일로 검증된 시장 변수만 함께 살펴볼 필요가 있다.', '최근 3개월 경로는 하루 등락이 추세 변화인지 일시적 변동인지 판단하는 기준을 제공한다.'], sectorsCompanies: [], wallStreetResearch: brokerage.entries.map(item => ({ headline: item.headline, institutionView: 'Goldman Sachs의 공개 시장 리서치가 ' + item.publishedAt.slice(0, 10) + '에 게시됐다. 보고서 원문 링크를 출처에 연결했으며 구체적인 투자 의견·목표주가는 원문 검증 전까지 인용하지 않는다.', motusInterpretation: null, facts: ['공식 사이트 공개일: ' + item.publishedAt.slice(0, 10)] })), marketResearch: researchResult.entries, checkpoints: [{ headline: '다음 정규장 확인사항', watchFor: '미국 10년물 금리가 주요 지수 방향을 확인하는지 점검', validityHorizon: 'NEXT_SESSION' }], sources: dedupe([...sources, ...deep.sources.map(item => ({ ...source(item.label, item.url, item.publisher), role: 'SUPPLEMENTARY' })), ...researchResult.entries.map(item => source(item.publisher + ' 공개 시장기사 (' + item.publishedAt.slice(0, 10) + ')', item.url, item.publisher))]), narrative };
+            return { ...ready(view, renderUSEditorialArticle(view), observedDate, audit, at), searchContext };
+        }
+        catch (error) {
+            return hold(audit, error);
+        }
+    }
+    async ai(at) {
+        const audit = [];
+        try {
+            const requested = Date.parse(at), withinWindow = (iso) => { const value = Date.parse(iso); return Number.isFinite(value) && requested - value >= -3600000 && requested - value <= AI_WINDOW_MS; };
+            const alreadyCovered = await previouslyPublishedAILinks(this.operationsRoot);
+            const pool = [];
+            for (const source of OFFICIAL_AI_SOURCES) {
+                try {
+                    if (source.kind === 'rss') {
+                        const xml = await this.text(source.url, 'AI_INTELLIGENCE', source.id, at, audit);
+                        for (const item of parseFeed(xml).slice(0, 40))
+                            pool.push({ source, item });
+                    }
+                    else {
+                        const html = await this.text(source.url, 'AI_INTELLIGENCE', source.id, at, audit);
+                        for (const link of parseAnthropicIndex(html).slice(0, 4))
+                            pool.push({ source, item: { title: '', link, publishedAt: '', summary: '', fullText: '' } });
+                    }
+                }
+                catch { }
+            }
+            const seenTitles = new Set(), seenLinks = new Set(), screened = pool.filter(({ source, item }) => {
+                const link = canonical(item.link);
+                if (!isOfficialLink(item.link, source.domains) || alreadyCovered.has(link) || seenLinks.has(link))
+                    return false;
+                seenLinks.add(link);
+                if (item.title) {
+                    const key = item.title.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+                    if (seenTitles.has(key) || !isNewsLike(item.title))
+                        return false;
+                    if (source.aiFilter && !isAIHeadline(item.title))
+                        return false;
+                    seenTitles.add(key);
+                }
+                return !item.publishedAt || withinWindow(item.publishedAt);
+            }).sort((a, b) => (Date.parse(b.item.publishedAt) || 0) - (Date.parse(a.item.publishedAt) || 0));
+            // Round-robin across publishers so one prolific channel cannot crowd out the others.
+            const byPublisher = new Map();
+            for (const entry of screened) {
+                const list = byPublisher.get(entry.source.publisher) ?? [];
+                list.push(entry);
+                byPublisher.set(entry.source.publisher, list);
+            }
+            const order = [];
+            for (let round = 0; order.length < AI_MAX_PAGE_FETCHES && [...byPublisher.values()].some(list => list.length > round); round++)
+                for (const list of byPublisher.values())
+                    if (list[round] && order.length < AI_MAX_PAGE_FETCHES)
+                        order.push(list[round]);
+            const events = [];
+            for (const [index, { source, item }] of order.entries()) {
+                const pageId = 'ai:page:' + (index + 1);
+                let title = item.title, publishedAt = item.publishedAt, evidence = '', basis = null, fallbackReason = 'PAGE_BLOCKED';
+                try {
+                    const html = await this.text(item.link, 'AI_INTELLIGENCE', pageId, at, audit, source.domains), pageDateDetail = pagePublishedDateDetail(html), pageDate = pageDateDetail?.iso ?? null, entry = [...audit].reverse().find(value => value.sourceId === pageId);
+                    if (!title)
+                        title = pageTitle(html);
+                    if (!publishedAt && pageDate)
+                        publishedAt = pageDate;
+                    if (pageDate && publishedAt && !datesAgree(pageDate, publishedAt)) {
+                        if (entry) {
+                            entry.status = 'FAILED';
+                            entry.error = 'AI_PUBLICATION_DATE_MISMATCH';
+                        }
+                        continue;
+                    }
+                    // A timestamped page field is the publisher's own statement of when the article went out; feed dates can
+                    // reflect a later edit, so they only stand in when the page has no structured timestamp.
+                    const fromPage = Boolean(pageDateDetail && (pageDateDetail.structured || !item.publishedAt));
+                    if (fromPage)
+                        publishedAt = pageDate;
+                    if (entry && publishedAt) {
+                        entry.observedDate = publishedAt.slice(0, 10);
+                        entry.sourceTimestamp = publishedAt;
+                        entry.dateField = fromPage ? 'page.datePublished' : 'rss.pubDate';
+                    }
+                    // Lead-grade evidence needs real article paragraphs; a meta description alone (e.g. a JS-rendered shell) is summary-grade.
+                    const meta = extractPageEvidence(html), paragraphs = pageBodyText(html);
+                    if (paragraphs.length >= 200) {
+                        evidence = [meta, paragraphs].filter(Boolean).join(' ');
+                        basis = 'OFFICIAL_PAGE';
+                    }
+                    else if (meta.length >= 80) {
+                        evidence = [meta, paragraphs].filter(Boolean).join(' ');
+                        basis = 'OFFICIAL_PAGE_SUMMARY';
+                    }
+                    else
+                        fallbackReason = 'PAGE_TEXT_INSUFFICIENT';
+                }
+                catch (error) {
+                    if (message(error) === 'AI_REDIRECT_OFF_OFFICIAL_DOMAIN')
+                        continue;
+                }
+                if (!basis) {
+                    // Feed bodies (content:encoded, Atom content) may be excerpts; without the page they are never treated as
+                    // full first-party text, so RSS-based items can support an issue but never lead it.
+                    const rssText = [item.fullText, item.summary].sort((a, b) => b.length - a.length)[0] ?? '', fallback = rssText.length >= 100 ? { text: rssText, basis: 'OFFICIAL_RSS_SUMMARY' } : null;
+                    if (!fallback || !publishedAt)
+                        continue;
+                    evidence = fallback.text;
+                    basis = fallback.basis;
+                    audit.push({ sourceId: 'ai:rss-evidence:' + (index + 1), category: 'AI_INTELLIGENCE', url: item.link, status: 'PASS', recordCount: 1, collectedAt: at, error: null, observedDate: publishedAt.slice(0, 10), sourceTimestamp: publishedAt, dateField: 'rss.pubDate' });
+                }
+                if (!title || !publishedAt || !withinWindow(publishedAt) || !isAIRelevant(title, evidence) || !isNewsLike(title))
+                    continue;
+                const topicId = `ai:${index}`, legacy = synthesizeKoreanAIEvent({ topicId, publisher: source.publisher, title, pageEvidence: evidence, link: item.link, publishedAt });
+                const event = legacy ? { ...legacy, basis, eventType: 'launch', evidenceBound: false, richness: 2 } : evidence.length >= (basis === 'OFFICIAL_PAGE' ? 200 : 100) ? synthesizeEvidenceBoundAIEvent({ topicId, publisher: source.publisher, sourceId: source.id, title, link: item.link, publishedAt, evidence, basis, ...(basis === 'OFFICIAL_PAGE' || basis === 'OFFICIAL_PAGE_SUMMARY' ? {} : { fallbackReason }) }) : null;
+                if (event)
+                    events.push(event);
+            }
+            const synthesized = selectAIEvents(events);
+            if (!synthesized.length)
+                throw new Error('AI_VERIFIED_EVENTS_INSUFFICIENT');
+            const corroboratingSources = [];
+            if (synthesized.some(item => /베라 루빈/.test(item.topic))) {
+                try {
+                    const html = await this.text(AI_CORROBORATION.veraRubinGoogleCloud, 'AI_INTELLIGENCE', 'ai:corroboration:google-cloud-vera-rubin', at, audit), plain = clean(html), lower = plain.toLowerCase();
+                    if (/vera\s+rubin/.test(lower) && /a5x/.test(lower)) {
+                        corroboratingSources.push(source('구글 클라우드 A5X·Vera Rubin 공식 발표', AI_CORROBORATION.veraRubinGoogleCloud, 'Google Cloud'));
+                    }
+                    else
+                        throw new Error('AI_CORROBORATION_CONTENT_MISMATCH');
+                }
+                catch { }
+            }
+            const topics = synthesized.map(item => ({ topicId: item.topicId, label: item.company, aliases: [item.publisher, item.topic], category: 'AI_INTELLIGENCE', claimRefs: [item.link], sourceRefs: [item.link, ...corroboratingSources.map(source => source.url)], verificationStatus: 'VERIFIED' })), searchContext = await collectPreRenderSearch(topics, at, this.environment), decision = buildAIEditorialDecision(synthesized, searchContext), observedDate = new Date(at).toISOString().slice(0, 10), sources = dedupe([...decision.ordered.map(item => source(item.company + ' 공식 발표', item.link, item.publisher)), ...corroboratingSources]);
+            // The optional price section must never stop the AI article (e.g. an unverified calendar year only drops it).
+            let usSessions = [];
+            try {
+                usSessions = [latestCompletedSession('US', at).date];
+            }
+            catch {
+                usSessions = [];
+            }
+            const aiDeep = await collectAIDeep({ operationDate: kstDate(at), candidateUSSessions: usSessions, at, fetcher: this.fetcher, audit, ...(this.pdfText ? { pdfText: this.pdfText } : {}) });
+            const view = { publicationId: `motus-live-${observedDate}:ai`, issueDate: observedDate, issueNumber: Number(observedDate.replaceAll('-', '')), title: decision.title, subtitle: '공식 원문에서 확인한 사실과 MOTUS 해석을 구분해 읽는 AI 산업', category: 'AI_INTELLIGENCE', canonicalLabel: 'AI Intelligence', displayLabel: 'AI 인텔리전스 (AI Intelligence)', todayCore: { headline: decision.ordered[0].headline, summary: `${decision.lead} 공식 AI 채널 ${OFFICIAL_AI_SOURCES.length}곳에서 최근 4일간 게시된 AI 발표 ${screened.length}건을 확인했고, 원문 출처와 발표일이 검증된 ${synthesized.length}건을 골라 정리했다.`, bullets: decision.ordered.map(item => item.headline) }, issues: decision.ordered.map((item, index) => ({ headline: item.headline, whatHappened: item.facts.slice(0, Math.max(decision.depthByTopic[item.topicId] ?? 1, 4)), coreContent: item.evidenceBound ? '' : `공식 원문에서 확인된 사실은 ${item.topic}에 관한 발표다.`, whyItMatters: repeatedAnalysis(decision.ordered, index) ? '' : item.interpretation, relatedCompaniesIndustries: [item.company, 'AI 산업'], marketConnection: '시장 평가는 발표 이후 고객 채택, 매출 기여와 인프라 투자 자료가 확인된 뒤 판단해야 한다.', institutionView: null, evidenceRefs: [item.link] })), deepSections: aiDeep.composition.sections, industryFlow: ['AI 제품 적용', 'AI 인프라', '기업 도입'], industryConnections: decision.ordered.map(item => ({ title: item.company + ' 발표의 산업 연결', explanation: item.interpretation, connectedCompanies: [item.company], connectedIndustries: ['AI 산업'], evidenceRefs: [item.link], optionalWatchPoint: item.evidenceBound ? '' : item.watch })), whatToWatch: decision.ordered.some(item => item.evidenceBound) ? decision.ordered.map(item => ({ headline: `${item.company} ${item.topic}`, watchFor: item.watch, validityHorizon: 'NEXT_30_DAYS' })) : [{ headline: '공식 후속 지표', watchFor: decision.ordered[0].watch, validityHorizon: 'NEXT_30_DAYS' }], sources: dedupe([...sources, ...aiDeep.sources.map(item => ({ ...source(item.label, item.url, item.publisher), role: 'SUPPLEMENTARY' }))]) };
+            return { ...ready(view, renderAIEditorialArticle(view), observedDate, audit, at), searchContext };
+        }
+        catch (error) {
+            return ['AI_VERIFIED_EVENTS_INSUFFICIENT', 'AI_KOREAN_SYNTHESIS_UNAVAILABLE'].includes(message(error)) ? skip(audit, error) : hold(audit, error);
+        }
+    }
+    async korea(at, options) {
+        const audit = [];
+        let crossVerification = null;
+        try {
+            const operationDate = kstDate(at), todaySession = marketSession('KOREA', operationDate), controlledRecovery = options.mode === 'ADMIN_CONTROLLED_RECOVERY';
+            if (todaySession.state === 'HOLIDAY' && !controlledRecovery)
+                return skip(audit, new Error('KOREA_OPERATION_DATE_HOLIDAY'));
+            // Keep the morning edition anchored to the previous completed session when
+            // GitHub schedule execution is delayed past market close; manually controlled
+            // closing recovery intentionally uses the current execution timestamp.
+            const expectedSession = koreaPublicationSession(operationDate, at, controlledRecovery);
+            if (!isCompletedSession(expectedSession, at))
+                throw new Error('KOREA_SESSION_NOT_COMPLETED');
+            if (expectedSession.date > operationDate)
+                throw new Error('KOREA_FUTURE_SESSION_REJECTED');
+            if (expectedSession.date === operationDate && !controlledRecovery)
+                throw new Error('KOREA_MORNING_WINDOW_NOT_ELIGIBLE');
+            const kospi = controlledRecovery ? await this.koreaIndex('KOSPI', NAVER.kospi, at, audit) : await this.koreaHistoricalIndex('KOSPI', NAVER.kospiHistory, expectedSession.date, at, audit), kosdaq = controlledRecovery ? await this.koreaIndex('KOSDAQ', NAVER.kosdaq, at, audit) : await this.koreaHistoricalIndex('KOSDAQ', NAVER.kosdaqHistory, expectedSession.date, at, audit), fx = await this.koreaFx(NAVER.fx, at, audit);
+            const [flowResult, sectorResult, moverResult] = await Promise.allSettled([this.koreaFlows(NAVER.flow, at, audit), this.koreaRows(NAVER.sector, 'SECTOR', at, audit), this.koreaRows(NAVER.movers, 'MOVER', at, audit)]);
+            const observedDate = kospi.date;
+            if (kosdaq.date !== observedDate)
+                throw new Error('KOREA_REFERENCE_DATE_MISMATCH');
+            if (observedDate !== expectedSession.date)
+                throw new Error('KOREA_COMPLETED_SESSION_MISMATCH:' + observedDate + ':' + expectedSession.date);
+            // Seoul FX trades until 02:00 KST, so after a Friday session the latest quote is stamped Saturday.
+            // Accept the latest quote dated from the completed session through the operation date; older (stale)
+            // or later (future) quotes still HOLD.
+            if (!(/^\d{4}-\d{2}-\d{2}$/.test(fx.date) && fx.date >= observedDate && fx.date <= operationDate))
+                throw new Error('KOREA_FX_REFERENCE_DATE_MISMATCH:' + fx.date + ':' + observedDate + ':' + operationDate);
+            const sameSession = (result, sourceIds) => { if (result.status !== 'fulfilled')
+                return []; if (result.value.date === observedDate)
+                return result.value.metrics; for (const sourceId of sourceIds) {
+                const entry = [...audit].reverse().find(item => item.sourceId === sourceId);
+                if (entry) {
+                    entry.status = 'FAILED';
+                    entry.error = 'CURRENT_SESSION_DATA_EXCLUDED';
+                    entry.referenceDate = observedDate;
+                }
+            } return []; }, flows = sameSession(flowResult, ['naver:flows']), sectorMetrics = sameSession(sectorResult, ['naver:sector']), moverMetrics = sameSession(moverResult, ['naver:mover']);
+            for (const entry of audit)
+                if (entry.observedDate !== undefined)
+                    entry.referenceDate = entry.sourceId === 'naver:usd-krw' ? fx.date : observedDate;
+            const preferredOfficial = await this.koreaOfficial.fetch(observedDate, at), official = !preferredOfficial.requiredProviderAvailable ? await this.koreaSecondary.fetch(observedDate, at) : preferredOfficial;
+            if (official !== preferredOfficial)
+                for (const item of preferredOfficial.audit)
+                    audit.push({ sourceId: item.sourceId, category: 'KOREA_MARKET', url: item.url, status: item.status === 'SKIPPED' ? 'FAILED' : item.status, recordCount: item.recordCount, collectedAt: at, error: item.error, referenceDate: observedDate });
+            for (const item of official.audit)
+                if (item.status !== 'SKIPPED')
+                    audit.push({ sourceId: item.sourceId, category: 'KOREA_MARKET', url: item.url, status: item.status, recordCount: item.recordCount, collectedAt: at, error: item.error, referenceDate: observedDate });
+            crossVerification = crossVerifyKoreaMarket({ observedDate, values: { KOSPI: kospi.value, KOSDAQ: kosdaq.value }, sourceUrls: [controlledRecovery ? NAVER.kospi : NAVER.kospiHistory, controlledRecovery ? NAVER.kosdaq : NAVER.kosdaqHistory], metricBasis: { KOSPI: 'SESSION_CLOSE', KOSDAQ: 'SESSION_CLOSE' } }, official, at);
+            if (crossVerification.verification !== 'VERIFIED')
+                throw new Error(crossVerification.reasonCodes[0] ?? 'KOREA_OFFICIAL_CROSS_VERIFICATION_FAILED');
+            const marketMedia = await collectMarketResearch('KOREA_MARKET', at, this.fetcher);
+            const brokerage = await collectKbBrokerResearch(at, this.fetcher);
+            const researchResult = { entries: [...brokerage.entries, ...marketMedia.entries], audit: [...brokerage.audit, ...marketMedia.audit] };
+            for (const item of researchResult.audit)
+                audit.push({ sourceId: 'market-research:' + item.publisher, category: 'KOREA_MARKET', url: item.url, status: item.status, recordCount: item.count, collectedAt: at, error: item.error });
+            for (const item of researchResult.entries)
+                audit.push({ sourceId: 'market-research:article:' + item.url, category: 'KOREA_MARKET', url: item.url, status: 'PASS', recordCount: 1, collectedAt: at, error: null, observedDate: item.publishedAt.slice(0, 10) });
+            const candidates = [...sectorMetrics, ...moverMetrics].sort((a, b) => metricMagnitude(b) - metricMagnitude(a)), baseTopics = [{ topicId: 'index:KOSPI', label: '코스피', aliases: ['KOSPI'], category: 'KOREA_MARKET', claimRefs: [NAVER.kospiHistory], sourceRefs: [NAVER.kospiHistory], verificationStatus: 'VERIFIED' }, { topicId: 'index:KOSDAQ', label: '코스닥', aliases: ['KOSDAQ'], category: 'KOREA_MARKET', claimRefs: [NAVER.kosdaqHistory], sourceRefs: [NAVER.kosdaqHistory], verificationStatus: 'VERIFIED' }], topics = [...baseTopics, ...candidates.map(item => ({ topicId: item.factId, label: item.label, aliases: [], category: 'KOREA_MARKET', claimRefs: [item.source.url], sourceRefs: [item.source.url], verificationStatus: 'VERIFIED' }))], searchContext = await collectPreRenderSearch(topics, at, this.environment), rank = new Map(searchContext.orderedTopicIds.map((id, index) => [id, index])), order = (items) => [...items].sort((a, b) => (rank.get(a.factId) ?? 999) - (rank.get(b.factId) ?? 999));
+            const orderedSectors = order(sectorMetrics), orderedMovers = order(moverMetrics), major = candidates[0], selected = searchContext.selectedSecondaryTopicId, searchFocus = topics.find(item => item.topicId === selected)?.label;
+            const verifiedKospi = official.observations.find(item => item.field === 'KOSPI'), verifiedKosdaq = official.observations.find(item => item.field === 'KOSDAQ'), marketSourceLabel = verifiedKospi.provider === 'KRX' ? '한국거래소' : 'Yahoo Finance 독립 비교값', officialKospi = { ...kospi.metric, displayValue: format(verifiedKospi.value), source: { label: marketSourceLabel, url: verifiedKospi.sourceUrl } }, officialKosdaq = { ...kosdaq.metric, displayValue: format(verifiedKosdaq.value), source: { label: marketSourceLabel, url: verifiedKosdaq.sourceUrl } }, bokFx = official.observations.find(item => item.field === 'USD_KRW' && item.provider === 'BOK_ECOS'), fxMetric = bokFx ? { ...fx.metric, label: 'USD/KRW 한국은행 기준값', displayValue: format(bokFx.value), direction: 'FLAT', source: { label: '한국은행 ECOS', url: bokFx.sourceUrl } } : { ...fx.metric, label: 'USD/KRW 수집 시점 현재가' };
+            const kospiHistory = kospi.history, kospiChangePct = kospiHistory && kospiHistory.closes.length >= 2 ? (kospiHistory.closes.at(-1) - kospiHistory.closes.at(-2)) / kospiHistory.closes.at(-2) * 100 : null;
+            const deep = await collectKoreaDeep({ sessionDate: observedDate, operationDate, at, fetcher: this.fetcher, audit, ...(this.pdfText ? { pdfText: this.pdfText } : {}), kospiClose: verifiedKospi.value, kospiChangePct });
+            if (!deep.composition.hasCoreCommentary && !controlledRecovery)
+                throw new Error('BROKER_MARKET_COMMENTARY_UNAVAILABLE');
+            const officialSources = official.observations.map(item => source(`${item.provider} ${item.field}`, item.sourceUrl, item.provider === 'KRX' ? '한국거래소' : item.provider === 'BOK_ECOS' ? '한국은행 ECOS' : 'Yahoo Finance')), sources = dedupe([source('네이버금융 KOSPI 전일 마감', controlledRecovery ? NAVER.kospi : NAVER.kospiHistory, '네이버금융'), source('네이버금융 KOSDAQ 전일 마감', controlledRecovery ? NAVER.kosdaq : NAVER.kosdaqHistory, '네이버금융'), source('네이버금융 USD/KRW 현재가', NAVER.fx, '네이버금융'), ...(flows.length ? [source('네이버금융 투자자 수급', NAVER.flow, '네이버금융')] : []), ...(orderedSectors.length ? [source('네이버금융 업종', NAVER.sector, '네이버금융')] : []), ...(orderedMovers.length ? [source('네이버금융 상승종목', NAVER.movers, '네이버금융')] : []), ...officialSources, ...deep.sources.map(item => ({ ...source(item.label, item.url, item.publisher), role: 'SUPPLEMENTARY' })), ...researchResult.entries.map(item => source(item.publisher + ' 공개 시장기사 (' + item.publishedAt.slice(0, 10) + ')', item.url, item.publisher))]);
+            const supportAvailable = flows.length > 0 || orderedSectors.length > 0 || orderedMovers.length > 0, marketSummary = controlledRecovery ? `${observedDate} 국내증시 마감은 KOSPI ${officialKospi.displayValue}, KOSDAQ ${officialKosdaq.displayValue}였다. 실제 완료된 최신 거래일의 검증된 시장 데이터를 바탕으로 다음 거래일 체크포인트를 정리한다.` : `${observedDate} 마감한 전일 국내증시는 KOSPI ${officialKospi.displayValue}, KOSDAQ ${numberWithEul(officialKosdaq.displayValue)} 기록했다. 오늘 아침에는 전일 지수 흐름과 환율, 확인 가능한 보조 신호를 함께 놓고 장의 성격을 다시 짚는다.`, verificationBasis = verifiedKospi.provider === 'KRX' ? '한국거래소 공식 자료를 기준으로 삼고 네이버금융 비교값과' : '네이버금융 마감값을 Yahoo Finance의 독립 비교값과', commentary = [`${controlledRecovery ? '최신 완료 거래일' : '전일'} 국내증시의 지수 종가는 ${verificationBasis} 대조해 확인했다. 원·달러 환율은 ${bokFx ? '한국은행 기준값으로' : '수집 시점 현재가로'} 표시해 지수 종가와 혼용하지 않았다.`, supportAvailable ? `같은 세션으로 검증된 ${flows.length ? '투자자 수급' : ''}${flows.length && (orderedSectors.length || orderedMovers.length) ? '과 ' : ''}${orderedSectors.length || orderedMovers.length ? '업종·종목 흐름' : ''}만 보조 신호로 사용했다. 오늘 장 데이터가 이미 시작된 경우 전일 기사에 섞이지 않도록 자동 제외한다.` : '오늘 장이 이미 시작돼 현재 세션의 수급·업종·종목 데이터는 전일 기사에서 제외했다. 전일 지수와 독립 비교값처럼 기준일이 명확히 검증된 정보만 사용했다.'];
+            const view = { publicationId: `motus-live-${operationDate}:korea`, issueDate: operationDate, issueNumber: Number(operationDate.replaceAll('-', '')), operationDate, sessionDate: observedDate, edition: controlledRecovery ? 'MANUAL_RECOVERY_CLOSE' : 'PREVIOUS_SESSION_MORNING', fxBasis: bokFx ? 'BOK_REFERENCE_RATE' : 'CURRENT_AT_COLLECTION', title: deep.title ?? buildKoreaEditorialTitle(kospi.change, kosdaq.change, controlledRecovery), subtitle: deep.composition.sections.length ? '증권사 리포트와 투자자 검색 순위로 읽는 전일 국내증시' : controlledRecovery ? '최신 완료 거래일 데이터로 읽는 국내증시 마감' : '전일 마감 데이터와 오늘 아침 변수를 함께 읽는 국내증시', category: 'KOREA_MARKET', canonicalLabel: 'Korea Market', displayLabel: '국내증시 (Korea Market)', marketSummary: [deep.composition.sections.length && kospiChangePct !== null ? marketSummary.replace(' 오늘 아침에는 전일 지수 흐름과 환율, 확인 가능한 보조 신호를 함께 놓고 장의 성격을 다시 짚는다.', ` 코스피는 전 거래일보다 ${Math.abs(kospiChangePct).toFixed(2)}% ${kospiChangePct >= 0 ? '올랐다' : '내렸다'}.`) : marketSummary, ...deep.composition.leadAddition].join(' '), deepSections: deep.composition.sections, indexMetrics: [officialKospi, officialKosdaq], fxAndSupporting: [fxMetric], investorFlows: flows, sectors: orderedSectors.slice(0, 5), movers: orderedMovers.slice(0, 5), research: brokerage.entries.map((item, index) => ({ researchId: 'kb-broker:' + item.publishedAt.slice(0, 10) + ':' + index, publisher: item.publisher, analyst: null, headline: item.headline, summary: 'KB증권 공식 사이트에 공개된 리포트 제목과 발행일이 확인됐다. 본문 분석이나 투자 의견은 수집되지 않았다.', institutionView: item.evidence?.length ? '공식 공개 요약: ' + item.evidence.join(' / ') : '공개 리포트 제목: ' + item.headline, evidence: item.evidence?.length ? item.evidence : [item.headline], interests: [], investmentStrategy: [], riskFactors: [], targetPriceLabel: null, ratingLabel: null, aiInterpretation: null, sources: [source(item.publisher, item.url, item.publisher)] })), marketResearch: researchResult.entries, marketCommentary: commentary, checkpoints: [{ headline: controlledRecovery ? '다음 거래일 체크포인트' : '오늘 체크포인트', watchFor: '외국인 수급과 원·달러 환율, 직전 주도 업종의 연속성을 확인', validityHorizon: controlledRecovery ? 'NEXT_SESSION' : 'TODAY' }], sources, narrative: buildKoreaMarketNarrative([kospi, kosdaq].flatMap(item => { const history = item.history; return history && history.closes.length >= 2 ? [history] : []; }), flows.map(item => ({ label: item.label, direction: item.direction }))) };
+            return { ...ready(view, renderKoreaEditorialArticle(view), observedDate, audit, at, crossVerification), searchContext };
+        }
+        catch (error) {
+            return hold(audit, error, crossVerification);
+        }
+    }
+    async usIndexSeries(input) { try {
+        const primary = await this.fred(input.id, 'US_MARKET', input.at, input.audit, input.key, input.label, 90), latest = primary.points.at(-1)?.date;
+        if (primary.points.length >= 63 && latest === input.expectedDate)
+            return primary;
+        const entry = [...input.audit].reverse().find(item => item.sourceId === 'fred:' + input.key);
+        if (entry) {
+            entry.status = 'FAILED';
+            entry.error = 'FRED_STALE_OR_INCOMPLETE';
+            entry.referenceDate = input.expectedDate;
+        }
+    }
+    catch (error) {
+        const entry = [...input.audit].reverse().find(item => item.sourceId === 'fred:' + input.key);
+        if (entry) {
+            entry.status = 'FAILED';
+            entry.error = entry.error ?? message(error);
+            entry.referenceDate = input.expectedDate;
+        }
+    } return this.yahooUsIndex(input.yahooSymbol, input.label, input.key, input.at, input.audit, input.expectedDate); }
+    async yahooUsIndex(symbol, label, sourceId, at, audit, expectedDate) {
+        // Same provider on its second public host: a query1 rate limit or outage must not HOLD the day. Validation is identical on both hosts.
+        const end = Math.floor((Date.parse(at) + 86400000) / 1000), start = end - 300 * 86400;
+        let lastError = null;
+        for (const host of ['query1.finance.yahoo.com', 'query2.finance.yahoo.com']) {
+            const url = `https://${host}/v8/finance/chart/${encodeURIComponent(symbol)}?period1=${start}&period2=${end}&interval=1d`;
+            try {
+                const response = await fetchWithTransientRetry(this.fetcher, url, () => ({ headers: { accept: 'application/json', 'user-agent': 'MOTUS-Internal-Collector/1.0' }, signal: AbortSignal.timeout(20000) }));
+                if (!response.ok)
+                    throw new Error('YAHOO_US_HTTP_' + response.status);
+                const body = await response.json(), points = parseYahooUsChart(body, symbol, url), latest = points.at(-1)?.date;
+                if (points.length < 63)
+                    throw new Error('YAHOO_US_' + sourceId.toUpperCase() + '_HISTORY_INSUFFICIENT');
+                if (latest !== expectedDate)
+                    throw new Error('YAHOO_US_' + sourceId.toUpperCase() + '_SESSION_MISMATCH:' + String(latest) + ':' + expectedDate);
+                audit.push({ sourceId: 'yahoo-us:' + sourceId, category: 'US_MARKET', url, status: 'PASS', recordCount: points.length, collectedAt: at, error: null, observedDate: latest, referenceDate: expectedDate });
+                return { label, url, points };
+            }
+            catch (error) {
+                lastError = error;
+                audit.push({ sourceId: 'yahoo-us:' + sourceId + (host.startsWith('query2') ? ':query2' : ''), category: 'US_MARKET', url, status: 'FAILED', recordCount: 0, collectedAt: at, error: message(error), referenceDate: expectedDate });
+            }
+        }
+        throw lastError instanceof Error ? lastError : new Error(message(lastError));
+    }
+    async usTenYearSeries(at, audit) { try {
+        return await this.fred('DGS10', 'US_MARKET', at, audit, 'DGS10', 'U.S. 10Y Treasury Yield (미국 10년물 국채금리)', 10);
+    }
+    catch (error) {
+        const entry = [...audit].reverse().find(item => item.sourceId === 'fred:DGS10');
+        if (entry) {
+            entry.status = 'FAILED';
+            entry.error = entry.error ?? message(error);
+        }
+        return this.treasuryTenYear(at, audit);
+    } }
+    async treasuryTenYear(at, audit) { const year = new Date(at).getUTCFullYear(), years = [year, year - 1], all = []; let primaryUrl = ''; for (const value of years) {
+        const url = `https://home.treasury.gov/resource-center/data-chart-center/interest-rates/pages/xml?data=daily_treasury_yield_curve&field_tdr_date_value=${value}`;
+        if (!primaryUrl)
+            primaryUrl = url;
+        try {
+            const response = await this.fetcher(url, { headers: { accept: 'application/xml,text/xml', 'user-agent': 'MOTUS-Internal-Collector/1.0' }, signal: AbortSignal.timeout(20000) });
+            if (!response.ok)
+                throw new Error('TREASURY_HTTP_' + response.status);
+            const xml = await response.text(), points = parseTreasuryTenYearXml(xml, url);
+            audit.push({ sourceId: 'treasury:10y:' + value, category: 'US_MARKET', url, status: 'PASS', recordCount: points.length, collectedAt: at, error: null, ...(points.at(-1)?.date ? { observedDate: points.at(-1).date } : {}) });
+            all.push(...points);
+            if (all.length >= 3)
+                break;
+        }
+        catch (error) {
+            audit.push({ sourceId: 'treasury:10y:' + value, category: 'US_MARKET', url, status: 'FAILED', recordCount: 0, collectedAt: at, error: message(error) });
+        }
+    } const points = [...new Map(all.map(point => [point.date, point])).values()].sort((a, b) => a.date.localeCompare(b.date)); if (points.length < 2)
+        throw new Error('TREASURY_10Y_OBSERVATIONS_INSUFFICIENT'); return { label: 'U.S. 10Y Treasury Yield (미국 10년물 국채금리)', url: primaryUrl, points }; }
+    async twelve(symbol, category, at, audit, sourceId, label, count) { const safe = `https://api.twelvedata.com/time_series?symbol=${encodeURIComponent(symbol)}&interval=1day`; try {
+        const result = await this.twelveProvider.fetchSeries({ symbol, count, requestedAt: at });
+        audit.push({ sourceId: 'twelve:' + sourceId, category, url: result.url, status: 'PASS', recordCount: result.points.length, collectedAt: at, error: null });
+        return { label, ...result };
+    }
+    catch (error) {
+        audit.push({ sourceId: 'twelve:' + sourceId, category, url: safe, status: 'FAILED', recordCount: 0, collectedAt: at, error: message(error) });
+        throw error;
+    } }
+    async fred(id, category, at, audit, sourceId, label, months) { const url = fredUrl(id, months), auditId = 'fred:' + sourceId, csv = await this.text(url, category, auditId, at, audit), points = parseFredCsv(csv, id, url), entry = [...audit].reverse().find(item => item.sourceId === auditId); if (entry) {
+        entry.recordCount = points.length;
+        if (points.at(-1)?.date)
+            entry.observedDate = points.at(-1).date;
+    } if (points.length < 2)
+        throw new Error(id + '_OBSERVATIONS_INSUFFICIENT'); return { label, url, points }; }
+    async text(url, category, sourceId, at, audit, officialDomains) { try {
+        const response = await this.fetcher(url, { headers: { accept: 'application/json,text/csv,application/rss+xml,application/xml,text/html', 'user-agent': 'MOTUS-Internal-Collector/1.0' }, signal: AbortSignal.timeout(20000) });
+        if (!response.ok)
+            throw new Error('HTTP_' + response.status);
+        if (officialDomains && response.url && !isOfficialLink(response.url, officialDomains))
+            throw new Error('AI_REDIRECT_OFF_OFFICIAL_DOMAIN');
+        const buffer = await response.arrayBuffer(), charset = (response.headers.get('content-type') ?? '').toLowerCase().includes('euc-kr') ? 'euc-kr' : 'utf-8', text = new TextDecoder(charset).decode(buffer);
+        audit.push({ sourceId, category, url, status: 'PASS', recordCount: 1, collectedAt: at, error: null });
+        return text;
+    }
+    catch (error) {
+        audit.push({ sourceId, category, url, status: 'FAILED', recordCount: 0, collectedAt: at, error: message(error) });
+        throw error;
+    } }
+    async koreaHistoricalIndex(label, url, expectedDate, at, audit) { const sourceId = 'naver:' + label.toLowerCase() + ':history', raw = await this.text(url, 'KOREA_MARKET', sourceId, at, audit), rows = JSON.parse(raw), row = rows.find(item => item.localTradedAt === expectedDate), value = Number(row?.closePrice?.replaceAll(',', '')), change = Number(row?.fluctuationsRatio); if (!row || !Number.isFinite(value) || !Number.isFinite(change))
+        throw new Error(label + '_HISTORICAL_SESSION_MISSING:' + expectedDate); const entry = [...audit].reverse().find(item => item.sourceId === sourceId); if (entry) {
+        entry.observedDate = expectedDate;
+        entry.referenceDate = expectedDate;
+        entry.dateField = 'localTradedAt';
+        entry.sourceTimestamp = expectedDate;
+        entry.recordCount = 1;
+    } const ordered = rows.filter(item => typeof item.localTradedAt === 'string' && item.localTradedAt <= expectedDate && Number.isFinite(Number(item.closePrice?.replaceAll(',', '')))).sort((a, b) => a.localTradedAt.localeCompare(b.localTradedAt)), history = { label, dates: ordered.map(item => item.localTradedAt), closes: ordered.map(item => Number(item.closePrice.replaceAll(',', ''))) }; return { date: expectedDate, value, change, metric: kMetric('index:' + label, 'INDEX', label, value, change, url), history }; }
+    async koreaIndex(label, url, at, audit) { const raw = await this.text(url, 'KOREA_MARKET', 'naver:' + label.toLowerCase(), at, audit), data = JSON.parse(raw), date = recordKoreaDate(audit, 'naver:' + label.toLowerCase(), 'localTradedAt', data.localTradedAt), value = Number(data.closePrice?.replaceAll(',', '')), change = Number(data.fluctuationsRatio); if (data.marketStatus !== 'CLOSE')
+        throw new Error(label + '_MARKET_NOT_CLOSED'); if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || !Number.isFinite(value) || !Number.isFinite(change))
+        throw new Error(label + '_REQUIRED_FIELDS_MISSING'); return { date, value, change, metric: kMetric('index:' + label, 'INDEX', label, value, change, url) }; }
+    async koreaFx(url, at, audit) { const raw = await this.text(url, 'KOREA_MARKET', 'naver:usd-krw', at, audit), data = JSON.parse(raw), info = data.exchangeInfo, date = recordKoreaDate(audit, 'naver:usd-krw', 'exchangeInfo.localTradedAt', info?.localTradedAt), value = Number(info?.closePrice?.replaceAll(',', '')), change = Number(info?.fluctuations?.replaceAll(',', '')); if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || !Number.isFinite(value) || !Number.isFinite(change))
+        throw new Error('USD_KRW_REQUIRED_FIELDS_MISSING'); return { date, value, metric: kMetric('fx:usd-krw', 'FX', 'USD/KRW', value, change, url) }; }
+    async koreaFlows(url, at, audit) { const raw = await this.text(url, 'KOREA_MARKET', 'naver:flows', at, audit), data = JSON.parse(raw), date = recordKoreaDate(audit, 'naver:flows', 'bizdate', data.bizdate), specs = [['개인', data.personalValue], ['외국인', data.foreignValue], ['기관', data.institutionalValue]], metrics = specs.map(([label, rawValue], index) => { const value = Number(rawValue?.replaceAll(',', '')); if (!Number.isFinite(value))
+        throw new Error('KOREA_INVESTOR_FLOWS_INCOMPLETE'); return kMetric('flow:' + index, 'FLOW', label, value, value, url); }); return { date, metrics }; }
+    async koreaRows(url, group, at, audit) { const raw = await this.text(url, 'KOREA_MARKET', 'naver:' + group.toLowerCase(), at, audit), data = JSON.parse(raw), rows = group === 'SECTOR' ? (Array.isArray(data) ? data : []) : (data.stocks ?? []), metrics = [], dates = []; for (const row of rows) {
+        const label = String(group === 'SECTOR' ? row.name ?? '' : row.stockName ?? ''), value = Number(group === 'SECTOR' ? row.changeRate : row.fluctuationsRatio), rawDate = String(group === 'SECTOR' ? row.thistime ?? '' : row.localTradedAt ?? ''), date = koreaReferenceDate(rawDate);
+        if (label && Number.isFinite(value) && /^\d{4}-\d{2}-\d{2}$/.test(date)) {
+            metrics.push(kMetric(group.toLowerCase() + ':' + metrics.length, group, label, value, value, url));
+            dates.push(date);
+        }
+        if (metrics.length === 8)
+            break;
+    } if (!metrics.length || new Set(dates).size !== 1)
+        throw new Error('KOREA_' + group + '_INCOMPLETE'); recordKoreaDate(audit, 'naver:' + group.toLowerCase(), group === 'SECTOR' ? 'thistime' : 'localTradedAt', String(group === 'SECTOR' ? rows[0]?.thistime ?? '' : rows[0]?.localTradedAt ?? '')); return { date: dates[0], metrics }; }
+}
+function ready(view, render, observedDate, audit, at, crossVerification = null) { const contentFingerprint = createHash('sha256').update(render.html).digest('hex'), unit = { publicationId: view.publicationId, category: view.category, observedDate, title: view.title, label: render.label, sourceCount: view.sources.length, itemCount: view.category === 'AI_INTELLIGENCE' ? view.issues.length : view.category === 'US_MARKET' ? view.marketHistory.series.length : view.indexMetrics.length + view.investorFlows.length + view.sectors.length + view.movers.length, readiness: 'READY', readinessReasons: [], review: { state: 'PENDING', reviewer: null, reviewedAt: null, history: [] }, publicationState: 'PREVIEW_READY', draftPostId: null, publicPostUrl: null, duplicateCount: 0, contentFingerprint, render, viewModel: view }; return { payload: { schemaVersion: '1.0', session: { state: 'COMPLETED', observedDate, completedAt: at }, unit }, audit, crossVerification, state: 'LIVE_READY', reason: null }; }
+function hold(audit, error, crossVerification = null) { return { payload: null, audit, crossVerification, state: 'HOLD', reason: message(error) }; }
+function skip(audit, error) { return { payload: null, audit, crossVerification: null, state: 'SKIP', reason: message(error) }; }
+function source(label, url, publisher) { return { label, url, publisher }; }
+function dedupe(items) { return [...new Map(items.map(item => [canonical(item.url), item])).values()]; }
+function fredUrl(id, months) { const start = new Date(Date.now() - months * 31 * 86400000).toISOString().slice(0, 10); return `${FRED}?id=${encodeURIComponent(id)}&cosd=${start}`; }
+export function parseFredCsv(csv, id, url) { const lines = csv.replace(/^\uFEFF/, '').trim().split(/\r?\n/).filter(Boolean); if (lines.length < 2)
+    return []; const header = parseCsvRow(lines[0]), dateIndex = header.findIndex(value => /^(?:observation_date|date)$/i.test(value.trim())), valueIndex = header.findIndex(value => value.trim().toUpperCase() === id.toUpperCase()); if (dateIndex < 0 || valueIndex < 0)
+    return []; const points = []; for (const line of lines.slice(1)) {
+    const fields = parseCsvRow(line), date = fields[dateIndex]?.trim() ?? '', raw = fields[valueIndex]?.trim().replaceAll(',', '') ?? '';
+    if (!raw || raw === '.')
+        continue;
+    const value = Number(raw);
+    if (/^\d{4}-\d{2}-\d{2}$/.test(date) && Number.isFinite(value))
+        points.push({ date, value, sourceId: 'FRED:' + id, sourceUrl: url });
+} return points; }
+function parseCsvRow(row) { const fields = []; let current = '', quoted = false; const push = () => { fields.push(current); current = ''; }; for (let index = 0; index < row.length; index++) {
+    const char = row[index];
+    if (char === '"') {
+        if (quoted && row[index + 1] === '"') {
+            current += '"';
+            index++;
+        }
+        else
+            quoted = !quoted;
+        continue;
+    }
+    if (char === ',' && !quoted) {
+        push();
+        continue;
+    }
+    current += char;
+} push(); return fields; }
+export function parseYahooUsChart(body, symbol, url) { const chart = body.chart, result = chart?.result?.[0], timestamps = result?.timestamp ?? [], closes = result?.indicators?.quote?.[0]?.close ?? [], points = []; for (let index = 0; index < timestamps.length; index++) {
+    const timestamp = timestamps[index], value = closes[index];
+    if (typeof timestamp !== 'number' || typeof value !== 'number' || !Number.isFinite(value))
+        continue;
+    const date = new Date(timestamp * 1000).toISOString().slice(0, 10);
+    if (/^\d{4}-\d{2}-\d{2}$/.test(date))
+        points.push({ date, value, sourceId: 'YAHOO:' + symbol, sourceUrl: url });
+} return points.sort((a, b) => a.date.localeCompare(b.date)); }
+export function parseTreasuryTenYearXml(xml, url) { const entries = [...xml.matchAll(/<entry\b[\s\S]*?<\/entry>/gi)], points = []; for (const match of entries) {
+    const block = match[0], dateRaw = block.match(/<d:NEW_DATE[^>]*>([^<]+)<\/d:NEW_DATE>/i)?.[1]?.trim() ?? '', valueRaw = block.match(/<d:BC_10YEAR[^>]*>([^<]+)<\/d:BC_10YEAR>/i)?.[1]?.trim() ?? '', date = dateRaw.slice(0, 10), value = Number(valueRaw);
+    if (/^\d{4}-\d{2}-\d{2}$/.test(date) && Number.isFinite(value))
+        points.push({ date, value, sourceId: 'TREASURY:10Y', sourceUrl: url });
+} return points.sort((a, b) => a.date.localeCompare(b.date)); }
+function usProvider(url) { if (url.includes('query1.finance.yahoo.com') || url.includes('query2.finance.yahoo.com'))
+    return { label: 'Yahoo Finance', publisher: 'Yahoo Finance' }; if (url.includes('home.treasury.gov'))
+    return { label: 'U.S. Treasury', publisher: 'U.S. Department of the Treasury' }; if (url.includes('twelvedata.com'))
+    return { label: 'Twelve Data', publisher: 'Twelve Data' }; return { label: 'FRED', publisher: 'Federal Reserve Bank of St. Louis' }; }
+function recentObservation(observed, sessionDate) { const days = (Date.parse(sessionDate + 'T00:00:00Z') - Date.parse(observed + 'T00:00:00Z')) / 86400000; return days >= 0 && days <= 4; }
+export function buildUSEditorialTitleCandidates(history, metrics) {
+    const core = history.series.filter(item => ['sp500', 'nasdaq', 'dow-jones'].includes(item.key) && Number.isFinite(item.latestChangePct));
+    if (core.length < 3)
+        throw new Error('US_EDITORIAL_TITLE_INPUT_INSUFFICIENT');
+    const largest = [...core].sort((a, b) => Math.abs(b.latestChangePct) - Math.abs(a.latestChangePct))[0], name = koreanUsIndexName(largest.key), move = movePhrase(largest.latestChangePct), up = core.filter(item => item.latestChangePct > 0).length, down = core.filter(item => item.latestChangePct < 0).length, breadth = up === core.length ? '동반 상승' : down === core.length ? '동반 하락' : '혼조', tenYear = metrics.find(item => item.label.includes('미국 10년물') && !item.label.includes('기준'));
+    if (!tenYear)
+        return [`${name} ${move}, 미국 3대 지수 ${breadth}`, `미국 3대 지수 ${breadth}, ${josa(name, '이', '가')} ${move}`];
+    const rateMove = tenYear.direction === 'UP' ? '상승' : tenYear.direction === 'DOWN' ? '하락' : '보합';
+    return [`${name} ${move}, 미국 10년물 금리 ${rateMove} 속 3대 지수 ${breadth}`, `미국 3대 지수 ${breadth}, ${josa(name, '이', '가')} ${move}`, `${josa(name, '이', '가')} ${move}, 10년물 금리는 ${rateMove}`];
+}
+export function koreanUsIndexName(key) { return key === 'sp500' ? 'S&P 500' : key === 'nasdaq' ? '나스닥' : key === 'dow-jones' ? '다우존스' : key === 'russell-2000' ? '러셀 2000' : key; }
+export function movePhrase(changePct) { if (!Number.isFinite(changePct) || Math.abs(changePct) < 0.005)
+    return '보합'; return `${Math.abs(changePct).toFixed(2)}% ${changePct > 0 ? '상승' : '하락'}`; }
+export function buildKoreaEditorialTitle(kospiChange, kosdaqChange, closeEdition) {
+    const kospi = movePhrase(kospiChange), kosdaq = movePhrase(kosdaqChange), diverged = Math.sign(Math.round(kospiChange * 100)) !== Math.sign(Math.round(kosdaqChange * 100));
+    const pair = diverged ? `코스피 ${kospi}, 코스닥은 ${kosdaq}` : `코스피 ${kospi}·코스닥 ${kosdaq}`;
+    return closeEdition ? `${josa(pair, '으로', '로')} 마감한 국내증시` : `${pair}, 전일 국내증시와 오늘의 확인사항`;
+}
+function rss(xml) { const entries = [...xml.matchAll(/<(?:item|entry)\b[\s\S]*?<\/(?:item|entry)>/gi)], read = (block, names) => { for (const name of names) {
+    const match = block.match(new RegExp(`<${name}[^>]*>(?:<!\\[CDATA\\[)?([\\s\\S]*?)(?:\\]\\]>)?<\\/${name}>`, 'i'));
+    if (match)
+        return clean(match[1]);
+} return ''; }; return entries.map(match => { const block = match[0], href = block.match(/<link[^>]*href=["']([^"']+)/i)?.[1] ?? read(block, ['link']); return { title: read(block, ['title']), link: href, publishedAt: read(block, ['pubDate', 'published', 'updated']), summary: read(block, ['description', 'summary', 'content']) }; }).filter(item => item.title && /^https?:\/\//.test(item.link)); }
+function kMetric(factId, group, label, value, change, url) { return { factId, group, label, displayValue: group === 'INDEX' || group === 'FX' ? format(value) : (change >= 0 ? '+' : '') + format(value), direction: direction(change), source: { label: '네이버금융', url } }; }
+function kstDate(value) { const parts = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul', year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(new Date(value)), get = (type) => parts.find(part => part.type === type)?.value ?? ''; return `${get('year')}-${get('month')}-${get('day')}`; }
+function metricMagnitude(metric) { const parsed = Number(metric.displayValue.replace(/[^0-9.-]/g, '')); return Number.isFinite(parsed) ? Math.abs(parsed) : 0; }
+function percent(value, previous) { const change = (value - previous) / previous * 100; return `${change >= 0 ? '+' : ''}${change.toFixed(2)}%`; }
+function direction(value) { return value > 0 ? 'UP' : value < 0 ? 'DOWN' : 'FLAT'; }
+/** Yield moves are reported in absolute basis points, never as a relative percent of the yield. */
+function basisPoints(latest, previous) { const bp = Math.round((latest - previous) * 100); return `${bp > 0 ? '+' : ''}${bp}bp`; }
+/** The same event type yields the same rule-based analysis; print it once per article instead of repeating it. */
+function repeatedAnalysis(items, index) { const current = items[index]; if (!current.eventType)
+    return false; const head = (value) => value.split('. ')[0]; return items.slice(0, index).some(item => item.eventType === current.eventType && head(item.interpretation) === head(current.interpretation)); }
+function format(value) { return new Intl.NumberFormat('en-US', { maximumFractionDigits: 2 }).format(value); }
+function clean(value) { return value.replace(/<!\[CDATA\[|\]\]>/g, '').replace(/&lt;/gi, '<').replace(/&gt;/gi, '>').replace(/&#(x[0-9a-f]+|[0-9]+);/gi, (entity, digits) => { const code = digits[0].toLowerCase() === 'x' ? parseInt(digits.slice(1), 16) : Number(digits); return code > 0 && code <= 0x10ffff ? String.fromCodePoint(code) : entity; }).replace(/<[^>]+>/g, ' ').replace(/&nbsp;|&#160;/gi, ' ').replace(/&amp;/gi, '&').replace(/&quot;/gi, '"').replace(/\s+/g, ' ').trim(); }
+function extractPageEvidence(html) { const descriptions = [...html.matchAll(/<meta\b[^>]*(?:name|property)=["'](?:description|og:description)["'][^>]*content=["']([^"']+)["'][^>]*>/gi)].map(match => clean(match[1])), paragraphs = [...html.matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/gi)].map(match => clean(match[1])).filter(value => value.length >= 60); return [...descriptions, ...paragraphs].find(value => value.length >= 80)?.slice(0, 700) ?? ''; }
+function koreanCompany(value) { return { OpenAI: '오픈AI', 'Google AI': '구글', NVIDIA: '엔비디아', Microsoft: '마이크로소프트' }[value] ?? value; }
+function canonical(value) { try {
+    const url = new URL(value);
+    url.hash = '';
+    for (const key of [...url.searchParams.keys()])
+        if (/^utm_/i.test(key))
+            url.searchParams.delete(key);
+    return url.toString();
+}
+catch {
+    return value.trim().toLowerCase();
+} }
+function message(error) { return error instanceof Error ? error.message : String(error); }
+// Offset timestamps represent instants; compact provider dates already use the Korean session calendar.
+export function koreaReferenceDate(value) {
+    const raw = value ?? '';
+    if (/^\d{4}-\d{2}-\d{2}T.*(?:Z|[+-]\d{2}:?\d{2})$/.test(raw)) {
+        const instant = Date.parse(raw);
+        return Number.isFinite(instant) ? new Date(instant + 9 * 3600000).toISOString().slice(0, 10) : '';
+    }
+    if (/^\d{8}(?:\d{6})?$/.test(raw))
+        return raw.slice(0, 8).replace(/^(\d{4})(\d{2})(\d{2})$/, '$1-$2-$3');
+    return /^\d{4}-\d{2}-\d{2}(?:T|$)/.test(raw) ? raw.slice(0, 10) : '';
+}
+function recordKoreaDate(audit, sourceId, dateField, sourceTimestamp) {
+    const observedDate = koreaReferenceDate(sourceTimestamp), entry = [...audit].reverse().find(item => item.sourceId === sourceId);
+    if (entry) {
+        entry.dateField = dateField;
+        entry.sourceTimestamp = sourceTimestamp ?? '';
+        entry.observedDate = observedDate;
+    }
+    return observedDate;
+}
+const AI_WINDOW_MS = 96 * 3600000, AI_MAX_PAGE_FETCHES = 10, AI_MAX_ISSUES = 3;
+const AI_TYPE_WEIGHT = { infrastructure: 3, launch: 3, partnership: 3, investment: 3, adoption: 2, policy: 2, security: 2, education: 1, research: 1 };
+/** Lead must rest on full first-party text; RSS-summary items may only support. One item per publisher first, then fill. */
+export function selectAIEvents(events) {
+    const score = (event) => (event.basis === 'OFFICIAL_PAGE' ? 4 : 0) + AI_TYPE_WEIGHT[event.eventType] + (event.richness ?? 0) + Math.max(0, 1 - (Date.now() - Date.parse(event.publishedAt)) / AI_WINDOW_MS);
+    const ranked = [...events].sort((a, b) => score(b) - score(a)), lead = ranked.find(event => event.basis === 'OFFICIAL_PAGE');
+    if (!lead)
+        return [];
+    const chosen = [lead];
+    for (const event of ranked)
+        if (chosen.length < AI_MAX_ISSUES && !chosen.includes(event) && !chosen.some(item => item.publisher === event.publisher))
+            chosen.push(event);
+    for (const event of ranked)
+        if (chosen.length < AI_MAX_ISSUES && !chosen.includes(event))
+            chosen.push(event);
+    return chosen;
+}
+/**
+ * Source links already covered by a PUBLISHED AI operation. Read from the immutable publish ledger
+ * (sourceUrls recorded at publication); a legacy entry without them falls back to the persisted live unit
+ * only when that unit is provably the published one (content fingerprint equals the ledger fingerprint).
+ */
+async function previouslyPublishedAILinks(operationsRoot) {
+    const links = new Set();
+    let dates = [];
+    try {
+        dates = (await readdir(operationsRoot)).filter(name => /^\d{4}-\d{2}-\d{2}$/.test(name));
+    }
+    catch {
+        return links;
+    }
+    for (const date of dates) {
+        const root = join(operationsRoot, date, 'ai');
+        let ledger = '';
+        try {
+            ledger = await readFile(join(root, 'publish-ledger.jsonl'), 'utf8');
+        }
+        catch {
+            continue;
+        }
+        const published = ledger.split(/\r?\n/).filter(Boolean).map(line => { try {
+            return JSON.parse(line);
+        }
+        catch {
+            return null;
+        } }).filter((entry) => Boolean(entry && entry.event === 'PUBLISHED'));
+        for (const entry of published) {
+            if (Array.isArray(entry.sourceUrls)) {
+                for (const url of entry.sourceUrls)
+                    if (typeof url === 'string')
+                        links.add(canonical(url));
+                continue;
+            }
+            try {
+                const unit = JSON.parse(await readFile(join(root, 'live-unit.json'), 'utf8'));
+                if (typeof unit.contentFingerprint === 'string' && 'sha256:' + unit.contentFingerprint === entry.fingerprint)
+                    for (const source of unit.viewModel?.sources ?? [])
+                        if (typeof source.url === 'string')
+                            links.add(canonical(source.url));
+            }
+            catch { }
+        }
+    }
+    return links;
+}

@@ -1,0 +1,71 @@
+import { readFile, writeFile } from 'node:fs/promises';
+import { join, resolve } from 'node:path';
+import { createLiveEditorialCycle } from './editorial/live-cycle.js';
+import { addEditorialMemory } from './library/retrieval.js';
+import { compareNarrativeCandidate, narrativeFingerprint, patchPublicNarrative } from './production/public-narrative-maintenance.js';
+import { GoogleBloggerApiAdapter } from './services/blogger.js';
+if (!process.argv.includes('--execute'))
+    throw new Error('Refusing external Blogger mutation without --execute');
+const root = join(process.cwd(), 'data', 'live-editorial-cycle', '2026-10-06');
+const cycle = createLiveEditorialCycle(new Date().toISOString());
+const ai = cycle.units.find(unit => unit.category === 'AI_INTELLIGENCE');
+const us = cycle.units.find(unit => unit.category === 'US_MARKET');
+const korea = cycle.units.find(unit => unit.category === 'KOREA_MARKET');
+const config = await publishingConfig();
+const google = new GoogleBloggerApiAdapter();
+let lookup = 0, patch = 0, insert = 0, publish = 0;
+const adapter = { readPost: async (id) => { lookup++; return google.readPost(id, config); }, patchPost: async (id, input) => { patch++; return google.patchPostContent(id, input, config); }, fetchPublic: async (url) => { const response = await fetch(url, { redirect: 'follow', headers: { 'user-agent': 'MOTUS-Narrative-Maintenance/1.0' } }); return { status: response.status, body: await response.text() }; } };
+const aiPublicationPath = join(root, 'ai', 'publication.json');
+const aiPublication = JSON.parse(await readFile(aiPublicationPath, 'utf8'));
+const aiExpected = String(aiPublication.contentFingerprint ?? (aiPublication.pdf?.articleContentFingerprint ?? ''));
+const aiResult = await patchPublicNarrative({ unit: ai, postId: '4294902999154862199', expectedState: 'PUBLISHED', expectedBeforeFingerprint: aiExpected, adapter });
+if (aiResult.state !== 'PUBLISHED')
+    throw new Error(`AI narrative patch blocked: ${aiResult.error}`);
+const koreaPreviewPath = join(root, 'korea', 'preview.html');
+const oldKoreaPreview = await readFile(koreaPreviewPath, 'utf8');
+const koreaResult = await patchPublicNarrative({ unit: korea, postId: '568850689418151231', expectedState: 'DRAFT', expectedBeforeFingerprint: narrativeFingerprint(article(oldKoreaPreview)), adapter });
+if (koreaResult.state !== 'DRAFT')
+    throw new Error(`Korea narrative patch blocked: ${koreaResult.error}`);
+const usComparison = await compareNarrativeCandidate({ unit: us, postId: '614930389904987485', expectedState: 'PUBLISHED', adapter });
+if (!usComparison.sourceSetPreserved || !usComparison.titlePreserved || !usComparison.labelPreserved)
+    throw new Error('U.S. local comparison identity/source guard failed');
+const at = new Date().toISOString();
+const aiAudit = Array.isArray(aiPublication.audit) ? aiPublication.audit : [];
+if (!aiAudit.some(item => item.event === 'PUBLIC_NARRATIVE_PATCH'))
+    aiAudit.push({ at, event: 'PUBLIC_NARRATIVE_PATCH', detail: 'Public prose reorganized without changing title, labels, verified facts or source URLs; HTTP 200 confirmed' });
+aiPublication.audit = aiAudit;
+aiPublication.contentFingerprint = aiResult.afterFingerprint;
+aiPublication.narrativeMaintenance = aiResult;
+await writeFile(aiPublicationPath, JSON.stringify(aiPublication, null, 2), 'utf8');
+const koreaOperationPath = join(root, 'korea', 'operation.json');
+const koreaOperation = JSON.parse(await readFile(koreaOperationPath, 'utf8'));
+koreaOperation.draftState = 'DRAFT';
+koreaOperation.publicationReadiness = 'APPROVAL_REQUIRED';
+koreaOperation.humanReviewState = 'APPROVAL_REQUIRED';
+koreaOperation.publicPostUrl = null;
+koreaOperation.narrativeMaintenance = koreaResult;
+koreaOperation.publishCount = 0;
+await writeFile(koreaOperationPath, JSON.stringify(koreaOperation, null, 2), 'utf8');
+await Promise.all([writeFile(join(root, 'ai', 'preview.html'), ai.render.html, 'utf8'), writeFile(koreaPreviewPath, korea.render.html, 'utf8'), writeFile(join(root, 'us', 'narrative-candidate.html'), us.render.html, 'utf8')]);
+const memoryPath = join(process.cwd(), 'data', 'library', 'memory', 'editorial-memory.json');
+let memory = JSON.parse(await readFile(memoryPath, 'utf8'));
+const rules = ['Public article prose should not expose internal analytical labels.', 'Industry/company connection must explain why the connection exists.', 'Title-only thematic lists are insufficient for public publication.', 'Bullets are for scanning and comparison; core explanation should use prose.'];
+for (const statement of rules)
+    memory = addEditorialMemory(memory, memoryRule(statement, at));
+await writeFile(memoryPath, JSON.stringify(memory, null, 2), 'utf8');
+const result = { generatedAt: at, ai: aiResult, korea: koreaResult, us: { ...usComparison, candidatePath: 'data/live-editorial-cycle/2026-10-06/us/narrative-candidate.html' }, editorialMemory: { newRecords: rules, recordCount: memory.records.length }, actions: { lookup, insert, patch, publish }, commerce: { enabled: false } };
+await writeFile(join(root, 'public-narrative-maintenance.json'), JSON.stringify(result, null, 2), 'utf8');
+const summaryPath = join(root, 'run-summary.json');
+const summary = JSON.parse(await readFile(summaryPath, 'utf8'));
+const prior = summary.externalActions;
+summary.externalActions = { bloggerLookup: (prior.bloggerLookup ?? 0) + lookup, bloggerInsert: (prior.bloggerInsert ?? 0) + insert, bloggerPatch: (prior.bloggerPatch ?? 0) + patch, bloggerPublish: (prior.bloggerPublish ?? 0) + publish };
+summary.publicNarrativeMaintenance = result;
+await writeFile(summaryPath, JSON.stringify(summary, null, 2), 'utf8');
+console.log(JSON.stringify(result, null, 2));
+function memoryRule(statement, createdAt) { return { subjectType: 'GLOBAL', subjectId: 'global:editorial', memoryType: 'EDITORIAL_DECISION', statement, evidenceRefs: [], sourceRefs: [], originSprint: 'PUBLIC_NARRATIVE', originPublication: null, createdAt, lastUsedAt: null, usageCount: 0, importance: 'IMPORTANT', reviewState: 'ACTIVE' }; }
+function article(html) { const match = html.match(/<article\b[^>]*>[\s\S]*<\/article>/i); if (!match)
+    throw new Error('article missing'); return match[0]; }
+async function publishingConfig() { const raw = JSON.parse(await readFile(resolve('config/publishing.json'), 'utf8')); const base = raw.blogger; const blogId = (base.blogIdEnvironmentVariable ? process.env[base.blogIdEnvironmentVariable] ?? base.blogId : base.blogId) ?? null; if (!blogId || !base.clientIdEnvironmentVariable || !process.env[base.clientIdEnvironmentVariable] || !base.clientSecretEnvironmentVariable || !process.env[base.clientSecretEnvironmentVariable] || !base.refreshTokenEnvironmentVariable || !process.env[base.refreshTokenEnvironmentVariable])
+    throw new Error('Blogger credentials unavailable'); return { ...base, blogId, credentialAvailable: true, publishAsDraft: true }; }
+import { assertMaintenanceWriteAllowed } from './production/maintenance-write-guard.js';
+assertMaintenanceWriteAllowed('public-narrative-maintenance-cli');
