@@ -123,10 +123,16 @@ export function composeUSDeepSections(input) {
         market.push({ text: `S&P 500 업종을 추종하는 SPDR 업종 ETF ${scope} 가운데 ${up}종이 올랐다. ${best.label}(${best.symbol}) ${signedPct(best.changePct)}가 가장 강했고 ${worst.label}(${worst.symbol}) ${signedPct(worst.changePct)}가 가장 약했다${input.sectors.length === 11 ? '' : '(확인된 업종 기준)'}. 업종별 등락: ${input.sectors.map(item => `${item.label} ${signedPct(item.changePct)}`).join(', ')}.` });
     }
     if (ranked.length) {
+        // The cause section's quotes are not repeated under a stock either.
+        const usedTexts = new Set(), causeText = cause.paragraphs.map(p => p.text).join('\n');
         const mentions = (stock) => {
             // A ticker counts only as a whole token (C must not match the C in FOMC); a Korean company name counts as written.
             const ticker = stock.symbol.length >= 2 ? new RegExp(`(?<![A-Za-z])${stock.symbol.replace(/[.^$*+?()[\]{}|\\]/g, '\\$&')}(?![A-Za-z])`) : null;
-            return briefs.flatMap(brief => brief.statements.filter(item => item.region === 'US' && (Boolean(stock.koreanName && stock.koreanName.length >= 2 && item.text.includes(stock.koreanName)) || Boolean(ticker?.test(item.text)))).map(item => ({ item, brief })))[0];
+            // A broker sentence explains one stock only; a sentence already used for another stock is not repeated.
+            const found = briefs.flatMap(brief => brief.statements.filter(item => item.region === 'US' && !usedTexts.has(item.text) && !causeText.includes(item.text.replace(/\s+/g, ' ').trim().slice(0, 30)) && (Boolean(stock.koreanName && stock.koreanName.length >= 2 && item.text.includes(stock.koreanName)) || Boolean(ticker?.test(item.text)))).map(item => ({ item, brief })))[0];
+            if (found)
+                usedTexts.add(found.item.text);
+            return found;
         };
         for (const stock of ranked) {
             const name = displayName(stock), particle = josa(name, '은', '는').slice(name.length), linked = mentions(stock);
@@ -142,7 +148,8 @@ export function composeUSDeepSections(input) {
     if (market.length)
         sections.push({ key: 'us-sectors-stocks', placement: 'early', title: '업종과 종목', intro: '종목 순위는 투자자 관심도를 보여 줄 뿐 주가 변동의 원인을 뜻하지 않는다. 등락은 해당 거래일 종가 기준이다.', paragraphs: market });
     const rateDigests = briefs.flatMap(brief => brief.digests.filter(item => /FOMC|연준|Fed|美|미국|달러/.test(item.heading) && !/프랑스|유럽|ECB|중국|일본|독일|영국|국고채|코스피|KOSPI|하이닉스|퀀틴전시|국내/.test(item.heading)).map(item => ({ item, brief }))).slice(0, 2);
-    const economy = (input.bundle?.economy ?? []).filter(item => /FOMC|연준|금리|미국|美|달러|물가|고용|Fed/.test(item.title)).slice(0, 3);
+    // A report is cited for what it says; a title alone ('관련 분석을 내놨다') is not analysis.
+    const economy = (input.bundle?.economy ?? []).filter(item => /FOMC|연준|금리|미국|美|달러|물가|고용|Fed|GDP/.test(item.title) && item.summary.length).slice(0, 3);
     if (rateDigests.length || economy.length)
         sections.push({ key: 'us-broker-analysis', placement: 'late', title: '증권사별 분석: 금리와 통화정책', paragraphs: [...rateDigests.map(({ item, brief }) => digestParagraph(item, brief)), ...economy.map(report => ({ text: ratingSentence(report), source: reportSource(report) }))] });
     if (input.checkpoint && sections.length)
@@ -190,9 +197,11 @@ export function composeKoreaDeepSections(input) {
     }
     const shown = new Set(input.searchTop.map(item => item.code));
     const reviewDigests = digests.filter(({ item }) => /Review|Preview|실적|목표주가|리뷰/.test(item.heading) && !input.searchTop.some(stock => item.heading.replace(/\s+/g, '').includes(stock.name.replace(/\s+/g, '')))).slice(0, 3);
-    const otherReports = [...new Map(companyReports.filter(item => item.stockCode && !shown.has(item.stockCode) && (item.targetPrice || item.rating)).map(item => [item.stockCode, item])).values()].slice(0, 4);
+    // Only companies the brokers' session commentary names: an unrelated rating list is padding, not analysis.
+    const commentary = briefs.flatMap(brief => brief.statements.filter(item => item.region === 'KOREA').map(item => item.text)).join('\n');
+    const otherReports = [...new Map(companyReports.filter(item => item.stockCode && !shown.has(item.stockCode) && (item.targetPrice || item.rating) && item.company && item.company.length >= 2 && commentary.includes(item.company)).map(item => [item.stockCode, item])).values()].slice(0, 4);
     const strategy = digests.filter(({ item }) => /전략|퀀틴전시|Strategy|시황|증시|KOSPI|코스피/.test(item.heading)).slice(0, 1);
-    const industry = (input.bundle?.industry ?? []).filter(item => !/daily|데일리|weekly|위클리|안녕하세요/i.test(item.title)).slice(0, 3);
+    const industry = [];
     const analysis = [...strategy.map(({ item, brief }) => digestParagraph(item, brief, 2)), ...reviewDigests.map(({ item, brief }) => digestParagraph(item, brief, 2)), ...otherReports.map(report => ({ text: `${report.company}: ${ratingSentence(report)}`, source: reportSource(report) })), ...(industry.length ? [{ text: `최근 산업 리포트: ${industry.map(report => `${report.broker} 「${report.title}」(${koreanDateLabel(report.date)})`).join(', ')}.`, source: reportSource(industry[0]) }] : [])];
     if (analysis.length)
         sections.push({ key: 'korea-broker-analysis', placement: 'late', title: '증권사별 분석', intro: '투자의견과 목표주가는 각 증권사가 리포트에 게시한 값이며, 증권사마다 전제와 시점이 다르다.', paragraphs: analysis });

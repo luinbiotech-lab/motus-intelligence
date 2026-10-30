@@ -63,7 +63,7 @@ function quotable(value) { return value.length >= 18 && value.length <= 200 && h
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const SENTENCE_END = /(?:다|함|음|임|됨|마감|전망|예상|지속|필요|유지|상승|하락|강세|약세|확대|축소|전환|발동|기록|주목|부각|반등|급등|급락|우려|기대|\)|%)\.?$/;
 /** Extracts verbatim single-line bullets, region headlines and titled bullet digests from a broker brief's text. */
-export function extractBriefContent(text) {
+export function extractBriefContent(text, defaultRegion = null) {
     const lines = text.split(/\r?\n/).map(line => line.replace(/\u00a0/g, ' ').trim());
     const statements = [], digests = [], events = [];
     let eventMode = false;
@@ -139,7 +139,8 @@ export function extractBriefContent(text) {
             // Bullets inside a titled report digest count as market commentary only when the report itself is a market/rates piece.
             if (digest && !/FOMC|연준|금리|증시|시황|전략|퀀틴전시|Strategy|코스피|KOSPI|美|미국|뉴욕/.test(digest.heading))
                 continue;
-            const classified = region ?? (KOREA_WORDS.test(body) && !/미국|뉴욕|美/.test(body) ? 'KOREA' : US_WORDS.test(body) && !KOREA_WORDS.test(body) ? 'US' : null);
+            // A bullet that names neither market belongs to the brief's own market when the brief covers only one (a Korean closing comment).
+            const classified = region ?? (KOREA_WORDS.test(body) && !/미국|뉴욕|美/.test(body) ? 'KOREA' : US_WORDS.test(body) && !KOREA_WORDS.test(body) ? 'US' : defaultRegion && !(defaultRegion === 'KOREA' ? US_WORDS : KOREA_WORDS).test(body) ? defaultRegion : null);
             if (classified)
                 statements.push({ region: classified, text: body, heading: digest?.heading ?? null });
             continue;
@@ -285,7 +286,7 @@ export async function collectBrokerResearch(input) {
                 const detail = await naverResearchDetail(fetcher, candidate.naver.category, candidate.naver.item.researchId);
                 report = naverReport(candidate.naver.item, 'MARKET', detail, candidate.naver.category);
                 if (detail.content)
-                    merge(extractBriefContent(summaryAsBullets(detail.content)), true);
+                    merge(extractBriefContent(summaryAsBullets(detail.content), candidate.koreaOnly ? 'KOREA' : null), true);
             }
             const pdfUrl = candidate.naver ? (report.url.endsWith('.pdf') ? report.url : null) : report.url;
             if (pdfUrl) {
@@ -299,7 +300,7 @@ export async function collectBrokerResearch(input) {
                     const text = await pdfText(buffer);
                     if (!text)
                         throw new Error('PDF_TEXT_UNAVAILABLE');
-                    merge(extractBriefContent(text), Boolean(candidate.naver));
+                    merge(extractBriefContent(text, candidate.koreaOnly ? 'KOREA' : null), Boolean(candidate.naver));
                 }
                 catch (error) {
                     if (!candidate.naver)
