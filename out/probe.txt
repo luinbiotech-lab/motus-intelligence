@@ -1,4 +1,16 @@
-status 200 497 https://www.schwab.com/learn/story/stock-market-update-open
-META 
-AROUND <!DOCTYPE html> <html lang="en" xmlns="http://www.w3.org/1999/xhtml"> <head> <meta charset="utf-8" /> <title>Charles Schwab</title> </head> <body> <img src="http://content.schwab.com/apperror/logo.png" alt="Schwab Logo" width="82" height="80" /> <p>We’re sorry, but we were unable to authorize your request. Please call us at 800-433-9196 and provide reference number SWAF-18.ec4f4317.1793322592.367089a. We apologize for any inconvenience.</p> <p>0915-82LR</p> </body> </html>
-SAID <!DOCTYPE html> <html lang="en" xmlns="http://www.w3.org/1999/xhtml"> <head> <meta charset="utf-8" /> <title>Charles Schwab</title> </head> <body> <img src="http://content.schwab.com/apperror/logo.png" alt="Schwab Logo" width="82" height="80" /> <p>We’re sorry, but we were unable to authorize your request. Please call us at 800-433-9196 and provide reference number SWAF-18.ec4f431
+TITLE 알파벳 13% 급락…증권가가 짚은 AI 투자 쟁점 core true
+## 오늘의 AI 쟁점: 증권가 시각 early
+- MOTUS 정리: 증권사 5곳의 리포트를 대조하면 AI 투자(유안타증권·iM증권·SK증권·KB증권), 기업 실적(신한투자증권·SK증권·KB증권)이 공통으로 꼽힌 배경이다.
+- 유안타증권은 10월 30일 마감 코멘트 「유안타 AI 미국 주식시장 마감 시황 (26.10.30)」에서 “3분기 GDP가 +3.4%로 서프라이즈를 기록하고 연준·ECB가 금리를 동결했음에도, 알파벳의 역대 최악 하루(-12.64%, 시총 약 5,000억 달러 증발)가 AI 투자 회수 의구심을 자극하며 나스닥을 끌어내렸습니다”라고 진단했다.
+- 신한투자증권은 10월 30일 아침 리포트 「Daily Market Digest (10월 30일)」에서 “미국 시장은 GOOGL 실적 충격 소화하며 반도체·SW 등 기술주 부진 vs 소비재·헬스케어 선방. S&P500 -0.3%, NASDAQ -1.4%, Dow -0.3%”라고 진단했다.
+- iM증권은 10월 30일 아침 리포트 「[Market Time] 빅테크 실적 쇼크에 하락 출발 전망」에서 “미국 빅테크는 AI 매출 성장에도 대규모 투자에 따른 현금흐름 악화가 부담으로 작용했습니다”라고 진단했다.
+- SK증권은 10월 30일 아침 리포트 「SK증권 아침에 슥_2026.10.30」에서 “알파벳 -12.64% 실적 부진·AI 투자 수익성 우려에 나스닥 주도 하락”이라고 진단했다.
+- 경계 요인도 제시됐다. 유안타증권은 “알파벳 급락이 지수를 눌러 나스닥 -1.38%, S&P 500 -0.30%, 다우 -0.25% 마감”이라고 짚었다.
+- 경계 요인도 제시됐다. KB증권은 “아마존과 인텔은 실적 예상 하회에 각 5%, 20% 이상 시간외 급락 중. AWS부문은 선전, 광고/소매부문 부진”이라고 짚었다.
+## AI 대표 종목의 주가 흐름 early
+- 10개 종목 가운데 1개가 올랐다. 가장 강한 종목은 메타(META, +1.96%), 가장 약한 종목은 알파벳(GOOGL, -12.64%)였다.
+- 메타 +1.96% · 마이크로소프트 -0.16% · 팔란티어 -0.20% · 엔비디아 -0.80% · TSMC -1.75% · 브로드컴 -1.94% · AMD -2.08% · 오라클 -3.45% · 아마존 -4.25% · 알파벳 -12.64%
+## 증권가가 본 AI 산업 
+- 신한투자증권은 10월 30일 산업 리포트 「풀스택 인프라로 뚫는 에이전트 AI 시대의 병목」를 냈다.
+- 유진투자증권은 10월 30일 산업 리포트 「스페이스X, 사상 최대 400억 달러 GPU 금융 조달」를 냈다.
+- 유안타증권은 10월 29일 산업 리포트 「[유안타이슈테마] 로봇손 엄지척!」를 냈다.
