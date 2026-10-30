@@ -112,7 +112,9 @@ export function composeUSDeepSections(input) {
     else if (wire) {
         sections.push(wire.section);
     }
-    const ranked = [...input.stocks].sort((a, b) => (a.trendingRank ?? 99) - (b.trendingRank ?? 99) || (a.mostActiveRank ?? 99) - (b.mostActiveRank ?? 99)).slice(0, 5);
+    // Big moves among the largest companies lead (largest first), then the most-searched names.
+    const big = [...input.stocks].filter(stock => stock.bigMover).sort((a, b) => Math.abs(b.changePct) - Math.abs(a.changePct)).slice(0, 2);
+    const ranked = [...big, ...[...input.stocks].filter(stock => !big.includes(stock)).sort((a, b) => (a.trendingRank ?? 99) - (b.trendingRank ?? 99) || (a.mostActiveRank ?? 99) - (b.mostActiveRank ?? 99))].slice(0, 6);
     let titleFocus = null;
     const market = [];
     if (input.sectors.length >= 6) {
@@ -128,11 +130,12 @@ export function composeUSDeepSections(input) {
         };
         for (const stock of ranked) {
             const name = displayName(stock), particle = josa(name, '은', '는').slice(name.length), linked = mentions(stock);
-            const rank = [stock.trendingRank ? `야후 파이낸스 검색 ${stock.trendingRank}위` : '', stock.mostActiveRank ? `대형주 거래량 ${stock.mostActiveRank}위` : ''].filter(Boolean).join(', ');
-            market.push({ text: `${name}(${stock.symbol})${particle} ${usd(stock.close)}달러로 ${absPct(stock.changePct)} ${moveWord(stock.changePct)}했다(${rank}).${linked ? ` ${josa(linked.brief.report.broker, '은', '는')} ${said([quote(linked.item.text)])} 설명했다.` : ''}`, ...(linked ? { source: reportSource(linked.brief.report) } : {}) });
+            const rank = [stock.bigMover ? '시가총액 상위 종목' : '', stock.trendingRank ? `야후 파이낸스 검색 ${stock.trendingRank}위` : '', stock.mostActiveRank ? `대형주 거래량 ${stock.mostActiveRank}위` : ''].filter(Boolean).join(', ');
+            market.push({ text: `${name}(${stock.symbol})${particle} ${usd(stock.close)}달러로 ${absPct(stock.changePct)} ${moveWord(stock.changePct)}했다${rank ? `(${rank})` : ''}.${linked ? ` ${josa(linked.brief.report.broker, '은', '는')} ${said([quote(linked.item.text)])} 설명했다.` : ''}`, ...(linked ? { source: reportSource(linked.brief.report) } : {}) });
         }
         // Titles use Korean company names only (the headline policy holds English names in titles).
-        const named = ranked.filter(stock => stock.koreanName), focus = named.find(stock => Math.abs(stock.changePct) >= 3) ?? named[0];
+        // The headline names the day's biggest megacap move when there is one, else the first searched name that moved 3%+.
+        const named = ranked.filter(stock => stock.koreanName), focus = named.find(stock => stock.bigMover) ?? named.find(stock => Math.abs(stock.changePct) >= 3) ?? named[0];
         if (focus)
             titleFocus = `${displayName(focus)} ${Math.abs(focus.changePct).toFixed(Math.abs(focus.changePct) >= 10 ? 0 : 1)}% ${moveWord(focus.changePct)}`;
     }
@@ -165,10 +168,21 @@ export function composeKoreaDeepSections(input) {
     const companyDigest = (name) => digests.find(({ item }) => item.heading.replace(/\s+/g, '').includes(name.replace(/\s+/g, '')));
     let titleFocus = null;
     if (input.searchTop.length) {
-        const paragraphs = input.searchTop.map(stock => {
-            const report = companyReports.find(item => item.stockCode === stock.code), digest = companyDigest(stock.name);
-            const research = report ? ` ${ratingSentence(report)}` : digest ? ` ${digestParagraph(digest.item, digest.brief, 2).text}` : '';
-            return { text: `검색 ${stock.rank}위 ${josa(stock.name, '은', '는')} ${won(stock.close)}원으로 ${absPct(stock.changePct)} ${moveWord(stock.changePct)}했다.${research}`, ...(report ? { source: reportSource(report) } : digest ? { source: reportSource(digest.brief.report) } : {}) };
+        // Why the stock moved: a broker comment on the session that names it, quoted with the broker; then the latest rating.
+        const why = (name) => briefs.flatMap(brief => brief.statements.filter(item => item.region === 'KOREA' && item.text.length <= 200 && item.text.replace(/\s+/g, '').includes(name.replace(/\s+/g, ''))).map(item => ({ item, brief })))[0];
+        // One link per paragraph: the move with its reason (broker comment) and the rating (company report) are cited separately.
+        const paragraphs = input.searchTop.flatMap(stock => {
+            const report = companyReports.find(item => item.stockCode === stock.code), digest = companyDigest(stock.name), reason = why(stock.name);
+            const head = `검색 ${stock.rank}위 ${josa(stock.name, '은', '는')} ${won(stock.close)}원으로 ${absPct(stock.changePct)} ${moveWord(stock.changePct)}했다.`;
+            const out = [];
+            if (reason)
+                out.push({ text: `${head} ${josa(reason.brief.report.broker, '은', '는')} ${koreanDateLabel(reason.brief.report.date)} 「${reason.brief.report.title}」에서 ${said([quote(reason.item.text)])} 짚었다.`, source: reportSource(reason.brief.report) });
+            const research = report ? { text: ratingSentence(report), source: reportSource(report) } : digest && !reason ? { text: digestParagraph(digest.item, digest.brief, 2).text, source: reportSource(digest.brief.report) } : null;
+            if (!reason)
+                out.push(research ? { text: `${head} ${research.text}`, source: research.source } : { text: head });
+            else if (research)
+                out.push(research);
+            return out;
         });
         sections.push({ key: 'korea-stocks', placement: 'early', title: '업종과 종목: 투자자 검색 상위', intro: '네이버페이 증권 검색 상위 종목(ETF·ETN·레버리지 제외)의 전일 종가 기준 등락과 최근 증권사 리포트다. 검색 순위는 관심도 지표이며 주가 변동의 원인이 아니다.', paragraphs });
         const top = input.searchTop[0];
@@ -192,10 +206,10 @@ export function composeKoreaDeepSections(input) {
 }
 const AI_WORDS = /AI|인공지능|반도체|HBM|데이터센터|GPU|엔비디아|LLM|클라우드|전력기기|인터커넥트|로봇|휴머노이드|파운드리|메모리|서버|MLCC|FC ?BGA/;
 /** AI article: AI bellwether moves on the latest U.S. session and broker research that names AI demand. */
-const AI_ISSUE = /AI|인공지능|빅테크|알파벳|구글|마이크로소프트|\bMS\b|아마존|AWS|애저|Azure|메타|엔비디아|오라클|데이터센터|클라우드|설비투자|CapEx|반도체|HBM|GPU/;
+const AI_ISSUE = /AI|인공지능|빅테크|알파벳|구글|마이크로소프트|\bMS\b|아마존|AWS|애저|Azure|메타(?!버스)|엔비디아|오라클|데이터센터|클라우드|설비투자|CapEx|반도체|HBM|GPU/;
 /** AI article: the day's AI issue as brokers explained the latest U.S. session, AI bellwether moves and AI research. */
 export function composeAIDeepSections(input) {
-    const sections = [], sources = [];
+    const sections = [], sources = [], leadAddition = [];
     // The day's AI issue: broker morning comments on the U.S. session that name AI companies or AI investment.
     const issueBriefs = (input.bundle?.briefs ?? []).map(brief => ({ ...brief, statements: brief.statements.filter(item => item.region === 'US' && AI_ISSUE.test(item.text)) })).filter(brief => brief.statements.length);
     const issue = causeParagraphs(issueBriefs, 'US');
@@ -203,15 +217,19 @@ export function composeAIDeepSections(input) {
     if (issue.first) {
         sections.push({ key: 'ai-issue', placement: 'early', title: '오늘의 AI 쟁점: 증권가 시각', intro: '직전 미국 정규장에서 AI 관련 기업의 주가를 움직인 사안을 증권사 아침 리포트 원문으로 정리했다.', paragraphs: issue.paragraphs });
         // The headline names the AI bellwether with the largest move that the brokers themselves discussed.
-        const named = [...input.stocks].filter(stock => stock.koreanName && Math.abs(stock.changePct) >= 3 && issueBriefs.some(brief => brief.statements.some(item => item.text.includes(stock.koreanName)))).sort((a, b) => Math.abs(b.changePct) - Math.abs(a.changePct))[0];
-        if (named)
+        // Only a stock whose move is printed in the stock section and whose name appears in a quoted paragraph qualifies.
+        const quoted = issue.paragraphs.map(p => p.text).join('\n'), mentions = (name) => new RegExp(`${name}(?!버스)`).test(quoted);
+        const named = input.stocks.length >= 3 && input.sessionDate ? [...input.stocks].filter(stock => stock.koreanName && Math.abs(stock.changePct) >= 3 && mentions(stock.koreanName)).sort((a, b) => Math.abs(b.changePct) - Math.abs(a.changePct))[0] : undefined;
+        if (named) {
             titleFocus = `${named.koreanName} ${Math.abs(named.changePct).toFixed(Math.abs(named.changePct) >= 10 ? 0 : 1)}% ${moveWord(named.changePct)}`;
+            leadAddition.push(`직전 미국 정규장(${koreanDateLabel(input.sessionDate)})에서 ${named.koreanName}(${named.symbol})${josa(named.koreanName, '은', '는').slice(named.koreanName.length)} ${absPct(named.changePct)} ${moveWord(named.changePct)}했다.`);
+        }
     }
     if (input.stocks.length >= 3 && input.sessionDate) {
         const sorted = [...input.stocks].sort((a, b) => b.changePct - a.changePct), best = sorted[0], worst = sorted.at(-1);
         const up = sorted.filter(item => item.changePct > 0.005).length;
         sections.push({ key: 'ai-stocks', placement: 'early', title: 'AI 대표 종목의 주가 흐름', intro: `미국 AI 대표 종목 ${sorted.length}개의 직전 정규장(${input.sessionDate}) 종가 기준 등락이다.`, paragraphs: [
-                { text: `${sorted.length}개 종목 가운데 ${up}개가 올랐다. 가장 강한 종목은 ${displayName(best)}(${best.symbol}, ${signedPct(best.changePct)}), 가장 약한 종목은 ${displayName(worst)}(${worst.symbol}, ${signedPct(worst.changePct)})였다.` },
+                { text: `${sorted.length}개 종목 가운데 ${up}개가 올랐다. 가장 강한 종목은 ${displayName(best)}(${best.symbol}, ${signedPct(best.changePct)}), 가장 약한 종목은 ${displayName(worst)}(${worst.symbol}, ${signedPct(worst.changePct)})${josa(displayName(worst), '이었다', '였다').slice(displayName(worst).length)}.` },
                 { text: sorted.map(item => `${displayName(item)} ${signedPct(item.changePct)}`).join(' · ') },
             ] });
     }
@@ -223,13 +241,13 @@ export function composeAIDeepSections(input) {
         sections.push({ key: 'ai-broker-research', title: '증권가가 본 AI 산업', intro: '국내 증권사가 최근 공개한 리포트 가운데 AI 수요를 직접 다룬 분석의 문장과 투자의견을 그대로 옮겼다.', paragraphs: [
                 ...digests.map(({ item, brief }) => digestParagraph(item, brief)),
                 ...companies.map(report => ({ text: `${report.company ?? report.title}: ${ratingSentence(report)}`, source: reportSource(report) })),
-                ...industry.map(report => ({ text: `${subject(report)} ${koreanDateLabel(report.date)} 산업 리포트 「${report.title}」를 냈다.${report.summary.length ? ` 요약: ${report.summary.slice(0, 2).map(quote).join(', ')}.` : ''}`, source: reportSource(report) })),
+                ...industry.map(report => ({ text: `${subject(report)} ${koreanDateLabel(report.date)} 「${report.title}」 산업 리포트를 냈다.${report.summary.length ? ` 요약: ${report.summary.slice(0, 2).map(quote).join(', ')}.` : ''}`, source: reportSource(report) })),
             ] });
     }
     const used = new Set(sections.flatMap(section => section.paragraphs.map(p => p.source?.url).filter(Boolean)));
     for (const report of [...briefs.map(item => item.report), ...companies, ...industry])
         if (used.has(report.url))
             sources.push(sourceEntry(report));
-    return { sections, leadAddition: [], titleFocus, hasCoreCommentary: Boolean(issue.first), sources: [...new Map(sources.map(item => [item.url, item])).values()] };
+    return { sections, leadAddition, titleFocus, hasCoreCommentary: Boolean(issue.first), sources: [...new Map(sources.map(item => [item.url, item])).values()] };
 }
 export { indexMove };

@@ -118,22 +118,25 @@ export function moveWord(value) { const size = Math.abs(value); if (size < 0.005
 export function displayName(stock) { return stock.koreanName ?? stock.name; }
 export const AI_BELLWETHERS = ['NVDA', 'MSFT', 'GOOGL', 'AMZN', 'META', 'AVGO', 'AMD', 'TSM', 'ORCL', 'PLTR'];
 /** Latest completed U.S. session close-to-close change for AI bellwethers (the session is taken from the data itself). */
-export async function collectAIBellwethers(candidateSessions, fetcher = fetch) {
+/** The largest U.S. companies: a big move in one of them is market news whether or not it trends. */
+export const US_MEGACAPS = [...AI_BELLWETHERS.filter(symbol => symbol !== 'PLTR'), 'AAPL', 'TSLA'];
+export async function collectAIBellwethers(candidateSessions, fetcher = fetch, symbols = AI_BELLWETHERS) {
+    const AI_BELLWETHERS_LIST = symbols;
     const audit = [], urls = [];
     for (const sessionDate of candidateSessions) {
         try {
             const fetched = [];
-            const changes = await sessionChanges(AI_BELLWETHERS, sessionDate, fetcher, fetched);
-            if (changes.size < AI_BELLWETHERS.length - 2)
+            const changes = await sessionChanges(AI_BELLWETHERS_LIST, sessionDate, fetcher, fetched);
+            if (changes.size < AI_BELLWETHERS_LIST.length - 2)
                 continue;
             for (const url of fetched) {
                 audit.push({ sourceId: 'yahoo:spark:ai-bellwethers', url, status: 'PASS', count: changes.size, error: null });
                 urls.push(url);
             }
-            return { stocks: AI_BELLWETHERS.flatMap(symbol => { const change = changes.get(symbol); return change ? [{ symbol, name: change.name, koreanName: US_KOREAN_NAMES[symbol] ?? null, changePct: change.changePct, close: change.close, date: sessionDate, trendingRank: null, mostActiveRank: null, marketCap: null }] : []; }), sessionDate, audit, urls };
+            return { stocks: AI_BELLWETHERS_LIST.flatMap(symbol => { const change = changes.get(symbol); return change ? [{ symbol, name: change.name, koreanName: US_KOREAN_NAMES[symbol] ?? null, changePct: change.changePct, close: change.close, date: sessionDate, trendingRank: null, mostActiveRank: null, marketCap: null }] : []; }), sessionDate, audit, urls };
         }
         catch (error) {
-            audit.push({ sourceId: 'yahoo:spark:ai-bellwethers', url: yahooSparkUrl(AI_BELLWETHERS), status: 'FAILED', count: 0, error: errorCode(error) });
+            audit.push({ sourceId: 'yahoo:spark:ai-bellwethers', url: yahooSparkUrl(AI_BELLWETHERS_LIST), status: 'FAILED', count: 0, error: errorCode(error) });
             break;
         }
     }

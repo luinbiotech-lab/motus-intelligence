@@ -1,4 +1,11 @@
 import fs from 'node:fs';
-const j=await (await fetch('https://motusnova.blogspot.com/feeds/posts/default?alt=json&max-results=1',{headers:{'user-agent':'Mozilla/5.0'}})).json();
-const out=j.feed.entry.map(e=>'# '+e.title.$t+'\n'+e.published.$t+'\n'+e.content.$t.replace(/<style[\s\S]*?<\/style>/g,'').replace(/<svg[\s\S]*?<\/svg>/g,'[차트]').replace(/<(h[1-4])[^>]*>/g,'\n## ').replace(/<\/(p|li|h[1-4]|div|tr)>/g,'\n').replace(/<[^>]+>/g,' ').replace(/&nbsp;/g,' ').replace(/&quot;/g,'"').replace(/&#39;/g,"'").replace(/&amp;/g,'&').replace(/&#8230;/g,'…').replace(/[ \t]+/g,' ').replace(/\n\s*\n+/g,'\n'));
-fs.mkdirSync('out',{recursive:true});fs.writeFileSync('out/posts.txt',out.join('\n'));
+const out=[];const log=(...a)=>out.push(a.join(' '));
+const show=(r)=>{log('TITLE',r.title);log('LEAD',r.composition.leadAddition.join(' '));for(const s of r.composition.sections){log('##',s.title);for(const p of s.paragraphs)log('-',p.text)}};
+try{
+const m=await import('./dist/src/operations/market-deep-collect.js');
+const at=new Date().toISOString();
+show(await m.collectUSDeep({sessionDate:'2026-10-29',operationDate:'2026-10-30',at,fetcher:fetch,audit:[],indexChanges:[-0.30,-1.38,-0.25]}));
+log('=====');
+show(await m.collectKoreaDeep({sessionDate:'2026-10-29',operationDate:'2026-10-30',at,fetcher:fetch,audit:[],kospiClose:5937.66,kospiChangePct:-1.24}));
+}catch(e){log('ERROR',e.stack)}
+fs.mkdirSync('out',{recursive:true});fs.writeFileSync('out/probe.txt',out.join('\n'));
