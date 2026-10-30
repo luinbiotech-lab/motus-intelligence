@@ -365,7 +365,20 @@ export async function collectBrokerResearch(input) {
             return naverReport(item, 'ECONOMY', null, 'economy');
         }
     })));
-    return { briefs, company: mergeReports([...naverCompany, ...recent(lists.COMPANY, 4)]), industry: mergeReports([...recent(naverPlain('industry', 'INDUSTRY'), 4), ...recent(lists.INDUSTRY, 4)]), economy: mergeReports([...recent(naverEconomy, 6), ...recent(naverPlain('economy', 'ECONOMY'), 6), ...recent(lists.ECONOMY, 6)]), audit };
+    // Industry reports carry the broker's own summary so they are cited for what they say, not only by title.
+    const industryItems = (naverLists.industry ?? []).filter(item => item.writeDate >= addDays(input.sessionDate, -4)).slice(0, 10);
+    const naverIndustry = (await Promise.all(industryItems.map(async (item) => {
+        try {
+            const detail = await naverResearchDetail(fetcher, 'industry', item.researchId);
+            const report = naverReport(item, 'INDUSTRY', detail, 'industry');
+            report.summary = summarySentences(detail.content).slice(0, 2);
+            return report;
+        }
+        catch {
+            return naverReport(item, 'INDUSTRY', null, 'industry');
+        }
+    })));
+    return { briefs, company: mergeReports([...naverCompany, ...recent(lists.COMPANY, 4)]), industry: mergeReports([...recent(naverIndustry, 4), ...recent(naverPlain('industry', 'INDUSTRY'), 4), ...recent(lists.INDUSTRY, 4)]), economy: mergeReports([...recent(naverEconomy, 6), ...recent(naverPlain('economy', 'ECONOMY'), 6), ...recent(lists.ECONOMY, 6)]), audit };
 }
 export function koreanDateLabel(date) { const [, month, day] = date.split('-'); return `${Number(month)}월 ${Number(day)}일`; }
 export function analystLabel(report) {

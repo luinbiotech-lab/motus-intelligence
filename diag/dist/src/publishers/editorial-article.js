@@ -16,25 +16,30 @@ export function renderAIEditorialArticle(view) {
     // The day's market issue and AI stock moves lead; official announcements follow.
     for (const item of (view.deepSections ?? []).filter(item => item.placement === 'early'))
         parts.push(deepSection(item));
+    // With the day's market issue explained by brokers, official announcements are reported as facts only:
+    // the per-type template readings ('MOTUS 분석: …', '시장 평가는 … 판단해야 한다') and generic watch lists read as boilerplate.
+    const issueLed = (view.deepSections ?? []).some(item => item.key === 'ai-issue');
     for (const issue of view.issues) {
-        const content = paragraphs(uniqueProse([...issue.whatHappened, issue.coreContent, issue.whyItMatters ?? '', issue.marketConnection ?? ''], seen));
+        const content = paragraphs(uniqueProse(issueLed ? [...issue.whatHappened, issue.coreContent] : [...issue.whatHappened, issue.coreContent, issue.whyItMatters ?? '', issue.marketConnection ?? ''], seen));
         if (content)
             parts.push(section(issue.headline, content));
     }
     for (const item of (view.deepSections ?? []).filter(item => item.placement !== 'early'))
         parts.push(deepSection(item));
-    const connections = paragraphs(uniqueProse(view.industryConnections.flatMap(item => [item.explanation, item.optionalWatchPoint ?? '']), seen));
-    if (connections)
-        parts.push(section('기업 AI가 실제 업무로 들어가는 경로', connections));
-    const watch = paragraphs(uniqueProse(view.whatToWatch.map(item => `${item.headline}: ${item.watchFor}`), seen));
-    if (watch)
-        parts.push(section('앞으로 볼 지점', watch));
+    if (!issueLed) {
+        const connections = paragraphs(uniqueProse(view.industryConnections.flatMap(item => [item.explanation, item.optionalWatchPoint ?? '']), seen));
+        if (connections)
+            parts.push(section('기업 AI가 실제 업무로 들어가는 경로', connections));
+        const watch = paragraphs(uniqueProse(view.whatToWatch.map(item => `${item.headline}: ${item.watchFor}`), seen));
+        if (watch)
+            parts.push(section('앞으로 볼 지점', watch));
+    }
     parts.push(sources(view.sources));
     return finish('ai-intelligence', view.title, BLOGGER_EDITORIAL_CATEGORIES.AI_INTELLIGENCE.publicLabel, parts, ['masthead', 'lead', 'issues', 'connections', 'watch', 'sources']);
 }
 export function renderUSEditorialArticle(view) {
     const terms = new Set();
-    const describe = (value) => explainTerms(value, terms);
+    const describe = (value) => explainTerms(value.replace('U.S. 10Y Treasury Yield (미국 10년물 국채금리)', '미국 10년물 국채금리'), terms);
     const parts = [masthead(view.title, view.subtitle, view.displayLabel, view.issueDate), lead(describe([view.marketSummary, ...view.marketCommentary].join(' ')))];
     const deep = view.deepSections ?? [], place = (where) => deep.filter(item => (item.placement ?? 'early') === where).map(deepSection);
     parts.push(...place('early'));
@@ -138,7 +143,7 @@ function finish(product, title, label, parts, renderedSections) { const html = `
         throw new Error(`forbidden public analytical label: ${forbidden}`); return { html, renderedSections, label }; }
 function esc(value) { return value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
 function attr(value) { return esc(value).replace(/'/g, '&#39;'); }
-function explainTerms(value, seen) { const terms = [['VIX', 'VIX (변동성지수)'], ['DXY', 'DXY (달러인덱스)'], ['미국 10년물', 'U.S. 10Y Treasury Yield (미국 10년물 국채금리)']]; let output = value; for (const [term, label] of terms) {
+function explainTerms(value, seen) { const terms = [['VIX', 'VIX (변동성지수)'], ['DXY', 'DXY (달러인덱스)'], ['미국 10년물', '미국 10년물 국채금리']]; let output = value; for (const [term, label] of terms) {
     if (seen.has(term))
         continue;
     if (output.includes(label)) {
