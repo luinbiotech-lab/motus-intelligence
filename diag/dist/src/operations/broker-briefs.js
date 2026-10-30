@@ -55,7 +55,7 @@ const MARKER = /^(?:[-•ㆍ·▪]\s*)(.+)$/;
 const REGION_HEADING = [[/^\[\s*(?:미국|뉴욕)\s*증시\s*동향\s*\]$/, 'US'], [/^\[\s*(?:국내|한국)\s*증시\s*동향\s*\]$/, 'KOREA'], [/^\[[^\]]*(?:중국|유럽|일본|아시아|신흥국|FICC|외환|원자재)[^\]]*\]$/, 'OTHER'], [/^(?:▶\s*)?(?:미국|미국증시|미국 증시|뉴욕|뉴욕증시|\[\s*미국증시\s*\]|\[\s*해외증시\s*\]|Global Market)$/, 'US'], [/^(?:▶\s*)?(?:한국증시|국내|국내증시|한국|\[\s*국내증시\s*\]|\[\s*한국증시\s*\])$/, 'KOREA'], [/^(?:▶\s*)?(?:중국|중국증시|유럽|유럽증시|일본|아시아|신흥국)$/i, 'OTHER']];
 const EVENT_HEADING = /Event|일정|캘린더|Calendar|Schedule/i;
 const US_WORDS = /미국|뉴욕|美|미 증시|S&P|나스닥|다우|연준|FOMC|빅테크|필라델피아|월가|Fed/;
-const KOREA_WORDS = /코스피|KOSPI|코스닥|KOSDAQ|국내 증시|국내증시|사이드카|외국인과 기관|유가증권시장/;
+const KOREA_WORDS = /코스피|KOSPI|코스닥|KOSDAQ|국내 증시|국내증시|양대 지수|사이드카|외국인과 기관|유가증권시장/;
 const ANALYST_LINE = /^([가-힣]{2,4}(?:[,·][가-힣]{2,4})*)\s*\.\s*\S+@\S+$/;
 const CATEGORY_LINE = /^(?:[A-Za-z][A-Za-z &/]{2,30}|산업 및 종목 분석|기업분석|산업분석|투자전략|시황|경제|채권)$/;
 function hangul(value) { return (value.match(/[가-힣]/g) ?? []).length; }
@@ -196,6 +196,10 @@ async function getText(fetcher, url) {
         throw new Error('CONSENSUS_HTTP_' + response.status);
     return await response.text();
 }
+/** Complete, quotable sentences of a broker summary (analysis may look ahead, so outlook lines are kept here). */
+export function summarySentences(html) {
+    return summaryAsBullets(html).split('\n').map(line => line.replace(/^[-•ㆍ·▪]\s*/, '').trim()).filter(line => quotable(line) && line.length <= 150 && /(?:다|음|함|임|됨)\.?$|(?:전망|예상|필요|지속|확대|축소|강세|약세|상승|하락)$/.test(line));
+}
 /** Forward-looking lines (today's outlook, scheduled items) describe no finished session. */
 const OUTLOOK = /금일|오늘|전망입니다|전망이다|할 전망|출발할|예정|것으로 (?:판단|예상|보인다|보임)|예상됩니다/;
 /**
@@ -247,7 +251,8 @@ export async function collectBrokerResearch(input) {
     const after = pool.filter(item => item.report.date > input.sessionDate && item.report.date <= addDays(input.sessionDate, 5));
     const briefDate = after.map(item => item.report.date).sort()[0];
     const sameEvening = pool.filter(item => item.report.date === input.sessionDate && /마감|레이더/.test(item.report.title) && !/\(\d{2}\.\d{2}\.\d{2}\)/.test(item.report.title)).map(item => ({ ...item, koreaOnly: true }));
-    const ordered = [...after.filter(item => item.report.date === briefDate), ...sameEvening].filter(item => datedFor(item.report, item.koreaOnly ? [input.sessionDate] : [input.sessionDate, item.report.date]));
+    // A Korean closing comment describes the Korean session; the U.S. lines in it are the previous U.S. night.
+    const ordered = [...after.filter(item => item.report.date === briefDate).map(item => /마감|레이더/.test(item.report.title) ? { ...item, koreaOnly: true } : item), ...sameEvening].filter(item => datedFor(item.report, item.koreaOnly ? [input.sessionDate] : [input.sessionDate, item.report.date]));
     const candidates = [];
     const seen = new Set();
     for (const item of ordered) {
@@ -335,7 +340,20 @@ export async function collectBrokerResearch(input) {
     const mergeReports = (items) => { const seenKeys = new Set(); return items.sort((a, b) => b.date.localeCompare(a.date)).filter(item => { const key = reportKey(item); if (seenKeys.has(key))
         return false; seenKeys.add(key); return true; }); };
     const naverPlain = (category, kind) => (naverLists[category] ?? []).map(item => naverReport(item, kind, null, category));
-    return { briefs, company: mergeReports([...naverCompany, ...recent(lists.COMPANY, 4)]), industry: mergeReports([...recent(naverPlain('industry', 'INDUSTRY'), 4), ...recent(lists.INDUSTRY, 4)]), economy: mergeReports([...recent(naverPlain('economy', 'ECONOMY'), 6), ...recent(lists.ECONOMY, 6)]), audit };
+    // Economy reports: the broker's own summary gives the first two quotable sentences.
+    const economyItems = (naverLists.economy ?? []).filter(item => item.writeDate >= addDays(input.sessionDate, -6)).slice(0, 6);
+    const naverEconomy = (await Promise.all(economyItems.map(async (item) => {
+        try {
+            const detail = await naverResearchDetail(fetcher, 'economy', item.researchId);
+            const report = naverReport(item, 'ECONOMY', detail, 'economy');
+            report.summary = summarySentences(detail.content).slice(0, 2);
+            return report;
+        }
+        catch {
+            return naverReport(item, 'ECONOMY', null, 'economy');
+        }
+    })));
+    return { briefs, company: mergeReports([...naverCompany, ...recent(lists.COMPANY, 4)]), industry: mergeReports([...recent(naverPlain('industry', 'INDUSTRY'), 4), ...recent(lists.INDUSTRY, 4)]), economy: mergeReports([...recent(naverEconomy, 6), ...recent(naverPlain('economy', 'ECONOMY'), 6), ...recent(lists.ECONOMY, 6)]), audit };
 }
 export function koreanDateLabel(date) { const [, month, day] = date.split('-'); return `${Number(month)}월 ${Number(day)}일`; }
 export function analystLabel(report) {

@@ -41,15 +41,11 @@ export function summaryAsBullets(html) {
             out.push('');
             continue;
         }
-        if (/^[-•ㆍ·▪]\s/.test(line) || line.length <= 60) {
+        if (/^[-•ㆍ·▪]\s/.test(line) || !/(?:다|음|함|임|됨)\.$/.test(line)) {
             out.push(line);
             continue;
         }
         const sentences = line.split(/(?<=(?:다|음|함|임|됨)\.)\s+/).map(item => item.trim()).filter(Boolean);
-        if (sentences.length < 2 && !/(?:다|음|함|임|됨)\.$/.test(line)) {
-            out.push(line);
-            continue;
-        }
         out.push('');
         for (const sentence of sentences)
             out.push(/(?:다|음|함|임|됨)\.$/.test(sentence) ? '- ' + sentence : sentence);
