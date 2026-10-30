@@ -29,7 +29,7 @@ export interface AIIndustryConnection {
 }
 export interface AIIntelligenceDailyViewModel extends DailyMasterBase {
   category:'AI_INTELLIGENCE';todayCore:{headline:string;summary:string;bullets:string[]};issues:AIIntelligenceIssue[];
-  deepSections?:Array<{key:string;title:string;intro?:string;paragraphs:Array<{text:string;source?:{label:string;url:string}}>}>;
+  deepSections?:Array<{key:string;title:string;intro?:string;placement?:'early'|'late'|'risks';paragraphs:Array<{text:string;source?:{label:string;url:string}}>}>;
   industryFlow:string[];industryConnections:AIIndustryConnection[];whatToWatch:NewsletterWatchItem[];
 }
 export interface USMarketDailyViewModel extends DailyMasterBase {
