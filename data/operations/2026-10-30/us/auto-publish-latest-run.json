@@ -1,0 +1,10 @@
+{
+  "state": "SKIP",
+  "reasonCode": "ALREADY_PUBLISHED_IN_PERSISTED_LEDGER",
+  "identity": "2026-10-30|US_MARKET",
+  "postId": "2937066993087807040",
+  "publicPostUrl": "https://motusnova.blogspot.com/2026/10/3-42.html",
+  "reason": "persistent publish ledger already records this publication identity",
+  "insertCallCount": 0,
+  "publishCallCount": 0
+}
