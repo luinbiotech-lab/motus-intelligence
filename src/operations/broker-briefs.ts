@@ -177,24 +177,30 @@ export async function collectBrokerResearch(input:{sessionDate:string;operationD
       catch(error){naverLists[category]=[];audit.push({sourceId:'naver-research:list:'+category,url,status:'FAILED',count:0,error:error instanceof Error&&/^NAVER_RESEARCH_HTTP_\d{3}$/.test(error.message)?error.message:'NAVER_RESEARCH_FETCH_FAILED'})}
     }),
   ]);
-  const year=Number(input.sessionDate.slice(0,4));
   // A date printed in the title must be the session or the report's own date (a 10/28 close note listed on 10/29 is not about 10/29).
-  const datedFor=(report:BrokerReport,allowed:string[])=>{const printed=titleDates(report.title,year);return !printed.length||printed.some(date=>allowed.includes(date))};
+  const datedFor=(report:BrokerReport,allowed:string[])=>{const printed=titleDates(report.title,report.date);return !printed.length||printed.some(date=>allowed.includes(date))};
+  /**
+   * A Korean closing comment describes the Korean session; the U.S. lines in it are the previous U.S. night.
+   * It is recognised by a title dated on the session but listed later, or by '마감'/'레이더' in a title that is
+   * neither about U.S./global markets nor dated on its own listing day (a morning '美 증시 마감' note is not one).
+   */
+  const closingComment=(report:BrokerReport)=>{const printed=titleDates(report.title,report.date);return (printed.includes(input.sessionDate)&&report.date>input.sessionDate)||(/마감|레이더/.test(report.title)&&!/美|미국|뉴욕|해외|글로벌|Global/i.test(report.title)&&!printed.includes(report.date))||(report.date===input.sessionDate&&/마감|레이더/.test(report.title))};
   const pool:Candidate[]=[
     ...(['market','invest','economy'] as NaverResearchCategory[]).flatMap(category=>(naverLists[category]??[]).filter(isMarketComment).map(item=>({report:naverReport(item,'MARKET',null,category),naver:{item,category},koreaOnly:false}))),
     ...(lists.MARKET??[]).filter(item=>/brief|daily|market|아침|모닝|morning|start|wake|view|데일리|시황|마감|코멘트/i.test(item.title)).map(report=>({report,koreaOnly:false})),
-  ];
+  ].map(item=>({...item,koreaOnly:closingComment(item.report)}));
   // Morning briefs published after the session describe it; take the earliest such date only.
   const after=pool.filter(item=>item.report.date>input.sessionDate&&item.report.date<=addDays(input.sessionDate,5));
   const briefDate=after.map(item=>item.report.date).sort()[0];
-  const sameEvening=pool.filter(item=>item.report.date===input.sessionDate&&/마감|레이더/.test(item.report.title)&&!/\(\d{2}\.\d{2}\.\d{2}\)/.test(item.report.title)).map(item=>({...item,koreaOnly:true}));
-  // A Korean closing comment describes the Korean session; the U.S. lines in it are the previous U.S. night.
-  const ordered=[...after.filter(item=>item.report.date===briefDate).map(item=>/마감|레이더/.test(item.report.title)?{...item,koreaOnly:true}:item),...sameEvening].filter(item=>datedFor(item.report,item.koreaOnly?[input.sessionDate]:[input.sessionDate,item.report.date]));
+  const sameEvening=pool.filter(item=>item.report.date===input.sessionDate&&/마감|레이더/.test(item.report.title));
+  const ordered=[...after.filter(item=>item.report.date===briefDate),...sameEvening].filter(item=>datedFor(item.report,item.koreaOnly?[input.sessionDate]:[input.sessionDate,item.report.date]));
   const candidates:Candidate[]=[];const seen=new Set<string>();
   for(const item of ordered){const key=reportKey(item.report);if(seen.has(key))continue;seen.add(key);candidates.push(item)}
   const briefs:BrokerBrief[]=[];
+  let attempts=0;
   for(const candidate of candidates){
-    if(briefs.length>=(input.maxBriefs??8))break;
+    // Failed candidates count too, so a slow PDF host cannot stretch the run.
+    if(briefs.length>=(input.maxBriefs??8)||attempts>=(input.maxBriefs??8)*2)break;attempts++;
     let report=candidate.report;
     try{
       let statements:BrokerStatement[]=[],digests:BrokerDigest[]=[],events:BrokerEvent[]=[];
@@ -211,7 +217,7 @@ export async function collectBrokerResearch(input:{sessionDate:string;operationD
       const pdfUrl=candidate.naver?(report.url.endsWith('.pdf')?report.url:null):report.url;
       if(pdfUrl){
         try{
-          const response=await fetcher(pdfUrl,{headers:{'user-agent':UA,...(candidate.naver?{}:{referer:CONSENSUS_HOST+'/analysis/list'})},signal:AbortSignal.timeout(25000)});
+          const response=await fetcher(pdfUrl,{headers:{'user-agent':UA,...(candidate.naver?{}:{referer:CONSENSUS_HOST+'/analysis/list'})},signal:AbortSignal.timeout(candidate.naver?15000:25000)});
           if(!response.ok)throw new Error('CONSENSUS_HTTP_'+response.status);
           const buffer=Buffer.from(await response.arrayBuffer());if(buffer.subarray(0,5).toString()!=='%PDF-')throw new Error('CONSENSUS_NOT_PDF');
           const text=await pdfText(buffer);if(!text)throw new Error('PDF_TEXT_UNAVAILABLE');
@@ -219,7 +225,7 @@ export async function collectBrokerResearch(input:{sessionDate:string;operationD
         }catch(error){if(!candidate.naver)throw error}
       }
       if(!statements.length&&!digests.length&&candidate.naver)throw new Error('NAVER_RESEARCH_EMPTY');
-      if(candidate.koreaOnly){statements=statements.filter(item=>item.region==='KOREA');digests=digests.filter(digest=>!/美|미국|뉴욕|FOMC|연준|Fed/.test(digest.heading));events=events.filter(item=>item.region==='KOREA')}
+      if(candidate.koreaOnly){statements=statements.filter(item=>item.region==='KOREA');digests=digests.filter(digest=>!/美|미국|뉴욕|FOMC|연준|Fed|달러|국채|금리/.test(digest.heading));events=events.filter(item=>item.region==='KOREA')}
       const close=input.verifiedKospiClose;
       if(close){
         const asStatements=(digest:BrokerDigest)=>[digest.heading,...digest.bullets].map(text=>({region:'KOREA' as const,text,heading:null}));
