@@ -227,12 +227,13 @@ export function composeAIDeepSections(input:{bundle:BrokerResearchBundle|null;st
   const briefs=input.bundle?.briefs??[];
   const digests=briefs.flatMap(brief=>brief.digests.filter(item=>AI_WORDS.test(item.heading)||item.bullets.some(bullet=>AI_WORDS.test(bullet))).map(item=>({item,brief}))).slice(0,3);
   const companies=[...new Map((input.bundle?.company??[]).filter(item=>AI_WORDS.test(item.title)&&(item.rating||item.targetPrice)).map(item=>[item.stockCode??item.url,item])).values()].slice(0,4);
-  const industry=(input.bundle?.industry??[]).filter(item=>AI_WORDS.test(item.title)&&!/daily|데일리|weekly|위클리/i.test(item.title)).slice(0,3);
+  // An industry report is cited only with its summary; a title alone ('리포트를 냈다') is not analysis.
+  const industry=(input.bundle?.industry??[]).filter(item=>AI_WORDS.test(item.title)&&!/daily|데일리|weekly|위클리/i.test(item.title)&&item.summary.length).slice(0,3);
   if(digests.length||companies.length||industry.length){
     sections.push({key:'ai-broker-research',title:'증권가가 본 AI 산업',intro:'국내 증권사가 최근 공개한 리포트 가운데 AI 수요를 직접 다룬 분석의 문장과 투자의견을 그대로 옮겼다.',paragraphs:[
       ...digests.map(({item,brief})=>digestParagraph(item,brief)),
       ...companies.map(report=>({text:`${report.company??report.title}: ${ratingSentence(report)}`,source:reportSource(report)})),
-      ...industry.map(report=>({text:`${subject(report)} ${koreanDateLabel(report.date)} 「${report.title}」 산업 리포트를 냈다.${report.summary.length?` 요약: ${report.summary.slice(0,2).map(quote).join(', ')}.`:''}`,source:reportSource(report)})),
+      ...industry.map(report=>({text:`${subject(report)} ${koreanDateLabel(report.date)} 「${report.title}」 산업 리포트에서 ${said(report.summary.slice(0,2).map(quote))} 분석했다.`,source:reportSource(report)})),
     ]});
   }
   const used=new Set(sections.flatMap(section=>section.paragraphs.map(p=>p.source?.url).filter(Boolean)));

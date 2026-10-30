@@ -15,7 +15,7 @@ test('verified three-core-index history renders when optional Russell is unavail
   const html = renderUSEditorialArticle(view).html;
   assert.equal((html.match(/<svg\b/g) ?? []).length, 3);
   for (const series of view.marketHistory.series) {
-    assert.ok(html.includes(series.label.replaceAll('&', '&amp;')));
+    assert.ok(html.includes(({'Nasdaq':'나스닥','Dow Jones':'다우존스','Russell 2000':'러셀 2000'} as Record<string,string>)[series.label] ?? series.label.replaceAll('&', '&amp;')));
     assert.ok(html.includes(String(series.latestClose)));
     assert.ok(html.includes(series.sourceUrl.replaceAll('&', '&amp;')));
   }
