@@ -205,6 +205,7 @@ jobs:
           path: |
             dist/src/ops-data-merge-cli.js
             dist/src/production/ops-data-merge.js
+            dist/src/production/run-record.js
           if-no-files-found: error
           retention-days: 7
       - name: Upload persistence bundle
