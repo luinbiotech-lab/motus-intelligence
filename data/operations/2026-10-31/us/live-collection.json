@@ -1,0 +1,14 @@
+{
+  "mode": "LIVE",
+  "sourceMode": "internal",
+  "date": "2026-10-31",
+  "observedDate": null,
+  "category": "US_MARKET",
+  "state": "HOLD",
+  "reasonCode": "BROKER_MARKET_COMMENTARY_UNAVAILABLE",
+  "verification": "FAILED",
+  "publishCallCount": 0,
+  "commerce": {
+    "enabled": false
+  }
+}
