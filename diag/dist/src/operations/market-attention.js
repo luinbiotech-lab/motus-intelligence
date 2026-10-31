@@ -54,7 +54,11 @@ export async function sessionChanges(symbols, sessionDate, fetcher = fetch, fetc
         fetched.push(url);
         for (const item of body.spark?.result ?? []) {
             const response = item.response?.[0], stamps = response?.timestamp ?? [], closes = response?.indicators?.quote?.[0]?.close ?? [], zone = response?.meta?.exchangeTimezoneName ?? 'America/New_York';
-            const index = stamps.findIndex(stamp => nyDate(stamp, zone) === sessionDate), close = index > 0 ? closes[index] : null, previous = index > 0 ? closes[index - 1] : null;
+            const index = stamps.findIndex(stamp => nyDate(stamp, zone) === sessionDate), previous = index > 0 ? closes[index - 1] : null;
+            // Right after a session (and over the weekend) the daily bar's close can still be null; the regular-market price
+            // stamped at or after that session's 16:00 close on the same New York date is the official close.
+            const meta = response?.meta, closedAt = meta?.regularMarketTime, afterClose = typeof closedAt === 'number' && nyDate(closedAt, zone) === sessionDate && Number(new Intl.DateTimeFormat('en-US', { timeZone: zone, hour: 'numeric', hourCycle: 'h23' }).format(new Date(closedAt * 1000))) >= 16;
+            const close = index > 0 ? (typeof closes[index] === 'number' ? closes[index] : afterClose && typeof meta?.regularMarketPrice === 'number' ? meta.regularMarketPrice : null) : null;
             if (typeof close !== 'number' || typeof previous !== 'number' || !(close > 0) || !(previous > 0))
                 continue;
             result.set(item.symbol, { name: response?.meta?.shortName ?? response?.meta?.longName ?? item.symbol, close, changePct: (close - previous) / previous * 100 });

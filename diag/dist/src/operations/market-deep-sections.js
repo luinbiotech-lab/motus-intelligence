@@ -95,7 +95,7 @@ function wireCause(reports, key, sources) {
     for (const report of reports)
         sources.push({ label: `${report.publisher} 「${report.title}」 (${kstDay(report.publishedAt)})`, url: report.url, publisher: report.publisher, date: kstDay(report.publishedAt) });
     const first = reports[0];
-    return { section: { key, placement: 'early', title: '상승·하락 요인', intro: '증권사 아침 리포트 게시 전이어서 통신사 마감 기사를 인용했다.', paragraphs }, lead: `${josa(first.publisher, '은', '는')} 이날 장을 ${said([quote(first.sentence ?? wireHeadline(first.title))])} 전했다.` };
+    return { section: { key, placement: 'early', title: '상승·하락 요인', intro: '이 세션을 다룬 증권사 아침 리포트가 아직 없어 통신사 마감 기사를 인용했다.', paragraphs }, lead: `${josa(first.publisher, '은', '는')} 이날 장을 ${said([quote(first.sentence ?? wireHeadline(first.title))])} 전했다.` };
 }
 function riskParagraphs(briefs, region, checkpoint) {
     const events = [...new Map(briefs.flatMap(brief => (brief.events ?? []).filter(item => item.region === region).map(item => [item.text, { item, brief }]))).values()].slice(0, 4);
@@ -115,7 +115,7 @@ export function composeUSDeepSections(input) {
         sections.push(wire.section);
     }
     // Big moves among the largest companies lead (largest first), then the most-searched names.
-    const big = [...input.stocks].filter(stock => stock.bigMover).sort((a, b) => Math.abs(b.changePct) - Math.abs(a.changePct)).slice(0, 2);
+    const big = [...input.stocks].filter(stock => stock.bigMover || stock.inNews).sort((a, b) => Math.abs(b.changePct) - Math.abs(a.changePct)).slice(0, 3);
     const ranked = [...big, ...[...input.stocks].filter(stock => !big.includes(stock)).sort((a, b) => (a.trendingRank ?? 99) - (b.trendingRank ?? 99) || (a.mostActiveRank ?? 99) - (b.mostActiveRank ?? 99))].slice(0, 6);
     let titleFocus = null;
     const market = [];
@@ -138,12 +138,12 @@ export function composeUSDeepSections(input) {
         };
         for (const stock of ranked) {
             const name = displayName(stock), particle = josa(name, '은', '는').slice(name.length), linked = mentions(stock);
-            const rank = [stock.bigMover ? '시가총액 상위 종목' : '', stock.trendingRank ? `야후 파이낸스 검색 ${stock.trendingRank}위` : '', stock.mostActiveRank ? `대형주 거래량 ${stock.mostActiveRank}위` : ''].filter(Boolean).join(', ');
+            const rank = [stock.inNews ? '리포트·기사 언급 종목' : '', stock.bigMover ? '시가총액 상위 종목' : '', stock.trendingRank ? `야후 파이낸스 검색 ${stock.trendingRank}위` : '', stock.mostActiveRank ? `대형주 거래량 ${stock.mostActiveRank}위` : ''].filter(Boolean).join(', ');
             market.push({ text: `${name}(${stock.symbol})${particle} ${usd(stock.close)}달러로 ${absPct(stock.changePct)} ${moveWord(stock.changePct)}했다${rank ? `(${rank})` : ''}.${linked ? ` ${josa(linked.brief.report.broker, '은', '는')} ${said([quote(linked.item.text)])} 설명했다.` : ''}`, ...(linked ? { source: reportSource(linked.brief.report) } : {}) });
         }
         // Titles use Korean company names only (the headline policy holds English names in titles).
         // The headline names the day's biggest megacap move when there is one, else the first searched name that moved 3%+.
-        const named = ranked.filter(stock => stock.koreanName), focus = named.find(stock => stock.bigMover) ?? named.find(stock => Math.abs(stock.changePct) >= 3) ?? named[0];
+        const named = ranked.filter(stock => stock.koreanName), focus = [...named].filter(stock => stock.bigMover || stock.inNews).sort((a, b) => Math.abs(b.changePct) - Math.abs(a.changePct))[0] ?? named.find(stock => Math.abs(stock.changePct) >= 3) ?? named[0];
         if (focus)
             titleFocus = `${displayName(focus)} ${Math.abs(focus.changePct).toFixed(Math.abs(focus.changePct) >= 10 ? 0 : 1)}% ${moveWord(focus.changePct)}`;
     }
