@@ -23,7 +23,9 @@ function record(audit:AuditSink[],items:Array<BrokerAudit|AttentionAudit>,catego
  * Wire close reports stand in for broker commentary only on the last retries of the morning (10:00 KST on):
  * earlier runs wait for the brokers' own morning comments, which are normally listed by 08:00 KST.
  */
-export function wireFallbackAllowed(at:string):boolean {return new Date(Date.parse(at)+9*3600000).getUTCHours()>=10}
+// Korean brokers publish no morning comments on weekends, so the Saturday edition on Friday's U.S. session
+// would otherwise wait for Monday: on Saturdays and Sundays (KST) wire close reports are used from the first run.
+export function wireFallbackAllowed(at:string):boolean {const kst=new Date(Date.parse(at)+9*3600000);return kst.getUTCHours()>=10||kst.getUTCDay()===6||kst.getUTCDay()===0}
 
 /** Never throws: missing research or rankings only drop the corresponding sections. */
 export async function collectUSDeep(input:{sessionDate:string;operationDate:string;at:string;fetcher:typeof fetch;audit:AuditSink[];pdfText?:PdfTextReader;indexChanges:number[]}):Promise<DeepCollection>{

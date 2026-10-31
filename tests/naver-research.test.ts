@@ -111,4 +111,5 @@ test('wire close reports stand in only from 10:00 KST', () => {
   assert.equal(wireFallbackAllowed('2026-10-29T21:45:00Z'),false);
   assert.equal(wireFallbackAllowed('2026-10-29T23:40:00Z'),false);
   assert.equal(wireFallbackAllowed('2026-10-30T01:40:00Z'),true);
+  assert.equal(wireFallbackAllowed('2026-10-30T21:45:00Z'),true,'Saturday 06:45 KST: no broker morning comments on weekends');
 });
