@@ -241,6 +241,15 @@ jobs:
           node --input-type=module <<'NODE'
           import {readFileSync,existsSync,appendFileSync} from 'node:fs';
           import {assessProductionGateOutcome} from './dist/src/production/production-gate-outcome.js';
+          // A republish run is judged only by its own outcome; the earlier publication's auto-publish.json says nothing about it.
+          if(process.env.REPUBLISH==='true'){
+            const republishPath='data/operations/'+process.env.RUN_DATE+'/'+process.env.CATEGORY+'/republish.json';
+            const republish=existsSync(republishPath)?JSON.parse(readFileSync(republishPath,'utf8')):null;
+            const summary=['### MOTUS republish result','- Category: '+process.env.CATEGORY,'- Operation date: '+process.env.RUN_DATE,'- Outcome: **'+(republish?.state??'MISSING')+'**','- Detail: '+(republish?.reason??republish?.title??''),...(republish?.publicPostUrl?['- Blogger URL: '+republish.publicPostUrl]:[]),''].join('\n');
+            if(process.env.GITHUB_STEP_SUMMARY)appendFileSync(process.env.GITHUB_STEP_SUMMARY,summary);
+            if(republish?.state==='REPUBLISHED'){console.log('Verified in-place republish: '+republish.publicPostUrl);process.exit(0)}
+            console.error('::error title=Republish not completed::'+JSON.stringify(republish));process.exit(1);
+          }
           const path='data/operations/'+process.env.RUN_DATE+'/'+process.env.CATEGORY+'/auto-publish.json';
           if(!existsSync(path)){console.error('::error title=Production not verified::Missing auto-publish outcome');process.exit(1)}
           const outcome=JSON.parse(readFileSync(path,'utf8'));
