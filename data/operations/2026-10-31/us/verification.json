@@ -14,10 +14,10 @@
   "leakagePass": true,
   "duplicateCheck": "PENDING_REMOTE",
   "duplicateUncertainty": true,
-  "articleFingerprint": "sha256:796118277da86408fedfc4085e5cd052da50ce270644391b0936871c97ddd3ce",
+  "articleFingerprint": "sha256:cb127e5fe262b13e810becf4c3d6816b7635473abaee17b122ee19282db748cf",
   "commerceEnabled": false,
-  "verifiedAt": "2026-10-31T02:42:58.341Z",
-  "expiresAt": "2026-10-31T04:12:58.341Z",
+  "verifiedAt": "2026-10-31T07:28:42.460Z",
+  "expiresAt": "2026-10-31T08:58:42.460Z",
   "sourceAuditIds": [
     "calendar:nyse",
     "deep:consensus:list:company",
@@ -39,7 +39,6 @@
     "deep:yahoo:spark:named-stocks",
     "deep:yahoo:spark:sectors",
     "deep:yahoo:spark:stocks",
-    "deep:yahoo:spark:stocks",
     "deep:yahoo:trending",
     "fred:DCOILBRENTEU",
     "fred:DGS10",
@@ -57,7 +56,7 @@
     "yahoo-us:nasdaq",
     "yahoo-us:sp500"
   ],
-  "sourceAuditFingerprint": "sha256:0a6c648deb89a91a5a8d97054da13835bee4216f74ee360d08ab81f355132bbe",
+  "sourceAuditFingerprint": "sha256:cd6e885d3880f9e220d49ed3285444c0768c06802c5f74f27d03c6fede14835e",
   "crossVerificationFingerprint": null,
   "crossVerification": null
 }
