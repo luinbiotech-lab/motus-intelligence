@@ -92,7 +92,7 @@ function wireCause(reports:WireReport[],key:string,sources:DeepComposition['sour
   const paragraphs:DeepParagraph[]=reports.map(report=>({text:report.sentence?`${josa(report.publisher,'은','는')} ${koreanDateLabel(kstDay(report.publishedAt))} 마감 기사 「${report.title}」에서 ${said([quote(report.sentence)])} 전했다.`:`${josa(report.publisher,'은','는')} ${koreanDateLabel(kstDay(report.publishedAt))} 마감 기사에서 ${said([quote(wireHeadline(report.title))])} 전했다.`,source:wireSource(report)}));
   for(const report of reports)sources.push({label:`${report.publisher} 「${report.title}」 (${kstDay(report.publishedAt)})`,url:report.url,publisher:report.publisher,date:kstDay(report.publishedAt)});
   const first=reports[0]!;
-  return {section:{key,placement:'early',title:'상승·하락 요인',intro:'증권사 아침 리포트 게시 전이어서 통신사 마감 기사를 인용했다.',paragraphs},lead:`${josa(first.publisher,'은','는')} 이날 장을 ${said([quote(first.sentence??wireHeadline(first.title))])} 전했다.`};
+  return {section:{key,placement:'early',title:'상승·하락 요인',intro:'이 세션을 다룬 증권사 아침 리포트가 아직 없어 통신사 마감 기사를 인용했다.',paragraphs},lead:`${josa(first.publisher,'은','는')} 이날 장을 ${said([quote(first.sentence??wireHeadline(first.title))])} 전했다.`};
 }
 
 function riskParagraphs(briefs:BrokerBrief[],region:'US'|'KOREA',checkpoint:string):DeepParagraph[]{

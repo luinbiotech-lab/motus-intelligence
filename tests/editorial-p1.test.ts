@@ -47,3 +47,16 @@ test('a short stock name does not borrow a longer name\'s comment', () => {
   assert.ok(!stocks.some(text=>text.startsWith('검색 1위 SK는')&&text.includes('HBM')),stocks.join('\n'));
   assert.ok(stocks.some(text=>text.startsWith('검색 2위 SK하이닉스는')&&text.includes('HBM')),stocks.join('\n'));
 });
+
+test('an unfinalized daily bar uses the regular-market price stamped at the session close', async () => {
+  const {sessionChanges}=await import('../src/operations/market-attention.js');
+  const day=(d:string)=>Date.parse(d+'T13:30:00Z')/1000;
+  const body={spark:{result:[
+    {symbol:'AMZN',response:[{meta:{shortName:'Amazon',exchangeTimezoneName:'America/New_York',regularMarketPrice:240.35,regularMarketTime:Date.parse('2026-10-30T20:00:01Z')/1000},timestamp:[day('2026-10-29'),day('2026-10-30')],indicators:{quote:[{close:[243.79,null]}]}}]},
+    {symbol:'EARLY',response:[{meta:{exchangeTimezoneName:'America/New_York',regularMarketPrice:10,regularMarketTime:Date.parse('2026-10-30T18:00:00Z')/1000},timestamp:[day('2026-10-29'),day('2026-10-30')],indicators:{quote:[{close:[9,null]}]}}]},
+  ]}};
+  const changes=await sessionChanges(['AMZN','EARLY'],'2026-10-30',(async()=>Response.json(body)) as typeof fetch);
+  assert.equal(changes.get('AMZN')!.close,240.35);
+  assert.ok(Math.abs(changes.get('AMZN')!.changePct-(240.35/243.79-1)*100)<1e-9);
+  assert.equal(changes.has('EARLY'),false,'an intraday price before the close is never used');
+});

@@ -51,7 +51,7 @@ export async function collectKoreaSearchTop(sessionDate:string,fetcher:typeof fe
   return {stocks,audit};
 }
 
-interface SparkResponse {spark?:{result?:Array<{symbol:string;response?:Array<{meta?:{shortName?:string;longName?:string;exchangeTimezoneName?:string};timestamp?:number[];indicators?:{quote?:Array<{close?:Array<number|null>}>}}>}>}}
+interface SparkResponse {spark?:{result?:Array<{symbol:string;response?:Array<{meta?:{shortName?:string;longName?:string;exchangeTimezoneName?:string;regularMarketPrice?:number;regularMarketTime?:number};timestamp?:number[];indicators?:{quote?:Array<{close?:Array<number|null>}>}}>}>}}
 function nyDate(seconds:number,zone='America/New_York'){return new Intl.DateTimeFormat('en-CA',{timeZone:zone,year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date(seconds*1000))}
 
 /** Session change for each symbol from daily closes: the bar dated `sessionDate` against the bar before it. */
@@ -61,7 +61,11 @@ export async function sessionChanges(symbols:string[],sessionDate:string,fetcher
     const url=yahooSparkUrl(symbols.slice(i,i+20));const body=await json<SparkResponse>(fetcher,url);fetched.push(url);
     for(const item of body.spark?.result??[]){
       const response=item.response?.[0],stamps=response?.timestamp??[],closes=response?.indicators?.quote?.[0]?.close??[],zone=response?.meta?.exchangeTimezoneName??'America/New_York';
-      const index=stamps.findIndex(stamp=>nyDate(stamp,zone)===sessionDate),close=index>0?closes[index]:null,previous=index>0?closes[index-1]:null;
+      const index=stamps.findIndex(stamp=>nyDate(stamp,zone)===sessionDate),previous=index>0?closes[index-1]:null;
+      // Right after a session (and over the weekend) the daily bar's close can still be null; the regular-market price
+      // stamped at or after that session's 16:00 close on the same New York date is the official close.
+      const meta=response?.meta,closedAt=meta?.regularMarketTime,afterClose=typeof closedAt==='number'&&nyDate(closedAt,zone)===sessionDate&&Number(new Intl.DateTimeFormat('en-US',{timeZone:zone,hour:'numeric',hourCycle:'h23'}).format(new Date(closedAt*1000)))>=16;
+      const close=index>0?(typeof closes[index]==='number'?closes[index]:afterClose&&typeof meta?.regularMarketPrice==='number'?meta.regularMarketPrice:null):null;
       if(typeof close!=='number'||typeof previous!=='number'||!(close>0)||!(previous>0))continue;
       result.set(item.symbol,{name:response?.meta?.shortName??response?.meta?.longName??item.symbol,close,changePct:(close-previous)/previous*100});
     }
