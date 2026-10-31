@@ -14,10 +14,10 @@
   "leakagePass": true,
   "duplicateCheck": "PENDING_REMOTE",
   "duplicateUncertainty": true,
-  "articleFingerprint": "sha256:2db8e93876a551f8293cd2e10f93c934d0c4b2918a44a8a3bc9746843a1f5af0",
+  "articleFingerprint": "sha256:0f8e6e73f4e6276b9c86a14510ae34a11acc5c51c445bcb9b545556ca364fcaa",
   "commerceEnabled": false,
-  "verifiedAt": "2026-10-31T00:22:26.292Z",
-  "expiresAt": "2026-10-31T01:52:26.292Z",
+  "verifiedAt": "2026-10-31T01:05:14.414Z",
+  "expiresAt": "2026-10-31T02:35:14.414Z",
   "sourceAuditIds": [
     "calendar:nyse",
     "deep:consensus:list:company",
@@ -35,6 +35,7 @@
     "deep:wire:report:www.newsis.com/view/NISX20261031_0003849136",
     "deep:wire:report:www.yna.co.kr/view/AKR20261031005452072",
     "deep:yahoo:most-active",
+    "deep:yahoo:spark:megacaps",
     "deep:yahoo:spark:sectors",
     "deep:yahoo:spark:stocks",
     "deep:yahoo:spark:stocks",
@@ -55,7 +56,7 @@
     "yahoo-us:nasdaq",
     "yahoo-us:sp500"
   ],
-  "sourceAuditFingerprint": "sha256:774cb6894dd4e098cf14e7110f94251b468e6438879ffb4f783da06af6250824",
+  "sourceAuditFingerprint": "sha256:8dd84c1712cc52c0a6e82664fe9d5e8235a6a11feff93db9250866ac71089825",
   "crossVerificationFingerprint": null,
   "crossVerification": null
 }
