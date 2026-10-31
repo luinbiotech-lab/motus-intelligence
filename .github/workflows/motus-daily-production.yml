@@ -15,6 +15,11 @@ on:
         required: false
         type: boolean
         default: false
+      republish:
+        description: Owner-requested correction - rebuild and replace the content of this date's already published post in place
+        required: false
+        type: boolean
+        default: false
   schedule:
     - cron: '45 21 * * 1-5'
     # U.S. retry at 08:40 KST once Korean broker morning briefs on the session are published.
@@ -104,6 +109,7 @@ jobs:
           INPUT_CATEGORY: ${{ inputs.category }}
           INPUT_DATE: ${{ inputs.run_date }}
           INPUT_EXECUTE_PUBLISH: ${{ inputs.execute_publish }}
+          INPUT_REPUBLISH: ${{ inputs.republish }}
           SCHEDULE: ${{ github.event.schedule }}
         run: |
           case "$SCHEDULE" in
@@ -125,6 +131,7 @@ jobs:
           echo "SCHEDULE_CRON=$SCHEDULE" >> "$GITHUB_ENV"
           echo "RUN_DATE=$RUN_DATE" >> "$GITHUB_ENV"
           echo "MOTUS_LIVE_PUBLISH_ENABLED=$LIVE_PUBLISH" >> "$GITHUB_ENV"
+          echo "REPUBLISH=${INPUT_REPUBLISH:-false}" >> "$GITHUB_ENV"
       - name: Require Blogger credentials before live publication
         if: env.MOTUS_LIVE_PUBLISH_ENABLED == 'true'
         shell: bash
@@ -148,8 +155,11 @@ jobs:
         if: env.MOTUS_LIVE_PUBLISH_ENABLED != 'true'
         run: npm run motus:publish -- --date "$RUN_DATE" --category "$CATEGORY"
       - name: Publish exactly once after explicit workflow activation
-        if: env.MOTUS_LIVE_PUBLISH_ENABLED == 'true'
+        if: env.MOTUS_LIVE_PUBLISH_ENABLED == 'true' && env.REPUBLISH != 'true'
         run: npm run motus:publish -- --date "$RUN_DATE" --category "$CATEGORY" --execute
+      - name: Replace the published post in place (owner-requested correction)
+        if: env.MOTUS_LIVE_PUBLISH_ENABLED == 'true' && env.REPUBLISH == 'true'
+        run: npm run motus:republish -- --date "$RUN_DATE" --category "$CATEGORY" --execute
       - name: Record production outcome
         if: always()
         run: npm run motus:production-summary -- --date "$RUN_DATE" --category "$CATEGORY"
@@ -231,6 +241,15 @@ jobs:
           node --input-type=module <<'NODE'
           import {readFileSync,existsSync,appendFileSync} from 'node:fs';
           import {assessProductionGateOutcome} from './dist/src/production/production-gate-outcome.js';
+          // A republish run is judged only by its own outcome; the earlier publication's auto-publish.json says nothing about it.
+          if(process.env.REPUBLISH==='true'){
+            const republishPath='data/operations/'+process.env.RUN_DATE+'/'+process.env.CATEGORY+'/republish.json';
+            const republish=existsSync(republishPath)?JSON.parse(readFileSync(republishPath,'utf8')):null;
+            const summary=['### MOTUS republish result','- Category: '+process.env.CATEGORY,'- Operation date: '+process.env.RUN_DATE,'- Outcome: **'+(republish?.state??'MISSING')+'**','- Detail: '+(republish?.reason??republish?.title??''),...(republish?.publicPostUrl?['- Blogger URL: '+republish.publicPostUrl]:[]),''].join('\n');
+            if(process.env.GITHUB_STEP_SUMMARY)appendFileSync(process.env.GITHUB_STEP_SUMMARY,summary);
+            if(republish?.state==='REPUBLISHED'){console.log('Verified in-place republish: '+republish.publicPostUrl);process.exit(0)}
+            console.error('::error title=Republish not completed::'+JSON.stringify(republish));process.exit(1);
+          }
           const path='data/operations/'+process.env.RUN_DATE+'/'+process.env.CATEGORY+'/auto-publish.json';
           if(!existsSync(path)){console.error('::error title=Production not verified::Missing auto-publish outcome');process.exit(1)}
           const outcome=JSON.parse(readFileSync(path,'utf8'));

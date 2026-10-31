@@ -5,7 +5,7 @@ import type {DailyCategory} from '../operations/daily-orchestrator.js';
 export interface PublishLedgerEntry {
   publicationIdentity:string;identity?:string;attemptId:string;operationDate:string;category:DailyCategory;at:string;gateState:string;
   publishAttempted:boolean;duplicateState:'PENDING'|'RESOLVED'|'CONFLICT';finalState:string;reason:string;commitSha:string;
-  event:'LOCK_ACQUIRED'|'LOCK_REJECTED'|'GATE_HOLD'|'PUBLISH_ATTEMPT'|'PUBLISHED'|'FAILED';
+  event:'LOCK_ACQUIRED'|'LOCK_REJECTED'|'GATE_HOLD'|'PUBLISH_ATTEMPT'|'PUBLISHED'|'FAILED'|'REPUBLISHED'|'REPUBLISH_FAILED';
   postId:string|null;publicPostUrl:string|null;fingerprint:string;detail:string;
   /** Market session (or AI event) date the published unit covers. Absent on legacy entries. */
   sessionDate?:string;
