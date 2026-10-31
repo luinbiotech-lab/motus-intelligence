@@ -14,10 +14,10 @@
   "leakagePass": true,
   "duplicateCheck": "PENDING_REMOTE",
   "duplicateUncertainty": true,
-  "articleFingerprint": "sha256:d1864fc17338ef9fdd7aeeb5dd5ab8e368fed89d7eb9eab236531efacb428bb3",
+  "articleFingerprint": "sha256:796118277da86408fedfc4085e5cd052da50ce270644391b0936871c97ddd3ce",
   "commerceEnabled": false,
-  "verifiedAt": "2026-10-31T01:26:42.574Z",
-  "expiresAt": "2026-10-31T02:56:42.574Z",
+  "verifiedAt": "2026-10-31T02:42:58.341Z",
+  "expiresAt": "2026-10-31T04:12:58.341Z",
   "sourceAuditIds": [
     "calendar:nyse",
     "deep:consensus:list:company",
@@ -57,7 +57,7 @@
     "yahoo-us:nasdaq",
     "yahoo-us:sp500"
   ],
-  "sourceAuditFingerprint": "sha256:f9d5e4b409e86c3a0b675a4e6cbec143fc7b9bb896ade4ed184ac43cb93e3920",
+  "sourceAuditFingerprint": "sha256:0a6c648deb89a91a5a8d97054da13835bee4216f74ee360d08ab81f355132bbe",
   "crossVerificationFingerprint": null,
   "crossVerification": null
 }
