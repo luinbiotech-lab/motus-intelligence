@@ -111,7 +111,7 @@ export function composeUSDeepSections(input:{bundle:BrokerResearchBundle|null;st
     sections.push({key:'us-causes',placement:'early',title:'상승·하락 요인과 반대 시각',paragraphs:cause.paragraphs});
   }else if(wire){sections.push(wire.section)}
   // Big moves among the largest companies lead (largest first), then the most-searched names.
-  const big=[...input.stocks].filter(stock=>stock.bigMover).sort((a,b)=>Math.abs(b.changePct)-Math.abs(a.changePct)).slice(0,2);
+  const big=[...input.stocks].filter(stock=>stock.bigMover||stock.inNews).sort((a,b)=>Math.abs(b.changePct)-Math.abs(a.changePct)).slice(0,3);
   const ranked=[...big,...[...input.stocks].filter(stock=>!big.includes(stock)).sort((a,b)=>(a.trendingRank??99)-(b.trendingRank??99)||(a.mostActiveRank??99)-(b.mostActiveRank??99))].slice(0,6);
   let titleFocus:string|null=null;const market:DeepParagraph[]=[];
   if(input.sectors.length>=6){
@@ -132,12 +132,12 @@ export function composeUSDeepSections(input:{bundle:BrokerResearchBundle|null;st
     };
     for(const stock of ranked){
       const name=displayName(stock),particle=josa(name,'은','는').slice(name.length),linked=mentions(stock);
-      const rank=[stock.bigMover?'시가총액 상위 종목':'',stock.trendingRank?`야후 파이낸스 검색 ${stock.trendingRank}위`:'',stock.mostActiveRank?`대형주 거래량 ${stock.mostActiveRank}위`:''].filter(Boolean).join(', ');
+      const rank=[stock.inNews?'리포트·기사 언급 종목':'',stock.bigMover?'시가총액 상위 종목':'',stock.trendingRank?`야후 파이낸스 검색 ${stock.trendingRank}위`:'',stock.mostActiveRank?`대형주 거래량 ${stock.mostActiveRank}위`:''].filter(Boolean).join(', ');
       market.push({text:`${name}(${stock.symbol})${particle} ${usd(stock.close)}달러로 ${absPct(stock.changePct)} ${moveWord(stock.changePct)}했다${rank?`(${rank})`:''}.${linked?` ${josa(linked.brief.report.broker,'은','는')} ${said([quote(linked.item.text)])} 설명했다.`:''}`,...(linked?{source:reportSource(linked.brief.report)}:{})});
     }
     // Titles use Korean company names only (the headline policy holds English names in titles).
     // The headline names the day's biggest megacap move when there is one, else the first searched name that moved 3%+.
-    const named=ranked.filter(stock=>stock.koreanName),focus=named.find(stock=>stock.bigMover)??named.find(stock=>Math.abs(stock.changePct)>=3)??named[0];
+    const named=ranked.filter(stock=>stock.koreanName),focus=[...named].filter(stock=>stock.bigMover||stock.inNews).sort((a,b)=>Math.abs(b.changePct)-Math.abs(a.changePct))[0]??named.find(stock=>Math.abs(stock.changePct)>=3)??named[0];
     if(focus)titleFocus=`${displayName(focus)} ${Math.abs(focus.changePct).toFixed(Math.abs(focus.changePct)>=10?0:1)}% ${moveWord(focus.changePct)}`;
   }
   if(market.length)sections.push({key:'us-sectors-stocks',placement:'early',title:'업종과 종목',intro:'종목 순위는 투자자 관심도를 보여 줄 뿐 주가 변동의 원인을 뜻하지 않는다. 등락은 해당 거래일 종가 기준이다.',paragraphs:market});

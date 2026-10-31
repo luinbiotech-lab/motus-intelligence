@@ -60,3 +60,11 @@ test('an unfinalized daily bar uses the regular-market price stamped at the sess
   assert.ok(Math.abs(changes.get('AMZN')!.changePct-(240.35/243.79-1)*100)<1e-9);
   assert.equal(changes.has('EARLY'),false,'an intraday price before the close is never used');
 });
+
+test('a company named in the session commentary with a 3%+ move leads the list and the headline', () => {
+  const stock=(symbol:string,koreanName:string,changePct:number,extra:object={})=>({symbol,name:symbol,koreanName,changePct,close:10,date:'2026-10-30',trendingRank:null,mostActiveRank:null,marketCap:null,...extra});
+  const composed=composeUSDeepSections({bundle:null,stocks:[stock('INTC','인텔',-29.1,{inNews:true}),stock('AMD','AMD',-10.88,{bigMover:true}),stock('INO','Inovio',-21.77,{trendingRank:1})],sectors:[]});
+  const market=composed.sections.find(item=>item.key==='us-sectors-stocks')!.paragraphs;
+  assert.match(market[0]!.text,/^인텔\(INTC\)은 10\.00달러로 29\.10% 급락했다\(리포트·기사 언급 종목\)\.$/);
+  assert.equal(composed.titleFocus,'인텔 29% 급락');
+});
