@@ -4,12 +4,14 @@ on:
     branches: [diagnostics/claude-research-sources-20261030]
 permissions:
   contents: write
+  models: read
 jobs:
   preview:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     env:
       TZ: Asia/Seoul
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       MOTUS_LIVE_PUBLISH_ENABLED: 'false'
       MOTUS_COMMERCE_ENABLED: 'false'
       TWELVE_DATA_API_KEY: ${{ secrets.TWELVE_DATA_API_KEY }}
