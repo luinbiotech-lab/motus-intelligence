@@ -14,10 +14,10 @@
   "leakagePass": true,
   "duplicateCheck": "PENDING_REMOTE",
   "duplicateUncertainty": true,
-  "articleFingerprint": "sha256:498f64e5a9d8a970a0d0c67b99825892bb59d5392fdab2b1acd308331e00c450",
+  "articleFingerprint": "sha256:a769a086131d0e63cfd721415bb6c020ddbfbf81209ce2552656952f000461df",
   "commerceEnabled": false,
-  "verifiedAt": "2026-10-31T01:10:47.268Z",
-  "expiresAt": "2026-10-31T02:40:47.268Z",
+  "verifiedAt": "2026-10-31T01:14:40.633Z",
+  "expiresAt": "2026-10-31T02:44:40.633Z",
   "sourceAuditIds": [
     "calendar:nyse",
     "deep:consensus:list:company",
@@ -36,6 +36,7 @@
     "deep:wire:report:www.yna.co.kr/view/AKR20261031005452072",
     "deep:yahoo:most-active",
     "deep:yahoo:spark:megacaps",
+    "deep:yahoo:spark:named-stocks",
     "deep:yahoo:spark:sectors",
     "deep:yahoo:spark:stocks",
     "deep:yahoo:spark:stocks",
@@ -56,7 +57,7 @@
     "yahoo-us:nasdaq",
     "yahoo-us:sp500"
   ],
-  "sourceAuditFingerprint": "sha256:e72b60cf994fb5bb1666e076a5aff64c6933df3e9a5e7a140f561ed7b5551117",
+  "sourceAuditFingerprint": "sha256:dbacbf0d679b80863fb9c433eb1afe586c978097d7782cbcd27fc5f9d9881986",
   "crossVerificationFingerprint": null,
   "crossVerification": null
 }
