@@ -1,10 +1,79 @@
 {
-  "state": "HOLD",
-  "reasonCode": "BROKER_MARKET_COMMENTARY_UNAVAILABLE",
-  "reasonCodes": [
-    "BROKER_MARKET_COMMENTARY_UNAVAILABLE"
+  "gate": {
+    "state": "AUTO_PUBLISH_READY",
+    "reasons": [],
+    "approval": "AUTO_POLICY_APPROVAL",
+    "checkedAt": "2026-10-31T00:22:39.468Z"
+  },
+  "searchRegistration": {
+    "publicationId": "motus-live-2026-10-30:us",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/286-10-3.html",
+    "registeredAt": "2026-10-31T09:22:42+09:00",
+    "trigger": "PUBLICATION_PUBLISHED",
+    "googleInspectionState": "QUEUED",
+    "naverDiscoveryState": "PENDING",
+    "visibility": {
+      "publicationId": "motus-live-2026-10-30:us",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/10/286-10-3.html",
+      "google": {
+        "discovered": null,
+        "indexed": null,
+        "lastCrawl": null,
+        "coverageState": null,
+        "inspectionAt": null
+      },
+      "naver": {
+        "discovered": null,
+        "indexed": null,
+        "collectionState": null,
+        "inspectionAt": null
+      },
+      "sitemapIncluded": null,
+      "rssIncluded": null
+    }
+  },
+  "libraryRegistration": {
+    "idempotencyKey": "library:motus-live-2026-10-30:us|https://motusnova.blogspot.com/2026/10/286-10-3.html"
+  },
+  "weeklyFeed": {
+    "idempotencyKey": "weekly:motus-live-2026-10-30:us"
+  },
+  "pdfCandidate": {
+    "idempotencyKey": "pdf:motus-live-2026-10-30:us:sha256:2db8e93876a551f8293cd2e10f93c934d0c4b2918a44a8a3bc9746843a1f5af0",
+    "visibility": "PRIVATE"
+  },
+  "audit": [
+    {
+      "at": "2026-10-31T00:22:39.468Z",
+      "event": "AUTO_PUBLISH_STATIC_GATE",
+      "detail": "AUTO_PUBLISH_READY"
+    },
+    {
+      "at": "2026-10-31T00:22:39.468Z",
+      "event": "REMOTE_DUPLICATE_CHECK",
+      "detail": "PASS"
+    },
+    {
+      "at": "2026-10-31T00:22:39.468Z",
+      "event": "FINAL_REMOTE_DUPLICATE_CHECK",
+      "detail": "PASS"
+    },
+    {
+      "at": "2026-10-31T00:22:39.468Z",
+      "event": "PUBLIC_PAGE_RATE_LIMITED",
+      "detail": "HTTP 429; Blogger API published readback and content verification passed"
+    },
+    {
+      "at": "2026-10-31T09:22:42+09:00",
+      "event": "PUBLISHED",
+      "detail": "AUTO_POLICY_APPROVAL"
+    }
   ],
-  "reason": "BROKER_MARKET_COMMENTARY_UNAVAILABLE",
-  "insertCallCount": 0,
-  "publishCallCount": 0
+  "state": "PUBLISHED",
+  "draftPostId": "2815349397408506901",
+  "publicPostUrl": "https://motusnova.blogspot.com/2026/10/286-10-3.html",
+  "publishedAt": "2026-10-31T09:22:42+09:00",
+  "insertCallCount": 1,
+  "publishCallCount": 1,
+  "error": null
 }

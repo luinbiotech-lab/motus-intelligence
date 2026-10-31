@@ -94,5 +94,11 @@
     "publicationId": "motus-live-2026-10-30:ai",
     "publicPostUrl": "https://motusnova.blogspot.com/2026/10/13-ai.html",
     "publishedAt": "2026-10-30T14:42:29+09:00"
+  },
+  {
+    "idempotencyKey": "library:motus-live-2026-10-30:us|https://motusnova.blogspot.com/2026/10/286-10-3.html",
+    "publicationId": "motus-live-2026-10-30:us",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/10/286-10-3.html",
+    "publishedAt": "2026-10-31T09:22:42+09:00"
   }
 ]
