@@ -6,7 +6,7 @@
  *   SPDR sector ETFs, each with the change for the covered session computed from daily closes.
  */
 export interface KoreaSearchStock {rank:number;name:string;code:string;close:number;changePct:number;date:string;url:string}
-export interface USAttentionStock {symbol:string;name:string;koreanName:string|null;changePct:number;close:number;date:string;trendingRank:number|null;mostActiveRank:number|null;marketCap:number|null;bigMover?:boolean}
+export interface USAttentionStock {symbol:string;name:string;koreanName:string|null;changePct:number;close:number;date:string;trendingRank:number|null;mostActiveRank:number|null;marketCap:number|null;bigMover?:boolean;inNews?:boolean}
 export interface SectorMove {symbol:string;label:string;changePct:number;date:string}
 export interface AttentionAudit {sourceId:string;url:string;status:'PASS'|'FAILED';count:number;error:string|null}
 
