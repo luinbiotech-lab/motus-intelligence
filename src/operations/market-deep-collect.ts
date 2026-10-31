@@ -47,12 +47,15 @@ export async function collectUSDeep(input:{sessionDate:string;operationDate:stri
     // (e.g. '인텔 29% 급락') even when the company is neither trending nor among the largest.
     const commentary=[...(bundle?.briefs??[]).flatMap(brief=>brief.statements.filter(item=>item.region==='US').map(item=>item.text)),...(wire?.reports??[]).flatMap(report=>[report.title,report.sentence??''])].join('\n');
     const known=new Set([...(attention?.stocks??[]),...(mega?.stocks??[])].map(stock=>stock.symbol));
+    const mentioned=new Set(Object.entries(US_KOREAN_NAMES).filter(([,name])=>name.length>=2&&!/^[A-Z&]+$/.test(name)&&new RegExp(`(?<![가-힣])${name}(?![가-힣]{2})`).test(commentary)).map(([symbol])=>symbol.replace('_','-')));
     const namedSymbols=[...new Set(Object.entries(US_KOREAN_NAMES).filter(([symbol,name])=>name.length>=2&&!known.has(symbol)&&!/^[A-Z&]+$/.test(name)&&new RegExp(`(?<![가-힣])${name}(?![가-힣]{2})`).test(commentary)).map(([symbol])=>symbol.replace('_','-')))].slice(0,8);
     const named=namedSymbols.length?await collectAIBellwethers([input.sessionDate],input.fetcher,namedSymbols).catch(()=>null):null;
     if(named)record(input.audit,named.audit.map(item=>({...item,sourceId:item.sourceId.replace('ai-bellwethers','named-stocks')})),'US_MARKET',input.at,input.sessionDate);
     const newsMovers=(named?.stocks??[]).filter(stock=>Math.abs(stock.changePct)>=3).map(stock=>({...stock,inNews:true}));
-    const attentionStocks=(attention?.stocks??[]).map(stock=>bigMovers.some(item=>item.symbol===stock.symbol)?{...stock,bigMover:true}:stock);
-    const stocks=[...newsMovers,...bigMovers.filter(item=>!attentionStocks.some(stock=>stock.symbol===item.symbol)).map(item=>({...item,bigMover:true})),...attentionStocks];
+    // A trending or megacap stock the commentary names, with a 3%+ move, is flagged the same way.
+    const flag=<T extends {symbol:string;changePct:number}>(stock:T)=>mentioned.has(stock.symbol)&&Math.abs(stock.changePct)>=3?{...stock,inNews:true}:stock;
+    const attentionStocks=(attention?.stocks??[]).map(stock=>flag(bigMovers.some(item=>item.symbol===stock.symbol)?{...stock,bigMover:true}:stock));
+    const stocks=[...newsMovers,...bigMovers.filter(item=>!attentionStocks.some(stock=>stock.symbol===item.symbol)).map(item=>flag({...item,bigMover:true})),...attentionStocks];
     const composition=composeUSDeepSections({bundle,stocks,sectors:attention?.sectors??[],wire:wire?.reports??[],checkpoint:'다음 정규장에서는 미국 10년물 금리 방향과 함께, 증권사들이 짚은 경계 요인이 주요 지수와 업종 등락에 실제로 반영되는지가 확인 대상이다.'});
     const sources=[...composition.sources];
     if(composition.sections.some(section=>section.key==='us-sectors-stocks')){sources.push({label:'Yahoo Finance 검색 상위 종목',url:YAHOO_TRENDING,publisher:'Yahoo Finance'});for(const url of attention?.stockUrls??[])sources.push({label:'Yahoo Finance 종목 일별 종가',url,publisher:'Yahoo Finance'});if(bigMovers.length)for(const url of mega?.urls??[])sources.push({label:'Yahoo Finance 미국 시가총액 상위 종목 일별 종가',url,publisher:'Yahoo Finance'});if(newsMovers.length)for(const url of named?.urls??[])sources.push({label:'Yahoo Finance 리포트·기사 언급 종목 일별 종가',url,publisher:'Yahoo Finance'})}
