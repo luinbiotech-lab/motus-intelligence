@@ -1,0 +1,167 @@
+name: MOTUS Weekly Review
+
+on:
+  workflow_dispatch:
+    inputs:
+      run_date:
+        description: KST run date (YYYY-MM-DD); the completed Monday-Friday week before it is reviewed
+        required: false
+        type: string
+      execute_publish:
+        description: Publish to Blogger after every gate passes (at most once per week)
+        required: false
+        type: boolean
+        default: false
+      final_attempt:
+        description: Accept broker outlook alone when the economic calendar has not moved to next week yet
+        required: false
+        type: boolean
+        default: false
+  schedule:
+    # Sunday 20:37 and 23:37 KST: the week's review with next week's calendar.
+    - cron: '37 11 * * 0'
+    - cron: '37 14 * * 0'
+    # Monday 06:37 KST: final attempt before the Korean open; broker outlook alone is accepted.
+    - cron: '37 21 * * 0'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: motus-weekly
+  cancel-in-progress: false
+
+jobs:
+  weekly-review:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      TZ: Asia/Seoul
+      MOTUS_LIVE_PUBLISH_ENABLED: 'false'
+      MOTUS_COMMERCE_ENABLED: 'false'
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Hydrate the persisted weekly ledger from ops-data
+        shell: bash
+        run: |
+          set -euo pipefail
+          for attempt in 1 2 3; do
+            if git fetch origin ops-data:refs/remotes/origin/ops-data; then
+              mkdir -p data
+              if git cat-file -e origin/ops-data:data/weekly 2>/dev/null; then git archive origin/ops-data data/weekly | tar -xf -; fi
+              git rev-parse origin/ops-data > data/.ops-data-hydrated
+              exit 0
+            fi
+            sleep $((attempt * 5))
+          done
+          echo '::warning title=ops-data unavailable::live publication will HOLD (OPS_DATA_NOT_HYDRATED)'
+      - uses: actions/setup-node@v4
+        with: {node-version: 22, cache: npm}
+      - run: npm ci
+      - run: npm run build
+      - run: node --test --experimental-test-isolation=none dist/tests/weekly-review.test.js
+      - name: Resolve run mode
+        shell: bash
+        env:
+          INPUT_DATE: ${{ inputs.run_date }}
+          INPUT_EXECUTE: ${{ inputs.execute_publish }}
+          INPUT_FINAL: ${{ inputs.final_attempt }}
+          SCHEDULE: ${{ github.event.schedule }}
+        run: |
+          RUN_DATE="${INPUT_DATE:-$(date +%F)}"
+          [[ "$RUN_DATE" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]] || exit 1
+          LIVE=false; FINAL=false
+          if [[ -n "$SCHEDULE" || "$INPUT_EXECUTE" == "true" ]]; then LIVE=true; fi
+          if [[ "$SCHEDULE" == "37 21 * * 0" || "$INPUT_FINAL" == "true" ]]; then FINAL=true; fi
+          echo "RUN_DATE=$RUN_DATE" >> "$GITHUB_ENV"
+          echo "MOTUS_LIVE_PUBLISH_ENABLED=$LIVE" >> "$GITHUB_ENV"
+          echo "FINAL_ATTEMPT=$FINAL" >> "$GITHUB_ENV"
+      - name: Mark the upload root
+        if: always()
+        run: mkdir -p data && echo weekly > data/.weekly-bundle
+      - name: Build and publish the weekly review
+        shell: bash
+        env:
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+        run: |
+          flags=(--date "$RUN_DATE")
+          [[ "$MOTUS_LIVE_PUBLISH_ENABLED" == "true" ]] && flags+=(--execute)
+          [[ "$FINAL_ATTEMPT" == "true" ]] && flags+=(--final-attempt)
+          node dist/src/motus-weekly-cli.js "${flags[@]}"
+      - name: Summarize
+        if: always()
+        shell: bash
+        run: |
+          file="${WEEKLY_RESULT:-}"
+          if [[ -n "$file" && -f "$file" ]]; then
+            node -e 'const r=require(process.argv[1]);console.log("### MOTUS weekly review\n- State: **"+r.state+"**\n- Title: "+(r.title??"")+"\n- Reasons: "+(r.reasons??[]).join(", ")+(r.publicPostUrl?"\n- URL: "+r.publicPostUrl:""))' "$file" >> "$GITHUB_STEP_SUMMARY" || true
+          fi
+      - name: Upload weekly record
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: motus-weekly-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            data/weekly/
+            data/.weekly-bundle
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 90
+      - name: Upload ops-data merge tool
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: motus-weekly-tool-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            dist/src/ops-data-merge-cli.js
+            dist/src/production/ops-data-merge.js
+            dist/src/production/run-record.js
+          if-no-files-found: error
+          retention-days: 7
+
+  persist-weekly-record:
+    if: ${{ !cancelled() }}
+    needs: weekly-review
+    permissions:
+      contents: write
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: ops-data, fetch-depth: 0, path: ops-data}
+      - uses: actions/download-artifact@v4
+        with:
+          name: motus-weekly-${{ github.run_id }}-${{ github.run_attempt }}
+          path: bundle
+      - uses: actions/download-artifact@v4
+        with:
+          name: motus-weekly-tool-${{ github.run_id }}-${{ github.run_attempt }}
+          path: persist-tool
+      - name: Merge the weekly ledger into ops-data
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f bundle/.weekly-bundle
+          [[ -d bundle/weekly ]] || { echo 'no weekly record'; exit 0; }
+          echo '{"type":"module"}' > persist-tool/package.json
+          git -C ops-data config user.name 'motus-operations-bot'
+          git -C ops-data config user.email 'actions@users.noreply.github.com'
+          for attempt in 1 2 3 4 5; do
+            git -C ops-data fetch origin ops-data
+            git -C ops-data reset --hard origin/ops-data
+            mkdir -p ops-data/data
+            node persist-tool/ops-data-merge-cli.js bundle ops-data/data
+            if grep -RIlE -- '-----BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY-----|BLOGGER_(CLIENT_SECRET|REFRESH_TOKEN)=' ops-data/data/weekly; then
+              echo '::error title=Secret scan failed::weekly record contains credential material'; exit 1
+            fi
+            git -C ops-data add data
+            if git -C ops-data diff --cached --quiet; then echo 'ops-data already up to date'; exit 0; fi
+            git -C ops-data commit -q -m "ops: persist weekly ${GITHUB_RUN_ID}/${GITHUB_RUN_ATTEMPT}"
+            if git -C ops-data push origin HEAD:ops-data; then exit 0; fi
+            sleep $((attempt * 5))
+          done
+          echo '::error title=ops-data persistence failed::weekly record was not persisted'; exit 1

@@ -64,7 +64,7 @@
 - [x] B5. **일회성 workflow 정리.** 검토 결과 삭제 대상이 없다. `motus-existing-korea-close-title-correction.yml`은 #53에서 수동 정정 도구로 의도적으로 남겼고, `motus-blogger-connection.yml`은 읽기 전용 진단이다. 정정 도구에는 발행 글을 바꾸는 `apply` 옵션이 있으나 수동 실행 전용이므로 그대로 둔다.
 - [x] B6. **기록 정합성 점검 도구.** `npm run motus:record-consistency -- --root <ops-data의 data>`는 읽기 전용이다(#63). ledger와 결과 파일의 발행물을 Library·Weekly feed·Search 등록과 대조하고, 같은 운영일 다중 발행과 같은 시장 세션 이중 발행도 찾는다. 루프는 매 실행 이 점검을 돌린다.
   - 첫 점검 결과: 발행물 13건 중 10/28 AI 글 1건(`ai_01909993953.html`)이 Library·Weekly·Search에 없다. 이 글은 #38 이전에 공개 페이지 429로 FAILED가 났다가 수동 복구된 건이다. 현재 코드는 429에도 정상 경로로 등록한다. 보정하려면 `ops-data`를 수동으로 고쳐야 하므로 사용자 결정 사항이다.
-- [ ] B7. **주간 인텔리전스 초안.** `ops-data`에 쌓인 일간 발행물로 주간 요약을 생성한다. 시뮬레이션 전용이며, 발행 활성화는 사용자 승인 사항이다.
+- [x] B7. **주간 증시 리뷰 자동 발행 (2026-11-01 사용자 승인).** `motus-weekly-production.yml`이 일요일 20:37·23:37 KST, 월요일 06:37 KST(최종)에 돈다. 주간 종가(Yahoo), 증권사 주간 리포트 인용(네이버 리서치), 다음 주 경제지표(Forex Factory), 그 주의 MOTUS 데일리 기사 링크로 구성한다. 한 주에 한 번만 발행하며 원장은 `ops-data`의 `data/weekly/<주 시작일>/publish-ledger.jsonl`이다. 처음 두 번은 다음 주 일정이 있어야 발행하고, 최종 시도는 증권사 전망만으로도 발행한다.
 
 ## 6. 사용자 결정 대기
 
@@ -72,7 +72,6 @@
 
 - 라이선스 있는 시장 데이터 업체(Yahoo 비공식 API 대체) 선정과 비용
 - KB증권 리서치 본문 bullet 발췌 유지 여부(이용조건 확인)
-- 주간 인텔리전스 공개 발행 여부
 
 ## 7. 작업 기록
 
