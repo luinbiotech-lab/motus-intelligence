@@ -24,6 +24,8 @@ export interface BloggerOAuthBootstrapDependencies {
   persistSecret?:(secret:string)=>Promise<string>;
   timeoutMs?:number;
   loginHint?:string;
+  /** Another Google API on the same OAuth client (e.g. Drive); defaults to Blogger. */
+  scope?:string;
 }
 
 export interface BloggerOAuthBootstrapResult {
@@ -54,13 +56,13 @@ export function readBloggerOAuthEnvironment(environment:EnvironmentReader=(name)
   return values as BloggerOAuthEnvironment;
 }
 
-export function buildBloggerAuthorizationUrl(input:{clientId:string;redirectUri:string;state:string;loginHint?:string}):URL {
+export function buildBloggerAuthorizationUrl(input:{clientId:string;redirectUri:string;state:string;loginHint?:string;scope?:string}):URL {
   const url=new URL(BLOGGER_AUTHORIZATION_ENDPOINT);
   url.search=new URLSearchParams({
     client_id:input.clientId,
     redirect_uri:input.redirectUri,
     response_type:'code',
-    scope:BLOGGER_OAUTH_SCOPE,
+    scope:input.scope??BLOGGER_OAUTH_SCOPE,
     access_type:'offline',
     prompt:'consent',
     state:input.state,
@@ -102,7 +104,7 @@ export async function runBloggerOAuthBootstrap(dependencies:BloggerOAuthBootstra
   const state=randomBytes(32).toString('hex');
   const callback=await startLoopbackCallback(state,dependencies.timeoutMs??300_000);
   try {
-    const authorizationUrl=buildBloggerAuthorizationUrl({clientId:environment.clientId,redirectUri:callback.redirectUri,state,...(dependencies.loginHint?{loginHint:dependencies.loginHint}:{})});
+    const authorizationUrl=buildBloggerAuthorizationUrl({clientId:environment.clientId,redirectUri:callback.redirectUri,state,...(dependencies.loginHint?{loginHint:dependencies.loginHint}:{}),...(dependencies.scope?{scope:dependencies.scope}:{})});
     callback.code.catch(()=>undefined);
     await (dependencies.openUrl??openExternalUrl)(authorizationUrl.toString());
     const code=await callback.code;
