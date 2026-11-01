@@ -31,6 +31,7 @@ const at0=(date:string)=>Date.parse(date+'T00:00:00Z');
 const addDays=(date:string,days:number)=>dateOf(at0(date)+days*DAY);
 export const shortDate=(date:string)=>{const [,m,d]=date.split('-');return `${Number(m)}/${Number(d)}`};
 export const dayLabel=(date:string)=>`${koreanDateLabel(date)}(${WEEKDAY[new Date(at0(date)).getUTCDay()]})`;
+export const shortDayLabel=(date:string)=>`${shortDate(date)}(${WEEKDAY[new Date(at0(date)).getUTCDay()]})`;
 
 /**
  * The completed Monday–Friday week a run reviews and the week it previews. A run on a weekday reviews the
@@ -188,7 +189,7 @@ const EVENT_NAMES:Array<[RegExp,string,string]>=[
   [/^Prelim Nonfarm Productivity/i,'비농업 생산성(예비)',''],[/^Prelim Unit Labor Costs/i,'단위노동비용(예비)',''],[/^Empire State Manufacturing/i,'뉴욕 제조업지수',''],[/^Philly Fed Manufacturing/i,'필라델피아 제조업지수',''],
   [/^Building Permits/i,'건축 허가',''],[/^Housing Starts/i,'주택 착공',''],[/^Existing Home Sales/i,'기존주택 판매',''],[/^New Home Sales/i,'신규주택 판매',''],[/^Pending Home Sales/i,'잠정주택 판매',''],
   [/^(\d+)-y Bond Auction/i,'$1년물 국채 입찰',''],[/^Treasury Currency Report/i,'재무부 환율보고서',''],
-  [/^Caixin Manufacturing PMI/i,'차이신 제조업 PMI',''],[/^Caixin Services PMI/i,'차이신 서비스업 PMI',''],[/^Manufacturing PMI/i,'제조업 PMI',''],[/^Non-Manufacturing PMI/i,'비제조업 PMI',''],
+  [/^Caixin Manufacturing PMI/i,'차이신 제조업 PMI','차이신 PMI'],[/^Caixin Services PMI/i,'차이신 서비스업 PMI','차이신 PMI'],[/^Manufacturing PMI/i,'제조업 PMI',''],[/^Non-Manufacturing PMI/i,'비제조업 PMI',''],
   [/^BOJ Policy Rate/i,'일본은행 기준금리 결정','일본은행'],[/^Main Refinancing Rate/i,'ECB 기준금리 결정','ECB'],[/^Official Bank Rate/i,'영란은행 기준금리 결정','영란은행'],[/^Cash Rate/i,'호주중앙은행 기준금리 결정','호주중앙은행'],
   [/^Monetary Policy Statement/i,'통화정책 성명',''],[/^BOE Monetary Policy Report/i,'영란은행 통화정책 보고서',''],[/^Overnight Rate/i,'캐나다중앙은행 기준금리 결정',''],
 ];
@@ -211,12 +212,12 @@ export function parseForexFactory(body:unknown,window:WeekWindow):{events:Calend
     if(kstDate<window.nextStart||kstDate>addDays(window.nextEnd,1))continue;
     if(!KEPT.has(country)||!(impact==='High'||(impact==='Medium'&&country==='USD')))continue;
     const named=koreanEventName(title);
-    // Other economies are shown only for releases with a Korean name; an untranslated English line reads as noise.
-    if(country!=='USD'&&!named.name)continue;
+    // Other economies are shown only for their headline decisions (rate decisions); speeches and reports crowd the table.
+    if(country!=='USD'&&!named.group)continue;
     const election=named.group==='중간선거'||named.group==='대선';
     // A release with no fixed time (00:00 local in the feed's own zone) is shown by date only.
     const allDay=/T00:00:00/.test(String(raw.date));
-    events.push({at:new Date(when).toISOString(),kstLabel:election?`${dayLabel(local)} (미국 현지)`:allDay?dayLabel(local):`${dayLabel(kstDate)} ${hh}`,country,countryLabel:COUNTRY[country]??country,title,koreanTitle:named.name,group:named.group,impact:impact as 'High'|'Medium',forecast:String(raw.forecast??'').trim(),previous:String(raw.previous??'').trim()});
+    events.push({at:election||allDay?new Date(Date.parse(local+'T00:00:00+09:00')).toISOString():new Date(when).toISOString(),kstLabel:election?`${shortDayLabel(local)} 미국 현지`:allDay?shortDayLabel(local):`${shortDayLabel(kstDate)} ${hh}`,country,countryLabel:COUNTRY[country]??country,title,koreanTitle:named.name,group:named.group,impact:impact as 'High'|'Medium',forecast:String(raw.forecast??'').trim(),previous:String(raw.previous??'').trim()});
   }
   events.sort((a,b)=>a.at.localeCompare(b.at));
   return {events,coversNextWeek:covers};
@@ -267,11 +268,11 @@ function changeText(quote:WeeklyQuote):string {return quote.unit==='yield'?`${qu
 export function joinEvents(names:string[]):string {if(names.length<2)return names[0]??'';const [first,second]=names as [string,string];const rest=first.startsWith('미국 ')&&second.startsWith('미국 ')?second.slice(3):second;return `${josa(first,'과','와')} ${rest}`}
 /** Next week's headline releases, one per group in time order (e.g. 고용보고서, ISM 지수). */
 export function headlineEvents(events:CalendarEvent[],limit=2):string[] {
-  const out:string[]=[],add=(list:CalendarEvent[])=>{for(const event of list)if(event.group&&!out.includes(event.group))out.push(event.group)};
+  const out:CalendarEvent[]=[],add=(list:CalendarEvent[])=>{for(const event of list)if(event.group&&!out.some(item=>item.group===event.group))out.push(event)};
   add(events.filter(event=>event.country==='USD'&&event.impact==='High'));
   add(events.filter(event=>event.country==='USD'&&event.impact==='Medium'&&/^(?:ISM 지수|FOMC|CPI|PCE 물가|소매판매|GDP)$/.test(event.group??'')));
   add(events.filter(event=>event.country!=='USD'&&event.impact==='High'));
-  return out.slice(0,limit).map(group=>/^(?:FOMC|ECB|일본은행|영란은행|호주중앙은행)/.test(group)?group:`미국 ${group}`);
+  return out.slice(0,limit).map(event=>/^(?:FOMC|ECB|일본은행|영란은행|호주중앙은행)/.test(event.group!)?event.group!:`${event.countryLabel} ${event.group}`);
 }
 
 export function buildWeeklyArticle(evidence:WeeklyEvidence,options:{requireCalendar:boolean}={requireCalendar:true}):WeeklyArticle {
@@ -308,7 +309,7 @@ export function buildWeeklyArticle(evidence:WeeklyEvidence,options:{requireCalen
   const cite=(item:WeeklyBrokerQuote,verb:string)=>({text:`${josa(item.broker,'은','는')} ${koreanDateLabel(item.date)} 「${item.title}」에서 ${said(quote(item.sentence))} ${verb}.`,source:{label:`${item.broker} ${item.title} (${koreanDateLabel(item.date)})`,url:item.url}});
   if(reviews.length)sections.push({key:'weekly-broker-review',title:'증권가가 본 이번 주',intro:'증권사가 이번 주 말 공개한 주간 리포트의 요약문을 그대로 인용했다.',paragraphs:reviews.slice(0,5).map(item=>cite(item,'진단했다'))});
   // 5) Next week's calendar.
-  if(evidence.calendar.length)sections.push({key:'weekly-calendar',title:`다음 주 주요 일정 (${nextRange})`,table:{headers:['일시(한국시간)','국가','지표·이벤트','예상','이전'],rows:evidence.calendar.slice(0,24).map(item=>[item.kstLabel,item.countryLabel,(item.koreanTitle??item.title)+(item.impact==='High'?' ★':''),item.forecast||'-',item.previous||'-']),note:'★는 시장 영향이 큰 일정. 예상치는 Forex Factory 집계 기준이며, 일정은 발표 기관 사정에 따라 바뀔 수 있다.'}});
+  if(evidence.calendar.length)sections.push({key:'weekly-calendar',title:`다음 주 주요 일정 (${nextRange})`,table:{headers:['한국시간','일정','예상 / 이전'],rows:evidence.calendar.slice(0,20).map(item=>[item.kstLabel,`${item.countryLabel} ${item.koreanTitle??item.title}${item.impact==='High'?' ★':''}`,item.forecast||item.previous?`${item.forecast||'-'} / ${item.previous||'-'}`:'-']),note:'★는 시장 영향이 큰 일정. 예상치는 Forex Factory 집계 기준이며, 일정은 발표 기관 사정에 따라 바뀔 수 있다.'}});
   // 6) What brokers say to watch.
   if(outlooks.length)sections.push({key:'weekly-broker-outlook',title:'증권가가 꼽은 다음 주 변수',paragraphs:outlooks.slice(0,5).map(item=>cite(item,'짚었다'))});
   const sourceList:Array<[string,{label:string;url:string}]>=[...evidence.broker.map(item=>[item.url,{label:`${item.broker} ${item.title} (${koreanDateLabel(item.date)})`,url:item.url}] as [string,{label:string;url:string}]),['yahoo',{label:'Yahoo Finance 일별 종가 (지수·금리·환율·종목)',url:'https://finance.yahoo.com/markets/'}]];

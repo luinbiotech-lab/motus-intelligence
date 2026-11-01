@@ -53,7 +53,7 @@ test('the economic calendar is kept only once it is on next week, in KST, with K
   const {events,coversNextWeek}=parseForexFactory(feed,window);
   assert.equal(coversNextWeek,true);
   assert.deepEqual(events.map(item=>item.koreanTitle),['ISM 제조업 PMI','비농업 고용','실업률'],'low-impact and non-U.S. medium-impact releases are left out');
-  assert.equal(events[1]!.kstLabel,'11월 6일(금) 22:30');
+  assert.equal(events[1]!.kstLabel,'11/6(금) 22:30');
   assert.deepEqual(headlineEvents(events),['미국 ISM 지수','미국 고용보고서']);
   assert.equal(joinEvents(headlineEvents(events)),'미국 ISM 지수와 고용보고서');
   assert.deepEqual(koreanEventName('Core CPI m/m'),{name:'근원 소비자물가(CPI)',group:'CPI'});
@@ -85,7 +85,7 @@ test('the weekly article states only collected numbers, quotes brokers by name a
   assert.match(article.lead,/다음 주\(11월 2~6일\)에는 미국 ISM 지수와 고용보고서가 예정돼 있다\./);
   const html=renderWeeklyEditorialArticle(article).html;
   assert.match(html,/유안타증권은 10월 30일 「\[주식시황 위클리\] 주간:知」에서 “반도체, IT하드웨어, 보험, 증권 업종 상승\. 조선, 미디어, 기계 업종 하락”이라고 진단했다\./);
-  assert.match(html,/11월 6일\(금\) 22:30/);assert.match(html,/인텔\(INTC\)/);
+  assert.match(html,/11\/6\(금\) 22:30/);assert.match(html,/인텔\(INTC\)/);
   assert.match(html,/<table/);assert.doesNotMatch(html,/undefined|NaN/);
 });
 
@@ -107,7 +107,7 @@ test('review fixes: a missing final bar is dropped, Sunday-evening Asia releases
   assert.deepEqual(completeWeek([late,gap,holidayKr]).map(item=>item.label),['엔비디아','코스피'],'a provider gap is dropped; a market-wide holiday is kept');
   const window=weekWindow('2026-11-01');
   const {events}=parseForexFactory([{title:'Caixin Manufacturing PMI',country:'CNY',date:'2026-11-01T20:45:00-05:00',impact:'High',forecast:'',previous:''},{title:'ISM Manufacturing PMI',country:'USD',date:'2026-11-02T10:00:00-05:00',impact:'High',forecast:'',previous:''}],window);
-  assert.deepEqual(events.map(item=>item.kstLabel),['11월 2일(월) 10:45','11월 3일(화) 00:00']);
+  assert.deepEqual(events.map(item=>item.kstLabel),['11/2(월) 10:45','11/3(화) 00:00']);assert.deepEqual(headlineEvents(events),['미국 ISM 지수','중국 차이신 PMI']);
   const flat=buildWeeklyArticle(evidence({quotes:evidence().quotes.map(item=>item.label==='나스닥'?{...item,changePct:-2.1}:item.label==='코스피'?{...item,changePct:0.03}:item)}));
   assert.match(flat.title,/코스피 0\.03% 상승/);
 });
@@ -117,11 +117,11 @@ test('the U.S. election and key U.S. releases lead next week; untranslated forei
     {title:'ISM Manufacturing PMI',country:'USD',date:'2026-11-02T10:00:00-05:00',impact:'Medium',forecast:'54.7',previous:'54.5'},
     {title:'Congressional Elections',country:'USD',date:'2026-11-03T10:16:00-05:00',impact:'High',forecast:'',previous:''},
     {title:'Official Bank Rate',country:'GBP',date:'2026-11-05T07:00:00-05:00',impact:'High',forecast:'4.00%',previous:'3.75%'},
-    {title:'Some Obscure Index',country:'GBP',date:'2026-11-05T07:00:00-05:00',impact:'High',forecast:'',previous:''},
+    {title:'BOE Gov Bailey Speaks',country:'GBP',date:'2026-11-05T07:00:00-05:00',impact:'High',forecast:'',previous:''},
     {title:'Non-Farm Employment Change',country:'USD',date:'2026-11-06T08:30:00-05:00',impact:'High',forecast:'63K',previous:'29K'},
   ],weekWindow('2026-11-01'));
   assert.deepEqual(events.map(item=>item.koreanTitle),['ISM 제조업 PMI','중간선거(상·하원 선거)','영란은행 기준금리 결정','비농업 고용']);
-  assert.equal(events[1]!.kstLabel,'11월 3일(화) (미국 현지)');
+  assert.equal(events[1]!.kstLabel,'11/3(화) 미국 현지');
   assert.deepEqual(headlineEvents(events),['미국 중간선거','미국 고용보고서']);
   const article=buildWeeklyArticle(evidence({calendar:events}));
   assert.match(article.title,/…다음 주 미국 중간선거·고용보고서 주목$/);
