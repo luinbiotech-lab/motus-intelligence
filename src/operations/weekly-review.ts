@@ -172,6 +172,8 @@ export const FF_THIS_WEEK='https://nfs.faireconomy.media/ff_calendar_thisweek.js
 export const FF_CALENDAR_PAGE='https://www.forexfactory.com/calendar';
 const COUNTRY:Record<string,string>={USD:'미국',CNY:'중국',JPY:'일본',EUR:'유로존',GBP:'영국',AUD:'호주',CAD:'캐나다'};
 const EVENT_NAMES:Array<[RegExp,string,string]>=[
+  [/Congressional Elections|Midterm Elections/i,'중간선거(상·하원 선거)','중간선거'],[/^Presidential Election/i,'대통령 선거','대선'],
+  [/^BOE Gov .* Speaks/i,'영란은행 총재 발언',''],[/^BOJ Gov .* Speaks/i,'일본은행 총재 발언',''],[/^ECB President .* Speaks/i,'ECB 총재 발언',''],[/^Monetary Policy Summary/i,'영란은행 통화정책 요약',''],[/^MPC Official Bank Rate Votes/i,'영란은행 금리 결정 투표',''],[/^BOJ Outlook Report/i,'일본은행 경제전망 보고서',''],[/^Main Refinancing Rate/i,'ECB 기준금리 결정','ECB'],[/^ECB Press Conference/i,'ECB 기자회견','ECB'],
   [/^Non-Farm Employment Change/i,'비농업 고용','고용보고서'],[/^Unemployment Rate/i,'실업률','고용보고서'],[/^Average Hourly Earnings/i,'평균 시간당 임금','고용보고서'],
   [/^ADP Non-Farm Employment Change/i,'ADP 민간 고용','ADP 고용'],[/^JOLTS Job Openings/i,'JOLTS 구인건수','구인건수'],[/^Unemployment Claims/i,'신규 실업수당 청구건수','실업수당'],
   [/^ISM Manufacturing PMI/i,'ISM 제조업 PMI','ISM 지수'],[/^ISM Services PMI/i,'ISM 서비스업 PMI','ISM 지수'],[/^ISM Manufacturing Prices/i,'ISM 제조업 가격지수','ISM 지수'],[/^ISM Services Prices/i,'ISM 서비스업 가격지수','ISM 지수'],
@@ -209,9 +211,12 @@ export function parseForexFactory(body:unknown,window:WeekWindow):{events:Calend
     if(kstDate<window.nextStart||kstDate>addDays(window.nextEnd,1))continue;
     if(!KEPT.has(country)||!(impact==='High'||(impact==='Medium'&&country==='USD')))continue;
     const named=koreanEventName(title);
+    // Other economies are shown only for releases with a Korean name; an untranslated English line reads as noise.
+    if(country!=='USD'&&!named.name)continue;
+    const election=named.group==='중간선거'||named.group==='대선';
     // A release with no fixed time (00:00 local in the feed's own zone) is shown by date only.
     const allDay=/T00:00:00/.test(String(raw.date));
-    events.push({at:new Date(when).toISOString(),kstLabel:allDay?dayLabel(local):`${dayLabel(kstDate)} ${hh}`,country,countryLabel:COUNTRY[country]??country,title,koreanTitle:named.name,group:named.group,impact:impact as 'High'|'Medium',forecast:String(raw.forecast??'').trim(),previous:String(raw.previous??'').trim()});
+    events.push({at:new Date(when).toISOString(),kstLabel:election?`${dayLabel(local)} (미국 현지)`:allDay?dayLabel(local):`${dayLabel(kstDate)} ${hh}`,country,countryLabel:COUNTRY[country]??country,title,koreanTitle:named.name,group:named.group,impact:impact as 'High'|'Medium',forecast:String(raw.forecast??'').trim(),previous:String(raw.previous??'').trim()});
   }
   events.sort((a,b)=>a.at.localeCompare(b.at));
   return {events,coversNextWeek:covers};
@@ -262,9 +267,10 @@ function changeText(quote:WeeklyQuote):string {return quote.unit==='yield'?`${qu
 export function joinEvents(names:string[]):string {if(names.length<2)return names[0]??'';const [first,second]=names as [string,string];const rest=first.startsWith('미국 ')&&second.startsWith('미국 ')?second.slice(3):second;return `${josa(first,'과','와')} ${rest}`}
 /** Next week's headline releases, one per group in time order (e.g. 고용보고서, ISM 지수). */
 export function headlineEvents(events:CalendarEvent[],limit=2):string[] {
-  const out:string[]=[];
-  for(const event of events)if(event.country==='USD'&&event.impact==='High'&&event.group&&!out.includes(event.group))out.push(event.group);
-  for(const event of events)if(event.country!=='USD'&&event.impact==='High'&&event.group&&!out.includes(event.group))out.push(event.group);
+  const out:string[]=[],add=(list:CalendarEvent[])=>{for(const event of list)if(event.group&&!out.includes(event.group))out.push(event.group)};
+  add(events.filter(event=>event.country==='USD'&&event.impact==='High'));
+  add(events.filter(event=>event.country==='USD'&&event.impact==='Medium'&&/^(?:ISM 지수|FOMC|CPI|PCE 물가|소매판매|GDP)$/.test(event.group??'')));
+  add(events.filter(event=>event.country!=='USD'&&event.impact==='High'));
   return out.slice(0,limit).map(group=>/^(?:FOMC|ECB|일본은행|영란은행|호주중앙은행)/.test(group)?group:`미국 ${group}`);
 }
 
@@ -286,7 +292,7 @@ export function buildWeeklyArticle(evidence:WeeklyEvidence,options:{requireCalen
   if(sp&&nasdaq&&dow)leadParts.push(`${range} 한 주 동안 뉴욕증시는 S&P 500 ${signedPct(sp.changePct)}, 나스닥 ${signedPct(nasdaq.changePct)}, 다우존스 ${signedPct(dow.changePct)}로 마감했다.`);
   if(kospi&&kosdaq)leadParts.push(`국내 증시는 코스피가 주간 ${signedPct(kospi.changePct)}(${fmt(kospi.weekClose)}), 코스닥이 ${signedPct(kosdaq.changePct)}(${fmt(kosdaq.weekClose)})를 기록했다.`);
   if(tenYear){const bp=tenYear.changeBp!,rate=`미국 10년물 국채금리는 ${fmt(tenYear.weekClose)}%로 한 주 사이 ${bp===0?'보합이었다':`${Math.abs(bp)}bp ${bp>0?'올랐다':'내렸다'}`}.`;leadParts.push(krw?`${rate} 원·달러 환율은 ${fmt(krw.weekClose)}원으로 주간 ${Math.abs(krw.changePct).toFixed(2)}% ${krw.changePct>0?'올랐다(원화 약세)':krw.changePct<0?'내렸다(원화 강세)':'보합이었다'}.`:rate)}
-  if(headline.length)leadParts.push(`다음 주(${nextRange})에는 ${joinEvents(headline)} 발표가 예정돼 있다.`);
+  if(headline.length)leadParts.push(`다음 주(${nextRange})에는 ${josa(joinEvents(headline),'이','가')} 예정돼 있다.`);
   const sections:WeeklySection[]=[];
   // 1) The week in numbers.
   const indexRows=evidence.quotes.filter(item=>item.group==='US_INDEX'||item.group==='KOREA_INDEX'||item.group==='MACRO');
