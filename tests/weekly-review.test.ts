@@ -82,7 +82,7 @@ test('the weekly article states only collected numbers, quotes brokers by name a
   assert.equal(article.title,'[주간 증시] 나스닥 주간 2.1% 하락·코스피 3.2% 상승…다음 주 미국 ISM 지수·고용보고서 주목');
   assert.match(article.lead,/S&P 500 -1\.20%, 나스닥 -2\.10%, 다우존스 -0\.40%/);
   assert.match(article.lead,/미국 10년물 국채금리는 4\.93%로 한 주 사이 5bp 내렸다\./);
-  assert.match(article.lead,/다음 주\(11월 2~6일\)에는 미국 ISM 지수와 고용보고서 발표가 예정돼 있다\./);
+  assert.match(article.lead,/다음 주\(11월 2~6일\)에는 미국 ISM 지수와 고용보고서가 예정돼 있다\./);
   const html=renderWeeklyEditorialArticle(article).html;
   assert.match(html,/유안타증권은 10월 30일 「\[주식시황 위클리\] 주간:知」에서 “반도체, IT하드웨어, 보험, 증권 업종 상승\. 조선, 미디어, 기계 업종 하락”이라고 진단했다\./);
   assert.match(html,/11월 6일\(금\) 22:30/);assert.match(html,/인텔\(INTC\)/);
@@ -110,4 +110,20 @@ test('review fixes: a missing final bar is dropped, Sunday-evening Asia releases
   assert.deepEqual(events.map(item=>item.kstLabel),['11월 2일(월) 10:45','11월 3일(화) 00:00']);
   const flat=buildWeeklyArticle(evidence({quotes:evidence().quotes.map(item=>item.label==='나스닥'?{...item,changePct:-2.1}:item.label==='코스피'?{...item,changePct:0.03}:item)}));
   assert.match(flat.title,/코스피 0\.03% 상승/);
+});
+
+test('the U.S. election and key U.S. releases lead next week; untranslated foreign lines are dropped', () => {
+  const {events}=parseForexFactory([
+    {title:'ISM Manufacturing PMI',country:'USD',date:'2026-11-02T10:00:00-05:00',impact:'Medium',forecast:'54.7',previous:'54.5'},
+    {title:'Congressional Elections',country:'USD',date:'2026-11-03T10:16:00-05:00',impact:'High',forecast:'',previous:''},
+    {title:'Official Bank Rate',country:'GBP',date:'2026-11-05T07:00:00-05:00',impact:'High',forecast:'4.00%',previous:'3.75%'},
+    {title:'Some Obscure Index',country:'GBP',date:'2026-11-05T07:00:00-05:00',impact:'High',forecast:'',previous:''},
+    {title:'Non-Farm Employment Change',country:'USD',date:'2026-11-06T08:30:00-05:00',impact:'High',forecast:'63K',previous:'29K'},
+  ],weekWindow('2026-11-01'));
+  assert.deepEqual(events.map(item=>item.koreanTitle),['ISM 제조업 PMI','중간선거(상·하원 선거)','영란은행 기준금리 결정','비농업 고용']);
+  assert.equal(events[1]!.kstLabel,'11월 3일(화) (미국 현지)');
+  assert.deepEqual(headlineEvents(events),['미국 중간선거','미국 고용보고서']);
+  const article=buildWeeklyArticle(evidence({calendar:events}));
+  assert.match(article.title,/…다음 주 미국 중간선거·고용보고서 주목$/);
+  assert.match(article.lead,/미국 중간선거와 고용보고서가 예정돼 있다\./);
 });
