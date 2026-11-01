@@ -41,7 +41,9 @@
     "motus:run-record": "node dist/src/run-record-cli.js",
     "motus:record-consistency": "node dist/src/record-consistency-cli.js",
     "search:intelligence:live": "npm run build && node dist/src/search-intelligence-cli.js --live",
-    "motus:republish": "npm run build && node dist/src/motus-republish-cli.js"
+    "motus:republish": "npm run build && node dist/src/motus-republish-cli.js",
+    "drive:oauth": "npm run build && node dist/src/drive-oauth-cli.js",
+    "drive:check": "node dist/src/drive-check-cli.js"
   },
   "devDependencies": {
     "@types/node": "^22.20.2",

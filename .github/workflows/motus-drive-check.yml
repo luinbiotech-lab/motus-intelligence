@@ -1,0 +1,28 @@
+name: MOTUS Google Drive connection check
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  drive-check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 22, cache: npm}
+      - run: npm ci
+      - run: npm run build
+      - name: Upload, share and read back a connection-check PDF
+        env:
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          MOTUS_DRIVE_REFRESH_TOKEN: ${{ secrets.MOTUS_DRIVE_REFRESH_TOKEN }}
+        run: npm run drive:check
+      - name: Summarize
+        if: always()
+        run: |
+          [[ -f data/report-storage/drive-check.json ]] && { echo '### MOTUS Drive check'; echo '```json'; cat data/report-storage/drive-check.json; echo '```'; } >> "$GITHUB_STEP_SUMMARY" || true
