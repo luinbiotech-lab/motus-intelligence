@@ -1460,6 +1460,13 @@
       "error": null
     },
     {
+      "sourceId": "forexfactory:thisweek",
+      "url": "https://nfs.faireconomy.media/ff_calendar_thisweek.json",
+      "status": "PASS",
+      "count": 11,
+      "error": null
+    },
+    {
       "sourceId": "yahoo:spark:15",
       "url": "https://query1.finance.yahoo.com/v7/finance/spark?symbols=AMZN,META,AVGO,AMD,TSM,ORCL,AAPL,TSLA,005930.KS,000660.KS,373220.KS,207940.KS,005380.KS,000270.KS,012450.KS&range=1mo&interval=1d",
       "status": "PASS",
@@ -1471,13 +1478,6 @@
       "url": "https://query1.finance.yahoo.com/v7/finance/spark?symbols=105560.KS,035420.KS,329180.KS,068270.KS,034020.KS&range=1mo&interval=1d",
       "status": "PASS",
       "count": 5,
-      "error": null
-    },
-    {
-      "sourceId": "forexfactory:thisweek",
-      "url": "https://nfs.faireconomy.media/ff_calendar_thisweek.json",
-      "status": "PASS",
-      "count": 11,
       "error": null
     },
     {
@@ -1544,5 +1544,5 @@
       "error": null
     }
   ],
-  "collectedAt": "2026-11-01T04:51:06.700Z"
+  "collectedAt": "2026-11-01T04:51:53.955Z"
 }

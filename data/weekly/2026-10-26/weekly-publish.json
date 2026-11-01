@@ -1,18 +1,9 @@
 {
   "identity": "weekly|2026-10-26",
   "runDate": "2026-11-01",
-  "state": "SIMULATED",
+  "state": "PUBLISHED",
+  "postId": "240289543400332274",
+  "publicPostUrl": "https://motusnova.blogspot.com/2026/11/20-33.html",
   "title": "[주간 증시] 나스닥 주간 2.0% 하락·코스피 3.3% 상승…다음 주 미국 중간선거·고용보고서 주목",
-  "sections": [
-    "masthead",
-    "lead",
-    "weekly-scoreboard",
-    "weekly-daily",
-    "weekly-large-caps",
-    "weekly-broker-review",
-    "weekly-calendar",
-    "weekly-broker-outlook",
-    "sources"
-  ],
-  "publishCallCount": 0
+  "publishCallCount": 1
 }
