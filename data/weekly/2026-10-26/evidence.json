@@ -1263,12 +1263,12 @@
     },
     {
       "at": "2026-11-03T15:16:00.000Z",
-      "kstLabel": "11월 4일(수) 00:16",
+      "kstLabel": "11월 3일(화) (미국 현지)",
       "country": "USD",
       "countryLabel": "미국",
       "title": "Congressional Elections",
-      "koreanTitle": null,
-      "group": null,
+      "koreanTitle": "중간선거(상·하원 선거)",
+      "group": "중간선거",
       "impact": "High",
       "forecast": "",
       "previous": ""
@@ -1303,7 +1303,7 @@
       "country": "GBP",
       "countryLabel": "영국",
       "title": "Monetary Policy Summary",
-      "koreanTitle": null,
+      "koreanTitle": "영란은행 통화정책 요약",
       "group": null,
       "impact": "High",
       "forecast": "",
@@ -1315,7 +1315,7 @@
       "country": "GBP",
       "countryLabel": "영국",
       "title": "MPC Official Bank Rate Votes",
-      "koreanTitle": null,
+      "koreanTitle": "영란은행 금리 결정 투표",
       "group": null,
       "impact": "High",
       "forecast": "7-0-2",
@@ -1339,7 +1339,7 @@
       "country": "GBP",
       "countryLabel": "영국",
       "title": "BOE Gov Bailey Speaks",
-      "koreanTitle": null,
+      "koreanTitle": "영란은행 총재 발언",
       "group": null,
       "impact": "High",
       "forecast": "",
@@ -1423,7 +1423,7 @@
       "country": "JPY",
       "countryLabel": "일본",
       "title": "BOJ Gov Ueda Speaks",
-      "koreanTitle": null,
+      "koreanTitle": "일본은행 총재 발언",
       "group": null,
       "impact": "High",
       "forecast": "",
@@ -1527,6 +1527,13 @@
       "error": null
     },
     {
+      "sourceId": "motus:feed",
+      "url": "https://motusnova.blogspot.com/feeds/posts/default?alt=json&max-results=40",
+      "status": "PASS",
+      "count": 13,
+      "error": null
+    },
+    {
       "sourceId": "yahoo:spark:15",
       "url": "https://query1.finance.yahoo.com/v7/finance/spark?symbols=AMZN,META,AVGO,AMD,TSM,ORCL,AAPL,TSLA,005930.KS,000660.KS,373220.KS,207940.KS,005380.KS,000270.KS,012450.KS&range=1mo&interval=1d",
       "status": "PASS",
@@ -1538,13 +1545,6 @@
       "url": "https://query1.finance.yahoo.com/v7/finance/spark?symbols=105560.KS,035420.KS,329180.KS,068270.KS,034020.KS&range=1mo&interval=1d",
       "status": "PASS",
       "count": 5,
-      "error": null
-    },
-    {
-      "sourceId": "motus:feed",
-      "url": "https://motusnova.blogspot.com/feeds/posts/default?alt=json&max-results=40",
-      "status": "PASS",
-      "count": 13,
       "error": null
     },
     {
@@ -1604,5 +1604,5 @@
       "error": null
     }
   ],
-  "collectedAt": "2026-11-01T04:45:57.669Z"
+  "collectedAt": "2026-11-01T04:48:26.826Z"
 }
