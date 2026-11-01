@@ -1,0 +1,14 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { createNextLiveCycle } from '../src/editorial/next-live-cycle.js';
+import { createReviewDraft, publishApprovedNextDaily } from '../src/production/next-daily-operations.js';
+function fake(unit = createNextLiveCycle().units[0], existing = true) {
+    const article = unit.render.html.match(/<article\b[^>]*>[\s\S]*<\/article>/i)[0];
+    let post = { postId: 'draft-1', title: unit.title, content: article, status: 'DRAFT', url: null, labels: [unit.label] };
+    const calls = { insert: 0, publish: 0 };
+    const adapter = { findMatches: async () => existing ? [post] : [], readPost: async () => post, insertDraft: async (input) => { calls.insert++; post = { postId: 'draft-1', title: input.title, content: input.content.match(/<article\b[^>]*>[\s\S]*<\/article>/i)[0], status: 'DRAFT', url: null, labels: input.labels }; return post; }, publishDraft: async () => { calls.publish++; post = { ...post, status: 'PUBLISHED', url: 'https://motusnova.blogspot.com/2026/10/test.html' }; return { postId: post.postId, publicPostUrl: post.url, publishedAt: '2026-10-07T10:00:00Z' }; }, fetchPublic: async () => ({ status: 200, body: `<html><title>${unit.title}</title><body>MOTUS</body></html>` }) };
+    return { adapter, calls, get post() { return post; } };
+}
+test('approved editorial-first Daily publishes exactly once', async () => { const unit = createNextLiveCycle().units.find(item => item.category === 'AI_INTELLIGENCE'); const f = fake(unit); const result = await publishApprovedNextDaily({ unit, draftPostId: 'draft-1', approvedAt: '2026-10-07T09:00:00Z', adapter: f.adapter }); assert.equal(result.state, 'PUBLISHED'); assert.equal(result.publishCount, 1); assert.equal(f.calls.publish, 1); assert.equal(result.searchRegistration?.googleInspectionState, 'QUEUED'); });
+test('Korea review Draft is created once and remains approval-required', async () => { const unit = createNextLiveCycle().units.find(item => item.category === 'KOREA_MARKET'); const f = fake(unit, false); const result = await createReviewDraft({ unit, at: '2026-10-07T09:00:00Z', adapter: f.adapter }); assert.equal(result.state, 'DRAFT'); assert.equal(result.humanReview.state, 'APPROVAL_REQUIRED'); assert.equal(result.insertCount, 1); assert.equal(result.publishCount, 0); assert.equal(f.calls.publish, 0); assert.equal(result.validation?.pass, true); });
+test('matching Korea Draft is reused without duplicate insert', async () => { const unit = createNextLiveCycle().units.find(item => item.category === 'KOREA_MARKET'); const f = fake(unit, true); const result = await createReviewDraft({ unit, at: '2026-10-07T09:00:00Z', adapter: f.adapter }); assert.equal(result.state, 'DRAFT'); assert.equal(result.insertCount, 0); assert.equal(result.remoteDuplicateCount, 0); });

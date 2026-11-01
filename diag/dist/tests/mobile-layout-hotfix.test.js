@@ -1,0 +1,29 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { createLiveEditorialCycle } from '../src/editorial/live-cycle.js';
+import { auditMobileMarkup, MOBILE_REGRESSION_WIDTHS, patchPublishedMobileLayout } from '../src/production/mobile-layout-hotfix.js';
+const cycle = () => createLiveEditorialCycle();
+const us = () => cycle().units.find(item => item.category === 'US_MARKET');
+const article = (html) => html.match(/<article\b[^>]*>[\s\S]*<\/article>/i)[0];
+class Fake {
+    patches = 0;
+    publishes = 0;
+    post;
+    constructor(post) { this.post = structuredClone(post); }
+    async readPost() { return structuredClone(this.post); }
+    async patchPost(_id, input) { this.patches++; this.post = { ...this.post, title: input.title, content: article(input.content) }; return this.readPost(); }
+    async fetchPublic() { return { status: 200, body: `<html><body>${this.post.title}${this.post.content}</body></html>` }; }
+}
+test('mobile master covers 320, 360, 375, 390 and 430 pixel regression widths', () => { assert.deepEqual(MOBILE_REGRESSION_WIDTHS, [320, 360, 375, 390, 430]); });
+test('U.S. charts use responsive grid, mobile stack primitives and four width-100 SVGs', () => { const html = us().render.html; const audit = auditMobileMarkup(html); assert.equal(audit.pass, true); assert.equal(audit.svgCount, 4); assert.match(html, /data-layout="responsive-two-by-two"/); assert.doesNotMatch(html, /index-trend-row|width:50%;max-width:50%|flex-wrap:nowrap!important/); });
+test('chart titles forbid break-all and use Korean index names', () => { const html = us().render.html; for (const title of ['S&amp;P 500', '나스닥', '다우존스', '러셀 2000'])
+    assert.match(html, new RegExp(`white-space:nowrap[^>]*>${title}<`)); assert.doesNotMatch(html, /word-break:break-all/); });
+test('indicator cards are contained by the shared responsive grid', () => { const html = us().render.html; assert.match(html, /data-layout="responsive-indicator-cards"[^>]*grid-template-columns:repeat\(auto-fit,minmax\(min\(100%,200px\),1fr\)\)/); });
+test('public patch is isolated to one U.S. post and never invokes publish', async () => { const expected = article(us().render.html); const old = expected.replace('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:10px;', '').replaceAll(' width="100%"', ''); const adapter = new Fake({ postId: '614930389904987485', title: us().title, content: old, status: 'PUBLISHED', url: 'https://motusnova.blogspot.com/2026/10/m-ai-531.html', labels: [us().render.label] }); const { contentFingerprint } = await import('../src/production/live-editorial-publish.js'); const result = await patchPublishedMobileLayout({ unit: us(), postId: '614930389904987485', expectedBeforeFingerprint: contentFingerprint(old), adapter }); assert.equal(result.patchCount, 1); assert.equal(result.publishCount, 0); assert.equal(adapter.patches, 1); assert.equal(adapter.publishes, 0); assert.equal(result.state, 'PUBLISHED'); });
+test('known legacy mobile layout can recover a sanitized fingerprint only after text and sources match', async () => { const expected = article(us().render.html); const old = expected.replace('display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:10px;', 'display:flex!important;flex-wrap:nowrap!important;width:50%;max-width:50%;').replaceAll(' width="100%"', '').replace('overflow-x:hidden;', ''); const adapter = new Fake({ postId: '614930389904987485', title: us().title, content: old, status: 'PUBLISHED', url: 'https://motusnova.blogspot.com/2026/10/m-ai-531.html', labels: [us().render.label] }); const result = await patchPublishedMobileLayout({ unit: us(), postId: '614930389904987485', expectedBeforeFingerprint: 'sha256:stale-audit-value', adapter }); assert.equal(result.fingerprintGuard, 'LEGACY_LAYOUT_RECOVERED'); assert.equal(result.patchCount, 1); assert.equal(result.state, 'PUBLISHED'); });
+test('AI and Korea local renders retain containment and Commerce stays absent', () => { for (const category of ['AI_INTELLIGENCE', 'KOREA_MARKET']) {
+    const html = cycle().units.find(item => item.category === category).render.html;
+    assert.match(html, /overflow-x:hidden/);
+    assert.match(html, /width:100%;max-width:100%;box-sizing:border-box/);
+    assert.doesNotMatch(html, /affiliate|commerce/i);
+} });

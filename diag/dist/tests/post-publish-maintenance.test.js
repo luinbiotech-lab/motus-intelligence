@@ -1,0 +1,15 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { createLiveEditorialCycle } from '../src/editorial/live-cycle.js';
+import { correctPublishedUsCaption, CURRENT_US_CHART_CAPTION, STALE_US_CHART_CAPTION } from '../src/production/post-publish-maintenance.js';
+class Fake {
+    patches = [];
+    post;
+    constructor() { const unit = createLiveEditorialCycle().units.find(item => item.category === 'US_MARKET'); this.post = { postId: '614930389904987485', title: unit.title, content: unit.render.html.match(/<article\b[^>]*>[\s\S]*<\/article>/i)[0].replace(CURRENT_US_CHART_CAPTION, STALE_US_CHART_CAPTION), status: 'PUBLISHED', url: 'https://motusnova.blogspot.com/2026/10/m-ai-531.html', labels: [unit.render.label] }; }
+    async readPost() { return structuredClone(this.post); }
+    async patchPost(postId, input) { this.patches.push(postId); this.post = { ...this.post, title: input.title, content: input.content.match(/<article\b[^>]*>[\s\S]*<\/article>/i)[0] }; return this.readPost(); }
+    async fetchPublic() { return { status: 200, body: this.post.content }; }
+}
+test('public correction patches only the approved post and uses actual dates', async () => { const adapter = new Fake(); const unit = createLiveEditorialCycle().units.find(item => item.category === 'US_MARKET'); const result = await correctPublishedUsCaption({ unit, postId: '614930389904987485', adapter }); assert.equal(result.state, 'PUBLISHED'); assert.equal(result.patchCount, 1); assert.deepEqual(adapter.patches, ['614930389904987485']); assert.equal(result.chartValidation, true); assert.match(adapter.post.content, new RegExp(CURRENT_US_CHART_CAPTION)); assert.doesNotMatch(adapter.post.content, new RegExp(STALE_US_CHART_CAPTION)); });
+test('post-publish correction is idempotent and never patches twice', async () => { const adapter = new Fake(); const unit = createLiveEditorialCycle().units.find(item => item.category === 'US_MARKET'); await correctPublishedUsCaption({ unit, postId: '614930389904987485', adapter }); const second = await correctPublishedUsCaption({ unit, postId: '614930389904987485', adapter }); assert.equal(second.patchCount, 0); assert.equal(second.state, 'PUBLISHED'); assert.equal(adapter.patches.length, 1); });
+test('public correction refuses a different post id', async () => { const adapter = new Fake(); const unit = createLiveEditorialCycle().units.find(item => item.category === 'US_MARKET'); const result = await correctPublishedUsCaption({ unit, postId: 'other', adapter }); assert.equal(result.state, 'HOLD'); assert.equal(result.patchCount, 0); assert.equal(adapter.patches.length, 0); });
