@@ -112,8 +112,8 @@ const WEEKLY_TITLE = /주간|weekly|위클리|다음\s?주|week/i;
 const NOT_MARKET_WEEKLY = /china|중국|japan|일본|헬스케어|healthcare|산업재|에너지|energy|소비재|platform|IT\s?H\/W|ETF|commodity|원자재|파생|펀드|fund|quant|퀀트|theme|신흥국|defense|carbon|ESG|크레딧|credit|채권|EPS|bitcoin|비트코인|전망과 전략|년 (?:주식|경제|금융)|20\d\d년/i;
 /** Weekly market, strategy and macro notes; sector, country and product weeklies and annual outlooks are not the week's market call. */
 export function isWeeklyMarketReport(item) { return WEEKLY_TITLE.test(item.title) && !NOT_MARKET_WEEKLY.test(item.title); }
-const AHEAD = /다음\s?주|차주|주초|주중|주 후반|주후반|앞두고|예정|발표|이벤트|변수|관건/;
-const MARKET = /KOSPI|KOSDAQ|코스피|코스닥|S&P|나스닥|다우|증시|주식시장|금융시장|경기지표|고용|물가|중간선거|지수|업종|외국인|기관|반도체|금리|달러|환율|연준|FOMC|실적/;
+const AHEAD = /다음\s?주|차주|주초|주중|주 후반|주후반|앞두고|예정돼|예정된|예정이다|\d{1,2}월\s?\d{1,2}일\s?(?:미국|발표|예정)/;
+const MARKET = /KOSPI|KOSDAQ|코스피|코스닥|S&P|나스닥|다우|증시|주식시장|금융시장|경기지표|고용|물가|중간선거|업종|외국인|기관|반도체|금리|달러|환율|연준|FOMC|실적/;
 const MOVE = /상승|하락|반등|급락|급등|강세|약세|순매수|순매도|등락|마감|부진|호조|이탈|회복|돌파|하회|상회|유입|유출|\d+(?:\.\d+)?\s?%/;
 const PREDICATE = /(?:다|음|함|임|됨|전망|예상|기대|우려|지속|확대|축소|부각|유입|등락|상승|하락|반등|강세|약세|마감|기록|작용|필요|주목|확인|유지|전환|가능성|부담|요인|관건)\.?$/;
 /** Whole sentences of a broker summary: bullet lines as they are, prose split at sentence ends; bold headings are not sentences. */
@@ -126,7 +126,7 @@ export function summarySentences(html) {
         const parts = /^[-•ㆍ·▪]/.test(raw.trim()) ? [line] : line.split(/(?<=(?:다|음|함|임|됨)\.)\s+/);
         for (const part of parts) {
             const text = part.replace(/\s+/g, ' ').trim();
-            if (text.length >= 25 && text.length <= 200 && PREDICATE.test(text) && !/\s:\s|^[^가-힣]*$/.test(text))
+            if (text.length >= 25 && text.length <= 160 && PREDICATE.test(text) && !/\s:\s|^[^가-힣]*$/.test(text))
                 out.push(text);
         }
     }
