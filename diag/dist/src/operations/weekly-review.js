@@ -104,36 +104,40 @@ export async function collectWeeklyQuotes(window, fetcher, audit) {
                 quotes.push(quote);
         }
     }
-    return quotes;
+    const order = new Map(specs.map((spec, index) => [spec.symbol, index]));
+    return quotes.sort((a, b) => (order.get(a.symbol) ?? 0) - (order.get(b.symbol) ?? 0));
 }
 /* ---------------- Broker weekly reports ---------------- */
-const WEEKLY_TITLE = /주간|weekly|위클리|다음\s?주|week|macro/i;
+const WEEKLY_TITLE = /주간|weekly|위클리|다음\s?주|week/i;
 const NOT_MARKET_WEEKLY = /china|중국|japan|일본|헬스케어|healthcare|산업재|에너지|energy|소비재|platform|IT\s?H\/W|ETF|commodity|원자재|파생|펀드|fund|quant|퀀트|theme|신흥국|defense|carbon|ESG|크레딧|credit|채권|EPS|bitcoin|비트코인|전망과 전략|년 (?:주식|경제|금융)|20\d\d년/i;
 /** Weekly market, strategy and macro notes; sector, country and product weeklies and annual outlooks are not the week's market call. */
 export function isWeeklyMarketReport(item) { return WEEKLY_TITLE.test(item.title) && !NOT_MARKET_WEEKLY.test(item.title); }
-const OUTLOOK = /다음\s?주|차주|주초|주중|주 후반|주후반|예정|앞두고|주목|관심|변수|관건|확인할|가늠|대응|전략|예상된다|전망이다|전망된다|될 것|일 것|할 것|가능성/;
-const REVIEW = /주간|금주|이번\s?주|지난\s?주|한\s?주|\d+(?:\.\d+)?\s?%|상승|하락|반등|강세|약세|순매수|순매도/;
-/** Whole sentences of a broker summary: bullet lines as they are, prose split at sentence ends. */
+const AHEAD = /다음\s?주|차주|주초|주중|주 후반|주후반|앞두고|예정|발표|이벤트|변수|관건/;
+const MARKET = /KOSPI|KOSDAQ|코스피|코스닥|S&P|나스닥|다우|증시|주식시장|금융시장|경기지표|고용|물가|중간선거|지수|업종|외국인|기관|반도체|금리|달러|환율|연준|FOMC|실적/;
+const MOVE = /상승|하락|반등|급락|급등|강세|약세|순매수|순매도|등락|마감|부진|호조|이탈|회복|돌파|하회|상회|유입|유출|\d+(?:\.\d+)?\s?%/;
+const PREDICATE = /(?:다|음|함|임|됨|전망|예상|기대|우려|지속|확대|축소|부각|유입|등락|상승|하락|반등|강세|약세|마감|기록|작용|필요|주목|확인|유지|전환|가능성|부담|요인|관건)\.?$/;
+/** Whole sentences of a broker summary: bullet lines as they are, prose split at sentence ends; bold headings are not sentences. */
 export function summarySentences(html) {
     const out = [];
-    for (const raw of summaryText(html).split('\n')) {
+    for (const raw of summaryText(html.replace(/<(strong|b|h\d)\b[^>]*>[\s\S]*?<\/\1>/gi, '')).split('\n')) {
         const line = raw.replace(/^[-•ㆍ·▪]\s*/, '').trim();
         if (!line)
             continue;
         const parts = /^[-•ㆍ·▪]/.test(raw.trim()) ? [line] : line.split(/(?<=(?:다|음|함|임|됨)\.)\s+/);
         for (const part of parts) {
             const text = part.replace(/\s+/g, ' ').trim();
-            if (text.length >= 25 && text.length <= 260)
+            if (text.length >= 25 && text.length <= 200 && PREDICATE.test(text) && !/\s:\s|^[^가-힣]*$/.test(text))
                 out.push(text);
         }
     }
     return out;
 }
-/** One review and one outlook sentence per report; a sentence about a different date range is left out. */
+/** One review and one outlook sentence per report: the review must be about the market's move, the outlook about what comes next. */
 export function pickBrokerSentences(sentences) {
     const usable = sentences.filter(text => !/\d{1,2}\/\d{1,2}\s?~|\d{1,2}월\s?\d{1,2}일\s?~|본 자료|투자 판단|Compliance|무단/i.test(text));
-    const outlook = usable.find(text => OUTLOOK.test(text) && /다음\s?주|차주|주초|주중|앞두고|예정|주목|관심|변수/.test(text)) ?? null;
-    const review = usable.find(text => text !== outlook && REVIEW.test(text) && !/^다음\s?주/.test(text)) ?? null;
+    const outlook = usable.find(text => AHEAD.test(text) && MARKET.test(text)) ?? null;
+    const score = (text) => (MARKET.test(text) ? 2 : 0) + (MOVE.test(text) ? 2 : 0) + (/주간|금주|이번\s?주|한\s?주/.test(text) ? 1 : 0) - (text.length > 150 ? 1 : 0);
+    const review = usable.filter(text => text !== outlook && MARKET.test(text) && MOVE.test(text) && !/^다음\s?주/.test(text)).sort((a, b) => score(b) - score(a))[0] ?? null;
     return { review, outlook };
 }
 export async function collectWeeklyResearch(window, fetcher, audit, limit = 8) {
@@ -330,7 +334,7 @@ export function buildWeeklyArticle(evidence, options = { requireCalendar: true }
         leadParts.push(`국내 증시는 코스피가 주간 ${signedPct(kospi.changePct)}(${fmt(kospi.weekClose)}), 코스닥이 ${signedPct(kosdaq.changePct)}(${fmt(kosdaq.weekClose)})를 기록했다.`);
     if (tenYear) {
         const bp = tenYear.changeBp, rate = `미국 10년물 국채금리는 ${fmt(tenYear.weekClose)}%로 한 주 사이 ${bp === 0 ? '보합이었다' : `${Math.abs(bp)}bp ${bp > 0 ? '올랐다' : '내렸다'}`}.`;
-        leadParts.push(krw ? `${rate} 원·달러 환율은 ${fmt(krw.weekClose)}원으로 주간 ${signedPct(krw.changePct)} 움직였다.` : rate);
+        leadParts.push(krw ? `${rate} 원·달러 환율은 ${fmt(krw.weekClose)}원으로 주간 ${Math.abs(krw.changePct).toFixed(2)}% ${krw.changePct > 0 ? '올랐다(원화 약세)' : krw.changePct < 0 ? '내렸다(원화 강세)' : '보합이었다'}.` : rate);
     }
     if (headline.length)
         leadParts.push(`다음 주(${nextRange})에는 ${joinEvents(headline)} 발표가 예정돼 있다.`);
