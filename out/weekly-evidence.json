@@ -1,0 +1,1477 @@
+{
+  "window": {
+    "runDate": "2026-11-01",
+    "weekStart": "2026-10-26",
+    "weekEnd": "2026-10-30",
+    "nextStart": "2026-11-02",
+    "nextEnd": "2026-11-06"
+  },
+  "quotes": [
+    {
+      "symbol": "CL=F",
+      "label": "WTI 유가",
+      "group": "MACRO",
+      "unit": "price",
+      "weekClose": 104.12,
+      "weekCloseDate": "2026-10-30",
+      "priorClose": 103.27,
+      "priorCloseDate": "2026-10-23",
+      "changePct": 0.8230851166844277,
+      "changeBp": null,
+      "daily": [
+        {
+          "date": "2026-10-26",
+          "close": 101.76
+        },
+        {
+          "date": "2026-10-27",
+          "close": 99.9
+        },
+        {
+          "date": "2026-10-28",
+          "close": 102.78
+        },
+        {
+          "date": "2026-10-29",
+          "close": 102
+        },
+        {
+          "date": "2026-10-30",
+          "close": 104.12
+        }
+      ]
+    },
+    {
+      "symbol": "MSFT",
+      "label": "마이크로소프트",
+      "group": "US_STOCK",
+      "unit": "price",
+      "weekClose": 521.91,
+      "weekCloseDate": "2026-10-30",
+      "priorClose": 524.51,
+      "priorCloseDate": "2026-10-23",
+      "changePct": -0.49570074927075225,
+      "changeBp": null,
+      "daily": [
+        {
+          "date": "2026-10-26",
+          "close": 532.6
+        },
+        {
+          "date": "2026-10-27",
+          "close": 531.33
+        },
+        {
+          "date": "2026-10-28",
+          "close": 531.01
+        },
+        {
+          "date": "2026-10-29",
+          "close": 530.14
+        },
+        {
+          "date": "2026-10-30",
+          "close": 521.91
+        }
+      ]
+    },
+    {
+      "symbol": "^SOX",
+      "label": "필라델피아 반도체",
+      "group": "US_INDEX",
+      "unit": "index",
+      "weekClose": 10688.8,
+      "weekCloseDate": "2026-10-30",
+      "priorClose": 10779.46,
+      "priorCloseDate": "2026-10-23",
+      "changePct": -0.8410439855057662,
+      "changeBp": null,
+      "daily": [
+        {
+          "date": "2026-10-26",
+          "close": 11083.47
+        },
+        {
+          "date": "2026-10-27",
+          "close": 11482.5
+        },
+        {
+          "date": "2026-10-28",
+          "close": 11684
+        },
+        {
+          "date": "2026-10-29",
+          "close": 11518.2
+        },
+        {
+          "date": "2026-10-30",
+          "close": 10688.8
+        }
+      ]
+    },
+    {
+      "symbol": "GOOGL",
+      "label": "알파벳",
+      "group": "US_STOCK",
+      "unit": "price",
+      "weekClose": 279.84,
+      "weekCloseDate": "2026-10-30",
+      "priorClose": 320.21,
+      "priorCloseDate": "2026-10-23",
+      "changePct": -12.607351425626934,
+      "changeBp": null,
+      "daily": [
+        {
+          "date": "2026-10-26",
+          "close": 316.8
+        },
+        {
+          "date": "2026-10-27",
+          "close": 320.58
+        },
+        {
+          "date": "2026-10-28",
+          "close": 324.89
+        },
+        {
+          "date": "2026-10-29",
+          "close": 283.82
+        },
+        {
+          "date": "2026-10-30",
+          "close": 279.84
+        }
+      ]
+    },
+    {
+      "symbol": "^RUT",
+      "label": "러셀 2000",
+      "group": "US_INDEX",
+      "unit": "index",
+      "weekClose": 2811.84,
+      "weekCloseDate": "2026-10-30",
+      "priorClose": 2775.9,
+      "priorCloseDate": "2026-10-23",
+      "changePct": 1.2947152274937879,
+      "changeBp": null,
+      "daily": [
+        {
+          "date": "2026-10-26",
+          "close": 2786.42
+        },
+        {
+          "date": "2026-10-27",
+          "close": 2818.87
+        },
+        {
+          "date": "2026-10-28",
+          "close": 2830.51
+        },
+        {
+          "date": "2026-10-29",
+          "close": 2859.22
+        },
+        {
+          "date": "2026-10-30",
+          "close": 2811.84
+        }
+      ]
+    },
+    {
+      "symbol": "^GSPC",
+      "label": "S&P 500",
+      "group": "US_INDEX",
+      "unit": "index",
+      "weekClose": 7580.07,
+      "weekCloseDate": "2026-10-30",
+      "priorClose": 7623.68,
+      "priorCloseDate": "2026-10-23",
+      "changePct": -0.5720334536601822,
+      "changeBp": null,
+      "daily": [
+        {
+          "date": "2026-10-26",
+          "close": 7676.77
+        },
+        {
+          "date": "2026-10-27",
+          "close": 7722.6
+        },
+        {
+          "date": "2026-10-28",
+          "close": 7743.98
+        },
+        {
+          "date": "2026-10-29",
+          "close": 7720.39
+        },
+        {
+          "date": "2026-10-30",
+          "close": 7580.07
+        }
+      ]
+    },
+    {
+      "symbol": "^DJI",
+      "label": "다우존스",
+      "group": "US_INDEX",
+      "unit": "index",
+      "weekClose": 51770.31,
+      "weekCloseDate": "2026-10-30",
+      "priorClose": 52215.16,
+      "priorCloseDate": "2026-10-23",
+      "changePct": -0.8519556389370554,
+      "changeBp": null,
+      "daily": [
+        {
+          "date": "2026-10-26",
+          "close": 52361.58
+        },
+        {
+          "date": "2026-10-27",
+          "close": 52377.57
+        },
+        {
+          "date": "2026-10-28",
+          "close": 52475.1
+        },
+        {
+          "date": "2026-10-29",
+          "close": 52342.56
+        },
+        {
+          "date": "2026-10-30",
+          "close": 51770.31
+        }
+      ]
+    },
+    {
+      "symbol": "DX-Y.NYB",
+      "label": "달러인덱스",
+      "group": "MACRO",
+      "unit": "index",
+      "weekClose": 101.88,
+      "weekCloseDate": "2026-10-30",
+      "priorClose": 101.81,
+      "priorCloseDate": "2026-10-23",
+      "changePct": 0.06875552499753775,
+      "changeBp": null,
+      "daily": [
+        {
+          "date": "2026-10-26",
+          "close": 101.96
+        },
+        {
+          "date": "2026-10-27",
+          "close": 102.32
+        },
+        {
+          "date": "2026-10-28",
+          "close": 102.19
+        },
+        {
+          "date": "2026-10-29",
+          "close": 102.04
+        },
+        {
+          "date": "2026-10-30",
+          "close": 101.88
+        }
+      ]
+    },
+    {
+      "symbol": "^KQ11",
+      "label": "코스닥",
+      "group": "KOREA_INDEX",
+      "unit": "index",
+      "weekClose": 724.38,
+      "weekCloseDate": "2026-10-30",
+      "priorClose": 751.69,
+      "priorCloseDate": "2026-10-23",
+      "changePct": -3.633146642898011,
+      "changeBp": null,
+      "daily": [
+        {
+          "date": "2026-10-26",
+          "close": 727.21
+        },
+        {
+          "date": "2026-10-27",
+          "close": 743.83
+        },
+        {
+          "date": "2026-10-28",
+          "close": 771.28
+        },
+        {
+          "date": "2026-10-29",
+          "close": 753.23
+        },
+        {
+          "date": "2026-10-30",
+          "close": 724.38
+        }
+      ]
+    },
+    {
+      "symbol": "^IXIC",
+      "label": "나스닥",
+      "group": "US_INDEX",
+      "unit": "index",
+      "weekClose": 25437,
+      "weekCloseDate": "2026-10-30",
+      "priorClose": 25955.34,
+      "priorCloseDate": "2026-10-23",
+      "changePct": -1.9970456946431836,
+      "changeBp": null,
+      "daily": [
+        {
+          "date": "2026-10-26",
+          "close": 26169.38
+        },
+        {
+          "date": "2026-10-27",
+          "close": 26477.81
+        },
+        {
+          "date": "2026-10-28",
+          "close": 26549.85
+        },
+        {
+          "date": "2026-10-29",
+          "close": 26184.72
+        },
+        {
+          "date": "2026-10-30",
+          "close": 25437
+        }
+      ]
+    },
+    {
+      "symbol": "GC=F",
+      "label": "금",
+      "group": "MACRO",
+      "unit": "price",
+      "weekClose": 3898.9,
+      "weekCloseDate": "2026-10-30",
+      "priorClose": 4007.9,
+      "priorCloseDate": "2026-10-23",
+      "changePct": -2.7196287332518274,
+      "changeBp": null,
+      "daily": [
+        {
+          "date": "2026-10-26",
+          "close": 4038.4
+        },
+        {
+          "date": "2026-10-27",
+          "close": 4074.6
+        },
+        {
+          "date": "2026-10-28",
+          "close": 4051.6
+        },
+        {
+          "date": "2026-10-29",
+          "close": 4031.4
+        },
+        {
+          "date": "2026-10-30",
+          "close": 3898.9
+        }
+      ]
+    },
+    {
+      "symbol": "NVDA",
+      "label": "엔비디아",
+      "group": "US_STOCK",
+      "unit": "price",
+      "weekClose": 204.64,
+      "weekCloseDate": "2026-10-30",
+      "priorClose": 210.96,
+      "priorCloseDate": "2026-10-23",
+      "changePct": -2.995828593098228,
+      "changeBp": null,
+      "daily": [
+        {
+          "date": "2026-10-26",
+          "close": 216
+        },
+        {
+          "date": "2026-10-27",
+          "close": 217.94
+        },
+        {
+          "date": "2026-10-28",
+          "close": 215.38
+        },
+        {
+          "date": "2026-10-29",
+          "close": 213.66
+        },
+        {
+          "date": "2026-10-30",
+          "close": 204.64
+        }
+      ]
+    },
+    {
+      "symbol": "^TNX",
+      "label": "미국 10년물 국채금리",
+      "group": "MACRO",
+      "unit": "yield",
+      "weekClose": 4.929,
+      "weekCloseDate": "2026-10-30",
+      "priorClose": 4.988,
+      "priorCloseDate": "2026-10-23",
+      "changePct": -1.1828388131515668,
+      "changeBp": -6,
+      "daily": [
+        {
+          "date": "2026-10-26",
+          "close": 4.986
+        },
+        {
+          "date": "2026-10-27",
+          "close": 4.993
+        },
+        {
+          "date": "2026-10-28",
+          "close": 5.045
+        },
+        {
+          "date": "2026-10-29",
+          "close": 4.989
+        },
+        {
+          "date": "2026-10-30",
+          "close": 4.929
+        }
+      ]
+    },
+    {
+      "symbol": "KRW=X",
+      "label": "원·달러 환율",
+      "group": "MACRO",
+      "unit": "fx",
+      "weekClose": 1337.98,
+      "weekCloseDate": "2026-10-30",
+      "priorClose": 1325.99,
+      "priorCloseDate": "2026-10-23",
+      "changePct": 0.9042300469837637,
+      "changeBp": null,
+      "daily": [
+        {
+          "date": "2026-10-26",
+          "close": 1321.76
+        },
+        {
+          "date": "2026-10-27",
+          "close": 1324.77
+        },
+        {
+          "date": "2026-10-28",
+          "close": 1326.81
+        },
+        {
+          "date": "2026-10-29",
+          "close": 1340.34
+        },
+        {
+          "date": "2026-10-30",
+          "close": 1337.98
+        }
+      ]
+    },
+    {
+      "symbol": "^KS11",
+      "label": "코스피",
+      "group": "KOREA_INDEX",
+      "unit": "index",
+      "weekClose": 5730.74,
+      "weekCloseDate": "2026-10-30",
+      "priorClose": 5550.3,
+      "priorCloseDate": "2026-10-23",
+      "changePct": 3.2509954416878295,
+      "changeBp": null,
+      "daily": [
+        {
+          "date": "2026-10-26",
+          "close": 5469.47
+        },
+        {
+          "date": "2026-10-27",
+          "close": 5638.34
+        },
+        {
+          "date": "2026-10-28",
+          "close": 6012.44
+        },
+        {
+          "date": "2026-10-29",
+          "close": 5937.66
+        },
+        {
+          "date": "2026-10-30",
+          "close": 5730.74
+        }
+      ]
+    },
+    {
+      "symbol": "AVGO",
+      "label": "브로드컴",
+      "group": "US_STOCK",
+      "unit": "price",
+      "weekClose": 326.08,
+      "weekCloseDate": "2026-10-30",
+      "priorClose": 321.68,
+      "priorCloseDate": "2026-10-23",
+      "changePct": 1.3678189505098164,
+      "changeBp": null,
+      "daily": [
+        {
+          "date": "2026-10-26",
+          "close": 329.17
+        },
+        {
+          "date": "2026-10-27",
+          "close": 342.33
+        },
+        {
+          "date": "2026-10-28",
+          "close": 351.81
+        },
+        {
+          "date": "2026-10-29",
+          "close": 345
+        },
+        {
+          "date": "2026-10-30",
+          "close": 326.08
+        }
+      ]
+    },
+    {
+      "symbol": "META",
+      "label": "메타",
+      "group": "US_STOCK",
+      "unit": "price",
+      "weekClose": 614.99,
+      "weekCloseDate": "2026-10-30",
+      "priorClose": 642.62,
+      "priorCloseDate": "2026-10-23",
+      "changePct": -4.299586069527869,
+      "changeBp": null,
+      "daily": [
+        {
+          "date": "2026-10-26",
+          "close": 630.56
+        },
+        {
+          "date": "2026-10-27",
+          "close": 620.19
+        },
+        {
+          "date": "2026-10-28",
+          "close": 612.49
+        },
+        {
+          "date": "2026-10-29",
+          "close": 624.52
+        },
+        {
+          "date": "2026-10-30",
+          "close": 614.99
+        }
+      ]
+    },
+    {
+      "symbol": "005930.KS",
+      "label": "삼성전자",
+      "group": "KOREA_STOCK",
+      "unit": "price",
+      "weekClose": 225000,
+      "weekCloseDate": "2026-10-30",
+      "priorClose": 215500,
+      "priorCloseDate": "2026-10-23",
+      "changePct": 4.408352668213457,
+      "changeBp": null,
+      "daily": [
+        {
+          "date": "2026-10-26",
+          "close": 213000
+        },
+        {
+          "date": "2026-10-27",
+          "close": 222000
+        },
+        {
+          "date": "2026-10-28",
+          "close": 242000
+        },
+        {
+          "date": "2026-10-29",
+          "close": 232000
+        },
+        {
+          "date": "2026-10-30",
+          "close": 225000
+        }
+      ]
+    },
+    {
+      "symbol": "207940.KS",
+      "label": "삼성바이오로직스",
+      "group": "KOREA_STOCK",
+      "unit": "price",
+      "weekClose": 1487000,
+      "weekCloseDate": "2026-10-30",
+      "priorClose": 1466000,
+      "priorCloseDate": "2026-10-23",
+      "changePct": 1.4324693042291952,
+      "changeBp": null,
+      "daily": [
+        {
+          "date": "2026-10-26",
+          "close": 1452000
+        },
+        {
+          "date": "2026-10-27",
+          "close": 1374000
+        },
+        {
+          "date": "2026-10-28",
+          "close": 1372000
+        },
+        {
+          "date": "2026-10-29",
+          "close": 1366000
+        },
+        {
+          "date": "2026-10-30",
+          "close": 1487000
+        }
+      ]
+    },
+    {
+      "symbol": "000270.KS",
+      "label": "기아",
+      "group": "KOREA_STOCK",
+      "unit": "price",
+      "weekClose": 95600,
+      "weekCloseDate": "2026-10-30",
+      "priorClose": 106900,
+      "priorCloseDate": "2026-10-23",
+      "changePct": -10.570626753975679,
+      "changeBp": null,
+      "daily": [
+        {
+          "date": "2026-10-26",
+          "close": 105100
+        },
+        {
+          "date": "2026-10-28",
+          "close": 107900
+        },
+        {
+          "date": "2026-10-29",
+          "close": 108300
+        },
+        {
+          "date": "2026-10-30",
+          "close": 95600
+        }
+      ]
+    },
+    {
+      "symbol": "373220.KS",
+      "label": "LG에너지솔루션",
+      "group": "KOREA_STOCK",
+      "unit": "price",
+      "weekClose": 359500,
+      "weekCloseDate": "2026-10-30",
+      "priorClose": 383000,
+      "priorCloseDate": "2026-10-23",
+      "changePct": -6.135770234986945,
+      "changeBp": null,
+      "daily": [
+        {
+          "date": "2026-10-26",
+          "close": 375000
+        },
+        {
+          "date": "2026-10-27",
+          "close": 382500
+        },
+        {
+          "date": "2026-10-28",
+          "close": 389500
+        },
+        {
+          "date": "2026-10-29",
+          "close": 356000
+        },
+        {
+          "date": "2026-10-30",
+          "close": 359500
+        }
+      ]
+    },
+    {
+      "symbol": "AMD",
+      "label": "AMD",
+      "group": "US_STOCK",
+      "unit": "price",
+      "weekClose": 504.8,
+      "weekCloseDate": "2026-10-30",
+      "priorClose": 516.79,
+      "priorCloseDate": "2026-10-23",
+      "changePct": -2.320091333036621,
+      "changeBp": null,
+      "daily": [
+        {
+          "date": "2026-10-26",
+          "close": 531.28
+        },
+        {
+          "date": "2026-10-27",
+          "close": 560.26
+        },
+        {
+          "date": "2026-10-28",
+          "close": 578.44
+        },
+        {
+          "date": "2026-10-29",
+          "close": 566.42
+        },
+        {
+          "date": "2026-10-30",
+          "close": 504.8
+        }
+      ]
+    },
+    {
+      "symbol": "TSM",
+      "label": "TSMC",
+      "group": "US_STOCK",
+      "unit": "price",
+      "weekClose": 406.13,
+      "weekCloseDate": "2026-10-30",
+      "priorClose": 418.51,
+      "priorCloseDate": "2026-10-23",
+      "changePct": -2.958113306731021,
+      "changeBp": null,
+      "daily": [
+        {
+          "date": "2026-10-26",
+          "close": 424.37
+        },
+        {
+          "date": "2026-10-27",
+          "close": 436.87
+        },
+        {
+          "date": "2026-10-28",
+          "close": 439.51
+        },
+        {
+          "date": "2026-10-29",
+          "close": 431.81
+        },
+        {
+          "date": "2026-10-30",
+          "close": 406.13
+        }
+      ]
+    },
+    {
+      "symbol": "000660.KS",
+      "label": "SK하이닉스",
+      "group": "KOREA_STOCK",
+      "unit": "price",
+      "weekClose": 1418000,
+      "weekCloseDate": "2026-10-30",
+      "priorClose": 1277000,
+      "priorCloseDate": "2026-10-23",
+      "changePct": 11.041503523884105,
+      "changeBp": null,
+      "daily": [
+        {
+          "date": "2026-10-26",
+          "close": 1275000
+        },
+        {
+          "date": "2026-10-27",
+          "close": 1341000
+        },
+        {
+          "date": "2026-10-28",
+          "close": 1487000
+        },
+        {
+          "date": "2026-10-29",
+          "close": 1526000
+        },
+        {
+          "date": "2026-10-30",
+          "close": 1418000
+        }
+      ]
+    },
+    {
+      "symbol": "AMZN",
+      "label": "아마존",
+      "group": "US_STOCK",
+      "unit": "price",
+      "weekClose": 240.35,
+      "weekCloseDate": "2026-10-30",
+      "priorClose": 248,
+      "priorCloseDate": "2026-10-23",
+      "changePct": -3.084677419354841,
+      "changeBp": null,
+      "daily": [
+        {
+          "date": "2026-10-26",
+          "close": 249.09
+        },
+        {
+          "date": "2026-10-27",
+          "close": 253.1
+        },
+        {
+          "date": "2026-10-28",
+          "close": 254.6
+        },
+        {
+          "date": "2026-10-29",
+          "close": 243.79
+        },
+        {
+          "date": "2026-10-30",
+          "close": 240.35
+        }
+      ]
+    },
+    {
+      "symbol": "ORCL",
+      "label": "오라클",
+      "group": "US_STOCK",
+      "unit": "price",
+      "weekClose": 130.67,
+      "weekCloseDate": "2026-10-30",
+      "priorClose": 126.16,
+      "priorCloseDate": "2026-10-23",
+      "changePct": 3.5748256182625164,
+      "changeBp": null,
+      "daily": [
+        {
+          "date": "2026-10-26",
+          "close": 126.06
+        },
+        {
+          "date": "2026-10-27",
+          "close": 130.53
+        },
+        {
+          "date": "2026-10-28",
+          "close": 144.54
+        },
+        {
+          "date": "2026-10-29",
+          "close": 139.56
+        },
+        {
+          "date": "2026-10-30",
+          "close": 130.67
+        }
+      ]
+    },
+    {
+      "symbol": "TSLA",
+      "label": "테슬라",
+      "group": "US_STOCK",
+      "unit": "price",
+      "weekClose": 399.81,
+      "weekCloseDate": "2026-10-30",
+      "priorClose": 372.22,
+      "priorCloseDate": "2026-10-23",
+      "changePct": 7.412283058406312,
+      "changeBp": null,
+      "daily": [
+        {
+          "date": "2026-10-26",
+          "close": 391.62
+        },
+        {
+          "date": "2026-10-27",
+          "close": 407.46
+        },
+        {
+          "date": "2026-10-28",
+          "close": 404.22
+        },
+        {
+          "date": "2026-10-29",
+          "close": 403.3
+        },
+        {
+          "date": "2026-10-30",
+          "close": 399.81
+        }
+      ]
+    },
+    {
+      "symbol": "AAPL",
+      "label": "애플",
+      "group": "US_STOCK",
+      "unit": "price",
+      "weekClose": 344.63,
+      "weekCloseDate": "2026-10-30",
+      "priorClose": 347.73,
+      "priorCloseDate": "2026-10-23",
+      "changePct": -0.891496275846209,
+      "changeBp": null,
+      "daily": [
+        {
+          "date": "2026-10-26",
+          "close": 343.91
+        },
+        {
+          "date": "2026-10-27",
+          "close": 347.1
+        },
+        {
+          "date": "2026-10-28",
+          "close": 343.83
+        },
+        {
+          "date": "2026-10-29",
+          "close": 348.91
+        },
+        {
+          "date": "2026-10-30",
+          "close": 344.63
+        }
+      ]
+    },
+    {
+      "symbol": "012450.KS",
+      "label": "한화에어로스페이스",
+      "group": "KOREA_STOCK",
+      "unit": "price",
+      "weekClose": 696000,
+      "weekCloseDate": "2026-10-30",
+      "priorClose": 792000,
+      "priorCloseDate": "2026-10-23",
+      "changePct": -12.121212121212121,
+      "changeBp": null,
+      "daily": [
+        {
+          "date": "2026-10-26",
+          "close": 760000
+        },
+        {
+          "date": "2026-10-27",
+          "close": 768000
+        },
+        {
+          "date": "2026-10-28",
+          "close": 787000
+        },
+        {
+          "date": "2026-10-29",
+          "close": 760000
+        },
+        {
+          "date": "2026-10-30",
+          "close": 696000
+        }
+      ]
+    },
+    {
+      "symbol": "005380.KS",
+      "label": "현대차",
+      "group": "KOREA_STOCK",
+      "unit": "price",
+      "weekClose": 282000,
+      "weekCloseDate": "2026-10-30",
+      "priorClose": 295500,
+      "priorCloseDate": "2026-10-23",
+      "changePct": -4.568527918781726,
+      "changeBp": null,
+      "daily": [
+        {
+          "date": "2026-10-26",
+          "close": 288000
+        },
+        {
+          "date": "2026-10-27",
+          "close": 290500
+        },
+        {
+          "date": "2026-10-28",
+          "close": 296000
+        },
+        {
+          "date": "2026-10-29",
+          "close": 292500
+        },
+        {
+          "date": "2026-10-30",
+          "close": 282000
+        }
+      ]
+    },
+    {
+      "symbol": "105560.KS",
+      "label": "KB금융",
+      "group": "KOREA_STOCK",
+      "unit": "price",
+      "weekClose": 155500,
+      "weekCloseDate": "2026-10-30",
+      "priorClose": 153000,
+      "priorCloseDate": "2026-10-23",
+      "changePct": 1.6339869281045754,
+      "changeBp": null,
+      "daily": [
+        {
+          "date": "2026-10-26",
+          "close": 147200
+        },
+        {
+          "date": "2026-10-27",
+          "close": 147600
+        },
+        {
+          "date": "2026-10-28",
+          "close": 154000
+        },
+        {
+          "date": "2026-10-29",
+          "close": 156800
+        },
+        {
+          "date": "2026-10-30",
+          "close": 155500
+        }
+      ]
+    },
+    {
+      "symbol": "068270.KS",
+      "label": "셀트리온",
+      "group": "KOREA_STOCK",
+      "unit": "price",
+      "weekClose": 191600,
+      "weekCloseDate": "2026-10-30",
+      "priorClose": 194400,
+      "priorCloseDate": "2026-10-23",
+      "changePct": -1.440329218106996,
+      "changeBp": null,
+      "daily": [
+        {
+          "date": "2026-10-26",
+          "close": 190000
+        },
+        {
+          "date": "2026-10-27",
+          "close": 188600
+        },
+        {
+          "date": "2026-10-28",
+          "close": 189800
+        },
+        {
+          "date": "2026-10-29",
+          "close": 189300
+        },
+        {
+          "date": "2026-10-30",
+          "close": 191600
+        }
+      ]
+    },
+    {
+      "symbol": "034020.KS",
+      "label": "두산에너빌리티",
+      "group": "KOREA_STOCK",
+      "unit": "price",
+      "weekClose": 54800,
+      "weekCloseDate": "2026-10-30",
+      "priorClose": 59400,
+      "priorCloseDate": "2026-10-23",
+      "changePct": -7.744107744107744,
+      "changeBp": null,
+      "daily": [
+        {
+          "date": "2026-10-26",
+          "close": 57600
+        },
+        {
+          "date": "2026-10-27",
+          "close": 58900
+        },
+        {
+          "date": "2026-10-28",
+          "close": 61400
+        },
+        {
+          "date": "2026-10-29",
+          "close": 56700
+        },
+        {
+          "date": "2026-10-30",
+          "close": 54800
+        }
+      ]
+    },
+    {
+      "symbol": "035420.KS",
+      "label": "NAVER",
+      "group": "KOREA_STOCK",
+      "unit": "price",
+      "weekClose": 172300,
+      "weekCloseDate": "2026-10-30",
+      "priorClose": 173600,
+      "priorCloseDate": "2026-10-23",
+      "changePct": -0.748847926267281,
+      "changeBp": null,
+      "daily": [
+        {
+          "date": "2026-10-26",
+          "close": 174200
+        },
+        {
+          "date": "2026-10-27",
+          "close": 174300
+        },
+        {
+          "date": "2026-10-28",
+          "close": 178000
+        },
+        {
+          "date": "2026-10-29",
+          "close": 174900
+        },
+        {
+          "date": "2026-10-30",
+          "close": 172300
+        }
+      ]
+    },
+    {
+      "symbol": "329180.KS",
+      "label": "HD현대중공업",
+      "group": "KOREA_STOCK",
+      "unit": "price",
+      "weekClose": 274000,
+      "weekCloseDate": "2026-10-30",
+      "priorClose": 305000,
+      "priorCloseDate": "2026-10-23",
+      "changePct": -10.163934426229508,
+      "changeBp": null,
+      "daily": [
+        {
+          "date": "2026-10-26",
+          "close": 289500
+        },
+        {
+          "date": "2026-10-27",
+          "close": 291500
+        },
+        {
+          "date": "2026-10-28",
+          "close": 285500
+        },
+        {
+          "date": "2026-10-29",
+          "close": 272000
+        },
+        {
+          "date": "2026-10-30",
+          "close": 274000
+        }
+      ]
+    }
+  ],
+  "broker": [
+    {
+      "broker": "대신증권",
+      "title": "THE GLOBAL 주간 증시 전략",
+      "date": "2026-10-30",
+      "url": "https://stock.pstatic.net/stock-research/invest/15/20261030_invest_90380000.pdf",
+      "sentence": "최근 여론 조사 결과 민주당이 상원을 가져올 확률은 53~76%(이코노미스트, 네이트 실버)로 전망이 엇갈리고 있다.",
+      "kind": "review"
+    },
+    {
+      "broker": "대신증권",
+      "title": "[다음주 시장은?] 트럼프, Macro 변수를 주목할 때",
+      "date": "2026-10-30",
+      "url": "https://stock.pstatic.net/stock-research/invest/15/20261030_invest_321262000.pdf",
+      "sentence": "10월 FOMC는 10대2로 금리동결 결정, 리사 쿡 이사와 베스 해맥 클리블랜드 연은 총재가 25bp 금리 인상 주장. 금리동결은 시장 예상에 부합하는 결과였고, 12월 금리인상 확률도 FedWatch 기준 81%로 전일(78%)과 유사한 수준. 시장에 미치는 영향은 제한적이며, 추후 데이터를 확인",
+      "kind": "review"
+    },
+    {
+      "broker": "대신증권",
+      "title": "[다음주 시장은?] 트럼프, Macro 변수를 주목할 때",
+      "date": "2026-10-30",
+      "url": "https://stock.pstatic.net/stock-research/invest/15/20261030_invest_321262000.pdf",
+      "sentence": "KOSPI는 주요 기업들의 엇갈린 실적에 재차 6,000선 이탈. 여전히 시장의 관심이 AI, 반도체 기업에 집중된 가운데, 실적 결과에 따른 투자심리 변화가 KOSPI 등락을 좌우하는 핵심 변수로 작용",
+      "kind": "outlook"
+    },
+    {
+      "broker": "유안타증권",
+      "title": "[주식시황 위클리] 주간:知 - KOSPI 정상화 진행 중, 다르긴 다릅니다 (11월 1주)",
+      "date": "2026-10-30",
+      "url": "https://stock.pstatic.net/stock-research/market/18/20261030_market_576401000.pdf",
+      "sentence": "주간 주식시장 Review : 실적, 주주환원, 외국인, 대형주, KOSPI롱-KOSDAQ 숏",
+      "kind": "review"
+    },
+    {
+      "broker": "키움증권",
+      "title": "(Macro Snapshot) AI 투자 논란 속 미국 성장세 지속",
+      "date": "2026-10-30",
+      "url": "https://stock.pstatic.net/stock-research/economy/39/20261030_economy_238979000.pdf",
+      "sentence": "미국 3 분기 GDP 성장률은 전기비 연율 3.4%로 2 분기(2.2%)보다 상승하며 양호한 성장세를 이어갔다.",
+      "kind": "review"
+    },
+    {
+      "broker": "키움증권",
+      "title": "(Macro Snapshot) AI 투자 논란 속 미국 성장세 지속",
+      "date": "2026-10-30",
+      "url": "https://stock.pstatic.net/stock-research/economy/39/20261030_economy_238979000.pdf",
+      "sentence": "이러한 우려에도 불구하고 투자를 중심으로 한 미국 경제의 성장세는 여전히 견조하다는 점에 주목할 필요가 있다.",
+      "kind": "outlook"
+    },
+    {
+      "broker": "키움증권",
+      "title": "10/30 Weekly Macro : 주요 이벤트 집중, 금융시장 향방에 주목",
+      "date": "2026-10-30",
+      "url": "https://stock.pstatic.net/stock-research/economy/39/20261030_economy_746647000.pdf",
+      "sentence": "최근 고금리 부담과 AI 투자 수익성에 대한 경계감이 높아진 상황에서 미국 시장금리의 추가 상승 여부는 달러화와 주식시장 투자심리에도 영향을 미칠 수 있다.",
+      "kind": "review"
+    },
+    {
+      "broker": "키움증권",
+      "title": "10/30 Weekly Macro : 주요 이벤트 집중, 금융시장 향방에 주목",
+      "date": "2026-10-30",
+      "url": "https://stock.pstatic.net/stock-research/economy/39/20261030_economy_746647000.pdf",
+      "sentence": "다음 주 금융시장은 미국 중간선거와 주요 고용 및 경기지표 발표를 앞두고 변동성이 확대될 것으로 예상된다.",
+      "kind": "outlook"
+    },
+    {
+      "broker": "IBK투자증권",
+      "title": "[IBKS Economy Monitor] Focus on Week: 높은 성장률이 양극화의 고통을 더 압박하는 흐름",
+      "date": "2026-10-30",
+      "url": "https://stock.pstatic.net/stock-research/economy/40/20261030_economy_660850000.pdf",
+      "sentence": "이번 주 발표된 3/4분기 경제성장률(속보치)은 우리 경제가 이례적인 호황을 이어가고 있음을 보여주고 있다.",
+      "kind": "review"
+    },
+    {
+      "broker": "IBK투자증권",
+      "title": "[IBKS Economy Monitor] Focus on Week: 높은 성장률이 양극화의 고통을 더 압박하는 흐름",
+      "date": "2026-10-30",
+      "url": "https://stock.pstatic.net/stock-research/economy/40/20261030_economy_660850000.pdf",
+      "sentence": "더 주목해서 봐야 할 것은 이례적으로 높은 정부의 기여다.",
+      "kind": "outlook"
+    },
+    {
+      "broker": "DS투자증권",
+      "title": "Macro Issue 10/29(목) - 10월 FOMC 리뷰",
+      "date": "2026-10-29",
+      "url": "https://stock.pstatic.net/stock-research/economy/66/20261029_economy_745837000.pdf",
+      "sentence": "연준은 정책금리를 3.75~4.00%로 동결했다.",
+      "kind": "review"
+    }
+  ],
+  "calendar": [],
+  "calendarCoversNextWeek": false,
+  "posts": [
+    {
+      "title": "코스피 상승으로 읽는 전일 국내증시",
+      "url": "https://motusnova.blogspot.com/2026/10/blog-post.html",
+      "publishedAt": "2026-10-26T01:43:39.846Z",
+      "category": "KOREA_MARKET"
+    },
+    {
+      "title": "엔비디아가 공개한 카자흐스탄 AI 컴퓨팅 인프라 확충, 실제 산업 변화로 이어질까",
+      "url": "https://motusnova.blogspot.com/2026/10/ai_0953310071.html",
+      "publishedAt": "2026-10-26T07:12:53.000Z",
+      "category": "AI_INTELLIGENCE"
+    },
+    {
+      "title": "Nasdaq 상승, 미국 주요 지수 동반 상승",
+      "url": "https://motusnova.blogspot.com/2026/10/nasdaq.html",
+      "publishedAt": "2026-10-27T00:51:43.021Z",
+      "category": "US_MARKET"
+    },
+    {
+      "title": "아마존웹서비스(AWS)가 공개한 GPT-6.1 신규 기능, 실제 산업 변화로 이어질까",
+      "url": "https://motusnova.blogspot.com/2026/10/aws-gpt-61.html",
+      "publishedAt": "2026-10-27T09:14:49.308Z",
+      "category": "AI_INTELLIGENCE"
+    },
+    {
+      "title": "메타 Muse 싱가포르 출시…AWS는 GPU 공유, 오라클은 AI 설비 확장",
+      "url": "https://motusnova.blogspot.com/2026/10/ai_01909993953.html",
+      "publishedAt": "2026-10-28T10:24:35.004Z",
+      "category": "AI_INTELLIGENCE"
+    },
+    {
+      "title": "나스닥 1.18% 상승…AI 투자 확대 속 S&P500 종목 과반은 하락",
+      "url": "https://motusnova.blogspot.com/2026/10/nasdaq_02017334565.html",
+      "publishedAt": "2026-10-28T12:46:42.034Z",
+      "category": "AI_INTELLIGENCE"
+    },
+    {
+      "title": "국내증시 마감: 코스피 상승과 코스닥·수급 흐름 점검",
+      "url": "https://motusnova.blogspot.com/2026/10/1q-sk.html",
+      "publishedAt": "2026-10-28T12:51:35.000Z",
+      "category": "KOREA_MARKET"
+    },
+    {
+      "title": "엔비디아가 공개한 RTX Spark 생태계 출시 준비, 마이크로소프트 움직임까지 읽기",
+      "url": "https://motusnova.blogspot.com/2026/10/rtx-spark.html",
+      "publishedAt": "2026-10-29T10:18:16.340Z",
+      "category": "AI_INTELLIGENCE"
+    },
+    {
+      "title": "S&P 500 상승, 나스닥과 함께 보는 미국증시",
+      "url": "https://motusnova.blogspot.com/2026/10/s-500.html",
+      "publishedAt": "2026-10-29T11:01:00.000Z",
+      "category": "US_MARKET"
+    },
+    {
+      "title": "뉴욕증시 3대 지수 하락…아마존 4.2% 하락",
+      "url": "https://motusnova.blogspot.com/2026/10/3-42.html",
+      "publishedAt": "2026-10-29T23:28:42.055Z",
+      "category": "US_MARKET"
+    },
+    {
+      "title": "코스피 1.24% 하락 5,937…검색 1위 삼성전자 4.8% 하락",
+      "url": "https://motusnova.blogspot.com/2026/10/124-5937-1-48.html",
+      "publishedAt": "2026-10-29T23:28:55.094Z",
+      "category": "KOREA_MARKET"
+    },
+    {
+      "title": "알파벳 13% 급락…증권가가 짚은 AI 투자 쟁점",
+      "url": "https://motusnova.blogspot.com/2026/10/13-ai.html",
+      "publishedAt": "2026-10-30T05:42:29.622Z",
+      "category": "AI_INTELLIGENCE"
+    },
+    {
+      "title": "뉴욕증시 3대 지수 하락…인텔 29% 급락",
+      "url": "https://motusnova.blogspot.com/2026/10/286-10-3.html",
+      "publishedAt": "2026-10-31T00:22:42.000Z",
+      "category": "US_MARKET"
+    }
+  ],
+  "audit": [
+    {
+      "sourceId": "forexfactory:thisweek",
+      "url": "https://nfs.faireconomy.media/ff_calendar_thisweek.json",
+      "status": "FAILED",
+      "count": 0,
+      "error": "FEED_NOT_YET_ON_NEXT_WEEK"
+    },
+    {
+      "sourceId": "yahoo:spark:0",
+      "url": "https://query1.finance.yahoo.com/v7/finance/spark?symbols=%5EGSPC,%5EIXIC,%5EDJI,%5ERUT,%5ESOX,%5EKS11,%5EKQ11,%5ETNX,KRW%3DX,DX-Y.NYB,CL%3DF,GC%3DF,NVDA,MSFT,GOOGL&range=1mo&interval=1d",
+      "status": "PASS",
+      "count": 15,
+      "error": null
+    },
+    {
+      "sourceId": "yahoo:spark:15",
+      "url": "https://query1.finance.yahoo.com/v7/finance/spark?symbols=AMZN,META,AVGO,AMD,TSM,ORCL,AAPL,TSLA,005930.KS,000660.KS,373220.KS,207940.KS,005380.KS,000270.KS,012450.KS&range=1mo&interval=1d",
+      "status": "PASS",
+      "count": 15,
+      "error": null
+    },
+    {
+      "sourceId": "yahoo:spark:30",
+      "url": "https://query1.finance.yahoo.com/v7/finance/spark?symbols=105560.KS,035420.KS,329180.KS,068270.KS,034020.KS&range=1mo&interval=1d",
+      "status": "PASS",
+      "count": 5,
+      "error": null
+    },
+    {
+      "sourceId": "motus:feed",
+      "url": "https://motusnova.blogspot.com/feeds/posts/default?alt=json&max-results=40",
+      "status": "PASS",
+      "count": 13,
+      "error": null
+    },
+    {
+      "sourceId": "naver-research:market",
+      "url": "https://m.stock.naver.com/api/research/market",
+      "status": "PASS",
+      "count": 100,
+      "error": null
+    },
+    {
+      "sourceId": "naver-research:invest",
+      "url": "https://m.stock.naver.com/api/research/invest",
+      "status": "PASS",
+      "count": 100,
+      "error": null
+    },
+    {
+      "sourceId": "naver-research:economy",
+      "url": "https://m.stock.naver.com/api/research/economy",
+      "status": "PASS",
+      "count": 100,
+      "error": null
+    },
+    {
+      "sourceId": "naver-research:invest:40648",
+      "url": "https://m.stock.naver.com/research/invest/40648",
+      "status": "PASS",
+      "count": 1,
+      "error": null
+    },
+    {
+      "sourceId": "naver-research:invest:40645",
+      "url": "https://m.stock.naver.com/research/invest/40645",
+      "status": "PASS",
+      "count": 1,
+      "error": null
+    },
+    {
+      "sourceId": "naver-research:market:37995",
+      "url": "https://m.stock.naver.com/research/market/37995",
+      "status": "PASS",
+      "count": 1,
+      "error": null
+    },
+    {
+      "sourceId": "naver-research:economy:13968",
+      "url": "https://m.stock.naver.com/research/economy/13968",
+      "status": "PASS",
+      "count": 1,
+      "error": null
+    },
+    {
+      "sourceId": "naver-research:economy:13967",
+      "url": "https://m.stock.naver.com/research/economy/13967",
+      "status": "PASS",
+      "count": 1,
+      "error": null
+    },
+    {
+      "sourceId": "naver-research:economy:13966",
+      "url": "https://m.stock.naver.com/research/economy/13966",
+      "status": "PASS",
+      "count": 1,
+      "error": null
+    },
+    {
+      "sourceId": "naver-research:economy:13964",
+      "url": "https://m.stock.naver.com/research/economy/13964",
+      "status": "PASS",
+      "count": 1,
+      "error": null
+    }
+  ],
+  "collectedAt": "2026-11-01T04:37:41.482Z"
+}
