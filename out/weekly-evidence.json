@@ -1208,16 +1208,8 @@
       "title": "[다음주 시장은?] 트럼프, Macro 변수를 주목할 때",
       "date": "2026-10-30",
       "url": "https://stock.pstatic.net/stock-research/invest/15/20261030_invest_321262000.pdf",
-      "sentence": "10월 FOMC는 10대2로 금리동결 결정, 리사 쿡 이사와 베스 해맥 클리블랜드 연은 총재가 25bp 금리 인상 주장. 금리동결은 시장 예상에 부합하는 결과였고, 12월 금리인상 확률도 FedWatch 기준 81%로 전일(78%)과 유사한 수준. 시장에 미치는 영향은 제한적이며, 추후 데이터를 확인",
-      "kind": "review"
-    },
-    {
-      "broker": "대신증권",
-      "title": "[다음주 시장은?] 트럼프, Macro 변수를 주목할 때",
-      "date": "2026-10-30",
-      "url": "https://stock.pstatic.net/stock-research/invest/15/20261030_invest_321262000.pdf",
       "sentence": "KOSPI는 주요 기업들의 엇갈린 실적에 재차 6,000선 이탈. 여전히 시장의 관심이 AI, 반도체 기업에 집중된 가운데, 실적 결과에 따른 투자심리 변화가 KOSPI 등락을 좌우하는 핵심 변수로 작용",
-      "kind": "outlook"
+      "kind": "review"
     },
     {
       "broker": "유안타증권",
@@ -1241,22 +1233,6 @@
       "date": "2026-10-30",
       "url": "https://stock.pstatic.net/stock-research/economy/39/20261030_economy_746647000.pdf",
       "sentence": "다음 주 금융시장은 미국 중간선거와 주요 고용 및 경기지표 발표를 앞두고 변동성이 확대될 것으로 예상된다.",
-      "kind": "outlook"
-    },
-    {
-      "broker": "IBK투자증권",
-      "title": "[IBKS Economy Monitor] Focus on Week: 높은 성장률이 양극화의 고통을 더 압박하는 흐름",
-      "date": "2026-10-30",
-      "url": "https://stock.pstatic.net/stock-research/economy/40/20261030_economy_660850000.pdf",
-      "sentence": "헤드라인 소비심리지수는 10월 수치가 약간 하락하기는 했지만 올해 들어 비교적 양호한 흐름을 이어왔지만 세부 항목으로 들어가 소비 여력과 관련된 항목을 보면 크게 개선되지 못하고 이전의 침체된 흐름을 이어오고 있다.",
-      "kind": "review"
-    },
-    {
-      "broker": "IBK투자증권",
-      "title": "[IBKS Economy Monitor] Focus on Week: 높은 성장률이 양극화의 고통을 더 압박하는 흐름",
-      "date": "2026-10-30",
-      "url": "https://stock.pstatic.net/stock-research/economy/40/20261030_economy_660850000.pdf",
-      "sentence": "같은 날 발표된 소비자심리지수는 그 이유를 잘 보여준다.",
       "kind": "outlook"
     }
   ],
@@ -1344,18 +1320,18 @@
   ],
   "audit": [
     {
-      "sourceId": "yahoo:spark:0",
-      "url": "https://query1.finance.yahoo.com/v7/finance/spark?symbols=%5EGSPC,%5EIXIC,%5EDJI,%5ERUT,%5ESOX,%5EKS11,%5EKQ11,%5ETNX,KRW%3DX,DX-Y.NYB,CL%3DF,GC%3DF,NVDA,MSFT,GOOGL&range=1mo&interval=1d",
-      "status": "PASS",
-      "count": 15,
-      "error": null
-    },
-    {
       "sourceId": "forexfactory:thisweek",
       "url": "https://nfs.faireconomy.media/ff_calendar_thisweek.json",
       "status": "FAILED",
       "count": 0,
       "error": "FEED_NOT_YET_ON_NEXT_WEEK"
+    },
+    {
+      "sourceId": "yahoo:spark:0",
+      "url": "https://query1.finance.yahoo.com/v7/finance/spark?symbols=%5EGSPC,%5EIXIC,%5EDJI,%5ERUT,%5ESOX,%5EKS11,%5EKQ11,%5ETNX,KRW%3DX,DX-Y.NYB,CL%3DF,GC%3DF,NVDA,MSFT,GOOGL&range=1mo&interval=1d",
+      "status": "PASS",
+      "count": 15,
+      "error": null
     },
     {
       "sourceId": "yahoo:spark:15",
@@ -1435,5 +1411,5 @@
       "error": null
     }
   ],
-  "collectedAt": "2026-11-01T04:39:12.258Z"
+  "collectedAt": "2026-11-01T04:40:11.297Z"
 }
