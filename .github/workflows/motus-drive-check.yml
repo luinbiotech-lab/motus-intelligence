@@ -18,8 +18,8 @@ jobs:
       - run: npm run build
       - name: Upload, share and read back a connection-check PDF
         env:
-          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
-          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          MOTUS_DRIVE_CLIENT_ID: ${{ secrets.MOTUS_DRIVE_CLIENT_ID }}
+          MOTUS_DRIVE_CLIENT_SECRET: ${{ secrets.MOTUS_DRIVE_CLIENT_SECRET }}
           MOTUS_DRIVE_REFRESH_TOKEN: ${{ secrets.MOTUS_DRIVE_REFRESH_TOKEN }}
         run: npm run drive:check
       - name: Summarize
