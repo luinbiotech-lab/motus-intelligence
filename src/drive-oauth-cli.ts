@@ -23,9 +23,21 @@ function ghSecretSet(value:string):Promise<void> {
   });
 }
 
+function ghReady():Promise<void> {
+  return new Promise((resolve,reject)=>{
+    const child=spawn('gh',['auth','status'],{stdio:'ignore',shell:process.platform==='win32'});
+    child.once('error',()=>reject(new Error('GitHub CLI(gh)가 없습니다. https://cli.github.com 에서 설치하고 gh auth login 후 다시 실행하세요.')));
+    child.once('exit',code=>code===0?resolve():reject(new Error('GitHub CLI 로그인이 필요합니다. gh auth login 후 다시 실행하세요.')));
+  });
+}
+const missingEnv=['BLOGGER_CLIENT_ID','BLOGGER_CLIENT_SECRET','BLOGGER_BLOG_ID'].filter(name=>!process.env[name]?.trim());
+
 let token='';
 console.log('MOTUS 구글 드라이브 승인을 시작합니다. 브라우저에서 luinbiotech@gmail.com으로 "허용"을 눌러 주세요. 토큰은 화면에 출력하지 않습니다.');
 try{
+  // Fail before the consent page, so a granted token is never lost for want of a place to store it.
+  if(missingEnv.length)throw new Error('PC 환경변수가 없습니다: '+missingEnv.join(', ')+' (Blogger 연동 때 설정한 값)');
+  await ghReady();
   await runBloggerOAuthBootstrap({scope:DRIVE_FILE_SCOPE,persistSecret:async value=>{token=value;await ghSecretSet(value);return value}});
   console.log(`1/3 승인 완료, GitHub Secret ${SECRET} 저장 완료`);
   const drive=new GoogleDriveClient({clientId:process.env.BLOGGER_CLIENT_ID!.trim(),clientSecret:process.env.BLOGGER_CLIENT_SECRET!.trim(),refreshToken:token});
