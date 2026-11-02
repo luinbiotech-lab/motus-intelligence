@@ -1,0 +1,10 @@
+{
+  "state": "HOLD",
+  "reasonCode": "KOSPI KOSDAQ USD/KRW required",
+  "reasonCodes": [
+    "KOSPI KOSDAQ USD/KRW required"
+  ],
+  "reason": "KOSPI KOSDAQ USD/KRW required",
+  "insertCallCount": 0,
+  "publishCallCount": 0
+}
