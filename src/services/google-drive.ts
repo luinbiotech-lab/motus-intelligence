@@ -17,7 +17,7 @@ export interface DriveCredentials {clientId:string;clientSecret:string;refreshTo
 export interface DriveUpload {fileId:string;name:string;webViewLink:string;downloadUrl:string;replaced:boolean;folderPath:string[]}
 
 export function driveCredentialsFromEnvironment(env:NodeJS.ProcessEnv=process.env):DriveCredentials|null {
-  const clientId=env.BLOGGER_CLIENT_ID?.trim(),clientSecret=env.BLOGGER_CLIENT_SECRET?.trim(),refreshToken=env.MOTUS_DRIVE_REFRESH_TOKEN?.trim();
+  const clientId=(env.MOTUS_DRIVE_CLIENT_ID??env.BLOGGER_CLIENT_ID)?.trim(),clientSecret=(env.MOTUS_DRIVE_CLIENT_SECRET??env.BLOGGER_CLIENT_SECRET)?.trim(),refreshToken=env.MOTUS_DRIVE_REFRESH_TOKEN?.trim();
   return clientId&&clientSecret&&refreshToken?{clientId,clientSecret,refreshToken}:null;
 }
 /** Drive error text without echoing request bodies or tokens. */
