@@ -1,1 +1,2 @@
 {"runId":"41368573418","attempt":"1","event":"schedule","schedule":"17 21 * * 0-4","category":"korea","operationDate":"2026-11-02","scheduledKst":"06:17","startedAt":"2026-11-02T00:42:27Z","delayMinutes":205,"state":"HOLD","reason":"KOSPI KOSDAQ USD/KRW required","publicPostUrl":null}
+{"runId":"41378734339","attempt":"1","event":"schedule","schedule":"25 23 * * 0-4","category":"korea","operationDate":"2026-11-02","scheduledKst":"08:25","startedAt":"2026-11-02T02:37:39Z","delayMinutes":192,"state":"HOLD","reason":"KOSPI KOSDAQ USD/KRW required","publicPostUrl":null}
