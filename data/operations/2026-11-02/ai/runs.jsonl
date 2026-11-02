@@ -1,0 +1,1 @@
+{"runId":"41437594011","attempt":"1","event":"schedule","schedule":"30 3 * * 1-5","category":"ai","operationDate":"2026-11-02","scheduledKst":"12:30","startedAt":"2026-11-02T11:32:20Z","delayMinutes":482,"state":"HOLD","reason":"Blogger OAuth refresh failed (400)","publicPostUrl":null}
