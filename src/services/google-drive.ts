@@ -44,7 +44,8 @@ export class GoogleDriveClient {
     let response:Response|null=null;
     for(let attempt=0;attempt<3;attempt++){
       response=await this.fetcher(url,{...init,headers:{...(init.headers as Record<string,string>??{}),authorization:`Bearer ${await this.accessToken()}`}});
-      if(response.status<500||attempt===2)break;
+      // Only reads and in-place updates are retried: a retried create could leave two files or folders of one name.
+      if(response.status<500||attempt===2||(init.method??'GET')==='POST')break;
       await new Promise(resolve=>setTimeout(resolve,1500*(attempt+1)));
     }
     if(!response!.ok)throw await failure(response!,what);

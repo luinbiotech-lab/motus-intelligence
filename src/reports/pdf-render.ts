@@ -3,15 +3,16 @@
  * (`npm install --no-save playwright-core` + `npx playwright-core install --with-deps chromium`), so it is loaded
  * dynamically and the rest of the codebase does not depend on it.
  */
+import {execFileSync} from 'node:child_process';
+export function koreanFontInstalled():boolean {try{return /Noto Sans CJK/i.test(execFileSync('fc-list',[':lang=ko','family'],{encoding:'utf8'}))}catch{return false}}
 export async function renderPdf(html:string):Promise<Uint8Array> {
-  const load=async(name:string)=>(await import(name)) as {chromium:{launch:()=>Promise<{newPage:()=>Promise<{setContent:(html:string,options:{waitUntil:string})=>Promise<void>;pdf:(options:Record<string,unknown>)=>Promise<Uint8Array>;evaluate:<T>(fn:()=>T)=>Promise<T>}>;close:()=>Promise<void>}>}};
+  const load=async(name:string)=>(await import(name)) as {chromium:{launch:()=>Promise<{newPage:()=>Promise<{setContent:(html:string,options:{waitUntil:string})=>Promise<void>;pdf:(options:Record<string,unknown>)=>Promise<Uint8Array>;}>;close:()=>Promise<void>}>}};
   let playwright;try{playwright=await load('playwright-core')}catch{playwright=await load('playwright')}
+  // Korean glyphs must come from an installed CJK font, never tofu boxes (document.fonts.check cannot tell for system fonts).
+  if(!koreanFontInstalled())throw new Error('PDF_KOREAN_FONT_MISSING: install fonts-noto-cjk');
   const browser=await playwright.chromium.launch();
   try{
     const page=await browser.newPage();await page.setContent(html,{waitUntil:'load'});
-    // Korean glyphs must come from a real font, never tofu boxes: the page reports whether the CJK font loaded.
-    const fontOk=await page.evaluate(()=>document.fonts.check('12px "Noto Sans CJK KR"'));
-    if(!fontOk)throw new Error('PDF_KOREAN_FONT_MISSING: install fonts-noto-cjk');
     return await page.pdf({format:'A4',printBackground:true,preferCSSPageSize:true});
   }finally{await browser.close()}
 }

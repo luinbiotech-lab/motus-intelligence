@@ -13,8 +13,10 @@ import {dayLabel,headlineEvents,joinEvents,weekRangeLabel,type WeeklyArticle,typ
 const NAVY='#0b2545',RED='#d1242f',BLUE='#1f5fbf',GRAY='#6b7785',LIGHT='#eef2f7',ACC='#c8a24a',SHADE='#f6efe0';
 const esc=(value:unknown)=>String(value).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 const num=(value:number,digits=2)=>new Intl.NumberFormat('en-US',{minimumFractionDigits:digits,maximumFractionDigits:digits}).format(value);
-const pct=(value:number,digits=2)=>`${value>0?'+':value<0?'-':''}${Math.abs(value).toFixed(digits)}%`;
-const col=(value:number)=>value>0?RED:value<0?BLUE:'#333';
+/** Sign and colour follow the printed (rounded) value, so -0.003% prints as 0.00% in black. */
+const rounded=(value:number,digits=2)=>Number(value.toFixed(digits));
+const pct=(value:number,digits=2)=>{const r=rounded(value,digits);return `${r>0?'+':r<0?'-':''}${Math.abs(r).toFixed(digits)}%`};
+const col=(value:number)=>{const r=rounded(value);return r>0?RED:r<0?BLUE:'#333'};
 const B=(value:number)=>`<b style="color:${col(value)}">${pct(value)}</b>`;
 const WEEKDAY=['일','월','화','수','목','금','토'];
 const weekday=(date:string)=>WEEKDAY[new Date(date+'T00:00:00Z').getUTCDay()]!;
@@ -73,7 +75,7 @@ export function buildWeeklyPdfHtml(evidence:WeeklyEvidence,article:WeeklyArticle
   const nqDay=biggestDay(nq);
   points.push(`<b class=k>미국.</b> 나스닥 ${B(nq.changePct)}, S&P 500 ${B(sp.changePct)}, 다우존스 ${B(dj.changePct)}로 한 주를 마쳤다.${nqDay?` 나스닥의 하루 최대 변동은 ${weekday(nqDay.date)}요일 ${B(nqDay.pct)}였다.`:''}${us.length>=2?` 대형 기술주 중 ${esc(josa(us[0]!.label,'이','가'))} ${B(us[0]!.changePct)}로 가장 강했고 ${esc(josa(us.at(-1)!.label,'이','가'))} ${B(us.at(-1)!.changePct)}로 가장 약했다.`:''}`);
   const ksDay=biggestDay(ks);
-  points.push(`<b class=k>국내.</b> 코스피 ${B(ks.changePct)}(${num(ks.weekClose)}), 코스닥 ${B(kq.changePct)}(${num(kq.weekClose)})로 두 지수의 주간 수익률 차이는 ${Math.abs(ks.changePct-kq.changePct).toFixed(1)}%p였다.${ksDay?` 코스피의 하루 최대 변동은 ${weekday(ksDay.date)}요일 ${B(ksDay.pct)}.`:''}${kr.length>=2?` 시가총액 상위 종목 중 ${esc(kr[0]!.label)} ${B(kr[0]!.changePct)}, ${esc(kr.at(-1)!.label)} ${B(kr.at(-1)!.changePct)}.`:''}`);
+  points.push(`<b class=k>국내.</b> 코스피 ${B(ks.changePct)}(${num(ks.weekClose)}), 코스닥 ${B(kq.changePct)}(${num(kq.weekClose)})로 두 지수의 주간 수익률 차이는 ${Math.abs(rounded(ks.changePct)-rounded(kq.changePct)).toFixed(2)}%p였다.${ksDay?` 코스피의 하루 최대 변동은 ${weekday(ksDay.date)}요일 ${B(ksDay.pct)}.`:''}${kr.length>=2?` 시가총액 상위 종목 중 ${esc(kr[0]!.label)} ${B(kr[0]!.changePct)}, ${esc(kr.at(-1)!.label)} ${B(kr.at(-1)!.changePct)}.`:''}`);
   if(ty){const peak=Math.max(...ty.daily.map(day=>day.close));points.push(`<b class=k>금리·환율.</b> 미국 10년물 금리는 주중 최고 ${peak.toFixed(2)}%를 거쳐 <b>${ty.weekClose.toFixed(2)}%</b>(${ty.changeBp!>0?'+':''}${ty.changeBp}bp)로 마감했다.${fx?` 원·달러 환율은 <b>${num(fx.weekClose)}원</b>(${B(fx.changePct)}).`:''}`)}
   if(events.length||evidence.calendar.length){const key=evidence.calendar.filter(item=>item.impact==='High').slice(0,3).map(item=>`${esc(item.kstLabel)} ${esc(item.countryLabel)} ${esc(item.koreanTitle??item.title)}${item.forecast?`(예상 ${esc(item.forecast)})`:''}`);points.push(`<b class=k>다음 주(${esc(nextRange)}).</b> ${events.length?esc(joinEvents(events))+'가 핵심 일정이다. ':''}${key.length?key.join(', ')+'.':''}`)}
 
@@ -98,7 +100,7 @@ export function buildWeeklyPdfHtml(evidence:WeeklyEvidence,article:WeeklyArticle
   const foot=`<div class=foot>MOTUS Research · 공개 자료 기반 참고 자료이며 투자 권유가 아닙니다. 수치는 각 시장의 ${esc(koreanDateLabel(sp.weekCloseDate))} 종가 기준입니다.</div>`;
   const fig=(no:number,title:string,body:string,source='자료: Yahoo Finance, MOTUS')=>body?`<div class=fig><div class=figt><span>그림 ${no}.</span> ${esc(title)}</div>${body}<div class=src>${esc(source)}</div></div>`:'';
   const css=`@page{size:A4;margin:0}*{box-sizing:border-box}body{margin:0;font-family:"Noto Sans CJK KR","Noto Sans KR",sans-serif;color:#1b2430;font-size:9.3pt;line-height:1.55}
-.page{width:210mm;height:297mm;padding:11mm 12mm 10mm;position:relative;page-break-after:always;overflow:hidden}
+.page{width:210mm;height:297mm;padding:11mm 12mm 10mm;position:relative;page-break-after:always;overflow:hidden}.page:last-child{page-break-after:auto}
 .top{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2.4px solid ${NAVY};padding-bottom:5px}.brand{font-size:17pt;font-weight:900;color:${NAVY};letter-spacing:.5px}.brand span{font-weight:400;color:${ACC}}
 .meta{text-align:right;font-size:7.8pt;color:${GRAY};line-height:1.4}.tag{display:inline-block;margin:10px 0 4px;background:${NAVY};color:#fff;font-size:7.8pt;font-weight:700;padding:2px 8px}
 h1{font-size:19pt;line-height:1.3;margin:2px 0 4px;color:${NAVY};font-weight:900;letter-spacing:-.4px}.sub{color:${GRAY};font-size:9pt;margin-bottom:8px}

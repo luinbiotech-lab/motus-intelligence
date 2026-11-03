@@ -60,22 +60,28 @@ const evidence=await collectWeeklyEvidence(runDate);
 await writeFile(join(root,'evidence.json'),JSON.stringify(evidence,null,2),'utf8');
 const article=buildWeeklyArticle(evidence,{requireCalendar:!finalAttempt&&!published});
 
+if(attachPdf&&!published)await done({state:'HOLD',mode:'attach-pdf',reasons:['ATTACH_PDF_WEEK_NOT_PUBLISHED'],publishCallCount:0});
 if(published){
   // --attach-pdf on a published week: add the PDF section to the same post (same id and permalink) and read it back.
+  // Every outcome other than PDF_ATTACHED or an already-attached SKIP fails the run, so it never shows green.
+  const fail=async(reason:string):Promise<never>=>{await record({event:'PDF_FAILED',postId:null,publicPostUrl:null,title:article.title,detail:reason.slice(0,300)});await writeFile(join(root,'weekly-publish.json'),JSON.stringify({identity,runDate,state:'FAILED',mode:'attach-pdf',reason},null,2),'utf8');console.error(JSON.stringify({identity,state:'FAILED',mode:'attach-pdf',reason}));process.exit(1)};
   if(!execute||process.env.MOTUS_LIVE_PUBLISH_ENABLED!=='true')await done({state:'SIMULATED',mode:'attach-pdf',publishCallCount:0});
-  const postId=prior.find(item=>item.event==='PUBLISHED')?.postId;if(!postId)await done({state:'HOLD',reasons:['PUBLISHED_POST_ID_UNKNOWN'],publishCallCount:0});
-  const section=await weeklyPdfSection(evidence,article);if(!section)await done({state:'FAILED',mode:'attach-pdf',reason:'PDF was not uploaded (see pdf-upload.json)'});
-  const raw=JSON.parse(await readFile(resolve('config/publishing.json'),'utf8')) as {blogger:BloggerPublishingConfig};
-  const config={...raw.blogger,blogId:process.env.BLOGGER_BLOG_ID!.trim(),credentialAvailable:true,publishAsDraft:true},google=new GoogleBloggerApiAdapter();
-  const before=await google.readPost(postId!,config);
-  if(before.status!=='PUBLISHED'||!before.url||!before.content.includes(`data-week="${window.weekStart}"`))await done({state:'HOLD',reasons:['PUBLISHED_POST_MISMATCH'],publishCallCount:0});
-  if(before.content.includes('data-section="weekly-pdf"'))await done({state:'SKIP',reason:'PDF link already in the post',publicPostUrl:before.url});
-  const block=renderWeeklySection(section!),content=before.content.replace(/(<p data-section="editorial-lead"[\s\S]*?<\/p>)/,`$1${block}`);
-  if(content===before.content)await done({state:'HOLD',reasons:['LEAD_NOT_FOUND_FOR_PDF_SECTION'],publishCallCount:0});
-  const after=await google.patchPostContent(postId!,{title:before.title,content:`<!doctype html><html><body>${content}</body></html>`,labels:before.labels},config);
-  if(after.status!=='PUBLISHED'||after.url!==before.url||!after.content.includes(section!.links![0]!.url))await done({state:'FAILED',mode:'attach-pdf',reason:'readback after patch does not contain the PDF link'});
-  await record({event:'PDF_ATTACHED',postId:postId!,publicPostUrl:after.url,title:before.title,detail:section!.links![0]!.url});
-  await done({state:'PDF_ATTACHED',postId,publicPostUrl:after.url,pdf:section!.links![0]!.url});
+  if(['BLOGGER_BLOG_ID','BLOGGER_CLIENT_ID','BLOGGER_CLIENT_SECRET','BLOGGER_REFRESH_TOKEN'].some(key=>!process.env[key]?.trim()))await fail('BLOGGER_CREDENTIALS_MISSING');
+  const postId=prior.find(item=>(item.event==='PUBLISHED'||item.event==='SKIPPED_EXISTING')&&item.postId)?.postId;if(!postId)await fail('PUBLISHED_POST_ID_UNKNOWN');
+  try{
+    const section=await weeklyPdfSection(evidence,article);if(!section)await fail('PDF was not uploaded (see pdf-upload.json)');
+    const raw=JSON.parse(await readFile(resolve('config/publishing.json'),'utf8')) as {blogger:BloggerPublishingConfig};
+    const config={...raw.blogger,blogId:process.env.BLOGGER_BLOG_ID!.trim(),credentialAvailable:true,publishAsDraft:true},google=new GoogleBloggerApiAdapter();
+    const before=await google.readPost(postId!,config);
+    if(before.status!=='PUBLISHED'||!before.url||!before.content.includes(`data-week="${window.weekStart}"`))await fail('PUBLISHED_POST_MISMATCH');
+    if(before.content.includes('data-section="weekly-pdf"'))await done({state:'SKIP',mode:'attach-pdf',reason:'PDF link already in the post',publicPostUrl:before.url});
+    const block=renderWeeklySection(section!),content=before.content.replace(/(<p data-section="editorial-lead"[\s\S]*?<\/p>)/,`$1${block}`);
+    if(content===before.content)await fail('LEAD_NOT_FOUND_FOR_PDF_SECTION');
+    const after=await google.patchPostContent(postId!,{title:before.title,content:`<!doctype html><html><body>${content}</body></html>`,labels:before.labels},config);
+    if(after.status!=='PUBLISHED'||after.url!==before.url||!after.content.includes(section!.links![0]!.url))await fail('readback after patch does not contain the PDF link');
+    await record({event:'PDF_ATTACHED',postId:postId!,publicPostUrl:after.url,title:before.title,detail:section!.links![0]!.url});
+    await done({state:'PDF_ATTACHED',postId,publicPostUrl:after.url,pdf:section!.links![0]!.url});
+  }catch(error){await fail(error instanceof Error?error.message:String(error))}
 }
 
 const pdfSection=execute&&process.env.MOTUS_LIVE_PUBLISH_ENABLED==='true'&&article.readiness==='READY'?await weeklyPdfSection(evidence,article):null;
