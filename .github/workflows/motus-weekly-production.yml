@@ -17,6 +17,11 @@ on:
         required: false
         type: boolean
         default: false
+      attach_pdf:
+        description: Add the week's PDF report link to an already published weekly post (once)
+        required: false
+        type: boolean
+        default: false
   schedule:
     # Sunday 20:37 and 23:37 KST: the week's review with next week's calendar.
     - cron: '37 11 * * 0'
@@ -60,13 +65,20 @@ jobs:
         with: {node-version: 22, cache: npm}
       - run: npm ci
       - run: npm run build
-      - run: node --test --experimental-test-isolation=none dist/tests/weekly-review.test.js
+      - run: node --test --experimental-test-isolation=none dist/tests/weekly-review.test.js dist/tests/weekly-pdf.test.js
+      - name: Install the PDF renderer (Chromium) and Korean fonts
+        shell: bash
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk >/dev/null
+          npm install --no-save playwright-core@1.56.0
+          npx playwright-core install --with-deps chromium
       - name: Resolve run mode
         shell: bash
         env:
           INPUT_DATE: ${{ inputs.run_date }}
           INPUT_EXECUTE: ${{ inputs.execute_publish }}
           INPUT_FINAL: ${{ inputs.final_attempt }}
+          INPUT_ATTACH: ${{ inputs.attach_pdf }}
           SCHEDULE: ${{ github.event.schedule }}
         run: |
           RUN_DATE="${INPUT_DATE:-$(date +%F)}"
@@ -77,6 +89,7 @@ jobs:
           echo "RUN_DATE=$RUN_DATE" >> "$GITHUB_ENV"
           echo "MOTUS_LIVE_PUBLISH_ENABLED=$LIVE" >> "$GITHUB_ENV"
           echo "FINAL_ATTEMPT=$FINAL" >> "$GITHUB_ENV"
+          echo "ATTACH_PDF=${INPUT_ATTACH:-false}" >> "$GITHUB_ENV"
       - name: Mark the upload root
         if: always()
         run: mkdir -p data && echo weekly > data/.weekly-bundle
@@ -87,10 +100,14 @@ jobs:
           BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
           BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
           BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+          MOTUS_DRIVE_CLIENT_ID: ${{ secrets.MOTUS_DRIVE_CLIENT_ID }}
+          MOTUS_DRIVE_CLIENT_SECRET: ${{ secrets.MOTUS_DRIVE_CLIENT_SECRET }}
+          MOTUS_DRIVE_REFRESH_TOKEN: ${{ secrets.MOTUS_DRIVE_REFRESH_TOKEN }}
         run: |
           flags=(--date "$RUN_DATE")
           [[ "$MOTUS_LIVE_PUBLISH_ENABLED" == "true" ]] && flags+=(--execute)
           [[ "$FINAL_ATTEMPT" == "true" ]] && flags+=(--final-attempt)
+          [[ "$ATTACH_PDF" == "true" ]] && flags+=(--attach-pdf)
           node dist/src/motus-weekly-cli.js "${flags[@]}"
       - name: Summarize
         if: always()

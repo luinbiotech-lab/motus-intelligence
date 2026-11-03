@@ -32,3 +32,12 @@ test('a token without drive.file is refused', async () => {
   const drive=new GoogleDriveClient({clientId:'c',clientSecret:'s',refreshToken:'r'},async()=>new Response(JSON.stringify({access_token:'at',scope:'https://www.googleapis.com/auth/blogger'}),{status:200}));
   await assert.rejects(()=>drive.ensureFolder(['MOTUS Reports']),/DRIVE_TOKEN_SCOPE_MISSING/);
 });
+
+test('a transient Drive 500 is retried instead of failing the upload', async () => {
+  let lists=0;
+  const fetcher=async(input:string|URL)=>{const url=String(input);if(url.includes('oauth2'))return new Response(JSON.stringify({access_token:'at',scope:DRIVE_FILE_SCOPE}),{status:200});
+    if(url.includes('/files?')){lists++;return lists===1?new Response(JSON.stringify({error:{message:'Internal Error'}}),{status:500}):new Response(JSON.stringify({files:[{id:'F1'}]}),{status:200})}
+    return new Response('{}',{status:404})};
+  const drive=new GoogleDriveClient({clientId:'c',clientSecret:'s',refreshToken:'r'},fetcher);
+  assert.equal(await drive.ensureFolder(['MOTUS Reports']),'F1');assert.equal(lists,2);
+});

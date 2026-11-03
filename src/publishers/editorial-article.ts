@@ -108,17 +108,19 @@ function finish(product:string,title:string,label:string,parts:string[],rendered
 function esc(value:string){return value.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}function attr(value:string){return esc(value).replace(/'/g,'&#39;');}
 function explainTerms(value:string,seen:Set<string>):string {const terms:[string,string][]=[['VIX','VIX (변동성지수)'],['DXY','DXY (달러인덱스)'],['미국 10년물','미국 10년물 국채금리']];let output=value;for(const [term,label] of terms){if(seen.has(term))continue;if(output.includes(label)){seen.add(term);continue;}const index=output.indexOf(term);if(index<0)continue;output=`${output.slice(0,index)}${label}${output.slice(index+term.length)}`;seen.add(term);}return output;}
 
+/** One weekly section (intro, table, links, quoted paragraphs) in the editorial style; also used to add a section to a published post. */
+export function renderWeeklySection(item:import('../operations/weekly-review.js').WeeklySection):string {
+  const table=(data:{headers:string[];rows:string[][];note?:string})=>`<div style="width:100%;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch"><table style="width:100%;border-collapse:collapse;font-size:15px;line-height:1.5;min-width:340px"><thead><tr>${data.headers.map(cell=>`<th style="text-align:left;padding:8px 10px;background:#eef3f9;color:#03162e;border-bottom:2px solid #173a63;white-space:nowrap">${esc(cell)}</th>`).join('')}</tr></thead><tbody>${data.rows.map(row=>`<tr>${row.map((cell,index)=>`<td style="padding:8px 10px;border-bottom:1px solid #dbe3ec;vertical-align:top;${index===0?'font-weight:700;white-space:nowrap;':''}${/^\$?[\d,.]+(?:원|%)?$/.test(cell)?'white-space:nowrap;':''}${/^[+-]\d|^[+-]?\d+bp$/.test(cell)?`white-space:nowrap;color:${cell.startsWith('-')?'#1f5fbf':cell.startsWith('+')?'#c62828':'#172033'};font-weight:700`:''}">${esc(cell)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>${data.note?`<p style="margin:8px 0 0;color:#4a5a6e;font-size:13px">${esc(data.note)}</p>`:''}`;
+  let body=item.intro?`<p style="margin:0 0 12px;color:#4a5a6e;font-size:15px">${esc(item.intro)}</p>`:'';
+  if(item.table)body+=table(item.table);
+  if(item.links?.length)body+=`<ul style="margin:0;padding-left:20px">${item.links.map(link=>`<li style="margin:0 0 10px"><span style="color:#4a5a6e;font-size:14px">${esc(link.meta)}</span><br><a href="${attr(link.url)}" style="${LINK}">${esc(link.label)}</a></li>`).join('')}</ul>`;
+  if(item.paragraphs?.length)body+=deepSection({key:item.key,title:'',paragraphs:item.paragraphs}).replace(/^<section[^>]*><h2[^>]*><\/h2>/,'').replace(/<\/section>$/,'');
+  return `<section data-section="${attr(item.key)}" style="${SECTION}"><h2 style="${HEADING}">${esc(item.title)}</h2>${body}</section>`;
+}
+
 /** Weekly review: the same editorial masthead and sections as the daily articles, with tables for the numbers and the calendar. */
 export function renderWeeklyEditorialArticle(view:import('../operations/weekly-review.js').WeeklyArticle):DailyMasterRenderResult {
-  const table=(data:{headers:string[];rows:string[][];note?:string})=>`<div style="width:100%;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch"><table style="width:100%;border-collapse:collapse;font-size:15px;line-height:1.5;min-width:340px"><thead><tr>${data.headers.map(cell=>`<th style="text-align:left;padding:8px 10px;background:#eef3f9;color:#03162e;border-bottom:2px solid #173a63;white-space:nowrap">${esc(cell)}</th>`).join('')}</tr></thead><tbody>${data.rows.map(row=>`<tr>${row.map((cell,index)=>`<td style="padding:8px 10px;border-bottom:1px solid #dbe3ec;vertical-align:top;${index===0?'font-weight:700;white-space:nowrap;':''}${/^\$?[\d,.]+(?:원|%)?$/.test(cell)?'white-space:nowrap;':''}${/^[+-]\d|^[+-]?\d+bp$/.test(cell)?`white-space:nowrap;color:${cell.startsWith('-')?'#1f5fbf':cell.startsWith('+')?'#c62828':'#172033'};font-weight:700`:''}">${esc(cell)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>${data.note?`<p style="margin:8px 0 0;color:#4a5a6e;font-size:13px">${esc(data.note)}</p>`:''}`;
-  const parts=[masthead(view.title,view.subtitle,'주간 증시',view.weekEnd),lead(view.lead)];
-  for(const item of view.sections){
-    let body=item.intro?`<p style="margin:0 0 12px;color:#4a5a6e;font-size:15px">${esc(item.intro)}</p>`:'';
-    if(item.table)body+=table(item.table);
-    if(item.links?.length)body+=`<ul style="margin:0;padding-left:20px">${item.links.map(link=>`<li style="margin:0 0 10px"><span style="color:#4a5a6e;font-size:14px">${esc(link.meta)}</span><br><a href="${attr(link.url)}" style="${LINK}">${esc(link.label)}</a></li>`).join('')}</ul>`;
-    if(item.paragraphs?.length)body+=deepSection({key:item.key,title:'',paragraphs:item.paragraphs}).replace(/^<section[^>]*><h2[^>]*><\/h2>/,'').replace(/<\/section>$/,'');
-    parts.push(`<section data-section="${attr(item.key)}" style="${SECTION}"><h2 style="${HEADING}">${esc(item.title)}</h2>${body}</section>`);
-  }
+  const parts=[masthead(view.title,view.subtitle,'주간 증시',view.weekEnd),lead(view.lead),...view.sections.map(renderWeeklySection)];
   parts.push(sources(view.sources.map(item=>({...item,publisher:''}))));
   return finish('weekly-intelligence',view.title,'주간 증시',parts,['masthead','lead',...view.sections.map(item=>item.key),'sources']);
 }
