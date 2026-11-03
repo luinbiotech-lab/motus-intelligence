@@ -30,7 +30,7 @@
    npm ci
    npm run drive:oauth -- --client-json "$HOME\Downloads\client_secret_….json"
    ```
-3. 브라우저에서 luinbiotech@gmail.com으로 **허용**을 누릅니다.
+3. 브라우저에서 luinbiotech@gmail.com으로 **허용**을 누릅니다. 이 승인 한 번으로 블로그 발행 토큰(`BLOGGER_*`)도 새로 발급되고, 이 데스크톱 클라이언트로 교체됩니다(`--drive-only`를 붙이면 드라이브만 발급).
    - client id, client secret, refresh token은 GitHub Secret `MOTUS_DRIVE_CLIENT_ID`, `MOTUS_DRIVE_CLIENT_SECRET`, `MOTUS_DRIVE_REFRESH_TOKEN`에 바로 저장되고 화면에 나오지 않습니다.
 4. 받은 JSON 파일은 지웁니다.
 5. GitHub Actions의 **MOTUS Google Drive connection check**를 실행해 연결을 확인합니다.
