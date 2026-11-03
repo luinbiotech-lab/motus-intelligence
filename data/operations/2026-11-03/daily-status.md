@@ -1,11 +1,11 @@
 # MOTUS 일일 상태 2026-11-03
 
-갱신: 2026-11-03T16:47:47.552Z
+갱신: 2026-11-03T16:48:32.871Z
 
 | 카테고리 | 상태 | 사유 | 글 | 실행 수 | 첫 실행 지연 |
 | --- | --- | --- | --- | --- | --- |
 | 미국증시 | HOLD | YAHOO_US_SP500_SESSION_MISMATCH:2026-11-03:2026-11-02 |  | 4 | 320분 |
 | AI 인텔리전스 | 발행 |  | [링크](https://motusnova.blogspot.com/2026/11/ai.html) | 2 | 461분 |
-| 국내증시 | HOLD | Blogger OAuth refresh failed (400) |  | 3 | 336분 |
+| 국내증시 | HOLD | YAHOO_FINANCE_KOSPI_ROW_MISSING |  | 4 | 336분 |
 
 지연은 예정 시각(KST) 대비 실제 시작까지의 분이다. 수동 실행은 예정 시각이 없어 비워 둔다.
