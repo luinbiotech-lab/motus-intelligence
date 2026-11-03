@@ -40,9 +40,15 @@ export class GoogleDriveClient {
     return this.token=body.access_token;
   }
   private async call<T>(url:string,init:RequestInit={},what='CALL'):Promise<T> {
-    const response=await this.fetcher(url,{...init,headers:{...(init.headers as Record<string,string>??{}),authorization:`Bearer ${await this.accessToken()}`}});
-    if(!response.ok)throw await failure(response,what);
-    return await response.json() as T;
+    // Drive answers an occasional 500/503 (seen 2026-11-04 on a first list call); up to two retries with backoff.
+    let response:Response|null=null;
+    for(let attempt=0;attempt<3;attempt++){
+      response=await this.fetcher(url,{...init,headers:{...(init.headers as Record<string,string>??{}),authorization:`Bearer ${await this.accessToken()}`}});
+      if(response.status<500||attempt===2)break;
+      await new Promise(resolve=>setTimeout(resolve,1500*(attempt+1)));
+    }
+    if(!response!.ok)throw await failure(response!,what);
+    return await response!.json() as T;
   }
   private async find(name:string,parent:string|null,mime?:string):Promise<{id:string}|null> {
     const parts=[`name='${q(name)}'`,'trashed=false',parent?`'${q(parent)}' in parents`:`'root' in parents`,...(mime?[`mimeType='${mime}'`]:[])];

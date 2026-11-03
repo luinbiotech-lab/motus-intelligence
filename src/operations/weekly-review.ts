@@ -21,7 +21,12 @@ export interface WeeklyBrokerQuote {broker:string;title:string;date:string;url:s
 export interface CalendarEvent {at:string;kstLabel:string;country:string;countryLabel:string;title:string;koreanTitle:string|null;group:string|null;impact:'High'|'Medium';forecast:string;previous:string}
 export interface MotusWeekPost {title:string;url:string;publishedAt:string;category:'US_MARKET'|'KOREA_MARKET'|'AI_INTELLIGENCE'|'OTHER'}
 export interface WeeklyAudit {sourceId:string;url:string;status:'PASS'|'FAILED';count:number;error:string|null}
-export interface WeeklyEvidence {window:WeekWindow;quotes:WeeklyQuote[];broker:WeeklyBrokerQuote[];calendar:CalendarEvent[];calendarCoversNextWeek:boolean;posts:MotusWeekPost[];audit:WeeklyAudit[];collectedAt:string}
+export interface KoreaFlows {date:string;foreign:number;institution:number;individual:number;url:string}
+export interface WeeklyEvidence {window:WeekWindow;quotes:WeeklyQuote[];broker:WeeklyBrokerQuote[];calendar:CalendarEvent[];calendarCoversNextWeek:boolean;posts:MotusWeekPost[];audit:WeeklyAudit[];collectedAt:string;
+  /** Three months of daily closes for the PDF charts, by symbol (exchange dates, up to the week's end). */
+  charts?:Record<string,Array<{date:string;close:number}>>;
+  /** KOSPI investor net buying (100 million won) on the week's last Korean session. */
+  flows?:KoreaFlows|null}
 export interface WeeklyParagraph {text:string;source?:{label:string;url:string}}
 export interface WeeklySection {key:string;title:string;intro?:string;paragraphs?:WeeklyParagraph[];table?:{headers:string[];rows:string[][];note?:string};links?:Array<{label:string;url:string;meta:string}>}
 export interface WeeklyArticle {publicationId:string;weekStart:string;weekEnd:string;title:string;subtitle:string;lead:string;sections:WeeklySection[];sources:Array<{label:string;url:string}>;readiness:'READY'|'HOLD';reasons:string[]}
@@ -247,10 +252,32 @@ export async function collectMotusPosts(window:WeekWindow,fetcher:typeof fetch,a
   catch(error){audit.push({sourceId:'motus:feed',url:MOTUS_FEED,status:'FAILED',count:0,error:errText(error)});return []}
 }
 
+export const CHART_SYMBOLS=['^GSPC','^IXIC','^KS11','^KQ11','^TNX','KRW=X','XLK','XLC','XLY','XLF','XLV','XLI','XLE','XLB','XLP','XLU','XLRE'];
+export async function collectWeeklyCharts(window:WeekWindow,fetcher:typeof fetch,audit:WeeklyAudit[]):Promise<Record<string,Array<{date:string;close:number}>>> {
+  const charts:Record<string,Array<{date:string;close:number}>>={};
+  for(let i=0;i<CHART_SYMBOLS.length;i+=17){
+    const batch=CHART_SYMBOLS.slice(i,i+17);let body:{spark?:{result?:SparkSeries[]}}|null=null;
+    for(const host of ['query1.finance.yahoo.com','query2.finance.yahoo.com']){const url=sparkUrl(batch,host).replace('range=1mo','range=3mo');try{body=await getJson(fetcher,url);audit.push({sourceId:'yahoo:spark-3mo',url,status:'PASS',count:(body as {spark?:{result?:SparkSeries[]}}).spark?.result?.length??0,error:null});break}catch(error){audit.push({sourceId:'yahoo:spark-3mo',url,status:'FAILED',count:0,error:errText(error)})}}
+    for(const series of body?.spark?.result??[])charts[series.symbol]=sparkCloses(series).filter(item=>item.date<=window.weekEnd);
+  }
+  return charts;
+}
+export const NAVER_KOSPI_FLOWS='https://m.stock.naver.com/api/index/KOSPI/trend';
+/** KOSPI investor net buying for the week's last Korean session; another day's figures are not reported. */
+export async function collectKoreaFlows(window:WeekWindow,fetcher:typeof fetch,audit:WeeklyAudit[],lastSession:string|null):Promise<KoreaFlows|null> {
+  try{const body=await getJson<{bizdate?:string;personalValue?:string;foreignValue?:string;institutionalValue?:string}>(fetcher,NAVER_KOSPI_FLOWS);
+    const raw=body.bizdate??'',date=/^\d{8}$/.test(raw)?`${raw.slice(0,4)}-${raw.slice(4,6)}-${raw.slice(6)}`:'',num=(value?:string)=>Number(String(value??'').replace(/,/g,''));
+    const flows={date,foreign:num(body.foreignValue),institution:num(body.institutionalValue),individual:num(body.personalValue),url:NAVER_KOSPI_FLOWS};
+    if(!date||(lastSession&&date!==lastSession)||date<window.weekStart||date>window.weekEnd||![flows.foreign,flows.institution,flows.individual].every(Number.isFinite)){audit.push({sourceId:'naver:kospi-flows',url:NAVER_KOSPI_FLOWS,status:'FAILED',count:0,error:'FLOWS_NOT_ON_LAST_SESSION:'+date});return null}
+    audit.push({sourceId:'naver:kospi-flows',url:NAVER_KOSPI_FLOWS,status:'PASS',count:1,error:null});return flows}
+  catch(error){audit.push({sourceId:'naver:kospi-flows',url:NAVER_KOSPI_FLOWS,status:'FAILED',count:0,error:errText(error)});return null}
+}
+
 export async function collectWeeklyEvidence(runDate:string,fetcher:typeof fetch=fetch,collectedAt=new Date().toISOString()):Promise<WeeklyEvidence> {
   const window=weekWindow(runDate),audit:WeeklyAudit[]=[];
-  const [quotes,broker,calendar,posts]=await Promise.all([collectWeeklyQuotes(window,fetcher,audit),collectWeeklyResearch(window,fetcher,audit),collectCalendar(window,fetcher,audit),collectMotusPosts(window,fetcher,audit)]);
-  return {window,quotes,broker,calendar:calendar.events,calendarCoversNextWeek:calendar.coversNextWeek,posts,audit,collectedAt};
+  const [quotes,broker,calendar,posts,charts]=await Promise.all([collectWeeklyQuotes(window,fetcher,audit),collectWeeklyResearch(window,fetcher,audit),collectCalendar(window,fetcher,audit),collectMotusPosts(window,fetcher,audit),collectWeeklyCharts(window,fetcher,audit)]);
+  const kospi=quotes.find(item=>item.symbol==='^KS11'),flows=await collectKoreaFlows(window,fetcher,audit,kospi?.weekCloseDate??null);
+  return {window,quotes,broker,calendar:calendar.events,calendarCoversNextWeek:calendar.coversNextWeek,posts,audit,collectedAt,charts,flows};
 }
 
 /* ---------------- Article ---------------- */
