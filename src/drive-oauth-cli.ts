@@ -3,6 +3,10 @@
  *
  *   npm run drive:oauth -- --client-json <Google Cloud에서 받은 client_secret_….json>
  *
+ * By default the same consent also re-authorizes Blogger publishing (scopes blogger + drive.file) and replaces
+ * BLOGGER_CLIENT_ID / BLOGGER_CLIENT_SECRET / BLOGGER_REFRESH_TOKEN with this client and token; --drive-only skips
+ * that. (2026-11-03: the Blogger refresh token issued 10/25 expired after seven days because the OAuth app was
+ * still in "Testing"; publishing the app to Production stops that.)
  * The client is a "Desktop app" OAuth client created for Drive (the existing Blogger client is a web client that
  * cannot use a local callback). The consent asks only for drive.file. The client id, client secret and refresh
  * token go straight into the repository's Actions secrets (MOTUS_DRIVE_CLIENT_ID / _CLIENT_SECRET /
@@ -11,7 +15,7 @@
  */
 import {spawn} from 'node:child_process';
 import {readFile} from 'node:fs/promises';
-import {runBloggerOAuthBootstrap} from './services/blogger-oauth.js';
+import {BLOGGER_OAUTH_SCOPE,runBloggerOAuthBootstrap} from './services/blogger-oauth.js';
 import {DRIVE_FILE_SCOPE,DRIVE_ROOT_FOLDER,GoogleDriveClient} from './services/google-drive.js';
 
 const REPO='luinbiotech-lab/motus-intelligence';
@@ -34,7 +38,7 @@ export async function readClientJson(path:string):Promise<{clientId:string;clien
   return {clientId,clientSecret};
 }
 
-const args=process.argv.slice(2),jsonPath=args[args.indexOf('--client-json')+1];
+const args=process.argv.slice(2),jsonPath=args[args.indexOf('--client-json')+1],withBlogger=!args.includes('--drive-only');
 console.log('MOTUS 구글 드라이브 승인을 시작합니다. 비밀번호와 토큰은 화면에 출력하지 않습니다.');
 try{
   if(!args.includes('--client-json')||!jsonPath)throw new Error('사용법: npm run drive:oauth -- --client-json <다운로드한 client_secret_….json 경로>');
@@ -44,9 +48,10 @@ try{
   let token='';
   const env:Record<string,string>={BLOGGER_CLIENT_ID:client.clientId,BLOGGER_CLIENT_SECRET:client.clientSecret,BLOGGER_BLOG_ID:'drive'};
   console.log('브라우저가 열리면 luinbiotech@gmail.com으로 "허용"을 눌러 주세요.');
-  await runBloggerOAuthBootstrap({environment:name=>env[name],scope:DRIVE_FILE_SCOPE,persistSecret:async value=>{token=value;return value}});
+  await runBloggerOAuthBootstrap({environment:name=>env[name],scope:withBlogger?`${BLOGGER_OAUTH_SCOPE} ${DRIVE_FILE_SCOPE}`:DRIVE_FILE_SCOPE,persistSecret:async value=>{token=value;return value}});
   await setSecret('MOTUS_DRIVE_CLIENT_ID',client.clientId);await setSecret('MOTUS_DRIVE_CLIENT_SECRET',client.clientSecret);await setSecret('MOTUS_DRIVE_REFRESH_TOKEN',token);
-  console.log('1/3 승인 완료, GitHub Secret 3개(MOTUS_DRIVE_CLIENT_ID·CLIENT_SECRET·REFRESH_TOKEN) 저장 완료');
+  if(withBlogger){await setSecret('BLOGGER_CLIENT_ID',client.clientId);await setSecret('BLOGGER_CLIENT_SECRET',client.clientSecret);await setSecret('BLOGGER_REFRESH_TOKEN',token)}
+  console.log(`1/3 승인 완료, GitHub Secret 저장 완료(드라이브${withBlogger?' + 블로그 발행':''})`);
   const drive=new GoogleDriveClient({...client,refreshToken:token});
   try{const folder=await drive.ensureFolder([DRIVE_ROOT_FOLDER]);console.log(`2/3 드라이브 API 응답 확인, 앱 전용 "${DRIVE_ROOT_FOLDER}" 폴더 준비 (id ${folder.slice(0,6)}…)`)}
   catch(error){const message=error instanceof Error?error.message:String(error);
