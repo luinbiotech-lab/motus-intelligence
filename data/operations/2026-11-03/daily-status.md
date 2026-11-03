@@ -1,10 +1,10 @@
 # MOTUS 일일 상태 2026-11-03
 
-갱신: 2026-11-03T08:00:40.340Z
+갱신: 2026-11-03T08:33:21.492Z
 
 | 카테고리 | 상태 | 사유 | 글 | 실행 수 | 첫 실행 지연 |
 | --- | --- | --- | --- | --- | --- |
-| 미국증시 | HOLD | Blogger OAuth refresh failed (400) |  | 2 | 320분 |
+| 미국증시 | HOLD | Blogger OAuth refresh failed (400) |  | 3 | 320분 |
 | AI 인텔리전스 | 미실행 |  |  | 0 |  |
 | 국내증시 | HOLD | Blogger OAuth refresh failed (400) |  | 3 | 336분 |
 
