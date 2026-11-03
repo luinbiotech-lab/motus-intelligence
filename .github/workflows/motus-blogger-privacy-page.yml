@@ -1,0 +1,44 @@
+name: MOTUS Blogger privacy page (one-off, owner-approved 2026-11-04)
+on:
+  workflow_dispatch: {}
+permissions:
+  contents: read
+jobs:
+  page:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Create the privacy policy page once and read it back
+        env:
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          const e=process.env,TITLE='개인정보처리방침';
+          if(e.BLOGGER_BLOG_ID!=='3015267553244608361'){console.error('MOTUS_BLOG_ID_MISMATCH');process.exit(1)}
+          const t=await fetch('https://oauth2.googleapis.com/token',{method:'POST',headers:{'content-type':'application/x-www-form-urlencoded'},body:new URLSearchParams({client_id:e.BLOGGER_CLIENT_ID,client_secret:e.BLOGGER_CLIENT_SECRET,refresh_token:e.BLOGGER_REFRESH_TOKEN,grant_type:'refresh_token'})}).then(r=>r.json());
+          if(!t.access_token){console.error('OAUTH_FAILED '+(t.error??''));process.exit(1)}
+          const api=`https://www.googleapis.com/blogger/v3/blogs/${e.BLOGGER_BLOG_ID}/pages`,auth={authorization:'Bearer '+t.access_token};
+          const list=await fetch(api+'?status=live&status=draft&fetchBodies=false',{headers:auth}).then(r=>r.json());
+          let page=(list.items??[]).find(p=>p.title===TITLE);
+          if(page)console.log('EXISTING '+page.status+' '+page.url);
+          else{
+            const content=`<article data-product="motus-privacy" style="font-family:Arial,&quot;Noto Sans KR&quot;,sans-serif;line-height:1.75;font-size:16px;max-width:760px">
+          <p>MOTUS(motusnova.blogspot.com, 이하 'MOTUS')는 미국·국내 증시와 AI 산업 리포트를 발행하는 블로그입니다. 이 방침은 MOTUS와 MOTUS 운영 도구가 정보를 어떻게 다루는지 설명합니다.</p>
+          <h3>1. 수집하는 개인정보</h3><p>MOTUS는 방문자의 이름, 연락처, 계정 정보 등 개인정보를 수집·저장·판매하지 않습니다. 회원가입, 댓글 외 별도 입력 양식을 운영하지 않습니다.</p>
+          <h3>2. Google 계정 연동 도구</h3><p>MOTUS 운영 도구는 운영자 본인의 Google 계정으로만 사용하며, 다음 두 가지 목적에만 Google API를 씁니다.</p>
+          <ul><li>Blogger: MOTUS 블로그 글의 작성·발행·수정</li><li>Google Drive(drive.file 권한): MOTUS가 만든 리포트 PDF의 저장과 링크 공유. 이 도구가 만들지 않은 Drive 파일에는 접근하지 않습니다.</li></ul>
+          <p>Google API로 받은 정보는 위 목적 외에 사용하거나 제3자에게 제공하지 않습니다.</p>
+          <h3>3. 블로그 플랫폼의 쿠키와 통계</h3><p>MOTUS는 Google Blogger에서 운영됩니다. 페이지 조회 통계와 쿠키는 Blogger가 처리하며 <a href="https://policies.google.com/privacy" rel="nofollow noopener">Google 개인정보처리방침</a>을 따릅니다.</p>
+          <h3>4. 문의</h3><p>개인정보 관련 문의: luinbiotech@gmail.com</p>
+          <p>시행일: 2026년 11월 4일</p></article>`;
+            const r=await fetch(api+'?isDraft=false',{method:'POST',headers:{...auth,'content-type':'application/json'},body:JSON.stringify({title:TITLE,content})});
+            page=await r.json();if(!r.ok||!page.url){console.error('PAGE_INSERT_FAILED '+r.status+' '+JSON.stringify(page.error??{}).slice(0,200));process.exit(1)}
+            console.log('CREATED '+page.status+' '+page.url);
+          }
+          const pub=await fetch(page.url,{redirect:'follow'});console.log('PUBLIC_HTTP '+pub.status);
+          if(pub.status!==200)process.exit(1);
+          NODE
