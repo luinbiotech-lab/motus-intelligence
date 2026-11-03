@@ -1,0 +1,1 @@
+{"runId":"41568874411","attempt":"1","event":"schedule","schedule":"17 21 * * 0-4","category":"korea","operationDate":"2026-11-03","scheduledKst":"06:17","startedAt":"2026-11-03T02:53:41Z","delayMinutes":336,"state":"HOLD","reason":"Blogger OAuth refresh failed (400)","publicPostUrl":null}
