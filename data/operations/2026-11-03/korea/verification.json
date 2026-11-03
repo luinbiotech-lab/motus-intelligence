@@ -14,10 +14,10 @@
   "leakagePass": true,
   "duplicateCheck": "PENDING_REMOTE",
   "duplicateUncertainty": true,
-  "articleFingerprint": "sha256:74bbaf7b5379a562d4e403a482b15b340328f0192e613c38cc1829579f3c1451",
+  "articleFingerprint": "sha256:86067341d57d585bc31b4461ed5e440d6c206bc9c9c03ba5291166418c67a6f3",
   "commerceEnabled": false,
-  "verifiedAt": "2026-11-03T02:53:49.802Z",
-  "expiresAt": "2026-11-03T04:23:49.802Z",
+  "verifiedAt": "2026-11-03T03:57:42.141Z",
+  "expiresAt": "2026-11-03T05:27:42.141Z",
   "sourceAuditIds": [
     "deep:consensus:list:company",
     "deep:consensus:list:economy",
@@ -49,8 +49,8 @@
     "market-research:KB증권 리서치",
     "market-research:article:https://rc.kbsec.com/detailView.able?documentid=20261021144128693K",
     "market-research:article:https://rc.kbsec.com/detailView.able?documentid=20261030172030640K",
-    "market-research:article:https://www.hankyung.com/article/202611020625i",
     "market-research:article:https://www.hankyung.com/article/202611032472i",
+    "market-research:article:https://www.hankyung.com/article/2026110326036",
     "market-research:article:https://www.mk.co.kr/news/stock/12194545",
     "market-research:article:https://www.mk.co.kr/news/stock/12194565",
     "market-research:매일경제 증권",
@@ -59,8 +59,8 @@
     "naver:kospi:history",
     "naver:usd-krw"
   ],
-  "sourceAuditFingerprint": "sha256:94ff163f4cc6626b30342491958b1f42fb8f48166edd51ed26f4cf244e2a58fe",
-  "crossVerificationFingerprint": "sha256:0855e45fd57f2be13a56dee8cb195ad4bb0e511de6efd6182daac41d0fa25ed5",
+  "sourceAuditFingerprint": "sha256:75d17be8707e07462bec2476da523d0ee1a026edd1a4f4fcadc227377d1c24fc",
+  "crossVerificationFingerprint": "sha256:d15738f6bf76294a96f5d4d72445181043cd2fb0f3a262a8f5c6d7f4368080c7",
   "crossVerification": {
     "schemaVersion": "1.0",
     "category": "KOREA_MARKET",
@@ -118,7 +118,7 @@
     "sourceDiversityPass": true,
     "verification": "VERIFIED",
     "reasonCodes": [],
-    "verifiedAt": "2026-11-03T02:53:49.802Z",
+    "verifiedAt": "2026-11-03T03:57:42.141Z",
     "officialPhase": "PRE_PUBLICATION",
     "reconciliation": {
       "status": "NOT_REQUIRED",
