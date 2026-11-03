@@ -1,5 +1,10 @@
 {
   "state": "HOLD",
-  "reason": "Blogger OAuth refresh failed (400)",
+  "reasonCode": "YAHOO_US_SP500_SESSION_MISMATCH:2026-11-03:2026-11-02",
+  "reasonCodes": [
+    "YAHOO_US_SP500_SESSION_MISMATCH:2026-11-03:2026-11-02"
+  ],
+  "reason": "YAHOO_US_SP500_SESSION_MISMATCH:2026-11-03:2026-11-02",
+  "insertCallCount": 0,
   "publishCallCount": 0
 }

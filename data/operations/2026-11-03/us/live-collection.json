@@ -2,11 +2,11 @@
   "mode": "LIVE",
   "sourceMode": "internal",
   "date": "2026-11-03",
-  "observedDate": "2026-11-02",
+  "observedDate": null,
   "category": "US_MARKET",
-  "state": "LIVE_READY",
-  "reasonCode": null,
-  "verification": "VERIFIED",
+  "state": "HOLD",
+  "reasonCode": "YAHOO_US_SP500_SESSION_MISMATCH:2026-11-03:2026-11-02",
+  "verification": "FAILED",
   "publishCallCount": 0,
   "commerce": {
     "enabled": false
