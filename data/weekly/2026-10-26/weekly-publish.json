@@ -1,8 +1,8 @@
 {
   "identity": "weekly|2026-10-26",
-  "runDate": "2026-11-02",
-  "state": "SKIP",
-  "reason": "this week is already published",
+  "runDate": "2026-11-01",
+  "state": "PDF_ATTACHED",
   "postId": "240289543400332274",
-  "publicPostUrl": "https://motusnova.blogspot.com/2026/11/20-33.html"
+  "publicPostUrl": "https://motusnova.blogspot.com/2026/11/20-33.html",
+  "pdf": "https://drive.google.com/file/d/1mFuVtPP0Fvk0zOdHSGYmBatmzfFjwF8j/view?usp=drivesdk"
 }
