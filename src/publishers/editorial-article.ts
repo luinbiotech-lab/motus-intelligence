@@ -36,9 +36,9 @@ export function barsSvg(rows:Array<{label:string;value:number}>):string {
   const data=rows.filter(row=>Number.isFinite(row.value));if(data.length<2)return '';
   const width=360,rowH=24,labelW=128,valueW=54,max=Math.max(...data.map(row=>Math.abs(row.value)),0.01),neg=data.some(row=>row.value<0),pos=data.some(row=>row.value>0);
   const plotL=labelW+(neg?valueW:6),plotR=width-(pos?valueW:6),half=neg&&pos?(plotR-plotL)/2:plotR-plotL,zero=neg&&pos?plotL+half:neg?plotR:plotL;
-  const height=data.length*rowH+8,out=[`<svg viewBox="0 0 ${width} ${height}" width="100%" style="display:block;max-width:100%" xmlns="http://www.w3.org/2000/svg" role="img"><line x1="${zero}" x2="${zero}" y1="2" y2="${height-2}" stroke="#9aa6b2" stroke-width="1"/>`];
+  const height=data.length*rowH+8,out=[`<svg viewBox="0 0 ${width} ${height}" width="100%" style="display:block;max-width:100%" role="img"><line x1="${zero}" x2="${zero}" y1="2" y2="${height-2}" stroke="#9aa6b2" stroke-width="1"></line>`];
   data.forEach((row,index)=>{const y=4+index*rowH,length=Math.max(1,half*Math.abs(row.value)/max),x=row.value>=0?zero:zero-length,color=row.value>0?C.up:row.value<0?C.down:'#8a96a3',label=row.label.length>10?row.label.slice(0,9)+'…':row.label,text=`${row.value>0?'+':row.value<0?'-':''}${Math.abs(row.value).toFixed(2)}%`;
-    out.push(`<text x="${labelW-6}" y="${y+15}" font-size="12" text-anchor="end" fill="${C.ink}">${esc(label)}</text><rect x="${x.toFixed(1)}" y="${y+4}" width="${length.toFixed(1)}" height="14" fill="${color}"/><text x="${(row.value>=0?x+length+4:x-4).toFixed(1)}" y="${y+15}" font-size="11.5" font-weight="700" text-anchor="${row.value>=0?'start':'end'}" fill="${color}">${text}</text>`)});
+    out.push(`<text x="${labelW-6}" y="${y+15}" font-size="12" text-anchor="end" fill="${C.ink}">${esc(label)}</text><rect x="${x.toFixed(1)}" y="${y+4}" width="${length.toFixed(1)}" height="14" fill="${color}"></rect><text x="${(row.value>=0?x+length+4:x-4).toFixed(1)}" y="${y+15}" font-size="11.5" font-weight="700" text-anchor="${row.value>=0?'start':'end'}" fill="${color}">${text}</text>`)});
   out.push('</svg>');return `<div data-visualization="change-bars" style="border:1px solid ${C.line};padding:10px 10px 4px;margin:0 0 12px">${out.join('')}</div>`;
 }
 /** Key figures as tiles: label, value and the change in colour. */
@@ -62,7 +62,7 @@ export function deepSection(input:import('../intelligence/daily-masters.js').Art
   const paragraphs=item.paragraphs.filter(p=>p.text.trim());const total=paragraphs.map(p=>p.text).join(' ').length;
   // Sections composed before roles existed (stored units, republishes) get their role from the section key.
   const role=item.role??(/causes|issue|broker/.test(item.key)?'broker':/stocks/.test(item.key)?'data':/risks/.test(item.key)?'watch':undefined);
-  if(!paragraphs.length||(paragraphs.length===1&&total<60&&role!=='data'&&role!=='broker'&&!item.bars))return '';
+  if(!paragraphs.length||(paragraphs.length===1&&total<60&&role!=='data'&&role!=='broker'&&role!=='watch'&&!item.bars))return '';
   if(!item.bars&&role==='data'){const list=paragraphs.find(p=>(p.text.match(/ · /g)??[]).length>=2);if(list){const rows=list.text.split(' · ').map(part=>{const match=part.match(/^(.*\S)\s+([+\-−]?\d+(?:\.\d+)?)%$/);return match?{label:match[1]!,value:Number(match[2]!.replace('−','-'))}:null});if(rows.every(Boolean))item={...item,bars:rows as Array<{label:string;value:number}>}}}
   let body=intro(item.intro);
   if(role==='broker')body=`<div style="background:${C.goldSoft};border:1px solid ${C.goldLine};padding:12px 12px 2px">${item.intro?`<p style="margin:0 0 10px;color:#6b5a2f;font-size:14px">${esc(item.intro)}</p>`:''}${paragraphs.map(brokerCard).join('')}</div>`;
@@ -83,7 +83,7 @@ export function renderAIEditorialArticle(view:AIIntelligenceDailyViewModel):Dail
   for(const item of deep.filter(item=>item.placement==='early'))parts.push(deepSection(item));
   // With the day's market issue explained by brokers, official announcements are reported as facts only.
   const issueLed=deep.some(item=>item.key==='ai-issue');
-  const cards=view.issues.map(issue=>{const facts=uniqueProse([...issue.whatHappened,issue.coreContent],seen);return facts.length?newsCard(issue.headline,facts,undefined,issueLed?null:[issue.whyItMatters,issue.marketConnection&&issue.marketConnection!==issue.whyItMatters?issue.marketConnection:null].filter(Boolean).join(' ')||null):''}).filter(Boolean);
+  const cards=view.issues.map(issue=>{const facts=uniqueProse([...issue.whatHappened,issue.coreContent],seen);return facts.length?newsCard(issue.headline,facts,undefined,issueLed?null:uniqueProse([issue.whyItMatters,issue.marketConnection].filter((text):text is string=>Boolean(text)),seen).join(' ')||null):''}).filter(Boolean);
   if(cards.length)parts.push(roleSection('오늘의 AI 발표',cards.join(''),'news','ai-issues'));
   for(const item of deep.filter(item=>item.placement!=='early'))parts.push(deepSection(item));
   // Connections and watch points become one checklist; a one-line 'path' section on its own is not printed.
