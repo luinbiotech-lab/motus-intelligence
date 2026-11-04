@@ -1,10 +1,10 @@
 {
   "date": "2026-11-05",
   "articlesDay": "2026-11-04",
-  "collectedAt": "2026-11-04T07:35:30.883Z",
+  "collectedAt": "2026-11-04T07:48:36.645Z",
   "pageviews": {
     "state": "PASS",
-    "capturedAt": "2026-11-04T07:35:31.473Z",
+    "capturedAt": "2026-11-04T07:48:36.984Z",
     "allTime": 215,
     "sevenDays": 116,
     "thirtyDays": 203,
@@ -16,8 +16,13 @@
     "count": 4
   },
   "searchConsole": {
-    "state": "UNAVAILABLE",
-    "reason": "NOT_CONNECTED"
+    "state": "PASS",
+    "range": [
+      "2026-10-28",
+      "2026-11-05"
+    ],
+    "lastDataDate": null,
+    "topQueries": []
   },
   "datalab": {
     "state": "PASS"
@@ -45,6 +50,7 @@
         "AI 뉴스",
         "AMD 상승"
       ],
+      "searchConsole": [],
       "datalab": [
         {
           "keyword": "AI 뉴스",
@@ -199,15 +205,6 @@
             },
             {
               "rank": 6,
-              "title": "[AI뉴스] 11/1일 투자자를 위한 핵심경제뉴스 5건",
-              "link": "https://blog.naver.com/ishfwilf/224460908093",
-              "blogger": "검은화요일의 투자노트",
-              "bloggerLink": "https://blog.naver.com/ishfwilf",
-              "postdate": "20261101",
-              "description": "hankyung.com/article/2026103174217 &quot; &quot; &quot; &quot; 덧) 고금리 시대.. 주식 비중에 대한 생각을 다시 좀 해야겠습니다. 투자하고 있는 섹터의 포트도 좀 점검해야겠네요. 11월도 AI뉴스비서는 계속 됩니다. :)"
-            },
-            {
-              "rank": 7,
               "title": "10월 29일 AI 뉴스 정리, 구글 Gemini 4 Carbon과 Claude가 찾은 크롬·리눅스....",
               "link": "https://blog.naver.com/peanutbuilding/224457344338",
               "blogger": "a sensuous daily life.",
@@ -216,7 +213,7 @@
               "description": "이번 주 중반 핫한 AI 뉴스 한눈에 보기 먼저 5가지 소식을 한 장으로 정리해봤어요. 키워드를 뽑자면 '보안에 강해진 AI, 실적으로 증명하는 AI' 정도가 될 것 같아요. 10월 29일 기준 AI 핫이슈 5가지... "
             },
             {
-              "rank": 8,
+              "rank": 7,
               "title": "10월 마지막 주 AI 뉴스 결산, 요금제와 한도가 한꺼번에 바뀌었다",
               "link": "https://blog.naver.com/kghj76138/224461355839",
               "blogger": "AI야 '해줘'",
@@ -225,7 +222,7 @@
               "description": "10월 마지막 주(10/26~11/1) AI 뉴스 결산  한눈에 보기 - 이번 주 키워드는 「요금제·한도 재편」, 챗GPT·클로드·제미나이가 한꺼번에 바꿨어요 - 신모델은 GPT-6.1 테라(API 반값)와 제미나이 4 카본, 월드 모델... "
             },
             {
-              "rank": 9,
+              "rank": 8,
               "title": "2026년 11월 1일 IT·AI 주요 뉴스 5가지｜오픈AI·스포티파이·인텔·사....",
               "link": "https://blog.naver.com/guseo1158/224460812333",
               "blogger": "\"누구나 쉬운 AI 생활\"",
@@ -234,13 +231,22 @@
               "description": "기업 계획은 언론 보도 단계이며 변경될 수 있습니다. #IT뉴스 #AI뉴스 #인공지능 #오픈AI #챗GPT #스포티파이 #AI음악 #인텔 #반도체뉴스 #사이버보안 #바이낸스 #메타 #틱톡 #온라인안전 #AI생활도우미"
             },
             {
-              "rank": 10,
+              "rank": 9,
               "title": "[AI뉴스] 11/2일 투자자를 위한 핵심경제뉴스 5건",
               "link": "https://blog.naver.com/ishfwilf/224462197037",
               "blogger": "검은화요일의 투자노트",
               "bloggerLink": "https://blog.naver.com/ishfwilf",
               "postdate": "20261102",
               "description": "⊙ 링크: https://www.reuters.com/world/middle-east/qatar-surges-bucking-gulf-market-slide-iran-war-concerns-2026-11-01/ 덧) AI해킹뉴스가 요즘 많이 나오네요. 보안쪽 섹터는 계속 주시해 볼 이유가 자꾸 생기는... "
+            },
+            {
+              "rank": 10,
+              "title": "오늘의 AI 뉴스｜2026년 11월 3일, AI가 에너지 산업의 의사결정과 컴퓨....",
+              "link": "https://blog.naver.com/pluto1109/224463117422",
+              "blogger": "지금을 즐기는 중",
+              "bloggerLink": "https://blog.naver.com/pluto1109",
+              "postdate": "20261103",
+              "description": "오늘의 AI 뉴스｜2026년 11월 3일, AI가 에너지 산업의 의사결정과 컴퓨팅 비용을 바꾸고 있다 AI가 기업에 들어간다는 소식은 이제 낯설지 않다. 그런데 실제 현장에서는 어떤 변화가 일어나고 있을까?... "
             }
           ]
         },
@@ -343,21 +349,21 @@
             },
             {
               "rank": 7,
-              "title": "11월 3일 글로벌 증시 요약 AMD 시간외 7% 상승",
-              "link": "https://blog.naver.com/zioziw/224464307286",
-              "blogger": "일상다반사",
-              "bloggerLink": "https://blog.naver.com/zioziw",
-              "postdate": "20261104",
-              "description": "미장 주요 상승 파이서브 +12.5% / 비용 절감 목표 상향과 자사주 매입 블룸에너지 +8.8% / AI 데이터센터 전력 수요로 투자의견 상향 AMD +3.7% / 실적 발표 앞두고 반등 AMD 3분기... "
-            },
-            {
-              "rank": 8,
               "title": "11/4 미국시장 데일리시황 - 나스닥 1.06% 반등! 엔비디아·AMD 상승에도....",
               "link": "https://blog.naver.com/compound_thoughts/224464263283",
               "blogger": "생각의 자본",
               "bloggerLink": "https://blog.naver.com/compound_thoughts",
               "postdate": "20261104",
               "description": "엔비디아와 AMD가 상승하는 동안 애플은 하락했고, 국채금리는 다시 올랐다. 이는 투자자들이 같은 기술주 안에서도 성장 가능성과 수익성 위험을 다르게 평가하고 있음을 시사한다. 지금 중요한 것은... "
+            },
+            {
+              "rank": 8,
+              "title": "11월 3일 글로벌 증시 요약 AMD 시간외 7% 상승",
+              "link": "https://blog.naver.com/zioziw/224464307286",
+              "blogger": "일상다반사",
+              "bloggerLink": "https://blog.naver.com/zioziw",
+              "postdate": "20261104",
+              "description": "미장 주요 상승 파이서브 +12.5% / 비용 절감 목표 상향과 자사주 매입 블룸에너지 +8.8% / AI 데이터센터 전력 수요로 투자의견 상향 AMD +3.7% / 실적 발표 앞두고 반등 AMD 3분기... "
             },
             {
               "rank": 9,
@@ -400,6 +406,7 @@
         "코스피 마감",
         "코스피"
       ],
+      "searchConsole": [],
       "datalab": [
         {
           "keyword": "코스피 마감",
@@ -609,6 +616,15 @@
             },
             {
               "rank": 8,
+              "title": "코스피 5,683 마감, 장중 400p 출렁인 끝에 반등",
+              "link": "https://blog.naver.com/limjh2331/224464827623",
+              "blogger": "불꽃",
+              "bloggerLink": "https://blog.naver.com/limjh2331",
+              "postdate": "20261104",
+              "description": "코스닥은 715.74로 출발해 한때 683.66까지 내려갔다가 714.95로 올라서 마감했어요. 코스피는 상승 568개, 하락 303개(상한가 1개), 코스닥은 상승 958개, 하락 698개(상한가 4개)로 시장 폭은 어제보다... "
+            },
+            {
+              "rank": 9,
               "title": "10월 29일 코스피 마감, 6000선 내준 이유와 삼성전자 배당 지급일",
               "link": "https://blog.naver.com/2co-news/224457916254",
               "blogger": "2co-news",
@@ -617,22 +633,13 @@
               "description": "10월 29일 코스피 마감 지수와 수급, 삼성전자 실적·배당이 준 영향을 정리했어요. 삼성전자 배당금 지급일과 계좌 확인 순서도 담았어요. (2026년 10월 29일 기준) 지수는 0.08% 오른 6,017.22로... "
             },
             {
-              "rank": 9,
+              "rank": 10,
               "title": "코스피 마감 5,550.30, 외국인 매도에도 오른 이유",
               "link": "https://blog.naver.com/saewoonote_/224458216192",
               "blogger": "새우노트",
               "bloggerLink": "https://blog.naver.com/saewoonote_",
               "postdate": "20261029",
               "description": "코스피 상승과 코스닥 하락이 엇갈린 10월 29일 장 마감 오늘 코스피·코스닥은 어떻게 마감했나 한국거래소 정보데이터시스템의 장 마감 스냅샷에서 코스피는 5,550.30, 전일보다 16.53포인트 상승했습니다.... "
-            },
-            {
-              "rank": 10,
-              "title": "오늘 코스피 마감 시황(11월 3일), 3.59% 급락 이유와 외국인 1.5조 매도",
-              "link": "https://blog.naver.com/sweetday5076/224463769368",
-              "blogger": "Giroomi 경제 한입",
-              "bloggerLink": "https://blog.naver.com/sweetday5076",
-              "postdate": "20261103",
-              "description": "오늘 코스피 마감, 얼마나 하락했을까? 주요 지표 11월 3일 마감 등락 코스피 5,648.79 -3.59% 코스닥 704.39 -4.08% 삼성전자 219,500원 -4.15% SK하이닉스 1,398,000원 -5.03% 원달러 환율 1,341.0원 -2.8원 출처: 한국거래소... "
             }
           ]
         },
@@ -792,6 +799,7 @@
         "뉴욕증시 마감",
         "뉴욕증시 지수 혼조"
       ],
+      "searchConsole": [],
       "datalab": [
         {
           "keyword": "뉴욕증시 마감",
@@ -1147,6 +1155,7 @@
         "AI 뉴스",
         "엔비디아가 공개한 도시"
       ],
+      "searchConsole": [],
       "datalab": [
         {
           "keyword": "AI 뉴스",
@@ -1301,15 +1310,6 @@
             },
             {
               "rank": 6,
-              "title": "[AI뉴스] 11/1일 투자자를 위한 핵심경제뉴스 5건",
-              "link": "https://blog.naver.com/ishfwilf/224460908093",
-              "blogger": "검은화요일의 투자노트",
-              "bloggerLink": "https://blog.naver.com/ishfwilf",
-              "postdate": "20261101",
-              "description": "hankyung.com/article/2026103174217 &quot; &quot; &quot; &quot; 덧) 고금리 시대.. 주식 비중에 대한 생각을 다시 좀 해야겠습니다. 투자하고 있는 섹터의 포트도 좀 점검해야겠네요. 11월도 AI뉴스비서는 계속 됩니다. :)"
-            },
-            {
-              "rank": 7,
               "title": "10월 29일 AI 뉴스 정리, 구글 Gemini 4 Carbon과 Claude가 찾은 크롬·리눅스....",
               "link": "https://blog.naver.com/peanutbuilding/224457344338",
               "blogger": "a sensuous daily life.",
@@ -1318,7 +1318,7 @@
               "description": "이번 주 중반 핫한 AI 뉴스 한눈에 보기 먼저 5가지 소식을 한 장으로 정리해봤어요. 키워드를 뽑자면 '보안에 강해진 AI, 실적으로 증명하는 AI' 정도가 될 것 같아요. 10월 29일 기준 AI 핫이슈 5가지... "
             },
             {
-              "rank": 8,
+              "rank": 7,
               "title": "10월 마지막 주 AI 뉴스 결산, 요금제와 한도가 한꺼번에 바뀌었다",
               "link": "https://blog.naver.com/kghj76138/224461355839",
               "blogger": "AI야 '해줘'",
@@ -1327,7 +1327,7 @@
               "description": "10월 마지막 주(10/26~11/1) AI 뉴스 결산  한눈에 보기 - 이번 주 키워드는 「요금제·한도 재편」, 챗GPT·클로드·제미나이가 한꺼번에 바꿨어요 - 신모델은 GPT-6.1 테라(API 반값)와 제미나이 4 카본, 월드 모델... "
             },
             {
-              "rank": 9,
+              "rank": 8,
               "title": "2026년 11월 1일 IT·AI 주요 뉴스 5가지｜오픈AI·스포티파이·인텔·사....",
               "link": "https://blog.naver.com/guseo1158/224460812333",
               "blogger": "\"누구나 쉬운 AI 생활\"",
@@ -1336,13 +1336,22 @@
               "description": "기업 계획은 언론 보도 단계이며 변경될 수 있습니다. #IT뉴스 #AI뉴스 #인공지능 #오픈AI #챗GPT #스포티파이 #AI음악 #인텔 #반도체뉴스 #사이버보안 #바이낸스 #메타 #틱톡 #온라인안전 #AI생활도우미"
             },
             {
-              "rank": 10,
+              "rank": 9,
               "title": "[AI뉴스] 11/2일 투자자를 위한 핵심경제뉴스 5건",
               "link": "https://blog.naver.com/ishfwilf/224462197037",
               "blogger": "검은화요일의 투자노트",
               "bloggerLink": "https://blog.naver.com/ishfwilf",
               "postdate": "20261102",
               "description": "⊙ 링크: https://www.reuters.com/world/middle-east/qatar-surges-bucking-gulf-market-slide-iran-war-concerns-2026-11-01/ 덧) AI해킹뉴스가 요즘 많이 나오네요. 보안쪽 섹터는 계속 주시해 볼 이유가 자꾸 생기는... "
+            },
+            {
+              "rank": 10,
+              "title": "오늘의 AI 뉴스｜2026년 11월 3일, AI가 에너지 산업의 의사결정과 컴퓨....",
+              "link": "https://blog.naver.com/pluto1109/224463117422",
+              "blogger": "지금을 즐기는 중",
+              "bloggerLink": "https://blog.naver.com/pluto1109",
+              "postdate": "20261103",
+              "description": "오늘의 AI 뉴스｜2026년 11월 3일, AI가 에너지 산업의 의사결정과 컴퓨팅 비용을 바꾸고 있다 AI가 기업에 들어간다는 소식은 이제 낯설지 않다. 그런데 실제 현장에서는 어떤 변화가 일어나고 있을까?... "
             }
           ]
         },
