@@ -81,3 +81,17 @@ test('article design helpers: figures coloured by sign or verb, particles kept, 
   const svg=barsSvg([{label:'기술',value:1.31},{label:'필수소비재',value:-2.07}]);
   assert.match(svg,/\+1\.31%/);assert.match(svg,/-2\.07%/);assert.equal(barsSvg([{label:'x',value:1}]),'');
 });
+
+test('article charts use the Blogger-proven SVG markup (explicit closing tags, no xmlns) so the exact readback matches', async () => {
+  const {deepSection}=await import('../src/publishers/editorial-article.js');
+  const html=deepSection({key:'ai-stocks',title:'AI 대표 종목',role:'data',bars:[{label:'엔비디아',value:1.2},{label:'AMD',value:-0.8}],paragraphs:[{text:'엔비디아 1.20% · AMD -0.80% · TSMC 0.10%'}]} as never);
+  assert.match(html,/<svg /);
+  assert.doesNotMatch(html,/\/>/);
+  assert.doesNotMatch(html,/xmlns/);
+  assert.match(html,/<\/line>/);assert.match(html,/<\/rect>/);
+});
+
+test('a short risk section is a checklist, not dropped by the one-line rule', async () => {
+  const {deepSection}=await import('../src/publishers/editorial-article.js');
+  assert.notEqual(deepSection({key:'korea-risks',title:'리스크',paragraphs:[{text:'환율 1,450원 돌파 여부를 확인할 필요가 있다.'}]} as never),'');
+});
