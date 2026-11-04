@@ -12,5 +12,12 @@
     "publicationId": "motus-live-2026-11-03:us",
     "publicPostUrl": "https://motusnova.blogspot.com/2026/11/3-58.html",
     "publishedAt": "2026-11-04T10:09:32+09:00"
+  },
+  {
+    "idempotencyKey": "weekly:motus-live-2026-11-04:ai",
+    "category": "AI_INTELLIGENCE",
+    "publicationId": "motus-live-2026-11-04:ai",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/11/amd-37-ai.html",
+    "publishedAt": "2026-11-04T13:10:02+09:00"
   }
 ]
