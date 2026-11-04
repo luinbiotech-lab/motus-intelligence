@@ -1,0 +1,5 @@
+{
+  "idLen": 10,
+  "datalab": 401,
+  "body": "{\"errorMessage\":\"NID AUTH Result Invalid (1000) : Authentication failed. (인증에 실패했습니다.)\",\"errorCode\":\"024\"}"
+}
