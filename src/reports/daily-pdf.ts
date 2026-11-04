@@ -40,7 +40,7 @@ export function buildDailyPdfHtml(view:View,category:'AI_INTELLIGENCE'|'US_MARKE
   // Box 1: today at a glance (real closes and changes only).
   const tiles:Array<{label:string;value:string;change:number|null}>=[];
   if(category==='US_MARKET'){const v=view as USMarketDailyViewModel,names:Record<string,string>={sp500:'S&P 500',nasdaq:'나스닥','dow-jones':'다우존스'};for(const series of v.marketHistory.series.filter(item=>names[item.key]))tiles.push({label:names[series.key]!,value:num(series.latestClose),change:series.latestChangePct})}
-  if(category==='KOREA_MARKET'){const v=view as KoreaMarketDailyViewModel,facts=(v.narrative?.facts??[]).join(' ');for(const metric of [...v.indexMetrics,...v.fxAndSupporting].slice(0,3)){const name=/KOSPI/i.test(metric.label)?'코스피':/KOSDAQ/i.test(metric.label)?'코스닥':null,match=name?facts.match(new RegExp(`${name}(?:은|는) [\\d,.]+(?:으로|로) 마감해 전 거래일보다 ([\\d.]+)% (상승|하락)`)):null;tiles.push({label:name??'원·달러',value:metric.displayValue,change:match?(match[2]==='상승'?1:-1)*Number(match[1]):null})}}
+  if(category==='KOREA_MARKET'){const v=view as KoreaMarketDailyViewModel,facts=(v.narrative?.facts??[]).join(' ');const all=[...v.indexMetrics,...v.fxAndSupporting],pick=[all.find(m=>/KOSPI/i.test(m.label)),all.find(m=>/KOSDAQ/i.test(m.label)),all.find(m=>m.group==='FX'||/USD\/KRW|원·달러/i.test(m.label))];for(const metric of pick){if(!metric)continue;const name=/KOSPI/i.test(metric.label)?'코스피':/KOSDAQ/i.test(metric.label)?'코스닥':null,match=name?facts.match(new RegExp(`${name}(?:은|는) [\\d,.]+(?:으로|로) 마감해 전 거래일보다 ([\\d.]+)% (상승|하락)`)):null;tiles.push({label:name??'원·달러',value:metric.displayValue,change:match?(match[2]==='상승'?1:-1)*Number(match[1]):null})}}
   const rows=stockRows(view);
   if(category==='AI_INTELLIGENCE'&&rows.length>=3){const up=rows.filter(row=>row.change>0.005).length,sorted=[...rows].sort((a,b)=>b.change-a.change);tiles.push({label:'상승 종목',value:`${up} / ${rows.length}`,change:null},{label:'최강 '+sorted[0]!.name.split(' ')[0],value:'',change:sorted[0]!.change},{label:'최약 '+sorted.at(-1)!.name.split(' ')[0],value:'',change:sorted.at(-1)!.change})}
   const glance=tiles.length?box('오늘의 시장 한눈에 보기',`<div class=tiles>${tiles.map(tile=>`<div class=tile><div class=tl>${esc(tile.label)}</div>${tile.value?`<div class=tv>${esc(tile.value)}</div>`:''}${tile.change!==null&&Number.isFinite(tile.change)?`<div class=tc style="color:${col(tile.change)}">${signed(tile.change)}</div>`:''}</div>`).join('')}</div>`):'';
@@ -103,3 +103,8 @@ export function multiLine(series:Array<{label:string;points:number[]}>,width=300
   out.push('</svg>');return out.join('');
 }
 export type {ArticleReportCard};
+/** True when this workflow run is the one that published the article (ledger PUBLISHED attemptId === run id). */
+export function publishedByRun(ledger:string,runId:string|undefined,postId:string):boolean {
+  if(!runId)return false;
+  return ledger.split('\n').filter(Boolean).some(line=>{try{const entry=JSON.parse(line) as {event?:string;attemptId?:string;postId?:string};return entry.event==='PUBLISHED'&&String(entry.attemptId)===runId&&(!entry.postId||entry.postId===postId)}catch{return false}});
+}
