@@ -14,10 +14,10 @@
   "leakagePass": true,
   "duplicateCheck": "PENDING_REMOTE",
   "duplicateUncertainty": true,
-  "articleFingerprint": "sha256:96697b2a08a396c2878b5c4a84b2104b82bfc8b4f1ec62433d3d340b15917193",
+  "articleFingerprint": "sha256:7f52d4c1c0a833bd25dba83b28e3cf478a5c79bcf74117c714cadbd9d00d9611",
   "commerceEnabled": false,
-  "verifiedAt": "2026-11-04T01:40:47.985Z",
-  "expiresAt": "2026-11-04T03:10:47.985Z",
+  "verifiedAt": "2026-11-04T03:14:55.794Z",
+  "expiresAt": "2026-11-04T04:44:55.794Z",
   "sourceAuditIds": [
     "calendar:nyse",
     "deep:consensus:list:company",
@@ -45,7 +45,6 @@
     "deep:yahoo:spark:named-stocks",
     "deep:yahoo:spark:sectors",
     "deep:yahoo:spark:stocks",
-    "deep:yahoo:spark:stocks",
     "deep:yahoo:trending",
     "fred:DCOILBRENTEU",
     "fred:DGS10",
@@ -54,8 +53,8 @@
     "market-research:Bloomberg Markets",
     "market-research:CNBC Investing",
     "market-research:Goldman Sachs",
+    "market-research:article:https://www.bloomberg.com/news/articles/2026-11-03/latest-oil-market-news-and-analysis-for-nov-4",
     "market-research:article:https://www.bloomberg.com/news/articles/2026-11-04/treasuries-advance-as-traders-eye-us-votes-refinancing-plans",
-    "market-research:article:https://www.bloomberg.com/news/articles/2026-11-04/us-equity-futures-inch-higher-as-investors-await-midterm-results",
     "market-research:article:https://www.cnbc.com/2026/11/01/top-analysts-are-bullish-on-these-3-stocks-for-the-long-haul.html",
     "market-research:article:https://www.cnbc.com/2026/11/03/santoli-ai-bull-market-needs-tech-stocks.html",
     "market-research:article:https://www.goldmansachs.com/insights/articles/are-bonds-becoming-a-better-investment-for-portfolios",
@@ -64,7 +63,7 @@
     "yahoo-us:nasdaq",
     "yahoo-us:sp500"
   ],
-  "sourceAuditFingerprint": "sha256:65e7ca6c3c3500d5ccda2d45864fa0cc4291ca1bb81594f1b35b172d5dd19d9c",
+  "sourceAuditFingerprint": "sha256:063c0fcd49880583689e591b76f4c0e3dda1fa9f5f26878ad41f8e963f9e8252",
   "crossVerificationFingerprint": null,
   "crossVerification": null
 }
