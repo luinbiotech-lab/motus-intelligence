@@ -1,0 +1,2394 @@
+{
+  "publicationId": "motus-live-2026-11-04:us",
+  "category": "US_MARKET",
+  "observedDate": "2026-11-04",
+  "title": "뉴욕증시 3대 지수 상승…마이크론 7.0% 급락",
+  "label": "미국증시",
+  "sourceCount": 22,
+  "itemCount": 3,
+  "readiness": "READY",
+  "readinessReasons": [],
+  "review": {
+    "state": "PENDING",
+    "reviewer": null,
+    "reviewedAt": null,
+    "history": []
+  },
+  "publicationState": "PREVIEW_READY",
+  "draftPostId": null,
+  "publicPostUrl": null,
+  "duplicateCount": 0,
+  "contentFingerprint": "6f96458944fb6e9653fe6521f0c715552217b571b80213da4fb36079cb78b4d2",
+  "render": {
+    "html": "<!doctype html><html lang=\"ko\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>뉴욕증시 3대 지수 상승…마이크론 7.0% 급락</title></head><body><article data-product=\"motus-us-market\" data-layout=\"editorial-article-4q\" style=\"font-family:Arial,&quot;Noto Sans KR&quot;,sans-serif;color:#172033;line-height:1.78;font-size:17px;width:100%;max-width:820px;box-sizing:border-box;margin:0 auto;overflow-x:hidden;overflow-wrap:anywhere\"><header style=\"width:100%;max-width:100%;box-sizing:border-box;background:#03162e;color:#fff;padding:26px 22px;margin:0 0 22px\"><p style=\"margin:0 0 9px;color:#c7d8ea;font-size:14px;font-weight:800\">MOTUS | What Moves the World</p><div role=\"heading\" aria-level=\"2\" style=\"font-size:clamp(25px,7vw,34px);line-height:1.22;font-weight:850;word-break:keep-all\">뉴욕증시 3대 지수 상승…마이크론 7.0% 급락</div><p style=\"margin:10px 0 0;color:#e6edf5\">증권가 분석과 투자자 관심 종목으로 읽는 미국 정규장 마감</p><p style=\"margin:11px 0 0;color:#b7c8da;font-size:13px\">미국증시 (U.S. Market) · 2026-11-04</p></header>\n<p data-section=\"editorial-lead\" style=\"margin:0 0 24px;font-size:18px;line-height:1.82;color:#172033\">2026-11-04 미국 정규장에서 S&amp;P 500 7,688.62(1.58% 상승), 나스닥 25,736.51(1.44% 상승), 다우존스 53,356.12(3.03% 상승)로 마감했다.</p>\n<div data-section=\"key-points\" style=\"border:1.5px solid #0b2545;padding:13px 15px 5px;margin:0 0 6px\"><div style=\"font-size:13px;font-weight:800;color:#0b2545;letter-spacing:.05em;margin:0 0 8px\">오늘의 핵심</div><p style=\"margin:0 0 9px;font-size:16px;line-height:1.65;display:flex;gap:8px\"><span style=\"color:#a8822e;font-weight:800\">1</span><span>지수: S&amp;P 500 <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+1.58%</b>, 나스닥 <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+1.44%</b>, 다우존스 <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+3.03%</b>.</span></p><p style=\"margin:0 0 9px;font-size:16px;line-height:1.65;display:flex;gap:8px\"><span style=\"color:#a8822e;font-weight:800\">2</span><span>미국 10년물 국채금리 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">4.90%</b>(<b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">-5bp</b>).</span></p><p style=\"margin:0 0 9px;font-size:16px;line-height:1.65;display:flex;gap:8px\"><span style=\"color:#a8822e;font-weight:800\">3</span><span>업종: 경기소비재 <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+4.26%</b>로 가장 강했고 에너지 <b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">-4.74%</b>로 가장 약했다.</span></p></div>\n<section data-section=\"us-causes\" style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><div style=\"display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:2px solid #0b2545;padding-bottom:7px;margin:0 0 12px\"><h2 style=\"margin:0;font-size:clamp(19px,4.8vw,22px);line-height:1.35;font-weight:900;color:#0b2545;word-break:keep-all\">상승·하락 요인과 반대 시각</h2><span style=\"font-size:12px;font-weight:800;letter-spacing:.03em;padding:3px 8px;border-radius:3px;white-space:nowrap;background:#a8822e;color:#fff\">증권가 리포트</span></div><div style=\"background:#fbf5e6;border:1px solid #e6d2a0;padding:12px 12px 2px\"><div style=\"background:#fff;border:1px solid #e6d2a0;border-left:4px solid #a8822e;padding:11px 14px;margin:0 0 10px;font-size:16px\">MOTUS 정리: 증권사 4곳의 리포트를 대조하면 국제유가(iM증권·KB증권·IBK투자증권), 반도체(iM증권·KB증권)가 공통으로 꼽힌 배경이다. 유진투자증권은 AI 투자를 따로 짚었다.</div><div style=\"background:#fff;border:1px solid #e6d2a0;border-left:4px solid #a8822e;padding:11px 14px;margin:0 0 10px;font-size:16px\">iM증권은 11월 5일 아침 리포트 「[Market Time] 중간선거 불확실성 해소와 AI 인프라 규제 우려」에서 “반도체 약세에는 미국 주요 데이터센터 거점의 주지사 선거 결과가 영향을 미쳤습니다”라고 진단했다. <a href=\"https://stock.pstatic.net/stock-research/market/61/20261105_market_285270000.pdf\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></div><div style=\"background:#fff;border:1px solid #e6d2a0;border-left:4px solid #a8822e;padding:11px 14px;margin:0 0 10px;font-size:16px\">KB증권은 11월 5일 아침 리포트 「11/5 KB 리서치 모닝코멘트」에서 “반면, 민주당의 데이터센터 규제 강화 우려에 반도체 관련주는 약세. 마이크론 급락 (<b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">-7%</b>) 등 필리 지수 <b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">-3%</b>”라고 진단했다. <a href=\"https://stock.pstatic.net/stock-research/market/58/20261105_market_447732000.pdf\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></div><div style=\"background:#fff;border:1px solid #e6d2a0;border-left:4px solid #a8822e;padding:11px 14px;margin:0 0 10px;font-size:16px\">IBK투자증권은 11월 5일 아침 리포트 「[IBKS Daily] Start with IBKS(2026.11.05) 美 중간선거, 블루웨이브에 달라지는 정책 지형」에서 “국제유가, 미국 중간선거 이후 이란 전쟁 종식 기대 확산에 하락”이라고 진단했다. <a href=\"https://stock.pstatic.net/stock-research/invest/40/20261105_invest_882266000.pdf\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></div><div style=\"background:#fff;border:1px solid #e6d2a0;border-left:4px solid #a8822e;padding:11px 14px;margin:0 0 10px;font-size:16px\">경계 요인도 제시됐다. iM증권은 “미국 중간선거에서 민주당이상·하원을 확보하면서 선거 결과를 둘러싼 불확실성이 해소됐고, 다우(<b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+2.97%</b>)와 나스닥(<b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+1.77%</b>)은 상승했습니다”라고 짚었다. <a href=\"https://stock.pstatic.net/stock-research/market/61/20261105_market_285270000.pdf\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></div><div style=\"background:#fff;border:1px solid #e6d2a0;border-left:4px solid #a8822e;padding:11px 14px;margin:0 0 10px;font-size:16px\">경계 요인도 제시됐다. KB증권은 “중간선거 결과 민주당이 의회 상하원 모두 장악하며 정치 불확실성 해소에 3대 지수 상승. 유가, 국채금리 급락”이라고 짚었다. <a href=\"https://stock.pstatic.net/stock-research/market/58/20261105_market_447732000.pdf\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></div></div></section>\n<section data-section=\"us-sectors-stocks\" style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><div style=\"display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:2px solid #0b2545;padding-bottom:7px;margin:0 0 12px\"><h2 style=\"margin:0;font-size:clamp(19px,4.8vw,22px);line-height:1.35;font-weight:900;color:#0b2545;word-break:keep-all\">업종과 종목</h2><span style=\"font-size:12px;font-weight:800;letter-spacing:.03em;padding:3px 8px;border-radius:3px;white-space:nowrap;background:#e8eef6;color:#0b2545\">데이터</span></div><p style=\"margin:0 0 12px;color:#566476;font-size:15px\">종목 순위는 투자자 관심도를 보여 줄 뿐 주가 변동의 원인을 뜻하지 않는다. 등락은 해당 거래일 종가 기준이다.</p><div data-visualization=\"change-bars\" style=\"border:1px solid #dbe2ea;padding:10px 10px 4px;margin:0 0 12px\"><svg viewBox=\"0 0 360 272\" width=\"100%\" style=\"display:block;max-width:100%\" role=\"img\"><line x1=\"244\" x2=\"244\" y1=\"2\" y2=\"270\" stroke=\"#9aa6b2\" stroke-width=\"1\"></line><text x=\"122\" y=\"19\" font-size=\"12\" text-anchor=\"end\" fill=\"#16202e\">경기소비재</text><rect x=\"244.0\" y=\"8\" width=\"55.8\" height=\"14\" fill=\"#c62828\"></rect><text x=\"303.8\" y=\"19\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"start\" fill=\"#c62828\">+4.26%</text><text x=\"122\" y=\"43\" font-size=\"12\" text-anchor=\"end\" fill=\"#16202e\">금융</text><rect x=\"244.0\" y=\"32\" width=\"46.0\" height=\"14\" fill=\"#c62828\"></rect><text x=\"294.0\" y=\"43\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"start\" fill=\"#c62828\">+3.51%</text><text x=\"122\" y=\"67\" font-size=\"12\" text-anchor=\"end\" fill=\"#16202e\">커뮤니케이션</text><rect x=\"244.0\" y=\"56\" width=\"45.4\" height=\"14\" fill=\"#c62828\"></rect><text x=\"293.4\" y=\"67\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"start\" fill=\"#c62828\">+3.47%</text><text x=\"122\" y=\"91\" font-size=\"12\" text-anchor=\"end\" fill=\"#16202e\">필수소비재</text><rect x=\"244.0\" y=\"80\" width=\"44.0\" height=\"14\" fill=\"#c62828\"></rect><text x=\"292.0\" y=\"91\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"start\" fill=\"#c62828\">+3.36%</text><text x=\"122\" y=\"115\" font-size=\"12\" text-anchor=\"end\" fill=\"#16202e\">부동산</text><rect x=\"244.0\" y=\"104\" width=\"43.4\" height=\"14\" fill=\"#c62828\"></rect><text x=\"291.4\" y=\"115\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"start\" fill=\"#c62828\">+3.32%</text><text x=\"122\" y=\"139\" font-size=\"12\" text-anchor=\"end\" fill=\"#16202e\">헬스케어</text><rect x=\"244.0\" y=\"128\" width=\"40.1\" height=\"14\" fill=\"#c62828\"></rect><text x=\"288.1\" y=\"139\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"start\" fill=\"#c62828\">+3.06%</text><text x=\"122\" y=\"163\" font-size=\"12\" text-anchor=\"end\" fill=\"#16202e\">소재</text><rect x=\"244.0\" y=\"152\" width=\"32.6\" height=\"14\" fill=\"#c62828\"></rect><text x=\"280.6\" y=\"163\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"start\" fill=\"#c62828\">+2.49%</text><text x=\"122\" y=\"187\" font-size=\"12\" text-anchor=\"end\" fill=\"#16202e\">유틸리티</text><rect x=\"244.0\" y=\"176\" width=\"5.7\" height=\"14\" fill=\"#c62828\"></rect><text x=\"253.7\" y=\"187\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"start\" fill=\"#c62828\">+0.44%</text><text x=\"122\" y=\"211\" font-size=\"12\" text-anchor=\"end\" fill=\"#16202e\">기술</text><rect x=\"243.0\" y=\"200\" width=\"1.0\" height=\"14\" fill=\"#1f5fbf\"></rect><text x=\"239.0\" y=\"211\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"end\" fill=\"#1f5fbf\">-0.01%</text><text x=\"122\" y=\"235\" font-size=\"12\" text-anchor=\"end\" fill=\"#16202e\">산업재</text><rect x=\"229.8\" y=\"224\" width=\"14.2\" height=\"14\" fill=\"#1f5fbf\"></rect><text x=\"225.8\" y=\"235\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"end\" fill=\"#1f5fbf\">-1.09%</text><text x=\"122\" y=\"259\" font-size=\"12\" text-anchor=\"end\" fill=\"#16202e\">에너지</text><rect x=\"182.0\" y=\"248\" width=\"62.0\" height=\"14\" fill=\"#1f5fbf\"></rect><text x=\"178.0\" y=\"259\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"end\" fill=\"#1f5fbf\">-4.74%</text></svg></div><p style=\"margin:0 0 13px\">S&amp;P 500 업종을 추종하는 SPDR 업종 ETF 11종 가운데 8종이 올랐다. 경기소비재(XLY) <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+4.26%</b>가 가장 강했고 에너지(XLE) <b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">-4.74%</b>가 가장 약했다. 업종별 등락: 경기소비재 <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+4.26%</b>, 금융 <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+3.51%</b>, 커뮤니케이션 <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+3.47%</b>, 필수소비재 <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+3.36%</b>, 부동산 <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+3.32%</b>, 헬스케어 <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+3.06%</b>, 소재 <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+2.49%</b>, 유틸리티 <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+0.44%</b>, 기술 <b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">-0.01%</b>, 산업재 <b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">-1.09%</b>, 에너지 <b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">-4.74%</b>.</p><p style=\"margin:0 0 13px\">마이크론(MU)은 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">795.23달러</b>로 <b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">7.00%</b> 급락했다(리포트·기사 언급 종목).</p><p style=\"margin:0 0 13px\">마이크로소프트(MSFT)는 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">555.80달러</b>로 <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">6.68%</b> 급등했다(시가총액 상위 종목, 야후 파이낸스 검색 10위).</p><p style=\"margin:0 0 13px\">아마존(AMZN)은 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">266.03달러</b>로 <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">6.12%</b> 급등했다(리포트·기사 언급 종목, 시가총액 상위 종목, 대형주 거래량 8위). KB증권은 “전통 산업주와 더불어 MS, 아마존, 알파벳 등 하이퍼스케일러도 급등. 자본지출 축소 및 FCF 흐름 개선 기대”라고 설명했다. <a href=\"https://stock.pstatic.net/stock-research/market/58/20261105_market_447732000.pdf\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></p><p style=\"margin:0 0 13px\">퀄컴(QCOM)은 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">173.19달러</b>로 <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">5.33%</b> 급등했다(야후 파이낸스 검색 1위).</p><p style=\"margin:0 0 13px\">Applovin(APP)은 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">271.75달러</b>로 <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">10.69%</b> 급등했다(야후 파이낸스 검색 2위).</p><p style=\"margin:0 0 13px\">Trump Media &amp; Technology Group(DJT)는 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">4.49달러</b>로 <b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">24.54%</b> 급락했다(야후 파이낸스 검색 3위).</p></section>\n<section class=\"editorial-block block-major-index-trend\" data-section=\"major-index-trend\" data-chart-status=\"rendered\" data-session-count=\"63\" style=\"width:100%;max-width:100%;box-sizing:border-box;margin:22px 0 0\"><h2 style=\"background:#17283d;color:#ffffff;border:1px solid #0b1522;padding:13px 16px;font-size:clamp(18px,4.8vw,20px);font-weight:800;line-height:1.35;margin:0;width:100%;max-width:100%;box-sizing:border-box;word-break:keep-all;overflow-wrap:normal\">미국 주요지수 3개월 흐름</h2><div class=\"editorial-content chart-content\" style=\"border:1px solid #aebed2;padding:21px 22px;background:#ffffff;margin:0 0 22px;width:100%;max-width:100%;box-sizing:border-box;background:#f7f9fc;padding:14px;width:100%;max-width:100%;box-sizing:border-box;overflow:hidden\"><div class=\"index-trend-grid\" data-layout=\"responsive-two-by-two\" style=\"display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:10px;width:100%;max-width:100%;min-width:0;box-sizing:border-box;margin:0;overflow:hidden\"><div class=\"index-trend-cell\" style=\"width:100%;max-width:100%;min-width:0;box-sizing:border-box\"><div class=\"index-trend-card\" data-index=\"sp500\" data-values=\"7757.64013671875,7753.10986328125,7728.2001953125,7748.5,7798.990234375,7785.759765625,7745.06005859375,7691.759765625,7707.97998046875,7641.16015625,7674.3701171875,7652.85986328125,7677.27978515625,7675.7001953125,7730.990234375,7711.759765625,7686.14013671875,7631.47021484375,7666.60009765625,7747.7099609375,7718.60009765625,7673.52001953125,7636.35986328125,7591.7001953125,7656.97998046875,7619.97998046875,7585.72998046875,7551.81005859375,7637.759765625,7650.5,7764.7001953125,7764.64013671875,7706.02978515625,7704.1298828125,7743.41015625,7683.68994140625,7670.83984375,7651.5400390625,7666.4501953125,7722.72021484375,7773.9501953125,7818.93017578125,7801.77001953125,7765.35986328125,7811.5400390625,7807.240234375,7805.4501953125,7718.93994140625,7744.06005859375,7659.43994140625,7690.72998046875,7712.56982421875,7757.169921875,7663.43017578125,7623.68017578125,7676.77001953125,7722.60009765625,7743.97998046875,7720.39013671875,7580.06982421875,7541.39990234375,7568.919921875,7688.6201171875\" style=\"width:100%;max-width:100%;min-width:0;box-sizing:border-box;background:#fbfcfe;border:1px solid #c4cfdb;margin:0;overflow:hidden\"><h3 style=\"margin:0;padding:8px;background:#203a57;color:#ffffff;font-size:14px;font-weight:800;line-height:1.3;white-space:nowrap;word-break:keep-all;overflow-wrap:normal\">S&amp;P 500</h3><div style=\"padding:8px;width:100%;max-width:100%;min-width:0;box-sizing:border-box\"><svg class=\"index-line-chart\" data-index=\"sp500\" width=\"100%\" viewBox=\"0 0 240 112\" preserveAspectRatio=\"xMidYMid meet\" role=\"img\" aria-label=\"S&amp;P 500 최근 63거래일 종가 추이\" style=\"display:block;width:100%;max-width:100%;height:auto;box-sizing:border-box;overflow:hidden\"><title>S&amp;P 500 최근 63거래일 종가</title><desc>2026-08-07 7757.64, 2026-08-10 7753.11, 2026-08-11 7728.20, 2026-08-12 7748.50, 2026-08-13 7798.99, 2026-08-14 7785.76, 2026-08-17 7745.06, 2026-08-18 7691.76, 2026-08-19 7707.98, 2026-08-20 7641.16, 2026-08-21 7674.37, 2026-08-24 7652.86, 2026-08-25 7677.28, 2026-08-26 7675.70, 2026-08-27 7730.99, 2026-08-28 7711.76, 2026-08-31 7686.14, 2026-09-01 7631.47, 2026-09-02 7666.60, 2026-09-03 7747.71, 2026-09-04 7718.60, 2026-09-08 7673.52, 2026-09-09 7636.36, 2026-09-10 7591.70, 2026-09-11 7656.98, 2026-09-14 7619.98, 2026-09-15 7585.73, 2026-09-16 7551.81, 2026-09-17 7637.76, 2026-09-18 7650.50, 2026-09-21 7764.70, 2026-09-22 7764.64, 2026-09-23 7706.03, 2026-09-24 7704.13, 2026-09-25 7743.41, 2026-09-28 7683.69, 2026-09-29 7670.84, 2026-09-30 7651.54, 2026-10-01 7666.45, 2026-10-02 7722.72, 2026-10-05 7773.95, 2026-10-06 7818.93, 2026-10-07 7801.77, 2026-10-08 7765.36, 2026-10-09 7811.54, 2026-10-12 7807.24, 2026-10-13 7805.45, 2026-10-14 7718.94, 2026-10-15 7744.06, 2026-10-16 7659.44, 2026-10-19 7690.73, 2026-10-20 7712.57, 2026-10-21 7757.17, 2026-10-22 7663.43, 2026-10-23 7623.68, 2026-10-26 7676.77, 2026-10-27 7722.60, 2026-10-28 7743.98, 2026-10-29 7720.39, 2026-10-30 7580.07, 2026-11-02 7541.40, 2026-11-03 7568.92, 2026-11-04 7688.62</desc><line x1=\"18\" y1=\"26\" x2=\"222\" y2=\"26\" stroke=\"#dce3eb\" stroke-width=\"1\"></line><line x1=\"18\" y1=\"56\" x2=\"222\" y2=\"56\" stroke=\"#dce3eb\" stroke-width=\"1\"></line><line x1=\"18\" y1=\"86\" x2=\"222\" y2=\"86\" stroke=\"#dce3eb\" stroke-width=\"1\"></line><polyline points=\"18,39 21.29032258064516,40 24.580645161290324,46 27.870967741935484,41 31.161290322580648,30 34.45161290322581,33 37.74193548387097,42 41.03225806451613,53 44.322580645161295,50 47.61290322580645,64 50.903225806451616,57 54.193548387096776,62 57.483870967741936,57 60.774193548387096,57 64.06451612903226,45 67.35483870967742,49 70.64516129032259,55 73.93548387096774,67 77.2258064516129,59 80.51612903225808,41 83.80645161290323,48 87.09677419354838,57 90.38709677419355,65 93.67741935483872,75 96.96774193548387,61 100.25806451612904,69 103.54838709677419,76 106.83870967741936,84 110.12903225806453,65 113.41935483870968,62 116.70967741935485,38 120,38 123.29032258064517,50 126.58064516129033,51 129.8709677419355,42 133.16129032258067,55 136.4516129032258,58 139.74193548387098,62 143.03225806451616,59 146.3225806451613,47 149.61290322580646,36 152.90322580645162,26 156.19354838709677,30 159.48387096774195,38 162.7741935483871,28 166.06451612903226,29 169.35483870967744,29 172.6451612903226,48 175.93548387096774,42 179.22580645161293,60 182.51612903225808,54 185.80645161290323,49 189.09677419354838,39 192.38709677419357,60 195.67741935483872,68 198.96774193548387,57 202.25806451612905,47 205.5483870967742,42 208.83870967741936,47 212.12903225806454,78 215.4193548387097,86 218.70967741935485,80 222,54\" fill=\"none\" stroke=\"#456b91\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></polyline><circle cx=\"18\" cy=\"39\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"21.29032258064516\" cy=\"40\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"24.580645161290324\" cy=\"46\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"27.870967741935484\" cy=\"41\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"31.161290322580648\" cy=\"30\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"34.45161290322581\" cy=\"33\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"37.74193548387097\" cy=\"42\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"41.03225806451613\" cy=\"53\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"44.322580645161295\" cy=\"50\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"47.61290322580645\" cy=\"64\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"50.903225806451616\" cy=\"57\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"54.193548387096776\" cy=\"62\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"57.483870967741936\" cy=\"57\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"60.774193548387096\" cy=\"57\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"64.06451612903226\" cy=\"45\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"67.35483870967742\" cy=\"49\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"70.64516129032259\" cy=\"55\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"73.93548387096774\" cy=\"67\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"77.2258064516129\" cy=\"59\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"80.51612903225808\" cy=\"41\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"83.80645161290323\" cy=\"48\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"87.09677419354838\" cy=\"57\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"90.38709677419355\" cy=\"65\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"93.67741935483872\" cy=\"75\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"96.96774193548387\" cy=\"61\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"100.25806451612904\" cy=\"69\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"103.54838709677419\" cy=\"76\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"106.83870967741936\" cy=\"84\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"110.12903225806453\" cy=\"65\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"113.41935483870968\" cy=\"62\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"116.70967741935485\" cy=\"38\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"120\" cy=\"38\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"123.29032258064517\" cy=\"50\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"126.58064516129033\" cy=\"51\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"129.8709677419355\" cy=\"42\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"133.16129032258067\" cy=\"55\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"136.4516129032258\" cy=\"58\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"139.74193548387098\" cy=\"62\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"143.03225806451616\" cy=\"59\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"146.3225806451613\" cy=\"47\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"149.61290322580646\" cy=\"36\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"152.90322580645162\" cy=\"26\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"156.19354838709677\" cy=\"30\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"159.48387096774195\" cy=\"38\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"162.7741935483871\" cy=\"28\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"166.06451612903226\" cy=\"29\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"169.35483870967744\" cy=\"29\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"172.6451612903226\" cy=\"48\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"175.93548387096774\" cy=\"42\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"179.22580645161293\" cy=\"60\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"182.51612903225808\" cy=\"54\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"185.80645161290323\" cy=\"49\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"189.09677419354838\" cy=\"39\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"192.38709677419357\" cy=\"60\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"195.67741935483872\" cy=\"68\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"198.96774193548387\" cy=\"57\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"202.25806451612905\" cy=\"47\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"205.5483870967742\" cy=\"42\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"208.83870967741936\" cy=\"47\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"212.12903225806454\" cy=\"78\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"215.4193548387097\" cy=\"86\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"218.70967741935485\" cy=\"80\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"222\" cy=\"54\" r=\"1.4\" fill=\"#173a63\"></circle><text x=\"18\" y=\"105\" fill=\"#65758a\" font-size=\"8\" text-anchor=\"start\">08/07</text><text x=\"70.64516129032259\" y=\"105\" fill=\"#65758a\" font-size=\"8\" text-anchor=\"middle\">08/31</text><text x=\"120\" y=\"105\" fill=\"#65758a\" font-size=\"8\" text-anchor=\"middle\">09/22</text><text x=\"172.6451612903226\" y=\"105\" fill=\"#65758a\" font-size=\"8\" text-anchor=\"middle\">10/14</text><text x=\"222\" y=\"105\" fill=\"#65758a\" font-size=\"8\" text-anchor=\"end\">11/04</text></svg><div style=\"display:flex;justify-content:space-between;gap:4px;align-items:baseline;margin-top:3px;width:100%;max-width:100%;min-width:0;box-sizing:border-box;white-space:nowrap\"><strong style=\"color:#172033;font-size:12px;font-variant-numeric:tabular-nums;white-space:nowrap\">7,688.62</strong><span style=\"color:#c62828;font-size:12px;font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap\">+1.58%</span></div></div></div></div><div class=\"index-trend-cell\" style=\"width:100%;max-width:100%;min-width:0;box-sizing:border-box\"><div class=\"index-trend-card\" data-index=\"nasdaq\" data-values=\"26690.619140625,26605.359375,26445.44921875,26588.490234375,26803.029296875,26729.16015625,26644.91015625,26289.7109375,26331.08984375,26067.169921875,26180.4609375,25980.189453125,26151.30078125,26130.19921875,26541.349609375,26402.419921875,26370.890625,26099.76953125,26217.830078125,26584.060546875,26506.990234375,26421.41015625,26253.33984375,26081.720703125,26333.0390625,26186.41015625,25981.5703125,25978.4296875,26418.30078125,26522.5390625,27122.08984375,27244.279296875,26936.0390625,26939.369140625,27068.720703125,26820.380859375,26797.5390625,26861.060546875,26871.599609375,27190.859375,27477.310546875,27599.7890625,27538.689453125,27193.33984375,27366.169921875,27245.900390625,27204.380859375,26692.869140625,26713.029296875,26140.029296875,26430.890625,26424.8203125,26702.859375,26008.859375,25955.33984375,26169.380859375,26477.810546875,26549.849609375,26184.720703125,25437,25164.310546875,25372.009765625,25736.513671875\" style=\"width:100%;max-width:100%;min-width:0;box-sizing:border-box;background:#fbfcfe;border:1px solid #c4cfdb;margin:0;overflow:hidden\"><h3 style=\"margin:0;padding:8px;background:#203a57;color:#ffffff;font-size:14px;font-weight:800;line-height:1.3;white-space:nowrap;word-break:keep-all;overflow-wrap:normal\">나스닥</h3><div style=\"padding:8px;width:100%;max-width:100%;min-width:0;box-sizing:border-box\"><svg class=\"index-line-chart\" data-index=\"nasdaq\" width=\"100%\" viewBox=\"0 0 240 112\" preserveAspectRatio=\"xMidYMid meet\" role=\"img\" aria-label=\"나스닥 최근 63거래일 종가 추이\" style=\"display:block;width:100%;max-width:100%;height:auto;box-sizing:border-box;overflow:hidden\"><title>나스닥 최근 63거래일 종가</title><desc>2026-08-07 26690.62, 2026-08-10 26605.36, 2026-08-11 26445.45, 2026-08-12 26588.49, 2026-08-13 26803.03, 2026-08-14 26729.16, 2026-08-17 26644.91, 2026-08-18 26289.71, 2026-08-19 26331.09, 2026-08-20 26067.17, 2026-08-21 26180.46, 2026-08-24 25980.19, 2026-08-25 26151.30, 2026-08-26 26130.20, 2026-08-27 26541.35, 2026-08-28 26402.42, 2026-08-31 26370.89, 2026-09-01 26099.77, 2026-09-02 26217.83, 2026-09-03 26584.06, 2026-09-04 26506.99, 2026-09-08 26421.41, 2026-09-09 26253.34, 2026-09-10 26081.72, 2026-09-11 26333.04, 2026-09-14 26186.41, 2026-09-15 25981.57, 2026-09-16 25978.43, 2026-09-17 26418.30, 2026-09-18 26522.54, 2026-09-21 27122.09, 2026-09-22 27244.28, 2026-09-23 26936.04, 2026-09-24 26939.37, 2026-09-25 27068.72, 2026-09-28 26820.38, 2026-09-29 26797.54, 2026-09-30 26861.06, 2026-10-01 26871.60, 2026-10-02 27190.86, 2026-10-05 27477.31, 2026-10-06 27599.79, 2026-10-07 27538.69, 2026-10-08 27193.34, 2026-10-09 27366.17, 2026-10-12 27245.90, 2026-10-13 27204.38, 2026-10-14 26692.87, 2026-10-15 26713.03, 2026-10-16 26140.03, 2026-10-19 26430.89, 2026-10-20 26424.82, 2026-10-21 26702.86, 2026-10-22 26008.86, 2026-10-23 25955.34, 2026-10-26 26169.38, 2026-10-27 26477.81, 2026-10-28 26549.85, 2026-10-29 26184.72, 2026-10-30 25437.00, 2026-11-02 25164.31, 2026-11-03 25372.01, 2026-11-04 25736.51</desc><line x1=\"18\" y1=\"26\" x2=\"222\" y2=\"26\" stroke=\"#dce3eb\" stroke-width=\"1\"></line><line x1=\"18\" y1=\"56\" x2=\"222\" y2=\"56\" stroke=\"#dce3eb\" stroke-width=\"1\"></line><line x1=\"18\" y1=\"86\" x2=\"222\" y2=\"86\" stroke=\"#dce3eb\" stroke-width=\"1\"></line><polyline points=\"18,48 21.29032258064516,50 24.580645161290324,54 27.870967741935484,51 31.161290322580648,46 34.45161290322581,47 37.74193548387097,50 41.03225806451613,58 44.322580645161295,57 47.61290322580645,64 50.903225806451616,61 54.193548387096776,66 57.483870967741936,62 60.774193548387096,62 64.06451612903226,52 67.35483870967742,55 70.64516129032259,56 73.93548387096774,63 77.2258064516129,60 80.51612903225808,51 83.80645161290323,53 87.09677419354838,55 90.38709677419355,59 93.67741935483872,63 96.96774193548387,57 100.25806451612904,61 103.54838709677419,66 106.83870967741936,66 110.12903225806453,55 113.41935483870968,53 116.70967741935485,38 120,35 123.29032258064517,42 126.58064516129033,42 129.8709677419355,39 133.16129032258067,45 136.4516129032258,46 139.74193548387098,44 143.03225806451616,44 146.3225806451613,36 149.61290322580646,29 152.90322580645162,26 156.19354838709677,28 159.48387096774195,36 162.7741935483871,32 166.06451612903226,35 169.35483870967744,36 172.6451612903226,48 175.93548387096774,48 179.22580645161293,62 182.51612903225808,55 185.80645161290323,55 189.09677419354838,48 192.38709677419357,65 195.67741935483872,67 198.96774193548387,61 202.25806451612905,54 205.5483870967742,52 208.83870967741936,61 212.12903225806454,79 215.4193548387097,86 218.70967741935485,81 222,72\" fill=\"none\" stroke=\"#456b91\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></polyline><circle cx=\"18\" cy=\"48\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"21.29032258064516\" cy=\"50\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"24.580645161290324\" cy=\"54\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"27.870967741935484\" cy=\"51\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"31.161290322580648\" cy=\"46\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"34.45161290322581\" cy=\"47\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"37.74193548387097\" cy=\"50\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"41.03225806451613\" cy=\"58\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"44.322580645161295\" cy=\"57\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"47.61290322580645\" cy=\"64\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"50.903225806451616\" cy=\"61\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"54.193548387096776\" cy=\"66\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"57.483870967741936\" cy=\"62\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"60.774193548387096\" cy=\"62\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"64.06451612903226\" cy=\"52\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"67.35483870967742\" cy=\"55\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"70.64516129032259\" cy=\"56\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"73.93548387096774\" cy=\"63\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"77.2258064516129\" cy=\"60\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"80.51612903225808\" cy=\"51\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"83.80645161290323\" cy=\"53\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"87.09677419354838\" cy=\"55\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"90.38709677419355\" cy=\"59\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"93.67741935483872\" cy=\"63\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"96.96774193548387\" cy=\"57\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"100.25806451612904\" cy=\"61\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"103.54838709677419\" cy=\"66\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"106.83870967741936\" cy=\"66\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"110.12903225806453\" cy=\"55\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"113.41935483870968\" cy=\"53\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"116.70967741935485\" cy=\"38\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"120\" cy=\"35\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"123.29032258064517\" cy=\"42\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"126.58064516129033\" cy=\"42\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"129.8709677419355\" cy=\"39\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"133.16129032258067\" cy=\"45\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"136.4516129032258\" cy=\"46\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"139.74193548387098\" cy=\"44\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"143.03225806451616\" cy=\"44\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"146.3225806451613\" cy=\"36\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"149.61290322580646\" cy=\"29\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"152.90322580645162\" cy=\"26\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"156.19354838709677\" cy=\"28\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"159.48387096774195\" cy=\"36\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"162.7741935483871\" cy=\"32\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"166.06451612903226\" cy=\"35\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"169.35483870967744\" cy=\"36\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"172.6451612903226\" cy=\"48\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"175.93548387096774\" cy=\"48\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"179.22580645161293\" cy=\"62\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"182.51612903225808\" cy=\"55\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"185.80645161290323\" cy=\"55\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"189.09677419354838\" cy=\"48\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"192.38709677419357\" cy=\"65\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"195.67741935483872\" cy=\"67\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"198.96774193548387\" cy=\"61\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"202.25806451612905\" cy=\"54\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"205.5483870967742\" cy=\"52\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"208.83870967741936\" cy=\"61\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"212.12903225806454\" cy=\"79\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"215.4193548387097\" cy=\"86\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"218.70967741935485\" cy=\"81\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"222\" cy=\"72\" r=\"1.4\" fill=\"#173a63\"></circle><text x=\"18\" y=\"105\" fill=\"#65758a\" font-size=\"8\" text-anchor=\"start\">08/07</text><text x=\"70.64516129032259\" y=\"105\" fill=\"#65758a\" font-size=\"8\" text-anchor=\"middle\">08/31</text><text x=\"120\" y=\"105\" fill=\"#65758a\" font-size=\"8\" text-anchor=\"middle\">09/22</text><text x=\"172.6451612903226\" y=\"105\" fill=\"#65758a\" font-size=\"8\" text-anchor=\"middle\">10/14</text><text x=\"222\" y=\"105\" fill=\"#65758a\" font-size=\"8\" text-anchor=\"end\">11/04</text></svg><div style=\"display:flex;justify-content:space-between;gap:4px;align-items:baseline;margin-top:3px;width:100%;max-width:100%;min-width:0;box-sizing:border-box;white-space:nowrap\"><strong style=\"color:#172033;font-size:12px;font-variant-numeric:tabular-nums;white-space:nowrap\">25,736.51</strong><span style=\"color:#c62828;font-size:12px;font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap\">+1.44%</span></div></div></div></div><div class=\"index-trend-cell\" style=\"width:100%;max-width:100%;min-width:0;box-sizing:border-box\"><div class=\"index-trend-card\" data-index=\"dow-jones\" data-values=\"54036.93,53975.98,53791.85,53770.27,53839.99,53732.41,53459.78,53343.4,53463.05,52759.21,53277.01,53417.16,53577.4,53463.88,53569.44,53559.99,53185.9,52766.88,53061.95,53686.11,53414.25,52786.07,52380.66,52064.1,52573.29,52421.2,52093.11,51461.9,51778.04,51682.64,52048.83,51863.69,51511.59,51349.98,51828.62,51481.51,51349.92,50906.05,50926.56,51176.96,51267.9,51521.28,51179.87,51231.64,51654.95,51850.55,51670.1,51621.48,52177.69,52002.41,51966.03,52495.88,52856.09,52867.98,52215.16,52361.58,52377.57,52475.1,52342.56,51770.31,51983.98,51786.72,53356.12\" style=\"width:100%;max-width:100%;min-width:0;box-sizing:border-box;background:#fbfcfe;border:1px solid #c4cfdb;margin:0;overflow:hidden\"><h3 style=\"margin:0;padding:8px;background:#203a57;color:#ffffff;font-size:14px;font-weight:800;line-height:1.3;white-space:nowrap;word-break:keep-all;overflow-wrap:normal\">다우존스</h3><div style=\"padding:8px;width:100%;max-width:100%;min-width:0;box-sizing:border-box\"><svg class=\"index-line-chart\" data-index=\"dow-jones\" width=\"100%\" viewBox=\"0 0 240 112\" preserveAspectRatio=\"xMidYMid meet\" role=\"img\" aria-label=\"다우존스 최근 63거래일 종가 추이\" style=\"display:block;width:100%;max-width:100%;height:auto;box-sizing:border-box;overflow:hidden\"><title>다우존스 최근 63거래일 종가</title><desc>2026-08-07 54036.93, 2026-08-10 53975.98, 2026-08-11 53791.85, 2026-08-12 53770.27, 2026-08-13 53839.99, 2026-08-14 53732.41, 2026-08-17 53459.78, 2026-08-18 53343.40, 2026-08-19 53463.05, 2026-08-20 52759.21, 2026-08-21 53277.01, 2026-08-24 53417.16, 2026-08-25 53577.40, 2026-08-26 53463.88, 2026-08-27 53569.44, 2026-08-28 53559.99, 2026-08-31 53185.90, 2026-09-01 52766.88, 2026-09-02 53061.95, 2026-09-03 53686.11, 2026-09-04 53414.25, 2026-09-08 52786.07, 2026-09-09 52380.66, 2026-09-10 52064.10, 2026-09-11 52573.29, 2026-09-14 52421.20, 2026-09-15 52093.11, 2026-09-16 51461.90, 2026-09-17 51778.04, 2026-09-18 51682.64, 2026-09-21 52048.83, 2026-09-22 51863.69, 2026-09-23 51511.59, 2026-09-24 51349.98, 2026-09-25 51828.62, 2026-09-28 51481.51, 2026-09-29 51349.92, 2026-09-30 50906.05, 2026-10-01 50926.56, 2026-10-02 51176.96, 2026-10-05 51267.90, 2026-10-06 51521.28, 2026-10-07 51179.87, 2026-10-08 51231.64, 2026-10-09 51654.95, 2026-10-12 51850.55, 2026-10-13 51670.10, 2026-10-14 51621.48, 2026-10-15 52177.69, 2026-10-16 52002.41, 2026-10-19 51966.03, 2026-10-20 52495.88, 2026-10-21 52856.09, 2026-10-22 52867.98, 2026-10-23 52215.16, 2026-10-26 52361.58, 2026-10-27 52377.57, 2026-10-28 52475.10, 2026-10-29 52342.56, 2026-10-30 51770.31, 2026-11-02 51983.98, 2026-11-03 51786.72, 2026-11-04 53356.12</desc><line x1=\"18\" y1=\"26\" x2=\"222\" y2=\"26\" stroke=\"#dce3eb\" stroke-width=\"1\"></line><line x1=\"18\" y1=\"56\" x2=\"222\" y2=\"56\" stroke=\"#dce3eb\" stroke-width=\"1\"></line><line x1=\"18\" y1=\"86\" x2=\"222\" y2=\"86\" stroke=\"#dce3eb\" stroke-width=\"1\"></line><polyline points=\"18,26 21.29032258064516,27 24.580645161290324,31 27.870967741935484,31 31.161290322580648,30 34.45161290322581,32 37.74193548387097,37 41.03225806451613,39 44.322580645161295,37 47.61290322580645,50 50.903225806451616,41 54.193548387096776,38 57.483870967741936,35 60.774193548387096,37 64.06451612903226,35 67.35483870967742,35 70.64516129032259,42 73.93548387096774,50 77.2258064516129,45 80.51612903225808,33 83.80645161290323,38 87.09677419354838,50 90.38709677419355,58 93.67741935483872,64 96.96774193548387,54 100.25806451612904,57 103.54838709677419,63 106.83870967741936,75 110.12903225806453,69 113.41935483870968,71 116.70967741935485,64 120,68 123.29032258064517,74 126.58064516129033,77 129.8709677419355,68 133.16129032258067,75 136.4516129032258,77 139.74193548387098,86 143.03225806451616,86 146.3225806451613,81 149.61290322580646,79 152.90322580645162,74 156.19354838709677,81 159.48387096774195,80 162.7741935483871,72 166.06451612903226,68 169.35483870967744,71 172.6451612903226,72 175.93548387096774,62 179.22580645161293,65 182.51612903225808,66 185.80645161290323,56 189.09677419354838,49 192.38709677419357,48 195.67741935483872,61 198.96774193548387,58 202.25806451612905,58 205.5483870967742,56 208.83870967741936,58 212.12903225806454,69 215.4193548387097,65 218.70967741935485,69 222,39\" fill=\"none\" stroke=\"#456b91\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></polyline><circle cx=\"18\" cy=\"26\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"21.29032258064516\" cy=\"27\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"24.580645161290324\" cy=\"31\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"27.870967741935484\" cy=\"31\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"31.161290322580648\" cy=\"30\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"34.45161290322581\" cy=\"32\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"37.74193548387097\" cy=\"37\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"41.03225806451613\" cy=\"39\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"44.322580645161295\" cy=\"37\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"47.61290322580645\" cy=\"50\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"50.903225806451616\" cy=\"41\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"54.193548387096776\" cy=\"38\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"57.483870967741936\" cy=\"35\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"60.774193548387096\" cy=\"37\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"64.06451612903226\" cy=\"35\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"67.35483870967742\" cy=\"35\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"70.64516129032259\" cy=\"42\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"73.93548387096774\" cy=\"50\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"77.2258064516129\" cy=\"45\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"80.51612903225808\" cy=\"33\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"83.80645161290323\" cy=\"38\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"87.09677419354838\" cy=\"50\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"90.38709677419355\" cy=\"58\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"93.67741935483872\" cy=\"64\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"96.96774193548387\" cy=\"54\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"100.25806451612904\" cy=\"57\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"103.54838709677419\" cy=\"63\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"106.83870967741936\" cy=\"75\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"110.12903225806453\" cy=\"69\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"113.41935483870968\" cy=\"71\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"116.70967741935485\" cy=\"64\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"120\" cy=\"68\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"123.29032258064517\" cy=\"74\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"126.58064516129033\" cy=\"77\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"129.8709677419355\" cy=\"68\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"133.16129032258067\" cy=\"75\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"136.4516129032258\" cy=\"77\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"139.74193548387098\" cy=\"86\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"143.03225806451616\" cy=\"86\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"146.3225806451613\" cy=\"81\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"149.61290322580646\" cy=\"79\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"152.90322580645162\" cy=\"74\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"156.19354838709677\" cy=\"81\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"159.48387096774195\" cy=\"80\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"162.7741935483871\" cy=\"72\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"166.06451612903226\" cy=\"68\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"169.35483870967744\" cy=\"71\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"172.6451612903226\" cy=\"72\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"175.93548387096774\" cy=\"62\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"179.22580645161293\" cy=\"65\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"182.51612903225808\" cy=\"66\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"185.80645161290323\" cy=\"56\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"189.09677419354838\" cy=\"49\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"192.38709677419357\" cy=\"48\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"195.67741935483872\" cy=\"61\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"198.96774193548387\" cy=\"58\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"202.25806451612905\" cy=\"58\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"205.5483870967742\" cy=\"56\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"208.83870967741936\" cy=\"58\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"212.12903225806454\" cy=\"69\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"215.4193548387097\" cy=\"65\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"218.70967741935485\" cy=\"69\" r=\"1.4\" fill=\"#173a63\"></circle><circle cx=\"222\" cy=\"39\" r=\"1.4\" fill=\"#173a63\"></circle><text x=\"18\" y=\"105\" fill=\"#65758a\" font-size=\"8\" text-anchor=\"start\">08/07</text><text x=\"70.64516129032259\" y=\"105\" fill=\"#65758a\" font-size=\"8\" text-anchor=\"middle\">08/31</text><text x=\"120\" y=\"105\" fill=\"#65758a\" font-size=\"8\" text-anchor=\"middle\">09/22</text><text x=\"172.6451612903226\" y=\"105\" fill=\"#65758a\" font-size=\"8\" text-anchor=\"middle\">10/14</text><text x=\"222\" y=\"105\" fill=\"#65758a\" font-size=\"8\" text-anchor=\"end\">11/04</text></svg><div style=\"display:flex;justify-content:space-between;gap:4px;align-items:baseline;margin-top:3px;width:100%;max-width:100%;min-width:0;box-sizing:border-box;white-space:nowrap\"><strong style=\"color:#172033;font-size:12px;font-variant-numeric:tabular-nums;white-space:nowrap\">53,356.12</strong><span style=\"color:#c62828;font-size:12px;font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap\">+3.03%</span></div></div></div></div></div><p style=\"margin:11px 2px 0;color:#59697d;font-size:12px;line-height:1.5\">2026년 8월 7일~11월 4일 정규장 종가 · <a href=\"https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&amp;period2=1793922376&amp;interval=1d\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px;font-weight:600;overflow-wrap:anywhere\">Yahoo Finance</a> · <a href=\"https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&amp;period2=1793922376&amp;interval=1d\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px;font-weight:600;overflow-wrap:anywhere\">Yahoo Finance</a> · <a href=\"https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&amp;cosd=2019-03-16\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px;font-weight:600;overflow-wrap:anywhere\">FRED</a></p></div></section>\n<section data-section=\"us-macro\" style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><div style=\"display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:2px solid #0b2545;padding-bottom:7px;margin:0 0 12px\"><h2 style=\"margin:0;font-size:clamp(19px,4.8vw,22px);line-height:1.35;font-weight:900;color:#0b2545;word-break:keep-all\">금리·달러·변동성</h2><span style=\"font-size:12px;font-weight:800;letter-spacing:.03em;padding:3px 8px;border-radius:3px;white-space:nowrap;background:#e8eef6;color:#0b2545\">데이터</span></div><div style=\"display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:8px;margin:0 0 12px\"><div style=\"border:1px solid #dbe2ea;padding:9px 11px;min-width:0\"><div style=\"font-size:13px;color:#566476;word-break:keep-all\">미국 10년물 국채금리</div><div style=\"font-size:19px;font-weight:800;color:#16202e;white-space:nowrap\">4.90%</div><div style=\"font-size:14px;font-weight:800;color:#1f5fbf;white-space:nowrap\">-5bp</div></div></div></section>\n<section data-section=\"us-index-facts\" style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><div style=\"display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:2px solid #0b2545;padding-bottom:7px;margin:0 0 12px\"><h2 style=\"margin:0;font-size:clamp(19px,4.8vw,22px);line-height:1.35;font-weight:900;color:#0b2545;word-break:keep-all\">지수별 흐름과 위치</h2><span style=\"font-size:12px;font-weight:800;letter-spacing:.03em;padding:3px 8px;border-radius:3px;white-space:nowrap;background:#e8eef6;color:#0b2545\">데이터</span></div><p style=\"margin:0 0 13px\">S&amp;P 500은 7,688.62로 마감해 전 거래일보다 <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">1.58%</b> 상승했다. 최근 5거래일 기준으로는 <b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">0.71%</b> 하락, 20거래일 기준으로는 <b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">1.45%</b> 하락했다. 최근 63거래일 종가 고점(7,818.93, 2026-10-06)보다 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">1.67%</b> 낮다.</p><p style=\"margin:0 0 13px\">나스닥 종합지수는 25,736.51로 마감해 전 거래일보다 <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">1.44%</b> 상승했다. 최근 5거래일 기준으로는 <b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">3.06%</b> 하락, 20거래일 기준으로는 <b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">6.54%</b> 하락했다. 최근 63거래일 종가 고점(27,599.79, 2026-10-06)보다 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">6.75%</b> 낮다.</p><p style=\"margin:0 0 13px\">다우존스 산업평균지수는 53,356.12로 마감해 전 거래일보다 <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">3.03%</b> 상승했다. 최근 5거래일 기준으로는 <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">1.68%</b> 상승, 20거래일 기준으로는 <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">4.25%</b> 상승했다. 최근 63거래일 종가 고점(54,036.93, 2026-08-07)보다 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">1.26%</b> 낮다.</p><p style=\"margin:0 0 13px\">미국 10년물 국채금리는 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">4.90%</b>로 직전 관측치보다 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">5bp</b> 내렸다.</p></section>\n<section data-section=\"us-analysis\" style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><div style=\"display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:2px solid #0b2545;padding-bottom:7px;margin:0 0 12px\"><h2 style=\"margin:0;font-size:clamp(19px,4.8vw,22px);line-height:1.35;font-weight:900;color:#0b2545;word-break:keep-all\">MOTUS 분석</h2><span style=\"font-size:12px;font-weight:800;letter-spacing:.03em;padding:3px 8px;border-radius:3px;white-space:nowrap;background:#f2f4f7;color:#2b3a4c;border:1px solid #cfd6df\">MOTUS 분석</span></div><div style=\"background:#f5f7fa;border:1px solid #d8dee6;padding:12px 14px 1px\"><p style=\"margin:0 0 13px\">기술주 비중이 큰 나스닥 종합지수가 다우존스 산업평균지수보다 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">1.59%p</b> 덜 올랐다.</p><p style=\"margin:0 0 13px\">같은 날 미국 10년물 국채금리는 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">5bp</b> 내렸고 S&amp;P 500은 <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">1.58%</b> 상승했다.</p></div></section>\n<section data-section=\"us-broker-analysis\" style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><div style=\"display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:2px solid #0b2545;padding-bottom:7px;margin:0 0 12px\"><h2 style=\"margin:0;font-size:clamp(19px,4.8vw,22px);line-height:1.35;font-weight:900;color:#0b2545;word-break:keep-all\">증권사별 분석: 금리와 통화정책</h2><span style=\"font-size:12px;font-weight:800;letter-spacing:.03em;padding:3px 8px;border-radius:3px;white-space:nowrap;background:#a8822e;color:#fff\">증권가 리포트</span></div><div style=\"background:#fbf5e6;border:1px solid #e6d2a0;padding:12px 12px 2px\"><div style=\"background:#fff;border:1px solid #e6d2a0;padding:12px 14px;margin:0 0 10px\"><div style=\"display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:baseline\"><b style=\"font-size:18px;color:#16202e\">블루웨이브에 미국 금융시장이 환호한 이유</b><span style=\"font-size:13px;color:#566476\">iM증권 · 11월 5일</span></div><div style=\"border-left:3px solid #a8822e;padding:1px 0 1px 10px;font-size:15.5px;color:#2b2a26\">“블루 쓰나미로 지칭될 정도로 미국 중간선거에서 민주당이 압승을 했다”, “민주당은 예상대로 하원에서 과반의석을 차지하는 동시에 상원에서도 경합주에서 대부분 승리하면서 과반의석을 차지했다”.</div> <a href=\"https://stock.pstatic.net/stock-research/economy/-/20261105_economy_736969000.pdf\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></div><div style=\"background:#fff;border:1px solid #e6d2a0;padding:12px 14px;margin:0 0 10px\"><div style=\"display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:baseline\"><b style=\"font-size:18px;color:#16202e\">한국 소비자물가: 헤드라인은 예상 부합 둔화, 근원물가는 2.8%로 수렴하며 완강</b><span style=\"font-size:13px;color:#566476\">대신증권 · 11월 4일</span></div><div style=\"border-left:3px solid #a8822e;padding:1px 0 1px 10px;font-size:15.5px;color:#2b2a26\">“10월 소비자물가는 전년동월비 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">2.8%</b>, 전월비 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">0.2%</b>를 기록했다”, “시장예상치(각각 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">2.85%</b>, <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">0.25%</b>)보다 0.05%포인트씩 낮았지만 이는 발표 단위인 0.1%포인트보다 작은 차이여서, 이를 물가가 예상보다 크게 꺾인 신호로 해석할 근거는 없다”.</div> <a href=\"https://stock.pstatic.net/stock-research/economy/15/20261104_economy_558351000.pdf\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></div><div style=\"background:#fff;border:1px solid #e6d2a0;padding:12px 14px;margin:0 0 10px\"><div style=\"display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:baseline\"><b style=\"font-size:18px;color:#16202e\">한국 10월 소비자물가; 농산물이 낮춘 물가, 기조적 압력은 지속</b><span style=\"font-size:13px;color:#566476\">신한투자증권 · 11월 4일</span></div><div style=\"border-left:3px solid #a8822e;padding:1px 0 1px 10px;font-size:15.5px;color:#2b2a26\">“한국 10월 소비자물가 MoM <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">0.2%</b>, YoY <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">2.8%</b> 상승”, “한국 10월 소비자물가는 전월대비 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">0.2%</b>, 전년동월대비 <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">2.8%</b> 상승하며 9월(<b style=\"color:#16202e;font-weight:800;white-space:nowrap\">2.9%</b>)보다 오름폭이 소폭 축소됐다”.</div> <a href=\"https://stock.pstatic.net/stock-research/economy/21/20261104_economy_617380000.pdf\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></div></div></section>\n<section style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><div style=\"display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:2px solid #0b2545;padding-bottom:7px;margin:0 0 12px\"><h2 style=\"margin:0;font-size:clamp(19px,4.8vw,22px);line-height:1.35;font-weight:900;color:#0b2545;word-break:keep-all\">금융 전문 언론 원문</h2><span style=\"font-size:12px;font-weight:800;letter-spacing:.03em;padding:3px 8px;border-radius:3px;white-space:nowrap;background:#f1f5f9;color:#3b5b7a;border:1px solid #cdd8e3\">뉴스·공식 발표</span></div><p style=\"margin:0 0 12px\">해외·국내 금융 매체가 같은 시기에 보도한 시장 기사다. 해외 기사는 원문 제목을 그대로 적었다.</p><ul style=\"margin:0;padding-left:20px\"><li style=\"margin:0 0 11px\"><strong>CNBC Investing</strong> · 2026-11-03<div><a href=\"https://www.cnbc.com/2026/11/03/santoli-ai-bull-market-needs-tech-stocks.html\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">Santoli: AI bull market almost surely needs tech stocks to recover to keep advancing</a></div></li><li style=\"margin:0 0 11px\"><strong>Bloomberg Markets</strong> · 2026-11-04<div><a href=\"https://www.bloomberg.com/news/videos/2026-11-04/asian-markets-react-as-trump-cools-iran-fears-video\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">Asian Markets React as Trump Cools Iran Fears</a></div></li><li style=\"margin:0 0 11px\"><strong>Bloomberg Markets</strong> · 2026-11-04<div><a href=\"https://www.bloomberg.com/news/articles/2026-11-04/stock-market-today-dow-s-p-live-updates\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">Asian Stocks to Rise as Oil Slides After US Vote: Markets Wrap</a></div></li></ul></section>\n<section data-section=\"us-risks\" style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><div style=\"display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:2px solid #0b2545;padding-bottom:7px;margin:0 0 12px\"><h2 style=\"margin:0;font-size:clamp(19px,4.8vw,22px);line-height:1.35;font-weight:900;color:#0b2545;word-break:keep-all\">위험 요인과 다음 확인 지표</h2><span style=\"font-size:12px;font-weight:800;letter-spacing:.03em;padding:3px 8px;border-radius:3px;white-space:nowrap;background:#fff;color:#0b2545;border:1px solid #0b2545\">체크포인트</span></div><div style=\"display:grid;gap:9px\"><p style=\"margin:0;display:flex;gap:10px;align-items:flex-start\"><span style=\"flex:0 0 14px;height:14px;border:2px solid #0b2545;margin-top:6px\"></span><span>다음 정규장에서는 미국 10년물 금리 방향과 함께, 증권사들이 짚은 경계 요인이 주요 지수와 업종 등락에 실제로 반영되는지가 확인 대상이다.</span></p></div></section>\n<section style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><h2 style=\"margin:0 0 12px;padding:0 0 8px;border-bottom:2px solid #173a63;color:#03162e;font-size:clamp(19px,4.8vw,23px);line-height:1.35;font-weight:850;word-break:keep-all;overflow-wrap:normal\">자료</h2><ul style=\"margin:0;padding-left:20px\"><li style=\"margin:5px 0\"><a href=\"https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&amp;period2=1793922376&amp;interval=1d\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">Yahoo Finance S&amp;P 500</a></li><li style=\"margin:5px 0\"><a href=\"https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&amp;period2=1793922376&amp;interval=1d\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">Yahoo Finance Nasdaq</a></li><li style=\"margin:5px 0\"><a href=\"https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&amp;cosd=2019-03-16\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">FRED Dow Jones</a></li><li style=\"margin:5px 0\"><a href=\"https://home.treasury.gov/resource-center/data-chart-center/interest-rates/pages/xml?data=daily_treasury_yield_curve&amp;field_tdr_date_value=2026\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">U.S. Treasury U.S. 10Y Treasury Yield (미국 10년물 국채금리)</a></li><li style=\"margin:5px 0\"><a href=\"https://www.nyse.com/trade/hours-calendars\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">NYSE 공식 거래일 캘린더</a></li><li style=\"margin:5px 0\"><a href=\"https://stock.pstatic.net/stock-research/market/61/20261105_market_285270000.pdf\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">iM증권 「[Market Time] 중간선거 불확실성 해소와 AI 인프라 규제 우려」 (2026-11-05)</a></li><li style=\"margin:5px 0\"><a href=\"https://stock.pstatic.net/stock-research/market/58/20261105_market_447732000.pdf\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">KB증권 「11/5 KB 리서치 모닝코멘트」 (2026-11-05)</a></li><li style=\"margin:5px 0\"><a href=\"https://stock.pstatic.net/stock-research/invest/40/20261105_invest_882266000.pdf\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">IBK투자증권 「[IBKS Daily] Start with IBKS(2026.11.05) 美 중간선거, 블루웨이브에 달라지는 정책 지형」 (2026-11-05)</a></li><li style=\"margin:5px 0\"><a href=\"https://stock.pstatic.net/stock-research/economy/-/20261105_economy_736969000.pdf\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">iM증권 「블루웨이브에 미국 금융시장이 환호한 이유」 (2026-11-05)</a></li><li style=\"margin:5px 0\"><a href=\"https://stock.pstatic.net/stock-research/economy/15/20261104_economy_558351000.pdf\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">대신증권 「한국 소비자물가: 헤드라인은 예상 부합 둔화, 근원물가는 2.8%로 수렴하며 완강」 (2026-11-04)</a></li><li style=\"margin:5px 0\"><a href=\"https://stock.pstatic.net/stock-research/economy/21/20261104_economy_617380000.pdf\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">신한투자증권 「한국 10월 소비자물가; 농산물이 낮춘 물가, 기조적 압력은 지속」 (2026-11-04)</a></li><li style=\"margin:5px 0\"><a href=\"https://query1.finance.yahoo.com/v1/finance/trending/US?count=20\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">Yahoo Finance 검색 상위 종목</a></li><li style=\"margin:5px 0\"><a href=\"https://query1.finance.yahoo.com/v7/finance/spark?symbols=QCOM,APP,DJT,MELI,COHR,BROS,SNAP,ARM,CAVA,MSFT,JOBY,FIG,INTC,NVDA,SPCX,ORCL,AAPL,NU,BBD,AMZN&amp;range=5d&amp;interval=1d\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">Yahoo Finance 종목 일별 종가</a></li><li style=\"margin:5px 0\"><a href=\"https://query1.finance.yahoo.com/v7/finance/spark?symbols=KVUE,NOK&amp;range=5d&amp;interval=1d\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">Yahoo Finance 종목 일별 종가</a></li><li style=\"margin:5px 0\"><a href=\"https://query1.finance.yahoo.com/v7/finance/spark?symbols=NVDA,MSFT,GOOGL,AMZN,META,AVGO,AMD,TSM,ORCL,AAPL,TSLA&amp;range=5d&amp;interval=1d\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">Yahoo Finance 미국 시가총액 상위 종목 일별 종가</a></li><li style=\"margin:5px 0\"><a href=\"https://query1.finance.yahoo.com/v7/finance/spark?symbols=GOOG,MU,CAT&amp;range=5d&amp;interval=1d\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">Yahoo Finance 리포트·기사 언급 종목 일별 종가</a></li><li style=\"margin:5px 0\"><a href=\"https://query1.finance.yahoo.com/v7/finance/spark?symbols=XLK,XLC,XLY,XLF,XLV,XLI,XLE,XLB,XLP,XLU,XLRE&amp;range=5d&amp;interval=1d\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">Yahoo Finance SPDR 업종 ETF 일별 종가</a></li><li style=\"margin:5px 0\"><a href=\"https://www.goldmansachs.com/insights/articles/are-bonds-becoming-a-better-investment-for-portfolios\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">Goldman Sachs 공개 시장기사 (2026-10-08)</a></li><li style=\"margin:5px 0\"><a href=\"https://www.goldmansachs.com/insights/articles/will-30-year-us-treasury-yields-climb-higher\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">Goldman Sachs 공개 시장기사 (2026-10-06)</a></li><li style=\"margin:5px 0\"><a href=\"https://www.cnbc.com/2026/11/03/santoli-ai-bull-market-needs-tech-stocks.html\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">CNBC Investing 공개 시장기사 (2026-11-03)</a></li><li style=\"margin:5px 0\"><a href=\"https://www.bloomberg.com/news/videos/2026-11-04/asian-markets-react-as-trump-cools-iran-fears-video\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">Bloomberg Markets 공개 시장기사 (2026-11-04)</a></li><li style=\"margin:5px 0\"><a href=\"https://www.bloomberg.com/news/articles/2026-11-04/stock-market-today-dow-s-p-live-updates\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">Bloomberg Markets 공개 시장기사 (2026-11-04)</a></li></ul></section></article></body></html>",
+    "renderedSections": [
+      "masthead",
+      "lead",
+      "key-points",
+      "charts",
+      "macro",
+      "companies",
+      "research",
+      "watch",
+      "sources"
+    ],
+    "label": "미국증시"
+  },
+  "viewModel": {
+    "publicationId": "motus-live-2026-11-04:us",
+    "issueDate": "2026-11-04",
+    "issueNumber": 20261104,
+    "title": "뉴욕증시 3대 지수 상승…마이크론 7.0% 급락",
+    "subtitle": "증권가 분석과 투자자 관심 종목으로 읽는 미국 정규장 마감",
+    "category": "US_MARKET",
+    "canonicalLabel": "U.S. Market",
+    "displayLabel": "미국증시 (U.S. Market)",
+    "marketSummary": "2026-11-04 미국 정규장에서 S&P 500 7,688.62(1.58% 상승), 나스닥 25,736.51(1.44% 상승), 다우존스 53,356.12(3.03% 상승)로 마감했다.",
+    "marketHistory": {
+      "asOf": "2026-11-04",
+      "sessionCount": 63,
+      "series": [
+        {
+          "key": "sp500",
+          "label": "S&P 500",
+          "dates": [
+            "2026-08-07",
+            "2026-08-10",
+            "2026-08-11",
+            "2026-08-12",
+            "2026-08-13",
+            "2026-08-14",
+            "2026-08-17",
+            "2026-08-18",
+            "2026-08-19",
+            "2026-08-20",
+            "2026-08-21",
+            "2026-08-24",
+            "2026-08-25",
+            "2026-08-26",
+            "2026-08-27",
+            "2026-08-28",
+            "2026-08-31",
+            "2026-09-01",
+            "2026-09-02",
+            "2026-09-03",
+            "2026-09-04",
+            "2026-09-08",
+            "2026-09-09",
+            "2026-09-10",
+            "2026-09-11",
+            "2026-09-14",
+            "2026-09-15",
+            "2026-09-16",
+            "2026-09-17",
+            "2026-09-18",
+            "2026-09-21",
+            "2026-09-22",
+            "2026-09-23",
+            "2026-09-24",
+            "2026-09-25",
+            "2026-09-28",
+            "2026-09-29",
+            "2026-09-30",
+            "2026-10-01",
+            "2026-10-02",
+            "2026-10-05",
+            "2026-10-06",
+            "2026-10-07",
+            "2026-10-08",
+            "2026-10-09",
+            "2026-10-12",
+            "2026-10-13",
+            "2026-10-14",
+            "2026-10-15",
+            "2026-10-16",
+            "2026-10-19",
+            "2026-10-20",
+            "2026-10-21",
+            "2026-10-22",
+            "2026-10-23",
+            "2026-10-26",
+            "2026-10-27",
+            "2026-10-28",
+            "2026-10-29",
+            "2026-10-30",
+            "2026-11-02",
+            "2026-11-03",
+            "2026-11-04"
+          ],
+          "closes": [
+            7757.64013671875,
+            7753.10986328125,
+            7728.2001953125,
+            7748.5,
+            7798.990234375,
+            7785.759765625,
+            7745.06005859375,
+            7691.759765625,
+            7707.97998046875,
+            7641.16015625,
+            7674.3701171875,
+            7652.85986328125,
+            7677.27978515625,
+            7675.7001953125,
+            7730.990234375,
+            7711.759765625,
+            7686.14013671875,
+            7631.47021484375,
+            7666.60009765625,
+            7747.7099609375,
+            7718.60009765625,
+            7673.52001953125,
+            7636.35986328125,
+            7591.7001953125,
+            7656.97998046875,
+            7619.97998046875,
+            7585.72998046875,
+            7551.81005859375,
+            7637.759765625,
+            7650.5,
+            7764.7001953125,
+            7764.64013671875,
+            7706.02978515625,
+            7704.1298828125,
+            7743.41015625,
+            7683.68994140625,
+            7670.83984375,
+            7651.5400390625,
+            7666.4501953125,
+            7722.72021484375,
+            7773.9501953125,
+            7818.93017578125,
+            7801.77001953125,
+            7765.35986328125,
+            7811.5400390625,
+            7807.240234375,
+            7805.4501953125,
+            7718.93994140625,
+            7744.06005859375,
+            7659.43994140625,
+            7690.72998046875,
+            7712.56982421875,
+            7757.169921875,
+            7663.43017578125,
+            7623.68017578125,
+            7676.77001953125,
+            7722.60009765625,
+            7743.97998046875,
+            7720.39013671875,
+            7580.06982421875,
+            7541.39990234375,
+            7568.919921875,
+            7688.6201171875
+          ],
+          "latestClose": 7688.6201171875,
+          "latestChangePct": 1.5814699659663916,
+          "sourceLabel": "Yahoo Finance",
+          "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+          "provenance": [
+            {
+              "date": "2026-08-07",
+              "inputDate": "2026-08-07",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-10",
+              "inputDate": "2026-08-10",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-11",
+              "inputDate": "2026-08-11",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-12",
+              "inputDate": "2026-08-12",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-13",
+              "inputDate": "2026-08-13",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-14",
+              "inputDate": "2026-08-14",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-17",
+              "inputDate": "2026-08-17",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-18",
+              "inputDate": "2026-08-18",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-19",
+              "inputDate": "2026-08-19",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-20",
+              "inputDate": "2026-08-20",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-21",
+              "inputDate": "2026-08-21",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-24",
+              "inputDate": "2026-08-24",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-25",
+              "inputDate": "2026-08-25",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-26",
+              "inputDate": "2026-08-26",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-27",
+              "inputDate": "2026-08-27",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-28",
+              "inputDate": "2026-08-28",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-31",
+              "inputDate": "2026-08-31",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-01",
+              "inputDate": "2026-09-01",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-02",
+              "inputDate": "2026-09-02",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-03",
+              "inputDate": "2026-09-03",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-04",
+              "inputDate": "2026-09-04",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-08",
+              "inputDate": "2026-09-08",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-09",
+              "inputDate": "2026-09-09",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-10",
+              "inputDate": "2026-09-10",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-11",
+              "inputDate": "2026-09-11",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-14",
+              "inputDate": "2026-09-14",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-15",
+              "inputDate": "2026-09-15",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-16",
+              "inputDate": "2026-09-16",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-17",
+              "inputDate": "2026-09-17",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-18",
+              "inputDate": "2026-09-18",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-21",
+              "inputDate": "2026-09-21",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-22",
+              "inputDate": "2026-09-22",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-23",
+              "inputDate": "2026-09-23",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-24",
+              "inputDate": "2026-09-24",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-25",
+              "inputDate": "2026-09-25",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-28",
+              "inputDate": "2026-09-28",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-29",
+              "inputDate": "2026-09-29",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-30",
+              "inputDate": "2026-09-30",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-01",
+              "inputDate": "2026-10-01",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-02",
+              "inputDate": "2026-10-02",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-05",
+              "inputDate": "2026-10-05",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-06",
+              "inputDate": "2026-10-06",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-07",
+              "inputDate": "2026-10-07",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-08",
+              "inputDate": "2026-10-08",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-09",
+              "inputDate": "2026-10-09",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-12",
+              "inputDate": "2026-10-12",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-13",
+              "inputDate": "2026-10-13",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-14",
+              "inputDate": "2026-10-14",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-15",
+              "inputDate": "2026-10-15",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-16",
+              "inputDate": "2026-10-16",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-19",
+              "inputDate": "2026-10-19",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-20",
+              "inputDate": "2026-10-20",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-21",
+              "inputDate": "2026-10-21",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-22",
+              "inputDate": "2026-10-22",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-23",
+              "inputDate": "2026-10-23",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-26",
+              "inputDate": "2026-10-26",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-27",
+              "inputDate": "2026-10-27",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-28",
+              "inputDate": "2026-10-28",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-29",
+              "inputDate": "2026-10-29",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-30",
+              "inputDate": "2026-10-30",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-11-02",
+              "inputDate": "2026-11-02",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-11-03",
+              "inputDate": "2026-11-03",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-11-04",
+              "inputDate": "2026-11-04",
+              "field": "close",
+              "sourceId": "YAHOO:^GSPC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            }
+          ]
+        },
+        {
+          "key": "nasdaq",
+          "label": "Nasdaq",
+          "dates": [
+            "2026-08-07",
+            "2026-08-10",
+            "2026-08-11",
+            "2026-08-12",
+            "2026-08-13",
+            "2026-08-14",
+            "2026-08-17",
+            "2026-08-18",
+            "2026-08-19",
+            "2026-08-20",
+            "2026-08-21",
+            "2026-08-24",
+            "2026-08-25",
+            "2026-08-26",
+            "2026-08-27",
+            "2026-08-28",
+            "2026-08-31",
+            "2026-09-01",
+            "2026-09-02",
+            "2026-09-03",
+            "2026-09-04",
+            "2026-09-08",
+            "2026-09-09",
+            "2026-09-10",
+            "2026-09-11",
+            "2026-09-14",
+            "2026-09-15",
+            "2026-09-16",
+            "2026-09-17",
+            "2026-09-18",
+            "2026-09-21",
+            "2026-09-22",
+            "2026-09-23",
+            "2026-09-24",
+            "2026-09-25",
+            "2026-09-28",
+            "2026-09-29",
+            "2026-09-30",
+            "2026-10-01",
+            "2026-10-02",
+            "2026-10-05",
+            "2026-10-06",
+            "2026-10-07",
+            "2026-10-08",
+            "2026-10-09",
+            "2026-10-12",
+            "2026-10-13",
+            "2026-10-14",
+            "2026-10-15",
+            "2026-10-16",
+            "2026-10-19",
+            "2026-10-20",
+            "2026-10-21",
+            "2026-10-22",
+            "2026-10-23",
+            "2026-10-26",
+            "2026-10-27",
+            "2026-10-28",
+            "2026-10-29",
+            "2026-10-30",
+            "2026-11-02",
+            "2026-11-03",
+            "2026-11-04"
+          ],
+          "closes": [
+            26690.619140625,
+            26605.359375,
+            26445.44921875,
+            26588.490234375,
+            26803.029296875,
+            26729.16015625,
+            26644.91015625,
+            26289.7109375,
+            26331.08984375,
+            26067.169921875,
+            26180.4609375,
+            25980.189453125,
+            26151.30078125,
+            26130.19921875,
+            26541.349609375,
+            26402.419921875,
+            26370.890625,
+            26099.76953125,
+            26217.830078125,
+            26584.060546875,
+            26506.990234375,
+            26421.41015625,
+            26253.33984375,
+            26081.720703125,
+            26333.0390625,
+            26186.41015625,
+            25981.5703125,
+            25978.4296875,
+            26418.30078125,
+            26522.5390625,
+            27122.08984375,
+            27244.279296875,
+            26936.0390625,
+            26939.369140625,
+            27068.720703125,
+            26820.380859375,
+            26797.5390625,
+            26861.060546875,
+            26871.599609375,
+            27190.859375,
+            27477.310546875,
+            27599.7890625,
+            27538.689453125,
+            27193.33984375,
+            27366.169921875,
+            27245.900390625,
+            27204.380859375,
+            26692.869140625,
+            26713.029296875,
+            26140.029296875,
+            26430.890625,
+            26424.8203125,
+            26702.859375,
+            26008.859375,
+            25955.33984375,
+            26169.380859375,
+            26477.810546875,
+            26549.849609375,
+            26184.720703125,
+            25437,
+            25164.310546875,
+            25372.009765625,
+            25736.513671875
+          ],
+          "latestClose": 25736.513671875,
+          "latestChangePct": 1.4366378919806513,
+          "sourceLabel": "Yahoo Finance",
+          "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+          "provenance": [
+            {
+              "date": "2026-08-07",
+              "inputDate": "2026-08-07",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-10",
+              "inputDate": "2026-08-10",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-11",
+              "inputDate": "2026-08-11",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-12",
+              "inputDate": "2026-08-12",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-13",
+              "inputDate": "2026-08-13",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-14",
+              "inputDate": "2026-08-14",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-17",
+              "inputDate": "2026-08-17",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-18",
+              "inputDate": "2026-08-18",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-19",
+              "inputDate": "2026-08-19",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-20",
+              "inputDate": "2026-08-20",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-21",
+              "inputDate": "2026-08-21",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-24",
+              "inputDate": "2026-08-24",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-25",
+              "inputDate": "2026-08-25",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-26",
+              "inputDate": "2026-08-26",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-27",
+              "inputDate": "2026-08-27",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-28",
+              "inputDate": "2026-08-28",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-31",
+              "inputDate": "2026-08-31",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-01",
+              "inputDate": "2026-09-01",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-02",
+              "inputDate": "2026-09-02",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-03",
+              "inputDate": "2026-09-03",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-04",
+              "inputDate": "2026-09-04",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-08",
+              "inputDate": "2026-09-08",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-09",
+              "inputDate": "2026-09-09",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-10",
+              "inputDate": "2026-09-10",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-11",
+              "inputDate": "2026-09-11",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-14",
+              "inputDate": "2026-09-14",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-15",
+              "inputDate": "2026-09-15",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-16",
+              "inputDate": "2026-09-16",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-17",
+              "inputDate": "2026-09-17",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-18",
+              "inputDate": "2026-09-18",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-21",
+              "inputDate": "2026-09-21",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-22",
+              "inputDate": "2026-09-22",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-23",
+              "inputDate": "2026-09-23",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-24",
+              "inputDate": "2026-09-24",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-25",
+              "inputDate": "2026-09-25",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-28",
+              "inputDate": "2026-09-28",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-29",
+              "inputDate": "2026-09-29",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-30",
+              "inputDate": "2026-09-30",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-01",
+              "inputDate": "2026-10-01",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-02",
+              "inputDate": "2026-10-02",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-05",
+              "inputDate": "2026-10-05",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-06",
+              "inputDate": "2026-10-06",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-07",
+              "inputDate": "2026-10-07",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-08",
+              "inputDate": "2026-10-08",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-09",
+              "inputDate": "2026-10-09",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-12",
+              "inputDate": "2026-10-12",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-13",
+              "inputDate": "2026-10-13",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-14",
+              "inputDate": "2026-10-14",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-15",
+              "inputDate": "2026-10-15",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-16",
+              "inputDate": "2026-10-16",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-19",
+              "inputDate": "2026-10-19",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-20",
+              "inputDate": "2026-10-20",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-21",
+              "inputDate": "2026-10-21",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-22",
+              "inputDate": "2026-10-22",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-23",
+              "inputDate": "2026-10-23",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-26",
+              "inputDate": "2026-10-26",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-27",
+              "inputDate": "2026-10-27",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-28",
+              "inputDate": "2026-10-28",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-29",
+              "inputDate": "2026-10-29",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-30",
+              "inputDate": "2026-10-30",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-11-02",
+              "inputDate": "2026-11-02",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-11-03",
+              "inputDate": "2026-11-03",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-11-04",
+              "inputDate": "2026-11-04",
+              "field": "close",
+              "sourceId": "YAHOO:^IXIC",
+              "sourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+              "collectionMode": "API"
+            }
+          ]
+        },
+        {
+          "key": "dow-jones",
+          "label": "Dow Jones",
+          "dates": [
+            "2026-08-07",
+            "2026-08-10",
+            "2026-08-11",
+            "2026-08-12",
+            "2026-08-13",
+            "2026-08-14",
+            "2026-08-17",
+            "2026-08-18",
+            "2026-08-19",
+            "2026-08-20",
+            "2026-08-21",
+            "2026-08-24",
+            "2026-08-25",
+            "2026-08-26",
+            "2026-08-27",
+            "2026-08-28",
+            "2026-08-31",
+            "2026-09-01",
+            "2026-09-02",
+            "2026-09-03",
+            "2026-09-04",
+            "2026-09-08",
+            "2026-09-09",
+            "2026-09-10",
+            "2026-09-11",
+            "2026-09-14",
+            "2026-09-15",
+            "2026-09-16",
+            "2026-09-17",
+            "2026-09-18",
+            "2026-09-21",
+            "2026-09-22",
+            "2026-09-23",
+            "2026-09-24",
+            "2026-09-25",
+            "2026-09-28",
+            "2026-09-29",
+            "2026-09-30",
+            "2026-10-01",
+            "2026-10-02",
+            "2026-10-05",
+            "2026-10-06",
+            "2026-10-07",
+            "2026-10-08",
+            "2026-10-09",
+            "2026-10-12",
+            "2026-10-13",
+            "2026-10-14",
+            "2026-10-15",
+            "2026-10-16",
+            "2026-10-19",
+            "2026-10-20",
+            "2026-10-21",
+            "2026-10-22",
+            "2026-10-23",
+            "2026-10-26",
+            "2026-10-27",
+            "2026-10-28",
+            "2026-10-29",
+            "2026-10-30",
+            "2026-11-02",
+            "2026-11-03",
+            "2026-11-04"
+          ],
+          "closes": [
+            54036.93,
+            53975.98,
+            53791.85,
+            53770.27,
+            53839.99,
+            53732.41,
+            53459.78,
+            53343.4,
+            53463.05,
+            52759.21,
+            53277.01,
+            53417.16,
+            53577.4,
+            53463.88,
+            53569.44,
+            53559.99,
+            53185.9,
+            52766.88,
+            53061.95,
+            53686.11,
+            53414.25,
+            52786.07,
+            52380.66,
+            52064.1,
+            52573.29,
+            52421.2,
+            52093.11,
+            51461.9,
+            51778.04,
+            51682.64,
+            52048.83,
+            51863.69,
+            51511.59,
+            51349.98,
+            51828.62,
+            51481.51,
+            51349.92,
+            50906.05,
+            50926.56,
+            51176.96,
+            51267.9,
+            51521.28,
+            51179.87,
+            51231.64,
+            51654.95,
+            51850.55,
+            51670.1,
+            51621.48,
+            52177.69,
+            52002.41,
+            51966.03,
+            52495.88,
+            52856.09,
+            52867.98,
+            52215.16,
+            52361.58,
+            52377.57,
+            52475.1,
+            52342.56,
+            51770.31,
+            51983.98,
+            51786.72,
+            53356.12
+          ],
+          "latestClose": 53356.12,
+          "latestChangePct": 3.0305066627119874,
+          "sourceLabel": "FRED",
+          "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+          "provenance": [
+            {
+              "date": "2026-08-07",
+              "inputDate": "2026-08-07",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-10",
+              "inputDate": "2026-08-10",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-11",
+              "inputDate": "2026-08-11",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-12",
+              "inputDate": "2026-08-12",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-13",
+              "inputDate": "2026-08-13",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-14",
+              "inputDate": "2026-08-14",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-17",
+              "inputDate": "2026-08-17",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-18",
+              "inputDate": "2026-08-18",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-19",
+              "inputDate": "2026-08-19",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-20",
+              "inputDate": "2026-08-20",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-21",
+              "inputDate": "2026-08-21",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-24",
+              "inputDate": "2026-08-24",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-25",
+              "inputDate": "2026-08-25",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-26",
+              "inputDate": "2026-08-26",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-27",
+              "inputDate": "2026-08-27",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-28",
+              "inputDate": "2026-08-28",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-08-31",
+              "inputDate": "2026-08-31",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-01",
+              "inputDate": "2026-09-01",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-02",
+              "inputDate": "2026-09-02",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-03",
+              "inputDate": "2026-09-03",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-04",
+              "inputDate": "2026-09-04",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-08",
+              "inputDate": "2026-09-08",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-09",
+              "inputDate": "2026-09-09",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-10",
+              "inputDate": "2026-09-10",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-11",
+              "inputDate": "2026-09-11",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-14",
+              "inputDate": "2026-09-14",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-15",
+              "inputDate": "2026-09-15",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-16",
+              "inputDate": "2026-09-16",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-17",
+              "inputDate": "2026-09-17",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-18",
+              "inputDate": "2026-09-18",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-21",
+              "inputDate": "2026-09-21",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-22",
+              "inputDate": "2026-09-22",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-23",
+              "inputDate": "2026-09-23",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-24",
+              "inputDate": "2026-09-24",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-25",
+              "inputDate": "2026-09-25",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-28",
+              "inputDate": "2026-09-28",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-29",
+              "inputDate": "2026-09-29",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-09-30",
+              "inputDate": "2026-09-30",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-01",
+              "inputDate": "2026-10-01",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-02",
+              "inputDate": "2026-10-02",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-05",
+              "inputDate": "2026-10-05",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-06",
+              "inputDate": "2026-10-06",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-07",
+              "inputDate": "2026-10-07",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-08",
+              "inputDate": "2026-10-08",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-09",
+              "inputDate": "2026-10-09",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-12",
+              "inputDate": "2026-10-12",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-13",
+              "inputDate": "2026-10-13",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-14",
+              "inputDate": "2026-10-14",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-15",
+              "inputDate": "2026-10-15",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-16",
+              "inputDate": "2026-10-16",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-19",
+              "inputDate": "2026-10-19",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-20",
+              "inputDate": "2026-10-20",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-21",
+              "inputDate": "2026-10-21",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-22",
+              "inputDate": "2026-10-22",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-23",
+              "inputDate": "2026-10-23",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-26",
+              "inputDate": "2026-10-26",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-27",
+              "inputDate": "2026-10-27",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-28",
+              "inputDate": "2026-10-28",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-29",
+              "inputDate": "2026-10-29",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-10-30",
+              "inputDate": "2026-10-30",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-11-02",
+              "inputDate": "2026-11-02",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-11-03",
+              "inputDate": "2026-11-03",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            },
+            {
+              "date": "2026-11-04",
+              "inputDate": "2026-11-04",
+              "field": "close",
+              "sourceId": "FRED:DJIA",
+              "sourceUrl": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+              "collectionMode": "API"
+            }
+          ]
+        }
+      ]
+    },
+    "deepSections": [
+      {
+        "key": "us-causes",
+        "placement": "early",
+        "role": "broker",
+        "title": "상승·하락 요인과 반대 시각",
+        "paragraphs": [
+          {
+            "text": "MOTUS 정리: 증권사 4곳의 리포트를 대조하면 국제유가(iM증권·KB증권·IBK투자증권), 반도체(iM증권·KB증권)가 공통으로 꼽힌 배경이다. 유진투자증권은 AI 투자를 따로 짚었다."
+          },
+          {
+            "text": "iM증권은 11월 5일 아침 리포트 「[Market Time] 중간선거 불확실성 해소와 AI 인프라 규제 우려」에서 “반도체 약세에는 미국 주요 데이터센터 거점의 주지사 선거 결과가 영향을 미쳤습니다”라고 진단했다.",
+            "source": {
+              "label": "iM증권 [Market Time] 중간선거 불확실성 해소와 AI 인프라 규제 우려 (11월 5일)",
+              "url": "https://stock.pstatic.net/stock-research/market/61/20261105_market_285270000.pdf"
+            }
+          },
+          {
+            "text": "KB증권은 11월 5일 아침 리포트 「11/5 KB 리서치 모닝코멘트」에서 “반면, 민주당의 데이터센터 규제 강화 우려에 반도체 관련주는 약세. 마이크론 급락 (-7%) 등 필리 지수 -3%”라고 진단했다.",
+            "source": {
+              "label": "KB증권 11/5 KB 리서치 모닝코멘트 (11월 5일)",
+              "url": "https://stock.pstatic.net/stock-research/market/58/20261105_market_447732000.pdf"
+            }
+          },
+          {
+            "text": "IBK투자증권은 11월 5일 아침 리포트 「[IBKS Daily] Start with IBKS(2026.11.05) 美 중간선거, 블루웨이브에 달라지는 정책 지형」에서 “국제유가, 미국 중간선거 이후 이란 전쟁 종식 기대 확산에 하락”이라고 진단했다.",
+            "source": {
+              "label": "IBK투자증권 [IBKS Daily] Start with IBKS(2026.11.05) 美 중간선거, 블루웨이브에 달라지는 정책 지형 (11월 5일)",
+              "url": "https://stock.pstatic.net/stock-research/invest/40/20261105_invest_882266000.pdf"
+            }
+          },
+          {
+            "text": "경계 요인도 제시됐다. iM증권은 “미국 중간선거에서 민주당이상·하원을 확보하면서 선거 결과를 둘러싼 불확실성이 해소됐고, 다우(+2.97%)와 나스닥(+1.77%)은 상승했습니다”라고 짚었다.",
+            "source": {
+              "label": "iM증권 [Market Time] 중간선거 불확실성 해소와 AI 인프라 규제 우려 (11월 5일)",
+              "url": "https://stock.pstatic.net/stock-research/market/61/20261105_market_285270000.pdf"
+            }
+          },
+          {
+            "text": "경계 요인도 제시됐다. KB증권은 “중간선거 결과 민주당이 의회 상하원 모두 장악하며 정치 불확실성 해소에 3대 지수 상승. 유가, 국채금리 급락”이라고 짚었다.",
+            "source": {
+              "label": "KB증권 11/5 KB 리서치 모닝코멘트 (11월 5일)",
+              "url": "https://stock.pstatic.net/stock-research/market/58/20261105_market_447732000.pdf"
+            }
+          }
+        ]
+      },
+      {
+        "key": "us-sectors-stocks",
+        "placement": "early",
+        "role": "data",
+        "bars": [
+          {
+            "label": "경기소비재",
+            "value": 4.261484701269922
+          },
+          {
+            "label": "금융",
+            "value": 3.5146004546249436
+          },
+          {
+            "label": "커뮤니케이션",
+            "value": 3.4700315457413216
+          },
+          {
+            "label": "필수소비재",
+            "value": 3.3614390106801513
+          },
+          {
+            "label": "부동산",
+            "value": 3.3203572246393307
+          },
+          {
+            "label": "헬스케어",
+            "value": 3.0648842517117627
+          },
+          {
+            "label": "소재",
+            "value": 2.490967864613035
+          },
+          {
+            "label": "유틸리티",
+            "value": 0.43758636573007303
+          },
+          {
+            "label": "기술",
+            "value": -0.0056654013936835905
+          },
+          {
+            "label": "산업재",
+            "value": -1.0856876021480186
+          },
+          {
+            "label": "에너지",
+            "value": -4.739052189562093
+          }
+        ],
+        "title": "업종과 종목",
+        "intro": "종목 순위는 투자자 관심도를 보여 줄 뿐 주가 변동의 원인을 뜻하지 않는다. 등락은 해당 거래일 종가 기준이다.",
+        "paragraphs": [
+          {
+            "text": "S&P 500 업종을 추종하는 SPDR 업종 ETF 11종 가운데 8종이 올랐다. 경기소비재(XLY) +4.26%가 가장 강했고 에너지(XLE) -4.74%가 가장 약했다. 업종별 등락: 경기소비재 +4.26%, 금융 +3.51%, 커뮤니케이션 +3.47%, 필수소비재 +3.36%, 부동산 +3.32%, 헬스케어 +3.06%, 소재 +2.49%, 유틸리티 +0.44%, 기술 -0.01%, 산업재 -1.09%, 에너지 -4.74%."
+          },
+          {
+            "text": "마이크론(MU)은 795.23달러로 7.00% 급락했다(리포트·기사 언급 종목)."
+          },
+          {
+            "text": "마이크로소프트(MSFT)는 555.80달러로 6.68% 급등했다(시가총액 상위 종목, 야후 파이낸스 검색 10위)."
+          },
+          {
+            "text": "아마존(AMZN)은 266.03달러로 6.12% 급등했다(리포트·기사 언급 종목, 시가총액 상위 종목, 대형주 거래량 8위). KB증권은 “전통 산업주와 더불어 MS, 아마존, 알파벳 등 하이퍼스케일러도 급등. 자본지출 축소 및 FCF 흐름 개선 기대”라고 설명했다.",
+            "source": {
+              "label": "KB증권 11/5 KB 리서치 모닝코멘트 (11월 5일)",
+              "url": "https://stock.pstatic.net/stock-research/market/58/20261105_market_447732000.pdf"
+            }
+          },
+          {
+            "text": "퀄컴(QCOM)은 173.19달러로 5.33% 급등했다(야후 파이낸스 검색 1위)."
+          },
+          {
+            "text": "Applovin(APP)은 271.75달러로 10.69% 급등했다(야후 파이낸스 검색 2위)."
+          },
+          {
+            "text": "Trump Media & Technology Group(DJT)는 4.49달러로 24.54% 급락했다(야후 파이낸스 검색 3위)."
+          }
+        ]
+      },
+      {
+        "key": "us-broker-analysis",
+        "placement": "late",
+        "role": "broker",
+        "title": "증권사별 분석: 금리와 통화정책",
+        "paragraphs": [
+          {
+            "text": "iM증권은 11월 5일 「블루웨이브에 미국 금융시장이 환호한 이유」 리포트에서 관련 분석을 내놨다. 요약: “블루 쓰나미로 지칭될 정도로 미국 중간선거에서 민주당이 압승을 했다”, “민주당은 예상대로 하원에서 과반의석을 차지하는 동시에 상원에서도 경합주에서 대부분 승리하면서 과반의석을 차지했다”.",
+            "source": {
+              "label": "iM증권 블루웨이브에 미국 금융시장이 환호한 이유 (11월 5일)",
+              "url": "https://stock.pstatic.net/stock-research/economy/-/20261105_economy_736969000.pdf"
+            },
+            "report": {
+              "company": null,
+              "broker": "iM증권",
+              "analysts": "",
+              "date": "2026-11-05",
+              "title": "블루웨이브에 미국 금융시장이 환호한 이유",
+              "rating": null,
+              "target": null
+            }
+          },
+          {
+            "text": "대신증권은 11월 4일 「한국 소비자물가: 헤드라인은 예상 부합 둔화, 근원물가는 2.8%로 수렴하며 완강」 리포트에서 관련 분석을 내놨다. 요약: “10월 소비자물가는 전년동월비 2.8%, 전월비 0.2%를 기록했다”, “시장예상치(각각 2.85%, 0.25%)보다 0.05%포인트씩 낮았지만 이는 발표 단위인 0.1%포인트보다 작은 차이여서, 이를 물가가 예상보다 크게 꺾인 신호로 해석할 근거는 없다”.",
+            "source": {
+              "label": "대신증권 한국 소비자물가: 헤드라인은 예상 부합 둔화, 근원물가는 2.8%로 수렴하며 완강 (11월 4일)",
+              "url": "https://stock.pstatic.net/stock-research/economy/15/20261104_economy_558351000.pdf"
+            },
+            "report": {
+              "company": null,
+              "broker": "대신증권",
+              "analysts": "",
+              "date": "2026-11-04",
+              "title": "한국 소비자물가: 헤드라인은 예상 부합 둔화, 근원물가는 2.8%로 수렴하며 완강",
+              "rating": null,
+              "target": null
+            }
+          },
+          {
+            "text": "신한투자증권은 11월 4일 「한국 10월 소비자물가; 농산물이 낮춘 물가, 기조적 압력은 지속」 리포트에서 관련 분석을 내놨다. 요약: “한국 10월 소비자물가 MoM 0.2%, YoY 2.8% 상승”, “한국 10월 소비자물가는 전월대비 0.2%, 전년동월대비 2.8% 상승하며 9월(2.9%)보다 오름폭이 소폭 축소됐다”.",
+            "source": {
+              "label": "신한투자증권 한국 10월 소비자물가; 농산물이 낮춘 물가, 기조적 압력은 지속 (11월 4일)",
+              "url": "https://stock.pstatic.net/stock-research/economy/21/20261104_economy_617380000.pdf"
+            },
+            "report": {
+              "company": null,
+              "broker": "신한투자증권",
+              "analysts": "",
+              "date": "2026-11-04",
+              "title": "한국 10월 소비자물가; 농산물이 낮춘 물가, 기조적 압력은 지속",
+              "rating": null,
+              "target": null
+            }
+          }
+        ]
+      },
+      {
+        "key": "us-risks",
+        "placement": "risks",
+        "role": "watch",
+        "title": "위험 요인과 다음 확인 지표",
+        "paragraphs": [
+          {
+            "text": "다음 정규장에서는 미국 10년물 금리 방향과 함께, 증권사들이 짚은 경계 요인이 주요 지수와 업종 등락에 실제로 반영되는지가 확인 대상이다."
+          }
+        ]
+      }
+    ],
+    "supportingMetrics": [
+      {
+        "label": "U.S. 10Y Treasury Yield (미국 10년물 국채금리)",
+        "value": "4.90%",
+        "change": "-5bp",
+        "direction": "DOWN"
+      }
+    ],
+    "marketCommentary": [],
+    "sectorsCompanies": [],
+    "wallStreetResearch": [
+      {
+        "headline": "Are Bonds Becoming a Better Investment for Portfolios?",
+        "institutionView": "Goldman Sachs의 공개 시장 리서치가 2026-10-08에 게시됐다. 보고서 원문 링크를 출처에 연결했으며 구체적인 투자 의견·목표주가는 원문 검증 전까지 인용하지 않는다.",
+        "motusInterpretation": null,
+        "facts": [
+          "공식 사이트 공개일: 2026-10-08"
+        ]
+      },
+      {
+        "headline": "Will 30-Year US Treasury Yields Climb Higher?",
+        "institutionView": "Goldman Sachs의 공개 시장 리서치가 2026-10-06에 게시됐다. 보고서 원문 링크를 출처에 연결했으며 구체적인 투자 의견·목표주가는 원문 검증 전까지 인용하지 않는다.",
+        "motusInterpretation": null,
+        "facts": [
+          "공식 사이트 공개일: 2026-10-06"
+        ]
+      }
+    ],
+    "marketResearch": [
+      {
+        "publisher": "Goldman Sachs",
+        "headline": "Are Bonds Becoming a Better Investment for Portfolios?",
+        "url": "https://www.goldmansachs.com/insights/articles/are-bonds-becoming-a-better-investment-for-portfolios",
+        "publishedAt": "2026-10-08T00:00:00.000Z",
+        "kind": "BROKER_RESEARCH",
+        "sourceFeed": "https://www.goldmansachs.com/insights"
+      },
+      {
+        "publisher": "Goldman Sachs",
+        "headline": "Will 30-Year US Treasury Yields Climb Higher?",
+        "url": "https://www.goldmansachs.com/insights/articles/will-30-year-us-treasury-yields-climb-higher",
+        "publishedAt": "2026-10-06T00:00:00.000Z",
+        "kind": "BROKER_RESEARCH",
+        "sourceFeed": "https://www.goldmansachs.com/insights"
+      },
+      {
+        "publisher": "CNBC Investing",
+        "headline": "Santoli: AI bull market almost surely needs tech stocks to recover to keep advancing",
+        "url": "https://www.cnbc.com/2026/11/03/santoli-ai-bull-market-needs-tech-stocks.html",
+        "publishedAt": "2026-11-03T13:01:23.000Z",
+        "kind": "FINANCIAL_MEDIA",
+        "sourceFeed": "https://www.cnbc.com/id/15839069/device/rss/rss.html"
+      },
+      {
+        "publisher": "Bloomberg Markets",
+        "headline": "Asian Markets React as Trump Cools Iran Fears",
+        "url": "https://www.bloomberg.com/news/videos/2026-11-04/asian-markets-react-as-trump-cools-iran-fears-video",
+        "publishedAt": "2026-11-04T23:31:57.000Z",
+        "kind": "FINANCIAL_MEDIA",
+        "sourceFeed": "https://feeds.bloomberg.com/markets/news.rss"
+      },
+      {
+        "publisher": "Bloomberg Markets",
+        "headline": "Asian Stocks to Rise as Oil Slides After US Vote: Markets Wrap",
+        "url": "https://www.bloomberg.com/news/articles/2026-11-04/stock-market-today-dow-s-p-live-updates",
+        "publishedAt": "2026-11-04T22:15:04.000Z",
+        "kind": "FINANCIAL_MEDIA",
+        "sourceFeed": "https://feeds.bloomberg.com/markets/news.rss"
+      }
+    ],
+    "checkpoints": [
+      {
+        "headline": "다음 정규장 확인사항",
+        "watchFor": "미국 10년물 금리가 주요 지수 방향을 확인하는지 점검",
+        "validityHorizon": "NEXT_SESSION"
+      }
+    ],
+    "sources": [
+      {
+        "label": "Yahoo Finance S&P 500",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768002376&period2=1793922376&interval=1d",
+        "publisher": "Yahoo Finance"
+      },
+      {
+        "label": "Yahoo Finance Nasdaq",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1768002376&period2=1793922376&interval=1d",
+        "publisher": "Yahoo Finance"
+      },
+      {
+        "label": "FRED Dow Jones",
+        "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-16",
+        "publisher": "Federal Reserve Bank of St. Louis"
+      },
+      {
+        "label": "U.S. Treasury U.S. 10Y Treasury Yield (미국 10년물 국채금리)",
+        "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/pages/xml?data=daily_treasury_yield_curve&field_tdr_date_value=2026",
+        "publisher": "U.S. Department of the Treasury"
+      },
+      {
+        "label": "NYSE 공식 거래일 캘린더",
+        "url": "https://www.nyse.com/trade/hours-calendars",
+        "publisher": "New York Stock Exchange"
+      },
+      {
+        "label": "iM증권 「[Market Time] 중간선거 불확실성 해소와 AI 인프라 규제 우려」 (2026-11-05)",
+        "url": "https://stock.pstatic.net/stock-research/market/61/20261105_market_285270000.pdf",
+        "publisher": "iM증권",
+        "role": "SUPPLEMENTARY"
+      },
+      {
+        "label": "KB증권 「11/5 KB 리서치 모닝코멘트」 (2026-11-05)",
+        "url": "https://stock.pstatic.net/stock-research/market/58/20261105_market_447732000.pdf",
+        "publisher": "KB증권",
+        "role": "SUPPLEMENTARY"
+      },
+      {
+        "label": "IBK투자증권 「[IBKS Daily] Start with IBKS(2026.11.05) 美 중간선거, 블루웨이브에 달라지는 정책 지형」 (2026-11-05)",
+        "url": "https://stock.pstatic.net/stock-research/invest/40/20261105_invest_882266000.pdf",
+        "publisher": "IBK투자증권",
+        "role": "SUPPLEMENTARY"
+      },
+      {
+        "label": "iM증권 「블루웨이브에 미국 금융시장이 환호한 이유」 (2026-11-05)",
+        "url": "https://stock.pstatic.net/stock-research/economy/-/20261105_economy_736969000.pdf",
+        "publisher": "iM증권",
+        "role": "SUPPLEMENTARY"
+      },
+      {
+        "label": "대신증권 「한국 소비자물가: 헤드라인은 예상 부합 둔화, 근원물가는 2.8%로 수렴하며 완강」 (2026-11-04)",
+        "url": "https://stock.pstatic.net/stock-research/economy/15/20261104_economy_558351000.pdf",
+        "publisher": "대신증권",
+        "role": "SUPPLEMENTARY"
+      },
+      {
+        "label": "신한투자증권 「한국 10월 소비자물가; 농산물이 낮춘 물가, 기조적 압력은 지속」 (2026-11-04)",
+        "url": "https://stock.pstatic.net/stock-research/economy/21/20261104_economy_617380000.pdf",
+        "publisher": "신한투자증권",
+        "role": "SUPPLEMENTARY"
+      },
+      {
+        "label": "Yahoo Finance 검색 상위 종목",
+        "url": "https://query1.finance.yahoo.com/v1/finance/trending/US?count=20",
+        "publisher": "Yahoo Finance",
+        "role": "SUPPLEMENTARY"
+      },
+      {
+        "label": "Yahoo Finance 종목 일별 종가",
+        "url": "https://query1.finance.yahoo.com/v7/finance/spark?symbols=QCOM,APP,DJT,MELI,COHR,BROS,SNAP,ARM,CAVA,MSFT,JOBY,FIG,INTC,NVDA,SPCX,ORCL,AAPL,NU,BBD,AMZN&range=5d&interval=1d",
+        "publisher": "Yahoo Finance",
+        "role": "SUPPLEMENTARY"
+      },
+      {
+        "label": "Yahoo Finance 종목 일별 종가",
+        "url": "https://query1.finance.yahoo.com/v7/finance/spark?symbols=KVUE,NOK&range=5d&interval=1d",
+        "publisher": "Yahoo Finance",
+        "role": "SUPPLEMENTARY"
+      },
+      {
+        "label": "Yahoo Finance 미국 시가총액 상위 종목 일별 종가",
+        "url": "https://query1.finance.yahoo.com/v7/finance/spark?symbols=NVDA,MSFT,GOOGL,AMZN,META,AVGO,AMD,TSM,ORCL,AAPL,TSLA&range=5d&interval=1d",
+        "publisher": "Yahoo Finance",
+        "role": "SUPPLEMENTARY"
+      },
+      {
+        "label": "Yahoo Finance 리포트·기사 언급 종목 일별 종가",
+        "url": "https://query1.finance.yahoo.com/v7/finance/spark?symbols=GOOG,MU,CAT&range=5d&interval=1d",
+        "publisher": "Yahoo Finance",
+        "role": "SUPPLEMENTARY"
+      },
+      {
+        "label": "Yahoo Finance SPDR 업종 ETF 일별 종가",
+        "url": "https://query1.finance.yahoo.com/v7/finance/spark?symbols=XLK,XLC,XLY,XLF,XLV,XLI,XLE,XLB,XLP,XLU,XLRE&range=5d&interval=1d",
+        "publisher": "Yahoo Finance",
+        "role": "SUPPLEMENTARY"
+      },
+      {
+        "label": "Goldman Sachs 공개 시장기사 (2026-10-08)",
+        "url": "https://www.goldmansachs.com/insights/articles/are-bonds-becoming-a-better-investment-for-portfolios",
+        "publisher": "Goldman Sachs"
+      },
+      {
+        "label": "Goldman Sachs 공개 시장기사 (2026-10-06)",
+        "url": "https://www.goldmansachs.com/insights/articles/will-30-year-us-treasury-yields-climb-higher",
+        "publisher": "Goldman Sachs"
+      },
+      {
+        "label": "CNBC Investing 공개 시장기사 (2026-11-03)",
+        "url": "https://www.cnbc.com/2026/11/03/santoli-ai-bull-market-needs-tech-stocks.html",
+        "publisher": "CNBC Investing"
+      },
+      {
+        "label": "Bloomberg Markets 공개 시장기사 (2026-11-04)",
+        "url": "https://www.bloomberg.com/news/videos/2026-11-04/asian-markets-react-as-trump-cools-iran-fears-video",
+        "publisher": "Bloomberg Markets"
+      },
+      {
+        "label": "Bloomberg Markets 공개 시장기사 (2026-11-04)",
+        "url": "https://www.bloomberg.com/news/articles/2026-11-04/stock-market-today-dow-s-p-live-updates",
+        "publisher": "Bloomberg Markets"
+      }
+    ],
+    "narrative": {
+      "facts": [
+        "S&P 500은 7,688.62로 마감해 전 거래일보다 1.58% 상승했다. 최근 5거래일 기준으로는 0.71% 하락, 20거래일 기준으로는 1.45% 하락했다. 최근 63거래일 종가 고점(7,818.93, 2026-10-06)보다 1.67% 낮다.",
+        "나스닥 종합지수는 25,736.51로 마감해 전 거래일보다 1.44% 상승했다. 최근 5거래일 기준으로는 3.06% 하락, 20거래일 기준으로는 6.54% 하락했다. 최근 63거래일 종가 고점(27,599.79, 2026-10-06)보다 6.75% 낮다.",
+        "다우존스 산업평균지수는 53,356.12로 마감해 전 거래일보다 3.03% 상승했다. 최근 5거래일 기준으로는 1.68% 상승, 20거래일 기준으로는 4.25% 상승했다. 최근 63거래일 종가 고점(54,036.93, 2026-08-07)보다 1.26% 낮다.",
+        "미국 10년물 국채금리는 4.90%로 직전 관측치보다 5bp 내렸다."
+      ],
+      "analysis": [
+        "기술주 비중이 큰 나스닥 종합지수가 다우존스 산업평균지수보다 1.59%p 덜 올랐다.",
+        "같은 날 미국 10년물 국채금리는 5bp 내렸고 S&P 500은 1.58% 상승했다."
+      ]
+    }
+  }
+}

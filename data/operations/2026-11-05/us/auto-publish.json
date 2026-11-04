@@ -1,0 +1,74 @@
+{
+  "gate": {
+    "state": "AUTO_PUBLISH_READY",
+    "reasons": [],
+    "approval": "AUTO_POLICY_APPROVAL",
+    "checkedAt": "2026-11-04T23:46:34.864Z"
+  },
+  "searchRegistration": {
+    "publicationId": "motus-live-2026-11-04:us",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/11/3-70.html",
+    "registeredAt": "2026-11-05T08:46:38+09:00",
+    "trigger": "PUBLICATION_PUBLISHED",
+    "googleInspectionState": "QUEUED",
+    "naverDiscoveryState": "PENDING",
+    "visibility": {
+      "publicationId": "motus-live-2026-11-04:us",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/11/3-70.html",
+      "google": {
+        "discovered": null,
+        "indexed": null,
+        "lastCrawl": null,
+        "coverageState": null,
+        "inspectionAt": null
+      },
+      "naver": {
+        "discovered": null,
+        "indexed": null,
+        "collectionState": null,
+        "inspectionAt": null
+      },
+      "sitemapIncluded": null,
+      "rssIncluded": null
+    }
+  },
+  "libraryRegistration": {
+    "idempotencyKey": "library:motus-live-2026-11-04:us|https://motusnova.blogspot.com/2026/11/3-70.html"
+  },
+  "weeklyFeed": {
+    "idempotencyKey": "weekly:motus-live-2026-11-04:us"
+  },
+  "pdfCandidate": {
+    "idempotencyKey": "pdf:motus-live-2026-11-04:us:sha256:6f96458944fb6e9653fe6521f0c715552217b571b80213da4fb36079cb78b4d2",
+    "visibility": "PRIVATE"
+  },
+  "audit": [
+    {
+      "at": "2026-11-04T23:46:34.864Z",
+      "event": "AUTO_PUBLISH_STATIC_GATE",
+      "detail": "AUTO_PUBLISH_READY"
+    },
+    {
+      "at": "2026-11-04T23:46:34.864Z",
+      "event": "REMOTE_DUPLICATE_CHECK",
+      "detail": "PASS"
+    },
+    {
+      "at": "2026-11-04T23:46:34.864Z",
+      "event": "FINAL_REMOTE_DUPLICATE_CHECK",
+      "detail": "PASS"
+    },
+    {
+      "at": "2026-11-05T08:46:38+09:00",
+      "event": "PUBLISHED",
+      "detail": "AUTO_POLICY_APPROVAL"
+    }
+  ],
+  "state": "PUBLISHED",
+  "draftPostId": "2321957514814716736",
+  "publicPostUrl": "https://motusnova.blogspot.com/2026/11/3-70.html",
+  "publishedAt": "2026-11-05T08:46:38+09:00",
+  "insertCallCount": 1,
+  "publishCallCount": 1,
+  "error": null
+}
