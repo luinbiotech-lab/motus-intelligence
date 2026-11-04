@@ -59,7 +59,8 @@ export function buildDailyPdfHtml(view:View,category:'AI_INTELLIGENCE'|'US_MARKE
   // Page 2: broker report table with rating boxes, quotes, index comparison, checkpoints.
   const cards=reportCards(view);
   const reportBox=cards.length?box('증권가 주요 리포트',`<table class=rep>${cards.slice(0,6).map(({card})=>`<tr><td class=rc><b>${esc(card.company??card.title)}</b><div>${esc(card.broker)}, ${esc(day(card.date))}</div></td><td class=rq>“${esc(card.title)}”</td><td class=rr>${card.rating||card.target?`<div class=rb><b>${esc(card.rating??'')}</b>${card.target?`<div>${esc(card.target)}원</div>`:''}</div>`:''}</td></tr>`).join('')}</table>`,'gold'):'';
-  const quotes=brokerQuotes(view).slice(cards.length?0:3,cards.length?4:7);
+  // Only quotes whose broker is named (a wire sentence has no source badge to show).
+  const quotes=brokerQuotes(view).filter(p=>/^\S+?[은는] /.test(p.text)).slice(cards.length?0:3,cards.length?4:7);
   const quoteBox=quotes.length?box('증권가 시각 (원문 인용)',quotes.map(p=>`<div class=q><div class=qs>${esc(p.text.match(/^(\S+?)[은는] /)?.[1]??'')}</div>“${esc(clip(p.text.match(/“([^”]+)”/)?.[1]??p.text,170))}”</div>`).join(''),'gold'):'';
   const compare=history&&history.series.length>=2?box('주요 지수 비교 (최근 20거래일, 첫날=100)',multiLine(history.series.slice(0,4).map(series=>({label:series.key==='sp500'?'S&P 500':series.key==='nasdaq'?'나스닥':series.key==='dow-jones'?'다우':series.label,points:series.closes.slice(-20)})))):'';
   const watch=checkpoints(view);
@@ -75,7 +76,7 @@ h1{font-size:19pt;line-height:1.3;margin:0 0 6px;font-weight:900;word-break:keep
 .t{width:100%;border-collapse:collapse;font-size:8.6pt}.t th{text-align:left;color:${GRAY};font-weight:700;border-bottom:1px solid ${LINE};padding:2px 3px}.t td{border-bottom:1px solid #eef1f5;padding:3px}.r{text-align:right}
 .issue{padding:4px 0;border-bottom:1px dashed ${LINE}}.issue:last-child{border:0}.ih{font-weight:900;font-size:10pt}.ib{color:#2c3a4b;font-size:8.6pt}
 .motus{display:grid;grid-template-columns:30mm 1fr;margin-top:4mm;border-radius:6px;overflow:hidden;border:1px solid ${LINE}}.ml{background:${NAVY};color:#fff;font-weight:900;font-size:11pt;display:flex;align-items:center;justify-content:center;text-align:center}.mt{padding:7px 10px;font-size:9pt}
-.rep{width:100%;border-collapse:collapse}.rep td{border-bottom:1px solid ${LINE};padding:5px 6px;vertical-align:middle}.rc{width:30%}.rc b{font-size:10.5pt}.rc div{color:${GRAY};font-size:8pt}.rq{font-weight:700;font-size:9pt}.rr{width:22mm}.rb{border:1.5px solid ${RED};border-radius:5px;text-align:center;color:${RED};padding:2px}.rb b{font-size:9.5pt}.rb div{font-weight:900;font-size:9pt}
+.rep{width:100%;border-collapse:collapse}.rep td{border-bottom:1px solid ${LINE};padding:5px 6px;vertical-align:middle}.rc{width:30%}.rc b{font-size:10.5pt}.rc div{color:${GRAY};font-size:8pt}.rq{font-weight:700;font-size:9pt}.rr{width:27mm}.rb{border:1.5px solid ${RED};border-radius:5px;text-align:center;color:${RED};padding:2px}.rb b{font-size:9.5pt}.rb div{font-weight:900;font-size:9pt;white-space:nowrap}
 .q{padding:5px 0;border-bottom:1px dashed ${LINE};font-size:8.8pt}.q:last-child{border:0}.qs{display:inline-block;background:${NAVY2};color:#fff;font-size:7.5pt;font-weight:700;padding:1px 6px;border-radius:3px;margin-right:5px}
 .ck{display:flex;gap:7px;padding:4px 0}.cb{color:#7a1f2b;font-weight:900;font-size:12pt;line-height:1}.ck b{font-size:9.8pt}.ck div div{font-size:8.6pt;color:#2c3a4b}
 .foot{position:absolute;left:9mm;right:9mm;bottom:4mm;border-top:1px solid ${LINE};padding-top:2px;font-size:6.8pt;color:${GRAY}}`;
