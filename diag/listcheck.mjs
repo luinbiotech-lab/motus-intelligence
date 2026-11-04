@@ -1,7 +1,19 @@
 import {writeFileSync,mkdirSync} from 'node:fs';
 mkdirSync('out',{recursive:true});
-const h={'X-NCP-APIGW-API-KEY-ID':(process.env.NAVER_DATALAB_CLIENT_ID??'').trim(),'X-NCP-APIGW-API-KEY':(process.env.NAVER_DATALAB_CLIENT_SECRET??'').trim()};
+const raw=p=>`https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/${p}`;
+const article=h=>h.match(/<article\b[^>]*>[\s\S]*<\/article>/i)?.[0]??h;
+const canonical=h=>h.replaceAll('&amp;','&').replaceAll('&quot;','"').replace(/>\s+</g,'><').replace(/\s+/g,' ').trim();
+const strip=h=>h.replace(/<section data-section="daily-pdf"[\s\S]*?<\/section>/g,'');
 const out={};
-const b=await fetch('https://naverapihub.apigw.ntruss.com/search/v1/blog?query='+encodeURIComponent('코스피 마감')+'&display=5&sort=sim',{headers:h});out.blog=b.status;out.blogBody=(await b.text()).slice(0,2500);
-try{const link=JSON.parse(out.blogBody).items?.[0]?.link;if(link){const m=link.replace('://blog.naver.com','://m.blog.naver.com');const r=await fetch(m,{headers:{'user-agent':'Mozilla/5.0 (iPhone)'}});const t=await r.text();out.post={url:m,status:r.status,len:t.length,body:/se-main-container/.test(t),imgs:(t.match(/<img /g)||[]).length}}}catch(e){out.err=String(e)}
-writeFileSync('out/naver4.json',JSON.stringify(out,null,2));
+for(const [d,c] of [['2026-11-04','korea'],['2026-11-04','us'],['2026-11-04','ai'],['2026-10-30','us'],['2026-10-30','korea']]){
+  const ledger=await (await fetch(raw(`data/operations/${d}/${c}/publish-ledger.jsonl`))).text();
+  const pub=ledger.split('\n').filter(Boolean).map(l=>{try{return JSON.parse(l)}catch{return {}}}).filter(e=>e.event==='PUBLISHED'||e.event==='REPUBLISHED').at(-1);
+  const page=await (await fetch(pub.publicPostUrl)).text();
+  const pa=canonical(strip(article(page)));
+  const r={url:pub.publicPostUrl,pageArticleLen:pa.length};
+  for(const f of ['published-unit.json','live-unit.json']){const res=await fetch(raw(`data/operations/${d}/${c}/${f}`));if(!res.ok){r[f]='absent';continue}const u=await res.json();const ua=canonical(article(u.render?.html??''));
+    let i=0;while(i<Math.min(ua.length,pa.length)&&ua[i]===pa[i])i++;
+    r[f]={equal:ua===pa,len:ua.length,firstDiff:i,unitAt:ua.slice(i,i+80),pageAt:pa.slice(i,i+80)}}
+  out[`${d}/${c}`]=r;
+}
+writeFileSync('out/match.json',JSON.stringify(out,null,2));
