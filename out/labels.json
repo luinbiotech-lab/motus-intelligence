@@ -1,0 +1,33 @@
+{
+  "menuLabels": [
+    "미국증시",
+    "국내증시",
+    "AI 인텔리전스",
+    "리포트",
+    "국내증시 (Korea Market)",
+    "미국증시 (U.S. Market)",
+    "주간 증시",
+    "AI 인텔리전스 (AI Intelligence)",
+    "MOTUS Daily"
+  ],
+  "postLabelCounts": {
+    "국내증시": 6,
+    "미국증시": 9,
+    "AI 인텔리전스": 9,
+    "주간 증시": 1,
+    "미국증시 (U.S. Market)": 2,
+    "AI 인텔리전스 (AI Intelligence)": 2,
+    "국내증시 (Korea Market)": 1,
+    "MOTUS Daily": 1
+  },
+  "blogCategories": [
+    "AI 인텔리전스",
+    "미국증시",
+    "국내증시",
+    "AI 인텔리전스 (AI Intelligence)",
+    "미국증시 (U.S. Market)",
+    "MOTUS Daily",
+    "국내증시 (Korea Market)",
+    "주간 증시"
+  ]
+}
