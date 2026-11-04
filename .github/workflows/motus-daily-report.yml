@@ -99,7 +99,7 @@ jobs:
           for d in $DATES; do
             flags=(--date "$d"); [[ "$PARTIAL" == "true" ]] && flags+=(--final-attempt)
             out=$(node dist/src/motus-daily-report-cli.js "${flags[@]}"); code=$?
-            echo "$out"; echo "- $d: \`$(echo "$out" | tail -1 | cut -c1-300)\`" >> "$GITHUB_STEP_SUMMARY"
+            echo "$out"; echo "- $d (사전 점검: 파일 기준, Blogger 저장본 대조 전 — SIMULATED는 실발행 가능·검증 통과가 아님): \`$(echo "$out" | tail -1 | cut -c1-300)\`" >> "$GITHUB_STEP_SUMMARY"
             if [[ "$out" == *'"state":"SIMULATED"'* ]]; then ready="$ready $d"; elif [[ $code -ne 0 ]]; then status=1; fi
           done
           echo "ready=${ready# }" >> "$GITHUB_OUTPUT"
