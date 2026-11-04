@@ -1,0 +1,204 @@
+name: MOTUS Daily Report
+
+# Owner decisions 2026-11-04: one combined daily report (PDF) in the '리포트' category per operation date —
+# Monday Korea + AI, Tuesday-Friday Korea + US + AI, none on weekends. It runs after every daily production run
+# (whichever category finishes last triggers it); at 05:40 KST the previous date is closed with what was published.
+# It never edits the articles and is idempotent (ledger, public feed marker, year-specific title).
+on:
+  workflow_run:
+    workflows: [MOTUS Daily Production Gate]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      run_date:
+        description: Operation date (YYYY-MM-DD, KST); empty = today and yesterday (required with allow_partial)
+        required: false
+        type: string
+      execute_publish:
+        description: Publish to Blogger (at most once per date)
+        required: false
+        type: boolean
+        default: false
+      allow_partial:
+        description: Publish with the categories that are published (a missing category is noted in the post)
+        required: false
+        type: boolean
+        default: false
+  schedule:
+    # 05:40 KST Tuesday-Saturday: final attempt for the previous operation date (before the 06:17 Korea run).
+    - cron: '40 20 * * 1-5'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: motus-daily-report
+  cancel-in-progress: false
+
+jobs:
+  daily-report:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.event != 'pull_request' }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      TZ: Asia/Seoul
+      MOTUS_LIVE_PUBLISH_ENABLED: 'false'
+      MOTUS_COMMERCE_ENABLED: 'false'
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: main, fetch-depth: 0}
+      - name: Resolve dates and mode
+        shell: bash
+        env:
+          INPUT_DATE: ${{ inputs.run_date }}
+          INPUT_EXECUTE: ${{ inputs.execute_publish }}
+          INPUT_PARTIAL: ${{ inputs.allow_partial }}
+          EVENT: ${{ github.event_name }}
+        run: |
+          today=$(date +%F); yesterday=$(date -d yesterday +%F)
+          LIVE=false; PARTIAL=false; DATES="$yesterday $today"
+          if [[ "$EVENT" == "workflow_run" ]]; then LIVE=true; fi
+          if [[ "$EVENT" == "schedule" ]]; then LIVE=true; PARTIAL=true; DATES="$yesterday"; fi
+          # A partial report is final for its date, so a manual one must name the date explicitly.
+          if [[ "$EVENT" == "workflow_dispatch" && "$INPUT_PARTIAL" == "true" && -z "$INPUT_DATE" ]]; then echo '::error::allow_partial needs run_date'; exit 1; fi
+          if [[ "$EVENT" == "workflow_dispatch" ]]; then
+            [[ "$INPUT_EXECUTE" == "true" ]] && LIVE=true
+            [[ "$INPUT_PARTIAL" == "true" ]] && PARTIAL=true
+            if [[ -n "$INPUT_DATE" ]]; then [[ "$INPUT_DATE" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]] || exit 1; DATES="$INPUT_DATE"; fi
+          fi
+          echo "DATES=$DATES" >> "$GITHUB_ENV"
+          echo "LIVE=$LIVE" >> "$GITHUB_ENV"
+          echo "PARTIAL=$PARTIAL" >> "$GITHUB_ENV"
+      - name: Hydrate operations and the daily-report ledger from ops-data
+        shell: bash
+        run: |
+          set -euo pipefail
+          for attempt in 1 2 3; do
+            if git fetch origin ops-data:refs/remotes/origin/ops-data; then
+              mkdir -p data
+              for d in $DATES; do if git cat-file -e "origin/ops-data:data/operations/$d" 2>/dev/null; then git archive origin/ops-data "data/operations/$d" | tar -xf -; fi; done
+              if git cat-file -e origin/ops-data:data/daily-report 2>/dev/null; then git archive origin/ops-data data/daily-report | tar -xf -; fi
+              exit 0
+            fi
+            sleep $((attempt * 5))
+          done
+          echo '::error title=ops-data unavailable::daily report not attempted'; exit 1
+      - uses: actions/setup-node@v4
+        with: {node-version: 22, cache: npm}
+      - run: npm ci
+      - run: npm run build
+      - name: Mark the upload root
+        if: always()
+        run: mkdir -p data && echo daily-report > data/.daily-report-bundle
+      - name: Check which dates are ready (no credentials, writes nothing)
+        id: check
+        shell: bash
+        run: |
+          set -uo pipefail
+          ready=""; status=0
+          for d in $DATES; do
+            flags=(--date "$d"); [[ "$PARTIAL" == "true" ]] && flags+=(--final-attempt)
+            out=$(node dist/src/motus-daily-report-cli.js "${flags[@]}"); code=$?
+            echo "$out"; echo "- $d (사전 점검: 파일 기준, Blogger 저장본 대조 전 — SIMULATED는 실발행 가능·검증 통과가 아님): \`$(echo "$out" | tail -1 | cut -c1-300)\`" >> "$GITHUB_STEP_SUMMARY"
+            if [[ "$out" == *'"state":"SIMULATED"'* ]]; then ready="$ready $d"; elif [[ $code -ne 0 ]]; then status=1; fi
+          done
+          echo "ready=${ready# }" >> "$GITHUB_OUTPUT"
+          echo "check_status=$status" >> "$GITHUB_OUTPUT"
+          # Nothing to publish: a FAILED check, or a final attempt that ends in HOLD, fails the run (visible).
+          [[ -z "$ready" ]] && exit $status
+          exit 0
+      - name: Install the PDF renderer (Chromium) and Korean fonts
+        if: steps.check.outputs.ready != '' && env.LIVE == 'true'
+        shell: bash
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk >/dev/null
+          npm install --no-save playwright-core@1.56.0 >/dev/null
+          npx playwright-core install --with-deps chromium >/dev/null
+      - name: Build and publish the daily report
+        if: steps.check.outputs.ready != '' && env.LIVE == 'true'
+        shell: bash
+        env:
+          READY: ${{ steps.check.outputs.ready }}
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+          MOTUS_DRIVE_CLIENT_ID: ${{ secrets.MOTUS_DRIVE_CLIENT_ID }}
+          MOTUS_DRIVE_CLIENT_SECRET: ${{ secrets.MOTUS_DRIVE_CLIENT_SECRET }}
+          MOTUS_DRIVE_REFRESH_TOKEN: ${{ secrets.MOTUS_DRIVE_REFRESH_TOKEN }}
+        run: |
+          set -uo pipefail
+          status=0
+          for d in $READY; do
+            flags=(--date "$d" --execute); [[ "$PARTIAL" == "true" ]] && flags+=(--final-attempt)
+            MOTUS_LIVE_PUBLISH_ENABLED=true node dist/src/motus-daily-report-cli.js "${flags[@]}" || status=1
+            node -e 'const r=require(process.argv[1]);console.log("### MOTUS daily report "+r.date+"\n- State: **"+r.state+"**\n- Title: "+(r.title??"")+(r.publicPostUrl?"\n- URL: "+r.publicPostUrl:"")+(r.reason?"\n- Reason: "+r.reason:""))' "$PWD/data/daily-report/$d/daily-report.json" >> "$GITHUB_STEP_SUMMARY" || true
+          done
+          # A date that failed its readiness check fails the run too, even when another date was published.
+          [[ "${{ steps.check.outputs.check_status }}" == "1" ]] && status=1
+          exit $status
+      - name: Upload daily-report record
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: motus-daily-report-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            data/daily-report/
+            data/.daily-report-bundle
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 90
+      - name: Upload ops-data merge tool
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: motus-daily-report-tool-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            dist/src/ops-data-merge-cli.js
+            dist/src/production/ops-data-merge.js
+            dist/src/production/run-record.js
+          if-no-files-found: error
+          retention-days: 7
+
+  persist-daily-report:
+    if: ${{ !cancelled() && needs.daily-report.result != 'skipped' }}
+    needs: daily-report
+    permissions:
+      contents: write
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: ops-data, fetch-depth: 0, path: ops-data}
+      - uses: actions/download-artifact@v4
+        with:
+          name: motus-daily-report-${{ github.run_id }}-${{ github.run_attempt }}
+          path: bundle
+      - uses: actions/download-artifact@v4
+        with:
+          name: motus-daily-report-tool-${{ github.run_id }}-${{ github.run_attempt }}
+          path: persist-tool
+      - name: Merge the daily-report ledger into ops-data
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f bundle/.daily-report-bundle
+          [[ -d bundle/daily-report ]] || { echo 'no daily-report record'; exit 0; }
+          echo '{"type":"module"}' > persist-tool/package.json
+          git -C ops-data config user.name 'motus-operations-bot'
+          git -C ops-data config user.email 'actions@users.noreply.github.com'
+          for attempt in 1 2 3 4 5; do
+            git -C ops-data fetch origin ops-data
+            git -C ops-data reset --hard origin/ops-data
+            mkdir -p ops-data/data
+            node persist-tool/ops-data-merge-cli.js bundle ops-data/data
+            if grep -RIlE -- '-----BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY-----|BLOGGER_(CLIENT_SECRET|REFRESH_TOKEN)=' ops-data/data/daily-report; then
+              echo '::error title=Secret scan failed::daily-report record contains credential material'; exit 1
+            fi
+            git -C ops-data add data
+            if git -C ops-data diff --cached --quiet; then echo 'ops-data already up to date'; exit 0; fi
+            git -C ops-data commit -q -m "ops: persist daily report ${GITHUB_RUN_ID}/${GITHUB_RUN_ATTEMPT}"
+            if git -C ops-data push origin HEAD:ops-data; then exit 0; fi
+            sleep $((attempt * 5))
+          done
+          echo '::error title=ops-data persistence failed::daily-report record was not persisted'; exit 1

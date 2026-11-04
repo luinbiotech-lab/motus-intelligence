@@ -59,7 +59,8 @@ export function buildDailyPdfHtml(view:View,category:'AI_INTELLIGENCE'|'US_MARKE
   // Page 2: broker report table with rating boxes, quotes, index comparison, checkpoints.
   const cards=reportCards(view);
   const reportBox=cards.length?box('증권가 주요 리포트',`<table class=rep>${cards.slice(0,6).map(({card})=>`<tr><td class=rc><b>${esc(card.company??card.title)}</b><div>${esc(card.broker)}, ${esc(day(card.date))}</div></td><td class=rq>“${esc(card.title)}”</td><td class=rr>${card.rating||card.target?`<div class=rb><b>${esc(card.rating??'')}</b>${card.target?`<div>${esc(card.target)}원</div>`:''}</div>`:''}</td></tr>`).join('')}</table>`,'gold'):'';
-  const quotes=brokerQuotes(view).slice(cards.length?0:3,cards.length?4:7);
+  // Only quotes whose broker is named (a wire sentence has no source badge to show).
+  const quotes=brokerQuotes(view).filter(p=>/^\S+?[은는] /.test(p.text)).slice(cards.length?0:3,cards.length?4:7);
   const quoteBox=quotes.length?box('증권가 시각 (원문 인용)',quotes.map(p=>`<div class=q><div class=qs>${esc(p.text.match(/^(\S+?)[은는] /)?.[1]??'')}</div>“${esc(clip(p.text.match(/“([^”]+)”/)?.[1]??p.text,170))}”</div>`).join(''),'gold'):'';
   const compare=history&&history.series.length>=2?box('주요 지수 비교 (최근 20거래일, 첫날=100)',multiLine(history.series.slice(0,4).map(series=>({label:series.key==='sp500'?'S&P 500':series.key==='nasdaq'?'나스닥':series.key==='dow-jones'?'다우':series.label,points:series.closes.slice(-20)})))):'';
   const watch=checkpoints(view);
@@ -75,7 +76,7 @@ h1{font-size:19pt;line-height:1.3;margin:0 0 6px;font-weight:900;word-break:keep
 .t{width:100%;border-collapse:collapse;font-size:8.6pt}.t th{text-align:left;color:${GRAY};font-weight:700;border-bottom:1px solid ${LINE};padding:2px 3px}.t td{border-bottom:1px solid #eef1f5;padding:3px}.r{text-align:right}
 .issue{padding:4px 0;border-bottom:1px dashed ${LINE}}.issue:last-child{border:0}.ih{font-weight:900;font-size:10pt}.ib{color:#2c3a4b;font-size:8.6pt}
 .motus{display:grid;grid-template-columns:30mm 1fr;margin-top:4mm;border-radius:6px;overflow:hidden;border:1px solid ${LINE}}.ml{background:${NAVY};color:#fff;font-weight:900;font-size:11pt;display:flex;align-items:center;justify-content:center;text-align:center}.mt{padding:7px 10px;font-size:9pt}
-.rep{width:100%;border-collapse:collapse}.rep td{border-bottom:1px solid ${LINE};padding:5px 6px;vertical-align:middle}.rc{width:30%}.rc b{font-size:10.5pt}.rc div{color:${GRAY};font-size:8pt}.rq{font-weight:700;font-size:9pt}.rr{width:22mm}.rb{border:1.5px solid ${RED};border-radius:5px;text-align:center;color:${RED};padding:2px}.rb b{font-size:9.5pt}.rb div{font-weight:900;font-size:9pt}
+.rep{width:100%;border-collapse:collapse}.rep td{border-bottom:1px solid ${LINE};padding:5px 6px;vertical-align:middle}.rc{width:30%}.rc b{font-size:10.5pt}.rc div{color:${GRAY};font-size:8pt}.rq{font-weight:700;font-size:9pt}.rr{width:27mm}.rb{border:1.5px solid ${RED};border-radius:5px;text-align:center;color:${RED};padding:2px}.rb b{font-size:9.5pt}.rb div{font-weight:900;font-size:9pt;white-space:nowrap}
 .q{padding:5px 0;border-bottom:1px dashed ${LINE};font-size:8.8pt}.q:last-child{border:0}.qs{display:inline-block;background:${NAVY2};color:#fff;font-size:7.5pt;font-weight:700;padding:1px 6px;border-radius:3px;margin-right:5px}
 .ck{display:flex;gap:7px;padding:4px 0}.cb{color:#7a1f2b;font-weight:900;font-size:12pt;line-height:1}.ck b{font-size:9.8pt}.ck div div{font-size:8.6pt;color:#2c3a4b}
 .foot{position:absolute;left:9mm;right:9mm;bottom:4mm;border-top:1px solid ${LINE};padding-top:2px;font-size:6.8pt;color:${GRAY}}`;
@@ -108,3 +109,25 @@ export function publishedByRun(ledger:string,runId:string|undefined,postId:strin
   if(!runId)return false;
   return ledger.split('\n').filter(Boolean).some(line=>{try{const entry=JSON.parse(line) as {event?:string;attemptId?:string;postId?:string};return entry.event==='PUBLISHED'&&String(entry.attemptId)===runId&&(!entry.postId||entry.postId===postId)}catch{return false}});
 }
+
+/* ---- Combined daily report (owner decision 2026-11-04): Korea, US and AI in one PDF, published once a day. ---- */
+export type DailyCategory='AI_INTELLIGENCE'|'US_MARKET'|'KOREA_MARKET';
+export interface DailyReportPart {category:DailyCategory;view:View;sessionLabel:string}
+export const DAILY_REPORT_ORDER:DailyCategory[]=['KOREA_MARKET','US_MARKET','AI_INTELLIGENCE'];
+export const dailyKind=(category:DailyCategory)=>category==='AI_INTELLIGENCE'?'AI 산업':category==='US_MARKET'?'미국 증시':'국내 증시';
+/** One A4 PDF: a cover page with each market's headline and figures, then each category's two-page briefing. */
+export function buildCombinedDailyPdfHtml(parts:DailyReportPart[],date:string):DailyPdf&{pages:number} {
+  const ordered=DAILY_REPORT_ORDER.flatMap(category=>parts.filter(part=>part.category===category));
+  if(!ordered.length)throw new Error('DAILY_REPORT_WITHOUT_PARTS');
+  const built=ordered.map(part=>({part,html:buildDailyPdfHtml(part.view,part.category,part.sessionLabel).html}));
+  const css=built[0]!.html.match(/<style>([\s\S]*?)<\/style>/)![1]!;
+  // The last tile closes as </div>(tc) </div>(tile) </div>(tiles): the first triple close ends the tile grid.
+  const tilesOf=(html:string)=>html.match(/<div class=tiles>[\s\S]*?<\/div><\/div><\/div>/)?.[0]??'';
+  const cards=built.map(({part,html})=>`<div class=box style="margin-top:4mm"><div class=bh>${esc(dailyKind(part.category))} · ${esc(part.sessionLabel)}</div><div class=bb><div style="font-size:13pt;font-weight:900;line-height:1.35;word-break:keep-all">${esc(part.view.title)}</div><p style="margin:3px 0 5px;color:#2c3a4b">${esc(leadOf(part.view))}</p>${tilesOf(html)}</div></div>`).join('');
+  const cover=`<div class=page><div class=band><div class=bandtop><div class=logo>MOTUS <span>Daily Market &amp; AI Report</span></div><div class=when>데일리 리포트<br><b>${esc(date.replace(/-/g,'. '))}</b></div></div><div class=rule></div><h1><em>오늘의 시장</em>: ${esc(ordered.map(part=>dailyKind(part.category)).join(' · '))}</h1><p class=lede>${esc(ordered.map((part,index)=>`${index+2+index}쪽 ${dailyKind(part.category)}`).join(' / '))} — 각 시장의 수치·차트·증권가 리포트를 2쪽씩 정리했습니다.</p></div><div class=in>${cards}</div><div class=foot>MOTUS Market Intelligence · ${esc(date)} 데일리 리포트 · 공개 자료 기반 참고 자료이며 투자 권유가 아닙니다.</div></div>`;
+  const bodies=built.map(({part,html})=>html.match(/<body>([\s\S]*)<\/body>/)![1]!.replace('MOTUS Market Intelligence · 2/2',`MOTUS Market Intelligence · ${esc(dailyKind(part.category))}`));
+  return {html:`<!doctype html><html lang=ko><head><meta charset=utf-8><title>MOTUS 데일리 리포트 ${esc(date)}</title><style>${css}</style></head><body>${cover}${bodies.join('')}</body></html>`,fileName:`MOTUS_Daily_Report_${date}.pdf`,pages:1+2*ordered.length};
+}
+export {leadOf as dailyLead};
+/** Categories a daily report waits for (owner decision 2026-11-04): Monday Korea + AI, Tuesday-Friday all three. */
+export function expectedCategories(weekday:number):DailyCategory[] {return weekday===1?['KOREA_MARKET','AI_INTELLIGENCE']:weekday>=2&&weekday<=5?[...DAILY_REPORT_ORDER]:[]}
