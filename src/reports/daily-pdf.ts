@@ -130,18 +130,3 @@ export function buildCombinedDailyPdfHtml(parts:DailyReportPart[],date:string):D
 export {leadOf as dailyLead};
 /** Categories a daily report waits for (owner decision 2026-11-04): Monday Korea + AI, Tuesday-Friday all three. */
 export function expectedCategories(weekday:number):DailyCategory[] {return weekday===1?['KOREA_MARKET','AI_INTELLIGENCE']:weekday>=2&&weekday<=5?[...DAILY_REPORT_ORDER]:[]}
-/** The article this operation date published (last PUBLISHED/REPUBLISHED ledger entry with a public URL). */
-export function publishedArticle(ledger:string):{url:string;sessionDate:string|null;attemptId:string|null}|null {
-  let found:{url:string;sessionDate:string|null;attemptId:string|null}|null=null;
-  for(const line of ledger.split('\n').filter(Boolean)){try{const entry=JSON.parse(line) as {event?:string;publicPostUrl?:string|null;sessionDate?:string;attemptId?:string};if((entry.event==='PUBLISHED'||entry.event==='REPUBLISHED')&&entry.publicPostUrl)found={url:entry.publicPostUrl,sessionDate:entry.sessionDate??null,attemptId:entry.attemptId?String(entry.attemptId):null}}catch{/* skip */}}
-  return found;
-}
-/** A rebuilt live-unit.json stands in for the missing snapshot only when it cannot differ from the published one:
- * market categories when it is the same session (the session's closes are fixed), AI only when no other run of
- * that category came after the publishing run (a later AI run can pick other announcements). */
-export function liveUnitUsable(category:DailyCategory,unitSession:string|undefined,published:{sessionDate:string|null;attemptId:string|null},runs:string):boolean {
-  if(!published.sessionDate||unitSession!==published.sessionDate)return false;
-  if(category!=='AI_INTELLIGENCE')return true;
-  const ids=runs.split('\n').filter(Boolean).flatMap(line=>{try{return [String((JSON.parse(line) as {runId?:string}).runId)]}catch{return []}});
-  return Boolean(published.attemptId)&&ids.at(-1)===published.attemptId;
-}

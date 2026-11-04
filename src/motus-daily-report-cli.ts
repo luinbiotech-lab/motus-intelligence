@@ -9,20 +9,22 @@
  * Owner decisions 2026-11-04: Monday = Korea + AI (no US session on Sunday), Tuesday-Friday = Korea + US + AI;
  * no report on Saturday/Sunday. Without --allow-partial it waits (HOLD, exit 0) until every expected category is
  * published; the final attempt (05:40 KST next day, --final-attempt) publishes what is there and fails loudly on
- * HOLD. Publication is judged by each category's publish ledger (auto-publish.json is overwritten by later runs),
- * and the article data by the snapshot taken by the publishing run (published-unit.json). Without --execute it
- * only reports readiness and writes nothing. It never edits the daily articles.
+ * HOLD. Publication is judged by each category's publish ledger (auto-publish.json is overwritten by later runs).
+ * Article data is charted only when its rendered article equals the article stored on Blogger (루인 review P0;
+ * operations/daily-report-plan.ts); otherwise the article is linked, not charted. Without --execute it only reports
+ * readiness from the files and writes nothing. It never edits the daily articles.
  */
 import {appendFile,mkdir,readFile,writeFile} from 'node:fs/promises';
 import {existsSync} from 'node:fs';
 import {join,resolve} from 'node:path';
 import type {SplitPublicationUnit} from './intelligence/split-daily-production.js';
-import {DAILY_REPORT_ORDER,buildCombinedDailyPdfHtml,dailyKind,dailyLead,expectedCategories,liveUnitUsable,publishedArticle,type DailyCategory,type DailyReportPart} from './reports/daily-pdf.js';
+import {DAILY_REPORT_ORDER,buildCombinedDailyPdfHtml,dailyKind,dailyLead,expectedCategories,type DailyCategory,type DailyReportPart} from './reports/daily-pdf.js';
 import {checkPdf,renderPdf} from './reports/pdf-render.js';
 import {DAILY_REPORT_LABEL,renderDailyReportArticle} from './publishers/editorial-article.js';
 import {DRIVE_ROOT_FOLDER,GoogleDriveClient,driveCredentialsFromEnvironment} from './services/google-drive.js';
 import {GoogleBloggerApiAdapter,isPublicBloggerPostUrl,type BloggerPublishingConfig} from './services/blogger.js';
 import type {WeeklySection} from './operations/weekly-review.js';
+import {planCategory,verifiedCandidate,type CategoryPlan} from './operations/daily-report-plan.js';
 
 const args=process.argv.slice(2),value=(flag:string)=>{const index=args.indexOf(flag);return index>=0?args[index+1]:undefined};
 const date=value('--date')??'',execute=args.includes('--execute'),finalAttempt=args.includes('--final-attempt'),allowPartial=finalAttempt||args.includes('--allow-partial');
@@ -46,27 +48,24 @@ try{
   if(!expected.length)await done({state:'SKIP',reason:'no daily report on weekends',publishCallCount:0});
   const folders:Record<DailyCategory,string>={KOREA_MARKET:'korea',US_MARKET:'us',AI_INTELLIGENCE:'ai'};
   const parts:Array<DailyReportPart&{url:string;title:string}>=[],links:Array<{category:DailyCategory;url:string;title:string;sessionDate:string|null}>=[],missing:string[]=[],noData:string[]=[];
+  const plans=new Map<DailyCategory,CategoryPlan>(),dataReasons:Record<string,string[]>={};
+  const readText=async(path:string)=>existsSync(path)?await readFile(path,'utf8'):null;
   for(const category of expected){
     const dir=join(process.cwd(),'data','operations',date,folders[category]);
-    const published=publishedArticle(existsSync(join(dir,'publish-ledger.jsonl'))?await readFile(join(dir,'publish-ledger.jsonl'),'utf8'):'');
-    if(!published){missing.push(folders[category]);continue}
-    // The publishing run's snapshot; without it, a live-unit.json only when it cannot differ (liveUnitUsable).
-    let unit:SplitPublicationUnit|null=null;
-    const read=async(file:string)=>existsSync(join(dir,file))?JSON.parse(await readFile(join(dir,file),'utf8')) as Partial<SplitPublicationUnit>:null;
-    const valid=(candidate:Partial<SplitPublicationUnit>|null)=>Boolean(candidate&&candidate.category===category&&candidate.viewModel&&candidate.title);
-    const snapshot=await read('published-unit.json'),live=snapshot?null:await read('live-unit.json');
-    if(valid(snapshot))unit=snapshot as SplitPublicationUnit;
-    else if(valid(live)&&liveUnitUsable(category,live!.observedDate,published,existsSync(join(dir,'runs.jsonl'))?await readFile(join(dir,'runs.jsonl'),'utf8'):''))unit=live as SplitPublicationUnit;
-    links.push({category,url:published.url,title:unit?.title??`${dailyKind(category)} 기사`,sessionDate:published.sessionDate});
-    if(unit)parts.push({category,view:unit.viewModel as DailyReportPart['view'],sessionLabel:`${unit.observedDate} 세션`,url:published.url,title:unit.title});else noData.push(folders[category]);
+    const plan=planCategory(category,{ledger:await readText(join(dir,'publish-ledger.jsonl'))??'',snapshot:await readText(join(dir,'published-unit.json')),live:await readText(join(dir,'live-unit.json'))});
+    plans.set(category,plan);dataReasons[folders[category]]=plan.reasons;
+    if(!plan.published){missing.push(folders[category]);continue}
+    // Provisional until the execute step compares it with the stored post (verifiedCandidate).
+    const unit=plan.candidates[0]?.unit;
+    links.push({category,url:plan.published.url,title:unit?.title??`${dailyKind(category)} 기사`,sessionDate:plan.published.sessionDate});
+    if(unit)parts.push({category,view:unit.viewModel as DailyReportPart['view'],sessionLabel:`${unit.observedDate} 세션`,url:plan.published.url,title:unit.title});else noData.push(folders[category]);
   }
   if(!links.length)await done({state:'HOLD',reasons:['NO_PUBLISHED_ARTICLE'],missing,publishCallCount:0});
   if(missing.length&&!allowPartial)await done({state:'HOLD',reasons:missing.map(name=>`WAITING_FOR_${name.toUpperCase()}`),missing,publishCallCount:0});
   // A published article without trustworthy data waits for the final attempt (then it is linked, not charted).
-  if(noData.length&&!allowPartial)await done({state:'HOLD',reasons:noData.map(name=>`NO_DATA_FOR_${name.toUpperCase()}`),noData,publishCallCount:0});
+  if(noData.length&&!allowPartial)await done({state:'HOLD',reasons:noData.map(name=>`NO_DATA_FOR_${name.toUpperCase()}`),noData,dataReasons,publishCallCount:0});
   if(!parts.length)await done({state:'HOLD',reasons:['NO_ARTICLE_DATA_FOR_PDF'],noData,publishCallCount:0});
-  const pdf=buildCombinedDailyPdfHtml(parts,date);
-  if(execute)await writeFile(join(root,'daily-report-pdf.html'),pdf.html,'utf8');
+  let pdf=buildCombinedDailyPdfHtml(parts,date);
   const [,month,day]=date.split('-').map(Number);
   const [year]=date.split('-');
   title=`[데일리 리포트] ${year}년 ${month}월 ${day}일 ${links.map(link=>dailyKind(link.category).replace(' 산업','')).join('·')} 핵심 정리`;
@@ -79,7 +78,7 @@ try{
     return renderDailyReportArticle({date,title,subtitle:'국내·미국 증시와 AI 산업을 한 번에 보는 하루 정리',lead,sections,sources:links.map(link=>({label:`${dailyKind(link.category)} — ${link.title}`,url:link.url}))}).html;
   };
   article({url:'https://drive.google.com/',fileName:pdf.fileName});
-  if(!execute||process.env.MOTUS_LIVE_PUBLISH_ENABLED!=='true')await done({state:'SIMULATED',title,fileName:pdf.fileName,pages:pdf.pages,missing,noData,publishCallCount:0});
+  if(!execute||process.env.MOTUS_LIVE_PUBLISH_ENABLED!=='true')await done({state:'SIMULATED',title,fileName:pdf.fileName,pages:pdf.pages,missing,noData,dataReasons,publishCallCount:0});
   const blogId=process.env.BLOGGER_BLOG_ID?.trim(),credentials=driveCredentialsFromEnvironment();
   if(!blogId||!process.env.BLOGGER_CLIENT_ID||!process.env.BLOGGER_CLIENT_SECRET||!process.env.BLOGGER_REFRESH_TOKEN)await done({state:'HOLD',reasons:['BLOGGER_CREDENTIALS_MISSING'],publishCallCount:0});
   if(!credentials)await done({state:'HOLD',reasons:['DRIVE_NOT_CONFIGURED'],publishCallCount:0});
@@ -95,7 +94,25 @@ try{
   const same=(await google.findMatchingPosts({title,label:DAILY_REPORT_LABEL},config)).filter(item=>item.status!=='DRAFT'||item.content.includes(`data-daily-report="${date}"`));
   const live=same.find(item=>item.status==='PUBLISHED'&&item.url);
   if(live){await record({event:'SKIPPED_EXISTING',postId:live.postId,publicPostUrl:live.url,title:live.title,detail:'same title already published'});await done({state:'SKIP',reason:'same title already published',publicPostUrl:live.url,publishCallCount:0})}
-  // PDF first (no post links it until the post below is published, so a same-name replace is safe).
+  // 루인 review P0: chart only a unit whose rendered article equals the stored post; otherwise link only.
+  parts.length=0;noData.length=0;const verification:Record<string,string>={};
+  for(const link of links){
+    const plan=plans.get(link.category)!,name=folders[link.category];
+    if(!plan.published?.postId){noData.push(name);verification[name]='NO_POST_ID_IN_LEDGER';continue}
+    const post=await google.readPost(plan.published.postId,config).catch((error:unknown)=>error instanceof Error?error:new Error(String(error)));
+    if(post instanceof Error){noData.push(name);verification[name]=`POST_READ_FAILED: ${post.message.slice(0,120)}`;continue}
+    const checked=verifiedCandidate(plan,post);
+    if('reason' in checked){noData.push(name);verification[name]=checked.reason;continue}
+    link.title=post.title;verification[name]=`VERIFIED_${checked.candidate.source}`;
+    parts.push({category:link.category,view:checked.candidate.unit.viewModel as DailyReportPart['view'],sessionLabel:`${checked.candidate.unit.observedDate} 세션`,url:link.url,title:post.title});
+  }
+  console.log(JSON.stringify({verification}));
+  if(noData.length&&!allowPartial)await done({state:'HOLD',reasons:noData.map(name=>`UNVERIFIED_DATA_FOR_${name.toUpperCase()}`),verification,publishCallCount:0});
+  if(!parts.length)await done({state:'HOLD',reasons:['NO_VERIFIED_ARTICLE_DATA'],verification,publishCallCount:0});
+  pdf=buildCombinedDailyPdfHtml(parts,date);
+  await writeFile(join(root,'daily-report-pdf.html'),pdf.html,'utf8');
+  // PDF first (no post links it until the post below is published; Drive replaces a same-name file, so a retry of
+  // the same date leaves one file).
   const bytes=await renderPdf(pdf.html),check=checkPdf(bytes,pdf.pages);
   if(!check.ok)throw new Error(`PDF_CHECK_FAILED pages=${check.pages}/${pdf.pages} size=${check.size}`);
   const drive=new GoogleDriveClient(credentials!);
@@ -117,7 +134,7 @@ try{
   if(after.status!=='PUBLISHED'||!isPublicBloggerPostUrl(after.url)||after.url!==result.publicPostUrl||after.title!==title)throw new Error('readback after publish does not match (status, permalink or title)');
   if(!after.content.includes(`data-daily-report="${date}"`)||!after.content.includes(upload.webViewLink))throw new Error('stored content is missing the date marker or the PDF link');
   await record({event:'PUBLISHED',postId,publicPostUrl:after.url,title,detail:'published and read back'});
-  await done({state:'PUBLISHED',postId,publicPostUrl:after.url,title,pdf:upload.webViewLink,pages:check.pages,missing,noData,publishCallCount:1});
+  await done({state:'PUBLISHED',postId,publicPostUrl:after.url,title,pdf:upload.webViewLink,pages:check.pages,missing,noData,verification,publishCallCount:1});
 }catch(error){
   const detail=error instanceof Error?error.message:String(error);
   await record({event:'FAILED',postId,publicPostUrl:null,title,detail});

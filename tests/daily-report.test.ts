@@ -35,20 +35,40 @@ test('daily report policy: Monday Korea + AI, Tuesday-Friday all three, no weeke
   assert.deepEqual(expectedCategories(6),[]);assert.deepEqual(expectedCategories(0),[]);
 });
 
-test('publication is read from the ledger, not from auto-publish.json that later runs overwrite', async () => {
-  const {publishedArticle}=await import('../src/reports/daily-pdf.js');
-  const ledger=[{event:'PUBLISH_ATTEMPT'},{event:'PUBLISHED',publicPostUrl:'https://motusnova.blogspot.com/2026/10/a.html',sessionDate:'2026-10-28'},{event:'GATE_HOLD'},{event:'REPUBLISHED',publicPostUrl:'https://motusnova.blogspot.com/2026/10/a.html',sessionDate:'2026-10-28'}].map(e=>JSON.stringify(e)).join('\n');
-  assert.deepEqual(publishedArticle(ledger),{url:'https://motusnova.blogspot.com/2026/10/a.html',sessionDate:'2026-10-28',attemptId:null});
-  assert.equal(publishedArticle(JSON.stringify({event:'SKIPPED_EXISTING',publicPostUrl:'https://x'})),null);
+import {planCategory,publishedArticle,verifiedCandidate,withoutDailyPdfLink} from '../src/operations/daily-report-plan.js';
+const unitOf=(category:string)=>createFirstSplitDailyProductionRun().units.find(unit=>unit.category===category)!;
+const ledgerFor=(entries:object[])=>entries.map(entry=>JSON.stringify(entry)).join('\n');
+const URL_A='https://motusnova.blogspot.com/2026/11/a.html';
+
+test('publication is read from the ledger (last PUBLISHED/REPUBLISHED), not from auto-publish.json', () => {
+  const ledger=ledgerFor([{event:'PUBLISH_ATTEMPT'},{event:'PUBLISHED',publicPostUrl:URL_A,sessionDate:'2026-11-03',attemptId:'7',postId:'p1'},{event:'GATE_HOLD'},'not json' as never,{event:'REPUBLISHED',publicPostUrl:URL_A,sessionDate:'2026-11-03',attemptId:'9',postId:'p1'}]);
+  assert.deepEqual(publishedArticle(ledger),{url:URL_A,sessionDate:'2026-11-03',attemptId:'9',postId:'p1'});
+  assert.equal(publishedArticle(ledgerFor([{event:'SKIPPED_EXISTING',publicPostUrl:URL_A}])),null);
   assert.equal(publishedArticle(''),null);
 });
 
-test('a rebuilt live unit replaces the missing snapshot only when it cannot differ from the published article', async () => {
-  const {liveUnitUsable}=await import('../src/reports/daily-pdf.js');
-  const pub={sessionDate:'2026-11-03',attemptId:'1'},runs=(...ids:string[])=>ids.map(runId=>JSON.stringify({runId})).join('\n');
-  assert.equal(liveUnitUsable('US_MARKET','2026-11-03',pub,runs('1','2')),true);
-  assert.equal(liveUnitUsable('US_MARKET','2026-11-04',pub,runs('1')),false);
-  assert.equal(liveUnitUsable('AI_INTELLIGENCE','2026-11-03',pub,runs('1')),true);
-  assert.equal(liveUnitUsable('AI_INTELLIGENCE','2026-11-03',pub,runs('1','2')),false);
-  assert.equal(liveUnitUsable('KOREA_MARKET','2026-11-03',{sessionDate:null,attemptId:'1'},runs('1')),false);
+test('candidate units: snapshot first, each rejection with its own reason code', () => {
+  const unit=unitOf('US_MARKET'),session=unit.observedDate,ledger=ledgerFor([{event:'PUBLISHED',publicPostUrl:URL_A,sessionDate:session,postId:'p1'}]);
+  const ok=JSON.stringify(unit),stale=JSON.stringify({...unit,observedDate:'2020-01-01'}),wrong=JSON.stringify({...unit,category:'KOREA_MARKET'});
+  assert.deepEqual(planCategory('US_MARKET',{ledger:'',snapshot:ok,live:ok}).reasons,['NOT_PUBLISHED']);
+  const both=planCategory('US_MARKET',{ledger,snapshot:ok,live:ok});assert.deepEqual(both.candidates.map(c=>c.source),['SNAPSHOT','LIVE']);
+  // A stale or broken snapshot no longer hides the live unit; both are still subject to the content check.
+  const staleSnap=planCategory('US_MARKET',{ledger,snapshot:stale,live:ok});assert.deepEqual(staleSnap.reasons,['SNAPSHOT_SESSION_MISMATCH']);assert.deepEqual(staleSnap.candidates.map(c=>c.source),['LIVE']);
+  assert.deepEqual(planCategory('US_MARKET',{ledger,snapshot:'{',live:wrong}).reasons,['SNAPSHOT_UNREADABLE','LIVE_INVALID']);
+  assert.deepEqual(planCategory('US_MARKET',{ledger,snapshot:null,live:null}).reasons,['SNAPSHOT_ABSENT','LIVE_ABSENT']);
+});
+
+test('only a unit whose rendered article equals the stored post is charted (루인 P0)', () => {
+  const unit=unitOf('KOREA_MARKET'),session=unit.observedDate,ledger=ledgerFor([{event:'PUBLISHED',publicPostUrl:URL_A,sessionDate:session,postId:'p1'}]);
+  const rebuilt={...unit,render:{...unit.render,html:unit.render.html.replace('</article>','<p>later run text</p></article>')}};
+  const plan=planCategory('KOREA_MARKET',{ledger,snapshot:JSON.stringify(rebuilt),live:JSON.stringify(unit)});
+  const post={postId:'p1',title:unit.title,content:unit.render.html,status:'PUBLISHED' as const,url:URL_A,labels:[]};
+  const match=verifiedCandidate(plan,post);assert.ok('candidate' in match&&match.candidate.source==='LIVE');
+  assert.deepEqual(verifiedCandidate(planCategory('KOREA_MARKET',{ledger,snapshot:JSON.stringify(rebuilt),live:null}),post),{reason:'CONTENT_MISMATCH'});
+  assert.deepEqual(verifiedCandidate(plan,{...post,url:'https://motusnova.blogspot.com/2026/11/b.html'}),{reason:'POST_IDENTITY_MISMATCH'});
+  assert.deepEqual(verifiedCandidate(plan,{...post,status:'DRAFT'}),{reason:'POST_IDENTITY_MISMATCH'});
+  // The per-article PDF link block added on 2026-11-04 is ignored in the comparison.
+  const withPdf={...post,content:unit.render.html.replace(/(<\/header>)/,'$1<section data-section="daily-pdf" style="x"><a href="https://drive.google.com/x">PDF</a></section>')};
+  assert.notEqual(withPdf.content,post.content);assert.equal(withoutDailyPdfLink(withPdf.content),post.content);
+  assert.ok('candidate' in verifiedCandidate(plan,withPdf));
 });
