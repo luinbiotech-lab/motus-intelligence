@@ -38,7 +38,17 @@ test('daily report policy: Monday Korea + AI, Tuesday-Friday all three, no weeke
 test('publication is read from the ledger, not from auto-publish.json that later runs overwrite', async () => {
   const {publishedArticle}=await import('../src/reports/daily-pdf.js');
   const ledger=[{event:'PUBLISH_ATTEMPT'},{event:'PUBLISHED',publicPostUrl:'https://motusnova.blogspot.com/2026/10/a.html',sessionDate:'2026-10-28'},{event:'GATE_HOLD'},{event:'REPUBLISHED',publicPostUrl:'https://motusnova.blogspot.com/2026/10/a.html',sessionDate:'2026-10-28'}].map(e=>JSON.stringify(e)).join('\n');
-  assert.deepEqual(publishedArticle(ledger),{url:'https://motusnova.blogspot.com/2026/10/a.html',sessionDate:'2026-10-28'});
+  assert.deepEqual(publishedArticle(ledger),{url:'https://motusnova.blogspot.com/2026/10/a.html',sessionDate:'2026-10-28',attemptId:null});
   assert.equal(publishedArticle(JSON.stringify({event:'SKIPPED_EXISTING',publicPostUrl:'https://x'})),null);
   assert.equal(publishedArticle(''),null);
+});
+
+test('a rebuilt live unit replaces the missing snapshot only when it cannot differ from the published article', async () => {
+  const {liveUnitUsable}=await import('../src/reports/daily-pdf.js');
+  const pub={sessionDate:'2026-11-03',attemptId:'1'},runs=(...ids:string[])=>ids.map(runId=>JSON.stringify({runId})).join('\n');
+  assert.equal(liveUnitUsable('US_MARKET','2026-11-03',pub,runs('1','2')),true);
+  assert.equal(liveUnitUsable('US_MARKET','2026-11-04',pub,runs('1')),false);
+  assert.equal(liveUnitUsable('AI_INTELLIGENCE','2026-11-03',pub,runs('1')),true);
+  assert.equal(liveUnitUsable('AI_INTELLIGENCE','2026-11-03',pub,runs('1','2')),false);
+  assert.equal(liveUnitUsable('KOREA_MARKET','2026-11-03',{sessionDate:null,attemptId:'1'},runs('1')),false);
 });

@@ -160,13 +160,13 @@ jobs:
       - name: Replace the published post in place (owner-requested correction)
         if: env.MOTUS_LIVE_PUBLISH_ENABLED == 'true' && env.REPUBLISH == 'true'
         run: npm run motus:republish -- --date "$RUN_DATE" --category "$CATEGORY" --execute
-      - name: Snapshot the published unit for the daily report (only the run that published)
+      - name: Snapshot the published unit for the daily report (only the run that published; a rerun never overwrites)
         if: always() && env.MOTUS_LIVE_PUBLISH_ENABLED == 'true'
         continue-on-error: true
         shell: bash
         run: |
           dir="data/operations/$RUN_DATE/$CATEGORY"
-          if [[ -f "$dir/publish-ledger.jsonl" && -f "$dir/live-unit.json" ]] && node -e 'const id=process.env.GITHUB_RUN_ID;const ok=require("fs").readFileSync(process.argv[1],"utf8").split("\n").filter(Boolean).some(l=>{try{const e=JSON.parse(l);return (e.event==="PUBLISHED"||e.event==="REPUBLISHED")&&String(e.attemptId)===id}catch{return false}});process.exit(ok?0:1)' "$dir/publish-ledger.jsonl"; then
+          if [[ -f "$dir/publish-ledger.jsonl" && -f "$dir/live-unit.json" ]] && node -e 'const id=process.env.GITHUB_RUN_ID;const fs=require("fs"),dir=process.argv[1],snap=fs.existsSync(dir+"/published-unit.json");const ok=fs.readFileSync(dir+"/publish-ledger.jsonl","utf8").split("\n").filter(Boolean).some(l=>{try{const e=JSON.parse(l);return String(e.attemptId)===id&&(e.event==="REPUBLISHED"||(e.event==="PUBLISHED"&&!snap))}catch{return false}});process.exit(ok?0:1)' "$dir"; then
             cp "$dir/live-unit.json" "$dir/published-unit.json" && echo 'published unit snapshot saved'
           else
             echo 'not published by this run; no snapshot'

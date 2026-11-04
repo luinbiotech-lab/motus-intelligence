@@ -103,6 +103,7 @@ jobs:
             if [[ "$out" == *'"state":"SIMULATED"'* ]]; then ready="$ready $d"; elif [[ $code -ne 0 ]]; then status=1; fi
           done
           echo "ready=${ready# }" >> "$GITHUB_OUTPUT"
+          echo "check_status=$status" >> "$GITHUB_OUTPUT"
           # Nothing to publish: a FAILED check, or a final attempt that ends in HOLD, fails the run (visible).
           [[ -z "$ready" ]] && exit $status
           exit 0
@@ -133,6 +134,8 @@ jobs:
             MOTUS_LIVE_PUBLISH_ENABLED=true node dist/src/motus-daily-report-cli.js "${flags[@]}" || status=1
             node -e 'const r=require(process.argv[1]);console.log("### MOTUS daily report "+r.date+"\n- State: **"+r.state+"**\n- Title: "+(r.title??"")+(r.publicPostUrl?"\n- URL: "+r.publicPostUrl:"")+(r.reason?"\n- Reason: "+r.reason:""))' "$PWD/data/daily-report/$d/daily-report.json" >> "$GITHUB_STEP_SUMMARY" || true
           done
+          # A date that failed its readiness check fails the run too, even when another date was published.
+          [[ "${{ steps.check.outputs.check_status }}" == "1" ]] && status=1
           exit $status
       - name: Upload daily-report record
         if: always()

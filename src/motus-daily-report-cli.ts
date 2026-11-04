@@ -17,7 +17,7 @@ import {appendFile,mkdir,readFile,writeFile} from 'node:fs/promises';
 import {existsSync} from 'node:fs';
 import {join,resolve} from 'node:path';
 import type {SplitPublicationUnit} from './intelligence/split-daily-production.js';
-import {DAILY_REPORT_ORDER,buildCombinedDailyPdfHtml,dailyKind,dailyLead,expectedCategories,publishedArticle,type DailyCategory,type DailyReportPart} from './reports/daily-pdf.js';
+import {DAILY_REPORT_ORDER,buildCombinedDailyPdfHtml,dailyKind,dailyLead,expectedCategories,liveUnitUsable,publishedArticle,type DailyCategory,type DailyReportPart} from './reports/daily-pdf.js';
 import {checkPdf,renderPdf} from './reports/pdf-render.js';
 import {DAILY_REPORT_LABEL,renderDailyReportArticle} from './publishers/editorial-article.js';
 import {DRIVE_ROOT_FOLDER,GoogleDriveClient,driveCredentialsFromEnvironment} from './services/google-drive.js';
@@ -50,18 +50,20 @@ try{
     const dir=join(process.cwd(),'data','operations',date,folders[category]);
     const published=publishedArticle(existsSync(join(dir,'publish-ledger.jsonl'))?await readFile(join(dir,'publish-ledger.jsonl'),'utf8'):'');
     if(!published){missing.push(folders[category]);continue}
-    // The publishing run's snapshot; a live-unit.json is used only when it is the same session (later runs rebuild it).
+    // The publishing run's snapshot; without it, a live-unit.json only when it cannot differ (liveUnitUsable).
     let unit:SplitPublicationUnit|null=null;
-    for(const file of ['published-unit.json','live-unit.json']){
-      if(!existsSync(join(dir,file)))continue;
-      const candidate=JSON.parse(await readFile(join(dir,file),'utf8')) as Partial<SplitPublicationUnit>;
-      if(candidate.category===category&&candidate.viewModel&&candidate.title&&(!published.sessionDate||candidate.observedDate===published.sessionDate)){unit=candidate as SplitPublicationUnit;break}
-    }
+    const read=async(file:string)=>existsSync(join(dir,file))?JSON.parse(await readFile(join(dir,file),'utf8')) as Partial<SplitPublicationUnit>:null;
+    const valid=(candidate:Partial<SplitPublicationUnit>|null)=>Boolean(candidate&&candidate.category===category&&candidate.viewModel&&candidate.title);
+    const snapshot=await read('published-unit.json'),live=snapshot?null:await read('live-unit.json');
+    if(valid(snapshot))unit=snapshot as SplitPublicationUnit;
+    else if(valid(live)&&liveUnitUsable(category,live!.observedDate,published,existsSync(join(dir,'runs.jsonl'))?await readFile(join(dir,'runs.jsonl'),'utf8'):''))unit=live as SplitPublicationUnit;
     links.push({category,url:published.url,title:unit?.title??`${dailyKind(category)} 기사`,sessionDate:published.sessionDate});
     if(unit)parts.push({category,view:unit.viewModel as DailyReportPart['view'],sessionLabel:`${unit.observedDate} 세션`,url:published.url,title:unit.title});else noData.push(folders[category]);
   }
   if(!links.length)await done({state:'HOLD',reasons:['NO_PUBLISHED_ARTICLE'],missing,publishCallCount:0});
   if(missing.length&&!allowPartial)await done({state:'HOLD',reasons:missing.map(name=>`WAITING_FOR_${name.toUpperCase()}`),missing,publishCallCount:0});
+  // A published article without trustworthy data waits for the final attempt (then it is linked, not charted).
+  if(noData.length&&!allowPartial)await done({state:'HOLD',reasons:noData.map(name=>`NO_DATA_FOR_${name.toUpperCase()}`),noData,publishCallCount:0});
   if(!parts.length)await done({state:'HOLD',reasons:['NO_ARTICLE_DATA_FOR_PDF'],noData,publishCallCount:0});
   const pdf=buildCombinedDailyPdfHtml(parts,date);
   if(execute)await writeFile(join(root,'daily-report-pdf.html'),pdf.html,'utf8');
@@ -73,7 +75,7 @@ try{
     if(link)sections.push({key:'daily-report-pdf',title:'PDF 리포트: 오늘의 시장 브리핑',intro:`표지 한 장에 ${parts.length}개 분야의 핵심 수치를, 이어서 분야마다 차트·종목·증권가 리포트를 2쪽씩 담은 A4 ${pdf.pages}쪽 리포트입니다.`,links:[{label:`MOTUS 데일리 리포트 (${link.fileName})`,url:link.url,meta:'PDF · Google Drive에서 보기·내려받기'}]});
     for(const link of links){const part=parts.find(item=>item.category===link.category);sections.push({key:`daily-report-${folders[link.category]}`,title:`${dailyKind(link.category)}: ${link.title}`,...(part?{intro:dailyLead(part.view)}:{}),links:[{label:link.title,url:link.url,meta:`${dailyKind(link.category)} 기사 전문${link.sessionDate?` · ${link.sessionDate} 세션`:''}`}]})}
     const kindOf=(name:string)=>dailyKind(DAILY_REPORT_ORDER.find(c=>folders[c]===name)!);
-    const lead=`${month}월 ${day}일 MOTUS 데일리 리포트입니다. 오늘 발행한 ${links.map(link=>dailyKind(link.category)).join('·')} 기사의 핵심 수치와 차트, 증권가 리포트를 PDF 한 편으로 묶었습니다.${weekday===1?' 월요일은 주말 동안 미국 정규장이 열리지 않아 국내 증시와 AI 산업만 다룹니다.':''}${missing.length?` ${missing.map(kindOf).join('·')} 기사는 이날 발행되지 않아 이번 리포트에서 빠졌습니다.`:''}${noData.length?` ${noData.map(kindOf).join('·')} 기사는 링크로만 소개합니다.`:''}`;
+    const lead=`${month}월 ${day}일 MOTUS 데일리 리포트입니다. 오늘 발행한 ${parts.map(part=>dailyKind(part.category)).join('·')} 기사의 핵심 수치와 차트, 증권가 리포트를 PDF 한 편으로 묶었습니다.${weekday===1?' 월요일은 주말 동안 미국 정규장이 열리지 않아 국내 증시와 AI 산업만 다룹니다.':''}${missing.length?` ${missing.map(kindOf).join('·')} 기사는 이날 발행되지 않아 이번 리포트에서 빠졌습니다.`:''}${noData.length?` ${noData.map(kindOf).join('·')} 기사는 링크로만 소개합니다.`:''}`;
     return renderDailyReportArticle({date,title,subtitle:'국내·미국 증시와 AI 산업을 한 번에 보는 하루 정리',lead,sections,sources:links.map(link=>({label:`${dailyKind(link.category)} — ${link.title}`,url:link.url}))}).html;
   };
   article({url:'https://drive.google.com/',fileName:pdf.fileName});
