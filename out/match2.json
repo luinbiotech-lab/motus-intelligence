@@ -1,0 +1,62 @@
+{
+  "2026-11-04/korea": {
+    "url": "https://motusnova.blogspot.com/2026/11/359-5648-1-31.html",
+    "pageArticleLen": 19113,
+    "published-unit.json": "absent",
+    "live-unit.json": {
+      "equal": false,
+      "len": 26366,
+      "firstDiff": 1050,
+      "unitAt": "div data-section=\"key-points\" style=\"border:1.5px solid #0b2545;padding:13px 15p",
+      "pageAt": "section data-section=\"korea-causes\" style=\"width:100%;max-width:100%;box-sizing:"
+    }
+  },
+  "2026-11-04/us": {
+    "url": "https://motusnova.blogspot.com/2026/11/3-58.html",
+    "pageArticleLen": 52403,
+    "published-unit.json": "absent",
+    "live-unit.json": {
+      "equal": false,
+      "len": 64316,
+      "firstDiff": 1055,
+      "unitAt": "div data-section=\"key-points\" style=\"border:1.5px solid #0b2545;padding:13px 15p",
+      "pageAt": "section data-section=\"us-causes\" style=\"width:100%;max-width:100%;box-sizing:bor"
+    }
+  },
+  "2026-11-04/ai": {
+    "url": "https://motusnova.blogspot.com/2026/11/amd-37-ai.html",
+    "pageArticleLen": 24206,
+    "published-unit.json": "absent",
+    "live-unit.json": {
+      "equal": true,
+      "len": 24206,
+      "firstDiff": 24206,
+      "unitAt": "",
+      "pageAt": ""
+    }
+  },
+  "2026-10-30/us": {
+    "url": "https://motusnova.blogspot.com/2026/10/3-42.html",
+    "pageArticleLen": 48951,
+    "published-unit.json": "absent",
+    "live-unit.json": {
+      "equal": false,
+      "len": 49047,
+      "firstDiff": 649,
+      "unitAt": "알파벳 13% 급락</div><p style=\"margin:10px 0 0;color:#e6edf5\">증권가 분석과 투자자 관심 종목으로 읽는 ",
+      "pageAt": "아마존 4.2% 하락</div><p style=\"margin:10px 0 0;color:#e6edf5\">증권가 분석과 투자자 관심 종목으로 읽는"
+    }
+  },
+  "2026-10-30/korea": {
+    "url": "https://motusnova.blogspot.com/2026/10/124-5937-1-48.html",
+    "pageArticleLen": 20731,
+    "published-unit.json": "absent",
+    "live-unit.json": {
+      "equal": false,
+      "len": 23128,
+      "firstDiff": 648,
+      "unitAt": "내려 5,937…검색 1위 삼성전자 4.8% 하락</div><p style=\"margin:10px 0 0;color:#e6edf5\">증권사 리포",
+      "pageAt": "하락 5,937…검색 1위 삼성전자 4.8% 하락</div><p style=\"margin:10px 0 0;color:#e6edf5\">증권사 리포"
+    }
+  }
+}
