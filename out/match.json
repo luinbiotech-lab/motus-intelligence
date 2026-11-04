@@ -1,0 +1,62 @@
+{
+  "2026-11-04/korea": {
+    "url": "https://motusnova.blogspot.com/2026/11/359-5648-1-31.html",
+    "pageArticleLen": 37770,
+    "published-unit.json": "absent",
+    "live-unit.json": {
+      "equal": false,
+      "len": 26366,
+      "firstDiff": 9,
+      "unitAt": "data-product=\"motus-korea-market\" data-layout=\"editorial-article-4q\" style=\"font",
+      "pageAt": "class='post-outer-container'><div class='post-outer'><div class='post'><script t"
+    }
+  },
+  "2026-11-04/us": {
+    "url": "https://motusnova.blogspot.com/2026/11/3-58.html",
+    "pageArticleLen": 3204,
+    "published-unit.json": "absent",
+    "live-unit.json": {
+      "equal": false,
+      "len": 64316,
+      "firstDiff": 1,
+      "unitAt": "article data-product=\"motus-us-market\" data-layout=\"editorial-article-4q\" style=",
+      "pageAt": "!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\"><html><head><meta "
+    }
+  },
+  "2026-11-04/ai": {
+    "url": "https://motusnova.blogspot.com/2026/11/amd-37-ai.html",
+    "pageArticleLen": 3219,
+    "published-unit.json": "absent",
+    "live-unit.json": {
+      "equal": false,
+      "len": 24206,
+      "firstDiff": 1,
+      "unitAt": "article data-product=\"motus-ai-intelligence\" data-layout=\"editorial-article-4q\" ",
+      "pageAt": "!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\"><html><head><meta "
+    }
+  },
+  "2026-10-30/us": {
+    "url": "https://motusnova.blogspot.com/2026/10/3-42.html",
+    "pageArticleLen": 3205,
+    "published-unit.json": "absent",
+    "live-unit.json": {
+      "equal": false,
+      "len": 49047,
+      "firstDiff": 1,
+      "unitAt": "article data-product=\"motus-us-market\" data-layout=\"editorial-article-4q\" style=",
+      "pageAt": "!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\"><html><head><meta "
+    }
+  },
+  "2026-10-30/korea": {
+    "url": "https://motusnova.blogspot.com/2026/10/124-5937-1-48.html",
+    "pageArticleLen": 39446,
+    "published-unit.json": "absent",
+    "live-unit.json": {
+      "equal": false,
+      "len": 23128,
+      "firstDiff": 9,
+      "unitAt": "data-product=\"motus-korea-market\" data-layout=\"editorial-article-4q\" style=\"font",
+      "pageAt": "class='post-outer-container'><div class='post-outer'><div class='post'><script t"
+    }
+  }
+}
