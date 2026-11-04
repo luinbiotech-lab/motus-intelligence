@@ -1,0 +1,125 @@
+/**
+ * Daily traffic analysis input (owner request 2026-11-04): for the articles published on the previous KST day,
+ * collect what can be measured and the top competing posts, so a daily analysis (Claude, shared with 루인) can say
+ * whether traffic was high or low, why, and what to improve.
+ *
+ *   node dist/src/traffic-daily-cli.js --date YYYY-MM-DD      (analysis day; articles of the day before)
+ *
+ * Collected (each part is optional and records why it is missing; nothing is estimated):
+ * - blog page views: Blogger API all-time/7d/30d counts; daily views = all-time delta since the last capture
+ * - our articles: public feed entries published that KST day, with simple content features
+ * - Search Console (when connected): clicks, impressions, CTR and position per article page
+ * - Naver DataLab search interest for each article's keywords (existing API Hub key)
+ * - Naver blog search (when NAVER_SEARCH_* is set): top posts per keyword with the same content features
+ * Output: data/traffic/<date>/traffic-input.json. Read-only: never writes to the blog.
+ */
+import {mkdir,readFile,readdir,writeFile} from 'node:fs/promises';
+import {existsSync} from 'node:fs';
+import {join} from 'node:path';
+import {articleKeywords,contentFeatures,type ContentFeatures} from './operations/traffic.js';
+
+const args=process.argv.slice(2),value=(flag:string)=>{const index=args.indexOf(flag);return index>=0?args[index+1]:undefined};
+const date=value('--date')??'';
+if(!/^\d{4}-\d{2}-\d{2}$/.test(date))throw new Error('--date YYYY-MM-DD required');
+const day=new Date(Date.parse(date+'T00:00:00Z')-86400000).toISOString().slice(0,10);
+const BLOG='https://motusnova.blogspot.com';
+const root=join(process.cwd(),'data','traffic',date);
+const env=(name:string)=>process.env[name]?.trim()||undefined;
+const timeout=(ms:number)=>AbortSignal.timeout(ms);
+
+async function googleToken(clientId:string,clientSecret:string,refreshToken:string):Promise<string> {
+  const response=await fetch('https://oauth2.googleapis.com/token',{method:'POST',headers:{'content-type':'application/x-www-form-urlencoded'},body:new URLSearchParams({client_id:clientId,client_secret:clientSecret,refresh_token:refreshToken,grant_type:'refresh_token'}),signal:timeout(20000)});
+  const body=await response.json() as {access_token?:string;error?:string};
+  if(!body.access_token)throw new Error(`token: ${body.error??response.status}`);
+  return body.access_token;
+}
+async function previousCapture():Promise<{capturedAt:string;allTime:number}|null> {
+  const base=join(process.cwd(),'data','traffic');if(!existsSync(base))return null;
+  for(const folder of (await readdir(base)).filter(name=>/^\d{4}-\d{2}-\d{2}$/.test(name)&&name<date).sort().reverse()){
+    try{const prior=JSON.parse(await readFile(join(base,folder,'traffic-input.json'),'utf8')) as {pageviews?:{capturedAt?:string;allTime?:number}};if(prior.pageviews?.capturedAt&&typeof prior.pageviews.allTime==='number')return {capturedAt:prior.pageviews.capturedAt,allTime:prior.pageviews.allTime}}catch{/* next */}
+  }
+  return null;
+}
+
+const result:Record<string,unknown>={date,articlesDay:day,collectedAt:new Date().toISOString()};
+
+// 1) Blog page views.
+try{
+  const id=env('BLOGGER_BLOG_ID'),cid=env('BLOGGER_CLIENT_ID'),secret=env('BLOGGER_CLIENT_SECRET'),refresh=env('BLOGGER_REFRESH_TOKEN');
+  if(!id||!cid||!secret||!refresh)throw new Error('NOT_CONFIGURED');
+  const token=await googleToken(cid,secret,refresh);
+  const response=await fetch(`https://www.googleapis.com/blogger/v3/blogs/${id}/pageviews?range=7DAYS&range=30DAYS&range=all`,{headers:{authorization:`Bearer ${token}`},signal:timeout(20000)});
+  if(!response.ok)throw new Error(`HTTP ${response.status}`);
+  const counts=(await response.json() as {counts?:Array<{timeRange?:string;count?:string}>}).counts??[],count=(range:string)=>Number(counts.find(item=>item.timeRange===range)?.count??NaN);
+  const capturedAt=new Date().toISOString(),allTime=count('ALL_TIME'),prior=await previousCapture();
+  result.pageviews={state:'PASS',capturedAt,allTime,sevenDays:count('SEVEN_DAYS'),thirtyDays:count('THIRTY_DAYS'),previous:prior,sincePrevious:prior?{views:allTime-prior.allTime,hours:Math.round((Date.parse(capturedAt)-Date.parse(prior.capturedAt))/360000)/10}:null};
+}catch(error){result.pageviews={state:'UNAVAILABLE',reason:error instanceof Error?error.message:String(error)}}
+
+// 2) Our articles of that KST day (public feed; published-min/max in KST).
+interface Ours {title:string;url:string;labels:string[];publishedKst:string;features:ContentFeatures;keywords:string[];searchConsole?:unknown;datalab?:unknown;competitors?:unknown}
+const ours:Ours[]=[];
+try{
+  const min=encodeURIComponent(`${day}T00:00:00+09:00`),max=encodeURIComponent(`${date}T00:00:00+09:00`);
+  const response=await fetch(`${BLOG}/feeds/posts/default?alt=json&max-results=25&published-min=${min}&published-max=${max}`,{signal:timeout(20000)});
+  if(!response.ok)throw new Error(`HTTP ${response.status}`);
+  const feed=await response.json() as {feed?:{entry?:Array<{title?:{$t?:string};content?:{$t?:string};published?:{$t?:string};category?:Array<{term?:string}>;link?:Array<{rel?:string;href?:string}>}>}};
+  for(const entry of feed.feed?.entry??[]){
+    const title=entry.title?.$t??'',labels=(entry.category??[]).map(item=>item.term??'').filter(Boolean),url=entry.link?.find(item=>item.rel==='alternate')?.href??'';
+    const published=entry.published?.$t??'';
+    ours.push({title,url,labels,publishedKst:published?new Date(Date.parse(published)+9*3600000).toISOString().slice(0,16).replace('T',' '):'',features:contentFeatures(entry.content?.$t??''),keywords:articleKeywords(title,labels)});
+  }
+  result.articles={state:'PASS',count:ours.length};
+}catch(error){result.articles={state:'UNAVAILABLE',reason:error instanceof Error?error.message:String(error)}}
+
+// 3) Search Console per page (data usually lags 2-3 days; the last 7 days by page and date are kept).
+try{
+  const property=env('GOOGLE_SEARCH_CONSOLE_PROPERTY'),cid=env('SEARCH_CONSOLE_CLIENT_ID'),secret=env('SEARCH_CONSOLE_CLIENT_SECRET'),refresh=env('SEARCH_CONSOLE_REFRESH_TOKEN');
+  if(!property||!cid||!secret||!refresh)throw new Error('NOT_CONNECTED');
+  const token=await googleToken(cid,secret,refresh),start=new Date(Date.parse(date+'T00:00:00Z')-8*86400000).toISOString().slice(0,10);
+  const query=async(dimensions:string[])=>{const response=await fetch(`https://www.googleapis.com/webmasters/v3/sites/${encodeURIComponent(property)}/searchAnalytics/query`,{method:'POST',headers:{authorization:`Bearer ${token}`,'content-type':'application/json'},body:JSON.stringify({startDate:start,endDate:date,dimensions,rowLimit:250}),signal:timeout(30000)});if(!response.ok)throw new Error(`HTTP ${response.status}`);return (await response.json() as {rows?:Array<{keys?:string[];clicks?:number;impressions?:number;ctr?:number;position?:number}>}).rows??[]};
+  const byPage=await query(['page','date']),byQuery=await query(['query']);
+  for(const article of ours)article.searchConsole=byPage.filter(row=>row.keys?.[0]===article.url).map(row=>({date:row.keys?.[1],clicks:row.clicks,impressions:row.impressions,ctr:row.ctr,position:row.position}));
+  result.searchConsole={state:'PASS',range:[start,date],lastDataDate:byPage.map(row=>row.keys?.[1]??'').sort().at(-1)??null,topQueries:byQuery.sort((a,b)=>(b.impressions??0)-(a.impressions??0)).slice(0,20)};
+}catch(error){result.searchConsole={state:'UNAVAILABLE',reason:error instanceof Error?error.message:String(error)}}
+
+// 4) Naver DataLab interest (relative, last 14 days) for each article's keywords.
+try{
+  const cid=env('NAVER_DATALAB_CLIENT_ID'),secret=env('NAVER_DATALAB_CLIENT_SECRET');if(!cid||!secret)throw new Error('NOT_CONFIGURED');
+  const start=new Date(Date.parse(date+'T00:00:00Z')-14*86400000).toISOString().slice(0,10);
+  for(const article of ours){
+    const groups=article.keywords.slice(0,5).map(keyword=>({groupName:keyword,keywords:[keyword]}));if(!groups.length)continue;
+    const response=await fetch('https://naverapihub.apigw.ntruss.com/search-trend/v1/search',{method:'POST',headers:{'content-type':'application/json','X-NCP-APIGW-API-KEY-ID':cid,'X-NCP-APIGW-API-KEY':secret},body:JSON.stringify({startDate:start,endDate:day,timeUnit:'date',keywordGroups:groups}),signal:timeout(20000)});
+    article.datalab=response.ok?((await response.json() as {results?:Array<{title?:string;data?:Array<{period?:string;ratio?:number}>}>}).results??[]).map(item=>({keyword:item.title,series:(item.data??[]).map(point=>[point.period,point.ratio])})):{error:`HTTP ${response.status}`};
+  }
+  result.datalab={state:'PASS'};
+}catch(error){result.datalab={state:'UNAVAILABLE',reason:error instanceof Error?error.message:String(error)}}
+
+// 5) Naver blog search: top posts per keyword, with the same content features for the first five.
+try{
+  const cid=env('NAVER_SEARCH_CLIENT_ID'),secret=env('NAVER_SEARCH_CLIENT_SECRET');if(!cid||!secret)throw new Error('NOT_CONFIGURED (NAVER_SEARCH_CLIENT_ID / NAVER_SEARCH_CLIENT_SECRET)');
+  const cache=new Map<string,unknown>();
+  for(const article of ours){
+    const lists=[];
+    for(const keyword of article.keywords.slice(0,2)){
+      if(!cache.has(keyword)){
+        const response=await fetch(`https://naverapihub.apigw.ntruss.com/search/v1/blog?query=${encodeURIComponent(keyword)}&display=10&sort=sim`,{headers:{'X-NCP-APIGW-API-KEY-ID':cid,'X-NCP-APIGW-API-KEY':secret},signal:timeout(20000)});
+        if(!response.ok){cache.set(keyword,{keyword,error:`HTTP ${response.status}: ${(await response.text()).slice(0,160)}`});continue}
+        const items=((await response.json() as {total?:number;items?:Array<{title?:string;link?:string;bloggername?:string;bloggerlink?:string;postdate?:string;description?:string}>}).items??[]).map((item,index)=>({rank:index+1,title:(item.title??'').replace(/<[^>]+>/g,''),link:item.link,blogger:item.bloggername,bloggerLink:item.bloggerlink,postdate:item.postdate,description:(item.description??'').replace(/<[^>]+>/g,'').slice(0,200)}));
+        const detailed=[];
+        for(const item of items){
+          if(detailed.length>=5)break;
+          try{const link=String(item.link).replace('://blog.naver.com','://m.blog.naver.com');const page=await fetch(link,{headers:{'user-agent':'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X)'},signal:timeout(15000)});const html=await page.text();const body=html.match(/<div class="se-main-container"[\s\S]*?(?=<div class="(?:post_footer|se-viewer-footer)|<\/body>)/)?.[0]??html;detailed.push({...item,features:page.ok?contentFeatures(body):null})}catch{detailed.push({...item,features:null})}
+        }
+        cache.set(keyword,{keyword,top:[...detailed,...items.slice(detailed.length)]});
+      }
+      lists.push(cache.get(keyword));
+    }
+    article.competitors=lists;
+  }
+  result.naverBlogSearch={state:'PASS'};
+}catch(error){result.naverBlogSearch={state:'UNAVAILABLE',reason:error instanceof Error?error.message:String(error)}}
+
+result.ourArticles=ours;
+await mkdir(root,{recursive:true});
+await writeFile(join(root,'traffic-input.json'),JSON.stringify(result,null,2),'utf8');
+console.log(JSON.stringify({date,articlesDay:day,articles:ours.length,pageviews:(result.pageviews as {state:string}).state,searchConsole:(result.searchConsole as {state:string}).state,datalab:(result.datalab as {state:string}).state,naverBlogSearch:(result.naverBlogSearch as {state:string}).state}));

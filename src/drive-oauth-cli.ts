@@ -12,6 +12,10 @@
  * token go straight into the repository's Actions secrets (MOTUS_DRIVE_CLIENT_ID / _CLIENT_SECRET /
  * _REFRESH_TOKEN) through the GitHub CLI; none of them is printed. Finally it checks that the Drive API answers and
  * creates the "MOTUS Reports" folder.
+ *
+ * --search-console (2026-11-04, daily traffic analysis): consent for Search Console read access only
+ * (webmasters.readonly) with a separate Desktop client; stores SEARCH_CONSOLE_CLIENT_ID / _CLIENT_SECRET /
+ * _REFRESH_TOKEN and GOOGLE_SEARCH_CONSOLE_PROPERTY, then checks that the blog property is visible.
  */
 import {spawn} from 'node:child_process';
 import {readFile} from 'node:fs/promises';
@@ -39,6 +43,30 @@ export async function readClientJson(path:string):Promise<{clientId:string;clien
 }
 
 const args=process.argv.slice(2),jsonPath=args[args.indexOf('--client-json')+1],withBlogger=!args.includes('--drive-only');
+export const SEARCH_CONSOLE_SCOPE='https://www.googleapis.com/auth/webmasters.readonly',SEARCH_CONSOLE_PROPERTY='https://motusnova.blogspot.com/';
+if(args.includes('--search-console')){
+  console.log('MOTUS 구글 서치 콘솔 연결을 시작합니다(읽기 전용). 비밀번호와 토큰은 화면에 출력하지 않습니다.');
+  try{
+    if(!args.includes('--client-json')||!jsonPath)throw new Error('사용법: npm run drive:oauth -- --search-console --client-json <다운로드한 client_secret_….json 경로>');
+    const client=await readClientJson(jsonPath);
+    await gh(['auth','status']);
+    let token='';
+    const env:Record<string,string>={BLOGGER_CLIENT_ID:client.clientId,BLOGGER_CLIENT_SECRET:client.clientSecret,BLOGGER_BLOG_ID:'search-console'};
+    console.log('브라우저가 열리면 블로그 주인 계정으로 "허용"을 눌러 주세요.');
+    await runBloggerOAuthBootstrap({environment:name=>env[name],scope:SEARCH_CONSOLE_SCOPE,persistSecret:async value=>{token=value;return value}});
+    // Check the property before storing anything, so a wrong account is caught while the owner is still at the PC.
+    const access=await fetch('https://oauth2.googleapis.com/token',{method:'POST',headers:{'content-type':'application/x-www-form-urlencoded'},body:new URLSearchParams({client_id:client.clientId,client_secret:client.clientSecret,refresh_token:token,grant_type:'refresh_token'})});
+    const accessToken=(await access.json() as {access_token?:string}).access_token;if(!accessToken)throw new Error('토큰 확인에 실패했습니다. 다시 실행해 주세요.');
+    const sites=await fetch('https://www.googleapis.com/webmasters/v3/sites',{headers:{authorization:`Bearer ${accessToken}`}});
+    if(!sites.ok){const text=await sites.text();throw new Error(/accessNotConfigured|SERVICE_DISABLED|has not been used/i.test(text)?'Google Search Console API가 꺼져 있습니다. Google Cloud 콘솔 > API 및 서비스 > 라이브러리에서 "Google Search Console API"를 사용 설정한 뒤 다시 실행하세요.':`서치 콘솔 응답 오류 HTTP ${sites.status}`)}
+    const list=(await sites.json() as {siteEntry?:Array<{siteUrl?:string;permissionLevel?:string}>}).siteEntry??[];
+    const entry=list.find(item=>item.siteUrl===SEARCH_CONSOLE_PROPERTY);
+    if(!entry||entry.permissionLevel==='siteUnverifiedUser')throw new Error(`서치 콘솔에 ${SEARCH_CONSOLE_PROPERTY} 속성이 없거나 확인되지 않았습니다(이 계정에 보이는 속성 ${list.length}개). 서치 콘솔에서 속성을 추가·확인한 뒤 다시 실행하세요.`);
+    await setSecret('SEARCH_CONSOLE_CLIENT_ID',client.clientId);await setSecret('SEARCH_CONSOLE_CLIENT_SECRET',client.clientSecret);await setSecret('SEARCH_CONSOLE_REFRESH_TOKEN',token);await setSecret('GOOGLE_SEARCH_CONSOLE_PROPERTY',SEARCH_CONSOLE_PROPERTY);
+    console.log(`완료: 서치 콘솔 속성 확인(${entry.permissionLevel}), GitHub Secret 4개 저장. 이제 매일 기사별 노출·클릭을 볼 수 있습니다.`);
+  }catch(error){console.error('중단: '+(error instanceof Error?error.message:String(error)));process.exitCode=3}
+  process.exit();
+}
 console.log('MOTUS 구글 드라이브 승인을 시작합니다. 비밀번호와 토큰은 화면에 출력하지 않습니다.');
 try{
   if(!args.includes('--client-json')||!jsonPath)throw new Error('사용법: npm run drive:oauth -- --client-json <다운로드한 client_secret_….json 경로>');
