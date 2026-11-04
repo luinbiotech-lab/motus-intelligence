@@ -1,8 +1,9 @@
 name: MOTUS Daily Report
 
-# Owner decision 2026-11-04: one combined daily report (Korea + US + AI PDF) in the '리포트' category, published
-# once the day's three articles are out. It runs after every daily production run (whichever category finishes
-# last triggers the publication), never edits the articles, and is idempotent (ledger, public feed, title).
+# Owner decisions 2026-11-04: one combined daily report (PDF) in the '리포트' category per operation date —
+# Monday Korea + AI, Tuesday-Friday Korea + US + AI, none on weekends. It runs after every daily production run
+# (whichever category finishes last triggers it); at 05:40 KST the previous date is closed with what was published.
+# It never edits the articles and is idempotent (ledger, public feed marker, year-specific title).
 on:
   workflow_run:
     workflows: [MOTUS Daily Production Gate]
@@ -10,7 +11,7 @@ on:
   workflow_dispatch:
     inputs:
       run_date:
-        description: Operation date (YYYY-MM-DD, KST); empty = today and yesterday
+        description: Operation date (YYYY-MM-DD, KST); empty = today and yesterday (required with allow_partial)
         required: false
         type: string
       execute_publish:
@@ -24,8 +25,8 @@ on:
         type: boolean
         default: false
   schedule:
-    # 00:20 KST: final attempt for the previous operation date with whatever was published that day.
-    - cron: '20 15 * * 1-5'
+    # 05:40 KST Tuesday-Saturday: final attempt for the previous operation date (before the 06:17 Korea run).
+    - cron: '40 20 * * 1-5'
 
 permissions:
   contents: read
@@ -58,6 +59,8 @@ jobs:
           LIVE=false; PARTIAL=false; DATES="$yesterday $today"
           if [[ "$EVENT" == "workflow_run" ]]; then LIVE=true; fi
           if [[ "$EVENT" == "schedule" ]]; then LIVE=true; PARTIAL=true; DATES="$yesterday"; fi
+          # A partial report is final for its date, so a manual one must name the date explicitly.
+          if [[ "$EVENT" == "workflow_dispatch" && "$INPUT_PARTIAL" == "true" && -z "$INPUT_DATE" ]]; then echo '::error::allow_partial needs run_date'; exit 1; fi
           if [[ "$EVENT" == "workflow_dispatch" ]]; then
             [[ "$INPUT_EXECUTE" == "true" ]] && LIVE=true
             [[ "$INPUT_PARTIAL" == "true" ]] && PARTIAL=true
@@ -87,9 +90,34 @@ jobs:
       - name: Mark the upload root
         if: always()
         run: mkdir -p data && echo daily-report > data/.daily-report-bundle
+      - name: Check which dates are ready (no credentials, writes nothing)
+        id: check
+        shell: bash
+        run: |
+          set -uo pipefail
+          ready=""; status=0
+          for d in $DATES; do
+            flags=(--date "$d"); [[ "$PARTIAL" == "true" ]] && flags+=(--final-attempt)
+            out=$(node dist/src/motus-daily-report-cli.js "${flags[@]}"); code=$?
+            echo "$out"; echo "- $d: \`$(echo "$out" | tail -1 | cut -c1-300)\`" >> "$GITHUB_STEP_SUMMARY"
+            if [[ "$out" == *'"state":"SIMULATED"'* ]]; then ready="$ready $d"; elif [[ $code -ne 0 ]]; then status=1; fi
+          done
+          echo "ready=${ready# }" >> "$GITHUB_OUTPUT"
+          # Nothing to publish: a FAILED check, or a final attempt that ends in HOLD, fails the run (visible).
+          [[ -z "$ready" ]] && exit $status
+          exit 0
+      - name: Install the PDF renderer (Chromium) and Korean fonts
+        if: steps.check.outputs.ready != '' && env.LIVE == 'true'
+        shell: bash
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk >/dev/null
+          npm install --no-save playwright-core@1.56.0 >/dev/null
+          npx playwright-core install --with-deps chromium >/dev/null
       - name: Build and publish the daily report
+        if: steps.check.outputs.ready != '' && env.LIVE == 'true'
         shell: bash
         env:
+          READY: ${{ steps.check.outputs.ready }}
           BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
           BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
           BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
@@ -99,21 +127,10 @@ jobs:
           MOTUS_DRIVE_REFRESH_TOKEN: ${{ secrets.MOTUS_DRIVE_REFRESH_TOKEN }}
         run: |
           set -uo pipefail
-          status=0; renderer=false
-          for d in $DATES; do
-            [[ -d "data/operations/$d" ]] || { echo "$d: no operations"; continue; }
-            flags=(--date "$d"); [[ "$PARTIAL" == "true" ]] && flags+=(--allow-partial)
-            # A dry run first: only a date that is ready (SIMULATED) needs the renderer and a live attempt.
-            out=$(node dist/src/motus-daily-report-cli.js "${flags[@]}") || { echo "$out"; status=1; continue; }
-            echo "$d: $out"
-            [[ "$LIVE" == "true" && "$out" == *'"state":"SIMULATED"'* ]] || continue
-            if [[ "$renderer" == false ]]; then
-              sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk >/dev/null
-              npm install --no-save playwright-core@1.56.0 >/dev/null
-              npx playwright-core install --with-deps chromium >/dev/null
-              renderer=true
-            fi
-            MOTUS_LIVE_PUBLISH_ENABLED=true node dist/src/motus-daily-report-cli.js "${flags[@]}" --execute || status=1
+          status=0
+          for d in $READY; do
+            flags=(--date "$d" --execute); [[ "$PARTIAL" == "true" ]] && flags+=(--final-attempt)
+            MOTUS_LIVE_PUBLISH_ENABLED=true node dist/src/motus-daily-report-cli.js "${flags[@]}" || status=1
             node -e 'const r=require(process.argv[1]);console.log("### MOTUS daily report "+r.date+"\n- State: **"+r.state+"**\n- Title: "+(r.title??"")+(r.publicPostUrl?"\n- URL: "+r.publicPostUrl:"")+(r.reason?"\n- Reason: "+r.reason:""))' "$PWD/data/daily-report/$d/daily-report.json" >> "$GITHUB_STEP_SUMMARY" || true
           done
           exit $status

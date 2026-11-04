@@ -27,3 +27,18 @@ test('the daily report post carries the date marker, the 리포트 label and lin
   assert.match(result.html,/data-section="editorial-lead" data-daily-report="2026-11-05"/);
   assert.match(result.html,/href="https:\/\/drive\.google\.com\/file\/d\/x\/view"/);
 });
+
+test('daily report policy: Monday Korea + AI, Tuesday-Friday all three, no weekend report', async () => {
+  const {expectedCategories}=await import('../src/reports/daily-pdf.js');
+  assert.deepEqual(expectedCategories(1),['KOREA_MARKET','AI_INTELLIGENCE']);
+  for(const day of [2,3,4,5])assert.deepEqual(expectedCategories(day),['KOREA_MARKET','US_MARKET','AI_INTELLIGENCE']);
+  assert.deepEqual(expectedCategories(6),[]);assert.deepEqual(expectedCategories(0),[]);
+});
+
+test('publication is read from the ledger, not from auto-publish.json that later runs overwrite', async () => {
+  const {publishedArticle}=await import('../src/reports/daily-pdf.js');
+  const ledger=[{event:'PUBLISH_ATTEMPT'},{event:'PUBLISHED',publicPostUrl:'https://motusnova.blogspot.com/2026/10/a.html',sessionDate:'2026-10-28'},{event:'GATE_HOLD'},{event:'REPUBLISHED',publicPostUrl:'https://motusnova.blogspot.com/2026/10/a.html',sessionDate:'2026-10-28'}].map(e=>JSON.stringify(e)).join('\n');
+  assert.deepEqual(publishedArticle(ledger),{url:'https://motusnova.blogspot.com/2026/10/a.html',sessionDate:'2026-10-28'});
+  assert.equal(publishedArticle(JSON.stringify({event:'SKIPPED_EXISTING',publicPostUrl:'https://x'})),null);
+  assert.equal(publishedArticle(''),null);
+});

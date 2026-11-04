@@ -6,14 +6,18 @@
  *
  *   node dist/src/motus-daily-report-cli.js --date YYYY-MM-DD [--execute] [--allow-partial]
  *
- * Without --allow-partial it waits (HOLD, exit 0) until all three categories are published. It never edits the
- * daily articles. Outcome: data/daily-report/<date>/daily-report.json and publish-ledger.jsonl.
+ * Owner decisions 2026-11-04: Monday = Korea + AI (no US session on Sunday), Tuesday-Friday = Korea + US + AI;
+ * no report on Saturday/Sunday. Without --allow-partial it waits (HOLD, exit 0) until every expected category is
+ * published; the final attempt (05:40 KST next day, --final-attempt) publishes what is there and fails loudly on
+ * HOLD. Publication is judged by each category's publish ledger (auto-publish.json is overwritten by later runs),
+ * and the article data by the snapshot taken by the publishing run (published-unit.json). Without --execute it
+ * only reports readiness and writes nothing. It never edits the daily articles.
  */
 import {appendFile,mkdir,readFile,writeFile} from 'node:fs/promises';
 import {existsSync} from 'node:fs';
 import {join,resolve} from 'node:path';
 import type {SplitPublicationUnit} from './intelligence/split-daily-production.js';
-import {DAILY_REPORT_ORDER,buildCombinedDailyPdfHtml,dailyKind,dailyLead,type DailyCategory,type DailyReportPart} from './reports/daily-pdf.js';
+import {DAILY_REPORT_ORDER,buildCombinedDailyPdfHtml,dailyKind,dailyLead,expectedCategories,publishedArticle,type DailyCategory,type DailyReportPart} from './reports/daily-pdf.js';
 import {checkPdf,renderPdf} from './reports/pdf-render.js';
 import {DAILY_REPORT_LABEL,renderDailyReportArticle} from './publishers/editorial-article.js';
 import {DRIVE_ROOT_FOLDER,GoogleDriveClient,driveCredentialsFromEnvironment} from './services/google-drive.js';
@@ -21,48 +25,59 @@ import {GoogleBloggerApiAdapter,isPublicBloggerPostUrl,type BloggerPublishingCon
 import type {WeeklySection} from './operations/weekly-review.js';
 
 const args=process.argv.slice(2),value=(flag:string)=>{const index=args.indexOf(flag);return index>=0?args[index+1]:undefined};
-const date=value('--date')??'',execute=args.includes('--execute'),allowPartial=args.includes('--allow-partial');
+const date=value('--date')??'',execute=args.includes('--execute'),finalAttempt=args.includes('--final-attempt'),allowPartial=finalAttempt||args.includes('--allow-partial');
 if(!/^\d{4}-\d{2}-\d{2}$/.test(date))throw new Error('--date YYYY-MM-DD required');
 const root=join(process.cwd(),'data','daily-report',date),ledgerPath=join(root,'publish-ledger.jsonl'),outcomePath=join(root,'daily-report.json');
-await mkdir(root,{recursive:true});
+if(execute)await mkdir(root,{recursive:true});
 const done=async(result:Record<string,unknown>):Promise<never>=>{
-  await writeFile(outcomePath,JSON.stringify({date,at:new Date().toISOString(),...result},null,2),'utf8');
-  if(result.state==='FAILED')console.log(`::warning title=Daily report::FAILED ${String(result.reason??'')}`);
-  console.log(JSON.stringify(result));process.exit(result.state==='FAILED'?1:0);
+  if(execute)await writeFile(outcomePath,JSON.stringify({date,at:new Date().toISOString(),...result},null,2),'utf8');
+  const failed=result.state==='FAILED'||(finalAttempt&&result.state==='HOLD');
+  if(failed)console.log(`::warning title=Daily report ${date}::${String(result.state)} ${String(result.reason??(result.reasons as string[]|undefined)?.join(',')??'')}`);
+  console.log(JSON.stringify({date,...result}));process.exit(failed?1:0);
 };
-const record=async(entry:{event:string;postId:string|null;publicPostUrl:string|null;title:string;detail:string})=>appendFile(ledgerPath,JSON.stringify({date,at:new Date().toISOString(),attemptId:process.env.GITHUB_RUN_ID??'LOCAL',...entry})+'\n','utf8');
+const record=async(entry:{event:string;postId:string|null;publicPostUrl:string|null;title:string;detail:string})=>execute&&appendFile(ledgerPath,JSON.stringify({date,at:new Date().toISOString(),attemptId:process.env.GITHUB_RUN_ID??'LOCAL',...entry})+'\n','utf8');
 const prior=existsSync(ledgerPath)?(await readFile(ledgerPath,'utf8')).split('\n').filter(Boolean).map(line=>JSON.parse(line) as {event:string;postId:string|null;publicPostUrl:string|null}):[];
 let postId:string|null=null,title='';
 try{
   const published=prior.find(item=>item.event==='PUBLISHED'||item.event==='SKIPPED_EXISTING');
   if(published)await done({state:'SKIP',reason:'daily report already published',publicPostUrl:published.publicPostUrl,publishCallCount:0});
-  // The day's published articles (the persisted outcome of each category's production run).
+  // The day's expected categories (owner decision): Monday Korea + AI, Tuesday-Friday all three, weekend none.
+  const weekday=new Date(date+'T00:00:00Z').getUTCDay(),expected=expectedCategories(weekday);
+  if(!expected.length)await done({state:'SKIP',reason:'no daily report on weekends',publishCallCount:0});
   const folders:Record<DailyCategory,string>={KOREA_MARKET:'korea',US_MARKET:'us',AI_INTELLIGENCE:'ai'};
-  const parts:Array<DailyReportPart&{url:string;title:string}>=[],missing:string[]=[];
-  for(const category of DAILY_REPORT_ORDER){
-    const dir=join(process.cwd(),'data','operations',date,folders[category]),publishPath=join(dir,'auto-publish.json'),unitPath=join(dir,'live-unit.json');
-    const outcome=existsSync(publishPath)?JSON.parse(await readFile(publishPath,'utf8')) as {state?:string;publicPostUrl?:string|null}:null;
-    if(outcome?.state!=='PUBLISHED'||!outcome.publicPostUrl||!existsSync(unitPath)){missing.push(folders[category]);continue}
-    const unit=JSON.parse(await readFile(unitPath,'utf8')) as SplitPublicationUnit;
-    if(unit.category!==category)throw new Error(`${folders[category]}: live unit category ${unit.category}`);
-    parts.push({category,view:unit.viewModel as DailyReportPart['view'],sessionLabel:`${unit.observedDate} 세션`,url:outcome.publicPostUrl,title:unit.title});
+  const parts:Array<DailyReportPart&{url:string;title:string}>=[],links:Array<{category:DailyCategory;url:string;title:string;sessionDate:string|null}>=[],missing:string[]=[],noData:string[]=[];
+  for(const category of expected){
+    const dir=join(process.cwd(),'data','operations',date,folders[category]);
+    const published=publishedArticle(existsSync(join(dir,'publish-ledger.jsonl'))?await readFile(join(dir,'publish-ledger.jsonl'),'utf8'):'');
+    if(!published){missing.push(folders[category]);continue}
+    // The publishing run's snapshot; a live-unit.json is used only when it is the same session (later runs rebuild it).
+    let unit:SplitPublicationUnit|null=null;
+    for(const file of ['published-unit.json','live-unit.json']){
+      if(!existsSync(join(dir,file)))continue;
+      const candidate=JSON.parse(await readFile(join(dir,file),'utf8')) as Partial<SplitPublicationUnit>;
+      if(candidate.category===category&&candidate.viewModel&&candidate.title&&(!published.sessionDate||candidate.observedDate===published.sessionDate)){unit=candidate as SplitPublicationUnit;break}
+    }
+    links.push({category,url:published.url,title:unit?.title??`${dailyKind(category)} 기사`,sessionDate:published.sessionDate});
+    if(unit)parts.push({category,view:unit.viewModel as DailyReportPart['view'],sessionLabel:`${unit.observedDate} 세션`,url:published.url,title:unit.title});else noData.push(folders[category]);
   }
-  if(!parts.length)await done({state:'HOLD',reasons:['NO_PUBLISHED_ARTICLE'],missing,publishCallCount:0});
+  if(!links.length)await done({state:'HOLD',reasons:['NO_PUBLISHED_ARTICLE'],missing,publishCallCount:0});
   if(missing.length&&!allowPartial)await done({state:'HOLD',reasons:missing.map(name=>`WAITING_FOR_${name.toUpperCase()}`),missing,publishCallCount:0});
+  if(!parts.length)await done({state:'HOLD',reasons:['NO_ARTICLE_DATA_FOR_PDF'],noData,publishCallCount:0});
   const pdf=buildCombinedDailyPdfHtml(parts,date);
-  await writeFile(join(root,'daily-report-pdf.html'),pdf.html,'utf8');
+  if(execute)await writeFile(join(root,'daily-report-pdf.html'),pdf.html,'utf8');
   const [,month,day]=date.split('-').map(Number);
-  title=`[데일리 리포트] ${month}월 ${day}일 ${parts.map(part=>dailyKind(part.category).replace(' 산업','')).join('·')} 핵심 정리`;
+  const [year]=date.split('-');
+  title=`[데일리 리포트] ${year}년 ${month}월 ${day}일 ${links.map(link=>dailyKind(link.category).replace(' 산업','')).join('·')} 핵심 정리`;
   const article=(link:{url:string;fileName:string}|null)=>{
     const sections:WeeklySection[]=[];
     if(link)sections.push({key:'daily-report-pdf',title:'PDF 리포트: 오늘의 시장 브리핑',intro:`표지 한 장에 ${parts.length}개 분야의 핵심 수치를, 이어서 분야마다 차트·종목·증권가 리포트를 2쪽씩 담은 A4 ${pdf.pages}쪽 리포트입니다.`,links:[{label:`MOTUS 데일리 리포트 (${link.fileName})`,url:link.url,meta:'PDF · Google Drive에서 보기·내려받기'}]});
-    for(const part of parts)sections.push({key:`daily-report-${folders[part.category]}`,title:`${dailyKind(part.category)}: ${part.title}`,intro:dailyLead(part.view),links:[{label:part.title,url:part.url,meta:`${dailyKind(part.category)} 기사 전문 · ${part.sessionLabel}`}]});
-    const lead=`${month}월 ${day}일 MOTUS 데일리 리포트입니다. 오늘 발행한 ${parts.map(part=>dailyKind(part.category)).join('·')} 기사의 핵심 수치와 차트, 증권가 리포트를 PDF 한 편으로 묶었습니다.${missing.length?` ${missing.map(name=>dailyKind(DAILY_REPORT_ORDER.find(c=>folders[c]===name)!)).join('·')} 기사는 발행되지 않아 이번 리포트에서 빠졌습니다.`:''}`;
-    return renderDailyReportArticle({date,title,subtitle:'국내·미국 증시와 AI 산업을 한 번에 보는 하루 정리',lead,sections,sources:parts.map(part=>({label:`${dailyKind(part.category)} — ${part.title}`,url:part.url}))}).html;
+    for(const link of links){const part=parts.find(item=>item.category===link.category);sections.push({key:`daily-report-${folders[link.category]}`,title:`${dailyKind(link.category)}: ${link.title}`,...(part?{intro:dailyLead(part.view)}:{}),links:[{label:link.title,url:link.url,meta:`${dailyKind(link.category)} 기사 전문${link.sessionDate?` · ${link.sessionDate} 세션`:''}`}]})}
+    const kindOf=(name:string)=>dailyKind(DAILY_REPORT_ORDER.find(c=>folders[c]===name)!);
+    const lead=`${month}월 ${day}일 MOTUS 데일리 리포트입니다. 오늘 발행한 ${links.map(link=>dailyKind(link.category)).join('·')} 기사의 핵심 수치와 차트, 증권가 리포트를 PDF 한 편으로 묶었습니다.${weekday===1?' 월요일은 주말 동안 미국 정규장이 열리지 않아 국내 증시와 AI 산업만 다룹니다.':''}${missing.length?` ${missing.map(kindOf).join('·')} 기사는 이날 발행되지 않아 이번 리포트에서 빠졌습니다.`:''}${noData.length?` ${noData.map(kindOf).join('·')} 기사는 링크로만 소개합니다.`:''}`;
+    return renderDailyReportArticle({date,title,subtitle:'국내·미국 증시와 AI 산업을 한 번에 보는 하루 정리',lead,sections,sources:links.map(link=>({label:`${dailyKind(link.category)} — ${link.title}`,url:link.url}))}).html;
   };
-  const preview=article({url:'https://drive.google.com/',fileName:pdf.fileName});
-  await writeFile(join(root,'daily-report-article.html'),preview,'utf8');
-  if(!execute||process.env.MOTUS_LIVE_PUBLISH_ENABLED!=='true')await done({state:'SIMULATED',title,fileName:pdf.fileName,pages:pdf.pages,missing,publishCallCount:0});
+  article({url:'https://drive.google.com/',fileName:pdf.fileName});
+  if(!execute||process.env.MOTUS_LIVE_PUBLISH_ENABLED!=='true')await done({state:'SIMULATED',title,fileName:pdf.fileName,pages:pdf.pages,missing,noData,publishCallCount:0});
   const blogId=process.env.BLOGGER_BLOG_ID?.trim(),credentials=driveCredentialsFromEnvironment();
   if(!blogId||!process.env.BLOGGER_CLIENT_ID||!process.env.BLOGGER_CLIENT_SECRET||!process.env.BLOGGER_REFRESH_TOKEN)await done({state:'HOLD',reasons:['BLOGGER_CREDENTIALS_MISSING'],publishCallCount:0});
   if(!credentials)await done({state:'HOLD',reasons:['DRIVE_NOT_CONFIGURED'],publishCallCount:0});
@@ -75,7 +90,7 @@ try{
   else if(response.status!==404)await done({state:'HOLD',reasons:['PUBLIC_FEED_LOOKUP_'+response.status],publishCallCount:0});
   const raw=JSON.parse(await readFile(resolve('config/publishing.json'),'utf8')) as {blogger:BloggerPublishingConfig};
   const config={...raw.blogger,blogId:blogId!,credentialAvailable:true,publishAsDraft:true},google=new GoogleBloggerApiAdapter();
-  const same=await google.findMatchingPosts({title,label:DAILY_REPORT_LABEL},config);
+  const same=(await google.findMatchingPosts({title,label:DAILY_REPORT_LABEL},config)).filter(item=>item.status!=='DRAFT'||item.content.includes(`data-daily-report="${date}"`));
   const live=same.find(item=>item.status==='PUBLISHED'&&item.url);
   if(live){await record({event:'SKIPPED_EXISTING',postId:live.postId,publicPostUrl:live.url,title:live.title,detail:'same title already published'});await done({state:'SKIP',reason:'same title already published',publicPostUrl:live.url,publishCallCount:0})}
   // PDF first (no post links it until the post below is published, so a same-name replace is safe).
@@ -100,7 +115,7 @@ try{
   if(after.status!=='PUBLISHED'||!isPublicBloggerPostUrl(after.url)||after.url!==result.publicPostUrl||after.title!==title)throw new Error('readback after publish does not match (status, permalink or title)');
   if(!after.content.includes(`data-daily-report="${date}"`)||!after.content.includes(upload.webViewLink))throw new Error('stored content is missing the date marker or the PDF link');
   await record({event:'PUBLISHED',postId,publicPostUrl:after.url,title,detail:'published and read back'});
-  await done({state:'PUBLISHED',postId,publicPostUrl:after.url,title,pdf:upload.webViewLink,pages:check.pages,missing,publishCallCount:1});
+  await done({state:'PUBLISHED',postId,publicPostUrl:after.url,title,pdf:upload.webViewLink,pages:check.pages,missing,noData,publishCallCount:1});
 }catch(error){
   const detail=error instanceof Error?error.message:String(error);
   await record({event:'FAILED',postId,publicPostUrl:null,title,detail});

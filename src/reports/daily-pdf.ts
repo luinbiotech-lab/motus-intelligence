@@ -128,3 +128,11 @@ export function buildCombinedDailyPdfHtml(parts:DailyReportPart[],date:string):D
   return {html:`<!doctype html><html lang=ko><head><meta charset=utf-8><title>MOTUS 데일리 리포트 ${esc(date)}</title><style>${css}</style></head><body>${cover}${bodies.join('')}</body></html>`,fileName:`MOTUS_Daily_Report_${date}.pdf`,pages:1+2*ordered.length};
 }
 export {leadOf as dailyLead};
+/** Categories a daily report waits for (owner decision 2026-11-04): Monday Korea + AI, Tuesday-Friday all three. */
+export function expectedCategories(weekday:number):DailyCategory[] {return weekday===1?['KOREA_MARKET','AI_INTELLIGENCE']:weekday>=2&&weekday<=5?[...DAILY_REPORT_ORDER]:[]}
+/** The article this operation date published (last PUBLISHED/REPUBLISHED ledger entry with a public URL). */
+export function publishedArticle(ledger:string):{url:string;sessionDate:string|null}|null {
+  let found:{url:string;sessionDate:string|null}|null=null;
+  for(const line of ledger.split('\n').filter(Boolean)){try{const entry=JSON.parse(line) as {event?:string;publicPostUrl?:string|null;sessionDate?:string};if((entry.event==='PUBLISHED'||entry.event==='REPUBLISHED')&&entry.publicPostUrl)found={url:entry.publicPostUrl,sessionDate:entry.sessionDate??null}}catch{/* skip */}}
+  return found;
+}
