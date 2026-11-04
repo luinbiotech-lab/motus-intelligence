@@ -1,0 +1,74 @@
+{
+  "gate": {
+    "state": "AUTO_PUBLISH_READY",
+    "reasons": [],
+    "approval": "AUTO_POLICY_APPROVAL",
+    "checkedAt": "2026-11-04T23:45:33.756Z"
+  },
+  "searchRegistration": {
+    "publicationId": "motus-live-2026-11-05:korea",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/11/062-5683-1-09.html",
+    "registeredAt": "2026-11-05T08:45:38+09:00",
+    "trigger": "PUBLICATION_PUBLISHED",
+    "googleInspectionState": "QUEUED",
+    "naverDiscoveryState": "PENDING",
+    "visibility": {
+      "publicationId": "motus-live-2026-11-05:korea",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/11/062-5683-1-09.html",
+      "google": {
+        "discovered": null,
+        "indexed": null,
+        "lastCrawl": null,
+        "coverageState": null,
+        "inspectionAt": null
+      },
+      "naver": {
+        "discovered": null,
+        "indexed": null,
+        "collectionState": null,
+        "inspectionAt": null
+      },
+      "sitemapIncluded": null,
+      "rssIncluded": null
+    }
+  },
+  "libraryRegistration": {
+    "idempotencyKey": "library:motus-live-2026-11-05:korea|https://motusnova.blogspot.com/2026/11/062-5683-1-09.html"
+  },
+  "weeklyFeed": {
+    "idempotencyKey": "weekly:motus-live-2026-11-05:korea"
+  },
+  "pdfCandidate": {
+    "idempotencyKey": "pdf:motus-live-2026-11-05:korea:sha256:19c02c833a07d95297102c2014c2ab6f0420443d8ebd9d6a9b9e6701f3bd5a20",
+    "visibility": "PRIVATE"
+  },
+  "audit": [
+    {
+      "at": "2026-11-04T23:45:33.756Z",
+      "event": "AUTO_PUBLISH_STATIC_GATE",
+      "detail": "AUTO_PUBLISH_READY"
+    },
+    {
+      "at": "2026-11-04T23:45:33.756Z",
+      "event": "REMOTE_DUPLICATE_CHECK",
+      "detail": "PASS"
+    },
+    {
+      "at": "2026-11-04T23:45:33.756Z",
+      "event": "FINAL_REMOTE_DUPLICATE_CHECK",
+      "detail": "PASS"
+    },
+    {
+      "at": "2026-11-05T08:45:38+09:00",
+      "event": "PUBLISHED",
+      "detail": "AUTO_POLICY_APPROVAL"
+    }
+  ],
+  "state": "PUBLISHED",
+  "draftPostId": "1679539622803046746",
+  "publicPostUrl": "https://motusnova.blogspot.com/2026/11/062-5683-1-09.html",
+  "publishedAt": "2026-11-05T08:45:38+09:00",
+  "insertCallCount": 1,
+  "publishCallCount": 1,
+  "error": null
+}
