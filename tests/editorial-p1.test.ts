@@ -68,3 +68,16 @@ test('a company named in the session commentary with a 3%+ move leads the list a
   assert.match(market[0]!.text,/^인텔\(INTC\)은 10\.00달러로 29\.10% 급락했다\(리포트·기사 언급 종목\)\.$/);
   assert.equal(composed.titleFocus,'인텔 29% 급락');
 });
+
+test('article design helpers: figures coloured by sign or verb, particles kept, bars on one scale', async () => {
+  const {emph,barsSvg}=await import('../src/publishers/editorial-article.js');
+  const html=emph('삼성전자는 222,000원으로 3.06% 하락했다. 한진칼 29.97% 급등, “+2.1%로 가장 강했고” 10년물 +4bp, 목표주가 610,000원을 제시');
+  assert.match(html,/<b style="color:#1f5fbf[^>]*>3\.06%<\/b> 하락/);
+  assert.match(html,/<b style="color:#c62828[^>]*>29\.97%<\/b> 급등/);
+  assert.match(html,/“<b style="color:#c62828[^>]*>\+2\.1%<\/b>로/);
+  assert.match(html,/<b style="color:#16202e[^>]*>222,000원<\/b>으로/);assert.match(html,/<b style="color:#16202e[^>]*>610,000원<\/b>을/);
+  assert.match(html,/<b style="color:#c62828[^>]*>\+4bp<\/b>/);
+  assert.doesNotMatch(emph('GPT-6.1 출시, 2026-11-03 발표'),/<b/);
+  const svg=barsSvg([{label:'기술',value:1.31},{label:'필수소비재',value:-2.07}]);
+  assert.match(svg,/\+1\.31%/);assert.match(svg,/-2\.07%/);assert.equal(barsSvg([{label:'x',value:1}]),'');
+});
