@@ -46,7 +46,7 @@ test('an issue-led AI article reports official announcements as facts, without t
   const led=renderAIEditorialArticle({...(base as object),deepSections:[{key:'ai-issue',placement:'early',title:'오늘의 AI 쟁점: 증권가 시각',paragraphs:[{text:'A증권은 “알파벳 급락”이라고 진단했다.'}]}]} as never).html;
   assert.match(led,/엔비디아는 10월 30일 공식 블로그에/);
   assert.doesNotMatch(led,/MOTUS 분석:|판단해야 한다|확인할 필요가 있다|과금 구조/);
-  assert.ok(led.indexOf('오늘의 AI 쟁점')<led.indexOf('엔비디아, AI 교육 공개'),'the market issue comes before announcements');
+  assert.ok(led.indexOf('오늘의 AI 쟁점')<led.indexOf('>엔비디아, AI 교육 공개<'),'the market issue comes before announcements');
   const plain=renderAIEditorialArticle(base).html;
   assert.match(plain,/MOTUS 분석:/,'without a market issue the official-announcement article keeps its reading');
 });

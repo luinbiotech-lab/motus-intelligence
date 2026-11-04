@@ -23,7 +23,7 @@ const TAGS:Record<Role,[string,string]>={data:['데이터',`background:${C.navyS
 /** Escaped text with every figure in bold: a signed change in red (+) or blue (-), a level or unsigned figure in ink. */
 export function emph(value:string):string {
   // An unsigned change takes its colour from the verb that follows it (3.06% 하락 → blue, 29.97% 급등 → red).
-  return esc(value).replace(/(^|[\s(·,:])([+\-−]?\d[\d,]*(?:\.\d+)?)(\s?(?:%p|%|bp|원|달러|억원|조원))(?![가-힣A-Za-z])(?=(\s?(?:상승|급등|올랐|오른|반등|하락|급락|내렸|내린|떨어))?)/g,(_match,lead:string,number:string,unit:string,verb?:string)=>{
+  return esc(value).replace(/(^|[\s(·,:“‘;~])([+\-−]?\d[\d,]*(?:\.\d+)?)(\s?(?:%p|%|bps|bp|억원|조원|원|달러))(?=(?:으로|로|을|를|이|가|은|는|의|대|에|씩|까지)?(?![가-힣A-Za-z]))(?=(?:으로|로|을|를|이|가|은|는|의)?(\s?(?:상승|급등|올랐|오른|반등|하락|급락|내렸|내린|떨어))?)/g,(_match,lead:string,number:string,unit:string,verb?:string)=>{
     const color=/^[+]/.test(number)?C.up:/^[\-−]/.test(number)?C.down:/%/.test(unit)&&verb?(/상승|급등|올랐|오른|반등/.test(verb)?C.up:C.down):C.ink;return `${lead}<b style="color:${color};font-weight:800;white-space:nowrap">${number}${unit}</b>`});
 }
 function heading(title:string,role?:Role){const tag=role?`<span style="font-size:12px;font-weight:800;letter-spacing:.03em;padding:3px 8px;border-radius:3px;white-space:nowrap;${TAGS[role][1]}">${TAGS[role][0]}</span>`:'';return `<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:2px solid ${C.navy};padding-bottom:7px;margin:0 0 12px"><h2 style="margin:0;font-size:clamp(19px,4.8vw,22px);line-height:1.35;font-weight:900;color:${C.navy};word-break:keep-all">${esc(title)}</h2>${tag}</div>`}
@@ -34,10 +34,10 @@ const prose=(values:string[])=>values.map(value=>value.trim()).filter(Boolean).m
 /** Horizontal bars of signed changes on one scale, labelled with the printed value (red up, blue down). */
 export function barsSvg(rows:Array<{label:string;value:number}>):string {
   const data=rows.filter(row=>Number.isFinite(row.value));if(data.length<2)return '';
-  const width=360,rowH=24,labelW=128,valueW=46,max=Math.max(...data.map(row=>Math.abs(row.value)),0.01),neg=data.some(row=>row.value<0),pos=data.some(row=>row.value>0);
+  const width=360,rowH=24,labelW=128,valueW=54,max=Math.max(...data.map(row=>Math.abs(row.value)),0.01),neg=data.some(row=>row.value<0),pos=data.some(row=>row.value>0);
   const plotL=labelW+(neg?valueW:6),plotR=width-(pos?valueW:6),half=neg&&pos?(plotR-plotL)/2:plotR-plotL,zero=neg&&pos?plotL+half:neg?plotR:plotL;
   const height=data.length*rowH+8,out=[`<svg viewBox="0 0 ${width} ${height}" width="100%" style="display:block;max-width:100%" xmlns="http://www.w3.org/2000/svg" role="img"><line x1="${zero}" x2="${zero}" y1="2" y2="${height-2}" stroke="#9aa6b2" stroke-width="1"/>`];
-  data.forEach((row,index)=>{const y=4+index*rowH,length=Math.max(1,half*Math.abs(row.value)/max),x=row.value>=0?zero:zero-length,color=row.value>0?C.up:row.value<0?C.down:'#8a96a3',label=row.label.length>12?row.label.slice(0,12)+'…':row.label,text=`${row.value>0?'+':row.value<0?'-':''}${Math.abs(row.value).toFixed(2)}%`;
+  data.forEach((row,index)=>{const y=4+index*rowH,length=Math.max(1,half*Math.abs(row.value)/max),x=row.value>=0?zero:zero-length,color=row.value>0?C.up:row.value<0?C.down:'#8a96a3',label=row.label.length>10?row.label.slice(0,9)+'…':row.label,text=`${row.value>0?'+':row.value<0?'-':''}${Math.abs(row.value).toFixed(2)}%`;
     out.push(`<text x="${labelW-6}" y="${y+15}" font-size="12" text-anchor="end" fill="${C.ink}">${esc(label)}</text><rect x="${x.toFixed(1)}" y="${y+4}" width="${length.toFixed(1)}" height="14" fill="${color}"/><text x="${(row.value>=0?x+length+4:x-4).toFixed(1)}" y="${y+15}" font-size="11.5" font-weight="700" text-anchor="${row.value>=0?'start':'end'}" fill="${color}">${text}</text>`)});
   out.push('</svg>');return `<div data-visualization="change-bars" style="border:1px solid ${C.line};padding:10px 10px 4px;margin:0 0 12px">${out.join('')}</div>`;
 }
@@ -47,10 +47,12 @@ function keyPoints(items:string[]){const list=items.map(item=>item.trim()).filte
 function checklist(items:string[]){return `<div style="display:grid;gap:9px">${items.filter(Boolean).map(item=>{const [head,...rest]=item.split(/:\s/);return `<p style="margin:0;display:flex;gap:10px;align-items:flex-start"><span style="flex:0 0 14px;height:14px;border:2px solid ${C.navy};margin-top:6px"></span><span>${rest.length?`<b style="color:${C.navy}">${esc(head!)}:</b> ${emph(rest.join(': '))}`:emph(item)}</span></p>`}).join('')}</div>`}
 function analysisBox(values:string[]){const text=prose(values);return text?`<div style="background:#f5f7fa;border:1px solid #d8dee6;padding:12px 14px 1px">${text}</div>`:''}
 function newsCard(head:string,body:string[],meta?:string,reading?:string|null){return `<div style="border:1px solid ${C.line};border-left:4px solid ${C.news};padding:12px 14px;margin:0 0 12px">${meta?`<div style="font-size:13px;color:${C.muted}">${esc(meta)}</div>`:''}<div style="font-size:18px;font-weight:800;line-height:1.45;margin:2px 0 6px;word-break:keep-all">${esc(head)}</div>${body.filter(Boolean).map(value=>`<p style="margin:0 0 8px;font-size:16px">${emph(value)}</p>`).join('')}${reading?`<div style="margin-top:6px;background:#f5f7fa;padding:8px 10px;font-size:15px"><b style="color:${C.navy}">MOTUS 분석:</b> ${emph(reading.replace(/^MOTUS 분석:\s*/,''))}</div>`:''}</div>`}
+/** Buy-type ratings in red, sell-type in blue, others neutral. */
+const ratingColor=(rating:string)=>/buy|매수|outperform|overweight|비중확대|strong/i.test(rating)?C.up:/sell|매도|underperform|underweight|비중축소|reduce/i.test(rating)?C.down:C.muted;
 /** A broker paragraph as a card: a report card (company, broker, rating and target chips) or a quoted comment. */
 function brokerCard(p:{text:string;source?:{label:string;url:string;kind?:'article'};report?:import('../intelligence/daily-masters.js').ArticleReportCard}){
   if(p.report){const r=p.report,who=[r.broker,r.analysts].filter(Boolean).join(' ')+(r.date?` · ${Number(r.date.slice(5,7))}월 ${Number(r.date.slice(8,10))}일`:''),summary=p.text.includes('요약:')?p.text.slice(p.text.indexOf('요약:')+3).trim():'',head=/^검색 \d+위/.test(p.text)?p.text.split(/(?<=했다\.)\s/)[0]:'';
-    const chips=[r.rating?`<span style="font-size:13px;padding:2px 9px;border:1.5px solid ${C.up};color:${C.up};font-weight:800;border-radius:999px">${esc(r.rating)}</span>`:'',r.target?`<span style="font-size:13px;padding:2px 9px;border:1px solid ${C.line};font-weight:800;border-radius:999px;white-space:nowrap">목표주가 ${esc(r.target)}원</span>`:''].filter(Boolean).join(' ');
+    const chips=[r.rating?`<span style="font-size:13px;padding:2px 9px;border:1.5px solid ${ratingColor(r.rating)};color:${ratingColor(r.rating)};font-weight:800;border-radius:999px">${esc(r.rating)}</span>`:'',r.target?`<span style="font-size:13px;padding:2px 9px;border:1px solid ${C.line};font-weight:800;border-radius:999px;white-space:nowrap">목표주가 ${esc(r.target)}원</span>`:''].filter(Boolean).join(' ');
     return `<div style="background:#fff;border:1px solid ${C.goldLine};padding:12px 14px;margin:0 0 10px"><div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:baseline"><b style="font-size:18px;color:${C.ink}">${esc(r.company??r.title)}</b><span style="font-size:13px;color:${C.muted}">${esc(who)}</span></div>${chips?`<div style="margin:8px 0">${chips}</div>`:''}${head?`<p style="margin:0 0 6px;font-size:15.5px">${emph(head)}</p>`:''}<div style="border-left:3px solid ${C.gold};padding:1px 0 1px 10px;font-size:15.5px;color:#2b2a26">${summary?emph(summary):`「${esc(r.title)}」`}</div>${sourceLink(p.source)}</div>`}
   return `<div style="background:#fff;border:1px solid ${C.goldLine};border-left:4px solid ${C.gold};padding:11px 14px;margin:0 0 10px;font-size:16px">${emph(p.text)}${sourceLink(p.source)}</div>`;
 }
@@ -58,9 +60,9 @@ function brokerCard(p:{text:string;source?:{label:string;url:string;kind?:'artic
 export function deepSection(input:import('../intelligence/daily-masters.js').ArticleDeepSection):string {
   let item=input;
   const paragraphs=item.paragraphs.filter(p=>p.text.trim());const total=paragraphs.map(p=>p.text).join(' ').length;
-  if(!paragraphs.length||(paragraphs.length===1&&total<60&&item.role!=='data'&&item.role!=='broker'&&!item.bars))return '';
   // Sections composed before roles existed (stored units, republishes) get their role from the section key.
   const role=item.role??(/causes|issue|broker/.test(item.key)?'broker':/stocks/.test(item.key)?'data':/risks/.test(item.key)?'watch':undefined);
+  if(!paragraphs.length||(paragraphs.length===1&&total<60&&role!=='data'&&role!=='broker'&&!item.bars))return '';
   if(!item.bars&&role==='data'){const list=paragraphs.find(p=>(p.text.match(/ · /g)??[]).length>=2);if(list){const rows=list.text.split(' · ').map(part=>{const match=part.match(/^(.*\S)\s+([+\-−]?\d+(?:\.\d+)?)%$/);return match?{label:match[1]!,value:Number(match[2]!.replace('−','-'))}:null});if(rows.every(Boolean))item={...item,bars:rows as Array<{label:string;value:number}>}}}
   let body=intro(item.intro);
   if(role==='broker')body=`<div style="background:${C.goldSoft};border:1px solid ${C.goldLine};padding:12px 12px 2px">${item.intro?`<p style="margin:0 0 10px;color:#6b5a2f;font-size:14px">${esc(item.intro)}</p>`:''}${paragraphs.map(brokerCard).join('')}</div>`;
@@ -81,12 +83,17 @@ export function renderAIEditorialArticle(view:AIIntelligenceDailyViewModel):Dail
   for(const item of deep.filter(item=>item.placement==='early'))parts.push(deepSection(item));
   // With the day's market issue explained by brokers, official announcements are reported as facts only.
   const issueLed=deep.some(item=>item.key==='ai-issue');
-  const cards=view.issues.map(issue=>{const facts=uniqueProse([...issue.whatHappened,issue.coreContent],seen);return facts.length?newsCard(issue.headline,facts.slice(0,3),undefined,issueLed?null:issue.whyItMatters):''}).filter(Boolean);
+  const cards=view.issues.map(issue=>{const facts=uniqueProse([...issue.whatHappened,issue.coreContent],seen);return facts.length?newsCard(issue.headline,facts,undefined,issueLed?null:[issue.whyItMatters,issue.marketConnection&&issue.marketConnection!==issue.whyItMatters?issue.marketConnection:null].filter(Boolean).join(' ')||null):''}).filter(Boolean);
   if(cards.length)parts.push(roleSection('오늘의 AI 발표',cards.join(''),'news','ai-issues'));
   for(const item of deep.filter(item=>item.placement!=='early'))parts.push(deepSection(item));
   // Connections and watch points become one checklist; a one-line 'path' section on its own is not printed.
-  const watch=[...view.whatToWatch.map(item=>`${item.headline}: ${item.watchFor}`),...view.industryConnections.map(item=>item.optionalWatchPoint??'')].filter(Boolean);
-  if(!issueLed&&watch.length)parts.push(roleSection('앞으로 확인할 것',checklist(uniqueProse(watch,seen)),'watch','ai-watch'));
+  if(!issueLed){
+    // Industry connections stay as a MOTUS reading when they say more than one line; watch points become one checklist.
+    const connections=uniqueProse(view.industryConnections.map(item=>item.explanation),seen);
+    if(connections.join(' ').length>=60)parts.push(roleSection('기업 AI가 실제 업무로 들어가는 경로',analysisBox(connections),'analysis','ai-connections'));
+    const watch=uniqueProse([...view.whatToWatch.map(item=>`${item.headline}: ${item.watchFor}`),...view.industryConnections.map(item=>item.optionalWatchPoint??''),...(connections.join(' ').length<60?connections:[])].filter(Boolean),seen);
+    if(watch.length)parts.push(roleSection('앞으로 확인할 것',checklist(watch),'watch','ai-watch'));
+  }
   parts.push(sources(view.sources));return finish('ai-intelligence',view.title,BLOGGER_EDITORIAL_CATEGORIES.AI_INTELLIGENCE.publicLabel,parts.filter(Boolean),['masthead','lead','key-points','issues','watch','sources']);
 }
 
@@ -94,7 +101,7 @@ export function renderUSEditorialArticle(view:USMarketDailyViewModel):DailyMaste
   const terms=new Set<string>();const describe=(value:string)=>explainTerms(value.replace('U.S. 10Y Treasury Yield (미국 10년물 국채금리)','미국 10년물 국채금리'),terms);
   const parts=[masthead(view.title,view.subtitle,view.displayLabel,view.issueDate),lead(describe([view.marketSummary,...view.marketCommentary].join(' ')))];
   const deep=view.deepSections??[],place=(where:'early'|'late'|'risks')=>deep.filter(item=>(item.placement??'early')===where).map(deepSection).filter(Boolean);
-  const names:Record<string,string>={sp500:'S&P 500',nasdaq:'나스닥','dow-jones':'다우존스',russell2000:'러셀 2000'};
+  const names:Record<string,string>={sp500:'S&P 500',nasdaq:'나스닥','dow-jones':'다우존스','russell-2000':'러셀 2000'};
   const idx=view.marketHistory.series.filter(item=>names[item.key]&&Number.isFinite(item.latestChangePct)).map(item=>`${names[item.key]} ${item.latestChangePct>0?'+':item.latestChangePct<0?'-':''}${Math.abs(item.latestChangePct).toFixed(2)}%`);
   const ten=view.supportingMetrics.find(item=>/10년물|10Y/.test(item.label)),sectors=deep.find(item=>item.key==='us-sectors-stocks')?.bars;
   const sorted=sectors?[...sectors].sort((a,b)=>b.value-a.value):[];
@@ -122,7 +129,7 @@ export function renderKoreaEditorialArticle(view:KoreaMarketDailyViewModel):Dail
   parts.push(...place('early'));
   if(view.marketCommentary.length&&!deep.length)parts.push(roleSection(view.edition==='PREVIOUS_SESSION_MORNING'?'전일 장을 읽는 기준':'마감 흐름을 읽는 기준',prose(view.marketCommentary)));
   // The index change is the one the narrative states for that index ('코스피는 … 전 거래일보다 3.59% 하락').
-  const changeOf=(label:string)=>{const name=/KOSPI/i.test(label)?'코스피':/KOSDAQ/i.test(label)?'코스닥':null;if(!name)return null;const match=(view.narrative?.facts??[]).join(' ').match(new RegExp(`${name}는 [\\d,.]+로 마감해 전 거래일보다 ([\\d.]+)% (상승|하락)`));return match?`${match[2]==='상승'?'+':'-'}${match[1]}%`:null};
+  const changeOf=(label:string)=>{const name=/KOSPI/i.test(label)?'코스피':/KOSDAQ/i.test(label)?'코스닥':null;if(!name)return null;const match=(view.narrative?.facts??[]).join(' ').match(new RegExp(`${name}(?:은|는) [\\d,.]+(?:으로|로) 마감해 전 거래일보다 ([\\d.]+)% (상승|하락)`));return match?`${match[2]==='상승'?'+':'-'}${match[1]}%`:null};
   const tileOf=(item:{label:string;displayValue:string})=>{const match=item.displayValue.match(/^(.*?)\s*\(([^)]*)\)\s*$/);return {label:item.label,value:match?match[1]!:item.displayValue,change:match?match[2]!:changeOf(item.label)}};
   if(view.indexMetrics.length||view.fxAndSupporting.length)parts.push(roleSection('코스피·코스닥·환율',tiles([...view.indexMetrics,...view.fxAndSupporting].map(tileOf))+(view.narrative?.facts.length?prose(view.narrative.facts):''),'data','korea-indexes'));
   if(view.investorFlows.length)parts.push(roleSection('투자자별 순매수',flow(view.investorFlows.map(item=>({label:item.label,displayValue:item.displayValue,direction:item.direction}))),'data','korea-flows'));

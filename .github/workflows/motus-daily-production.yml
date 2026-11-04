@@ -160,6 +160,24 @@ jobs:
       - name: Replace the published post in place (owner-requested correction)
         if: env.MOTUS_LIVE_PUBLISH_ENABLED == 'true' && env.REPUBLISH == 'true'
         run: npm run motus:republish -- --date "$RUN_DATE" --category "$CATEGORY" --execute
+      - name: Daily PDF briefing (owner decision 2026-11-04; never changes the publication)
+        if: env.MOTUS_LIVE_PUBLISH_ENABLED == 'true' && env.REPUBLISH != 'true'
+        continue-on-error: true
+        shell: bash
+        env:
+          MOTUS_DRIVE_CLIENT_ID: ${{ secrets.MOTUS_DRIVE_CLIENT_ID }}
+          MOTUS_DRIVE_CLIENT_SECRET: ${{ secrets.MOTUS_DRIVE_CLIENT_SECRET }}
+          MOTUS_DRIVE_REFRESH_TOKEN: ${{ secrets.MOTUS_DRIVE_REFRESH_TOKEN }}
+        run: |
+          outcome="data/operations/$RUN_DATE/$CATEGORY/auto-publish.json"
+          if [[ -f "$outcome" ]] && grep -q '"state": "PUBLISHED"' "$outcome"; then
+            sudo apt-get install -y -qq fonts-noto-cjk >/dev/null || (sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk >/dev/null)
+            npm install --no-save playwright-core@1.56.0 >/dev/null
+            npx playwright-core install --with-deps chromium >/dev/null
+            node dist/src/motus-daily-pdf-cli.js --date "$RUN_DATE" --category "$CATEGORY" --execute
+          else
+            echo 'no new publication in this run; daily PDF skipped'
+          fi
       - name: Record production outcome
         if: always()
         run: npm run motus:production-summary -- --date "$RUN_DATE" --category "$CATEGORY"
