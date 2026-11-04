@@ -19,6 +19,15 @@ interface DailyMasterBase {
   category:MotusPublicCategoryKey;canonicalLabel:string;displayLabel:string;
   sources:NewsletterSourceLink[];glossary?:DailyGlossaryEntry[];report?:PublicReportEntry;
 }
+/** A broker report shown as a card: the rating and target exactly as the broker published them. */
+export interface ArticleReportCard {company?:string|null;broker:string;analysts?:string;date:string;title:string;rating?:string|null;target?:string|null}
+export interface ArticleDeepParagraph {text:string;source?:{label:string;url:string;kind?:'article'};report?:ArticleReportCard}
+/**
+ * A composed article section. The role decides how it is set apart on the page (2026-11-04 owner-approved design):
+ * data (charted figures), news (official or wire reports), broker (securities research, highlighted panel),
+ * analysis (MOTUS reading, kept apart from facts) and watch (checkpoints).
+ */
+export interface ArticleDeepSection {key:string;title:string;intro?:string;placement?:'early'|'late'|'risks';role?:'data'|'news'|'broker'|'analysis'|'watch';bars?:Array<{label:string;value:number}>;paragraphs:ArticleDeepParagraph[]}
 export interface AIIntelligenceIssue {
   headline:string;whatHappened:string[];coreContent:string;whyItMatters:string|null;
   relatedCompaniesIndustries:string[];marketConnection:string|null;institutionView:string|null;evidenceRefs:string[];
@@ -29,14 +38,14 @@ export interface AIIndustryConnection {
 }
 export interface AIIntelligenceDailyViewModel extends DailyMasterBase {
   category:'AI_INTELLIGENCE';todayCore:{headline:string;summary:string;bullets:string[]};issues:AIIntelligenceIssue[];
-  deepSections?:Array<{key:string;title:string;intro?:string;placement?:'early'|'late'|'risks';paragraphs:Array<{text:string;source?:{label:string;url:string}}>}>;
+  deepSections?:ArticleDeepSection[];
   industryFlow:string[];industryConnections:AIIndustryConnection[];whatToWatch:NewsletterWatchItem[];
 }
 export interface USMarketDailyViewModel extends DailyMasterBase {
   marketResearch?:{publisher:string;headline:string;url:string;publishedAt:string;kind:'FINANCIAL_MEDIA'|'BROKER_RESEARCH';evidence?:string[]}[];
   category:'US_MARKET';marketSummary:string;marketHistory:MajorIndexHistory;
   /** Expert (broker-quoted) and search-ranked sections composed from attributed evidence. */
-  deepSections?:Array<{key:string;title:string;intro?:string;placement?:'early'|'late'|'risks';paragraphs:Array<{text:string;source?:{label:string;url:string}}>}>;
+  deepSections?:ArticleDeepSection[];
   supportingMetrics:NewsletterMarketMetric[];marketCommentary:string[];sectorsCompanies:string[];
   wallStreetResearch:{headline:string;institutionView:string|null;motusInterpretation:string|null;facts:string[]}[];
   checkpoints:NewsletterWatchItem[];
@@ -47,7 +56,7 @@ export interface KoreaMarketDailyViewModel extends DailyMasterBase {
   marketResearch?:{publisher:string;headline:string;url:string;publishedAt:string;kind:'FINANCIAL_MEDIA'|'BROKER_RESEARCH';evidence?:string[]}[];
   category:'KOREA_MARKET';marketSummary:string;indexMetrics:KoreaMarketNewsletterMetric[];
   /** Expert (broker-quoted) and search-ranked sections composed from attributed evidence. */
-  deepSections?:Array<{key:string;title:string;intro?:string;placement?:'early'|'late'|'risks';paragraphs:Array<{text:string;source?:{label:string;url:string}}>}>;
+  deepSections?:ArticleDeepSection[];
   operationDate?:string;sessionDate?:string;edition?:'PREVIOUS_SESSION_MORNING'|'MANUAL_RECOVERY_CLOSE';fxBasis?:'BOK_REFERENCE_RATE'|'CURRENT_AT_COLLECTION';
   fxAndSupporting:KoreaMarketNewsletterMetric[];investorFlows:KoreaMarketNewsletterMetric[];
   sectors:KoreaMarketNewsletterMetric[];movers:KoreaMarketNewsletterMetric[];research:KoreaResearchNewsletterEntry[];
