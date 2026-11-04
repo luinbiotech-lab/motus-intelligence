@@ -184,11 +184,18 @@ export function renderWeeklySection(item:import('../operations/weekly-review.js'
   let body=item.intro?`<p style="margin:0 0 12px;color:#4a5a6e;font-size:15px">${esc(item.intro)}</p>`:'';
   if(item.table)body+=table(item.table);
   if(item.links?.length)body+=`<ul style="margin:0;padding-left:20px">${item.links.map(link=>`<li style="margin:0 0 10px"><span style="color:#4a5a6e;font-size:14px">${esc(link.meta)}</span><br><a href="${attr(link.url)}" style="${LINK}">${esc(link.label)}</a></li>`).join('')}</ul>`;
-  const role:Role|undefined=/broker/.test(item.key)?'broker':item.key==='weekly-calendar'?'watch':item.key==='weekly-daily'?'news':item.table||item.key==='weekly-pdf'?'data':undefined;
+  const role:Role|undefined=/broker/.test(item.key)?'broker':item.key==='weekly-calendar'?'watch':item.key==='weekly-daily'?'news':item.table||/-pdf$/.test(item.key)?'data':undefined;
   if(item.paragraphs?.length)body+=role==='broker'?`<div style="background:${C.goldSoft};border:1px solid ${C.goldLine};padding:12px 12px 2px">${item.paragraphs.map(brokerCard).join('')}</div>`:item.paragraphs.map(p=>`<p style="margin:0 0 13px">${emph(p.text)}${sourceLink(p.source)}</p>`).join('');
   return roleSection(item.title,body,role,item.key);
 }
 
+/** Daily report (owner decision 2026-11-04): one post a day in the '리포트' category with the combined PDF and the day's articles. */
+export const DAILY_REPORT_LABEL='리포트';
+export function renderDailyReportArticle(view:{date:string;title:string;subtitle:string;lead:string;sections:import('../operations/weekly-review.js').WeeklySection[];sources:Array<{label:string;url:string}>}):DailyMasterRenderResult {
+  const parts=[masthead(view.title,view.subtitle,DAILY_REPORT_LABEL,view.date),lead(view.lead).replace('<p data-section="editorial-lead"',`<p data-section="editorial-lead" data-daily-report="${attr(view.date)}"`),...view.sections.map(renderWeeklySection)];
+  parts.push(sources(view.sources.map(item=>({...item,publisher:''}))));
+  return finish('daily-report',view.title,DAILY_REPORT_LABEL,parts,['masthead','lead',...view.sections.map(item=>item.key),'sources']);
+}
 /** Weekly review: the same editorial masthead and sections as the daily articles, with tables for the numbers and the calendar. */
 export function renderWeeklyEditorialArticle(view:import('../operations/weekly-review.js').WeeklyArticle):DailyMasterRenderResult {
   const parts=[masthead(view.title,view.subtitle,'주간 증시',view.weekEnd),lead(view.lead),...view.sections.map(renderWeeklySection)];
