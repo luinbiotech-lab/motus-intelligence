@@ -1,0 +1,15 @@
+{
+  "collectedAt": "2026-11-04T01:09:03.921Z",
+  "signalDate": "2026-11-03",
+  "provider": "NAVER_DATALAB",
+  "freshness": "PREVIOUS_DAY_NAVER_SIGNAL",
+  "fallbackReason": null,
+  "warnings": [],
+  "orderedTopicIds": [
+    "index:KOSPI",
+    "index:KOSDAQ"
+  ],
+  "selectedSecondaryTopicId": "index:KOSDAQ",
+  "factsChanged": false,
+  "gateOverride": false
+}
