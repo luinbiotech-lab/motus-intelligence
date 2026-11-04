@@ -1,0 +1,14 @@
+{
+  "mode": "LIVE",
+  "sourceMode": "internal",
+  "date": "2026-11-04",
+  "observedDate": "2026-11-03",
+  "category": "US_MARKET",
+  "state": "LIVE_READY",
+  "reasonCode": null,
+  "verification": "VERIFIED",
+  "publishCallCount": 0,
+  "commerce": {
+    "enabled": false
+  }
+}
