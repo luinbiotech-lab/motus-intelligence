@@ -2,11 +2,11 @@
   "mode": "LIVE",
   "sourceMode": "internal",
   "date": "2026-11-04",
-  "observedDate": "2026-11-04",
+  "observedDate": null,
   "category": "AI_INTELLIGENCE",
-  "state": "LIVE_READY",
-  "reasonCode": null,
-  "verification": "VERIFIED",
+  "state": "SKIP",
+  "reasonCode": "AI_VERIFIED_EVENTS_INSUFFICIENT",
+  "verification": "FAILED",
   "publishCallCount": 0,
   "commerce": {
     "enabled": false

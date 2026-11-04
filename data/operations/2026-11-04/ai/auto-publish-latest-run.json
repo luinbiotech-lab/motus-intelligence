@@ -1,0 +1,10 @@
+{
+  "state": "SKIP",
+  "reasonCode": "AI_VERIFIED_EVENTS_INSUFFICIENT",
+  "reasonCodes": [
+    "AI_VERIFIED_EVENTS_INSUFFICIENT"
+  ],
+  "reason": "AI_VERIFIED_EVENTS_INSUFFICIENT",
+  "insertCallCount": 0,
+  "publishCallCount": 0
+}

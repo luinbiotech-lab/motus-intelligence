@@ -1,15 +1,12 @@
 {
-  "collectedAt": "2026-11-04T04:09:42.565Z",
-  "signalDate": "2026-11-03",
-  "provider": "NAVER_DATALAB",
-  "freshness": "PREVIOUS_DAY_NAVER_SIGNAL",
-  "fallbackReason": null,
+  "collectedAt": "2026-11-04T11:22:34.941Z",
+  "signalDate": null,
+  "provider": null,
+  "freshness": "NO_SEARCH_SIGNAL",
+  "fallbackReason": "NO_PRE_RENDER_SEARCH_CONTEXT",
   "warnings": [],
-  "orderedTopicIds": [
-    "ai:4",
-    "ai:3"
-  ],
-  "selectedSecondaryTopicId": "ai:3",
+  "orderedTopicIds": [],
+  "selectedSecondaryTopicId": null,
   "factsChanged": false,
   "gateOverride": false
 }
