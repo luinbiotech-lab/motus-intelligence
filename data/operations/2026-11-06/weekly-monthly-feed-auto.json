@@ -5,5 +5,12 @@
     "publicationId": "motus-live-2026-11-05:us",
     "publicPostUrl": "https://motusnova.blogspot.com/2026/11/3-amd-17.html",
     "publishedAt": "2026-11-06T08:41:37+09:00"
+  },
+  {
+    "idempotencyKey": "weekly:motus-live-2026-11-06:korea",
+    "category": "KOREA_MARKET",
+    "publicationId": "motus-live-2026-11-06:korea",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/11/528-538380-1-76.html",
+    "publishedAt": "2026-11-06T08:41:51+09:00"
   }
 ]
