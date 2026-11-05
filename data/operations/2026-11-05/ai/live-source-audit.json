@@ -3,8 +3,8 @@
   "sourceMode": "internal",
   "category": "AI_INTELLIGENCE",
   "operationDate": "2026-11-05",
-  "status": "LIVE_READY",
-  "reasonCode": null,
+  "status": "HOLD",
+  "reasonCode": "independent source diversity failed; production provenance audit failed; editorial quality: publisher concentration requires editorial review",
   "entries": [
     {
       "sourceId": "openai",
@@ -12,7 +12,7 @@
       "url": "https://openai.com/news/rss.xml",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null,
       "screening": {
         "total": 40,
@@ -31,7 +31,7 @@
       "url": "https://blog.google/technology/ai/rss/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null,
       "screening": {
         "total": 20,
@@ -50,7 +50,7 @@
       "url": "https://deepmind.google/blog/rss.xml",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null,
       "screening": {
         "total": 40,
@@ -69,7 +69,7 @@
       "url": "https://blogs.nvidia.com/feed/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null,
       "screening": {
         "total": 18,
@@ -88,7 +88,7 @@
       "url": "https://nvidianews.nvidia.com/releases.xml",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null,
       "screening": {
         "total": 20,
@@ -107,7 +107,7 @@
       "url": "https://blogs.microsoft.com/feed/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null,
       "screening": {
         "total": 10,
@@ -126,7 +126,7 @@
       "url": "https://news.microsoft.com/source/feed/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null,
       "screening": {
         "total": 10,
@@ -145,7 +145,7 @@
       "url": "https://aws.amazon.com/blogs/aws/feed/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null,
       "screening": {
         "total": 20,
@@ -164,7 +164,7 @@
       "url": "https://aws.amazon.com/about-aws/whats-new/recent/feed/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null,
       "screening": {
         "total": 40,
@@ -178,31 +178,12 @@
       }
     },
     {
-      "sourceId": "aws-ml",
-      "category": "AI_INTELLIGENCE",
-      "url": "https://aws.amazon.com/blogs/machine-learning/feed/",
-      "status": "PASS",
-      "recordCount": 1,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
-      "error": null,
-      "screening": {
-        "total": 20,
-        "candidates": 12,
-        "alreadyPublished": 0,
-        "duplicate": 0,
-        "notNews": 0,
-        "notAIHeadline": 4,
-        "outOfWindow": 4,
-        "unofficialLink": 0
-      }
-    },
-    {
       "sourceId": "azure-blog",
       "category": "AI_INTELLIGENCE",
       "url": "https://azure.microsoft.com/en-us/blog/feed/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null,
       "screening": {
         "total": 10,
@@ -221,7 +202,7 @@
       "url": "https://cloudblog.withgoogle.com/rss/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null,
       "screening": {
         "total": 20,
@@ -240,7 +221,7 @@
       "url": "https://about.fb.com/news/feed/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null,
       "screening": {
         "total": 10,
@@ -259,7 +240,7 @@
       "url": "https://www.anthropic.com/news",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null,
       "screening": {
         "total": 12,
@@ -275,28 +256,10 @@
     {
       "sourceId": "ai:page:1",
       "category": "AI_INTELLIGENCE",
-      "url": "https://aws.amazon.com/blogs/machine-learning/use-decision-models-with-amazon-bedrock-agentcore-evaluations/",
-      "status": "PASS",
-      "recordCount": 1,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
-      "error": null,
-      "observedDate": "2026-11-04",
-      "sourceTimestamp": "2026-11-04T18:46:36.000Z",
-      "dateField": "page.datePublished",
-      "candidate": {
-        "title": "Use decision models with Amazon Bedrock AgentCore Evaluations",
-        "outcome": "EVENT_CREATED",
-        "basis": "OFFICIAL_PAGE",
-        "bodyChars": 4000
-      }
-    },
-    {
-      "sourceId": "ai:page:2",
-      "category": "AI_INTELLIGENCE",
       "url": "https://cloud.google.com/blog/products/identity-security/helping-you-build-and-defend-at-machine-speed-in-the-agentic-era/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null,
       "observedDate": "Wed, 04 No",
       "sourceTimestamp": "Wed, 04 Nov 2026 17:00:00 +0000",
@@ -309,21 +272,21 @@
       }
     },
     {
-      "sourceId": "ai:page:3",
+      "sourceId": "ai:page:2",
       "category": "AI_INTELLIGENCE",
       "url": "https://openai.com/index/openai-to-acquire-pierre",
       "status": "FAILED",
       "recordCount": 0,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": "HTTP_403"
     },
     {
-      "sourceId": "ai:rss-evidence:3",
+      "sourceId": "ai:rss-evidence:2",
       "category": "AI_INTELLIGENCE",
       "url": "https://openai.com/index/openai-to-acquire-pierre",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null,
       "observedDate": "Wed, 04 No",
       "sourceTimestamp": "Wed, 04 Nov 2026 14:30:00 GMT",
@@ -336,12 +299,30 @@
       }
     },
     {
+      "sourceId": "ai:page:3",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/workspaces-ai-agents-linux-windows-11",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:44:45.895Z",
+      "error": null,
+      "observedDate": "Tue, 03 No",
+      "sourceTimestamp": "Tue, 03 Nov 2026 18:00:00 GMT",
+      "dateField": "rss.pubDate",
+      "candidate": {
+        "title": "Amazon WorkSpaces for AI agents now supports Linux and Windows 11 cloud desktops",
+        "outcome": "NOT_SYNTHESIZED",
+        "basis": "OFFICIAL_PAGE",
+        "bodyChars": 1077
+      }
+    },
+    {
       "sourceId": "ai:page:4",
       "category": "AI_INTELLIGENCE",
       "url": "https://deepmind.google/blog/agentic-cheminformatics-with-google-antigravity/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null,
       "observedDate": "2026-11-03",
       "sourceTimestamp": "2026-11-03T15:00:00.000Z",
@@ -359,14 +340,14 @@
       "url": "https://blogs.nvidia.com/blog/ai-semiconductor-fabs/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null,
       "observedDate": "2026-11-03",
       "sourceTimestamp": "2026-11-03T16:00:45.000Z",
       "dateField": "page.datePublished",
       "candidate": {
         "title": "AI Is Changing How Semiconductor Fabs Work — and Engineers Are Moving Faster Because of It",
-        "outcome": "UNCLASSIFIED",
+        "outcome": "NOT_SYNTHESIZED",
         "basis": "OFFICIAL_PAGE",
         "bodyChars": 4000
       }
@@ -377,7 +358,7 @@
       "url": "https://www.anthropic.com/news/public-benefit-fund",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null,
       "observedDate": "2026-10-18",
       "sourceTimestamp": "2026-10-18T00:00:00.000Z",
@@ -392,28 +373,10 @@
     {
       "sourceId": "ai:page:7",
       "category": "AI_INTELLIGENCE",
-      "url": "https://aws.amazon.com/blogs/machine-learning/four-layers-of-context-engineering-for-production-ai-agents-how-deep-insight-applies-them-in-working-code/",
-      "status": "PASS",
-      "recordCount": 1,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
-      "error": null,
-      "observedDate": "2026-11-04",
-      "sourceTimestamp": "2026-11-04T16:30:40.000Z",
-      "dateField": "page.datePublished",
-      "candidate": {
-        "title": "Four layers of context engineering for production AI agents: How Deep Insight applies them in working code",
-        "outcome": "UNCLASSIFIED",
-        "basis": "OFFICIAL_PAGE",
-        "bodyChars": 4000
-      }
-    },
-    {
-      "sourceId": "ai:page:8",
-      "category": "AI_INTELLIGENCE",
       "url": "https://cloud.google.com/blog/products/databases/whats-new-across-googles-agentic-data-cloud/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null,
       "observedDate": "Wed, 04 No",
       "sourceTimestamp": "Wed, 04 Nov 2026 14:00:00 +0000",
@@ -426,22 +389,22 @@
       }
     },
     {
-      "sourceId": "ai:page:9",
+      "sourceId": "ai:page:8",
       "category": "AI_INTELLIGENCE",
       "url": "https://openai.com/index/a-thousand-fewer-paths-to-root",
       "status": "FAILED",
       "recordCount": 0,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": "SKIPPED_PUBLISHER_BLOCKED",
       "sourceTimestamp": "Wed, 04 Nov 2026 08:00:00 GMT"
     },
     {
-      "sourceId": "ai:rss-evidence:9",
+      "sourceId": "ai:rss-evidence:8",
       "category": "AI_INTELLIGENCE",
       "url": "https://openai.com/index/a-thousand-fewer-paths-to-root",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null,
       "observedDate": "Wed, 04 No",
       "sourceTimestamp": "Wed, 04 Nov 2026 08:00:00 GMT",
@@ -454,12 +417,12 @@
       }
     },
     {
-      "sourceId": "ai:page:10",
+      "sourceId": "ai:page:9",
       "category": "AI_INTELLIGENCE",
       "url": "https://www.anthropic.com/news/s1-sec",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null,
       "observedDate": "2026-10-26",
       "sourceTimestamp": "2026-10-26T00:00:00.000Z",
@@ -472,30 +435,12 @@
       }
     },
     {
-      "sourceId": "ai:page:11",
-      "category": "AI_INTELLIGENCE",
-      "url": "https://aws.amazon.com/blogs/machine-learning/how-u-mobile-built-agentic-telco-operations-with-amazon-bedrock-agentcore/",
-      "status": "PASS",
-      "recordCount": 1,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
-      "error": null,
-      "observedDate": "2026-11-04",
-      "sourceTimestamp": "2026-11-04T16:23:33.000Z",
-      "dateField": "page.datePublished",
-      "candidate": {
-        "title": "How U Mobile built agentic telco operations with Amazon Bedrock AgentCore",
-        "outcome": "EVENT_CREATED",
-        "basis": "OFFICIAL_PAGE",
-        "bodyChars": 4000
-      }
-    },
-    {
-      "sourceId": "ai:page:12",
+      "sourceId": "ai:page:10",
       "category": "AI_INTELLIGENCE",
       "url": "https://cloud.google.com/blog/products/ai-machine-learning/what-google-cloud-announced-in-ai-this-month/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null,
       "observedDate": "Mon, 02 No",
       "sourceTimestamp": "Mon, 02 Nov 2026 16:00:00 +0000",
@@ -508,22 +453,22 @@
       }
     },
     {
-      "sourceId": "ai:page:13",
+      "sourceId": "ai:page:11",
       "category": "AI_INTELLIGENCE",
       "url": "https://openai.com/index/daybreak-red-aws-govcloud",
       "status": "FAILED",
       "recordCount": 0,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": "SKIPPED_PUBLISHER_BLOCKED",
       "sourceTimestamp": "Wed, 04 Nov 2026 07:00:00 GMT"
     },
     {
-      "sourceId": "ai:rss-evidence:13",
+      "sourceId": "ai:rss-evidence:11",
       "category": "AI_INTELLIGENCE",
       "url": "https://openai.com/index/daybreak-red-aws-govcloud",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null,
       "observedDate": "Wed, 04 No",
       "sourceTimestamp": "Wed, 04 Nov 2026 07:00:00 GMT",
@@ -536,12 +481,12 @@
       }
     },
     {
-      "sourceId": "ai:page:14",
+      "sourceId": "ai:page:12",
       "category": "AI_INTELLIGENCE",
       "url": "https://www.anthropic.com/news/ai-for-science-expands-foundations-research-institutions",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null,
       "observedDate": "2026-10-28",
       "sourceTimestamp": "2026-10-28T00:00:00.000Z",
@@ -554,40 +499,22 @@
       }
     },
     {
-      "sourceId": "ai:page:15",
-      "category": "AI_INTELLIGENCE",
-      "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/workspaces-ai-agents-linux-windows-11",
-      "status": "PASS",
-      "recordCount": 1,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
-      "error": null,
-      "observedDate": "Tue, 03 No",
-      "sourceTimestamp": "Tue, 03 Nov 2026 18:00:00 GMT",
-      "dateField": "rss.pubDate",
-      "candidate": {
-        "title": "Amazon WorkSpaces for AI agents now supports Linux and Windows 11 cloud desktops",
-        "outcome": "UNCLASSIFIED",
-        "basis": "OFFICIAL_PAGE",
-        "bodyChars": 1077
-      }
-    },
-    {
-      "sourceId": "ai:page:16",
+      "sourceId": "ai:page:13",
       "category": "AI_INTELLIGENCE",
       "url": "https://openai.com/index/introducing-images-2-6",
       "status": "FAILED",
       "recordCount": 0,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": "SKIPPED_PUBLISHER_BLOCKED",
       "sourceTimestamp": "Wed, 04 Nov 2026 00:00:00 GMT"
     },
     {
-      "sourceId": "ai:rss-evidence:16",
+      "sourceId": "ai:rss-evidence:13",
       "category": "AI_INTELLIGENCE",
       "url": "https://openai.com/index/introducing-images-2-6",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null,
       "observedDate": "Wed, 04 No",
       "sourceTimestamp": "Wed, 04 Nov 2026 00:00:00 GMT",
@@ -600,12 +527,12 @@
       }
     },
     {
-      "sourceId": "ai:page:17",
+      "sourceId": "ai:page:14",
       "category": "AI_INTELLIGENCE",
       "url": "https://www.anthropic.com/news/expanding-partnership-gsa",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null,
       "observedDate": "2026-10-27",
       "sourceTimestamp": "2026-10-27T00:00:00.000Z",
@@ -618,40 +545,22 @@
       }
     },
     {
-      "sourceId": "ai:page:18",
-      "category": "AI_INTELLIGENCE",
-      "url": "https://aws.amazon.com/blogs/machine-learning/servicenow-on-behalf-of-token-exchange-with-bedrock-agentcore-gateway/",
-      "status": "PASS",
-      "recordCount": 1,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
-      "error": null,
-      "observedDate": "2026-11-03",
-      "sourceTimestamp": "2026-11-03T16:47:40.000Z",
-      "dateField": "page.datePublished",
-      "candidate": {
-        "title": "ServiceNow on-behalf-of token exchange with Bedrock AgentCore Gateway",
-        "outcome": "UNCLASSIFIED",
-        "basis": "OFFICIAL_PAGE",
-        "bodyChars": 4000
-      }
-    },
-    {
-      "sourceId": "ai:page:19",
+      "sourceId": "ai:page:15",
       "category": "AI_INTELLIGENCE",
       "url": "https://openai.com/index/devrev-enterprise-self-service",
       "status": "FAILED",
       "recordCount": 0,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": "SKIPPED_PUBLISHER_BLOCKED",
       "sourceTimestamp": "Wed, 04 Nov 2026 00:00:00 GMT"
     },
     {
-      "sourceId": "ai:rss-evidence:19",
+      "sourceId": "ai:rss-evidence:15",
       "category": "AI_INTELLIGENCE",
       "url": "https://openai.com/index/devrev-enterprise-self-service",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null,
       "observedDate": "Wed, 04 No",
       "sourceTimestamp": "Wed, 04 Nov 2026 00:00:00 GMT",
@@ -664,21 +573,464 @@
       }
     },
     {
+      "sourceId": "ai:page:16",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://www.anthropic.com/news/partnerships",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:44:45.895Z",
+      "error": null,
+      "observedDate": "2026-10-27",
+      "sourceTimestamp": "2026-10-27T12:00:00.000Z",
+      "dateField": "page.datePublished",
+      "candidate": {
+        "title": "Partnerships",
+        "outcome": "OUT_OF_WINDOW",
+        "basis": "OFFICIAL_PAGE",
+        "bodyChars": 3873
+      }
+    },
+    {
+      "sourceId": "ai:page:17",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/accelerating-engineering-for-the-physical-world",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-11-05T03:44:45.895Z",
+      "error": "SKIPPED_PUBLISHER_BLOCKED",
+      "sourceTimestamp": "Tue, 03 Nov 2026 12:00:00 GMT"
+    },
+    {
+      "sourceId": "ai:rss-evidence:17",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/accelerating-engineering-for-the-physical-world",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:44:45.895Z",
+      "error": null,
+      "observedDate": "Tue, 03 No",
+      "sourceTimestamp": "Tue, 03 Nov 2026 12:00:00 GMT",
+      "dateField": "rss.pubDate",
+      "candidate": {
+        "title": "Accelerating engineering for the physical world",
+        "outcome": "NOT_AI_RELEVANT",
+        "basis": "OFFICIAL_RSS_SUMMARY",
+        "bodyChars": 0
+      }
+    },
+    {
+      "sourceId": "ai:page:18",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://www.anthropic.com/news/donating-agent-skills-to-the-agentic-ai-foundation",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:44:45.895Z",
+      "error": null,
+      "observedDate": "2026-10-22",
+      "sourceTimestamp": "2026-10-22T00:00:00.000Z",
+      "dateField": "page.datePublished",
+      "candidate": {
+        "title": "Donating Agent Skills to the Agentic AI Foundation",
+        "outcome": "OUT_OF_WINDOW",
+        "basis": "OFFICIAL_PAGE",
+        "bodyChars": 2308
+      }
+    },
+    {
+      "sourceId": "ai:page:19",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/cisco-cyber",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-11-05T03:44:45.895Z",
+      "error": "SKIPPED_PUBLISHER_BLOCKED",
+      "sourceTimestamp": "Tue, 03 Nov 2026 08:00:00 GMT"
+    },
+    {
+      "sourceId": "ai:rss-evidence:19",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/cisco-cyber",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:44:45.895Z",
+      "error": null,
+      "observedDate": "Tue, 03 No",
+      "sourceTimestamp": "Tue, 03 Nov 2026 08:00:00 GMT",
+      "dateField": "rss.pubDate",
+      "candidate": {
+        "title": "How Cisco defends at machine speed with OpenAI",
+        "outcome": "NOT_AI_RELEVANT",
+        "basis": "OFFICIAL_RSS_SUMMARY",
+        "bodyChars": 0
+      }
+    },
+    {
+      "sourceId": "ai:page:20",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://www.anthropic.com/news/open-call-guest-investigators-life-sciences",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:44:45.895Z",
+      "error": null,
+      "observedDate": "2026-10-22",
+      "sourceTimestamp": "2026-10-22T00:00:00.000Z",
+      "dateField": "page.datePublished",
+      "candidate": {
+        "title": "Open call for guest investigators in the life sciences",
+        "outcome": "OUT_OF_WINDOW",
+        "basis": "OFFICIAL_PAGE",
+        "bodyChars": 2703
+      }
+    },
+    {
+      "sourceId": "ai:page:21",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/heimstaden",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-11-05T03:44:45.895Z",
+      "error": "SKIPPED_PUBLISHER_BLOCKED",
+      "sourceTimestamp": "Tue, 03 Nov 2026 08:00:00 GMT"
+    },
+    {
+      "sourceId": "ai:rss-evidence:21",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/heimstaden",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:44:45.895Z",
+      "error": null,
+      "observedDate": "Tue, 03 No",
+      "sourceTimestamp": "Tue, 03 Nov 2026 08:00:00 GMT",
+      "dateField": "rss.pubDate",
+      "candidate": {
+        "title": "Heimstaden is changing residential real estate management with AI",
+        "outcome": "UNCLASSIFIED",
+        "basis": "OFFICIAL_RSS_SUMMARY",
+        "bodyChars": 0
+      }
+    },
+    {
+      "sourceId": "ai:page:22",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://www.anthropic.com/news/christopher-stubbs-joins-long-term-benefit-trust",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:44:45.895Z",
+      "error": null,
+      "observedDate": "2026-10-21",
+      "sourceTimestamp": "2026-10-21T00:00:00.000Z",
+      "dateField": "page.datePublished",
+      "candidate": {
+        "title": "Physicist Christopher Stubbs joins Anthropic's Long-Term Benefit Trust",
+        "outcome": "OUT_OF_WINDOW",
+        "basis": "OFFICIAL_PAGE",
+        "bodyChars": 3771
+      }
+    },
+    {
+      "sourceId": "ai:page:23",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/jill-hazelbaker-chief-corporate-affairs-officer",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-11-05T03:44:45.895Z",
+      "error": "SKIPPED_PUBLISHER_BLOCKED",
+      "sourceTimestamp": "Tue, 03 Nov 2026 00:00:00 GMT"
+    },
+    {
+      "sourceId": "ai:rss-evidence:23",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/jill-hazelbaker-chief-corporate-affairs-officer",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:44:45.895Z",
+      "error": null,
+      "observedDate": "Tue, 03 No",
+      "sourceTimestamp": "Tue, 03 Nov 2026 00:00:00 GMT",
+      "dateField": "rss.pubDate",
+      "candidate": {
+        "title": "OpenAI appoints Jill Hazelbaker as Chief Corporate Affairs Officer",
+        "outcome": "NOT_AI_RELEVANT",
+        "basis": "OFFICIAL_RSS_SUMMARY",
+        "bodyChars": 0
+      }
+    },
+    {
+      "sourceId": "ai:page:24",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://www.anthropic.com/news/an-update-on-independent-evaluators",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:44:45.895Z",
+      "error": null,
+      "observedDate": "2026-10-15",
+      "sourceTimestamp": "2026-10-15T00:00:00.000Z",
+      "dateField": "page.datePublished",
+      "candidate": {
+        "title": "Anthropic update on independent evaluators",
+        "outcome": "OUT_OF_WINDOW",
+        "basis": "OFFICIAL_PAGE",
+        "bodyChars": 4000
+      }
+    },
+    {
+      "sourceId": "ai:page:25",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/preparing-our-next-security-sprint-to-harden-openai",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-11-05T03:44:45.895Z",
+      "error": "SKIPPED_PUBLISHER_BLOCKED",
+      "sourceTimestamp": "Mon, 02 Nov 2026 18:00:00 GMT"
+    },
+    {
+      "sourceId": "ai:rss-evidence:25",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/preparing-our-next-security-sprint-to-harden-openai",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:44:45.895Z",
+      "error": null,
+      "observedDate": "Mon, 02 No",
+      "sourceTimestamp": "Mon, 02 Nov 2026 18:00:00 GMT",
+      "dateField": "rss.pubDate",
+      "candidate": {
+        "title": "Preparing our next security sprint to harden OpenAI",
+        "outcome": "NOT_AI_RELEVANT",
+        "basis": "OFFICIAL_RSS_SUMMARY",
+        "bodyChars": 0
+      }
+    },
+    {
+      "sourceId": "ai:page:26",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://www.anthropic.com/news/2026-us-midterms",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:44:45.895Z",
+      "error": null,
+      "observedDate": "2026-10-14",
+      "sourceTimestamp": "2026-10-14T00:00:00.000Z",
+      "dateField": "page.datePublished",
+      "candidate": {
+        "title": "Preparing for the 2026 US midterms",
+        "outcome": "OUT_OF_WINDOW",
+        "basis": "OFFICIAL_PAGE",
+        "bodyChars": 4000
+      }
+    },
+    {
+      "sourceId": "ai:page:27",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/rewarding-defenders-with-bigger-bug-bounties",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-11-05T03:44:45.895Z",
+      "error": "SKIPPED_PUBLISHER_BLOCKED",
+      "sourceTimestamp": "Mon, 02 Nov 2026 18:00:00 GMT"
+    },
+    {
+      "sourceId": "ai:rss-evidence:27",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/rewarding-defenders-with-bigger-bug-bounties",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:44:45.895Z",
+      "error": null,
+      "observedDate": "Mon, 02 No",
+      "sourceTimestamp": "Mon, 02 Nov 2026 18:00:00 GMT",
+      "dateField": "rss.pubDate",
+      "candidate": {
+        "title": "Rewarding defenders with bigger bug bounties",
+        "outcome": "NOT_AI_RELEVANT",
+        "basis": "OFFICIAL_RSS_SUMMARY",
+        "bodyChars": 0
+      }
+    },
+    {
+      "sourceId": "ai:page:28",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://www.anthropic.com/news/safeguards",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:44:45.895Z",
+      "error": null,
+      "observedDate": "2026-10-14",
+      "sourceTimestamp": "2026-10-14T12:00:00.000Z",
+      "dateField": "page.datePublished",
+      "candidate": {
+        "title": "Safeguards",
+        "outcome": "OUT_OF_WINDOW",
+        "basis": "OFFICIAL_PAGE",
+        "bodyChars": 4000
+      }
+    },
+    {
+      "sourceId": "ai:page:29",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/scaling-git-at-openai",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-11-05T03:44:45.895Z",
+      "error": "SKIPPED_PUBLISHER_BLOCKED",
+      "sourceTimestamp": "Mon, 02 Nov 2026 15:30:00 GMT"
+    },
+    {
+      "sourceId": "ai:rss-evidence:29",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/scaling-git-at-openai",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:44:45.895Z",
+      "error": null,
+      "observedDate": "Mon, 02 No",
+      "sourceTimestamp": "Mon, 02 Nov 2026 15:30:00 GMT",
+      "dateField": "rss.pubDate",
+      "candidate": {
+        "title": "Scaling Git at OpenAI",
+        "outcome": "NOT_AI_RELEVANT",
+        "basis": "OFFICIAL_RSS_SUMMARY",
+        "bodyChars": 0
+      }
+    },
+    {
+      "sourceId": "ai:page:30",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://www.anthropic.com/news/singapore-office-opening",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:44:45.895Z",
+      "error": null,
+      "observedDate": "2026-10-14",
+      "sourceTimestamp": "2026-10-14T00:00:00.000Z",
+      "dateField": "page.datePublished",
+      "candidate": {
+        "title": "Singapore office and government MOU",
+        "outcome": "OUT_OF_WINDOW",
+        "basis": "OFFICIAL_PAGE",
+        "bodyChars": 4000
+      }
+    },
+    {
+      "sourceId": "ai:page:31",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/grid-protectors-program",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-11-05T03:44:45.895Z",
+      "error": "SKIPPED_PUBLISHER_BLOCKED",
+      "sourceTimestamp": "Mon, 02 Nov 2026 15:00:00 GMT"
+    },
+    {
+      "sourceId": "ai:rss-evidence:31",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/grid-protectors-program",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:44:45.895Z",
+      "error": null,
+      "observedDate": "Mon, 02 No",
+      "sourceTimestamp": "Mon, 02 Nov 2026 15:00:00 GMT",
+      "dateField": "rss.pubDate",
+      "candidate": {
+        "title": "Introducing the Grid Protectors Program",
+        "outcome": "NOT_AI_RELEVANT",
+        "basis": "OFFICIAL_RSS_SUMMARY",
+        "bodyChars": 0
+      }
+    },
+    {
+      "sourceId": "ai:page:32",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/lifeval",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-11-05T03:44:45.895Z",
+      "error": "SKIPPED_PUBLISHER_BLOCKED",
+      "sourceTimestamp": "Mon, 02 Nov 2026 09:00:00 GMT"
+    },
+    {
+      "sourceId": "ai:rss-evidence:32",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/lifeval",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:44:45.895Z",
+      "error": null,
+      "observedDate": "Mon, 02 No",
+      "sourceTimestamp": "Mon, 02 Nov 2026 09:00:00 GMT",
+      "dateField": "rss.pubDate",
+      "candidate": {
+        "title": "LifeVal",
+        "outcome": "NOT_AI_RELEVANT",
+        "basis": "OFFICIAL_RSS_SUMMARY",
+        "bodyChars": 0
+      }
+    },
+    {
+      "sourceId": "ai:page:33",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/dan-driscoll-joins-openai",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-11-05T03:44:45.895Z",
+      "error": "SKIPPED_PUBLISHER_BLOCKED",
+      "sourceTimestamp": "Mon, 02 Nov 2026 00:00:00 GMT"
+    },
+    {
+      "sourceId": "ai:rss-evidence:33",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/dan-driscoll-joins-openai",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:44:45.895Z",
+      "error": null,
+      "observedDate": "Mon, 02 No",
+      "sourceTimestamp": "Mon, 02 Nov 2026 00:00:00 GMT",
+      "dateField": "rss.pubDate",
+      "candidate": {
+        "title": "OpenAI appoints Dan Driscoll as Senior Counselor for National Security Modernization",
+        "outcome": "NOT_AI_RELEVANT",
+        "basis": "OFFICIAL_RSS_SUMMARY",
+        "bodyChars": 0
+      }
+    },
+    {
+      "sourceId": "ai:page:34",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/qodo-codex-plugin",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-11-05T03:44:45.895Z",
+      "error": "SKIPPED_PUBLISHER_BLOCKED",
+      "sourceTimestamp": "Mon, 02 Nov 2026 00:00:00 GMT"
+    },
+    {
+      "sourceId": "ai:rss-evidence:34",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/qodo-codex-plugin",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:44:45.895Z",
+      "error": null,
+      "observedDate": "Mon, 02 No",
+      "sourceTimestamp": "Mon, 02 Nov 2026 00:00:00 GMT",
+      "dateField": "rss.pubDate",
+      "candidate": {
+        "title": "Qodo builds context into AI code review with Codex",
+        "outcome": "UNCLASSIFIED",
+        "basis": "OFFICIAL_RSS_SUMMARY",
+        "bodyChars": 0
+      }
+    },
+    {
       "sourceId": "deep:consensus:list:economy",
       "category": "AI_INTELLIGENCE",
       "url": "https://consensus.hankyung.com/analysis/list?report_type=EC&sdate=2026-10-29&edate=2026-11-06&now_page=1&pagenum=80",
       "status": "PASS",
       "recordCount": 2,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
-      "error": null
-    },
-    {
-      "sourceId": "deep:naver-research:list:invest",
-      "category": "AI_INTELLIGENCE",
-      "url": "https://m.stock.naver.com/api/research/invest?page=1&pageSize=60",
-      "status": "PASS",
-      "recordCount": 60,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null
     },
     {
@@ -687,25 +1039,16 @@
       "url": "https://m.stock.naver.com/api/research/market?page=1&pageSize=60",
       "status": "PASS",
       "recordCount": 60,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null
     },
     {
-      "sourceId": "deep:naver-research:list:economy",
+      "sourceId": "deep:naver-research:list:invest",
       "category": "AI_INTELLIGENCE",
-      "url": "https://m.stock.naver.com/api/research/economy?page=1&pageSize=60",
-      "status": "PASS",
-      "recordCount": 37,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
-      "error": null
-    },
-    {
-      "sourceId": "deep:naver-research:list:industry",
-      "category": "AI_INTELLIGENCE",
-      "url": "https://m.stock.naver.com/api/research/industry?page=1&pageSize=60",
+      "url": "https://m.stock.naver.com/api/research/invest?page=1&pageSize=60",
       "status": "PASS",
       "recordCount": 60,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null
     },
     {
@@ -714,7 +1057,25 @@
       "url": "https://consensus.hankyung.com/analysis/list?skinType=market&report_type=MK&sdate=2026-10-29&edate=2026-11-06&now_page=1&pagenum=80",
       "status": "PASS",
       "recordCount": 70,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
+      "error": null
+    },
+    {
+      "sourceId": "deep:naver-research:list:industry",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://m.stock.naver.com/api/research/industry?page=1&pageSize=60",
+      "status": "PASS",
+      "recordCount": 60,
+      "collectedAt": "2026-11-05T03:44:45.895Z",
+      "error": null
+    },
+    {
+      "sourceId": "deep:naver-research:list:economy",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://m.stock.naver.com/api/research/economy?page=1&pageSize=60",
+      "status": "PASS",
+      "recordCount": 37,
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null
     },
     {
@@ -723,7 +1084,7 @@
       "url": "https://consensus.hankyung.com/analysis/list?skinType=industry&report_type=IN&sdate=2026-10-29&edate=2026-11-06&now_page=1&pagenum=80",
       "status": "PASS",
       "recordCount": 51,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null
     },
     {
@@ -732,7 +1093,7 @@
       "url": "https://m.stock.naver.com/api/research/company?page=1&pageSize=60",
       "status": "PASS",
       "recordCount": 60,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null
     },
     {
@@ -741,7 +1102,7 @@
       "url": "https://consensus.hankyung.com/analysis/list?skinType=business&report_type=CO&sdate=2026-10-29&edate=2026-11-06&now_page=1&pagenum=80",
       "status": "PASS",
       "recordCount": 75,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null
     },
     {
@@ -750,7 +1111,7 @@
       "url": "https://stock.pstatic.net/stock-research/market/21/20261105_market_805943000.pdf",
       "status": "FAILED",
       "recordCount": 0,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": "NAVER_RESEARCH_EMPTY"
     },
     {
@@ -759,7 +1120,7 @@
       "url": "https://stock.pstatic.net/stock-research/market/18/20261105_market_467591000.pdf",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null,
       "observedDate": "2026-11-05"
     },
@@ -769,7 +1130,7 @@
       "url": "https://stock.pstatic.net/stock-research/market/18/20261105_market_6406000.pdf",
       "status": "FAILED",
       "recordCount": 0,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": "NAVER_RESEARCH_EMPTY"
     },
     {
@@ -778,7 +1139,7 @@
       "url": "https://stock.pstatic.net/stock-research/market/76/20261105_market_641513000.pdf",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null,
       "observedDate": "2026-11-05"
     },
@@ -788,7 +1149,7 @@
       "url": "https://stock.pstatic.net/stock-research/market/21/20261105_market_278760000.pdf",
       "status": "PASS",
       "recordCount": 6,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null,
       "observedDate": "2026-11-05"
     },
@@ -798,7 +1159,7 @@
       "url": "https://stock.pstatic.net/stock-research/market/64/20261105_market_817869000.pdf",
       "status": "PASS",
       "recordCount": 4,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null,
       "observedDate": "2026-11-05"
     },
@@ -808,7 +1169,7 @@
       "url": "https://stock.pstatic.net/stock-research/market/61/20261105_market_147371000.pdf",
       "status": "PASS",
       "recordCount": 4,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null,
       "observedDate": "2026-11-05"
     },
@@ -818,7 +1179,7 @@
       "url": "https://stock.pstatic.net/stock-research/market/63/20261105_market_257537000.pdf",
       "status": "PASS",
       "recordCount": 4,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null,
       "observedDate": "2026-11-05"
     },
@@ -828,7 +1189,7 @@
       "url": "https://stock.pstatic.net/stock-research/market/40/20261105_market_433107000.pdf",
       "status": "PASS",
       "recordCount": 4,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null,
       "observedDate": "2026-11-05"
     },
@@ -838,7 +1199,7 @@
       "url": "https://stock.pstatic.net/stock-research/market/58/20261105_market_447732000.pdf",
       "status": "PASS",
       "recordCount": 4,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null,
       "observedDate": "2026-11-05"
     },
@@ -848,7 +1209,7 @@
       "url": "https://query1.finance.yahoo.com/v7/finance/spark?symbols=NVDA,MSFT,GOOGL,AMZN,META,AVGO,AMD,TSM,ORCL,PLTR&range=5d&interval=1d",
       "status": "PASS",
       "recordCount": 10,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null,
       "observedDate": "2026-11-04"
     },
@@ -858,7 +1219,7 @@
       "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653758",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null,
       "observedDate": "2026-11-05"
     },
@@ -868,7 +1229,7 @@
       "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653750",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null,
       "observedDate": "2026-11-04"
     },
@@ -878,7 +1239,7 @@
       "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653722",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null,
       "observedDate": "2026-11-04"
     },
@@ -888,7 +1249,7 @@
       "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653676",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "collectedAt": "2026-11-05T03:44:45.895Z",
       "error": null,
       "observedDate": "2026-11-03"
     }
