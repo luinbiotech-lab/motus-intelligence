@@ -94,7 +94,7 @@ export function renderAIEditorialArticle(view:AIIntelligenceDailyViewModel):Dail
     const watch=uniqueProse([...view.whatToWatch.map(item=>`${item.headline}: ${item.watchFor}`),...view.industryConnections.map(item=>item.optionalWatchPoint??''),...(connections.join(' ').length<60?connections:[])].filter(Boolean),seen);
     if(watch.length)parts.push(roleSection('앞으로 확인할 것',checklist(watch),'watch','ai-watch'));
   }
-  parts.push(sources(view.sources));return finish('ai-intelligence',view.title,BLOGGER_EDITORIAL_CATEGORIES.AI_INTELLIGENCE.publicLabel,parts.filter(Boolean),['masthead','lead','key-points','issues','watch','sources']);
+  parts.push(relatedPosts(view.relatedPosts));parts.push(sources(view.sources));return finish('ai-intelligence',view.title,BLOGGER_EDITORIAL_CATEGORIES.AI_INTELLIGENCE.publicLabel,parts.filter(Boolean),['masthead','lead','key-points','issues','watch','sources']);
 }
 
 export function renderUSEditorialArticle(view:USMarketDailyViewModel):DailyMasterRenderResult {
@@ -117,7 +117,7 @@ export function renderUSEditorialArticle(view:USMarketDailyViewModel):DailyMaste
   if(view.marketResearch?.length)parts.push(renderMarketResearchEntries(view.marketResearch,view.issueDate));
   const risks=place('risks');
   if(risks.length)parts.push(...risks);else if(view.checkpoints.length)parts.push(roleSection('다음 거래일',checklist(view.checkpoints.map(item=>`${item.headline}: ${item.watchFor}`)),'watch'));
-  parts.push(sources(view.sources));return finish('us-market',view.title,BLOGGER_EDITORIAL_CATEGORIES.US_MARKET.publicLabel,parts.filter(Boolean),['masthead','lead','key-points','charts','macro','companies','research','watch','sources']);
+  parts.push(relatedPosts(view.relatedPosts));parts.push(sources(view.sources));return finish('us-market',view.title,BLOGGER_EDITORIAL_CATEGORIES.US_MARKET.publicLabel,parts.filter(Boolean),['masthead','lead','key-points','charts','macro','companies','research','watch','sources']);
 }
 
 const metricValue=(value:string)=>{const number=Number(value.replace(/[^0-9.+\-−]/g,'').replace('−','-'));return Number.isFinite(number)?number:Number.NaN};
@@ -143,7 +143,7 @@ export function renderKoreaEditorialArticle(view:KoreaMarketDailyViewModel):Dail
   const risks=place('risks');
   if(risks.length)parts.push(...risks);else if(view.checkpoints.length)parts.push(roleSection(view.edition==='PREVIOUS_SESSION_MORNING'?'오늘 체크포인트':'다음 거래일',checklist(view.checkpoints.map(item=>`${item.headline}: ${item.watchFor}`)),'watch'));
   if(view.marketCommentary.length&&deep.length)parts.push(roleSection('자료 기준',`<div style="font-size:14px;color:${C.muted}">${prose(view.marketCommentary)}</div>`));
-  parts.push(sources(view.sources));return finish('korea-market',view.title,BLOGGER_EDITORIAL_CATEGORIES.KOREA_MARKET.publicLabel,parts.filter(Boolean),['masthead','lead','key-points','indexes','fx','flows','sectors','research','watch','sources']);
+  parts.push(relatedPosts(view.relatedPosts));parts.push(sources(view.sources));return finish('korea-market',view.title,BLOGGER_EDITORIAL_CATEGORIES.KOREA_MARKET.publicLabel,parts.filter(Boolean),['masthead','lead','key-points','indexes','fx','flows','sectors','research','watch','sources']);
 }
 
 /** Show what the publisher actually published, without manufacturing a brokerage opinion.
@@ -189,6 +189,12 @@ export function renderWeeklySection(item:import('../operations/weekly-review.js'
   return roleSection(item.title,body,role,item.key);
 }
 
+/** Recent MOTUS posts (owner 2026-11-05, Google indexing): internal links help crawlers find and weigh new posts. */
+export function relatedPosts(posts:Array<{title:string;url:string;label:string;published:string}>|undefined):string {
+  const items=(posts??[]).filter(post=>/^https:\/\/motusnova\.blogspot\.com\//.test(post.url)&&post.title&&!/(무슨 일이 있었나|왜 중요한가|핵심 내용|산업 연결|시장 연결|fixture|placeholder)/i.test(post.title)).slice(0,5);
+  if(!items.length)return '';
+  return renderWeeklySection({key:'related-posts',title:'MOTUS 최근 기사',intro:'최근 발행한 시장·AI 브리핑을 이어서 읽어 보세요.',links:items.map(post=>({label:post.title,url:post.url,meta:[post.label,post.published].filter(Boolean).join(' · ')}))});
+}
 /** Daily report (owner decision 2026-11-04): one post a day in the '리포트' category with the combined PDF and the day's articles. */
 export const DAILY_REPORT_LABEL='리포트';
 export function renderDailyReportArticle(view:{date:string;title:string;subtitle:string;lead:string;sections:import('../operations/weekly-review.js').WeeklySection[];sources:Array<{label:string;url:string}>}):DailyMasterRenderResult {

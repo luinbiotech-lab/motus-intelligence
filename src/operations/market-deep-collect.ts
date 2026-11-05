@@ -63,7 +63,9 @@ export async function collectUSDeep(input:{sessionDate:string;operationDate:stri
     recordListed(input.audit,sources,'US_MARKET',input.at);
     const ups=input.indexChanges.filter(value=>value>0.005).length,downs=input.indexChanges.filter(value=>value<-0.005).length;
     const indexPhrase=ups===input.indexChanges.length?'3대 지수 상승':downs===input.indexChanges.length?'3대 지수 하락':'3대 지수 혼조';
-    return {composition,title:composition.titleFocus?`뉴욕증시 ${indexPhrase}…${composition.titleFocus}`:null,sources};
+    // Owner 2026-11-05 (traffic analysis #97): '마감' is the word the top posts and searchers use. No calendar date: the
+    // editorial gate rejects dates in titles (루인 rule 10-21); whether to add one waits for 루인's review (owner decision).
+    return {composition,title:composition.titleFocus?`뉴욕증시 마감, ${indexPhrase}…${composition.titleFocus}`:null,sources};
   }catch{return empty}
 }
 
@@ -82,10 +84,9 @@ export async function collectKoreaDeep(input:{sessionDate:string;operationDate:s
     const sources=[...composition.sources];
     if(composition.sections.some(section=>section.key==='korea-stocks')){sources.push({label:'네이버페이 증권 검색 상위 종목',url:NAVER_SEARCH_TOP,publisher:'네이버페이 증권'});for(const stock of search?.stocks??[])sources.push({label:`네이버페이 증권 ${stock.name} 일별 시세`,url:stock.url,publisher:'네이버페이 증권'})}
     recordListed(input.audit,sources,'KOREA_MARKET',input.at);
-    const change=input.kospiChangePct,level=new Intl.NumberFormat('en-US',{maximumFractionDigits:0}).format(Math.floor(input.kospiClose));
-    // '코스피 1.24% 내려 5,937…검색 1위 삼성전자 4.8% 하락': the index verb differs from the stock's, so the headline does not repeat '하락…하락'.
-    const verb:Record<string,string>={상승:'올라',하락:'내려',급등:'급등해',급락:'급락해',보합:'보합'};
-    const head=change===null?null:`코스피 ${Math.abs(change).toFixed(2)}% ${verb[indexMove(change)]??indexMove(change)} ${level}`;
+    // Owner 2026-11-05 (traffic analysis #97): '코스피 마감, 3.59% 급락 5,648.79…검색 1위 삼성전자 3.1% 하락' — '마감' is what
+    // searchers and the top posts use; the close is the exact value (no rounding). No calendar date (see the US title).
+    const head=koreaTitleHead(input.kospiChangePct,input.kospiClose);
     return {composition,title:head&&composition.titleFocus?`${head}…${composition.titleFocus}`:null,sources};
   }catch{return empty}
 }
@@ -103,4 +104,10 @@ export async function collectAIDeep(input:{operationDate:string;candidateUSSessi
     recordListed(input.audit,sources,'AI_INTELLIGENCE',input.at);
     return {composition,title:composition.titleFocus?`${composition.titleFocus}…증권가가 짚은 AI 투자 쟁점`:null,sources};
   }catch{return empty}
+}
+/** '코스피 마감, 3.59% 급락 5,648.79' (null without a change). */
+export function koreaTitleHead(change:number|null,close:number):string|null {
+  if(change===null)return null;
+  const move=indexMove(change),level=new Intl.NumberFormat('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}).format(close);
+  return `코스피 마감, ${move==='보합'?'보합':`${Math.abs(change).toFixed(2)}% ${move}`} ${level}`;
 }
