@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "1.1",
+  "category": "KOREA_MARKET",
+  "operationDate": "2026-11-06",
+  "observedDate": "2026-11-06",
+  "sourceMode": "internal",
+  "verification": "FAILED",
+  "unresolvedConflicts": [
+    "YAHOO_FINANCE_KOSPI_ROW_MISSING"
+  ],
+  "provenancePass": false,
+  "sourceDiversityPass": false,
+  "sourceLinksPass": false,
+  "mobilePass": false,
+  "editorialQualityPass": false,
+  "leakagePass": true,
+  "duplicateCheck": "PENDING_REMOTE",
+  "duplicateUncertainty": true,
+  "articleFingerprint": "",
+  "commerceEnabled": false,
+  "verifiedAt": "2026-11-05T21:18:31.959Z",
+  "expiresAt": "2026-11-05T22:48:31.959Z",
+  "sourceAuditIds": [
+    "naver:kospi:history",
+    "naver:kosdaq:history",
+    "naver:usd-krw",
+    "naver:flows",
+    "naver:mover"
+  ],
+  "sourceAuditFingerprint": "sha256:58b44d22230b5c89fd004d8c5301e4af999b5f435452e6b7fba1da12975d13f4",
+  "crossVerificationFingerprint": "sha256:3859c882c747560739a3486be08b852a173ebae1a45aec009770ef0491f6c42d",
+  "crossVerification": {
+    "schemaVersion": "1.0",
+    "category": "KOREA_MARKET",
+    "observedDate": "2026-11-05",
+    "primarySource": {
+      "provider": "Naver Finance",
+      "domain": "naver.com",
+      "urls": [
+        "https://m.stock.naver.com/api/index/KOSPI/price?pageSize=10&page=1",
+        "https://m.stock.naver.com/api/index/KOSDAQ/price?pageSize=10&page=1"
+      ]
+    },
+    "independentSource": {
+      "providers": [],
+      "domains": [],
+      "urls": []
+    },
+    "comparedFields": [],
+    "tolerance": {
+      "KOSPI": 0.05,
+      "KOSDAQ": 0.05,
+      "USD_KRW": 2
+    },
+    "comparisonResult": "UNAVAILABLE",
+    "sourceDiversityPass": false,
+    "verification": "REVIEW_REQUIRED",
+    "reasonCodes": [
+      "YAHOO_FINANCE_KOSPI_ROW_MISSING",
+      "KOREA_OFFICIAL_INDEX_COMPARISON_INCOMPLETE",
+      "KOREA_INDEPENDENT_SOURCE_DIVERSITY_FAILED"
+    ],
+    "verifiedAt": "2026-11-05T21:18:31.959Z",
+    "officialPhase": "PRE_PUBLICATION",
+    "reconciliation": {
+      "status": "NOT_REQUIRED",
+      "officialObservedDates": []
+    }
+  }
+}
