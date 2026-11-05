@@ -251,3 +251,8 @@ test('body keyword hits alone cannot turn a customer story into an infrastructur
   const titled=synthesizeEvidenceBoundAIEvent({...input,title:'Amazon expands AI data center capacity in Malaysia'});
   assert.match(titled?.topic??'',/말레이시아/);
 });
+
+test('a named AWS product in an official title is enough detail to report the launch',()=>{
+  const event=synthesizeEvidenceBoundAIEvent({topicId:'a',publisher:'Amazon AWS',sourceId:'aws-whats-new',title:'Amazon WorkSpaces for AI agents now supports Linux and Windows 11 cloud desktops',link:'https://aws.amazon.com/about-aws/whats-new/2026/11/workspaces-ai-agents-linux-windows-11',publishedAt:'2026-11-03T18:00:00Z',evidence:'Agents can now run on managed cloud desktops. '.repeat(10),basis:'OFFICIAL_PAGE'});
+  assert.equal(event?.eventType,'launch');assert.match(event?.topic??'',/Amazon WorkSpaces/);
+});
