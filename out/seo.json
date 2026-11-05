@@ -1,0 +1,38 @@
+{
+  "robots": {
+    "status": 404,
+    "text": "<!DOCTYPE html>\n<html lang=en>\n  <meta charset=utf-8>\n  <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=device-width\">\n  <title>Error 404 (Not Found)!!1</title>\n  <style>\n    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}"
+  },
+  "/sitemap.xml": {
+    "status": 200,
+    "location": null,
+    "len": 3974,
+    "head": "<?xml version='1.0' encoding='UTF-8'?><urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\"><url><loc>https://motusnova.blogspot.com/2026/11/3-70.html</loc><lastmod>2026-11-04T23:46:38Z</lastmod></url><url><loc>https://motusnova.blogspot.com/2026/11/062-5683-1-09.html</loc><lastmod>2026-11-04T"
+  },
+  "/sitemap-pages.xml": {
+    "status": 200,
+    "location": null,
+    "len": 215,
+    "head": "<?xml version='1.0' encoding='UTF-8'?><urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\"><url><loc>https://motusnova.blogspot.com/p/blog-page.html</loc><lastmod>2026-11-03T16:52:20Z</lastmod></url></urlset>"
+  },
+  "/feeds/posts/default": {
+    "status": 200,
+    "location": null,
+    "len": 737511,
+    "head": "<?xml version='1.0' encoding='UTF-8'?><?xml-stylesheet href=\"http://www.blogger.com/styles/atom.css\" type=\"text/css\"?><feed xmlns='http://www.w3.org/2005/Atom' xmlns:openSearch='http://a9.com/-/spec/opensearchrss/1.0/' xmlns:blogger='http://schemas.google.com/blogger/2008' xmlns:georss='http://www.g"
+  },
+  "home": {
+    "status": 302,
+    "xrobots": null,
+    "metaRobots": [],
+    "gsv": [],
+    "noindexAny": false
+  },
+  "post": {
+    "status": 302,
+    "xrobots": null,
+    "metaRobots": [],
+    "gsv": [],
+    "noindexAny": false
+  }
+}
