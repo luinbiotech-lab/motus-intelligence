@@ -1,16 +1,10 @@
 {
-  "state": "HOLD",
-  "gate": {
-    "state": "HOLD",
-    "reasons": [
-      "duplicate state uncertain"
-    ],
-    "approval": null,
-    "checkedAt": "2026-11-05T03:47:20.050Z"
-  },
-  "publishCallCount": 0,
-  "execution": "SIMULATED",
-  "commerce": {
-    "enabled": false
-  }
+  "state": "SKIP",
+  "reasonCode": "AI_VERIFIED_EVENTS_INSUFFICIENT",
+  "reasonCodes": [
+    "AI_VERIFIED_EVENTS_INSUFFICIENT"
+  ],
+  "reason": "AI_VERIFIED_EVENTS_INSUFFICIENT",
+  "insertCallCount": 0,
+  "publishCallCount": 0
 }
