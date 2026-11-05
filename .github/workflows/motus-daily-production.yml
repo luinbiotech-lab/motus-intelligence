@@ -171,6 +171,25 @@ jobs:
           else
             echo 'not published by this run; no snapshot'
           fi
+      # AI narrative, shadow mode (owner 2026-11-06): runs after publication, writes only narrative files next to the
+      # unit and never changes the published article. The subscription token is scoped to this step; without it the
+      # step does nothing. The CLI child process gets only PATH and the token (src/narrative/claude-cli-provider.ts).
+      - name: AI narrative (shadow, no publication effect)
+        if: always() && env.CATEGORY == 'ai'
+        continue-on-error: true
+        timeout-minutes: 12
+        shell: bash
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          MOTUS_NARRATIVE_MODEL: ${{ vars.MOTUS_NARRATIVE_MODEL }}
+        run: |
+          if [[ -z "$CLAUDE_CODE_OAUTH_TOKEN" ]]; then echo 'CLAUDE_CODE_OAUTH_TOKEN not configured; narrative shadow skipped'; exit 0; fi
+          npm install -g --no-fund --no-audit @anthropic-ai/claude-code@2.1.318 >/dev/null
+          help="$(claude --help)"
+          for flag in --print --output-format --tools --strict-mcp-config --setting-sources --no-session-persistence --system-prompt; do
+            grep -q -- "$flag" <<<"$help" || { echo "::warning title=AI narrative (shadow)::claude CLI lacks $flag; skipped"; exit 0; }
+          done
+          node dist/src/ai-narrative-cli.js --date "$RUN_DATE"
       - name: Record production outcome
         if: always()
         run: npm run motus:production-summary -- --date "$RUN_DATE" --category "$CATEGORY"

@@ -1,0 +1,360 @@
+{
+ "publicationId": "motus-live-2026-11-04:ai",
+ "issueDate": "2026-11-04",
+ "issueNumber": 20261104,
+ "title": "AMD 3.7% 상승…증권가가 짚은 AI 투자 쟁점",
+ "subtitle": "증권가 분석과 공식 발표로 읽는 AI 산업",
+ "category": "AI_INTELLIGENCE",
+ "canonicalLabel": "AI Intelligence",
+ "displayLabel": "AI 인텔리전스 (AI Intelligence)",
+ "todayCore": {
+  "headline": "구글, 신규 AI 제품·기능 공개",
+  "summary": "직전 미국 정규장(11월 3일)에서 AMD(AMD)는 3.65% 상승했다. 공식 채널에서는 구글의 신규 AI 제품·기능, 마이크로소프트의 Copilot 관련 AI 보안 발표가 나왔다. 공식 AI 채널 11곳에서 최근 4일간 게시된 AI 발표 19건을 확인했고, 원문 출처와 발표일이 검증된 2건을 골라 정리했다.",
+  "bullets": [
+   "구글, 신규 AI 제품·기능 공개",
+   "마이크로소프트, Copilot 관련 AI 보안"
+  ]
+ },
+ "issues": [
+  {
+   "headline": "구글, 신규 AI 제품·기능 공개",
+   "whatHappened": [
+    "구글은 2026년 11월 03일(한국 시간) 공식 블로그에 「The latest AI news we announced in October 2026」 제목의 발표를 게시했다.",
+    "발표 제목과 본문은 신규 AI 제품·기능 공개에 관한 내용을 다룬다. 원문에서 언급된 제품·플랫폼은 Gemini 4이다."
+   ],
+   "coreContent": "",
+   "whyItMatters": "MOTUS 분석: 신규 기능 공개의 의미는 기술 사양보다 실제로 쓰는 고객이 얼마나 빨리 늘어나는지와 과금 구조에 달려 있다. Gemini 4 같은 제품이 기존 고객 기반에 기본 기능으로 붙으면 확산 속도가 빨라질 수 있지만, 사용량 지표가 공개되기 전까지는 효과를 단정하기 어렵다.",
+   "relatedCompaniesIndustries": [
+    "구글",
+    "AI 산업"
+   ],
+   "marketConnection": "시장 평가는 발표 이후 고객 채택, 매출 기여와 인프라 투자 자료가 확인된 뒤 판단해야 한다.",
+   "institutionView": null,
+   "evidenceRefs": [
+    "https://blog.google/innovation-and-ai/technology/ai/google-ai-updates-october-2026/"
+   ]
+  },
+  {
+   "headline": "마이크로소프트, Copilot 관련 AI 보안",
+   "whatHappened": [
+    "마이크로소프트는 2026년 11월 03일(한국 시간) 공식 블로그에 「Nine engineers, 1,211 code updates in a day: Lessons from building Copilot Cowork」 제목의 발표를 게시했다.",
+    "원문 본문은 AI 보안·안전 강화에 관한 내용을 다룬다. 발표의 중심 제품·플랫폼은 Copilot이다."
+   ],
+   "coreContent": "",
+   "whyItMatters": "MOTUS 분석: AI 서비스 이용자가 늘수록 보안과 안전 체계는 기업 고객의 도입 여부를 가르는 조건이 된다. 공개된 조치가 실제 사고 예방이나 인증 획득으로 이어지는지가 신뢰도의 기준이다.",
+   "relatedCompaniesIndustries": [
+    "마이크로소프트",
+    "AI 산업"
+   ],
+   "marketConnection": "시장 평가는 발표 이후 고객 채택, 매출 기여와 인프라 투자 자료가 확인된 뒤 판단해야 한다.",
+   "institutionView": null,
+   "evidenceRefs": [
+    "https://commandline.microsoft.com/how-we-built-copilot-cowork-python-to-rust-migration/"
+   ]
+  }
+ ],
+ "deepSections": [
+  {
+   "key": "ai-issue",
+   "placement": "early",
+   "role": "broker",
+   "title": "오늘의 AI 쟁점: 증권가 시각",
+   "intro": "직전 미국 정규장에서 AI 관련 기업의 주가를 움직인 사안을 증권사 아침 리포트 원문으로 정리했다.",
+   "paragraphs": [
+    {
+     "text": "MOTUS 정리: 증권사 5곳의 리포트를 대조하면 AI 투자(유안타증권·다올투자증권·신한투자증권·KB증권), 반도체(다올투자증권·신한투자증권·KB증권)가 공통으로 꼽힌 배경이다."
+    },
+    {
+     "text": "유안타증권은 11월 4일 마감 코멘트 「유안타 AI 미국 주식시장 마감 시황 (26.11.04)」에서 “AMD의 데이터센터 매출 급증 실적에 AI 성장주가 반등하며 나스닥을 끌어올렸지만, 10년물 금리가 4.95%까지 치솟고 블루칩(다우)은 약세로 돌아선 엇갈린 하루였습니다”라고 진단했다.",
+     "source": {
+      "label": "유안타증권 유안타 AI 미국 주식시장 마감 시황 (26.11.04) (11월 4일)",
+      "url": "https://stock.pstatic.net/stock-research/market/18/20261104_market_258440000.pdf"
+     }
+    },
+    {
+     "text": "신한투자증권은 11월 4일 아침 리포트 「Daily Market Digest (11월 4일)」에서 “빅테크 선방(META +2.4%) 속 AAPL(-1.9%)은 GPM 가이던스 실망에 하락”이라고 진단했다.",
+     "source": {
+      "label": "신한투자증권 Daily Market Digest (11월 4일) (11월 4일)",
+      "url": "https://stock.pstatic.net/stock-research/market/21/20261104_market_514536000.pdf"
+     }
+    },
+    {
+     "text": "KB증권은 11월 4일 아침 리포트 「11/4 KB 리서치 모닝코멘트」에서 “최근 반도체주 급락에 저가 매수세 유입되며 반등. 중간선거 경계감 반영하며 상승폭 제한 및 다우 지수 하락”이라고 진단했다.",
+     "source": {
+      "label": "KB증권 11/4 KB 리서치 모닝코멘트 (11월 4일)",
+      "url": "https://stock.pstatic.net/stock-research/market/58/20261104_market_961310000.pdf"
+     }
+    },
+    {
+     "text": "경계 요인도 제시됐다. 다올투자증권은 “미국증시, 미국 중간선거 결과를 앞둔 정치적 불확실성에도 AI·반도체 관련주가 반등하며 강세를 보이자 3대 지수 혼조 마감”이라고 짚었다.",
+     "source": {
+      "label": "다올투자증권 Daily Morning Brief(2026.11.04) (11월 4일)",
+      "url": "https://stock.pstatic.net/stock-research/market/76/20261104_market_721012000.pdf"
+     }
+    }
+   ]
+  },
+  {
+   "key": "ai-stocks",
+   "placement": "early",
+   "role": "data",
+   "bars": [
+    {
+     "label": "오라클 ORCL",
+     "value": 5.846334507632946
+    },
+    {
+     "label": "AMD AMD",
+     "value": 3.654356953131695
+    },
+    {
+     "label": "브로드컴 AVGO",
+     "value": 3.0723396331812607
+    },
+    {
+     "label": "마이크로소프트 MSFT",
+     "value": 2.7350528474522804
+    },
+    {
+     "label": "메타 META",
+     "value": 2.3568968074761347
+    },
+    {
+     "label": "엔비디아 NVDA",
+     "value": 2.291398594476886
+    },
+    {
+     "label": "아마존 AMZN",
+     "value": 2.0600089565606816
+    },
+    {
+     "label": "TSMC TSM",
+     "value": 1.5478012191756807
+    },
+    {
+     "label": "알파벳 GOOGL",
+     "value": 0.37277321767803995
+    },
+    {
+     "label": "팔란티어 PLTR",
+     "value": -1.6485365033082862
+    }
+   ],
+   "title": "AI 대표 종목의 주가 흐름",
+   "intro": "미국 AI 대표 종목 10개의 직전 정규장(2026-11-03) 종가 기준 등락이다.",
+   "paragraphs": [
+    {
+     "text": "10개 종목 가운데 9개가 올랐다. 가장 강한 종목은 오라클(ORCL, +5.85%), 가장 약한 종목은 팔란티어(PLTR, -1.65%)였다."
+    },
+    {
+     "text": "오라클 +5.85% · AMD +3.65% · 브로드컴 +3.07% · 마이크로소프트 +2.74% · 메타 +2.36% · 엔비디아 +2.29% · 아마존 +2.06% · TSMC +1.55% · 알파벳 +0.37% · 팔란티어 -1.65%"
+    }
+   ]
+  },
+  {
+   "key": "ai-broker-research",
+   "role": "broker",
+   "title": "증권가가 본 AI 산업",
+   "intro": "국내 증권사가 최근 공개한 리포트 가운데 AI 수요를 직접 다룬 분석의 문장과 투자의견을 그대로 옮겼다.",
+   "paragraphs": [
+    {
+     "text": "유진투자증권은 「필라델피아 반도체 +2.6% & AMD 시간외 +6%」에서 “美 중간선거 당일 뉴욕증시 3대 지수는 반도체 저가매수 반등, 애플 실적 실망에 다우만 하락하며 혼조. 다우 -0.4%·S&P500 +0.4%·나스닥 +0.8%·필 반도체 +2.6%”, “3거래일 급락했던 반도체에 기술적 반발 매수 & 장 마감 후 AMD 실적 기대. 엔비디아(+2.3%)·AMD(+3.7%)·브로드컴(+3.1%)·마이크론(+2.6%) 상승, 인텔도 +1.0%. 크레도(+7.8%)·코히런트(+3.8%)·시에나(+5.6%) 등 광통신주도 강세”, “다우는 애플 등 하드웨어·경기소비·헬스케어 약세로 홀로 하락. 애플은 전일 장 마감 후 실적에서 메모리 비용 부담에 따른 마진 가이던스(12월 분기 총마진 45~46%) 실망. 프리마켓 -4%, 정규장 -1.9%. 머크(-2.6%)·셰윈윌리엄스(-3.3%)·홈디포(-2.2%)도 지수 압박”이라고 밝혔다.",
+     "source": {
+      "label": "유진투자증권 Eugene Daily Snapshot - 자금조달 부담 vs 인프라 수요 재확인에 출렁이는 증시 (11월 4일)",
+      "url": "https://stock.pstatic.net/stock-research/market/63/20261104_market_268984000.pdf"
+     }
+    },
+    {
+     "text": "유진투자증권은 「외국인·기관 동반 매도에 코스피 -3.6%, 하루 만에 반등 반납」에서 “국내 양대 증시는 美 반도체 3거래일 연속 급락 & 외국인·기관 동반 매도에 반도체 중심 하락, 전일 반등분 반납(코스피 -3.6%·코스닥 -4.1%)”, “2)반도체 대형주 급락 전환. 삼성전자(-4.2%)·SK하이닉스(-5.0%) 동반 약세, 장비주(주성 엔지니어링 -7.7%·원익IPS -7.1%)도 낙폭 확대. 3)내수방어 업종 선방. 소매유통·필수소비재·호텔레저·미디어 상대적 강세, 한진칼(上)은 최대주주 변경 가능성에 이틀째 급등”, “코스피 외국인(-1조5,244억원·현선물 동시 매도)·기관(-4,926억원·금투 순매도) vs 개인(+1조6,354억원), 코스닥 개인(+3,107억원) vs 외국인(-747억원)·기관(-2,342억원). 여타 아시아 증시는 닛케이225(휴장)·대만 가권(-3.6%)·상해종합(-0.8%)”라고 밝혔다.",
+     "source": {
+      "label": "유진투자증권 Eugene Daily Snapshot - 자금조달 부담 vs 인프라 수요 재확인에 출렁이는 증시 (11월 4일)",
+      "url": "https://stock.pstatic.net/stock-research/market/63/20261104_market_268984000.pdf"
+     }
+    },
+    {
+     "text": "SK하이닉스: iM증권 고의영 연구원은 11월 4일 「HBM 하나로 시가총액 설명」 리포트에서 투자의견 Buy, 목표주가 2,300,000원을 제시했다.",
+     "source": {
+      "label": "iM증권 SK하이닉스(000660) HBM 하나로 시가총액 설명 (11월 4일)",
+      "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653750"
+     },
+     "report": {
+      "company": "SK하이닉스",
+      "broker": "iM증권",
+      "analysts": "고의영",
+      "date": "2026-11-04",
+      "title": "SK하이닉스(000660) HBM 하나로 시가총액 설명",
+      "rating": "Buy",
+      "target": "2,300,000"
+     }
+    },
+    {
+     "text": "뷰웍스: LS증권 정홍식 연구원은 11월 4일 「3Q26 Review: 반도체 분야로 확대」 리포트에서 투자의견 Buy, 목표주가 36,000원을 제시했다.",
+     "source": {
+      "label": "LS증권 뷰웍스(100120) 3Q26 Review: 반도체 분야로 확대 (11월 4일)",
+      "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653722"
+     },
+     "report": {
+      "company": "뷰웍스",
+      "broker": "LS증권",
+      "analysts": "정홍식",
+      "date": "2026-11-04",
+      "title": "뷰웍스(100120) 3Q26 Review: 반도체 분야로 확대",
+      "rating": "Buy",
+      "target": "36,000"
+     }
+    },
+    {
+     "text": "현대오토에버: LS증권 이병근 연구원은 11월 3일 「GPUaaS를 통한 성장 기대」 리포트에서 투자의견 Buy, 목표주가 500,000원을 제시했다.",
+     "source": {
+      "label": "LS증권 현대오토에버(307950) GPUaaS를 통한 성장 기대 (11월 3일)",
+      "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653676"
+     },
+     "report": {
+      "company": "현대오토에버",
+      "broker": "LS증권",
+      "analysts": "이병근",
+      "date": "2026-11-03",
+      "title": "현대오토에버(307950) GPUaaS를 통한 성장 기대",
+      "rating": "Buy",
+      "target": "500,000"
+     }
+    },
+    {
+     "text": "GS건설: iM증권 배세호 연구원은 11월 2일 「본업 정상화 진입, 동해 데이터센터 수주 기대」 리포트에서 투자의견 Buy, 목표주가 38,000원을 제시했다.",
+     "source": {
+      "label": "iM증권 GS건설(006360) 본업 정상화 진입, 동해 데이터센터 수주 기대 (11월 2일)",
+      "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653646"
+     },
+     "report": {
+      "company": "GS건설",
+      "broker": "iM증권",
+      "analysts": "배세호",
+      "date": "2026-11-02",
+      "title": "GS건설(006360) 본업 정상화 진입, 동해 데이터센터 수주 기대",
+      "rating": "Buy",
+      "target": "38,000"
+     }
+    }
+   ]
+  }
+ ],
+ "industryFlow": [
+  "AI 제품 적용",
+  "AI 인프라",
+  "기업 도입"
+ ],
+ "industryConnections": [
+  {
+   "title": "구글 발표의 산업 연결",
+   "explanation": "MOTUS 분석: 신규 기능 공개의 의미는 기술 사양보다 실제로 쓰는 고객이 얼마나 빨리 늘어나는지와 과금 구조에 달려 있다. Gemini 4 같은 제품이 기존 고객 기반에 기본 기능으로 붙으면 확산 속도가 빨라질 수 있지만, 사용량 지표가 공개되기 전까지는 효과를 단정하기 어렵다.",
+   "connectedCompanies": [
+    "구글"
+   ],
+   "connectedIndustries": [
+    "AI 산업"
+   ],
+   "evidenceRefs": [
+    "https://blog.google/innovation-and-ai/technology/ai/google-ai-updates-october-2026/"
+   ],
+   "optionalWatchPoint": ""
+  },
+  {
+   "title": "마이크로소프트 발표의 산업 연결",
+   "explanation": "MOTUS 분석: AI 서비스 이용자가 늘수록 보안과 안전 체계는 기업 고객의 도입 여부를 가르는 조건이 된다. 공개된 조치가 실제 사고 예방이나 인증 획득으로 이어지는지가 신뢰도의 기준이다.",
+   "connectedCompanies": [
+    "마이크로소프트"
+   ],
+   "connectedIndustries": [
+    "AI 산업"
+   ],
+   "evidenceRefs": [
+    "https://commandline.microsoft.com/how-we-built-copilot-cowork-python-to-rust-migration/"
+   ],
+   "optionalWatchPoint": ""
+  }
+ ],
+ "whatToWatch": [
+  {
+   "headline": "구글 신규 AI 제품·기능",
+   "watchFor": "제공 지역과 가격, 기존 고객의 실제 사용량과 경쟁 서비스 대비 차별점을 확인할 필요가 있다.",
+   "validityHorizon": "NEXT_30_DAYS"
+  },
+  {
+   "headline": "마이크로소프트 Copilot 관련 AI 보안",
+   "watchFor": "적용 대상 서비스와 시점, 외부 검증 결과가 공개되는지 확인할 필요가 있다.",
+   "validityHorizon": "NEXT_30_DAYS"
+  }
+ ],
+ "sources": [
+  {
+   "label": "구글 공식 발표",
+   "url": "https://blog.google/innovation-and-ai/technology/ai/google-ai-updates-october-2026/",
+   "publisher": "Google AI"
+  },
+  {
+   "label": "마이크로소프트 공식 발표",
+   "url": "https://commandline.microsoft.com/how-we-built-copilot-cowork-python-to-rust-migration/",
+   "publisher": "Microsoft"
+  },
+  {
+   "label": "유안타증권 「유안타 AI 미국 주식시장 마감 시황 (26.11.04)」 (2026-11-04)",
+   "url": "https://stock.pstatic.net/stock-research/market/18/20261104_market_258440000.pdf",
+   "publisher": "유안타증권",
+   "role": "SUPPLEMENTARY"
+  },
+  {
+   "label": "다올투자증권 「Daily Morning Brief(2026.11.04)」 (2026-11-04)",
+   "url": "https://stock.pstatic.net/stock-research/market/76/20261104_market_721012000.pdf",
+   "publisher": "다올투자증권",
+   "role": "SUPPLEMENTARY"
+  },
+  {
+   "label": "신한투자증권 「Daily Market Digest (11월 4일)」 (2026-11-04)",
+   "url": "https://stock.pstatic.net/stock-research/market/21/20261104_market_514536000.pdf",
+   "publisher": "신한투자증권",
+   "role": "SUPPLEMENTARY"
+  },
+  {
+   "label": "유진투자증권 「Eugene Daily Snapshot - 자금조달 부담 vs 인프라 수요 재확인에 출렁이는 증시」 (2026-11-04)",
+   "url": "https://stock.pstatic.net/stock-research/market/63/20261104_market_268984000.pdf",
+   "publisher": "유진투자증권",
+   "role": "SUPPLEMENTARY"
+  },
+  {
+   "label": "KB증권 「11/4 KB 리서치 모닝코멘트」 (2026-11-04)",
+   "url": "https://stock.pstatic.net/stock-research/market/58/20261104_market_961310000.pdf",
+   "publisher": "KB증권",
+   "role": "SUPPLEMENTARY"
+  },
+  {
+   "label": "iM증권 「SK하이닉스(000660) HBM 하나로 시가총액 설명」 (2026-11-04)",
+   "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653750",
+   "publisher": "iM증권",
+   "role": "SUPPLEMENTARY"
+  },
+  {
+   "label": "LS증권 「뷰웍스(100120) 3Q26 Review: 반도체 분야로 확대」 (2026-11-04)",
+   "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653722",
+   "publisher": "LS증권",
+   "role": "SUPPLEMENTARY"
+  },
+  {
+   "label": "LS증권 「현대오토에버(307950) GPUaaS를 통한 성장 기대」 (2026-11-03)",
+   "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653676",
+   "publisher": "LS증권",
+   "role": "SUPPLEMENTARY"
+  },
+  {
+   "label": "iM증권 「GS건설(006360) 본업 정상화 진입, 동해 데이터센터 수주 기대」 (2026-11-02)",
+   "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653646",
+   "publisher": "iM증권",
+   "role": "SUPPLEMENTARY"
+  },
+  {
+   "label": "Yahoo Finance AI 대표 종목 일별 종가",
+   "url": "https://query1.finance.yahoo.com/v7/finance/spark?symbols=NVDA,MSFT,GOOGL,AMZN,META,AVGO,AMD,TSM,ORCL,PLTR&range=5d&interval=1d",
+   "publisher": "Yahoo Finance",
+   "role": "SUPPLEMENTARY"
+  }
+ ]
+}

@@ -23,7 +23,7 @@ const TAGS:Record<Role,[string,string]>={data:['데이터',`background:${C.navyS
 /** Escaped text with every figure in bold: a signed change in red (+) or blue (-), a level or unsigned figure in ink. */
 export function emph(value:string):string {
   // An unsigned change takes its colour from the verb that follows it (3.06% 하락 → blue, 29.97% 급등 → red).
-  return esc(value).replace(/(^|[\s(·,:“‘;~])([+\-−]?\d[\d,]*(?:\.\d+)?)(\s?(?:%p|%|bps|bp|억원|조원|원|달러))(?=(?:으로|로|을|를|이|가|은|는|의|대|에|씩|까지)?(?![가-힣A-Za-z]))(?=(?:으로|로|을|를|이|가|은|는|의)?(\s?(?:상승|급등|올랐|오른|반등|하락|급락|내렸|내린|떨어))?)/g,(_match,lead:string,number:string,unit:string,verb?:string)=>{
+  return esc(value).replace(/(^|[\s(·:“‘;~]|(?<![\d조억]),)([+\-−]?\d[\d,]*(?:\.\d+)?(?:조(?:\s?\d[\d,]*(?:\.\d+)?(?=\s?억))?)?)(\s?(?:%p|%|bps|bp|억원|조원|원|달러))(?=(?:으로|로|을|를|이|가|은|는|의|대|에|씩|까지)?(?![가-힣A-Za-z]))(?=(?:으로|로|을|를|이|가|은|는|의)?(\s?(?:상승|급등|올랐|오른|반등|하락|급락|내렸|내린|떨어))?)/g,(_match,lead:string,number:string,unit:string,verb?:string)=>{
     const color=/^[+]/.test(number)?C.up:/^[\-−]/.test(number)?C.down:/%/.test(unit)&&verb?(/상승|급등|올랐|오른|반등/.test(verb)?C.up:C.down):C.ink;return `${lead}<b style="color:${color};font-weight:800;white-space:nowrap">${number}${unit}</b>`});
 }
 function heading(title:string,role?:Role){const tag=role?`<span style="font-size:12px;font-weight:800;letter-spacing:.03em;padding:3px 8px;border-radius:3px;white-space:nowrap;${TAGS[role][1]}">${TAGS[role][0]}</span>`:'';return `<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:2px solid ${C.navy};padding-bottom:7px;margin:0 0 12px"><h2 style="margin:0;font-size:clamp(19px,4.8vw,22px);line-height:1.35;font-weight:900;color:${C.navy};word-break:keep-all">${esc(title)}</h2>${tag}</div>`}
@@ -209,4 +209,20 @@ export function renderWeeklyEditorialArticle(view:import('../operations/weekly-r
   const parts=[masthead(view.title,view.subtitle,'주간 증시',view.weekEnd),lead(view.lead),...view.sections.map(renderWeeklySection)];
   parts.push(sources(view.sources.map(item=>({...item,publisher:''}))));
   return finish('weekly-intelligence',view.title,'주간 증시',parts,['masthead','lead',...view.sections.map(item=>item.key),'sources']);
+}
+
+/**
+ * The AI article with a validated narrative in place of the template prose (shadow preview first, 2026-11-06).
+ * Figures, broker report cards, related posts and sources stay deterministic; the narrative supplies the lead,
+ * the key points and 3–5 prose sections. A fixed investment disclaimer closes the body.
+ */
+export function renderAINarrativeArticle(view:AIIntelligenceDailyViewModel,narrative:import('../narrative/ai-narrative.js').AINarrative,disclaimer:string):DailyMasterRenderResult {
+  const deep=view.deepSections??[],stocks=deep.find(item=>item.key==='ai-stocks'),cards=deep.filter(item=>item.role==='broker').flatMap(item=>item.paragraphs.filter(p=>p.report));
+  const parts=[masthead(view.title,view.subtitle,view.displayLabel,view.issueDate),lead(narrative.lead.text),keyPoints(narrative.keyPoints.map(p=>p.text))];
+  narrative.sections.forEach((item,index)=>{parts.push(roleSection(item.heading,prose(item.paragraphs.map(p=>p.text)),undefined,`ai-narrative-${index+1}`));if(index===0&&stocks?.bars?.length)parts.push(roleSection(stocks.title,intro(stocks.intro)+barsSvg(stocks.bars),'data','ai-stocks'))});
+  if(cards.length)parts.push(roleSection('증권가 리포트',`<div style="background:${C.goldSoft};border:1px solid ${C.goldLine};padding:12px 12px 2px">${cards.map(brokerCard).join('')}</div>`,'broker','ai-broker-cards'));
+  parts.push(relatedPosts(view.relatedPosts));
+  parts.push(`<p data-section="disclaimer" style="margin:26px 0 0;padding:10px 12px;background:#f5f7fa;color:${C.muted};font-size:13.5px;line-height:1.6">${esc(disclaimer)}</p>`);
+  parts.push(sources(view.sources));
+  return finish('ai-intelligence',view.title,BLOGGER_EDITORIAL_CATEGORIES.AI_INTELLIGENCE.publicLabel,parts.filter(Boolean),['masthead','lead','key-points','narrative','stocks','broker-cards','disclaimer','sources']);
 }
