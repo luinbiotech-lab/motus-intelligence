@@ -191,9 +191,11 @@ export function renderWeeklySection(item:import('../operations/weekly-review.js'
 
 /** Recent MOTUS posts (owner 2026-11-05, Google indexing): internal links help crawlers find and weigh new posts. */
 export function relatedPosts(posts:Array<{title:string;url:string;label:string;published:string}>|undefined):string {
-  const items=(posts??[]).filter(post=>/^https:\/\/motusnova\.blogspot\.com\//.test(post.url)&&post.title&&!/(무슨 일이 있었나|왜 중요한가|핵심 내용|산업 연결|시장 연결|fixture|placeholder)/i.test(post.title)).slice(0,5);
-  if(!items.length)return '';
-  return renderWeeklySection({key:'related-posts',title:'MOTUS 최근 기사',intro:'최근 발행한 시장·AI 브리핑을 이어서 읽어 보세요.',links:items.map(post=>({label:post.title,url:post.url,meta:[post.label,post.published].filter(Boolean).join(' · ')}))});
+  // Optional block: a post whose title would trip a public-HTML or leakage check is dropped, never the article (#100 review).
+  const unsafe=/https?:\/\/|www\.|(무슨 일이 있었나|왜 중요한가|핵심 내용|산업 연결|시장 연결)|fixture|placeholder|sample marker|eventId|themeId|companyId|publicationId|verificationStatus|confidenceScore|claimId|reportId|researchId|[A-Z]{2,}_[A-Z]{2,}/i;
+  const block=(items:Array<{title:string;url:string;label:string;published:string}>)=>renderWeeklySection({key:'related-posts',title:'MOTUS 최근 기사',intro:'최근 발행한 시장·AI 브리핑을 이어서 읽어 보세요.',links:items.map(post=>({label:post.title,url:post.url,meta:[post.label,post.published].filter(Boolean).join(' · ')}))});
+  const items=(posts??[]).filter(post=>/^https:\/\/motusnova\.blogspot\.com\/\d{4}\/\d{2}\/[\w.-]+\.html$/.test(post.url)&&post.title&&!unsafe.test(post.title)&&!unsafe.test(post.label)).filter(post=>{try{assertNewsletterPublicHtmlSafe(`<article>${block([post])}</article>`);return true}catch{return false}}).slice(0,5);
+  return items.length?block(items):'';
 }
 /** Daily report (owner decision 2026-11-04): one post a day in the '리포트' category with the combined PDF and the day's articles. */
 export const DAILY_REPORT_LABEL='리포트';

@@ -19,6 +19,9 @@ test('market titles carry 마감 and the exact close, no calendar date (owner 20
   assert.equal(koreaTitleHead(-3.59,5648.79),'코스피 마감, 3.59% 급락 5,648.79');
   assert.equal(koreaTitleHead(0.62,5683.1),'코스피 마감, 0.62% 상승 5,683.10');
   assert.equal(koreaTitleHead(null,5683.1),null);
+  // '하락…하락' is avoided: the index takes the verb form when the focus repeats the word (#100 review).
+  assert.equal(koreaTitleHead(-1.236,5937,'검색 1위 삼성전자 4.8% 하락'),'코스피 마감, 1.24% 내려 5,937.00');
+  assert.equal(koreaTitleHead(-1.236,5937,'검색 1위 삼성전자 4.8% 상승'),'코스피 마감, 1.24% 하락 5,937.00');
   for(const title of ['코스피 마감, 3.59% 급락 5,648.79…검색 1위 삼성전자 3.1% 하락','뉴욕증시 마감, 3대 지수 혼조…오라클 5.8% 급등']){
     assert.equal(titleContainsCalendarDate(title),false,title);
     const html='<article style="max-width:100%;overflow-x:hidden"><p>검증된 시장 사실을 충분한 문장으로 설명하고 배경과 맥락을 함께 제시한다. 독자는 원문을 열지 않아도 핵심 흐름을 이해할 수 있다.</p><p>두 번째 문단에서는 움직임의 의미와 산업 연결을 구체적으로 정리하고 과장된 인과관계를 피한다. 숫자는 검증된 값만 쓴다.</p><p>마지막 문단에서는 다음 거래일에 확인할 변수를 제시하고 검증된 출처만 연결한다. 투자 권유가 아니다.</p></article>';
@@ -34,4 +37,8 @@ test('articles link recent MOTUS posts (internal links for indexing), only blog 
   assert.match(html,/href="https:\/\/motusnova\.blogspot\.com\/2026\/11\/a\.html"/);
   assert.doesNotMatch(html,/example\.com|핵심 내용/);
   assert.equal(relatedPosts([]),'');assert.equal(relatedPosts(undefined),'');
+  // A risky title drops that post only, never the article (#100 review).
+  const risky=['링크 https://x.example 포함','MANUAL_VERIFIED 상태','researchId 노출','sample marker 글'].map((title,index)=>({title,url:`https://motusnova.blogspot.com/2026/11/r${index}.html`,label:'',published:''}));
+  assert.equal(relatedPosts(risky),'');
+  assert.match(relatedPosts([...risky,{title:'S&P 500 상승',url:'https://motusnova.blogspot.com/2026/11/ok.html',label:'미국증시',published:'2026-11-05'}]),/ok\.html/);
 });

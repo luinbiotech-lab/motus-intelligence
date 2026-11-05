@@ -86,7 +86,7 @@ export async function collectKoreaDeep(input:{sessionDate:string;operationDate:s
     recordListed(input.audit,sources,'KOREA_MARKET',input.at);
     // Owner 2026-11-05 (traffic analysis #97): '코스피 마감, 3.59% 급락 5,648.79…검색 1위 삼성전자 3.1% 하락' — '마감' is what
     // searchers and the top posts use; the close is the exact value (no rounding). No calendar date (see the US title).
-    const head=koreaTitleHead(input.kospiChangePct,input.kospiClose);
+    const head=koreaTitleHead(input.kospiChangePct,input.kospiClose,composition.titleFocus);
     return {composition,title:head&&composition.titleFocus?`${head}…${composition.titleFocus}`:null,sources};
   }catch{return empty}
 }
@@ -105,9 +105,12 @@ export async function collectAIDeep(input:{operationDate:string;candidateUSSessi
     return {composition,title:composition.titleFocus?`${composition.titleFocus}…증권가가 짚은 AI 투자 쟁점`:null,sources};
   }catch{return empty}
 }
-/** '코스피 마감, 3.59% 급락 5,648.79' (null without a change). */
-export function koreaTitleHead(change:number|null,close:number):string|null {
+/** '코스피 마감, 3.59% 급락 5,648.79' (null without a change). When the stock focus repeats the same word
+ * ('…삼성전자 4.8% 하락'), the index takes the verb form ('1.24% 내려') so the headline does not say '하락…하락'. */
+export function koreaTitleHead(change:number|null,close:number,focus?:string|null):string|null {
   if(change===null)return null;
   const move=indexMove(change),level=new Intl.NumberFormat('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}).format(close);
-  return `코스피 마감, ${move==='보합'?'보합':`${Math.abs(change).toFixed(2)}% ${move}`} ${level}`;
+  const verb:Record<string,string>={상승:'올라',하락:'내려',급등:'급등해',급락:'급락해'};
+  const word=move!=='보합'&&focus&&focus.includes(move)?verb[move]??move:move;
+  return `코스피 마감, ${move==='보합'?'보합':`${Math.abs(change).toFixed(2)}% ${word}`} ${level}`;
 }
