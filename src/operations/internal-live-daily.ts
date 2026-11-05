@@ -18,7 +18,7 @@ import {buildKoreaMarketNarrative,buildUSMarketNarrative,formatLevel,moveText,nu
 import {isCompletedSession,latestCompletedSession,marketSession} from './market-calendar.js';
 import {buildAIEditorialDecision,synthesizeKoreanAIEvent} from './ai-editorial-synthesis.js';
 import {OFFICIAL_AI_SOURCES,datesAgree,isAIHeadline,isAIRelevant,isNewsLike,isOfficialLink,pageBodyText,pagePublishedDateDetail,pageTitle,parseAnthropicIndex,parseFeed,type AIEvidenceBasis,type FeedItem,type OfficialAISource} from './ai-sources.js';
-import {josa,synthesizeEvidenceBoundAIEvent,type AIEventType} from './ai-generic-synthesis.js';
+import {classifyAIEvent,josa,synthesizeEvidenceBoundAIEvent,type AIEventType} from './ai-generic-synthesis.js';
 import {readFile,readdir} from 'node:fs/promises';
 import {join} from 'node:path';
 
@@ -28,7 +28,7 @@ export interface InternalSourceAuditEntry {sourceId:string;category:DailyCategor
 /** Why feed items did or did not become candidates. Diagnostic only: gates never read it. */
 export interface AIFeedScreening {total:number;candidates:number;alreadyPublished:number;duplicate:number;notNews:number;notAIHeadline:number;outOfWindow:number;unofficialLink:number}
 /** What happened to one fetched candidate, so a SKIP can be explained from the persisted audit alone. */
-export interface AICandidateOutcome {title:string;outcome:'EVENT_CREATED'|'DATE_MISMATCH'|'OFF_OFFICIAL_DOMAIN'|'NO_USABLE_EVIDENCE'|'NO_TITLE'|'NO_DATE'|'OUT_OF_WINDOW'|'NOT_AI_RELEVANT'|'NOT_NEWS_LIKE'|'EVIDENCE_TOO_SHORT'|'UNCLASSIFIED';basis:AIEvidenceBasis|null;bodyChars:number}
+export interface AICandidateOutcome {title:string;outcome:'EVENT_CREATED'|'DATE_MISMATCH'|'OFF_OFFICIAL_DOMAIN'|'NO_USABLE_EVIDENCE'|'NO_TITLE'|'NO_DATE'|'OUT_OF_WINDOW'|'NOT_AI_RELEVANT'|'NOT_NEWS_LIKE'|'EVIDENCE_TOO_SHORT'|'UNCLASSIFIED'|'NOT_SYNTHESIZED';basis:AIEvidenceBasis|null;bodyChars:number}
 export interface InternalBuildResult {payload:LiveDailyPayload|null;audit:InternalSourceAuditEntry[];crossVerification?:KoreaCrossVerificationArtifact|null;searchContext?:PreRenderSearchContext|null;reason:string|null;state:'LIVE_READY'|'HOLD'|'SKIP'}
 export interface InternalBuildOptions {mode?:'SCHEDULED'|'ADMIN_CONTROLLED_RECOVERY'}
 export interface InternalDailyBuilder {build(category:DailyCategory,requestedAt:string,options?:InternalBuildOptions):Promise<InternalBuildResult>}
@@ -138,7 +138,7 @@ export class RepositoryInternalDailyBuilder implements InternalDailyBuilder {
     const topicId=`ai:${index}`,legacy=synthesizeKoreanAIEvent({topicId,publisher:source.publisher,title,pageEvidence:evidence,link:item.link,publishedAt});
     const event=legacy?{...legacy,basis,eventType:'launch' as const,evidenceBound:false,richness:2}:evidence.length>=(basis==='OFFICIAL_PAGE'?200:100)?synthesizeEvidenceBoundAIEvent({topicId,publisher:source.publisher,sourceId:source.id,title,link:item.link,publishedAt,evidence,basis,...(basis==='OFFICIAL_PAGE'||basis==='OFFICIAL_PAGE_SUMMARY'?{}:{fallbackReason})}):null;
     if(event)events.push(event);
-    note(event?'EVENT_CREATED':evidence.length<(basis==='OFFICIAL_PAGE'?200:100)?'EVIDENCE_TOO_SHORT':'UNCLASSIFIED');
+    note(event?'EVENT_CREATED':evidence.length<(basis==='OFFICIAL_PAGE'?200:100)?'EVIDENCE_TOO_SHORT':classifyAIEvent(title,evidence,item.link)?'NOT_SYNTHESIZED':'UNCLASSIFIED');
    }
    const synthesized=selectAIEvents(events);if(!synthesized.length)throw new Error('AI_VERIFIED_EVENTS_INSUFFICIENT');
    const corroboratingSources:NewsletterSourceLink[]=[];if(synthesized.some(item=>/베라 루빈/.test(item.topic))){try{const html=await this.text(AI_CORROBORATION.veraRubinGoogleCloud,'AI_INTELLIGENCE','ai:corroboration:google-cloud-vera-rubin',at,audit),plain=clean(html),lower=plain.toLowerCase();if(/vera\s+rubin/.test(lower)&&/a5x/.test(lower)){corroboratingSources.push(source('구글 클라우드 A5X·Vera Rubin 공식 발표',AI_CORROBORATION.veraRubinGoogleCloud,'Google Cloud'))}else throw new Error('AI_CORROBORATION_CONTENT_MISMATCH')}catch{}}

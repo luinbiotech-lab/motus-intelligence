@@ -242,3 +242,12 @@ test('a SKIP explains from the audit why each candidate was dropped',async()=>{
   const nvidia=result.audit.find(entry=>entry.sourceId==='nvidia')?.screening;assert.equal(nvidia?.total,3);assert.equal(nvidia?.outOfWindow,1);assert.equal(nvidia?.candidates,2);
   assert.equal(result.audit.find(entry=>entry.sourceId==='aws-news')?.screening?.notAIHeadline,1);
 });
+
+test('body keyword hits alone cannot turn a customer story into an infrastructure claim',()=>{
+  const evidence='U Mobile is a telecom operator in Malaysia. Its network infrastructure team uses agents to read alarms, and the infrastructure runbooks are stored in one place for 2,000 engineers. '.repeat(3);
+  const input={topicId:'a',publisher:'Amazon AWS',sourceId:'aws-news',title:'How U Mobile built agentic telco operations with Amazon Bedrock AgentCore',link:'https://aws.amazon.com/blogs/aws/u-mobile/',publishedAt:'2026-11-04T16:23:33Z',evidence,basis:'OFFICIAL_PAGE' as const};
+  assert.equal(classifyAIEvent(input.title,evidence,input.link)?.type,'infrastructure');
+  assert.equal(synthesizeEvidenceBoundAIEvent(input),null);
+  const titled=synthesizeEvidenceBoundAIEvent({...input,title:'Amazon expands AI data center capacity in Malaysia'});
+  assert.match(titled?.topic??'',/말레이시아/);
+});

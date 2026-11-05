@@ -126,6 +126,8 @@ export function extractFigures(text:string):string[] {
   return [...new Set(out)].slice(0,4);
 }
 
+const BODY_ONLY_UNSUPPORTED=new Set<AIEventType>(['infrastructure','investment','partnership','policy']);
+
 export function classifyAIEvent(title:string,text:string,link=''):{type:AIEventType;fromTitle:boolean}|null {
   if(/^[A-Z][\w.&-]*(?: [A-Z][\w.&-]*)* and (?:the )?[A-Z][\w.&-]*(?: [A-Z][\w.&-]*)* [a-z]+s\b/.test(title)&&!/\b(?:data ?cent|supercomput|compute)\w*/i.test(title))return {type:'partnership',fromTitle:true};
   if(/\/research\//i.test(link)&&!/\b(?:launch|available|introduc\w*|announc\w*)\b/i.test(title))return {type:'research',fromTitle:false};
@@ -170,6 +172,9 @@ export function synthesizeEvidenceBoundAIEvent(input:EvidenceBoundAIInput):(Kore
   // chrome (related posts, footers, region lists) cannot be presented as part of the announcement.
   const text=`${input.title}. ${input.evidence.slice(0,1500)}`,classified=classifyAIEvent(input.title,input.evidence,input.link);
   if(!classified)return null;
+  // A few keyword hits in the body cannot support a headline claim such as "infrastructure expansion" or "investment":
+  // a customer story that mentions infrastructure twice is not an infrastructure announcement.
+  if(!classified.fromTitle&&BODY_ONLY_UNSUPPORTED.has(classified.type))return null;
   const company=companyKorean(input.publisher),type=TYPE_KO[classified.type];
   const places=findAll(text,PLACES),orgs=findAll(withoutApiMentions(text),COMPANIES).filter(name=>name!==company&&!company.startsWith(name)&&!name.startsWith(company));
   const product=(input.title.match(PRODUCT)??input.evidence.match(PRODUCT))?.[0]??null,figures=extractFigures(text);
