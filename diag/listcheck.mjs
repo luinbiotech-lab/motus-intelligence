@@ -1,21 +1,9 @@
 import {writeFileSync,mkdirSync} from 'node:fs';
 mkdirSync('out',{recursive:true});
-const raw=p=>`https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/${p}`;
-const article=h=>h.match(/<article\b[^>]*>[\s\S]*<\/article>/i)?.[0]??h;
-const canonical=h=>h.replaceAll('&amp;','&').replaceAll('&quot;','"').replace(/>\s+</g,'><').replace(/\s+/g,' ').trim();
-const strip=h=>h.replace(/<section data-section="daily-pdf"[\s\S]*?<\/section>/g,'');
-const feed=await (await fetch('https://motusnova.blogspot.com/feeds/posts/default?alt=json&max-results=40')).json();
-const body=url=>(feed.feed.entry??[]).find(e=>e.link?.find(l=>l.rel==='alternate')?.href===url)?.content?.$t??'';
-const out={};
-for(const [d,c] of [['2026-11-04','korea'],['2026-11-04','us'],['2026-11-04','ai'],['2026-10-30','us'],['2026-10-30','korea']]){
-  const ledger=await (await fetch(raw(`data/operations/${d}/${c}/publish-ledger.jsonl`))).text();
-  const pub=ledger.split('\n').filter(Boolean).map(l=>{try{return JSON.parse(l)}catch{return {}}}).filter(e=>e.event==='PUBLISHED'||e.event==='REPUBLISHED').at(-1);
-  const page=body(pub.publicPostUrl);
-  const pa=canonical(strip(article(page)));
-  const r={url:pub.publicPostUrl,pageArticleLen:pa.length};
-  for(const f of ['published-unit.json','live-unit.json']){const res=await fetch(raw(`data/operations/${d}/${c}/${f}`));if(!res.ok){r[f]='absent';continue}const u=await res.json();const ua=canonical(article(u.render?.html??''));
-    let i=0;while(i<Math.min(ua.length,pa.length)&&ua[i]===pa[i])i++;
-    r[f]={equal:ua===pa,len:ua.length,firstDiff:i,unitAt:ua.slice(i,i+80),pageAt:pa.slice(i,i+80)}}
-  out[`${d}/${c}`]=r;
-}
-writeFileSync('out/match2.json',JSON.stringify(out,null,2));
+const B='https://motusnova.blogspot.com';const out={};
+const get=async u=>{try{const r=await fetch(u,{redirect:'manual',headers:{'user-agent':'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'}});return {status:r.status,location:r.headers.get('location'),xrobots:r.headers.get('x-robots-tag'),text:await r.text()}}catch(e){return {error:String(e)}}};
+const robots=await get(B+'/robots.txt');out.robots={status:robots.status,text:robots.text?.slice(0,800)};
+for(const p of ['/sitemap.xml','/sitemap-pages.xml','/feeds/posts/default']){const r=await get(B+p);out[p]={status:r.status,location:r.location,len:r.text?.length,head:r.text?.slice(0,300)}}
+const home=await get(B+'/');const post=await get(B+'/2026/11/062-5683-1-09.html');
+for(const [k,r] of [['home',home],['post',post]]){const t=r.text??'';out[k]={status:r.status,xrobots:r.xrobots,metaRobots:[...t.matchAll(/<meta[^>]+name=['"]robots['"][^>]*>/gi)].map(m=>m[0]),canonical:t.match(/<link[^>]+rel=['"]canonical['"][^>]*>/i)?.[0],ogImage:t.match(/<meta[^>]+property=['"]og:image['"][^>]*>/i)?.[0],title:t.match(/<title>([^<]*)/)?.[1],description:t.match(/<meta[^>]+name=['"]description['"][^>]*>/i)?.[0],gsv:[...t.matchAll(/google-site-verification[^>]*/gi)].map(m=>m[0]).slice(0,2),noindexAny:/noindex/i.test(t)}}
+writeFileSync('out/seo.json',JSON.stringify(out,null,2));
