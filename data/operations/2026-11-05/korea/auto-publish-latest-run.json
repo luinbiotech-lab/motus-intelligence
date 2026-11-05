@@ -1,0 +1,10 @@
+{
+  "state": "SKIP",
+  "reasonCode": "ALREADY_PUBLISHED_IN_PERSISTED_LEDGER",
+  "identity": "2026-11-05|KOREA_MARKET",
+  "postId": "1679539622803046746",
+  "publicPostUrl": "https://motusnova.blogspot.com/2026/11/062-5683-1-09.html",
+  "reason": "persistent publish ledger already records this publication identity",
+  "insertCallCount": 0,
+  "publishCallCount": 0
+}
