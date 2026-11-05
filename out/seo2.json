@@ -1,0 +1,51 @@
+{
+  "browser /robots.txt": {
+    "status": 200,
+    "location": null,
+    "xrobots": null,
+    "body": "User-agent: Mediapartners-Google\nDisallow: \n\nUser-agent: *\nDisallow: /search\nDisallow: /share-widget\nAllow: /\n\nSitemap: https://motusnova.blogspot.com/sitemap.xml\n\n",
+    "metaRobots": [],
+    "len": 164
+  },
+  "browser /": {
+    "status": 302,
+    "location": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/&q=EgQ0sIrHGOSdstcGIi1ipUeNgDRJJzk25zST51ZMVpJz9vzf_vCq8Rlp2vXH5biXTLb9eCgGcwadDxcyAnJSWgFDYN2w3IbBy4__ZQ",
+    "xrobots": null,
+    "metaRobots": [],
+    "len": 381
+  },
+  "browser /2026/11/062-5683-1-09.html": {
+    "status": 302,
+    "location": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/062-5683-1-09.html&q=EgQ0sIrHGOSdstcGIi2qSMZoaoGriM4lJTwwr9X5fDJqH44jhPSso8hap5lmlg9JIY_VZhvvO5INfF4yAnJSWgFDYPn29ZfCj57v3AE",
+    "xrobots": null,
+    "metaRobots": [],
+    "len": 408
+  },
+  "none /robots.txt": {
+    "status": 404,
+    "location": null,
+    "xrobots": null,
+    "body": "<!DOCTYPE html>\n<html lang=en>\n  <meta charset=utf-8>\n  <meta name=viewport content=\"initial-scale=1, minimum-scale=1, width=device-width\">\n  <title>Error 404 (Not Found)!!1</title>\n  <style>\n    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:u",
+    "metaRobots": [],
+    "len": 1567
+  },
+  "none /": {
+    "status": 302,
+    "location": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/&q=EgQ0sIrHGOWdstcGIi3OUgiC95r7GZbDIyahS2ZnzZNVjUcIxkZbExbWuHWfWtoko9JgWvagF_AJokgyAnJSWgFDYM2a3d7pjovm2AE",
+    "xrobots": null,
+    "metaRobots": [],
+    "len": 382
+  },
+  "none /2026/11/062-5683-1-09.html": {
+    "status": 302,
+    "location": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/062-5683-1-09.html&q=EgQ0sIrHGOWdstcGIi3nBqiUIP6n-kmBp0KFvi78gv1UqzA6bQKz4K0Vz2ZI8YEA_dACuPBVPK3KVDYyAnJSWgFDYILu4Ly6mdbOMA",
+    "xrobots": null,
+    "metaRobots": [],
+    "len": 407
+  },
+  "followRoot": {
+    "status": 429,
+    "url": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/&q=EgQ0sIrHGOadstcGIi0mdLkFnDlOfRXfecTv3guyyHhyuBkDy55lyijMTEC2Z2-mx9ffQeWqryh3NxYyAnJSWgFDYIeI_ruU07a-3QE",
+    "len": 3190
+  }
+}
