@@ -3,8 +3,8 @@
   "sourceMode": "internal",
   "category": "AI_INTELLIGENCE",
   "operationDate": "2026-11-05",
-  "status": "SKIP",
-  "reasonCode": "AI_VERIFIED_EVENTS_INSUFFICIENT",
+  "status": "LIVE_READY",
+  "reasonCode": null,
   "entries": [
     {
       "sourceId": "openai",
@@ -12,8 +12,18 @@
       "url": "https://openai.com/news/rss.xml",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:32:48.580Z",
-      "error": null
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": null,
+      "screening": {
+        "total": 40,
+        "candidates": 16,
+        "alreadyPublished": 1,
+        "duplicate": 0,
+        "notNews": 0,
+        "notAIHeadline": 0,
+        "outOfWindow": 23,
+        "unofficialLink": 0
+      }
     },
     {
       "sourceId": "google-ai",
@@ -21,8 +31,18 @@
       "url": "https://blog.google/technology/ai/rss/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:32:48.580Z",
-      "error": null
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": null,
+      "screening": {
+        "total": 20,
+        "candidates": 0,
+        "alreadyPublished": 1,
+        "duplicate": 0,
+        "notNews": 0,
+        "notAIHeadline": 0,
+        "outOfWindow": 19,
+        "unofficialLink": 0
+      }
     },
     {
       "sourceId": "google-deepmind",
@@ -30,8 +50,18 @@
       "url": "https://deepmind.google/blog/rss.xml",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:32:48.580Z",
-      "error": null
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": null,
+      "screening": {
+        "total": 40,
+        "candidates": 1,
+        "alreadyPublished": 0,
+        "duplicate": 1,
+        "notNews": 0,
+        "notAIHeadline": 0,
+        "outOfWindow": 38,
+        "unofficialLink": 0
+      }
     },
     {
       "sourceId": "nvidia",
@@ -39,8 +69,18 @@
       "url": "https://blogs.nvidia.com/feed/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:32:48.580Z",
-      "error": null
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": null,
+      "screening": {
+        "total": 18,
+        "candidates": 1,
+        "alreadyPublished": 4,
+        "duplicate": 0,
+        "notNews": 0,
+        "notAIHeadline": 0,
+        "outOfWindow": 13,
+        "unofficialLink": 0
+      }
     },
     {
       "sourceId": "nvidia-newsroom",
@@ -48,8 +88,18 @@
       "url": "https://nvidianews.nvidia.com/releases.xml",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:32:48.580Z",
-      "error": null
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": null,
+      "screening": {
+        "total": 20,
+        "candidates": 0,
+        "alreadyPublished": 4,
+        "duplicate": 14,
+        "notNews": 0,
+        "notAIHeadline": 2,
+        "outOfWindow": 0,
+        "unofficialLink": 0
+      }
     },
     {
       "sourceId": "microsoft",
@@ -57,8 +107,18 @@
       "url": "https://blogs.microsoft.com/feed/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:32:48.580Z",
-      "error": null
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": null,
+      "screening": {
+        "total": 10,
+        "candidates": 0,
+        "alreadyPublished": 1,
+        "duplicate": 0,
+        "notNews": 0,
+        "notAIHeadline": 6,
+        "outOfWindow": 3,
+        "unofficialLink": 0
+      }
     },
     {
       "sourceId": "microsoft-source",
@@ -66,8 +126,18 @@
       "url": "https://news.microsoft.com/source/feed/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:32:48.580Z",
-      "error": null
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": null,
+      "screening": {
+        "total": 10,
+        "candidates": 0,
+        "alreadyPublished": 2,
+        "duplicate": 0,
+        "notNews": 0,
+        "notAIHeadline": 5,
+        "outOfWindow": 0,
+        "unofficialLink": 3
+      }
     },
     {
       "sourceId": "aws-news",
@@ -75,8 +145,18 @@
       "url": "https://aws.amazon.com/blogs/aws/feed/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:32:48.580Z",
-      "error": null
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": null,
+      "screening": {
+        "total": 20,
+        "candidates": 0,
+        "alreadyPublished": 1,
+        "duplicate": 0,
+        "notNews": 0,
+        "notAIHeadline": 12,
+        "outOfWindow": 7,
+        "unofficialLink": 0
+      }
     },
     {
       "sourceId": "aws-whats-new",
@@ -84,8 +164,75 @@
       "url": "https://aws.amazon.com/about-aws/whats-new/recent/feed/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:32:48.580Z",
-      "error": null
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": null,
+      "screening": {
+        "total": 40,
+        "candidates": 1,
+        "alreadyPublished": 0,
+        "duplicate": 0,
+        "notNews": 0,
+        "notAIHeadline": 37,
+        "outOfWindow": 2,
+        "unofficialLink": 0
+      }
+    },
+    {
+      "sourceId": "aws-ml",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://aws.amazon.com/blogs/machine-learning/feed/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": null,
+      "screening": {
+        "total": 20,
+        "candidates": 12,
+        "alreadyPublished": 0,
+        "duplicate": 0,
+        "notNews": 0,
+        "notAIHeadline": 4,
+        "outOfWindow": 4,
+        "unofficialLink": 0
+      }
+    },
+    {
+      "sourceId": "azure-blog",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://azure.microsoft.com/en-us/blog/feed/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": null,
+      "screening": {
+        "total": 10,
+        "candidates": 0,
+        "alreadyPublished": 0,
+        "duplicate": 1,
+        "notNews": 0,
+        "notAIHeadline": 6,
+        "outOfWindow": 3,
+        "unofficialLink": 0
+      }
+    },
+    {
+      "sourceId": "google-cloud",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://cloudblog.withgoogle.com/rss/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": null,
+      "screening": {
+        "total": 20,
+        "candidates": 3,
+        "alreadyPublished": 0,
+        "duplicate": 0,
+        "notNews": 1,
+        "notAIHeadline": 15,
+        "outOfWindow": 1,
+        "unofficialLink": 0
+      }
     },
     {
       "sourceId": "meta",
@@ -93,8 +240,18 @@
       "url": "https://about.fb.com/news/feed/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:32:48.580Z",
-      "error": null
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": null,
+      "screening": {
+        "total": 10,
+        "candidates": 0,
+        "alreadyPublished": 1,
+        "duplicate": 0,
+        "notNews": 0,
+        "notAIHeadline": 7,
+        "outOfWindow": 2,
+        "unofficialLink": 0
+      }
     },
     {
       "sourceId": "anthropic",
@@ -102,164 +259,638 @@
       "url": "https://www.anthropic.com/news",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:32:48.580Z",
-      "error": null
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": null,
+      "screening": {
+        "total": 12,
+        "candidates": 12,
+        "alreadyPublished": 0,
+        "duplicate": 0,
+        "notNews": 0,
+        "notAIHeadline": 0,
+        "outOfWindow": 0,
+        "unofficialLink": 0
+      }
     },
     {
       "sourceId": "ai:page:1",
       "category": "AI_INTELLIGENCE",
-      "url": "https://openai.com/index/openai-to-acquire-pierre",
-      "status": "FAILED",
-      "recordCount": 0,
-      "collectedAt": "2026-11-05T03:32:48.580Z",
-      "error": "HTTP_403"
-    },
-    {
-      "sourceId": "ai:rss-evidence:1",
-      "category": "AI_INTELLIGENCE",
-      "url": "https://openai.com/index/openai-to-acquire-pierre",
+      "url": "https://aws.amazon.com/blogs/machine-learning/use-decision-models-with-amazon-bedrock-agentcore-evaluations/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:32:48.580Z",
+      "collectedAt": "2026-11-05T03:42:25.506Z",
       "error": null,
-      "observedDate": "Wed, 04 No",
-      "sourceTimestamp": "Wed, 04 Nov 2026 14:30:00 GMT",
-      "dateField": "rss.pubDate"
+      "observedDate": "2026-11-04",
+      "sourceTimestamp": "2026-11-04T18:46:36.000Z",
+      "dateField": "page.datePublished",
+      "candidate": {
+        "title": "Use decision models with Amazon Bedrock AgentCore Evaluations",
+        "outcome": "EVENT_CREATED",
+        "basis": "OFFICIAL_PAGE",
+        "bodyChars": 4000
+      }
     },
     {
       "sourceId": "ai:page:2",
       "category": "AI_INTELLIGENCE",
-      "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/workspaces-ai-agents-linux-windows-11",
+      "url": "https://cloud.google.com/blog/products/identity-security/helping-you-build-and-defend-at-machine-speed-in-the-agentic-era/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:32:48.580Z",
+      "collectedAt": "2026-11-05T03:42:25.506Z",
       "error": null,
-      "observedDate": "Tue, 03 No",
-      "sourceTimestamp": "Tue, 03 Nov 2026 18:00:00 GMT",
-      "dateField": "rss.pubDate"
+      "observedDate": "Wed, 04 No",
+      "sourceTimestamp": "Wed, 04 Nov 2026 17:00:00 +0000",
+      "dateField": "rss.pubDate",
+      "candidate": {
+        "title": "Helping you build and defend at machine-speed in the agentic era",
+        "outcome": "EVENT_CREATED",
+        "basis": "OFFICIAL_PAGE",
+        "bodyChars": 4000
+      }
     },
     {
       "sourceId": "ai:page:3",
       "category": "AI_INTELLIGENCE",
-      "url": "https://deepmind.google/blog/agentic-cheminformatics-with-google-antigravity/",
+      "url": "https://openai.com/index/openai-to-acquire-pierre",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": "HTTP_403"
+    },
+    {
+      "sourceId": "ai:rss-evidence:3",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/openai-to-acquire-pierre",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:32:48.580Z",
+      "collectedAt": "2026-11-05T03:42:25.506Z",
       "error": null,
-      "observedDate": "2026-11-03",
-      "sourceTimestamp": "2026-11-03T15:00:00.000Z",
-      "dateField": "page.datePublished"
+      "observedDate": "Wed, 04 No",
+      "sourceTimestamp": "Wed, 04 Nov 2026 14:30:00 GMT",
+      "dateField": "rss.pubDate",
+      "candidate": {
+        "title": "OpenAI to acquire Pierre Computer Company, Inc.",
+        "outcome": "NOT_AI_RELEVANT",
+        "basis": "OFFICIAL_RSS_SUMMARY",
+        "bodyChars": 0
+      }
     },
     {
       "sourceId": "ai:page:4",
       "category": "AI_INTELLIGENCE",
-      "url": "https://blogs.nvidia.com/blog/ai-semiconductor-fabs/",
+      "url": "https://deepmind.google/blog/agentic-cheminformatics-with-google-antigravity/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:32:48.580Z",
+      "collectedAt": "2026-11-05T03:42:25.506Z",
       "error": null,
       "observedDate": "2026-11-03",
-      "sourceTimestamp": "2026-11-03T16:00:45.000Z",
-      "dateField": "page.datePublished"
+      "sourceTimestamp": "2026-11-03T15:00:00.000Z",
+      "dateField": "page.datePublished",
+      "candidate": {
+        "title": "Agentic cheminformatics with Google Antigravity",
+        "outcome": "UNCLASSIFIED",
+        "basis": "OFFICIAL_PAGE_SUMMARY",
+        "bodyChars": 0
+      }
     },
     {
       "sourceId": "ai:page:5",
       "category": "AI_INTELLIGENCE",
-      "url": "https://www.anthropic.com/news/public-benefit-fund",
+      "url": "https://blogs.nvidia.com/blog/ai-semiconductor-fabs/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:32:48.580Z",
+      "collectedAt": "2026-11-05T03:42:25.506Z",
       "error": null,
-      "observedDate": "2026-10-18",
-      "sourceTimestamp": "2026-10-18T00:00:00.000Z",
-      "dateField": "page.datePublished"
+      "observedDate": "2026-11-03",
+      "sourceTimestamp": "2026-11-03T16:00:45.000Z",
+      "dateField": "page.datePublished",
+      "candidate": {
+        "title": "AI Is Changing How Semiconductor Fabs Work — and Engineers Are Moving Faster Because of It",
+        "outcome": "UNCLASSIFIED",
+        "basis": "OFFICIAL_PAGE",
+        "bodyChars": 4000
+      }
     },
     {
       "sourceId": "ai:page:6",
       "category": "AI_INTELLIGENCE",
-      "url": "https://openai.com/index/a-thousand-fewer-paths-to-root",
-      "status": "FAILED",
-      "recordCount": 0,
-      "collectedAt": "2026-11-05T03:32:48.580Z",
-      "error": "HTTP_403"
-    },
-    {
-      "sourceId": "ai:rss-evidence:6",
-      "category": "AI_INTELLIGENCE",
-      "url": "https://openai.com/index/a-thousand-fewer-paths-to-root",
+      "url": "https://www.anthropic.com/news/public-benefit-fund",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:32:48.580Z",
+      "collectedAt": "2026-11-05T03:42:25.506Z",
       "error": null,
-      "observedDate": "Wed, 04 No",
-      "sourceTimestamp": "Wed, 04 Nov 2026 08:00:00 GMT",
-      "dateField": "rss.pubDate"
+      "observedDate": "2026-10-18",
+      "sourceTimestamp": "2026-10-18T00:00:00.000Z",
+      "dateField": "page.datePublished",
+      "candidate": {
+        "title": "Investing in the public benefit",
+        "outcome": "OUT_OF_WINDOW",
+        "basis": "OFFICIAL_PAGE",
+        "bodyChars": 2792
+      }
     },
     {
       "sourceId": "ai:page:7",
       "category": "AI_INTELLIGENCE",
-      "url": "https://www.anthropic.com/news/s1-sec",
+      "url": "https://aws.amazon.com/blogs/machine-learning/four-layers-of-context-engineering-for-production-ai-agents-how-deep-insight-applies-them-in-working-code/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:32:48.580Z",
+      "collectedAt": "2026-11-05T03:42:25.506Z",
       "error": null,
-      "observedDate": "2026-10-26",
-      "sourceTimestamp": "2026-10-26T00:00:00.000Z",
-      "dateField": "page.datePublished"
+      "observedDate": "2026-11-04",
+      "sourceTimestamp": "2026-11-04T16:30:40.000Z",
+      "dateField": "page.datePublished",
+      "candidate": {
+        "title": "Four layers of context engineering for production AI agents: How Deep Insight applies them in working code",
+        "outcome": "UNCLASSIFIED",
+        "basis": "OFFICIAL_PAGE",
+        "bodyChars": 4000
+      }
     },
     {
       "sourceId": "ai:page:8",
       "category": "AI_INTELLIGENCE",
-      "url": "https://openai.com/index/daybreak-red-aws-govcloud",
-      "status": "FAILED",
-      "recordCount": 0,
-      "collectedAt": "2026-11-05T03:32:48.580Z",
-      "error": "HTTP_403"
-    },
-    {
-      "sourceId": "ai:rss-evidence:8",
-      "category": "AI_INTELLIGENCE",
-      "url": "https://openai.com/index/daybreak-red-aws-govcloud",
+      "url": "https://cloud.google.com/blog/products/databases/whats-new-across-googles-agentic-data-cloud/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:32:48.580Z",
+      "collectedAt": "2026-11-05T03:42:25.506Z",
       "error": null,
       "observedDate": "Wed, 04 No",
-      "sourceTimestamp": "Wed, 04 Nov 2026 07:00:00 GMT",
-      "dateField": "rss.pubDate"
+      "sourceTimestamp": "Wed, 04 Nov 2026 14:00:00 +0000",
+      "dateField": "rss.pubDate",
+      "candidate": {
+        "title": "New capabilities to power agents at scale with Google's Agentic Data Cloud",
+        "outcome": "EVENT_CREATED",
+        "basis": "OFFICIAL_PAGE",
+        "bodyChars": 4000
+      }
     },
     {
       "sourceId": "ai:page:9",
       "category": "AI_INTELLIGENCE",
-      "url": "https://www.anthropic.com/news/ai-for-science-expands-foundations-research-institutions",
+      "url": "https://openai.com/index/a-thousand-fewer-paths-to-root",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": "SKIPPED_PUBLISHER_BLOCKED",
+      "sourceTimestamp": "Wed, 04 Nov 2026 08:00:00 GMT"
+    },
+    {
+      "sourceId": "ai:rss-evidence:9",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/a-thousand-fewer-paths-to-root",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:32:48.580Z",
+      "collectedAt": "2026-11-05T03:42:25.506Z",
       "error": null,
-      "observedDate": "2026-10-28",
-      "sourceTimestamp": "2026-10-28T00:00:00.000Z",
-      "dateField": "page.datePublished"
+      "observedDate": "Wed, 04 No",
+      "sourceTimestamp": "Wed, 04 Nov 2026 08:00:00 GMT",
+      "dateField": "rss.pubDate",
+      "candidate": {
+        "title": "A thousand fewer paths to root",
+        "outcome": "NOT_AI_RELEVANT",
+        "basis": "OFFICIAL_RSS_SUMMARY",
+        "bodyChars": 0
+      }
     },
     {
       "sourceId": "ai:page:10",
       "category": "AI_INTELLIGENCE",
+      "url": "https://www.anthropic.com/news/s1-sec",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": null,
+      "observedDate": "2026-10-26",
+      "sourceTimestamp": "2026-10-26T00:00:00.000Z",
+      "dateField": "page.datePublished",
+      "candidate": {
+        "title": "Anthropic files S-1 with the SEC for proposed initial public offering",
+        "outcome": "OUT_OF_WINDOW",
+        "basis": "OFFICIAL_PAGE",
+        "bodyChars": 1467
+      }
+    },
+    {
+      "sourceId": "ai:page:11",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://aws.amazon.com/blogs/machine-learning/how-u-mobile-built-agentic-telco-operations-with-amazon-bedrock-agentcore/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": null,
+      "observedDate": "2026-11-04",
+      "sourceTimestamp": "2026-11-04T16:23:33.000Z",
+      "dateField": "page.datePublished",
+      "candidate": {
+        "title": "How U Mobile built agentic telco operations with Amazon Bedrock AgentCore",
+        "outcome": "EVENT_CREATED",
+        "basis": "OFFICIAL_PAGE",
+        "bodyChars": 4000
+      }
+    },
+    {
+      "sourceId": "ai:page:12",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://cloud.google.com/blog/products/ai-machine-learning/what-google-cloud-announced-in-ai-this-month/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": null,
+      "observedDate": "Mon, 02 No",
+      "sourceTimestamp": "Mon, 02 Nov 2026 16:00:00 +0000",
+      "dateField": "rss.pubDate",
+      "candidate": {
+        "title": "What Google Cloud announced in AI this month",
+        "outcome": "EVENT_CREATED",
+        "basis": "OFFICIAL_PAGE",
+        "bodyChars": 4000
+      }
+    },
+    {
+      "sourceId": "ai:page:13",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/daybreak-red-aws-govcloud",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": "SKIPPED_PUBLISHER_BLOCKED",
+      "sourceTimestamp": "Wed, 04 Nov 2026 07:00:00 GMT"
+    },
+    {
+      "sourceId": "ai:rss-evidence:13",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/daybreak-red-aws-govcloud",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": null,
+      "observedDate": "Wed, 04 No",
+      "sourceTimestamp": "Wed, 04 Nov 2026 07:00:00 GMT",
+      "dateField": "rss.pubDate",
+      "candidate": {
+        "title": "Daybreak Red is now available in AWS GovCloud (US-East)",
+        "outcome": "NOT_AI_RELEVANT",
+        "basis": "OFFICIAL_RSS_SUMMARY",
+        "bodyChars": 0
+      }
+    },
+    {
+      "sourceId": "ai:page:14",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://www.anthropic.com/news/ai-for-science-expands-foundations-research-institutions",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": null,
+      "observedDate": "2026-10-28",
+      "sourceTimestamp": "2026-10-28T00:00:00.000Z",
+      "dateField": "page.datePublished",
+      "candidate": {
+        "title": "AI for Science expands to foundations and institutions",
+        "outcome": "OUT_OF_WINDOW",
+        "basis": "OFFICIAL_PAGE",
+        "bodyChars": 3376
+      }
+    },
+    {
+      "sourceId": "ai:page:15",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/workspaces-ai-agents-linux-windows-11",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": null,
+      "observedDate": "Tue, 03 No",
+      "sourceTimestamp": "Tue, 03 Nov 2026 18:00:00 GMT",
+      "dateField": "rss.pubDate",
+      "candidate": {
+        "title": "Amazon WorkSpaces for AI agents now supports Linux and Windows 11 cloud desktops",
+        "outcome": "UNCLASSIFIED",
+        "basis": "OFFICIAL_PAGE",
+        "bodyChars": 1077
+      }
+    },
+    {
+      "sourceId": "ai:page:16",
+      "category": "AI_INTELLIGENCE",
       "url": "https://openai.com/index/introducing-images-2-6",
       "status": "FAILED",
       "recordCount": 0,
-      "collectedAt": "2026-11-05T03:32:48.580Z",
-      "error": "HTTP_403"
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": "SKIPPED_PUBLISHER_BLOCKED",
+      "sourceTimestamp": "Wed, 04 Nov 2026 00:00:00 GMT"
     },
     {
-      "sourceId": "ai:rss-evidence:10",
+      "sourceId": "ai:rss-evidence:16",
       "category": "AI_INTELLIGENCE",
       "url": "https://openai.com/index/introducing-images-2-6",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-05T03:32:48.580Z",
+      "collectedAt": "2026-11-05T03:42:25.506Z",
       "error": null,
       "observedDate": "Wed, 04 No",
       "sourceTimestamp": "Wed, 04 Nov 2026 00:00:00 GMT",
-      "dateField": "rss.pubDate"
+      "dateField": "rss.pubDate",
+      "candidate": {
+        "title": "Introducing Images 2.6",
+        "outcome": "NOT_AI_RELEVANT",
+        "basis": "OFFICIAL_RSS_SUMMARY",
+        "bodyChars": 0
+      }
+    },
+    {
+      "sourceId": "ai:page:17",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://www.anthropic.com/news/expanding-partnership-gsa",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": null,
+      "observedDate": "2026-10-27",
+      "sourceTimestamp": "2026-10-27T00:00:00.000Z",
+      "dateField": "page.datePublished",
+      "candidate": {
+        "title": "Expanding our partnership with GSA to bring Claude to all levels of government",
+        "outcome": "OUT_OF_WINDOW",
+        "basis": "OFFICIAL_PAGE",
+        "bodyChars": 2719
+      }
+    },
+    {
+      "sourceId": "ai:page:18",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://aws.amazon.com/blogs/machine-learning/servicenow-on-behalf-of-token-exchange-with-bedrock-agentcore-gateway/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": null,
+      "observedDate": "2026-11-03",
+      "sourceTimestamp": "2026-11-03T16:47:40.000Z",
+      "dateField": "page.datePublished",
+      "candidate": {
+        "title": "ServiceNow on-behalf-of token exchange with Bedrock AgentCore Gateway",
+        "outcome": "UNCLASSIFIED",
+        "basis": "OFFICIAL_PAGE",
+        "bodyChars": 4000
+      }
+    },
+    {
+      "sourceId": "ai:page:19",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/devrev-enterprise-self-service",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": "SKIPPED_PUBLISHER_BLOCKED",
+      "sourceTimestamp": "Wed, 04 Nov 2026 00:00:00 GMT"
+    },
+    {
+      "sourceId": "ai:rss-evidence:19",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/devrev-enterprise-self-service",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": null,
+      "observedDate": "Wed, 04 No",
+      "sourceTimestamp": "Wed, 04 Nov 2026 00:00:00 GMT",
+      "dateField": "rss.pubDate",
+      "candidate": {
+        "title": "DevRev delivers autonomous self-service with GPT-6.1 Sol",
+        "outcome": "UNCLASSIFIED",
+        "basis": "OFFICIAL_RSS_SUMMARY",
+        "bodyChars": 0
+      }
+    },
+    {
+      "sourceId": "deep:consensus:list:economy",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://consensus.hankyung.com/analysis/list?report_type=EC&sdate=2026-10-29&edate=2026-11-06&now_page=1&pagenum=80",
+      "status": "PASS",
+      "recordCount": 2,
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": null
+    },
+    {
+      "sourceId": "deep:naver-research:list:invest",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://m.stock.naver.com/api/research/invest?page=1&pageSize=60",
+      "status": "PASS",
+      "recordCount": 60,
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": null
+    },
+    {
+      "sourceId": "deep:naver-research:list:market",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://m.stock.naver.com/api/research/market?page=1&pageSize=60",
+      "status": "PASS",
+      "recordCount": 60,
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": null
+    },
+    {
+      "sourceId": "deep:naver-research:list:economy",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://m.stock.naver.com/api/research/economy?page=1&pageSize=60",
+      "status": "PASS",
+      "recordCount": 37,
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": null
+    },
+    {
+      "sourceId": "deep:naver-research:list:industry",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://m.stock.naver.com/api/research/industry?page=1&pageSize=60",
+      "status": "PASS",
+      "recordCount": 60,
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": null
+    },
+    {
+      "sourceId": "deep:consensus:list:market",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://consensus.hankyung.com/analysis/list?skinType=market&report_type=MK&sdate=2026-10-29&edate=2026-11-06&now_page=1&pagenum=80",
+      "status": "PASS",
+      "recordCount": 70,
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": null
+    },
+    {
+      "sourceId": "deep:consensus:list:industry",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://consensus.hankyung.com/analysis/list?skinType=industry&report_type=IN&sdate=2026-10-29&edate=2026-11-06&now_page=1&pagenum=80",
+      "status": "PASS",
+      "recordCount": 51,
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": null
+    },
+    {
+      "sourceId": "deep:naver-research:list:company",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://m.stock.naver.com/api/research/company?page=1&pageSize=60",
+      "status": "PASS",
+      "recordCount": 60,
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": null
+    },
+    {
+      "sourceId": "deep:consensus:list:company",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://consensus.hankyung.com/analysis/list?skinType=business&report_type=CO&sdate=2026-10-29&edate=2026-11-06&now_page=1&pagenum=80",
+      "status": "PASS",
+      "recordCount": 75,
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": null
+    },
+    {
+      "sourceId": "deep:naver-research:market:38058",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://stock.pstatic.net/stock-research/market/21/20261105_market_805943000.pdf",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": "NAVER_RESEARCH_EMPTY"
+    },
+    {
+      "sourceId": "deep:naver-research:market:38056",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://stock.pstatic.net/stock-research/market/18/20261105_market_467591000.pdf",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": null,
+      "observedDate": "2026-11-05"
+    },
+    {
+      "sourceId": "deep:naver-research:market:38055",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://stock.pstatic.net/stock-research/market/18/20261105_market_6406000.pdf",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": "NAVER_RESEARCH_EMPTY"
+    },
+    {
+      "sourceId": "deep:naver-research:market:38054",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://stock.pstatic.net/stock-research/market/76/20261105_market_641513000.pdf",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": null,
+      "observedDate": "2026-11-05"
+    },
+    {
+      "sourceId": "deep:naver-research:market:38053",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://stock.pstatic.net/stock-research/market/21/20261105_market_278760000.pdf",
+      "status": "PASS",
+      "recordCount": 6,
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": null,
+      "observedDate": "2026-11-05"
+    },
+    {
+      "sourceId": "deep:naver-research:market:38051",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://stock.pstatic.net/stock-research/market/64/20261105_market_817869000.pdf",
+      "status": "PASS",
+      "recordCount": 4,
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": null,
+      "observedDate": "2026-11-05"
+    },
+    {
+      "sourceId": "deep:naver-research:market:38050",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://stock.pstatic.net/stock-research/market/61/20261105_market_147371000.pdf",
+      "status": "PASS",
+      "recordCount": 4,
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": null,
+      "observedDate": "2026-11-05"
+    },
+    {
+      "sourceId": "deep:naver-research:market:38049",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://stock.pstatic.net/stock-research/market/63/20261105_market_257537000.pdf",
+      "status": "PASS",
+      "recordCount": 4,
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": null,
+      "observedDate": "2026-11-05"
+    },
+    {
+      "sourceId": "deep:naver-research:market:38048",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://stock.pstatic.net/stock-research/market/40/20261105_market_433107000.pdf",
+      "status": "PASS",
+      "recordCount": 4,
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": null,
+      "observedDate": "2026-11-05"
+    },
+    {
+      "sourceId": "deep:naver-research:market:38047",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://stock.pstatic.net/stock-research/market/58/20261105_market_447732000.pdf",
+      "status": "PASS",
+      "recordCount": 4,
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": null,
+      "observedDate": "2026-11-05"
+    },
+    {
+      "sourceId": "deep:yahoo:spark:ai-bellwethers",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://query1.finance.yahoo.com/v7/finance/spark?symbols=NVDA,MSFT,GOOGL,AMZN,META,AVGO,AMD,TSM,ORCL,PLTR&range=5d&interval=1d",
+      "status": "PASS",
+      "recordCount": 10,
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": null,
+      "observedDate": "2026-11-04"
+    },
+    {
+      "sourceId": "deep:research:listed:consensus.hankyung.com/analysis/downpdf?report_idx=653758",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653758",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": null,
+      "observedDate": "2026-11-05"
+    },
+    {
+      "sourceId": "deep:research:listed:consensus.hankyung.com/analysis/downpdf?report_idx=653750",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653750",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": null,
+      "observedDate": "2026-11-04"
+    },
+    {
+      "sourceId": "deep:research:listed:consensus.hankyung.com/analysis/downpdf?report_idx=653722",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653722",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": null,
+      "observedDate": "2026-11-04"
+    },
+    {
+      "sourceId": "deep:research:listed:consensus.hankyung.com/analysis/downpdf?report_idx=653676",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653676",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:42:25.506Z",
+      "error": null,
+      "observedDate": "2026-11-03"
     }
   ]
 }

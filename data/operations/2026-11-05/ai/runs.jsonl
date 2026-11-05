@@ -1,1 +1,2 @@
 {"runId":"41962221380","attempt":"1","event":"workflow_dispatch","schedule":null,"category":"ai","operationDate":"2026-11-05","scheduledKst":null,"startedAt":"2026-11-05T03:32:34Z","delayMinutes":null,"state":"SKIP","reason":"AI_VERIFIED_EVENTS_INSUFFICIENT","publicPostUrl":null}
+{"runId":"41963220879","attempt":"1","event":"workflow_dispatch","schedule":null,"category":"ai","operationDate":"2026-11-05","scheduledKst":null,"startedAt":"2026-11-05T03:42:15Z","delayMinutes":null,"state":"HOLD","reason":"duplicate state uncertain","publicPostUrl":null}
