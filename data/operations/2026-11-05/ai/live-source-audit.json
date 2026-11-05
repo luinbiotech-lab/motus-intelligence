@@ -1,0 +1,265 @@
+{
+  "schemaVersion": "1.0",
+  "sourceMode": "internal",
+  "category": "AI_INTELLIGENCE",
+  "operationDate": "2026-11-05",
+  "status": "SKIP",
+  "reasonCode": "AI_VERIFIED_EVENTS_INSUFFICIENT",
+  "entries": [
+    {
+      "sourceId": "openai",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/news/rss.xml",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:32:48.580Z",
+      "error": null
+    },
+    {
+      "sourceId": "google-ai",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blog.google/technology/ai/rss/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:32:48.580Z",
+      "error": null
+    },
+    {
+      "sourceId": "google-deepmind",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://deepmind.google/blog/rss.xml",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:32:48.580Z",
+      "error": null
+    },
+    {
+      "sourceId": "nvidia",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blogs.nvidia.com/feed/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:32:48.580Z",
+      "error": null
+    },
+    {
+      "sourceId": "nvidia-newsroom",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://nvidianews.nvidia.com/releases.xml",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:32:48.580Z",
+      "error": null
+    },
+    {
+      "sourceId": "microsoft",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blogs.microsoft.com/feed/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:32:48.580Z",
+      "error": null
+    },
+    {
+      "sourceId": "microsoft-source",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://news.microsoft.com/source/feed/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:32:48.580Z",
+      "error": null
+    },
+    {
+      "sourceId": "aws-news",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://aws.amazon.com/blogs/aws/feed/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:32:48.580Z",
+      "error": null
+    },
+    {
+      "sourceId": "aws-whats-new",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://aws.amazon.com/about-aws/whats-new/recent/feed/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:32:48.580Z",
+      "error": null
+    },
+    {
+      "sourceId": "meta",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://about.fb.com/news/feed/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:32:48.580Z",
+      "error": null
+    },
+    {
+      "sourceId": "anthropic",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://www.anthropic.com/news",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:32:48.580Z",
+      "error": null
+    },
+    {
+      "sourceId": "ai:page:1",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/openai-to-acquire-pierre",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-11-05T03:32:48.580Z",
+      "error": "HTTP_403"
+    },
+    {
+      "sourceId": "ai:rss-evidence:1",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/openai-to-acquire-pierre",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:32:48.580Z",
+      "error": null,
+      "observedDate": "Wed, 04 No",
+      "sourceTimestamp": "Wed, 04 Nov 2026 14:30:00 GMT",
+      "dateField": "rss.pubDate"
+    },
+    {
+      "sourceId": "ai:page:2",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/workspaces-ai-agents-linux-windows-11",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:32:48.580Z",
+      "error": null,
+      "observedDate": "Tue, 03 No",
+      "sourceTimestamp": "Tue, 03 Nov 2026 18:00:00 GMT",
+      "dateField": "rss.pubDate"
+    },
+    {
+      "sourceId": "ai:page:3",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://deepmind.google/blog/agentic-cheminformatics-with-google-antigravity/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:32:48.580Z",
+      "error": null,
+      "observedDate": "2026-11-03",
+      "sourceTimestamp": "2026-11-03T15:00:00.000Z",
+      "dateField": "page.datePublished"
+    },
+    {
+      "sourceId": "ai:page:4",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blogs.nvidia.com/blog/ai-semiconductor-fabs/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:32:48.580Z",
+      "error": null,
+      "observedDate": "2026-11-03",
+      "sourceTimestamp": "2026-11-03T16:00:45.000Z",
+      "dateField": "page.datePublished"
+    },
+    {
+      "sourceId": "ai:page:5",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://www.anthropic.com/news/public-benefit-fund",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:32:48.580Z",
+      "error": null,
+      "observedDate": "2026-10-18",
+      "sourceTimestamp": "2026-10-18T00:00:00.000Z",
+      "dateField": "page.datePublished"
+    },
+    {
+      "sourceId": "ai:page:6",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/a-thousand-fewer-paths-to-root",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-11-05T03:32:48.580Z",
+      "error": "HTTP_403"
+    },
+    {
+      "sourceId": "ai:rss-evidence:6",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/a-thousand-fewer-paths-to-root",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:32:48.580Z",
+      "error": null,
+      "observedDate": "Wed, 04 No",
+      "sourceTimestamp": "Wed, 04 Nov 2026 08:00:00 GMT",
+      "dateField": "rss.pubDate"
+    },
+    {
+      "sourceId": "ai:page:7",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://www.anthropic.com/news/s1-sec",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:32:48.580Z",
+      "error": null,
+      "observedDate": "2026-10-26",
+      "sourceTimestamp": "2026-10-26T00:00:00.000Z",
+      "dateField": "page.datePublished"
+    },
+    {
+      "sourceId": "ai:page:8",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/daybreak-red-aws-govcloud",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-11-05T03:32:48.580Z",
+      "error": "HTTP_403"
+    },
+    {
+      "sourceId": "ai:rss-evidence:8",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/daybreak-red-aws-govcloud",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:32:48.580Z",
+      "error": null,
+      "observedDate": "Wed, 04 No",
+      "sourceTimestamp": "Wed, 04 Nov 2026 07:00:00 GMT",
+      "dateField": "rss.pubDate"
+    },
+    {
+      "sourceId": "ai:page:9",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://www.anthropic.com/news/ai-for-science-expands-foundations-research-institutions",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:32:48.580Z",
+      "error": null,
+      "observedDate": "2026-10-28",
+      "sourceTimestamp": "2026-10-28T00:00:00.000Z",
+      "dateField": "page.datePublished"
+    },
+    {
+      "sourceId": "ai:page:10",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/introducing-images-2-6",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-11-05T03:32:48.580Z",
+      "error": "HTTP_403"
+    },
+    {
+      "sourceId": "ai:rss-evidence:10",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/introducing-images-2-6",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-05T03:32:48.580Z",
+      "error": null,
+      "observedDate": "Wed, 04 No",
+      "sourceTimestamp": "Wed, 04 Nov 2026 00:00:00 GMT",
+      "dateField": "rss.pubDate"
+    }
+  ]
+}

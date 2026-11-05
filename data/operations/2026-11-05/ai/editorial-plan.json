@@ -1,0 +1,11 @@
+{
+  "category": "AI_INTELLIGENCE",
+  "operationDate": "2026-11-05",
+  "observedDate": null,
+  "state": "HOLD",
+  "searchDemandMayOverride": false,
+  "articleFingerprint": "",
+  "commerce": {
+    "enabled": false
+  }
+}
