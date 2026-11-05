@@ -27,6 +27,9 @@ export const OFFICIAL_AI_SOURCES:OfficialAISource[]=[
   {id:'microsoft-source',publisher:'Microsoft',url:'https://news.microsoft.com/source/feed/',domains:['news.microsoft.com','microsoft.com'],aiFilter:true,kind:'rss'},
   {id:'aws-news',publisher:'Amazon AWS',url:'https://aws.amazon.com/blogs/aws/feed/',domains:['aws.amazon.com'],aiFilter:true,kind:'rss'},
   {id:'aws-whats-new',publisher:'Amazon AWS',url:'https://aws.amazon.com/about-aws/whats-new/recent/feed/',domains:['aws.amazon.com'],aiFilter:true,kind:'rss'},
+  {id:'aws-ml',publisher:'Amazon AWS',url:'https://aws.amazon.com/blogs/machine-learning/feed/',domains:['aws.amazon.com'],aiFilter:true,kind:'rss'},
+  {id:'azure-blog',publisher:'Microsoft',url:'https://azure.microsoft.com/en-us/blog/feed/',domains:['azure.microsoft.com','microsoft.com'],aiFilter:true,kind:'rss'},
+  {id:'google-cloud',publisher:'Google AI',url:'https://cloudblog.withgoogle.com/rss/',domains:['cloud.google.com'],aiFilter:true,kind:'rss'},
   {id:'meta',publisher:'Meta',url:'https://about.fb.com/news/feed/',domains:['about.fb.com'],aiFilter:true,kind:'rss'},
   {id:'anthropic',publisher:'Anthropic',url:'https://www.anthropic.com/news',domains:['anthropic.com'],aiFilter:false,kind:'anthropic-index'},
 ];
