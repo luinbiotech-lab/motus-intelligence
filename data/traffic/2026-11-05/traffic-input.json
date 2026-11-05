@@ -1,13 +1,13 @@
 {
   "date": "2026-11-05",
   "articlesDay": "2026-11-04",
-  "collectedAt": "2026-11-05T04:41:57.829Z",
+  "collectedAt": "2026-11-05T14:15:08.794Z",
   "pageviews": {
     "state": "PASS",
-    "capturedAt": "2026-11-05T04:41:58.296Z",
-    "allTime": 253,
-    "sevenDays": 134,
-    "thirtyDays": 232,
+    "capturedAt": "2026-11-05T14:15:09.224Z",
+    "allTime": 310,
+    "sevenDays": 191,
+    "thirtyDays": 289,
     "previous": null,
     "sincePrevious": null
   },
@@ -16,13 +16,183 @@
     "count": 4
   },
   "searchConsole": {
-    "state": "PASS",
+    "state": "NO_DATA",
     "range": [
       "2026-10-28",
       "2026-11-05"
     ],
+    "dataState": "all",
     "lastDataDate": null,
     "topQueries": []
+  },
+  "indexStatus": {
+    "state": "PASS",
+    "sitemaps": [
+      {
+        "path": "https://motusnova.blogspot.com/sitemap.xml",
+        "lastSubmitted": "2026-08-19T15:35:38.831Z",
+        "lastDownloaded": "2026-11-01T20:01:26.713Z",
+        "isPending": false,
+        "errors": "0",
+        "warnings": "0",
+        "contents": [
+          {
+            "type": "web",
+            "submitted": "28",
+            "indexed": "0"
+          }
+        ]
+      }
+    ],
+    "inspected": 11,
+    "indexed": 2,
+    "inspections": [
+      {
+        "url": "https://motusnova.blogspot.com/",
+        "verdict": "PASS",
+        "coverageState": "제출되고 색인이 생성되었습니다.",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_ALLOWED",
+        "pageFetchState": "SUCCESSFUL",
+        "lastCrawlTime": "2026-11-02T12:40:33Z",
+        "googleCanonical": "https://motusnova.blogspot.com/",
+        "userCanonical": "https://motusnova.blogspot.com/",
+        "referringUrls": [
+          "https://motusnova.blogspot.com/?m=1",
+          "https://motusnova.blogspot.com/2026/10/13-ai.html"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/amd-37-ai.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "발견됨 - 현재 색인이 생성되지 않음",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "referringUrls": [
+          "https://motusnova.blogspot.com/feeds/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/359-5648-1-31.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "발견됨 - 현재 색인이 생성되지 않음",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "referringUrls": [
+          "https://www.blogger.com/feeds/3015267553244608361/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/3-58.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "발견됨 - 현재 색인이 생성되지 않음",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "referringUrls": [
+          "https://www.blogger.com/feeds/3015267553244608361/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/ai.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "크롤링됨 - 현재 색인이 생성되지 않음",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_ALLOWED",
+        "pageFetchState": "SUCCESSFUL",
+        "lastCrawlTime": "2026-11-03T22:24:29Z",
+        "googleCanonical": "https://motusnova.blogspot.com/2026/11/ai.html",
+        "userCanonical": "https://motusnova.blogspot.com/2026/11/ai.html",
+        "referringUrls": [
+          "https://motusnova.blogspot.com/feeds/posts/default",
+          "http://motusnova.blogspot.com/feeds/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/3-70.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "Google에는 아직 알려지지 않은 URL입니다.",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/062-5683-1-09.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "발견됨 - 현재 색인이 생성되지 않음",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "referringUrls": [
+          "https://www.blogger.com/feeds/3015267553244608361/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/20-33.html",
+        "verdict": "PASS",
+        "coverageState": "제출되고 색인이 생성되었습니다.",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_ALLOWED",
+        "pageFetchState": "SUCCESSFUL",
+        "lastCrawlTime": "2026-11-02T14:10:53Z",
+        "googleCanonical": "https://motusnova.blogspot.com/2026/11/20-33.html",
+        "userCanonical": "https://motusnova.blogspot.com/2026/11/20-33.html",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://www.blogger.com/feeds/3015267553244608361/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/10/286-10-3.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "크롤링됨 - 현재 색인이 생성되지 않음",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_ALLOWED",
+        "pageFetchState": "SUCCESSFUL",
+        "lastCrawlTime": "2026-10-31T16:46:08Z",
+        "googleCanonical": "https://motusnova.blogspot.com/2026/10/286-10-3.html",
+        "userCanonical": "https://motusnova.blogspot.com/2026/10/286-10-3.html",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://www.blogger.com/feeds/3015267553244608361/posts/default",
+          "https://motusnova.blogspot.com/feeds/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/10/13-ai.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "발견됨 - 현재 색인이 생성되지 않음",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "http://motusnova.blogspot.com/feeds/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/10/124-5937-1-48.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "발견됨 - 현재 색인이 생성되지 않음",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://www.blogger.com/feeds/3015267553244608361/posts/default"
+        ]
+      }
+    ]
   },
   "datalab": {
     "state": "PASS"
@@ -175,36 +345,36 @@
             },
             {
               "rank": 4,
-              "title": "클로드, 신약 개발 속도 높여 제약 산업의 새로운 지평을 열다 | 지....",
-              "link": "https://blog.naver.com/jiinsi/224457847576",
-              "blogger": "지금은 인공지능 시대(지인시) ㅡ 매일 아침 뉴스레터",
-              "bloggerLink": "https://blog.naver.com/jiinsi",
-              "postdate": "20261029",
-              "description": "혹은 뉴스를 보며 왜 새로운 약 하나 개발하는 데 10년이 넘는 긴 시간과 조 단위의 천문학적인 돈이... 'AI 박사님', 정말 믿어도 될까요? 물론 장밋빛 전망만 있는 것은 아닙니다. 인공지능이 신약 개발의 새로운... ",
+              "title": "2026년 11월 4일 IT·AI 주요 뉴스 5가지｜AMD·AI 서버·알리바바·사이버....",
+              "link": "https://blog.naver.com/guseo1158/224464303134",
+              "blogger": "\"누구나 쉬운 AI 생활\"",
+              "bloggerLink": "https://blog.naver.com/guseo1158",
+              "postdate": "20261104",
+              "description": "#IT뉴스 #AI뉴스 #인공지능 #AMD #AI반도체 #데이터센터 #슈퍼마이크로 #AI서버 #알리바바 #AI토큰 #AI투자 #사이버보안 #IT트렌드 #AI생활도우미 2026년 11월 4일 IT·AI 주요 뉴스 5가지. AMD 실적, AI 서버... ",
               "features": {
-                "textLength": 3596,
-                "imageCount": 3,
+                "textLength": 4096,
+                "imageCount": 1,
                 "chartCount": 0,
                 "headingCount": 0,
                 "tableCount": 0,
-                "linkCount": 8
+                "linkCount": 7
               }
             },
             {
               "rank": 5,
-              "title": "10월 마지막 주 AI 뉴스 결산, 요금제와 한도가 한꺼번에 바뀌었다",
-              "link": "https://blog.naver.com/kghj76138/224461355839",
-              "blogger": "AI야 '해줘'",
-              "bloggerLink": "https://blog.naver.com/kghj76138",
-              "postdate": "20261101",
-              "description": "10월 마지막 주(10/26~11/1) AI 뉴스 결산  한눈에 보기 - 이번 주 키워드는 「요금제·한도 재편」, 챗GPT·클로드·제미나이가 한꺼번에 바꿨어요 - 신모델은 GPT-6.1 테라(API 반값)와 제미나이 4 카본, 월드 모델... ",
+              "title": "허블의 뉴스 AI 에이전트 ‘탭뷰 AI’｜맞춤형 뉴스 경험을 바꾸다",
+              "link": "https://blog.naver.com/huvlesub/224466221584",
+              "blogger": "허블뷰 공식 블로그",
+              "bloggerLink": "https://blog.naver.com/huvlesub",
+              "postdate": "20261105",
+              "description": "허블은 이런 뉴스 소비의 불편함을 줄이기 위해 뉴스 AI 에이전트 ‘탭뷰 AI(TabView AI)’를 출시했답니다. 탭뷰 AI를 실제로 사용하면 뉴스가 어떻게 달라질까? 탭뷰 AI를 한마디로 표현하면 사용자가 관심 있어... ",
               "features": {
-                "textLength": 7497,
-                "imageCount": 5,
+                "textLength": 2996,
+                "imageCount": 6,
                 "chartCount": 0,
                 "headingCount": 0,
                 "tableCount": 0,
-                "linkCount": 37
+                "linkCount": 6
               }
             },
             {
@@ -236,21 +406,21 @@
             },
             {
               "rank": 9,
-              "title": "AI 뉴스 10월 마지막 주 정리, 제미나이 4 카본부터 앤트로픽 상장까....",
-              "link": "https://blog.naver.com/matt1982/224458153513",
-              "blogger": "AI Like AI, One&Only",
-              "bloggerLink": "https://blog.naver.com/matt1982",
-              "postdate": "20261029",
-              "description": "안녕하세요, 한 주 동안 나온 AI 뉴스를 골라 전해 드리는 주간 AI 뉴스입니다. 이번에는 10월 23일부터 29일까지 나온 소식 가운데 꼭 알아두면 좋은 다섯 가지를 정리했습니다. 바쁘신 분들은 소제목과... "
+              "title": "2026년 11월 4일 경제·AI 뉴스, 기업이 주목할 변화 10가지",
+              "link": "https://blog.naver.com/y2kwooga/224464389706",
+              "blogger": "브릭이니셔티브",
+              "bloggerLink": "https://blog.naver.com/y2kwooga",
+              "postdate": "20261104",
+              "description": "STUDIO8 INSIGHTS · 2026.11.04 11월 4일 모닝브리핑 기업이 주목할 10가지 변화 경제·AI·디지털 마케팅·웹 보안·부산 산업 뉴스 / 정보 기준: 2026년 11월 4일 오전(KST) 오늘의 핵심 TOP 3 ① 나스닥 반등과 AI 투자... "
             },
             {
               "rank": 10,
-              "title": "[AI뉴스] 11/4일 투자자를 위한 핵심경제뉴스 5건",
-              "link": "https://blog.naver.com/ishfwilf/224465001813",
-              "blogger": "검은화요일의 투자노트",
-              "bloggerLink": "https://blog.naver.com/ishfwilf",
-              "postdate": "20261104",
-              "description": "AI비서가 전달해주는 최신 경제뉴스 5건입니다. :)  오늘의 핵심 뉴스 (2026-11-04 KST) [1] 제목: 코스피, 美기술주 하락 영향에 3.6% 급락…코스닥도 4%↓(종합) ⊙ 발행시간: 2026-11-03 16:10... "
+              "title": "11월 1일 AI 뉴스 정리, Claude Code 확장 프로그램 백도어 사고와 GPT-Rosal....",
+              "link": "https://blog.naver.com/peanutbuilding/224460804787",
+              "blogger": "a sensuous daily life.",
+              "bloggerLink": "https://blog.naver.com/peanutbuilding",
+              "postdate": "20261101",
+              "description": "오늘의 핫한 AI 뉴스 한눈에 보기 먼저 6가지 소식을 한 장으로 정리해봤어요. 한 줄로 줄이면 'AI가 내 컴퓨터 안으로 더 깊이 들어오는 만큼, 점검도 더 꼼꼼해야 한다' 정도가 될 것... "
             }
           ]
         },
@@ -259,23 +429,40 @@
           "top": [
             {
               "rank": 1,
-              "title": "미국 증시 마감｜나스닥 0.83% 반등·엔비디아 2.3% 상승! AMD 호실적에 ....",
-              "link": "https://blog.naver.com/bigbosslap/224464305451",
-              "blogger": "경제를 내리다",
-              "bloggerLink": "https://blog.naver.com/bigbosslap",
+              "title": "오전장 특징주 2026.11.04(수) -美 블루웨이브 기대감 등에 태양광,풍력....",
+              "link": "https://blog.naver.com/psyoo2000/224464519725",
+              "blogger": "세지니",
+              "bloggerLink": "https://blog.naver.com/psyoo2000",
               "postdate": "20261104",
-              "description": "미국 반도체주 상승과 AMD 실적이 국내 주가에 얼마나 반영되는지 살펴봐야 합니다. 둘째, 외국인 현물·선물 수급입니다. 전날 큰 폭의 매도세가 나타났던 만큼 실제 매수 전환 여부가 중요합니다. 셋째, 원... ",
+              "description": "밸류에이션 상승과 함께 동사의 기업가치 재평가도 기대할 수... 등에 상승 ▷26년3분기 연결기준 매출액 3.31조원(전년동기대비... 삼성E&amp;A (028050) AI ·모듈러 기반 EPC 경쟁력 부각 등에 상승... ",
               "features": {
-                "textLength": 4546,
-                "imageCount": 1,
+                "textLength": 20334,
+                "imageCount": 0,
                 "chartCount": 0,
                 "headingCount": 0,
-                "tableCount": 2,
-                "linkCount": 1
+                "tableCount": 4,
+                "linkCount": 81
               }
             },
             {
               "rank": 2,
+              "title": "AMD 주가, 사상 최대 매출에 높은 가이던스까지 냈는데 왜 1%대 상승....",
+              "link": "https://blog.naver.com/readme0987/224465366774",
+              "blogger": "코인베이스 가입",
+              "bloggerLink": "https://blog.naver.com/readme0987",
+              "postdate": "20261105",
+              "description": "AMD 주가, 사상 최대 매출에 높은 가이던스까지 냈는데 왜 1%대 상승일까? AMD가 3분기 매출 134억 달러로 사상 최대 실적을 발표했습니다. 4분기 매출 전망도 시장 예상보다 높은 170억 달러를 내놨습니다.... ",
+              "features": {
+                "textLength": 3486,
+                "imageCount": 8,
+                "chartCount": 0,
+                "headingCount": 0,
+                "tableCount": 1,
+                "linkCount": 8
+              }
+            },
+            {
+              "rank": 3,
               "title": "11/4 미국시장 데일리시황 - 나스닥 1.06% 반등! 엔비디아·AMD 상승에도....",
               "link": "https://blog.naver.com/compound_thoughts/224464263283",
               "blogger": "생각의 자본",
@@ -292,7 +479,7 @@
               }
             },
             {
-              "rank": 3,
+              "rank": 4,
               "title": "11월 3일 글로벌 증시 요약 AMD 시간외 7% 상승",
               "link": "https://blog.naver.com/zioziw/224464307286",
               "blogger": "일상다반사",
@@ -309,83 +496,66 @@
               }
             },
             {
-              "rank": 4,
-              "title": "미국 증시 반등이유! 앤트로픽 IPO가 불러온 AI 열풍 엔비디아·AMD 상....",
-              "link": "https://blog.naver.com/steph730/224455075003",
-              "blogger": "모아의공책",
-              "bloggerLink": "https://blog.naver.com/steph730",
-              "postdate": "20261027",
-              "description": "앤트로픽 IPO가 불러온 AI 열풍 엔비디아·AMD 상승, 지금 주목할 점은? 미국 증시가 다시 상승세를 보였습니다!  최근 인공지능(AI) 관련주의 고평가 논란과 막대한 투자 비용에 대한 우려가 이어졌는데요.... ",
-              "features": {
-                "textLength": 3097,
-                "imageCount": 1,
-                "chartCount": 0,
-                "headingCount": 0,
-                "tableCount": 0,
-                "linkCount": 1
-              }
-            },
-            {
               "rank": 5,
-              "title": "미국 반도체주 반등ㅣ나스닥 0.83% 상승, AMD 실적 호조에 시간외 5%대 ....",
-              "link": "https://blog.naver.com/jpark_1/224464414419",
-              "blogger": "jpark님의 블로그",
-              "bloggerLink": "https://blog.naver.com/jpark_1",
-              "postdate": "20261104",
-              "description": "실적 발표를 앞둔 AMD가 3.65% 올랐고, 브로드컴도 3.07% 상승했습니다. 마이크론 2.58%, 엔비디아 2.29%도 함께 반등했어요. ◆ AMD, 깜짝 실적에 시간외 급등 장 마감 후 나온 AMD 실적이 시장 예상을 크게... ",
-              "features": {
-                "textLength": 1372,
-                "imageCount": 2,
-                "chartCount": 0,
-                "headingCount": 0,
-                "tableCount": 0,
-                "linkCount": 2
-              }
-            },
-            {
-              "rank": 6,
               "title": "'너무 떨어졌나' 기술주 반등 시작!…엔비디아·AMD 줄줄이 상승",
               "link": "https://blog.naver.com/ymk6182/224464446046",
               "blogger": "산사의 아침",
               "bloggerLink": "https://blog.naver.com/ymk6182",
               "postdate": "20261104",
-              "description": "개별 종목에서는 AMD가 약 3.7% 상승했고, 브로드컴도 3%대 오름세를 나타냈습니다. 엔비디아와 마이크론 역시 각각 2%대 반등했습니다. 다만 모든 기술주가 오른 것은 아닙니다. 애플은 향후 매출 전망에 대한... "
+              "description": "개별 종목에서는 AMD가 약 3.7% 상승했고, 브로드컴도 3%대 오름세를 나타냈습니다. 엔비디아와 마이크론 역시 각각 2%대 반등했습니다. 다만 모든 기술주가 오른 것은 아닙니다. 애플은 향후 매출 전망에 대한... ",
+              "features": {
+                "textLength": 3231,
+                "imageCount": 4,
+                "chartCount": 0,
+                "headingCount": 0,
+                "tableCount": 1,
+                "linkCount": 4
+              }
+            },
+            {
+              "rank": 6,
+              "title": "미국 증시 마감｜나스닥 0.83% 반등·엔비디아 2.3% 상승! AMD 호실적에 ....",
+              "link": "https://blog.naver.com/bigbosslap/224464305451",
+              "blogger": "경제를 내리다",
+              "bloggerLink": "https://blog.naver.com/bigbosslap",
+              "postdate": "20261104",
+              "description": "미국 반도체주 상승과 AMD 실적이 국내 주가에 얼마나 반영되는지 살펴봐야 합니다. 둘째, 외국인 현물·선물 수급입니다. 전날 큰 폭의 매도세가 나타났던 만큼 실제 매수 전환 여부가 중요합니다. 셋째, 원... "
             },
             {
               "rank": 7,
-              "title": "[11월3일 증시마감] 반도체 반등에 나스닥 상승, 다우 하락 | AMD 실적....",
-              "link": "https://blog.naver.com/aion2crush/224464270225",
-              "blogger": "aion2crush님의 블로그",
-              "bloggerLink": "https://blog.naver.com/aion2crush",
-              "postdate": "20261104",
-              "description": "미국 증시 마감: 반도체 반등에 나스닥 상승, 다우 하락 | AMD 실적과 다음 일정 도입 미국 증시가 서로 다른 방향으로 마감했습니다. 11월 3일 정규장에서 엔비디아와 마이크론 등 반도체주가... "
+              "title": "미국 증시 반등이유! 앤트로픽 IPO가 불러온 AI 열풍 엔비디아·AMD 상....",
+              "link": "https://blog.naver.com/steph730/224455075003",
+              "blogger": "모아의공책",
+              "bloggerLink": "https://blog.naver.com/steph730",
+              "postdate": "20261027",
+              "description": "앤트로픽 IPO가 불러온 AI 열풍 엔비디아·AMD 상승, 지금 주목할 점은? 미국 증시가 다시 상승세를 보였습니다!  최근 인공지능(AI) 관련주의 고평가 논란과 막대한 투자 비용에 대한 우려가 이어졌는데요.... "
             },
             {
               "rank": 8,
-              "title": "뉴욕증시 혼조세, 나스닥 0.83% 상승에도 다우 하락",
-              "link": "https://blog.naver.com/smartliving_tip/224464405098",
-              "blogger": "재린이엄마 경제 블로그",
-              "bloggerLink": "https://blog.naver.com/smartliving_tip",
-              "postdate": "20261104",
-              "description": "01 애플 2% 가까이 하락 마이크론테크놀로지·엔비디아 각각 2% 넘게 상승 브로드컴 3% 이상 상승 AMD 3% 넘게 상승 2. 다우를 끌어내린 애플의 실적과 전망 애플은 전날 장 마감 후 실적을 발표했어요. 그런데... "
+              "title": "AMD 3분기 매출 18조원·시간외 주가 7% 상승, 데이터센터 실적은?",
+              "link": "https://blog.naver.com/mikaelguide/224466405713",
+              "blogger": "머니민의 돈과 차 이야기",
+              "bloggerLink": "https://blog.naver.com/mikaelguide",
+              "postdate": "20261105",
+              "description": "핵심 요약 3분기 매출: 133억8,000만 달러, 전년 대비 45% 증가 데이터센터: 85억5,000만 달러, 전년 대비 97% 증가 주가 반응: 11월 3일 정규장 3.65% 상승, 실적 발표 후 시간외 약 7% 상승 보도 AMD 3분기 매출은... "
             },
             {
               "rank": 9,
-              "title": "AMD 주가, 사상 최대 매출에 높은 가이던스까지 냈는데 왜 1%대 상승....",
-              "link": "https://blog.naver.com/readme0987/224465366774",
-              "blogger": "코인베이스 가입",
-              "bloggerLink": "https://blog.naver.com/readme0987",
-              "postdate": "20261105",
-              "description": "AMD 주가, 사상 최대 매출에 높은 가이던스까지 냈는데 왜 1%대 상승일까? AMD가 3분기 매출 134억 달러로 사상 최대 실적을 발표했습니다. 4분기 매출 전망도 시장 예상보다 높은 170억 달러를 내놨습니다.... "
+              "title": "미국 반도체주 반등ㅣ나스닥 0.83% 상승, AMD 실적 호조에 시간외 5%대 ....",
+              "link": "https://blog.naver.com/jpark_1/224464414419",
+              "blogger": "jpark님의 블로그",
+              "bloggerLink": "https://blog.naver.com/jpark_1",
+              "postdate": "20261104",
+              "description": "실적 발표를 앞둔 AMD가 3.65% 올랐고, 브로드컴도 3.07% 상승했습니다. 마이크론 2.58%, 엔비디아 2.29%도 함께 반등했어요. ◆ AMD, 깜짝 실적에 시간외 급등 장 마감 후 나온 AMD 실적이 시장 예상을 크게... "
             },
             {
               "rank": 10,
-              "title": "[2026년11월4일 국내증시 마감시황] 코스피 롤러코스터 장세 끝에 상....",
-              "link": "https://blog.naver.com/hsenic/224465036373",
-              "blogger": "Energetic, Networking, Inspiring, Creative",
-              "bloggerLink": "https://blog.naver.com/hsenic",
-              "postdate": "20261104",
-              "description": "미국 중간선거 결과에 따라 AI 데이터센터 규제가 강화될 수 있다는 우려가 나오면서 장중 코스피가 5,400선까지 밀렸지만, 오후 들어 낙폭을 상당 부분 회복하며 상승 마감했다. 특히 전날 발표된 AMD의... "
+              "title": "AMD 주가 상승, 실적이 얼마나 좋았길래?",
+              "link": "https://blog.naver.com/susuhanmoneylog/224465336155",
+              "blogger": "수수한 머니로그 (SUSUHAN MONEY LOG)",
+              "bloggerLink": "https://blog.naver.com/susuhanmoneylog",
+              "postdate": "20261105",
+              "description": "11월 4일 로이터 보도에 따르면 AMD 주가는 미국 증시 장 초반 약 3% 상승했습니다. 실적 발표 직후 시간외 거래에서도 상승 반응이 나타났지만, 거래 시점에 따라 상승률은 달랐습니다. 사진... "
             }
           ]
         }
@@ -525,6 +695,23 @@
           "top": [
             {
               "rank": 1,
+              "title": "[11월 5일 마감시황] 코스피 5383선 붕괴·양대 시장 매도 사이드카 발....",
+              "link": "https://blog.naver.com/retailinvestor89/224466149424",
+              "blogger": "30대 개미투자자의 실전 투자일기",
+              "bloggerLink": "https://blog.naver.com/retailinvestor89",
+              "postdate": "20261105",
+              "description": "에코프로 2026년 3분기 실적발표 컨콜: https://www.thelec.kr/news/articleView.html?idxno=64956 #국내증시 #마감시황 #코스피 #코스닥 #매도사이드카 #삼성전자 #SK하이닉스 #카카오 #에코프로 #원달러환율",
+              "features": {
+                "textLength": 2752,
+                "imageCount": 8,
+                "chartCount": 0,
+                "headingCount": 0,
+                "tableCount": 7,
+                "linkCount": 8
+              }
+            },
+            {
+              "rank": 2,
               "title": "11월 2일 코스피 마감 시황, 인텔 쇼크에도 2.24% 올라 5,859 마감",
               "link": "https://blog.naver.com/to_1m/224462516679",
               "blogger": "그냥 이렇게 살아요~~",
@@ -541,7 +728,7 @@
               }
             },
             {
-              "rank": 2,
+              "rank": 3,
               "title": "오늘 코스피 마감 시황(11월 3일), 3.59% 급락 이유와 외국인 1.5조 매도",
               "link": "https://blog.naver.com/sweetday5076/224463769368",
               "blogger": "Giroomi 경제 한입",
@@ -558,7 +745,24 @@
               }
             },
             {
-              "rank": 3,
+              "rank": 4,
+              "title": "[11월 5일 국내증시 장마감 시황] 코스피 -5.28%·외국인 3.4조 순매도, S....",
+              "link": "https://blog.naver.com/hsh260504/224466225121",
+              "blogger": "빠모쌤의 주식 노트",
+              "bloggerLink": "https://blog.naver.com/hsh260504",
+              "postdate": "20261105",
+              "description": "오늘의 시황 — 하락 출발, 사이드카 두 번, 저점 부근 마감 구분 값 비고 코스피 5,383.80 -5.28% 코스피 시가 5,580.09 하락 출발 코스피 저가 5,336.88 장 후반 코스닥 678.41 -5.11% 코스닥 저가 673.38 이번 하락장... ",
+              "features": {
+                "textLength": 8303,
+                "imageCount": 7,
+                "chartCount": 0,
+                "headingCount": 0,
+                "tableCount": 4,
+                "linkCount": 11
+              }
+            },
+            {
+              "rank": 5,
               "title": "11월 4일 마감시황, 코스피 반등에도 반도체 대형주가 내린 이유",
               "link": "https://blog.naver.com/dajunglog_/224465109597",
               "blogger": "흐름을 읽는 서재",
@@ -575,50 +779,34 @@
               }
             },
             {
-              "rank": 4,
+              "rank": 6,
               "title": "[코스피 마감] 알파벳 쇼크가 한국까지 번졌다, 코스피 3.48% 급락 5,73....",
               "link": "https://blog.naver.com/cyon6590/224459213182",
               "blogger": "[K월급쟁이 주식 노트]",
               "bloggerLink": "https://blog.naver.com/cyon6590",
               "postdate": "20261030",
-              "description": "✅ 3줄 요약 코스피는 전 거래일보다 3.48% 내린 5,730.74에 마감했고, 장중에는 최저 5,602.59까지 밀렸습니다. 원인은 미국입니다. 미국 빅테크 실적 이후 AI 투자 수익성 우려가 커지며 반도체 대형주가... ",
-              "features": {
-                "textLength": 1591,
-                "imageCount": 1,
-                "chartCount": 0,
-                "headingCount": 0,
-                "tableCount": 3,
-                "linkCount": 1
-              }
-            },
-            {
-              "rank": 5,
-              "title": "&quot;128포인트 올랐는데&quot; 코스피 마감시황, 아직 안심 못 하는 이유",
-              "link": "https://blog.naver.com/hrok2002/224462371891",
-              "blogger": "홍사마짱",
-              "bloggerLink": "https://blog.naver.com/hrok2002",
-              "postdate": "20261102",
-              "description": "출처: viva100.com (viva100.com) 기사 사진 오늘 마감, 무엇이 확정일까 코스피는 전 거래일보다 128.34p(2.24%) 오른 5859.08에 마감했습니다. 코스닥은 9.98p(1.38%) 오른 734.36에 마감했습니다. 이 숫자는 거래소... ",
-              "features": {
-                "textLength": 2548,
-                "imageCount": 3,
-                "chartCount": 0,
-                "headingCount": 0,
-                "tableCount": 0,
-                "linkCount": 4
-              }
-            },
-            {
-              "rank": 6,
-              "title": "11월 4일 코스피 +0.62% 마감, 종가만 보면 놓치는 하루",
-              "link": "https://blog.naver.com/ddongme12/224464827670",
-              "blogger": "똥므",
-              "bloggerLink": "https://blog.naver.com/ddongme12",
-              "postdate": "20261104",
-              "description": "04 16:06 장마감 표시 [3] 아시아경제 — 11월 4일 09:44, 09:29 장중 수치 [4] 아시아경제 — 11월 4일 10:55, 10:38 장중 수치 [5] 머니투데이 — 11월 4일 13:47, 13:39 장중 수치·변동성 배경 #코스피 #코스피마감... "
+              "description": "✅ 3줄 요약 코스피는 전 거래일보다 3.48% 내린 5,730.74에 마감했고, 장중에는 최저 5,602.59까지 밀렸습니다. 원인은 미국입니다. 미국 빅테크 실적 이후 AI 투자 수익성 우려가 커지며 반도체 대형주가... "
             },
             {
               "rank": 7,
+              "title": "코스피 마감시황",
+              "link": "https://blog.naver.com/kr2006424/224464911075",
+              "blogger": "신의경지 주식연구소",
+              "bloggerLink": "https://blog.naver.com/kr2006424",
+              "postdate": "20261104",
+              "description": "코스피 마감시황 - 코스피시장 - 11/4 KOSPI 5,683.80(+0.62%) 美 중간선거 결과 주시, 2차전지 등 신재생에너지 관련주 강세(+), 기관/개인 순매수(+) 밤사이 뉴욕증시가 중간선거 관망 속 혼조세를... "
+            },
+            {
+              "rank": 8,
+              "title": "11월 4일 코스피 마감 | 장중 3% 상승 뒤 0.62% 마감, 외국인 2.5조 매도",
+              "link": "https://blog.naver.com/cocomonic25/224464916904",
+              "blogger": "투자의 기준, 코코모닉",
+              "bloggerLink": "https://blog.naver.com/cocomonic25",
+              "postdate": "20261104",
+              "description": "아침에는 5,800선, 장중에는 5,400선…결국 상승 마감 코스피는 전날 3.59% 급락한 뒤 오늘 5,786.13으로 출발했습니다. 장 초반에는 5,828.13까지 올랐지만 외국인 매도가 커지며 한때 5,421.72로... "
+            },
+            {
+              "rank": 9,
               "title": "코스피 마감, 3.59% 급락한 5,649…AI 우려 확산(11월 3일)",
               "link": "https://blog.naver.com/2co-news/224464095341",
               "blogger": "2co-news",
@@ -627,31 +815,13 @@
               "description": "11월 3일 코스피 마감 지수와 외국인·기관·개인 수급, 미국 기술주 약세가 장중 어떻게 번졌는지 정리했어요. 전날 반등분을 얼마나 지켰는지와 내 계좌 점검 순서도 함께 담았어요. (2026년 11월 3일... "
             },
             {
-              "rank": 8,
-              "title": "2026년 10월 30일 코스피 3.48% 급락 마감, 삼성전자·SK하이닉스 하락 이....",
-              "link": "https://blog.naver.com/dbwjd9851/224459284142",
-              "blogger": "챙겨봄 생활경제",
-              "bloggerLink": "https://blog.naver.com/dbwjd9851",
-              "postdate": "20261030",
-              "description": "10월 30일 코스피는 얼마로 마감했나요? 코스피는 전 거래일보다 206.92포인트(-3.48%) 하락한 5,730.74로 마감했습니다. Q. 외국인은 얼마나 순매도했나요? 아주경제의 한국거래소 인용 마감 집계 기준 1조 6,173억... "
-            },
-            {
-              "rank": 9,
-              "title": "“22만전자·140만닉스 무너졌다”… 외국인 1.5조 쏟아낸 오늘 증시 ....",
-              "link": "https://blog.naver.com/newcoshop/224463714882",
-              "blogger": "재테크냥이",
-              "bloggerLink": "https://blog.naver.com/newcoshop",
-              "postdate": "20261103",
-              "description": "국가데이터처 #삼전닉스 #코스피 #삼성전자 #SK하이닉스 #코스피전망 #코스피마감 #오늘증시 #코스닥 #외국인순매도 #반도체 #AI버블 #미국중간선거 #소비자물가 #10월소비자물가 #주식시황 #국장... "
-            },
-            {
               "rank": 10,
-              "title": "11월 4일 코스피 마감, 미국 중간선거 400포인트 출렁과 하이닉스",
-              "link": "https://blog.naver.com/alliknam/224464888653",
-              "blogger": "알읽남 | 알고리즘으로 읽어주는 남자",
-              "bloggerLink": "https://blog.naver.com/alliknam",
+              "title": "11월 4일 코스피 +0.62% 마감, 종가만 보면 놓치는 하루",
+              "link": "https://blog.naver.com/ddongme12/224464827670",
+              "blogger": "똥므",
+              "bloggerLink": "https://blog.naver.com/ddongme12",
               "postdate": "20261104",
-              "description": "숫자 기준: 한국거래소 정규장 종가 기준, 투자자별 매매는 장 마감 잠정치, 고점과 저점 차이와 비중은 직접 계산 #코스피마감 #SK하이닉스 #삼성전자 #미국중간선거 #한화솔루션 #삼성SDI #AMD... "
+              "description": "04 16:06 장마감 표시 [3] 아시아경제 — 11월 4일 09:44, 09:29 장중 수치 [4] 아시아경제 — 11월 4일 10:55, 10:38 장중 수치 [5] 머니투데이 — 11월 4일 13:47, 13:39 장중 수치·변동성 배경 #코스피 #코스피마감... "
             }
           ]
         },
@@ -677,40 +847,6 @@
             },
             {
               "rank": 2,
-              "title": "코스피 코스닥 뜻과 차이, 지수는 오르는데 내 주식은 왜 떨어질까?",
-              "link": "https://blog.naver.com/my_name_jin/224452224122",
-              "blogger": "미스터리 부동산",
-              "bloggerLink": "https://blog.naver.com/my_name_jin",
-              "postdate": "20261024",
-              "description": "코스피 지수가 상승했다는 뉴스를 보고 주식 계좌를 확인했는데... 2026년 10월 23일 코스피는 상승 마감했지만, 상당수 종목의 주가는 하락했는데요. 왜 이런 차이가 발생하는 걸까요? 오늘은 코스피 코스닥... ",
-              "features": {
-                "textLength": 4965,
-                "imageCount": 11,
-                "chartCount": 0,
-                "headingCount": 0,
-                "tableCount": 1,
-                "linkCount": 11
-              }
-            },
-            {
-              "rank": 3,
-              "title": "11월 코스피 전망 &quot;검은월요일 온다더니 대반전?&quot; 공포에 팔았던 사....",
-              "link": "https://blog.naver.com/traderfeels/224462756810",
-              "blogger": "트필 | Traderfeels",
-              "bloggerLink": "https://blog.naver.com/traderfeels",
-              "postdate": "20261102",
-              "description": "미국 반도체 급락에 긴장했던 코스피는 11월 첫 거래일을 2.24... 11월 코스피 전망 &quot;검은월요일 온다더니 대반전?&quot; 공포에 팔았던... 2일 코스피는 전 거래일보다 128.34포인트 오른 5,859.08에 거래를 마쳤다.... ",
-              "features": {
-                "textLength": 4885,
-                "imageCount": 9,
-                "chartCount": 0,
-                "headingCount": 0,
-                "tableCount": 0,
-                "linkCount": 11
-              }
-            },
-            {
-              "rank": 4,
               "title": "코스피200 야간선물 뜻, 등락률은 무엇과 비교한 숫자일까",
               "link": "https://blog.naver.com/segxcyc/224454151528",
               "blogger": "코스피 야간선물",
@@ -727,33 +863,76 @@
               }
             },
             {
+              "rank": 3,
+              "title": "코스피 매도 사이드카 발동 5%급락 5500 붕괴 이유",
+              "link": "https://blog.naver.com/health248/224465722320",
+              "blogger": "뚝프로 경제 알리미",
+              "bloggerLink": "https://blog.naver.com/health248",
+              "postdate": "20261105",
+              "description": "코스피 매도 사이드카 발동 5%급락 5500 붕괴 이유 회사에서 오전 업무를 보다가 코스피 지수를 확인했는데 5500선이 깨져 있었습니다.... 더 신경 쓰인 건 코스피 매도 사이드카 발동 소식이었습니다. 지수가... ",
+              "features": {
+                "textLength": 2301,
+                "imageCount": 5,
+                "chartCount": 0,
+                "headingCount": 0,
+                "tableCount": 1,
+                "linkCount": 5
+              }
+            },
+            {
+              "rank": 4,
+              "title": "코스피 예상 시황 총정리, 5700선 지켰지만 반등은 아직일까....?",
+              "link": "https://blog.naver.com/dmoon88/224461810107",
+              "blogger": "dmoon88님의 블로그",
+              "bloggerLink": "https://blog.naver.com/dmoon88",
+              "postdate": "20261102",
+              "description": "하루 만에 6% 넘게 오른 코스피가 이틀 뒤 상승분을 다시 내줬다면, 다음 주는 어떻게 봐야 할까요? 10월 28일 코스피는 6.63% 급등하며... 지금 코스피, 어디쯤 와 있을까 네이버 뉴스와 증권사 보고서를... ",
+              "features": {
+                "textLength": 2607,
+                "imageCount": 6,
+                "chartCount": 0,
+                "headingCount": 0,
+                "tableCount": 0,
+                "linkCount": 6
+              }
+            },
+            {
               "rank": 5,
+              "title": "2026 미국 중간선거 뒤 코스피 반도체만 울었던 이유,&quot;블루웨이브 악....",
+              "link": "https://blog.naver.com/namiso39/224465810807",
+              "blogger": "경제도슨트",
+              "bloggerLink": "https://blog.naver.com/namiso39",
+              "postdate": "20261105",
+              "description": "올랐지만, 코스피 반도체주는 AI 데이터센터 규제 우려로 흔들렸습니다.... 코스피에 남긴 숫자와, 반도체 투자자가 확인할 체크포인트를 정리합니다. &quot;블루웨이브 악재 아니었나&quot; 미국 중간선거 뒤 코스피... ",
+              "features": {
+                "textLength": 4370,
+                "imageCount": 4,
+                "chartCount": 0,
+                "headingCount": 0,
+                "tableCount": 6,
+                "linkCount": 4
+              }
+            },
+            {
+              "rank": 6,
               "title": "코스피 6천 찍고 이틀 만에 5,730, 이번 주 무슨 일이 있었나",
               "link": "https://blog.naver.com/didl158/224459352590",
               "blogger": "백뚜비의 머니체크",
               "bloggerLink": "https://blog.naver.com/didl158",
               "postdate": "20261102",
-              "description": "이번 주 코스피는 수요일 사상 최대 낙폭 시도에서 6,012를 회복했고... ⏱ 3줄 요약 ① 10/28(수): 코스피 +6.63%, 6,012 회복 — 반도체 실적... 6조 순매도 코스피 한 주, 일별로 숫자만 정리 수요일은 달랐어요.... ",
-              "features": {
-                "textLength": 2558,
-                "imageCount": 6,
-                "chartCount": 0,
-                "headingCount": 0,
-                "tableCount": 2,
-                "linkCount": 6
-              }
-            },
-            {
-              "rank": 6,
-              "title": "&quot;코스피 ETF 조정장에 돈 몰리는 곳&quot; 월배당 커버드콜 ETF 뜬다",
-              "link": "https://blog.naver.com/119dud/224464316195",
-              "blogger": "에그머니ㅣ2030 경제가이드",
-              "bloggerLink": "https://blog.naver.com/119dud",
-              "postdate": "20261104",
-              "description": "최근 코스피가 큰 조정을 받으면서 국내 주식 하는 사람들이라면 심란할... 코스피 ETF 중에서도 KODEX의 대표적인 커버드콜 상품 2종을 비교하고 조정장에서 어떻게 활용할 수 있는지 알아보겠다. 1. 코스피... "
+              "description": "이번 주 코스피는 수요일 사상 최대 낙폭 시도에서 6,012를 회복했고... ⏱ 3줄 요약 ① 10/28(수): 코스피 +6.63%, 6,012 회복 — 반도체 실적... 6조 순매도 코스피 한 주, 일별로 숫자만 정리 수요일은 달랐어요.... "
             },
             {
               "rank": 7,
+              "title": "⚓ 코스피 급락 5383, 뉴욕 오른 날 삼성전자 7% 하이닉스 9% 왜",
+              "link": "https://blog.naver.com/captianwallet/224466190634",
+              "blogger": "경제 한 스푼",
+              "bloggerLink": "https://blog.naver.com/captianwallet",
+              "postdate": "20261105",
+              "description": "코스피가 전 거래일보다 300.00포인트(5.28%) 내린 5383.80에 마감 사진출처: 뉴시스 코스피 급락 5383, 뉴욕 오른 날 삼성전자 7% 하이닉스 9... 이 글의 핵심 3가지 01 뉴욕과 코스피가 반대로 간 이유 02... "
+            },
+            {
+              "rank": 8,
               "title": "코스피 5500 붕괴, 40% 하락했는데 본전 회복엔 왜 66.64%가 필요할까?",
               "link": "https://blog.naver.com/ya_nt/224455394101",
               "blogger": "청년개미의 경제 이야기",
@@ -762,31 +941,22 @@
               "description": "코스피가 2026년 10월 26일 5,469.47로 마감하며 5,500선 아래로... 그런데 코스피가 과거 최고점으로 돌아가려면 약 66.64% 상승해야... 1. 코스피 5500선 붕괴, 실제 얼마나 떨어졌을까? 10월 26일 코스피는 전 거래일... "
             },
             {
-              "rank": 8,
-              "title": "코스피 전망 &quot;검은월요일 없다고 좋아했는데&quot; 이제 서서히 검은 '연....",
-              "link": "https://blog.naver.com/traderfeels/224464018129",
-              "blogger": "트필 | Traderfeels",
-              "bloggerLink": "https://blog.naver.com/traderfeels",
-              "postdate": "20261103",
-              "description": "코스피 전망 &quot;검은월요일 없다고 좋아했는데&quot; 이제 서서히 검은... 2일 코스피는 2.24% 상승했다. 주말 내내 걱정했던 검은월요일을... 하지만 3일 코스피는 3.59% 하락한 5,648.79로 마감했다. 코스닥도 4.08... "
-            },
-            {
               "rank": 9,
-              "title": "코스피 목표치 하향에 놀라셨죠 지금이 기회인 이유",
-              "link": "https://blog.naver.com/sinnatto/224453932173",
-              "blogger": "신나또",
-              "bloggerLink": "https://blog.naver.com/sinnatto",
-              "postdate": "20261026",
-              "description": "코스피 목표치 1만2000→9000…골드만삭스 &quot;그래도 60% 더 오른다... 골드만삭스에서 코스피 목표치를 1만2000에서 9000으로 무려 25퍼센트나... 역대급 저평가 구간 진입한 코스피 더 충격적이었던 건 코스피의 선행... "
+              "title": "&quot;코스피 ETF 조정장에 돈 몰리는 곳&quot; 월배당 커버드콜 ETF 뜬다",
+              "link": "https://blog.naver.com/119dud/224464316195",
+              "blogger": "에그머니ㅣ2030 경제가이드",
+              "bloggerLink": "https://blog.naver.com/119dud",
+              "postdate": "20261104",
+              "description": "최근 코스피가 큰 조정을 받으면서 국내 주식 하는 사람들이라면 심란할... 코스피 ETF 중에서도 KODEX의 대표적인 커버드콜 상품 2종을 비교하고 조정장에서 어떻게 활용할 수 있는지 알아보겠다. 1. 코스피... "
             },
             {
               "rank": 10,
-              "title": "&quot;다들 국장 망했다는데...&quot; 코스피 8,500 간다는 뜻밖의 전망",
-              "link": "https://blog.naver.com/blueshw/224464047512",
-              "blogger": "보노의 투자 생존기",
-              "bloggerLink": "https://blog.naver.com/blueshw",
-              "postdate": "20261103",
-              "description": "오늘 코스피는 3.59% 빠진 5,648.79에 마감했다. 외국인과 기관이 함께 던졌고... 2027년 코스피 전망을 발표했다. 지수 예상 범위는 5,250~8,500이다. 근거를 따라가 보면 결국 핵심은 이익이다. 2027년 코스피 순이익... "
+              "title": "코스피 지수 폭락 이유, 실적보다 앞서간 주가, AI 주식 투자 공포일....",
+              "link": "https://blog.naver.com/sjay34/224461848411",
+              "blogger": "Becoming a Millionaire",
+              "bloggerLink": "https://blog.naver.com/sjay34",
+              "postdate": "20261102",
+              "description": "금요일 하루에 낮엔 한국, 밤엔 미국이 같이 무너졌음 #코스피... 86% 빠졌음 #코스피폭락이유 를 한 줄로 줄이면 AI에 쏟는 돈이 언제... 6조원 팔았다 코스피는 2.99% 내린 5,760.35로 출발했고 장중 낙폭이 5.... "
             }
           ]
         }
@@ -885,6 +1055,23 @@
           "top": [
             {
               "rank": 1,
+              "title": "뉴욕증시 마감, 3대 지수 동반 상승 뒤에 재정지출 제동 기대가 있었....",
+              "link": "https://blog.naver.com/eco_antman/224465901205",
+              "blogger": "개미왕앤트맨",
+              "bloggerLink": "https://blog.naver.com/eco_antman",
+              "postdate": "20261105",
+              "description": "11월 3일(현지시간) 미국 중간선거에서 민주당이 상원과 하원을 모두 가져갔다는 소식 들으셨을 텐데요, 11월 4일 뉴욕증시 마감에서는 3대 지수가 나란히 올랐어요. 주가는 왜 올랐는지, 국채 금리는 얼마나... ",
+              "features": {
+                "textLength": 2839,
+                "imageCount": 11,
+                "chartCount": 0,
+                "headingCount": 0,
+                "tableCount": 0,
+                "linkCount": 13
+              }
+            },
+            {
+              "rank": 2,
               "title": "미국 뉴욕 증시 마감 분석 / 민주당의 의회 장악에 다우 1,569포인트 ....",
               "link": "https://blog.naver.com/djhahn/224465499630",
               "blogger": "캐나다 생활 정보, 세상사는 이야기",
@@ -901,7 +1088,7 @@
               }
             },
             {
-              "rank": 2,
+              "rank": 3,
               "title": "[11/5 뉴욕증시 마감] 민주당 의회 장악에 다우 3% 급등… 빅테크는 웃....",
               "link": "https://blog.naver.com/rebook24/224465463796",
               "blogger": "JR 4컷 경제산책",
@@ -918,7 +1105,7 @@
               }
             },
             {
-              "rank": 3,
+              "rank": 4,
               "title": "뉴욕증시 3대 지수 마감 현황 | 나스닥 종합지수 정리 |",
               "link": "https://blog.naver.com/kmw5076/224464268703",
               "blogger": "일상과 회복을 위한 블로그",
@@ -935,7 +1122,7 @@
               }
             },
             {
-              "rank": 4,
+              "rank": 5,
               "title": "미국 증시 전일 종가 요약 : 2026년 10월 26일 뉴욕증시 마감",
               "link": "https://blog.naver.com/mmh86/224454984095",
               "blogger": "행운의 나침반",
@@ -952,42 +1139,7 @@
               }
             },
             {
-              "rank": 5,
-              "title": "11월 4일 미국 뉴욕증시 마감시황｜미국 중간선거 민주당 압승에 다....",
-              "link": "https://blog.naver.com/smile090780/224465492027",
-              "blogger": "smile090780님의 블로그",
-              "bloggerLink": "https://blog.naver.com/smile090780",
-              "postdate": "20261105",
-              "description": "2026년 11월 4일 미국 뉴욕증시 마감시황을 정리해 보겠습니다. 간밤 뉴욕증시는 미국 중간선거 결과가 시장의 주요 변수로 작용하면서 강한 상승세를 나타냈습니다. 민주당이 상원과 하원을 모두... ",
-              "features": {
-                "textLength": 10710,
-                "imageCount": 5,
-                "chartCount": 0,
-                "headingCount": 0,
-                "tableCount": 16,
-                "linkCount": 5
-              }
-            },
-            {
               "rank": 6,
-              "title": "미국 뉴욕증시 마감 시황, 다우지수 3% 폭등! 나스닥·S&amp;P500 동반 상승....",
-              "link": "https://blog.naver.com/busan-hardwarestore/224465552854",
-              "blogger": "세상과소통하며즐기기",
-              "bloggerLink": "https://blog.naver.com/busan-hardwarestore",
-              "postdate": "20261105",
-              "description": "뉴욕증시 4대 지수 마감 현황 다우존스 산업평균지수: 53,356.12포인트, 전일 대비 3.03% 상승 S&amp;P500지수: 7,688.62포인트, 전일 대비 1.58% 상승 나스닥 종합지수: 25,736.51포인트, 전일 대비 1.44% 상승 러셀2000지수: 2,856.... "
-            },
-            {
-              "rank": 7,
-              "title": "미국 뉴욕 증시 마감 브리핑 / AI 반도체가 나스닥을 살렸지만 시장 ....",
-              "link": "https://blog.naver.com/djhahn/224464279161",
-              "blogger": "캐나다 생활 정보, 세상사는 이야기",
-              "bloggerLink": "https://blog.naver.com/djhahn",
-              "postdate": "20261104",
-              "description": "2026년 11월 3일 화요일 뉴욕증시 마감 기준 뉴욕증시는 중간선거 결과와 AMD 실적 발표를 앞두고 혼조세로 마감했다. 엔비디아·브로드컴·마이크론을 중심으로 AI 반도체주에 저가 매수세가 유입되면서 S&amp;P... "
-            },
-            {
-              "rank": 8,
               "title": "미국 뉴욕증시 마감 브리핑 / 2026년 11월 2일 월요일",
               "link": "https://blog.naver.com/djhahn/224463020299",
               "blogger": "캐나다 생활 정보, 세상사는 이야기",
@@ -996,22 +1148,40 @@
               "description": "미국 뉴욕증시 마감 브리핑 2026년 11월 2일 월요일 | 미국 동부시간 정규장 마감 기준 유가 7%대 급락에도 나스닥은 하락…AI 투자 부담과 중간선거 불확실성이 시장을 갈랐다 11월 첫 거래일 뉴욕증시는... "
             },
             {
+              "rank": 7,
+              "title": "미국 뉴욕증시 마감 시황, 다우지수 3% 폭등! 나스닥·S&amp;P500 동반 상승....",
+              "link": "https://blog.naver.com/busan-hardwarestore/224465552854",
+              "blogger": "세상과소통하며즐기기",
+              "bloggerLink": "https://blog.naver.com/busan-hardwarestore",
+              "postdate": "20261105",
+              "description": "뉴욕증시 4대 지수 마감 현황 다우존스 산업평균지수: 53,356.12포인트, 전일 대비 3.03% 상승 S&amp;P500지수: 7,688.62포인트, 전일 대비 1.58% 상승 나스닥 종합지수: 25,736.51포인트, 전일 대비 1.44% 상승 러셀2000지수: 2,856.... "
+            },
+            {
+              "rank": 8,
+              "title": "11월 4일 미국 뉴욕증시 마감시황｜미국 중간선거 민주당 압승에 다....",
+              "link": "https://blog.naver.com/smile090780/224465492027",
+              "blogger": "smile090780님의 블로그",
+              "bloggerLink": "https://blog.naver.com/smile090780",
+              "postdate": "20261105",
+              "description": "2026년 11월 4일 미국 뉴욕증시 마감시황을 정리해 보겠습니다. 간밤 뉴욕증시는 미국 중간선거 결과가 시장의 주요 변수로 작용하면서 강한 상승세를 나타냈습니다. 민주당이 상원과 하원을 모두... "
+            },
+            {
               "rank": 9,
+              "title": "미국 뉴욕 증시 마감 브리핑 / AI 반도체가 나스닥을 살렸지만 시장 ....",
+              "link": "https://blog.naver.com/djhahn/224464279161",
+              "blogger": "캐나다 생활 정보, 세상사는 이야기",
+              "bloggerLink": "https://blog.naver.com/djhahn",
+              "postdate": "20261104",
+              "description": "2026년 11월 3일 화요일 뉴욕증시 마감 기준 뉴욕증시는 중간선거 결과와 AMD 실적 발표를 앞두고 혼조세로 마감했다. 엔비디아·브로드컴·마이크론을 중심으로 AI 반도체주에 저가 매수세가 유입되면서 S&amp;P... "
+            },
+            {
+              "rank": 10,
               "title": "[뉴욕 증시 마감] 2026.11.04 - 반도체 랠리에 나스닥 반등, 중간선거 결....",
               "link": "https://blog.naver.com/rebook24/224464289916",
               "blogger": "JR 4컷 경제산책",
               "bloggerLink": "https://blog.naver.com/rebook24",
               "postdate": "20261104",
               "description": "미국 동부시간 11월 3일(화) 뉴욕 증시는 혼조세로 마감했습니다. 다우존스산업평균은 소폭 하락했지만, 기술주 중심의 나스닥종합지수는 반도체 업종의 반등에 힘입어 상승 마감에 성공했습니다.... "
-            },
-            {
-              "rank": 10,
-              "title": "뉴욕증시 11월 2일 마감, 나스닥 1.07% 하락과 유가 7%대 급락 그리고 ....",
-              "link": "https://blog.naver.com/dungssa26/224463145895",
-              "blogger": "다양한 경로로 더욱 풍요롭다.",
-              "bloggerLink": "https://blog.naver.com/dungssa26",
-              "postdate": "20261103",
-              "description": "기술주만 빠진 날, 내 계좌가 유독 아팠던 이유 지수는 내렸는데 종목은 올랐습니다 핵심 키워드 뉴욕증시 마감, 나스닥 하락, S&amp;P500 전망, 국제유가 급락, 미국 중간선거, 애플 실적, 팔란티어 실적... "
             }
           ]
         },
@@ -1105,15 +1275,6 @@
             },
             {
               "rank": 6,
-              "title": "11월 4일 미국증시 마감 &quot;민주당 압승에 뉴욕증시 흔들렸을까?&quot; 혼조....",
-              "link": "https://blog.naver.com/pick-note_/224465490040",
-              "blogger": "Pick-note_",
-              "bloggerLink": "https://blog.naver.com/pick-note_",
-              "postdate": "20261105",
-              "description": "❙ 뉴욕 3대 지수 마감, 공포 딛고 차분한 숨고르기 현지시간 11월 4일 뉴욕 증시는 정치적 불확실성을 빠르게 가격에 반영하며 3대 지수가 팽팽한 혼조세로 마감했습니다. 다우존스 30 산업평균지수는 트럼프... "
-            },
-            {
-              "rank": 7,
               "title": "뉴욕증시 요약",
               "link": "https://blog.naver.com/wngyckd/224448549136",
               "blogger": "마루코의 경제 블로그",
@@ -1122,7 +1283,7 @@
               "description": "뉴욕증시 혼조 마감! 다우 1% 상승, 나스닥은 왜 주춤했나 지난밤 뉴욕증시는 주요 지수별로 엇갈린 흐름을 보였습니다. 10월 20일 미국 증시에서 다우존스산업평균지수는 전 거래일보다 약 1.02% 상승한 52,495.... "
             },
             {
-              "rank": 8,
+              "rank": 7,
               "title": "26.10.28 미국증시 마감시황 &quot;인공지능(AI) 반도체 랠리와 대형 기술주....",
               "link": "https://blog.naver.com/ssencrete/224456176809",
               "blogger": "SOUL AI",
@@ -1131,7 +1292,7 @@
               "description": "뉴욕증시 한 줄 평 및 마감 지수 요약 인공지능(AI) 반도체 랠리와 대형 기술주들의 반등에 힘입어 뉴욕증시는 혼조세 속에서도 주요 지수가 일제히 상승 마감했다. 연방준비제도(Fed)의 금리 결정을 앞둔... "
             },
             {
-              "rank": 9,
+              "rank": 8,
               "title": "뉴욕증시 중간선거 경계 혼조, 반도체 저가매수 반등, AI 투자 수익....",
               "link": "https://blog.naver.com/kyuwilly/224464261018",
               "blogger": "해피경제연구소",
@@ -1140,13 +1301,22 @@
               "description": "뉴욕증시 멘트 ① 뉴욕증시 3대 지수 혼조, 기술주가 강세를 보인 가운데 나스닥과 S&amp;P 500은 4거래일 만에 처음 상승 ② 미국 중간선거 결과를 앞두고 뚜렷한 방향 없음, 하원에선 민주당의 승리가... "
             },
             {
+              "rank": 9,
+              "title": "뉴욕증시 혼조 마감 기술주 숨 고르기와 다우 강세",
+              "link": "https://blog.naver.com/hyunsuk3832/224448577857",
+              "blogger": "Quotidien",
+              "bloggerLink": "https://blog.naver.com/hyunsuk3832",
+              "postdate": "20261021",
+              "description": "당분간은 변동성에 흔들리지 마시고 차분하게 대응하시면 좋을 것 같아요:)) 오늘도 뉴욕증시 혼조 마감 속에서 성투하시길 진심으로 응원합니다ㅎㅎ #뉴욕증시혼조 #다우지수상승 #나스닥하락요인 #기술주주가... "
+            },
+            {
               "rank": 10,
-              "title": "뉴욕증시 혼조 마감! 나스닥 1.07% 하락… AI 반도체 투자심리 흔들린 ....",
-              "link": "https://blog.naver.com/todayharuu/224463038124",
-              "blogger": "투자하는하루",
-              "bloggerLink": "https://blog.naver.com/todayharuu",
-              "postdate": "20261103",
-              "description": "11월 2일(현지시간) 뉴욕증시는 다우지수와 기술주 중심의 나스닥이 엇갈리는 혼조세로 거래를 마쳤습니다. 장 초반에는 국제유가 하락과 위험자산 선호 심리 회복으로 상승 흐름을 보였지만, 장 후반 AI... "
+              "title": "11월 4일 미국증시 마감 &quot;민주당 압승에 뉴욕증시 흔들렸을까?&quot; 혼조....",
+              "link": "https://blog.naver.com/pick-note_/224465490040",
+              "blogger": "Pick-note_",
+              "bloggerLink": "https://blog.naver.com/pick-note_",
+              "postdate": "20261105",
+              "description": "❙ 뉴욕 3대 지수 마감, 공포 딛고 차분한 숨고르기 현지시간 11월 4일 뉴욕 증시는 정치적 불확실성을 빠르게 가격에 반영하며 3대 지수가 팽팽한 혼조세로 마감했습니다. 다우존스 30 산업평균지수는 트럼프... "
             }
           ]
         }
@@ -1296,36 +1466,36 @@
             },
             {
               "rank": 4,
-              "title": "클로드, 신약 개발 속도 높여 제약 산업의 새로운 지평을 열다 | 지....",
-              "link": "https://blog.naver.com/jiinsi/224457847576",
-              "blogger": "지금은 인공지능 시대(지인시) ㅡ 매일 아침 뉴스레터",
-              "bloggerLink": "https://blog.naver.com/jiinsi",
-              "postdate": "20261029",
-              "description": "혹은 뉴스를 보며 왜 새로운 약 하나 개발하는 데 10년이 넘는 긴 시간과 조 단위의 천문학적인 돈이... 'AI 박사님', 정말 믿어도 될까요? 물론 장밋빛 전망만 있는 것은 아닙니다. 인공지능이 신약 개발의 새로운... ",
+              "title": "2026년 11월 4일 IT·AI 주요 뉴스 5가지｜AMD·AI 서버·알리바바·사이버....",
+              "link": "https://blog.naver.com/guseo1158/224464303134",
+              "blogger": "\"누구나 쉬운 AI 생활\"",
+              "bloggerLink": "https://blog.naver.com/guseo1158",
+              "postdate": "20261104",
+              "description": "#IT뉴스 #AI뉴스 #인공지능 #AMD #AI반도체 #데이터센터 #슈퍼마이크로 #AI서버 #알리바바 #AI토큰 #AI투자 #사이버보안 #IT트렌드 #AI생활도우미 2026년 11월 4일 IT·AI 주요 뉴스 5가지. AMD 실적, AI 서버... ",
               "features": {
-                "textLength": 3596,
-                "imageCount": 3,
+                "textLength": 4096,
+                "imageCount": 1,
                 "chartCount": 0,
                 "headingCount": 0,
                 "tableCount": 0,
-                "linkCount": 8
+                "linkCount": 7
               }
             },
             {
               "rank": 5,
-              "title": "10월 마지막 주 AI 뉴스 결산, 요금제와 한도가 한꺼번에 바뀌었다",
-              "link": "https://blog.naver.com/kghj76138/224461355839",
-              "blogger": "AI야 '해줘'",
-              "bloggerLink": "https://blog.naver.com/kghj76138",
-              "postdate": "20261101",
-              "description": "10월 마지막 주(10/26~11/1) AI 뉴스 결산  한눈에 보기 - 이번 주 키워드는 「요금제·한도 재편」, 챗GPT·클로드·제미나이가 한꺼번에 바꿨어요 - 신모델은 GPT-6.1 테라(API 반값)와 제미나이 4 카본, 월드 모델... ",
+              "title": "허블의 뉴스 AI 에이전트 ‘탭뷰 AI’｜맞춤형 뉴스 경험을 바꾸다",
+              "link": "https://blog.naver.com/huvlesub/224466221584",
+              "blogger": "허블뷰 공식 블로그",
+              "bloggerLink": "https://blog.naver.com/huvlesub",
+              "postdate": "20261105",
+              "description": "허블은 이런 뉴스 소비의 불편함을 줄이기 위해 뉴스 AI 에이전트 ‘탭뷰 AI(TabView AI)’를 출시했답니다. 탭뷰 AI를 실제로 사용하면 뉴스가 어떻게 달라질까? 탭뷰 AI를 한마디로 표현하면 사용자가 관심 있어... ",
               "features": {
-                "textLength": 7497,
-                "imageCount": 5,
+                "textLength": 2996,
+                "imageCount": 6,
                 "chartCount": 0,
                 "headingCount": 0,
                 "tableCount": 0,
-                "linkCount": 37
+                "linkCount": 6
               }
             },
             {
@@ -1357,21 +1527,21 @@
             },
             {
               "rank": 9,
-              "title": "AI 뉴스 10월 마지막 주 정리, 제미나이 4 카본부터 앤트로픽 상장까....",
-              "link": "https://blog.naver.com/matt1982/224458153513",
-              "blogger": "AI Like AI, One&Only",
-              "bloggerLink": "https://blog.naver.com/matt1982",
-              "postdate": "20261029",
-              "description": "안녕하세요, 한 주 동안 나온 AI 뉴스를 골라 전해 드리는 주간 AI 뉴스입니다. 이번에는 10월 23일부터 29일까지 나온 소식 가운데 꼭 알아두면 좋은 다섯 가지를 정리했습니다. 바쁘신 분들은 소제목과... "
+              "title": "2026년 11월 4일 경제·AI 뉴스, 기업이 주목할 변화 10가지",
+              "link": "https://blog.naver.com/y2kwooga/224464389706",
+              "blogger": "브릭이니셔티브",
+              "bloggerLink": "https://blog.naver.com/y2kwooga",
+              "postdate": "20261104",
+              "description": "STUDIO8 INSIGHTS · 2026.11.04 11월 4일 모닝브리핑 기업이 주목할 10가지 변화 경제·AI·디지털 마케팅·웹 보안·부산 산업 뉴스 / 정보 기준: 2026년 11월 4일 오전(KST) 오늘의 핵심 TOP 3 ① 나스닥 반등과 AI 투자... "
             },
             {
               "rank": 10,
-              "title": "[AI뉴스] 11/4일 투자자를 위한 핵심경제뉴스 5건",
-              "link": "https://blog.naver.com/ishfwilf/224465001813",
-              "blogger": "검은화요일의 투자노트",
-              "bloggerLink": "https://blog.naver.com/ishfwilf",
-              "postdate": "20261104",
-              "description": "AI비서가 전달해주는 최신 경제뉴스 5건입니다. :)  오늘의 핵심 뉴스 (2026-11-04 KST) [1] 제목: 코스피, 美기술주 하락 영향에 3.6% 급락…코스닥도 4%↓(종합) ⊙ 발행시간: 2026-11-03 16:10... "
+              "title": "11월 1일 AI 뉴스 정리, Claude Code 확장 프로그램 백도어 사고와 GPT-Rosal....",
+              "link": "https://blog.naver.com/peanutbuilding/224460804787",
+              "blogger": "a sensuous daily life.",
+              "bloggerLink": "https://blog.naver.com/peanutbuilding",
+              "postdate": "20261101",
+              "description": "오늘의 핫한 AI 뉴스 한눈에 보기 먼저 6가지 소식을 한 장으로 정리해봤어요. 한 줄로 줄이면 'AI가 내 컴퓨터 안으로 더 깊이 들어오는 만큼, 점검도 더 꼼꼼해야 한다' 정도가 될 것... "
             }
           ]
         },
@@ -1431,6 +1601,23 @@
             },
             {
               "rank": 4,
+              "title": "마곡에 엔비디아가 온다? 부천대장엔 SK하이닉스…서울 서부 AI·반....",
+              "link": "https://blog.naver.com/donggukbp/224458980806",
+              "blogger": "동국브리핑 생활속 뉘우스",
+              "bloggerLink": "https://blog.naver.com/donggukbp",
+              "postdate": "20261030",
+              "description": "마곡에 엔비디아가 들어온다는 이야기가 들리고, 부천대장에는... 대장 도시첨단산업단지를 조성하고 있습니다. 핵심 쟁점... 2026년 10월 22일, LG이노텍과 엔비디아의 협력 공개 LG이노텍은 독일... ",
+              "features": {
+                "textLength": 11428,
+                "imageCount": 1,
+                "chartCount": 0,
+                "headingCount": 0,
+                "tableCount": 5,
+                "linkCount": 18
+              }
+            },
+            {
+              "rank": 5,
               "title": "엔비디아 RTX 스파크 국내 출시일 가격 스펙 총정리, 노트북 한 대 347....",
               "link": "https://blog.naver.com/pbd813500/224444934120",
               "blogger": "만타의 애드 커넥트",
@@ -1447,48 +1634,31 @@
               }
             },
             {
-              "rank": 5,
+              "rank": 6,
               "title": "엔비디아 완전 대체 노린다는 알리바바 AI칩 '젠우 V900' 스펙 총정리",
               "link": "https://blog.naver.com/magicicetn0_/224455204616",
               "blogger": "magicicetn0_님의 블로그",
               "bloggerLink": "https://blog.naver.com/magicicetn0_",
               "postdate": "20261027",
-              "description": "지금까지 AI 칩 하면 엔비디아가 거의 독점하다시피 한 시장이었습니다.... 또는 '로드맵 공개' 수준으로 봐야 하지만, 그 방향성만으로도 시장이 들썩이는 이유가 있습니다. 엔비디아에 선전포고한 이유... ",
-              "features": {
-                "textLength": 4039,
-                "imageCount": 5,
-                "chartCount": 0,
-                "headingCount": 0,
-                "tableCount": 0,
-                "linkCount": 5
-              }
-            },
-            {
-              "rank": 6,
-              "title": "마곡에 엔비디아가 온다? 부천대장엔 SK하이닉스…서울 서부 AI·반....",
-              "link": "https://blog.naver.com/donggukbp/224458980806",
-              "blogger": "동국브리핑 생활속 뉘우스",
-              "bloggerLink": "https://blog.naver.com/donggukbp",
-              "postdate": "20261030",
-              "description": "마곡에 엔비디아가 들어온다는 이야기가 들리고, 부천대장에는... 대장 도시첨단산업단지를 조성하고 있습니다. 핵심 쟁점... 2026년 10월 22일, LG이노텍과 엔비디아의 협력 공개 LG이노텍은 독일... "
+              "description": "지금까지 AI 칩 하면 엔비디아가 거의 독점하다시피 한 시장이었습니다.... 또는 '로드맵 공개' 수준으로 봐야 하지만, 그 방향성만으로도 시장이 들썩이는 이유가 있습니다. 엔비디아에 선전포고한 이유... "
             },
             {
               "rank": 7,
-              "title": "오늘의 AI 뉴스 브리핑 | 2026년 10월 28일",
-              "link": "https://blog.naver.com/sb00lgs/224456644979",
-              "blogger": "AI 연구 블로그",
-              "bloggerLink": "https://blog.naver.com/sb00lgs",
-              "postdate": "20261028",
-              "description": "오늘의 AI 뉴스 브리핑 | 2026년 10월 28일 오늘은 AI, 인공지능, 엔비디아, ChatGPT, Claude, Gemini... &quot;주문 전부터 AI가 수요 예측해 배달 준비&quot;…배민, '멈추지 않는 도시' ... 발행 시각: 2026-10-28... "
-            },
-            {
-              "rank": 8,
               "title": "&quot;노트북 한 대가 900만 원&quot; 엔비디아 RTX 스파크 출시, 성능 가격 총정....",
               "link": "https://blog.naver.com/franksong0030/224444938239",
               "blogger": "Franky, IT Story",
               "bloggerLink": "https://blog.naver.com/franksong0030",
               "postdate": "20261019",
               "description": "서울 코엑스를 비롯해 글로벌 주요 도시에서 동시 공개된 이번... 엔비디아 RTX 스파크란? (그레이스 CPU + 블랙웰 GPU의 만남) 이번에 공개된 RTX 스파크의 핵심은 엔비디아가 미디어텍과 함께 공동... "
+            },
+            {
+              "rank": 8,
+              "title": "오늘의 AI 뉴스 브리핑 | 2026년 10월 28일",
+              "link": "https://blog.naver.com/sb00lgs/224456644979",
+              "blogger": "AI 연구 블로그",
+              "bloggerLink": "https://blog.naver.com/sb00lgs",
+              "postdate": "20261028",
+              "description": "오늘의 AI 뉴스 브리핑 | 2026년 10월 28일 오늘은 AI, 인공지능, 엔비디아, ChatGPT, Claude, Gemini... &quot;주문 전부터 AI가 수요 예측해 배달 준비&quot;…배민, '멈추지 않는 도시' ... 발행 시각: 2026-10-28... "
             },
             {
               "rank": 9,
@@ -1501,12 +1671,12 @@
             },
             {
               "rank": 10,
-              "title": "[AI] 블록 음성 AI 'Dessa': 글 없이 소리만 듣고 말을 배웠다",
-              "link": "https://blog.naver.com/insight-solution/224454354262",
-              "blogger": "인사이트솔루션 | 보험·AI 실무 노트",
-              "bloggerLink": "https://blog.naver.com/insight-solution",
-              "postdate": "20261026",
-              "description": "학습과 실행 - 학습: LLM보다 수백 배 적은 단어로 언어를 배웠고, 엔비디아 GB200 NVL72 한 대로... 잭 도시에게 직접 보고합니다. - 공개 범위: 일반 공개 전, 대기자 명단 접수. 소리만으로 말을 배운 모델은... "
+              "title": "10.30 ~ 11.2 중국 뉴스 기타.",
+              "link": "https://blog.naver.com/takechanceandfortune/224462857030",
+              "blogger": "운좋은투자자(淵 植 (연 식))",
+              "bloggerLink": "https://blog.naver.com/takechanceandfortune",
+              "postdate": "20261103",
+              "description": "4% 하락… 엔비디아, 황인훈이 중국 여성 스파이의 표적이... 《뉴욕타임스》 보도에 따르면, 미국 당국은 엔비디아(Nvidia)의... 엔비디아 대변인은 대변인은 관련 보도를 반박하며, 메가스피드는 단지... "
             }
           ]
         }
