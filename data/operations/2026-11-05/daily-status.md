@@ -1,11 +1,11 @@
 # MOTUS 일일 상태 2026-11-05
 
-갱신: 2026-11-05T03:45:27.676Z
+갱신: 2026-11-05T03:47:38.517Z
 
 | 카테고리 | 상태 | 사유 | 글 | 실행 수 | 첫 실행 지연 |
 | --- | --- | --- | --- | --- | --- |
 | 미국증시 | 발행 |  | [링크](https://motusnova.blogspot.com/2026/11/3-70.html) | 3 | 245분 |
-| AI 인텔리전스 | HOLD | verification is not VERIFIED; unresolved verification conflict; duplicate state uncertain; provenance validation failed |  | 3 |  |
+| AI 인텔리전스 | HOLD | duplicate state uncertain |  | 4 |  |
 | 국내증시 | 발행 |  | [링크](https://motusnova.blogspot.com/2026/11/062-5683-1-09.html) | 3 | 250분 |
 
 지연은 예정 시각(KST) 대비 실제 시작까지의 분이다. 수동 실행은 예정 시각이 없어 비워 둔다.

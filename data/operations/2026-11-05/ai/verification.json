@@ -4,24 +4,20 @@
   "operationDate": "2026-11-05",
   "observedDate": "2026-11-05",
   "sourceMode": "internal",
-  "verification": "REVIEW_REQUIRED",
-  "unresolvedConflicts": [
-    "independent source diversity failed",
-    "production provenance audit failed",
-    "editorial quality: publisher concentration requires editorial review"
-  ],
-  "provenancePass": false,
-  "sourceDiversityPass": false,
+  "verification": "VERIFIED",
+  "unresolvedConflicts": [],
+  "provenancePass": true,
+  "sourceDiversityPass": true,
   "sourceLinksPass": true,
   "mobilePass": true,
   "editorialQualityPass": true,
   "leakagePass": true,
   "duplicateCheck": "PENDING_REMOTE",
   "duplicateUncertainty": true,
-  "articleFingerprint": "sha256:9c809c19adcb52901917da469b081a82e31988da76c1285e540d665d7ae9112b",
+  "articleFingerprint": "sha256:f3302073fd0a39634933b2278c5cd14c1f1dfdae2acaf1879ae071213db206a9",
   "commerceEnabled": false,
-  "verifiedAt": "2026-11-05T03:44:45.895Z",
-  "expiresAt": "2026-11-05T05:14:45.895Z",
+  "verifiedAt": "2026-11-05T03:47:02.478Z",
+  "expiresAt": "2026-11-05T05:17:02.478Z",
   "sourceAuditIds": [
     "ai:page:1",
     "ai:page:10",
@@ -93,10 +89,7 @@
     "nvidia-newsroom",
     "openai"
   ],
-  "sourceAuditFingerprint": "sha256:22abb52753cbda0f3fa63a9dba870efea7e0ce945ac9c486985441f31b7d67eb",
+  "sourceAuditFingerprint": "sha256:83208ebfd6f133387a431b46d4243b0062e73aedb41434f5610a21b32a730d27",
   "crossVerificationFingerprint": null,
-  "crossVerification": null,
-  "editorialWarnings": [
-    "publisher concentration requires editorial review"
-  ]
+  "crossVerification": null
 }

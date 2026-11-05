@@ -3,13 +3,10 @@
   "gate": {
     "state": "HOLD",
     "reasons": [
-      "verification is not VERIFIED",
-      "unresolved verification conflict",
-      "duplicate state uncertain",
-      "provenance validation failed"
+      "duplicate state uncertain"
     ],
     "approval": null,
-    "checkedAt": "2026-11-05T03:45:00.867Z"
+    "checkedAt": "2026-11-05T03:47:20.050Z"
   },
   "publishCallCount": 0,
   "execution": "SIMULATED",
