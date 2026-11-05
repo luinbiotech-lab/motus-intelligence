@@ -1,10 +1,10 @@
 {
   "category": "US_MARKET",
   "operationDate": "2026-11-06",
-  "observedDate": null,
-  "state": "HOLD",
+  "observedDate": "2026-11-05",
+  "state": "AUTO_POLICY_CANDIDATE",
   "searchDemandMayOverride": false,
-  "articleFingerprint": "",
+  "articleFingerprint": "sha256:268c2e6a6e02179b6cd85458349808ba4461d0af680aa630939423b60b0353f6",
   "commerce": {
     "enabled": false
   }
