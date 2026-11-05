@@ -1,0 +1,14 @@
+{
+  "date": "2026-11-04",
+  "at": "2026-11-05T00:00:00.946Z",
+  "state": "HOLD",
+  "reasons": [
+    "NO_VERIFIED_ARTICLE_DATA"
+  ],
+  "verification": {
+    "korea": "CONTENT_MISMATCH",
+    "us": "CONTENT_MISMATCH",
+    "ai": "NO_CANDIDATE_UNIT"
+  },
+  "publishCallCount": 0
+}
