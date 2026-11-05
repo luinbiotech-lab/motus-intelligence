@@ -76,11 +76,32 @@ try{
   const property=env('GOOGLE_SEARCH_CONSOLE_PROPERTY'),cid=env('SEARCH_CONSOLE_CLIENT_ID'),secret=env('SEARCH_CONSOLE_CLIENT_SECRET'),refresh=env('SEARCH_CONSOLE_REFRESH_TOKEN');
   if(!property||!cid||!secret||!refresh)throw new Error('NOT_CONNECTED');
   const token=await googleToken(cid,secret,refresh),start=new Date(Date.parse(date+'T00:00:00Z')-8*86400000).toISOString().slice(0,10);
-  const query=async(dimensions:string[])=>{const response=await fetch(`https://www.googleapis.com/webmasters/v3/sites/${encodeURIComponent(property)}/searchAnalytics/query`,{method:'POST',headers:{authorization:`Bearer ${token}`,'content-type':'application/json'},body:JSON.stringify({startDate:start,endDate:date,dimensions,rowLimit:250}),signal:timeout(30000)});if(!response.ok)throw new Error(`HTTP ${response.status}`);return (await response.json() as {rows?:Array<{keys?:string[];clicks?:number;impressions?:number;ctr?:number;position?:number}>}).rows??[]};
+  const query=async(dimensions:string[])=>{const response=await fetch(`https://www.googleapis.com/webmasters/v3/sites/${encodeURIComponent(property)}/searchAnalytics/query`,{method:'POST',headers:{authorization:`Bearer ${token}`,'content-type':'application/json'},body:JSON.stringify({startDate:start,endDate:date,dimensions,rowLimit:250,dataState:'all'}),signal:timeout(30000)});if(!response.ok)throw new Error(`HTTP ${response.status}`);return (await response.json() as {rows?:Array<{keys?:string[];clicks?:number;impressions?:number;ctr?:number;position?:number}>}).rows??[]};
   const byPage=await query(['page','date']),byQuery=await query(['query']);
   for(const article of ours)article.searchConsole=byPage.filter(row=>row.keys?.[0]===article.url).map(row=>({date:row.keys?.[1],clicks:row.clicks,impressions:row.impressions,ctr:row.ctr,position:row.position}));
-  result.searchConsole={state:'PASS',range:[start,date],lastDataDate:byPage.map(row=>row.keys?.[1]??'').sort().at(-1)??null,topQueries:byQuery.sort((a,b)=>(b.impressions??0)-(a.impressions??0)).slice(0,20)};
+  result.searchConsole={state:byPage.length||byQuery.length?'PASS':'NO_DATA',range:[start,date],dataState:'all',lastDataDate:byPage.map(row=>row.keys?.[1]??'').sort().at(-1)??null,topQueries:byQuery.sort((a,b)=>(b.impressions??0)-(a.impressions??0)).slice(0,20)};
 }catch(error){result.searchConsole={state:'UNAVAILABLE',reason:error instanceof Error?error.message:String(error)}}
+
+// 3b) Index status (owner 2026-11-05: "구글검색 노출이 전혀 안 되는 것은 반드시 보완"): submitted sitemaps and the
+// URL Inspection verdict (indexed or not, why, last crawl) for the home page, the day's articles and recent posts.
+try{
+  const property=env('GOOGLE_SEARCH_CONSOLE_PROPERTY'),cid=env('SEARCH_CONSOLE_CLIENT_ID'),secret=env('SEARCH_CONSOLE_CLIENT_SECRET'),refresh=env('SEARCH_CONSOLE_REFRESH_TOKEN');
+  if(!property||!cid||!secret||!refresh)throw new Error('NOT_CONNECTED');
+  const token=await googleToken(cid,secret,refresh),auth={authorization:`Bearer ${token}`};
+  const sitemapsResponse=await fetch(`https://www.googleapis.com/webmasters/v3/sites/${encodeURIComponent(property)}/sitemaps`,{headers:auth,signal:timeout(20000)});
+  const sitemaps=sitemapsResponse.ok?((await sitemapsResponse.json() as {sitemap?:Array<Record<string,unknown>>}).sitemap??[]).map(item=>({path:item.path,lastSubmitted:item.lastSubmitted,lastDownloaded:item.lastDownloaded,isPending:item.isPending,errors:item.errors,warnings:item.warnings,contents:item.contents})):{error:`HTTP ${sitemapsResponse.status}`};
+  let recent:string[]=[];
+  try{const feed=await fetch(`${BLOG}/feeds/posts/summary?alt=json&max-results=10`,{signal:timeout(20000)});recent=((await feed.json() as {feed?:{entry?:Array<{link?:Array<{rel?:string;href?:string}>}>}}).feed?.entry??[]).map(entry=>entry.link?.find(link=>link.rel==='alternate')?.href??'').filter(Boolean)}catch{/* optional */}
+  const urls=[...new Set([`${BLOG}/`,...ours.map(article=>article.url),...recent])].slice(0,15),inspections=[];
+  for(const url of urls){
+    const response=await fetch('https://searchconsole.googleapis.com/v1/urlInspection/index:inspect',{method:'POST',headers:{...auth,'content-type':'application/json'},body:JSON.stringify({inspectionUrl:url,siteUrl:property,languageCode:'ko'}),signal:timeout(30000)});
+    if(!response.ok){inspections.push({url,error:`HTTP ${response.status}: ${(await response.text()).slice(0,160)}`});continue}
+    const index=(await response.json() as {inspectionResult?:{indexStatusResult?:Record<string,unknown>}}).inspectionResult?.indexStatusResult??{};
+    inspections.push({url,verdict:index.verdict,coverageState:index.coverageState,robotsTxtState:index.robotsTxtState,indexingState:index.indexingState,pageFetchState:index.pageFetchState,lastCrawlTime:index.lastCrawlTime,googleCanonical:index.googleCanonical,userCanonical:index.userCanonical,sitemap:index.sitemap,referringUrls:index.referringUrls});
+  }
+  const indexed=inspections.filter(item=>'verdict' in item&&item.verdict==='PASS').length;
+  result.indexStatus={state:'PASS',sitemaps,inspected:inspections.length,indexed,inspections};
+}catch(error){result.indexStatus={state:'UNAVAILABLE',reason:error instanceof Error?error.message:String(error)}}
 
 // 4) Naver DataLab interest (relative, last 14 days) for each article's keywords.
 try{
@@ -122,4 +143,4 @@ try{
 result.ourArticles=ours;
 await mkdir(root,{recursive:true});
 await writeFile(join(root,'traffic-input.json'),JSON.stringify(result,null,2),'utf8');
-console.log(JSON.stringify({date,articlesDay:day,articles:ours.length,pageviews:(result.pageviews as {state:string}).state,searchConsole:(result.searchConsole as {state:string}).state,datalab:(result.datalab as {state:string}).state,naverBlogSearch:(result.naverBlogSearch as {state:string}).state}));
+console.log(JSON.stringify({date,articlesDay:day,articles:ours.length,pageviews:(result.pageviews as {state:string}).state,searchConsole:(result.searchConsole as {state:string}).state,indexStatus:(({state,indexed,inspected})=>({state,indexed,inspected}))(result.indexStatus as {state:string;indexed?:number;inspected?:number}),datalab:(result.datalab as {state:string}).state,naverBlogSearch:(result.naverBlogSearch as {state:string}).state}));
