@@ -18,6 +18,8 @@ interface DailyMasterBase {
   publicationId:string;issueDate:string;issueNumber:number;title:string;subtitle:string;
   category:MotusPublicCategoryKey;canonicalLabel:string;displayLabel:string;
   sources:NewsletterSourceLink[];glossary?:DailyGlossaryEntry[];report?:PublicReportEntry;
+  /** Owner 2026-11-05 (Google indexing): recent MOTUS posts linked from each article (internal links). Not sources. */
+  relatedPosts?:Array<{title:string;url:string;label:string;published:string}>;
 }
 /** A broker report shown as a card: the rating and target exactly as the broker published them. */
 export interface ArticleReportCard {company?:string|null;broker:string;analysts?:string;date:string;title:string;rating?:string|null;target?:string|null}
