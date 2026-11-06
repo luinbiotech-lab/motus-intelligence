@@ -5,17 +5,15 @@
     "reasons": [
       "verification is not VERIFIED",
       "unresolved verification conflict",
+      "duplicate state uncertain",
       "provenance validation failed"
     ],
     "approval": null,
-    "checkedAt": "2026-11-06T03:34:34.430Z"
+    "checkedAt": "2026-11-06T06:58:47.807Z"
   },
-  "reasonCodes": [
-    "verification is not VERIFIED",
-    "unresolved verification conflict",
-    "provenance validation failed"
-  ],
-  "reason": "verification is not VERIFIED; unresolved verification conflict; provenance validation failed",
-  "insertCallCount": 0,
-  "publishCallCount": 0
+  "publishCallCount": 0,
+  "execution": "SIMULATED",
+  "commerce": {
+    "enabled": false
+  }
 }

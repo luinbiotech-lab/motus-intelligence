@@ -6,9 +6,9 @@
   "reason": "NARRATIVE_INVALID:CHARSET",
   "attempts": 2,
   "errors": [
-    "CHARSET:s2p3:$"
+    "CHARSET:s4p2:非"
   ],
   "model": "claude-sonnet-5-5",
-  "durationMs": 57697,
+  "durationMs": 52514,
   "editorialQuality": null
 }
