@@ -97,32 +97,37 @@ export class RepositoryInternalDailyBuilder implements InternalDailyBuilder {
    const byPublisher=new Map<string,typeof screened>();for(const entry of screened){const list=byPublisher.get(entry.source.publisher)??[];list.push(entry);byPublisher.set(entry.source.publisher,list)}
    const order:typeof screened=[];for(let round=0;order.length<AI_MAX_PAGE_FETCHES&&[...byPublisher.values()].some(list=>list.length>round);round++)for(const list of byPublisher.values())if(list[round]&&order.length<AI_MAX_PAGE_FETCHES)order.push(list[round]!);
    const events:Array<NonNullable<ReturnType<typeof synthesizeKoreanAIEvent>>&{basis:AIEvidenceBasis;eventType:AIEventType;evidenceBound:boolean;richness:number}>=[];
+   // Diagnostics (MOT-033): why each fetched candidate did or did not become an event; logged, never gated on.
+   const candidateLog:Array<Record<string,unknown>>=[];
    for(const [index,{source,item}] of order.entries()){
     const pageId='ai:page:'+(index+1);let title=item.title,publishedAt=item.publishedAt,evidence='',basis:AIEvidenceBasis|null=null,fallbackReason:'PAGE_BLOCKED'|'PAGE_TEXT_INSUFFICIENT'='PAGE_BLOCKED';
     try{const html=await this.text(item.link,'AI_INTELLIGENCE',pageId,at,audit,source.domains),pageDateDetail=pagePublishedDateDetail(html),pageDate=pageDateDetail?.iso??null,entry=[...audit].reverse().find(value=>value.sourceId===pageId);
      if(!title)title=pageTitle(html);
      if(!publishedAt&&pageDate)publishedAt=pageDate;
-     if(pageDate&&publishedAt&&!datesAgree(pageDate,publishedAt)){if(entry){entry.status='FAILED';entry.error='AI_PUBLICATION_DATE_MISMATCH'}continue}
+     if(pageDate&&publishedAt&&!datesAgree(pageDate,publishedAt)){if(entry){entry.status='FAILED';entry.error='AI_PUBLICATION_DATE_MISMATCH'}candidateLog.push({page:pageId,publisher:source.publisher,url:item.link,result:'DATE_MISMATCH'});continue}
      // A timestamped page field is the publisher's own statement of when the article went out; feed dates can
      // reflect a later edit, so they only stand in when the page has no structured timestamp.
      const fromPage=Boolean(pageDateDetail&&(pageDateDetail.structured||!item.publishedAt));if(fromPage)publishedAt=pageDate!;
      if(entry&&publishedAt){entry.observedDate=publishedAt.slice(0,10);entry.sourceTimestamp=publishedAt;entry.dateField=fromPage?'page.datePublished':'rss.pubDate'}
      // Lead-grade evidence needs real article paragraphs; a meta description alone (e.g. a JS-rendered shell) is summary-grade.
      const meta=extractPageEvidence(html),paragraphs=pageBodyText(html);if(paragraphs.length>=200){evidence=[meta,paragraphs].filter(Boolean).join(' ');basis='OFFICIAL_PAGE'}else if(meta.length>=80){evidence=[meta,paragraphs].filter(Boolean).join(' ');basis='OFFICIAL_PAGE_SUMMARY'}else fallbackReason='PAGE_TEXT_INSUFFICIENT'
-    }catch(error){if(message(error)==='AI_REDIRECT_OFF_OFFICIAL_DOMAIN')continue}
+    }catch(error){if(message(error)==='AI_REDIRECT_OFF_OFFICIAL_DOMAIN'){candidateLog.push({page:pageId,publisher:source.publisher,url:item.link,result:'REDIRECT_OFF_DOMAIN'});continue}}
     if(!basis){
      // Feed bodies (content:encoded, Atom content) may be excerpts; without the page they are never treated as
      // full first-party text, so RSS-based items can support an issue but never lead it.
      const rssText=[item.fullText,item.summary].sort((a,b)=>b.length-a.length)[0]??'',fallback=rssText.length>=100?{text:rssText,basis:'OFFICIAL_RSS_SUMMARY' as const}:null;
-     if(!fallback||!publishedAt)continue;
+     if(!fallback||!publishedAt){candidateLog.push({page:pageId,publisher:source.publisher,url:item.link,result:fallback?'NO_DATE':'NO_TEXT'});continue}
      evidence=fallback.text;basis=fallback.basis;
      audit.push({sourceId:'ai:rss-evidence:'+(index+1),category:'AI_INTELLIGENCE',url:item.link,status:'PASS',recordCount:1,collectedAt:at,error:null,observedDate:publishedAt.slice(0,10),sourceTimestamp:publishedAt,dateField:'rss.pubDate'});
     }
-    if(!title||!publishedAt||!withinWindow(publishedAt)||!isAIRelevant(title,evidence)||!isNewsLike(title))continue;
+    const drop=!title?'NO_TITLE':!publishedAt?'NO_DATE':!withinWindow(publishedAt)?'OUTSIDE_WINDOW':!isAIRelevant(title,evidence)?'NOT_AI_RELEVANT':!isNewsLike(title)?'NOT_NEWS_LIKE':null;
+    if(drop){candidateLog.push({page:pageId,publisher:source.publisher,url:item.link,publishedAt,basis,result:drop});continue}
     const topicId=`ai:${index}`,legacy=synthesizeKoreanAIEvent({topicId,publisher:source.publisher,title,pageEvidence:evidence,link:item.link,publishedAt});
     const event=legacy?{...legacy,basis,eventType:'launch' as const,evidenceBound:false,richness:2}:evidence.length>=(basis==='OFFICIAL_PAGE'?200:100)?synthesizeEvidenceBoundAIEvent({topicId,publisher:source.publisher,sourceId:source.id,title,link:item.link,publishedAt,evidence,basis,...(basis==='OFFICIAL_PAGE'||basis==='OFFICIAL_PAGE_SUMMARY'?{}:{fallbackReason})}):null;
     if(event)events.push(event);
+    candidateLog.push({page:pageId,publisher:source.publisher,url:item.link,publishedAt,basis,result:event?`EVENT:${event.eventType}`:'SYNTHESIS_NULL'});
    }
+   console.error('AI_CANDIDATES '+JSON.stringify(candidateLog));
    const synthesized=selectAIEvents(events);if(!synthesized.length)throw new Error('AI_VERIFIED_EVENTS_INSUFFICIENT');
    const corroboratingSources:NewsletterSourceLink[]=[];if(synthesized.some(item=>/베라 루빈/.test(item.topic))){try{const html=await this.text(AI_CORROBORATION.veraRubinGoogleCloud,'AI_INTELLIGENCE','ai:corroboration:google-cloud-vera-rubin',at,audit),plain=clean(html),lower=plain.toLowerCase();if(/vera\s+rubin/.test(lower)&&/a5x/.test(lower)){corroboratingSources.push(source('구글 클라우드 A5X·Vera Rubin 공식 발표',AI_CORROBORATION.veraRubinGoogleCloud,'Google Cloud'))}else throw new Error('AI_CORROBORATION_CONTENT_MISMATCH')}catch{}}
    const topics:VerifiedSearchTopic[]=synthesized.map(item=>({topicId:item.topicId,label:item.company,aliases:[item.publisher,item.topic],category:'AI_INTELLIGENCE',claimRefs:[item.link],sourceRefs:[item.link,...corroboratingSources.map(source=>source.url)],verificationStatus:'VERIFIED'})),searchContext=await collectPreRenderSearch(topics,at,this.environment),decision=buildAIEditorialDecision(synthesized,searchContext),observedDate=new Date(at).toISOString().slice(0,10),sources=dedupe([...decision.ordered.map(item=>source(item.company+' 공식 발표',item.link,item.publisher)),...corroboratingSources]);
