@@ -1,0 +1,14 @@
+{
+  "mode": "LIVE",
+  "sourceMode": "internal",
+  "date": "2026-11-06",
+  "observedDate": "2026-11-06",
+  "category": "AI_INTELLIGENCE",
+  "state": "HOLD",
+  "reasonCode": "independent source diversity failed; production provenance audit failed; editorial quality: publisher concentration requires editorial review",
+  "verification": "REVIEW_REQUIRED",
+  "publishCallCount": 0,
+  "commerce": {
+    "enabled": false
+  }
+}

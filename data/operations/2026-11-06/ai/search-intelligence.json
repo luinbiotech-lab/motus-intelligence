@@ -1,0 +1,15 @@
+{
+  "collectedAt": "2026-11-06T03:34:21.586Z",
+  "signalDate": null,
+  "provider": null,
+  "freshness": "NO_SEARCH_SIGNAL",
+  "fallbackReason": "NO_MATCHING_VERIFIED_TOPIC",
+  "warnings": [],
+  "orderedTopicIds": [
+    "ai:0",
+    "ai:7"
+  ],
+  "selectedSecondaryTopicId": null,
+  "factsChanged": false,
+  "gateOverride": false
+}
