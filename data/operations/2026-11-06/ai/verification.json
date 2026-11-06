@@ -18,10 +18,10 @@
   "leakagePass": true,
   "duplicateCheck": "PENDING_REMOTE",
   "duplicateUncertainty": true,
-  "articleFingerprint": "sha256:a1c0e8e60a7fefc7a3f352fe4757a868a6097c89651474d477b663853688612f",
+  "articleFingerprint": "sha256:f58bd3fd5fd0aac36485139e6dfe0e259b2c482ad3dd4215cab28454c6a417fe",
   "commerceEnabled": false,
-  "verifiedAt": "2026-11-06T06:58:34.357Z",
-  "expiresAt": "2026-11-06T08:28:34.357Z",
+  "verifiedAt": "2026-11-06T11:18:24.128Z",
+  "expiresAt": "2026-11-06T12:48:24.128Z",
   "sourceAuditIds": [
     "ai:page:1",
     "ai:page:2",
@@ -66,7 +66,7 @@
     "nvidia-newsroom",
     "openai"
   ],
-  "sourceAuditFingerprint": "sha256:c62b94dd7eb60586a8729db600dab4385132a8d1f0fd67c0d506d669efc10b46",
+  "sourceAuditFingerprint": "sha256:be71ee065626d65e7b3f059c619be5d2548caeacb488c2981f4b401a9f38cda0",
   "crossVerificationFingerprint": null,
   "crossVerification": null,
   "editorialWarnings": [

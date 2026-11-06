@@ -3,12 +3,12 @@
   "mode": "SHADOW",
   "bundleHash": "64de813d2520affd",
   "status": "REJECTED",
-  "reason": "NARRATIVE_INVALID:CHARSET",
+  "reason": "NARRATIVE_INVALID:LENGTH",
   "attempts": 2,
   "errors": [
-    "CHARSET:s4p2:非"
+    "LENGTH:s3p2:62"
   ],
   "model": "claude-sonnet-5-5",
-  "durationMs": 52514,
+  "durationMs": 57352,
   "editorialQuality": null
 }
