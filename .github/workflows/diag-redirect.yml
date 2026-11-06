@@ -1,0 +1,26 @@
+name: DIAG redirect error (read-only, temporary)
+on:
+  push:
+    branches: [diag/redirect-error-1106]
+permissions: {contents: read}
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Redirect chains (read-only)
+        shell: bash
+        run: |
+          GB='Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
+          BR='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36'
+          base=https://motusnova.blogspot.com
+          for p in /2026/11/3-70.html /2026/11/amd-37-ai.html /2026/11/3-58.html /2026/11/ai.html /2026/11/20-33.html /robots.txt; do
+            for v in "$base$p" "http://motusnova.blogspot.com$p" "$base$p?m=1"; do
+              for ua in GB BR; do
+                echo "### $ua $v"
+                curl -sS -o /dev/null -L --max-redirs 10 -A "${!ua}" -w '%{http_code} final=%{url_effective} redirects=%{num_redirects}\n' "$v" -D - 2>&1 | grep -iE '^(HTTP/|location:)|final=' || true
+                sleep 2
+              done
+            done
+          done
+          echo '### robots.txt'; curl -sS -A "$BR" "$base/robots.txt"
+          echo '### canonical/meta of amd-37-ai (browser UA)'; curl -sS -A "$BR" "$base/2026/11/amd-37-ai.html" | grep -oiE '<link[^>]+canonical[^>]*>|<meta[^>]+robots[^>]*>|refresh[^>]*>' | head
