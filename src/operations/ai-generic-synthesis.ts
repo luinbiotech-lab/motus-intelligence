@@ -75,7 +75,7 @@ const PLACES:Array<[RegExp,string]>=[
   [/\bSoutheast Asia\b/,'동남아시아'],[/\bEurope(?:an Union)?\b|\bEU\b/,'유럽'],[/\bMiddle East\b/,'중동'],[/\bAfrica\b/,'아프리카'],[/\bLatin America\b/,'중남미'],
 ];
 
-const PRODUCT=/\b(?:Vera Rubin|Blackwell(?: Ultra)?|Rubin|DGX(?: [A-Z0-9]+)?|NIM|Omniverse|Cosmos|Isaac|Jetson(?: [A-Z][a-z]+)?|CUDA|Gemini(?: (?:Enterprise|Pro|Flash|Ultra|Nano|\d[\w.]*))*|Gemma(?: \d[\w.]*)?|Veo(?: \d[\w.]*)?|Imagen(?: \d[\w.]*)?|NotebookLM|Microsoft 365 Copilot|GitHub Copilot|Copilot(?: Studio)?|Azure AI Foundry|Microsoft Foundry|Azure|Claude(?: (?:Opus|Sonnet|Haiku)(?: \d[\w.]*)?| Code)?|ChatGPT(?: (?:Enterprise|Edu|Pro|Atlas))?|GPT-\d[\w.]*|Codex|Sora(?: \d)?|Llama(?: \d[\w.]*)?|Meta AI|Amazon Bedrock(?: AgentCore)?|Bedrock(?: AgentCore)?|SageMaker(?: AI)?|Amazon Nova(?: [A-Z][a-z]+)?|Amazon Q|Trainium\d?|Inferentia\d?|Kiro)\b/;
+const PRODUCT=/\b(?:Vera Rubin|Blackwell(?: Ultra)?|Rubin|DGX(?: [A-Z0-9]+)?|NIM|Omniverse|Cosmos|Isaac|Jetson(?: [A-Z][a-z]+)?|CUDA|Gemini(?: (?:Enterprise|Pro|Flash|Ultra|Nano|\d[\w.]*))*|Gemma(?: \d[\w.]*)?|Veo(?: \d[\w.]*)?|Imagen(?: \d[\w.]*)?|NotebookLM|Microsoft 365 Copilot|GitHub Copilot|Copilot(?: Studio)?|Azure AI Foundry|Microsoft Foundry|Azure|Claude(?: (?:Opus|Sonnet|Haiku)(?: \d[\w.]*)?| Code)?|ChatGPT(?: (?:Enterprise|Edu|Pro|Atlas))?|GPT-\d[\w.]*|Codex|Sora(?: \d)?|Llama(?: \d[\w.]*)?|Meta AI|Amazon Bedrock(?: AgentCore)?|Bedrock(?: AgentCore)?|SageMaker(?: AI)?|Amazon Nova(?: [A-Z][a-z]+)?|Amazon Q|Amazon WorkSpaces|Amazon Connect|Amazon Kendra|Amazon Lex|Amazon Titan|AWS Transform|Vertex AI|Agentic Data Cloud|Antigravity|Trainium\d?|Inferentia\d?|Kiro)\b/;
 
 const COUNT_NOUNS:Array<[RegExp,string,string]>=[
   [/GPUs?/i,'GPU','개'],[/chips?/i,'칩','개'],[/countries/i,'국가','개국'],[/languages/i,'언어','개'],[/customers/i,'고객','곳'],[/users/i,'이용자','명'],[/developers/i,'개발자','명'],
@@ -126,6 +126,8 @@ export function extractFigures(text:string):string[] {
   return [...new Set(out)].slice(0,4);
 }
 
+const BODY_ONLY_UNSUPPORTED=new Set<AIEventType>(['infrastructure','investment','partnership','policy']);
+
 export function classifyAIEvent(title:string,text:string,link=''):{type:AIEventType;fromTitle:boolean}|null {
   if(/^[A-Z][\w.&-]*(?: [A-Z][\w.&-]*)* and (?:the )?[A-Z][\w.&-]*(?: [A-Z][\w.&-]*)* [a-z]+s\b/.test(title)&&!/\b(?:data ?cent|supercomput|compute)\w*/i.test(title))return {type:'partnership',fromTitle:true};
   if(/\/research\//i.test(link)&&!/\b(?:launch|available|introduc\w*|announc\w*)\b/i.test(title))return {type:'research',fromTitle:false};
@@ -170,6 +172,9 @@ export function synthesizeEvidenceBoundAIEvent(input:EvidenceBoundAIInput):(Kore
   // chrome (related posts, footers, region lists) cannot be presented as part of the announcement.
   const text=`${input.title}. ${input.evidence.slice(0,1500)}`,classified=classifyAIEvent(input.title,input.evidence,input.link);
   if(!classified)return null;
+  // A few keyword hits in the body cannot support a headline claim such as "infrastructure expansion" or "investment":
+  // a customer story that mentions infrastructure twice is not an infrastructure announcement.
+  if(!classified.fromTitle&&BODY_ONLY_UNSUPPORTED.has(classified.type))return null;
   const company=companyKorean(input.publisher),type=TYPE_KO[classified.type];
   const places=findAll(text,PLACES),orgs=findAll(withoutApiMentions(text),COMPANIES).filter(name=>name!==company&&!company.startsWith(name)&&!name.startsWith(company));
   const product=(input.title.match(PRODUCT)??input.evidence.match(PRODUCT))?.[0]??null,figures=extractFigures(text);

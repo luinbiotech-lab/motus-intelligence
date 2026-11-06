@@ -18,13 +18,17 @@ import {buildKoreaMarketNarrative,buildUSMarketNarrative,formatLevel,moveText,nu
 import {isCompletedSession,latestCompletedSession,marketSession} from './market-calendar.js';
 import {buildAIEditorialDecision,synthesizeKoreanAIEvent} from './ai-editorial-synthesis.js';
 import {OFFICIAL_AI_SOURCES,datesAgree,isAIHeadline,isAIRelevant,isNewsLike,isOfficialLink,pageBodyText,pagePublishedDateDetail,pageTitle,parseAnthropicIndex,parseFeed,type AIEvidenceBasis,type FeedItem,type OfficialAISource} from './ai-sources.js';
-import {josa,synthesizeEvidenceBoundAIEvent,type AIEventType} from './ai-generic-synthesis.js';
+import {classifyAIEvent,josa,synthesizeEvidenceBoundAIEvent,type AIEventType} from './ai-generic-synthesis.js';
 import {readFile,readdir} from 'node:fs/promises';
 import {join} from 'node:path';
 
 export function koreaPublicationSession(operationDate:string,at:string,controlledRecovery:boolean){return latestCompletedSession('KOREA',controlledRecovery?at:operationDate+'T06:17:00+09:00')}
 
-export interface InternalSourceAuditEntry {sourceId:string;category:DailyCategory;url:string;status:'PASS'|'FAILED';recordCount:number;collectedAt:string;error:string|null;observedDate?:string;referenceDate?:string;sourceTimestamp?:string;dateField?:string}
+export interface InternalSourceAuditEntry {sourceId:string;category:DailyCategory;url:string;status:'PASS'|'FAILED';recordCount:number;collectedAt:string;error:string|null;observedDate?:string;referenceDate?:string;sourceTimestamp?:string;dateField?:string;screening?:AIFeedScreening;candidate?:AICandidateOutcome}
+/** Why feed items did or did not become candidates. Diagnostic only: gates never read it. */
+export interface AIFeedScreening {total:number;candidates:number;alreadyPublished:number;duplicate:number;notNews:number;notAIHeadline:number;outOfWindow:number;unofficialLink:number}
+/** What happened to one fetched candidate, so a SKIP can be explained from the persisted audit alone. */
+export interface AICandidateOutcome {title:string;outcome:'EVENT_CREATED'|'DATE_MISMATCH'|'OFF_OFFICIAL_DOMAIN'|'NO_USABLE_EVIDENCE'|'NO_TITLE'|'NO_DATE'|'OUT_OF_WINDOW'|'NOT_AI_RELEVANT'|'NOT_NEWS_LIKE'|'EVIDENCE_TOO_SHORT'|'UNCLASSIFIED'|'NOT_SYNTHESIZED';basis:AIEvidenceBasis|null;bodyChars:number}
 export interface InternalBuildResult {payload:LiveDailyPayload|null;audit:InternalSourceAuditEntry[];crossVerification?:KoreaCrossVerificationArtifact|null;searchContext?:PreRenderSearchContext|null;reason:string|null;state:'LIVE_READY'|'HOLD'|'SKIP'}
 export interface InternalBuildOptions {mode?:'SCHEDULED'|'ADMIN_CONTROLLED_RECOVERY'}
 export interface InternalDailyBuilder {build(category:DailyCategory,requestedAt:string,options?:InternalBuildOptions):Promise<InternalBuildResult>}
@@ -81,47 +85,61 @@ export class RepositoryInternalDailyBuilder implements InternalDailyBuilder {
   try{
    const requested=Date.parse(at),withinWindow=(iso:string)=>{const value=Date.parse(iso);return Number.isFinite(value)&&requested-value>=-3600000&&requested-value<=AI_WINDOW_MS};
    const alreadyCovered=await previouslyPublishedAILinks(this.operationsRoot);
-   const pool:Array<{source:OfficialAISource;item:FeedItem}>=[];
+   const pool:Array<{source:OfficialAISource;item:FeedItem}>=[],screeningFor=new Map<string,AIFeedScreening>();
    for(const source of OFFICIAL_AI_SOURCES){try{
     if(source.kind==='rss'){const xml=await this.text(source.url,'AI_INTELLIGENCE',source.id,at,audit);for(const item of parseFeed(xml).slice(0,40))pool.push({source,item})}
-    else{const html=await this.text(source.url,'AI_INTELLIGENCE',source.id,at,audit);for(const link of parseAnthropicIndex(html).slice(0,4))pool.push({source,item:{title:'',link,publishedAt:'',summary:'',fullText:''}})}
+    else{const html=await this.text(source.url,'AI_INTELLIGENCE',source.id,at,audit);for(const link of parseAnthropicIndex(html).slice(0,AI_ANTHROPIC_INDEX_LINKS))pool.push({source,item:{title:'',link,publishedAt:'',summary:'',fullText:''}})}
    }catch{}}
    const seenTitles=new Set<string>(),seenLinks=new Set<string>(),screened=pool.filter(({source,item})=>{
-    const link=canonical(item.link);
-    if(!isOfficialLink(item.link,source.domains)||alreadyCovered.has(link)||seenLinks.has(link))return false;
+    const link=canonical(item.link),stats=screeningFor.get(source.id)??{total:0,candidates:0,alreadyPublished:0,duplicate:0,notNews:0,notAIHeadline:0,outOfWindow:0,unofficialLink:0};screeningFor.set(source.id,stats);stats.total++;
+    if(!isOfficialLink(item.link,source.domains)){stats.unofficialLink++;return false}
+    if(alreadyCovered.has(link)){stats.alreadyPublished++;return false}
+    if(seenLinks.has(link)){stats.duplicate++;return false}
     seenLinks.add(link);
-    if(item.title){const key=item.title.toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();if(seenTitles.has(key)||!isNewsLike(item.title))return false;if(source.aiFilter&&!isAIHeadline(item.title))return false;seenTitles.add(key)}
-    return !item.publishedAt||withinWindow(item.publishedAt);
+    if(item.title){const key=item.title.toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();if(seenTitles.has(key)){stats.duplicate++;return false}if(!isNewsLike(item.title)){stats.notNews++;return false}if(source.aiFilter&&!isAIHeadline(item.title)){stats.notAIHeadline++;return false}seenTitles.add(key)}
+    if(item.publishedAt&&!withinWindow(item.publishedAt)){stats.outOfWindow++;return false}
+    stats.candidates++;return true;
    }).sort((a,b)=>(Date.parse(b.item.publishedAt)||0)-(Date.parse(a.item.publishedAt)||0));
+   for(const [sourceId,stats] of screeningFor){const entry=audit.find(value=>value.sourceId===sourceId);if(entry)entry.screening=stats}
    // Round-robin across publishers so one prolific channel cannot crowd out the others.
    const byPublisher=new Map<string,typeof screened>();for(const entry of screened){const list=byPublisher.get(entry.source.publisher)??[];list.push(entry);byPublisher.set(entry.source.publisher,list)}
-   const order:typeof screened=[];for(let round=0;order.length<AI_MAX_PAGE_FETCHES&&[...byPublisher.values()].some(list=>list.length>round);round++)for(const list of byPublisher.values())if(list[round]&&order.length<AI_MAX_PAGE_FETCHES)order.push(list[round]!);
+   const order:typeof screened=[];for(let round=0;[...byPublisher.values()].some(list=>list.length>round);round++)for(const list of byPublisher.values())if(list[round])order.push(list[round]!);
    const events:Array<NonNullable<ReturnType<typeof synthesizeKoreanAIEvent>>&{basis:AIEvidenceBasis;eventType:AIEventType;evidenceBound:boolean;richness:number}>=[];
+   // The budget is spent only on pages that can yield a candidate. A publisher that refuses automated access and an
+   // undated index link that turns out to be old must not use up the slots of pages that could lead the article.
+   const blockedPublishers=new Set<string>();let usablePages=0,pageRequests=0;
    for(const [index,{source,item}] of order.entries()){
-    const pageId='ai:page:'+(index+1);let title=item.title,publishedAt=item.publishedAt,evidence='',basis:AIEvidenceBasis|null=null,fallbackReason:'PAGE_BLOCKED'|'PAGE_TEXT_INSUFFICIENT'='PAGE_BLOCKED';
-    try{const html=await this.text(item.link,'AI_INTELLIGENCE',pageId,at,audit,source.domains),pageDateDetail=pagePublishedDateDetail(html),pageDate=pageDateDetail?.iso??null,entry=[...audit].reverse().find(value=>value.sourceId===pageId);
+    const isBlocked=blockedPublishers.has(source.publisher);
+    if(!isBlocked&&(usablePages>=AI_MAX_PAGE_FETCHES||pageRequests>=AI_MAX_PAGE_REQUESTS))break;
+    const pageId='ai:page:'+(index+1);let title=item.title,publishedAt=item.publishedAt,evidence='',basis:AIEvidenceBasis|null=null,bodyChars=0,fetched=false,fallbackReason:'PAGE_BLOCKED'|'PAGE_TEXT_INSUFFICIENT'='PAGE_BLOCKED';
+    const note=(outcome:AICandidateOutcome['outcome'])=>{const entry=[...audit].reverse().find(value=>value.sourceId==='ai:rss-evidence:'+(index+1)||value.sourceId===pageId);if(entry)entry.candidate={title,outcome,basis,bodyChars}};
+    if(isBlocked)audit.push({sourceId:pageId,category:'AI_INTELLIGENCE',url:item.link,status:'FAILED',recordCount:0,collectedAt:at,error:'SKIPPED_PUBLISHER_BLOCKED',sourceTimestamp:publishedAt});
+    else try{pageRequests++;const html=await this.text(item.link,'AI_INTELLIGENCE',pageId,at,audit,source.domains),pageDateDetail=pagePublishedDateDetail(html),pageDate=pageDateDetail?.iso??null,entry=[...audit].reverse().find(value=>value.sourceId===pageId);
      if(!title)title=pageTitle(html);
      if(!publishedAt&&pageDate)publishedAt=pageDate;
-     if(pageDate&&publishedAt&&!datesAgree(pageDate,publishedAt)){if(entry){entry.status='FAILED';entry.error='AI_PUBLICATION_DATE_MISMATCH'}continue}
+     if(pageDate&&publishedAt&&!datesAgree(pageDate,publishedAt)){if(entry){entry.status='FAILED';entry.error='AI_PUBLICATION_DATE_MISMATCH'}note('DATE_MISMATCH');continue}
      // A timestamped page field is the publisher's own statement of when the article went out; feed dates can
      // reflect a later edit, so they only stand in when the page has no structured timestamp.
      const fromPage=Boolean(pageDateDetail&&(pageDateDetail.structured||!item.publishedAt));if(fromPage)publishedAt=pageDate!;
      if(entry&&publishedAt){entry.observedDate=publishedAt.slice(0,10);entry.sourceTimestamp=publishedAt;entry.dateField=fromPage?'page.datePublished':'rss.pubDate'}
      // Lead-grade evidence needs real article paragraphs; a meta description alone (e.g. a JS-rendered shell) is summary-grade.
-     const meta=extractPageEvidence(html),paragraphs=pageBodyText(html);if(paragraphs.length>=200){evidence=[meta,paragraphs].filter(Boolean).join(' ');basis='OFFICIAL_PAGE'}else if(meta.length>=80){evidence=[meta,paragraphs].filter(Boolean).join(' ');basis='OFFICIAL_PAGE_SUMMARY'}else fallbackReason='PAGE_TEXT_INSUFFICIENT'
-    }catch(error){if(message(error)==='AI_REDIRECT_OFF_OFFICIAL_DOMAIN')continue}
+     fetched=true;const meta=extractPageEvidence(html),paragraphs=pageBodyText(html);bodyChars=paragraphs.length;if(paragraphs.length>=200){evidence=[meta,paragraphs].filter(Boolean).join(' ');basis='OFFICIAL_PAGE'}else if(meta.length>=80){evidence=[meta,paragraphs].filter(Boolean).join(' ');basis='OFFICIAL_PAGE_SUMMARY'}else fallbackReason='PAGE_TEXT_INSUFFICIENT'
+    }catch(error){if(message(error)==='AI_REDIRECT_OFF_OFFICIAL_DOMAIN'){note('OFF_OFFICIAL_DOMAIN');continue}if(message(error)==='HTTP_403')blockedPublishers.add(source.publisher)}
+    if(fetched&&publishedAt&&withinWindow(publishedAt))usablePages++;
     if(!basis){
      // Feed bodies (content:encoded, Atom content) may be excerpts; without the page they are never treated as
      // full first-party text, so RSS-based items can support an issue but never lead it.
      const rssText=[item.fullText,item.summary].sort((a,b)=>b.length-a.length)[0]??'',fallback=rssText.length>=100?{text:rssText,basis:'OFFICIAL_RSS_SUMMARY' as const}:null;
-     if(!fallback||!publishedAt)continue;
+     if(!fallback||!publishedAt){note('NO_USABLE_EVIDENCE');continue}
      evidence=fallback.text;basis=fallback.basis;
      audit.push({sourceId:'ai:rss-evidence:'+(index+1),category:'AI_INTELLIGENCE',url:item.link,status:'PASS',recordCount:1,collectedAt:at,error:null,observedDate:publishedAt.slice(0,10),sourceTimestamp:publishedAt,dateField:'rss.pubDate'});
     }
-    if(!title||!publishedAt||!withinWindow(publishedAt)||!isAIRelevant(title,evidence)||!isNewsLike(title))continue;
+    const rejected=!title?'NO_TITLE':!publishedAt?'NO_DATE':!withinWindow(publishedAt)?'OUT_OF_WINDOW':!isAIRelevant(title,evidence)?'NOT_AI_RELEVANT':!isNewsLike(title)?'NOT_NEWS_LIKE':null;
+    if(rejected){note(rejected);continue}
     const topicId=`ai:${index}`,legacy=synthesizeKoreanAIEvent({topicId,publisher:source.publisher,title,pageEvidence:evidence,link:item.link,publishedAt});
     const event=legacy?{...legacy,basis,eventType:'launch' as const,evidenceBound:false,richness:2}:evidence.length>=(basis==='OFFICIAL_PAGE'?200:100)?synthesizeEvidenceBoundAIEvent({topicId,publisher:source.publisher,sourceId:source.id,title,link:item.link,publishedAt,evidence,basis,...(basis==='OFFICIAL_PAGE'||basis==='OFFICIAL_PAGE_SUMMARY'?{}:{fallbackReason})}):null;
     if(event)events.push(event);
+    note(event?'EVENT_CREATED':evidence.length<(basis==='OFFICIAL_PAGE'?200:100)?'EVIDENCE_TOO_SHORT':classifyAIEvent(title,evidence,item.link)?'NOT_SYNTHESIZED':'UNCLASSIFIED');
    }
    const synthesized=selectAIEvents(events);if(!synthesized.length)throw new Error('AI_VERIFIED_EVENTS_INSUFFICIENT');
    const corroboratingSources:NewsletterSourceLink[]=[];if(synthesized.some(item=>/베라 루빈/.test(item.topic))){try{const html=await this.text(AI_CORROBORATION.veraRubinGoogleCloud,'AI_INTELLIGENCE','ai:corroboration:google-cloud-vera-rubin',at,audit),plain=clean(html),lower=plain.toLowerCase();if(/vera\s+rubin/.test(lower)&&/a5x/.test(lower)){corroboratingSources.push(source('구글 클라우드 A5X·Vera Rubin 공식 발표',AI_CORROBORATION.veraRubinGoogleCloud,'Google Cloud'))}else throw new Error('AI_CORROBORATION_CONTENT_MISMATCH')}catch{}}
@@ -275,7 +293,7 @@ function recordKoreaDate(audit:InternalSourceAuditEntry[],sourceId:string,dateFi
  return observedDate;
 }
 
-const AI_WINDOW_MS=96*3600000,AI_MAX_PAGE_FETCHES=10,AI_MAX_ISSUES=3;
+const AI_WINDOW_MS=96*3600000,AI_MAX_PAGE_FETCHES=10,AI_MAX_PAGE_REQUESTS=24,AI_MAX_ISSUES=3,AI_ANTHROPIC_INDEX_LINKS=12;
 const AI_TYPE_WEIGHT:Record<AIEventType,number>={infrastructure:3,launch:3,partnership:3,investment:3,adoption:2,policy:2,security:2,education:1,research:1};
 type SelectableAIEvent={topicId:string;publisher:string;publishedAt:string;basis:AIEvidenceBasis;eventType:AIEventType;richness?:number};
 /** Lead must rest on full first-party text; RSS-summary items may only support. One item per publisher first, then fill. */

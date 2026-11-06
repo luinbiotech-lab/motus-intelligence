@@ -203,3 +203,56 @@ test('stated date comes from the page timestamp, channel from the article URL, a
   const aws=synthesizeEvidenceBoundAIEvent({topicId:'a',publisher:'Amazon AWS',sourceId:'aws-whats-new',title:'Web Search on Amazon Bedrock now supports domain filtering and user location controls',link:'https://aws.amazon.com/about-aws/whats-new/2026/10/bedrock-web-search/',publishedAt:'2026-10-23T18:00:00Z',evidence:'Web Search on Amazon Bedrock now gives you more control over the results that ground a model response. Both are configured directly on the web_search tool in your existing OpenAI Responses API request, and work with OpenAI-compatible clients.',basis:'OFFICIAL_PAGE'})!;
   assert.doesNotMatch(aws.facts.join(' '),/오픈AI/);assert.match(aws.facts[0]!,/공식 What’s New 공지에/);
 });
+
+const candidateBody=(topic:string)=>`<article><p>${(topic+' expands AI compute with 2,000 GPUs in a sovereign data center for enterprise customers. ').repeat(4)}</p></article>`;
+const buildAI=(fetcher:typeof fetch)=>new RepositoryInternalDailyBuilder(fetcher,{},undefined,undefined,undefined,join(tmpdir(),'motus-none-'+Date.now())).build('AI_INTELLIGENCE',at);
+
+test('a blocked publisher and old index links do not use up the slots of a page that can lead',async()=>{
+  const openai=Array.from({length:8},(_,index)=>item(`OpenAI update ${index} for enterprise AI`,`https://openai.com/index/update-${index}`,'Sun, 25 Oct 2026 10:00:00 GMT','We describe new AI capabilities for enterprise customers, with details on availability, security controls and how teams can start using them today.')).join('');
+  const aws=Array.from({length:5},(_,index)=>item(index===4?'Amazon expands AI data center capacity':`Bedrock note ${index}`,`https://aws.amazon.com/blogs/aws/note-${index}/`,'Sun, 25 Oct 2026 09:00:00 GMT','x')).join('');
+  const requests:string[]=[];
+  const fetcher=(async(input:RequestInfo|URL)=>{const url=String(input);requests.push(url);
+    if(url.includes('openai.com/news/rss.xml'))return new Response(`<rss>${openai}</rss>`);
+    if(url.includes('openai.com/index'))return new Response('Forbidden',{status:403});
+    if(url.includes('aws.amazon.com/blogs/aws/feed/'))return new Response(`<rss>${aws}</rss>`);
+    if(url.includes('aws.amazon.com/blogs/aws/note-4'))return new Response(candidateBody('Amazon'));
+    if(url.includes('aws.amazon.com/blogs/aws/note-'))return new Response('<article><p>Short.</p></article>');
+    if(url==='https://www.anthropic.com/news')return new Response(Array.from({length:6},(_,index)=>`<a href="/news/old-${index}">x</a>`).join(''));
+    if(url.includes('anthropic.com/news/old-'))return new Response(`<html><head><meta property="article:published_time" content="2026-10-01T00:00:00Z"><title>Old</title></head><body><article><p>${'Anthropic AI announcement with long body text. '.repeat(8)}</p></article></body></html>`);
+    return new Response('<rss></rss>');}) as typeof fetch;
+  const result=await buildAI(fetcher);
+  assert.equal(result.state,'LIVE_READY',String(result.reason));
+  assert.equal(requests.filter(url=>url.includes('openai.com/index')).length,1,'a publisher that answered 403 is not asked again in the same run');
+  assert.ok(result.audit.some(entry=>entry.error==='SKIPPED_PUBLISHER_BLOCKED'));
+});
+
+test('a SKIP explains from the audit why each candidate was dropped',async()=>{
+  const fetcher=(async(input:RequestInfo|URL)=>{const url=String(input);
+    if(url.includes('blogs.nvidia.com/feed/'))return new Response(`<rss>${item('How AI shapes fabs','https://blogs.nvidia.com/blog/fabs/','Sun, 25 Oct 2026 02:00:13 +0000','x')}${item('Quarterly gardening notes','https://blogs.nvidia.com/blog/garden/','Sun, 25 Oct 2026 01:00:00 +0000','x')}${item('Ancient AI post','https://blogs.nvidia.com/blog/ancient/','Sun, 04 Oct 2026 01:00:00 +0000','x')}</rss>`);
+    if(url.includes('blogs.nvidia.com/blog/fabs'))return new Response(`<article><p>${'Fabs are complicated places where AI helps engineers read sensor logs and plan work. '.repeat(4)}</p></article>`);
+    if(url.includes('blogs.nvidia.com/blog/garden'))return new Response(`<article><p>${'Tomatoes and basil grow well together in a sunny corner of the yard all summer. '.repeat(4)}</p></article>`);
+    if(url.includes('aws.amazon.com/blogs/aws/feed/'))return new Response(`<rss>${item('Store release notes','https://aws.amazon.com/blogs/aws/store/','Sun, 25 Oct 2026 01:00:00 +0000','x')}</rss>`);
+    return new Response('<rss></rss>');}) as typeof fetch;
+  const result=await buildAI(fetcher);
+  assert.equal(result.state,'SKIP');
+  const outcome=(fragment:string)=>result.audit.find(entry=>entry.url.includes(fragment))?.candidate;
+  assert.deepEqual({outcome:outcome('blog/fabs')?.outcome,basis:outcome('blog/fabs')?.basis,title:outcome('blog/fabs')?.title},{outcome:'UNCLASSIFIED',basis:'OFFICIAL_PAGE',title:'How AI shapes fabs'});
+  assert.ok((outcome('blog/fabs')?.bodyChars??0)>=200);
+  assert.equal(outcome('blog/garden')?.outcome,'NOT_AI_RELEVANT');
+  const nvidia=result.audit.find(entry=>entry.sourceId==='nvidia')?.screening;assert.equal(nvidia?.total,3);assert.equal(nvidia?.outOfWindow,1);assert.equal(nvidia?.candidates,2);
+  assert.equal(result.audit.find(entry=>entry.sourceId==='aws-news')?.screening?.notAIHeadline,1);
+});
+
+test('body keyword hits alone cannot turn a customer story into an infrastructure claim',()=>{
+  const evidence='U Mobile is a telecom operator in Malaysia. Its network infrastructure team uses agents to read alarms, and the infrastructure runbooks are stored in one place for 2,000 engineers. '.repeat(3);
+  const input={topicId:'a',publisher:'Amazon AWS',sourceId:'aws-news',title:'How U Mobile built agentic telco operations with Amazon Bedrock AgentCore',link:'https://aws.amazon.com/blogs/aws/u-mobile/',publishedAt:'2026-11-04T16:23:33Z',evidence,basis:'OFFICIAL_PAGE' as const};
+  assert.equal(classifyAIEvent(input.title,evidence,input.link)?.type,'infrastructure');
+  assert.equal(synthesizeEvidenceBoundAIEvent(input),null);
+  const titled=synthesizeEvidenceBoundAIEvent({...input,title:'Amazon expands AI data center capacity in Malaysia'});
+  assert.match(titled?.topic??'',/말레이시아/);
+});
+
+test('a named AWS product in an official title is enough detail to report the launch',()=>{
+  const event=synthesizeEvidenceBoundAIEvent({topicId:'a',publisher:'Amazon AWS',sourceId:'aws-whats-new',title:'Amazon WorkSpaces for AI agents now supports Linux and Windows 11 cloud desktops',link:'https://aws.amazon.com/about-aws/whats-new/2026/11/workspaces-ai-agents-linux-windows-11',publishedAt:'2026-11-03T18:00:00Z',evidence:'Agents can now run on managed cloud desktops. '.repeat(10),basis:'OFFICIAL_PAGE'});
+  assert.equal(event?.eventType,'launch');assert.match(event?.topic??'',/Amazon WorkSpaces/);
+});
