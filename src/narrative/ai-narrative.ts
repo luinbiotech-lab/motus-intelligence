@@ -42,7 +42,7 @@ const CAUSE=/때문|덕분|영향으로|힘입어|배경으로|으로 인해|로
 const ATTRIBUTION=/(분석|진단|평가|설명|전망|해석|판단)했다|봤다|짚었다|밝혔다|꼽았다|제시했다|에 따르면|라고 |로 보았다|는 입장/;
 export const NARRATIVE_BANNED=['매수 추천','매수 기회','저가 매수 기회','사야','담아라','담아야','비중 확대하라','지금이 기회','수익 보장','확실히 오를','무조건','급등 예상','추천 종목','주목할 종목','오를 것','떨어질 것','귀추가 주목','주목해야 할','결론적으로','이처럼','투자자라면'];
 /** Characters that render and read back unchanged (no quotes that Blogger re-encodes, no markup, no links). */
-const ALLOWED=/^[가-힣ㄱ-ㅎA-Za-z0-9\s.,%·()“”‘’「」\-+~/:;?!…→↑↓&$]*$/;
+const ALLOWED=/^[가-힣ㄱ-ㅎA-Za-z0-9\s.,%·()“”‘’「」\-+~/:;?!…→↑↓&$一-鿿]*$/;
 const numbersIn=(text:string)=>[...text.matchAll(/\d[\d,]*(?:\.\d+)?/g)].map(match=>match[0].replace(/,/g,'')).map(value=>value.replace(/\.0+$/,''));
 const latinIn=(text:string)=>[...text.matchAll(/[A-Za-z][A-Za-z0-9&.\-]*[A-Za-z0-9]|[A-Za-z]/g)].map(match=>match[0].toLowerCase());
 const brokersIn=(text:string)=>[...text.matchAll(/([가-힣A-Za-z]{1,12}(?:투자증권|증권))/g)].map(match=>match[1]!);
@@ -65,7 +65,7 @@ export function validateNarrative(bundle:AIFactBundle,value:unknown):NarrativeVa
   const check=(where:string,p:NarrativeParagraph,min:number,max:number)=>{
     const text=p.text.trim();
     if(text.length<min||text.length>max)errors.push(`LENGTH:${where}:${text.length}`);
-    if(!ALLOWED.test(text))errors.push(`CHARSET:${where}:${[...new Set(text.replace(/[가-힣ㄱ-ㅎA-Za-z0-9\s.,%·()“”‘’「」\-+~/:;?!…→↑↓&$]/g,''))].join('')}`);
+    if(!ALLOWED.test(text))errors.push(`CHARSET:${where}:${[...new Set(text.replace(/[가-힣ㄱ-ㅎA-Za-z0-9\s.,%·()“”‘’「」\-+~/:;?!…→↑↓&$一-鿿]/g,''))].join('')}`);
     if(/https?:|www\.|<|>|\*\*|#|\[|\]/.test(text))errors.push(`FORMAT:${where}`);
     if(/eventId|claimId|reportId|fixture|placeholder|sample|MOTUS는|MOTUS가 보기|당사/.test(text))errors.push(`INTERNAL:${where}`);
     for(const phrase of NARRATIVE_BANNED)if(text.includes(phrase))errors.push(`BANNED:${where}:${phrase}`);

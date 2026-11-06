@@ -47,6 +47,8 @@ test('validation rejects advice, unattributed causes, markup and characters Blog
   assert.ok(errorsOf(n=>{n.lead.text+=" 'AI' 반등."}).some(e=>e.startsWith('CHARSET')));
   // Dollar prices are ordinary in broker facts (2026-11-06 shadow run rejected "$91.06" as CHARSET).
   assert.ok(!errorsOf(n=>{n.lead.text+=' 직전 정규장에서 $3.65 수준.'}).some(e=>e.startsWith('CHARSET')));
+  // Hanja abbreviations from broker notes (非메모리, 美·中) are ordinary text (2026-11-06 simulation rejected 非).
+  assert.ok(!errorsOf(n=>{n.lead.text+=' 非메모리 美中 흐름.'}).some(e=>e.startsWith('CHARSET')));
   assert.ok(errorsOf(n=>{n.sections=n.sections.slice(0,2)}).includes('SCHEMA:sections'));
   assert.ok(errorsOf(n=>{n.sections[1]!.paragraphs[0]!.text=n.lead.text}).includes('DUPLICATE'));
 });
