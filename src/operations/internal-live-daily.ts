@@ -18,7 +18,7 @@ import {buildKoreaMarketNarrative,buildUSMarketNarrative,formatLevel,moveText,nu
 import {isCompletedSession,latestCompletedSession,marketSession} from './market-calendar.js';
 import {buildAIEditorialDecision,synthesizeKoreanAIEvent} from './ai-editorial-synthesis.js';
 import {OFFICIAL_AI_SOURCES,datesAgree,isAIHeadline,isAIRelevant,isNewsLike,isOfficialLink,pageBodyText,pagePublishedDateDetail,pageTitle,parseAnthropicIndex,parseFeed,type AIEvidenceBasis,type FeedItem,type OfficialAISource} from './ai-sources.js';
-import {josa,synthesizeEvidenceBoundAIEvent,type AIEventType} from './ai-generic-synthesis.js';
+import {classifyAIEvent,josa,synthesizeEvidenceBoundAIEvent,type AIEventType} from './ai-generic-synthesis.js';
 import {readFile,readdir} from 'node:fs/promises';
 import {join} from 'node:path';
 
@@ -125,7 +125,7 @@ export class RepositoryInternalDailyBuilder implements InternalDailyBuilder {
     const topicId=`ai:${index}`,legacy=synthesizeKoreanAIEvent({topicId,publisher:source.publisher,title,pageEvidence:evidence,link:item.link,publishedAt});
     const event=legacy?{...legacy,basis,eventType:'launch' as const,evidenceBound:false,richness:2}:evidence.length>=(basis==='OFFICIAL_PAGE'?200:100)?synthesizeEvidenceBoundAIEvent({topicId,publisher:source.publisher,sourceId:source.id,title,link:item.link,publishedAt,evidence,basis,...(basis==='OFFICIAL_PAGE'||basis==='OFFICIAL_PAGE_SUMMARY'?{}:{fallbackReason})}):null;
     if(event)events.push(event);
-    candidateLog.push({page:pageId,publisher:source.publisher,url:item.link,publishedAt,basis,result:event?`EVENT:${event.eventType}`:'SYNTHESIS_NULL'});
+    candidateLog.push({page:pageId,publisher:source.publisher,url:item.link,publishedAt,basis,result:event?`EVENT:${event.eventType}`:'SYNTHESIS_NULL',title,evidenceChars:evidence.length,classified:classifyAIEvent(title,evidence,item.link)?.type??null});
    }
    console.error('AI_CANDIDATES '+JSON.stringify(candidateLog));
    const synthesized=selectAIEvents(events);if(!synthesized.length)throw new Error('AI_VERIFIED_EVENTS_INSUFFICIENT');
