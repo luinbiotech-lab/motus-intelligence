@@ -1,0 +1,20 @@
+name: DIAG hero image readback (temporary, draft only)
+on:
+  push:
+    branches: [diag/hero-readback]
+permissions: {contents: read}
+jobs:
+  readback:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 22}
+      - run: npm ci && npm run build
+      - name: Insert a draft with the hero figure, read it back, delete it
+        env:
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+        run: node diag/hero-readback.mjs
