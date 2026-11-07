@@ -62,9 +62,10 @@ export async function collectUSDeep(input:{sessionDate:string;operationDate:stri
     if(composition.sections.some(section=>section.key==='us-sectors-stocks'))for(const url of attention?.sectorUrls??[])sources.push({label:'Yahoo Finance SPDR 업종 ETF 일별 종가',url,publisher:'Yahoo Finance'});
     recordListed(input.audit,sources,'US_MARKET',input.at);
     const indexPhrase=usIndexPhrase(input.indexChanges.map((value,index)=>({name:input.indexNames?.[index]??'',value})));
-    // Owner 2026-11-05 (traffic analysis #97): '마감' is the word the top posts and searchers use. No calendar date: the
-    // editorial gate rejects dates in titles (루인 rule 10-21); whether to add one waits for 루인's review (owner decision).
-    return {composition,title:composition.titleFocus?`뉴욕증시 마감, ${indexPhrase}…${composition.titleFocus}`:null,sources};
+    // Owner 2026-11-05 (traffic analysis #97): '마감' is the word the top posts and searchers use.
+    // Owner 2026-11-07 (traffic analysis #97): the session date leads the title ('11월 6일 뉴욕증시 마감, …'), as 7 of
+    // the top 10 posts do. This replaces 루인's 10-21 no-date rule for market-close titles only (owner decision).
+    return {composition,title:composition.titleFocus?`${sessionDatePrefix(input.sessionDate)}뉴욕증시 마감, ${indexPhrase}…${composition.titleFocus}`:null,sources};
   }catch{return empty}
 }
 
@@ -84,9 +85,9 @@ export async function collectKoreaDeep(input:{sessionDate:string;operationDate:s
     if(composition.sections.some(section=>section.key==='korea-stocks')){sources.push({label:'네이버페이 증권 검색 상위 종목',url:NAVER_SEARCH_TOP,publisher:'네이버페이 증권'});for(const stock of search?.stocks??[])sources.push({label:`네이버페이 증권 ${stock.name} 일별 시세`,url:stock.url,publisher:'네이버페이 증권'})}
     recordListed(input.audit,sources,'KOREA_MARKET',input.at);
     // Owner 2026-11-05 (traffic analysis #97): '코스피 마감, 3.59% 급락 5,648.79…검색 1위 삼성전자 3.1% 하락' — '마감' is what
-    // searchers and the top posts use; the close is the exact value (no rounding). No calendar date (see the US title).
+    // searchers and the top posts use; the close is the exact value (no rounding). The session date leads (see the US title).
     const head=koreaTitleHead(input.kospiChangePct,input.kospiClose,composition.titleFocus);
-    return {composition,title:head&&composition.titleFocus?`${head}…${composition.titleFocus}`:null,sources};
+    return {composition,title:head&&composition.titleFocus?`${sessionDatePrefix(input.sessionDate)}${head}…${composition.titleFocus}`:null,sources};
   }catch{return empty}
 }
 
@@ -125,4 +126,9 @@ export function usIndexPhrase(changes:Array<{name:string;value:number}>):string 
   const base=ups===changes.length?'3대 지수 상승':'3대 지수 하락',top=[...changes].sort((a,b)=>Math.abs(b.value)-Math.abs(a.value))[0]!,size=Math.abs(top.value);
   if(!top.name||size<1)return base;
   return `${base}·${top.name} ${size.toFixed(size>=10?0:1)}% ${moveWord(top.value)}`;
+}
+
+/** '11월 6일 ' for the session date (the only calendar date a title may carry, and only before '코스피/뉴욕증시 마감'). */
+export function sessionDatePrefix(iso:string):string {
+  return /^\d{4}-\d{2}-\d{2}$/.test(iso)?`${Number(iso.slice(5,7))}월 ${Number(iso.slice(8,10))}일 `:'';
 }
