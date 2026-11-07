@@ -16,7 +16,7 @@ export const HERO_WIDTH=1200,HERO_HEIGHT=630;
 export const HERO_BASE_URL='https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/';
 export type HeroCategory='us'|'korea'|'ai';
 /** issueDate is shown on the card; storeDate is the operation date whose ops-data folder holds the file. */
-export interface HeroInput {category:HeroCategory;issueDate:string;storeDate:string;title:string;moves:Array<{label:string;value:number}>}
+export interface HeroInput {category:HeroCategory;issueDate:string;storeDate:string;title:string;moves:Array<{label:string;value:number}>;movesTitle?:string}
 export const HERO_LABEL:Record<HeroCategory,string>={us:'미국증시',korea:'국내증시',ai:'AI 인텔리전스'};
 export interface HeroImage {url:string;alt:string;width:number;height:number}
 
@@ -43,10 +43,11 @@ body:before{content:"";position:absolute;left:0;top:0;bottom:0;width:14px;backgr
 .label{display:inline-block;padding:6px 16px;border:2px solid ${accent};color:${accent};font-size:24px;font-weight:800;margin-bottom:22px}
 h1{font-size:${titleSize}px;line-height:1.28;font-weight:900;letter-spacing:-.02em;word-break:keep-all;overflow-wrap:anywhere;max-height:${titleSize*1.28*3}px;overflow:hidden}
 .tiles{display:flex;gap:18px}.tile{flex:1;background:rgba(255,255,255,.07);border-top:3px solid ${accent};padding:16px 20px}
+.mt{font-size:20px;color:#8fa6bf;font-weight:700;margin-bottom:10px}
 .tl{font-size:22px;color:#c7d8ea;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.tv{font-size:40px;font-weight:900;margin-top:4px}
 </style></head><body><div class="top"><div class="brand">MOTUS <span>·</span> What Moves the World</div><div>${esc(dateKo(input.issueDate))}</div></div>
 <div><div class="label">${esc(HERO_LABEL[input.category])}</div><h1>${esc(input.title)}</h1></div>
-<div class="tiles">${tiles}</div></body></html>`;
+${input.moves.length&&input.movesTitle?`<div><div class="mt">${esc(input.movesTitle)}</div><div class="tiles">${tiles}</div></div>`:`<div class="tiles">${tiles}</div>`}</body></html>`;
 }
 
 export function heroFileName(input:HeroInput):string {
