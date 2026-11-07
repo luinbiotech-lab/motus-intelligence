@@ -20,4 +20,7 @@ jobs:
           BOK_ECOS_API_KEY: ${{ secrets.BOK_ECOS_API_KEY }}
         run: |
           npm run motus:live -- --date 2026-11-06 --category korea --source internal --at 2026-11-06T08:10:00Z || true
-          node -e 'const u=require("./data/operations/2026-11-06/korea/live-unit.json");const v=u.viewModel||{};console.log(JSON.stringify({state:u.status||u.readiness,reason:u.reasonCode,readinessReasons:u.readinessReasons,observed:u.observedDate,title:u.title,edition:v.edition,summary:v.marketSummary,checkpoints:(v.checkpoints||[]).map(c=>c.headline+": "+c.watchFor)},null,1))'
+          node -e 'const u=require("./data/operations/2026-11-06/korea/live-unit.json");const v=u.viewModel||{};console.log(JSON.stringify({state:u.status||u.readiness,reason:u.reasonCode,readinessReasons:u.readinessReasons,observed:u.observedDate,title:u.title,edition:v.edition,summary:v.marketSummary,checkpoints:(v.checkpoints||[]).map(c=>c.headline+": "+c.watchFor),hero:v.heroImage||null},null,1))'
+          cp data/operations/2026-11-06/korea/live-unit.json /tmp/unit.json && node -e 'const fs=require("fs");const u=require("/tmp/unit.json");fs.writeFileSync("preview.html",u.render.html)'
+      - uses: actions/upload-artifact@v4
+        with: {name: korea-evening-preview, path: preview.html}
