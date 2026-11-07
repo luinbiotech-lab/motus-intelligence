@@ -1,0 +1,11 @@
+{
+  "category": "AI_INTELLIGENCE",
+  "operationDate": "2026-11-07",
+  "observedDate": "2026-11-07",
+  "state": "AUTO_POLICY_CANDIDATE",
+  "searchDemandMayOverride": false,
+  "articleFingerprint": "sha256:1a3bc217c92db6333136884c212a6b108e2ad45a17a1964d33289312413cd818",
+  "commerce": {
+    "enabled": false
+  }
+}
