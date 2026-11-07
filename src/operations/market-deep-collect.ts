@@ -69,7 +69,7 @@ export async function collectUSDeep(input:{sessionDate:string;operationDate:stri
   }catch{return empty}
 }
 
-export async function collectKoreaDeep(input:{sessionDate:string;operationDate:string;at:string;fetcher:typeof fetch;audit:AuditSink[];pdfText?:PdfTextReader;kospiClose:number;kospiChangePct:number|null}):Promise<DeepCollection>{
+export async function collectKoreaDeep(input:{sessionDate:string;operationDate:string;at:string;evening?:boolean;fetcher:typeof fetch;audit:AuditSink[];pdfText?:PdfTextReader;kospiClose:number;kospiChangePct:number|null}):Promise<DeepCollection>{
   const empty:DeepCollection={composition:{sections:[],leadAddition:[],titleFocus:null,sources:[]},title:null,sources:[]};
   try{
     // The search ranking comes first so the research intake can fetch ratings for exactly those stocks.
@@ -80,7 +80,7 @@ export async function collectKoreaDeep(input:{sessionDate:string;operationDate:s
     const krBriefed=Boolean(bundle?.briefs.some(brief=>brief.statements.some(item=>item.region==='KOREA')));
     const wire=krBriefed||!wireFallbackAllowed(input.at)?null:await collectWireCloses({region:'KOREA',sessionDate:input.sessionDate,change:input.kospiChangePct,fetcher:input.fetcher}).catch(()=>null);
     if(wire)record(input.audit,wire.audit,'KOREA_MARKET',input.at,input.sessionDate);
-    const composition=composeKoreaDeepSections({bundle,searchTop:search?.stocks??[],wire:wire?.reports??[],checkpoint:'오늘 장에서는 외국인·기관 수급의 연속성, 원·달러 환율, 전일 강세 업종이 이어지는지가 확인 대상이다.'});
+    const composition=composeKoreaDeepSections({bundle,searchTop:search?.stocks??[],wire:wire?.reports??[],checkpoint:input.evening?'다음 거래일에는 외국인·기관 수급의 연속성, 원·달러 환율, 오늘 강세 업종이 이어지는지가 확인 대상이다.':'오늘 장에서는 외국인·기관 수급의 연속성, 원·달러 환율, 전일 강세 업종이 이어지는지가 확인 대상이다.'});
     const sources=[...composition.sources];
     if(composition.sections.some(section=>section.key==='korea-stocks')){sources.push({label:'네이버페이 증권 검색 상위 종목',url:NAVER_SEARCH_TOP,publisher:'네이버페이 증권'});for(const stock of search?.stocks??[])sources.push({label:`네이버페이 증권 ${stock.name} 일별 시세`,url:stock.url,publisher:'네이버페이 증권'})}
     recordListed(input.audit,sources,'KOREA_MARKET',input.at);
