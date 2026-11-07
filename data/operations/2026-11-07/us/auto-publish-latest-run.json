@@ -1,10 +1,16 @@
 {
-  "state": "SKIP",
-  "reasonCode": "ALREADY_PUBLISHED_IN_PERSISTED_LEDGER",
-  "identity": "2026-11-07|US_MARKET",
-  "postId": "5630041542994590221",
-  "publicPostUrl": "https://motusnova.blogspot.com/2026/11/3-amd-11.html",
-  "reason": "persistent publish ledger already records this publication identity",
-  "insertCallCount": 0,
-  "publishCallCount": 0
+  "state": "HOLD",
+  "gate": {
+    "state": "HOLD",
+    "reasons": [
+      "duplicate state uncertain"
+    ],
+    "approval": null,
+    "checkedAt": "2026-11-07T09:01:44.700Z"
+  },
+  "publishCallCount": 0,
+  "execution": "SIMULATED",
+  "commerce": {
+    "enabled": false
+  }
 }
