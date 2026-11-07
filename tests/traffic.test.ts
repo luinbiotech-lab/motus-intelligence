@@ -42,3 +42,12 @@ test('articles link recent MOTUS posts (internal links for indexing), only blog 
   assert.equal(relatedPosts(risky),'');
   assert.match(relatedPosts([...risky,{title:'S&P 500 상승',url:'https://motusnova.blogspot.com/2026/11/ok.html',label:'미국증시',published:'2026-11-05'}]),/ok\.html/);
 });
+
+test('US title names the biggest index move when all three agree (owner 2026-11-07, #97 P2)', async () => {
+  const {usIndexPhrase}=await import('../src/operations/market-deep-collect.js');
+  assert.equal(usIndexPhrase([{name:'S&P 500',value:-3.1},{name:'나스닥',value:-5.52},{name:'다우',value:-1.9}]),'3대 지수 하락·나스닥 5.5% 급락');
+  assert.equal(usIndexPhrase([{name:'S&P 500',value:1.52},{name:'나스닥',value:2.41},{name:'다우',value:0.84}]),'3대 지수 상승·나스닥 2.4% 상승');
+  assert.equal(usIndexPhrase([{name:'S&P 500',value:0.3},{name:'나스닥',value:0.6},{name:'다우',value:0.1}]),'3대 지수 상승');
+  assert.equal(usIndexPhrase([{name:'S&P 500',value:0.3},{name:'나스닥',value:-0.6},{name:'다우',value:0.1}]),'3대 지수 혼조');
+  assert.equal(usIndexPhrase([{name:'',value:-2},{name:'',value:-3},{name:'',value:-1}]),'3대 지수 하락');
+});

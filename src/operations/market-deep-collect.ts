@@ -1,7 +1,7 @@
 /** Collection wrapper that turns broker research and attention signals into audited deep sections. */
 import type {DailyCategory} from './daily-orchestrator.js';
 import {collectBrokerResearch,type BrokerAudit,type PdfTextReader} from './broker-briefs.js';
-import {collectAIBellwethers,collectKoreaSearchTop,collectUSAttention,US_MEGACAPS,US_KOREAN_NAMES,NAVER_SEARCH_TOP,YAHOO_TRENDING,type AttentionAudit} from './market-attention.js';
+import {collectAIBellwethers,collectKoreaSearchTop,collectUSAttention,moveWord,US_MEGACAPS,US_KOREAN_NAMES,NAVER_SEARCH_TOP,YAHOO_TRENDING,type AttentionAudit} from './market-attention.js';
 import {collectWireCloses} from './market-wire.js';
 import {composeAIDeepSections,composeKoreaDeepSections,composeUSDeepSections,indexMove,type DeepComposition} from './market-deep-sections.js';
 
@@ -28,7 +28,7 @@ function record(audit:AuditSink[],items:Array<BrokerAudit|AttentionAudit>,catego
 export function wireFallbackAllowed(at:string):boolean {const kst=new Date(Date.parse(at)+9*3600000);return kst.getUTCHours()>=10||kst.getUTCDay()===6||kst.getUTCDay()===0}
 
 /** Never throws: missing research or rankings only drop the corresponding sections. */
-export async function collectUSDeep(input:{sessionDate:string;operationDate:string;at:string;fetcher:typeof fetch;audit:AuditSink[];pdfText?:PdfTextReader;indexChanges:number[]}):Promise<DeepCollection>{
+export async function collectUSDeep(input:{sessionDate:string;operationDate:string;at:string;fetcher:typeof fetch;audit:AuditSink[];pdfText?:PdfTextReader;indexChanges:number[];indexNames?:string[]}):Promise<DeepCollection>{
   const empty:DeepCollection={composition:{sections:[],leadAddition:[],titleFocus:null,sources:[]},title:null,sources:[]};
   try{
     const [bundle,attention,mega]=await Promise.all([collectBrokerResearch({sessionDate:input.sessionDate,operationDate:input.operationDate,fetcher:input.fetcher,...(input.pdfText?{pdfText:input.pdfText}:{})}).catch(()=>null),collectUSAttention(input.sessionDate,input.fetcher).catch(()=>null),collectAIBellwethers([input.sessionDate],input.fetcher,US_MEGACAPS).catch(()=>null)]);
@@ -61,8 +61,7 @@ export async function collectUSDeep(input:{sessionDate:string;operationDate:stri
     if(composition.sections.some(section=>section.key==='us-sectors-stocks')){sources.push({label:'Yahoo Finance 검색 상위 종목',url:YAHOO_TRENDING,publisher:'Yahoo Finance'});for(const url of attention?.stockUrls??[])sources.push({label:'Yahoo Finance 종목 일별 종가',url,publisher:'Yahoo Finance'});if(bigMovers.length)for(const url of mega?.urls??[])sources.push({label:'Yahoo Finance 미국 시가총액 상위 종목 일별 종가',url,publisher:'Yahoo Finance'});if(newsMovers.length)for(const url of named?.urls??[])sources.push({label:'Yahoo Finance 리포트·기사 언급 종목 일별 종가',url,publisher:'Yahoo Finance'})}
     if(composition.sections.some(section=>section.key==='us-sectors-stocks'))for(const url of attention?.sectorUrls??[])sources.push({label:'Yahoo Finance SPDR 업종 ETF 일별 종가',url,publisher:'Yahoo Finance'});
     recordListed(input.audit,sources,'US_MARKET',input.at);
-    const ups=input.indexChanges.filter(value=>value>0.005).length,downs=input.indexChanges.filter(value=>value<-0.005).length;
-    const indexPhrase=ups===input.indexChanges.length?'3대 지수 상승':downs===input.indexChanges.length?'3대 지수 하락':'3대 지수 혼조';
+    const indexPhrase=usIndexPhrase(input.indexChanges.map((value,index)=>({name:input.indexNames?.[index]??'',value})));
     // Owner 2026-11-05 (traffic analysis #97): '마감' is the word the top posts and searchers use. No calendar date: the
     // editorial gate rejects dates in titles (루인 rule 10-21); whether to add one waits for 루인's review (owner decision).
     return {composition,title:composition.titleFocus?`뉴욕증시 마감, ${indexPhrase}…${composition.titleFocus}`:null,sources};
@@ -113,4 +112,17 @@ export function koreaTitleHead(change:number|null,close:number,focus?:string|nul
   const verb:Record<string,string>={상승:'올라',하락:'내려',급등:'급등해',급락:'급락해'};
   const word=move!=='보합'&&focus&&focus.includes(move)?verb[move]??move:move;
   return `코스피 마감, ${move==='보합'?'보합':`${Math.abs(change).toFixed(2)}% ${word}`} ${level}`;
+}
+
+/**
+ * The index part of the US title. Owner 2026-11-07 (traffic analysis #97, P2): the top posts name the biggest index
+ * move ("나스닥 5.52% 폭락"); ours said only "3대 지수 하락". When all three indices move the same way and the largest
+ * moved 1% or more, that index and its move are named; otherwise the plain phrase stays.
+ */
+export function usIndexPhrase(changes:Array<{name:string;value:number}>):string {
+  const ups=changes.filter(item=>item.value>0.005).length,downs=changes.filter(item=>item.value<-0.005).length;
+  if(!changes.length||(ups!==changes.length&&downs!==changes.length))return '3대 지수 혼조';
+  const base=ups===changes.length?'3대 지수 상승':'3대 지수 하락',top=[...changes].sort((a,b)=>Math.abs(b.value)-Math.abs(a.value))[0]!,size=Math.abs(top.value);
+  if(!top.name||size<1)return base;
+  return `${base}·${top.name} ${size.toFixed(size>=10?0:1)}% ${moveWord(top.value)}`;
 }
