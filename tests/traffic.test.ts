@@ -51,3 +51,17 @@ test('US title names the biggest index move when all three agree (owner 2026-11-
   assert.equal(usIndexPhrase([{name:'S&P 500',value:0.3},{name:'나스닥',value:-0.6},{name:'다우',value:0.1}]),'3대 지수 혼조');
   assert.equal(usIndexPhrase([{name:'',value:-2},{name:'',value:-3},{name:'',value:-1}]),'3대 지수 하락');
 });
+
+test('market-close titles lead with the session date; the gate allows only that date (owner 2026-11-07, #97)', async () => {
+  const {sessionDatePrefix}=await import('../src/operations/market-deep-collect.js');
+  const {evaluateEditorialQuality,titleContainsCalendarDate,SESSION_DATE_PREFIX}=await import('../src/production/editorial-quality.js');
+  assert.equal(sessionDatePrefix('2026-11-06'),'11월 6일 ');assert.equal(sessionDatePrefix('bad'),'');
+  for(const title of ['11월 6일 코스피 마감, 5.28% 급락해 5,383.80…검색 1위 삼성전자 7.6% 급락','11월 5일 뉴욕증시 마감, 3대 지수 하락·나스닥 5.5% 급락…AMD 17% 급락']){
+    assert.match(title,SESSION_DATE_PREFIX);assert.equal(titleContainsCalendarDate(title.replace(SESSION_DATE_PREFIX,'')),false,title);
+    const result=evaluateEditorialQuality(title,'<article><p>'+'코스피와 뉴욕증시 흐름을 정리했다. '.repeat(40)+'</p></article>');
+    assert.ok(!result.reasons.includes('calendar date exposed in title'),title);
+  }
+  for(const title of ['AI 투자 11월 6일 핵심','11월 6일 AI 뉴스, 엔비디아 상승','코스피 마감 11월 6일, 급락']){
+    assert.ok(evaluateEditorialQuality(title,'<article><p>'+'코스피와 뉴욕증시 흐름을 정리했다. '.repeat(40)+'</p></article>').reasons.includes('calendar date exposed in title'),title);
+  }
+});

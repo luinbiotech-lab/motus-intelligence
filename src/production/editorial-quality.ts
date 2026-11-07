@@ -6,7 +6,7 @@ export function evaluateEditorialQuality(title:string,html:string):EditorialQual
   const blocks=[...withoutCode.matchAll(/<(?:p|li)\b[^>]*>([\s\S]*?)<\/(?:p|li)>/gi)].map(match=>match[1]!.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim()).filter(value=>value.length>=40);
   const korean=(title.match(/[가-힣]/g)??[]).length,latin=(title.match(/[A-Za-z]/g)??[]).length,bodyKorean=(visible.match(/[가-힣]/g)??[]).length,bodyLatin=(visible.match(/[A-Za-z]/g)??[]).length;
   if(title.length<12||!korean||latin>korean*1.5)reasons.push('title is not natural Korean-first editorial copy');
-  if(titleContainsCalendarDate(title))reasons.push('calendar date exposed in title');
+  if(titleContainsCalendarDate(title.replace(SESSION_DATE_PREFIX,'')))reasons.push('calendar date exposed in title');
   reasons.push(...titlePolicyViolations(title));
   if(/^\s*(?:MOTUS\b|AI 인텔리전스\s*:|미국증시 마감\s*:)/i.test(title))reasons.push('mechanical title prefix exposed');
   if(/<(?:script|style)\b/i.test(decoded))reasons.push('script or style payload present');
@@ -21,6 +21,8 @@ export function evaluateEditorialQuality(title:string,html:string):EditorialQual
   return {pass:reasons.length===0,reasons:[...new Set(reasons)],notes,visibleText:visible,proseBlockCount:blocks.length,koreanTextRatio,englishCopiedTextRatio};
 }
 
+/** Owner 2026-11-07 (#97): a market-close title may lead with its session date, '11월 6일 코스피 마감, …'. Nothing else. */
+export const SESSION_DATE_PREFIX=/^(?:0?[1-9]|1[0-2])월 (?:0?[1-9]|[12]\d|3[01])일 (?=(?:코스피|뉴욕증시) 마감,)/u;
 export function titleContainsCalendarDate(title:string):boolean {
   return /(?:\b(?:19|20)\d{2}[-./](?:0?[1-9]|1[0-2])[-./](?:0?[1-9]|[12]\d|3[01])\b|(?:(?:19|20)\d{2}년\s*)?(?:0?[1-9]|1[0-2])월\s*(?:0?[1-9]|[12]\d|3[01])일)/u.test(title);
 }
