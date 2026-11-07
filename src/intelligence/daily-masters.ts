@@ -61,7 +61,7 @@ export interface KoreaMarketDailyViewModel extends DailyMasterBase {
   category:'KOREA_MARKET';marketSummary:string;indexMetrics:KoreaMarketNewsletterMetric[];
   /** Expert (broker-quoted) and search-ranked sections composed from attributed evidence. */
   deepSections?:ArticleDeepSection[];
-  operationDate?:string;sessionDate?:string;edition?:'PREVIOUS_SESSION_MORNING'|'MANUAL_RECOVERY_CLOSE';fxBasis?:'BOK_REFERENCE_RATE'|'CURRENT_AT_COLLECTION';
+  operationDate?:string;sessionDate?:string;edition?:'PREVIOUS_SESSION_MORNING'|'SAME_DAY_CLOSE'|'MANUAL_RECOVERY_CLOSE';fxBasis?:'BOK_REFERENCE_RATE'|'CURRENT_AT_COLLECTION';
   fxAndSupporting:KoreaMarketNewsletterMetric[];investorFlows:KoreaMarketNewsletterMetric[];
   sectors:KoreaMarketNewsletterMetric[];movers:KoreaMarketNewsletterMetric[];research:KoreaResearchNewsletterEntry[];
   marketCommentary:string[];checkpoints:NewsletterWatchItem[];marketHistory?:MajorIndexHistory;
