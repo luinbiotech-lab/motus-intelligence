@@ -20,6 +20,8 @@ interface DailyMasterBase {
   sources:NewsletterSourceLink[];glossary?:DailyGlossaryEntry[];report?:PublicReportEntry;
   /** Owner 2026-11-05 (Google indexing): recent MOTUS posts linked from each article (internal links). Not sources. */
   relatedPosts?:Array<{title:string;url:string;label:string;published:string}>;
+  /** Owner 2026-11-07: representative image (1200x630 card rendered from the article's own facts), first in the body. */
+  heroImage?:{url:string;alt:string;width:number;height:number};
 }
 /** A broker report shown as a card: the rating and target exactly as the broker published them. */
 export interface ArticleReportCard {company?:string|null;broker:string;analysts?:string;date:string;title:string;rating?:string|null;target?:string|null}

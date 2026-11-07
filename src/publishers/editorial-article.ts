@@ -77,7 +77,7 @@ export function deepSection(input:import('../intelligence/daily-masters.js').Art
 }
 
 export function renderAIEditorialArticle(view:AIIntelligenceDailyViewModel):DailyMasterRenderResult {
-  const deep=view.deepSections??[],seen=new Set<string>([normalized(view.todayCore.summary)]),parts=[masthead(view.title,view.subtitle,view.displayLabel,view.issueDate),lead(view.todayCore.summary)];
+  const deep=view.deepSections??[],seen=new Set<string>([normalized(view.todayCore.summary)]),parts=[masthead(view.title,view.subtitle,view.displayLabel,view.issueDate)+heroFigure(view.heroImage),lead(view.todayCore.summary)];
   const stocks=deep.find(item=>item.key==='ai-stocks'),research=deep.find(item=>item.key==='ai-broker-research'),firstCard=research?.paragraphs.find(p=>p.report?.target)?.report;
   parts.push(keyPoints([stocks?.paragraphs[0]?.text??'',view.issues.length?`공식 발표: ${view.issues.slice(0,3).map(issue=>issue.headline).join(' / ')}.`:'',firstCard?`증권가: ${firstCard.company??firstCard.title} 목표주가 ${firstCard.target}원(${firstCard.broker}${firstCard.rating?`, ${firstCard.rating}`:''}) 등 AI 수요 리포트 ${research!.paragraphs.length}건.`:'']));
   for(const item of deep.filter(item=>item.placement==='early'))parts.push(deepSection(item));
@@ -99,7 +99,7 @@ export function renderAIEditorialArticle(view:AIIntelligenceDailyViewModel):Dail
 
 export function renderUSEditorialArticle(view:USMarketDailyViewModel):DailyMasterRenderResult {
   const terms=new Set<string>();const describe=(value:string)=>explainTerms(value.replace('U.S. 10Y Treasury Yield (미국 10년물 국채금리)','미국 10년물 국채금리'),terms);
-  const parts=[masthead(view.title,view.subtitle,view.displayLabel,view.issueDate),lead(describe([view.marketSummary,...view.marketCommentary].join(' ')))];
+  const parts=[masthead(view.title,view.subtitle,view.displayLabel,view.issueDate)+heroFigure(view.heroImage),lead(describe([view.marketSummary,...view.marketCommentary].join(' ')))];
   const deep=view.deepSections??[],place=(where:'early'|'late'|'risks')=>deep.filter(item=>(item.placement??'early')===where).map(deepSection).filter(Boolean);
   const names:Record<string,string>={sp500:'S&P 500',nasdaq:'나스닥','dow-jones':'다우존스','russell-2000':'러셀 2000'};
   const idx=view.marketHistory.series.filter(item=>names[item.key]&&Number.isFinite(item.latestChangePct)).map(item=>`${names[item.key]} ${item.latestChangePct>0?'+':item.latestChangePct<0?'-':''}${Math.abs(item.latestChangePct).toFixed(2)}%`);
@@ -122,7 +122,7 @@ export function renderUSEditorialArticle(view:USMarketDailyViewModel):DailyMaste
 
 const metricValue=(value:string)=>{const number=Number(value.replace(/[^0-9.+\-−]/g,'').replace('−','-'));return Number.isFinite(number)?number:Number.NaN};
 export function renderKoreaEditorialArticle(view:KoreaMarketDailyViewModel):DailyMasterRenderResult {
-  const parts=[masthead(view.title,view.subtitle,view.displayLabel,view.issueDate),lead(view.marketSummary)];
+  const parts=[masthead(view.title,view.subtitle,view.displayLabel,view.issueDate)+heroFigure(view.heroImage),lead(view.marketSummary)];
   const deep=view.deepSections??[],place=(where:'early'|'late'|'risks')=>deep.filter(item=>(item.placement??'early')===where).map(deepSection).filter(Boolean);
   const top=deep.find(item=>item.key==='korea-stocks')?.bars?.[0];
   parts.push(keyPoints([view.indexMetrics.length?`지수: ${view.indexMetrics.map(item=>`${item.label} ${item.displayValue}`).join(', ')}.`:'',view.investorFlows.length?`수급: ${view.investorFlows.map(item=>`${item.label} ${item.displayValue}`).join(', ')}.`:'',top?`검색 1위 ${top.label} ${top.value>0?'+':top.value<0?'-':''}${Math.abs(top.value).toFixed(2)}%.`:'']));
@@ -165,6 +165,8 @@ export function renderMarketResearchEntries(entries:ReadonlyArray<{publisher:str
 }
 
 function masthead(title:string,subtitle:string,label:string,date:string){return `<header style="width:100%;max-width:100%;box-sizing:border-box;background:#03162e;color:#fff;padding:26px 22px;margin:0 0 22px"><p style="margin:0 0 9px;color:#c7d8ea;font-size:14px;font-weight:800">${esc(MOTUS_DISPLAY_NAME)}</p><div role="heading" aria-level="2" style="font-size:clamp(25px,7vw,34px);line-height:1.22;font-weight:850;word-break:keep-all">${esc(title)}</div><p style="margin:10px 0 0;color:#e6edf5">${esc(subtitle)}</p><p style="margin:11px 0 0;color:#b7c8da;font-size:13px">${esc(label)} · ${esc(date)}</p></header>`;}
+/** The article's representative image (first image in the body, so Blogger uses it as the post thumbnail). */
+function heroFigure(image?:{url:string;alt:string;width:number;height:number}){if(!image||!/^https:\/\/raw\.githubusercontent\.com\/luinbiotech-lab\/motus-intelligence\/ops-data\/data\/operations\/\d{4}-\d{2}-\d{2}\/(us|korea|ai)\/hero-[0-9a-f]{12}\.png$/.test(image.url))return '';return `<figure data-section="hero-image" style="margin:0 0 22px"><img src="${image.url}" alt="${esc(image.alt)}" width="${image.width}" height="${image.height}" style="display:block;width:100%;height:auto;border:0"></figure>`}
 function lead(value:string){return `<p data-section="editorial-lead" style="margin:0 0 24px;font-size:18px;line-height:1.82;color:#172033">${esc(value)}</p>`;}
 function section(title:string,content:string){return `<section style="${SECTION}"><h2 style="${HEADING}">${esc(title)}</h2>${content}</section>`;}
 function paragraphs(values:string[]){return values.map(value=>value.trim()).filter(Boolean).map(value=>`<p style="margin:0 0 13px">${esc(value)}</p>`).join('');}
@@ -218,7 +220,7 @@ export function renderWeeklyEditorialArticle(view:import('../operations/weekly-r
  */
 export function renderAINarrativeArticle(view:AIIntelligenceDailyViewModel,narrative:import('../narrative/ai-narrative.js').AINarrative,disclaimer:string):DailyMasterRenderResult {
   const deep=view.deepSections??[],stocks=deep.find(item=>item.key==='ai-stocks'),cards=deep.filter(item=>item.role==='broker').flatMap(item=>item.paragraphs.filter(p=>p.report));
-  const parts=[masthead(view.title,view.subtitle,view.displayLabel,view.issueDate),lead(narrative.lead.text),keyPoints(narrative.keyPoints.map(p=>p.text))];
+  const parts=[masthead(view.title,view.subtitle,view.displayLabel,view.issueDate)+heroFigure(view.heroImage),lead(narrative.lead.text),keyPoints(narrative.keyPoints.map(p=>p.text))];
   narrative.sections.forEach((item,index)=>{parts.push(roleSection(item.heading,prose(item.paragraphs.map(p=>p.text)),undefined,`ai-narrative-${index+1}`));if(index===0&&stocks?.bars?.length)parts.push(roleSection(stocks.title,intro(stocks.intro)+barsSvg(stocks.bars),'data','ai-stocks'))});
   if(cards.length)parts.push(roleSection('증권가 리포트',`<div style="background:${C.goldSoft};border:1px solid ${C.goldLine};padding:12px 12px 2px">${cards.map(brokerCard).join('')}</div>`,'broker','ai-broker-cards'));
   parts.push(relatedPosts(view.relatedPosts));
