@@ -14,10 +14,10 @@
   "leakagePass": true,
   "duplicateCheck": "PENDING_REMOTE",
   "duplicateUncertainty": true,
-  "articleFingerprint": "sha256:b5988840f4742c72b28a4727c58b2cc95c30e27556128a8d9832a9d99ad5796f",
+  "articleFingerprint": "sha256:b99dc3f20e3bc2a19d241f408444800d0b0fcf28ff92ebc0eba6c3d6a0eaba7b",
   "commerceEnabled": false,
-  "verifiedAt": "2026-11-07T01:15:48.588Z",
-  "expiresAt": "2026-11-07T02:45:48.588Z",
+  "verifiedAt": "2026-11-07T03:12:06.219Z",
+  "expiresAt": "2026-11-07T04:42:06.219Z",
   "sourceAuditIds": [
     "calendar:nyse",
     "deep:consensus:list:company",
@@ -34,7 +34,6 @@
     "deep:research:listed:stock.pstatic.net/stock-research/economy/-/20261105_economy_736969000.pdf",
     "deep:research:listed:stock.pstatic.net/stock-research/economy/39/20261106_economy_7751000.pdf",
     "deep:wire:report:news.einfomax.co.kr/news/articleView.html?idxno=4443579",
-    "deep:wire:report:www.yna.co.kr/view/AKR20261107008551072",
     "deep:yahoo:most-active",
     "deep:yahoo:spark:megacaps",
     "deep:yahoo:spark:sectors",
@@ -55,7 +54,7 @@
     "yahoo-us:nasdaq",
     "yahoo-us:sp500"
   ],
-  "sourceAuditFingerprint": "sha256:1cd21422672044e5c45794891343ef96481dddf771965c09e5bc099c878ca93a",
+  "sourceAuditFingerprint": "sha256:bf215e845a81dbfebac2ddf4aaf4cf4be6cf5278625542cdb9ec1a134325f5ba",
   "crossVerificationFingerprint": null,
   "crossVerification": null
 }
