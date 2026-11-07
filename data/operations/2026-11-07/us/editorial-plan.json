@@ -4,7 +4,7 @@
   "observedDate": "2026-11-06",
   "state": "AUTO_POLICY_CANDIDATE",
   "searchDemandMayOverride": false,
-  "articleFingerprint": "sha256:3fa8ba22b3e92a6381d1bdb3ad75dd22216e24879d1ba0bab18371cbddbba556",
+  "articleFingerprint": "sha256:b5988840f4742c72b28a4727c58b2cc95c30e27556128a8d9832a9d99ad5796f",
   "commerce": {
     "enabled": false
   }

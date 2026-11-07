@@ -1,9 +1,9 @@
 {
-  "collectedAt": "2026-11-06T23:42:30.207Z",
-  "signalDate": null,
-  "provider": null,
-  "freshness": "NO_SEARCH_SIGNAL",
-  "fallbackReason": "NO_MATCHING_VERIFIED_TOPIC",
+  "collectedAt": "2026-11-07T01:15:48.588Z",
+  "signalDate": "2026-11-06",
+  "provider": "NAVER_DATALAB",
+  "freshness": "PREVIOUS_DAY_NAVER_SIGNAL",
+  "fallbackReason": null,
   "warnings": [],
   "orderedTopicIds": [
     "us:index:nasdaq",
@@ -11,7 +11,7 @@
     "us:index:dow-jones",
     "us:10y"
   ],
-  "selectedSecondaryTopicId": null,
+  "selectedSecondaryTopicId": "us:index:sp500",
   "factsChanged": false,
   "gateOverride": false
 }

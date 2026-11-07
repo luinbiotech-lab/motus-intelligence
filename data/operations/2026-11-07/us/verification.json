@@ -14,10 +14,10 @@
   "leakagePass": true,
   "duplicateCheck": "PENDING_REMOTE",
   "duplicateUncertainty": true,
-  "articleFingerprint": "sha256:3fa8ba22b3e92a6381d1bdb3ad75dd22216e24879d1ba0bab18371cbddbba556",
+  "articleFingerprint": "sha256:b5988840f4742c72b28a4727c58b2cc95c30e27556128a8d9832a9d99ad5796f",
   "commerceEnabled": false,
-  "verifiedAt": "2026-11-06T23:42:30.207Z",
-  "expiresAt": "2026-11-07T01:12:30.207Z",
+  "verifiedAt": "2026-11-07T01:15:48.588Z",
+  "expiresAt": "2026-11-07T02:45:48.588Z",
   "sourceAuditIds": [
     "calendar:nyse",
     "deep:consensus:list:company",
@@ -51,12 +51,11 @@
     "market-research:article:https://www.bloomberg.com/news/videos/2026-11-06/elanco-shares-jump-after-q3-beat-and-outlook-raise-video",
     "market-research:article:https://www.bloomberg.com/news/videos/2026-11-06/figs-ceo-trina-spears-on-earnings-beat-video",
     "market-research:article:https://www.cnbc.com/2026/11/05/cnbcs-experts-on-whether-the-ai-trade-is-ending-and-what-investors-should-do-next.html",
-    "market-research:article:https://www.goldmansachs.com/insights/articles/are-bonds-becoming-a-better-investment-for-portfolios",
     "treasury:10y:2026",
     "yahoo-us:nasdaq",
     "yahoo-us:sp500"
   ],
-  "sourceAuditFingerprint": "sha256:9f9a3e126d19b2af5fa40f5a25de93646aea5f3230723f3ca7fe4569733d4223",
+  "sourceAuditFingerprint": "sha256:1cd21422672044e5c45794891343ef96481dddf771965c09e5bc099c878ca93a",
   "crossVerificationFingerprint": null,
   "crossVerification": null
 }
