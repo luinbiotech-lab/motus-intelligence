@@ -37,6 +37,12 @@ export async function mergeBundleIntoOpsData(bundleRoot:string,opsDataRoot:strin
   for(const file of await listFiles(bundleRoot)){
     const rel=relative(bundleRoot,file);
     if(rel.split(/[\\/]/).includes('.publish-lock'))continue;
+    // Binary files (hero images, 2026-11-07) are copied byte for byte, never read as text.
+    if(/\.(png|jpe?g|webp)$/i.test(file)){
+      const target=join(opsDataRoot,rel),bytes=await readFile(file),existing=await readFile(target).catch(()=>null);
+      if(existing&&Buffer.compare(existing,bytes)===0){summary.unchanged++;continue}
+      await mkdir(dirname(target),{recursive:true});await writeFile(target,bytes);summary.written++;continue;
+    }
     const target=join(opsDataRoot,rel),incoming=await readFile(file,'utf8'),existing=await readOptional(target);
     let output=incoming;
     if(existing!==null&&file.endsWith('.jsonl')){output=mergeJsonl(existing,incoming);summary.mergedLedgers++}

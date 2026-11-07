@@ -150,7 +150,18 @@ jobs:
       - name: Install PDF text extraction for broker research
         continue-on-error: true
         run: command -v pdftotext >/dev/null || (sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils)
+      # Representative image (owner 2026-11-07): headless Chromium and Korean fonts for the 1200x630 card. If this
+      # step fails the article is published without an image (src/publishers/hero-card.ts never blocks publication).
+      - name: Install the hero image renderer (Chromium) and Korean fonts
+        continue-on-error: true
+        shell: bash
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk >/dev/null
+          npm install --no-save playwright-core@1.56.0 >/dev/null
+          npx playwright-core install --with-deps chromium >/dev/null
       - run: npm run motus:live -- --date "$RUN_DATE" --category "$CATEGORY" --source internal
+        env:
+          MOTUS_HERO_IMAGE: 'on'
       - name: Evaluate gate without live publication
         if: env.MOTUS_LIVE_PUBLISH_ENABLED != 'true'
         run: npm run motus:publish -- --date "$RUN_DATE" --category "$CATEGORY"
