@@ -1,0 +1,23 @@
+name: DIAG mobile redirect after Blogger mobile setting (temporary, read-only)
+on:
+  push:
+    branches: [diag/mobile-redirect-20261108]
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe redirect chains (no writes)
+        run: |
+          UA_PHONE='Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
+          UA_IPHONE='Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Mobile/15E148 Safari/604.1'
+          for u in https://motusnova.blogspot.com/ https://motusnova.blogspot.com/2026/11/3-70.html https://motusnova.blogspot.com/2026/11/062-5683-1-09.html https://motusnova.blogspot.com/2026/11/amd-37-ai.html https://motusnova.blogspot.com/2026/11/359-5648-1-31.html; do
+            for ua in "$UA_PHONE" "$UA_IPHONE"; do
+              for i in 1 2 3; do
+                r=$(curl -sS -o /dev/null -A "$ua" -w '%{http_code} %{redirect_url}' "$u" || echo ERR)
+                echo "PROBE ${ua:0:30} | $u | $r"
+                case "$r" in *sorry*) sleep 3;; *) break;; esac
+              done
+            done
+          done
