@@ -65,3 +65,12 @@ test('market-close titles lead with the session date; the gate allows only that 
     assert.ok(evaluateEditorialQuality(title,'<article><p>'+'코스피와 뉴욕증시 흐름을 정리했다. '.repeat(40)+'</p></article>').reasons.includes('calendar date exposed in title'),title);
   }
 });
+
+test('SmartEditor headings are quotation components and large-font paragraphs (MOT-037)', async () => {
+  const {headingCount,contentFeatures}=await import('../src/operations/traffic.js');
+  const naver='<div class="se-component se-text"><p class="se-text-paragraph"><span class="se-fs-fs24">1. 코스피 급락</span></p><p class="se-text-paragraph"><span class="se-fs-fs15">본문</span></p></div>'
+    +'<div class="se-component se-quotation"><blockquote>2. 반도체</blockquote></div><div class="se-component se-text"><p class="se-text-paragraph"><span class="se-fs-fs30">3. 전망</span><span class="se-fs-fs30">!</span></p></div>';
+  assert.equal(headingCount(naver),3);
+  assert.equal(contentFeatures('<article><h2>a</h2><h3>b</h3><p>c</p></article>').headingCount,2);
+  assert.equal(headingCount('<div class="se-component se-text"><p class="se-text-paragraph"><span class="se-fs-fs16">x</span></p></div>'),0);
+});
