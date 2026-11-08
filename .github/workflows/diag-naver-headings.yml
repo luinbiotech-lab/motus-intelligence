@@ -1,0 +1,18 @@
+name: DIAG Naver heading markup (temporary, read-only)
+on:
+  push:
+    branches: [diag/naver-headings]
+permissions: {contents: read}
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - shell: bash
+        run: |
+          UA='Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1'
+          for p in 119dud/224464316195 alliknam/224464888653 blueshw/224464047512 cocomonic25/224464916904 djhahn/224464279161; do
+            curl -sS -A "$UA" "https://m.blog.naver.com/$p" -o page.html
+            echo "### $p bytes=$(wc -c <page.html)"
+            for k in '<h[1-4]' 'role="heading"' 'se-sectionTitle' 'se-section-sectionTitle' 'se-quotation' 'se-fs-fs24' 'se-fs-fs26' 'se-fs-fs28' 'se-fs-fs30' 'se-fs-fs34' 'se-fs-fs38' 'se-title-text' 'se-documentTitle' 'se-text-paragraph' '<b>' 'se-ff-' 'se-component se-'; do printf '%s=%s ' "$k" "$(grep -o -- "$k" page.html | wc -l)"; done; echo
+            grep -o 'se-component se-[a-zA-Z]*' page.html | sort | uniq -c | sort -rn | head -8
+          done
