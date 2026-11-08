@@ -1,9 +1,21 @@
 /** Helpers for the daily traffic analysis input (owner request 2026-11-04). */
 export interface ContentFeatures {textLength:number;imageCount:number;chartCount:number;headingCount:number;tableCount:number;linkCount:number}
+/**
+ * Section headings. Naver SmartEditor bodies have no <h2>-<h4>: writers mark sections with quotation components or
+ * large-font paragraphs (MOT-037, read-only probe of five 11/7 competitor posts: se-quotation 0-6, se-fs-fs24 0-7,
+ * <h1-4> only in the page chrome). Those are counted for SmartEditor bodies; other HTML counts h1-h4/role=heading.
+ */
+export function headingCount(html:string):number {
+  if(!/se-component\b/.test(html))return (html.match(/<h[1-4]\b|role="heading"/gi)??[]).length;
+  const quotations=(html.match(/se-component se-quotation\b/g)??[]).length;
+  const largeParagraphs=html.split(/se-text-paragraph\b/).slice(1).filter(part=>/se-fs-fs(?:2[4-9]|[3-9]\d)\b/.test(part.split(/<\/p>/)[0]??'')).length;
+  return quotations+largeParagraphs;
+}
+
 /** Plain features of an article body (HTML). */
 export function contentFeatures(html:string):ContentFeatures {
   const text=html.replace(/<(script|style)[\s\S]*?<\/\1>/gi,' ').replace(/<[^>]+>/g,' ').replace(/&[a-z#0-9]+;/gi,' ').replace(/\s+/g,' ').trim();
-  return {textLength:text.length,imageCount:(html.match(/<img\b/gi)??[]).length,chartCount:(html.match(/<svg\b/gi)??[]).length,headingCount:(html.match(/<h[1-4]\b|role="heading"/gi)??[]).length,tableCount:(html.match(/<table\b/gi)??[]).length,linkCount:(html.match(/<a\s[^>]*href=/gi)??[]).length};
+  return {textLength:text.length,imageCount:(html.match(/<img\b/gi)??[]).length,chartCount:(html.match(/<svg\b/gi)??[]).length,headingCount:headingCount(html),tableCount:(html.match(/<table\b/gi)??[]).length,linkCount:(html.match(/<a\s[^>]*href=/gi)??[]).length};
 }
 /** Search keywords for an article: the category's market phrase and the headline's first words without figures. */
 export function articleKeywords(title:string,labels:string[]):string[] {
