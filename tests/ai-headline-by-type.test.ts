@@ -25,3 +25,12 @@ test('product-named official titles without type keywords become events (MOT-033
   const event=synthesizeEvidenceBoundAIEvent({topicId:'t',publisher:'Google AI',sourceId:'s',title:'Gemini Omni 1.2 Flash: Fast and cost-effective with longer clips',link:'https://blog.google/x/',publishedAt:'2026-11-05T17:00:00Z',evidence:'Gemini Omni 1.2 Flash is fast. '.repeat(30),basis:'OFFICIAL_PAGE'});
   assert.ok(event);assert.equal(event.eventType,'launch');assert.match(event.headline,/^구글, Gemini Omni 1\.2 Flash/);
 });
+
+test('the type clause does not repeat what the topic already says (11/7 simulation title)', async () => {
+  const {aiHeadline}=await import('../src/operations/ai-editorial-synthesis.js');
+  const title=aiHeadline({company:'엔비디아',topic:'Vera 관련 AI 인프라',eventType:'infrastructure'} as never);
+  assert.equal(title,'엔비디아의 Vera 관련 AI 인프라, 경쟁의 다음 단계');
+  assert.equal((title.match(/AI 인프라/g)??[]).length,1);
+  assert.equal(aiHeadline({company:'엔비디아',topic:'데이터센터 확충',eventType:'infrastructure'} as never),'엔비디아의 데이터센터 확충, AI 인프라 경쟁의 다음 단계');
+  assert.equal((aiHeadline({company:'구글 딥마인드',topic:'AI 연구 성과 공개',eventType:'research'} as never).match(/연구/g)??[]).length,1);
+});
