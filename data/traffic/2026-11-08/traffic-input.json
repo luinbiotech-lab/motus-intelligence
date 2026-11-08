@@ -1,0 +1,833 @@
+{
+  "date": "2026-11-08",
+  "articlesDay": "2026-11-07",
+  "collectedAt": "2026-11-08T04:41:22.767Z",
+  "pageviews": {
+    "state": "PASS",
+    "capturedAt": "2026-11-08T04:41:23.138Z",
+    "allTime": 410,
+    "sevenDays": 232,
+    "thirtyDays": 357,
+    "previous": {
+      "capturedAt": "2026-11-07T04:41:04.197Z",
+      "allTime": 357
+    },
+    "sincePrevious": {
+      "views": 53,
+      "hours": 24
+    }
+  },
+  "articles": {
+    "state": "PASS",
+    "count": 2
+  },
+  "searchConsole": {
+    "state": "NO_DATA",
+    "range": [
+      "2026-10-31",
+      "2026-11-08"
+    ],
+    "dataState": "all",
+    "lastDataDate": null,
+    "topQueries": []
+  },
+  "indexStatus": {
+    "state": "PASS",
+    "sitemaps": [
+      {
+        "path": "https://motusnova.blogspot.com/sitemap.xml",
+        "lastSubmitted": "2026-11-05T14:31:04.586Z",
+        "lastDownloaded": "2026-11-05T14:31:06.830Z",
+        "isPending": false,
+        "errors": "0",
+        "warnings": "0",
+        "contents": [
+          {
+            "type": "web",
+            "submitted": "34",
+            "indexed": "0"
+          }
+        ]
+      }
+    ],
+    "inspected": 11,
+    "indexed": 1,
+    "inspections": [
+      {
+        "url": "https://motusnova.blogspot.com/",
+        "verdict": "PASS",
+        "coverageState": "제출되고 색인이 생성되었습니다.",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_ALLOWED",
+        "pageFetchState": "SUCCESSFUL",
+        "lastCrawlTime": "2026-11-02T12:40:33Z",
+        "googleCanonical": "https://motusnova.blogspot.com/",
+        "userCanonical": "https://motusnova.blogspot.com/",
+        "referringUrls": [
+          "https://motusnova.blogspot.com/?m=1",
+          "https://motusnova.blogspot.com/2026/10/13-ai.html"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/3-amd-11.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "Google에는 아직 알려지지 않은 URL입니다.",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/2026-11-6.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "발견됨 - 현재 색인이 생성되지 않음",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/528-538380-1-76.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "발견됨 - 현재 색인이 생성되지 않음",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "referringUrls": [
+          "https://motusnova.blogspot.com/feeds/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/3-amd-17.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "Google에는 아직 알려지지 않은 URL입니다.",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/2026-11-5.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "발견됨 - 현재 색인이 생성되지 않음",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "referringUrls": [
+          "https://www.blogger.com/feeds/3015267553244608361/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/3-70.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-05T14:36:34Z",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "http://motusnova.blogspot.com/feeds/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/062-5683-1-09.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-05T14:35:59Z",
+        "referringUrls": [
+          "https://www.blogger.com/feeds/3015267553244608361/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/amd-37-ai.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-05T14:35:44Z",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://motusnova.blogspot.com/feeds/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/359-5648-1-31.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-05T14:36:34Z",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://www.blogger.com/feeds/3015267553244608361/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/3-58.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-05T14:36:45Z",
+        "referringUrls": [
+          "https://www.blogger.com/feeds/3015267553244608361/posts/default"
+        ]
+      }
+    ]
+  },
+  "datalab": {
+    "state": "PASS"
+  },
+  "naverBlogSearch": {
+    "state": "PASS"
+  },
+  "ourArticles": [
+    {
+      "title": "뉴욕증시 마감, 3대 지수 혼조…AMD 11% 급등",
+      "url": "https://motusnova.blogspot.com/2026/11/3-amd-11.html",
+      "labels": [
+        "미국증시"
+      ],
+      "publishedKst": "2026-11-07 06:46",
+      "features": {
+        "textLength": 8002,
+        "imageCount": 0,
+        "chartCount": 4,
+        "headingCount": 15,
+        "tableCount": 0,
+        "linkCount": 31
+      },
+      "keywords": [
+        "뉴욕증시 마감",
+        "뉴욕증시"
+      ],
+      "searchConsole": [],
+      "datalab": [
+        {
+          "keyword": "뉴욕증시 마감",
+          "series": [
+            [
+              "2026-10-25",
+              0.03983
+            ],
+            [
+              "2026-10-26",
+              0.07604
+            ],
+            [
+              "2026-10-27",
+              0.19917
+            ],
+            [
+              "2026-10-28",
+              0.22814
+            ],
+            [
+              "2026-10-29",
+              0.1702
+            ],
+            [
+              "2026-10-30",
+              0.23538
+            ],
+            [
+              "2026-10-31",
+              0.21728
+            ],
+            [
+              "2026-11-01",
+              0.02534
+            ],
+            [
+              "2026-11-02",
+              0.10139
+            ],
+            [
+              "2026-11-03",
+              0.30057
+            ],
+            [
+              "2026-11-04",
+              0.19917
+            ],
+            [
+              "2026-11-05",
+              0.16658
+            ],
+            [
+              "2026-11-06",
+              0.36937
+            ],
+            [
+              "2026-11-07",
+              0.18468
+            ]
+          ]
+        },
+        {
+          "keyword": "뉴욕증시",
+          "series": [
+            [
+              "2026-10-25",
+              6.22148
+            ],
+            [
+              "2026-10-26",
+              23.17664
+            ],
+            [
+              "2026-10-27",
+              61.40725
+            ],
+            [
+              "2026-10-28",
+              65.19156
+            ],
+            [
+              "2026-10-29",
+              71.13058
+            ],
+            [
+              "2026-10-30",
+              62.97892
+            ],
+            [
+              "2026-10-31",
+              47.47229
+            ],
+            [
+              "2026-11-01",
+              5.93901
+            ],
+            [
+              "2026-11-02",
+              27.22532
+            ],
+            [
+              "2026-11-03",
+              78.75715
+            ],
+            [
+              "2026-11-04",
+              74.40428
+            ],
+            [
+              "2026-11-05",
+              80.88288
+            ],
+            [
+              "2026-11-06",
+              100
+            ],
+            [
+              "2026-11-07",
+              57.23546
+            ]
+          ]
+        }
+      ],
+      "competitors": [
+        {
+          "keyword": "뉴욕증시 마감",
+          "top": [
+            {
+              "rank": 1,
+              "title": "미국증시 전망 및 뉴욕증시 마감 시황 총정리! 나스닥·다우존스·S&amp;P....",
+              "link": "https://blog.naver.com/daone0113/224468138737",
+              "blogger": "JIJI",
+              "bloggerLink": "https://blog.naver.com/daone0113",
+              "postdate": "20261107",
+              "description": "오늘은 미국증시 주요 지수와 최근 뉴욕증시 마감 상황, 앞으로 주목해야 할 투자 포인트를 살펴보겠습니다. 1. 미국증시란 무엇일까요? 미국증시는 미국에서 거래되는 주식시장을 의미합니다. 대표적으로... ",
+              "features": {
+                "textLength": 3430,
+                "imageCount": 2,
+                "chartCount": 0,
+                "headingCount": 0,
+                "tableCount": 3,
+                "linkCount": 2
+              }
+            },
+            {
+              "rank": 2,
+              "title": "뉴욕증시 마감, 3대 지수 동반 상승 뒤에 재정지출 제동 기대가 있었....",
+              "link": "https://blog.naver.com/eco_antman/224465901205",
+              "blogger": "개미왕앤트맨",
+              "bloggerLink": "https://blog.naver.com/eco_antman",
+              "postdate": "20261105",
+              "description": "11월 3일(현지시간) 미국 중간선거에서 민주당이 상원과 하원을 모두 가져갔다는 소식 들으셨을 텐데요, 11월 4일 뉴욕증시 마감에서는 3대 지수가 나란히 올랐어요. 주가는 왜 올랐는지, 국채 금리는 얼마나... ",
+              "features": {
+                "textLength": 2839,
+                "imageCount": 11,
+                "chartCount": 0,
+                "headingCount": 6,
+                "tableCount": 0,
+                "linkCount": 13
+              }
+            },
+            {
+              "rank": 3,
+              "title": "뉴욕증시 마감 나스닥 0.83% 반등, 중간선거 앞 반도체주 오른 이유 | ....",
+              "link": "https://blog.naver.com/myplaylog_/224464652127",
+              "blogger": "해외증시·ETF·배당",
+              "bloggerLink": "https://blog.naver.com/myplaylog_",
+              "postdate": "20261104",
+              "description": "#뉴욕증시 #뉴욕증시마감 #미국증시 #나스닥 #나스닥반등 #반도체주 #미국중간선거 #중간선거증시 #애플주가 #엔비디아 #해외주식 #미국주식 닭정육 뼈없는 순살 닭다리살 2kg 비비수산 naver.me 돈, 뜨겁게... ",
+              "features": {
+                "textLength": 2475,
+                "imageCount": 7,
+                "chartCount": 0,
+                "headingCount": 6,
+                "tableCount": 0,
+                "linkCount": 7
+              }
+            },
+            {
+              "rank": 4,
+              "title": "뉴욕증시 3대 지수 마감 현황 | 나스닥 종합지수 정리 |",
+              "link": "https://blog.naver.com/kmw5076/224464268703",
+              "blogger": "일상과 회복을 위한 블로그",
+              "bloggerLink": "https://blog.naver.com/kmw5076",
+              "postdate": "20261104",
+              "description": "뉴욕증시 3대 지수 마감 현황 나스닥 종합지수 (NASDAQ) 25,372.01 (+207.65, +0.83%)  반도체 및 핵심 기술주들의 강한 저가 매수세 유입으로 일주일 만에 가장 큰 폭의 하루 상승률을 기록했습니다. [1, 2] S&amp;P 500... ",
+              "features": {
+                "textLength": 2481,
+                "imageCount": 1,
+                "chartCount": 0,
+                "headingCount": 0,
+                "tableCount": 0,
+                "linkCount": 33
+              }
+            },
+            {
+              "rank": 5,
+              "title": "뉴욕증시 마감요약(11월5일)",
+              "link": "https://blog.naver.com/insigt913/224466778307",
+              "blogger": "insigt913님의 블로그",
+              "bloggerLink": "https://blog.naver.com/insigt913",
+              "postdate": "20261106",
+              "description": "### 뉴욕증시 마감시황 및 주요 이슈(26년 11월 5일(목) 마감) 1. 주요 지수 마감 다우존스 51,523.06 / -3.44% S&amp;P 500 7,353.73 / -4.36% 나스닥종합 24,315.00 / -5.52% 필.반도체(SOX) 9,011.14 / -12.25% 러셀 2000 2,729.89 / -4.44... ",
+              "features": {
+                "textLength": 2711,
+                "imageCount": 0,
+                "chartCount": 0,
+                "headingCount": 0,
+                "tableCount": 0,
+                "linkCount": 0
+              }
+            },
+            {
+              "rank": 6,
+              "title": "11월 05일 뉴욕증시 마감 시황｜미국 증시 주요 이슈 정리",
+              "link": "https://blog.naver.com/sc_tv/224466783452",
+              "blogger": "SCTV주식챔피언",
+              "bloggerLink": "https://blog.naver.com/sc_tv",
+              "postdate": "20261106",
+              "description": "김선규 소장이 알려주는 전일 뉴욕증시 마감시황입니다. 11월 5일 뉴욕 증시는 AI 데이터센터 건설 규제 우려가 반도체·전력 인프라주에 대한 투매로 이어지면서 뉴욕증시 3대 지수가 급락한 날입니다.... "
+            },
+            {
+              "rank": 7,
+              "title": "미국 뉴욕 증시 마감 브리핑 / AI 반도체가 나스닥을 살렸지만 시장 ....",
+              "link": "https://blog.naver.com/djhahn/224464279161",
+              "blogger": "캐나다 생활 정보, 세상사는 이야기",
+              "bloggerLink": "https://blog.naver.com/djhahn",
+              "postdate": "20261104",
+              "description": "2026년 11월 3일 화요일 뉴욕증시 마감 기준 뉴욕증시는 중간선거 결과와 AMD 실적 발표를 앞두고 혼조세로 마감했다. 엔비디아·브로드컴·마이크론을 중심으로 AI 반도체주에 저가 매수세가 유입되면서 S&amp;P... "
+            },
+            {
+              "rank": 8,
+              "title": "뉴욕증시 11월 2일 마감, 나스닥 1.07% 하락과 유가 7%대 급락 그리고 ....",
+              "link": "https://blog.naver.com/dungssa26/224463145895",
+              "blogger": "다양한 경로로 더욱 풍요롭다.",
+              "bloggerLink": "https://blog.naver.com/dungssa26",
+              "postdate": "20261103",
+              "description": "기술주만 빠진 날, 내 계좌가 유독 아팠던 이유 지수는 내렸는데 종목은 올랐습니다 핵심 키워드 뉴욕증시 마감, 나스닥 하락, S&amp;P500 전망, 국제유가 급락, 미국 중간선거, 애플 실적, 팔란티어 실적... "
+            },
+            {
+              "rank": 9,
+              "title": "뉴욕증시 나스닥 5% 급락 마감 코스피 5383 삼성전자 금요일 전망",
+              "link": "https://blog.naver.com/haehapa/224466729100",
+              "blogger": "그때 그생각",
+              "bloggerLink": "https://blog.naver.com/haehapa",
+              "postdate": "20261106",
+              "description": "[11월 6일 오전 6시 마감 뉴욕증시] AI 트레이드 차익실현에 나스닥 24,432(-5.07%) 마감 vs 금리·유가 동반 하락!  방금(한국 시간 11월 6일 오전 6시) 종료된 미국 뉴욕증시는 월스트리트저널(WSJ)과 CNBC가... "
+            },
+            {
+              "rank": 10,
+              "title": "미국 뉴욕증시 마감 시황, 다우지수 3% 폭등! 나스닥·S&amp;P500 동반 상승....",
+              "link": "https://blog.naver.com/busan-hardwarestore/224465552854",
+              "blogger": "세상과소통하며즐기기",
+              "bloggerLink": "https://blog.naver.com/busan-hardwarestore",
+              "postdate": "20261105",
+              "description": "뉴욕증시 4대 지수 마감 현황 다우존스 산업평균지수: 53,356.12포인트, 전일 대비 3.03% 상승 S&amp;P500지수: 7,688.62포인트, 전일 대비 1.58% 상승 나스닥 종합지수: 25,736.51포인트, 전일 대비 1.44% 상승 러셀2000지수: 2,856.... "
+            }
+          ]
+        },
+        {
+          "keyword": "뉴욕증시",
+          "top": [
+            {
+              "rank": 1,
+              "title": "뉴욕증시 급락! 나스닥 5.52% 폭락, 삼성전자·SK하이닉스에도 영향 있....",
+              "link": "https://blog.naver.com/ya3yangji/224466869187",
+              "blogger": "경기안양 주거재생혁신지구",
+              "bloggerLink": "https://blog.naver.com/ya3yangji",
+              "postdate": "20261106",
+              "description": "밤사이 미국 뉴욕증시가 크게 흔들렸습니다. 11월 5일(미국 현지시간) 나스닥지수는 5.52%, S&amp;P500은 4.36%, 다우지수는 3.44% 급락했습니다. 특히 엔비디아를 비롯한 AI·반도체 관련 주식에 매도세가... ",
+              "features": {
+                "textLength": 3941,
+                "imageCount": 6,
+                "chartCount": 0,
+                "headingCount": 0,
+                "tableCount": 2,
+                "linkCount": 11
+              }
+            },
+            {
+              "rank": 2,
+              "title": "뉴욕증시 폭락 충격! 나스닥 5.5%·반도체 12.25% 급락…삼성전자·SK하....",
+              "link": "https://blog.naver.com/ysh836/224466881007",
+              "blogger": "오늘의 시선",
+              "bloggerLink": "https://blog.naver.com/ysh836",
+              "postdate": "20261106",
+              "description": "미국 뉴욕증시가 하루 만에 급락하면서 글로벌 금융시장에 충격을 주고 있습니다. 2026년 11월 5일(현지시간) 나스닥지수는 5.52%, 필라델피아 반도체지수는 무려 12.25% 폭락했습니다. 특히 엔비디아와... ",
+              "features": {
+                "textLength": 2627,
+                "imageCount": 1,
+                "chartCount": 0,
+                "headingCount": 0,
+                "tableCount": 2,
+                "linkCount": 1
+              }
+            },
+            {
+              "rank": 3,
+              "title": "뉴욕증시 혼조세, 나스닥 0.83% 상승에도 다우 하락",
+              "link": "https://blog.naver.com/smartliving_tip/224464405098",
+              "blogger": "재린이엄마 경제 블로그",
+              "bloggerLink": "https://blog.naver.com/smartliving_tip",
+              "postdate": "20261104",
+              "description": "3일(현지시간) 뉴욕증시가 혼조세로 끝난 날, 지수의 방향을 가른 건 애플과 반도체주였어요. 안녕하세요, 재린이엄마입니다 :) 같은 날 같은 시장인데 지수마다 방향이 엇갈렸다면, 이건 어떻게 나눠서... ",
+              "features": {
+                "textLength": 2751,
+                "imageCount": 6,
+                "chartCount": 0,
+                "headingCount": 2,
+                "tableCount": 21,
+                "linkCount": 6
+              }
+            },
+            {
+              "rank": 4,
+              "title": "2026 미 증시 긴급 진단: 정치적 불확실성 소멸에 따른 뉴욕증시 폭등....",
+              "link": "https://blog.naver.com/saichino1/224465567363",
+              "blogger": "Weaver World [스마트 금융·경제 가이드]",
+              "bloggerLink": "https://blog.naver.com/saichino1",
+              "postdate": "20261105",
+              "description": "글로벌 금융 시장의 향방을 가르던 정치적 불확실성이 해소되면서 뉴욕증시가 일제히 급등세를 연출했습니다. 특히 시장의 발목을 잡던 대형 정치 이벤트에서 민주당이 압승을 거두며 정책적 투명성이... ",
+              "features": {
+                "textLength": 2182,
+                "imageCount": 4,
+                "chartCount": 0,
+                "headingCount": 0,
+                "tableCount": 1,
+                "linkCount": 4
+              }
+            },
+            {
+              "rank": 5,
+              "title": "뉴욕증시 전격 폭락",
+              "link": "https://blog.naver.com/moneyh0/224466798121",
+              "blogger": "경제 비지니스 이슈",
+              "bloggerLink": "https://blog.naver.com/moneyh0",
+              "postdate": "20261106",
+              "description": "뉴욕증시 전격 폭락  [속보] AI 기술주 투매에 뉴욕증시 전격 폭락… 나스닥 5.5% 급락하며 조정장 진입! 안녕하세요, 여러분! 증시 및 글로벌 경제 소식을 빠르게 전해드리는 블로거입니다. 오늘 아침 미국... ",
+              "features": {
+                "textLength": 2585,
+                "imageCount": 2,
+                "chartCount": 0,
+                "headingCount": 5,
+                "tableCount": 0,
+                "linkCount": 2
+              }
+            },
+            {
+              "rank": 6,
+              "title": "[기록] 나스닥 -5.5% S&amp;P500 -4.3% 뉴욕증시 폭락",
+              "link": "https://blog.naver.com/jongy0644/224466853045",
+              "blogger": "복리를 쌓는 기록",
+              "bloggerLink": "https://blog.naver.com/jongy0644",
+              "postdate": "20261106",
+              "description": "2026년 11월 5일(미국 현지시간), 뉴욕증시가 그야말로 무너졌다. 그동안 시장을 끌어올렸던 AI와 반도체 관련주가 집중적으로 매도되면서 나스닥은 하루 만에 5.5% 넘게 하락했고, S&amp;P500도 4% 이상 밀렸다.... "
+            },
+            {
+              "rank": 7,
+              "title": "뉴욕증시 3대 지수 마감 현황 | 나스닥 종합지수 정리 |",
+              "link": "https://blog.naver.com/kmw5076/224464268703",
+              "blogger": "일상과 회복을 위한 블로그",
+              "bloggerLink": "https://blog.naver.com/kmw5076",
+              "postdate": "20261104",
+              "description": "뉴욕증시 3대 지수 마감 현황 나스닥 종합지수 (NASDAQ) 25,372.01 (+207.65, +0.83%)  반도체 및 핵심 기술주들의 강한 저가 매수세 유입으로 일주일 만에 가장 큰 폭의 하루 상승률을 기록했습니다. [1, 2] S&amp;P 500... "
+            },
+            {
+              "rank": 8,
+              "title": "뉴욕증시 AI 기술주 투매 현상 나스닥 5.5퍼센트 급락한 배경과 전망",
+              "link": "https://blog.naver.com/heimdall6/224468017945",
+              "blogger": "혜안",
+              "bloggerLink": "https://blog.naver.com/heimdall6",
+              "postdate": "20261107",
+              "description": "최근 뉴욕증시가 AI 기술주를 중심으로 큰 폭의 하락세를 보이고 있습니다. 나스닥 지수가 5.5퍼센트나 급락하며 투자자들의 우려가 커지고 있는데요. 오늘 이번 사태의 원인과 향후 시장을 어떻게 바라봐야 할지... "
+            },
+            {
+              "rank": 9,
+              "title": "뉴욕증시 급락 나스닥 급락, AI 반도체주가 무너진 이유와 국내 증시....",
+              "link": "https://blog.naver.com/man12347/224466989408",
+              "blogger": "승하부부",
+              "bloggerLink": "https://blog.naver.com/man12347",
+              "postdate": "20261106",
+              "description": "미국 뉴욕증시가 하루 만에 크게 흔들리면서 국내 투자자들도 긴장하고 있습니다. 특히 나스닥이 5% 넘게 하락하고 AI 반도체 관련주에 매도세가 집중됐다는 소식인데요. 단순한 주가 조정인지, AI 산업에... "
+            },
+            {
+              "rank": 10,
+              "title": "[뉴욕증시] 오라클 8.8%↓, 유가 7%↓, 팔란티어 호실적: 11월 2일",
+              "link": "https://blog.naver.com/insight-solution/224463067361",
+              "blogger": "인사이트솔루션 | 보험·AI 실무 노트",
+              "bloggerLink": "https://blog.naver.com/insight-solution",
+              "postdate": "20261103",
+              "description": "■ 함께 읽으면 좋은 글 - 「저PBR기업 151곳 첫 공표: 선정 기준과 업종 지도」 (2026-11-02) - 「수출 1조 달러 눈앞, AI 자금줄 경고등: 11월 2일」 (2026-11-02) #뉴욕증시 #오라클 #팔란티어 #AI투자 #국제유가... "
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "[데일리 리포트] 2026년 11월 6일 국내 증시·미국 증시 핵심 정리",
+      "url": "https://motusnova.blogspot.com/2026/11/2026-11-6.html",
+      "labels": [
+        "리포트"
+      ],
+      "publishedKst": "2026-11-07 05:41",
+      "features": {
+        "textLength": 913,
+        "imageCount": 0,
+        "chartCount": 0,
+        "headingCount": 5,
+        "tableCount": 0,
+        "linkCount": 5
+      },
+      "keywords": [
+        "국내 증시"
+      ],
+      "searchConsole": [],
+      "datalab": [
+        {
+          "keyword": "국내 증시",
+          "series": [
+            [
+              "2026-10-25",
+              3.44234
+            ],
+            [
+              "2026-10-26",
+              60.06225
+            ],
+            [
+              "2026-10-27",
+              57.30744
+            ],
+            [
+              "2026-10-28",
+              62.53832
+            ],
+            [
+              "2026-10-29",
+              69.72266
+            ],
+            [
+              "2026-10-30",
+              61.92511
+            ],
+            [
+              "2026-10-31",
+              8.04376
+            ],
+            [
+              "2026-11-01",
+              3.63049
+            ],
+            [
+              "2026-11-02",
+              61.38623
+            ],
+            [
+              "2026-11-03",
+              60.99832
+            ],
+            [
+              "2026-11-04",
+              71.89909
+            ],
+            [
+              "2026-11-05",
+              80.37257
+            ],
+            [
+              "2026-11-06",
+              100
+            ],
+            [
+              "2026-11-07",
+              10.67081
+            ]
+          ]
+        }
+      ],
+      "competitors": [
+        {
+          "keyword": "국내 증시",
+          "top": [
+            {
+              "rank": 1,
+              "title": "국내주식 거래시간 총정리｜주식시장 개장시간부터 2026년 국내 증....",
+              "link": "https://blog.naver.com/xiiminn/224462049287",
+              "blogger": "MONEY LOADING",
+              "bloggerLink": "https://blog.naver.com/xiiminn",
+              "postdate": "20261103",
+              "description": "오늘은 국내주식 거래시간과 시간외 거래 방법, 11월 국내 증시 전망까지 한 번에 정리해 보겠습니다. 목차 1. 국내주식 거래시간과 개장시간 2. 시간외 거래는 어떻게 다를까? 3. 2026년 국내 증시 흐름 4.... ",
+              "features": {
+                "textLength": 2399,
+                "imageCount": 4,
+                "chartCount": 0,
+                "headingCount": 10,
+                "tableCount": 1,
+                "linkCount": 7
+              }
+            },
+            {
+              "rank": 2,
+              "title": "이란 전쟁 총정리｜미국·이스라엘과 이란의 충돌, 국제유가와 국내....",
+              "link": "https://blog.naver.com/todayharuu/224465513283",
+              "blogger": "투자하는하루",
+              "bloggerLink": "https://blog.naver.com/todayharuu",
+              "postdate": "20261105",
+              "description": "#이란전쟁 #미국이란전쟁 #이스라엘이란 #호르무즈해협 #국제유가 #유가전망 #중동전쟁 #방산관련주 #정유관련주 #해운관련주 #석유화학 #국내증시 #미국증시 #세계경제 #에너지위기",
+              "features": {
+                "textLength": 2667,
+                "imageCount": 2,
+                "chartCount": 0,
+                "headingCount": 23,
+                "tableCount": 0,
+                "linkCount": 2
+              }
+            },
+            {
+              "rank": 3,
+              "title": "2026년 11월 6일 국내증시 전망, 코스피 급락 충격…오늘은 반도체·AI....",
+              "link": "https://blog.naver.com/economyy365/224466786098",
+              "blogger": "매일 만나는 경제 인사이트",
+              "bloggerLink": "https://blog.naver.com/economyy365",
+              "postdate": "20261106",
+              "description": "오늘은 2026년 11월 6일 국내증시 흐름을 살펴보겠습니다. 전날 국내 증시는 상당히 큰 충격을 받았습니다. 11월 5일 코스피는 5,383.80으로 5.28% 급락했고, 코스닥 역시 678.41로 5.11% 하락했습니다. 특히 외국인의... ",
+              "features": {
+                "textLength": 2471,
+                "imageCount": 1,
+                "chartCount": 0,
+                "headingCount": 1,
+                "tableCount": 0,
+                "linkCount": 1
+              }
+            },
+            {
+              "rank": 4,
+              "title": "오늘의 국내증시 전망",
+              "link": "https://blog.naver.com/wngyckd/224463008274",
+              "blogger": "마루코의 경제 블로그",
+              "bloggerLink": "https://blog.naver.com/wngyckd",
+              "postdate": "20261103",
+              "description": "2026년 11월 3일 국내 증시는 전날의 강한 반등세가 이어질 수 있을지가 핵심입니다. 지난 11월 2일 코스피는 전 거래일보다 2.24% 상승한 5,859.08에 거래를 마쳤습니다. 미국 기술주 하락 여파로 장 초반에는 약세를... ",
+              "features": {
+                "textLength": 1655,
+                "imageCount": 7,
+                "chartCount": 0,
+                "headingCount": 0,
+                "tableCount": 0,
+                "linkCount": 7
+              }
+            },
+            {
+              "rank": 5,
+              "title": "[11월 3일 오늘의 국내 증시] 코스피 3.6% 하락 마감, 원달러 환율 안정....",
+              "link": "https://blog.naver.com/kna217891/224463306222",
+              "blogger": "경제 한스푼",
+              "bloggerLink": "https://blog.naver.com/kna217891",
+              "postdate": "20261103",
+              "description": "오늘의 국내 증시 핵심 3줄 요약 코스피, 외국인과 기관의 거센 쌍끌이 매도세에 3.6% 급락하며 5,646포인트 마감 글로벌 기술주 약세와 매크로 불확실성 여파로 반도체 등 대형주 투심 꽁꽁 원/달러 환율은 하락... ",
+              "features": {
+                "textLength": 2911,
+                "imageCount": 10,
+                "chartCount": 0,
+                "headingCount": 4,
+                "tableCount": 0,
+                "linkCount": 15
+              }
+            },
+            {
+              "rank": 6,
+              "title": "미국 민주당 총정리! 2026년 중간선거와 미국 산업정책 변화, 국내 증....",
+              "link": "https://blog.naver.com/todayharuu/224464358173",
+              "blogger": "투자하는하루",
+              "bloggerLink": "https://blog.naver.com/todayharuu",
+              "postdate": "20261104",
+              "description": "#미국민주당 #미국공화당 #미국중간선거 #미국정치 #미국산업정책 #민주당관련주 #미국증시 #AI반도체 #배터리관련주 #태양광관련주 #전력인프라 #바이오관련주 #국내증시#미국중간선거결과발표"
+            },
+            {
+              "rank": 7,
+              "title": "2026 미국 중간선거 총정리｜트럼프 정부 정책 변화, 국내 증시에 미....",
+              "link": "https://blog.naver.com/todayharuu/224463290313",
+              "blogger": "투자하는하루",
+              "bloggerLink": "https://blog.naver.com/todayharuu",
+              "postdate": "20261103",
+              "description": "자료이며 특정 종목에 대한 매수·매도 추천이 아닙니다. #미국중간선거 #2026미국선거 #트럼프정책 #미국증시 #국내증시 #반도체관련주 #AI관련주 #방산관련주 #전력관련주 #조선관련주 #미국경제 #글로벌증시"
+            },
+            {
+              "rank": 8,
+              "title": "국내증시 상한가 종목 정리 2026년 11월 3일 (화)",
+              "link": "https://blog.naver.com/jnpp87/224463650843",
+              "blogger": "부자만들기",
+              "bloggerLink": "https://blog.naver.com/jnpp87",
+              "postdate": "20261103",
+              "description": "2026년 11월 3일 국내증시에서는 총 7종목(코스피 4종목, 코스닥 3종목)이 상한가를 달성하였습니다. 각각의 종목별로 상한가를 달성한 상세 이유들을 정리하면 다음과 같습니다. 국내증시 상한가 종목 정리 1.... "
+            },
+            {
+              "rank": 9,
+              "title": "오늘 국내증시, 코스피 5000선 하회…반도체 급락과 이슈종목·오후 ....",
+              "link": "https://blog.naver.com/underwind-/224466948576",
+              "blogger": "정책인사이트",
+              "bloggerLink": "https://blog.naver.com/underwind-",
+              "postdate": "20261106",
+              "description": "11월 6일 국내 증시는 미국 기술주 급락의 충격을 받으며 출발했습니다. 코스피는 개장 직후 8% 넘게 떨어져 거래가 일시 중단됐고, 코스닥에서도 매도 사이드카가 발동됐습니다. 오늘은 지수 반등 여부와... "
+            },
+            {
+              "rank": 10,
+              "title": "11월 3일 오늘 국내 증시 관심 종목과 미국 중간선거 반도체 국제유....",
+              "link": "https://blog.naver.com/underwind-/224462987483",
+              "blogger": "정책인사이트",
+              "bloggerLink": "https://blog.naver.com/underwind-",
+              "postdate": "20261103",
+              "description": "오늘 국내 증시를 움직일 핵심 변수 2026년 11월 3일 국내 증시는 미국 중간선거와 반도체 투자심리 그리고 국제유가 변화를 살펴야 하는 날입니다 한국시간 새벽 개장 전 기준이며 미국 현지 11월 2일 거래는 진행... "
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
