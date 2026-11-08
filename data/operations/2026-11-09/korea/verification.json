@@ -14,10 +14,10 @@
   "leakagePass": true,
   "duplicateCheck": "PENDING_REMOTE",
   "duplicateUncertainty": true,
-  "articleFingerprint": "sha256:09fcb85a84b6d9685d7370458c4a02a8fb35c964199ea8cadca851777cf18232",
+  "articleFingerprint": "sha256:95447101fe4046574a128396b142e400c0e87dde9c271aa73857cfaa6b72fc3e",
   "commerceEnabled": false,
-  "verifiedAt": "2026-11-08T21:19:00.942Z",
-  "expiresAt": "2026-11-08T22:49:00.942Z",
+  "verifiedAt": "2026-11-08T23:41:27.498Z",
+  "expiresAt": "2026-11-09T01:11:27.498Z",
   "sourceAuditIds": [
     "deep:consensus:list:company",
     "deep:consensus:list:economy",
@@ -30,33 +30,33 @@
     "deep:naver-research:list:market",
     "deep:naver-research:market:38074",
     "deep:naver-research:market:38076",
+    "deep:naver-research:market:38080",
+    "deep:naver-research:market:38082",
     "deep:naver:search-top",
     "deep:naver:stock-price:000660",
-    "deep:naver:stock-price:005380",
     "deep:naver:stock-price:005930",
+    "deep:naver:stock-price:006400",
     "deep:naver:stock-price:009150",
     "deep:naver:stock-price:034020",
     "deep:naver:stock-price:035420",
-    "deep:research:listed:stock.pstatic.net/stock-research/company/63/20261106_company_508693000.pdf",
+    "krx:kosdaq",
+    "krx:kospi",
     "market-research:KB증권 리서치",
     "market-research:article:https://rc.kbsec.com/detailView.able?documentid=20261021144128693K",
     "market-research:article:https://rc.kbsec.com/detailView.able?documentid=20261030172030640K",
-    "market-research:article:https://www.hankyung.com/article/2026110832381",
-    "market-research:article:https://www.hankyung.com/article/2026110833407",
+    "market-research:article:https://www.hankyung.com/article/2026110828686",
+    "market-research:article:https://www.hankyung.com/article/202611083134i",
     "market-research:article:https://www.mk.co.kr/news/stock/12201699",
-    "market-research:article:https://www.mk.co.kr/news/stock/12201708",
+    "market-research:article:https://www.mk.co.kr/news/stock/12202007",
     "market-research:매일경제 증권",
     "market-research:한국경제 증권",
-    "naver:flows",
     "naver:kosdaq:history",
     "naver:kospi:history",
     "naver:mover",
-    "naver:usd-krw",
-    "yahoo-finance:kosdaq:query1.finance.yahoo.com",
-    "yahoo-finance:kospi:query1.finance.yahoo.com"
+    "naver:usd-krw"
   ],
-  "sourceAuditFingerprint": "sha256:b777b83b0f351e2cb29799e5787be02b9a348e057b0506d270f426dd2f45ebfe",
-  "crossVerificationFingerprint": "sha256:fad026fa5ef76326f6b364517e7a15b091aeffea9e6dffbbfca73318fcc825e3",
+  "sourceAuditFingerprint": "sha256:3846083e105dcd74bbeef551b54f2becbff3a26cce210363d674c06d0a84d89b",
+  "crossVerificationFingerprint": "sha256:c413442b5671779397613aa69019a2e60d0827de7190f79776beb2fbf692277e",
   "crossVerification": {
     "schemaVersion": "1.0",
     "category": "KOREA_MARKET",
@@ -71,37 +71,37 @@
     },
     "independentSource": {
       "providers": [
-        "YAHOO_FINANCE"
+        "KRX"
       ],
       "domains": [
-        "yahoo.com"
+        "co.kr"
       ],
       "urls": [
-        "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?period1=1793750400&period2=1794182400&interval=1d",
-        "https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?period1=1793750400&period2=1794182400&interval=1d"
+        "https://data-dbg.krx.co.kr/svc/apis/idx/kospi_dd_trd?basDd=20261106",
+        "https://data-dbg.krx.co.kr/svc/apis/idx/kosdaq_dd_trd?basDd=20261106"
       ]
     },
     "comparedFields": [
       {
         "field": "KOSPI",
         "primaryValue": 5059.69,
-        "independentValue": 5059.68994140625,
-        "difference": 0.00005859374959982233,
+        "independentValue": 5059.69,
+        "difference": 0,
         "tolerance": 0.05,
         "result": "PASS",
         "primarySourceUrl": "https://m.stock.naver.com/api/index/KOSPI/price?pageSize=10&page=1",
-        "independentSourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?period1=1793750400&period2=1794182400&interval=1d",
+        "independentSourceUrl": "https://data-dbg.krx.co.kr/svc/apis/idx/kospi_dd_trd?basDd=20261106",
         "metricBasis": "SESSION_CLOSE"
       },
       {
         "field": "KOSDAQ",
         "primaryValue": 644.27,
-        "independentValue": 644.27001953125,
-        "difference": 0.000019531250018189894,
+        "independentValue": 644.27,
+        "difference": 0,
         "tolerance": 0.05,
         "result": "PASS",
         "primarySourceUrl": "https://m.stock.naver.com/api/index/KOSDAQ/price?pageSize=10&page=1",
-        "independentSourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?period1=1793750400&period2=1794182400&interval=1d",
+        "independentSourceUrl": "https://data-dbg.krx.co.kr/svc/apis/idx/kosdaq_dd_trd?basDd=20261106",
         "metricBasis": "SESSION_CLOSE"
       }
     ],
@@ -114,7 +114,7 @@
     "sourceDiversityPass": true,
     "verification": "VERIFIED",
     "reasonCodes": [],
-    "verifiedAt": "2026-11-08T21:19:00.942Z",
+    "verifiedAt": "2026-11-08T23:41:27.498Z",
     "officialPhase": "PRE_PUBLICATION",
     "reconciliation": {
       "status": "NOT_REQUIRED",
