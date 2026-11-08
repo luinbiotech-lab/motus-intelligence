@@ -46,7 +46,21 @@ const HEADLINE_BY_TYPE:Record<string,(company:string,topic:string)=>string>={
   policy:(company,topic)=>`${company}의 ${topic}, 정책 변화가 AI 산업에 미칠 영향`,
   education:(company,topic)=>`${company}의 ${topic}, AI 인재 양성 경쟁`,
 };
+// When the topic already names what the type clause says ('Vera 관련 AI 인프라' + 'AI 인프라 경쟁의 다음 단계'), the
+// clause would repeat it; this wording keeps the same meaning without the repeat (11/7 simulation, #109 review).
+const HEADLINE_IF_REPEATED:Record<string,{repeat:RegExp;build:(company:string,topic:string)=>string}>={
+  infrastructure:{repeat:/AI 인프라/,build:(company,topic)=>`${company}의 ${topic}, 경쟁의 다음 단계`},
+  partnership:{repeat:/협력/,build:(company,topic)=>`${company}의 ${topic}, AI 시장 구도를 바꿀까`},
+  adoption:{repeat:/도입/,build:(company,topic)=>`${company}의 ${topic}, 현장이 보여 준 AI 활용 방식`},
+  investment:{repeat:/투자/,build:(company,topic)=>`${company}의 ${topic}, 자금이 가리키는 방향`},
+  research:{repeat:/연구/,build:(company,topic)=>`${company}의 ${topic}, 제품으로 이어질 시점`},
+  security:{repeat:/AI 보안/,build:(company,topic)=>`${company}의 ${topic}, 기준이 달라지는 지점`},
+  policy:{repeat:/정책/,build:(company,topic)=>`${company}의 ${topic}, AI 산업에 미칠 영향`},
+  education:{repeat:/인재|교육/,build:(company,topic)=>`${company}의 ${topic}, 다음 경쟁 무대`},
+};
 export function aiHeadline(event:KoreanAIEvent&{eventType?:string}):string {
+  const repeated=event.eventType?HEADLINE_IF_REPEATED[event.eventType]:undefined;
+  if(repeated&&repeated.repeat.test(event.topic))return repeated.build(event.company,event.topic);
   const build=event.eventType?HEADLINE_BY_TYPE[event.eventType]:undefined;
   return build?build(event.company,event.topic):`${josa(event.company,'이','가')} 공개한 ${event.topic}, 실제 산업 변화로 이어질까`;
 }
