@@ -1,20 +1,20 @@
 {
   "date": "2026-11-08",
   "articlesDay": "2026-11-07",
-  "collectedAt": "2026-11-08T04:41:22.767Z",
+  "collectedAt": "2026-11-08T04:54:22.123Z",
   "pageviews": {
     "state": "PASS",
-    "capturedAt": "2026-11-08T04:41:23.138Z",
-    "allTime": 410,
-    "sevenDays": 232,
-    "thirtyDays": 357,
+    "capturedAt": "2026-11-08T04:54:22.564Z",
+    "allTime": 425,
+    "sevenDays": 247,
+    "thirtyDays": 372,
     "previous": {
       "capturedAt": "2026-11-07T04:41:04.197Z",
       "allTime": 357
     },
     "sincePrevious": {
-      "views": 53,
-      "hours": 24
+      "views": 68,
+      "hours": 24.2
     }
   },
   "articles": {
@@ -50,8 +50,8 @@
         ]
       }
     ],
-    "inspected": 11,
-    "indexed": 1,
+    "inspected": 12,
+    "indexed": 2,
     "inspections": [
       {
         "url": "https://motusnova.blogspot.com/",
@@ -66,52 +66,6 @@
         "referringUrls": [
           "https://motusnova.blogspot.com/?m=1",
           "https://motusnova.blogspot.com/2026/10/13-ai.html"
-        ]
-      },
-      {
-        "url": "https://motusnova.blogspot.com/2026/11/3-amd-11.html",
-        "verdict": "NEUTRAL",
-        "coverageState": "Google에는 아직 알려지지 않은 URL입니다.",
-        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
-        "indexingState": "INDEXING_STATE_UNSPECIFIED",
-        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
-      },
-      {
-        "url": "https://motusnova.blogspot.com/2026/11/2026-11-6.html",
-        "verdict": "NEUTRAL",
-        "coverageState": "발견됨 - 현재 색인이 생성되지 않음",
-        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
-        "indexingState": "INDEXING_STATE_UNSPECIFIED",
-        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
-      },
-      {
-        "url": "https://motusnova.blogspot.com/2026/11/528-538380-1-76.html",
-        "verdict": "NEUTRAL",
-        "coverageState": "발견됨 - 현재 색인이 생성되지 않음",
-        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
-        "indexingState": "INDEXING_STATE_UNSPECIFIED",
-        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
-        "referringUrls": [
-          "https://motusnova.blogspot.com/feeds/posts/default"
-        ]
-      },
-      {
-        "url": "https://motusnova.blogspot.com/2026/11/3-amd-17.html",
-        "verdict": "NEUTRAL",
-        "coverageState": "Google에는 아직 알려지지 않은 URL입니다.",
-        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
-        "indexingState": "INDEXING_STATE_UNSPECIFIED",
-        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
-      },
-      {
-        "url": "https://motusnova.blogspot.com/2026/11/2026-11-5.html",
-        "verdict": "NEUTRAL",
-        "coverageState": "발견됨 - 현재 색인이 생성되지 않음",
-        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
-        "indexingState": "INDEXING_STATE_UNSPECIFIED",
-        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
-        "referringUrls": [
-          "https://www.blogger.com/feeds/3015267553244608361/posts/default"
         ]
       },
       {
@@ -137,6 +91,9 @@
         "indexingState": "INDEXING_STATE_UNSPECIFIED",
         "pageFetchState": "REDIRECT_ERROR",
         "lastCrawlTime": "2026-11-05T14:35:59Z",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
         "referringUrls": [
           "https://www.blogger.com/feeds/3015267553244608361/posts/default"
         ]
@@ -164,9 +121,6 @@
         "indexingState": "INDEXING_STATE_UNSPECIFIED",
         "pageFetchState": "REDIRECT_ERROR",
         "lastCrawlTime": "2026-11-05T14:36:34Z",
-        "sitemap": [
-          "https://motusnova.blogspot.com/sitemap.xml"
-        ],
         "referringUrls": [
           "https://www.blogger.com/feeds/3015267553244608361/posts/default"
         ]
@@ -179,11 +133,321 @@
         "indexingState": "INDEXING_STATE_UNSPECIFIED",
         "pageFetchState": "REDIRECT_ERROR",
         "lastCrawlTime": "2026-11-05T14:36:45Z",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://www.blogger.com/feeds/3015267553244608361/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/20-33.html",
+        "verdict": "PASS",
+        "coverageState": "제출되고 색인이 생성되었습니다.",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_ALLOWED",
+        "pageFetchState": "SUCCESSFUL",
+        "lastCrawlTime": "2026-11-02T14:10:53Z",
+        "googleCanonical": "https://motusnova.blogspot.com/2026/11/20-33.html",
+        "userCanonical": "https://motusnova.blogspot.com/2026/11/20-33.html",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://www.blogger.com/feeds/3015267553244608361/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/3-amd-11.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "발견됨 - 현재 색인이 생성되지 않음",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/2026-11-6.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "발견됨 - 현재 색인이 생성되지 않음",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/528-538380-1-76.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "발견됨 - 현재 색인이 생성되지 않음",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "referringUrls": [
+          "https://motusnova.blogspot.com/feeds/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/3-amd-17.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "발견됨 - 현재 색인이 생성되지 않음",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "referringUrls": [
+          "https://www.blogger.com/feeds/3015267553244608361/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/2026-11-5.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "발견됨 - 현재 색인이 생성되지 않음",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
         "referringUrls": [
           "https://www.blogger.com/feeds/3015267553244608361/posts/default"
         ]
       }
-    ]
+    ],
+    "fixedSample": {
+      "paths": [
+        "/",
+        "/2026/11/3-70.html",
+        "/2026/11/062-5683-1-09.html",
+        "/2026/11/amd-37-ai.html",
+        "/2026/11/359-5648-1-31.html",
+        "/2026/11/3-58.html",
+        "/2026/11/20-33.html"
+      ],
+      "chains": [
+        {
+          "url": "https://motusnova.blogspot.com/",
+          "agent": "desktop",
+          "hops": [
+            {
+              "status": 302,
+              "location": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/&q=EgQ0mhQxGMyBwNcGIi2OVSVFik2tJ52-6p6JCfxDHS06LP3jGl2K5OCsIOWSDXY5Wm8aLzy3on2lHY8yAnJSWgFDYL2LuamDka22FQ"
+            },
+            {
+              "status": 429,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/&q=EgQ0mhQxGMyBwNcGIi2OVSVFik2tJ52-6p6JCfxDHS06LP3jGl2K5OCsIOWSDXY5Wm8aLzy3on2lHY8yAnJSWgFDYL2LuamDka22FQ",
+          "canonical": null
+        },
+        {
+          "url": "https://motusnova.blogspot.com/",
+          "agent": "googlebot-smartphone",
+          "hops": [
+            {
+              "status": 302,
+              "location": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/&q=EgQ0mhQxGMyBwNcGIi23qRfz_53KAu2od_9egL-a_Ryc6kCqxBlsWsFFOGklQkxldH0k4Tr3wjgK-ZMyAnJSWgFDYOqQzNqy-JmiqwE"
+            },
+            {
+              "status": 429,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/&q=EgQ0mhQxGMyBwNcGIi23qRfz_53KAu2od_9egL-a_Ryc6kCqxBlsWsFFOGklQkxldH0k4Tr3wjgK-ZMyAnJSWgFDYOqQzNqy-JmiqwE",
+          "canonical": null
+        },
+        {
+          "url": "https://motusnova.blogspot.com/2026/11/3-70.html",
+          "agent": "desktop",
+          "hops": [
+            {
+              "status": 302,
+              "location": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/3-70.html&q=EgQ0mhQxGM2BwNcGIi3vXVCeKWwEG3ggyLm1UuHhUmVKsiiLnPhdTJ34QKXaRsDN3xwf6yHcCgu80OUyAnJSWgFDYM2srvfT8tXF0AE"
+            },
+            {
+              "status": 429,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/3-70.html&q=EgQ0mhQxGM2BwNcGIi3vXVCeKWwEG3ggyLm1UuHhUmVKsiiLnPhdTJ34QKXaRsDN3xwf6yHcCgu80OUyAnJSWgFDYM2srvfT8tXF0AE",
+          "canonical": null
+        },
+        {
+          "url": "https://motusnova.blogspot.com/2026/11/3-70.html",
+          "agent": "googlebot-smartphone",
+          "hops": [
+            {
+              "status": 302,
+              "location": "https://motusnova.blogspot.com/2026/11/3-70.html?m=1"
+            },
+            {
+              "status": 302,
+              "location": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/3-70.html%3Fm%3D1&q=EgQ0mhQxGM2BwNcGIi0rb6Iph2JuXRWZ79DEGIT0UfEcw7eqMQhrtpx0sp4zLrfJLrm1kfxnO0Ry4oAyAnJSWgFDYKPuqtPHrdCWkAE"
+            },
+            {
+              "status": 429,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/3-70.html%3Fm%3D1&q=EgQ0mhQxGM2BwNcGIi0rb6Iph2JuXRWZ79DEGIT0UfEcw7eqMQhrtpx0sp4zLrfJLrm1kfxnO0Ry4oAyAnJSWgFDYKPuqtPHrdCWkAE",
+          "canonical": null
+        },
+        {
+          "url": "https://motusnova.blogspot.com/2026/11/062-5683-1-09.html",
+          "agent": "desktop",
+          "hops": [
+            {
+              "status": 302,
+              "location": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/062-5683-1-09.html&q=EgQ0mhQxGM2BwNcGIi3sgEvISfrNvN_SJmUGUYAn-NON0_X-Y1uRayszMHRfLGhfSS2se_zbJ8tKdNwyAnJSWgFDYPf9_K_c9r2DLQ"
+            },
+            {
+              "status": 429,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/062-5683-1-09.html&q=EgQ0mhQxGM2BwNcGIi3sgEvISfrNvN_SJmUGUYAn-NON0_X-Y1uRayszMHRfLGhfSS2se_zbJ8tKdNwyAnJSWgFDYPf9_K_c9r2DLQ",
+          "canonical": null
+        },
+        {
+          "url": "https://motusnova.blogspot.com/2026/11/062-5683-1-09.html",
+          "agent": "googlebot-smartphone",
+          "hops": [
+            {
+              "status": 302,
+              "location": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/062-5683-1-09.html&q=EgQ0mhQxGM6BwNcGIi1XQ8cSqzbBwp88UjbUXnD8tghAsXCkyMt6zWHQlMTp6j_DIOYbDsHhNqbQB6gyAnJSWgFDYLLe6cetuJHdmAE"
+            },
+            {
+              "status": 429,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/062-5683-1-09.html&q=EgQ0mhQxGM6BwNcGIi1XQ8cSqzbBwp88UjbUXnD8tghAsXCkyMt6zWHQlMTp6j_DIOYbDsHhNqbQB6gyAnJSWgFDYLLe6cetuJHdmAE",
+          "canonical": null
+        },
+        {
+          "url": "https://motusnova.blogspot.com/2026/11/amd-37-ai.html",
+          "agent": "desktop",
+          "hops": [
+            {
+              "status": 302,
+              "location": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/amd-37-ai.html&q=EgQ0mhQxGM6BwNcGIi0IfMcCfj_RfCqKfscGUbb0iUV3uQ0hY_WbQg915bhC_99VhGFSvcWN8KUgD_4yAnJSWgFDYL6P9LynvoQb"
+            },
+            {
+              "status": 429,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/amd-37-ai.html&q=EgQ0mhQxGM6BwNcGIi0IfMcCfj_RfCqKfscGUbb0iUV3uQ0hY_WbQg915bhC_99VhGFSvcWN8KUgD_4yAnJSWgFDYL6P9LynvoQb",
+          "canonical": null
+        },
+        {
+          "url": "https://motusnova.blogspot.com/2026/11/amd-37-ai.html",
+          "agent": "googlebot-smartphone",
+          "hops": [
+            {
+              "status": 302,
+              "location": "https://motusnova.blogspot.com/2026/11/amd-37-ai.html?m=1"
+            },
+            {
+              "status": 200,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://motusnova.blogspot.com/2026/11/amd-37-ai.html?m=1",
+          "canonical": null
+        },
+        {
+          "url": "https://motusnova.blogspot.com/2026/11/359-5648-1-31.html",
+          "agent": "desktop",
+          "hops": [
+            {
+              "status": 302,
+              "location": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/359-5648-1-31.html&q=EgQ0mhQxGM-BwNcGIi1H4LPY9HW_nB9KmxcUJTAReW6BwHI395-iiFKexXekdVTgSC7Md3tNVTf1zZkyAnJSWgFDYIiju7TRmcyrZw"
+            },
+            {
+              "status": 429,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/359-5648-1-31.html&q=EgQ0mhQxGM-BwNcGIi1H4LPY9HW_nB9KmxcUJTAReW6BwHI395-iiFKexXekdVTgSC7Md3tNVTf1zZkyAnJSWgFDYIiju7TRmcyrZw",
+          "canonical": null
+        },
+        {
+          "url": "https://motusnova.blogspot.com/2026/11/359-5648-1-31.html",
+          "agent": "googlebot-smartphone",
+          "hops": [
+            {
+              "status": 302,
+              "location": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/359-5648-1-31.html&q=EgQ0mhQxGM-BwNcGIi3qSunx-iPbjvopyhg82AKGCNJGVbXsVMG65KPgHkKYiDfONBjFn5W4xOadeVQyAnJSWgFDYLjolaXW78jCwwE"
+            },
+            {
+              "status": 429,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/359-5648-1-31.html&q=EgQ0mhQxGM-BwNcGIi3qSunx-iPbjvopyhg82AKGCNJGVbXsVMG65KPgHkKYiDfONBjFn5W4xOadeVQyAnJSWgFDYLjolaXW78jCwwE",
+          "canonical": null
+        },
+        {
+          "url": "https://motusnova.blogspot.com/2026/11/3-58.html",
+          "agent": "desktop",
+          "hops": [
+            {
+              "status": 302,
+              "location": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/3-58.html&q=EgQ0mhQxGNCBwNcGIi2eEYukOlJjKwp6YuUDOs10McUobaEAtTzedlczW_bFbe_WFRrYr6-UeFRONkcyAnJSWgFDYPbZwv3Nhbrb_QE"
+            },
+            {
+              "status": 429,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/3-58.html&q=EgQ0mhQxGNCBwNcGIi2eEYukOlJjKwp6YuUDOs10McUobaEAtTzedlczW_bFbe_WFRrYr6-UeFRONkcyAnJSWgFDYPbZwv3Nhbrb_QE",
+          "canonical": null
+        },
+        {
+          "url": "https://motusnova.blogspot.com/2026/11/3-58.html",
+          "agent": "googlebot-smartphone",
+          "hops": [
+            {
+              "status": 302,
+              "location": "https://motusnova.blogspot.com/2026/11/3-58.html?m=1"
+            },
+            {
+              "status": 200,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://motusnova.blogspot.com/2026/11/3-58.html?m=1",
+          "canonical": null
+        },
+        {
+          "url": "https://motusnova.blogspot.com/2026/11/20-33.html",
+          "agent": "desktop",
+          "hops": [
+            {
+              "status": 302,
+              "location": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/20-33.html&q=EgQ0mhQxGNCBwNcGIi3KZ_7bE3T5CT-oA9GSCxI4blyiC7uA3LVCwAuRBpjxxyttmNbbqwJi9g1PEvwyAnJSWgFDYI2rgcy0sdL3jwE"
+            },
+            {
+              "status": 429,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/20-33.html&q=EgQ0mhQxGNCBwNcGIi3KZ_7bE3T5CT-oA9GSCxI4blyiC7uA3LVCwAuRBpjxxyttmNbbqwJi9g1PEvwyAnJSWgFDYI2rgcy0sdL3jwE",
+          "canonical": null
+        },
+        {
+          "url": "https://motusnova.blogspot.com/2026/11/20-33.html",
+          "agent": "googlebot-smartphone",
+          "hops": [
+            {
+              "status": 302,
+              "location": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/20-33.html&q=EgQ0mhQxGNGBwNcGIi3NdHkifFu7o61N875IVyS20tzcHg1DE-p-aDq7UbKsH-AjGmOfOnLmZ0lJBDEyAnJSWgFDYPLjgu-j9JSXNw"
+            },
+            {
+              "status": 429,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/20-33.html&q=EgQ0mhQxGNGBwNcGIi3NdHkifFu7o61N875IVyS20tzcHg1DE-p-aDq7UbKsH-AjGmOfOnLmZ0lJBDEyAnJSWgFDYPLjgu-j9JSXNw",
+          "canonical": null
+        }
+      ]
+    }
   },
   "datalab": {
     "state": "PASS"
