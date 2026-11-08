@@ -83,6 +83,9 @@ try{
 }catch(error){result.searchConsole={state:'UNAVAILABLE',reason:error instanceof Error?error.message:String(error)}}
 
 // 3b) Index status (owner 2026-11-05: "구글검색 노출이 전혀 안 되는 것은 반드시 보완"): submitted sitemaps and the
+const INDEX_FIXED_SAMPLE=['/','/2026/11/3-70.html','/2026/11/062-5683-1-09.html','/2026/11/amd-37-ai.html','/2026/11/359-5648-1-31.html','/2026/11/3-58.html','/2026/11/20-33.html'];
+const DESKTOP_UA='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36';
+const GOOGLEBOT_SMARTPHONE_UA='Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)';
 // URL Inspection verdict (indexed or not, why, last crawl) for the home page, the day's articles and recent posts.
 try{
   const property=env('GOOGLE_SEARCH_CONSOLE_PROPERTY'),cid=env('SEARCH_CONSOLE_CLIENT_ID'),secret=env('SEARCH_CONSOLE_CLIENT_SECRET'),refresh=env('SEARCH_CONSOLE_REFRESH_TOKEN');
@@ -92,7 +95,10 @@ try{
   const sitemaps=sitemapsResponse.ok?((await sitemapsResponse.json() as {sitemap?:Array<Record<string,unknown>>}).sitemap??[]).map(item=>({path:item.path,lastSubmitted:item.lastSubmitted,lastDownloaded:item.lastDownloaded,isPending:item.isPending,errors:item.errors,warnings:item.warnings,contents:item.contents})):{error:`HTTP ${sitemapsResponse.status}`};
   let recent:string[]=[];
   try{const feed=await fetch(`${BLOG}/feeds/posts/summary?alt=json&max-results=10`,{signal:timeout(20000)});recent=((await feed.json() as {feed?:{entry?:Array<{link?:Array<{rel?:string;href?:string}>}>}}).feed?.entry??[]).map(entry=>entry.link?.find(link=>link.rel==='alternate')?.href??'').filter(Boolean)}catch{/* optional */}
-  const urls=[...new Set([`${BLOG}/`,...ours.map(article=>article.url),...recent])].slice(0,15),inspections=[];
+  // Fixed sample (루인 review 2026-11-08, MOT-035): the same URLs every day, so the redirect-error fix is judged on a
+  // stable before/after set: the five REDIRECT_ERROR posts, the home page and one post that was indexed.
+  const fixed=INDEX_FIXED_SAMPLE.map(path=>BLOG+path);
+  const urls=[...new Set([...fixed,...ours.map(article=>article.url),...recent])].slice(0,18),inspections=[];
   for(const url of urls){
     const response=await fetch('https://searchconsole.googleapis.com/v1/urlInspection/index:inspect',{method:'POST',headers:{...auth,'content-type':'application/json'},body:JSON.stringify({inspectionUrl:url,siteUrl:property,languageCode:'ko'}),signal:timeout(30000)});
     if(!response.ok){inspections.push({url,error:`HTTP ${response.status}: ${(await response.text()).slice(0,160)}`});continue}
@@ -100,7 +106,16 @@ try{
     inspections.push({url,verdict:index.verdict,coverageState:index.coverageState,robotsTxtState:index.robotsTxtState,indexingState:index.indexingState,pageFetchState:index.pageFetchState,lastCrawlTime:index.lastCrawlTime,googleCanonical:index.googleCanonical,userCanonical:index.userCanonical,sitemap:index.sitemap,referringUrls:index.referringUrls});
   }
   const indexed=inspections.filter(item=>'verdict' in item&&item.verdict==='PASS').length;
-  result.indexStatus={state:'PASS',sitemaps,inspected:inspections.length,indexed,inspections};
+  // Redirect chain of each fixed URL as a desktop browser and as Googlebot smartphone (public pages, read-only).
+  const chains=[];
+  for(const url of fixed)for(const [agent,ua] of [['desktop',DESKTOP_UA],['googlebot-smartphone',GOOGLEBOT_SMARTPHONE_UA]] as const){
+    try{const hops:Array<{status:number;location:string|null}>=[];let next=url;
+      for(let i=0;i<5;i++){const response=await fetch(next,{redirect:'manual',headers:{'user-agent':ua},signal:timeout(20000)});const location=response.headers.get('location');hops.push({status:response.status,location});
+        if(response.status>=300&&response.status<400&&location){next=new URL(location,next).href;continue}
+        const html=response.status===200?await response.text():'';chains.push({url,agent,hops,finalUrl:next,canonical:html.match(/<link[^>]+rel=['"]canonical['"][^>]*href=['"]([^'"]+)/i)?.[1]??null});break}
+    }catch(error){chains.push({url,agent,error:error instanceof Error?error.message:String(error)})}
+  }
+  result.indexStatus={state:'PASS',sitemaps,inspected:inspections.length,indexed,inspections,fixedSample:{paths:INDEX_FIXED_SAMPLE,chains}};
 }catch(error){result.indexStatus={state:'UNAVAILABLE',reason:error instanceof Error?error.message:String(error)}}
 
 // 4) Naver DataLab interest (relative, last 14 days) for each article's keywords.
