@@ -1,1 +1,2 @@
 {"runId":"42701148355","attempt":"1","event":"workflow_dispatch","schedule":null,"category":"korea","operationDate":"2026-11-10","scheduledKst":null,"startedAt":"2026-11-09T21:18:01Z","delayMinutes":null,"state":"HOLD","reason":"BROKER_MARKET_COMMENTARY_UNAVAILABLE","publicPostUrl":null}
+{"runId":"42713812318","attempt":"1","event":"workflow_dispatch","schedule":null,"category":"korea","operationDate":"2026-11-10","scheduledKst":null,"startedAt":"2026-11-09T22:39:34Z","delayMinutes":null,"state":"HOLD","reason":"BROKER_MARKET_COMMENTARY_UNAVAILABLE","publicPostUrl":null}
