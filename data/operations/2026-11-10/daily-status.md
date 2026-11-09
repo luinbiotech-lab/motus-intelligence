@@ -1,10 +1,10 @@
 # MOTUS 일일 상태 2026-11-10
 
-갱신: 2026-11-09T21:19:02.912Z
+갱신: 2026-11-09T21:47:18.995Z
 
 | 카테고리 | 상태 | 사유 | 글 | 실행 수 | 첫 실행 지연 |
 | --- | --- | --- | --- | --- | --- |
-| 미국증시 | 미실행 |  |  | 0 |  |
+| 미국증시 | HOLD | BROKER_MARKET_COMMENTARY_UNAVAILABLE |  | 1 |  |
 | AI 인텔리전스 | 미실행 |  |  | 0 |  |
 | 국내증시 | HOLD | BROKER_MARKET_COMMENTARY_UNAVAILABLE |  | 1 |  |
 
