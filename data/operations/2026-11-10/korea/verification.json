@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "1.1",
+  "category": "KOREA_MARKET",
+  "operationDate": "2026-11-10",
+  "observedDate": "2026-11-10",
+  "sourceMode": "internal",
+  "verification": "FAILED",
+  "unresolvedConflicts": [
+    "BROKER_MARKET_COMMENTARY_UNAVAILABLE"
+  ],
+  "provenancePass": false,
+  "sourceDiversityPass": false,
+  "sourceLinksPass": false,
+  "mobilePass": false,
+  "editorialQualityPass": false,
+  "leakagePass": true,
+  "duplicateCheck": "PENDING_REMOTE",
+  "duplicateUncertainty": true,
+  "articleFingerprint": "",
+  "commerceEnabled": false,
+  "verifiedAt": "2026-11-09T21:18:29.926Z",
+  "expiresAt": "2026-11-09T22:48:29.926Z",
+  "sourceAuditIds": [
+    "naver:kospi:history",
+    "naver:kosdaq:history",
+    "naver:usd-krw",
+    "naver:flows",
+    "naver:mover",
+    "yahoo-finance:kospi:query1.finance.yahoo.com",
+    "yahoo-finance:kosdaq:query1.finance.yahoo.com",
+    "market-research:KB증권 리서치",
+    "market-research:한국경제 증권",
+    "market-research:매일경제 증권",
+    "market-research:article:https://rc.kbsec.com/detailView.able?documentid=20261021144128693K",
+    "market-research:article:https://rc.kbsec.com/detailView.able?documentid=20261030172030640K",
+    "market-research:article:https://www.hankyung.com/article/2026111061777",
+    "market-research:article:https://www.hankyung.com/article/2026111061747",
+    "market-research:article:https://www.mk.co.kr/news/business/12202662",
+    "market-research:article:https://www.mk.co.kr/news/stock/12202975",
+    "deep:naver-research:list:market",
+    "deep:naver-research:list:invest",
+    "deep:naver-research:list:economy",
+    "deep:naver-research:list:industry",
+    "deep:naver-research:list:company",
+    "deep:consensus:list:economy",
+    "deep:consensus:list:market",
+    "deep:consensus:list:company",
+    "deep:consensus:list:industry",
+    "deep:naver:search-top",
+    "deep:naver:stock-price:005930",
+    "deep:naver:stock-price:000660",
+    "deep:naver:stock-price:006400",
+    "deep:naver:stock-price:009150",
+    "deep:naver:stock-price:196170",
+    "deep:naver:stock-price:034020"
+  ],
+  "sourceAuditFingerprint": "sha256:4e340470197dce0c09bb5ac7b2a23a321a4d626ebb2751758c0423a904b8e642",
+  "crossVerificationFingerprint": "sha256:7ef8dcca2a17a03923efeadf9864e80ec0466350a750d4e770c9faca3d02a911",
+  "crossVerification": {
+    "schemaVersion": "1.0",
+    "category": "KOREA_MARKET",
+    "observedDate": "2026-11-09",
+    "primarySource": {
+      "provider": "Naver Finance",
+      "domain": "naver.com",
+      "urls": [
+        "https://m.stock.naver.com/api/index/KOSPI/price?pageSize=10&page=1",
+        "https://m.stock.naver.com/api/index/KOSDAQ/price?pageSize=10&page=1"
+      ]
+    },
+    "independentSource": {
+      "providers": [
+        "YAHOO_FINANCE"
+      ],
+      "domains": [
+        "yahoo.com"
+      ],
+      "urls": [
+        "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?period1=1794009600&period2=1794441600&interval=1d",
+        "https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?period1=1794009600&period2=1794441600&interval=1d"
+      ]
+    },
+    "comparedFields": [
+      {
+        "field": "KOSPI",
+        "primaryValue": 5018.85,
+        "independentValue": 5018.85009765625,
+        "difference": 0.00009765624963620212,
+        "tolerance": 0.05,
+        "result": "PASS",
+        "primarySourceUrl": "https://m.stock.naver.com/api/index/KOSPI/price?pageSize=10&page=1",
+        "independentSourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?period1=1794009600&period2=1794441600&interval=1d",
+        "metricBasis": "SESSION_CLOSE"
+      },
+      {
+        "field": "KOSDAQ",
+        "primaryValue": 638.97,
+        "independentValue": 638.969970703125,
+        "difference": 0.00002929687502728484,
+        "tolerance": 0.05,
+        "result": "PASS",
+        "primarySourceUrl": "https://m.stock.naver.com/api/index/KOSDAQ/price?pageSize=10&page=1",
+        "independentSourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?period1=1794009600&period2=1794441600&interval=1d",
+        "metricBasis": "SESSION_CLOSE"
+      }
+    ],
+    "tolerance": {
+      "KOSPI": 0.05,
+      "KOSDAQ": 0.05,
+      "USD_KRW": 2
+    },
+    "comparisonResult": "PASS",
+    "sourceDiversityPass": true,
+    "verification": "VERIFIED",
+    "reasonCodes": [],
+    "verifiedAt": "2026-11-09T21:18:29.926Z",
+    "officialPhase": "PRE_PUBLICATION",
+    "reconciliation": {
+      "status": "NOT_REQUIRED",
+      "officialObservedDates": [
+        "2026-11-09"
+      ]
+    }
+  }
+}
