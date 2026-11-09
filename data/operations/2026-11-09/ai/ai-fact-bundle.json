@@ -1,6 +1,6 @@
 {
   "schema": "motus.ai-facts/1",
-  "bundleHash": "835aaa3175886f0f",
+  "bundleHash": "a287879514895122",
   "operationDate": "2026-11-09",
   "sessionDate": "2026-11-06",
   "facts": [
@@ -13,23 +13,23 @@
     {
       "id": "F2",
       "kind": "official",
-      "text": "엔비디아는 2026년 11월 06일(한국 시간) 공식 블로그에 「Vera Delivers the Best of Both Worlds: Highest Throughput and Fastest Agents」 제목의 발표를 게시했다. 원문 본문은 AI 컴퓨팅 인프라 확충에 관한 내용을 다룬다. 발표의 중심 제품·플랫폼은 Vera이다.",
+      "text": "엔비디아는 2026년 11월 09일(한국 시간) 공식 블로그에 「Korea Advances Physical AI Across Industries With NVIDIA」 제목의 발표를 게시했다. 원문 본문은 AI 협력 확대에 관한 내용을 다룬다. 원문에서 언급된 제품·플랫폼은 Isaac이다. 원문에서 함께 언급된 국가·기업은 한국, 삼성이다. 원문은 5배 빠른 처리 등의 수치를 명시했다.",
       "publisher": "엔비디아",
-      "sourceUrl": "https://blogs.nvidia.com/blog/vera-cpu-highest-throughput-fastest-agents/"
+      "sourceUrl": "https://blogs.nvidia.com/blog/korea-physical-ai-ecosystem/"
     },
     {
       "id": "F3",
       "kind": "official",
-      "text": "구글은 2026년 11월 06일(한국 시간) 공식 블로그에 「Gemini Omni 1.2 Flash: Fast and cost-effective with longer clips」 제목의 발표를 게시했다. 발표 제목과 본문은 신규 AI 제품·기능 공개에 관한 내용을 다룬다. 발표의 중심 제품·플랫폼은 Gemini Omni 1.2 Flash이다.",
-      "publisher": "구글",
-      "sourceUrl": "https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemini-omni-1-2-flash/"
+      "text": "엔비디아는 2026년 11월 09일(한국 시간) 공식 블로그에 「NVIDIA Announces New Planned Investments in Korean Startups at the MSIT-NVIDIA AI Startup Partnership Forum」 제목의 발표를 게시했다. 발표 제목과 본문은 AI 협력 확대에 관한 내용을 다룬다. 원문에서 함께 언급된 국가·기업은 한국이다.",
+      "publisher": "엔비디아",
+      "sourceUrl": "https://blogs.nvidia.com/blog/korean-startup-investments-msit/"
     },
     {
       "id": "F4",
       "kind": "official",
-      "text": "아마존웹서비스(AWS)는 2026년 11월 07일(한국 시간) 공식 What’s New 공지에 「Kimi K3.1 Pro (Highspeed) now available on Amazon Bedrock」 제목의 발표를 게시했다. 발표 제목과 본문은 신규 AI 제품·기능 공개에 관한 내용을 다룬다. 발표의 중심 제품·플랫폼은 Amazon Bedrock이다.",
+      "text": "아마존웹서비스(AWS)는 2026년 11월 06일(한국 시간) 공식 What’s New 공지에 「Announcing Web Answer on Amazon Bedrock AgentCore」 제목의 발표를 게시했다. 발표 제목과 본문은 신규 AI 제품·기능 공개에 관한 내용을 다룬다. 발표의 중심 제품·플랫폼은 Amazon Bedrock AgentCore이다.",
       "publisher": "아마존웹서비스(AWS)",
-      "sourceUrl": "https://aws.amazon.com/about-aws/whats-new/2026/11/moonshot-ai-kimi-k3-1-pro-on-amazon-bedrock"
+      "sourceUrl": "https://aws.amazon.com/about-aws/whats-new/2026/11/web-answer-amazon-bedrock/"
     },
     {
       "id": "F5",

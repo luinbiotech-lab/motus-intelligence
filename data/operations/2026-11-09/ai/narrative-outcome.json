@@ -1,15 +1,15 @@
 {
   "schema": "motus.ai-narrative-outcome/1",
   "mode": "SHADOW",
-  "bundleHash": "835aaa3175886f0f",
-  "status": "VALID",
-  "reason": null,
+  "bundleHash": "a287879514895122",
+  "status": "REJECTED",
+  "reason": "NARRATIVE_INVALID:LENGTH",
   "attempts": 2,
-  "errors": [],
+  "errors": [
+    "LENGTH:s2p3:76",
+    "BANNED:s3p3:매수 기회"
+  ],
   "model": "claude-sonnet-5-5",
-  "durationMs": 45023,
-  "editorialQuality": {
-    "pass": true,
-    "reasons": []
-  }
+  "durationMs": 38526,
+  "editorialQuality": null
 }

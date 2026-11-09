@@ -1,16 +1,16 @@
 {
-  "collectedAt": "2026-11-09T03:34:06.327Z",
+  "collectedAt": "2026-11-09T11:56:50.038Z",
   "signalDate": "2026-11-08",
   "provider": "NAVER_DATALAB",
   "freshness": "PREVIOUS_DAY_NAVER_SIGNAL",
   "fallbackReason": null,
   "warnings": [],
   "orderedTopicIds": [
-    "ai:6",
-    "ai:3",
-    "ai:0"
+    "ai:5",
+    "ai:0",
+    "ai:2"
   ],
-  "selectedSecondaryTopicId": "ai:3",
+  "selectedSecondaryTopicId": "ai:0",
   "factsChanged": false,
   "gateOverride": false
 }
