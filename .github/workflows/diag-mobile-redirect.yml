@@ -31,3 +31,4 @@ jobs:
           grep -o '<meta[^>]*og:image[^>]*>' page.html | head -3 | sed 's/^/OGIMG /'
           grep -o '<img[^>]*hero[^>]*>\|<img[^>]*1200[^>]*>' page.html | head -2 | cut -c1-400 | sed 's/^/HEROIMG /'
           grep -o '<h1[^>]*>[^<]*' page.html | head -2 | sed 's/^/H1 /'
+# rerun 2026-11-09T04:01:17Z
