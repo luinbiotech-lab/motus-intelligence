@@ -21,4 +21,13 @@ jobs:
               done
             done
           done
-# rerun 2026-11-08T13:57:44Z
+      - name: Probe og:image on today's post (no writes)
+        run: |
+          u='https://motusnova.blogspot.com/2026/11/11-6-602-505969-1-40.html'
+          for i in 1 2 3 4 5 6; do
+            curl -sS -L -A 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36' "$u" -o page.html -w 'HTTP %{http_code} %{url_effective}\n' || true
+            if grep -q 'og:image' page.html; then break; fi; sleep 5
+          done
+          grep -o '<meta[^>]*og:image[^>]*>' page.html | head -3 | sed 's/^/OGIMG /'
+          grep -o '<img[^>]*hero[^>]*>\|<img[^>]*1200[^>]*>' page.html | head -2 | cut -c1-400 | sed 's/^/HEROIMG /'
+          grep -o '<h1[^>]*>[^<]*' page.html | head -2 | sed 's/^/H1 /'
