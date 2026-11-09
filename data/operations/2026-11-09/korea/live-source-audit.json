@@ -12,7 +12,7 @@
       "url": "https://m.stock.naver.com/api/index/KOSPI/price?pageSize=10&page=1",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-09T00:52:29.786Z",
+      "collectedAt": "2026-11-09T02:47:05.590Z",
       "error": null,
       "observedDate": "2026-11-06",
       "referenceDate": "2026-11-06",
@@ -25,7 +25,7 @@
       "url": "https://m.stock.naver.com/api/index/KOSDAQ/price?pageSize=10&page=1",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-09T00:52:29.786Z",
+      "collectedAt": "2026-11-09T02:47:05.590Z",
       "error": null,
       "observedDate": "2026-11-06",
       "referenceDate": "2026-11-06",
@@ -38,10 +38,10 @@
       "url": "https://api.stock.naver.com/marketindex/exchange/FX_USDKRW",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-09T00:52:29.786Z",
+      "collectedAt": "2026-11-09T02:47:05.590Z",
       "error": null,
       "dateField": "exchangeInfo.localTradedAt",
-      "sourceTimestamp": "2026-11-09T09:51:44+09:00",
+      "sourceTimestamp": "2026-11-09T11:45:23+09:00",
       "observedDate": "2026-11-09",
       "referenceDate": "2026-11-09"
     },
@@ -51,7 +51,7 @@
       "url": "https://m.stock.naver.com/api/index/KOSPI/trend",
       "status": "FAILED",
       "recordCount": 1,
-      "collectedAt": "2026-11-09T00:52:29.786Z",
+      "collectedAt": "2026-11-09T02:47:05.590Z",
       "error": "CURRENT_SESSION_DATA_EXCLUDED",
       "dateField": "bizdate",
       "sourceTimestamp": "20261109",
@@ -64,10 +64,10 @@
       "url": "https://m.stock.naver.com/api/stocks/up/KOSPI?page=1&pageSize=20",
       "status": "FAILED",
       "recordCount": 1,
-      "collectedAt": "2026-11-09T00:52:29.786Z",
+      "collectedAt": "2026-11-09T02:47:05.590Z",
       "error": "CURRENT_SESSION_DATA_EXCLUDED",
       "dateField": "localTradedAt",
-      "sourceTimestamp": "2026-11-09T09:52:18+09:00",
+      "sourceTimestamp": "2026-11-09T11:47:08+09:00",
       "observedDate": "2026-11-09",
       "referenceDate": "2026-11-06"
     },
@@ -77,7 +77,7 @@
       "url": "https://stock.naver.com/api/domestic/market/upjong/list?startIdx=0&pageSize=100&sortType=changeRate",
       "status": "FAILED",
       "recordCount": 0,
-      "collectedAt": "2026-11-09T00:52:29.786Z",
+      "collectedAt": "2026-11-09T02:47:05.590Z",
       "error": "HTTP_404"
     },
     {
@@ -86,7 +86,7 @@
       "url": "https://data-dbg.krx.co.kr/svc/apis/idx/kospi_dd_trd?basDd=20261106",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-09T00:52:29.786Z",
+      "collectedAt": "2026-11-09T02:47:05.590Z",
       "error": null,
       "referenceDate": "2026-11-06"
     },
@@ -96,7 +96,7 @@
       "url": "https://data-dbg.krx.co.kr/svc/apis/idx/kosdaq_dd_trd?basDd=20261106",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-09T00:52:29.786Z",
+      "collectedAt": "2026-11-09T02:47:05.590Z",
       "error": null,
       "referenceDate": "2026-11-06"
     },
@@ -106,7 +106,7 @@
       "url": "https://rc.kbsec.com/today/index.able",
       "status": "PASS",
       "recordCount": 2,
-      "collectedAt": "2026-11-09T00:52:29.786Z",
+      "collectedAt": "2026-11-09T02:47:05.590Z",
       "error": null
     },
     {
@@ -115,7 +115,7 @@
       "url": "https://www.hankyung.com/feed/finance",
       "status": "PASS",
       "recordCount": 2,
-      "collectedAt": "2026-11-09T00:52:29.786Z",
+      "collectedAt": "2026-11-09T02:47:05.590Z",
       "error": null
     },
     {
@@ -124,7 +124,7 @@
       "url": "https://www.mk.co.kr/rss/50200011/",
       "status": "PASS",
       "recordCount": 2,
-      "collectedAt": "2026-11-09T00:52:29.786Z",
+      "collectedAt": "2026-11-09T02:47:05.590Z",
       "error": null
     },
     {
@@ -133,7 +133,7 @@
       "url": "https://rc.kbsec.com/detailView.able?documentid=20261021144128693K",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-09T00:52:29.786Z",
+      "collectedAt": "2026-11-09T02:47:05.590Z",
       "error": null,
       "observedDate": "2026-10-21"
     },
@@ -143,47 +143,47 @@
       "url": "https://rc.kbsec.com/detailView.able?documentid=20261030172030640K",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-09T00:52:29.786Z",
+      "collectedAt": "2026-11-09T02:47:05.590Z",
       "error": null,
       "observedDate": "2026-10-30"
     },
     {
-      "sourceId": "market-research:article:https://www.hankyung.com/article/2026110936236",
+      "sourceId": "market-research:article:https://www.hankyung.com/article/202611094501i",
       "category": "KOREA_MARKET",
-      "url": "https://www.hankyung.com/article/2026110936236",
+      "url": "https://www.hankyung.com/article/202611094501i",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-09T00:52:29.786Z",
-      "error": null,
-      "observedDate": "2026-11-08"
-    },
-    {
-      "sourceId": "market-research:article:https://www.hankyung.com/article/202611083134i",
-      "category": "KOREA_MARKET",
-      "url": "https://www.hankyung.com/article/202611083134i",
-      "status": "PASS",
-      "recordCount": 1,
-      "collectedAt": "2026-11-09T00:52:29.786Z",
-      "error": null,
-      "observedDate": "2026-11-08"
-    },
-    {
-      "sourceId": "market-research:article:https://www.mk.co.kr/news/stock/12202067",
-      "category": "KOREA_MARKET",
-      "url": "https://www.mk.co.kr/news/stock/12202067",
-      "status": "PASS",
-      "recordCount": 1,
-      "collectedAt": "2026-11-09T00:52:29.786Z",
+      "collectedAt": "2026-11-09T02:47:05.590Z",
       "error": null,
       "observedDate": "2026-11-09"
     },
     {
-      "sourceId": "market-research:article:https://www.mk.co.kr/news/stock/12202043",
+      "sourceId": "market-research:article:https://www.hankyung.com/article/2026110945406",
       "category": "KOREA_MARKET",
-      "url": "https://www.mk.co.kr/news/stock/12202043",
+      "url": "https://www.hankyung.com/article/2026110945406",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-09T00:52:29.786Z",
+      "collectedAt": "2026-11-09T02:47:05.590Z",
+      "error": null,
+      "observedDate": "2026-11-09"
+    },
+    {
+      "sourceId": "market-research:article:https://www.mk.co.kr/news/stock/12202159",
+      "category": "KOREA_MARKET",
+      "url": "https://www.mk.co.kr/news/stock/12202159",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-09T02:47:05.590Z",
+      "error": null,
+      "observedDate": "2026-11-09"
+    },
+    {
+      "sourceId": "market-research:article:https://www.mk.co.kr/news/stock/12202114",
+      "category": "KOREA_MARKET",
+      "url": "https://www.mk.co.kr/news/stock/12202114",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-09T02:47:05.590Z",
       "error": null,
       "observedDate": "2026-11-09"
     },
@@ -193,7 +193,7 @@
       "url": "https://m.stock.naver.com/api/research/market?page=1&pageSize=60",
       "status": "PASS",
       "recordCount": 60,
-      "collectedAt": "2026-11-09T00:52:29.786Z",
+      "collectedAt": "2026-11-09T02:47:05.590Z",
       "error": null
     },
     {
@@ -201,8 +201,8 @@
       "category": "KOREA_MARKET",
       "url": "https://m.stock.naver.com/api/research/economy?page=1&pageSize=60",
       "status": "PASS",
-      "recordCount": 33,
-      "collectedAt": "2026-11-09T00:52:29.786Z",
+      "recordCount": 39,
+      "collectedAt": "2026-11-09T02:47:05.590Z",
       "error": null
     },
     {
@@ -211,16 +211,7 @@
       "url": "https://m.stock.naver.com/api/research/invest?page=1&pageSize=60",
       "status": "PASS",
       "recordCount": 60,
-      "collectedAt": "2026-11-09T00:52:29.786Z",
-      "error": null
-    },
-    {
-      "sourceId": "deep:naver-research:list:company",
-      "category": "KOREA_MARKET",
-      "url": "https://m.stock.naver.com/api/research/company?page=1&pageSize=60",
-      "status": "PASS",
-      "recordCount": 60,
-      "collectedAt": "2026-11-09T00:52:29.786Z",
+      "collectedAt": "2026-11-09T02:47:05.590Z",
       "error": null
     },
     {
@@ -229,7 +220,16 @@
       "url": "https://m.stock.naver.com/api/research/industry?page=1&pageSize=60",
       "status": "PASS",
       "recordCount": 60,
-      "collectedAt": "2026-11-09T00:52:29.786Z",
+      "collectedAt": "2026-11-09T02:47:05.590Z",
+      "error": null
+    },
+    {
+      "sourceId": "deep:naver-research:list:company",
+      "category": "KOREA_MARKET",
+      "url": "https://m.stock.naver.com/api/research/company?page=1&pageSize=60",
+      "status": "PASS",
+      "recordCount": 60,
+      "collectedAt": "2026-11-09T02:47:05.590Z",
       "error": null
     },
     {
@@ -238,7 +238,7 @@
       "url": "https://consensus.hankyung.com/analysis/list?report_type=EC&sdate=2026-10-31&edate=2026-11-10&now_page=1&pagenum=80",
       "status": "PASS",
       "recordCount": 3,
-      "collectedAt": "2026-11-09T00:52:29.786Z",
+      "collectedAt": "2026-11-09T02:47:05.590Z",
       "error": null
     },
     {
@@ -246,17 +246,8 @@
       "category": "KOREA_MARKET",
       "url": "https://consensus.hankyung.com/analysis/list?skinType=market&report_type=MK&sdate=2026-10-31&edate=2026-11-10&now_page=1&pagenum=80",
       "status": "PASS",
-      "recordCount": 67,
-      "collectedAt": "2026-11-09T00:52:29.786Z",
-      "error": null
-    },
-    {
-      "sourceId": "deep:consensus:list:industry",
-      "category": "KOREA_MARKET",
-      "url": "https://consensus.hankyung.com/analysis/list?skinType=industry&report_type=IN&sdate=2026-10-31&edate=2026-11-10&now_page=1&pagenum=80",
-      "status": "PASS",
-      "recordCount": 67,
-      "collectedAt": "2026-11-09T00:52:29.786Z",
+      "recordCount": 72,
+      "collectedAt": "2026-11-09T02:47:05.590Z",
       "error": null
     },
     {
@@ -264,9 +255,105 @@
       "category": "KOREA_MARKET",
       "url": "https://consensus.hankyung.com/analysis/list?skinType=business&report_type=CO&sdate=2026-10-31&edate=2026-11-10&now_page=1&pagenum=80",
       "status": "PASS",
-      "recordCount": 78,
-      "collectedAt": "2026-11-09T00:52:29.786Z",
+      "recordCount": 77,
+      "collectedAt": "2026-11-09T02:47:05.590Z",
       "error": null
+    },
+    {
+      "sourceId": "deep:consensus:list:industry",
+      "category": "KOREA_MARKET",
+      "url": "https://consensus.hankyung.com/analysis/list?skinType=industry&report_type=IN&sdate=2026-10-31&edate=2026-11-10&now_page=1&pagenum=80",
+      "status": "PASS",
+      "recordCount": 70,
+      "collectedAt": "2026-11-09T02:47:05.590Z",
+      "error": null
+    },
+    {
+      "sourceId": "deep:naver-research:market:38093",
+      "category": "KOREA_MARKET",
+      "url": "https://stock.pstatic.net/stock-research/market/18/20261109_market_125856000.pdf",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-11-09T02:47:05.590Z",
+      "error": "NAVER_RESEARCH_EMPTY"
+    },
+    {
+      "sourceId": "deep:naver-research:market:38092",
+      "category": "KOREA_MARKET",
+      "url": "https://stock.pstatic.net/stock-research/market/21/20261109_market_229084000.pdf",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-11-09T02:47:05.590Z",
+      "error": "NAVER_RESEARCH_EMPTY"
+    },
+    {
+      "sourceId": "deep:naver-research:market:38090",
+      "category": "KOREA_MARKET",
+      "url": "https://stock.pstatic.net/stock-research/market/21/20261109_market_234914000.pdf",
+      "status": "PASS",
+      "recordCount": 6,
+      "collectedAt": "2026-11-09T02:47:05.590Z",
+      "error": null,
+      "observedDate": "2026-11-09"
+    },
+    {
+      "sourceId": "deep:naver-research:market:38089",
+      "category": "KOREA_MARKET",
+      "url": "https://stock.pstatic.net/stock-research/market/61/20261109_market_986168000.pdf",
+      "status": "PASS",
+      "recordCount": 6,
+      "collectedAt": "2026-11-09T02:47:05.590Z",
+      "error": null,
+      "observedDate": "2026-11-09"
+    },
+    {
+      "sourceId": "deep:naver-research:market:38088",
+      "category": "KOREA_MARKET",
+      "url": "https://stock.pstatic.net/stock-research/market/64/20261109_market_497908000.pdf",
+      "status": "PASS",
+      "recordCount": 5,
+      "collectedAt": "2026-11-09T02:47:05.590Z",
+      "error": null,
+      "observedDate": "2026-11-09"
+    },
+    {
+      "sourceId": "deep:naver-research:market:38087",
+      "category": "KOREA_MARKET",
+      "url": "https://stock.pstatic.net/stock-research/market/40/20261109_market_848971000.pdf",
+      "status": "PASS",
+      "recordCount": 3,
+      "collectedAt": "2026-11-09T02:47:05.590Z",
+      "error": null,
+      "observedDate": "2026-11-09"
+    },
+    {
+      "sourceId": "deep:naver-research:market:38086",
+      "category": "KOREA_MARKET",
+      "url": "https://stock.pstatic.net/stock-research/market/58/20261109_market_605655000.pdf",
+      "status": "PASS",
+      "recordCount": 4,
+      "collectedAt": "2026-11-09T02:47:05.590Z",
+      "error": null,
+      "observedDate": "2026-11-09"
+    },
+    {
+      "sourceId": "deep:naver-research:market:38085",
+      "category": "KOREA_MARKET",
+      "url": "https://stock.pstatic.net/stock-research/market/63/20261109_market_912991000.pdf",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-09T02:47:05.590Z",
+      "error": null,
+      "observedDate": "2026-11-09"
+    },
+    {
+      "sourceId": "deep:naver-research:market:38083",
+      "category": "KOREA_MARKET",
+      "url": "https://stock.pstatic.net/stock-research/market/64/20261109_market_612067000.pdf",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-11-09T02:47:05.590Z",
+      "error": "NAVER_RESEARCH_EMPTY"
     },
     {
       "sourceId": "deep:naver-research:market:38082",
@@ -274,7 +361,7 @@
       "url": "https://stock.pstatic.net/stock-research/market/21/20261109_market_963486000.pdf",
       "status": "PASS",
       "recordCount": 3,
-      "collectedAt": "2026-11-09T00:52:29.786Z",
+      "collectedAt": "2026-11-09T02:47:05.590Z",
       "error": null,
       "observedDate": "2026-11-09"
     },
@@ -284,87 +371,9 @@
       "url": "https://stock.pstatic.net/stock-research/market/58/20261109_market_763730000.pdf",
       "status": "PASS",
       "recordCount": 6,
-      "collectedAt": "2026-11-09T00:52:29.786Z",
+      "collectedAt": "2026-11-09T02:47:05.590Z",
       "error": null,
       "observedDate": "2026-11-09"
-    },
-    {
-      "sourceId": "deep:naver-research:economy:14000",
-      "category": "KOREA_MARKET",
-      "url": "https://stock.pstatic.net/stock-research/economy/21/20261109_economy_583227000.pdf",
-      "status": "FAILED",
-      "recordCount": 0,
-      "collectedAt": "2026-11-09T00:52:29.786Z",
-      "error": "NAVER_RESEARCH_EMPTY"
-    },
-    {
-      "sourceId": "deep:consensus:pdf:653934",
-      "category": "KOREA_MARKET",
-      "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653934",
-      "status": "PASS",
-      "recordCount": 0,
-      "collectedAt": "2026-11-09T00:52:29.786Z",
-      "error": null,
-      "observedDate": "2026-11-09"
-    },
-    {
-      "sourceId": "deep:consensus:pdf:653921",
-      "category": "KOREA_MARKET",
-      "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653921",
-      "status": "PASS",
-      "recordCount": 2,
-      "collectedAt": "2026-11-09T00:52:29.786Z",
-      "error": null,
-      "observedDate": "2026-11-09"
-    },
-    {
-      "sourceId": "deep:consensus:pdf:653919",
-      "category": "KOREA_MARKET",
-      "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653919",
-      "status": "PASS",
-      "recordCount": 4,
-      "collectedAt": "2026-11-09T00:52:29.786Z",
-      "error": null,
-      "observedDate": "2026-11-09"
-    },
-    {
-      "sourceId": "deep:consensus:pdf:653904",
-      "category": "KOREA_MARKET",
-      "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653904",
-      "status": "PASS",
-      "recordCount": 0,
-      "collectedAt": "2026-11-09T00:52:29.786Z",
-      "error": null,
-      "observedDate": "2026-11-09"
-    },
-    {
-      "sourceId": "deep:consensus:pdf:653890",
-      "category": "KOREA_MARKET",
-      "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653890",
-      "status": "PASS",
-      "recordCount": 13,
-      "collectedAt": "2026-11-09T00:52:29.786Z",
-      "error": null,
-      "observedDate": "2026-11-09"
-    },
-    {
-      "sourceId": "deep:naver-research:market:38078",
-      "category": "KOREA_MARKET",
-      "url": "https://stock.pstatic.net/stock-research/market/21/20261106_market_453803000.pdf",
-      "status": "FAILED",
-      "recordCount": 0,
-      "collectedAt": "2026-11-09T00:52:29.786Z",
-      "error": "NAVER_RESEARCH_EMPTY"
-    },
-    {
-      "sourceId": "deep:naver-research:market:38076",
-      "category": "KOREA_MARKET",
-      "url": "https://stock.pstatic.net/stock-research/market/18/20261106_market_369972000.pdf",
-      "status": "PASS",
-      "recordCount": 5,
-      "collectedAt": "2026-11-09T00:52:29.786Z",
-      "error": null,
-      "observedDate": "2026-11-06"
     },
     {
       "sourceId": "deep:naver:search-top",
@@ -372,7 +381,7 @@
       "url": "https://m.stock.naver.com/api/stocks/searchTop/all?page=1&pageSize=20",
       "status": "PASS",
       "recordCount": 19,
-      "collectedAt": "2026-11-09T00:52:29.786Z",
+      "collectedAt": "2026-11-09T02:47:05.590Z",
       "error": null,
       "observedDate": "2026-11-06"
     },
@@ -382,7 +391,7 @@
       "url": "https://m.stock.naver.com/api/stock/005930/price?pageSize=5&page=1",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-09T00:52:29.786Z",
+      "collectedAt": "2026-11-09T02:47:05.590Z",
       "error": null,
       "observedDate": "2026-11-06"
     },
@@ -392,7 +401,27 @@
       "url": "https://m.stock.naver.com/api/stock/000660/price?pageSize=5&page=1",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-09T00:52:29.786Z",
+      "collectedAt": "2026-11-09T02:47:05.590Z",
+      "error": null,
+      "observedDate": "2026-11-06"
+    },
+    {
+      "sourceId": "deep:naver:stock-price:196170",
+      "category": "KOREA_MARKET",
+      "url": "https://m.stock.naver.com/api/stock/196170/price?pageSize=5&page=1",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-09T02:47:05.590Z",
+      "error": null,
+      "observedDate": "2026-11-06"
+    },
+    {
+      "sourceId": "deep:naver:stock-price:006400",
+      "category": "KOREA_MARKET",
+      "url": "https://m.stock.naver.com/api/stock/006400/price?pageSize=5&page=1",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-09T02:47:05.590Z",
       "error": null,
       "observedDate": "2026-11-06"
     },
@@ -402,17 +431,7 @@
       "url": "https://m.stock.naver.com/api/stock/009150/price?pageSize=5&page=1",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-09T00:52:29.786Z",
-      "error": null,
-      "observedDate": "2026-11-06"
-    },
-    {
-      "sourceId": "deep:naver:stock-price:035420",
-      "category": "KOREA_MARKET",
-      "url": "https://m.stock.naver.com/api/stock/035420/price?pageSize=5&page=1",
-      "status": "PASS",
-      "recordCount": 1,
-      "collectedAt": "2026-11-09T00:52:29.786Z",
+      "collectedAt": "2026-11-09T02:47:05.590Z",
       "error": null,
       "observedDate": "2026-11-06"
     },
@@ -422,27 +441,7 @@
       "url": "https://m.stock.naver.com/api/stock/034020/price?pageSize=5&page=1",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-09T00:52:29.786Z",
-      "error": null,
-      "observedDate": "2026-11-06"
-    },
-    {
-      "sourceId": "deep:naver:stock-price:005380",
-      "category": "KOREA_MARKET",
-      "url": "https://m.stock.naver.com/api/stock/005380/price?pageSize=5&page=1",
-      "status": "PASS",
-      "recordCount": 1,
-      "collectedAt": "2026-11-09T00:52:29.786Z",
-      "error": null,
-      "observedDate": "2026-11-06"
-    },
-    {
-      "sourceId": "deep:research:listed:stock.pstatic.net/stock-research/company/63/20261106_company_508693000.pdf",
-      "category": "KOREA_MARKET",
-      "url": "https://stock.pstatic.net/stock-research/company/63/20261106_company_508693000.pdf",
-      "status": "PASS",
-      "recordCount": 1,
-      "collectedAt": "2026-11-09T00:52:29.786Z",
+      "collectedAt": "2026-11-09T02:47:05.590Z",
       "error": null,
       "observedDate": "2026-11-06"
     }
