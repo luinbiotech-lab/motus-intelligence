@@ -1,0 +1,74 @@
+{
+  "gate": {
+    "state": "AUTO_PUBLISH_READY",
+    "reasons": [],
+    "approval": "AUTO_POLICY_APPROVAL",
+    "checkedAt": "2026-11-09T03:34:21.198Z"
+  },
+  "searchRegistration": {
+    "publicationId": "motus-live-2026-11-09:ai",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/11/amd-11-ai.html",
+    "registeredAt": "2026-11-09T12:34:23+09:00",
+    "trigger": "PUBLICATION_PUBLISHED",
+    "googleInspectionState": "QUEUED",
+    "naverDiscoveryState": "PENDING",
+    "visibility": {
+      "publicationId": "motus-live-2026-11-09:ai",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/11/amd-11-ai.html",
+      "google": {
+        "discovered": null,
+        "indexed": null,
+        "lastCrawl": null,
+        "coverageState": null,
+        "inspectionAt": null
+      },
+      "naver": {
+        "discovered": null,
+        "indexed": null,
+        "collectionState": null,
+        "inspectionAt": null
+      },
+      "sitemapIncluded": null,
+      "rssIncluded": null
+    }
+  },
+  "libraryRegistration": {
+    "idempotencyKey": "library:motus-live-2026-11-09:ai|https://motusnova.blogspot.com/2026/11/amd-11-ai.html"
+  },
+  "weeklyFeed": {
+    "idempotencyKey": "weekly:motus-live-2026-11-09:ai"
+  },
+  "pdfCandidate": {
+    "idempotencyKey": "pdf:motus-live-2026-11-09:ai:sha256:43ffdb7ba926bb5cc64374aebda95dcf6df208358339aa8026c770fb77eb1327",
+    "visibility": "PRIVATE"
+  },
+  "audit": [
+    {
+      "at": "2026-11-09T03:34:21.198Z",
+      "event": "AUTO_PUBLISH_STATIC_GATE",
+      "detail": "AUTO_PUBLISH_READY"
+    },
+    {
+      "at": "2026-11-09T03:34:21.198Z",
+      "event": "REMOTE_DUPLICATE_CHECK",
+      "detail": "PASS"
+    },
+    {
+      "at": "2026-11-09T03:34:21.198Z",
+      "event": "FINAL_REMOTE_DUPLICATE_CHECK",
+      "detail": "PASS"
+    },
+    {
+      "at": "2026-11-09T12:34:23+09:00",
+      "event": "PUBLISHED",
+      "detail": "AUTO_POLICY_APPROVAL"
+    }
+  ],
+  "state": "PUBLISHED",
+  "draftPostId": "7862079433671734962",
+  "publicPostUrl": "https://motusnova.blogspot.com/2026/11/amd-11-ai.html",
+  "publishedAt": "2026-11-09T12:34:23+09:00",
+  "insertCallCount": 1,
+  "publishCallCount": 1,
+  "error": null
+}
