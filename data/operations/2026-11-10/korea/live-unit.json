@@ -1,9 +1,524 @@
 {
-  "schemaVersion": "1.0",
+  "publicationId": "motus-live-2026-11-10:korea",
   "category": "KOREA_MARKET",
-  "operationDate": "2026-11-10",
-  "status": "HOLD",
-  "observedDate": null,
-  "reasonCode": "BROKER_MARKET_COMMENTARY_UNAVAILABLE",
-  "unit": null
+  "observedDate": "2026-11-09",
+  "title": "11월 9일 코스피 마감, 0.81% 내려 5,018.85…검색 1위 삼성전자 0.9% 하락",
+  "label": "국내증시",
+  "sourceCount": 22,
+  "itemCount": 2,
+  "readiness": "READY",
+  "readinessReasons": [],
+  "review": {
+    "state": "PENDING",
+    "reviewer": null,
+    "reviewedAt": null,
+    "history": []
+  },
+  "publicationState": "PREVIEW_READY",
+  "draftPostId": null,
+  "publicPostUrl": null,
+  "duplicateCount": 0,
+  "contentFingerprint": "eb715cc4fbacdc3b6251858daa71d75f8eb534f9f9b7e85f29aaf6eeea87066b",
+  "render": {
+    "html": "<!doctype html><html lang=\"ko\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>11월 9일 코스피 마감, 0.81% 내려 5,018.85…검색 1위 삼성전자 0.9% 하락</title></head><body><article data-product=\"motus-korea-market\" data-layout=\"editorial-article-4q\" style=\"font-family:Arial,&quot;Noto Sans KR&quot;,sans-serif;color:#172033;line-height:1.78;font-size:17px;width:100%;max-width:820px;box-sizing:border-box;margin:0 auto;overflow-x:hidden;overflow-wrap:anywhere\"><header style=\"width:100%;max-width:100%;box-sizing:border-box;background:#03162e;color:#fff;padding:26px 22px;margin:0 0 22px\"><p style=\"margin:0 0 9px;color:#c7d8ea;font-size:14px;font-weight:800\">MOTUS | What Moves the World</p><div role=\"heading\" aria-level=\"2\" style=\"font-size:clamp(25px,7vw,34px);line-height:1.22;font-weight:850;word-break:keep-all\">11월 9일 코스피 마감, 0.81% 내려 5,018.85…검색 1위 삼성전자 0.9% 하락</div><p style=\"margin:10px 0 0;color:#e6edf5\">증권사 리포트와 투자자 검색 순위로 읽는 전일 국내증시</p><p style=\"margin:11px 0 0;color:#b7c8da;font-size:13px\">국내증시 (Korea Market) · 2026-11-10</p></header><figure data-section=\"hero-image\" style=\"margin:0 0 22px\"><img src=\"https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/operations/2026-11-10/korea/hero-2d4f137b3107.png\" alt=\"국내증시 2026년 11월 10일: 11월 9일 코스피 마감, 0.81% 내려 5,018.85…검색 1위 삼성전자 0.9% 하락\" width=\"1200\" height=\"630\" style=\"display:block;width:100%;height:auto;border:0\"></figure>\n<p data-section=\"editorial-lead\" style=\"margin:0 0 24px;font-size:18px;line-height:1.82;color:#172033\">2026-11-09 마감한 전일 국내증시는 KOSPI 5,018.85, KOSDAQ 638.97을 기록했다. 코스피는 전 거래일보다 0.81% 내렸다.</p>\n<div data-section=\"key-points\" style=\"border:1.5px solid #0b2545;padding:13px 15px 5px;margin:0 0 6px\"><div style=\"font-size:13px;font-weight:800;color:#0b2545;letter-spacing:.05em;margin:0 0 8px\">오늘의 핵심</div><p style=\"margin:0 0 9px;font-size:16px;line-height:1.65;display:flex;gap:8px\"><span style=\"color:#a8822e;font-weight:800\">1</span><span>지수: KOSPI 5,018.85, KOSDAQ 638.97.</span></p><p style=\"margin:0 0 9px;font-size:16px;line-height:1.65;display:flex;gap:8px\"><span style=\"color:#a8822e;font-weight:800\">2</span><span>검색 1위 삼성전자 <b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">-0.90%</b>.</span></p></div>\n<section data-section=\"korea-causes\" style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><div style=\"display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:2px solid #0b2545;padding-bottom:7px;margin:0 0 12px\"><h2 style=\"margin:0;font-size:clamp(19px,4.8vw,22px);line-height:1.35;font-weight:900;color:#0b2545;word-break:keep-all\">상승·하락 요인과 반대 시각</h2><span style=\"font-size:12px;font-weight:800;letter-spacing:.03em;padding:3px 8px;border-radius:3px;white-space:nowrap;background:#a8822e;color:#fff\">증권가 리포트</span></div><div style=\"background:#fbf5e6;border:1px solid #e6d2a0;padding:12px 12px 2px\"><div style=\"background:#fff;border:1px solid #e6d2a0;border-left:4px solid #a8822e;padding:11px 14px;margin:0 0 10px;font-size:16px\">MOTUS 정리: 증권사 3곳의 리포트를 대조하면 반도체(신한투자증권·KB증권)가 공통으로 꼽힌 배경이다. 대신증권은 국제유가를 따로 짚었다.</div><div style=\"background:#fff;border:1px solid #e6d2a0;border-left:4px solid #a8822e;padding:11px 14px;margin:0 0 10px;font-size:16px\">KB증권은 11월 10일 마감 코멘트 「11/9 KB 리서치 장마감코멘트」에서 “알테오젠 <b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">-16%</b>대 급락, 미 정부의 제형 변경 의약품 약가 통합 책정 방침 보도에 SC 제형 전환 플랫폼 사업성 우려 확산 영향. 회사 측은 SC 전환 수요 및 기술 경쟁력 유효하다는 입장”이라고 진단했다. <a href=\"https://stock.pstatic.net/stock-research/market/58/20261110_market_184205000.pdf\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></div><div style=\"background:#fff;border:1px solid #e6d2a0;border-left:4px solid #a8822e;padding:11px 14px;margin:0 0 10px;font-size:16px\">대신증권 리서치센터는 11월 10일 아침 리포트 「morning meeting brief」에서 “Blue Wave 충격에 과도한 조정, KOSPI &amp; 유가 비중확대 기회”라고 진단했다. <a href=\"https://consensus.hankyung.com/analysis/downpdf?report_idx=653967\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></div><div style=\"background:#fff;border:1px solid #e6d2a0;border-left:4px solid #a8822e;padding:11px 14px;margin:0 0 10px;font-size:16px\">경계 요인도 제시됐다. KB증권은 “미 10월 비농업 고용 예상치 상회에 따른 금리 부담 속, 이번주 미 10월 CPI (10일) 및 국내외 주요 기업 실적 등 주요 이벤트에 주목”이라고 짚었다. <a href=\"https://stock.pstatic.net/stock-research/market/58/20261110_market_184205000.pdf\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></div></div></section>\n<section data-section=\"korea-stocks\" style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><div style=\"display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:2px solid #0b2545;padding-bottom:7px;margin:0 0 12px\"><h2 style=\"margin:0;font-size:clamp(19px,4.8vw,22px);line-height:1.35;font-weight:900;color:#0b2545;word-break:keep-all\">업종과 종목: 투자자 검색 상위</h2><span style=\"font-size:12px;font-weight:800;letter-spacing:.03em;padding:3px 8px;border-radius:3px;white-space:nowrap;background:#e8eef6;color:#0b2545\">데이터</span></div><p style=\"margin:0 0 12px;color:#566476;font-size:15px\">네이버페이 증권 검색 상위 종목(ETF·ETN·레버리지 제외)의 전일 종가 기준 등락과 최근 증권사 리포트다. 검색 순위는 관심도 지표이며 주가 변동의 원인이 아니다.</p><div data-visualization=\"change-bars\" style=\"border:1px solid #dbe2ea;padding:10px 10px 4px;margin:0 0 12px\"><svg viewBox=\"0 0 360 152\" width=\"100%\" style=\"display:block;max-width:100%\" role=\"img\"><line x1=\"354\" x2=\"354\" y1=\"2\" y2=\"150\" stroke=\"#9aa6b2\" stroke-width=\"1\"></line><text x=\"122\" y=\"19\" font-size=\"12\" text-anchor=\"end\" fill=\"#16202e\">삼성전자</text><rect x=\"344.8\" y=\"8\" width=\"9.2\" height=\"14\" fill=\"#1f5fbf\"></rect><text x=\"340.8\" y=\"19\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"end\" fill=\"#1f5fbf\">-0.90%</text><text x=\"122\" y=\"43\" font-size=\"12\" text-anchor=\"end\" fill=\"#16202e\">SK하이닉스</text><rect x=\"338.6\" y=\"32\" width=\"15.4\" height=\"14\" fill=\"#1f5fbf\"></rect><text x=\"334.6\" y=\"43\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"end\" fill=\"#1f5fbf\">-1.50%</text><text x=\"122\" y=\"67\" font-size=\"12\" text-anchor=\"end\" fill=\"#16202e\">삼성SDI</text><rect x=\"224.6\" y=\"56\" width=\"129.4\" height=\"14\" fill=\"#1f5fbf\"></rect><text x=\"220.6\" y=\"67\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"end\" fill=\"#1f5fbf\">-12.61%</text><text x=\"122\" y=\"91\" font-size=\"12\" text-anchor=\"end\" fill=\"#16202e\">삼성전기</text><rect x=\"289.1\" y=\"80\" width=\"64.9\" height=\"14\" fill=\"#1f5fbf\"></rect><text x=\"285.1\" y=\"91\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"end\" fill=\"#1f5fbf\">-6.32%</text><text x=\"122\" y=\"115\" font-size=\"12\" text-anchor=\"end\" fill=\"#16202e\">알테오젠</text><rect x=\"182.0\" y=\"104\" width=\"172.0\" height=\"14\" fill=\"#1f5fbf\"></rect><text x=\"178.0\" y=\"115\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"end\" fill=\"#1f5fbf\">-16.76%</text><text x=\"122\" y=\"139\" font-size=\"12\" text-anchor=\"end\" fill=\"#16202e\">NAVER</text><rect x=\"324.3\" y=\"128\" width=\"29.7\" height=\"14\" fill=\"#1f5fbf\"></rect><text x=\"320.3\" y=\"139\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"end\" fill=\"#1f5fbf\">-2.89%</text></svg></div><p style=\"margin:0 0 13px\">검색 1위 삼성전자는 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">187,000원</b>으로 <b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">0.90%</b> 하락했다. 신한투자증권은 11월 10일 「국내 주식 마감 시황 - 반도체로 버틴 하루, 애프터에서 드러난 경계(11월 9일)」에서 “대만(<b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+4.9%</b>)의 증시 안정 대책 영향 더해져 한국 반도체(삼성전자 <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+0.6%</b>, 하이닉스 <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+0.4%</b>) 선방하면서 5천피 방어했지만 여타 대형주로는 온기 확산되지 못했고, 애프터에서 반도체도 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">2%</b>대 하락하며 여전히 불안한 모습을 보이고 있습니다”라고 짚었다. <a href=\"https://stock.pstatic.net/stock-research/market/21/20261110_market_827764000.pdf\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></p><p style=\"margin:0 0 13px\">검색 2위 SK하이닉스는 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">1,115,000원</b>으로 <b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">1.50%</b> 하락했다. KB증권은 11월 10일 「11/9 KB 리서치 장마감코멘트」에서 “국내 증시 역시 반도체 중심 반발 매수세 유입, KRX 반도체 업종 <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+1%</b>대. 삼성전자, SK하이닉스는 소폭 상승하며 지수 하단을 일부 지지”라고 짚었다. <a href=\"https://stock.pstatic.net/stock-research/market/58/20261110_market_184205000.pdf\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></p><p style=\"margin:0 0 13px\">검색 3위 삼성SDI는 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">409,000원</b>으로 <b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">12.61%</b> 급락했다.</p><p style=\"margin:0 0 13px\">검색 4위 삼성전기는 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">815,000원</b>으로 <b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">6.32%</b> 급락했다.</p><p style=\"margin:0 0 13px\">검색 5위 알테오젠은 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">166,900원</b>으로 <b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">16.76%</b> 급락했다. KB증권은 11월 10일 「11/9 KB 리서치 장마감코멘트」에서 “알테오젠 <b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">-16%</b>대 급락, 미 정부의 제형 변경 의약품 약가 통합 책정 방침 보도에 SC 제형 전환 플랫폼 사업성 우려 확산 영향. 회사 측은 SC 전환 수요 및 기술 경쟁력 유효하다는 입장”이라고 짚었다. <a href=\"https://stock.pstatic.net/stock-research/market/58/20261110_market_184205000.pdf\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></p><p style=\"margin:0 0 13px\">대신증권 홍가혜 연구원은 11월 10일 「IRA 약가협상 규정 확정, SC 플랫폼 영향은 선별적」 리포트에서 투자의견 Buy, 목표주가 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">450,000원</b>을 제시했다. <a href=\"https://consensus.hankyung.com/analysis/downpdf?report_idx=653965\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></p><p style=\"margin:0 0 13px\">검색 6위 NAVER는 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">184,700원</b>으로 <b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">2.89%</b> 하락했다.</p></section>\n<section data-section=\"korea-indexes\" style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><div style=\"display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:2px solid #0b2545;padding-bottom:7px;margin:0 0 12px\"><h2 style=\"margin:0;font-size:clamp(19px,4.8vw,22px);line-height:1.35;font-weight:900;color:#0b2545;word-break:keep-all\">코스피·코스닥·환율</h2><span style=\"font-size:12px;font-weight:800;letter-spacing:.03em;padding:3px 8px;border-radius:3px;white-space:nowrap;background:#e8eef6;color:#0b2545\">데이터</span></div><div style=\"display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:8px;margin:0 0 12px\"><div style=\"border:1px solid #dbe2ea;padding:9px 11px;min-width:0\"><div style=\"font-size:13px;color:#566476;word-break:keep-all\">KOSPI</div><div style=\"font-size:19px;font-weight:800;color:#16202e;white-space:nowrap\">5,018.85</div><div style=\"font-size:14px;font-weight:800;color:#1f5fbf;white-space:nowrap\">-0.81%</div></div><div style=\"border:1px solid #dbe2ea;padding:9px 11px;min-width:0\"><div style=\"font-size:13px;color:#566476;word-break:keep-all\">KOSDAQ</div><div style=\"font-size:19px;font-weight:800;color:#16202e;white-space:nowrap\">638.97</div><div style=\"font-size:14px;font-weight:800;color:#1f5fbf;white-space:nowrap\">-0.82%</div></div><div style=\"border:1px solid #dbe2ea;padding:9px 11px;min-width:0\"><div style=\"font-size:13px;color:#566476;word-break:keep-all\">원·달러 환율(기사 작성 시점)</div><div style=\"font-size:19px;font-weight:800;color:#16202e;white-space:nowrap\">1,342</div></div></div><p style=\"margin:0 0 13px\">코스피는 5,018.85로 마감해 전 거래일보다 <b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">0.81%</b> 하락했다. 최근 5거래일 기준으로는 <b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">14.34%</b> 하락했다. 최근 10거래일 종가 고점(6,012.44, 2026-10-28)보다 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">16.53%</b> 낮다.</p><p style=\"margin:0 0 13px\">코스닥은 638.97로 마감해 전 거래일보다 <b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">0.82%</b> 하락했다. 최근 5거래일 기준으로는 <b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">12.99%</b> 하락했다. 최근 10거래일 종가 고점(771.28, 2026-10-28)보다 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">17.15%</b> 낮다.</p></section>\n<section data-section=\"korea-broker-analysis\" style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><div style=\"display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:2px solid #0b2545;padding-bottom:7px;margin:0 0 12px\"><h2 style=\"margin:0;font-size:clamp(19px,4.8vw,22px);line-height:1.35;font-weight:900;color:#0b2545;word-break:keep-all\">증권사별 분석</h2><span style=\"font-size:12px;font-weight:800;letter-spacing:.03em;padding:3px 8px;border-radius:3px;white-space:nowrap;background:#a8822e;color:#fff\">증권가 리포트</span></div><div style=\"background:#fbf5e6;border:1px solid #e6d2a0;padding:12px 12px 2px\"><p style=\"margin:0 0 10px;color:#6b5a2f;font-size:14px\">투자의견과 목표주가는 각 증권사가 리포트에 게시한 값이며, 증권사마다 전제와 시점이 다르다.</p><div style=\"background:#fff;border:1px solid #e6d2a0;border-left:4px solid #a8822e;padding:11px 14px;margin:0 0 10px;font-size:16px\">대신증권 박강호 연구원은 「[3Q26 Review] 티엘비: 3Q 호조, 4Q 더 좋다」에서 “3Q26 매출 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">940억원</b>(<b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+6.5%</b> qoq), 영업이익 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">166억원</b>(<b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+29.9%</b> qoq) 호조”, “소캠2 등 고부가 매출 증가, 믹스 개선으로 영업이익률 확대”라고 밝혔다. <a href=\"https://consensus.hankyung.com/analysis/downpdf?report_idx=653967\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></div></div></section>\n<section style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><div style=\"display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:2px solid #0b2545;padding-bottom:7px;margin:0 0 12px\"><h2 style=\"margin:0;font-size:clamp(19px,4.8vw,22px);line-height:1.35;font-weight:900;color:#0b2545;word-break:keep-all\">금융 전문 언론 원문</h2><span style=\"font-size:12px;font-weight:800;letter-spacing:.03em;padding:3px 8px;border-radius:3px;white-space:nowrap;background:#f1f5f9;color:#3b5b7a;border:1px solid #cdd8e3\">뉴스·공식 발표</span></div><p style=\"margin:0 0 12px\">해외·국내 금융 매체가 같은 시기에 보도한 시장 기사다. 해외 기사는 원문 제목을 그대로 적었다.</p><ul style=\"margin:0;padding-left:20px\"><li style=\"margin:0 0 11px\"><strong>한국경제 증권</strong> · 2026-11-09<div><a href=\"https://www.hankyung.com/article/202611106255i\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">엔비디아만 급락…젠슨 황 스캔들, 美·中 반도체 전쟁으로 번지나 [오늘 아침 당신이 알아야 할 7가지]</a></div></li><li style=\"margin:0 0 11px\"><strong>한국경제 증권</strong> · 2026-11-09<div><a href=\"https://www.hankyung.com/article/2026111062696\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">&quot;두산, 전자사업 호실적에도…목표가 50%↓&quot;-DB</a></div></li><li style=\"margin:0 0 11px\"><strong>매일경제 증권</strong> · 2026-11-09<div><a href=\"https://www.mk.co.kr/news/stock/12203486\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">하나증권 “두산, 목표가 127만원으로 하향…고부가 소재 수요는 견조”</a></div></li><li style=\"margin:0 0 11px\"><strong>매일경제 증권</strong> · 2026-11-09<div><a href=\"https://www.mk.co.kr/news/stock/12203475\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">“롯데칠성, 원가 부담 장기화에 단기 실적 눈높이 하향 불가피” 목표가↓</a></div></li></ul></section>\n<section data-section=\"korea-risks\" style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><div style=\"display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:2px solid #0b2545;padding-bottom:7px;margin:0 0 12px\"><h2 style=\"margin:0;font-size:clamp(19px,4.8vw,22px);line-height:1.35;font-weight:900;color:#0b2545;word-break:keep-all\">위험 요인과 다음 확인 지표</h2><span style=\"font-size:12px;font-weight:800;letter-spacing:.03em;padding:3px 8px;border-radius:3px;white-space:nowrap;background:#fff;color:#0b2545;border:1px solid #0b2545\">체크포인트</span></div><div style=\"display:grid;gap:9px\"><p style=\"margin:0;display:flex;gap:10px;align-items:flex-start\"><span style=\"flex:0 0 14px;height:14px;border:2px solid #0b2545;margin-top:6px\"></span><span>오늘 장에서는 외국인·기관 수급의 연속성, 원·달러 환율, 전일 강세 업종이 이어지는지가 확인 대상이다.</span></p></div></section>\n<section style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><div style=\"display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:2px solid #0b2545;padding-bottom:7px;margin:0 0 12px\"><h2 style=\"margin:0;font-size:clamp(19px,4.8vw,22px);line-height:1.35;font-weight:900;color:#0b2545;word-break:keep-all\">자료 기준</h2></div><div style=\"font-size:14px;color:#566476\"><p style=\"margin:0 0 13px\">전일 국내증시의 지수 종가는 한국거래소 공식 자료를 기준으로 삼고 네이버금융 비교값과 대조해 확인했다. 원·달러 환율은 기사 작성 시점 값이다.</p><p style=\"margin:0 0 13px\">이 기사는 장 시작 뒤 작성돼, 섞일 수 있는 당일 수급·업종 자료는 싣지 않았다.</p></div></section>\n<section data-section=\"related-posts\" style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><div style=\"display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-bottom:2px solid #0b2545;padding-bottom:7px;margin:0 0 12px\"><h2 style=\"margin:0;font-size:clamp(19px,4.8vw,22px);line-height:1.35;font-weight:900;color:#0b2545;word-break:keep-all\">MOTUS 최근 기사</h2></div><p style=\"margin:0 0 12px;color:#4a5a6e;font-size:15px\">최근 발행한 시장·AI 브리핑을 이어서 읽어 보세요.</p><ul style=\"margin:0;padding-left:20px\"><li style=\"margin:0 0 10px\"><span style=\"color:#4a5a6e;font-size:14px\">리포트 · 2026-11-09</span><br><a href=\"https://motusnova.blogspot.com/2026/11/2026-11-9-ai.html\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">[데일리 리포트] 2026년 11월 9일 국내 증시·AI 핵심 정리</a></li><li style=\"margin:0 0 10px\"><span style=\"color:#4a5a6e;font-size:14px\">AI 인텔리전스 · 2026-11-09</span><br><a href=\"https://motusnova.blogspot.com/2026/11/amd-11-ai.html\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">AMD 11% 급등…증권가가 짚은 AI 투자 쟁점</a></li><li style=\"margin:0 0 10px\"><span style=\"color:#4a5a6e;font-size:14px\">국내증시 · 2026-11-09</span><br><a href=\"https://motusnova.blogspot.com/2026/11/11-6-602-505969-1-40.html\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">11월 6일 코스피 마감, 6.02% 급락 5,059.69…검색 1위 삼성전자 4.0% 하락</a></li><li style=\"margin:0 0 10px\"><span style=\"color:#4a5a6e;font-size:14px\">주간 증시 · 2026-11-08</span><br><a href=\"https://motusnova.blogspot.com/2026/11/34-117-cpippi.html\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">[주간 증시] 나스닥 주간 3.4% 하락·코스피 11.7% 하락…다음 주 미국 CPI·PPI 주목</a></li><li style=\"margin:0 0 10px\"><span style=\"color:#4a5a6e;font-size:14px\">미국증시 · 2026-11-07</span><br><a href=\"https://motusnova.blogspot.com/2026/11/3-amd-11.html\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">뉴욕증시 마감, 3대 지수 혼조…AMD 11% 급등</a></li></ul></section>\n<section style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><h2 style=\"margin:0 0 12px;padding:0 0 8px;border-bottom:2px solid #173a63;color:#03162e;font-size:clamp(19px,4.8vw,23px);line-height:1.35;font-weight:850;word-break:keep-all;overflow-wrap:normal\">자료</h2><ul style=\"margin:0;padding-left:20px\"><li style=\"margin:5px 0\"><a href=\"https://m.stock.naver.com/api/index/KOSPI/price?pageSize=10&amp;page=1\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">네이버금융 KOSPI 전일 마감</a></li><li style=\"margin:5px 0\"><a href=\"https://m.stock.naver.com/api/index/KOSDAQ/price?pageSize=10&amp;page=1\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">네이버금융 KOSDAQ 전일 마감</a></li><li style=\"margin:5px 0\"><a href=\"https://api.stock.naver.com/marketindex/exchange/FX_USDKRW\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">네이버금융 USD/KRW 현재가</a></li><li style=\"margin:5px 0\"><a href=\"https://data-dbg.krx.co.kr/svc/apis/idx/kospi_dd_trd?basDd=20261109\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">KRX KOSPI</a></li><li style=\"margin:5px 0\"><a href=\"https://data-dbg.krx.co.kr/svc/apis/idx/kosdaq_dd_trd?basDd=20261109\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">KRX KOSDAQ</a></li><li style=\"margin:5px 0\"><a href=\"https://stock.pstatic.net/stock-research/market/21/20261110_market_827764000.pdf\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">신한투자증권 「국내 주식 마감 시황 - 반도체로 버틴 하루, 애프터에서 드러난 경계(11월 9일)」 (2026-11-10)</a></li><li style=\"margin:5px 0\"><a href=\"https://stock.pstatic.net/stock-research/market/58/20261110_market_184205000.pdf\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">KB증권 「11/9 KB 리서치 장마감코멘트」 (2026-11-10)</a></li><li style=\"margin:5px 0\"><a href=\"https://consensus.hankyung.com/analysis/downpdf?report_idx=653967\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">대신증권 「morning meeting brief」 (2026-11-10)</a></li><li style=\"margin:5px 0\"><a href=\"https://consensus.hankyung.com/analysis/downpdf?report_idx=653965\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">대신증권 「알테오젠(196170) IRA 약가협상 규정 확정, SC 플랫폼 영향은 선별적」 (2026-11-10)</a></li><li style=\"margin:5px 0\"><a href=\"https://m.stock.naver.com/api/stocks/searchTop/all?page=1&amp;pageSize=20\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">네이버페이 증권 검색 상위 종목</a></li><li style=\"margin:5px 0\"><a href=\"https://m.stock.naver.com/api/stock/005930/price?pageSize=5&amp;page=1\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">네이버페이 증권 삼성전자 일별 시세</a></li><li style=\"margin:5px 0\"><a href=\"https://m.stock.naver.com/api/stock/000660/price?pageSize=5&amp;page=1\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">네이버페이 증권 SK하이닉스 일별 시세</a></li><li style=\"margin:5px 0\"><a href=\"https://m.stock.naver.com/api/stock/006400/price?pageSize=5&amp;page=1\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">네이버페이 증권 삼성SDI 일별 시세</a></li><li style=\"margin:5px 0\"><a href=\"https://m.stock.naver.com/api/stock/009150/price?pageSize=5&amp;page=1\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">네이버페이 증권 삼성전기 일별 시세</a></li><li style=\"margin:5px 0\"><a href=\"https://m.stock.naver.com/api/stock/196170/price?pageSize=5&amp;page=1\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">네이버페이 증권 알테오젠 일별 시세</a></li><li style=\"margin:5px 0\"><a href=\"https://m.stock.naver.com/api/stock/035420/price?pageSize=5&amp;page=1\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">네이버페이 증권 NAVER 일별 시세</a></li><li style=\"margin:5px 0\"><a href=\"https://rc.kbsec.com/detailView.able?documentid=20261021144128693K\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">KB증권 리서치 공개 시장기사 (2026-10-21)</a></li><li style=\"margin:5px 0\"><a href=\"https://rc.kbsec.com/detailView.able?documentid=20261030172030640K\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">KB증권 리서치 공개 시장기사 (2026-10-30)</a></li><li style=\"margin:5px 0\"><a href=\"https://www.hankyung.com/article/202611106255i\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">한국경제 증권 공개 시장기사 (2026-11-09)</a></li><li style=\"margin:5px 0\"><a href=\"https://www.hankyung.com/article/2026111062696\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">한국경제 증권 공개 시장기사 (2026-11-09)</a></li><li style=\"margin:5px 0\"><a href=\"https://www.mk.co.kr/news/stock/12203486\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">매일경제 증권 공개 시장기사 (2026-11-09)</a></li><li style=\"margin:5px 0\"><a href=\"https://www.mk.co.kr/news/stock/12203475\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">매일경제 증권 공개 시장기사 (2026-11-09)</a></li></ul></section></article></body></html>",
+    "renderedSections": [
+      "masthead",
+      "lead",
+      "key-points",
+      "indexes",
+      "fx",
+      "flows",
+      "sectors",
+      "research",
+      "watch",
+      "sources"
+    ],
+    "label": "국내증시"
+  },
+  "viewModel": {
+    "publicationId": "motus-live-2026-11-10:korea",
+    "issueDate": "2026-11-10",
+    "issueNumber": 20261110,
+    "operationDate": "2026-11-10",
+    "sessionDate": "2026-11-09",
+    "edition": "PREVIOUS_SESSION_MORNING",
+    "fxBasis": "CURRENT_AT_COLLECTION",
+    "title": "11월 9일 코스피 마감, 0.81% 내려 5,018.85…검색 1위 삼성전자 0.9% 하락",
+    "subtitle": "증권사 리포트와 투자자 검색 순위로 읽는 전일 국내증시",
+    "category": "KOREA_MARKET",
+    "canonicalLabel": "Korea Market",
+    "displayLabel": "국내증시 (Korea Market)",
+    "marketSummary": "2026-11-09 마감한 전일 국내증시는 KOSPI 5,018.85, KOSDAQ 638.97을 기록했다. 코스피는 전 거래일보다 0.81% 내렸다.",
+    "deepSections": [
+      {
+        "key": "korea-causes",
+        "placement": "early",
+        "role": "broker",
+        "title": "상승·하락 요인과 반대 시각",
+        "paragraphs": [
+          {
+            "text": "MOTUS 정리: 증권사 3곳의 리포트를 대조하면 반도체(신한투자증권·KB증권)가 공통으로 꼽힌 배경이다. 대신증권은 국제유가를 따로 짚었다."
+          },
+          {
+            "text": "KB증권은 11월 10일 마감 코멘트 「11/9 KB 리서치 장마감코멘트」에서 “알테오젠 -16%대 급락, 미 정부의 제형 변경 의약품 약가 통합 책정 방침 보도에 SC 제형 전환 플랫폼 사업성 우려 확산 영향. 회사 측은 SC 전환 수요 및 기술 경쟁력 유효하다는 입장”이라고 진단했다.",
+            "source": {
+              "label": "KB증권 11/9 KB 리서치 장마감코멘트 (11월 10일)",
+              "url": "https://stock.pstatic.net/stock-research/market/58/20261110_market_184205000.pdf"
+            }
+          },
+          {
+            "text": "대신증권 리서치센터는 11월 10일 아침 리포트 「morning meeting brief」에서 “Blue Wave 충격에 과도한 조정, KOSPI & 유가 비중확대 기회”라고 진단했다.",
+            "source": {
+              "label": "대신증권 morning meeting brief (11월 10일)",
+              "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653967"
+            }
+          },
+          {
+            "text": "경계 요인도 제시됐다. KB증권은 “미 10월 비농업 고용 예상치 상회에 따른 금리 부담 속, 이번주 미 10월 CPI (10일) 및 국내외 주요 기업 실적 등 주요 이벤트에 주목”이라고 짚었다.",
+            "source": {
+              "label": "KB증권 11/9 KB 리서치 장마감코멘트 (11월 10일)",
+              "url": "https://stock.pstatic.net/stock-research/market/58/20261110_market_184205000.pdf"
+            }
+          }
+        ]
+      },
+      {
+        "key": "korea-stocks",
+        "placement": "early",
+        "role": "data",
+        "bars": [
+          {
+            "label": "삼성전자",
+            "value": -0.9
+          },
+          {
+            "label": "SK하이닉스",
+            "value": -1.5
+          },
+          {
+            "label": "삼성SDI",
+            "value": -12.61
+          },
+          {
+            "label": "삼성전기",
+            "value": -6.32
+          },
+          {
+            "label": "알테오젠",
+            "value": -16.76
+          },
+          {
+            "label": "NAVER",
+            "value": -2.89
+          }
+        ],
+        "title": "업종과 종목: 투자자 검색 상위",
+        "intro": "네이버페이 증권 검색 상위 종목(ETF·ETN·레버리지 제외)의 전일 종가 기준 등락과 최근 증권사 리포트다. 검색 순위는 관심도 지표이며 주가 변동의 원인이 아니다.",
+        "paragraphs": [
+          {
+            "text": "검색 1위 삼성전자는 187,000원으로 0.90% 하락했다. 신한투자증권은 11월 10일 「국내 주식 마감 시황 - 반도체로 버틴 하루, 애프터에서 드러난 경계(11월 9일)」에서 “대만(+4.9%)의 증시 안정 대책 영향 더해져 한국 반도체(삼성전자 +0.6%, 하이닉스 +0.4%) 선방하면서 5천피 방어했지만 여타 대형주로는 온기 확산되지 못했고, 애프터에서 반도체도 2%대 하락하며 여전히 불안한 모습을 보이고 있습니다”라고 짚었다.",
+            "source": {
+              "label": "신한투자증권 국내 주식 마감 시황 - 반도체로 버틴 하루, 애프터에서 드러난 경계(11월 9일) (11월 10일)",
+              "url": "https://stock.pstatic.net/stock-research/market/21/20261110_market_827764000.pdf"
+            }
+          },
+          {
+            "text": "검색 2위 SK하이닉스는 1,115,000원으로 1.50% 하락했다. KB증권은 11월 10일 「11/9 KB 리서치 장마감코멘트」에서 “국내 증시 역시 반도체 중심 반발 매수세 유입, KRX 반도체 업종 +1%대. 삼성전자, SK하이닉스는 소폭 상승하며 지수 하단을 일부 지지”라고 짚었다.",
+            "source": {
+              "label": "KB증권 11/9 KB 리서치 장마감코멘트 (11월 10일)",
+              "url": "https://stock.pstatic.net/stock-research/market/58/20261110_market_184205000.pdf"
+            }
+          },
+          {
+            "text": "검색 3위 삼성SDI는 409,000원으로 12.61% 급락했다."
+          },
+          {
+            "text": "검색 4위 삼성전기는 815,000원으로 6.32% 급락했다."
+          },
+          {
+            "text": "검색 5위 알테오젠은 166,900원으로 16.76% 급락했다. KB증권은 11월 10일 「11/9 KB 리서치 장마감코멘트」에서 “알테오젠 -16%대 급락, 미 정부의 제형 변경 의약품 약가 통합 책정 방침 보도에 SC 제형 전환 플랫폼 사업성 우려 확산 영향. 회사 측은 SC 전환 수요 및 기술 경쟁력 유효하다는 입장”이라고 짚었다.",
+            "source": {
+              "label": "KB증권 11/9 KB 리서치 장마감코멘트 (11월 10일)",
+              "url": "https://stock.pstatic.net/stock-research/market/58/20261110_market_184205000.pdf"
+            }
+          },
+          {
+            "text": "대신증권 홍가혜 연구원은 11월 10일 「IRA 약가협상 규정 확정, SC 플랫폼 영향은 선별적」 리포트에서 투자의견 Buy, 목표주가 450,000원을 제시했다.",
+            "source": {
+              "label": "대신증권 알테오젠(196170) IRA 약가협상 규정 확정, SC 플랫폼 영향은 선별적 (11월 10일)",
+              "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653965"
+            },
+            "report": {
+              "company": "알테오젠",
+              "broker": "대신증권",
+              "analysts": "홍가혜",
+              "date": "2026-11-10",
+              "title": "알테오젠(196170) IRA 약가협상 규정 확정, SC 플랫폼 영향은 선별적",
+              "rating": "Buy",
+              "target": "450,000"
+            }
+          },
+          {
+            "text": "검색 6위 NAVER는 184,700원으로 2.89% 하락했다."
+          }
+        ]
+      },
+      {
+        "key": "korea-broker-analysis",
+        "placement": "late",
+        "role": "broker",
+        "title": "증권사별 분석",
+        "intro": "투자의견과 목표주가는 각 증권사가 리포트에 게시한 값이며, 증권사마다 전제와 시점이 다르다.",
+        "paragraphs": [
+          {
+            "text": "대신증권 박강호 연구원은 「[3Q26 Review] 티엘비: 3Q 호조, 4Q 더 좋다」에서 “3Q26 매출 940억원(+6.5% qoq), 영업이익 166억원(+29.9% qoq) 호조”, “소캠2 등 고부가 매출 증가, 믹스 개선으로 영업이익률 확대”라고 밝혔다.",
+            "source": {
+              "label": "대신증권 morning meeting brief (11월 10일)",
+              "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653967"
+            }
+          }
+        ]
+      },
+      {
+        "key": "korea-risks",
+        "placement": "risks",
+        "role": "watch",
+        "title": "위험 요인과 다음 확인 지표",
+        "paragraphs": [
+          {
+            "text": "오늘 장에서는 외국인·기관 수급의 연속성, 원·달러 환율, 전일 강세 업종이 이어지는지가 확인 대상이다."
+          }
+        ]
+      }
+    ],
+    "indexMetrics": [
+      {
+        "factId": "index:KOSPI",
+        "group": "INDEX",
+        "label": "KOSPI",
+        "displayValue": "5,018.85",
+        "direction": "DOWN",
+        "source": {
+          "label": "한국거래소",
+          "url": "https://data-dbg.krx.co.kr/svc/apis/idx/kospi_dd_trd?basDd=20261109"
+        }
+      },
+      {
+        "factId": "index:KOSDAQ",
+        "group": "INDEX",
+        "label": "KOSDAQ",
+        "displayValue": "638.97",
+        "direction": "DOWN",
+        "source": {
+          "label": "한국거래소",
+          "url": "https://data-dbg.krx.co.kr/svc/apis/idx/kosdaq_dd_trd?basDd=20261109"
+        }
+      }
+    ],
+    "fxAndSupporting": [
+      {
+        "factId": "fx:usd-krw",
+        "group": "FX",
+        "label": "원·달러 환율(기사 작성 시점)",
+        "displayValue": "1,342",
+        "direction": "FLAT",
+        "source": {
+          "label": "네이버금융",
+          "url": "https://api.stock.naver.com/marketindex/exchange/FX_USDKRW"
+        }
+      }
+    ],
+    "investorFlows": [],
+    "sectors": [],
+    "movers": [],
+    "research": [
+      {
+        "researchId": "kb-broker:2026-10-21:0",
+        "publisher": "KB증권 리서치",
+        "analyst": null,
+        "headline": "KB Core View · 이제부터 시장 중심은 ‘금리 (Gravity)’에서 ‘인플레’로 바뀐다",
+        "summary": "KB증권 공식 사이트에 공개된 리포트 제목과 발행일이 확인됐다. 본문 분석이나 투자 의견은 수집되지 않았다.",
+        "institutionView": "공식 공개 요약: 글로벌 자산배분: 시장 중심은 '금리 (Gravity)'에서 '인플레 (Rabbit Hole)'로 이동 / 경제: 미국 중간선거 임박. 한국은 강한 성장세에 긴축 경계 지속",
+        "evidence": [
+          "글로벌 자산배분: 시장 중심은 '금리 (Gravity)'에서 '인플레 (Rabbit Hole)'로 이동",
+          "경제: 미국 중간선거 임박. 한국은 강한 성장세에 긴축 경계 지속"
+        ],
+        "interests": [],
+        "investmentStrategy": [],
+        "riskFactors": [],
+        "targetPriceLabel": null,
+        "ratingLabel": null,
+        "aiInterpretation": null,
+        "sources": [
+          {
+            "label": "KB증권 리서치",
+            "url": "https://rc.kbsec.com/detailView.able?documentid=20261021144128693K",
+            "publisher": "KB증권 리서치"
+          }
+        ]
+      },
+      {
+        "researchId": "kb-broker:2026-10-30:1",
+        "publisher": "KB증권 리서치",
+        "analyst": null,
+        "headline": "KB 월간 전략 · Uphill",
+        "summary": "KB증권 공식 사이트에 공개된 리포트 제목과 발행일이 확인됐다. 본문 분석이나 투자 의견은 수집되지 않았다.",
+        "institutionView": "공식 공개 요약: 시장전망: 내려올 땐 외로웠지만 올라갈 땐 외롭지 않다 / 업종전략 1. 반도체에 주어진 단기와 장기 기회",
+        "evidence": [
+          "시장전망: 내려올 땐 외로웠지만 올라갈 땐 외롭지 않다",
+          "업종전략 1. 반도체에 주어진 단기와 장기 기회"
+        ],
+        "interests": [],
+        "investmentStrategy": [],
+        "riskFactors": [],
+        "targetPriceLabel": null,
+        "ratingLabel": null,
+        "aiInterpretation": null,
+        "sources": [
+          {
+            "label": "KB증권 리서치",
+            "url": "https://rc.kbsec.com/detailView.able?documentid=20261030172030640K",
+            "publisher": "KB증권 리서치"
+          }
+        ]
+      }
+    ],
+    "marketResearch": [
+      {
+        "publisher": "KB증권 리서치",
+        "headline": "KB Core View · 이제부터 시장 중심은 ‘금리 (Gravity)’에서 ‘인플레’로 바뀐다",
+        "url": "https://rc.kbsec.com/detailView.able?documentid=20261021144128693K",
+        "publishedAt": "2026-10-21T00:00:00.000Z",
+        "kind": "BROKER_RESEARCH",
+        "sourceFeed": "https://rc.kbsec.com/today/index.able",
+        "evidence": [
+          "글로벌 자산배분: 시장 중심은 '금리 (Gravity)'에서 '인플레 (Rabbit Hole)'로 이동",
+          "경제: 미국 중간선거 임박. 한국은 강한 성장세에 긴축 경계 지속"
+        ]
+      },
+      {
+        "publisher": "KB증권 리서치",
+        "headline": "KB 월간 전략 · Uphill",
+        "url": "https://rc.kbsec.com/detailView.able?documentid=20261030172030640K",
+        "publishedAt": "2026-10-30T00:00:00.000Z",
+        "kind": "BROKER_RESEARCH",
+        "sourceFeed": "https://rc.kbsec.com/today/index.able",
+        "evidence": [
+          "시장전망: 내려올 땐 외로웠지만 올라갈 땐 외롭지 않다",
+          "업종전략 1. 반도체에 주어진 단기와 장기 기회"
+        ]
+      },
+      {
+        "publisher": "한국경제 증권",
+        "headline": "엔비디아만 급락…젠슨 황 스캔들, 美·中 반도체 전쟁으로 번지나 [오늘 아침 당신이 알아야 할 7가지]",
+        "url": "https://www.hankyung.com/article/202611106255i",
+        "publishedAt": "2026-11-09T22:34:27.000Z",
+        "kind": "FINANCIAL_MEDIA",
+        "sourceFeed": "https://www.hankyung.com/feed/finance"
+      },
+      {
+        "publisher": "한국경제 증권",
+        "headline": "\"두산, 전자사업 호실적에도…목표가 50%↓\"-DB",
+        "url": "https://www.hankyung.com/article/2026111062696",
+        "publishedAt": "2026-11-09T22:27:52.000Z",
+        "kind": "FINANCIAL_MEDIA",
+        "sourceFeed": "https://www.hankyung.com/feed/finance"
+      },
+      {
+        "publisher": "매일경제 증권",
+        "headline": "하나증권 “두산, 목표가 127만원으로 하향…고부가 소재 수요는 견조”",
+        "url": "https://www.mk.co.kr/news/stock/12203486",
+        "publishedAt": "2026-11-09T23:41:00.000Z",
+        "kind": "FINANCIAL_MEDIA",
+        "sourceFeed": "https://www.mk.co.kr/rss/50200011/"
+      },
+      {
+        "publisher": "매일경제 증권",
+        "headline": "“롯데칠성, 원가 부담 장기화에 단기 실적 눈높이 하향 불가피” 목표가↓",
+        "url": "https://www.mk.co.kr/news/stock/12203475",
+        "publishedAt": "2026-11-09T23:24:15.000Z",
+        "kind": "FINANCIAL_MEDIA",
+        "sourceFeed": "https://www.mk.co.kr/rss/50200011/"
+      }
+    ],
+    "marketCommentary": [
+      "전일 국내증시의 지수 종가는 한국거래소 공식 자료를 기준으로 삼고 네이버금융 비교값과 대조해 확인했다. 원·달러 환율은 기사 작성 시점 값이다.",
+      "이 기사는 장 시작 뒤 작성돼, 섞일 수 있는 당일 수급·업종 자료는 싣지 않았다."
+    ],
+    "checkpoints": [
+      {
+        "headline": "오늘 체크포인트",
+        "watchFor": "외국인 수급과 원·달러 환율, 직전 주도 업종의 연속성을 확인",
+        "validityHorizon": "TODAY"
+      }
+    ],
+    "sources": [
+      {
+        "label": "네이버금융 KOSPI 전일 마감",
+        "url": "https://m.stock.naver.com/api/index/KOSPI/price?pageSize=10&page=1",
+        "publisher": "네이버금융"
+      },
+      {
+        "label": "네이버금융 KOSDAQ 전일 마감",
+        "url": "https://m.stock.naver.com/api/index/KOSDAQ/price?pageSize=10&page=1",
+        "publisher": "네이버금융"
+      },
+      {
+        "label": "네이버금융 USD/KRW 현재가",
+        "url": "https://api.stock.naver.com/marketindex/exchange/FX_USDKRW",
+        "publisher": "네이버금융"
+      },
+      {
+        "label": "KRX KOSPI",
+        "url": "https://data-dbg.krx.co.kr/svc/apis/idx/kospi_dd_trd?basDd=20261109",
+        "publisher": "한국거래소"
+      },
+      {
+        "label": "KRX KOSDAQ",
+        "url": "https://data-dbg.krx.co.kr/svc/apis/idx/kosdaq_dd_trd?basDd=20261109",
+        "publisher": "한국거래소"
+      },
+      {
+        "label": "신한투자증권 「국내 주식 마감 시황 - 반도체로 버틴 하루, 애프터에서 드러난 경계(11월 9일)」 (2026-11-10)",
+        "url": "https://stock.pstatic.net/stock-research/market/21/20261110_market_827764000.pdf",
+        "publisher": "신한투자증권",
+        "role": "SUPPLEMENTARY"
+      },
+      {
+        "label": "KB증권 「11/9 KB 리서치 장마감코멘트」 (2026-11-10)",
+        "url": "https://stock.pstatic.net/stock-research/market/58/20261110_market_184205000.pdf",
+        "publisher": "KB증권",
+        "role": "SUPPLEMENTARY"
+      },
+      {
+        "label": "대신증권 「morning meeting brief」 (2026-11-10)",
+        "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653967",
+        "publisher": "대신증권",
+        "role": "SUPPLEMENTARY"
+      },
+      {
+        "label": "대신증권 「알테오젠(196170) IRA 약가협상 규정 확정, SC 플랫폼 영향은 선별적」 (2026-11-10)",
+        "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=653965",
+        "publisher": "대신증권",
+        "role": "SUPPLEMENTARY"
+      },
+      {
+        "label": "네이버페이 증권 검색 상위 종목",
+        "url": "https://m.stock.naver.com/api/stocks/searchTop/all?page=1&pageSize=20",
+        "publisher": "네이버페이 증권",
+        "role": "SUPPLEMENTARY"
+      },
+      {
+        "label": "네이버페이 증권 삼성전자 일별 시세",
+        "url": "https://m.stock.naver.com/api/stock/005930/price?pageSize=5&page=1",
+        "publisher": "네이버페이 증권",
+        "role": "SUPPLEMENTARY"
+      },
+      {
+        "label": "네이버페이 증권 SK하이닉스 일별 시세",
+        "url": "https://m.stock.naver.com/api/stock/000660/price?pageSize=5&page=1",
+        "publisher": "네이버페이 증권",
+        "role": "SUPPLEMENTARY"
+      },
+      {
+        "label": "네이버페이 증권 삼성SDI 일별 시세",
+        "url": "https://m.stock.naver.com/api/stock/006400/price?pageSize=5&page=1",
+        "publisher": "네이버페이 증권",
+        "role": "SUPPLEMENTARY"
+      },
+      {
+        "label": "네이버페이 증권 삼성전기 일별 시세",
+        "url": "https://m.stock.naver.com/api/stock/009150/price?pageSize=5&page=1",
+        "publisher": "네이버페이 증권",
+        "role": "SUPPLEMENTARY"
+      },
+      {
+        "label": "네이버페이 증권 알테오젠 일별 시세",
+        "url": "https://m.stock.naver.com/api/stock/196170/price?pageSize=5&page=1",
+        "publisher": "네이버페이 증권",
+        "role": "SUPPLEMENTARY"
+      },
+      {
+        "label": "네이버페이 증권 NAVER 일별 시세",
+        "url": "https://m.stock.naver.com/api/stock/035420/price?pageSize=5&page=1",
+        "publisher": "네이버페이 증권",
+        "role": "SUPPLEMENTARY"
+      },
+      {
+        "label": "KB증권 리서치 공개 시장기사 (2026-10-21)",
+        "url": "https://rc.kbsec.com/detailView.able?documentid=20261021144128693K",
+        "publisher": "KB증권 리서치"
+      },
+      {
+        "label": "KB증권 리서치 공개 시장기사 (2026-10-30)",
+        "url": "https://rc.kbsec.com/detailView.able?documentid=20261030172030640K",
+        "publisher": "KB증권 리서치"
+      },
+      {
+        "label": "한국경제 증권 공개 시장기사 (2026-11-09)",
+        "url": "https://www.hankyung.com/article/202611106255i",
+        "publisher": "한국경제 증권"
+      },
+      {
+        "label": "한국경제 증권 공개 시장기사 (2026-11-09)",
+        "url": "https://www.hankyung.com/article/2026111062696",
+        "publisher": "한국경제 증권"
+      },
+      {
+        "label": "매일경제 증권 공개 시장기사 (2026-11-09)",
+        "url": "https://www.mk.co.kr/news/stock/12203486",
+        "publisher": "매일경제 증권"
+      },
+      {
+        "label": "매일경제 증권 공개 시장기사 (2026-11-09)",
+        "url": "https://www.mk.co.kr/news/stock/12203475",
+        "publisher": "매일경제 증권"
+      }
+    ],
+    "narrative": {
+      "facts": [
+        "코스피는 5,018.85로 마감해 전 거래일보다 0.81% 하락했다. 최근 5거래일 기준으로는 14.34% 하락했다. 최근 10거래일 종가 고점(6,012.44, 2026-10-28)보다 16.53% 낮다.",
+        "코스닥은 638.97로 마감해 전 거래일보다 0.82% 하락했다. 최근 5거래일 기준으로는 12.99% 하락했다. 최근 10거래일 종가 고점(771.28, 2026-10-28)보다 17.15% 낮다."
+      ],
+      "analysis": []
+    },
+    "relatedPosts": [
+      {
+        "title": "[데일리 리포트] 2026년 11월 9일 국내 증시·AI 핵심 정리",
+        "url": "https://motusnova.blogspot.com/2026/11/2026-11-9-ai.html",
+        "label": "리포트",
+        "published": "2026-11-09"
+      },
+      {
+        "title": "AMD 11% 급등…증권가가 짚은 AI 투자 쟁점",
+        "url": "https://motusnova.blogspot.com/2026/11/amd-11-ai.html",
+        "label": "AI 인텔리전스",
+        "published": "2026-11-09"
+      },
+      {
+        "title": "11월 6일 코스피 마감, 6.02% 급락 5,059.69…검색 1위 삼성전자 4.0% 하락",
+        "url": "https://motusnova.blogspot.com/2026/11/11-6-602-505969-1-40.html",
+        "label": "국내증시",
+        "published": "2026-11-09"
+      },
+      {
+        "title": "[주간 증시] 나스닥 주간 3.4% 하락·코스피 11.7% 하락…다음 주 미국 CPI·PPI 주목",
+        "url": "https://motusnova.blogspot.com/2026/11/34-117-cpippi.html",
+        "label": "주간 증시",
+        "published": "2026-11-08"
+      },
+      {
+        "title": "뉴욕증시 마감, 3대 지수 혼조…AMD 11% 급등",
+        "url": "https://motusnova.blogspot.com/2026/11/3-amd-11.html",
+        "label": "미국증시",
+        "published": "2026-11-07"
+      }
+    ],
+    "heroImage": {
+      "url": "https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/operations/2026-11-10/korea/hero-2d4f137b3107.png",
+      "alt": "국내증시 2026년 11월 10일: 11월 9일 코스피 마감, 0.81% 내려 5,018.85…검색 1위 삼성전자 0.9% 하락",
+      "width": 1200,
+      "height": 630
+    }
+  }
 }

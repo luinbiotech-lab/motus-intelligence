@@ -12,37 +12,37 @@
   },
   "independentSource": {
     "providers": [
-      "YAHOO_FINANCE"
+      "KRX"
     ],
     "domains": [
-      "yahoo.com"
+      "co.kr"
     ],
     "urls": [
-      "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?period1=1794009600&period2=1794441600&interval=1d",
-      "https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?period1=1794009600&period2=1794441600&interval=1d"
+      "https://data-dbg.krx.co.kr/svc/apis/idx/kospi_dd_trd?basDd=20261109",
+      "https://data-dbg.krx.co.kr/svc/apis/idx/kosdaq_dd_trd?basDd=20261109"
     ]
   },
   "comparedFields": [
     {
       "field": "KOSPI",
       "primaryValue": 5018.85,
-      "independentValue": 5018.85009765625,
-      "difference": 0.00009765624963620212,
+      "independentValue": 5018.85,
+      "difference": 0,
       "tolerance": 0.05,
       "result": "PASS",
       "primarySourceUrl": "https://m.stock.naver.com/api/index/KOSPI/price?pageSize=10&page=1",
-      "independentSourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?period1=1794009600&period2=1794441600&interval=1d",
+      "independentSourceUrl": "https://data-dbg.krx.co.kr/svc/apis/idx/kospi_dd_trd?basDd=20261109",
       "metricBasis": "SESSION_CLOSE"
     },
     {
       "field": "KOSDAQ",
       "primaryValue": 638.97,
-      "independentValue": 638.969970703125,
-      "difference": 0.00002929687502728484,
+      "independentValue": 638.97,
+      "difference": 0,
       "tolerance": 0.05,
       "result": "PASS",
       "primarySourceUrl": "https://m.stock.naver.com/api/index/KOSDAQ/price?pageSize=10&page=1",
-      "independentSourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?period1=1794009600&period2=1794441600&interval=1d",
+      "independentSourceUrl": "https://data-dbg.krx.co.kr/svc/apis/idx/kosdaq_dd_trd?basDd=20261109",
       "metricBasis": "SESSION_CLOSE"
     }
   ],
@@ -55,7 +55,7 @@
   "sourceDiversityPass": true,
   "verification": "VERIFIED",
   "reasonCodes": [],
-  "verifiedAt": "2026-11-09T22:40:03.731Z",
+  "verifiedAt": "2026-11-09T23:43:44.296Z",
   "officialPhase": "PRE_PUBLICATION",
   "reconciliation": {
     "status": "NOT_REQUIRED",

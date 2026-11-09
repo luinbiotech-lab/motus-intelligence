@@ -172,5 +172,11 @@
     "publicationId": "motus-live-2026-11-09:us",
     "publicPostUrl": "https://motusnova.blogspot.com/2026/11/11-9-3-27-amd-13.html",
     "publishedAt": "2026-11-10T08:44:20+09:00"
+  },
+  {
+    "idempotencyKey": "library:motus-live-2026-11-10:korea|https://motusnova.blogspot.com/2026/11/11-9-081-501885-1-09.html",
+    "publicationId": "motus-live-2026-11-10:korea",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/11/11-9-081-501885-1-09.html",
+    "publishedAt": "2026-11-10T08:44:25+09:00"
   }
 ]
