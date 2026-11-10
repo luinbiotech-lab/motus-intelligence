@@ -190,5 +190,11 @@
     "publicationId": "motus-live-2026-11-11:korea",
     "publicPostUrl": "https://motusnova.blogspot.com/2026/11/11-10-439-523913-1-50.html",
     "publishedAt": "2026-11-10T17:15:12+09:00"
+  },
+  {
+    "idempotencyKey": "library:motus-live-2026-11-10:us|https://motusnova.blogspot.com/2026/11/11-10-3-55.html",
+    "publicationId": "motus-live-2026-11-10:us",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/11/11-10-3-55.html",
+    "publishedAt": "2026-11-11T08:47:03+09:00"
   }
 ]

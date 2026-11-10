@@ -1,10 +1,74 @@
 {
-  "state": "HOLD",
-  "reasonCode": "BROKER_MARKET_COMMENTARY_UNAVAILABLE",
-  "reasonCodes": [
-    "BROKER_MARKET_COMMENTARY_UNAVAILABLE"
+  "gate": {
+    "state": "AUTO_PUBLISH_READY",
+    "reasons": [],
+    "approval": "AUTO_POLICY_APPROVAL",
+    "checkedAt": "2026-11-10T23:46:59.273Z"
+  },
+  "searchRegistration": {
+    "publicationId": "motus-live-2026-11-10:us",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/11/11-10-3-55.html",
+    "registeredAt": "2026-11-11T08:47:03+09:00",
+    "trigger": "PUBLICATION_PUBLISHED",
+    "googleInspectionState": "QUEUED",
+    "naverDiscoveryState": "PENDING",
+    "visibility": {
+      "publicationId": "motus-live-2026-11-10:us",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/11/11-10-3-55.html",
+      "google": {
+        "discovered": null,
+        "indexed": null,
+        "lastCrawl": null,
+        "coverageState": null,
+        "inspectionAt": null
+      },
+      "naver": {
+        "discovered": null,
+        "indexed": null,
+        "collectionState": null,
+        "inspectionAt": null
+      },
+      "sitemapIncluded": null,
+      "rssIncluded": null
+    }
+  },
+  "libraryRegistration": {
+    "idempotencyKey": "library:motus-live-2026-11-10:us|https://motusnova.blogspot.com/2026/11/11-10-3-55.html"
+  },
+  "weeklyFeed": {
+    "idempotencyKey": "weekly:motus-live-2026-11-10:us"
+  },
+  "pdfCandidate": {
+    "idempotencyKey": "pdf:motus-live-2026-11-10:us:sha256:69b2bbb63069c34598cec1e2ffc78a8ab2af6b058e2c345f3b5e991b309e1418",
+    "visibility": "PRIVATE"
+  },
+  "audit": [
+    {
+      "at": "2026-11-10T23:46:59.273Z",
+      "event": "AUTO_PUBLISH_STATIC_GATE",
+      "detail": "AUTO_PUBLISH_READY"
+    },
+    {
+      "at": "2026-11-10T23:46:59.273Z",
+      "event": "REMOTE_DUPLICATE_CHECK",
+      "detail": "PASS"
+    },
+    {
+      "at": "2026-11-10T23:46:59.273Z",
+      "event": "FINAL_REMOTE_DUPLICATE_CHECK",
+      "detail": "PASS"
+    },
+    {
+      "at": "2026-11-11T08:47:03+09:00",
+      "event": "PUBLISHED",
+      "detail": "AUTO_POLICY_APPROVAL"
+    }
   ],
-  "reason": "BROKER_MARKET_COMMENTARY_UNAVAILABLE",
-  "insertCallCount": 0,
-  "publishCallCount": 0
+  "state": "PUBLISHED",
+  "draftPostId": "1927177304669907792",
+  "publicPostUrl": "https://motusnova.blogspot.com/2026/11/11-10-3-55.html",
+  "publishedAt": "2026-11-11T08:47:03+09:00",
+  "insertCallCount": 1,
+  "publishCallCount": 1,
+  "error": null
 }
