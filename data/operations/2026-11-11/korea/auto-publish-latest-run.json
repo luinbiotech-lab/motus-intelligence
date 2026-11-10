@@ -1,10 +1,10 @@
 {
-  "state": "HOLD",
-  "reasonCode": "YAHOO_FINANCE_KOSPI_ROW_MISSING",
-  "reasonCodes": [
-    "YAHOO_FINANCE_KOSPI_ROW_MISSING"
-  ],
-  "reason": "YAHOO_FINANCE_KOSPI_ROW_MISSING",
+  "state": "SKIP",
+  "reasonCode": "ALREADY_PUBLISHED_IN_PERSISTED_LEDGER",
+  "identity": "2026-11-11|KOREA_MARKET",
+  "postId": "2053404216869865781",
+  "publicPostUrl": "https://motusnova.blogspot.com/2026/11/11-10-439-523913-1-50.html",
+  "reason": "persistent publish ledger already records this publication identity",
   "insertCallCount": 0,
   "publishCallCount": 0
 }
