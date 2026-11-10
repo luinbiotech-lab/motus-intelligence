@@ -1,0 +1,447 @@
+{
+  "schemaVersion": "1.0",
+  "sourceMode": "internal",
+  "category": "AI_INTELLIGENCE",
+  "operationDate": "2026-11-10",
+  "status": "LIVE_READY",
+  "reasonCode": null,
+  "entries": [
+    {
+      "sourceId": "openai",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/news/rss.xml",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "error": null
+    },
+    {
+      "sourceId": "google-ai",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blog.google/technology/ai/rss/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "error": null
+    },
+    {
+      "sourceId": "google-deepmind",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://deepmind.google/blog/rss.xml",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "error": null
+    },
+    {
+      "sourceId": "nvidia",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blogs.nvidia.com/feed/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "error": null
+    },
+    {
+      "sourceId": "nvidia-newsroom",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://nvidianews.nvidia.com/releases.xml",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "error": null
+    },
+    {
+      "sourceId": "microsoft",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blogs.microsoft.com/feed/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "error": null
+    },
+    {
+      "sourceId": "microsoft-source",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://news.microsoft.com/source/feed/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "error": null
+    },
+    {
+      "sourceId": "aws-news",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://aws.amazon.com/blogs/aws/feed/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "error": null
+    },
+    {
+      "sourceId": "aws-whats-new",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://aws.amazon.com/about-aws/whats-new/recent/feed/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "error": null
+    },
+    {
+      "sourceId": "meta",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://about.fb.com/news/feed/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "error": null
+    },
+    {
+      "sourceId": "anthropic",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://www.anthropic.com/news",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "error": null
+    },
+    {
+      "sourceId": "ai:page:1",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/amazon-bedrock-agentcore-web-search-api/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "error": null,
+      "observedDate": "Tue, 10 No",
+      "sourceTimestamp": "Tue, 10 Nov 2026 00:00:00 GMT",
+      "dateField": "rss.pubDate"
+    },
+    {
+      "sourceId": "ai:page:2",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/chatgpt-enterprise-aws-marketplace",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "error": "HTTP_403"
+    },
+    {
+      "sourceId": "ai:rss-evidence:2",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/chatgpt-enterprise-aws-marketplace",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "error": null,
+      "observedDate": "Mon, 09 No",
+      "sourceTimestamp": "Mon, 09 Nov 2026 19:00:00 GMT",
+      "dateField": "rss.pubDate"
+    },
+    {
+      "sourceId": "ai:page:3",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://news.microsoft.com/source/2026/11/09/northern-trust-and-microsoft-frontier-company-collaborate-to-transform-client-onboarding-through-ai/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "error": null,
+      "observedDate": "2026-11-09",
+      "sourceTimestamp": "2026-11-09T15:58:45.000Z",
+      "dateField": "page.datePublished"
+    },
+    {
+      "sourceId": "ai:page:4",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blogs.nvidia.com/blog/robotics-simulation-advancements-corl/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "error": null,
+      "observedDate": "2026-11-09",
+      "sourceTimestamp": "2026-11-09T14:00:01.000Z",
+      "dateField": "page.datePublished"
+    },
+    {
+      "sourceId": "ai:page:5",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://www.anthropic.com/news/public-benefit-fund",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "error": null,
+      "observedDate": "2026-10-18",
+      "sourceTimestamp": "2026-10-18T00:00:00.000Z",
+      "dateField": "page.datePublished"
+    },
+    {
+      "sourceId": "ai:page:6",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/claude-fable-5-2-aws-govcloud/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "error": null,
+      "observedDate": "Mon, 09 No",
+      "sourceTimestamp": "Mon, 09 Nov 2026 18:30:00 GMT",
+      "dateField": "rss.pubDate"
+    },
+    {
+      "sourceId": "ai:page:7",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/control-room",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "error": "HTTP_403"
+    },
+    {
+      "sourceId": "ai:rss-evidence:7",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/control-room",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "error": null,
+      "observedDate": "Mon, 09 No",
+      "sourceTimestamp": "Mon, 09 Nov 2026 13:00:00 GMT",
+      "dateField": "rss.pubDate"
+    },
+    {
+      "sourceId": "ai:page:8",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://commandline.microsoft.com/thinkingbox-part-two-expanded-model-evals-reinforcement-learning-rewards/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "error": null,
+      "observedDate": "2026-11-06",
+      "sourceTimestamp": "2026-11-06T16:51:25.000Z",
+      "dateField": "page.datePublished"
+    },
+    {
+      "sourceId": "ai:page:9",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blogs.nvidia.com/blog/korean-startup-investments-msit/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "error": null,
+      "observedDate": "2026-11-09",
+      "sourceTimestamp": "2026-11-09T08:00:53.000Z",
+      "dateField": "page.datePublished"
+    },
+    {
+      "sourceId": "ai:page:10",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://www.anthropic.com/news/s1-sec",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "error": null,
+      "observedDate": "2026-10-26",
+      "sourceTimestamp": "2026-10-26T00:00:00.000Z",
+      "dateField": "page.datePublished"
+    },
+    {
+      "sourceId": "deep:consensus:list:economy",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://consensus.hankyung.com/analysis/list?report_type=EC&sdate=2026-11-03&edate=2026-11-11&now_page=1&pagenum=80",
+      "status": "PASS",
+      "recordCount": 3,
+      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "error": null
+    },
+    {
+      "sourceId": "deep:naver-research:list:market",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://m.stock.naver.com/api/research/market?page=1&pageSize=60",
+      "status": "PASS",
+      "recordCount": 60,
+      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "error": null
+    },
+    {
+      "sourceId": "deep:naver-research:list:industry",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://m.stock.naver.com/api/research/industry?page=1&pageSize=60",
+      "status": "PASS",
+      "recordCount": 60,
+      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "error": null
+    },
+    {
+      "sourceId": "deep:naver-research:list:economy",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://m.stock.naver.com/api/research/economy?page=1&pageSize=60",
+      "status": "PASS",
+      "recordCount": 32,
+      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "error": null
+    },
+    {
+      "sourceId": "deep:naver-research:list:invest",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://m.stock.naver.com/api/research/invest?page=1&pageSize=60",
+      "status": "PASS",
+      "recordCount": 60,
+      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "error": null
+    },
+    {
+      "sourceId": "deep:consensus:list:market",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://consensus.hankyung.com/analysis/list?skinType=market&report_type=MK&sdate=2026-11-03&edate=2026-11-11&now_page=1&pagenum=80",
+      "status": "PASS",
+      "recordCount": 63,
+      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "error": null
+    },
+    {
+      "sourceId": "deep:consensus:list:company",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://consensus.hankyung.com/analysis/list?skinType=business&report_type=CO&sdate=2026-11-03&edate=2026-11-11&now_page=1&pagenum=80",
+      "status": "PASS",
+      "recordCount": 78,
+      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "error": null
+    },
+    {
+      "sourceId": "deep:naver-research:list:company",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://m.stock.naver.com/api/research/company?page=1&pageSize=60",
+      "status": "PASS",
+      "recordCount": 60,
+      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "error": null
+    },
+    {
+      "sourceId": "deep:consensus:list:industry",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://consensus.hankyung.com/analysis/list?skinType=industry&report_type=IN&sdate=2026-11-03&edate=2026-11-11&now_page=1&pagenum=80",
+      "status": "PASS",
+      "recordCount": 66,
+      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "error": null
+    },
+    {
+      "sourceId": "deep:naver-research:market:38109",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://stock.pstatic.net/stock-research/market/21/20261110_market_409287000.pdf",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "error": "NAVER_RESEARCH_EMPTY"
+    },
+    {
+      "sourceId": "deep:naver-research:market:38107",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://stock.pstatic.net/stock-research/market/18/20261110_market_17150000.pdf",
+      "status": "PASS",
+      "recordCount": 0,
+      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "error": null,
+      "observedDate": "2026-11-10"
+    },
+    {
+      "sourceId": "deep:naver-research:market:38104",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://stock.pstatic.net/stock-research/market/76/20261110_market_145965000.pdf",
+      "status": "PASS",
+      "recordCount": 2,
+      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "error": null,
+      "observedDate": "2026-11-10"
+    },
+    {
+      "sourceId": "deep:naver-research:market:38103",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://stock.pstatic.net/stock-research/market/76/20261110_market_143205000.pdf",
+      "status": "PASS",
+      "recordCount": 2,
+      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "error": null,
+      "observedDate": "2026-11-10"
+    },
+    {
+      "sourceId": "deep:naver-research:market:38102",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://stock.pstatic.net/stock-research/market/21/20261110_market_167264000.pdf",
+      "status": "PASS",
+      "recordCount": 7,
+      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "error": null,
+      "observedDate": "2026-11-10"
+    },
+    {
+      "sourceId": "deep:naver-research:market:38101",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://stock.pstatic.net/stock-research/market/40/20261110_market_890158000.pdf",
+      "status": "PASS",
+      "recordCount": 3,
+      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "error": null,
+      "observedDate": "2026-11-10"
+    },
+    {
+      "sourceId": "deep:naver-research:market:38100",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://stock.pstatic.net/stock-research/market/64/20261110_market_707722000.pdf",
+      "status": "PASS",
+      "recordCount": 3,
+      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "error": null,
+      "observedDate": "2026-11-10"
+    },
+    {
+      "sourceId": "deep:naver-research:market:38099",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://stock.pstatic.net/stock-research/market/61/20261110_market_172124000.pdf",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "error": null,
+      "observedDate": "2026-11-10"
+    },
+    {
+      "sourceId": "deep:naver-research:market:38098",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://stock.pstatic.net/stock-research/market/63/20261110_market_170857000.pdf",
+      "status": "PASS",
+      "recordCount": 4,
+      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "error": null,
+      "observedDate": "2026-11-10"
+    },
+    {
+      "sourceId": "deep:yahoo:spark:ai-bellwethers",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://query1.finance.yahoo.com/v7/finance/spark?symbols=NVDA,MSFT,GOOGL,AMZN,META,AVGO,AMD,TSM,ORCL,PLTR&range=5d&interval=1d",
+      "status": "PASS",
+      "recordCount": 10,
+      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "error": null,
+      "observedDate": "2026-11-09"
+    },
+    {
+      "sourceId": "deep:research:listed:stock.pstatic.net/stock-research/industry/57/20261110_industry_821747000.pdf",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://stock.pstatic.net/stock-research/industry/57/20261110_industry_821747000.pdf",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "error": null,
+      "observedDate": "2026-11-10"
+    },
+    {
+      "sourceId": "deep:research:listed:stock.pstatic.net/stock-research/industry/66/20261110_industry_45460000.pdf",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://stock.pstatic.net/stock-research/industry/66/20261110_industry_45460000.pdf",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "error": null,
+      "observedDate": "2026-11-10"
+    }
+  ]
+}
