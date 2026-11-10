@@ -12,7 +12,7 @@
       "url": "https://openai.com/news/rss.xml",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "collectedAt": "2026-11-10T11:30:45.503Z",
       "error": null
     },
     {
@@ -21,7 +21,7 @@
       "url": "https://blog.google/technology/ai/rss/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "collectedAt": "2026-11-10T11:30:45.503Z",
       "error": null
     },
     {
@@ -30,7 +30,7 @@
       "url": "https://deepmind.google/blog/rss.xml",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "collectedAt": "2026-11-10T11:30:45.503Z",
       "error": null
     },
     {
@@ -39,7 +39,7 @@
       "url": "https://blogs.nvidia.com/feed/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "collectedAt": "2026-11-10T11:30:45.503Z",
       "error": null
     },
     {
@@ -48,7 +48,7 @@
       "url": "https://nvidianews.nvidia.com/releases.xml",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "collectedAt": "2026-11-10T11:30:45.503Z",
       "error": null
     },
     {
@@ -57,7 +57,7 @@
       "url": "https://blogs.microsoft.com/feed/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "collectedAt": "2026-11-10T11:30:45.503Z",
       "error": null
     },
     {
@@ -66,7 +66,7 @@
       "url": "https://news.microsoft.com/source/feed/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "collectedAt": "2026-11-10T11:30:45.503Z",
       "error": null
     },
     {
@@ -75,7 +75,7 @@
       "url": "https://aws.amazon.com/blogs/aws/feed/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "collectedAt": "2026-11-10T11:30:45.503Z",
       "error": null
     },
     {
@@ -84,7 +84,7 @@
       "url": "https://aws.amazon.com/about-aws/whats-new/recent/feed/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "collectedAt": "2026-11-10T11:30:45.503Z",
       "error": null
     },
     {
@@ -93,7 +93,7 @@
       "url": "https://about.fb.com/news/feed/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "collectedAt": "2026-11-10T11:30:45.503Z",
       "error": null
     },
     {
@@ -102,64 +102,64 @@
       "url": "https://www.anthropic.com/news",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "collectedAt": "2026-11-10T11:30:45.503Z",
       "error": null
     },
     {
       "sourceId": "ai:page:1",
       "category": "AI_INTELLIGENCE",
-      "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/amazon-bedrock-agentcore-web-search-api/",
+      "url": "https://openai.com/index/closing-ai-guidance-gap-education",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-11-10T11:30:45.503Z",
+      "error": "HTTP_403"
+    },
+    {
+      "sourceId": "ai:rss-evidence:1",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/closing-ai-guidance-gap-education",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "collectedAt": "2026-11-10T11:30:45.503Z",
       "error": null,
       "observedDate": "Tue, 10 No",
-      "sourceTimestamp": "Tue, 10 Nov 2026 00:00:00 GMT",
+      "sourceTimestamp": "Tue, 10 Nov 2026 09:00:00 GMT",
       "dateField": "rss.pubDate"
     },
     {
       "sourceId": "ai:page:2",
       "category": "AI_INTELLIGENCE",
-      "url": "https://openai.com/index/chatgpt-enterprise-aws-marketplace",
-      "status": "FAILED",
-      "recordCount": 0,
-      "collectedAt": "2026-11-10T03:35:45.478Z",
-      "error": "HTTP_403"
-    },
-    {
-      "sourceId": "ai:rss-evidence:2",
-      "category": "AI_INTELLIGENCE",
-      "url": "https://openai.com/index/chatgpt-enterprise-aws-marketplace",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/claude-fable-5-2-aws-govcloud/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "collectedAt": "2026-11-10T11:30:45.503Z",
       "error": null,
       "observedDate": "Mon, 09 No",
-      "sourceTimestamp": "Mon, 09 Nov 2026 19:00:00 GMT",
+      "sourceTimestamp": "Mon, 09 Nov 2026 18:30:00 GMT",
       "dateField": "rss.pubDate"
     },
     {
       "sourceId": "ai:page:3",
       "category": "AI_INTELLIGENCE",
-      "url": "https://news.microsoft.com/source/2026/11/09/northern-trust-and-microsoft-frontier-company-collaborate-to-transform-client-onboarding-through-ai/",
+      "url": "https://blogs.nvidia.com/blog/korean-startup-investments-msit/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "collectedAt": "2026-11-10T11:30:45.503Z",
       "error": null,
       "observedDate": "2026-11-09",
-      "sourceTimestamp": "2026-11-09T15:58:45.000Z",
+      "sourceTimestamp": "2026-11-09T08:00:53.000Z",
       "dateField": "page.datePublished"
     },
     {
       "sourceId": "ai:page:4",
       "category": "AI_INTELLIGENCE",
-      "url": "https://blogs.nvidia.com/blog/robotics-simulation-advancements-corl/",
+      "url": "https://commandline.microsoft.com/thinkingbox-part-two-expanded-model-evals-reinforcement-learning-rewards/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "collectedAt": "2026-11-10T11:30:45.503Z",
       "error": null,
-      "observedDate": "2026-11-09",
-      "sourceTimestamp": "2026-11-09T14:00:01.000Z",
+      "observedDate": "2026-11-06",
+      "sourceTimestamp": "2026-11-06T16:51:25.000Z",
       "dateField": "page.datePublished"
     },
     {
@@ -168,7 +168,7 @@
       "url": "https://www.anthropic.com/news/public-benefit-fund",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "collectedAt": "2026-11-10T11:30:45.503Z",
       "error": null,
       "observedDate": "2026-10-18",
       "sourceTimestamp": "2026-10-18T00:00:00.000Z",
@@ -177,71 +177,80 @@
     {
       "sourceId": "ai:page:6",
       "category": "AI_INTELLIGENCE",
-      "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/claude-fable-5-2-aws-govcloud/",
+      "url": "https://openai.com/index/chatgpt-enterprise-aws-marketplace",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-11-10T11:30:45.503Z",
+      "error": "HTTP_403"
+    },
+    {
+      "sourceId": "ai:rss-evidence:6",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/chatgpt-enterprise-aws-marketplace",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "collectedAt": "2026-11-10T11:30:45.503Z",
+      "error": null,
+      "observedDate": "Mon, 09 No",
+      "sourceTimestamp": "Mon, 09 Nov 2026 19:00:00 GMT",
+      "dateField": "rss.pubDate"
+    },
+    {
+      "sourceId": "ai:page:7",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/bedrock-claude-mythos-5-2-govcloud/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-10T11:30:45.503Z",
       "error": null,
       "observedDate": "Mon, 09 No",
       "sourceTimestamp": "Mon, 09 Nov 2026 18:30:00 GMT",
       "dateField": "rss.pubDate"
     },
     {
-      "sourceId": "ai:page:7",
-      "category": "AI_INTELLIGENCE",
-      "url": "https://openai.com/index/control-room",
-      "status": "FAILED",
-      "recordCount": 0,
-      "collectedAt": "2026-11-10T03:35:45.478Z",
-      "error": "HTTP_403"
-    },
-    {
-      "sourceId": "ai:rss-evidence:7",
-      "category": "AI_INTELLIGENCE",
-      "url": "https://openai.com/index/control-room",
-      "status": "PASS",
-      "recordCount": 1,
-      "collectedAt": "2026-11-10T03:35:45.478Z",
-      "error": null,
-      "observedDate": "Mon, 09 No",
-      "sourceTimestamp": "Mon, 09 Nov 2026 13:00:00 GMT",
-      "dateField": "rss.pubDate"
-    },
-    {
       "sourceId": "ai:page:8",
       "category": "AI_INTELLIGENCE",
-      "url": "https://commandline.microsoft.com/thinkingbox-part-two-expanded-model-evals-reinforcement-learning-rewards/",
+      "url": "https://blogs.nvidia.com/blog/korea-physical-ai-ecosystem/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "collectedAt": "2026-11-10T11:30:45.503Z",
       "error": null,
-      "observedDate": "2026-11-06",
-      "sourceTimestamp": "2026-11-06T16:51:25.000Z",
+      "observedDate": "2026-11-09",
+      "sourceTimestamp": "2026-11-09T05:00:40.000Z",
       "dateField": "page.datePublished"
     },
     {
       "sourceId": "ai:page:9",
       "category": "AI_INTELLIGENCE",
-      "url": "https://blogs.nvidia.com/blog/korean-startup-investments-msit/",
+      "url": "https://www.anthropic.com/news/s1-sec",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "collectedAt": "2026-11-10T11:30:45.503Z",
       "error": null,
-      "observedDate": "2026-11-09",
-      "sourceTimestamp": "2026-11-09T08:00:53.000Z",
+      "observedDate": "2026-10-26",
+      "sourceTimestamp": "2026-10-26T00:00:00.000Z",
       "dateField": "page.datePublished"
     },
     {
       "sourceId": "ai:page:10",
       "category": "AI_INTELLIGENCE",
-      "url": "https://www.anthropic.com/news/s1-sec",
+      "url": "https://openai.com/index/control-room",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-11-10T11:30:45.503Z",
+      "error": "HTTP_403"
+    },
+    {
+      "sourceId": "ai:rss-evidence:10",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/control-room",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "collectedAt": "2026-11-10T11:30:45.503Z",
       "error": null,
-      "observedDate": "2026-10-26",
-      "sourceTimestamp": "2026-10-26T00:00:00.000Z",
-      "dateField": "page.datePublished"
+      "observedDate": "Mon, 09 No",
+      "sourceTimestamp": "Mon, 09 Nov 2026 13:00:00 GMT",
+      "dateField": "rss.pubDate"
     },
     {
       "sourceId": "deep:consensus:list:economy",
@@ -249,7 +258,7 @@
       "url": "https://consensus.hankyung.com/analysis/list?report_type=EC&sdate=2026-11-03&edate=2026-11-11&now_page=1&pagenum=80",
       "status": "PASS",
       "recordCount": 3,
-      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "collectedAt": "2026-11-10T11:30:45.503Z",
       "error": null
     },
     {
@@ -258,25 +267,7 @@
       "url": "https://m.stock.naver.com/api/research/market?page=1&pageSize=60",
       "status": "PASS",
       "recordCount": 60,
-      "collectedAt": "2026-11-10T03:35:45.478Z",
-      "error": null
-    },
-    {
-      "sourceId": "deep:naver-research:list:industry",
-      "category": "AI_INTELLIGENCE",
-      "url": "https://m.stock.naver.com/api/research/industry?page=1&pageSize=60",
-      "status": "PASS",
-      "recordCount": 60,
-      "collectedAt": "2026-11-10T03:35:45.478Z",
-      "error": null
-    },
-    {
-      "sourceId": "deep:naver-research:list:economy",
-      "category": "AI_INTELLIGENCE",
-      "url": "https://m.stock.naver.com/api/research/economy?page=1&pageSize=60",
-      "status": "PASS",
-      "recordCount": 32,
-      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "collectedAt": "2026-11-10T11:30:45.503Z",
       "error": null
     },
     {
@@ -285,7 +276,25 @@
       "url": "https://m.stock.naver.com/api/research/invest?page=1&pageSize=60",
       "status": "PASS",
       "recordCount": 60,
-      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "collectedAt": "2026-11-10T11:30:45.503Z",
+      "error": null
+    },
+    {
+      "sourceId": "deep:naver-research:list:industry",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://m.stock.naver.com/api/research/industry?page=1&pageSize=60",
+      "status": "PASS",
+      "recordCount": 60,
+      "collectedAt": "2026-11-10T11:30:45.503Z",
+      "error": null
+    },
+    {
+      "sourceId": "deep:naver-research:list:economy",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://m.stock.naver.com/api/research/economy?page=1&pageSize=60",
+      "status": "PASS",
+      "recordCount": 32,
+      "collectedAt": "2026-11-10T11:30:45.503Z",
       "error": null
     },
     {
@@ -294,25 +303,7 @@
       "url": "https://consensus.hankyung.com/analysis/list?skinType=market&report_type=MK&sdate=2026-11-03&edate=2026-11-11&now_page=1&pagenum=80",
       "status": "PASS",
       "recordCount": 63,
-      "collectedAt": "2026-11-10T03:35:45.478Z",
-      "error": null
-    },
-    {
-      "sourceId": "deep:consensus:list:company",
-      "category": "AI_INTELLIGENCE",
-      "url": "https://consensus.hankyung.com/analysis/list?skinType=business&report_type=CO&sdate=2026-11-03&edate=2026-11-11&now_page=1&pagenum=80",
-      "status": "PASS",
-      "recordCount": 78,
-      "collectedAt": "2026-11-10T03:35:45.478Z",
-      "error": null
-    },
-    {
-      "sourceId": "deep:naver-research:list:company",
-      "category": "AI_INTELLIGENCE",
-      "url": "https://m.stock.naver.com/api/research/company?page=1&pageSize=60",
-      "status": "PASS",
-      "recordCount": 60,
-      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "collectedAt": "2026-11-10T11:30:45.503Z",
       "error": null
     },
     {
@@ -321,7 +312,25 @@
       "url": "https://consensus.hankyung.com/analysis/list?skinType=industry&report_type=IN&sdate=2026-11-03&edate=2026-11-11&now_page=1&pagenum=80",
       "status": "PASS",
       "recordCount": 66,
-      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "collectedAt": "2026-11-10T11:30:45.503Z",
+      "error": null
+    },
+    {
+      "sourceId": "deep:naver-research:list:company",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://m.stock.naver.com/api/research/company?page=1&pageSize=60",
+      "status": "PASS",
+      "recordCount": 60,
+      "collectedAt": "2026-11-10T11:30:45.503Z",
+      "error": null
+    },
+    {
+      "sourceId": "deep:consensus:list:company",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://consensus.hankyung.com/analysis/list?skinType=business&report_type=CO&sdate=2026-11-03&edate=2026-11-11&now_page=1&pagenum=80",
+      "status": "PASS",
+      "recordCount": 78,
+      "collectedAt": "2026-11-10T11:30:45.503Z",
       "error": null
     },
     {
@@ -330,7 +339,7 @@
       "url": "https://stock.pstatic.net/stock-research/market/21/20261110_market_409287000.pdf",
       "status": "FAILED",
       "recordCount": 0,
-      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "collectedAt": "2026-11-10T11:30:45.503Z",
       "error": "NAVER_RESEARCH_EMPTY"
     },
     {
@@ -339,7 +348,7 @@
       "url": "https://stock.pstatic.net/stock-research/market/18/20261110_market_17150000.pdf",
       "status": "PASS",
       "recordCount": 0,
-      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "collectedAt": "2026-11-10T11:30:45.503Z",
       "error": null,
       "observedDate": "2026-11-10"
     },
@@ -349,7 +358,7 @@
       "url": "https://stock.pstatic.net/stock-research/market/76/20261110_market_145965000.pdf",
       "status": "PASS",
       "recordCount": 2,
-      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "collectedAt": "2026-11-10T11:30:45.503Z",
       "error": null,
       "observedDate": "2026-11-10"
     },
@@ -359,7 +368,7 @@
       "url": "https://stock.pstatic.net/stock-research/market/76/20261110_market_143205000.pdf",
       "status": "PASS",
       "recordCount": 2,
-      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "collectedAt": "2026-11-10T11:30:45.503Z",
       "error": null,
       "observedDate": "2026-11-10"
     },
@@ -369,7 +378,7 @@
       "url": "https://stock.pstatic.net/stock-research/market/21/20261110_market_167264000.pdf",
       "status": "PASS",
       "recordCount": 7,
-      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "collectedAt": "2026-11-10T11:30:45.503Z",
       "error": null,
       "observedDate": "2026-11-10"
     },
@@ -379,7 +388,7 @@
       "url": "https://stock.pstatic.net/stock-research/market/40/20261110_market_890158000.pdf",
       "status": "PASS",
       "recordCount": 3,
-      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "collectedAt": "2026-11-10T11:30:45.503Z",
       "error": null,
       "observedDate": "2026-11-10"
     },
@@ -389,7 +398,7 @@
       "url": "https://stock.pstatic.net/stock-research/market/64/20261110_market_707722000.pdf",
       "status": "PASS",
       "recordCount": 3,
-      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "collectedAt": "2026-11-10T11:30:45.503Z",
       "error": null,
       "observedDate": "2026-11-10"
     },
@@ -399,7 +408,7 @@
       "url": "https://stock.pstatic.net/stock-research/market/61/20261110_market_172124000.pdf",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "collectedAt": "2026-11-10T11:30:45.503Z",
       "error": null,
       "observedDate": "2026-11-10"
     },
@@ -409,7 +418,7 @@
       "url": "https://stock.pstatic.net/stock-research/market/63/20261110_market_170857000.pdf",
       "status": "PASS",
       "recordCount": 4,
-      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "collectedAt": "2026-11-10T11:30:45.503Z",
       "error": null,
       "observedDate": "2026-11-10"
     },
@@ -419,7 +428,7 @@
       "url": "https://query1.finance.yahoo.com/v7/finance/spark?symbols=NVDA,MSFT,GOOGL,AMZN,META,AVGO,AMD,TSM,ORCL,PLTR&range=5d&interval=1d",
       "status": "PASS",
       "recordCount": 10,
-      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "collectedAt": "2026-11-10T11:30:45.503Z",
       "error": null,
       "observedDate": "2026-11-09"
     },
@@ -429,7 +438,17 @@
       "url": "https://stock.pstatic.net/stock-research/industry/57/20261110_industry_821747000.pdf",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "collectedAt": "2026-11-10T11:30:45.503Z",
+      "error": null,
+      "observedDate": "2026-11-10"
+    },
+    {
+      "sourceId": "deep:research:listed:stock.pstatic.net/stock-research/industry/16/20261110_industry_733238000.pdf",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://stock.pstatic.net/stock-research/industry/16/20261110_industry_733238000.pdf",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-10T11:30:45.503Z",
       "error": null,
       "observedDate": "2026-11-10"
     },
@@ -439,7 +458,7 @@
       "url": "https://stock.pstatic.net/stock-research/industry/66/20261110_industry_45460000.pdf",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-10T03:35:45.478Z",
+      "collectedAt": "2026-11-10T11:30:45.503Z",
       "error": null,
       "observedDate": "2026-11-10"
     }

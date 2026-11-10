@@ -1,6 +1,6 @@
 {
   "schema": "motus.ai-facts/1",
-  "bundleHash": "d4c1eab6b09ba235",
+  "bundleHash": "7aea9e60687822d0",
   "operationDate": "2026-11-10",
   "sessionDate": "2026-11-09",
   "facts": [
@@ -13,23 +13,23 @@
     {
       "id": "F2",
       "kind": "official",
-      "text": "엔비디아는 2026년 11월 09일(한국 시간) 공식 블로그에 「Practice Makes Precise: At CoRL, NVIDIA and Partners Reveal How Robots Rehearse Delicate Work in Simulation」 제목의 발표를 게시했다. 발표 제목과 본문은 AI 협력 확대에 관한 내용을 다룬다. 원문에서 언급된 제품·플랫폼은 Isaac이다. 원문에서 함께 언급된 국가·기업은 지멘스이다.",
+      "text": "엔비디아는 2026년 11월 09일(한국 시간) 공식 블로그에 「Korea Advances Physical AI Across Industries With NVIDIA」 제목의 발표를 게시했다. 원문 본문은 AI 협력 확대에 관한 내용을 다룬다. 원문에서 언급된 제품·플랫폼은 Isaac이다. 원문에서 함께 언급된 국가·기업은 한국, 삼성이다. 원문은 5배 빠른 처리 등의 수치를 명시했다.",
       "publisher": "엔비디아",
-      "sourceUrl": "https://blogs.nvidia.com/blog/robotics-simulation-advancements-corl/"
+      "sourceUrl": "https://blogs.nvidia.com/blog/korea-physical-ai-ecosystem/"
     },
     {
       "id": "F3",
       "kind": "official",
-      "text": "마이크로소프트는 2026년 11월 10일(한국 시간) 공식 뉴스룸에 「Northern Trust and Microsoft Frontier Company collaborate to transform client onboarding through AI」 제목의 발표를 게시했다. 발표 제목과 본문은 AI 협력 확대에 관한 내용을 다룬다. 원문에서 언급된 제품·플랫폼은 Azure이다.",
-      "publisher": "마이크로소프트",
-      "sourceUrl": "https://news.microsoft.com/source/2026/11/09/northern-trust-and-microsoft-frontier-company-collaborate-to-transform-client-onboarding-through-ai/"
+      "text": "오픈AI는 2026년 11월 10일(한국 시간) 공식 블로그에 「ChatGPT Enterprise now available in AWS Marketplace」 제목의 발표를 게시했다. 발표 제목과 본문은 신규 AI 제품·기능 공개에 관한 내용을 다룬다. 발표의 중심 제품·플랫폼은 ChatGPT Enterprise이다. 원문에서 함께 언급된 국가·기업은 아마존웹서비스(AWS)이다. 원문 페이지가 자동 수집을 허용하지 않아 이 항목은 오픈AI 공식 RSS에 게시된 요약을 근거로 정리했으며, 발표일은 공식 RSS 기록으로 확인했다.",
+      "publisher": "오픈AI",
+      "sourceUrl": "https://openai.com/index/chatgpt-enterprise-aws-marketplace"
     },
     {
       "id": "F4",
       "kind": "official",
-      "text": "아마존웹서비스(AWS)는 2026년 11월 10일(한국 시간) 공식 What’s New 공지에 「Amazon Bedrock AgentCore now offers a Web Search API」 제목의 발표를 게시했다. 원문 본문은 신규 AI 제품·기능 공개에 관한 내용을 다룬다. 발표의 중심 제품·플랫폼은 Amazon Bedrock AgentCore이다. 원문에서 함께 언급된 국가·기업은 유럽, 아일랜드이다.",
+      "text": "아마존웹서비스(AWS)는 2026년 11월 10일(한국 시간) 공식 What’s New 공지에 「Claude Fable 5.2 is now available on AWS GovCloud (US)」 제목의 발표를 게시했다. 발표 제목과 본문은 신규 AI 제품·기능 공개에 관한 내용을 다룬다. 발표의 중심 제품·플랫폼은 Claude이다. 원문에서 함께 언급된 국가·기업은 앤트로픽이다.",
       "publisher": "아마존웹서비스(AWS)",
-      "sourceUrl": "https://aws.amazon.com/about-aws/whats-new/2026/11/amazon-bedrock-agentcore-web-search-api/"
+      "sourceUrl": "https://aws.amazon.com/about-aws/whats-new/2026/11/claude-fable-5-2-aws-govcloud/"
     },
     {
       "id": "F5",
@@ -141,6 +141,13 @@
     },
     {
       "id": "F22",
+      "kind": "broker",
+      "text": "한화투자증권은 11월 10일 「[ESG] 불륜 보도 너머, 반도체 수출통제와 국내 공급망」 산업 리포트에서 “CNBC는 11월 8일 젠슨 황 CEO가 직원 이메일에서 외도 사실을 인정했다고 전했습니다”, “같은 날 이사회는 독립 조사를 발표했습니다”라고 분석했다.",
+      "publisher": "한화투자증권",
+      "sourceUrl": "https://stock.pstatic.net/stock-research/industry/16/20261110_industry_733238000.pdf"
+    },
+    {
+      "id": "F23",
       "kind": "broker",
       "text": "DS투자증권은 11월 10일 「머슬 메모리」 산업 리포트에서 “지난 몇 년간 메모리 업체들은 AI 산업의 성장에 맞춰 제품과 고객 구성을 바꾸며 체질을 개선해왔다”, “반복해서 익힌 동작을 몸이 기억하듯, 메모리 업체들이 다운사이클에도 버틸 수 있는 이익 체력을 확보하였다는 판단이다”라고 분석했다.",
       "publisher": "DS투자증권",
