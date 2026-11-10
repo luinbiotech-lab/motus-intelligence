@@ -2,11 +2,11 @@
   "mode": "LIVE",
   "sourceMode": "internal",
   "date": "2026-11-11",
-  "observedDate": "2026-11-10",
+  "observedDate": null,
   "category": "KOREA_MARKET",
-  "state": "LIVE_READY",
-  "reasonCode": null,
-  "verification": "VERIFIED",
+  "state": "HOLD",
+  "reasonCode": "YAHOO_FINANCE_KOSPI_ROW_MISSING",
+  "verification": "FAILED",
   "publishCallCount": 0,
   "commerce": {
     "enabled": false
