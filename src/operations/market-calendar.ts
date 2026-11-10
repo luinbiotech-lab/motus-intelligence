@@ -22,6 +22,13 @@ export function latestCompletedSession(market:'US'|'KOREA',at:string):MarketSess
   throw new Error(`${market}_COMPLETED_SESSION_NOT_FOUND`);
 }
 
+/** The first trading session strictly after `date` (weekends, holidays skipped; the calendar year must be verified). */
+export function nextSessionDate(market:'US'|'KOREA',date:string):string {
+  let next=date;
+  for(let count=0;count<14;count++){const value=new Date(next+'T12:00:00Z');value.setUTCDate(value.getUTCDate()+1);next=value.toISOString().slice(0,10);if(marketSession(market,next).state!=='HOLIDAY')return next}
+  throw new Error(`${market}_NEXT_SESSION_NOT_FOUND`);
+}
+
 export function isCompletedSession(session:MarketSession,at:string):boolean {
   if(session.state==='HOLIDAY'||!session.closeLocal)return false;
   const zone=session.market==='US'?'America/New_York':'Asia/Seoul',local=localParts(at,zone);
