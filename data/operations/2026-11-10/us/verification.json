@@ -14,10 +14,10 @@
   "leakagePass": true,
   "duplicateCheck": "PENDING_REMOTE",
   "duplicateUncertainty": true,
-  "articleFingerprint": "sha256:4c7016a765b8111484a92eed4f43e0a4f1cbc507847c06e9b99585c10d195e96",
+  "articleFingerprint": "sha256:ae12a4110cf2a9d9ef9cf3e0ee777be5bdfbc5bf5aee0aa73ffa05a144bd434e",
   "commerceEnabled": false,
-  "verifiedAt": "2026-11-10T04:58:47.458Z",
-  "expiresAt": "2026-11-10T06:28:47.458Z",
+  "verifiedAt": "2026-11-10T09:03:54.501Z",
+  "expiresAt": "2026-11-10T10:33:54.501Z",
   "sourceAuditIds": [
     "calendar:nyse",
     "deep:consensus:list:company",
@@ -55,14 +55,14 @@
     "market-research:Bloomberg Markets",
     "market-research:CNBC Investing",
     "market-research:Goldman Sachs",
-    "market-research:article:https://www.bloomberg.com/news/articles/2026-11-09/latest-oil-market-news-and-analysis-for-nov-10",
     "market-research:article:https://www.bloomberg.com/news/articles/2026-11-09/stock-market-today-dow-s-p-live-updates",
+    "market-research:article:https://www.bloomberg.com/news/videos/2026-11-10/great-for-investors-tough-for-traders-3-minutes-mliv-video",
     "market-research:article:https://www.cnbc.com/2026/11/08/top-analysts-like-these-3-dividend-stocks-for-consistent-income.html",
     "market-research:article:https://www.cnbc.com/2026/11/09/millions-of-dollars-poured-into-prediction-markets-on-election-night.html",
     "treasury:10y:2026",
     "yahoo-us:sp500"
   ],
-  "sourceAuditFingerprint": "sha256:141031ce8f9e28f2a36957e725bcbbb08c27e95244fd58f4ff55e05ae6a36ef0",
+  "sourceAuditFingerprint": "sha256:d9d1066567e0e04bf239ce7c3d481cecbb396f0ade1a708a598d58ed02eb3cb3",
   "crossVerificationFingerprint": null,
   "crossVerification": null
 }

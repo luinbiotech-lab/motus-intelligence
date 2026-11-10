@@ -7,22 +7,22 @@
   "reasonCode": null,
   "entries": [
     {
-      "sourceId": "twelve:dxy",
-      "category": "US_MARKET",
-      "url": "https://api.twelvedata.com/time_series?symbol=DXY&interval=1day",
-      "status": "FAILED",
-      "recordCount": 0,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
-      "error": "TWELVE_DATA_DATA_NOT_FOUND symbol=DXY endpoint=/time_series http=404 providerCode=404"
-    },
-    {
       "sourceId": "twelve:russell-2000",
       "category": "US_MARKET",
       "url": "https://api.twelvedata.com/time_series?symbol=RUT&interval=1day",
       "status": "FAILED",
       "recordCount": 0,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
+      "collectedAt": "2026-11-10T09:03:54.501Z",
       "error": "TWELVE_DATA_DATA_NOT_FOUND symbol=RUT endpoint=/time_series http=404 providerCode=404"
+    },
+    {
+      "sourceId": "twelve:dxy",
+      "category": "US_MARKET",
+      "url": "https://api.twelvedata.com/time_series?symbol=DXY&interval=1day",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-11-10T09:03:54.501Z",
+      "error": "TWELVE_DATA_DATA_NOT_FOUND symbol=DXY endpoint=/time_series http=404 providerCode=404"
     },
     {
       "sourceId": "fred:sp500",
@@ -30,7 +30,7 @@
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=SP500&cosd=2019-03-22",
       "status": "FAILED",
       "recordCount": 1918,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
+      "collectedAt": "2026-11-10T09:03:54.501Z",
       "error": "FRED_STALE_OR_INCOMPLETE",
       "observedDate": "2026-11-05",
       "referenceDate": "2026-11-09"
@@ -38,10 +38,10 @@
     {
       "sourceId": "yahoo-us:sp500",
       "category": "US_MARKET",
-      "url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768453127&period2=1794373127&interval=1d",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1768467834&period2=1794387834&interval=1d",
       "status": "PASS",
       "recordCount": 206,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
+      "collectedAt": "2026-11-10T09:03:54.501Z",
       "error": null,
       "observedDate": "2026-11-09",
       "referenceDate": "2026-11-09"
@@ -52,7 +52,7 @@
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=NASDAQCOM&cosd=2019-03-22",
       "status": "PASS",
       "recordCount": 1921,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
+      "collectedAt": "2026-11-10T09:03:54.501Z",
       "error": null,
       "observedDate": "2026-11-09"
     },
@@ -62,7 +62,7 @@
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-22",
       "status": "PASS",
       "recordCount": 1920,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
+      "collectedAt": "2026-11-10T09:03:54.501Z",
       "error": null,
       "observedDate": "2026-11-09"
     },
@@ -72,17 +72,7 @@
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2026-01-04",
       "status": "PASS",
       "recordCount": 213,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
-      "error": null,
-      "observedDate": "2026-11-06"
-    },
-    {
-      "sourceId": "fred:VIXCLS",
-      "category": "US_MARKET",
-      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS&cosd=2026-01-04",
-      "status": "PASS",
-      "recordCount": 219,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
+      "collectedAt": "2026-11-10T09:03:54.501Z",
       "error": null,
       "observedDate": "2026-11-06"
     },
@@ -92,9 +82,19 @@
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILBRENTEU&cosd=2026-01-04",
       "status": "PASS",
       "recordCount": 212,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
+      "collectedAt": "2026-11-10T09:03:54.501Z",
       "error": null,
       "observedDate": "2026-11-03"
+    },
+    {
+      "sourceId": "fred:VIXCLS",
+      "category": "US_MARKET",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS&cosd=2026-01-04",
+      "status": "PASS",
+      "recordCount": 219,
+      "collectedAt": "2026-11-10T09:03:54.501Z",
+      "error": null,
+      "observedDate": "2026-11-06"
     },
     {
       "sourceId": "calendar:nyse",
@@ -102,7 +102,7 @@
       "url": "https://www.nyse.com/trade/hours-calendars",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
+      "collectedAt": "2026-11-10T09:03:54.501Z",
       "error": null,
       "observedDate": "2026-11-09",
       "referenceDate": "2026-11-09"
@@ -113,7 +113,7 @@
       "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/pages/xml?data=daily_treasury_yield_curve&field_tdr_date_value=2026",
       "status": "PASS",
       "recordCount": 215,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
+      "collectedAt": "2026-11-10T09:03:54.501Z",
       "error": null,
       "observedDate": "2026-11-09"
     },
@@ -123,7 +123,7 @@
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS&cosd=2026-01-04",
       "status": "FAILED",
       "recordCount": 0,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
+      "collectedAt": "2026-11-10T09:03:54.501Z",
       "error": "OPTIONAL_METRIC_STALE",
       "observedDate": "2026-11-06",
       "referenceDate": "2026-11-09"
@@ -134,7 +134,7 @@
       "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILBRENTEU&cosd=2026-01-04",
       "status": "FAILED",
       "recordCount": 0,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
+      "collectedAt": "2026-11-10T09:03:54.501Z",
       "error": "OPTIONAL_METRIC_STALE",
       "observedDate": "2026-11-03",
       "referenceDate": "2026-11-09"
@@ -145,7 +145,7 @@
       "url": "https://www.goldmansachs.com/insights",
       "status": "PASS",
       "recordCount": 0,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
+      "collectedAt": "2026-11-10T09:03:54.501Z",
       "error": null
     },
     {
@@ -154,7 +154,7 @@
       "url": "https://www.cnbc.com/id/15839069/device/rss/rss.html",
       "status": "PASS",
       "recordCount": 2,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
+      "collectedAt": "2026-11-10T09:03:54.501Z",
       "error": null
     },
     {
@@ -163,7 +163,7 @@
       "url": "https://feeds.bloomberg.com/markets/news.rss",
       "status": "PASS",
       "recordCount": 2,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
+      "collectedAt": "2026-11-10T09:03:54.501Z",
       "error": null
     },
     {
@@ -172,7 +172,7 @@
       "url": "https://www.cnbc.com/2026/11/09/millions-of-dollars-poured-into-prediction-markets-on-election-night.html",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
+      "collectedAt": "2026-11-10T09:03:54.501Z",
       "error": null,
       "observedDate": "2026-11-09"
     },
@@ -182,9 +182,19 @@
       "url": "https://www.cnbc.com/2026/11/08/top-analysts-like-these-3-dividend-stocks-for-consistent-income.html",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
+      "collectedAt": "2026-11-10T09:03:54.501Z",
       "error": null,
       "observedDate": "2026-11-08"
+    },
+    {
+      "sourceId": "market-research:article:https://www.bloomberg.com/news/videos/2026-11-10/great-for-investors-tough-for-traders-3-minutes-mliv-video",
+      "category": "US_MARKET",
+      "url": "https://www.bloomberg.com/news/videos/2026-11-10/great-for-investors-tough-for-traders-3-minutes-mliv-video",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-10T09:03:54.501Z",
+      "error": null,
+      "observedDate": "2026-11-10"
     },
     {
       "sourceId": "market-research:article:https://www.bloomberg.com/news/articles/2026-11-09/stock-market-today-dow-s-p-live-updates",
@@ -192,17 +202,7 @@
       "url": "https://www.bloomberg.com/news/articles/2026-11-09/stock-market-today-dow-s-p-live-updates",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
-      "error": null,
-      "observedDate": "2026-11-09"
-    },
-    {
-      "sourceId": "market-research:article:https://www.bloomberg.com/news/articles/2026-11-09/latest-oil-market-news-and-analysis-for-nov-10",
-      "category": "US_MARKET",
-      "url": "https://www.bloomberg.com/news/articles/2026-11-09/latest-oil-market-news-and-analysis-for-nov-10",
-      "status": "PASS",
-      "recordCount": 1,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
+      "collectedAt": "2026-11-10T09:03:54.501Z",
       "error": null,
       "observedDate": "2026-11-09"
     },
@@ -212,7 +212,7 @@
       "url": "https://query1.finance.yahoo.com/v7/finance/spark?symbols=NVDA,MSFT,GOOGL,AMZN,META,AVGO,AMD,TSM,ORCL,AAPL,TSLA&range=5d&interval=1d",
       "status": "PASS",
       "recordCount": 11,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
+      "collectedAt": "2026-11-10T09:03:54.501Z",
       "error": null,
       "observedDate": "2026-11-09"
     },
@@ -222,16 +222,7 @@
       "url": "https://consensus.hankyung.com/analysis/list?report_type=EC&sdate=2026-11-03&edate=2026-11-11&now_page=1&pagenum=80",
       "status": "PASS",
       "recordCount": 3,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
-      "error": null
-    },
-    {
-      "sourceId": "deep:naver-research:list:market",
-      "category": "US_MARKET",
-      "url": "https://m.stock.naver.com/api/research/market?page=1&pageSize=60",
-      "status": "PASS",
-      "recordCount": 60,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
+      "collectedAt": "2026-11-10T09:03:54.501Z",
       "error": null
     },
     {
@@ -240,16 +231,16 @@
       "url": "https://m.stock.naver.com/api/research/invest?page=1&pageSize=60",
       "status": "PASS",
       "recordCount": 60,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
+      "collectedAt": "2026-11-10T09:03:54.501Z",
       "error": null
     },
     {
-      "sourceId": "deep:naver-research:list:industry",
+      "sourceId": "deep:naver-research:list:market",
       "category": "US_MARKET",
-      "url": "https://m.stock.naver.com/api/research/industry?page=1&pageSize=60",
+      "url": "https://m.stock.naver.com/api/research/market?page=1&pageSize=60",
       "status": "PASS",
       "recordCount": 60,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
+      "collectedAt": "2026-11-10T09:03:54.501Z",
       "error": null
     },
     {
@@ -258,7 +249,16 @@
       "url": "https://m.stock.naver.com/api/research/economy?page=1&pageSize=60",
       "status": "PASS",
       "recordCount": 32,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
+      "collectedAt": "2026-11-10T09:03:54.501Z",
+      "error": null
+    },
+    {
+      "sourceId": "deep:naver-research:list:industry",
+      "category": "US_MARKET",
+      "url": "https://m.stock.naver.com/api/research/industry?page=1&pageSize=60",
+      "status": "PASS",
+      "recordCount": 60,
+      "collectedAt": "2026-11-10T09:03:54.501Z",
       "error": null
     },
     {
@@ -267,7 +267,7 @@
       "url": "https://consensus.hankyung.com/analysis/list?skinType=market&report_type=MK&sdate=2026-11-03&edate=2026-11-11&now_page=1&pagenum=80",
       "status": "PASS",
       "recordCount": 63,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
+      "collectedAt": "2026-11-10T09:03:54.501Z",
       "error": null
     },
     {
@@ -276,7 +276,7 @@
       "url": "https://consensus.hankyung.com/analysis/list?skinType=business&report_type=CO&sdate=2026-11-03&edate=2026-11-11&now_page=1&pagenum=80",
       "status": "PASS",
       "recordCount": 78,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
+      "collectedAt": "2026-11-10T09:03:54.501Z",
       "error": null
     },
     {
@@ -285,7 +285,7 @@
       "url": "https://m.stock.naver.com/api/research/company?page=1&pageSize=60",
       "status": "PASS",
       "recordCount": 60,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
+      "collectedAt": "2026-11-10T09:03:54.501Z",
       "error": null
     },
     {
@@ -294,7 +294,7 @@
       "url": "https://consensus.hankyung.com/analysis/list?skinType=industry&report_type=IN&sdate=2026-11-03&edate=2026-11-11&now_page=1&pagenum=80",
       "status": "PASS",
       "recordCount": 66,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
+      "collectedAt": "2026-11-10T09:03:54.501Z",
       "error": null
     },
     {
@@ -303,7 +303,7 @@
       "url": "https://stock.pstatic.net/stock-research/market/21/20261110_market_409287000.pdf",
       "status": "FAILED",
       "recordCount": 0,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
+      "collectedAt": "2026-11-10T09:03:54.501Z",
       "error": "NAVER_RESEARCH_EMPTY"
     },
     {
@@ -312,7 +312,7 @@
       "url": "https://stock.pstatic.net/stock-research/market/18/20261110_market_17150000.pdf",
       "status": "PASS",
       "recordCount": 0,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
+      "collectedAt": "2026-11-10T09:03:54.501Z",
       "error": null,
       "observedDate": "2026-11-10"
     },
@@ -322,7 +322,7 @@
       "url": "https://stock.pstatic.net/stock-research/market/76/20261110_market_145965000.pdf",
       "status": "PASS",
       "recordCount": 2,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
+      "collectedAt": "2026-11-10T09:03:54.501Z",
       "error": null,
       "observedDate": "2026-11-10"
     },
@@ -332,7 +332,7 @@
       "url": "https://stock.pstatic.net/stock-research/market/76/20261110_market_143205000.pdf",
       "status": "PASS",
       "recordCount": 2,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
+      "collectedAt": "2026-11-10T09:03:54.501Z",
       "error": null,
       "observedDate": "2026-11-10"
     },
@@ -342,7 +342,7 @@
       "url": "https://stock.pstatic.net/stock-research/market/21/20261110_market_167264000.pdf",
       "status": "PASS",
       "recordCount": 7,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
+      "collectedAt": "2026-11-10T09:03:54.501Z",
       "error": null,
       "observedDate": "2026-11-10"
     },
@@ -352,7 +352,7 @@
       "url": "https://stock.pstatic.net/stock-research/market/40/20261110_market_890158000.pdf",
       "status": "PASS",
       "recordCount": 3,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
+      "collectedAt": "2026-11-10T09:03:54.501Z",
       "error": null,
       "observedDate": "2026-11-10"
     },
@@ -362,7 +362,7 @@
       "url": "https://stock.pstatic.net/stock-research/market/64/20261110_market_707722000.pdf",
       "status": "PASS",
       "recordCount": 3,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
+      "collectedAt": "2026-11-10T09:03:54.501Z",
       "error": null,
       "observedDate": "2026-11-10"
     },
@@ -372,7 +372,7 @@
       "url": "https://stock.pstatic.net/stock-research/market/61/20261110_market_172124000.pdf",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
+      "collectedAt": "2026-11-10T09:03:54.501Z",
       "error": null,
       "observedDate": "2026-11-10"
     },
@@ -382,7 +382,7 @@
       "url": "https://stock.pstatic.net/stock-research/market/63/20261110_market_170857000.pdf",
       "status": "PASS",
       "recordCount": 4,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
+      "collectedAt": "2026-11-10T09:03:54.501Z",
       "error": null,
       "observedDate": "2026-11-10"
     },
@@ -391,8 +391,8 @@
       "category": "US_MARKET",
       "url": "https://query1.finance.yahoo.com/v1/finance/trending/US?count=20",
       "status": "PASS",
-      "recordCount": 17,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
+      "recordCount": 16,
+      "collectedAt": "2026-11-10T09:03:54.501Z",
       "error": null,
       "observedDate": "2026-11-09"
     },
@@ -402,17 +402,17 @@
       "url": "https://query1.finance.yahoo.com/v1/finance/screener/predefined/saved?scrIds=most_actives&count=25",
       "status": "PASS",
       "recordCount": 25,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
+      "collectedAt": "2026-11-10T09:03:54.501Z",
       "error": null,
       "observedDate": "2026-11-09"
     },
     {
       "sourceId": "deep:yahoo:spark:stocks",
       "category": "US_MARKET",
-      "url": "https://query1.finance.yahoo.com/v7/finance/spark?symbols=TTD,HIMS,ASTS,TTWO,SANM,QXO,ACAD,ZETA,RKLB,OMH,SKYD,LCID,NVDA,INTC,SPCX,NOK,AMZN,NU,PFE,AMD&range=5d&interval=1d",
+      "url": "https://query1.finance.yahoo.com/v7/finance/spark?symbols=TTD,HIMS,SANM,ASTS,TTWO,PLUG,OMH,ACAD,ZETA,FRVO,LCID,WIX,NVDA,INTC,SPCX,NOK,AMZN,NU,PFE,AMD&range=5d&interval=1d",
       "status": "PASS",
       "recordCount": 22,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
+      "collectedAt": "2026-11-10T09:03:54.501Z",
       "error": null,
       "observedDate": "2026-11-09"
     },
@@ -422,7 +422,7 @@
       "url": "https://query1.finance.yahoo.com/v7/finance/spark?symbols=CRWV,T&range=5d&interval=1d",
       "status": "PASS",
       "recordCount": 22,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
+      "collectedAt": "2026-11-10T09:03:54.501Z",
       "error": null,
       "observedDate": "2026-11-09"
     },
@@ -432,7 +432,7 @@
       "url": "https://query1.finance.yahoo.com/v7/finance/spark?symbols=XLK,XLC,XLY,XLF,XLV,XLI,XLE,XLB,XLP,XLU,XLRE&range=5d&interval=1d",
       "status": "PASS",
       "recordCount": 11,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
+      "collectedAt": "2026-11-10T09:03:54.501Z",
       "error": null,
       "observedDate": "2026-11-09"
     },
@@ -442,7 +442,7 @@
       "url": "https://query1.finance.yahoo.com/v7/finance/spark?symbols=CAT&range=5d&interval=1d",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
+      "collectedAt": "2026-11-10T09:03:54.501Z",
       "error": null,
       "observedDate": "2026-11-09"
     },
@@ -452,7 +452,7 @@
       "url": "https://stock.pstatic.net/stock-research/economy/57/20261110_economy_550641000.pdf",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
+      "collectedAt": "2026-11-10T09:03:54.501Z",
       "error": null,
       "observedDate": "2026-11-10"
     },
@@ -462,7 +462,7 @@
       "url": "https://stock.pstatic.net/stock-research/economy/21/20261110_economy_463836000.pdf",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
+      "collectedAt": "2026-11-10T09:03:54.501Z",
       "error": null,
       "observedDate": "2026-11-10"
     },
@@ -472,7 +472,7 @@
       "url": "https://stock.pstatic.net/stock-research/economy/16/20261109_economy_794484000.pdf",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-10T04:58:47.458Z",
+      "collectedAt": "2026-11-10T09:03:54.501Z",
       "error": null,
       "observedDate": "2026-11-09"
     }

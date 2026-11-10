@@ -1,18 +1,18 @@
 {
   "state": "PASS",
-  "capturedAt": "2026-11-10T05:11:50Z",
+  "capturedAt": "2026-11-10T09:04:11Z",
   "counts": [
     {
       "timeRange": "ALL_TIME",
-      "count": "494"
+      "count": "510"
     },
     {
       "timeRange": "THIRTY_DAYS",
-      "count": "441"
+      "count": "457"
     },
     {
       "timeRange": "SEVEN_DAYS",
-      "count": "308"
+      "count": "324"
     }
   ]
 }
