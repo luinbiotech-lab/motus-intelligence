@@ -202,5 +202,11 @@
     "publicationId": "motus-live-2026-11-11:ai",
     "publicPostUrl": "https://motusnova.blogspot.com/2026/11/55-ai.html",
     "publishedAt": "2026-11-11T12:34:05+09:00"
+  },
+  {
+    "idempotencyKey": "library:motus-live-2026-11-11:us|https://motusnova.blogspot.com/2026/11/11-11-3-16-88.html",
+    "publicationId": "motus-live-2026-11-11:us",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/11/11-11-3-16-88.html",
+    "publishedAt": "2026-11-12T08:42:09+09:00"
   }
 ]
