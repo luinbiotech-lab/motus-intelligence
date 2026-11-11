@@ -9,7 +9,9 @@ import {createHash} from 'node:crypto';
 import {relatedPosts} from '../publishers/editorial-article.js';
 import {type RelatedPost,pickRelatedPosts} from '../publishers/related-posts.js';
 
-export const BACKFILL_MARKER='<!-- motus-backfill:v1 -->';
+// Element markers, not HTML comments: data-* attributes are known to survive Blogger storage (data-section does).
+export const BACKFILL_MARKER='<div data-motus-backfill="v1" style="display:none"></div>';
+export const BACKFILL_LINKS_MARKER='<div data-motus-backfill="links" style="display:none"></div>';
 export const BACKFILL_ROOT='data/daily-report/backfill';
 export const BACKFILL_IMAGE_BASE='https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/daily-report/backfill/img/';
 export type FeedPost=RelatedPost&{postId:string};
@@ -47,10 +49,12 @@ export function backfillContent(original:string,input:{post:FeedPost;all:FeedPos
   const block=picked.length?relatedPosts(picked,input.post.label):'';
   const image=state.needsImage&&input.image&&/^hero-[0-9a-f]{12}\.png$/.test(input.image.file)?`<figure data-section="hero-image" style="margin:0 0 22px"><img src="${BACKFILL_IMAGE_BASE}${input.image.file}" alt="${input.image.alt.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;')}" width="1200" height="630" style="display:block;width:100%;height:auto;border:0"></figure>`:'';
   const open=body.match(/^<article\b[^>]*>/i)![0],inner=body.slice(open.length,body.length-'</article>'.length);
-  return {content:`${open}${BACKFILL_MARKER}${image}${inner}${block}</article>`,related:(block.match(/<li /g)??[]).length};
+  return {content:`${open}${BACKFILL_MARKER}${image}${inner}${block?BACKFILL_LINKS_MARKER+block:''}</article>`,related:(block.match(/<li /g)??[]).length};
 }
 /** Exact restore check: the backfilled body minus the added parts is the original. */
 export function stripBackfill(content:string):string{
   const body=content.trim();if(!body.includes(BACKFILL_MARKER))return body;
-  return body.replace(BACKFILL_MARKER,'').replace(/<figure data-section="hero-image"[^>]*><img src="https:\/\/raw\.githubusercontent\.com\/luinbiotech-lab\/motus-intelligence\/ops-data\/data\/daily-report\/backfill\/img\/[^"]+"[^>]*><\/figure>/,'').replace(/<section data-section="related-posts"[\s\S]*<\/section>(?=<\/article>$)/,'');
+  // Only what the backfill added is removed: the links block is the part after its own marker.
+  const links=body.indexOf(BACKFILL_LINKS_MARKER),trimmed=links>=0?body.slice(0,links)+'</article>':body;
+  return trimmed.replace(BACKFILL_MARKER,'').replace(/<figure data-section="hero-image"[^>]*><img src="https:\/\/raw\.githubusercontent\.com\/luinbiotech-lab\/motus-intelligence\/ops-data\/data\/daily-report\/backfill\/img\/[^"]+"[^>]*><\/figure>/,'');
 }

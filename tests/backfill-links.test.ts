@@ -44,3 +44,12 @@ test('an invalid image file name is never linked', ()=>{
   assert.ok(!out.content.includes('<img'));
   assert.equal(stripBackfill(out.content),original.trim());
 });
+
+test('a post that already links keeps its own block; only the card is added and removed', ()=>{
+  const linked=original.trim().replace(/<\/article>$/,'<section data-section="related-posts"><ul><li >x</li></ul></section></article>');
+  assert.deepEqual(eligibility(linked),{eligible:true,needsLinks:false,needsImage:true});
+  const out=backfillContent(linked,{post,all,image});
+  assert.equal(out.related,0);
+  assert.equal((out.content.match(/data-section="related-posts"/g)??[]).length,1);
+  assert.equal(stripBackfill(out.content),linked);
+});
