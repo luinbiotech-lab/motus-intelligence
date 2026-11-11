@@ -47,3 +47,38 @@ test('the evening slot is the identity the next morning checks, so that morning 
   const evening=[{publicationIdentity:identity,event:'PUBLISHED',postId:'1',publicPostUrl:'u'}] as never;
   assert.equal(persistedPublicationDecision(evening,'2026-11-10','KOREA_MARKET').state,'SKIP');      // next morning skips
 });
+
+// 루인 review on #114 (2026-11-11, BLOCKING): morning 08:45, evening 17h, holiday and midnight-boundary regressions
+// for the ledger key and the shown publication date.
+test('slot regression: morning 08:45, evening 17h, holidays and the midnight boundary', async () => {
+  const {koreaPublicationSlot}=await import('../src/operations/internal-live-daily.js');
+  // morning retry 08:45 KST keeps its own date
+  assert.deepEqual(koreaPublicationSlot('2026-11-10T23:45:00Z','2026-11-11'),{evening:false,slotDate:'2026-11-11'});
+  // evening 17:00 / 17:59 KST -> next trading day
+  assert.deepEqual(koreaPublicationSlot('2026-11-11T08:00:00Z','2026-11-11'),{evening:true,slotDate:'2026-11-12'});
+  assert.deepEqual(koreaPublicationSlot('2026-11-11T08:59:00Z','2026-11-11'),{evening:true,slotDate:'2026-11-12'});
+  // 16:40 boundary is inclusive, 16:39 is not
+  assert.deepEqual(koreaPublicationSlot('2026-11-11T07:40:00Z','2026-11-11'),{evening:true,slotDate:'2026-11-12'});
+  assert.deepEqual(koreaPublicationSlot('2026-11-11T07:39:59Z','2026-11-11'),{evening:false,slotDate:'2026-11-11'});
+  // holiday evening (12/25 Fri) is never an evening edition
+  assert.deepEqual(koreaPublicationSlot('2026-12-25T08:10:00Z','2026-12-25'),{evening:false,slotDate:'2026-12-25'});
+  // evening before a holiday skips it (12/24 Thu -> 12/28 Mon)
+  assert.deepEqual(koreaPublicationSlot('2026-12-24T08:10:00Z','2026-12-24'),{evening:true,slotDate:'2026-12-28'});
+  // midnight: 23:59 KST is still that day's evening; 00:01 KST the next day for the old date is not an evening run
+  assert.deepEqual(koreaPublicationSlot('2026-11-11T14:59:00Z','2026-11-11'),{evening:true,slotDate:'2026-11-12'});
+  assert.deepEqual(koreaPublicationSlot('2026-11-11T15:01:00Z','2026-11-11'),{evening:false,slotDate:'2026-11-11'});
+});
+
+test('ledger sequence for one trading day publishes each session once', async () => {
+  const {persistedPublicationDecision,publicationIdentity}=await import('../src/production/publication-operation.js');
+  const {koreaPublicationSlot}=await import('../src/operations/internal-live-daily.js');
+  const ledger:Array<{publicationIdentity:string;event:string;postId:string;publicPostUrl:string}>=[];
+  const run=(at:string,runDate:string)=>{const {slotDate}=koreaPublicationSlot(at,runDate),decision=persistedPublicationDecision(ledger as never,slotDate,'KOREA_MARKET');if(decision.state==='CONTINUE')ledger.push({publicationIdentity:publicationIdentity(slotDate,'KOREA_MARKET'),event:'PUBLISHED',postId:slotDate,publicPostUrl:slotDate});return decision.state};
+  assert.equal(run('2026-11-10T21:17:00Z','2026-11-11'),'CONTINUE'); // 11/11 06:17 morning (session 11/10) — only if no evening yet
+  assert.equal(run('2026-11-10T23:45:00Z','2026-11-11'),'SKIP');     // 08:45 retry
+  assert.equal(run('2026-11-11T08:10:00Z','2026-11-11'),'CONTINUE'); // 17:10 evening (session 11/11) -> slot 11/12
+  assert.equal(run('2026-11-11T08:29:00Z','2026-11-11'),'SKIP');     // GitHub cron rerun the same evening
+  assert.equal(run('2026-11-11T21:17:00Z','2026-11-12'),'SKIP');     // 11/12 06:17 morning
+  assert.equal(run('2026-11-11T23:40:00Z','2026-11-12'),'SKIP');     // 11/12 08:40 morning
+  assert.equal(ledger.length,2);
+});
