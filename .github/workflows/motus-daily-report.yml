@@ -132,6 +132,8 @@ jobs:
           for d in $READY; do
             flags=(--date "$d" --execute); [[ "$PARTIAL" == "true" ]] && flags+=(--final-attempt)
             MOTUS_LIVE_PUBLISH_ENABLED=true node dist/src/motus-daily-report-cli.js "${flags[@]}" || status=1
+            # Naver blog summary for the owner to post by hand (2026-11-11); never blocks the report.
+            node dist/src/naver-summary-cli.js --date "$d" || echo '::warning title=Naver summary::not written'
             node -e 'const r=require(process.argv[1]);console.log("### MOTUS daily report "+r.date+"\n- State: **"+r.state+"**\n- Title: "+(r.title??"")+(r.publicPostUrl?"\n- URL: "+r.publicPostUrl:"")+(r.reason?"\n- Reason: "+r.reason:""))' "$PWD/data/daily-report/$d/daily-report.json" >> "$GITHUB_STEP_SUMMARY" || true
           done
           # A date that failed its readiness check fails the run too, even when another date was published.
