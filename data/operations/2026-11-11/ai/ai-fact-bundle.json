@@ -1,6 +1,6 @@
 {
   "schema": "motus.ai-facts/1",
-  "bundleHash": "0ad3dc91da575025",
+  "bundleHash": "ce3dfc2d825b7ef6",
   "operationDate": "2026-11-11",
   "sessionDate": "2026-11-10",
   "facts": [
@@ -13,23 +13,23 @@
     {
       "id": "F2",
       "kind": "official",
-      "text": "구글은 2026년 11월 11일(한국 시간) 공식 블로그에 「Gemini Intelligence: New features, on more devices」 제목의 발표를 게시했다. 원문 본문은 신규 AI 제품·기능 공개에 관한 내용을 다룬다. 발표의 중심 제품·플랫폼은 Gemini이다. 원문에서 함께 언급된 국가·기업은 미국, 삼성이다.",
+      "text": "구글은 2026년 11월 10일(한국 시간) 공식 블로그에 「We’re bringing Adobe’s creative and productivity tools closer to your everyday Google apps.」 제목의 발표를 게시했다. 원문 본문은 AI 협력 확대에 관한 내용을 다룬다. 원문에서 언급된 제품·플랫폼은 Gemini이다. 원문에서 함께 언급된 국가·기업은 어도비이다.",
       "publisher": "구글",
-      "sourceUrl": "https://blog.google/products-and-platforms/platforms/android/gemini-intelligence-november-features-devices/"
+      "sourceUrl": "https://blog.google/company-news/inside-google/company-announcements/adobe-google-partnership-integration/"
     },
     {
       "id": "F3",
       "kind": "official",
-      "text": "엔비디아는 2026년 11월 11일(한국 시간) 공식 블로그에 「NVIDIA Expands Open Source Commitment With OpenShell Donation and New AI Infrastructure」 제목의 발표를 게시했다. 발표 제목과 본문은 AI 컴퓨팅 인프라 확충에 관한 내용을 다룬다. 원문에서 함께 언급된 국가·기업은 구글이다.",
+      "text": "엔비디아는 2026년 11월 09일(한국 시간) 공식 블로그에 「NVIDIA Announces New Planned Investments in Korean Startups at the MSIT-NVIDIA AI Startup Partnership Forum」 제목의 발표를 게시했다. 발표 제목과 본문은 AI 협력 확대에 관한 내용을 다룬다. 원문에서 함께 언급된 국가·기업은 한국이다.",
       "publisher": "엔비디아",
-      "sourceUrl": "https://blogs.nvidia.com/blog/open-source-openshell-infrastructure/"
+      "sourceUrl": "https://blogs.nvidia.com/blog/korean-startup-investments-msit/"
     },
     {
       "id": "F4",
       "kind": "official",
-      "text": "마이크로소프트는 2026년 11월 10일(한국 시간) 공식 뉴스룸에 「IBM and Microsoft announce a new AI agent platform designed for industry-specific transformation」 제목의 발표를 게시했다. 원문 본문은 AI 보안·안전 강화에 관한 내용을 다룬다. 원문에서 언급된 제품·플랫폼은 Microsoft Foundry이다. 원문에서 함께 언급된 국가·기업은 IBM이다.",
-      "publisher": "마이크로소프트",
-      "sourceUrl": "https://news.microsoft.com/source/2026/11/10/ibm-and-microsoft-announce-a-new-ai-agent-platform-designed-for-industry-specific-transformation/"
+      "text": "아마존웹서비스(AWS)는 2026년 11월 10일(한국 시간) 공식 What’s New 공지에 「Amazon Bedrock adds bedrock-runtime endpoint support for Daybreak models」 제목의 발표를 게시했다. 원문 본문은 AI 보안·안전 강화에 관한 내용을 다룬다. 발표의 중심 제품·플랫폼은 Amazon Bedrock이다. 원문에서 함께 언급된 국가·기업은 오픈AI이다.",
+      "publisher": "아마존웹서비스(AWS)",
+      "sourceUrl": "https://aws.amazon.com/about-aws/whats-new/2026/11/openai-gpt-daybreak-on-amazon-bedrock-runtime/"
     },
     {
       "id": "F5",
@@ -138,14 +138,6 @@
       "text": "유진투자증권은 「외국인 8 거래일 만에 순매수 전환 & 코스피 4.4% 급반등」에서 “국내 양대 증시는 반도체 대형주 중심 저가 매수 유입 & 외국인 순매수 전환에 급등(코스피 +4.4%·코스닥 +4.5%). 장 초반 양 시장 동시 매수 사이드카 발동(올해 9번째). 코스피는 장중 5,300.92(+5.6%)까지 오른 뒤 상승폭 일부 반납했으나 4거래일 만에 반등. 종가 5,239p로 5,200선 회복”, “1)반도체 급반등. 11/9 美 상원 에너지 인프라 인허가 간소화법(BAAJA) 절차표결 통과(73-25) & 필 반도체 +6.9% 급등. 우호적 투심 이어지며 SK하이닉스(+6.7%)·삼성전자(+4.7%) 강세. 이오테크닉스(+14.5%)·주성엔지니어링(+7.5%) 등 반도체 소부장도 상승”, “2)항공·낙폭과대 급등. 트럼프 대통령의 이란 추가 공격 자제 발언으로 국제유가 급락(WTI 연결물 -4.5%), 유류비 부담 완화 기대에 진에어·대한항공우 상한가, 대한항공·아시아나항공은 52주 신고가. 전일 급락했던 2차전지·바이오도 에코프로(+10.2%)·알테오젠(+4.7%)”라고 밝혔다.",
       "publisher": "유진투자증권",
       "sourceUrl": "https://stock.pstatic.net/stock-research/market/63/20261111_market_250703000.pdf"
-    },
-    {
-      "id": "F22",
-      "kind": "broker",
-      "text": "NHN: 교보증권, 2026-11-11 리포트 「어닝 호조와 함꼐 밟은 AI DC 확장 엑셀」, 투자의견 Buy, 목표주가 92,000원.",
-      "publisher": "교보증권",
-      "sourceUrl": "https://stock.pstatic.net/stock-research/company/62/20261111_company_306258000.pdf",
-      "date": "2026-11-11"
     }
   ]
 }
