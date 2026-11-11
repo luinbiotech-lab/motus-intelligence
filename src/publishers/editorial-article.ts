@@ -201,8 +201,10 @@ export function relatedPosts(posts:Array<{title:string;url:string;label:string;p
 }
 /** Daily report (owner decision 2026-11-04): one post a day in the '리포트' category with the combined PDF and the day's articles. */
 export const DAILY_REPORT_LABEL='리포트';
-export function renderDailyReportArticle(view:{date:string;title:string;subtitle:string;lead:string;sections:import('../operations/weekly-review.js').WeeklySection[];sources:Array<{label:string;url:string}>}):DailyMasterRenderResult {
-  const parts=[masthead(view.title,view.subtitle,DAILY_REPORT_LABEL,view.date),lead(view.lead).replace('<p data-section="editorial-lead"',`<p data-section="editorial-lead" data-daily-report="${attr(view.date)}"`),...view.sections.map(renderWeeklySection)];
+// 2026-11-11 owner: the post list showed '[' as the report's thumbnail (no image in the post). The report reuses the
+// representative image of one of the day's articles (already validated by heroFigure), so the list shows a real thumbnail.
+export function renderDailyReportArticle(view:{date:string;title:string;subtitle:string;lead:string;sections:import('../operations/weekly-review.js').WeeklySection[];sources:Array<{label:string;url:string}>;heroImage?:{url:string;alt:string;width:number;height:number}}):DailyMasterRenderResult {
+  const parts=[masthead(view.title,view.subtitle,DAILY_REPORT_LABEL,view.date)+heroFigure(view.heroImage),lead(view.lead).replace('<p data-section="editorial-lead"',`<p data-section="editorial-lead" data-daily-report="${attr(view.date)}"`),...view.sections.map(renderWeeklySection)];
   parts.push(sources(view.sources.map(item=>({...item,publisher:''}))));
   return finish('daily-report',view.title,DAILY_REPORT_LABEL,parts,['masthead','lead',...view.sections.map(item=>item.key),'sources']);
 }

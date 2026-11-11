@@ -72,3 +72,13 @@ test('only a unit whose rendered article equals the stored post is charted (루�
   assert.notEqual(withPdf.content,post.content);assert.equal(withoutDailyPdfLink(withPdf.content),post.content);
   assert.ok('candidate' in verifiedCandidate(plan,withPdf));
 });
+
+test('the daily report carries a valid article hero image as its thumbnail, and drops an untrusted one (2026-11-11)',()=>{
+  const base={date:'2026-11-11',title:'[데일리 리포트] 2026년 11월 11일 국내 증시·AI 핵심 정리',subtitle:'s',lead:'리포트입니다.',sections:[],sources:[]};
+  const hero={url:'https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/operations/2026-11-11/korea/hero-0123456789ab.png',alt:'MOTUS 데일리 리포트 11월 11일 대표 이미지',width:1200,height:630};
+  const withHero=renderDailyReportArticle({...base,heroImage:hero}).html;
+  assert.match(withHero,/<figure data-section="hero-image"[^>]*><img src="https:\/\/raw\.githubusercontent\.com\/[^"]+hero-0123456789ab\.png"/);
+  assert.ok(withHero.indexOf('hero-image')<withHero.indexOf('data-daily-report="2026-11-11"'));
+  assert.doesNotMatch(renderDailyReportArticle({...base,heroImage:{...hero,url:'https://example.com/x.png'}}).html,/<img /);
+  assert.doesNotMatch(renderDailyReportArticle(base).html,/<img /);
+});
