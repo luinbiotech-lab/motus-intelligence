@@ -18,8 +18,8 @@
   "duplicateUncertainty": true,
   "articleFingerprint": "",
   "commerceEnabled": false,
-  "verifiedAt": "2026-11-11T21:19:23.956Z",
-  "expiresAt": "2026-11-11T22:49:23.956Z",
+  "verifiedAt": "2026-11-11T22:44:42.433Z",
+  "expiresAt": "2026-11-12T00:14:42.433Z",
   "sourceAuditIds": [
     "naver:kospi:history",
     "naver:kosdaq:history",
@@ -27,8 +27,8 @@
     "naver:flows",
     "naver:mover"
   ],
-  "sourceAuditFingerprint": "sha256:05071af7c83683f1c744e03ae2bd0fd9908fdda8eac2b3ec81b6cde7e8486ad8",
-  "crossVerificationFingerprint": "sha256:a2e0fc31628fcd05268d3f200394e2660bbab7d7f613bb06acc1e31ab2c4e43e",
+  "sourceAuditFingerprint": "sha256:cf917eacd69469b3652604c8e06a97c40c951441811f880387f48d71711eeb15",
+  "crossVerificationFingerprint": "sha256:f249075cf6276da85ab36837128a8b34075a8f21ac4d917e51915b1d5061aec9",
   "crossVerification": {
     "schemaVersion": "1.0",
     "category": "KOREA_MARKET",
@@ -60,7 +60,7 @@
       "KOREA_OFFICIAL_INDEX_COMPARISON_INCOMPLETE",
       "KOREA_INDEPENDENT_SOURCE_DIVERSITY_FAILED"
     ],
-    "verifiedAt": "2026-11-11T21:19:23.956Z",
+    "verifiedAt": "2026-11-11T22:44:42.433Z",
     "officialPhase": "PRE_PUBLICATION",
     "reconciliation": {
       "status": "NOT_REQUIRED",
