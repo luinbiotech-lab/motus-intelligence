@@ -1,0 +1,49 @@
+name: ops label cleanup 2026-11-11 (owner-approved, one-shot)
+# 루치오 승인 2026-11-11 ("옛 라벨 6개 글 정리"): legacy labels -> canonical labels. Title, body and permalink unchanged.
+on:
+  push:
+    branches: [ops/label-cleanup-20261111]
+    paths: [.github/workflows/ops-label-cleanup-20261111.yml]
+permissions:
+  contents: read
+concurrency: {group: motus-blog-write, cancel-in-progress: false}
+jobs:
+  relabel:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 22, cache: npm}
+      - run: npm ci && npm run build
+      - name: Relabel (labels only; before/after printed)
+        env:
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+        run: |
+          cat > relabel.mjs <<'JS'
+          import fs from 'fs';
+          const {GoogleBloggerApiAdapter}=await import('./dist/src/services/blogger.js');
+          const B=await import('./dist/src/operations/backfill-links.js');
+          const raw=JSON.parse(fs.readFileSync('config/publishing.json','utf8'));
+          const config={...raw.blogger,blogId:process.env.BLOGGER_BLOG_ID.trim(),credentialAvailable:true,publishAsDraft:true};
+          const g=new GoogleBloggerApiAdapter();
+          const map={'미국증시 (U.S. Market)':'미국증시','AI 인텔리전스 (AI Intelligence)':'AI 인텔리전스','국내증시 (Korea Market)':'국내증시','MOTUS Daily':'리포트'};
+          const feed=await (await fetch('https://motusnova.blogspot.com/feeds/posts/default?alt=json&max-results=150')).json();
+          let changed=0,failed=0;
+          for(const e of feed.feed.entry){
+            const terms=(e.category||[]).map(c=>c.term);if(!terms.some(t=>map[t]))continue;
+            const id=e.id.$t.match(/post-(\d+)$/)[1];const before=await g.readPost(id,config);
+            const labels=[...new Set(before.labels.map(l=>map[l]??l))];
+            console.log('BEFORE',id,before.url,JSON.stringify(before.labels),'sha',B.sha256(before.content));
+            if(!/^<article\b[\s\S]*<\/article>$/i.test(before.content.trim())||before.status!=='PUBLISHED'){console.log('SKIP not a single-article published post');continue}
+            try{const after=await g.patchPostContent(id,{title:before.title,content:before.content,labels},config);
+              const ok=after.url===before.url&&after.title===before.title&&after.status==='PUBLISHED'&&JSON.stringify([...after.labels].sort())===JSON.stringify([...labels].sort());
+              console.log(ok?'AFTER':'MISMATCH',id,JSON.stringify(after.labels),'contentSame',after.content.trim()===before.content.trim(),'sha',B.sha256(after.content));ok?changed++:failed++;
+            }catch(err){failed++;console.log('FAILED',id,String(err.message).slice(0,200))}
+          }
+          console.log('DONE changed',changed,'failed',failed);if(failed)process.exit(1);
+          JS
+          node relabel.mjs
