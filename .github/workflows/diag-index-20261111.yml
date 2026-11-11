@@ -1,0 +1,41 @@
+name: diag index status 2026-11-11 (read-only)
+on:
+  push:
+    branches: [diag/mobile-redirect-20261108]
+    paths: [.github/workflows/diag-index-20261111.yml]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      TZ: Asia/Seoul
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: claude/index-status-coverage}
+      - uses: actions/setup-node@v4
+        with: {node-version: 22, cache: npm}
+      - run: npm ci && npm run build
+      - name: Collect (no persist; read-only APIs)
+        env:
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+          GOOGLE_SEARCH_CONSOLE_PROPERTY: ${{ secrets.GOOGLE_SEARCH_CONSOLE_PROPERTY }}
+          SEARCH_CONSOLE_CLIENT_ID: ${{ secrets.SEARCH_CONSOLE_CLIENT_ID }}
+          SEARCH_CONSOLE_CLIENT_SECRET: ${{ secrets.SEARCH_CONSOLE_CLIENT_SECRET }}
+          SEARCH_CONSOLE_REFRESH_TOKEN: ${{ secrets.SEARCH_CONSOLE_REFRESH_TOKEN }}
+        run: node dist/src/traffic-daily-cli.js --date "$(date +%F)"
+      - name: Print index summary
+        run: |
+          node -e '
+          const fs=require("fs"),d=new Date(Date.now()+9*3600e3).toISOString().slice(0,10);
+          const r=JSON.parse(fs.readFileSync(`data/traffic/${d}/traffic-input.json`,"utf8"));
+          const i=r.indexStatus||{};console.log("STATE",i.state,i.reason||"","inspected",i.inspected,"indexed",i.indexed);
+          console.log("SITEMAPS",JSON.stringify(i.sitemaps));
+          console.log("SC",JSON.stringify(r.searchConsole).slice(0,1500));
+          const c={};for(const x of i.inspections||[]){const k=x.coverageState||x.error;c[k]=(c[k]||0)+1;console.log("URL",x.coverageState||x.error,"|",x.lastCrawlTime||"-","|",x.url)}
+          console.log("COUNTS",JSON.stringify(c));
+          for(const ch of (i.fixedSample||{}).chains||[])console.log("CHAIN",ch.agent,ch.url,JSON.stringify(ch.hops),ch.error||"");'
