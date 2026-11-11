@@ -1,0 +1,36 @@
+name: diag blog structure 2026-11-11 (read-only)
+on:
+  push:
+    branches: [diag/mobile-redirect-20261108]
+    paths: [.github/workflows/diag-structure-20261111.yml]
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    steps:
+      - uses: actions/setup-node@v4
+        with: {node-version: 22}
+      - name: Feed and page structure (public GET only)
+        run: |
+          cat > a.mjs <<'JS'
+          const UA='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36';
+          const get=async u=>{const r=await fetch(u,{headers:{'user-agent':UA},redirect:'manual'});return {s:r.status,loc:r.headers.get('location'),t:await r.text()}};
+          const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+          const strip=h=>h.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g,'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
+          const f=await get('https://motusnova.blogspot.com/feeds/posts/default?alt=json&max-results=150');
+          console.log('FEED',f.s,f.loc||'');
+          if(f.s===200){const e=JSON.parse(f.t).feed.entry||[];console.log('POSTS',e.length);
+            for(const x of e){const c=x.content?.$t||'';const hrefs=[...c.matchAll(/href="([^"]+)"/g)].map(m=>m[1]);
+              const inn=hrefs.filter(h=>h.includes('motusnova.blogspot'));const u=(x.link||[]).find(l=>l.rel==='alternate')?.href||'';
+              console.log('P\t'+x.published.$t.slice(0,16)+'\t'+u.replace('https://motusnova.blogspot.com','')+'\t'+strip(c).length+'\t'+hrefs.length+'\t'+inn.length+'\t'+(c.match(/<img/g)||[]).length+'\t'+(x.category||[]).map(k=>k.term).join(',')+'\t'+x.title.$t);}}
+          for(const u of ['https://motusnova.blogspot.com/','https://motusnova.blogspot.com/2026/11/11-10-439-523913-1-50.html','https://motusnova.blogspot.com/search/label/%EA%B5%AD%EB%82%B4%EC%A6%9D%EC%8B%9C','https://motusnova.blogspot.com/robots.txt','https://motusnova.blogspot.com/sitemap.xml']){
+            await sleep(4000);const p=await get(u);const all=[...p.t.matchAll(/href=['"]([^'"]+)['"]/g)].map(m=>m[1]);
+            const posts=new Set(all.filter(h=>/motusnova\.blogspot\.com\/20\d\d\/\d\d\/[^#?]+\.html/.test(h)).map(h=>h.split(/[?#]/)[0]));
+            const labels=new Set(all.filter(h=>h.includes('/search/label/')));
+            console.log('PAGE',p.s,p.loc||'',u,'bytes',p.t.length,'text',strip(p.t).length,'postLinks',posts.size,'labelLinks',labels.size,'related',/related|관련/i.test(p.t),'prevnext',/blog-pager-(older|newer)/.test(p.t),'canonical',(p.t.match(/rel=['"]canonical['"][^>]*href=['"]([^'"]+)/)||[])[1]||'-','desc',(p.t.match(/name=['"]description['"][^>]*content=['"]([^'"]{0,80})/)||[])[1]||'-');
+            if(u.endsWith('robots.txt')||u.endsWith('sitemap.xml'))console.log(p.t.slice(0,600));
+            if(u.endsWith('/'))console.log('HOMELABELS',[...labels].join(' ').slice(0,500));}
+          JS
+          node a.mjs
