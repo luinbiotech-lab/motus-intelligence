@@ -70,7 +70,8 @@ export function deepSection(input:import('../intelligence/daily-masters.js').Art
   else if(role==='news')body+=paragraphs.map(p=>`<div style="border:1px solid ${C.line};border-left:4px solid ${C.news};padding:11px 14px;margin:0 0 10px">${emph(p.text)}${sourceLink(p.source)}</div>`).join('');
   else{
     // A chart replaces the '·'-joined list of the same figures; other paragraphs stay as text.
-    const chart=item.bars?barsSvg(item.bars):'',rest=chart?paragraphs.filter(p=>(p.text.match(/ · /g)??[]).length<2&&!/^업종별 등락:/.test(p.text)):paragraphs;
+    // A section image (same rows as PNG, 2026-11-11) leads; the inline chart stays so the numbers never depend on the image.
+    const chart=(item.bars?chartFigure(item.image):'')+(item.bars?barsSvg(item.bars):''),rest=chart?paragraphs.filter(p=>(p.text.match(/ · /g)??[]).length<2&&!/^업종별 등락:/.test(p.text)):paragraphs;
     body+=chart+rest.map(p=>`<p style="margin:0 0 13px">${emph(p.text)}${sourceLink(p.source)}</p>`).join('');
   }
   return roleSection(item.title,body,role,item.key);
@@ -166,6 +167,7 @@ export function renderMarketResearchEntries(entries:ReadonlyArray<{publisher:str
 
 function masthead(title:string,subtitle:string,label:string,date:string){return `<header style="width:100%;max-width:100%;box-sizing:border-box;background:#03162e;color:#fff;padding:26px 22px;margin:0 0 22px"><p style="margin:0 0 9px;color:#c7d8ea;font-size:14px;font-weight:800">${esc(MOTUS_DISPLAY_NAME)}</p><div role="heading" aria-level="2" style="font-size:clamp(25px,7vw,34px);line-height:1.22;font-weight:850;word-break:keep-all">${esc(title)}</div><p style="margin:10px 0 0;color:#e6edf5">${esc(subtitle)}</p><p style="margin:11px 0 0;color:#b7c8da;font-size:13px">${esc(label)} · ${esc(date)}</p></header>`;}
 /** The article's representative image (first image in the body, so Blogger uses it as the post thumbnail). */
+function chartFigure(image?:{url:string;alt:string;width:number;height:number}){if(!image||!/^https:\/\/raw\.githubusercontent\.com\/luinbiotech-lab\/motus-intelligence\/ops-data\/data\/operations\/\d{4}-\d{2}-\d{2}\/(us|korea|ai)\/chart-[0-9a-f]{12}\.png$/.test(image.url))return '';return `<figure data-section="chart-image" style="margin:0 0 14px"><img src="${image.url}" alt="${esc(image.alt)}" width="${image.width}" height="${image.height}" loading="lazy" style="display:block;width:100%;height:auto;border:0"></figure>`}
 function heroFigure(image?:{url:string;alt:string;width:number;height:number}){if(!image||!/^https:\/\/raw\.githubusercontent\.com\/luinbiotech-lab\/motus-intelligence\/ops-data\/data\/operations\/\d{4}-\d{2}-\d{2}\/(us|korea|ai)\/hero-[0-9a-f]{12}\.png$/.test(image.url))return '';return `<figure data-section="hero-image" style="margin:0 0 22px"><img src="${image.url}" alt="${esc(image.alt)}" width="${image.width}" height="${image.height}" style="display:block;width:100%;height:auto;border:0"></figure>`}
 function lead(value:string){return `<p data-section="editorial-lead" style="margin:0 0 24px;font-size:18px;line-height:1.82;color:#172033">${esc(value)}</p>`;}
 function section(title:string,content:string){return `<section style="${SECTION}"><h2 style="${HEADING}">${esc(title)}</h2>${content}</section>`;}

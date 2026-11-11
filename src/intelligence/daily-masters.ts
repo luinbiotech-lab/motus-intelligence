@@ -31,7 +31,7 @@ export interface ArticleDeepParagraph {text:string;source?:{label:string;url:str
  * data (charted figures), news (official or wire reports), broker (securities research, highlighted panel),
  * analysis (MOTUS reading, kept apart from facts) and watch (checkpoints).
  */
-export interface ArticleDeepSection {key:string;title:string;intro?:string;placement?:'early'|'late'|'risks';role?:'data'|'news'|'broker'|'analysis'|'watch';bars?:Array<{label:string;value:number}>;paragraphs:ArticleDeepParagraph[]}
+export interface ArticleDeepSection {key:string;title:string;intro?:string;placement?:'early'|'late'|'risks';role?:'data'|'news'|'broker'|'analysis'|'watch';bars?:Array<{label:string;value:number}>;image?:{url:string;alt:string;width:number;height:number};paragraphs:ArticleDeepParagraph[]}
 export interface AIIntelligenceIssue {
   headline:string;whatHappened:string[];coreContent:string;whyItMatters:string|null;
   relatedCompaniesIndustries:string[];marketConnection:string|null;institutionView:string|null;evidenceRefs:string[];
