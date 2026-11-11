@@ -1,4 +1,4 @@
-name: DIAG mobile redirect after Blogger mobile setting (temporary, read-only)
+name: DIAG Blogger duplicate check (temporary, read-only)
 on:
   push:
     branches: [diag/mobile-redirect-20261108]
@@ -8,27 +8,21 @@ jobs:
   probe:
     runs-on: ubuntu-latest
     steps:
-      - name: Probe redirect chains (no writes)
+      - name: Count Korea-close posts per title date in the public feed (no writes)
         run: |
-          UA_PHONE='Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
-          UA_IPHONE='Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Mobile/15E148 Safari/604.1'
-          for u in https://motusnova.blogspot.com/ https://motusnova.blogspot.com/2026/11/3-70.html https://motusnova.blogspot.com/2026/11/062-5683-1-09.html https://motusnova.blogspot.com/2026/11/amd-37-ai.html https://motusnova.blogspot.com/2026/11/359-5648-1-31.html; do
-            for ua in "$UA_PHONE" "$UA_IPHONE"; do
-              for i in 1 2 3; do
-                r=$(curl -sS -o /dev/null -A "$ua" -w '%{http_code} %{redirect_url}' "$u" || echo ERR)
-                echo "PROBE ${ua:0:30} | $u | $r"
-                case "$r" in *sorry*) sleep 3;; *) break;; esac
-              done
-            done
-          done
-      - name: Probe og:image on today's post (no writes)
-        run: |
-          u='https://motusnova.blogspot.com/2026/11/11-6-602-505969-1-40.html'
           for i in 1 2 3 4 5 6; do
-            curl -sS -L -A 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36' "$u" -o page.html -w 'HTTP %{http_code} %{url_effective}\n' || true
-            if grep -q 'og:image' page.html; then break; fi; sleep 5
+            curl -sS -A 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/130.0 Safari/537.36' 'https://motusnova.blogspot.com/feeds/posts/summary?alt=json&max-results=60' -o feed.json -w 'HTTP %{http_code}\n' || true
+            python3 -c 'import json;json.load(open("feed.json"))' 2>/dev/null && break; sleep 8
           done
-          grep -o '<meta[^>]*og:image[^>]*>' page.html | head -3 | sed 's/^/OGIMG /'
-          grep -o '<img[^>]*hero[^>]*>\|<img[^>]*1200[^>]*>' page.html | head -2 | cut -c1-400 | sed 's/^/HEROIMG /'
-          grep -o '<h1[^>]*>[^<]*' page.html | head -2 | sed 's/^/H1 /'
-# rerun 2026-11-09T04:01:17Z
+          python3 - <<'PY'
+          import json,collections
+          d=json.load(open('feed.json'));rows=[]
+          for e in d['feed'].get('entry',[]):
+            t=e['title']['$t'];p=e['published']['$t'];u=[l['href'] for l in e['link'] if l['rel']=='alternate'][0]
+            rows.append((p,t,u))
+          print('FEED total',len(rows))
+          for p,t,u in sorted(rows):
+            if p>='2026-11-06': print('POST',p[:16],t[:60],u)
+          c=collections.Counter(t.split(',')[0] for p,t,u in rows if '마감' in t and p>='2026-11-06')
+          for k,v in c.items(): print('COUNT',v,k)
+          PY
