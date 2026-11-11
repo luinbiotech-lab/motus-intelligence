@@ -1,0 +1,24 @@
+name: diag naver web exposure 2026-11-11 (read-only)
+on:
+  push:
+    branches: [diag/mobile-redirect-20261108]
+    paths: [.github/workflows/diag-naver-20261111.yml]
+permissions:
+  contents: read
+jobs:
+  naver:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Naver web/blog search for MOTUS
+        env:
+          ID: ${{ secrets.NAVER_SEARCH_CLIENT_ID }}
+          SECRET: ${{ secrets.NAVER_SEARCH_CLIENT_SECRET }}
+        run: |
+          node -e '
+          const q=["motusnova","motusnova.blogspot.com","MOTUS What Moves the World","11월 10일 코스피 마감 4.39% 급등해 5,239.13","11월 10일 뉴욕증시 마감 3대 지수 하락 엔비디아 5.5% 급락","코스피 마감","뉴욕증시 마감"];
+          (async()=>{for(const kind of ["webkr","blog"])for(const s of q){
+            const r=await fetch(`https://openapi.naver.com/v1/search/${kind}.json?query=${encodeURIComponent(s)}&display=30`,{headers:{"X-Naver-Client-Id":process.env.ID,"X-Naver-Client-Secret":process.env.SECRET}});
+            const b=await r.json();const items=b.items||[];const hit=items.map((x,i)=>({i:i+1,link:x.link})).filter(x=>/motusnova/.test(x.link));
+            console.log("Q",kind,JSON.stringify(s),"total",b.total,"motusHits",JSON.stringify(hit),"top3",JSON.stringify(items.slice(0,3).map(x=>x.link)));
+          }})()'
