@@ -85,3 +85,47 @@ export async function prepareHeroImage(input:HeroInput,options:{root?:string;ena
     return {url:HERO_BASE_URL+rel.split(/[\\/]/).join('/'),alt:`${HERO_LABEL[input.category]} ${dateKo(input.issueDate)}: ${input.title}`,width:HERO_WIDTH,height:HERO_HEIGHT};
   }catch(error){console.log(`::warning title=Hero image::${String(error instanceof Error?error.message:error).slice(0,200)}`);return null}
 }
+
+
+/**
+ * Section chart images (owner 2026-11-11, traffic review: MOTUS posts carried 0-1 images against a median of 4 in the
+ * top-ranked posts, because the charts are inline HTML that search engines and feeds do not see as images).
+ * Each charted section (bars) gets a 1200x630 PNG of the same rows, so the image and the text say the same numbers.
+ */
+export interface ChartImageInput {category:HeroCategory;issueDate:string;storeDate:string;title:string;rows:Array<{label:string;value:number}>}
+export function chartCardHtml(input:ChartImageInput):string {
+  const accent=ACCENT[input.category],rows=input.rows.filter(row=>Number.isFinite(row.value)).slice(0,12);
+  const max=Math.max(0.01,...rows.map(row=>Math.abs(row.value))),barH=Math.min(40,Math.floor(420/Math.max(rows.length,1))-6);
+  const bars=rows.map(row=>{const width=Math.round(Math.abs(row.value)/max*300),color=row.value>0?'#ff6b6b':row.value<0?'#6aa8ff':'#c7d2de';
+    return `<div class="r" style="height:${barH}px"><div class="l">${esc(row.label.length>18?row.label.slice(0,17)+'…':row.label)}</div><div class="c"><div class="neg">${row.value<0?`<i style="width:${width}px;background:${color}"></i>`:''}</div><div class="pos">${row.value>0?`<i style="width:${width}px;background:${color}"></i>`:''}</div></div><div class="v" style="color:${color}">${pct(row.value)}</div></div>`}).join('');
+  return `<!doctype html><html lang="ko"><head><meta charset="utf-8"><style>
+*{box-sizing:border-box;margin:0}html,body{width:${HERO_WIDTH}px;height:${HERO_HEIGHT}px}
+body{font-family:'Noto Sans CJK KR','Noto Sans KR',sans-serif;background:#03162e;color:#fff;padding:40px 56px;position:relative;overflow:hidden}
+body:before{content:"";position:absolute;left:0;top:0;bottom:0;width:12px;background:${accent}}
+.top{display:flex;justify-content:space-between;font-size:22px;font-weight:700;color:#c7d8ea;margin-bottom:10px}.top b{color:#fff;letter-spacing:.06em}
+h1{font-size:36px;font-weight:900;margin-bottom:24px;word-break:keep-all;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.r{display:flex;align-items:center;margin-bottom:6px}.l{width:250px;font-size:22px;color:#dbe6f2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.c{flex:none;width:640px;display:flex;height:100%;margin:0 auto}.neg,.pos{flex:none;width:320px;display:flex;align-items:center}.neg{justify-content:flex-end;border-right:2px solid #5d7590}
+.neg i,.pos i{display:block;height:70%}.v{width:140px;text-align:right;font-size:24px;font-weight:900}
+</style></head><body><div class="top"><b>MOTUS · ${esc(HERO_LABEL[input.category])}</b><span>${esc(dateKo(input.issueDate))}</span></div><h1>${esc(input.title)}</h1>${bars}</body></html>`;
+}
+export function chartFileName(input:ChartImageInput):string {return `chart-${createHash('sha256').update(chartCardHtml(input)).digest('hex').slice(0,12)}.png`}
+
+/** Adds an image to at most three charted sections (three rows or more). Off unless MOTUS_HERO_IMAGE=on; never throws. */
+export async function attachChartImages(sections:Array<{title:string;bars?:Array<{label:string;value:number}>;image?:HeroImage}>|undefined,context:{category:HeroCategory;issueDate:string;storeDate:string},options:{root?:string;enabled?:boolean;render?:(html:string)=>Promise<Uint8Array|null>}={}):Promise<number> {
+  if(!(options.enabled??process.env.MOTUS_HERO_IMAGE==='on')||!sections)return 0;
+  let count=0;
+  for(const section of sections.filter(item=>(item.bars?.length??0)>=3).slice(0,3)){
+    try{
+      const input:ChartImageInput={...context,title:section.title,rows:section.bars!};
+      const bytes=await (options.render??renderHeroPng)(chartCardHtml(input));
+      if(!bytes||!validHeroPng(bytes))continue;
+      const rel=join('data','operations',context.storeDate,context.category,chartFileName(input));
+      await mkdir(join(options.root??process.cwd(),'data','operations',context.storeDate,context.category),{recursive:true});
+      await writeFile(join(options.root??process.cwd(),rel),bytes);
+      section.image={url:HERO_BASE_URL+rel.split(/[\\/]/).join('/'),alt:`${HERO_LABEL[context.category]} ${dateKo(context.issueDate)} ${section.title}: ${section.bars!.slice(0,4).map(row=>`${row.label} ${pct(row.value)}`).join(', ')}`,width:HERO_WIDTH,height:HERO_HEIGHT};
+      count++;
+    }catch(error){console.log(`::warning title=Chart image::${String(error instanceof Error?error.message:error).slice(0,200)}`)}
+  }
+  return count;
+}

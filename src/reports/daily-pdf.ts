@@ -25,7 +25,10 @@ export function stockRows(view:View):DailyRow[] {
     if(us)rows.push({name:`${us[1]}(${us[2]})`,close:`$${us[3]}`,change:(/하락|급락/.test(us[5]!)?-1:1)*Number(us[4])});
     else if(kr)rows.push({name:kr[1]!,close:`${kr[2]}원`,change:(/하락|급락/.test(kr[4]!)?-1:1)*Number(kr[3])});
   }
-  if(!rows.length)for(const section of deep.filter(item=>item.bars?.length&&/stocks/.test(item.key)))for(const bar of section.bars!)rows.push({name:bar.label,close:null,change:bar.value});
+  // PR #116 (2026-11-11): Korea search stocks without commentary share one paragraph, so their rows come from the
+  // section's bars; names already read from their own line are not repeated.
+  const regexRows=rows.length;
+  for(const section of deep.filter(item=>item.bars?.length&&/stocks/.test(item.key)&&(!regexRows||item.key==='korea-stocks')))for(const bar of section.bars!)if(!rows.some(row=>row.name===bar.label||row.name.startsWith(bar.label+'(')))rows.push({name:bar.label,close:null,change:bar.value});
   // Units composed before sections carried bars: the '·'-joined list of the same figures ('엔비디아 -1.26% · …').
   if(!rows.length)for(const section of deep.filter(item=>/stocks/.test(item.key)))for(const p of section.paragraphs)if((p.text.match(/ · /g)??[]).length>=2)for(const part of p.text.split(' · ')){const match=part.match(/^(.*\S)\s+([+\-−]?\d+(?:\.\d+)?)%$/);if(match)rows.push({name:match[1]!,close:null,change:Number(match[2]!.replace('−','-'))})}
   return rows;
@@ -129,5 +132,19 @@ export function buildCombinedDailyPdfHtml(parts:DailyReportPart[],date:string):D
   return {html:`<!doctype html><html lang=ko><head><meta charset=utf-8><title>MOTUS 데일리 리포트 ${esc(date)}</title><style>${css}</style></head><body>${cover}${bodies.join('')}</body></html>`,fileName:`MOTUS_Daily_Report_${date}.pdf`,pages:1+2*ordered.length};
 }
 export {leadOf as dailyLead};
+
+/**
+ * The daily report post's section for one category (owner 2026-11-11: the post was 947 characters, a link list).
+ * It carries what the article itself published: the lead, the session's stock moves as a table, two broker quotes with
+ * their reports and the checkpoints. Nothing is computed beyond the article's own figures.
+ */
+export function dailyReportSection(input:{key:string;title:string;view:View;link:{label:string;url:string;meta:string}}):import('../operations/weekly-review.js').WeeklySection {
+  const rows=[...stockRows(input.view)].sort((a,b)=>Math.abs(b.change)-Math.abs(a.change)).slice(0,6),quotes=brokerQuotes(input.view).slice(0,2),checks=checkpoints(input.view).slice(0,2);
+  const pctText=(value:number)=>`${value>0?'+':value<0?'-':''}${Math.abs(value).toFixed(2)}%`;
+  const paragraphs=[...quotes.map(p=>({text:p.text,...(p.source?{source:{label:p.source.label,url:p.source.url}}:{})})),...checks.map(text=>({text:`다음 확인: ${text.replace(/^다음 확인:\s*/,'')}`}))];
+  return {key:input.key,title:input.title,intro:leadOf(input.view),
+    ...(rows.length?{table:{headers:['종목','종가','등락'],rows:rows.map(row=>[row.name,row.close??'-',pctText(row.change)]),note:'기사에 실린 종가·등락 그대로'}}:{}),
+    links:[input.link],...(paragraphs.length?{paragraphs}:{})};
+}
 /** Categories a daily report waits for (owner decision 2026-11-04): Monday Korea + AI, Tuesday-Friday all three. */
 export function expectedCategories(weekday:number):DailyCategory[] {return weekday===1?['KOREA_MARKET','AI_INTELLIGENCE']:weekday>=2&&weekday<=5?[...DAILY_REPORT_ORDER]:[]}
