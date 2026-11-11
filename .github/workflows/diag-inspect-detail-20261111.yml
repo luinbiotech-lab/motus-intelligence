@@ -1,0 +1,33 @@
+name: diag URL inspection detail 2026-11-11 (read-only)
+on:
+  push:
+    branches: [diag/mobile-redirect-20261108]
+    paths: [.github/workflows/diag-inspect-detail-20261111.yml]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - env:
+          P: ${{ secrets.GOOGLE_SEARCH_CONSOLE_PROPERTY }}
+          CID: ${{ secrets.SEARCH_CONSOLE_CLIENT_ID }}
+          CS: ${{ secrets.SEARCH_CONSOLE_CLIENT_SECRET }}
+          RT: ${{ secrets.SEARCH_CONSOLE_REFRESH_TOKEN }}
+        run: |
+          node -e '
+          const B="https://motusnova.blogspot.com";
+          const urls=["/","/2026/11/20-33.html","/2026/10/s-500.html","/2026/10/nasdaq.html","/2026/11/3-70.html","/2026/11/11-10-439-523913-1-50.html","/2026/11/2026-11-11-ai.html","/2026/11/2026-11-9-ai.html","/2026/10/286-10-3.html","/2026/11/ai.html"];
+          (async()=>{
+            const t=await (await fetch("https://oauth2.googleapis.com/token",{method:"POST",headers:{"content-type":"application/x-www-form-urlencoded"},body:new URLSearchParams({client_id:process.env.CID.trim(),client_secret:process.env.CS.trim(),refresh_token:process.env.RT.trim(),grant_type:"refresh_token"})})).json();
+            for(const u of urls){const r=await fetch("https://searchconsole.googleapis.com/v1/urlInspection/index:inspect",{method:"POST",headers:{authorization:"Bearer "+t.access_token,"content-type":"application/json"},body:JSON.stringify({inspectionUrl:B+u,siteUrl:process.env.P.trim(),languageCode:"en"})});
+              const j=await r.json();const x=j.inspectionResult||{};const i=x.indexStatusResult||{};
+              console.log("URL",u,JSON.stringify({verdict:i.verdict,coverage:i.coverageState,fetch:i.pageFetchState,crawledAs:i.crawledAs,lastCrawl:i.lastCrawlTime,googleCanonical:i.googleCanonical,userCanonical:i.userCanonical,robots:i.robotsTxtState,indexing:i.indexingState,referring:(i.referringUrls||[]).slice(0,3),mobile:(x.mobileUsabilityResult||{}).verdict,err:j.error&&j.error.message}).replaceAll(B,""));}
+          })()'
+      - name: Fetch ?m=1 and standard as smartphone (status, canonical, robots meta)
+        run: |
+          UA='Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
+          for u in "https://motusnova.blogspot.com/2026/11/3-70.html?m=1" "https://motusnova.blogspot.com/2026/11/20-33.html?m=1"; do
+            echo "== $u"; curl -s -A "$UA" -D /tmp/h -o /tmp/b --max-redirs 0 "$u"; grep -iE "^HTTP|^location" /tmp/h | tr -d '\r'; grep -oiE "<link[^>]+rel=.canonical[^>]*>|<meta[^>]+robots[^>]*>" /tmp/b | head -3; wc -c < /tmp/b; sleep 3
+          done
