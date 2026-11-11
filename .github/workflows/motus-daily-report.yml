@@ -114,7 +114,7 @@ jobs:
       # Backfill switch (owner approval 2026-11-11): config/backfill.json, or the repository variable MOTUS_BACKFILL=on.
       - name: Backfill switch
         id: backfill
-        if: github.event_name == 'schedule'
+        if: ${{ !cancelled() && github.event_name == 'schedule' }}
         shell: bash
         env:
           VAR_ON: ${{ vars.MOTUS_BACKFILL }}
@@ -123,7 +123,7 @@ jobs:
           node -e 'const c=JSON.parse(require("fs").readFileSync("config/backfill.json","utf8"));const on=c.enabled===true||process.env.VAR_ON==="on";const limit=Number(process.env.VAR_LIMIT||c.limit||3);console.log("on="+on);console.log("limit="+limit)' >> "$GITHUB_OUTPUT"
           cat "$GITHUB_OUTPUT"
       - name: Install the PDF renderer (Chromium) and Korean fonts
-        if: (steps.check.outputs.ready != '' && env.LIVE == 'true') || steps.backfill.outputs.on == 'true'
+        if: ${{ !cancelled() && ((steps.check.outputs.ready != '' && env.LIVE == 'true') || steps.backfill.outputs.on == 'true') }}
         shell: bash
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk >/dev/null
@@ -147,17 +147,24 @@ jobs:
           for d in $READY; do
             flags=(--date "$d" --execute); [[ "$PARTIAL" == "true" ]] && flags+=(--final-attempt)
             MOTUS_LIVE_PUBLISH_ENABLED=true node dist/src/motus-daily-report-cli.js "${flags[@]}" || status=1
-            # Naver blog summary for the owner to post by hand (2026-11-11); never blocks the report.
-            node dist/src/naver-summary-cli.js --date "$d" || echo '::warning title=Naver summary::not written'
             node -e 'const r=require(process.argv[1]);console.log("### MOTUS daily report "+r.date+"\n- State: **"+r.state+"**\n- Title: "+(r.title??"")+(r.publicPostUrl?"\n- URL: "+r.publicPostUrl:"")+(r.reason?"\n- Reason: "+r.reason:""))' "$PWD/data/daily-report/$d/daily-report.json" >> "$GITHUB_STEP_SUMMARY" || true
           done
           # A date that failed its readiness check fails the run too, even when another date was published.
           [[ "${{ steps.check.outputs.check_status }}" == "1" ]] && status=1
           exit $status
+      # Naver blog summary (owner decision 2026-11-11): written on every run for every date that has published
+      # articles, so the fixed link always shows the latest day even when the report itself was already published.
+      # Reads hydrated files only; never blocks the report.
+      - name: Naver blog summary
+        if: ${{ !cancelled() }}
+        shell: bash
+        run: |
+          for d in $DATES; do node dist/src/naver-summary-cli.js --date "$d" || echo "::notice title=Naver summary::$d has no published article yet"; done
+          ls -la data/daily-report/naver-latest.md || true
       # Backfill of old posts (owner approval required: repository variable MOTUS_BACKFILL=on). Once a day at 05:40:
       # apply yesterday's plan (its card images are on ops-data by now), then back up and plan the next few posts.
       - name: Backfill old posts (paced, reversible)
-        if: steps.backfill.outputs.on == 'true'
+        if: ${{ !cancelled() && steps.backfill.outputs.on == 'true' }}
         shell: bash
         env:
           MOTUS_BACKFILL_ENABLED: 'true'
