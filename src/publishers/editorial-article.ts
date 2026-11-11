@@ -3,6 +3,7 @@ import type {NewsletterSourceLink} from '../intelligence/newsletter.js';
 import {MOTUS_DISPLAY_NAME} from '../content/publisher-schema.js';
 import {renderMarketTrendSection} from './motus.js';
 import {assertNewsletterPublicHtmlSafe} from './motus-newsletter.js';
+import {relatedCategoryHubs} from './related-posts.js';
 
 const BODY='font-family:Arial,&quot;Noto Sans KR&quot;,sans-serif;color:#172033;line-height:1.78;font-size:17px;width:100%;max-width:820px;box-sizing:border-box;margin:0 auto;overflow-x:hidden;overflow-wrap:anywhere';
 const SECTION='width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0';
@@ -95,7 +96,7 @@ export function renderAIEditorialArticle(view:AIIntelligenceDailyViewModel):Dail
     const watch=uniqueProse([...view.whatToWatch.map(item=>`${item.headline}: ${item.watchFor}`),...view.industryConnections.map(item=>item.optionalWatchPoint??''),...(connections.join(' ').length<60?connections:[])].filter(Boolean),seen);
     if(watch.length)parts.push(roleSection('앞으로 확인할 것',checklist(watch),'watch','ai-watch'));
   }
-  parts.push(relatedPosts(view.relatedPosts));parts.push(sources(view.sources));return finish('ai-intelligence',view.title,BLOGGER_EDITORIAL_CATEGORIES.AI_INTELLIGENCE.publicLabel,parts.filter(Boolean),['masthead','lead','key-points','issues','watch','sources']);
+  parts.push(relatedPosts(view.relatedPosts,BLOGGER_EDITORIAL_CATEGORIES.AI_INTELLIGENCE.publicLabel));parts.push(sources(view.sources));return finish('ai-intelligence',view.title,BLOGGER_EDITORIAL_CATEGORIES.AI_INTELLIGENCE.publicLabel,parts.filter(Boolean),['masthead','lead','key-points','issues','watch','sources']);
 }
 
 export function renderUSEditorialArticle(view:USMarketDailyViewModel):DailyMasterRenderResult {
@@ -118,7 +119,7 @@ export function renderUSEditorialArticle(view:USMarketDailyViewModel):DailyMaste
   if(view.marketResearch?.length)parts.push(renderMarketResearchEntries(view.marketResearch,view.issueDate));
   const risks=place('risks');
   if(risks.length)parts.push(...risks);else if(view.checkpoints.length)parts.push(roleSection('다음 거래일',checklist(view.checkpoints.map(item=>`${item.headline}: ${item.watchFor}`)),'watch'));
-  parts.push(relatedPosts(view.relatedPosts));parts.push(sources(view.sources));return finish('us-market',view.title,BLOGGER_EDITORIAL_CATEGORIES.US_MARKET.publicLabel,parts.filter(Boolean),['masthead','lead','key-points','charts','macro','companies','research','watch','sources']);
+  parts.push(relatedPosts(view.relatedPosts,BLOGGER_EDITORIAL_CATEGORIES.US_MARKET.publicLabel));parts.push(sources(view.sources));return finish('us-market',view.title,BLOGGER_EDITORIAL_CATEGORIES.US_MARKET.publicLabel,parts.filter(Boolean),['masthead','lead','key-points','charts','macro','companies','research','watch','sources']);
 }
 
 const metricValue=(value:string)=>{const number=Number(value.replace(/[^0-9.+\-−]/g,'').replace('−','-'));return Number.isFinite(number)?number:Number.NaN};
@@ -144,7 +145,7 @@ export function renderKoreaEditorialArticle(view:KoreaMarketDailyViewModel):Dail
   const risks=place('risks');
   if(risks.length)parts.push(...risks);else if(view.checkpoints.length)parts.push(roleSection(view.edition==='PREVIOUS_SESSION_MORNING'?'오늘 체크포인트':'다음 거래일',checklist(view.checkpoints.map(item=>`${item.headline}: ${item.watchFor}`)),'watch'));
   if(view.marketCommentary.length&&deep.length)parts.push(roleSection('자료 기준',`<div style="font-size:14px;color:${C.muted}">${prose(view.marketCommentary)}</div>`));
-  parts.push(relatedPosts(view.relatedPosts));parts.push(sources(view.sources));return finish('korea-market',view.title,BLOGGER_EDITORIAL_CATEGORIES.KOREA_MARKET.publicLabel,parts.filter(Boolean),['masthead','lead','key-points','indexes','fx','flows','sectors','research','watch','sources']);
+  parts.push(relatedPosts(view.relatedPosts,BLOGGER_EDITORIAL_CATEGORIES.KOREA_MARKET.publicLabel));parts.push(sources(view.sources));return finish('korea-market',view.title,BLOGGER_EDITORIAL_CATEGORIES.KOREA_MARKET.publicLabel,parts.filter(Boolean),['masthead','lead','key-points','indexes','fx','flows','sectors','research','watch','sources']);
 }
 
 /** Show what the publisher actually published, without manufacturing a brokerage opinion.
@@ -194,12 +195,15 @@ export function renderWeeklySection(item:import('../operations/weekly-review.js'
 }
 
 /** Recent MOTUS posts (owner 2026-11-05, Google indexing): internal links help crawlers find and weigh new posts. */
-export function relatedPosts(posts:Array<{title:string;url:string;label:string;published:string}>|undefined):string {
+export function relatedPosts(posts:Array<{title:string;url:string;label:string;published:string}>|undefined,currentLabel=''):string {
   // Optional block: a post whose title would trip a public-HTML or leakage check is dropped, never the article (#100 review).
   const unsafe=/https?:\/\/|www\.|(무슨 일이 있었나|왜 중요한가|핵심 내용|산업 연결|시장 연결)|fixture|placeholder|sample marker|eventId|themeId|companyId|publicationId|verificationStatus|confidenceScore|claimId|reportId|researchId|[A-Z]{2,}_[A-Z]{2,}/i;
   const block=(items:Array<{title:string;url:string;label:string;published:string}>)=>renderWeeklySection({key:'related-posts',title:'MOTUS 최근 기사',intro:'최근 발행한 시장·AI 브리핑을 이어서 읽어 보세요.',links:items.map(post=>({label:post.title,url:post.url,meta:[post.label,post.published].filter(Boolean).join(' · ')}))});
-  const items=(posts??[]).filter(post=>/^https:\/\/motusnova\.blogspot\.com\/\d{4}\/\d{2}\/[\w.-]+\.html$/.test(post.url)&&post.title&&!unsafe.test(post.title)&&!unsafe.test(post.label)).filter(post=>{try{assertNewsletterPublicHtmlSafe(`<article>${block([post])}</article>`);return true}catch{return false}}).slice(0,5);
-  return items.length?block(items):'';
+  const items=(posts??[]).filter(post=>/^https:\/\/motusnova\.blogspot\.com\/\d{4}\/\d{2}\/[\w.-]+\.html$/.test(post.url)&&post.title&&!unsafe.test(post.title)&&!unsafe.test(post.label)).filter(post=>{try{assertNewsletterPublicHtmlSafe(`<article>${block([post])}</article>`);return true}catch{return false}}).slice(0,6);
+  if(!items.length)return '';
+  // Category pages follow the post list (crawl hubs, 2026-11-11); their URLs are fixed, never taken from the feed.
+  const hubs=relatedCategoryHubs(currentLabel).map(hub=>`<a href="${attr(hub.url)}" style="${LINK}">${esc(hub.label)} 전체 보기</a>`).join(' · ');
+  return block(items).replace(/<\/section>\s*$/,`<p data-section="category-hubs" style="margin:4px 0 0;font-size:15px">${hubs}</p></section>`);
 }
 /** Daily report (owner decision 2026-11-04): one post a day in the '리포트' category with the combined PDF and the day's articles. */
 export const DAILY_REPORT_LABEL='리포트';
@@ -227,7 +231,7 @@ export function renderAINarrativeArticle(view:AIIntelligenceDailyViewModel,narra
   const parts=[masthead(view.title,view.subtitle,view.displayLabel,view.issueDate)+heroFigure(view.heroImage),lead(narrative.lead.text),keyPoints(narrative.keyPoints.map(p=>p.text))];
   narrative.sections.forEach((item,index)=>{parts.push(roleSection(item.heading,prose(item.paragraphs.map(p=>p.text)),undefined,`ai-narrative-${index+1}`));if(index===0&&stocks?.bars?.length)parts.push(roleSection(stocks.title,intro(stocks.intro)+barsSvg(stocks.bars),'data','ai-stocks'))});
   if(cards.length)parts.push(roleSection('증권가 리포트',`<div style="background:${C.goldSoft};border:1px solid ${C.goldLine};padding:12px 12px 2px">${cards.map(brokerCard).join('')}</div>`,'broker','ai-broker-cards'));
-  parts.push(relatedPosts(view.relatedPosts));
+  parts.push(relatedPosts(view.relatedPosts,BLOGGER_EDITORIAL_CATEGORIES.AI_INTELLIGENCE.publicLabel));
   parts.push(`<p data-section="disclaimer" style="margin:26px 0 0;padding:10px 12px;background:#f5f7fa;color:${C.muted};font-size:13.5px;line-height:1.6">${esc(disclaimer)}</p>`);
   parts.push(sources(view.sources));
   return finish('ai-intelligence',view.title,BLOGGER_EDITORIAL_CATEGORIES.AI_INTELLIGENCE.publicLabel,parts.filter(Boolean),['masthead','lead','key-points','narrative','stocks','broker-cards','disclaimer','sources']);
