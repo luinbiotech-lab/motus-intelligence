@@ -8,7 +8,8 @@
 export interface NaverSummaryPart {category:'korea'|'us'|'ai';title:string;url:string;keyPoints:string[];synthesis?:string|null;checkpoint?:string|null;heroImageUrl?:string|null;topStock?:string|null}
 export interface NaverSummary {date:string;title:string;body:string;tags:string[];category:string;imageUrl:string|null;markdown:string}
 
-export const NAVER_CATEGORY='증시 브리핑';
+// Owner's Naver blog (Lucius Insight Lab) keeps its categories; the briefing is a sub-category of 자본시장·투자 분석.
+export const NAVER_CATEGORY='자본시장·투자 분석 > 증시 브리핑';
 const NAME:Record<NaverSummaryPart['category'],string>={korea:'국내증시',us:'뉴욕증시',ai:'AI 산업·AI주'};
 const clean=(value:string)=>value.replace(/<[^>]+>/g,'').replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/&#39;/g,"'").replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/\s+/g,' ').trim();
 
