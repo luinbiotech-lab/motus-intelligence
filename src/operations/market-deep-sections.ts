@@ -105,6 +105,29 @@ function riskParagraphs(briefs:BrokerBrief[],region:'US'|'KOREA',checkpoint:stri
   return paragraphs;
 }
 
+/**
+ * MOTUS's own reading of a ranking, built only from the verified closes printed in the same section:
+ * breadth, the strongest and weakest names, and how many beat the index. It explains nothing it cannot count.
+ */
+function breadthParagraph(rows:Array<{label:string;changePct:number}>,universe:string,index:{label:string;changePct:number|null}|null):DeepParagraph|null{
+  if(rows.length<3)return null;
+  const up=rows.filter(item=>item.changePct>0.005).length,down=rows.filter(item=>item.changePct< -0.005).length;
+  const sorted=[...rows].sort((a,b)=>b.changePct-a.changePct),best=sorted[0]!,worst=sorted.at(-1)!;
+  const flat=rows.length-up-down;
+  let text=`MOTUS 정리: ${universe} ${rows.length}종목 가운데 ${up}종목이 오르고 ${down}종목이 내렸다${flat?`(보합 ${flat}종목)`:''}. 가장 강한 종목은 ${best.label}(${signedPct(best.changePct)}), 가장 약한 종목은 ${worst.label}(${signedPct(worst.changePct)})로 등락 폭 차이가 ${Math.abs(best.changePct-worst.changePct).toFixed(2)}%p였다.`;
+  if(index&&index.changePct!==null&&Number.isFinite(index.changePct)){
+    const beat=rows.filter(item=>item.changePct>index.changePct!);
+    text+=` 같은 날 ${index.label}는 ${signedPct(index.changePct)}였고, ${index.label}보다 강했던 종목은 ${beat.length}종목${beat.length&&beat.length<=4?`(${beat.map(item=>item.label).join('·')})`:''}이다.`;
+  }
+  return {text};
+}
+/** Names that moved 5% or more are a concrete next check; the threshold matches the '급등·급락' wording. */
+function volatilityWatch(rows:Array<{label:string;changePct:number}>,scope:string):DeepParagraph|null{
+  const big=[...rows].filter(item=>Math.abs(item.changePct)>=5).sort((a,b)=>Math.abs(b.changePct)-Math.abs(a.changePct)).slice(0,4);
+  if(!big.length)return null;
+  return {text:`변동성 점검: ${scope} 가운데 5% 넘게 움직인 ${big.map(item=>`${item.label}(${signedPct(item.changePct)})`).join('·')}${josa(big.at(-1)!.label,'은','는').slice(-1)} 등락이 이어지는지가 함께 확인 대상이다.`};
+}
+
 export function composeUSDeepSections(input:{bundle:BrokerResearchBundle|null;stocks:USAttentionStock[];sectors:SectorMove[];checkpoint?:string;wire?:WireReport[]}):DeepComposition {
   const sections:DeepSection[]=[],sources:DeepComposition['sources']=[],leadAddition:string[]=[];
   const briefs=input.bundle?.briefs??[];
@@ -148,13 +171,16 @@ export function composeUSDeepSections(input:{bundle:BrokerResearchBundle|null;st
   // A report is cited for what it says; a title alone ('관련 분석을 내놨다') is not analysis.
   const economy=(input.bundle?.economy??[]).filter(item=>/FOMC|연준|금리|미국|美|달러|물가|고용|Fed|GDP/.test(item.title)&&item.summary.length).slice(0,3);
   if(rateDigests.length||economy.length)sections.push({key:'us-broker-analysis',placement:'late',role:'broker',title:'증권사별 분석: 금리와 통화정책',paragraphs:[...rateDigests.map(({item,brief})=>digestParagraph(item,brief)),...economy.map(report=>({text:ratingSentence(report),source:reportSource(report),report:reportCard(report)}))]});
-  if(input.checkpoint&&sections.length)sections.push({key:'us-risks',placement:'risks',role:'watch',title:'위험 요인과 다음 확인 지표',paragraphs:riskParagraphs(briefs,'US',input.checkpoint)});
+  if(input.checkpoint&&sections.length){
+    const watch=volatilityWatch(ranked.map(stock=>({label:displayName(stock),changePct:stock.changePct})),'직전 정규장 관심 종목');
+    sections.push({key:'us-risks',placement:'risks',role:'watch',title:'위험 요인과 다음 확인 지표',paragraphs:[...riskParagraphs(briefs,'US',input.checkpoint),...(watch?[watch]:[])]});
+  }
   const used=new Set(sections.flatMap(section=>section.paragraphs.map(p=>p.source?.url).filter(Boolean)));
   for(const report of [...briefs.map(item=>item.report),...economy])if(used.has(report.url))sources.push(sourceEntry(report));
   return {sections,leadAddition,titleFocus,sources:[...new Map(sources.map(item=>[item.url,item])).values()],hasCoreCommentary:Boolean(cause.first||wire)};
 }
 
-export function composeKoreaDeepSections(input:{bundle:BrokerResearchBundle|null;searchTop:KoreaSearchStock[];checkpoint?:string;wire?:WireReport[]}):DeepComposition {
+export function composeKoreaDeepSections(input:{bundle:BrokerResearchBundle|null;searchTop:KoreaSearchStock[];checkpoint?:string;wire?:WireReport[];kospiChangePct?:number|null}):DeepComposition {
   const sections:DeepSection[]=[],sources:DeepComposition['sources']=[],leadAddition:string[]=[];
   const briefs=input.bundle?.briefs??[],companyReports=input.bundle?.company??[];
   const cause=causeParagraphs(briefs,'KOREA');
@@ -171,16 +197,31 @@ export function composeKoreaDeepSections(input:{bundle:BrokerResearchBundle|null
     const named=(text:string,name:string)=>new RegExp(`(?<![가-힣A-Za-z0-9])${name.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}(?![가-힣A-Za-z0-9&])|(?<![가-힣A-Za-z0-9])${name.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}(?=[은는이가을를의와과도에])`).test(text);
     const why=(name:string)=>briefs.flatMap(brief=>brief.statements.filter(item=>item.region==='KOREA'&&item.text.length<=200&&named(item.text,name)).map(item=>({item,brief})))[0];
     // One link per paragraph: the move with its reason (broker comment) and the rating (company report) are cited separately.
+    const kospi=typeof input.kospiChangePct==='number'&&Number.isFinite(input.kospiChangePct)?input.kospiChangePct:null;
+    const vsKospi=(value:number)=>kospi===null?'':`(코스피 대비 ${value-kospi>=0?'+':'-'}${Math.abs(value-kospi).toFixed(2)}%p)`;
+    // 2026-11-11 owner: one-line number paragraphs read as an empty article. A stock with neither a broker comment
+    // nor a report is no longer printed alone; such stocks are read together in one MOTUS paragraph below.
+    const bare:KoreaSearchStock[]=[];
     const paragraphs:DeepParagraph[]=input.searchTop.flatMap(stock=>{
       const report=companyReports.find(item=>item.stockCode===stock.code),digest=companyDigest(stock.name),reason=why(stock.name);
-      const head=`검색 ${stock.rank}위 ${josa(stock.name,'은','는')} ${won(stock.close)}원으로 ${absPct(stock.changePct)} ${moveWord(stock.changePct)}했다.`;
+      const head=`검색 ${stock.rank}위 ${josa(stock.name,'은','는')} ${won(stock.close)}원으로 ${absPct(stock.changePct)} ${moveWord(stock.changePct)}했다${vsKospi(stock.changePct)}.`;
       const out:DeepParagraph[]=[];
       if(reason)out.push({text:`${head} ${josa(reason.brief.report.broker,'은','는')} ${koreanDateLabel(reason.brief.report.date)} 「${reason.brief.report.title}」에서 ${said([quote(reason.item.text)])} 짚었다.`,source:reportSource(reason.brief.report)});
       const research=report?{text:ratingSentence(report),source:reportSource(report),report:reportCard(report)}:digest&&!reason?{text:digestParagraph(digest.item,digest.brief,2).text,source:reportSource(digest.brief.report)}:null;
-      if(!reason)out.push(research?{text:`${head} ${research.text}`,source:research.source,...('report' in research&&research.report?{report:research.report}:{})}:{text:head});
+      if(!reason&&research)out.push({text:`${head} ${research.text}`,source:research.source,...('report' in research&&research.report?{report:research.report}:{})});
+      else if(!reason)bare.push(stock);
       else if(research)out.push(research);
       return out;
     });
+    if(bare.length===1&&!paragraphs.length)paragraphs.push({text:`검색 ${bare[0]!.rank}위 ${josa(bare[0]!.name,'은','는')} ${won(bare[0]!.close)}원으로 ${absPct(bare[0]!.changePct)} ${moveWord(bare[0]!.changePct)}했다${vsKospi(bare[0]!.changePct)}.`});
+    else if(bare.length){
+      const list=bare.map(stock=>`${stock.name}(${stock.rank}위, ${won(stock.close)}원, ${signedPct(stock.changePct)})`).join(', ');
+      const stronger=kospi===null?[]:bare.filter(stock=>stock.changePct>kospi),weaker=kospi===null?[]:bare.filter(stock=>stock.changePct<=kospi);
+      const relative=kospi===null?'':` 코스피(${signedPct(kospi)})와 비교하면 ${stronger.length?`${stronger.map(stock=>stock.name).join('·')}${josa(stronger.at(-1)!.name,'이','가').slice(-1)} 지수보다 강했고`:'지수보다 강한 종목은 없었고'}${weaker.length?` ${weaker.map(stock=>stock.name).join('·')}${josa(weaker.at(-1)!.name,'은','는').slice(-1)} 지수를 밑돌았다`:' 지수를 밑돈 종목은 없었다'}.`;
+      paragraphs.push({text:`이 밖의 검색 상위 종목은 해당 세션을 다룬 증권사 코멘트·리포트가 확인되지 않아 종가와 등락만 정리했다: ${list}.${relative}`});
+    }
+    const breadth=breadthParagraph(input.searchTop.map(stock=>({label:stock.name,changePct:stock.changePct})),'투자자 검색 상위',kospi===null?null:{label:'코스피',changePct:kospi});
+    if(breadth)paragraphs.unshift(breadth);
     sections.push({key:'korea-stocks',placement:'early',role:'data',bars:input.searchTop.map(item=>({label:item.name,value:item.changePct})),title:'업종과 종목: 투자자 검색 상위',intro:'네이버페이 증권 검색 상위 종목(ETF·ETN·레버리지 제외)의 전일 종가 기준 등락과 최근 증권사 리포트다. 검색 순위는 관심도 지표이며 주가 변동의 원인이 아니다.',paragraphs});
     const top=input.searchTop[0]!;titleFocus=`검색 ${top.rank}위 ${top.name} ${Math.abs(top.changePct).toFixed(1)}% ${moveWord(top.changePct)}`;
   }
@@ -193,7 +234,10 @@ export function composeKoreaDeepSections(input:{bundle:BrokerResearchBundle|null
   const industry:BrokerReport[]=[];
   const analysis:DeepParagraph[]=[...strategy.map(({item,brief})=>digestParagraph(item,brief,2)),...reviewDigests.map(({item,brief})=>digestParagraph(item,brief,2)),...otherReports.map(report=>({text:`${report.company}: ${ratingSentence(report)}`,source:reportSource(report),report:reportCard(report)})),...(industry.length?[{text:`최근 산업 리포트: ${industry.map(report=>`${report.broker} 「${report.title}」(${koreanDateLabel(report.date)})`).join(', ')}.`,source:reportSource(industry[0]!)}]:[])];
   if(analysis.length)sections.push({key:'korea-broker-analysis',placement:'late',role:'broker',title:'증권사별 분석',intro:'투자의견과 목표주가는 각 증권사가 리포트에 게시한 값이며, 증권사마다 전제와 시점이 다르다.',paragraphs:analysis});
-  if(input.checkpoint&&sections.length)sections.push({key:'korea-risks',placement:'risks',role:'watch',title:'위험 요인과 다음 확인 지표',paragraphs:riskParagraphs(briefs,'KOREA',input.checkpoint)});
+  if(input.checkpoint&&sections.length){
+    const watch=volatilityWatch(input.searchTop.map(stock=>({label:stock.name,changePct:stock.changePct})),'직전 거래일 검색 상위');
+    sections.push({key:'korea-risks',placement:'risks',role:'watch',title:'위험 요인과 다음 확인 지표',paragraphs:[...riskParagraphs(briefs,'KOREA',input.checkpoint),...(watch?[watch]:[])]});
+  }
   const used=new Set(sections.flatMap(section=>section.paragraphs.map(p=>p.source?.url).filter(Boolean)));
   for(const report of [...briefs.map(item=>item.report),...companyReports,...industry])if(used.has(report.url))sources.push(sourceEntry(report));
   return {sections,leadAddition,titleFocus,sources:[...new Map(sources.map(item=>[item.url,item])).values()],hasCoreCommentary:Boolean(cause.first||wire)};
@@ -201,6 +245,14 @@ export function composeKoreaDeepSections(input:{bundle:BrokerResearchBundle|null
 
 // A medical or surgical robot is not AI demand (2026-11-03: a kidney-stone surgical robot report reached the AI article).
 const AI_WORDS=/AI|인공지능|반도체|HBM|데이터센터|GPU|엔비디아|LLM|클라우드|전력기기|인터커넥트|휴머노이드|파운드리|메모리|서버|MLCC|FC ?BGA/;
+
+/** Ratings without a published summary, as one paragraph: who, which company, which rating and target, when. */
+function ratingList(reports:BrokerReport[]):DeepParagraph[]{
+  if(!reports.length)return [];
+  if(reports.length===1)return [{text:`${reports[0]!.company??reports[0]!.title}: ${ratingSentence(reports[0]!)}`,source:reportSource(reports[0]!),report:reportCard(reports[0]!)}];
+  const items=reports.map(report=>`${report.company??report.title}(${report.broker}, ${koreanDateLabel(report.date)}${report.rating?`, ${report.rating}`:''}${report.targetPrice?`, 목표주가 ${report.targetPrice}원`:''})`);
+  return [{text:`요약문 없이 투자의견만 공개된 AI 관련 리포트도 있었다: ${items.join(', ')}.`,source:reportSource(reports[0]!)}];
+}
 
 /** AI article: AI bellwether moves on the latest U.S. session and broker research that names AI demand. */
 const AI_ISSUE=/AI|인공지능|빅테크|알파벳|구글|마이크로소프트|\bMS\b|아마존|AWS|애저|Azure|메타(?!버스)|엔비디아|오라클|데이터센터|클라우드|설비투자|CapEx|반도체|HBM|GPU/;
@@ -236,7 +288,9 @@ export function composeAIDeepSections(input:{bundle:BrokerResearchBundle|null;st
   if(digests.length||companies.length||industry.length){
     sections.push({key:'ai-broker-research',role:'broker',title:'증권가가 본 AI 산업',intro:'국내 증권사가 최근 공개한 리포트 가운데 AI 수요를 직접 다룬 분석의 문장과 투자의견을 그대로 옮겼다.',paragraphs:[
       ...digests.map(({item,brief})=>digestParagraph(item,brief)),
-      ...companies.map(report=>({text:`${report.company??report.title}: ${ratingSentence(report)}`,source:reportSource(report),report:reportCard(report)})),
+      // A rating with no quoted reasoning is one line; such reports are listed together instead of one paragraph each.
+      ...companies.filter(report=>report.summary.length).map(report=>({text:`${report.company??report.title}: ${ratingSentence(report)}`,source:reportSource(report),report:reportCard(report)})),
+      ...ratingList(companies.filter(report=>!report.summary.length)),
       ...industry.map(report=>({text:`${subject(report)} ${koreanDateLabel(report.date)} 「${report.title}」 산업 리포트에서 ${said(report.summary.slice(0,2).map(quote))} 분석했다.`,source:reportSource(report)})),
     ]});
   }
