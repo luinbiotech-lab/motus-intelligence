@@ -24,6 +24,10 @@ on:
         required: false
         type: boolean
         default: false
+      backfill_revert_post_id:
+        description: Restore the backed-up original body of one backfilled post (numeric post id)
+        required: false
+        type: string
   schedule:
     # 05:40 KST Tuesday-Saturday: final attempt for the previous operation date (before the 06:17 Korea run).
     - cron: '40 20 * * 1-5'
@@ -108,7 +112,7 @@ jobs:
           [[ -z "$ready" ]] && exit $status
           exit 0
       - name: Install the PDF renderer (Chromium) and Korean fonts
-        if: steps.check.outputs.ready != '' && env.LIVE == 'true'
+        if: (steps.check.outputs.ready != '' && env.LIVE == 'true') || (github.event_name == 'schedule' && vars.MOTUS_BACKFILL == 'on')
         shell: bash
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk >/dev/null
@@ -137,6 +141,35 @@ jobs:
           # A date that failed its readiness check fails the run too, even when another date was published.
           [[ "${{ steps.check.outputs.check_status }}" == "1" ]] && status=1
           exit $status
+      # Backfill of old posts (owner approval required: repository variable MOTUS_BACKFILL=on). Once a day at 05:40:
+      # apply yesterday's plan (its card images are on ops-data by now), then back up and plan the next few posts.
+      - name: Backfill old posts (paced, reversible)
+        if: github.event_name == 'schedule' && vars.MOTUS_BACKFILL == 'on'
+        shell: bash
+        env:
+          MOTUS_BACKFILL_ENABLED: 'true'
+          MOTUS_HERO_IMAGE: 'on'
+          LIMIT: ${{ vars.MOTUS_BACKFILL_LIMIT || '3' }}
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+        run: |
+          node dist/src/motus-backfill-cli.js --execute || echo '::warning title=Backfill::execute failed'
+          node dist/src/motus-backfill-cli.js --plan --limit "$LIMIT" || echo '::warning title=Backfill::plan failed'
+      - name: Revert one backfilled post
+        if: github.event_name == 'workflow_dispatch' && inputs.backfill_revert_post_id != ''
+        shell: bash
+        env:
+          MOTUS_BACKFILL_ENABLED: 'true'
+          POST_ID: ${{ inputs.backfill_revert_post_id }}
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+        run: |
+          [[ "$POST_ID" =~ ^[0-9]+$ ]] || { echo '::error::numeric post id required'; exit 1; }
+          node dist/src/motus-backfill-cli.js --revert "$POST_ID"
       - name: Upload daily-report record
         if: always()
         uses: actions/upload-artifact@v4
