@@ -1,0 +1,44 @@
+name: diag backfill scope 2026-11-11 (read-only)
+on:
+  push:
+    branches: [diag/mobile-redirect-20261108]
+    paths: [.github/workflows/diag-backfill-scope-20261111.yml]
+permissions:
+  contents: read
+jobs:
+  scan:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: claude/backfill-old-posts}
+      - uses: actions/setup-node@v4
+        with: {node-version: 22, cache: npm}
+      - run: npm ci && npm run build
+      - name: Read every public post (GET only) and report eligibility
+        env:
+          BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
+          BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
+          BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
+          BLOGGER_REFRESH_TOKEN: ${{ secrets.BLOGGER_REFRESH_TOKEN }}
+        run: |
+          cat > scan.mjs <<'JS'
+          import fs from 'fs';
+          const {GoogleBloggerApiAdapter}=await import('./dist/src/services/blogger.js');
+          const B=await import('./dist/src/operations/backfill-links.js');
+          const {RELATED_FEED_URL}=await import('./dist/src/publishers/related-posts.js');
+          const raw=JSON.parse(fs.readFileSync('config/publishing.json','utf8'));
+          const config={...raw.blogger,blogId:process.env.BLOGGER_BLOG_ID.trim(),credentialAvailable:true,publishAsDraft:true};
+          const g=new GoogleBloggerApiAdapter();
+          const all=B.parseFeedWithIds(await (await fetch(RELATED_FEED_URL)).json());
+          console.log('FEED',all.length);
+          const c={};
+          for(const p of B.backfillOrder(all,new Set())){
+            const post=await g.readPost(p.postId,config);const e=B.eligibility(post.content);
+            const k=e.eligible?`ELIGIBLE links=${e.needsLinks} image=${e.needsImage}`:'SKIP '+e.reason;c[k]=(c[k]||0)+1;
+            let size='';if(e.eligible){const out=B.backfillContent(post.content,{post:p,all,image:{file:'hero-000000000000.png',alt:'x'}});size=` +${out.content.length-post.content.trim().length}B related=${out.related} restore=${B.stripBackfill(out.content)===post.content.trim()}`}
+            console.log('S',p.published,p.label||'-',p.url.replace('https://motusnova.blogspot.com',''),post.status,k+size);
+          }
+          console.log('COUNTS',JSON.stringify(c));
+          JS
+          node scan.mjs
