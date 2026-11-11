@@ -75,7 +75,8 @@ try{
     for(const link of links){const part=parts.find(item=>item.category===link.category);sections.push({key:`daily-report-${folders[link.category]}`,title:`${dailyKind(link.category)}: ${link.title}`,...(part?{intro:dailyLead(part.view)}:{}),links:[{label:link.title,url:link.url,meta:`${dailyKind(link.category)} 기사 전문${link.sessionDate?` · ${link.sessionDate} 세션`:''}`}]})}
     const kindOf=(name:string)=>dailyKind(DAILY_REPORT_ORDER.find(c=>folders[c]===name)!);
     const lead=`${month}월 ${day}일 MOTUS 데일리 리포트입니다. 오늘 발행한 ${parts.map(part=>dailyKind(part.category)).join('·')} 기사의 핵심 수치와 차트, 증권가 리포트를 PDF 한 편으로 묶었습니다.${weekday===1?' 월요일은 주말 동안 미국 정규장이 열리지 않아 국내 증시와 AI 산업만 다룹니다.':''}${missing.length?` ${missing.map(kindOf).join('·')} 기사는 이날 발행되지 않아 이번 리포트에서 빠졌습니다.`:''}${noData.length?` ${noData.map(kindOf).join('·')} 기사는 링크로만 소개합니다.`:''}`;
-    return renderDailyReportArticle({date,title,subtitle:'국내·미국 증시와 AI 산업을 한 번에 보는 하루 정리',lead,sections,sources:links.map(link=>({label:`${dailyKind(link.category)} — ${link.title}`,url:link.url}))}).html;
+    const heroImage=parts.map(part=>(part.view as {heroImage?:{url:string;alt:string;width:number;height:number}}).heroImage).find(Boolean);
+    return renderDailyReportArticle({date,title,subtitle:'국내·미국 증시와 AI 산업을 한 번에 보는 하루 정리',lead,sections,...(heroImage?{heroImage:{...heroImage,alt:`MOTUS 데일리 리포트 ${month}월 ${day}일 대표 이미지`}}:{}),sources:links.map(link=>({label:`${dailyKind(link.category)} — ${link.title}`,url:link.url}))}).html;
   };
   article({url:'https://drive.google.com/',fileName:pdf.fileName});
   if(!execute||process.env.MOTUS_LIVE_PUBLISH_ENABLED!=='true')await done({state:'SIMULATED',title,fileName:pdf.fileName,pages:pdf.pages,missing,noData,dataReasons,publishCallCount:0});
