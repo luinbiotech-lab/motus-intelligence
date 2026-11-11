@@ -94,13 +94,17 @@ try{
   const sitemapsResponse=await fetch(`https://www.googleapis.com/webmasters/v3/sites/${encodeURIComponent(property)}/sitemaps`,{headers:auth,signal:timeout(20000)});
   const sitemaps=sitemapsResponse.ok?((await sitemapsResponse.json() as {sitemap?:Array<Record<string,unknown>>}).sitemap??[]).map(item=>({path:item.path,lastSubmitted:item.lastSubmitted,lastDownloaded:item.lastDownloaded,isPending:item.isPending,errors:item.errors,warnings:item.warnings,contents:item.contents})):{error:`HTTP ${sitemapsResponse.status}`};
   let recent:string[]=[];
-  try{const feed=await fetch(`${BLOG}/feeds/posts/summary?alt=json&max-results=10`,{signal:timeout(20000)});recent=((await feed.json() as {feed?:{entry?:Array<{link?:Array<{rel?:string;href?:string}>}>}}).feed?.entry??[]).map(entry=>entry.link?.find(link=>link.rel==='alternate')?.href??'').filter(Boolean)}catch{/* optional */}
+  try{const feed=await fetch(`${BLOG}/feeds/posts/summary?alt=json&max-results=50`,{signal:timeout(20000)});recent=((await feed.json() as {feed?:{entry?:Array<{link?:Array<{rel?:string;href?:string}>}>}}).feed?.entry??[]).map(entry=>entry.link?.find(link=>link.rel==='alternate')?.href??'').filter(Boolean)}catch{/* optional */}
   // Fixed sample (루인 review 2026-11-08, MOT-035): the same URLs every day, so the redirect-error fix is judged on a
   // stable before/after set: the five REDIRECT_ERROR posts, the home page and one post that was indexed.
   const fixed=INDEX_FIXED_SAMPLE.map(path=>BLOG+path);
-  const urls=[...new Set([...fixed,...ours.map(article=>article.url),...recent])].slice(0,18),inspections=[];
+  const urls=[...new Set([...fixed,...ours.map(article=>article.url),...recent])].slice(0,60),inspections=[];
+  const inspectDeadline=Date.now()+6*60000;
   for(const url of urls){
-    const response=await fetch('https://searchconsole.googleapis.com/v1/urlInspection/index:inspect',{method:'POST',headers:{...auth,'content-type':'application/json'},body:JSON.stringify({inspectionUrl:url,siteUrl:property,languageCode:'ko'}),signal:timeout(30000)});
+    if(Date.now()>inspectDeadline){inspections.push({url,error:'SKIPPED_TIME_BUDGET'});continue}
+    // MOT-043: one slow inspection (11/11 timeout) must not discard every other result; it is recorded per URL.
+    const response=await fetch('https://searchconsole.googleapis.com/v1/urlInspection/index:inspect',{method:'POST',headers:{...auth,'content-type':'application/json'},body:JSON.stringify({inspectionUrl:url,siteUrl:property,languageCode:'ko'}),signal:timeout(30000)}).catch((error:unknown)=>error instanceof Error?error:new Error(String(error)));
+    if(response instanceof Error){inspections.push({url,error:response.message.slice(0,160)});continue}
     if(!response.ok){inspections.push({url,error:`HTTP ${response.status}: ${(await response.text()).slice(0,160)}`});continue}
     const index=(await response.json() as {inspectionResult?:{indexStatusResult?:Record<string,unknown>}}).inspectionResult?.indexStatusResult??{};
     inspections.push({url,verdict:index.verdict,coverageState:index.coverageState,robotsTxtState:index.robotsTxtState,indexingState:index.indexingState,pageFetchState:index.pageFetchState,lastCrawlTime:index.lastCrawlTime,googleCanonical:index.googleCanonical,userCanonical:index.userCanonical,sitemap:index.sitemap,referringUrls:index.referringUrls});
