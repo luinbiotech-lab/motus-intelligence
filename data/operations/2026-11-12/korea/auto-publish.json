@@ -1,10 +1,10 @@
 {
   "state": "HOLD",
-  "reasonCode": "BROKER_MARKET_COMMENTARY_UNAVAILABLE",
+  "reasonCode": "YAHOO_FINANCE_KOSPI_ROW_MISSING",
   "reasonCodes": [
-    "BROKER_MARKET_COMMENTARY_UNAVAILABLE"
+    "YAHOO_FINANCE_KOSPI_ROW_MISSING"
   ],
-  "reason": "BROKER_MARKET_COMMENTARY_UNAVAILABLE",
+  "reason": "YAHOO_FINANCE_KOSPI_ROW_MISSING",
   "insertCallCount": 0,
   "publishCallCount": 0
 }
