@@ -1,0 +1,5 @@
+{
+  "_comment": "기존 글 소급 보강 스위치. 루치오 승인 2026-11-11(하루 3건). 끄려면 enabled를 false로 바꿔 main에 병합.",
+  "enabled": true,
+  "limit": 3
+}

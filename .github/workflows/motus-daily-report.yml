@@ -111,8 +111,19 @@ jobs:
           # Nothing to publish: a FAILED check, or a final attempt that ends in HOLD, fails the run (visible).
           [[ -z "$ready" ]] && exit $status
           exit 0
+      # Backfill switch (owner approval 2026-11-11): config/backfill.json, or the repository variable MOTUS_BACKFILL=on.
+      - name: Backfill switch
+        id: backfill
+        if: github.event_name == 'schedule'
+        shell: bash
+        env:
+          VAR_ON: ${{ vars.MOTUS_BACKFILL }}
+          VAR_LIMIT: ${{ vars.MOTUS_BACKFILL_LIMIT }}
+        run: |
+          node -e 'const c=JSON.parse(require("fs").readFileSync("config/backfill.json","utf8"));const on=c.enabled===true||process.env.VAR_ON==="on";const limit=Number(process.env.VAR_LIMIT||c.limit||3);console.log("on="+on);console.log("limit="+limit)' >> "$GITHUB_OUTPUT"
+          cat "$GITHUB_OUTPUT"
       - name: Install the PDF renderer (Chromium) and Korean fonts
-        if: (steps.check.outputs.ready != '' && env.LIVE == 'true') || (github.event_name == 'schedule' && vars.MOTUS_BACKFILL == 'on')
+        if: (steps.check.outputs.ready != '' && env.LIVE == 'true') || steps.backfill.outputs.on == 'true'
         shell: bash
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk >/dev/null
@@ -146,12 +157,12 @@ jobs:
       # Backfill of old posts (owner approval required: repository variable MOTUS_BACKFILL=on). Once a day at 05:40:
       # apply yesterday's plan (its card images are on ops-data by now), then back up and plan the next few posts.
       - name: Backfill old posts (paced, reversible)
-        if: github.event_name == 'schedule' && vars.MOTUS_BACKFILL == 'on'
+        if: steps.backfill.outputs.on == 'true'
         shell: bash
         env:
           MOTUS_BACKFILL_ENABLED: 'true'
           MOTUS_HERO_IMAGE: 'on'
-          LIMIT: ${{ vars.MOTUS_BACKFILL_LIMIT || '3' }}
+          LIMIT: ${{ steps.backfill.outputs.limit }}
           BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
           BLOGGER_CLIENT_ID: ${{ secrets.BLOGGER_CLIENT_ID }}
           BLOGGER_CLIENT_SECRET: ${{ secrets.BLOGGER_CLIENT_SECRET }}
