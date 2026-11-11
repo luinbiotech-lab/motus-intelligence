@@ -20,5 +20,5 @@ jobs:
           (async()=>{for(const kind of ["webkr","blog"])for(const s of q){
             const r=await fetch(`https://openapi.naver.com/v1/search/${kind}.json?query=${encodeURIComponent(s)}&display=30`,{headers:{"X-Naver-Client-Id":process.env.ID,"X-Naver-Client-Secret":process.env.SECRET}});
             const b=await r.json();const items=b.items||[];const hit=items.map((x,i)=>({i:i+1,link:x.link})).filter(x=>/motusnova/.test(x.link));
-            console.log("Q",kind,JSON.stringify(s),"total",b.total,"motusHits",JSON.stringify(hit),"top3",JSON.stringify(items.slice(0,3).map(x=>x.link)));
+            console.log("Q",kind,JSON.stringify(s),"total",b.total,"err",r.status,b.errorCode||"",b.errorMessage||"","motusHits",JSON.stringify(hit),"top3",JSON.stringify(items.slice(0,3).map(x=>x.link)));
           }})()'
