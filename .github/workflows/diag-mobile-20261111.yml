@@ -1,0 +1,22 @@
+name: diag mobile redirect after setting 2026-11-11 (read-only)
+on:
+  push:
+    branches: [diag/mobile-redirect-20261108]
+    paths: [.github/workflows/diag-mobile-20261111.yml]
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - run: |
+          IPHONE='Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1'
+          GBOT='Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
+          for url in https://motusnova.blogspot.com/2026/11/3-70.html https://motusnova.blogspot.com/2026/11/11-10-439-523913-1-50.html https://motusnova.blogspot.com/ https://spec-insight.blogspot.com/; do
+            for ua in "$IPHONE" "$GBOT"; do
+              echo "== $url | ${ua:0:30}"
+              curl -s -o /dev/null -D - -A "$ua" --max-redirs 0 "$url" | grep -iE "^HTTP|^location" | tr -d '\r'
+              sleep 2
+            done
+          done
