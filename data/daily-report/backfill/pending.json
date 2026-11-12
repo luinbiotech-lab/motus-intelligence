@@ -1,0 +1,41 @@
+{
+  "updatedAt": "2026-11-12T02:00:25.603Z",
+  "items": [
+    {
+      "postId": "9009523239057574527",
+      "url": "https://motusnova.blogspot.com/2026/09/5-ai.html",
+      "title": "국채금리 5%대의 압박과 AI 에이전트 경쟁",
+      "labels": [
+        "리포트"
+      ],
+      "originalSha256": "sha256:19f2a0abf325c2b45d4050a2661da4d0d961ec643aacb75b916a31dbc7f6fb13",
+      "proposedSha256": "sha256:a063f13ab3bb1210d5ecc905a9ab803199ae29c9ce3e968b7aa5dcd55ebd8458",
+      "image": null,
+      "relatedCount": 5
+    },
+    {
+      "postId": "7329329991867951886",
+      "url": "https://motusnova.blogspot.com/2026/10/2026-9-30_0170921246.html",
+      "title": "국내 증시 마감: 외국인·기관 매도에 코스피 하락, 코스닥은 반등 (2026년 9월 30일)",
+      "labels": [
+        "국내증시"
+      ],
+      "originalSha256": "sha256:d905f397344055c608ebbc918b8cb62ad7be0ff4087446b97823117ce7b9c028",
+      "proposedSha256": "sha256:ff8b562069b631ccfd6c97e8d443b736b52225de535df16dca137cc6dc2f5572",
+      "image": "https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/daily-report/backfill/img/hero-e45cde43dadb.png",
+      "relatedCount": 5
+    },
+    {
+      "postId": "6490308826156387498",
+      "url": "https://motusnova.blogspot.com/2026/10/2026-9-30.html",
+      "title": "미국 증시 마감: 장기금리 부담에 다우 약세, 나스닥은 소폭 상승 (2026년 9월 30일)",
+      "labels": [
+        "미국증시"
+      ],
+      "originalSha256": "sha256:66661546f12b560ed8e7e44234b6f4324e46ccbd9a5bfd312f68d6da1a17ff16",
+      "proposedSha256": "sha256:7c70552db155c980dbc15bfee75733d01c3f105485dbbfa40a2dd3440897675d",
+      "image": "https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/daily-report/backfill/img/hero-e02596b9f3da.png",
+      "relatedCount": 5
+    }
+  ]
+}
