@@ -1,16 +1,15 @@
 {
   "schema": "motus.ai-narrative-outcome/1",
   "mode": "SHADOW",
-  "bundleHash": "98e62ca59942ac90",
+  "bundleHash": "9468c69bacf66fae",
   "status": "REJECTED",
-  "reason": "NARRATIVE_INVALID:CAUSE_UNATTRIBUTED",
+  "reason": "NARRATIVE_INVALID:NUMBER",
   "attempts": 2,
   "errors": [
-    "CAUSE_UNATTRIBUTED:s1p1",
-    "CAUSE_UNATTRIBUTED:s1p1",
-    "LENGTH:s1p3:50"
+    "NUMBER:s1p1:11",
+    "NUMBER:s1p1:11"
   ],
   "model": "claude-sonnet-5-5",
-  "durationMs": 50971,
+  "durationMs": 27410,
   "editorialQuality": null
 }

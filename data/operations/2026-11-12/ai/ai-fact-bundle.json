@@ -1,6 +1,6 @@
 {
   "schema": "motus.ai-facts/1",
-  "bundleHash": "98e62ca59942ac90",
+  "bundleHash": "9468c69bacf66fae",
   "operationDate": "2026-11-12",
   "sessionDate": "2026-11-11",
   "facts": [
@@ -13,23 +13,23 @@
     {
       "id": "F2",
       "kind": "official",
-      "text": "구글은 2026년 11월 12일(한국 시간) 공식 블로그에 「Gemini Decisions API: Fast, calibrated multimodal decisions」 제목의 발표를 게시했다. 원문 본문은 신규 AI 제품·기능 공개에 관한 내용을 다룬다. 발표의 중심 제품·플랫폼은 Gemini이다.",
-      "publisher": "구글",
-      "sourceUrl": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/"
+      "text": "아마존웹서비스(AWS)는 2026년 11월 12일(한국 시간) 공식 What’s New 공지에 「DeepSeek-V4-Pro, DeepSeek-V4-Flash, and DeepSeek-V4.1-Flash models now available on Amazon SageMaker JumpStart」 제목의 발표를 게시했다. 발표 제목과 본문은 신규 AI 제품·기능 공개에 관한 내용을 다룬다. 발표의 중심 제품·플랫폼은 SageMaker이다.",
+      "publisher": "아마존웹서비스(AWS)",
+      "sourceUrl": "https://aws.amazon.com/about-aws/whats-new/2026/01/deepseek-v4-pro-v4-flash-v4.1-flash-on-sagemaker-jumpstart/"
     },
     {
       "id": "F3",
       "kind": "official",
-      "text": "마이크로소프트는 2026년 11월 12일(한국 시간) 공식 블로그에 「What it takes to bring an AI research assistant to thousands of medical experts」 제목의 발표를 게시했다. 발표 제목과 본문은 AI 연구 성과 공개에 관한 내용을 다룬다. 원문에서 언급된 제품·플랫폼은 Microsoft Foundry이다.",
-      "publisher": "마이크로소프트",
-      "sourceUrl": "https://commandline.microsoft.com/from-custom-infrastructure-to-hosted-agents/"
+      "text": "구글은 2026년 11월 11일(한국 시간) 공식 블로그에 「Experience the art and legacy of Dr. Esther Mahlangu」 제목의 발표를 게시했다. 원문 본문은 AI 연구 성과 공개에 관한 내용을 다룬다. 원문에서 언급된 제품·플랫폼은 Veo이다.",
+      "publisher": "구글",
+      "sourceUrl": "https://blog.google/company-news/outreach-and-initiatives/arts-culture/esther-mahlangu/"
     },
     {
       "id": "F4",
       "kind": "official",
-      "text": "아마존웹서비스(AWS)는 2026년 11월 12일(한국 시간) 공식 What’s New 공지에 「Ornith-1.0-9B and Ornith-1.0-35B models now available on Amazon SageMaker JumpStart」 제목의 발표를 게시했다. 발표 제목과 본문은 AI 협력 확대에 관한 내용을 다룬다. 발표의 중심 제품·플랫폼은 SageMaker이다.",
-      "publisher": "아마존웹서비스(AWS)",
-      "sourceUrl": "https://aws.amazon.com/about-aws/whats-new/2026/01/ornith-1-0-9b-ornith-1-0-35b-on-sagemaker-jumpstart/"
+      "text": "오픈AI는 2026년 11월 12일(한국 시간) 공식 블로그에 「Supporting research on AI and children’s safety」 제목의 발표를 게시했다. 발표 제목과 본문은 AI 보안·안전 강화에 관한 내용을 다룬다. 원문은 200만 달러 등의 수치를 명시했다. 원문 페이지가 자동 수집을 허용하지 않아 이 항목은 오픈AI 공식 RSS에 게시된 요약을 근거로 정리했으며, 발표일은 공식 RSS 기록으로 확인했다.",
+      "publisher": "오픈AI",
+      "sourceUrl": "https://openai.com/index/children-first-declaration"
     },
     {
       "id": "F5",
@@ -135,9 +135,17 @@
     {
       "id": "F21",
       "kind": "broker",
-      "text": "요약문 없이 투자의견만 공개된 AI 관련 리포트도 있었다: 삼성전기(대신증권, 11월 12일, Buy, 목표주가 2,800,000원), 레이언스(LS증권, 11월 12일, Buy, 목표주가 9,000원).",
-      "publisher": "대신증권",
-      "sourceUrl": "https://stock.pstatic.net/stock-research/company/15/20261112_company_422347000.pdf"
+      "text": "레이언스: LS증권 정홍식 연구원, 2026-11-12 리포트 「레이언스(228850) 반도체 부품으로 성장성 부각」, 투자의견 Buy, 목표주가 9,000원.",
+      "publisher": "LS증권",
+      "sourceUrl": "https://consensus.hankyung.com/analysis/downpdf?report_idx=654121",
+      "date": "2026-11-12"
+    },
+    {
+      "id": "F22",
+      "kind": "broker",
+      "text": "하나증권은 11월 12일 「AI 수요대비 부족한 공급 능력」 산업 리포트에서 “글로벌 주요 3사를 필두로 모든 DRAM 업체들이 CAPA 증대를 계획하고 있다”, “2027년에는 삼성전자의 P5, SK하이닉스의 Y1, Micron의 Idaho 신규 공장이 오픈할 예정이다”라고 분석했다.",
+      "publisher": "하나증권",
+      "sourceUrl": "https://stock.pstatic.net/stock-research/industry/57/20261112_industry_398291000.pdf"
     }
   ]
 }
