@@ -1,0 +1,16 @@
+{
+  "schema": "motus.ai-narrative-outcome/1",
+  "mode": "SHADOW",
+  "bundleHash": "98e62ca59942ac90",
+  "status": "REJECTED",
+  "reason": "NARRATIVE_INVALID:CAUSE_UNATTRIBUTED",
+  "attempts": 2,
+  "errors": [
+    "CAUSE_UNATTRIBUTED:s1p1",
+    "CAUSE_UNATTRIBUTED:s1p1",
+    "LENGTH:s1p3:50"
+  ],
+  "model": "claude-sonnet-5-5",
+  "durationMs": 50971,
+  "editorialQuality": null
+}
