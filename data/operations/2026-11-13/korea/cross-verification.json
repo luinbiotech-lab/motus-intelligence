@@ -12,14 +12,14 @@
   },
   "independentSource": {
     "providers": [
-      "YAHOO_FINANCE"
+      "KRX"
     ],
     "domains": [
-      "yahoo.com"
+      "co.kr"
     ],
     "urls": [
-      "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?period1=1794268800&period2=1794700800&interval=1d",
-      "https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?period1=1794268800&period2=1794700800&interval=1d"
+      "https://data-dbg.krx.co.kr/svc/apis/idx/kospi_dd_trd?basDd=20261112",
+      "https://data-dbg.krx.co.kr/svc/apis/idx/kosdaq_dd_trd?basDd=20261112"
     ]
   },
   "comparedFields": [
@@ -31,7 +31,7 @@
       "tolerance": 0.05,
       "result": "PASS",
       "primarySourceUrl": "https://m.stock.naver.com/api/index/KOSPI/price?pageSize=10&page=1",
-      "independentSourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?period1=1794268800&period2=1794700800&interval=1d",
+      "independentSourceUrl": "https://data-dbg.krx.co.kr/svc/apis/idx/kospi_dd_trd?basDd=20261112",
       "metricBasis": "SESSION_CLOSE"
     },
     {
@@ -42,7 +42,7 @@
       "tolerance": 0.05,
       "result": "PASS",
       "primarySourceUrl": "https://m.stock.naver.com/api/index/KOSDAQ/price?pageSize=10&page=1",
-      "independentSourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?period1=1794268800&period2=1794700800&interval=1d",
+      "independentSourceUrl": "https://data-dbg.krx.co.kr/svc/apis/idx/kosdaq_dd_trd?basDd=20261112",
       "metricBasis": "SESSION_CLOSE"
     }
   ],
@@ -55,7 +55,7 @@
   "sourceDiversityPass": true,
   "verification": "VERIFIED",
   "reasonCodes": [],
-  "verifiedAt": "2026-11-12T21:19:58.502Z",
+  "verifiedAt": "2026-11-12T23:42:14.332Z",
   "officialPhase": "PRE_PUBLICATION",
   "reconciliation": {
     "status": "NOT_REQUIRED",

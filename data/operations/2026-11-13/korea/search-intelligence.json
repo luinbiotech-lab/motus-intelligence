@@ -1,12 +1,15 @@
 {
-  "collectedAt": "2026-11-12T21:19:58.502Z",
-  "signalDate": null,
-  "provider": null,
-  "freshness": "NO_SEARCH_SIGNAL",
-  "fallbackReason": "NO_PRE_RENDER_SEARCH_CONTEXT",
+  "collectedAt": "2026-11-12T23:42:14.332Z",
+  "signalDate": "2026-11-12",
+  "provider": "NAVER_DATALAB",
+  "freshness": "PREVIOUS_DAY_NAVER_SIGNAL",
+  "fallbackReason": null,
   "warnings": [],
-  "orderedTopicIds": [],
-  "selectedSecondaryTopicId": null,
+  "orderedTopicIds": [
+    "index:KOSPI",
+    "index:KOSDAQ"
+  ],
+  "selectedSecondaryTopicId": "index:KOSDAQ",
   "factsChanged": false,
   "gateOverride": false
 }
