@@ -78,6 +78,12 @@ function consensus(picks:Pick[],allStatements:Array<{text:string;brief:BrokerBri
   if(views.length<2)return null;
   return `증권사들이 강조한 배경은 엇갈렸다. ${views.map(item=>`${josa(item.broker,'은','는')} ${item.themes.slice(0,2).join('·')}`).join(', ')}에 무게를 뒀다.`;
 }
+/**
+ * Whether the broker briefs explain the session (a driver statement exists). A brief can carry statements for a
+ * region without any driver; the wire fallback must then still be fetched, or the run holds with no core commentary.
+ */
+export function hasBrokerCause(briefs:BrokerBrief[],region:'US'|'KOREA'):boolean {return causeParagraphs(briefs,region).first!==null}
+
 function causeParagraphs(briefs:BrokerBrief[],region:'US'|'KOREA'):{paragraphs:DeepParagraph[];first:Pick|null}{
   const {drivers,cautions}=causes(briefs,region),all=briefs.flatMap(brief=>brief.statements.filter(item=>item.region===region).map(item=>({text:item.text,brief})));
   const paragraphs:DeepParagraph[]=[];const summary=consensus(drivers,all);if(summary)paragraphs.push({text:'MOTUS 정리: '+summary});
