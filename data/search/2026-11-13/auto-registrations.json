@@ -1,0 +1,29 @@
+[
+  {
+    "publicationId": "motus-live-2026-11-13:korea",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/11/11-12-061-534273-1-10.html",
+    "registeredAt": "2026-11-12T17:13:41+09:00",
+    "trigger": "PUBLICATION_PUBLISHED",
+    "googleInspectionState": "QUEUED",
+    "naverDiscoveryState": "PENDING",
+    "visibility": {
+      "publicationId": "motus-live-2026-11-13:korea",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/11/11-12-061-534273-1-10.html",
+      "google": {
+        "discovered": null,
+        "indexed": null,
+        "lastCrawl": null,
+        "coverageState": null,
+        "inspectionAt": null
+      },
+      "naver": {
+        "discovered": null,
+        "indexed": null,
+        "collectionState": null,
+        "inspectionAt": null
+      },
+      "sitemapIncluded": null,
+      "rssIncluded": null
+    }
+  }
+]
