@@ -57,11 +57,16 @@ export class YahooKoreaSecondarySourceAdapter implements KoreaOfficialSourceAdap
      const url=`https://${host}/v8/finance/chart/${symbol}?period1=${from}&period2=${to}&interval=1d`;
      const response=await fetchWithTransientRetry(this.fetcher,url,()=>({headers:{accept:'application/json','user-agent':'MOTUS-Internal-Collector/1.0'},signal:AbortSignal.timeout(20000)}));
      if(!response.ok){lastCode='YAHOO_FINANCE_HTTP_'+response.status;audit.push({sourceId:'yahoo-finance:'+field.toLowerCase()+':'+host,url,status:'FAILED',recordCount:0,error:lastCode,requestedDate:observedDate,availableDates:[]});continue}
-     const body=await response.json() as {chart?:{error?:unknown;result?:Array<{meta?:{exchangeTimezoneName?:string;timezone?:string};timestamp?:number[];indicators?:{quote?:Array<{close?:Array<number|null>}>}}>}};
+     const body=await response.json() as {chart?:{error?:unknown;result?:Array<{meta?:{exchangeTimezoneName?:string;timezone?:string;regularMarketPrice?:number;regularMarketTime?:number};timestamp?:number[];indicators?:{quote?:Array<{close?:Array<number|null>}>}}>}};
      const result=body.chart?.result?.[0],timestamps=result?.timestamp??[],closes=result?.indicators?.quote?.[0]?.close??[],zone=result?.meta?.exchangeTimezoneName||result?.meta?.timezone||'Asia/Seoul';
-     const dates=timestamps.map(value=>yahooSessionDate(value,zone)),index=dates.indexOf(observedDate),value=index>=0?closes[index]:null;
-     const code=body.chart?.error?'YAHOO_FINANCE_PROVIDER_ERROR':index<0||value==null?'YAHOO_FINANCE_'+field+'_ROW_MISSING':typeof value!=='number'||!Number.isFinite(value)||value<=0?'YAHOO_FINANCE_'+field+'_INVALID_CLOSE':null;
-     audit.push({sourceId:'yahoo-finance:'+field.toLowerCase()+':'+host,url,status:code?'FAILED':'PASS',recordCount:code?0:1,error:code,requestedDate:observedDate,availableDates:[...new Set(dates.filter(Boolean))].slice(-8)});
+     const dates=timestamps.map(value=>yahooSessionDate(value,zone)),index=dates.indexOf(observedDate),rowValue=index>=0?closes[index]:null;
+     // Yahoo often leaves the latest daily row of a Korean index empty (or absent) for hours after the close; the
+     // quote's regular-market price is that session's close once its time is past the 15:30 KST close (the same rule
+     // market-attention.ts and weekly-review.ts already use for U.S. closes). The cross-check against Naver still applies.
+     const metaClose=rowValue==null&&yahooClosedSession(result?.meta?.regularMarketTime,zone)===observedDate&&typeof result?.meta?.regularMarketPrice==='number'?result.meta.regularMarketPrice:null;
+     const value=rowValue??metaClose;
+     const code=body.chart?.error?'YAHOO_FINANCE_PROVIDER_ERROR':value==null?'YAHOO_FINANCE_'+field+'_ROW_MISSING':typeof value!=='number'||!Number.isFinite(value)||value<=0?'YAHOO_FINANCE_'+field+'_INVALID_CLOSE':null;
+     audit.push({sourceId:'yahoo-finance:'+field.toLowerCase()+':'+host+(metaClose!==null&&!code?':quote':''),url,status:code?'FAILED':'PASS',recordCount:code?0:1,error:code,requestedDate:observedDate,availableDates:[...new Set(dates.filter(Boolean))].slice(-8)});
      if(!code){accepted={value:value as number,url,availableDates:dates};break}
      lastCode=code;
     }
@@ -72,6 +77,13 @@ export class YahooKoreaSecondarySourceAdapter implements KoreaOfficialSourceAdap
   }
   catch(error){return {observations,audit:[...audit,{sourceId:'yahoo-finance:secondary',url:'https://finance.yahoo.com/',status:'FAILED',recordCount:0,error:errorMessage(error),requestedDate:observedDate,availableDates:[...new Set(audit.flatMap(item=>item.availableDates??[]))].slice(-8)}],requiredProviderAvailable:false,reasonCode:errorMessage(error),phase:'PRE_PUBLICATION'}}
  }
+}
+
+/** The session date of a regular-market quote time, only once that time is at or after the 15:30 KST close. */
+export function yahooClosedSession(value:number|undefined,timeZone:string):string {
+ if(typeof value!=='number'||!Number.isFinite(value))return '';
+ const kst=new Date(value*1000+9*3600000),minutes=kst.getUTCHours()*60+kst.getUTCMinutes();
+ return minutes>=15*60+30?yahooSessionDate(value,timeZone):'';
 }
 
 function yahooSessionDate(value:number|undefined,timeZone:string):string {

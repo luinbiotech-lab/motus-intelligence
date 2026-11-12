@@ -3,7 +3,7 @@ import type {DailyCategory} from './daily-orchestrator.js';
 import {collectBrokerResearch,type BrokerAudit,type PdfTextReader} from './broker-briefs.js';
 import {collectAIBellwethers,collectKoreaSearchTop,collectUSAttention,moveWord,US_MEGACAPS,US_KOREAN_NAMES,NAVER_SEARCH_TOP,YAHOO_TRENDING,type AttentionAudit} from './market-attention.js';
 import {collectWireCloses} from './market-wire.js';
-import {composeAIDeepSections,composeKoreaDeepSections,composeUSDeepSections,indexMove,type DeepComposition} from './market-deep-sections.js';
+import {composeAIDeepSections,composeKoreaDeepSections,composeUSDeepSections,hasBrokerCause,indexMove,type DeepComposition} from './market-deep-sections.js';
 
 interface AuditSink {sourceId:string;category:DailyCategory;url:string;status:'PASS'|'FAILED';recordCount:number;collectedAt:string;error:string|null;observedDate?:string}
 export interface DeepCollection {composition:DeepComposition;title:string|null;sources:Array<{label:string;url:string;publisher:string}>}
@@ -37,7 +37,8 @@ export async function collectUSDeep(input:{sessionDate:string;operationDate:stri
     const bigMovers=(mega?.stocks??[]).filter(stock=>Math.abs(stock.changePct)>=3);
     if(bundle)record(input.audit,bundle.audit,'US_MARKET',input.at,null);
     if(attention)record(input.audit,attention.audit,'US_MARKET',input.at,input.sessionDate);
-    const usBriefed=Boolean(bundle?.briefs.some(brief=>brief.statements.some(item=>item.region==='US')));
+    // MOT-044: a brief with U.S. statements but no driver used to skip the wire fallback and hold the run.
+    const usBriefed=hasBrokerCause(bundle?.briefs??[],'US');
     // Direction check only when the three indexes agree; a mixed session has no single direction to contradict.
     const agreed=input.indexChanges.length&&(input.indexChanges.every(value=>value>0.005)||input.indexChanges.every(value=>value<-0.005));
     const sp=agreed?input.indexChanges.reduce((sum,value)=>sum+value,0)/input.indexChanges.length:null;
@@ -77,7 +78,7 @@ export async function collectKoreaDeep(input:{sessionDate:string;operationDate:s
     const bundle=await collectBrokerResearch({sessionDate:input.sessionDate,operationDate:input.operationDate,fetcher:input.fetcher,verifiedKospiClose:input.kospiClose,focusCodes:(search?.stocks??[]).map(stock=>stock.code),...(input.pdfText?{pdfText:input.pdfText}:{})}).catch(()=>null);
     if(bundle)record(input.audit,bundle.audit,'KOREA_MARKET',input.at,null);
     if(search)record(input.audit,search.audit,'KOREA_MARKET',input.at,input.sessionDate);
-    const krBriefed=Boolean(bundle?.briefs.some(brief=>brief.statements.some(item=>item.region==='KOREA')));
+    const krBriefed=hasBrokerCause(bundle?.briefs??[],'KOREA');
     const wire=krBriefed||!wireFallbackAllowed(input.at)?null:await collectWireCloses({region:'KOREA',sessionDate:input.sessionDate,change:input.kospiChangePct,fetcher:input.fetcher}).catch(()=>null);
     if(wire)record(input.audit,wire.audit,'KOREA_MARKET',input.at,input.sessionDate);
     const composition=composeKoreaDeepSections({bundle,searchTop:search?.stocks??[],wire:wire?.reports??[],kospiChangePct:input.kospiChangePct,checkpoint:input.evening?'다음 거래일에는 외국인·기관 수급의 연속성, 원·달러 환율, 오늘 강세 업종이 이어지는지가 확인 대상이다.':'오늘 장에서는 외국인·기관 수급의 연속성, 원·달러 환율, 전일 강세 업종이 이어지는지가 확인 대상이다.'});
