@@ -26,8 +26,8 @@
     {
       "field": "KOSPI",
       "primaryValue": 5342.73,
-      "independentValue": 5342.72998046875,
-      "difference": 0.000019531249563442543,
+      "independentValue": 5342.73,
+      "difference": 0,
       "tolerance": 0.05,
       "result": "PASS",
       "primarySourceUrl": "https://m.stock.naver.com/api/index/KOSPI/price?pageSize=10&page=1",
@@ -37,8 +37,8 @@
     {
       "field": "KOSDAQ",
       "primaryValue": 696.53,
-      "independentValue": 696.530029296875,
-      "difference": 0.00002929687502728484,
+      "independentValue": 696.53,
+      "difference": 0,
       "tolerance": 0.05,
       "result": "PASS",
       "primarySourceUrl": "https://m.stock.naver.com/api/index/KOSDAQ/price?pageSize=10&page=1",
@@ -55,7 +55,7 @@
   "sourceDiversityPass": true,
   "verification": "VERIFIED",
   "reasonCodes": [],
-  "verifiedAt": "2026-11-12T08:27:20.176Z",
+  "verifiedAt": "2026-11-12T21:19:58.502Z",
   "officialPhase": "PRE_PUBLICATION",
   "reconciliation": {
     "status": "NOT_REQUIRED",
