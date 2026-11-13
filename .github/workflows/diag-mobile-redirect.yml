@@ -6,7 +6,7 @@ permissions:
   contents: read
 jobs:
   probe:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Capture the macro section of the live U.S. article (GET only)
         run: |
