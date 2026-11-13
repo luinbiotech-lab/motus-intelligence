@@ -1,0 +1,17 @@
+{
+  "collectedAt": "2026-11-13T21:47:24.918Z",
+  "signalDate": null,
+  "provider": null,
+  "freshness": "NO_SEARCH_SIGNAL",
+  "fallbackReason": "NO_MATCHING_VERIFIED_TOPIC",
+  "warnings": [],
+  "orderedTopicIds": [
+    "us:index:nasdaq",
+    "us:index:sp500",
+    "us:index:dow-jones",
+    "us:10y"
+  ],
+  "selectedSecondaryTopicId": null,
+  "factsChanged": false,
+  "gateOverride": false
+}
