@@ -1,4 +1,4 @@
-name: DIAG backfill live check (temporary, read-only)
+name: DIAG redirect-error page anatomy (temporary, read-only)
 on:
   push:
     branches: [diag/mobile-redirect-20261108]
@@ -8,20 +8,28 @@ jobs:
   probe:
     runs-on: ubuntu-latest
     steps:
-      - name: Read the 3 backfilled posts (GET only, no writes)
+      - name: Compare an indexed post with REDIRECT_ERROR posts (GET only)
         run: |
-          for u in https://motusnova.blogspot.com/2026/09/5-ai.html https://motusnova.blogspot.com/2026/10/2026-9-30_0170921246.html https://motusnova.blogspot.com/2026/10/2026-9-30.html; do
-            curl -sS -L -A 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/130.0 Safari/537.36' "$u" -o p.html -w "HTTP %{http_code} $u\n" || true
-            python3 - "$u" <<'PY'
-          import re,sys
+          GB='Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
+          DT='Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
+          for path in /2026/11/20-33.html /2026/11/3-70.html /2026/11/11-12-061-534273-1-10.html /2026/11/gemini.html; do
+            for ua in mobile desktop; do
+              [[ $ua == mobile ]] && A="$GB" || A="$DT"
+              for t in 1 2 3; do
+                curl -sS -A "$A" -D h.txt -o p.html "https://motusnova.blogspot.com$path" -w "" || true
+                grep -qi 'google.com/sorry' h.txt || break; sleep 15
+              done
+              echo "=== $ua $path"; grep -iE '^(HTTP|location|x-robots|cache-control|content-type)' h.txt | tr -d '\r'
+              loc=$(grep -i '^location' h.txt | tr -d '\r' | awk '{print $2}')
+              if [[ -n "$loc" && "$loc" != *sorry* ]]; then curl -sS -A "$A" -D h2.txt -o p.html "$loc" || true; echo "--- follow $loc"; grep -iE '^(HTTP|location|x-robots)' h2.txt | tr -d '\r'; fi
+              python3 - <<'PY'
+          import re
           h=open('p.html',encoding='utf8',errors='ignore').read()
-          body=h[h.find('post-body'):] if 'post-body' in h else h
-          rel=re.search(r'data-section="related-posts".*?</section>',body,re.S)
-          links=re.findall(r'href="(https://motusnova\.blogspot\.com/20\d\d/[^"]+)"',rel.group(0)) if rel else []
-          imgs=re.findall(r'<img[^>]+src="([^"]+)"',body)
-          print(sys.argv[1],'marker_v1',('data-motus-backfill="v1"' in h),'marker_links',('data-motus-backfill="links"' in h),'related_section',bool(rel),'related_links',len(set(links)),'imgs',len(imgs),'backfill_img',sum('backfill/img' in i for i in imgs))
-          for l in sorted(set(links))[:6]: print('  LINK',l)
-          for i in imgs[:3]: print('  IMG',i[:140])
+          f=lambda p:re.findall(p,h,re.I)
+          print('size',len(h),'canonical',f(r'<link[^>]+rel=.canonical.[^>]*>')[:2])
+          print('robots',f(r'<meta[^>]+name=.robots.[^>]*>')[:2],'refresh',f(r'<meta[^>]+http-equiv=.refresh.[^>]*>')[:1])
+          print('jsredirect',len(f(r'(?:window|document)\.location(?:\.href)?\s*=')),'ldjson',len(f(r'application/ld\+json')),'og:image',len(f(r'og:image')),'amphtml',f(r'<link[^>]+amphtml[^>]*>')[:1])
+          print('title',f(r'<title>(.*?)</title>')[:1],'h1',len(f(r'<h1\b')),'imgs',len(f(r'<img\b')),'words',len(re.sub(r'<[^>]+>',' ',h).split()))
           PY
+            done
           done
-          for i in hero-180392c89306 hero-6d56e9aeff9b hero-7ee4d6fd46ae; do curl -sS -o /dev/null -w "IMGURL %{http_code} %{content_type} $i\n" "https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/daily-report/backfill/img/$i.png"; done
