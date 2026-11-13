@@ -79,4 +79,4 @@ export function selectEveningParts(units:PublishedCandidate[]):{anchor:Published
   return {anchor,parts:[anchor,pick('us'),pick('ai')].filter((unit):unit is PublishedCandidate=>Boolean(unit))};
 }
 /** Phone copy text: title, tags and body in the order they are pasted into the Naver app. */
-export function phoneText(summary:NaverSummary):string{return ['[제목]',summary.title,'','[태그]',summary.tags.map(tag=>'#'+tag).join(' '),'','[본문]',summary.body,''].join('\n')}
+export function phoneText(summary:NaverSummary):string{return ['[제목]',summary.title,'','[태그]',summary.tags.map(tag=>'#'+tag).join(' '),'','[대표 이미지] 링크를 열어 길게 눌러 저장',summary.imageUrl??'없음','','[본문]',summary.body,''].join('\n')}
