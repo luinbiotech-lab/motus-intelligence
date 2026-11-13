@@ -1,0 +1,136 @@
+{
+  "schema": "motus.ai-facts/1",
+  "bundleHash": "89aeaf7265d334e3",
+  "operationDate": "2026-11-13",
+  "sessionDate": "2026-11-12",
+  "facts": [
+    {
+      "id": "F1",
+      "kind": "calendar",
+      "text": "기사 발행일은 2026-11-13이다. 주가는 직전 미국 정규장(2026-11-12, 11월 12일) 종가 기준이다.",
+      "date": "2026-11-13"
+    },
+    {
+      "id": "F2",
+      "kind": "official",
+      "text": "구글은 2026년 11월 13일(한국 시간) 공식 블로그에 「Google Search gets a major upgrade with Gemini 4 Hydrogen」 제목의 발표를 게시했다. 발표 제목과 본문은 신규 AI 제품·기능 공개에 관한 내용을 다룬다. 발표의 중심 제품·플랫폼은 Gemini 4이다.",
+      "publisher": "구글",
+      "sourceUrl": "https://blog.google/products-and-platforms/products/search/gemini-4-hydrogen-search-upgrade/"
+    },
+    {
+      "id": "F3",
+      "kind": "official",
+      "text": "아마존웹서비스(AWS)는 2026년 11월 12일(한국 시간) 공식 What’s New 공지에 「DeepSeek-V4-Pro, DeepSeek-V4-Flash, and DeepSeek-V4.1-Flash models now available on Amazon SageMaker JumpStart」 제목의 발표를 게시했다. 발표 제목과 본문은 신규 AI 제품·기능 공개에 관한 내용을 다룬다. 발표의 중심 제품·플랫폼은 SageMaker이다.",
+      "publisher": "아마존웹서비스(AWS)",
+      "sourceUrl": "https://aws.amazon.com/about-aws/whats-new/2026/01/deepseek-v4-pro-v4-flash-v4.1-flash-on-sagemaker-jumpstart/"
+    },
+    {
+      "id": "F4",
+      "kind": "price",
+      "text": "10개 종목 가운데 5개가 올랐다. 가장 강한 종목은 AMD(AMD, +5.86%), 가장 약한 종목은 엔비디아(NVDA, -4.34%)였다.",
+      "date": "2026-11-12"
+    },
+    {
+      "id": "F5",
+      "kind": "price",
+      "text": "AMD AMD: 직전 정규장 등락 +5.86%",
+      "date": "2026-11-12"
+    },
+    {
+      "id": "F6",
+      "kind": "price",
+      "text": "브로드컴 AVGO: 직전 정규장 등락 +5.54%",
+      "date": "2026-11-12"
+    },
+    {
+      "id": "F7",
+      "kind": "price",
+      "text": "알파벳 GOOGL: 직전 정규장 등락 +1.79%",
+      "date": "2026-11-12"
+    },
+    {
+      "id": "F8",
+      "kind": "price",
+      "text": "아마존 AMZN: 직전 정규장 등락 +0.48%",
+      "date": "2026-11-12"
+    },
+    {
+      "id": "F9",
+      "kind": "price",
+      "text": "마이크로소프트 MSFT: 직전 정규장 등락 +0.36%",
+      "date": "2026-11-12"
+    },
+    {
+      "id": "F10",
+      "kind": "price",
+      "text": "팔란티어 PLTR: 직전 정규장 등락 -0.48%",
+      "date": "2026-11-12"
+    },
+    {
+      "id": "F11",
+      "kind": "price",
+      "text": "메타 META: 직전 정규장 등락 -0.82%",
+      "date": "2026-11-12"
+    },
+    {
+      "id": "F12",
+      "kind": "price",
+      "text": "오라클 ORCL: 직전 정규장 등락 -0.99%",
+      "date": "2026-11-12"
+    },
+    {
+      "id": "F13",
+      "kind": "price",
+      "text": "TSMC TSM: 직전 정규장 등락 -1.90%",
+      "date": "2026-11-12"
+    },
+    {
+      "id": "F14",
+      "kind": "price",
+      "text": "엔비디아 NVDA: 직전 정규장 등락 -4.34%",
+      "date": "2026-11-12"
+    },
+    {
+      "id": "F15",
+      "kind": "broker",
+      "text": "다올투자증권은 11월 13일 아침 리포트 「Daily Morning Brief(2026.11.13)」에서 “미국증시, 젠슨 황 사퇴로 AI 산업을 둘러싼 불확실성이 확대된 가운데, 국제유가가 재차 상승하며 3대 지수 하락 마감”이라고 진단했다.",
+      "publisher": "다올투자증권",
+      "sourceUrl": "https://stock.pstatic.net/stock-research/market/76/20261113_market_363859000.pdf"
+    },
+    {
+      "id": "F16",
+      "kind": "broker",
+      "text": "KB증권은 11월 13일 아침 리포트 「11/13 KB 리서치 모닝코멘트」에서 “AMD, 브로드컴 반사이익 기대감에 나란히 5% 급등. GPU 가격 하락 기대감에 하이퍼스케일러도 대체로 강세”라고 진단했다.",
+      "publisher": "KB증권",
+      "sourceUrl": "https://stock.pstatic.net/stock-research/market/58/20261113_market_65476000.pdf"
+    },
+    {
+      "id": "F17",
+      "kind": "broker",
+      "text": "경계 요인도 제시됐다. KB증권은 “젠슨 황 CEO 사퇴에 따른 불확실성을 반영하며 약세. 엔비디아 프리마켓에서 -14%까지 하락, -4%로 마감”이라고 짚었다.",
+      "publisher": "KB증권",
+      "sourceUrl": "https://stock.pstatic.net/stock-research/market/58/20261113_market_65476000.pdf"
+    },
+    {
+      "id": "F18",
+      "kind": "broker",
+      "text": "유진투자증권은 「젠슨 황 엔비디아 CEO 전격 사임 & 美 10 년물 5.1% 돌파」에서 “뉴욕증시 3대 지수는 엔비디아 CEO 사임 & 트럼프 대통령의 이란 협상 중단 시사에 따른 국채금리 급등으로 소폭 하락 마감. 다우(-0.4%)·S&P500(-0.4%)·나스닥(-0.4%), 필 반도체(-0.5%). VIX 18.70(+6.9%)”, “엔비디아(-4.3%, $166.19)는 젠슨 황이 사장·CEO·이사직에서 사임. 콜레트 크레스 CFO가 임시 CEO를 겸임하고, 하비 존스 이사가 사상 첫 이사회 의장으로 선임. 개장 직후 -13% 급락 후 낙폭 축소. 사임 전후 목표가 줄하향(번스타인 $400 → $200, 베어드 투자의견 매수 → 중립·$500 → $200)”, “경쟁사는 반사이익 기대에 강세. AMD(+5.9%)·브로드컴(+5.5%)이 S&P500 상승률 1·2위. 반면 엔비디아 생태계는 약세. 슈퍼마이크로(-11.3%, 법무부 조사 가능성 보도)·네비우스(-16.8%, 설비 투자 가이던스 270억 달러로 상향·매출 가이던스 하단 제시)·코어위브(-6.9%, 전일 +25% 후 반락)·마이크론(-1.6%)”라고 밝혔다.",
+      "publisher": "유진투자증권",
+      "sourceUrl": "https://stock.pstatic.net/stock-research/market/63/20261113_market_504853000.pdf"
+    },
+    {
+      "id": "F19",
+      "kind": "broker",
+      "text": "유진투자증권은 「젠슨 황 해임설에 꺾인 반도체 & 코스닥 하루 만에 700 반납」에서 “국내 양대 증시는 엔비디아 젠슨 황 CEO 해임 준비 보도와 이틀 급등 뒤 나온 차익실현 매물에 3거래일 만에 하락(코스피 -0.6%·코스닥 -1.2%). 코스피는 장중 +1.6%까지 올랐으나, 옵션만기일 수급 변동성 속에 오후 들어 하락 전환. 코스닥은 하루 만에 700선 반납”, “코스피 외국인(+4,121억원) vs 기관(-6,526억원)·개인(-2,785억원). 코스닥 개인(+3,078억원)·기관(+435억원) vs 외국인(-3,543억원)(KRX 애프터마켓 포함)”, “여타 아시아 증시도 반도체주 중심 약세. 닛케이225(-0.7%)는 4거래일 만에 하락(어드반테스트(-4.6%)·키옥시아(-2.8%)), 대만 가권(-2.6%)은 난야테크놀로지(-3.7%)·TSMC(-2.3%) 약세. 홍콩 항셍(-1.3%)은 2거래일 연속 하락”이라고 밝혔다.",
+      "publisher": "유진투자증권",
+      "sourceUrl": "https://stock.pstatic.net/stock-research/market/63/20261113_market_504853000.pdf"
+    },
+    {
+      "id": "F20",
+      "kind": "broker",
+      "text": "요약문 없이 투자의견만 공개된 AI 관련 리포트도 있었다: LG(한화투자증권, 11월 13일, Buy, 목표주가 125,000원), NAVER(유진투자증권, 11월 13일, Buy, 목표주가 320,000원), 사피엔반도체(유진투자증권, 11월 13일, nr), 레이언스(LS증권, 11월 12일, Buy, 목표주가 9,000원).",
+      "publisher": "한화투자증권",
+      "sourceUrl": "https://stock.pstatic.net/stock-research/company/16/20261113_company_525682000.pdf"
+    }
+  ]
+}

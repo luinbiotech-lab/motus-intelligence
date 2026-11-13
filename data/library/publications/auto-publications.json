@@ -232,5 +232,11 @@
     "publicationId": "motus-live-2026-11-12:us",
     "publicPostUrl": "https://motusnova.blogspot.com/2026/11/11-12-3-amd-59.html",
     "publishedAt": "2026-11-13T08:42:56+09:00"
+  },
+  {
+    "idempotencyKey": "library:motus-live-2026-11-13:ai|https://motusnova.blogspot.com/2026/11/amd-59-ai.html",
+    "publicationId": "motus-live-2026-11-13:ai",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/11/amd-59-ai.html",
+    "publishedAt": "2026-11-13T12:34:53+09:00"
   }
 ]
