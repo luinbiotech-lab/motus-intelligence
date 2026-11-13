@@ -4,20 +4,23 @@
   "operationDate": "2026-11-13",
   "observedDate": "2026-11-13",
   "sourceMode": "internal",
-  "verification": "VERIFIED",
-  "unresolvedConflicts": [],
-  "provenancePass": true,
-  "sourceDiversityPass": true,
+  "verification": "REVIEW_REQUIRED",
+  "unresolvedConflicts": [
+    "independent source diversity failed",
+    "production provenance audit failed"
+  ],
+  "provenancePass": false,
+  "sourceDiversityPass": false,
   "sourceLinksPass": true,
   "mobilePass": true,
   "editorialQualityPass": true,
   "leakagePass": true,
   "duplicateCheck": "PENDING_REMOTE",
   "duplicateUncertainty": true,
-  "articleFingerprint": "sha256:42113f84a590cb88cadf7e6d5a79bbc29b1a8721da3c581cce1504ee95b51185",
+  "articleFingerprint": "sha256:c3d6aa4efc00530881fbd7f793b78310741932196482d6ed6e0e9ada50575421",
   "commerceEnabled": false,
-  "verifiedAt": "2026-11-13T03:34:25.354Z",
-  "expiresAt": "2026-11-13T05:04:25.354Z",
+  "verifiedAt": "2026-11-13T11:23:50.084Z",
+  "expiresAt": "2026-11-13T12:53:50.084Z",
   "sourceAuditIds": [
     "ai:page:10",
     "ai:page:3",
@@ -48,7 +51,7 @@
     "deep:naver-research:market:38152",
     "deep:naver-research:market:38153",
     "deep:naver-research:market:38155",
-    "deep:research:listed:stock.pstatic.net/stock-research/company/16/20261113_company_525682000.pdf",
+    "deep:research:listed:consensus.hankyung.com/analysis/downpdf?report_idx=654172",
     "deep:yahoo:spark:ai-bellwethers",
     "google-ai",
     "google-deepmind",
@@ -59,7 +62,7 @@
     "nvidia-newsroom",
     "openai"
   ],
-  "sourceAuditFingerprint": "sha256:17023516f13518218792ffcb8d0f9e04923174183129270827427c46fbc3ac7d",
+  "sourceAuditFingerprint": "sha256:3f4bc4054432db4049d58a05e5d2f3ce951d5975d0228d2c859608fa25e81d38",
   "crossVerificationFingerprint": null,
   "crossVerification": null
 }
