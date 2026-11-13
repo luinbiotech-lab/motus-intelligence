@@ -1,40 +1,40 @@
 {
-  "updatedAt": "2026-11-12T02:00:25.603Z",
+  "updatedAt": "2026-11-13T01:28:08.161Z",
   "items": [
     {
-      "postId": "9009523239057574527",
-      "url": "https://motusnova.blogspot.com/2026/09/5-ai.html",
-      "title": "국채금리 5%대의 압박과 AI 에이전트 경쟁",
-      "labels": [
-        "리포트"
-      ],
-      "originalSha256": "sha256:19f2a0abf325c2b45d4050a2661da4d0d961ec643aacb75b916a31dbc7f6fb13",
-      "proposedSha256": "sha256:a063f13ab3bb1210d5ecc905a9ab803199ae29c9ce3e968b7aa5dcd55ebd8458",
-      "image": null,
-      "relatedCount": 5
-    },
-    {
-      "postId": "7329329991867951886",
-      "url": "https://motusnova.blogspot.com/2026/10/2026-9-30_0170921246.html",
-      "title": "국내 증시 마감: 외국인·기관 매도에 코스피 하락, 코스닥은 반등 (2026년 9월 30일)",
+      "postId": "568850689418151231",
+      "url": "https://motusnova.blogspot.com/2026/10/298.html",
+      "title": "국내 증시 마감: 외국인 반도체 매도에 코스피 하락, 코스닥은 2.98% 반등",
       "labels": [
         "국내증시"
       ],
-      "originalSha256": "sha256:d905f397344055c608ebbc918b8cb62ad7be0ff4087446b97823117ce7b9c028",
-      "proposedSha256": "sha256:ff8b562069b631ccfd6c97e8d443b736b52225de535df16dca137cc6dc2f5572",
-      "image": "https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/daily-report/backfill/img/hero-e45cde43dadb.png",
+      "originalSha256": "sha256:39ecbcb7e4446b57d9102141a85a7fc307681f8a4c3837b81e21cb0dcab5c0e7",
+      "proposedSha256": "sha256:76436ce0f6d229689a552ce19e7827eedb6313bdb5ec795f4fccc73e2d12ff8b",
+      "image": "https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/daily-report/backfill/img/hero-180392c89306.png",
       "relatedCount": 5
     },
     {
-      "postId": "6490308826156387498",
-      "url": "https://motusnova.blogspot.com/2026/10/2026-9-30.html",
-      "title": "미국 증시 마감: 장기금리 부담에 다우 약세, 나스닥은 소폭 상승 (2026년 9월 30일)",
+      "postId": "2683873333879055086",
+      "url": "https://motusnova.blogspot.com/2026/10/ai-2026-9-29.html",
+      "title": "상시 실행형 에이전트와 AI 보안·과학 연구의 확장 (2026년 9월 29일)",
       "labels": [
-        "미국증시"
+        "AI 인텔리전스"
       ],
-      "originalSha256": "sha256:66661546f12b560ed8e7e44234b6f4324e46ccbd9a5bfd312f68d6da1a17ff16",
-      "proposedSha256": "sha256:7c70552db155c980dbc15bfee75733d01c3f105485dbbfa40a2dd3440897675d",
-      "image": "https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/daily-report/backfill/img/hero-e02596b9f3da.png",
+      "originalSha256": "sha256:ddd2b44d34f686ea0f4764def4d34945d97962639e76b69da2672e4407066c94",
+      "proposedSha256": "sha256:3903f9d0e63df097268b0cd78aa2731a029d0a27fa72d3353f96f9b247b07b29",
+      "image": "https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/daily-report/backfill/img/hero-7ee4d6fd46ae.png",
+      "relatedCount": 5
+    },
+    {
+      "postId": "4294902999154862199",
+      "url": "https://motusnova.blogspot.com/2026/10/ai.html",
+      "title": "기업 AI의 다음 관문: 소버린 운영, 현장형 인재, 추론 최적화",
+      "labels": [
+        "AI 인텔리전스"
+      ],
+      "originalSha256": "sha256:898975363541270c3c84dedfc796fd816a0a04e53f088c9f4b827b1ebc2fd861",
+      "proposedSha256": "sha256:10b1ed6b2592d9e12e4ef73e8e21cf403e58706f75cecbdfc939737d2234652c",
+      "image": "https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/daily-report/backfill/img/hero-6d56e9aeff9b.png",
       "relatedCount": 5
     }
   ]
