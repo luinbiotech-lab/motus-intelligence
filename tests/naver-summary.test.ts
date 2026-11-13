@@ -13,7 +13,9 @@ test('summary has its own title, links each full article, tags and a disclaimer'
   const s=buildNaverSummary('2026-11-11',[
     {category:'us',title:'11월 10일 뉴욕증시 마감, 3대 지수 하락…엔비디아 5.5% 급락',url:'https://motusnova.blogspot.com/2026/11/u.html',keyPoints:['지수: S&P 500 -0.38%.'],checkpoint:'미국 10년물 금리 확인',heroImageUrl:null},
     {category:'korea',title:'11월 10일 코스피 마감, 4.39% 급등해 5,239.13…검색 1위 삼성전자 5.0% 급등',url:'https://motusnova.blogspot.com/2026/11/k.html',keyPoints:['지수: KOSPI 5,239.13.'],topStock:'삼성전자',heroImageUrl:'https://raw.githubusercontent.com/x/hero.png'}]);
-  assert.equal(s.title,'11월 11일 증시 브리핑: 코스피 마감, 4.39% 급등해 5,239.13, 엔비디아 5.5% 급락');
+  assert.equal(s.title,'11월 10일 증시 브리핑: 코스피 마감, 4.39% 급등해 5,239.13, 엔비디아 5.5% 급락');
+  // Owner 2026-11-12: the title and intro name the session the articles (and the hero image) cover, not the run date.
+  assert.ok(s.body.startsWith('11월 10일 장 마감 기준으로'));
   assert.ok(s.body.indexOf('1. 국내증시')<s.body.indexOf('2. 뉴욕증시'));
   assert.match(s.body,/전체 분석: https:\/\/motusnova\.blogspot\.com\/2026\/11\/k\.html/);
   assert.match(s.body,/투자 권유가 아닙니다/);

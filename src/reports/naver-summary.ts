@@ -24,12 +24,18 @@ export function extractArticleFacts(html:string):{keyPoints:string[];synthesis:s
 
 const headline=(part:NaverSummaryPart)=>part.category==='korea'?part.title.split('…')[0]!.replace(/^\d+월 \d+일\s*/,''):part.category==='us'?(part.title.split('…')[1]??part.title.split('…')[0]!):part.title.split('…')[0]!;
 const dateKo=(iso:string)=>`${Number(iso.slice(5,7))}월 ${Number(iso.slice(8,10))}일`;
+/**
+ * 2026-11-12 owner: the image (article title '11월 11일 코스피 마감…') and the summary title ('11월 12일 증시 브리핑')
+ * named different days. The summary is about the market session the articles cover, so it is dated by the session
+ * date printed in the Korea or U.S. article title; the operation date is only the fallback.
+ */
+const sessionLabel=(list:NaverSummaryPart[],date:string)=>{for(const key of ['korea','us'] as const){const match=list.find(part=>part.category===key)?.title.match(/^(\d{1,2}월 \d{1,2}일)/);if(match)return match[1]!}return dateKo(date)};
 
 export function buildNaverSummary(date:string,parts:NaverSummaryPart[]):NaverSummary{
   const order=['korea','us','ai'] as const,list=order.map(key=>parts.find(part=>part.category===key)).filter((part):part is NaverSummaryPart=>Boolean(part&&part.url&&part.keyPoints.length));
   if(!list.length)throw new Error('no published category with key points');
-  const title=`${dateKo(date)} 증시 브리핑: ${list.slice(0,2).map(headline).map(text=>text.trim()).join(', ')}`.slice(0,80);
-  const lines:string[]=[`${dateKo(date)} 국내·미국 증시와 AI 관련 흐름을 숫자 중심으로 짧게 정리했습니다. 항목마다 핵심 수치와 다음에 확인할 점을 적었고, 차트와 증권사 리포트 인용이 들어간 전체 분석은 각 항목 끝의 링크에서 볼 수 있습니다.`,''];
+  const day=sessionLabel(list,date),title=`${day} 증시 브리핑: ${list.slice(0,2).map(headline).map(text=>text.trim()).join(', ')}`.slice(0,80);
+  const lines:string[]=[`${day} 장 마감 기준으로 국내·미국 증시와 AI 관련 흐름을 숫자 중심으로 짧게 정리했습니다. 항목마다 핵심 수치와 다음에 확인할 점을 적었고, 차트와 증권사 리포트 인용이 들어간 전체 분석은 각 항목 끝의 링크에서 볼 수 있습니다.`,''];
   list.forEach((part,index)=>{
     lines.push(`${index+1}. ${NAME[part.category]} — ${headline(part).trim()}`);
     for(const point of part.keyPoints)lines.push(`· ${point}`);
