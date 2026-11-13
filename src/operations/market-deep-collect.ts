@@ -3,7 +3,7 @@ import type {DailyCategory} from './daily-orchestrator.js';
 import {collectBrokerResearch,type BrokerAudit,type PdfTextReader} from './broker-briefs.js';
 import {collectAIBellwethers,collectKoreaSearchTop,collectUSAttention,moveWord,US_MEGACAPS,US_KOREAN_NAMES,NAVER_SEARCH_TOP,YAHOO_TRENDING,type AttentionAudit} from './market-attention.js';
 import {collectWireCloses} from './market-wire.js';
-import {composeAIDeepSections,composeKoreaDeepSections,composeUSDeepSections,hasBrokerCause,indexMove,type DeepComposition} from './market-deep-sections.js';
+import {composeAIDeepSections,composeKoreaDeepSections,composeUSDeepSections,composeRatesComment,hasBrokerCause,type RatePoint,indexMove,type DeepComposition} from './market-deep-sections.js';
 
 interface AuditSink {sourceId:string;category:DailyCategory;url:string;status:'PASS'|'FAILED';recordCount:number;collectedAt:string;error:string|null;observedDate?:string}
 export interface DeepCollection {composition:DeepComposition;title:string|null;sources:Array<{label:string;url:string;publisher:string}>}
@@ -28,7 +28,7 @@ function record(audit:AuditSink[],items:Array<BrokerAudit|AttentionAudit>,catego
 export function wireFallbackAllowed(at:string):boolean {const kst=new Date(Date.parse(at)+9*3600000);return kst.getUTCHours()>=10||kst.getUTCDay()===6||kst.getUTCDay()===0}
 
 /** Never throws: missing research or rankings only drop the corresponding sections. */
-export async function collectUSDeep(input:{sessionDate:string;operationDate:string;at:string;fetcher:typeof fetch;audit:AuditSink[];pdfText?:PdfTextReader;indexChanges:number[];indexNames?:string[]}):Promise<DeepCollection>{
+export async function collectUSDeep(input:{sessionDate:string;operationDate:string;at:string;fetcher:typeof fetch;audit:AuditSink[];pdfText?:PdfTextReader;indexChanges:number[];indexNames?:string[];rates?:{points:RatePoint[]}}):Promise<DeepCollection>{
   const empty:DeepCollection={composition:{sections:[],leadAddition:[],titleFocus:null,sources:[]},title:null,sources:[]};
   try{
     const [bundle,attention,mega]=await Promise.all([collectBrokerResearch({sessionDate:input.sessionDate,operationDate:input.operationDate,fetcher:input.fetcher,...(input.pdfText?{pdfText:input.pdfText}:{})}).catch(()=>null),collectUSAttention(input.sessionDate,input.fetcher).catch(()=>null),collectAIBellwethers([input.sessionDate],input.fetcher,US_MEGACAPS).catch(()=>null)]);
@@ -58,6 +58,9 @@ export async function collectUSDeep(input:{sessionDate:string;operationDate:stri
     const attentionStocks=(attention?.stocks??[]).map(stock=>flag(bigMovers.some(item=>item.symbol===stock.symbol)?{...stock,bigMover:true}:stock));
     const stocks=[...newsMovers,...bigMovers.filter(item=>!attentionStocks.some(stock=>stock.symbol===item.symbol)).map(item=>flag({...item,bigMover:true})),...attentionStocks];
     const composition=composeUSDeepSections({bundle,stocks,sectors:attention?.sectors??[],wire:wire?.reports??[],checkpoint:'다음 정규장에서는 미국 10년물 금리 방향과 함께, 증권사들이 짚은 경계 요인이 주요 지수와 업종 등락에 실제로 반영되는지가 확인 대상이다.'});
+    // 2026-11-13 owner: the rate tile gets a sourced reading (금리 해설), rendered under the tile.
+    const ratesComment=input.rates?composeRatesComment({points:input.rates.points,sessionDate:input.sessionDate,indexes:input.indexChanges.map((changePct,index)=>({name:input.indexNames?.[index]??'',changePct})),bundle,wire:wire?.reports??[]}):null;
+    if(ratesComment){composition.sections.push(ratesComment);for(const p of ratesComment.paragraphs)if(p.source&&!composition.sources.some(item=>item.url===p.source!.url))composition.sources.push({label:p.source.label,url:p.source.url,publisher:p.source.label.split(' ')[0]!})}
     const sources=[...composition.sources];
     if(composition.sections.some(section=>section.key==='us-sectors-stocks')){sources.push({label:'Yahoo Finance 검색 상위 종목',url:YAHOO_TRENDING,publisher:'Yahoo Finance'});for(const url of attention?.stockUrls??[])sources.push({label:'Yahoo Finance 종목 일별 종가',url,publisher:'Yahoo Finance'});if(bigMovers.length)for(const url of mega?.urls??[])sources.push({label:'Yahoo Finance 미국 시가총액 상위 종목 일별 종가',url,publisher:'Yahoo Finance'});if(newsMovers.length)for(const url of named?.urls??[])sources.push({label:'Yahoo Finance 리포트·기사 언급 종목 일별 종가',url,publisher:'Yahoo Finance'})}
     if(composition.sections.some(section=>section.key==='us-sectors-stocks'))for(const url of attention?.sectorUrls??[])sources.push({label:'Yahoo Finance SPDR 업종 ETF 일별 종가',url,publisher:'Yahoo Finance'});
