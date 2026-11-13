@@ -306,3 +306,65 @@ export function composeAIDeepSections(input:{bundle:BrokerResearchBundle|null;st
 }
 
 export {indexMove};
+
+/**
+ * 2026-11-13 owner: the 금리·달러·변동성 tile listed '미국 10년물 국채금리 5.10% +12bp' with no reading of it. The comment
+ * under the tile says, from the verified series only: the level against the prior session, five sessions and the last
+ * 20 sessions; why it moved, only as a named broker or wire sentence that mentions rates (otherwise it says no source
+ * explained it); MOTUS's own reading against the index moves, labelled as such; and the levels and scheduled data to
+ * watch next, labelled as check points, not a forecast. Every sentence carries a number or a named source.
+ */
+export interface RatePoint {date:string;value:number}
+const RATE_WORDS=/(국채|금리|10년물|연준|FOMC|Fed|파월|인플레|물가|CPI|PPI|고용|소매판매|입찰)/;
+const RATE_CORE=/(국채|금리|10년물|수익률)/;
+const bp=(value:number)=>Math.round(value*100);
+const signedBp=(value:number)=>`${bp(value)>0?'+':''}${bp(value)}bp`;
+const moved=(value:number)=>bp(value)>0?'올랐다':bp(value)<0?'내렸다':'변동이 없었다';
+const md=(iso:string)=>`${Number(iso.slice(5,7))}월 ${Number(iso.slice(8,10))}일`;
+const pct2=(value:number)=>value.toFixed(2)+'%';
+export function composeRatesComment(input:{label?:string;points:RatePoint[];sessionDate:string;indexes:Array<{name:string;changePct:number}>;bundle:BrokerResearchBundle|null;wire?:WireReport[]}):DeepSection|null{
+  const points=[...input.points].filter(point=>Number.isFinite(point.value)).sort((a,b)=>a.date.localeCompare(b.date));
+  const latest=points.at(-1),previous=points.at(-2);
+  if(!latest||!previous)return null;
+  const paragraphs:DeepParagraph[]=[],change=latest.value-previous.value;
+  // 1. Level and context: prior session, five sessions, the last 20 sessions, and a run in one direction.
+  let fact=`미국 10년물 국채금리는 ${md(latest.date)} ${pct2(latest.value)}로 전 거래일(${md(previous.date)} ${pct2(previous.value)})보다 ${Math.abs(bp(change))}bp ${moved(change)}.`;
+  if(latest.date!==input.sessionDate)fact+=` 이 값은 ${md(latest.date)} 고시분으로, ${md(input.sessionDate)} 정규장 값은 아직 고시되지 않았다.`;
+  const week=points.at(-6);if(week)fact+=` 5거래일 전(${md(week.date)} ${pct2(week.value)})과 비교하면 ${signedBp(latest.value-week.value)}이다.`;
+  const window=points.slice(-20);
+  if(window.length>=10){
+    const values=window.map(point=>point.value),low=Math.min(...values),high=Math.max(...values);
+    const place=latest.value>=high?'최고치':latest.value<=low?'최저치':(latest.value-low)/(high-low)>=0.75?'상단':(latest.value-low)/(high-low)<=0.25?'하단':'중간';
+    fact+=` 최근 ${window.length}거래일 범위 ${pct2(low)}~${pct2(high)}에서 ${place}${place.endsWith('치')?'다':'이다'}.`;
+  }
+  let run=0;for(let i=points.length-1;i>0;i--){const step=bp(points[i]!.value-points[i-1]!.value);if(step===0||Math.sign(step)!==Math.sign(bp(change)))break;run++}
+  if(run>=2)fact+=` ${run}거래일 연속 ${bp(change)>0?'상승':'하락'}이다.`;
+  paragraphs.push({text:fact});
+  // 2. Why: only a sourced sentence about rates. Broker statements first, then economy reports, then a wire sentence.
+  const briefs=input.bundle?.briefs??[];
+  const statements=briefs.flatMap(brief=>brief.statements.filter(item=>item.region==='US'&&RATE_CORE.test(item.text)).map(item=>({text:item.text,report:brief.report})));
+  const economy=(input.bundle?.economy??[]).flatMap(report=>report.summary.filter(text=>RATE_CORE.test(text)).map(text=>({text,report})));
+  const picks=[...new Map([...statements,...economy].map(item=>[item.text.replace(/\s+/g,' ').trim(),item])).values()].slice(0,2);
+  if(picks.length)for(const pick of picks)paragraphs.push({text:`금리 관련 증권가 시각: ${subject(pick.report)} 「${pick.report.title}」에서 ${said([quote(pick.text)])} 짚었다.`,source:reportSource(pick.report)});
+  else{
+    const wire=(input.wire??[]).find(report=>RATE_CORE.test(report.sentence??'')||RATE_CORE.test(report.title));
+    if(wire)paragraphs.push({text:`금리 배경(통신 보도): ${josa(wire.publisher,'은','는')} ${md(kstDay(wire.publishedAt))} 「${wire.title}」에서 ${said([quote(RATE_CORE.test(wire.sentence??'')?wire.sentence!:wire.title)])} 전했다.`,source:{label:`${wire.publisher} 「${wire.title}」`,url:wire.url,kind:'article'}});
+    else paragraphs.push({text:`금리 배경: 이날 10년물 금리가 ${Math.abs(bp(change))}bp ${moved(change).replace(/다$/,'')}는데 그 이유를 직접 설명한 증권사 리포트·통신 기사 문장은 수집되지 않았다(원인 미확인).`});
+  }
+  // 3. MOTUS's own reading: the yield move next to the index moves of the same session.
+  const nasdaq=input.indexes.find(item=>/나스닥|Nasdaq/i.test(item.name)),sp=input.indexes.find(item=>/S&P/.test(item.name));
+  if(nasdaq&&latest.date===input.sessionDate){
+    const b=bp(change),n=`나스닥 ${signedPct(nasdaq.changePct)}${sp?`, S&P 500 ${signedPct(sp.changePct)}`:''}`;
+    const reading=Math.abs(b)<5?`금리 변동이 ${signedBp(change)}로 작아 이날 지수 등락(${n})의 주된 변수로 보기는 어렵다.`
+      :b>0&&nasdaq.changePct<0?`금리가 ${signedBp(change)} 오른 날 지수가 내렸다(${n}). 금리 상승은 미래 이익의 현재가치를 낮춰 성장주에 부담이 되는 경우가 많아, 이날 약세와 방향이 같다.`
+      :b>0?`금리가 ${signedBp(change)} 올랐는데도 지수가 올라(${n}), 이날 지수는 금리보다 실적·종목 재료의 영향이 컸던 것으로 읽힌다.`
+      :nasdaq.changePct>0?`금리가 ${signedBp(change)} 내린 날 지수가 올랐다(${n}). 금리 하락이 성장주에 우호적으로 작용하는 방향과 같다.`
+      :`금리가 ${signedBp(change)} 내렸는데도 지수가 내려(${n}), 금리 하락이 경기 둔화 우려를 반영했을 가능성도 함께 봐야 한다.`;
+    paragraphs.push({text:`MOTUS 해석(추정): ${reading}`});
+  }
+  // 4. Next: the nearest quarter-point levels and the rate-related data on the brokers' calendars (check points only).
+  const below=Math.floor(latest.value*4)/4,above=below+0.25,levels=latest.value-below<0.005?`${pct2(below)}선 위를 지키는지`:`${pct2(above)}를 넘어서는지(${Math.abs(bp(above-latest.value))}bp 위), ${pct2(below)} 아래로 되돌아오는지(${Math.abs(bp(latest.value-below))}bp 아래)`;
+  const events=[...new Set(briefs.flatMap(brief=>(brief.events??[]).filter(item=>item.region==='US'&&RATE_WORDS.test(item.text)).map(item=>`${item.text}(${brief.report.broker} 집계)`)))].slice(0,2);
+  paragraphs.push({text:`다음 거래일 관전 포인트(전망 아님): 10년물이 ${levels}가 1차 확인 지점이다.${events.length?` 금리에 영향을 줄 예정 일정: ${events.join(' / ')}.`:''}`});
+  return {key:'us-rates-comment',placement:'early',role:'analysis',title:'금리 해설',paragraphs};
+}

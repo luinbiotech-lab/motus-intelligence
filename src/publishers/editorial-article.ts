@@ -102,7 +102,9 @@ export function renderAIEditorialArticle(view:AIIntelligenceDailyViewModel):Dail
 export function renderUSEditorialArticle(view:USMarketDailyViewModel):DailyMasterRenderResult {
   const terms=new Set<string>();const describe=(value:string)=>explainTerms(value.replace('U.S. 10Y Treasury Yield (미국 10년물 국채금리)','미국 10년물 국채금리'),terms);
   const parts=[masthead(view.title,view.subtitle,view.displayLabel,view.issueDate)+heroFigure(view.heroImage),lead(describe([view.marketSummary,...view.marketCommentary].join(' ')))];
-  const deep=view.deepSections??[],place=(where:'early'|'late'|'risks')=>deep.filter(item=>(item.placement??'early')===where).map(deepSection).filter(Boolean);
+  const deep=(view.deepSections??[]).filter(item=>item.key!=='us-rates-comment'),place=(where:'early'|'late'|'risks')=>deep.filter(item=>(item.placement??'early')===where).map(deepSection).filter(Boolean);
+  // 2026-11-13 owner: the rate figures are read right under the tile (level, cause, impact, next check points).
+  const ratesComment=view.deepSections?.find(item=>item.key==='us-rates-comment');
   const names:Record<string,string>={sp500:'S&P 500',nasdaq:'나스닥','dow-jones':'다우존스','russell-2000':'러셀 2000'};
   const idx=view.marketHistory.series.filter(item=>names[item.key]&&Number.isFinite(item.latestChangePct)).map(item=>`${names[item.key]} ${item.latestChangePct>0?'+':item.latestChangePct<0?'-':''}${Math.abs(item.latestChangePct).toFixed(2)}%`);
   const ten=view.supportingMetrics.find(item=>/10년물|10Y/.test(item.label)),sectors=deep.find(item=>item.key==='us-sectors-stocks')?.bars;
@@ -111,7 +113,7 @@ export function renderUSEditorialArticle(view:USMarketDailyViewModel):DailyMaste
   parts.push(...place('early'));
   const period=view.marketHistory.sessionCount>=60?'3개월':`${view.marketHistory.sessionCount}거래일`;
   parts.push(renderMarketTrendSection(view.marketHistory).replace('미국 주요 증시 추이',`미국 주요지수 ${period} 흐름`));
-  if(view.supportingMetrics.length)parts.push(roleSection('금리·달러·변동성',tiles(view.supportingMetrics.map(item=>({label:describe(item.label),value:item.value,change:item.change??null}))),'data','us-macro'));
+  if(view.supportingMetrics.length)parts.push(roleSection('금리·달러·변동성',tiles(view.supportingMetrics.map(item=>({label:describe(item.label),value:item.value,change:item.change??null})))+(ratesComment?ratesComment.paragraphs.map(p=>`<p style="margin:0 0 13px">${emph(p.text)}${sourceLink(p.source)}</p>`).join(''):''),'data','us-macro'));
   if(view.narrative?.facts.length)parts.push(roleSection('지수별 흐름과 위치',prose(view.narrative.facts),'data','us-index-facts'));
   if(view.narrative?.analysis.length)parts.push(roleSection('MOTUS 분석',analysisBox(view.narrative.analysis),'analysis','us-analysis'));
   parts.push(...place('late'));
