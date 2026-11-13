@@ -13,9 +13,9 @@ jobs:
           npm init -y >/dev/null && npm install --no-save playwright-core@1.56.0 >/dev/null && npx playwright-core install --with-deps chromium >/dev/null
           sudo apt-get install -y -qq fonts-noto-cjk >/dev/null
           cat > shot.cjs <<'JS'
-          const {chromium}=require('playwright-core');(async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:390,height:900},deviceScaleFactor:2,userAgent:'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/130.0 Safari/537.36'});
+          const {chromium}=require('playwright-core');(async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:390,height:900},deviceScaleFactor:1.5,userAgent:'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/130.0 Safari/537.36'});
           for(let i=0;i<4;i++){await p.goto('https://motusnova.blogspot.com/2026/11/11-13-3-amd-88.html?m=0',{waitUntil:'networkidle'}).catch(()=>{});if(!p.url().includes('google.com/sorry'))break;await p.waitForTimeout(15000)}
-          console.log('URL',p.url());const el=await p.$('[data-section="us-macro"]');console.log('SECTION',!!el);if(el){console.log((await el.innerText()).slice(0,1500));await el.screenshot({path:'macro.png'})}await b.close()})();
+          console.log('URL',p.url());const el=await p.$('[data-section="us-macro"]');console.log('SECTION',!!el);if(el){console.log((await el.innerText()).slice(0,1500));await el.screenshot({path:'macro.png'});console.log('B64START');console.log(require('fs').readFileSync('macro.png').toString('base64'));console.log('B64END')}await b.close()})();
           JS
           node shot.cjs
       - uses: actions/upload-artifact@v4
