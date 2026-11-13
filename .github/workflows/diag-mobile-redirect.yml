@@ -1,4 +1,4 @@
-name: DIAG redirect-error page anatomy (temporary, read-only)
+name: DIAG live article capture (temporary, read-only)
 on:
   push:
     branches: [diag/mobile-redirect-20261108]
@@ -8,28 +8,15 @@ jobs:
   probe:
     runs-on: ubuntu-latest
     steps:
-      - name: Compare an indexed post with REDIRECT_ERROR posts (GET only)
+      - name: Capture the macro section of the live U.S. article (GET only)
         run: |
-          GB='Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
-          DT='Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
-          for path in /2026/11/20-33.html /2026/11/3-70.html /2026/11/11-12-061-534273-1-10.html /2026/11/gemini.html; do
-            for ua in mobile desktop; do
-              [[ $ua == mobile ]] && A="$GB" || A="$DT"
-              for t in 1 2 3; do
-                curl -sS -A "$A" -D h.txt -o p.html "https://motusnova.blogspot.com$path" -w "" || true
-                grep -qi 'google.com/sorry' h.txt || break; sleep 15
-              done
-              echo "=== $ua $path"; grep -iE '^(HTTP|location|x-robots|cache-control|content-type)' h.txt | tr -d '\r'
-              loc=$(grep -i '^location' h.txt | tr -d '\r' | awk '{print $2}')
-              if [[ -n "$loc" && "$loc" != *sorry* ]]; then curl -sS -A "$A" -D h2.txt -o p.html "$loc" || true; echo "--- follow $loc"; grep -iE '^(HTTP|location|x-robots)' h2.txt | tr -d '\r'; fi
-              python3 - <<'PY'
-          import re
-          h=open('p.html',encoding='utf8',errors='ignore').read()
-          f=lambda p:re.findall(p,h,re.I)
-          print('size',len(h),'canonical',f(r'<link[^>]+rel=.canonical.[^>]*>')[:2])
-          print('robots',f(r'<meta[^>]+name=.robots.[^>]*>')[:2],'refresh',f(r'<meta[^>]+http-equiv=.refresh.[^>]*>')[:1])
-          print('jsredirect',len(f(r'(?:window|document)\.location(?:\.href)?\s*=')),'ldjson',len(f(r'application/ld\+json')),'og:image',len(f(r'og:image')),'amphtml',f(r'<link[^>]+amphtml[^>]*>')[:1])
-          print('title',f(r'<title>(.*?)</title>')[:1],'h1',len(f(r'<h1\b')),'imgs',len(f(r'<img\b')),'words',len(re.sub(r'<[^>]+>',' ',h).split()))
-          PY
-            done
-          done
+          npm init -y >/dev/null && npm install --no-save playwright-core@1.56.0 >/dev/null && npx playwright-core install --with-deps chromium >/dev/null
+          sudo apt-get install -y -qq fonts-noto-cjk >/dev/null
+          cat > shot.cjs <<'JS'
+          const {chromium}=require('playwright-core');(async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:390,height:900},deviceScaleFactor:2,userAgent:'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/130.0 Safari/537.36'});
+          for(let i=0;i<4;i++){await p.goto('https://motusnova.blogspot.com/2026/11/11-13-3-amd-88.html?m=0',{waitUntil:'networkidle'}).catch(()=>{});if(!p.url().includes('google.com/sorry'))break;await p.waitForTimeout(15000)}
+          console.log('URL',p.url());const el=await p.$('[data-section="us-macro"]');console.log('SECTION',!!el);if(el){console.log((await el.innerText()).slice(0,1500));await el.screenshot({path:'macro.png'})}await b.close()})();
+          JS
+          node shot.cjs
+      - uses: actions/upload-artifact@v4
+        with: {name: macro-capture, path: macro.png}
