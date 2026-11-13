@@ -14,10 +14,10 @@
   "leakagePass": true,
   "duplicateCheck": "PENDING_REMOTE",
   "duplicateUncertainty": true,
-  "articleFingerprint": "sha256:717d0afc8e1a0c89f7df778b875466a4b04a1bb21601dc7f57f22cd8918d83e1",
+  "articleFingerprint": "sha256:67b40d24290dde817322d2ef832fc9977cedf068f420bf375c0f7907b2b2ec92",
   "commerceEnabled": false,
-  "verifiedAt": "2026-11-13T08:10:01.173Z",
-  "expiresAt": "2026-11-13T09:40:01.173Z",
+  "verifiedAt": "2026-11-13T08:13:48.364Z",
+  "expiresAt": "2026-11-13T09:43:48.364Z",
   "sourceAuditIds": [
     "deep:consensus:list:company",
     "deep:consensus:list:economy",
@@ -54,8 +54,8 @@
     "yahoo-finance:kosdaq:query1.finance.yahoo.com",
     "yahoo-finance:kospi:query1.finance.yahoo.com"
   ],
-  "sourceAuditFingerprint": "sha256:daf3352b9b6240b413daea3115ba9223a421dc62f24453f3ff0143db129e4e9b",
-  "crossVerificationFingerprint": "sha256:2cb1a91915a284f04199290dc3155186210d6077dc9a7587ee12251adf3dd2bd",
+  "sourceAuditFingerprint": "sha256:b49968776ec39cead3c9b7ffeaae69066b99426dda67f38c5b55af8a9450967e",
+  "crossVerificationFingerprint": "sha256:941cacec07f0ab2d70e6547c4577fccc5303958fe5bce57e6dbcc5f291b2b5e3",
   "crossVerification": {
     "schemaVersion": "1.0",
     "category": "KOREA_MARKET",
@@ -113,7 +113,7 @@
     "sourceDiversityPass": true,
     "verification": "VERIFIED",
     "reasonCodes": [],
-    "verifiedAt": "2026-11-13T08:10:01.173Z",
+    "verifiedAt": "2026-11-13T08:13:48.364Z",
     "officialPhase": "PRE_PUBLICATION",
     "reconciliation": {
       "status": "NOT_REQUIRED",
