@@ -14,10 +14,10 @@
   "leakagePass": true,
   "duplicateCheck": "PENDING_REMOTE",
   "duplicateUncertainty": true,
-  "articleFingerprint": "sha256:1ceaf6f8303b135bc50479f19d443dabea66ec05922f3e5bacd32844009d27c7",
+  "articleFingerprint": "sha256:bc5b4cb67cdfc3131bbc7b2d062137daaa06de63ba8d51614ba43525924b32c5",
   "commerceEnabled": false,
-  "verifiedAt": "2026-11-13T21:47:24.918Z",
-  "expiresAt": "2026-11-13T23:17:24.918Z",
+  "verifiedAt": "2026-11-13T23:41:51.674Z",
+  "expiresAt": "2026-11-14T01:11:51.674Z",
   "sourceAuditIds": [
     "calendar:nyse",
     "deep:consensus:list:company",
@@ -32,6 +32,7 @@
     "deep:research:listed:stock.pstatic.net/stock-research/economy/39/20261113_economy_104010000.pdf",
     "deep:research:listed:stock.pstatic.net/stock-research/economy/39/20261113_economy_257620000.pdf",
     "deep:research:listed:stock.pstatic.net/stock-research/economy/76/20261113_economy_345551000.pdf",
+    "deep:wire:report:news.einfomax.co.kr/news/articleView.html?idxno=4444749",
     "deep:wire:report:www.newsis.com/view/NISX20261114_0003867937",
     "deep:yahoo:most-active",
     "deep:yahoo:spark:megacaps",
@@ -42,6 +43,7 @@
     "fred:DCOILBRENTEU",
     "fred:DGS10",
     "fred:VIXCLS",
+    "fred:dow-jones",
     "market-research:Bloomberg Markets",
     "market-research:CNBC Investing",
     "market-research:Goldman Sachs",
@@ -50,11 +52,10 @@
     "market-research:article:https://www.cnbc.com/2026/11/13/is-a-bottom-in-for-the-nasdaq-100-charts-to-watch.html",
     "market-research:article:https://www.goldmansachs.com/insights/articles/emerging-market-credit-shows-resilience-amid-energy-shock",
     "treasury:10y:2026",
-    "yahoo-us:dow-jones",
     "yahoo-us:nasdaq",
     "yahoo-us:sp500"
   ],
-  "sourceAuditFingerprint": "sha256:c2c5d000fb341ecfc022c9ab34f4dec39b2949d8c0f4f8b41b098b7645105f14",
+  "sourceAuditFingerprint": "sha256:ac1bec7be878a2c07968db62b9d6f551b66e63831227b9c33275288b74b5be8e",
   "crossVerificationFingerprint": null,
   "crossVerification": null
 }
