@@ -160,7 +160,11 @@ jobs:
         shell: bash
         run: |
           for d in $DATES; do node dist/src/naver-summary-cli.js --date "$d" || echo "::notice title=Naver summary::$d has no published article yet"; done
-          ls -la data/daily-report/naver-latest.md || true
+          # Owner 2026-11-13: the post to hand over is prepared right after the Korea close article (~17:15 KST), whose
+          # operation date is the next weekday, so the operation dates around today are read as well (read-only).
+          for n in -3 -2 -1 0 1 2 3 4; do d=$(date -d "$n day" +%F); [[ -d "data/operations/$d" ]] && continue; if git cat-file -e "origin/ops-data:data/operations/$d" 2>/dev/null; then git archive origin/ops-data "data/operations/$d" | tar -xf -; fi; done
+          node dist/src/naver-summary-cli.js --evening || echo '::notice title=Naver summary::no Korea close article yet'
+          ls -la data/daily-report/naver-latest.md data/daily-report/naver-latest.txt || true
       # Backfill of old posts (owner approval required: repository variable MOTUS_BACKFILL=on). Once a day at 05:40:
       # apply yesterday's plan (its card images are on ops-data by now), then back up and plan the next few posts.
       - name: Backfill old posts (paced, reversible)
