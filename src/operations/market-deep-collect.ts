@@ -3,7 +3,7 @@ import type {DailyCategory} from './daily-orchestrator.js';
 import {collectBrokerResearch,type BrokerAudit,type PdfTextReader} from './broker-briefs.js';
 import {collectAIBellwethers,collectKoreaSearchTop,collectUSAttention,moveWord,US_MEGACAPS,US_KOREAN_NAMES,NAVER_SEARCH_TOP,YAHOO_TRENDING,type AttentionAudit} from './market-attention.js';
 import {collectWireCloses} from './market-wire.js';
-import {composeAIDeepSections,composeKoreaDeepSections,composeUSDeepSections,composeRatesComment,hasBrokerCause,type RatePoint,indexMove,type DeepComposition} from './market-deep-sections.js';
+import {composeAIDeepSections,composeKoreaDeepSections,composeUSDeepSections,composeKoreaFxFlowComment,composeRatesComment,hasBrokerCause,type RatePoint,indexMove,type DeepComposition} from './market-deep-sections.js';
 
 interface AuditSink {sourceId:string;category:DailyCategory;url:string;status:'PASS'|'FAILED';recordCount:number;collectedAt:string;error:string|null;observedDate?:string}
 export interface DeepCollection {composition:DeepComposition;title:string|null;sources:Array<{label:string;url:string;publisher:string}>}
@@ -73,7 +73,7 @@ export async function collectUSDeep(input:{sessionDate:string;operationDate:stri
   }catch{return empty}
 }
 
-export async function collectKoreaDeep(input:{sessionDate:string;operationDate:string;at:string;evening?:boolean;fetcher:typeof fetch;audit:AuditSink[];pdfText?:PdfTextReader;kospiClose:number;kospiChangePct:number|null}):Promise<DeepCollection>{
+export async function collectKoreaDeep(input:{sessionDate:string;operationDate:string;at:string;evening?:boolean;fetcher:typeof fetch;audit:AuditSink[];pdfText?:PdfTextReader;kospiClose:number;kospiChangePct:number|null;fx?:{value:number;change:number}|null;flows?:Array<{label:string;value:number}>}):Promise<DeepCollection>{
   const empty:DeepCollection={composition:{sections:[],leadAddition:[],titleFocus:null,sources:[]},title:null,sources:[]};
   try{
     // The search ranking comes first so the research intake can fetch ratings for exactly those stocks.
@@ -85,6 +85,8 @@ export async function collectKoreaDeep(input:{sessionDate:string;operationDate:s
     const wire=krBriefed||!wireFallbackAllowed(input.at)?null:await collectWireCloses({region:'KOREA',sessionDate:input.sessionDate,change:input.kospiChangePct,fetcher:input.fetcher}).catch(()=>null);
     if(wire)record(input.audit,wire.audit,'KOREA_MARKET',input.at,input.sessionDate);
     const composition=composeKoreaDeepSections({bundle,searchTop:search?.stocks??[],wire:wire?.reports??[],kospiChangePct:input.kospiChangePct,checkpoint:input.evening?'다음 거래일에는 외국인·기관 수급의 연속성, 원·달러 환율, 오늘 강세 업종이 이어지는지가 확인 대상이다.':'오늘 장에서는 외국인·기관 수급의 연속성, 원·달러 환율, 전일 강세 업종이 이어지는지가 확인 대상이다.'});
+    // 2026-11-13 owner: the FX tile and the investor flows are read, not only listed.
+    for(const section of composeKoreaFxFlowComment({fx:input.fx??null,flows:input.flows??[],kospiChangePct:input.kospiChangePct,bundle,wire:wire?.reports??[]})){composition.sections.push(section);for(const p of section.paragraphs)if(p.source&&!composition.sources.some(item=>item.url===p.source!.url))composition.sources.push({label:p.source.label,url:p.source.url,publisher:p.source.label.split(' ')[0]!})}
     const sources=[...composition.sources];
     if(composition.sections.some(section=>section.key==='korea-stocks')){sources.push({label:'네이버페이 증권 검색 상위 종목',url:NAVER_SEARCH_TOP,publisher:'네이버페이 증권'});for(const stock of search?.stocks??[])sources.push({label:`네이버페이 증권 ${stock.name} 일별 시세`,url:stock.url,publisher:'네이버페이 증권'})}
     recordListed(input.audit,sources,'KOREA_MARKET',input.at);

@@ -368,3 +368,41 @@ export function composeRatesComment(input:{label?:string;points:RatePoint[];sess
   paragraphs.push({text:`다음 거래일 관전 포인트(전망 아님): 10년물이 ${levels}가 1차 확인 지점이다.${events.length?` 금리에 영향을 줄 예정 일정: ${events.join(' / ')}.`:''}`});
   return {key:'us-rates-comment',placement:'early',role:'analysis',title:'금리 해설',paragraphs};
 }
+
+/**
+ * 2026-11-13 owner standard (see composeRatesComment): Korea's FX tile and investor flows get the same reading:
+ * the move, a sourced cause or 'unconfirmed', MOTUS's labelled reading against the index, and levels to watch.
+ */
+const fmtNum=(value:number)=>new Intl.NumberFormat('en-US',{maximumFractionDigits:2}).format(value);
+const FX_WORDS=/(환율|원화|원·달러|원\/달러|달러\s*강세|달러\s*약세|달러인덱스)/;
+const won1=(value:number)=>new Intl.NumberFormat('en-US',{minimumFractionDigits:1,maximumFractionDigits:1}).format(value);
+export function composeKoreaFxFlowComment(input:{fx:{value:number;change:number}|null;flows:Array<{label:string;value:number}>;kospiChangePct:number|null;bundle:BrokerResearchBundle|null;wire?:WireReport[]}):DeepSection[]{
+  const sections:DeepSection[]=[],briefs=input.bundle?.briefs??[],foreign=input.flows.find(item=>item.label==='외국인');
+  if(input.fx&&Number.isFinite(input.fx.value)&&Number.isFinite(input.fx.change)){
+    const {value,change}=input.fx,previous=value-change,pct=previous?change/previous*100:0;
+    const paragraphs:DeepParagraph[]=[{text:`원·달러 환율은 기사 작성 시점 ${won1(value)}원으로 전일보다 ${Math.abs(change)<0.05?'변동이 없었다':`${won1(Math.abs(change))}원(${Math.abs(pct).toFixed(2)}%) ${change>0?'올랐다(원화 약세)':'내렸다(원화 강세)'}`}.`}];
+    const statement=briefs.flatMap(brief=>brief.statements.filter(item=>item.region==='KOREA'&&FX_WORDS.test(item.text)).map(item=>({text:item.text,report:brief.report})))[0];
+    const wire=statement?null:(input.wire??[]).find(report=>FX_WORDS.test(report.sentence??''));
+    if(statement)paragraphs.push({text:`환율 관련 증권가 시각: ${subject(statement.report)} 「${statement.report.title}」에서 ${said([quote(statement.text)])} 짚었다.`,source:reportSource(statement.report)});
+    else if(wire)paragraphs.push({text:`환율 배경(통신 보도): ${josa(wire.publisher,'은','는')} ${md(kstDay(wire.publishedAt))} 「${wire.title}」에서 ${said([quote(wire.sentence!)])} 전했다.`,source:{label:`${wire.publisher} 「${wire.title}」`,url:wire.url,kind:'article'}});
+    else if(Math.abs(change)>=0.05)paragraphs.push({text:`환율 배경: 이날 환율이 ${won1(Math.abs(change))}원 ${change>0?'오른':'내린'} 이유를 직접 설명한 증권사 리포트·통신 기사 문장은 수집되지 않았다(원인 미확인).`});
+    if(foreign&&Math.abs(change)>=0.05&&foreign.value!==0){
+      const sell=foreign.value<0,weak=change>0,flow=`외국인 ${foreign.value>0?'+':''}${fmtNum(foreign.value)}`;
+      paragraphs.push({text:`MOTUS 해석(추정): ${sell===weak?`외국인이 ${sell?'순매도':'순매수'}(${flow})한 날 원화가 ${weak?'약해져':'강해져'}, 외국인 주식 수급과 환율이 같은 방향으로 움직였다.`:`외국인 ${sell?'순매도':'순매수'}(${flow})와 달리 원화가 ${weak?'약해져':'강해져'}, 이날 환율은 국내 주식 수급보다 다른 요인의 영향이 컸던 것으로 읽힌다.`}`});
+    }
+    const below=Math.floor(value/10)*10,above=below+10;
+    paragraphs.push({text:`다음 거래일 관전 포인트(전망 아님): ${value-below<0.05?`환율이 ${fmtNum(below)}원선 위를 지키는지`:`환율이 ${fmtNum(above)}원을 넘어서는지(${won1(above-value)}원 위), ${fmtNum(below)}원 아래로 내려가는지(${won1(value-below)}원 아래)`}가 확인 지점이다.`});
+    sections.push({key:'korea-fx-comment',placement:'early',role:'analysis',title:'환율 해설',paragraphs});
+  }
+  if(input.flows.length>=2){
+    const sorted=[...input.flows].sort((a,b)=>Math.abs(b.value)-Math.abs(a.value)),lead=sorted[0]!,rest=input.flows.filter(item=>item!==lead);
+    const sign=(value:number)=>`${value>0?'+':''}${fmtNum(value)}`;
+    const paragraphs:DeepParagraph[]=[{text:`투자자별로는 ${lead.label}의 ${lead.value<0?'순매도':'순매수'}(${sign(lead.value)}) 규모가 가장 컸고, ${rest.map(item=>`${item.label}(${sign(item.value)})`).join('·')}${rest.every(item=>item.value>0)?josa(rest.at(-1)!.label,'은','는').slice(rest.at(-1)!.label.length)+' 순매수했다':rest.every(item=>item.value<0)?josa(rest.at(-1)!.label,'은','는').slice(rest.at(-1)!.label.length)+' 순매도했다':josa(rest.at(-1)!.label,'이','가').slice(rest.at(-1)!.label.length)+' 뒤를 이었다'}.`}];
+    if(foreign&&input.kospiChangePct!==null&&Math.abs(input.kospiChangePct)>=0.05&&foreign.value!==0){
+      const same=(foreign.value>0)===(input.kospiChangePct>0);
+      paragraphs.push({text:`MOTUS 해석(추정): 코스피가 ${Math.abs(input.kospiChangePct).toFixed(2)}% ${input.kospiChangePct>0?'오른':'내린'} 날 외국인은 ${foreign.value>0?'순매수':'순매도'}(${sign(foreign.value)})해, ${same?'지수 방향과 외국인 수급이 같았다.':'지수 방향과 외국인 수급이 엇갈렸다. 지수를 움직인 주체가 외국인 밖에 있었을 가능성이 있다.'}`});
+    }
+    sections.push({key:'korea-flow-comment',placement:'early',role:'analysis',title:'수급 해설',paragraphs});
+  }
+  return sections;
+}
