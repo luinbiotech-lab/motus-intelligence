@@ -14,10 +14,10 @@
   "leakagePass": true,
   "duplicateCheck": "PENDING_REMOTE",
   "duplicateUncertainty": true,
-  "articleFingerprint": "sha256:b5a28be3eed28568156b5e9fa396842cc3dca258102670181ff2e07549ce4ff1",
+  "articleFingerprint": "sha256:70166858faa5bea16ba5ef05b066317994483e9fafa2ded37d8ecd3624a107ab",
   "commerceEnabled": false,
-  "verifiedAt": "2026-11-13T02:10:11.168Z",
-  "expiresAt": "2026-11-13T03:40:11.168Z",
+  "verifiedAt": "2026-11-13T03:35:56.519Z",
+  "expiresAt": "2026-11-13T05:05:56.519Z",
   "sourceAuditIds": [
     "calendar:nyse",
     "deep:consensus:list:company",
@@ -52,14 +52,14 @@
     "market-research:Bloomberg Markets",
     "market-research:CNBC Investing",
     "market-research:Goldman Sachs",
-    "market-research:article:https://www.bloomberg.com/news/articles/2026-11-12/stock-market-today-dow-s-p-live-updates",
-    "market-research:article:https://www.bloomberg.com/news/articles/2026-11-13/new-world-suspends-trading-as-investors-watch-for-next-steps",
+    "market-research:article:https://www.bloomberg.com/news/articles/2026-11-12/latest-oil-market-news-and-analysis-for-nov-13",
+    "market-research:article:https://www.bloomberg.com/news/articles/2026-11-13/japan-bonds-fall-as-treasury-rout-extends-on-fed-hike-bets",
     "market-research:article:https://www.goldmansachs.com/insights/articles/emerging-market-credit-shows-resilience-amid-energy-shock",
     "treasury:10y:2026",
     "yahoo-us:nasdaq",
     "yahoo-us:sp500"
   ],
-  "sourceAuditFingerprint": "sha256:c871b1cb7149f1c8d0493c64c028cbe7c34cf36f669ee39a9e53f58c9606a880",
+  "sourceAuditFingerprint": "sha256:3080fcd63d5b221f2cb42251ebc7c0c128e9755ff1d4c638e0fca119a0bd9ef1",
   "crossVerificationFingerprint": null,
   "crossVerification": null
 }
