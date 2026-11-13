@@ -1,4 +1,4 @@
-name: DIAG Blogger duplicate check (temporary, read-only)
+name: DIAG backfill live check (temporary, read-only)
 on:
   push:
     branches: [diag/mobile-redirect-20261108]
@@ -8,21 +8,20 @@ jobs:
   probe:
     runs-on: ubuntu-latest
     steps:
-      - name: Count Korea-close posts per title date in the public feed (no writes)
+      - name: Read the 3 backfilled posts (GET only, no writes)
         run: |
-          for i in 1 2 3 4 5 6; do
-            curl -sS -A 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/130.0 Safari/537.36' 'https://motusnova.blogspot.com/feeds/posts/summary?alt=json&max-results=60' -o feed.json -w 'HTTP %{http_code}\n' || true
-            python3 -c 'import json;json.load(open("feed.json"))' 2>/dev/null && break; sleep 8
-          done
-          python3 - <<'PY'
-          import json,collections
-          d=json.load(open('feed.json'));rows=[]
-          for e in d['feed'].get('entry',[]):
-            t=e['title']['$t'];p=e['published']['$t'];u=[l['href'] for l in e['link'] if l['rel']=='alternate'][0]
-            rows.append((p,t,u))
-          print('FEED total',len(rows))
-          for p,t,u in sorted(rows):
-            if p>='2026-11-06': print('POST',p[:16],t[:60],u)
-          c=collections.Counter(t.split(',')[0] for p,t,u in rows if '마감' in t and p>='2026-11-06')
-          for k,v in c.items(): print('COUNT',v,k)
+          for u in https://motusnova.blogspot.com/2026/09/5-ai.html https://motusnova.blogspot.com/2026/10/2026-9-30_0170921246.html https://motusnova.blogspot.com/2026/10/2026-9-30.html; do
+            curl -sS -L -A 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/130.0 Safari/537.36' "$u" -o p.html -w "HTTP %{http_code} $u\n" || true
+            python3 - "$u" <<'PY'
+          import re,sys
+          h=open('p.html',encoding='utf8',errors='ignore').read()
+          body=h[h.find('post-body'):] if 'post-body' in h else h
+          rel=re.search(r'data-section="related-posts".*?</section>',body,re.S)
+          links=re.findall(r'href="(https://motusnova\.blogspot\.com/20\d\d/[^"]+)"',rel.group(0)) if rel else []
+          imgs=re.findall(r'<img[^>]+src="([^"]+)"',body)
+          print(sys.argv[1],'marker_v1',('data-motus-backfill="v1"' in h),'marker_links',('data-motus-backfill="links"' in h),'related_section',bool(rel),'related_links',len(set(links)),'imgs',len(imgs),'backfill_img',sum('backfill/img' in i for i in imgs))
+          for l in sorted(set(links))[:6]: print('  LINK',l)
+          for i in imgs[:3]: print('  IMG',i[:140])
           PY
+          done
+          for i in hero-180392c89306 hero-6d56e9aeff9b hero-7ee4d6fd46ae; do curl -sS -o /dev/null -w "IMGURL %{http_code} %{content_type} $i\n" "https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/daily-report/backfill/img/$i.png"; done
