@@ -14,10 +14,10 @@
   "leakagePass": true,
   "duplicateCheck": "PENDING_REMOTE",
   "duplicateUncertainty": true,
-  "articleFingerprint": "sha256:275677e6045b52bc6d23fc5aa35e493b48990e70c30a85d130bd4410b527f24e",
+  "articleFingerprint": "sha256:5feb24662f8a76f3cf50ecced0915d95df843860e9c98097fc6d1983c8290f95",
   "commerceEnabled": false,
-  "verifiedAt": "2026-11-14T03:34:35.361Z",
-  "expiresAt": "2026-11-14T05:04:35.361Z",
+  "verifiedAt": "2026-11-14T08:00:09.983Z",
+  "expiresAt": "2026-11-14T09:30:09.983Z",
   "sourceAuditIds": [
     "calendar:nyse",
     "deep:consensus:list:company",
@@ -44,18 +44,18 @@
     "fred:DGS10",
     "fred:VIXCLS",
     "fred:dow-jones",
+    "fred:nasdaq",
     "fred:sp500",
     "market-research:Bloomberg Markets",
     "market-research:CNBC Investing",
     "market-research:Goldman Sachs",
-    "market-research:article:https://www.bloomberg.com/news/articles/2026-11-13/treasury-yield-surge-shatters-hopes-worst-of-bond-rout-is-over",
+    "market-research:article:https://www.bloomberg.com/news/articles/2026-11-14/china-s-market-regulator-warns-of-global-asset-repricing-risks",
     "market-research:article:https://www.bloomberg.com/news/videos/2026-11-13/the-close-11-13-2026-video",
     "market-research:article:https://www.cnbc.com/2026/11/13/is-a-bottom-in-for-the-nasdaq-100-charts-to-watch.html",
     "market-research:article:https://www.goldmansachs.com/insights/articles/emerging-market-credit-shows-resilience-amid-energy-shock",
-    "treasury:10y:2026",
-    "yahoo-us:nasdaq"
+    "treasury:10y:2026"
   ],
-  "sourceAuditFingerprint": "sha256:c9d13780ed0e28e504a3a1450a4da70047bcf2bbffea6e36652206f03960a44e",
+  "sourceAuditFingerprint": "sha256:e1e474e9b96a2d777d87702ce1ad78f78af69cb252a39c93504af50c2b8ef477",
   "crossVerificationFingerprint": null,
   "crossVerification": null
 }
