@@ -1,41 +1,41 @@
 {
-  "updatedAt": "2026-11-13T01:28:08.161Z",
+  "updatedAt": "2026-11-14T01:01:16.562Z",
   "items": [
     {
-      "postId": "568850689418151231",
-      "url": "https://motusnova.blogspot.com/2026/10/298.html",
-      "title": "국내 증시 마감: 외국인 반도체 매도에 코스피 하락, 코스닥은 2.98% 반등",
+      "postId": "614930389904987485",
+      "url": "https://motusnova.blogspot.com/2026/10/m-ai-531.html",
+      "title": "미국 증시 마감: 나스닥 사상 최고, M&A와 AI주 강세가 5.31% 금리 부담을 압도",
       "labels": [
-        "국내증시"
+        "미국증시"
       ],
-      "originalSha256": "sha256:39ecbcb7e4446b57d9102141a85a7fc307681f8a4c3837b81e21cb0dcab5c0e7",
-      "proposedSha256": "sha256:76436ce0f6d229689a552ce19e7827eedb6313bdb5ec795f4fccc73e2d12ff8b",
-      "image": "https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/daily-report/backfill/img/hero-180392c89306.png",
+      "originalSha256": "sha256:ac44f4704a84463096fe56864d18d5fd6ca6ae9a6eb7ca3e255f9a7370e1b5bf",
+      "proposedSha256": "sha256:44d49529ba94d1935a726970de21eb525fd238725c107f36e947f981944c3702",
+      "image": "https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/daily-report/backfill/img/hero-cef31f89fd83.png",
       "relatedCount": 5
     },
     {
-      "postId": "2683873333879055086",
-      "url": "https://motusnova.blogspot.com/2026/10/ai-2026-9-29.html",
-      "title": "상시 실행형 에이전트와 AI 보안·과학 연구의 확장 (2026년 9월 29일)",
+      "postId": "3144124090554362868",
+      "url": "https://motusnova.blogspot.com/2026/10/ai_01763533093.html",
+      "title": "기업 AI의 경쟁 무대가 모델에서 실제 업무로 이동했다",
       "labels": [
         "AI 인텔리전스"
       ],
-      "originalSha256": "sha256:ddd2b44d34f686ea0f4764def4d34945d97962639e76b69da2672e4407066c94",
-      "proposedSha256": "sha256:3903f9d0e63df097268b0cd78aa2731a029d0a27fa72d3353f96f9b247b07b29",
-      "image": "https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/daily-report/backfill/img/hero-7ee4d6fd46ae.png",
-      "relatedCount": 5
+      "originalSha256": "sha256:37c2575335e7f01bc2d8043ff29d04e1a3bab4442a508360010472e624d5baa4",
+      "proposedSha256": "sha256:1343b403b869f5561876dbc30cbc12f12505033b569745d6e74d5122245712e0",
+      "image": "https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/daily-report/backfill/img/hero-dcf28012254c.png",
+      "relatedCount": 6
     },
     {
-      "postId": "4294902999154862199",
-      "url": "https://motusnova.blogspot.com/2026/10/ai.html",
-      "title": "기업 AI의 다음 관문: 소버린 운영, 현장형 인재, 추론 최적화",
+      "postId": "2371588160186534300",
+      "url": "https://motusnova.blogspot.com/2026/10/s-500-5.html",
+      "title": "미국 증시 마감: S&P 500·나스닥 최고치, 실적 기대가 5%대 금리를 눌렀다",
       "labels": [
-        "AI 인텔리전스"
+        "미국증시"
       ],
-      "originalSha256": "sha256:898975363541270c3c84dedfc796fd816a0a04e53f088c9f4b827b1ebc2fd861",
-      "proposedSha256": "sha256:10b1ed6b2592d9e12e4ef73e8e21cf403e58706f75cecbdfc939737d2234652c",
-      "image": "https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/daily-report/backfill/img/hero-6d56e9aeff9b.png",
-      "relatedCount": 5
+      "originalSha256": "sha256:8ed1eae6d214dec21990467a48f3134a29ca8eaa0d0bbdb281c9f1bb1fe39e02",
+      "proposedSha256": "sha256:95a610dc7ab760e4d3030a72283bc8e90767b702e2cf688ca2a89e92173cbf15",
+      "image": "https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/daily-report/backfill/img/hero-196f597483b6.png",
+      "relatedCount": 6
     }
   ]
 }
