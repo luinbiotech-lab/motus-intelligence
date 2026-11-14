@@ -14,10 +14,10 @@
   "leakagePass": true,
   "duplicateCheck": "PENDING_REMOTE",
   "duplicateUncertainty": true,
-  "articleFingerprint": "sha256:bc5b4cb67cdfc3131bbc7b2d062137daaa06de63ba8d51614ba43525924b32c5",
+  "articleFingerprint": "sha256:031bd915a4455ba945b47cd9cc7208aaefcff43caff0d053c1edeebfb67cd83b",
   "commerceEnabled": false,
-  "verifiedAt": "2026-11-13T23:41:51.674Z",
-  "expiresAt": "2026-11-14T01:11:51.674Z",
+  "verifiedAt": "2026-11-14T01:50:24.950Z",
+  "expiresAt": "2026-11-14T03:20:24.950Z",
   "sourceAuditIds": [
     "calendar:nyse",
     "deep:consensus:list:company",
@@ -44,18 +44,18 @@
     "fred:DGS10",
     "fred:VIXCLS",
     "fred:dow-jones",
+    "fred:sp500",
     "market-research:Bloomberg Markets",
     "market-research:CNBC Investing",
     "market-research:Goldman Sachs",
-    "market-research:article:https://www.bloomberg.com/news/articles/2026-11-13/em-stocks-eye-first-weekly-gain-since-september-as-tech-rebounds",
     "market-research:article:https://www.bloomberg.com/news/articles/2026-11-13/treasury-yield-surge-shatters-hopes-worst-of-bond-rout-is-over",
+    "market-research:article:https://www.bloomberg.com/news/videos/2026-11-13/the-close-11-13-2026-video",
     "market-research:article:https://www.cnbc.com/2026/11/13/is-a-bottom-in-for-the-nasdaq-100-charts-to-watch.html",
     "market-research:article:https://www.goldmansachs.com/insights/articles/emerging-market-credit-shows-resilience-amid-energy-shock",
     "treasury:10y:2026",
-    "yahoo-us:nasdaq",
-    "yahoo-us:sp500"
+    "yahoo-us:nasdaq"
   ],
-  "sourceAuditFingerprint": "sha256:ac1bec7be878a2c07968db62b9d6f551b66e63831227b9c33275288b74b5be8e",
+  "sourceAuditFingerprint": "sha256:4c7c6944b74a7b37d266dc2c9f6eade78ed35d6d1184ab5a8c01745a0b1808ee",
   "crossVerificationFingerprint": null,
   "crossVerification": null
 }
