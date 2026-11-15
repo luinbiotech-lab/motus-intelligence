@@ -17,12 +17,18 @@ jobs:
               curl -sS -L --max-redirs 10 -A "$1" -D "$3.h" -o "$3" -w '%{num_redirects} %{url_effective} %{http_code}\n' "$2" > "$3.w" || true
               grep -qi 'google.com/sorry' "$3.h" "$3.w" || return 0; sleep 25
             done; }
+          for r in https://motusnova.blogspot.com/robots.txt https://motusnova.blogspot.com/sitemap.xml; do
+            curl -sS -A "$GB" -D r.h -o r.b "$r" || true
+            echo "=== $r"; grep -iE '^(HTTP|x-robots|location|last-modified|content-type)' r.h | tr -d '\r' | sed 's/^/HDR /'
+            head -c 1500 r.b | sed 's/^/BODY /'; echo
+          done
           n=0
           for u in https://motusnova.blogspot.com/2026/11/20-33.html https://motusnova.blogspot.com/2026/11/3-70.html https://motusnova.blogspot.com/2026/10/124-5937-1-48.html http://motusnova.blogspot.com/2026/11/3-70.html https://motusnova.blogspot.com/2026/11/3-70.html?m=1; do
             for ua in mob desk; do
               n=$((n+1)); [[ $ua == mob ]] && A="$GB" || A="$DT"
               fetch "$A" "$u" p$n
               echo "=== $ua $u"
+              grep -iE "^x-robots" p$n.h | tr -d "\\r" | sed "s/^/XROBOTS /"
               echo "HOPS $(grep -iE '^(HTTP|location)' p$n.h | tr -d '\r' | tr '\n' ' ' | cut -c1-400)"
               echo "FINAL $(cat p$n.w) bytes=$(wc -c < p$n)"
               grep -oiE '<link[^>]+rel=.(canonical|alternate|amphtml)[^>]*>' p$n | cut -c1-200 | sort -u | head -8 | sed 's/^/LINK /'
