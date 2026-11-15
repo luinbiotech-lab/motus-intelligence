@@ -1,10 +1,8 @@
 {
   "identity": "weekly|2026-11-09",
   "runDate": "2026-11-15",
-  "state": "PUBLISHED",
+  "state": "SKIP",
+  "reason": "this week is already published",
   "postId": "4018719477333209473",
-  "publicPostUrl": "https://motusnova.blogspot.com/2026/11/s-500-25-46-fomc.html",
-  "title": "[주간 증시] S&P 500 주간 2.5% 상승·코스피 4.6% 상승…다음 주 미국 소매판매·FOMC 의사록 주목",
-  "pdf": "https://drive.google.com/file/d/16Tk7wV7ykD73Rkh-LF6jEuMkHFe9cHXO/view?usp=drivesdk",
-  "publishCallCount": 1
+  "publicPostUrl": "https://motusnova.blogspot.com/2026/11/s-500-25-46-fomc.html"
 }
