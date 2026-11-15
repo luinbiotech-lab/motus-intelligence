@@ -1,0 +1,1425 @@
+{
+  "date": "2026-11-15",
+  "articlesDay": "2026-11-14",
+  "collectedAt": "2026-11-15T04:41:06.434Z",
+  "pageviews": {
+    "state": "PASS",
+    "capturedAt": "2026-11-15T04:41:06.788Z",
+    "allTime": 818,
+    "sevenDays": 375,
+    "thirtyDays": 763,
+    "previous": {
+      "capturedAt": "2026-11-14T04:41:19.565Z",
+      "allTime": 769
+    },
+    "sincePrevious": {
+      "views": 49,
+      "hours": 24
+    }
+  },
+  "articles": {
+    "state": "PASS",
+    "count": 1
+  },
+  "searchConsole": {
+    "state": "PASS",
+    "range": [
+      "2026-11-07",
+      "2026-11-15"
+    ],
+    "dataState": "all",
+    "lastDataDate": "2026-11-13",
+    "topQueries": []
+  },
+  "indexStatus": {
+    "state": "PASS",
+    "sitemaps": [
+      {
+        "path": "https://motusnova.blogspot.com/sitemap.xml",
+        "lastSubmitted": "2026-11-05T14:31:04.586Z",
+        "lastDownloaded": "2026-11-14T18:47:28.385Z",
+        "isPending": false,
+        "errors": "0",
+        "warnings": "0",
+        "contents": [
+          {
+            "type": "web",
+            "submitted": "61",
+            "indexed": "0"
+          }
+        ]
+      }
+    ],
+    "inspected": 51,
+    "indexed": 9,
+    "inspections": [
+      {
+        "url": "https://motusnova.blogspot.com/",
+        "verdict": "PASS",
+        "coverageState": "제출되고 색인이 생성되었습니다.",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_ALLOWED",
+        "pageFetchState": "SUCCESSFUL",
+        "lastCrawlTime": "2026-11-02T12:40:33Z",
+        "googleCanonical": "https://motusnova.blogspot.com/",
+        "userCanonical": "https://motusnova.blogspot.com/",
+        "referringUrls": [
+          "https://motusnova.blogspot.com/?m=1",
+          "https://motusnova.blogspot.com/2026/10/13-ai.html"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/3-70.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-13T08:00:13Z",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "http://motusnova.blogspot.com/feeds/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/062-5683-1-09.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-05T14:35:59Z",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://www.blogger.com/feeds/3015267553244608361/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/amd-37-ai.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-05T14:35:44Z",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://motusnova.blogspot.com/feeds/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/359-5648-1-31.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-05T14:36:34Z",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://www.blogger.com/feeds/3015267553244608361/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/3-58.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-05T14:36:45Z",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://www.blogger.com/feeds/3015267553244608361/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/20-33.html",
+        "verdict": "PASS",
+        "coverageState": "제출되고 색인이 생성되었습니다.",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_ALLOWED",
+        "pageFetchState": "SUCCESSFUL",
+        "lastCrawlTime": "2026-11-02T14:10:53Z",
+        "googleCanonical": "https://motusnova.blogspot.com/2026/11/20-33.html",
+        "userCanonical": "https://motusnova.blogspot.com/2026/11/20-33.html",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://www.blogger.com/feeds/3015267553244608361/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/11-13-3-amd-88.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "발견됨 - 현재 색인이 생성되지 않음",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "http://motusnova.blogspot.com/feeds/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/11-13-098-529053-1-05.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "발견됨 - 현재 색인이 생성되지 않음",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://motusnova.blogspot.com/feeds/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/2026-11-13-ai.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "발견됨 - 현재 색인이 생성되지 않음",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://motusnova.blogspot.com/2026/11/"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/amd-59-ai.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "Google에는 아직 알려지지 않은 URL입니다.",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/11-12-3-amd-59.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "Google에는 아직 알려지지 않은 URL입니다.",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/11-12-061-534273-1-10.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-12T12:25:02Z",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://motusnova.blogspot.com/2026/11/11-12-3-amd-59.html"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/2026-11-12-ai.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-12T12:24:59Z",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "http://motusnova.blogspot.com/feeds/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/gemini.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-13T07:59:20Z",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "http://motusnova.blogspot.com/feeds/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/11-11-260-537536-1-46.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-12T12:24:52Z",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://motusnova.blogspot.com/feeds/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/11-11-3-16-88.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-12T12:22:53Z",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://www.blogger.com/feeds/3015267553244608361/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/2026-11-11-ai.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-12T12:34:25Z",
+        "referringUrls": [
+          "https://motusnova.blogspot.com/feeds/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/55-ai.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-12T12:35:29Z",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://motusnova.blogspot.com/2026/11/2026-11-11-ai.html"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/11-10-3-55.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-12T12:38:37Z",
+        "referringUrls": [
+          "https://motusnova.blogspot.com/2026/11/2026-11-11-ai.html"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/11-10-439-523913-1-50.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-12T12:35:29Z",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://motusnova.blogspot.com/feeds/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/2026-11-10-ai.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-11T10:44:37Z",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://motusnova.blogspot.com/feeds/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/ai_01456032107.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-11T10:45:01Z",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://motusnova.blogspot.com/feeds/posts/default",
+          "http://motusnova.blogspot.com/feeds/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/11-9-081-501885-1-09.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-11T10:45:31Z",
+        "referringUrls": [
+          "https://motusnova.blogspot.com/feeds/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/11-9-3-27-amd-13.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-11T10:45:01Z",
+        "referringUrls": [
+          "https://motusnova.blogspot.com/feeds/posts/default",
+          "http://motusnova.blogspot.com/feeds/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/2026-11-9-ai.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "Google에는 아직 알려지지 않은 URL입니다.",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/amd-11-ai.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "발견됨 - 현재 색인이 생성되지 않음",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://www.blogger.com/feeds/3015267553244608361/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/11-6-602-505969-1-40.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "발견됨 - 현재 색인이 생성되지 않음",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://motusnova.blogspot.com/feeds/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/34-117-cpippi.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "Google에는 아직 알려지지 않은 URL입니다.",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/3-amd-11.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "발견됨 - 현재 색인이 생성되지 않음",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://motusnova.blogspot.com/2026/11/34-117-cpippi.html"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/2026-11-6.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "발견됨 - 현재 색인이 생성되지 않음",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://motusnova.blogspot.com/2026/11/34-117-cpippi.html"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/528-538380-1-76.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "발견됨 - 현재 색인이 생성되지 않음",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://motusnova.blogspot.com/feeds/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/3-amd-17.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "발견됨 - 현재 색인이 생성되지 않음",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://www.blogger.com/feeds/3015267553244608361/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/2026-11-5.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "발견됨 - 현재 색인이 생성되지 않음",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://www.blogger.com/feeds/3015267553244608361/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/ai.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "크롤링됨 - 현재 색인이 생성되지 않음",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_ALLOWED",
+        "pageFetchState": "SUCCESSFUL",
+        "lastCrawlTime": "2026-11-03T22:24:29Z",
+        "googleCanonical": "https://motusnova.blogspot.com/2026/11/ai.html",
+        "userCanonical": "https://motusnova.blogspot.com/2026/11/ai.html",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://motusnova.blogspot.com/feeds/posts/default",
+          "http://motusnova.blogspot.com/feeds/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/10/286-10-3.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "크롤링됨 - 현재 색인이 생성되지 않음",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_ALLOWED",
+        "pageFetchState": "SUCCESSFUL",
+        "lastCrawlTime": "2026-10-31T16:46:08Z",
+        "googleCanonical": "https://motusnova.blogspot.com/2026/10/286-10-3.html",
+        "userCanonical": "https://motusnova.blogspot.com/2026/10/286-10-3.html",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://www.blogger.com/feeds/3015267553244608361/posts/default",
+          "https://motusnova.blogspot.com/feeds/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/10/13-ai.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-05T14:36:34Z",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "http://motusnova.blogspot.com/feeds/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/10/124-5937-1-48.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-05T14:35:48Z",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://www.blogger.com/feeds/3015267553244608361/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/10/3-42.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "Google에는 아직 알려지지 않은 URL입니다.",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/10/s-500.html",
+        "verdict": "PASS",
+        "coverageState": "제출되고 색인이 생성되었습니다.",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_ALLOWED",
+        "pageFetchState": "SUCCESSFUL",
+        "lastCrawlTime": "2026-11-01T10:47:58Z",
+        "googleCanonical": "https://motusnova.blogspot.com/2026/10/s-500.html",
+        "userCanonical": "https://motusnova.blogspot.com/2026/10/s-500.html",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "http://motusnova.blogspot.com/feeds/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/10/rtx-spark.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "발견됨 - 현재 색인이 생성되지 않음",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "http://motusnova.blogspot.com/feeds/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/10/1q-sk.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "Google에는 아직 알려지지 않은 URL입니다.",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/10/nasdaq_02017334565.html",
+        "verdict": "PASS",
+        "coverageState": "제출되고 색인이 생성되었습니다.",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_ALLOWED",
+        "pageFetchState": "SUCCESSFUL",
+        "lastCrawlTime": "2026-11-01T16:27:36Z",
+        "googleCanonical": "https://motusnova.blogspot.com/2026/10/nasdaq_02017334565.html",
+        "userCanonical": "https://motusnova.blogspot.com/2026/10/nasdaq_02017334565.html",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://motusnova.blogspot.com/2026/11/20-33.html"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/10/ai_01909993953.html",
+        "verdict": "PASS",
+        "coverageState": "제출되고 색인이 생성되었습니다.",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_ALLOWED",
+        "pageFetchState": "SUCCESSFUL",
+        "lastCrawlTime": "2026-11-02T09:21:54Z",
+        "googleCanonical": "https://motusnova.blogspot.com/2026/10/ai_01909993953.html",
+        "userCanonical": "https://motusnova.blogspot.com/2026/10/ai_01909993953.html",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://motusnova.blogspot.com/2026/11/20-33.html"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/10/aws-gpt-61.html",
+        "verdict": "PASS",
+        "coverageState": "제출되고 색인이 생성되었습니다.",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_ALLOWED",
+        "pageFetchState": "SUCCESSFUL",
+        "lastCrawlTime": "2026-11-01T12:35:36Z",
+        "googleCanonical": "https://motusnova.blogspot.com/2026/10/aws-gpt-61.html",
+        "userCanonical": "https://motusnova.blogspot.com/2026/10/aws-gpt-61.html",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://motusnova.blogspot.com/2026/11/20-33.html"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/10/nasdaq.html",
+        "verdict": "PASS",
+        "coverageState": "제출되고 색인이 생성되었습니다.",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_ALLOWED",
+        "pageFetchState": "SUCCESSFUL",
+        "lastCrawlTime": "2026-11-01T12:06:57Z",
+        "googleCanonical": "https://motusnova.blogspot.com/2026/10/nasdaq.html",
+        "userCanonical": "https://motusnova.blogspot.com/2026/10/nasdaq.html",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://motusnova.blogspot.com/2026/11/20-33.html"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/10/ai_0953310071.html",
+        "verdict": "PASS",
+        "coverageState": "제출되고 색인이 생성되었습니다.",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_ALLOWED",
+        "pageFetchState": "SUCCESSFUL",
+        "lastCrawlTime": "2026-11-01T14:41:43Z",
+        "googleCanonical": "https://motusnova.blogspot.com/2026/10/ai_0953310071.html",
+        "userCanonical": "https://motusnova.blogspot.com/2026/10/ai_0953310071.html",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://motusnova.blogspot.com/2026/11/20-33.html"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/10/blog-post.html",
+        "verdict": "PASS",
+        "coverageState": "제출되고 색인이 생성되었습니다.",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_ALLOWED",
+        "pageFetchState": "SUCCESSFUL",
+        "lastCrawlTime": "2026-11-03T06:03:01Z",
+        "googleCanonical": "https://motusnova.blogspot.com/2026/10/blog-post.html",
+        "userCanonical": "https://motusnova.blogspot.com/2026/10/blog-post.html",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://motusnova.blogspot.com/2026/11/20-33.html"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/10/dow-jones.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "Google에는 아직 알려지지 않은 URL입니다.",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/10/kbi.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "발견됨 - 현재 색인이 생성되지 않음",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/10/2026-10-14.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "발견됨 - 현재 색인이 생성되지 않음",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ]
+      }
+    ],
+    "fixedSample": {
+      "paths": [
+        "/",
+        "/2026/11/3-70.html",
+        "/2026/11/062-5683-1-09.html",
+        "/2026/11/amd-37-ai.html",
+        "/2026/11/359-5648-1-31.html",
+        "/2026/11/3-58.html",
+        "/2026/11/20-33.html"
+      ],
+      "chains": [
+        {
+          "url": "https://motusnova.blogspot.com/",
+          "agent": "desktop",
+          "hops": [
+            {
+              "status": 302,
+              "location": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/&q=EgQDKdKJGKHy5NcGIi0fa-Ru7D3VkfWFPuy1aL7giHH57EVje6r9cvn4OTGU1eTJ-vtGoTI5P65DvE0yAnJSWgFDYLed0qznvuffzwE"
+            },
+            {
+              "status": 429,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/&q=EgQDKdKJGKHy5NcGIi0fa-Ru7D3VkfWFPuy1aL7giHH57EVje6r9cvn4OTGU1eTJ-vtGoTI5P65DvE0yAnJSWgFDYLed0qznvuffzwE",
+          "canonical": null
+        },
+        {
+          "url": "https://motusnova.blogspot.com/",
+          "agent": "googlebot-smartphone",
+          "hops": [
+            {
+              "status": 302,
+              "location": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/&q=EgQDKdKJGKLy5NcGIi1n1gfzu0NBcog_-zFMaP1tfCDbEueWPYI4vMIko68IeQ8E4KJjTSzyqCjBBJ0yAnJSWgFDYMrV28_snpjIWA"
+            },
+            {
+              "status": 429,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/&q=EgQDKdKJGKLy5NcGIi1n1gfzu0NBcog_-zFMaP1tfCDbEueWPYI4vMIko68IeQ8E4KJjTSzyqCjBBJ0yAnJSWgFDYMrV28_snpjIWA",
+          "canonical": null
+        },
+        {
+          "url": "https://motusnova.blogspot.com/2026/11/3-70.html",
+          "agent": "desktop",
+          "hops": [
+            {
+              "status": 302,
+              "location": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/3-70.html&q=EgQDKdKJGKLy5NcGIi3_A8WGmFYxl5xBITsmcYQM6SOV-PDx4PeJuzZXRxV_LlR25UwMQSSIFRY6_DIyAnJSWgFDYIaWxLzYobvFQQ"
+            },
+            {
+              "status": 429,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/3-70.html&q=EgQDKdKJGKLy5NcGIi3_A8WGmFYxl5xBITsmcYQM6SOV-PDx4PeJuzZXRxV_LlR25UwMQSSIFRY6_DIyAnJSWgFDYIaWxLzYobvFQQ",
+          "canonical": null
+        },
+        {
+          "url": "https://motusnova.blogspot.com/2026/11/3-70.html",
+          "agent": "googlebot-smartphone",
+          "hops": [
+            {
+              "status": 302,
+              "location": "https://motusnova.blogspot.com/2026/11/3-70.html?m=1"
+            },
+            {
+              "status": 302,
+              "location": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/3-70.html%3Fm%3D1&q=EgQDKdKJGKLy5NcGIi22OloP7WpgPYQLB8nBwWF5MxBdXE2rEx-G3tGbHZ110jyDplAwR7SLn_R1CfoyAnJSWgFDYKzu0rW0sfvojwE"
+            },
+            {
+              "status": 429,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/3-70.html%3Fm%3D1&q=EgQDKdKJGKLy5NcGIi22OloP7WpgPYQLB8nBwWF5MxBdXE2rEx-G3tGbHZ110jyDplAwR7SLn_R1CfoyAnJSWgFDYKzu0rW0sfvojwE",
+          "canonical": null
+        },
+        {
+          "url": "https://motusnova.blogspot.com/2026/11/062-5683-1-09.html",
+          "agent": "desktop",
+          "hops": [
+            {
+              "status": 200,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://motusnova.blogspot.com/2026/11/062-5683-1-09.html",
+          "canonical": null
+        },
+        {
+          "url": "https://motusnova.blogspot.com/2026/11/062-5683-1-09.html",
+          "agent": "googlebot-smartphone",
+          "hops": [
+            {
+              "status": 302,
+              "location": "https://motusnova.blogspot.com/2026/11/062-5683-1-09.html?m=1"
+            },
+            {
+              "status": 302,
+              "location": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/062-5683-1-09.html%3Fm%3D1&q=EgQDKdKJGKPy5NcGIi1EOGA12QV-od3QgaWFNMy3HAmy5ljfPljO9n7ue_sNqh0oDAchcIPIUzYEaP4yAnJSWgFDYKelod7KuI-prAE"
+            },
+            {
+              "status": 429,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/062-5683-1-09.html%3Fm%3D1&q=EgQDKdKJGKPy5NcGIi1EOGA12QV-od3QgaWFNMy3HAmy5ljfPljO9n7ue_sNqh0oDAchcIPIUzYEaP4yAnJSWgFDYKelod7KuI-prAE",
+          "canonical": null
+        },
+        {
+          "url": "https://motusnova.blogspot.com/2026/11/amd-37-ai.html",
+          "agent": "desktop",
+          "hops": [
+            {
+              "status": 200,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://motusnova.blogspot.com/2026/11/amd-37-ai.html",
+          "canonical": null
+        },
+        {
+          "url": "https://motusnova.blogspot.com/2026/11/amd-37-ai.html",
+          "agent": "googlebot-smartphone",
+          "hops": [
+            {
+              "status": 302,
+              "location": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/amd-37-ai.html&q=EgQDKdKJGKPy5NcGIi1fErKwOCVXWH-3rmNkEBLm3dQSfKxmI4q_PrlqX-pGXiq-jiIFdIep8s3QTeIyAnJSWgFDYPTHrvSEhPbMZA"
+            },
+            {
+              "status": 429,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/amd-37-ai.html&q=EgQDKdKJGKPy5NcGIi1fErKwOCVXWH-3rmNkEBLm3dQSfKxmI4q_PrlqX-pGXiq-jiIFdIep8s3QTeIyAnJSWgFDYPTHrvSEhPbMZA",
+          "canonical": null
+        },
+        {
+          "url": "https://motusnova.blogspot.com/2026/11/359-5648-1-31.html",
+          "agent": "desktop",
+          "hops": [
+            {
+              "status": 200,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://motusnova.blogspot.com/2026/11/359-5648-1-31.html",
+          "canonical": null
+        },
+        {
+          "url": "https://motusnova.blogspot.com/2026/11/359-5648-1-31.html",
+          "agent": "googlebot-smartphone",
+          "hops": [
+            {
+              "status": 302,
+              "location": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/359-5648-1-31.html&q=EgQDKdKJGKTy5NcGIi0jHl-VS1xIuNzD5PH7Sg9-wn9tVXoDKGdsYe-HAOOuxxuC_PY_U0NvCZIRBv8yAnJSWgFDYPSQh_yAmoW39wE"
+            },
+            {
+              "status": 429,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/359-5648-1-31.html&q=EgQDKdKJGKTy5NcGIi0jHl-VS1xIuNzD5PH7Sg9-wn9tVXoDKGdsYe-HAOOuxxuC_PY_U0NvCZIRBv8yAnJSWgFDYPSQh_yAmoW39wE",
+          "canonical": null
+        },
+        {
+          "url": "https://motusnova.blogspot.com/2026/11/3-58.html",
+          "agent": "desktop",
+          "hops": [
+            {
+              "status": 302,
+              "location": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/3-58.html&q=EgQDKdKJGKXy5NcGIi1bnuzIts1hdzjJMBz45RN38QZg_sM8RZaOqsVM2n8yB8RfwfePilIpxm9UgCoyAnJSWgFDYNq5ptuuz8Hx_QE"
+            },
+            {
+              "status": 429,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/3-58.html&q=EgQDKdKJGKXy5NcGIi1bnuzIts1hdzjJMBz45RN38QZg_sM8RZaOqsVM2n8yB8RfwfePilIpxm9UgCoyAnJSWgFDYNq5ptuuz8Hx_QE",
+          "canonical": null
+        },
+        {
+          "url": "https://motusnova.blogspot.com/2026/11/3-58.html",
+          "agent": "googlebot-smartphone",
+          "hops": [
+            {
+              "status": 302,
+              "location": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/3-58.html&q=EgQDKdKJGKXy5NcGIi0KJCIpEyqf_3RXRHEBKqUIPQ02JdOYNk98DOvQR3F9cS7LjbOxV5aQJLpFd7gyAnJSWgFDYKyn77mKlaj_iAE"
+            },
+            {
+              "status": 429,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/3-58.html&q=EgQDKdKJGKXy5NcGIi0KJCIpEyqf_3RXRHEBKqUIPQ02JdOYNk98DOvQR3F9cS7LjbOxV5aQJLpFd7gyAnJSWgFDYKyn77mKlaj_iAE",
+          "canonical": null
+        },
+        {
+          "url": "https://motusnova.blogspot.com/2026/11/20-33.html",
+          "agent": "desktop",
+          "hops": [
+            {
+              "status": 302,
+              "location": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/20-33.html&q=EgQDKdKJGKby5NcGIi11SXbjTcAVfOIOK8qAi20htiL6EmSU9whkgPBPLuLlSHjJPVjQkmx_lEY93FMyAnJSWgFDYLy_8pT674v6xQE"
+            },
+            {
+              "status": 429,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/20-33.html&q=EgQDKdKJGKby5NcGIi11SXbjTcAVfOIOK8qAi20htiL6EmSU9whkgPBPLuLlSHjJPVjQkmx_lEY93FMyAnJSWgFDYLy_8pT674v6xQE",
+          "canonical": null
+        },
+        {
+          "url": "https://motusnova.blogspot.com/2026/11/20-33.html",
+          "agent": "googlebot-smartphone",
+          "hops": [
+            {
+              "status": 302,
+              "location": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/20-33.html&q=EgQDKdKJGKby5NcGIi1L_XEGvq2Fw1Z25o003_Hl1IGE6ASbTFNjWFXjxT2_QqJXibbZ-YwuY6qBC6UyAnJSWgFDYOSm0ZWmsf38cA"
+            },
+            {
+              "status": 429,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/20-33.html&q=EgQDKdKJGKby5NcGIi1L_XEGvq2Fw1Z25o003_Hl1IGE6ASbTFNjWFXjxT2_QqJXibbZ-YwuY6qBC6UyAnJSWgFDYOSm0ZWmsf38cA",
+          "canonical": null
+        }
+      ]
+    }
+  },
+  "datalab": {
+    "state": "PASS"
+  },
+  "naverBlogSearch": {
+    "state": "PASS"
+  },
+  "ourArticles": [
+    {
+      "title": "11월 13일 뉴욕증시 마감, 3대 지수 혼조…AMD 8.8% 급락",
+      "url": "https://motusnova.blogspot.com/2026/11/11-13-3-amd-88.html",
+      "labels": [
+        "미국증시"
+      ],
+      "publishedKst": "2026-11-14 06:47",
+      "features": {
+        "textLength": 9186,
+        "imageCount": 2,
+        "chartCount": 4,
+        "headingCount": 15,
+        "tableCount": 0,
+        "linkCount": 39
+      },
+      "keywords": [
+        "뉴욕증시 마감",
+        "뉴욕증시"
+      ],
+      "searchConsole": [],
+      "datalab": [
+        {
+          "keyword": "뉴욕증시 마감",
+          "series": [
+            [
+              "2026-11-01",
+              0.02534
+            ],
+            [
+              "2026-11-02",
+              0.10139
+            ],
+            [
+              "2026-11-03",
+              0.30057
+            ],
+            [
+              "2026-11-04",
+              0.19917
+            ],
+            [
+              "2026-11-05",
+              0.16658
+            ],
+            [
+              "2026-11-06",
+              0.36937
+            ],
+            [
+              "2026-11-07",
+              0.18468
+            ],
+            [
+              "2026-11-08",
+              0.03621
+            ],
+            [
+              "2026-11-09",
+              0.07604
+            ],
+            [
+              "2026-11-10",
+              0.24263
+            ],
+            [
+              "2026-11-11",
+              0.24987
+            ],
+            [
+              "2026-11-12",
+              0.28608
+            ],
+            [
+              "2026-11-13",
+              0.26435
+            ],
+            [
+              "2026-11-14",
+              0.08691
+            ]
+          ]
+        },
+        {
+          "keyword": "뉴욕증시",
+          "series": [
+            [
+              "2026-11-01",
+              5.93901
+            ],
+            [
+              "2026-11-02",
+              27.22532
+            ],
+            [
+              "2026-11-03",
+              78.75715
+            ],
+            [
+              "2026-11-04",
+              74.40428
+            ],
+            [
+              "2026-11-05",
+              80.88288
+            ],
+            [
+              "2026-11-06",
+              100
+            ],
+            [
+              "2026-11-07",
+              57.23546
+            ],
+            [
+              "2026-11-08",
+              7.03266
+            ],
+            [
+              "2026-11-09",
+              24.65416
+            ],
+            [
+              "2026-11-10",
+              78.57246
+            ],
+            [
+              "2026-11-11",
+              78.38777
+            ],
+            [
+              "2026-11-12",
+              79.01788
+            ],
+            [
+              "2026-11-13",
+              69.41768
+            ],
+            [
+              "2026-11-14",
+              50.06156
+            ]
+          ]
+        }
+      ],
+      "competitors": [
+        {
+          "keyword": "뉴욕증시 마감",
+          "top": [
+            {
+              "rank": 1,
+              "title": "11월 12일 뉴욕증시 마감 시황｜미국 증시 주요 이슈 정리",
+              "link": "https://blog.naver.com/sc_tv/224475234259",
+              "blogger": "SCTV주식챔피언",
+              "bloggerLink": "https://blog.naver.com/sc_tv",
+              "postdate": "20261113",
+              "description": "김선규 소장이 알려주는 전일 뉴욕증시 마감시황입니다. 11월 12일(현지시간) 뉴욕증시는 엔비디아 경영진 관련 충격과 중동 지정학적 긴장에 따른 국제유가 급등, 미국 국채금리 상승 부담이 겹치며... ",
+              "features": {
+                "textLength": 4254,
+                "imageCount": 0,
+                "chartCount": 0,
+                "headingCount": 1,
+                "tableCount": 6,
+                "linkCount": 0
+              }
+            },
+            {
+              "rank": 2,
+              "title": "뉴욕증시 마감요약(11월11일)",
+              "link": "https://blog.naver.com/insigt913/224473832140",
+              "blogger": "insigt913님의 블로그",
+              "bloggerLink": "https://blog.naver.com/insigt913",
+              "postdate": "20261112",
+              "description": "### 뉴욕증시 마감시황 및 주요 이슈 26년 11월 11일(수) 미국 현지시간 마감 기술주 중심 강한 반등 미국 증시는 전일 급락 이후 AI·반도체주가 반등하면서 상승 마감했습니다. 특히 엔비디아의 반등과... ",
+              "features": {
+                "textLength": 3176,
+                "imageCount": 0,
+                "chartCount": 0,
+                "headingCount": 0,
+                "tableCount": 0,
+                "linkCount": 0
+              }
+            },
+            {
+              "rank": 3,
+              "title": "뉴욕증시 마감 나스닥 -0.39%, 11월 12일 젠슨 황 사임 엔비디아 -4.43%",
+              "link": "https://blog.naver.com/moneyfinds/224475153341",
+              "blogger": "머니알려줘",
+              "bloggerLink": "https://blog.naver.com/moneyfinds",
+              "postdate": "20261113",
+              "description": "0, Wikimedia Commons). 투자 권유가 아닙니다. #뉴욕증시마감 #나스닥마감 #젠슨황사임 #엔비디아주가 #엔비디아 #미국증시 #다우존스 #AMD #브로드컴 #불릴돈 #머니알려줘",
+              "features": {
+                "textLength": 2335,
+                "imageCount": 8,
+                "chartCount": 0,
+                "headingCount": 3,
+                "tableCount": 0,
+                "linkCount": 11
+              }
+            },
+            {
+              "rank": 4,
+              "title": "미국증시 전망 및 뉴욕증시 마감 시황 총정리! 나스닥·다우존스·S&amp;P....",
+              "link": "https://blog.naver.com/daone0113/224468138737",
+              "blogger": "JIJI",
+              "bloggerLink": "https://blog.naver.com/daone0113",
+              "postdate": "20261107",
+              "description": "오늘은 미국증시 주요 지수와 최근 뉴욕증시 마감 상황, 앞으로 주목해야 할 투자 포인트를 살펴보겠습니다. 1. 미국증시란 무엇일까요? 미국증시는 미국에서 거래되는 주식시장을 의미합니다. 대표적으로... ",
+              "features": {
+                "textLength": 3430,
+                "imageCount": 2,
+                "chartCount": 0,
+                "headingCount": 0,
+                "tableCount": 3,
+                "linkCount": 2
+              }
+            },
+            {
+              "rank": 5,
+              "title": "뉴욕증시 마감 11월 11일, 코어위브 실적에 반도체 5.7% 반등",
+              "link": "https://blog.naver.com/sockmool/224473791308",
+              "blogger": "속물일기",
+              "bloggerLink": "https://blog.naver.com/sockmool",
+              "postdate": "20261112",
+              "description": "11월 11일(수, 미국 시각) 뉴욕증시 마감. 나스닥 종합은 25,466으로 하루 1.6% 올랐습니다. S&amp;P500은 7,619로 1.3%, 다우는 52,486으로 0.5% 올랐습니다. 세 지수가 모두 빨간불이었습니다. 그런데 진짜 주인공은 따로... ",
+              "features": {
+                "textLength": 2177,
+                "imageCount": 6,
+                "chartCount": 0,
+                "headingCount": 6,
+                "tableCount": 0,
+                "linkCount": 6
+              }
+            },
+            {
+              "rank": 6,
+              "title": "11월 11일 뉴욕증시 마감 시황｜미국 증시 주요 이슈 정리",
+              "link": "https://blog.naver.com/sc_tv/224473860652",
+              "blogger": "SCTV주식챔피언",
+              "bloggerLink": "https://blog.naver.com/sc_tv",
+              "postdate": "20261112",
+              "description": "김선규 소장이 알려주는 전일 뉴욕증시 마감시황입니다. 11월 11일(현지시간) 뉴욕증시는 AI 클라우드 기업 코어위브의 호실적과 앤스로픽 IPO 흥행 기대감으로 AI·반도체 관련주에 강한 매수세가... "
+            },
+            {
+              "rank": 7,
+              "title": "11월 12일 미국증시 요약, 11월 12일 경제뉴스, 뉴욕증시 마감",
+              "link": "https://blog.naver.com/yoon3844/224473778850",
+              "blogger": "해달님의 두번째 서른",
+              "bloggerLink": "https://blog.naver.com/yoon3844",
+              "postdate": "20261112",
+              "description": "Reuters #11월12일경제뉴스 #미국증시요약 #뉴욕증시마감 #나스닥 #코어위브 #필라델피아반도체지수 #미국반도체주 #대중반도체규제 #매치법 #삼성전자 #SK하이닉스 #한미관계 #서울아파트 #경기아파트... "
+            },
+            {
+              "rank": 8,
+              "title": "[11월 10일 뉴욕증시 마감] CPI 충격에 3대 지수 하락… 엔비디아 이틀....",
+              "link": "https://blog.naver.com/lifenote_2811/224472533103",
+              "blogger": "자본주의 세상에서 \"나\" 돌보기",
+              "bloggerLink": "https://blog.naver.com/lifenote_2811",
+              "postdate": "20261111",
+              "description": "오늘의 한 줄 10월 소비자물가(CPI)가 예상보다 높게 나오면서 뉴욕증시가 하루 만에 하락으로... 코어위브는 정규장에서 0.5% 내린 뒤, 장 마감 후 3분기 매출 36억 6천만 달러를 발표해 예상치(35억... "
+            },
+            {
+              "rank": 9,
+              "title": "뉴욕증시 마감 11월 12일, 엔비디아 젠슨 황 사임에 4% 하락",
+              "link": "https://blog.naver.com/sockmool/224475165820",
+              "blogger": "속물일기",
+              "bloggerLink": "https://blog.naver.com/sockmool",
+              "postdate": "20261113",
+              "description": "11월 12일(목, 미국 시각) 뉴욕증시 마감. 나스닥 종합은 25,366으로 약 0.4% 내렸습니다. S&amp;P500은 7,592, 다우는 52,297로 마쳤습니다. 둘 다 하루 약 0.4% 하락입니다. 젠슨 황 CEO가 물러난 날치고는 지수가 너무... "
+            },
+            {
+              "rank": 10,
+              "title": "뉴욕증시 하락, 11월 10일 마감 숫자와 미국 10월 CPI 정리",
+              "link": "https://blog.naver.com/wjddnjs6506/224473915828",
+              "blogger": "엔터 피드",
+              "bloggerLink": "https://blog.naver.com/wjddnjs6506",
+              "postdate": "20261112",
+              "description": "#뉴욕증시하락 #뉴욕증시 #미국증시마감 #나스닥종합 #다우지수 #SP500 #미국CPI #미국물가 #연준 #엔비디아 AP 11월 10일 미국 증시 마감 · 미 노동통계국 10월 CPI 발표 · 미 연준 월러 이사 연설 · AP 물가와... "
+            }
+          ]
+        },
+        {
+          "keyword": "뉴욕증시",
+          "top": [
+            {
+              "rank": 1,
+              "title": "11월 12일 뉴욕증시 마감 시황｜미국 증시 주요 이슈 정리",
+              "link": "https://blog.naver.com/sc_tv/224475234259",
+              "blogger": "SCTV주식챔피언",
+              "bloggerLink": "https://blog.naver.com/sc_tv",
+              "postdate": "20261113",
+              "description": "김선규 소장이 알려주는 전일 뉴욕증시 마감시황입니다. 11월 12일(현지시간) 뉴욕증시는 엔비디아 경영진 관련 충격과 중동 지정학적 긴장에 따른 국제유가 급등, 미국 국채금리 상승 부담이 겹치며... ",
+              "features": {
+                "textLength": 4254,
+                "imageCount": 0,
+                "chartCount": 0,
+                "headingCount": 1,
+                "tableCount": 6,
+                "linkCount": 0
+              }
+            },
+            {
+              "rank": 2,
+              "title": "미국증시 전망 및 뉴욕증시 마감 시황 총정리! 나스닥·다우존스·S&amp;P....",
+              "link": "https://blog.naver.com/daone0113/224468138737",
+              "blogger": "JIJI",
+              "bloggerLink": "https://blog.naver.com/daone0113",
+              "postdate": "20261107",
+              "description": "오늘은 미국증시 주요 지수와 최근 뉴욕증시 마감 상황, 앞으로 주목해야 할 투자 포인트를 살펴보겠습니다. 1. 미국증시란 무엇일까요? 미국증시는 미국에서 거래되는 주식시장을 의미합니다. 대표적으로... ",
+              "features": {
+                "textLength": 3430,
+                "imageCount": 2,
+                "chartCount": 0,
+                "headingCount": 0,
+                "tableCount": 3,
+                "linkCount": 2
+              }
+            },
+            {
+              "rank": 3,
+              "title": "&quot;증시는 날아가는데 왜 내 코인은 이 모양일까?&quot; 뉴욕증시 랠리와 비....",
+              "link": "https://blog.naver.com/aram8689/224473971253",
+              "blogger": "원하는 것을 끌어당기는 힘",
+              "bloggerLink": "https://blog.naver.com/aram8689",
+              "postdate": "20261113",
+              "description": "같은 밤을 보냈는데, 계좌의 아침은 달랐다 아침에 경제 뉴스를 열면 뉴욕증시가 반등했다는 소식이 먼저 눈에 들어오는 것 같다. AI 관련 기업의 실적이 투자 심리를 되살렸고, 기술주에 다시 매수세가... ",
+              "features": {
+                "textLength": 5002,
+                "imageCount": 5,
+                "chartCount": 0,
+                "headingCount": 13,
+                "tableCount": 4,
+                "linkCount": 5
+              }
+            },
+            {
+              "rank": 4,
+              "title": "젠슨 황의 사퇴와 뉴욕증시의 혼돈 (feat. 미중 정보전)",
+              "link": "https://blog.naver.com/rnrnqjrtm/224476538507",
+              "blogger": "청담생각",
+              "bloggerLink": "https://blog.naver.com/rnrnqjrtm",
+              "postdate": "20261114",
+              "description": "어젯밤 뉴욕증시 마감 브리핑을 보던 투자자들은 고개를 갸웃거렸을 것임. 2. 지수는 전반적으로 혼조세로 마감했지만, 시장 밑바닥의 기류는 평소와 완전히 달랐음. 3. 인플레이션이나 금리 결정... ",
+              "features": {
+                "textLength": 3580,
+                "imageCount": 1,
+                "chartCount": 0,
+                "headingCount": 0,
+                "tableCount": 0,
+                "linkCount": 2
+              }
+            },
+            {
+              "rank": 5,
+              "title": "[11월 10일 뉴욕증시 마감] CPI 충격에 3대 지수 하락… 엔비디아 이틀....",
+              "link": "https://blog.naver.com/lifenote_2811/224472533103",
+              "blogger": "자본주의 세상에서 \"나\" 돌보기",
+              "bloggerLink": "https://blog.naver.com/lifenote_2811",
+              "postdate": "20261111",
+              "description": "오늘의 한 줄 10월 소비자물가(CPI)가 예상보다 높게 나오면서 뉴욕증시가 하루 만에 하락으로 돌아섰습니다. 엔비디아는 CEO 관련 이사회 조사 여파로 이틀째 급락했지만, 다른 반도체주로 충격이... ",
+              "features": {
+                "textLength": 4267,
+                "imageCount": 0,
+                "chartCount": 0,
+                "headingCount": 0,
+                "tableCount": 6,
+                "linkCount": 0
+              }
+            },
+            {
+              "rank": 6,
+              "title": "뉴욕증시 반등, AI가 다시 시장을 움직였다! 코어위브 24% 폭등…SK하....",
+              "link": "https://blog.naver.com/jeonsssi/224473881632",
+              "blogger": "직장시인(Worker_poet)의 단상",
+              "bloggerLink": "https://blog.naver.com/jeonsssi",
+              "postdate": "20261112",
+              "description": "전날 물가 상승에 따른 금리 부담으로 주춤했던 뉴욕증시는 이번에는 AI 연산 수요와 데이터센터 투자 확대라는 강력한 재료에 힘입어 상승세로 장을 마감했습니다. 이번 반등에서 가장 주목해야 할 부분은... "
+            },
+            {
+              "rank": 7,
+              "title": "고용 지표 발표 후 뉴욕증시가 상승한 이유와 금리 동결 전망",
+              "link": "https://blog.naver.com/y0ungwon2/224432008692",
+              "blogger": "SOM1_LIKEU",
+              "bloggerLink": "https://blog.naver.com/y0ungwon2",
+              "postdate": "20261114",
+              "description": "고용 지표 발표 후 뉴욕증시가 상승한 이유와 금리 동결 전망 오늘 다룰 주요 이슈는 고용 지표 흐름과 뉴욕증시의 움직임입니다. 금리 걱정부터 앞서는 분들이 많으실 거예요. 혹시 지표 발표 때마다 어떻게... "
+            },
+            {
+              "rank": 8,
+              "title": "젠슨 황 스캔들 여파 지속…엔비디아 2.01%↓에 뉴욕증시 혼조세",
+              "link": "https://blog.naver.com/hms3913/224476552964",
+              "blogger": "데일리 인포 브리핑 아카이브 실시간 검색 이슈",
+              "bloggerLink": "https://blog.naver.com/hms3913",
+              "postdate": "20261114",
+              "description": "2026년 11월 14일 토요일 아침, 밤사이 전해진 미국 뉴욕증시 소식은 여전히 한 인물의 빈자리가 남긴 거대한 파장으로 뜨겁습니다. 33년 동안 엔비디아를 이끌며 인공지능 시대의 상징으로 불렸던 젠슨 황 전... "
+            },
+            {
+              "rank": 9,
+              "title": "뉴욕증시브리핑_2026-11-05 (목)",
+              "link": "https://blog.naver.com/obandit123/224465484830",
+              "blogger": "AI/테크 분석",
+              "bloggerLink": "https://blog.naver.com/obandit123",
+              "postdate": "20261105",
+              "description": "오늘의 요약 어제(11/4, 미국시간) 뉴욕증시는 S&amp;P500 +1.58%, 나스닥 +1.44%, 다우 +3.03%로 일제히 급등했습니다. 민주당의 상·하원 동시 장악 → '이란 전쟁 종식' 기대 → 유가 -8% 폭락이라는... "
+            },
+            {
+              "rank": 10,
+              "title": "뉴욕증시 일제히 반등했는데… 엔비디아만 4.27% 급락한 이유는?",
+              "link": "https://blog.naver.com/eehyungk79_/224471211237",
+              "blogger": "글로 디자인하는 삶",
+              "bloggerLink": "https://blog.naver.com/eehyungk79_",
+              "postdate": "20261110",
+              "description": "뉴욕증시 일제히 반등했는데… 엔비디아만 4.27% 급락한 이유는? 안녕하세요. 오늘의 경제 뉴스를 전해드립니다. 미국 뉴욕증시가 최근 급락 충격을 딛고 반등했습니다. 다우존스, 나스닥, S&amp;P500 등 주요 지수가... "
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
