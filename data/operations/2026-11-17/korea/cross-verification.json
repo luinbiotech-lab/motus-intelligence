@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "1.0",
+  "category": "KOREA_MARKET",
+  "observedDate": "2026-11-16",
+  "primarySource": {
+    "provider": "Naver Finance",
+    "domain": "naver.com",
+    "urls": [
+      "https://m.stock.naver.com/api/index/KOSPI/price?pageSize=10&page=1",
+      "https://m.stock.naver.com/api/index/KOSDAQ/price?pageSize=10&page=1"
+    ]
+  },
+  "independentSource": {
+    "providers": [
+      "YAHOO_FINANCE"
+    ],
+    "domains": [
+      "yahoo.com"
+    ],
+    "urls": [
+      "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?period1=1794614400&period2=1795046400&interval=1d",
+      "https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?period1=1794614400&period2=1795046400&interval=1d"
+    ]
+  },
+  "comparedFields": [
+    {
+      "field": "KOSPI",
+      "primaryValue": 5100.5,
+      "independentValue": 5100.5,
+      "difference": 0,
+      "tolerance": 0.05,
+      "result": "PASS",
+      "primarySourceUrl": "https://m.stock.naver.com/api/index/KOSPI/price?pageSize=10&page=1",
+      "independentSourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?period1=1794614400&period2=1795046400&interval=1d",
+      "metricBasis": "SESSION_CLOSE"
+    },
+    {
+      "field": "KOSDAQ",
+      "primaryValue": 665.65,
+      "independentValue": 665.6500244140625,
+      "difference": 0.000024414062522737368,
+      "tolerance": 0.05,
+      "result": "PASS",
+      "primarySourceUrl": "https://m.stock.naver.com/api/index/KOSDAQ/price?pageSize=10&page=1",
+      "independentSourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?period1=1794614400&period2=1795046400&interval=1d",
+      "metricBasis": "SESSION_CLOSE"
+    }
+  ],
+  "tolerance": {
+    "KOSPI": 0.05,
+    "KOSDAQ": 0.05,
+    "USD_KRW": 2
+  },
+  "comparisonResult": "PASS",
+  "sourceDiversityPass": true,
+  "verification": "VERIFIED",
+  "reasonCodes": [],
+  "verifiedAt": "2026-11-16T08:05:20.803Z",
+  "officialPhase": "PRE_PUBLICATION",
+  "reconciliation": {
+    "status": "NOT_REQUIRED",
+    "officialObservedDates": [
+      "2026-11-16"
+    ]
+  }
+}
