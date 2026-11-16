@@ -11,12 +11,17 @@
  * PDF report (owner-approved design, 2026-11-01): when the Drive credentials are present, the week's three-page PDF
  * is rendered, uploaded to Google Drive ("MOTUS Reports/<year>/Weekly") and linked from the article. A PDF failure
  * never blocks the article. --attach-pdf adds the PDF link to a week that is already published (once).
+ *
+ * Outlook first (owner 2026-11-16): published Sunday morning as "주간 증시 전망", and refreshed once on Monday morning
+ * (--refresh): the same post (same id, permalink and title) gets the latest calendar, earnings and broker outlook. A
+ * refresh of a week that was never published publishes it instead. Every post carries a representative image.
  */
 import {appendFile,mkdir,readFile,writeFile} from 'node:fs/promises';
 import {existsSync} from 'node:fs';
 import {join,resolve} from 'node:path';
 import {buildWeeklyArticle,collectWeeklyEvidence,weekWindow} from './operations/weekly-review.js';
 import {renderWeeklyEditorialArticle,renderWeeklySection} from './publishers/editorial-article.js';
+import {heroMoves,prepareHeroImage} from './publishers/hero-card.js';
 import {buildWeeklyPdfHtml} from './reports/weekly-pdf.js';
 import {checkPdf,renderPdf} from './reports/pdf-render.js';
 import {DRIVE_ROOT_FOLDER,GoogleDriveClient,driveCredentialsFromEnvironment} from './services/google-drive.js';
@@ -27,11 +32,11 @@ export const WEEKLY_LABEL='주간 증시';
 const args=process.argv.slice(2),value=(flag:string)=>{const index=args.indexOf(flag);return index>=0?args[index+1]:undefined};
 const kstToday=new Date(Date.now()+9*3600000).toISOString().slice(0,10);
 const runDate=value('--date')??kstToday;if(!/^\d{4}-\d{2}-\d{2}$/.test(runDate))throw new Error('--date YYYY-MM-DD required');
-const execute=args.includes('--execute'),finalAttempt=args.includes('--final-attempt'),attachPdf=args.includes('--attach-pdf');
+const execute=args.includes('--execute'),finalAttempt=args.includes('--final-attempt'),attachPdf=args.includes('--attach-pdf'),refresh=args.includes('--refresh');
 const window=weekWindow(runDate),root=join(process.cwd(),'data','weekly',window.weekStart),identity=`weekly|${window.weekStart}`;
 await mkdir(root,{recursive:true});
 const ledgerPath=join(root,'publish-ledger.jsonl');
-type LedgerEntry={identity:string;at:string;event:'DRAFT_CREATED'|'DRAFT_ABANDONED'|'PUBLISHED'|'FAILED'|'SKIPPED_EXISTING'|'PDF_ATTACHED'|'PDF_FAILED';postId:string|null;publicPostUrl:string|null;title:string;detail:string};
+type LedgerEntry={identity:string;at:string;event:'DRAFT_CREATED'|'DRAFT_ABANDONED'|'PUBLISHED'|'FAILED'|'SKIPPED_EXISTING'|'PDF_ATTACHED'|'PDF_FAILED'|'REFRESHED'|'REFRESH_FAILED';postId:string|null;publicPostUrl:string|null;title:string;detail:string};
 const ledger=async():Promise<LedgerEntry[]>=>{try{return (await readFile(ledgerPath,'utf8')).split('\n').filter(Boolean).map(line=>JSON.parse(line) as LedgerEntry).filter(item=>item.identity===identity)}catch{return []}};
 const record=async(entry:Omit<LedgerEntry,'identity'|'at'>)=>appendFile(ledgerPath,JSON.stringify({identity,at:new Date().toISOString(),...entry})+'\n','utf8');
 const done=async(result:Record<string,unknown>):Promise<never>=>{await writeFile(join(root,'weekly-publish.json'),JSON.stringify({identity,runDate,...result},null,2),'utf8');if(process.env.GITHUB_ENV)await appendFile(process.env.GITHUB_ENV,`WEEKLY_RESULT=${join(root,'weekly-publish.json')}\n`,'utf8');console.log(JSON.stringify({identity,...result}));
@@ -54,11 +59,49 @@ async function weeklyPdfSection(evidence:WeeklyEvidence,article:WeeklyArticle):P
 
 // A week already published needs no collection at all, unless its PDF link is to be added once.
 const prior=await ledger(),published=prior.find(item=>item.event==='PUBLISHED'||item.event==='SKIPPED_EXISTING');
-if(published&&execute&&!(attachPdf&&!prior.some(item=>item.event==='PDF_ATTACHED')))await done({state:'SKIP',reason:'this week is already published',postId:published.postId,publicPostUrl:published.publicPostUrl});
+const refreshPending=refresh&&!prior.some(item=>item.event==='REFRESHED');
+if(published&&execute&&!(attachPdf&&!prior.some(item=>item.event==='PDF_ATTACHED'))&&!refreshPending)await done({state:'SKIP',reason:refresh?'this week is already refreshed':'this week is already published',postId:published.postId,publicPostUrl:published.publicPostUrl});
 
 const evidence=await collectWeeklyEvidence(runDate);
 await writeFile(join(root,'evidence.json'),JSON.stringify(evidence,null,2),'utf8');
 const article=buildWeeklyArticle(evidence,{requireCalendar:!finalAttempt&&!published});
+
+/** The representative card: the article's own title over last week's largest index moves (no figure that is not in the post). */
+async function weeklyHero(target:WeeklyArticle):Promise<void> {
+  const rows=evidence.quotes.filter(item=>item.group==='US_INDEX'||item.group==='KOREA_INDEX').map(item=>({label:item.label,value:item.changePct}));
+  const hero=await prepareHeroImage({category:'weekly',issueDate:window.nextStart,storeDate:window.weekStart,title:target.title,moves:heroMoves(rows),movesTitle:'지난주 주간 등락'},{dir:join('data','weekly',window.weekStart)});
+  if(hero)target.heroImage=hero;
+}
+/** The PDF block goes after the outlook sections, so the week ahead stays at the top of the post. */
+function insertPdf(target:WeeklyArticle,section:WeeklySection):void {
+  const after=['weekly-broker-outlook','weekly-earnings','weekly-calendar'].map(key=>target.sections.findIndex(item=>item.key===key)).find(index=>index>=0);
+  target.sections.splice(after===undefined?0:after+1,0,section);
+}
+
+if(published&&refresh){
+  // Monday refresh: the same post (id, permalink, title) gets this morning's calendar, earnings and broker outlook.
+  const fail=async(reason:string):Promise<never>=>{await record({event:'REFRESH_FAILED',postId:published.postId,publicPostUrl:published.publicPostUrl,title:published.title,detail:reason.slice(0,300)});await writeFile(join(root,'weekly-publish.json'),JSON.stringify({identity,runDate,state:'FAILED',mode:'refresh',reason},null,2),'utf8');console.error(JSON.stringify({identity,state:'FAILED',mode:'refresh',reason}));process.exit(1)};
+  if(article.readiness!=='READY')await done({state:'HOLD',mode:'refresh',reasons:article.reasons,publishCallCount:0});
+  article.title=published.title;
+  await weeklyHero(article);
+  try{const pdf=JSON.parse(await readFile(join(root,'pdf-upload.json'),'utf8')) as {state?:string;fileName?:string;webViewLink?:string};
+    if(pdf.state==='UPLOADED'&&pdf.webViewLink)insertPdf(article,{key:'weekly-pdf',title:'PDF 리포트: 주간 시장 전략',intro:'그래프와 표로 지난주를 정리한 A4 3쪽 리포트입니다. 지수 3개월 추이, 업종별 수익률, 대형주 등락, 이번 주 일정을 담았습니다.',links:[{label:`MOTUS 주간 시장 전략 (${pdf.fileName??'PDF'})`,url:pdf.webViewLink,meta:'PDF · Google Drive에서 보기·내려받기'}]})}catch{/* no PDF recorded: the refreshed post carries none */}
+  const refreshedAt=new Date().toISOString(),html=renderWeeklyEditorialArticle(article).html.replace('<article ',`<article data-week="${window.weekStart}" data-refreshed="${refreshedAt}" `);
+  await writeFile(join(root,'weekly-article.json'),JSON.stringify(article,null,2),'utf8');await writeFile(join(root,'weekly-article.html'),html,'utf8');
+  if(!execute||process.env.MOTUS_LIVE_PUBLISH_ENABLED!=='true')await done({state:'SIMULATED',mode:'refresh',title:article.title,publishCallCount:0});
+  if(['BLOGGER_BLOG_ID','BLOGGER_CLIENT_ID','BLOGGER_CLIENT_SECRET','BLOGGER_REFRESH_TOKEN'].some(key=>!process.env[key]?.trim()))await fail('BLOGGER_CREDENTIALS_MISSING');
+  const postId=prior.find(item=>(item.event==='PUBLISHED'||item.event==='SKIPPED_EXISTING')&&item.postId)?.postId;if(!postId)await fail('PUBLISHED_POST_ID_UNKNOWN');
+  try{
+    const raw=JSON.parse(await readFile(resolve('config/publishing.json'),'utf8')) as {blogger:BloggerPublishingConfig};
+    const config={...raw.blogger,blogId:process.env.BLOGGER_BLOG_ID!.trim(),credentialAvailable:true,publishAsDraft:true},google=new GoogleBloggerApiAdapter();
+    const before=await google.readPost(postId!,config);
+    if(before.status!=='PUBLISHED'||!before.url||!before.content.includes(`data-week="${window.weekStart}"`))await fail('PUBLISHED_POST_MISMATCH');
+    const after=await google.patchPostContent(postId!,{title:before.title,content:html,labels:before.labels},config);
+    if(after.status!=='PUBLISHED'||after.url!==before.url||after.title!==before.title||!after.content.includes(`data-refreshed="${refreshedAt}"`))await fail('readback after refresh does not match (status, permalink, title or marker)');
+    await record({event:'REFRESHED',postId:postId!,publicPostUrl:after.url,title:before.title,detail:`refreshed ${refreshedAt}`});
+    await done({state:'REFRESHED',postId,publicPostUrl:after.url,title:before.title,publishCallCount:1});
+  }catch(error){await fail(error instanceof Error?error.message:String(error))}
+}
 
 if(attachPdf&&!published)await done({state:'HOLD',mode:'attach-pdf',reasons:['ATTACH_PDF_WEEK_NOT_PUBLISHED'],publishCallCount:0});
 if(published){
@@ -85,7 +128,8 @@ if(published){
 }
 
 const pdfSection=execute&&process.env.MOTUS_LIVE_PUBLISH_ENABLED==='true'&&article.readiness==='READY'?await weeklyPdfSection(evidence,article):null;
-if(pdfSection)article.sections.unshift(pdfSection);
+if(pdfSection)insertPdf(article,pdfSection);
+if(article.readiness==='READY')await weeklyHero(article);
 const render=renderWeeklyEditorialArticle(article),html=render.html.replace('<article ',`<article data-week="${window.weekStart}" `);
 await writeFile(join(root,'weekly-article.json'),JSON.stringify(article,null,2),'utf8');await writeFile(join(root,'weekly-article.html'),html,'utf8');
 if(article.readiness!=='READY')await done({state:'HOLD',reasons:article.reasons,title:article.title,publishCallCount:0});

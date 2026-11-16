@@ -14,16 +14,16 @@ import {koreanFontInstalled} from '../reports/pdf-render.js';
 
 export const HERO_WIDTH=1200,HERO_HEIGHT=630;
 export const HERO_BASE_URL='https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/';
-export type HeroCategory='us'|'korea'|'ai';
+export type HeroCategory='us'|'korea'|'ai'|'weekly';
 /** issueDate is shown on the card; storeDate is the operation date whose ops-data folder holds the file. */
 export interface HeroInput {category:HeroCategory;issueDate:string;storeDate:string;title:string;moves:Array<{label:string;value:number}>;movesTitle?:string}
-export const HERO_LABEL:Record<HeroCategory,string>={us:'미국증시',korea:'국내증시',ai:'AI 인텔리전스'};
+export const HERO_LABEL:Record<HeroCategory,string>={us:'미국증시',korea:'국내증시',ai:'AI 인텔리전스',weekly:'주간 증시 전망'};
 export interface HeroImage {url:string;alt:string;width:number;height:number}
 
 const esc=(value:string)=>value.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 const dateKo=(iso:string)=>`${Number(iso.slice(0,4))}년 ${Number(iso.slice(5,7))}월 ${Number(iso.slice(8,10))}일`;
 const pct=(value:number)=>`${value>0?'+':value<0?'−':''}${Math.abs(value).toFixed(2)}%`;
-const ACCENT:Record<HeroCategory,string>={us:'#5fa8ff',korea:'#ff8a65',ai:'#b39dff'};
+const ACCENT:Record<HeroCategory,string>={us:'#5fa8ff',korea:'#ff8a65',ai:'#b39dff',weekly:'#ffd54f'};
 
 /** The largest moves among the article's charted rows (at most three, biggest absolute change first). */
 export function heroMoves(rows:Array<{label:string;value:number}>|undefined):Array<{label:string;value:number}> {
@@ -74,13 +74,14 @@ export function validHeroPng(bytes:Uint8Array):boolean {
  * Renders and stores the card under data/operations/<date>/<category>/ and returns how the article links it, or
  * null (feature off, renderer unavailable, render failure). Never throws.
  */
-export async function prepareHeroImage(input:HeroInput,options:{root?:string;enabled?:boolean;render?:(html:string)=>Promise<Uint8Array|null>}={}):Promise<HeroImage|null> {
+/** dir (relative to root) overrides the default data/operations/<storeDate>/<category> folder, e.g. data/weekly/<weekStart>. */
+export async function prepareHeroImage(input:HeroInput,options:{root?:string;enabled?:boolean;dir?:string;render?:(html:string)=>Promise<Uint8Array|null>}={}):Promise<HeroImage|null> {
   if(!(options.enabled??process.env.MOTUS_HERO_IMAGE==='on'))return null;
   try{
     const html=heroCardHtml(input),bytes=await (options.render??renderHeroPng)(html);
     if(!bytes||!validHeroPng(bytes)){console.log('::warning title=Hero image::not rendered; article goes out without an image');return null}
-    const rel=join('data','operations',input.storeDate,input.category,heroFileName(input));
-    await mkdir(join(options.root??process.cwd(),'data','operations',input.storeDate,input.category),{recursive:true});
+    const dir=options.dir??join('data','operations',input.storeDate,input.category),rel=join(dir,heroFileName(input));
+    await mkdir(join(options.root??process.cwd(),dir),{recursive:true});
     await writeFile(join(options.root??process.cwd(),rel),bytes);
     return {url:HERO_BASE_URL+rel.split(/[\\/]/).join('/'),alt:`${HERO_LABEL[input.category]} ${dateKo(input.issueDate)}: ${input.title}`,width:HERO_WIDTH,height:HERO_HEIGHT};
   }catch(error){console.log(`::warning title=Hero image::${String(error instanceof Error?error.message:error).slice(0,200)}`);return null}
