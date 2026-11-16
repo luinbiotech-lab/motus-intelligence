@@ -75,10 +75,39 @@ export function contradictsDirection(title:string,change:number|null):boolean {
   return change>0?down&&!up:up&&!down;
 }
 
+/** Close reports of the session window that do not contradict the verified direction (one entry per URL). */
+export function eligibleCloseReports(reports:WireReport[],region:WireRegion,sessionDate:string,change:number|null,now:number):WireReport[] {
+  const [from,to]=wireWindow(region,sessionDate),end=Math.min(to,now);
+  return [...new Map(reports.map(item=>[item.url,item])).values()].filter(item=>{const at=Date.parse(item.publishedAt);return at>=from&&at<=end&&isCloseReport(region,item.title)&&!contradictsDirection(item.title,change)});
+}
+
+/** The visible paragraphs of a news article page (scripts, styles and markup removed). */
+export function articleText(html:string):string {
+  const body=html.replace(/<(script|style|noscript|figure|figcaption)[\s\S]*?<\/\1>/gi,' ');
+  const paragraphs=[...body.matchAll(/<p[^>]*>([\s\S]*?)<\/p>/gi)].map(match=>decode(match[1]!)).filter(text=>text.length>=15);
+  return paragraphs.length?paragraphs.join('\n'):decode(body).slice(0,4000);
+}
+
+/**
+ * Owner 2026-11-16 ("국내 시황 리포트가 없다는 건 말이 안 된다"): many wire close reports carry no summary in the feed
+ * (연합뉴스 RSS has none), so a session with several close reports could still HOLD for want of a causal sentence.
+ * For the latest eligible reports without a sentence, the article itself is read and its first causal sentence used.
+ */
+export async function fillSentencesFromArticles(reports:WireReport[],region:WireRegion,sessionDate:string,change:number|null,now:number,fetcher:typeof fetch,audit:AttentionAudit[],limit=4):Promise<void> {
+  const missing=eligibleCloseReports(reports,region,sessionDate,change,now).filter(item=>!item.sentence).sort((a,b)=>Date.parse(b.publishedAt)-Date.parse(a.publishedAt)).slice(0,limit);
+  await Promise.all(missing.map(async item=>{
+    try{
+      const response=await fetcher(item.url,{headers:{'user-agent':UA,accept:'text/html'},signal:AbortSignal.timeout(15000)});
+      if(!response.ok)throw new Error('WIRE_ARTICLE_HTTP_'+response.status);
+      const sentence=causalSentence(articleText(await response.text()));
+      for(const report of reports)if(report.url===item.url)report.sentence=sentence;
+    }catch(error){audit.push({sourceId:'wire:article:'+item.url.replace(/^https:\/\//,''),url:item.url,status:'FAILED',count:0,error:error instanceof Error&&/^WIRE_ARTICLE_HTTP_\d{3}$/.test(error.message)?error.message:'WIRE_ARTICLE_FETCH_FAILED'})}
+  }));
+}
+
 /** One close report per publisher, preferring a report with a causal summary sentence, then the latest. */
 export function selectWireReports(reports:WireReport[],region:WireRegion,sessionDate:string,change:number|null,now:number):WireReport[] {
-  const [from,to]=wireWindow(region,sessionDate),end=Math.min(to,now);
-  const eligible=[...new Map(reports.map(item=>[item.url,item])).values()].filter(item=>{const at=Date.parse(item.publishedAt);return at>=from&&at<=end&&isCloseReport(region,item.title)&&!contradictsDirection(item.title,change)});
+  const eligible=eligibleCloseReports(reports,region,sessionDate,change,now);
   const best=new Map<string,WireReport>();
   for(const item of eligible.sort((a,b)=>Number(Boolean(b.sentence))-Number(Boolean(a.sentence))||Date.parse(b.publishedAt)-Date.parse(a.publishedAt)))if(!best.has(item.publisher))best.set(item.publisher,item);
   return [...best.values()].filter(item=>item.sentence||CAUSAL.test(item.title)).slice(0,3);
@@ -93,6 +122,7 @@ export async function collectWireCloses(input:{region:WireRegion;sessionDate:str
       all.push(...parseWireFeed(await response.text(),feed));
     }catch(error){audit.push({sourceId:'wire:'+feed.url.replace(/^https:\/\//,''),url:feed.url,status:'FAILED',count:0,error:error instanceof Error&&/^WIRE_HTTP_\d{3}$/.test(error.message)?error.message:'WIRE_FETCH_FAILED'})}
   }));
+  await fillSentencesFromArticles(all,input.region,input.sessionDate,input.change,input.now??Date.now(),input.fetcher,audit);
   const reports=selectWireReports(all,input.region,input.sessionDate,input.change,input.now??Date.now());
   for(const report of reports)audit.push({sourceId:'wire:report:'+report.url.replace(/^https:\/\//,''),url:report.url,status:'PASS',count:1,error:null});
   return {reports,audit};

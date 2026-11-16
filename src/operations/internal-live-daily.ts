@@ -176,6 +176,9 @@ export class RepositoryInternalDailyBuilder implements InternalDailyBuilder {
    // GitHub schedule execution is delayed past market close; manually controlled
    // closing recovery intentionally uses the current execution timestamp.
    const evening=!controlledRecovery&&koreaEveningWindow(at,operationDate);
+   // Owner 2026-11-16: the Korea close is published the same evening only. A next-morning edition of the previous
+   // session is stale for readers, so with MOTUS_KOREA_EVENING_ONLY=true a run outside the evening window skips.
+   if(!evening&&!controlledRecovery&&this.environment.MOTUS_KOREA_EVENING_ONLY==='true')return skip(audit,new Error('KOREA_MORNING_EDITION_RETIRED'));
    const expectedSession=evening?latestCompletedSession('KOREA',at):koreaPublicationSession(operationDate,at,controlledRecovery);
    if(!isCompletedSession(expectedSession,at))throw new Error('KOREA_SESSION_NOT_COMPLETED');
    if(expectedSession.date>operationDate)throw new Error('KOREA_FUTURE_SESSION_REJECTED');
