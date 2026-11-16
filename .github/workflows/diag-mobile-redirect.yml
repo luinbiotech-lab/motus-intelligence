@@ -1,4 +1,4 @@
-name: DIAG m1 page html compare (temporary, read-only)
+name: DIAG mobile redirect recheck 11-16 (temporary, read-only)
 on:
   push:
     branches: [diag/mobile-redirect-20261108]
@@ -8,34 +8,17 @@ jobs:
   probe:
     runs-on: ubuntu-24.04
     steps:
-      - name: Compare indexed vs redirect-error pages (GET only)
+      - name: Mobile UA redirect check (GET only)
         run: |
           GB='Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
-          DT='Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
-          fetch() { # $1 ua $2 url $3 out
-            for t in 1 2 3 4 5; do
-              curl -sS -L --max-redirs 10 -A "$1" -D "$3.h" -o "$3" -w '%{num_redirects} %{url_effective} %{http_code}\n' "$2" > "$3.w" || true
-              grep -qi 'google.com/sorry' "$3.h" "$3.w" || return 0; sleep 25
-            done; }
-          for r in https://motusnova.blogspot.com/robots.txt http://motusnova.blogspot.com/robots.txt https://blogger.googleblog.com/robots.txt https://www.blogger.com/feeds/3015267553244608361/posts/default?max-results=1; do
-            curl -sS -A "$GB" -D r.h -o r.b "$r" || true
-            echo "=== $r"; grep -iE '^(HTTP|x-robots|location|last-modified|content-type)' r.h | tr -d '\r' | sed 's/^/HDR /'
-            head -c 600 r.b | sed 's/^/BODY /'; echo
-          done
-          exit 0
-          n=0
-          for u in https://motusnova.blogspot.com/2026/11/20-33.html https://motusnova.blogspot.com/2026/11/3-70.html https://motusnova.blogspot.com/2026/10/124-5937-1-48.html http://motusnova.blogspot.com/2026/11/3-70.html https://motusnova.blogspot.com/2026/11/3-70.html?m=1; do
-            for ua in mob desk; do
-              n=$((n+1)); [[ $ua == mob ]] && A="$GB" || A="$DT"
-              fetch "$A" "$u" p$n
-              echo "=== $ua $u"
-              grep -iE "^x-robots" p$n.h | tr -d "\\r" | sed "s/^/XROBOTS /"
-              echo "HOPS $(grep -iE '^(HTTP|location)' p$n.h | tr -d '\r' | tr '\n' ' ' | cut -c1-400)"
-              echo "FINAL $(cat p$n.w) bytes=$(wc -c < p$n)"
-              grep -oiE '<link[^>]+rel=.(canonical|alternate|amphtml)[^>]*>' p$n | cut -c1-200 | sort -u | head -8 | sed 's/^/LINK /'
-              grep -oiE '<meta[^>]+(robots|refresh|googlebot)[^>]*>' p$n | cut -c1-200 | sort -u | sed 's/^/META /'
-              grep -oiE "(location\.(replace|href)|window\.location)[^;]{0,80}" p$n | sort -u | head -5 | sed 's/^/JS /'
-              grep -oiE "b:responsive[^ ]*|class=.mobile[^ ]*|data:blog.isMobile|<body[^>]{0,120}" p$n | sort -u | head -4 | sed 's/^/TPL /'
-              echo "TITLE $(grep -oiE '<title>[^<]{0,80}' p$n | head -1)"
+          IP='Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Mobile/15E148 Safari/604.1'
+          for path in / /2026/11/3-70.html /2026/11/gemini.html /2026/11/11-13-3-amd-88.html; do
+            for name in googlebot iphone; do
+              [[ $name == googlebot ]] && A="$GB" || A="$IP"
+              for t in 1 2 3 4; do
+                curl -sS -A "$A" -D h.txt -o /dev/null "https://motusnova.blogspot.com$path" || true
+                grep -qi 'google.com/sorry' h.txt || break; sleep 20
+              done
+              echo "RESULT $name $path $(grep -i '^HTTP' h.txt | tr -d '\r') $(grep -i '^location' h.txt | tr -d '\r' | cut -c1-120)"
             done
           done
