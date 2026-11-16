@@ -82,3 +82,18 @@ test('ledger sequence for one trading day publishes each session once', async ()
   assert.equal(run('2026-11-11T23:40:00Z','2026-11-12'),'SKIP');     // 11/12 08:40 morning
   assert.equal(ledger.length,2);
 });
+
+// Owner 2026-11-16: "국내증시는 당일 발행이 전제" — the next-morning edition of the previous session is retired.
+test('with MOTUS_KOREA_EVENING_ONLY a morning Korea run skips before any fetch; the evening run is not blocked', async () => {
+  const {RepositoryInternalDailyBuilder}=await import('../src/operations/internal-live-daily.js');
+  let calls=0;const fetcher=(async()=>{calls++;throw new Error('offline')}) as unknown as typeof fetch;
+  const builder=new RepositoryInternalDailyBuilder(fetcher,{MOTUS_KOREA_EVENING_ONLY:'true'});
+  const morning=await builder.build('KOREA_MARKET','2026-11-09T21:17:00Z');   // Tue 06:17 KST
+  assert.equal(morning.state,'SKIP');assert.equal(morning.reason,'KOREA_MORNING_EDITION_RETIRED');assert.equal(calls,0);
+  const evening=await builder.build('KOREA_MARKET','2026-11-09T08:10:00Z');   // Mon 17:10 KST
+  assert.notEqual(evening.reason,'KOREA_MORNING_EDITION_RETIRED');
+  const recovery=await builder.build('KOREA_MARKET','2026-11-09T21:17:00Z',{mode:'ADMIN_CONTROLLED_RECOVERY'});
+  assert.notEqual(recovery.reason,'KOREA_MORNING_EDITION_RETIRED');
+  const legacy=await new RepositoryInternalDailyBuilder(fetcher,{}).build('KOREA_MARKET','2026-11-09T21:17:00Z');
+  assert.notEqual(legacy.reason,'KOREA_MORNING_EDITION_RETIRED');
+});
