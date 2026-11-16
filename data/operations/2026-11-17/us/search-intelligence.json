@@ -1,0 +1,17 @@
+{
+  "collectedAt": "2026-11-16T23:42:38.767Z",
+  "signalDate": "2026-11-16",
+  "provider": "NAVER_DATALAB",
+  "freshness": "PREVIOUS_DAY_NAVER_SIGNAL",
+  "fallbackReason": null,
+  "warnings": [],
+  "orderedTopicIds": [
+    "us:index:nasdaq",
+    "us:10y",
+    "us:index:sp500",
+    "us:index:dow-jones"
+  ],
+  "selectedSecondaryTopicId": "us:10y",
+  "factsChanged": false,
+  "gateOverride": false
+}
