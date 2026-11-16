@@ -11,9 +11,9 @@ jobs:
       - uses: actions/checkout@v4
         with: {fetch-depth: 0}
       - run: |
-          git fetch -q origin main && git checkout origin/main -- src tests package.json package-lock.json tsconfig.json
+          git fetch -q origin main && git fetch -q origin claude/korea-same-day-only && git checkout FETCH_HEAD -- src tests package.json package-lock.json tsconfig.json
           npm ci --ignore-scripts >/dev/null 2>&1 || npm install --ignore-scripts >/dev/null
-          npx tsc -p . && node diag/wire-probe.mjs 2026-11-16 0.36
+          npx tsc -p . && node diag/wire-probe.mjs
         env:
           NAVER_DATALAB_CLIENT_ID: ${{ secrets.NAVER_DATALAB_CLIENT_ID }}
           NAVER_DATALAB_CLIENT_SECRET: ${{ secrets.NAVER_DATALAB_CLIENT_SECRET }}
