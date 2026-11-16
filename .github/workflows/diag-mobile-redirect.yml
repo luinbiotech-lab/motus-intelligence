@@ -1,4 +1,4 @@
-name: DIAG mobile redirect recheck 11-16 (temporary, read-only)
+name: DIAG wire close sources (temporary, read-only)
 on:
   push:
     branches: [diag/mobile-redirect-20261108]
@@ -8,17 +8,12 @@ jobs:
   probe:
     runs-on: ubuntu-24.04
     steps:
-      - name: Mobile UA redirect check (GET only)
-        run: |
-          GB='Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Mobile Safari/537.36 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
-          IP='Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Mobile/15E148 Safari/604.1'
-          for path in / /2026/11/3-70.html /2026/11/gemini.html /2026/11/11-13-3-amd-88.html; do
-            for name in googlebot iphone; do
-              [[ $name == googlebot ]] && A="$GB" || A="$IP"
-              for t in 1 2 3 4; do
-                curl -sS -A "$A" -D h.txt -o /dev/null "https://motusnova.blogspot.com$path" || true
-                grep -qi 'google.com/sorry' h.txt || break; sleep 20
-              done
-              echo "RESULT $name $path $(grep -i '^HTTP' h.txt | tr -d '\r') $(grep -i '^location' h.txt | tr -d '\r' | cut -c1-120)"
-            done
-          done
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - run: |
+          git fetch -q origin main && git checkout origin/main -- src tests package.json package-lock.json tsconfig.json
+          npm ci --ignore-scripts >/dev/null 2>&1 || npm install --ignore-scripts >/dev/null
+          npx tsc -p . && node diag/wire-probe.mjs 2026-11-16 0.36
+        env:
+          NAVER_DATALAB_CLIENT_ID: ${{ secrets.NAVER_DATALAB_CLIENT_ID }}
+          NAVER_DATALAB_CLIENT_SECRET: ${{ secrets.NAVER_DATALAB_CLIENT_SECRET }}
