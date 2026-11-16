@@ -25,5 +25,32 @@
       "sitemapIncluded": null,
       "rssIncluded": null
     }
+  },
+  {
+    "publicationId": "motus-live-2026-11-16:ai",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/11/amd-88-ai.html",
+    "registeredAt": "2026-11-16T12:34:49+09:00",
+    "trigger": "PUBLICATION_PUBLISHED",
+    "googleInspectionState": "QUEUED",
+    "naverDiscoveryState": "PENDING",
+    "visibility": {
+      "publicationId": "motus-live-2026-11-16:ai",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/11/amd-88-ai.html",
+      "google": {
+        "discovered": null,
+        "indexed": null,
+        "lastCrawl": null,
+        "coverageState": null,
+        "inspectionAt": null
+      },
+      "naver": {
+        "discovered": null,
+        "indexed": null,
+        "collectionState": null,
+        "inspectionAt": null
+      },
+      "sitemapIncluded": null,
+      "rssIncluded": null
+    }
   }
 ]
