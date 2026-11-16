@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {buildWeeklyArticle,headlineEvents,isWeeklyMarketReport,joinEvents,koreanEventName,parseForexFactory,parseMotusFeed,pickBrokerSentences,sparkCloses,summarySentences,weekWindow,weeklyQuote,type WeeklyEvidence,type WeeklyQuote} from '../src/operations/weekly-review.js';
+import {WEEKLY_TITLE_MAX,buildWeeklyArticle,headlineEvents,parseNasdaqEarnings,weeklyTitle,isWeeklyMarketReport,joinEvents,koreanEventName,parseForexFactory,parseMotusFeed,pickBrokerSentences,sparkCloses,summarySentences,weekWindow,weeklyQuote,type WeeklyEvidence,type WeeklyQuote} from '../src/operations/weekly-review.js';
 import {renderWeeklyEditorialArticle} from '../src/publishers/editorial-article.js';
 
 test('a weekend or weekday run reviews the last completed Monday-Friday week', () => {
@@ -79,10 +79,10 @@ function evidence(overrides:Partial<WeeklyEvidence>={}):WeeklyEvidence {
 test('the weekly article states only collected numbers, quotes brokers by name and previews next week', () => {
   const article=buildWeeklyArticle(evidence());
   assert.equal(article.readiness,'READY');
-  assert.equal(article.title,'[주간 증시] 나스닥 주간 2.1% 하락·코스피 3.2% 상승…다음 주 미국 ISM 지수·고용보고서 주목');
+  assert.equal(article.title,'주간 증시 전망(11/2~11/6)｜미국 ISM 지수·고용보고서 주목…지난주 나스닥 2.1% 하락·코스피 3.2% 상승');
   assert.match(article.lead,/S&P 500 -1\.20%, 나스닥 -2\.10%, 다우존스 -0\.40%/);
   assert.match(article.lead,/미국 10년물 국채금리는 4\.93%로 한 주 사이 5bp 내렸다\./);
-  assert.match(article.lead,/다음 주\(11월 2~6일\)에는 미국 ISM 지수와 고용보고서가 예정돼 있다\./);
+  assert.match(article.lead,/^이번 주\(11월 2~6일\)에는 미국 ISM 지수와 고용보고서가 예정돼 있다\./,'the lead opens with the week ahead');
   const html=renderWeeklyEditorialArticle(article).html;
   assert.match(html,/유안타증권은 10월 30일 「\[주식시황 위클리\] 주간:知」에서 “반도체, IT하드웨어, 보험, 증권 업종 상승\. 조선, 미디어, 기계 업종 하락”이라고 진단했다\./);
   assert.match(html,/11\/6\(금\) 22:30/);assert.match(html,/인텔\(INTC\)/);
@@ -94,7 +94,7 @@ test('a week without next week\'s calendar waits unless it is the final attempt,
   assert.equal(early.readiness,'HOLD');assert.ok(early.reasons.includes('WEEKLY_CALENDAR_NOT_ON_NEXT_WEEK'));
   const final=buildWeeklyArticle(evidence({calendar:[],calendarCoversNextWeek:false}),{requireCalendar:false});
   assert.equal(final.readiness,'READY','broker outlook alone previews next week on the final attempt');
-  assert.match(final.title,/다음 주 증시 일정$/);
+  assert.match(final.title,/^주간 증시 전망\(11\/2~11\/6\)｜주요 일정…지난주 /);
   const noKorea=buildWeeklyArticle(evidence({quotes:evidence().quotes.filter(item=>item.group!=='KOREA_INDEX')}),{requireCalendar:false});
   assert.ok(noKorea.reasons.includes('WEEKLY_KOREA_INDEX_MISSING'));
   const nothingAhead=buildWeeklyArticle(evidence({calendar:[],calendarCoversNextWeek:false,broker:evidence().broker.filter(item=>item.kind==='review')}),{requireCalendar:false});
@@ -124,6 +124,36 @@ test('the U.S. election and key U.S. releases lead next week; untranslated forei
   assert.equal(events[1]!.kstLabel,'11/3(화) 미국 현지');
   assert.deepEqual(headlineEvents(events),['미국 중간선거','미국 고용보고서']);
   const article=buildWeeklyArticle(evidence({calendar:events}));
-  assert.match(article.title,/…다음 주 미국 중간선거·고용보고서 주목$/);
+  assert.match(article.title,/｜미국 중간선거·고용보고서 주목…지난주 /);
   assert.match(article.lead,/미국 중간선거와 고용보고서가 예정돼 있다\./);
+});
+
+test('outlook first (owner 2026-11-16): the week ahead leads the post and large-cap earnings join the title', () => {
+  const body={data:{rows:[
+    {symbol:'NVDA',name:'NVIDIA Corporation',marketCap:'$4,012,345,678,901',time:'time-after-hours',fiscalQuarterEnding:'Oct/2026',epsForecast:'$1.20'},
+    {symbol:'WMT',name:'Walmart Inc.',marketCap:'$812,000,000,000',time:'time-pre-market',fiscalQuarterEnding:'Oct/2026',epsForecast:'$0.60'},
+    {symbol:'TINY',name:'Tiny Co',marketCap:'$2,000,000,000',time:'time-after-hours',fiscalQuarterEnding:'Sep/2026',epsForecast:''},
+    {symbol:'BAD',name:'',marketCap:'N/A',time:'',fiscalQuarterEnding:'',epsForecast:''}]}};
+  const rows=parseNasdaqEarnings(body,'2026-11-04');
+  assert.deepEqual(rows.map(item=>[item.symbol,item.timing]),[['NVDA','AMC'],['WMT','BMO']],'small caps and malformed rows are dropped');
+  assert.equal(rows[0]!.kstLabel,'11/5(목) 오전 (미국 11/4 장 마감 후)');
+  assert.equal(rows[1]!.kstLabel,'11/4(수) 밤 (미국 장 시작 전)');
+  assert.deepEqual(parseNasdaqEarnings({data:{rows:null}},'2026-11-04'),[]);
+  const article=buildWeeklyArticle(evidence({earnings:rows}));
+  assert.equal(article.title,'주간 증시 전망(11/2~11/6)｜엔비디아 실적·ISM 지수·고용보고서 주목…지난주 나스닥 2.1% 하락·코스피 3.2% 상승');
+  assert.ok(article.title.length<=WEEKLY_TITLE_MAX);
+  assert.match(article.lead,/^이번 주\(11월 2~6일\)에는 엔비디아·월마트 실적 발표와 미국 ISM 지수·고용보고서가 예정돼 있다\./);
+  const keys=article.sections.map(item=>item.key);
+  assert.deepEqual(keys.slice(0,3),['weekly-calendar','weekly-earnings','weekly-broker-outlook'],'the week ahead comes before last week');
+  assert.ok(keys.indexOf('weekly-scoreboard')>keys.indexOf('weekly-broker-outlook'));
+  const html=renderWeeklyEditorialArticle({...article,heroImage:{url:'https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/weekly/2026-10-26/hero-0123456789ab.png',alt:'주간 증시 전망',width:1200,height:630}}).html;
+  assert.match(html,/<img[^>]+data\/weekly\/2026-10-26\/hero-0123456789ab\.png/,'the weekly post carries its representative image');
+  assert.match(html,/엔비디아\(NVDA\)/);assert.match(html,/4\.0조 달러/);assert.match(html,/Nasdaq 실적 발표 캘린더/);
+  assert.doesNotMatch(html,/undefined|NaN/);
+});
+
+test('a long weekly title drops focus items instead of exceeding the limit', () => {
+  const window=weekWindow('2026-11-01'),q=(label:string,changePct:number)=>({symbol:label,label,group:'US_INDEX',unit:'index',weekClose:1,weekCloseDate:'2026-10-30',priorClose:1,priorCloseDate:'2026-10-23',changePct,changeBp:null,daily:[]}) as WeeklyQuote;
+  const title=weeklyTitle({nextStart:window.nextStart,nextEnd:window.nextEnd,earnings:['마이크로소프트·알파벳·메타 플랫폼스'],headline:['미국 소비자물가지수(CPI)','미국 생산자물가지수(PPI)'],usLead:q('S&P 500',2.51),kospi:q('코스피',-11.7)});
+  assert.ok(title.length<=WEEKLY_TITLE_MAX,title);assert.match(title,/^주간 증시 전망\(11\/2~11\/6\)｜/);
 });

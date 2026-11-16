@@ -19,6 +19,8 @@ export function contentFeatures(html:string):ContentFeatures {
 }
 /** Search keywords for an article: the category's market phrase and the headline's first words without figures. */
 export function articleKeywords(title:string,labels:string[]):string[] {
+  // Weekly outlook (owner 2026-11-16, MOT-051): the title's first words are not a search phrase; use the phrases people type.
+  if(labels.some(label=>/주간/.test(label)))return ['주간 증시 전망','이번주 증시 전망'];
   const base=labels.some(label=>/국내증시/.test(label))?'코스피 마감':labels.some(label=>/미국증시/.test(label))?'뉴욕증시 마감':labels.some(label=>/AI/.test(label))?'AI 뉴스':labels.some(label=>/주간/.test(label))?'주간 증시 전망':null;
   const head=(title.split(/…|\.\.\.|,|·/)[0]??'').replace(/\[[^\]]*\]/g,' ').replace(/[\d.,]+%?|[▲▼+\-−%()]/g,' ').split(/\s+/).filter(word=>word.length>=2&&!/^(급락해|급등해|상승해|하락해|마감|기록)$/.test(word)).slice(0,3).join(' ').trim();
   return [...new Set([base,head].filter((item):item is string=>Boolean(item&&item.length>=2)))];

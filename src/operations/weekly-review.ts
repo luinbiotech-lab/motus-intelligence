@@ -21,15 +21,19 @@ export interface WeeklyBrokerQuote {broker:string;title:string;date:string;url:s
 export interface CalendarEvent {at:string;kstLabel:string;country:string;countryLabel:string;title:string;koreanTitle:string|null;group:string|null;impact:'High'|'Medium';forecast:string;previous:string}
 export interface MotusWeekPost {title:string;url:string;publishedAt:string;category:'US_MARKET'|'KOREA_MARKET'|'AI_INTELLIGENCE'|'OTHER'}
 export interface WeeklyAudit {sourceId:string;url:string;status:'PASS'|'FAILED';count:number;error:string|null}
+/** A large-cap US earnings release in the previewed week (Nasdaq earnings calendar; the date is the company's expected date). */
+export interface EarningsEvent {date:string;symbol:string;name:string;koreanName:string|null;marketCapUsd:number;timing:'BMO'|'AMC'|'UNKNOWN';kstLabel:string;fiscalQuarter:string}
 export interface KoreaFlows {date:string;foreign:number;institution:number;individual:number;url:string}
 export interface WeeklyEvidence {window:WeekWindow;quotes:WeeklyQuote[];broker:WeeklyBrokerQuote[];calendar:CalendarEvent[];calendarCoversNextWeek:boolean;posts:MotusWeekPost[];audit:WeeklyAudit[];collectedAt:string;
   /** Three months of daily closes for the PDF charts, by symbol (exchange dates, up to the week's end). */
   charts?:Record<string,Array<{date:string;close:number}>>;
   /** KOSPI investor net buying (100 million won) on the week's last Korean session. */
-  flows?:KoreaFlows|null}
+  flows?:KoreaFlows|null;
+  /** US earnings of companies worth at least EARNINGS_MIN_CAP in the previewed week; absent or empty when not collected. */
+  earnings?:EarningsEvent[]}
 export interface WeeklyParagraph {text:string;source?:{label:string;url:string}}
 export interface WeeklySection {key:string;title:string;intro?:string;paragraphs?:WeeklyParagraph[];table?:{headers:string[];rows:string[][];note?:string};links?:Array<{label:string;url:string;meta:string}>}
-export interface WeeklyArticle {publicationId:string;weekStart:string;weekEnd:string;title:string;subtitle:string;lead:string;sections:WeeklySection[];sources:Array<{label:string;url:string}>;readiness:'READY'|'HOLD';reasons:string[]}
+export interface WeeklyArticle {publicationId:string;weekStart:string;weekEnd:string;title:string;subtitle:string;lead:string;sections:WeeklySection[];sources:Array<{label:string;url:string}>;readiness:'READY'|'HOLD';reasons:string[];heroImage?:{url:string;alt:string;width:number;height:number}}
 
 const dateOf=(ms:number)=>new Date(ms).toISOString().slice(0,10);
 const at0=(date:string)=>Date.parse(date+'T00:00:00Z');
@@ -99,8 +103,8 @@ export function completeWeek(quotes:WeeklyQuote[]):WeeklyQuote[] {
   for(const quote of quotes){const key=market(quote);if(key&&(latest.get(key)??'')<quote.weekCloseDate)latest.set(key,quote.weekCloseDate)}
   return quotes.filter(quote=>{const key=market(quote);return !key||quote.weekCloseDate===latest.get(key)});
 }
-async function getJson<T>(fetcher:typeof fetch,url:string,timeout=20000):Promise<T>{
-  const response=await fetcher(url,{headers:{'user-agent':UA,accept:'application/json'},signal:AbortSignal.timeout(timeout)});
+async function getJson<T>(fetcher:typeof fetch,url:string,timeout=20000,headers:Record<string,string>={}):Promise<T>{
+  const response=await fetcher(url,{headers:{'user-agent':UA,accept:'application/json',...headers},signal:AbortSignal.timeout(timeout)});
   if(!response.ok)throw new Error('HTTP_'+response.status);
   return await response.json() as T;
 }
@@ -273,11 +277,44 @@ export async function collectKoreaFlows(window:WeekWindow,fetcher:typeof fetch,a
   catch(error){audit.push({sourceId:'naver:kospi-flows',url:NAVER_KOSPI_FLOWS,status:'FAILED',count:0,error:errText(error)});return null}
 }
 
+/*
+ * Earnings (owner 2026-11-16, traffic review: every top-ranked '주간 증시 전망' post led with the week's big earnings,
+ * which the economic calendar does not carry). Nasdaq's public earnings calendar, one request per previewed weekday;
+ * only companies worth at least EARNINGS_MIN_CAP are kept. A failure leaves the list empty and never blocks.
+ */
+export const NASDAQ_EARNINGS='https://api.nasdaq.com/api/calendar/earnings?date=';
+export const NASDAQ_EARNINGS_PAGE='https://www.nasdaq.com/market-activity/earnings';
+export const EARNINGS_MIN_CAP=100e9;
+const money=(value:unknown)=>{const n=Number(String(value??'').replace(/[$,\s]/g,''));return Number.isFinite(n)?n:0};
+export function earningsKstLabel(date:string,timing:EarningsEvent['timing']):string {
+  return timing==='AMC'?`${shortDayLabel(addDays(date,1))} 오전 (미국 ${shortDate(date)} 장 마감 후)`:timing==='BMO'?`${shortDayLabel(date)} 밤 (미국 장 시작 전)`:`미국 ${shortDayLabel(date)} (발표 시각 미정)`;
+}
+export function parseNasdaqEarnings(body:unknown,date:string,minCap=EARNINGS_MIN_CAP):EarningsEvent[] {
+  const rows=(body as {data?:{rows?:Array<Record<string,unknown>>|null}}|null)?.data?.rows??[];
+  const out:EarningsEvent[]=[];
+  for(const row of Array.isArray(rows)?rows:[]){
+    const symbol=String(row.symbol??'').trim().toUpperCase(),name=String(row.name??'').trim(),cap=money(row.marketCap);
+    if(!/^[A-Z.]{1,6}$/.test(symbol)||!name||cap<minCap)continue;
+    const time=String(row.time??''),timing:EarningsEvent['timing']=/after/i.test(time)?'AMC':/pre-market/i.test(time)?'BMO':'UNKNOWN';
+    out.push({date,symbol,name,koreanName:US_KOREAN_NAMES[symbol]??null,marketCapUsd:cap,timing,kstLabel:earningsKstLabel(date,timing),fiscalQuarter:String(row.fiscalQuarterEnding??'').trim()});
+  }
+  return out;
+}
+export async function collectEarnings(window:WeekWindow,fetcher:typeof fetch,audit:WeeklyAudit[]):Promise<EarningsEvent[]> {
+  const out:EarningsEvent[]=[];
+  for(let day=window.nextStart;day<=window.nextEnd;day=addDays(day,1)){
+    const url=NASDAQ_EARNINGS+day;
+    try{const body=await getJson<unknown>(fetcher,url,20000,{'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36'});const rows=parseNasdaqEarnings(body,day);out.push(...rows);audit.push({sourceId:'nasdaq:earnings:'+day,url,status:'PASS',count:rows.length,error:null})}
+    catch(error){audit.push({sourceId:'nasdaq:earnings:'+day,url,status:'FAILED',count:0,error:errText(error)})}
+  }
+  return out.sort((a,b)=>a.date.localeCompare(b.date)||b.marketCapUsd-a.marketCapUsd);
+}
+
 export async function collectWeeklyEvidence(runDate:string,fetcher:typeof fetch=fetch,collectedAt=new Date().toISOString()):Promise<WeeklyEvidence> {
   const window=weekWindow(runDate),audit:WeeklyAudit[]=[];
-  const [quotes,broker,calendar,posts,charts]=await Promise.all([collectWeeklyQuotes(window,fetcher,audit),collectWeeklyResearch(window,fetcher,audit),collectCalendar(window,fetcher,audit),collectMotusPosts(window,fetcher,audit),collectWeeklyCharts(window,fetcher,audit)]);
+  const [quotes,broker,calendar,posts,charts,earnings]=await Promise.all([collectWeeklyQuotes(window,fetcher,audit),collectWeeklyResearch(window,fetcher,audit),collectCalendar(window,fetcher,audit),collectMotusPosts(window,fetcher,audit),collectWeeklyCharts(window,fetcher,audit),collectEarnings(window,fetcher,audit)]);
   const kospi=quotes.find(item=>item.symbol==='^KS11'),flows=await collectKoreaFlows(window,fetcher,audit,kospi?.weekCloseDate??null);
-  return {window,quotes,broker,calendar:calendar.events,calendarCoversNextWeek:calendar.coversNextWeek,posts,audit,collectedAt,charts,flows};
+  return {window,quotes,broker,calendar:calendar.events,calendarCoversNextWeek:calendar.coversNextWeek,posts,audit,collectedAt,charts,flows,earnings};
 }
 
 /* ---------------- Article ---------------- */
@@ -302,6 +339,24 @@ export function headlineEvents(events:CalendarEvent[],limit=2):string[] {
   return out.slice(0,limit).map(event=>/^(?:FOMC|ECB|일본은행|영란은행|호주중앙은행)/.test(event.group!)?event.group!:`${event.countryLabel} ${event.group}`);
 }
 
+/**
+ * Outlook-first weekly title (owner 2026-11-16): the search phrase and the week's dates lead, then the week's
+ * biggest earnings and economic releases, then last week's result. Example:
+ * "주간 증시 전망(11/16~11/20)｜엔비디아 실적·미국 소매판매 주목…지난주 S&P 500 2.5% 상승·코스피 4.6% 상승".
+ */
+export const WEEKLY_TITLE_MAX=78;
+export const capText=(usd:number)=>usd>=1e12?`${(usd/1e12).toFixed(1)}조 달러`:`${fmt(usd/1e8,0)}억 달러`;
+export function weeklyTitle(input:{nextStart:string;nextEnd:string;earnings:string[];headline:string[];usLead?:WeeklyQuote|undefined;kospi?:WeeklyQuote|undefined}):string {
+  const head=`주간 증시 전망(${shortDate(input.nextStart)}~${shortDate(input.nextEnd)})`;
+  const tail=input.usLead&&input.kospi?`…지난주 ${input.usLead.label} ${titlePct(input.usLead.changePct)}·코스피 ${titlePct(input.kospi.changePct)}`:'';
+  const items=[...input.earnings.map(name=>`${name} 실적`),...input.headline.map((item,index)=>index>0||input.earnings.length?item.replace(/^미국 /,''):item)];
+  for(let n=Math.min(items.length,3);n>=0;n--){
+    const focus=n?`｜${items.slice(0,n).join('·')} 주목`:'｜주요 일정';
+    const title=head+focus+tail;if(title.length<=WEEKLY_TITLE_MAX||n===0)return title.length<=WEEKLY_TITLE_MAX?title:head+focus;
+  }
+  return head;
+}
+
 export function buildWeeklyArticle(evidence:WeeklyEvidence,options:{requireCalendar:boolean}={requireCalendar:true}):WeeklyArticle {
   const {window}=evidence,reasons:string[]=[],find=(label:string)=>evidence.quotes.find(item=>item.label===label);
   const sp=find('S&P 500'),nasdaq=find('나스닥'),dow=find('다우존스'),kospi=find('코스피'),kosdaq=find('코스닥'),tenYear=find('미국 10년물 국채금리'),krw=find('원·달러 환율');
@@ -313,34 +368,42 @@ export function buildWeeklyArticle(evidence:WeeklyEvidence,options:{requireCalen
   if(!evidence.calendar.length&&!outlooks.length)reasons.push('WEEKLY_NEXT_WEEK_EVIDENCE_MISSING');
   const range=weekRangeLabel(window),nextRange=weekRangeLabel({...window,weekStart:window.nextStart,weekEnd:window.nextEnd});
   const usLead=[sp,nasdaq,dow].filter((item):item is WeeklyQuote=>Boolean(item)).sort((a,b)=>Math.abs(b.changePct)-Math.abs(a.changePct))[0];
-  const headline=headlineEvents(evidence.calendar);
-  const title=usLead&&kospi?`[주간 증시] ${usLead.label} 주간 ${titlePct(usLead.changePct)}·코스피 ${titlePct(kospi.changePct)}…다음 주 ${headline.length?headline.join('·').replace(/·미국 /,'·')+' 주목':'증시 일정'}`:`[주간 증시] ${range} 결산과 다음 주 일정`;
-  const subtitle=`${range} 뉴욕·서울 증시 결산과 ${nextRange} 경제지표·이벤트 일정`;
+  const headline=headlineEvents(evidence.calendar),earnings=(evidence.earnings??[]).slice();
+  const bigEarnings=[...earnings].sort((a,b)=>b.marketCapUsd-a.marketCapUsd),earningsName=(item:EarningsEvent)=>item.koreanName??item.name.replace(/,?\s+(Inc|Corp|Corporation|Ltd|Co|Company|Holdings|plc)\.?$/i,'').trim();
+  const title=weeklyTitle({nextStart:window.nextStart,nextEnd:window.nextEnd,earnings:bigEarnings.slice(0,1).map(earningsName),headline,usLead,kospi});
+  const subtitle=`${nextRange} 이번 주 증시 일정${earnings.length?'·실적 발표':''}·증권가 전망과 지난주(${range}) 결산`;
+  // Outlook first (owner 2026-11-16): readers search for the week ahead on Sunday and Monday morning; the review follows.
   const leadParts:string[]=[];
-  if(sp&&nasdaq&&dow)leadParts.push(`${range} 한 주 동안 뉴욕증시는 S&P 500 ${signedPct(sp.changePct)}, 나스닥 ${signedPct(nasdaq.changePct)}, 다우존스 ${signedPct(dow.changePct)}로 마감했다.`);
+  const earningsPart=bigEarnings.length?`${bigEarnings.slice(0,2).map(earningsName).join('·')} 실적 발표`:'';
+  const eventsPart=earningsPart?headline.map((item,index)=>index&&headline[0]!.startsWith('미국 ')?item.replace(/^미국 /,''):item).join('·'):joinEvents(headline);
+  const ahead=earningsPart&&eventsPart?`${josa(earningsPart,'과','와')} ${eventsPart}`:earningsPart||eventsPart;
+  if(ahead)leadParts.push(`이번 주(${nextRange})에는 ${josa(ahead,'이','가')} 예정돼 있다.`);
+  if(sp&&nasdaq&&dow)leadParts.push(`지난주(${range}) 뉴욕증시는 S&P 500 ${signedPct(sp.changePct)}, 나스닥 ${signedPct(nasdaq.changePct)}, 다우존스 ${signedPct(dow.changePct)}로 마감했다.`);
   if(kospi&&kosdaq)leadParts.push(`국내 증시는 코스피가 주간 ${signedPct(kospi.changePct)}(${fmt(kospi.weekClose)}), 코스닥이 ${signedPct(kosdaq.changePct)}(${fmt(kosdaq.weekClose)})를 기록했다.`);
   if(tenYear){const bp=tenYear.changeBp!,rate=`미국 10년물 국채금리는 ${fmt(tenYear.weekClose)}%로 한 주 사이 ${bp===0?'보합이었다':`${Math.abs(bp)}bp ${bp>0?'올랐다':'내렸다'}`}.`;leadParts.push(krw?`${rate} 원·달러 환율은 ${fmt(krw.weekClose)}원으로 주간 ${Math.abs(krw.changePct).toFixed(2)}% ${krw.changePct>0?'올랐다(원화 약세)':krw.changePct<0?'내렸다(원화 강세)':'보합이었다'}.`:rate)}
-  if(headline.length)leadParts.push(`다음 주(${nextRange})에는 ${josa(joinEvents(headline),'이','가')} 예정돼 있다.`);
   const sections:WeeklySection[]=[];
-  // 1) The week in numbers.
+  const cite=(item:WeeklyBrokerQuote,verb:string)=>({text:`${josa(item.broker,'은','는')} ${koreanDateLabel(item.date)} 「${item.title}」에서 ${said(quote(item.sentence))} ${verb}.`,source:{label:`${item.broker} ${item.title} (${koreanDateLabel(item.date)})`,url:item.url}});
+  // 1) The week ahead: economic calendar.
+  if(evidence.calendar.length)sections.push({key:'weekly-calendar',title:`이번 주 주요 일정 (${nextRange})`,table:{headers:['한국시간','일정','예상 / 이전'],rows:evidence.calendar.slice(0,20).map(item=>[item.kstLabel,`${item.countryLabel} ${item.koreanTitle??item.title}${item.impact==='High'?' ★':''}`,item.forecast||item.previous?`${item.forecast||'-'} / ${item.previous||'-'}`:'-']),note:'★는 시장 영향이 큰 일정. 예상치는 Forex Factory 집계 기준이며, 일정은 발표 기관 사정에 따라 바뀔 수 있다.'}});
+  // 2) The week ahead: large-cap earnings.
+  if(earnings.length)sections.push({key:'weekly-earnings',title:`이번 주 주요 실적 발표 (${nextRange})`,intro:`시가총액 ${capText(EARNINGS_MIN_CAP)} 이상 미국 기업의 실적 발표 예정일이다.`,table:{headers:['한국시간','기업','시가총액','분기'],rows:earnings.slice(0,12).map(item=>[item.kstLabel,`${earningsName(item)}(${item.symbol})`,capText(item.marketCapUsd),item.fiscalQuarter||'-']),note:'발표일·시각은 Nasdaq 실적 캘린더의 회사 예정 기준이며 바뀔 수 있다. 한국시간은 미국 장 마감 후 발표를 다음 날 오전으로 표기했다.'}});
+  // 3) The week ahead: what brokers say to watch.
+  if(outlooks.length)sections.push({key:'weekly-broker-outlook',title:'증권가가 꼽은 이번 주 변수',paragraphs:outlooks.slice(0,5).map(item=>cite(item,'짚었다'))});
+  // 4) Last week in numbers.
   const indexRows=evidence.quotes.filter(item=>item.group==='US_INDEX'||item.group==='KOREA_INDEX'||item.group==='MACRO');
-  if(indexRows.length)sections.push({key:'weekly-scoreboard',title:'주간 성적표: 지수·금리·환율',table:{headers:['구분','주간 종가','주간 등락'],rows:indexRows.map(item=>[item.label,valueText(item),changeText(item)]),note:`주간 등락은 직전 주 마지막 거래일(${[...new Set(indexRows.map(item=>dayLabel(item.priorCloseDate)))].join('·')}) 종가 대비 이번 주 마지막 거래일 종가 기준. 금리는 bp(0.01%p), 유가·금은 근월물 선물 가격.`}});
-  // 2) What happened, day by day, through the week's own articles.
-  const posts=evidence.posts.filter(item=>item.category!=='OTHER');
-  if(posts.length)sections.push({key:'weekly-daily',title:'이번 주 시장을 움직인 장면',intro:'MOTUS가 이번 주 발행한 데일리 기사 제목으로 한 주를 되짚었다. 제목을 누르면 그날의 원인 분석과 증권가 해석을 볼 수 있다.',links:posts.map(item=>({label:item.title,url:item.url,meta:`${dayLabel(new Date(Date.parse(item.publishedAt)+9*3600000).toISOString().slice(0,10))} · ${item.category==='US_MARKET'?'미국증시':item.category==='KOREA_MARKET'?'국내증시':'AI 인텔리전스'}`}))});
-  // 3) Large caps.
+  if(indexRows.length)sections.push({key:'weekly-scoreboard',title:`지난주 성적표: 지수·금리·환율 (${range})`,table:{headers:['구분','주간 종가','주간 등락'],rows:indexRows.map(item=>[item.label,valueText(item),changeText(item)]),note:`주간 등락은 직전 주 마지막 거래일(${[...new Set(indexRows.map(item=>dayLabel(item.priorCloseDate)))].join('·')}) 종가 대비 이번 주 마지막 거래일 종가 기준. 금리는 bp(0.01%p), 유가·금은 근월물 선물 가격.`}});
+  // 5) Large caps.
   const movers=(group:'US_STOCK'|'KOREA_STOCK')=>{const rows=evidence.quotes.filter(item=>item.group===group).sort((a,b)=>b.changePct-a.changePct);return rows.length>=4?rows:[]};
   const us=movers('US_STOCK'),kr=movers('KOREA_STOCK'),pick=(rows:WeeklyQuote[])=>[...rows.slice(0,3),...rows.slice(-3).filter(item=>!rows.slice(0,3).includes(item))];
-  if(us.length||kr.length)sections.push({key:'weekly-large-caps',title:'대형주 주간 등락',intro:'미국 시가총액 상위 기술주와 국내 시가총액 상위 종목 가운데 이번 주 가장 많이 오르고 내린 종목이다.',table:{headers:['시장','종목','주간 종가','주간 등락'],rows:[...pick(us).map(item=>['미국',`${item.label}(${item.symbol})`,valueText(item),signedPct(item.changePct)]),...pick(kr).map(item=>['국내',item.label,valueText(item),signedPct(item.changePct)])]}});
-  // 4) Brokers on the week.
-  const cite=(item:WeeklyBrokerQuote,verb:string)=>({text:`${josa(item.broker,'은','는')} ${koreanDateLabel(item.date)} 「${item.title}」에서 ${said(quote(item.sentence))} ${verb}.`,source:{label:`${item.broker} ${item.title} (${koreanDateLabel(item.date)})`,url:item.url}});
-  if(reviews.length)sections.push({key:'weekly-broker-review',title:'증권가가 본 이번 주',intro:'증권사가 이번 주 말 공개한 주간 리포트의 요약문을 그대로 인용했다.',paragraphs:reviews.slice(0,5).map(item=>cite(item,'진단했다'))});
-  // 5) Next week's calendar.
-  if(evidence.calendar.length)sections.push({key:'weekly-calendar',title:`다음 주 주요 일정 (${nextRange})`,table:{headers:['한국시간','일정','예상 / 이전'],rows:evidence.calendar.slice(0,20).map(item=>[item.kstLabel,`${item.countryLabel} ${item.koreanTitle??item.title}${item.impact==='High'?' ★':''}`,item.forecast||item.previous?`${item.forecast||'-'} / ${item.previous||'-'}`:'-']),note:'★는 시장 영향이 큰 일정. 예상치는 Forex Factory 집계 기준이며, 일정은 발표 기관 사정에 따라 바뀔 수 있다.'}});
-  // 6) What brokers say to watch.
-  if(outlooks.length)sections.push({key:'weekly-broker-outlook',title:'증권가가 꼽은 다음 주 변수',paragraphs:outlooks.slice(0,5).map(item=>cite(item,'짚었다'))});
+  if(us.length||kr.length)sections.push({key:'weekly-large-caps',title:'지난주 대형주 등락',intro:'미국 시가총액 상위 기술주와 국내 시가총액 상위 종목 가운데 지난주 가장 많이 오르고 내린 종목이다.',table:{headers:['시장','종목','주간 종가','주간 등락'],rows:[...pick(us).map(item=>['미국',`${item.label}(${item.symbol})`,valueText(item),signedPct(item.changePct)]),...pick(kr).map(item=>['국내',item.label,valueText(item),signedPct(item.changePct)])]}});
+  // 6) Brokers on last week.
+  if(reviews.length)sections.push({key:'weekly-broker-review',title:'증권가가 본 지난주',intro:'증권사가 지난주 말 공개한 주간 리포트의 요약문을 그대로 인용했다.',paragraphs:reviews.slice(0,5).map(item=>cite(item,'진단했다'))});
+  // 7) What happened, day by day, through last week's own articles.
+  const posts=evidence.posts.filter(item=>item.category!=='OTHER');
+  if(posts.length)sections.push({key:'weekly-daily',title:'지난주 시장을 움직인 장면',intro:'MOTUS가 지난주 발행한 데일리 기사 제목으로 한 주를 되짚었다. 제목을 누르면 그날의 원인 분석과 증권가 해석을 볼 수 있다.',links:posts.map(item=>({label:item.title,url:item.url,meta:`${dayLabel(new Date(Date.parse(item.publishedAt)+9*3600000).toISOString().slice(0,10))} · ${item.category==='US_MARKET'?'미국증시':item.category==='KOREA_MARKET'?'국내증시':'AI 인텔리전스'}`}))});
   const sourceList:Array<[string,{label:string;url:string}]>=[...evidence.broker.map(item=>[item.url,{label:`${item.broker} ${item.title} (${koreanDateLabel(item.date)})`,url:item.url}] as [string,{label:string;url:string}]),['yahoo',{label:'Yahoo Finance 일별 종가 (지수·금리·환율·종목)',url:'https://finance.yahoo.com/markets/'}]];
   if(evidence.calendar.length)sourceList.push(['ff',{label:'Forex Factory 경제 캘린더',url:FF_CALENDAR_PAGE}]);
+  if(earnings.length)sourceList.push(['nasdaq',{label:'Nasdaq 실적 발표 캘린더',url:NASDAQ_EARNINGS_PAGE}]);
   const sources=[...new Map(sourceList).values()];
   return {publicationId:`motus-weekly-${window.weekStart}`,weekStart:window.weekStart,weekEnd:window.weekEnd,title,subtitle,lead:leadParts.join(' '),sections,sources,readiness:reasons.length?'HOLD':'READY',reasons};
 }
