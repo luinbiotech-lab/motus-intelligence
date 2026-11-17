@@ -1,0 +1,79 @@
+{
+  "gate": {
+    "state": "AUTO_PUBLISH_READY",
+    "reasons": [],
+    "approval": "AUTO_POLICY_APPROVAL",
+    "checkedAt": "2026-11-17T23:42:04.001Z"
+  },
+  "searchRegistration": {
+    "publicationId": "motus-live-2026-11-17:us",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/11/11-17-3-16-tsmc-37.html",
+    "registeredAt": "2026-11-18T08:42:06+09:00",
+    "trigger": "PUBLICATION_PUBLISHED",
+    "googleInspectionState": "QUEUED",
+    "naverDiscoveryState": "PENDING",
+    "visibility": {
+      "publicationId": "motus-live-2026-11-17:us",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/11/11-17-3-16-tsmc-37.html",
+      "google": {
+        "discovered": null,
+        "indexed": null,
+        "lastCrawl": null,
+        "coverageState": null,
+        "inspectionAt": null
+      },
+      "naver": {
+        "discovered": null,
+        "indexed": null,
+        "collectionState": null,
+        "inspectionAt": null
+      },
+      "sitemapIncluded": null,
+      "rssIncluded": null
+    }
+  },
+  "libraryRegistration": {
+    "idempotencyKey": "library:motus-live-2026-11-17:us|https://motusnova.blogspot.com/2026/11/11-17-3-16-tsmc-37.html"
+  },
+  "weeklyFeed": {
+    "idempotencyKey": "weekly:motus-live-2026-11-17:us"
+  },
+  "pdfCandidate": {
+    "idempotencyKey": "pdf:motus-live-2026-11-17:us:sha256:de8de0347c2908ae74024c08f7b6af306473713f901cd0aab69b82f0f31c4229",
+    "visibility": "PRIVATE"
+  },
+  "audit": [
+    {
+      "at": "2026-11-17T23:42:04.001Z",
+      "event": "AUTO_PUBLISH_STATIC_GATE",
+      "detail": "AUTO_PUBLISH_READY"
+    },
+    {
+      "at": "2026-11-17T23:42:04.001Z",
+      "event": "REMOTE_DUPLICATE_CHECK",
+      "detail": "PASS"
+    },
+    {
+      "at": "2026-11-17T23:42:04.001Z",
+      "event": "FINAL_REMOTE_DUPLICATE_CHECK",
+      "detail": "PASS"
+    },
+    {
+      "at": "2026-11-17T23:42:04.001Z",
+      "event": "PUBLIC_PAGE_RATE_LIMITED",
+      "detail": "HTTP 429; Blogger API published readback and content verification passed"
+    },
+    {
+      "at": "2026-11-18T08:42:06+09:00",
+      "event": "PUBLISHED",
+      "detail": "AUTO_POLICY_APPROVAL"
+    }
+  ],
+  "state": "PUBLISHED",
+  "draftPostId": "2129532309641873143",
+  "publicPostUrl": "https://motusnova.blogspot.com/2026/11/11-17-3-16-tsmc-37.html",
+  "publishedAt": "2026-11-18T08:42:06+09:00",
+  "insertCallCount": 1,
+  "publishCallCount": 1,
+  "error": null
+}

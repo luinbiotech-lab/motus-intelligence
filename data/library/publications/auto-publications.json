@@ -280,5 +280,11 @@
     "publicationId": "motus-live-2026-11-18:korea",
     "publicPostUrl": "https://motusnova.blogspot.com/2026/11/11-17-259-496848-1-30.html",
     "publishedAt": "2026-11-17T17:36:51+09:00"
+  },
+  {
+    "idempotencyKey": "library:motus-live-2026-11-17:us|https://motusnova.blogspot.com/2026/11/11-17-3-16-tsmc-37.html",
+    "publicationId": "motus-live-2026-11-17:us",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/11/11-17-3-16-tsmc-37.html",
+    "publishedAt": "2026-11-18T08:42:06+09:00"
   }
 ]
