@@ -2,11 +2,11 @@
   "mode": "LIVE",
   "sourceMode": "internal",
   "date": "2026-11-17",
-  "observedDate": "2026-11-16",
+  "observedDate": null,
   "category": "KOREA_MARKET",
-  "state": "LIVE_READY",
-  "reasonCode": null,
-  "verification": "VERIFIED",
+  "state": "SKIP",
+  "reasonCode": "KOREA_MORNING_EDITION_RETIRED",
+  "verification": "FAILED",
   "publishCallCount": 0,
   "commerce": {
     "enabled": false
