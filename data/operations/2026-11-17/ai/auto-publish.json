@@ -1,0 +1,79 @@
+{
+  "gate": {
+    "state": "AUTO_PUBLISH_READY",
+    "reasons": [],
+    "approval": "AUTO_POLICY_APPROVAL",
+    "checkedAt": "2026-11-17T03:34:34.894Z"
+  },
+  "searchRegistration": {
+    "publicationId": "motus-live-2026-11-17:ai",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/11/41-ai.html",
+    "registeredAt": "2026-11-17T12:34:38+09:00",
+    "trigger": "PUBLICATION_PUBLISHED",
+    "googleInspectionState": "QUEUED",
+    "naverDiscoveryState": "PENDING",
+    "visibility": {
+      "publicationId": "motus-live-2026-11-17:ai",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/11/41-ai.html",
+      "google": {
+        "discovered": null,
+        "indexed": null,
+        "lastCrawl": null,
+        "coverageState": null,
+        "inspectionAt": null
+      },
+      "naver": {
+        "discovered": null,
+        "indexed": null,
+        "collectionState": null,
+        "inspectionAt": null
+      },
+      "sitemapIncluded": null,
+      "rssIncluded": null
+    }
+  },
+  "libraryRegistration": {
+    "idempotencyKey": "library:motus-live-2026-11-17:ai|https://motusnova.blogspot.com/2026/11/41-ai.html"
+  },
+  "weeklyFeed": {
+    "idempotencyKey": "weekly:motus-live-2026-11-17:ai"
+  },
+  "pdfCandidate": {
+    "idempotencyKey": "pdf:motus-live-2026-11-17:ai:sha256:5cadf134f6ac7a8064bcf512bd7a9c3db7fb39522013068321d9e9c671823b8c",
+    "visibility": "PRIVATE"
+  },
+  "audit": [
+    {
+      "at": "2026-11-17T03:34:34.894Z",
+      "event": "AUTO_PUBLISH_STATIC_GATE",
+      "detail": "AUTO_PUBLISH_READY"
+    },
+    {
+      "at": "2026-11-17T03:34:34.894Z",
+      "event": "REMOTE_DUPLICATE_CHECK",
+      "detail": "PASS"
+    },
+    {
+      "at": "2026-11-17T03:34:34.894Z",
+      "event": "FINAL_REMOTE_DUPLICATE_CHECK",
+      "detail": "PASS"
+    },
+    {
+      "at": "2026-11-17T03:34:34.894Z",
+      "event": "PUBLIC_PAGE_RATE_LIMITED",
+      "detail": "HTTP 429; Blogger API published readback and content verification passed"
+    },
+    {
+      "at": "2026-11-17T12:34:38+09:00",
+      "event": "PUBLISHED",
+      "detail": "AUTO_POLICY_APPROVAL"
+    }
+  ],
+  "state": "PUBLISHED",
+  "draftPostId": "7208265745906784144",
+  "publicPostUrl": "https://motusnova.blogspot.com/2026/11/41-ai.html",
+  "publishedAt": "2026-11-17T12:34:38+09:00",
+  "insertCallCount": 1,
+  "publishCallCount": 1,
+  "error": null
+}

@@ -268,5 +268,11 @@
     "publicationId": "motus-live-2026-11-16:us",
     "publicPostUrl": "https://motusnova.blogspot.com/2026/11/11-16-3-25-tsmc-63.html",
     "publishedAt": "2026-11-17T08:43:04+09:00"
+  },
+  {
+    "idempotencyKey": "library:motus-live-2026-11-17:ai|https://motusnova.blogspot.com/2026/11/41-ai.html",
+    "publicationId": "motus-live-2026-11-17:ai",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/11/41-ai.html",
+    "publishedAt": "2026-11-17T12:34:38+09:00"
   }
 ]
