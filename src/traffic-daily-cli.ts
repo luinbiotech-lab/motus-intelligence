@@ -17,6 +17,7 @@ import {mkdir,readFile,readdir,writeFile} from 'node:fs/promises';
 import {existsSync} from 'node:fs';
 import {join} from 'node:path';
 import {articleKeywords,contentFeatures,type ContentFeatures} from './operations/traffic.js';
+import {sitemapFreshness} from './production/run-record.js';
 
 const args=process.argv.slice(2),value=(flag:string)=>{const index=args.indexOf(flag);return index>=0?args[index+1]:undefined};
 const date=value('--date')??'';
@@ -119,7 +120,10 @@ try{
         const html=response.status===200?await response.text():'';chains.push({url,agent,hops,finalUrl:next,canonical:html.match(/<link[^>]+rel=['"]canonical['"][^>]*href=['"]([^'"]+)/i)?.[1]??null});break}
     }catch(error){chains.push({url,agent,error:error instanceof Error?error.message:String(error)})}
   }
-  result.indexStatus={state:'PASS',sitemaps,inspected:inspections.length,indexed,inspections,fixedSample:{paths:INDEX_FIXED_SAMPLE,chains}};
+  // MO-9: a sitemap Google has not downloaded for 48 hours is flagged here and in the daily status.
+  const freshness=sitemapFreshness(sitemaps,new Date().toISOString());
+  if(freshness.state==='STALE')console.log(`::warning title=Sitemap not downloaded for ${freshness.hours}h::last download ${freshness.lastDownloaded} (limit ${freshness.maxHours}h)`);
+  result.indexStatus={state:'PASS',sitemaps,sitemapFreshness:freshness,inspected:inspections.length,indexed,inspections,fixedSample:{paths:INDEX_FIXED_SAMPLE,chains}};
 }catch(error){result.indexStatus={state:'UNAVAILABLE',reason:error instanceof Error?error.message:String(error)}}
 
 // 4) Naver DataLab interest (relative, last 14 days) for each article's keywords.
