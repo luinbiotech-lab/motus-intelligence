@@ -91,6 +91,13 @@ function causeParagraphs(briefs:BrokerBrief[],region:'US'|'KOREA'):{paragraphs:D
   for(const pick of cautions)paragraphs.push({text:`경계 요인도 제시됐다. ${subject(pick.brief.report)} ${said([quote(pick.text)])} 짚었다.`,source:reportSource(pick.brief.report)});
   return {paragraphs,first:[...drivers].sort((a,b)=>marketScore(b.text)-marketScore(a.text))[0]??null};
 }
+/** The one cause sentence the session is explained by: a broker driver first, else the first wire close sentence. */
+export function sessionDriver(briefs:BrokerBrief[],region:'US'|'KOREA',wire:WireReport[]):{publisher:string;text:string}|null{
+  const first=causeParagraphs(briefs,region).first;
+  if(first)return {publisher:first.brief.report.broker,text:first.text};
+  const report=wire.find(item=>item.sentence);
+  return report?{publisher:report.publisher,text:report.sentence!}:null;
+}
 const kstDay=(iso:string)=>new Date(Date.parse(iso)+9*3600000).toISOString().slice(0,10);
 /** Wire edition tags such as (종합) are not part of what the report says. */
 const wireHeadline=(title:string)=>title.replace(/\s*\((?:종합|\d+보)[^)]*\)\s*$/,'').trim();

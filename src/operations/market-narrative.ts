@@ -77,19 +77,85 @@ export function buildUSMarketNarrative(series:ClosingSeries[],tenYear:RateObserv
 
 export interface KoreaIndexHistory {label:'KOSPI'|'KOSDAQ';dates:string[];closes:number[]}
 
-/** Korea session: index facts from the verified session history plus rule-based MOTUS analysis. */
-export function buildKoreaMarketNarrative(histories:KoreaIndexHistory[],flows:Array<{label:string;direction:'UP'|'DOWN'|'FLAT'}>):MarketNarrative {
+/** 억원 amount in words: 14,090 -> '1조 4,090억원'. */
+export function eokText(value:number):string {
+  const a=Math.round(Math.abs(value)),jo=Math.floor(a/10000),rest=a%10000;
+  return jo?`${jo}조${rest?` ${rest.toLocaleString('en-US')}억원`:'원'}`:`${rest.toLocaleString('en-US')}억원`;
+}
+export interface KoreaNarrativeContext {flows?:Array<{label:string;value:number}>;driver?:{publisher:string;text:string}|null}
+
+/** Consecutive closes moving the same way as the last one (2 or more), counted back from the latest session. */
+function streak(closes:number[]):number {
+  let count=0;const last=direction(pct(closes.at(-2)!,closes.at(-1)!));if(!last)return 0;
+  for(let i=closes.length-1;i>0&&direction(pct(closes[i-1]!,closes[i]!))===last;i--)count++;
+  return count;
+}
+/** A 1,000-point level crossed between the previous and the latest close (KOSPI) or a 100-point level (KOSDAQ). */
+function levelCrossed(previous:number,close:number,step:number):number|null {
+  const level=close<previous?Math.floor(previous/step)*step:Math.floor(close/step)*step;
+  return (previous>=level&&close<level)||(previous<level&&close>=level)?level:null;
+}
+
+/**
+ * Korea session: index facts plus a rule-based MOTUS reading. 2026-11-18 owner ("이걸 분석이라고 할 수 있어?" on
+ * '외국인은 순매도로 마감했다.'): the box must say what kind of day it was, who moved it and with what size, how that
+ * lines up with the reported cause, and what decides the next session. Every number comes from the verified series and
+ * flows; readings that go beyond the numbers are marked (추정).
+ */
+export function buildKoreaMarketNarrative(histories:KoreaIndexHistory[],flows:Array<{label:string;direction:'UP'|'DOWN'|'FLAT'}>,context:KoreaNarrativeContext={}):MarketNarrative {
   const stats=histories.map(item=>seriesStats({key:item.label,label:item.label,dates:item.dates,closes:item.closes},item.label==='KOSPI'?'코스피':'코스닥')).filter((item):item is SeriesStats=>Boolean(item));
-  const facts=stats.map(item=>indexFact(item,`최근 ${histories[0]?.closes.length??0}거래일`).replace(/최근 5거래일 기준으로는 ([^,]+), 20거래일 기준으로는 [^.]+했다\./,'최근 5거래일 기준으로는 $1했다.'));
+  const sessions=histories[0]?.closes.length??0;
+  const facts=stats.map(item=>indexFact(item,`최근 ${sessions}거래일`).replace(/최근 5거래일 기준으로는 ([^,]+), 20거래일 기준으로는 [^.]+했다\./,'최근 5거래일 기준으로는 $1했다.'));
   const analysis:string[]=[],kospi=stats.find(item=>item.name==='코스피'),kosdaq=stats.find(item=>item.name==='코스닥');
-  if(kospi&&kosdaq){
-    // Only index closes are verified here, so the reading stays at the level of the two indices (no size or flow claims).
-    const a=direction(kospi.day),b=direction(kosdaq.day);
-    if(a!==0&&b!==0&&a!==b)analysis.push(`코스피와 코스닥의 방향이 엇갈렸다.`);
-    else if(a!==0&&a===b&&Math.abs(kospi.day-kosdaq.day)>=0.5){const weaker=Math.abs(kosdaq.day)>Math.abs(kospi.day)?'코스닥':'코스피',other=weaker==='코스닥'?'코스피':'코스닥';analysis.push(`${josa(weaker,'이','가')} ${other}보다 ${Math.abs(kospi.day-kosdaq.day).toFixed(2)}%p 더 크게 ${a>0?'올랐다':'내렸다'}.`)}
-    if(kospi.week!==null&&direction(kospi.week)!==0&&direction(kospi.day)!==0&&direction(kospi.week)!==direction(kospi.day))analysis.push(`코스피는 최근 5거래일 기준으로 ${kospi.week>0?'올랐지만':'내렸지만'} 이날은 ${kospi.day>0?'올랐다':'내렸다'}.`);
+  const kospiHistory=histories.find(item=>item.label==='KOSPI');
+  let crossed:number|null=null,run=0;
+  if(kospi&&kospiHistory&&direction(kospi.day)!==0){
+    const closes=kospiHistory.closes,down=kospi.day<0,parts:string[]=[];
+    run=streak(closes);crossed=levelCrossed(closes.at(-2)!,closes.at(-1)!,1000);
+    const moves=closes.slice(1).map((value,index)=>Math.abs(pct(closes[index]!,value)));
+    const lead=run>=2?`코스피는 ${run}거래일 연속 ${down?'하락':'상승'}하며`:`코스피는 ${Math.abs(kospi.day).toFixed(2)}% ${down?'내리며':'오르며'}`;
+    parts.push(crossed!==null?`${lead} ${formatLevel(crossed).replace(/\.00$/,'')}선 ${down?'아래로 내려왔다':'위로 올라섰다'}.`:`${lead} ${numberWithRo(formatLevel(kospi.close))} 마감했다.`);
+    if(moves.length>=4&&Math.abs(kospi.day)>=1&&Math.abs(kospi.day)>=Math.max(...moves)-1e-9)parts.push(`하루 ${down?'낙폭':'상승폭'} ${Math.abs(kospi.day).toFixed(2)}%는 최근 ${sessions}거래일 가운데 가장 컸다.`);
+    if(kospi.fromHigh<=-10)parts.push(`최근 ${sessions}거래일 고점(${formatLevel(kospi.high)}, ${kospi.highDate})보다 ${Math.abs(kospi.fromHigh).toFixed(2)}% 낮아, 흔히 '조정'이라 부르는 고점 대비 10% 이상 하락 구간에 들어섰다.`);
+    else if(kospi.fromHigh<=-5)parts.push(`최근 ${sessions}거래일 고점보다 ${Math.abs(kospi.fromHigh).toFixed(2)}% 낮아 단기 조정 흐름이 이어지고 있다.`);
+    else if(!down&&kospi.close>=kospi.high)parts.push(`최근 ${sessions}거래일 종가 가운데 가장 높은 수준으로, 상승 흐름이 이어지고 있다.`);
+    if(kosdaq){
+      const a=direction(kospi.day),b=direction(kosdaq.day);
+      if(b!==0&&a!==b)parts.push(`코스닥은 반대로 ${Math.abs(kosdaq.day).toFixed(2)}% ${kosdaq.day>0?'올라':'내려'} 두 시장의 방향이 엇갈렸다.`);
+      else if(a===b&&Math.abs(kospi.day-kosdaq.day)>=0.5){const bigger=Math.abs(kosdaq.day)>Math.abs(kospi.day)?'코스닥':'코스피',other=bigger==='코스닥'?'코스피':'코스닥';parts.push(`${josa(bigger,'이','가')} ${other}보다 ${Math.abs(kospi.day-kosdaq.day).toFixed(2)}%p 더 크게 ${down?'내렸다':'올랐다'}.`)}
+      else if(a===b&&Math.abs(kospi.day)>=1&&Math.abs(kosdaq.day)>=1)parts.push(`코스닥도 ${Math.abs(kosdaq.day).toFixed(2)}% ${down?'내려':'올라'} 두 시장이 함께 움직였다.`);
+    }
+    if(kospi.week!==null&&direction(kospi.week)!==0&&direction(kospi.week)!==direction(kospi.day))parts.push(`최근 5거래일 기준으로는 아직 ${kospi.week>0?'상승':'하락'} 구간이다.`);
+    analysis.push(parts.join(' '));
+  }else if(kospi&&kosdaq){
+    const b=direction(kosdaq.day);if(b!==0)analysis.push(`코스피는 보합이었고 코스닥은 ${Math.abs(kosdaq.day).toFixed(2)}% ${kosdaq.day>0?'올랐다':'내렸다'}.`);
   }
-  const foreign=flows.find(item=>/외국인/.test(item.label));
-  if(foreign&&foreign.direction!=='FLAT')analysis.push(`외국인은 순${foreign.direction==='UP'?'매수':'매도'}로 마감했다.`);
+  const amounts=(context.flows??[]).filter(item=>Number.isFinite(item.value)&&item.value!==0);
+  const foreign=amounts.find(item=>/외국인/.test(item.label));
+  let foreignLed=false;
+  if(kospi&&amounts.length>=2&&direction(kospi.day)!==0){
+    const down=kospi.day<0,sellers=amounts.filter(item=>item.value<0).sort((a,b)=>a.value-b.value),buyers=amounts.filter(item=>item.value>0).sort((a,b)=>b.value-a.value);
+    const list=(items:typeof amounts)=>items.map(item=>`${item.label}(${item.value>0?'+':'−'}${eokText(item.value)})`).join('·');
+    const lead=down?sellers[0]:buyers[0];
+    if(sellers.length&&buyers.length&&lead){
+      const text=`매도 쪽은 ${list(sellers)}, 매수 쪽은 ${list(buyers)}이었다.`;
+      const largest=[...amounts].sort((a,b)=>Math.abs(b.value)-Math.abs(a.value))[0]!;
+      foreignLed=lead===largest&&/외국인/.test(lead.label);
+      analysis.push(lead===largest?`${text} 지수 방향과 같은 쪽에서 가장 크게 움직인 주체가 ${lead.label}이어서, 이날 ${down?'하락':'상승'}은 ${lead.label} ${down?'매도':'매수'}가 주도한 것으로 읽힌다(추정).`
+        :`${text} 가장 크게 움직인 ${josa(largest.label,'은','는')} 지수와 반대로 ${largest.value>0?'샀고':'팔았고'}, 지수는 ${down?'매도':'매수'} 쪽(${(down?sellers:buyers).map(item=>item.label).join('·')})을 따라 ${down?'내렸다':'올랐다'}(추정).`);
+    }
+  }
+  if(context.driver&&kospi&&direction(kospi.day)!==0){
+    const quote=`“${context.driver.text.replace(/[.。]\s*$/,'')}”`;
+    analysis.push(foreignLed&&foreign?`원인으로는 ${josa(context.driver.publisher,'이','가')} ${quote}고 짚었다. 같은 날 외국인이 ${eokText(foreign.value)}을 ${foreign.value<0?'순매도':'순매수'}한 만큼, 이 요인이 외국인 매매를 통해 지수에 반영된 것으로 읽힌다(추정).`
+      :`원인으로는 ${josa(context.driver.publisher,'이','가')} ${quote}고 짚었다.`);
+  }
+  if(kospi&&direction(kospi.day)!==0){
+    const down=kospi.day<0,checks:string[]=[];
+    if(crossed!==null)checks.push(`${formatLevel(crossed).replace(/\.00$/,'')}선 ${down?'회복':'안착'} 여부`);
+    if(foreign)checks.push(`외국인 ${foreign.value<0?'매도가 멈추는지':'매수가 이어지는지'}`);
+    else if(run>=3)checks.push(`${run}거래일 연속 ${down?'하락':'상승'}이 멈추는지`);
+    if(checks.length)analysis.push(`다음 거래일에는 ${checks.join('와 ')}가 이 ${down?'하락':'상승'}이 이어질지를 가르는 첫 확인점이다.`);
+  }
   return {facts,analysis};
 }
