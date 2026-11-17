@@ -1,19 +1,10 @@
-name: DIAG wire close sources (temporary, read-only)
-on:
-  push:
-    branches: [diag/mobile-redirect-20261108]
-permissions:
-  contents: read
+name: diag-mobile-redirect
+on: push
 jobs:
   probe:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-        with: {fetch-depth: 0}
       - run: |
-          git fetch -q origin main && git fetch -q origin claude/korea-same-day-only && git checkout FETCH_HEAD -- src tests package.json package-lock.json tsconfig.json
-          npm ci --ignore-scripts >/dev/null 2>&1 || npm install --ignore-scripts >/dev/null
-          npx tsc -p . && node diag/wire-probe.mjs
-        env:
-          NAVER_DATALAB_CLIENT_ID: ${{ secrets.NAVER_DATALAB_CLIENT_ID }}
-          NAVER_DATALAB_CLIENT_SECRET: ${{ secrets.NAVER_DATALAB_CLIENT_SECRET }}
+          curl -s https://m.stock.naver.com/api/index/KOSPI/trend; echo
+          curl -s https://api.stock.naver.com/marketindex/exchange/FX_USDKRW | head -c 1500; echo
+          curl -sL "https://news.einfomax.co.kr/news/articleView.html?idxno=4445196" | python3 -c "import sys,re,html;s=sys.stdin.read();t=html.unescape(re.sub(r'<[^>]+>',' ',s));t=re.sub(r'\s+',' ',t);[print(m.group(0)) for m in re.finditer(r'.{0,120}(억원|환율|달러-원).{0,120}',t)][:0]" | head -20
