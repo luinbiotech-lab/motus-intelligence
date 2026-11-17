@@ -14,10 +14,10 @@
   "leakagePass": true,
   "duplicateCheck": "PENDING_REMOTE",
   "duplicateUncertainty": true,
-  "articleFingerprint": "sha256:b0e889dce3efc91c85a7c415ee210f8aad0b07d07b92a6db26a2b08a8f92ebb9",
+  "articleFingerprint": "sha256:7400940bf493b491295b9088e73d0096fd18feec72e3e71ba6692bd8b412adb7",
   "commerceEnabled": false,
-  "verifiedAt": "2026-11-17T04:12:19.966Z",
-  "expiresAt": "2026-11-17T05:42:19.966Z",
+  "verifiedAt": "2026-11-17T05:15:10.840Z",
+  "expiresAt": "2026-11-17T06:45:10.840Z",
   "sourceAuditIds": [
     "calendar:nyse",
     "deep:consensus:list:company",
@@ -47,17 +47,17 @@
     "fred:DGS10",
     "fred:VIXCLS",
     "fred:dow-jones",
+    "fred:nasdaq",
     "fred:sp500",
     "market-research:Bloomberg Markets",
     "market-research:CNBC Investing",
     "market-research:Goldman Sachs",
-    "market-research:article:https://www.bloomberg.com/news/articles/2026-11-16/latest-oil-market-news-and-analysis-for-nov-17",
     "market-research:article:https://www.bloomberg.com/news/articles/2026-11-16/stock-market-today-dow-s-p-live-updates",
+    "market-research:article:https://www.bloomberg.com/news/videos/2026-11-17/anthropic-ipo-what-australian-investors-need-to-know-video",
     "market-research:article:https://www.goldmansachs.com/insights/articles/emerging-market-credit-shows-resilience-amid-energy-shock",
-    "treasury:10y:2026",
-    "yahoo-us:nasdaq"
+    "treasury:10y:2026"
   ],
-  "sourceAuditFingerprint": "sha256:e391e9ef8bc724eb977294ce7054215af341f5a02df6c91579403dd895ed79c2",
+  "sourceAuditFingerprint": "sha256:2c27a3031c020ea76bdfa8461ce07987f2911a033d0c5ea692876c116b77b1a8",
   "crossVerificationFingerprint": null,
   "crossVerification": null
 }
