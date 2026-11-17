@@ -1,40 +1,40 @@
 {
-  "updatedAt": "2026-11-14T01:01:16.562Z",
+  "updatedAt": "2026-11-17T03:08:15.091Z",
   "items": [
     {
-      "postId": "614930389904987485",
-      "url": "https://motusnova.blogspot.com/2026/10/m-ai-531.html",
-      "title": "미국 증시 마감: 나스닥 사상 최고, M&A와 AI주 강세가 5.31% 금리 부담을 압도",
-      "labels": [
-        "미국증시"
-      ],
-      "originalSha256": "sha256:ac44f4704a84463096fe56864d18d5fd6ca6ae9a6eb7ca3e255f9a7370e1b5bf",
-      "proposedSha256": "sha256:44d49529ba94d1935a726970de21eb525fd238725c107f36e947f981944c3702",
-      "image": "https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/daily-report/backfill/img/hero-cef31f89fd83.png",
-      "relatedCount": 5
-    },
-    {
-      "postId": "3144124090554362868",
-      "url": "https://motusnova.blogspot.com/2026/10/ai_01763533093.html",
-      "title": "기업 AI의 경쟁 무대가 모델에서 실제 업무로 이동했다",
+      "postId": "9164842084025804267",
+      "url": "https://motusnova.blogspot.com/2026/10/ai_02030153127.html",
+      "title": "AI 인프라 경쟁, 엔비디아 개방형 설계와 마이크로소프트 자체 칩으로 확산",
       "labels": [
         "AI 인텔리전스"
       ],
-      "originalSha256": "sha256:37c2575335e7f01bc2d8043ff29d04e1a3bab4442a508360010472e624d5baa4",
-      "proposedSha256": "sha256:1343b403b869f5561876dbc30cbc12f12505033b569745d6e74d5122245712e0",
-      "image": "https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/daily-report/backfill/img/hero-dcf28012254c.png",
+      "originalSha256": "sha256:6c39615885ada5b124a576fa52410121903269c2d9ec4665c767e6979f1d4619",
+      "proposedSha256": "sha256:ecebb19499788fb2658f7dc0bfa60e1f074e07955a4e7bc8e0169cf7aefcfeef",
+      "image": "https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/daily-report/backfill/img/hero-4fff2115aa25.png",
       "relatedCount": 6
     },
     {
-      "postId": "2371588160186534300",
-      "url": "https://motusnova.blogspot.com/2026/10/s-500-5.html",
-      "title": "미국 증시 마감: S&P 500·나스닥 최고치, 실적 기대가 5%대 금리를 눌렀다",
+      "postId": "6826959067001717480",
+      "url": "https://motusnova.blogspot.com/2026/10/ai-2026-10-14.html",
+      "title": "AI 인텔리전스: 2026-10-14 공식 발표로 읽는 산업 변화",
+      "labels": [
+        "AI 인텔리전스"
+      ],
+      "originalSha256": "sha256:2882732fc5220ea9aa2cfb3c23b77c3afed052cee08161ecbe0b19a962a78bcc",
+      "proposedSha256": "sha256:235a1d4a90017b918b24ed498d5dd5cbc1de3970bfd071152dfd5de556689283",
+      "image": "https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/daily-report/backfill/img/hero-d9160c037457.png",
+      "relatedCount": 6
+    },
+    {
+      "postId": "5150404224514978487",
+      "url": "https://motusnova.blogspot.com/2026/10/2026-10-14.html",
+      "title": "미국증시 마감: 2026-10-14 주요 지수와 금리·달러 흐름",
       "labels": [
         "미국증시"
       ],
-      "originalSha256": "sha256:8ed1eae6d214dec21990467a48f3134a29ca8eaa0d0bbdb281c9f1bb1fe39e02",
-      "proposedSha256": "sha256:95a610dc7ab760e4d3030a72283bc8e90767b702e2cf688ca2a89e92173cbf15",
-      "image": "https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/daily-report/backfill/img/hero-196f597483b6.png",
+      "originalSha256": "sha256:136c6c9810bc0907db4a24f4537495575d40cd578dbec03bdb47b2f416175ce5",
+      "proposedSha256": "sha256:93576ce186cb30a30a26a5d7a125a57d4dbb1f496b3009dc982fb8edd858043f",
+      "image": "https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/daily-report/backfill/img/hero-e7bc0ab5b3d2.png",
       "relatedCount": 6
     }
   ]
