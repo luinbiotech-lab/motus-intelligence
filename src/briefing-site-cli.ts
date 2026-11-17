@@ -12,6 +12,8 @@ const args=process.argv.slice(2),value=(flag:string)=>{const index=args.indexOf(
 const out=value('--out')??'site',origin=(value('--origin')??'').replace(/\/?$/,'/');
 if(!/^https:\/\//.test(origin))throw new Error('--origin https://… required');
 const base=new URL(origin).pathname;
+// The push worker URL (owner 2026-11-16 daily alert); without it the alert button is not shown.
+const pushRaw=value('--push-endpoint')??process.env.MOTUS_BRIEFING_PUSH_ENDPOINT??'',pushEndpoint=/^https:\/\/[a-z0-9.-]+\/?$/i.test(pushRaw)?pushRaw.replace(/\/?$/,'/'):null;
 const root=join('data','daily-report'),byDate=new Map<string,BriefingDay>();
 for(const op of (existsSync(root)?readdirSync(root):[]).filter(name=>/^\d{4}-\d{2}-\d{2}$/.test(name)).sort()){
   const path=join(root,op,'naver-evening.md');if(!existsSync(path))continue;
@@ -20,8 +22,8 @@ for(const op of (existsSync(root)?readdirSync(root):[]).filter(name=>/^\d{4}-\d{
 const days=[...byDate.values()].sort((a,b)=>b.sessionDate.localeCompare(a.sessionDate));
 if(!days.length)throw new Error('BRIEFING_NO_SUMMARY');
 await mkdir(join(out,'d'),{recursive:true});
-for(const [index,day] of days.entries())await writeFile(join(out,dayPath(day)),renderDayPage(day,origin,base,{newer:days[index-1]??null,older:days[index+1]??null}),'utf8');
-await writeFile(join(out,'index.html'),renderDayPage(days[0]!,origin,base,{older:days[1]??null}),'utf8');
+for(const [index,day] of days.entries())await writeFile(join(out,dayPath(day)),renderDayPage(day,origin,base,{newer:days[index-1]??null,older:days[index+1]??null},pushEndpoint),'utf8');
+await writeFile(join(out,'index.html'),renderDayPage(days[0]!,origin,base,{older:days[1]??null},pushEndpoint),'utf8');
 await writeFile(join(out,'archive.html'),renderArchive(days,origin,base),'utf8');
 await writeFile(join(out,'manifest.webmanifest'),manifest(base),'utf8');
 await writeFile(join(out,'sw.js'),serviceWorker(days[0]!.sessionDate),'utf8');

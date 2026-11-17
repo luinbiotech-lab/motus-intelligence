@@ -31,7 +31,7 @@ export function parseEveningMarkdown(markdown:string,operationDate:string):Brief
 }
 
 const SITE_NAME='MOTUS 증시 브리핑';
-function shell(input:{title:string;description:string;canonical:string;base:string;body:string;image?:string|null}):string{
+function shell(input:{title:string;description:string;canonical:string;base:string;body:string;image?:string|null;pushEndpoint?:string|null}):string{
   return `<!doctype html>
 <html lang="ko">
 <head>
@@ -61,19 +61,24 @@ h1{font-size:21px;line-height:1.4;margin:6px 0 4px}.date{color:var(--muted);font
 .more{display:inline-block;margin-top:10px;font-weight:600;color:var(--accent);text-decoration:none}
 .tags{color:var(--muted);font-size:13px;margin:6px 0 16px}.note{color:var(--muted);font-size:13px;border-top:1px solid var(--line);padding-top:12px;margin-top:18px}
 .list a{display:block;padding:12px 0;border-bottom:1px solid var(--line);color:var(--ink);text-decoration:none}.list small{color:var(--muted);display:block}
-.install{display:none;background:var(--card);border:1px dashed var(--line);border-radius:12px;padding:12px 14px;font-size:14px;margin:0 0 14px}
+.alert{display:block;width:100%;margin:0 0 12px;padding:12px;border:0;border-radius:12px;background:var(--accent);color:#fff;font-size:15px;font-weight:700}.install{display:none;background:var(--card);border:1px dashed var(--line);border-radius:12px;padding:12px 14px;font-size:14px;margin:0 0 14px}
 .pager{display:flex;justify-content:space-between;font-size:14px;margin:6px 0 0}.pager a{color:var(--accent);text-decoration:none}
 </style>
 </head>
 <body>
 <header><a class="brand" href="${input.base}">MOTUS 증시 브리핑</a><nav><a href="${input.base}">오늘</a><a href="${input.base}archive.html">지난 브리핑</a></nav></header>
 <main>
+${input.pushEndpoint?`<button class="alert" id="alert" hidden>매일 저녁 브리핑 알림 받기</button>`:''}
 <div class="install" id="install"><b>홈 화면에 추가</b>하면 앱처럼 열립니다. 아이폰: 공유 버튼 → '홈 화면에 추가'. 안드로이드: 메뉴 → '앱 설치' 또는 '홈 화면에 추가'.</div>
 ${input.body}
 </main>
 <script>
 if('serviceWorker' in navigator)navigator.serviceWorker.register('${input.base}sw.js').catch(()=>{});
-if(!(window.matchMedia&&matchMedia('(display-mode: standalone)').matches)&&!navigator.standalone){var i=document.getElementById('install');if(i)i.style.display='block'}
+if(!(window.matchMedia&&matchMedia('(display-mode: standalone)').matches)&&!navigator.standalone){var i=document.getElementById('install');if(i)i.style.display='block'}${input.pushEndpoint?`
+var P='${input.pushEndpoint}',A=document.getElementById('alert');
+function k(s){s=s.replace(/-/g,'+').replace(/_/g,'/');var b=atob(s+'==='.slice((s.length+3)%4)),o=new Uint8Array(b.length);for(var j=0;j<b.length;j++)o[j]=b.charCodeAt(j);return o}
+if(A&&'serviceWorker' in navigator&&'PushManager' in window&&'Notification' in window&&Notification.permission!=='denied'){navigator.serviceWorker.ready.then(function(reg){return reg.pushManager.getSubscription()}).then(function(s){if(!s){A.hidden=false}}).catch(function(){});
+A.onclick=function(){A.disabled=true;Notification.requestPermission().then(function(p){if(p!=='granted')throw 0;return Promise.all([navigator.serviceWorker.ready,fetch(P+'vapid-public-key').then(function(r){return r.text()})])}).then(function(v){return v[0].pushManager.subscribe({userVisibleOnly:true,applicationServerKey:k(v[1].trim())})}).then(function(s){return fetch(P+'subscribe',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(s)})}).then(function(r){if(!r.ok)throw 0;A.textContent='알림 신청 완료 — 매일 저녁 보내 드립니다'}).catch(function(){A.disabled=false;A.textContent='알림 신청 실패 — 다시 누르기 (아이폰은 홈 화면 앱에서만 가능)'})}}`:''}
 </script>
 </body>
 </html>
@@ -84,12 +89,12 @@ const color=(text:string)=>esc(text).replace(/([+-]\d[\d,]*(?:\.\d+)?%(?:p)?)/g,
 
 export function dayPath(day:BriefingDay):string{return `d/${day.sessionDate}.html`}
 
-export function renderDayPage(day:BriefingDay,origin:string,base:string,neighbours:{newer?:BriefingDay|null;older?:BriefingDay|null}={}):string{
+export function renderDayPage(day:BriefingDay,origin:string,base:string,neighbours:{newer?:BriefingDay|null;older?:BriefingDay|null}={},pushEndpoint:string|null=null):string{
   const description=day.items.map(item=>item.heading).join(' · ').slice(0,150);
   const items=day.items.map(item=>`<section class="card"><h2>${esc(item.heading)}</h2><ul>${item.lines.map(line=>`<li>${color(line)}</li>`).join('')}</ul>${item.articleUrl?`<a class="more" href="${esc(item.articleUrl)}">전체 분석 보기 →</a>`:''}</section>`).join('\n');
   const pager=`<div class="pager">${neighbours.older?`<a href="${base}${dayPath(neighbours.older)}">← ${esc(neighbours.older.sessionDate)}</a>`:'<span></span>'}${neighbours.newer?`<a href="${base}${dayPath(neighbours.newer)}">${esc(neighbours.newer.sessionDate)} →</a>`:'<span></span>'}</div>`;
   const body=`<div class="date">${esc(day.sessionDate)} 장 마감 기준</div><h1>${esc(day.title)}</h1>${day.imageUrl?`<img class="hero" src="${esc(day.imageUrl)}" alt="${esc(day.title)}" loading="lazy">`:''}<p class="intro">${esc(day.intro)}</p>\n${items}\n<div class="tags">${day.tags.map(tag=>'#'+esc(tag)).join(' ')}</div>${pager}<p class="note">${esc(day.disclaimer)}</p>`;
-  return shell({title:`${day.title} | ${SITE_NAME}`,description,canonical:origin+dayPath(day),base,body,image:day.imageUrl});
+  return shell({title:`${day.title} | ${SITE_NAME}`,description,canonical:origin+dayPath(day),base,body,image:day.imageUrl,pushEndpoint});
 }
 
 export function renderArchive(days:BriefingDay[],origin:string,base:string):string{
@@ -108,6 +113,8 @@ self.addEventListener('install',e=>{self.skipWaiting()});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
 self.addEventListener('fetch',e=>{const r=e.request;if(r.method!=='GET'||new URL(r.url).origin!==location.origin)return;
 e.respondWith(fetch(r).then(res=>{const copy=res.clone();caches.open(CACHE).then(c=>c.put(r,copy));return res}).catch(()=>caches.match(r).then(m=>m||caches.match('./'))))});
+self.addEventListener('push',e=>{let d={};try{d=e.data?e.data.json():{}}catch(_){}e.waitUntil(self.registration.showNotification(d.title||'MOTUS 증시 브리핑',{body:d.body||'오늘 장 마감 브리핑이 올라왔습니다.',icon:'icon-192.png',badge:'icon-192.png',data:{url:d.url||'./'}}))});
+self.addEventListener('notificationclick',e=>{e.notification.close();e.waitUntil(clients.openWindow((e.notification.data&&e.notification.data.url)||'./'))});
 `;
 }
 
