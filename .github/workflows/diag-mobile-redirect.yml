@@ -5,6 +5,11 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - run: |
-          curl -s https://m.stock.naver.com/api/index/KOSPI/trend; echo
-          curl -s https://api.stock.naver.com/marketindex/exchange/FX_USDKRW | head -c 1500; echo
-          curl -sL "https://news.einfomax.co.kr/news/articleView.html?idxno=4445196" | python3 -c "import sys,re,html;s=sys.stdin.read();t=html.unescape(re.sub(r'<[^>]+>',' ',s));t=re.sub(r'\s+',' ',t);[print(m.group(0)) for m in re.finditer(r'.{0,120}(억원|환율|달러-원).{0,120}',t)][:0]" | head -20
+          curl -sL "https://news.einfomax.co.kr/news/articleView.html?idxno=4445196" > a.html
+          python3 - <<'PY'
+          import re,html
+          s=open('a.html',encoding='utf-8',errors='ignore').read()
+          ps=[html.unescape(re.sub(r'<[^>]+>','',p)) for p in re.findall(r'<p[^>]*>(.*?)</p>',s,re.S)]
+          for p in ps:
+            if '억' in p or '외국인' in p: print('P>',p.strip()[:300])
+          PY
