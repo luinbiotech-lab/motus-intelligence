@@ -10,18 +10,18 @@ test('FX and flows are read with numbers, a cause or "unconfirmed", a labelled r
   assert.deepEqual(fx!.paragraphs.map(p=>p.text),[
     '원·달러 환율은 기사 작성 시점 1,337.8원으로 전일보다 3.2원(0.24%) 올랐다(원화 약세).',
     '환율 배경: 이날 환율이 3.2원 오른 이유를 직접 설명한 증권사 리포트·통신 기사 문장은 수집되지 않았다(원인 미확인).',
-    'MOTUS 해석(추정): 외국인이 순매도(외국인 -5,527)한 날 원화가 약해져, 외국인 주식 수급과 환율이 같은 방향으로 움직였다.',
+    'MOTUS 해석(추정): 외국인이 순매도(외국인 -5,527억원)한 날 원화가 약해져, 외국인 주식 수급과 환율이 같은 방향으로 움직였다.',
     '다음 거래일 관전 포인트(전망 아님): 환율이 1,340원을 넘어서는지(2.2원 위), 1,330원 아래로 내려가는지(7.8원 아래)가 확인 지점이다.']);
   assert.equal(flow!.key,'korea-flow-comment');
   assert.deepEqual(flow!.paragraphs.map(p=>p.text),[
-    '투자자별로는 외국인의 순매도(-5,527) 규모가 가장 컸고, 개인(+194)·기관(+23)은 순매수했다.',
-    'MOTUS 해석(추정): 코스피가 0.98% 내린 날 외국인은 순매도(-5,527)해, 지수 방향과 외국인 수급이 같았다.']);
+    '투자자별로는 외국인의 순매도(-5,527억원) 규모가 가장 컸고, 개인(+194억원)·기관(+23억원)은 순매수했다.',
+    'MOTUS 해석(추정): 코스피가 0.98% 내린 날 외국인은 순매도(-5,527억원)해, 지수 방향과 외국인 수급이 같았다.']);
 });
 test('a wire sentence about the won is quoted; an opposite move is read as another driver', ()=>{
   const [fx]=composeKoreaFxFlowComment({fx:{value:1330,change:-4},flows,kospiChangePct:-0.98,bundle:null,wire:[{publisher:'연합인포맥스',title:'[서환-마감] 원·달러 하락',url:'https://example.com/w',publishedAt:'2026-11-13T07:00:00Z',sentence:'원·달러 환율은 달러 약세에 4원 내렸다.',feed:'x'}]});
   const texts=fx!.paragraphs.map(p=>p.text);
   assert.ok(texts[1]!.startsWith('환율 배경(통신 보도): 연합인포맥스는 11월 13일 「[서환-마감] 원·달러 하락」에서 “원·달러 환율은 달러 약세에 4원 내렸다”'),texts[1]);
-  assert.match(texts[2]!,/외국인 순매도\(외국인 -5,527\)와 달리 원화가 강해져/);
+  assert.match(texts[2]!,/외국인 순매도\(외국인 -5,527억원\)와 달리 원화가 강해져/);
   assert.equal(texts[3],'다음 거래일 관전 포인트(전망 아님): 환율이 1,330원선 위를 지키는지가 확인 지점이다.');
 });
 

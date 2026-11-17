@@ -387,7 +387,7 @@ export function composeKoreaFxFlowComment(input:{fx:{value:number;change:number}
     else if(wire)paragraphs.push({text:`환율 배경(통신 보도): ${josa(wire.publisher,'은','는')} ${md(kstDay(wire.publishedAt))} 「${wire.title}」에서 ${said([quote(wire.sentence!)])} 전했다.`,source:{label:`${wire.publisher} 「${wire.title}」`,url:wire.url,kind:'article'}});
     else if(Math.abs(change)>=0.05)paragraphs.push({text:`환율 배경: 이날 환율이 ${won1(Math.abs(change))}원 ${change>0?'오른':'내린'} 이유를 직접 설명한 증권사 리포트·통신 기사 문장은 수집되지 않았다(원인 미확인).`});
     if(foreign&&Math.abs(change)>=0.05&&foreign.value!==0){
-      const sell=foreign.value<0,weak=change>0,flow=`외국인 ${foreign.value>0?'+':''}${fmtNum(foreign.value)}`;
+      const sell=foreign.value<0,weak=change>0,flow=`외국인 ${foreign.value>0?'+':''}${fmtNum(foreign.value)}억원`;
       paragraphs.push({text:`MOTUS 해석(추정): ${sell===weak?`외국인이 ${sell?'순매도':'순매수'}(${flow})한 날 원화가 ${weak?'약해져':'강해져'}, 외국인 주식 수급과 환율이 같은 방향으로 움직였다.`:`외국인 ${sell?'순매도':'순매수'}(${flow})와 달리 원화가 ${weak?'약해져':'강해져'}, 이날 환율은 국내 주식 수급보다 다른 요인의 영향이 컸던 것으로 읽힌다.`}`});
     }
     const below=Math.floor(value/10)*10,above=below+10;
@@ -396,7 +396,8 @@ export function composeKoreaFxFlowComment(input:{fx:{value:number;change:number}
   }
   if(input.flows.length>=2){
     const sorted=[...input.flows].sort((a,b)=>Math.abs(b.value)-Math.abs(a.value)),lead=sorted[0]!,rest=input.flows.filter(item=>item!==lead);
-    const sign=(value:number)=>`${value>0?'+':''}${fmtNum(value)}`;
+    // Naver KOSPI trend values are 억원 (VERIFIED 11/17: -14,098 vs 연합인포맥스 '1조4천459억 원 순매도').
+    const sign=(value:number)=>`${value>0?'+':''}${fmtNum(value)}억원`;
     const paragraphs:DeepParagraph[]=[{text:`투자자별로는 ${lead.label}의 ${lead.value<0?'순매도':'순매수'}(${sign(lead.value)}) 규모가 가장 컸고, ${rest.map(item=>`${item.label}(${sign(item.value)})`).join('·')}${rest.every(item=>item.value>0)?josa(rest.at(-1)!.label,'은','는').slice(rest.at(-1)!.label.length)+' 순매수했다':rest.every(item=>item.value<0)?josa(rest.at(-1)!.label,'은','는').slice(rest.at(-1)!.label.length)+' 순매도했다':josa(rest.at(-1)!.label,'이','가').slice(rest.at(-1)!.label.length)+' 뒤를 이었다'}.`}];
     if(foreign&&input.kospiChangePct!==null&&Math.abs(input.kospiChangePct)>=0.05&&foreign.value!==0){
       const same=(foreign.value>0)===(input.kospiChangePct>0);
