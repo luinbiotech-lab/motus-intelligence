@@ -1,6 +1,6 @@
 {
   "schema": "motus.ai-facts/1",
-  "bundleHash": "70c826e8356a100f",
+  "bundleHash": "10d14422e33ec9e8",
   "operationDate": "2026-11-17",
   "sessionDate": "2026-11-16",
   "facts": [
@@ -13,23 +13,23 @@
     {
       "id": "F2",
       "kind": "official",
-      "text": "엔비디아는 2026년 11월 17일(한국 시간) 공식 블로그에 「How the World’s Most Advanced AI Infrastructure Supply Chain Invents the Future」 제목의 발표를 게시했다. 발표 제목과 본문은 AI 컴퓨팅 인프라 확충에 관한 내용을 다룬다. 원문에서 함께 언급된 국가·기업은 대만, 베트남, TSMC, 폭스콘이다.",
+      "text": "엔비디아는 2026년 11월 17일(한국 시간) 공식 블로그에 「NVIDIA Expands Slurm to Bring Quantum Computing Into Supercomputing」 제목의 발표를 게시했다. 발표 제목과 본문은 AI 컴퓨팅 인프라 확충에 관한 내용을 다룬다. 원문에서 언급된 제품·플랫폼은 CUDA이다. 원문에서 함께 언급된 국가·기업은 IBM이다.",
       "publisher": "엔비디아",
-      "sourceUrl": "https://blogs.nvidia.com/blog/ai-infrastructure-supply-chain/"
+      "sourceUrl": "https://blogs.nvidia.com/blog/slurm-quantum-computing-supercomputing/"
     },
     {
       "id": "F3",
       "kind": "official",
-      "text": "메타는 2026년 11월 16일(한국 시간) 공식 뉴스룸에 「94% of Singapore Small Business Owners Surveyed Say More AI Guidance Is Needed」 제목의 발표를 게시했다. 원문 본문은 공공·주권 AI 협력에 관한 내용을 다룬다. 원문에서 함께 언급된 국가·기업은 싱가포르이다.",
-      "publisher": "메타",
-      "sourceUrl": "https://about.fb.com/news/2026/11/94-of-singapore-small-business-owners-surveyed-say-more-ai-guidance-is-needed/"
+      "text": "오픈AI는 2026년 11월 17일(한국 시간) 공식 블로그에 「Broadening access to AI for scientists」 제목의 발표를 게시했다. 발표 제목과 본문은 AI 연구 성과 공개에 관한 내용을 다룬다. 원문에서 언급된 제품·플랫폼은 ChatGPT이다. 원문 페이지가 자동 수집을 허용하지 않아 이 항목은 오픈AI 공식 RSS에 게시된 요약을 근거로 정리했으며, 발표일은 공식 RSS 기록으로 확인했다.",
+      "publisher": "오픈AI",
+      "sourceUrl": "https://openai.com/index/expanding-chatgpt-for-academic-researchers"
     },
     {
       "id": "F4",
       "kind": "official",
-      "text": "아마존웹서비스(AWS)는 2026년 11월 16일(한국 시간) 공식 What’s New 공지에 「Amazon SageMaker AI now supports KV cache-aware routing for real-time inference endpoints」 제목의 발표를 게시했다. 발표 제목과 본문은 신규 AI 제품·기능 공개에 관한 내용을 다룬다. 발표의 중심 제품·플랫폼은 SageMaker AI이다.",
+      "text": "아마존웹서비스(AWS)는 2026년 11월 17일(한국 시간) 공식 What’s New 공지에 「Set up, connect, and govern AI agents faster with Amazon WorkSpaces」 제목의 발표를 게시했다. 원문 본문은 AI 보안·안전 강화에 관한 내용을 다룬다. 원문에서 언급된 제품·플랫폼은 Claude Code이다.",
       "publisher": "아마존웹서비스(AWS)",
-      "sourceUrl": "https://aws.amazon.com/about-aws/whats-new/2026/11/sagemaker-kv-cache-routing/"
+      "sourceUrl": "https://aws.amazon.com/about-aws/whats-new/2026/11/amazon-workspaces-AI-agents-connect-govern"
     },
     {
       "id": "F5",

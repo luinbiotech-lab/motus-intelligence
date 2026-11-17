@@ -12,7 +12,7 @@
       "url": "https://openai.com/news/rss.xml",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
+      "collectedAt": "2026-11-17T12:16:51.938Z",
       "error": null
     },
     {
@@ -21,7 +21,7 @@
       "url": "https://blog.google/technology/ai/rss/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
+      "collectedAt": "2026-11-17T12:16:51.938Z",
       "error": null
     },
     {
@@ -30,7 +30,7 @@
       "url": "https://deepmind.google/blog/rss.xml",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
+      "collectedAt": "2026-11-17T12:16:51.938Z",
       "error": null
     },
     {
@@ -39,7 +39,7 @@
       "url": "https://blogs.nvidia.com/feed/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
+      "collectedAt": "2026-11-17T12:16:51.938Z",
       "error": null
     },
     {
@@ -48,7 +48,7 @@
       "url": "https://nvidianews.nvidia.com/releases.xml",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
+      "collectedAt": "2026-11-17T12:16:51.938Z",
       "error": null
     },
     {
@@ -57,7 +57,7 @@
       "url": "https://blogs.microsoft.com/feed/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
+      "collectedAt": "2026-11-17T12:16:51.938Z",
       "error": null
     },
     {
@@ -66,7 +66,7 @@
       "url": "https://news.microsoft.com/source/feed/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
+      "collectedAt": "2026-11-17T12:16:51.938Z",
       "error": null
     },
     {
@@ -75,7 +75,7 @@
       "url": "https://aws.amazon.com/blogs/aws/feed/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
+      "collectedAt": "2026-11-17T12:16:51.938Z",
       "error": null
     },
     {
@@ -84,7 +84,7 @@
       "url": "https://aws.amazon.com/about-aws/whats-new/recent/feed/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
+      "collectedAt": "2026-11-17T12:16:51.938Z",
       "error": null
     },
     {
@@ -93,7 +93,7 @@
       "url": "https://about.fb.com/news/feed/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
+      "collectedAt": "2026-11-17T12:16:51.938Z",
       "error": null
     },
     {
@@ -102,52 +102,52 @@
       "url": "https://www.anthropic.com/news",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
+      "collectedAt": "2026-11-17T12:16:51.938Z",
       "error": null
     },
     {
       "sourceId": "ai:page:1",
       "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/strengthening-nato-allied-cyber-defences-ai",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-11-17T12:16:51.938Z",
+      "error": "HTTP_403"
+    },
+    {
+      "sourceId": "ai:rss-evidence:1",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/strengthening-nato-allied-cyber-defences-ai",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-17T12:16:51.938Z",
+      "error": null,
+      "observedDate": "Tue, 17 No",
+      "sourceTimestamp": "Tue, 17 Nov 2026 00:00:00 GMT",
+      "dateField": "rss.pubDate"
+    },
+    {
+      "sourceId": "ai:page:2",
+      "category": "AI_INTELLIGENCE",
       "url": "https://blogs.nvidia.com/blog/dgx-spark-hpc-developer-kit-sc26/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
+      "collectedAt": "2026-11-17T12:16:51.938Z",
       "error": null,
       "observedDate": "2026-11-16",
       "sourceTimestamp": "2026-11-16T23:00:05.000Z",
       "dateField": "page.datePublished"
     },
     {
-      "sourceId": "ai:page:2",
+      "sourceId": "ai:page:3",
       "category": "AI_INTELLIGENCE",
       "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/amazon-workspaces-AI-agents-connect-govern",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
+      "collectedAt": "2026-11-17T12:16:51.938Z",
       "error": null,
       "observedDate": "Mon, 16 No",
       "sourceTimestamp": "Mon, 16 Nov 2026 18:00:00 GMT",
-      "dateField": "rss.pubDate"
-    },
-    {
-      "sourceId": "ai:page:3",
-      "category": "AI_INTELLIGENCE",
-      "url": "https://openai.com/index/expanding-chatgpt-for-academic-researchers",
-      "status": "FAILED",
-      "recordCount": 0,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
-      "error": "HTTP_403"
-    },
-    {
-      "sourceId": "ai:rss-evidence:3",
-      "category": "AI_INTELLIGENCE",
-      "url": "https://openai.com/index/expanding-chatgpt-for-academic-researchers",
-      "status": "PASS",
-      "recordCount": 1,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
-      "error": null,
-      "observedDate": "Mon, 16 No",
-      "sourceTimestamp": "Mon, 16 Nov 2026 17:00:00 GMT",
       "dateField": "rss.pubDate"
     },
     {
@@ -156,7 +156,7 @@
       "url": "https://blog.google/products-and-platforms/products/maps/ask-maps-holiday-travel-features-2026/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
+      "collectedAt": "2026-11-17T12:16:51.938Z",
       "error": null,
       "observedDate": "Mon, 16 No",
       "sourceTimestamp": "Mon, 16 Nov 2026 14:00:00 +0000",
@@ -165,50 +165,59 @@
     {
       "sourceId": "ai:page:5",
       "category": "AI_INTELLIGENCE",
-      "url": "https://about.fb.com/news/2026/11/94-of-singapore-small-business-owners-surveyed-say-more-ai-guidance-is-needed/",
-      "status": "PASS",
-      "recordCount": 1,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
-      "error": null,
-      "observedDate": "2026-11-16",
-      "sourceTimestamp": "2026-11-16T06:25:27.000Z",
-      "dateField": "page.datePublished"
-    },
-    {
-      "sourceId": "ai:page:6",
-      "category": "AI_INTELLIGENCE",
       "url": "https://www.anthropic.com/news/public-benefit-fund",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
+      "collectedAt": "2026-11-17T12:16:51.938Z",
       "error": null,
       "observedDate": "2026-10-18",
       "sourceTimestamp": "2026-10-18T00:00:00.000Z",
       "dateField": "page.datePublished"
     },
     {
-      "sourceId": "ai:page:7",
+      "sourceId": "ai:page:6",
       "category": "AI_INTELLIGENCE",
-      "url": "https://blogs.nvidia.com/blog/ai-infrastructure-supply-chain/",
+      "url": "https://openai.com/index/expanding-chatgpt-for-academic-researchers",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-11-17T12:16:51.938Z",
+      "error": "HTTP_403"
+    },
+    {
+      "sourceId": "ai:rss-evidence:6",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://openai.com/index/expanding-chatgpt-for-academic-researchers",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
+      "collectedAt": "2026-11-17T12:16:51.938Z",
+      "error": null,
+      "observedDate": "Mon, 16 No",
+      "sourceTimestamp": "Mon, 16 Nov 2026 17:00:00 GMT",
+      "dateField": "rss.pubDate"
+    },
+    {
+      "sourceId": "ai:page:7",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://blogs.nvidia.com/blog/lambda-photonics/",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-17T12:16:51.938Z",
       "error": null,
       "observedDate": "2026-11-16",
-      "sourceTimestamp": "2026-11-16T20:00:37.000Z",
+      "sourceTimestamp": "2026-11-16T16:00:51.000Z",
       "dateField": "page.datePublished"
     },
     {
       "sourceId": "ai:page:8",
       "category": "AI_INTELLIGENCE",
-      "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/sagemaker-kv-cache-routing/",
+      "url": "https://www.anthropic.com/news/s1-sec",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
+      "collectedAt": "2026-11-17T12:16:51.938Z",
       "error": null,
-      "observedDate": "Mon, 16 No",
-      "sourceTimestamp": "Mon, 16 Nov 2026 08:00:00 GMT",
-      "dateField": "rss.pubDate"
+      "observedDate": "2026-10-26",
+      "sourceTimestamp": "2026-10-26T00:00:00.000Z",
+      "dateField": "page.datePublished"
     },
     {
       "sourceId": "ai:page:9",
@@ -216,7 +225,7 @@
       "url": "https://openai.com/index/strengthening-online-child-safety",
       "status": "FAILED",
       "recordCount": 0,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
+      "collectedAt": "2026-11-17T12:16:51.938Z",
       "error": "HTTP_403"
     },
     {
@@ -225,7 +234,7 @@
       "url": "https://openai.com/index/strengthening-online-child-safety",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
+      "collectedAt": "2026-11-17T12:16:51.938Z",
       "error": null,
       "observedDate": "Mon, 16 No",
       "sourceTimestamp": "Mon, 16 Nov 2026 17:00:00 GMT",
@@ -234,13 +243,13 @@
     {
       "sourceId": "ai:page:10",
       "category": "AI_INTELLIGENCE",
-      "url": "https://www.anthropic.com/news/s1-sec",
+      "url": "https://blogs.nvidia.com/blog/slurm-quantum-computing-supercomputing/",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
+      "collectedAt": "2026-11-17T12:16:51.938Z",
       "error": null,
-      "observedDate": "2026-10-26",
-      "sourceTimestamp": "2026-10-26T00:00:00.000Z",
+      "observedDate": "2026-11-16",
+      "sourceTimestamp": "2026-11-16T16:00:47.000Z",
       "dateField": "page.datePublished"
     },
     {
@@ -249,16 +258,7 @@
       "url": "https://consensus.hankyung.com/analysis/list?report_type=EC&sdate=2026-11-10&edate=2026-11-18&now_page=1&pagenum=80",
       "status": "PASS",
       "recordCount": 2,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
-      "error": null
-    },
-    {
-      "sourceId": "deep:naver-research:list:invest",
-      "category": "AI_INTELLIGENCE",
-      "url": "https://m.stock.naver.com/api/research/invest?page=1&pageSize=60",
-      "status": "PASS",
-      "recordCount": 60,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
+      "collectedAt": "2026-11-17T12:16:51.938Z",
       "error": null
     },
     {
@@ -267,7 +267,16 @@
       "url": "https://m.stock.naver.com/api/research/market?page=1&pageSize=60",
       "status": "PASS",
       "recordCount": 60,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
+      "collectedAt": "2026-11-17T12:16:51.938Z",
+      "error": null
+    },
+    {
+      "sourceId": "deep:naver-research:list:invest",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://m.stock.naver.com/api/research/invest?page=1&pageSize=60",
+      "status": "PASS",
+      "recordCount": 60,
+      "collectedAt": "2026-11-17T12:16:51.938Z",
       "error": null
     },
     {
@@ -276,7 +285,7 @@
       "url": "https://consensus.hankyung.com/analysis/list?skinType=market&report_type=MK&sdate=2026-11-10&edate=2026-11-18&now_page=1&pagenum=80",
       "status": "PASS",
       "recordCount": 56,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
+      "collectedAt": "2026-11-17T12:16:51.938Z",
       "error": null
     },
     {
@@ -285,7 +294,7 @@
       "url": "https://m.stock.naver.com/api/research/industry?page=1&pageSize=60",
       "status": "PASS",
       "recordCount": 60,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
+      "collectedAt": "2026-11-17T12:16:51.938Z",
       "error": null
     },
     {
@@ -294,7 +303,7 @@
       "url": "https://m.stock.naver.com/api/research/economy?page=1&pageSize=60",
       "status": "PASS",
       "recordCount": 28,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
+      "collectedAt": "2026-11-17T12:16:51.938Z",
       "error": null
     },
     {
@@ -303,16 +312,7 @@
       "url": "https://m.stock.naver.com/api/research/company?page=1&pageSize=60",
       "status": "PASS",
       "recordCount": 60,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
-      "error": null
-    },
-    {
-      "sourceId": "deep:consensus:list:company",
-      "category": "AI_INTELLIGENCE",
-      "url": "https://consensus.hankyung.com/analysis/list?skinType=business&report_type=CO&sdate=2026-11-10&edate=2026-11-18&now_page=1&pagenum=80",
-      "status": "PASS",
-      "recordCount": 80,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
+      "collectedAt": "2026-11-17T12:16:51.938Z",
       "error": null
     },
     {
@@ -321,7 +321,16 @@
       "url": "https://consensus.hankyung.com/analysis/list?skinType=industry&report_type=IN&sdate=2026-11-10&edate=2026-11-18&now_page=1&pagenum=80",
       "status": "PASS",
       "recordCount": 79,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
+      "collectedAt": "2026-11-17T12:16:51.938Z",
+      "error": null
+    },
+    {
+      "sourceId": "deep:consensus:list:company",
+      "category": "AI_INTELLIGENCE",
+      "url": "https://consensus.hankyung.com/analysis/list?skinType=business&report_type=CO&sdate=2026-11-10&edate=2026-11-18&now_page=1&pagenum=80",
+      "status": "PASS",
+      "recordCount": 80,
+      "collectedAt": "2026-11-17T12:16:51.938Z",
       "error": null
     },
     {
@@ -330,7 +339,7 @@
       "url": "https://stock.pstatic.net/stock-research/market/21/20261117_market_465005000.pdf",
       "status": "FAILED",
       "recordCount": 0,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
+      "collectedAt": "2026-11-17T12:16:51.938Z",
       "error": "NAVER_RESEARCH_EMPTY"
     },
     {
@@ -339,7 +348,7 @@
       "url": "https://stock.pstatic.net/stock-research/market/18/20261117_market_514328000.pdf",
       "status": "PASS",
       "recordCount": 2,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
+      "collectedAt": "2026-11-17T12:16:51.938Z",
       "error": null,
       "observedDate": "2026-11-17"
     },
@@ -349,7 +358,7 @@
       "url": "https://stock.pstatic.net/stock-research/market/18/20261117_market_352952000.pdf",
       "status": "FAILED",
       "recordCount": 0,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
+      "collectedAt": "2026-11-17T12:16:51.938Z",
       "error": "NAVER_RESEARCH_EMPTY"
     },
     {
@@ -358,7 +367,7 @@
       "url": "https://stock.pstatic.net/stock-research/market/76/20261117_market_960736000.pdf",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
+      "collectedAt": "2026-11-17T12:16:51.938Z",
       "error": null,
       "observedDate": "2026-11-17"
     },
@@ -368,7 +377,7 @@
       "url": "https://stock.pstatic.net/stock-research/market/21/20261117_market_848189000.pdf",
       "status": "PASS",
       "recordCount": 8,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
+      "collectedAt": "2026-11-17T12:16:51.938Z",
       "error": null,
       "observedDate": "2026-11-17"
     },
@@ -378,7 +387,7 @@
       "url": "https://stock.pstatic.net/stock-research/market/63/20261117_market_923865000.pdf",
       "status": "PASS",
       "recordCount": 2,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
+      "collectedAt": "2026-11-17T12:16:51.938Z",
       "error": null,
       "observedDate": "2026-11-17"
     },
@@ -388,7 +397,7 @@
       "url": "https://stock.pstatic.net/stock-research/market/61/20261117_market_773663000.pdf",
       "status": "FAILED",
       "recordCount": 0,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
+      "collectedAt": "2026-11-17T12:16:51.938Z",
       "error": "NAVER_RESEARCH_EMPTY"
     },
     {
@@ -397,7 +406,7 @@
       "url": "https://stock.pstatic.net/stock-research/market/40/20261117_market_909108000.pdf",
       "status": "PASS",
       "recordCount": 4,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
+      "collectedAt": "2026-11-17T12:16:51.938Z",
       "error": null,
       "observedDate": "2026-11-17"
     },
@@ -407,7 +416,7 @@
       "url": "https://stock.pstatic.net/stock-research/market/64/20261117_market_882006000.pdf",
       "status": "PASS",
       "recordCount": 5,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
+      "collectedAt": "2026-11-17T12:16:51.938Z",
       "error": null,
       "observedDate": "2026-11-17"
     },
@@ -417,7 +426,7 @@
       "url": "https://stock.pstatic.net/stock-research/market/58/20261117_market_964096000.pdf",
       "status": "PASS",
       "recordCount": 4,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
+      "collectedAt": "2026-11-17T12:16:51.938Z",
       "error": null,
       "observedDate": "2026-11-17"
     },
@@ -427,7 +436,7 @@
       "url": "https://stock.pstatic.net/stock-research/market/21/20261117_market_680178000.pdf",
       "status": "FAILED",
       "recordCount": 0,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
+      "collectedAt": "2026-11-17T12:16:51.938Z",
       "error": "NAVER_RESEARCH_EMPTY"
     },
     {
@@ -436,7 +445,7 @@
       "url": "https://stock.pstatic.net/stock-research/market/58/20261117_market_753254000.pdf",
       "status": "PASS",
       "recordCount": 5,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
+      "collectedAt": "2026-11-17T12:16:51.938Z",
       "error": null,
       "observedDate": "2026-11-17"
     },
@@ -446,7 +455,7 @@
       "url": "https://query1.finance.yahoo.com/v7/finance/spark?symbols=NVDA,MSFT,GOOGL,AMZN,META,AVGO,AMD,TSM,ORCL,PLTR&range=5d&interval=1d",
       "status": "PASS",
       "recordCount": 10,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
+      "collectedAt": "2026-11-17T12:16:51.938Z",
       "error": null,
       "observedDate": "2026-11-16"
     },
@@ -456,7 +465,7 @@
       "url": "https://stock.pstatic.net/stock-research/company/16/20261117_company_68816000.pdf",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
+      "collectedAt": "2026-11-17T12:16:51.938Z",
       "error": null,
       "observedDate": "2026-11-17"
     },
@@ -466,7 +475,7 @@
       "url": "https://stock.pstatic.net/stock-research/industry/16/20261117_industry_211070000.pdf",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-17T03:34:17.881Z",
+      "collectedAt": "2026-11-17T12:16:51.938Z",
       "error": null,
       "observedDate": "2026-11-17"
     }
