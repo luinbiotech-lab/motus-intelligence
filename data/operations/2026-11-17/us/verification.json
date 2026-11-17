@@ -14,10 +14,10 @@
   "leakagePass": true,
   "duplicateCheck": "PENDING_REMOTE",
   "duplicateUncertainty": true,
-  "articleFingerprint": "sha256:7400940bf493b491295b9088e73d0096fd18feec72e3e71ba6692bd8b412adb7",
+  "articleFingerprint": "sha256:859c9526f92ecbde55d3e8b63de8b360e4916b70231b854701c79295270b7ad2",
   "commerceEnabled": false,
-  "verifiedAt": "2026-11-17T05:15:10.840Z",
-  "expiresAt": "2026-11-17T06:45:10.840Z",
+  "verifiedAt": "2026-11-17T09:44:37.268Z",
+  "expiresAt": "2026-11-17T11:14:37.268Z",
   "sourceAuditIds": [
     "calendar:nyse",
     "deep:consensus:list:company",
@@ -52,12 +52,12 @@
     "market-research:Bloomberg Markets",
     "market-research:CNBC Investing",
     "market-research:Goldman Sachs",
-    "market-research:article:https://www.bloomberg.com/news/articles/2026-11-16/stock-market-today-dow-s-p-live-updates",
-    "market-research:article:https://www.bloomberg.com/news/videos/2026-11-17/anthropic-ipo-what-australian-investors-need-to-know-video",
+    "market-research:article:https://www.bloomberg.com/news/articles/2026-11-16/nvidia-earnings-are-sideshow-as-huang-s-ouster-looms-over-market",
+    "market-research:article:https://www.bloomberg.com/news/articles/2026-11-17/t-rowe-sticks-to-bearish-treasuries-bet-that-fueled-banner-2026",
     "market-research:article:https://www.goldmansachs.com/insights/articles/emerging-market-credit-shows-resilience-amid-energy-shock",
     "treasury:10y:2026"
   ],
-  "sourceAuditFingerprint": "sha256:2c27a3031c020ea76bdfa8461ce07987f2911a033d0c5ea692876c116b77b1a8",
+  "sourceAuditFingerprint": "sha256:85926a8595d5561c2f2b9450b2a94446365c54f9af166dca0e85a960e06f6b83",
   "crossVerificationFingerprint": null,
   "crossVerification": null
 }
