@@ -1,0 +1,10 @@
+{
+  "state": "SKIP",
+  "reasonCode": "ALREADY_PUBLISHED_IN_PERSISTED_LEDGER",
+  "identity": "2026-11-17|US_MARKET",
+  "postId": "7058260686444730115",
+  "publicPostUrl": "https://motusnova.blogspot.com/2026/11/11-16-3-25-tsmc-63.html",
+  "reason": "persistent publish ledger already records this publication identity",
+  "insertCallCount": 0,
+  "publishCallCount": 0
+}
