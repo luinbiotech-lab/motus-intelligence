@@ -1,10 +1,10 @@
 {
   "category": "KOREA_MARKET",
   "operationDate": "2026-11-18",
-  "observedDate": "2026-11-17",
-  "state": "AUTO_POLICY_CANDIDATE",
+  "observedDate": null,
+  "state": "HOLD",
   "searchDemandMayOverride": false,
-  "articleFingerprint": "sha256:64d3eecd548f63ab58f9d3df0490ade29295ee3a41310aa5511110f50eee5aab",
+  "articleFingerprint": "",
   "commerce": {
     "enabled": false
   }

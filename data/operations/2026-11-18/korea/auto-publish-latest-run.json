@@ -1,10 +1,10 @@
 {
   "state": "SKIP",
-  "reasonCode": "ALREADY_PUBLISHED_IN_PERSISTED_LEDGER",
-  "identity": "2026-11-18|KOREA_MARKET",
-  "postId": "153943772032324043",
-  "publicPostUrl": "https://motusnova.blogspot.com/2026/11/11-17-259-496848-1-30.html",
-  "reason": "persistent publish ledger already records this publication identity",
+  "reasonCode": "KOREA_MORNING_EDITION_RETIRED",
+  "reasonCodes": [
+    "KOREA_MORNING_EDITION_RETIRED"
+  ],
+  "reason": "KOREA_MORNING_EDITION_RETIRED",
   "insertCallCount": 0,
   "publishCallCount": 0
 }
