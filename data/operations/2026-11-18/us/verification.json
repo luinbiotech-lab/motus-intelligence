@@ -14,10 +14,10 @@
   "leakagePass": true,
   "duplicateCheck": "PENDING_REMOTE",
   "duplicateUncertainty": true,
-  "articleFingerprint": "sha256:da10e6030fb4b5693c90143f480ca5454f3a6df7be98621100666720e8170b20",
+  "articleFingerprint": "sha256:94ca37f4a570df75e8cbafd34cbb152ac89d44010e61c3a8ba2ce3b4d300d71a",
   "commerceEnabled": false,
-  "verifiedAt": "2026-11-18T04:48:39.914Z",
-  "expiresAt": "2026-11-18T06:18:39.914Z",
+  "verifiedAt": "2026-11-18T09:28:33.451Z",
+  "expiresAt": "2026-11-18T10:58:33.451Z",
   "sourceAuditIds": [
     "calendar:nyse",
     "deep:consensus:list:company",
@@ -50,14 +50,14 @@
     "market-research:Bloomberg Markets",
     "market-research:CNBC Investing",
     "market-research:Goldman Sachs",
-    "market-research:article:https://www.bloomberg.com/news/articles/2026-11-17/foreign-investors-pour-record-9-6-billion-into-indian-stocks-in-november",
-    "market-research:article:https://www.bloomberg.com/news/articles/2026-11-18/medline-s-backers-raise-2-1-billion-in-stock-offering",
+    "market-research:article:https://www.bloomberg.com/news/live-blog/2026-11-18/bloomberg-global-credit-forum-2026",
+    "market-research:article:https://www.bloomberg.com/news/videos/2026-11-18/uk-inflation-accelerates-to-highest-level-in-a-year-video",
     "market-research:article:https://www.cnbc.com/2026/11/17/nvidia-has-lost-2-trillion-in-value-heres-what-options-traders-expect-from-earnings.html",
     "market-research:article:https://www.goldmansachs.com/insights/articles/emerging-market-credit-shows-resilience-amid-energy-shock",
     "treasury:10y:2026",
     "yahoo-us:sp500"
   ],
-  "sourceAuditFingerprint": "sha256:71c7a9fe998710675250e41db508fcfa9db6bea59ac524837b16c60dbc6f5d43",
+  "sourceAuditFingerprint": "sha256:1736eacf1b8467942637a9692e32b0beae67a90496a3c2a26eb0e82158081bec",
   "crossVerificationFingerprint": null,
   "crossVerification": null
 }
