@@ -3,10 +3,10 @@ import type {DailyCategory} from './daily-orchestrator.js';
 import {collectBrokerResearch,type BrokerAudit,type PdfTextReader} from './broker-briefs.js';
 import {collectAIBellwethers,collectKoreaSearchTop,collectUSAttention,moveWord,US_MEGACAPS,US_KOREAN_NAMES,NAVER_SEARCH_TOP,YAHOO_TRENDING,type AttentionAudit} from './market-attention.js';
 import {collectWireCloses} from './market-wire.js';
-import {composeAIDeepSections,composeKoreaDeepSections,composeUSDeepSections,composeKoreaFxFlowComment,composeRatesComment,hasBrokerCause,type RatePoint,indexMove,type DeepComposition} from './market-deep-sections.js';
+import {composeAIDeepSections,composeKoreaDeepSections,composeUSDeepSections,composeKoreaFxFlowComment,composeRatesComment,hasBrokerCause,sessionDriver,type RatePoint,indexMove,type DeepComposition} from './market-deep-sections.js';
 
 interface AuditSink {sourceId:string;category:DailyCategory;url:string;status:'PASS'|'FAILED';recordCount:number;collectedAt:string;error:string|null;observedDate?:string}
-export interface DeepCollection {composition:DeepComposition;title:string|null;sources:Array<{label:string;url:string;publisher:string}>}
+export interface DeepCollection {composition:DeepComposition;title:string|null;sources:Array<{label:string;url:string;publisher:string}>;driver?:{publisher:string;text:string}|null}
 
 /** Reports cited from a fetched consensus list (not opened as PDFs) are verified as listed on that page; the audit keeps each report's own date. */
 function recordListed(audit:AuditSink[],sources:Array<{url:string;date?:string}>,category:DailyCategory,at:string){
@@ -69,7 +69,7 @@ export async function collectUSDeep(input:{sessionDate:string;operationDate:stri
     // Owner 2026-11-05 (traffic analysis #97): '마감' is the word the top posts and searchers use.
     // Owner 2026-11-07 (traffic analysis #97): the session date leads the title ('11월 6일 뉴욕증시 마감, …'), as 7 of
     // the top 10 posts do. This replaces 루인's 10-21 no-date rule for market-close titles only (owner decision).
-    return {composition,title:composition.titleFocus?`${sessionDatePrefix(input.sessionDate)}뉴욕증시 마감, ${indexPhrase}…${composition.titleFocus}`:null,sources};
+    return {composition,title:composition.titleFocus?`${sessionDatePrefix(input.sessionDate)}뉴욕증시 마감, ${indexPhrase}…${composition.titleFocus}`:null,sources,driver:sessionDriver(bundle?.briefs??[],'US',wire?.reports??[])};
   }catch{return empty}
 }
 
@@ -93,7 +93,7 @@ export async function collectKoreaDeep(input:{sessionDate:string;operationDate:s
     // Owner 2026-11-05 (traffic analysis #97): '코스피 마감, 3.59% 급락 5,648.79…검색 1위 삼성전자 3.1% 하락' — '마감' is what
     // searchers and the top posts use; the close is the exact value (no rounding). The session date leads (see the US title).
     const head=koreaTitleHead(input.kospiChangePct,input.kospiClose,composition.titleFocus);
-    return {composition,title:head&&composition.titleFocus?`${sessionDatePrefix(input.sessionDate)}${head}…${composition.titleFocus}`:null,sources};
+    return {composition,title:head&&composition.titleFocus?`${sessionDatePrefix(input.sessionDate)}${head}…${composition.titleFocus}`:null,sources,driver:sessionDriver(bundle?.briefs??[],'KOREA',wire?.reports??[])};
   }catch{return empty}
 }
 
