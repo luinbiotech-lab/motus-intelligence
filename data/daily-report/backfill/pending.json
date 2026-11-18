@@ -1,40 +1,40 @@
 {
-  "updatedAt": "2026-11-17T03:08:15.091Z",
+  "updatedAt": "2026-11-18T02:35:26.153Z",
   "items": [
     {
-      "postId": "9164842084025804267",
-      "url": "https://motusnova.blogspot.com/2026/10/ai_02030153127.html",
-      "title": "AI 인프라 경쟁, 엔비디아 개방형 설계와 마이크로소프트 자체 칩으로 확산",
+      "postId": "1329969301383262104",
+      "url": "https://motusnova.blogspot.com/2026/10/kbi.html",
+      "title": "국내증시 마감: KBI동양철관 흐름과 다음 거래일 체크포인트",
       "labels": [
-        "AI 인텔리전스"
+        "국내증시"
       ],
-      "originalSha256": "sha256:6c39615885ada5b124a576fa52410121903269c2d9ec4665c767e6979f1d4619",
-      "proposedSha256": "sha256:ecebb19499788fb2658f7dc0bfa60e1f074e07955a4e7bc8e0169cf7aefcfeef",
-      "image": "https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/daily-report/backfill/img/hero-4fff2115aa25.png",
+      "originalSha256": "sha256:5ddc81577cb2378aeadcef45033c1cefce4fbd0128397063f040eb0e826773e0",
+      "proposedSha256": "sha256:f72a5d2dceafdb34dacac62ee10f9d97d1393ec86e9c1f2dabad76e52b355472",
+      "image": "https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/daily-report/backfill/img/hero-f8411be73ae3.png",
       "relatedCount": 6
     },
     {
-      "postId": "6826959067001717480",
-      "url": "https://motusnova.blogspot.com/2026/10/ai-2026-10-14.html",
-      "title": "AI 인텔리전스: 2026-10-14 공식 발표로 읽는 산업 변화",
-      "labels": [
-        "AI 인텔리전스"
-      ],
-      "originalSha256": "sha256:2882732fc5220ea9aa2cfb3c23b77c3afed052cee08161ecbe0b19a962a78bcc",
-      "proposedSha256": "sha256:235a1d4a90017b918b24ed498d5dd5cbc1de3970bfd071152dfd5de556689283",
-      "image": "https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/daily-report/backfill/img/hero-d9160c037457.png",
-      "relatedCount": 6
-    },
-    {
-      "postId": "5150404224514978487",
-      "url": "https://motusnova.blogspot.com/2026/10/2026-10-14.html",
-      "title": "미국증시 마감: 2026-10-14 주요 지수와 금리·달러 흐름",
+      "postId": "2224110527358191460",
+      "url": "https://motusnova.blogspot.com/2026/10/dow-jones.html",
+      "title": "Dow Jones 하락, 미국 주요 지수 동반 하락",
       "labels": [
         "미국증시"
       ],
-      "originalSha256": "sha256:136c6c9810bc0907db4a24f4537495575d40cd578dbec03bdb47b2f416175ce5",
-      "proposedSha256": "sha256:93576ce186cb30a30a26a5d7a125a57d4dbb1f496b3009dc982fb8edd858043f",
-      "image": "https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/daily-report/backfill/img/hero-e7bc0ab5b3d2.png",
+      "originalSha256": "sha256:0a26cf1867f2bf7e8d9073198d5b3015f2e6341d77480bc38a7c5822cf21fff3",
+      "proposedSha256": "sha256:b8916cedae89aa470f87635e811a8ff5e12099e9b3f0f5e0f5e73aaa455d18c8",
+      "image": "https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/daily-report/backfill/img/hero-ebc96b6f1ff2.png",
+      "relatedCount": 6
+    },
+    {
+      "postId": "5585115675162819801",
+      "url": "https://motusnova.blogspot.com/2026/10/ai_0953310071.html",
+      "title": "엔비디아가 공개한 카자흐스탄 AI 컴퓨팅 인프라 확충, 실제 산업 변화로 이어질까",
+      "labels": [
+        "AI 인텔리전스"
+      ],
+      "originalSha256": "sha256:33773059fcd4c5bce997231bb59111ef5eb8f609b120e0de3ac18ba30ee56b65",
+      "proposedSha256": "sha256:e5f15032d298b4f29192128e3e74242aab1dffd65bf88937a93892cc744f4d8e",
+      "image": "https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/daily-report/backfill/img/hero-7dcd8fd7f819.png",
       "relatedCount": 6
     }
   ]
