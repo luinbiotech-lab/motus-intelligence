@@ -25,7 +25,8 @@ jobs:
           done
           for f in p*.html; do
             echo "===== $f size=$(wc -c <$f)"
-            grep -oiE '<link[^>]*rel=.canonical[^>]*>|<meta[^>]*(refresh|robots)[^>]*>' $f | head
+            if [ $(wc -c <$f) -lt 3000 ]; then echo "FULL:"; cat $f; echo; fi
+            grep -oiE '<link[^>]*rel=.canonical[^>]*>|<meta[^>]*(refresh|robots)[^>]*>' $f | head || true
             # every inline script that touches location/history/m=1
             python3 - "$f" <<'PY'
           import re,sys
@@ -38,6 +39,6 @@ jobs:
           print('b:responsive/mobile flags:',re.findall(r"(?:isMobile|mobile)['\"]?\s*[:=]\s*['\"]?\w+",h)[:5])
           PY
           done
-          head -20 h*.txt
+          for h in h*.txt; do echo "## $h"; head -20 $h; done
       - uses: actions/upload-artifact@v4
         with: {name: pages, path: out, retention-days: 3}
