@@ -11,8 +11,9 @@ jobs:
         shell: bash
         run: |
           BR='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36'
+          set +o pipefail
           for u in https://motusnova.blogspot.com/sitemap.xml "https://motusnova.blogspot.com/sitemap.xml?page=1" https://motusnova.blogspot.com/feeds/posts/default https://www.blogger.com/feeds/3015267553244608361/posts/default https://motusnova.blogspot.com/robots.txt; do
-            echo "### $u"; curl -sS -L -A "$BR" -w '\nHTTP %{http_code} final=%{url_effective}\n' "$u" | head -c 2500 | tr '>' '>\n' | grep -oE "<loc>[^<]*|rel='alternate'[^/]*href='[^']*'|^HTTP.*|Sitemap:.*|Disallow:.*|Allow:.*" | head -12
+            echo "### $u"; curl -sS -L -A "$BR" -w '\nHTTP %{http_code} final=%{url_effective}\n' "$u" | head -c 2500 | tr '>' '>\n' | grep -oE "<loc>[^<]*|rel='alternate'[^/]*href='[^']*'|^HTTP.*|Sitemap:.*|Disallow:.*|Allow:.*" | head -12 || true
             sleep 3
           done
       - name: Render like Googlebot (read-only)
