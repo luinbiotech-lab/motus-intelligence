@@ -16,7 +16,7 @@
 import {mkdir,readFile,readdir,writeFile} from 'node:fs/promises';
 import {existsSync} from 'node:fs';
 import {join} from 'node:path';
-import {articleKeywords,contentFeatures,type ContentFeatures} from './operations/traffic.js';
+import {articleKeywordFallbacks,articleKeywords,contentFeatures,fillEmptyDatalabSeries,type ContentFeatures,type DatalabSeries} from './operations/traffic.js';
 
 const args=process.argv.slice(2),value=(flag:string)=>{const index=args.indexOf(flag);return index>=0?args[index+1]:undefined};
 const date=value('--date')??'';
@@ -126,10 +126,15 @@ try{
 try{
   const cid=env('NAVER_DATALAB_CLIENT_ID'),secret=env('NAVER_DATALAB_CLIENT_SECRET');if(!cid||!secret)throw new Error('NOT_CONFIGURED');
   const start=new Date(Date.parse(date+'T00:00:00Z')-14*86400000).toISOString().slice(0,10);
+  const datalab=async(keywords:string[]):Promise<DatalabSeries[]|{error:string}>=>{
+    const response=await fetch('https://naverapihub.apigw.ntruss.com/search-trend/v1/search',{method:'POST',headers:{'content-type':'application/json','X-NCP-APIGW-API-KEY-ID':cid,'X-NCP-APIGW-API-KEY':secret},body:JSON.stringify({startDate:start,endDate:day,timeUnit:'date',keywordGroups:keywords.map(keyword=>({groupName:keyword,keywords:[keyword]}))}),signal:timeout(20000)});
+    return response.ok?((await response.json() as {results?:Array<{title?:string;data?:Array<{period?:string;ratio?:number}>}>}).results??[]).map(item=>({keyword:String(item.title),series:(item.data??[]).map(point=>[String(point.period),Number(point.ratio)] as [string,number])})):{error:`HTTP ${response.status}`};
+  };
   for(const article of ours){
-    const groups=article.keywords.slice(0,5).map(keyword=>({groupName:keyword,keywords:[keyword]}));if(!groups.length)continue;
-    const response=await fetch('https://naverapihub.apigw.ntruss.com/search-trend/v1/search',{method:'POST',headers:{'content-type':'application/json','X-NCP-APIGW-API-KEY-ID':cid,'X-NCP-APIGW-API-KEY':secret},body:JSON.stringify({startDate:start,endDate:day,timeUnit:'date',keywordGroups:groups}),signal:timeout(20000)});
-    article.datalab=response.ok?((await response.json() as {results?:Array<{title?:string;data?:Array<{period?:string;ratio?:number}>}>}).results??[]).map(item=>({keyword:item.title,series:(item.data??[]).map(point=>[point.period,point.ratio])})):{error:`HTTP ${response.status}`};
+    const keywords=article.keywords.slice(0,5);if(!keywords.length)continue;
+    const first=await datalab(keywords);
+    // An empty series means too little volume for that phrase: retry with shorter fallbacks (MOT-045, ledger MO-7).
+    article.datalab=Array.isArray(first)?await fillEmptyDatalabSeries(first,articleKeywordFallbacks(article.title,article.labels),async next=>{const reply=await datalab(next);return Array.isArray(reply)?reply:[]}):first;
   }
   result.datalab={state:'PASS'};
 }catch(error){result.datalab={state:'UNAVAILABLE',reason:error instanceof Error?error.message:String(error)}}
