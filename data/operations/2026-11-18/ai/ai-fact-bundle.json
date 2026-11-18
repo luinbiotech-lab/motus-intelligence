@@ -1,6 +1,6 @@
 {
   "schema": "motus.ai-facts/1",
-  "bundleHash": "5f674c3252c21a9f",
+  "bundleHash": "0e32f48a7184fa75",
   "operationDate": "2026-11-18",
   "sessionDate": "2026-11-17",
   "facts": [
@@ -13,23 +13,23 @@
     {
       "id": "F2",
       "kind": "official",
-      "text": "마이크로소프트는 2026년 11월 18일(한국 시간) 공식 뉴스룸에 「Microsoft and Salesforce Announce Copilotforce, Bringing Trusted Customer Context and Action into Microsoft AI Experiences」 제목의 발표를 게시했다. 원문 본문은 신규 AI 제품·기능 공개에 관한 내용을 다룬다. 발표의 중심 제품·플랫폼은 Copilot이다. 원문에서 함께 언급된 국가·기업은 세일즈포스이다.",
-      "publisher": "마이크로소프트",
-      "sourceUrl": "https://news.microsoft.com/source/2026/11/17/microsoft-and-salesforce-announce-copilotforce-bringing-trusted-customer-context-and-action-into-microsoft-ai-experiences/"
+      "text": "구글은 2026년 11월 18일(한국 시간) 공식 블로그에 「Put Gemini to work for you」 제목의 발표를 게시했다. 원문 본문은 AI 보안·안전 강화에 관한 내용을 다룬다. 발표의 중심 제품·플랫폼은 Gemini이다. 원문에서 함께 언급된 국가·기업은 미국이다.",
+      "publisher": "구글",
+      "sourceUrl": "https://blog.google/innovation-and-ai/products/gemini-app/tasks-in-gemini-free-new-features/"
     },
     {
       "id": "F3",
       "kind": "official",
-      "text": "엔비디아는 2026년 11월 17일(한국 시간) 공식 블로그에 「Ian Buck Kicks Off NVIDIA’s Week at SC26 as Science Enters the Age of Agents」 제목의 발표를 게시했다. 원문 본문은 신규 AI 제품·기능 공개에 관한 내용을 다룬다. 원문에서 언급된 제품·플랫폼은 Rubin이다. 원문에서 함께 언급된 국가·기업은 IBM이다.",
+      "text": "엔비디아는 2026년 11월 17일(한국 시간) 공식 블로그에 「NVIDIA DGX Spark Developer Kit Turns a Desk Into a Supercomputing Lab」 제목의 발표를 게시했다. 발표 제목과 본문은 AI 컴퓨팅 인프라 확충에 관한 내용을 다룬다. 발표의 중심 제품·플랫폼은 DGX이다.",
       "publisher": "엔비디아",
-      "sourceUrl": "https://blogs.nvidia.com/blog/ian-buck-sc26/"
+      "sourceUrl": "https://blogs.nvidia.com/blog/dgx-spark-hpc-developer-kit-sc26/"
     },
     {
       "id": "F4",
       "kind": "official",
-      "text": "메타는 2026년 11월 18일(한국 시간) 공식 뉴스룸에 「Muse Is Now Available in Australia: The World’s First Personal AI Agent Built for Everyone」 제목의 발표를 게시했다. 발표 제목과 본문은 신규 AI 제품·기능 공개에 관한 내용을 다룬다. 원문에서 함께 언급된 국가·기업은 호주, 구글이다.",
-      "publisher": "메타",
-      "sourceUrl": "https://about.fb.com/news/2026/11/muse-is-now-available-in-australia/"
+      "text": "마이크로소프트는 2026년 11월 18일(한국 시간) 공식 뉴스룸에 「Microsoft and organizations across industries launch AI Transparency Initiative to strengthen enterprise trust in AI models and agents」 제목의 발표를 게시했다. 발표 제목과 본문은 신규 AI 제품·기능 공개에 관한 내용을 다룬다. 원문에서 언급된 제품·플랫폼은 Microsoft Foundry이다.",
+      "publisher": "마이크로소프트",
+      "sourceUrl": "https://news.microsoft.com/source/2026/11/17/microsoft-and-organizations-across-industries-launch-ai-transparency-initiative-to-strengthen-enterprise-trust-in-ai-models-and-agents/"
     },
     {
       "id": "F5",
@@ -100,47 +100,54 @@
     {
       "id": "F16",
       "kind": "broker",
+      "text": "유안타증권은 11월 18일 마감 코멘트 「유안타 AI 미국 주식시장 마감 시황 (26.11.18)」에서 “엔비디아 실적 발표를 앞두고 황 CEO 사임 여파와 SEC 조사, 전방위 기술 장애까지 겹친 가운데 연준 인사들의 추가 인상 시사가 더해지며 블루칩(다우 -1.64%)이 가장 크게 밀렸습니다”라고 진단했다.",
+      "publisher": "유안타증권",
+      "sourceUrl": "https://stock.pstatic.net/stock-research/market/18/20261118_market_708021000.pdf"
+    },
+    {
+      "id": "F17",
+      "kind": "broker",
       "text": "신한투자증권은 11월 18일 아침 리포트 「Daily Market Digest (11월 18일)」에서 “빅테크 부진(GOOGL -1.2%). 반도체는 반발 매수세에 낙폭 축소(SOX +0.3%)”라고 진단했다.",
       "publisher": "신한투자증권",
       "sourceUrl": "https://stock.pstatic.net/stock-research/market/21/20261118_market_339155000.pdf"
     },
     {
-      "id": "F17",
+      "id": "F18",
       "kind": "broker",
       "text": "KB증권은 11월 18일 아침 리포트 「11/18 KB 리서치 모닝코멘트」에서 “엔비디아 나흘 연속 하락했으나 낙폭 크게 축소. 젠슨 황 CEO 복귀 의지 표명한 가운데 필리 지수는 소폭 반등”이라고 진단했다.",
       "publisher": "KB증권",
       "sourceUrl": "https://stock.pstatic.net/stock-research/market/58/20261118_market_158685000.pdf"
     },
     {
-      "id": "F18",
+      "id": "F19",
       "kind": "broker",
       "text": "SK증권은 11월 18일 아침 리포트 「SK증권 아침에 슥_2026.11.18」에서 “엔비디아 실적 경계와 기술주 매도 지속으로 S&P500·나스닥 4거래일 연속 하락”이라고 진단했다.",
       "publisher": "SK증권",
       "sourceUrl": "https://stock.pstatic.net/stock-research/market/64/20261118_market_73478000.pdf"
     },
     {
-      "id": "F19",
+      "id": "F20",
+      "kind": "broker",
+      "text": "유안타증권은 「③ 美 소매판매 둔화」에서 “소매판매 둔화가 시장에 부담으로 작용”, “황 CEO 사임 이후 엔비디아를 대상으로 한 SEC 조사 착수. 실적 발표를 앞두고 하락 마감”, “세일즈포스(CRM) -9.45%로 S&P500 하락 주도”라고 밝혔다.",
+      "publisher": "유안타증권",
+      "sourceUrl": "https://stock.pstatic.net/stock-research/market/18/20261118_market_708021000.pdf"
+    },
+    {
+      "id": "F21",
       "kind": "broker",
       "text": "유진투자증권은 「엔비디아 실적 앞 경계, 다우 800p 넘게 급락」에서 “뉴욕증시 3대 지수, 엔비디아 실적 발표 & 앤트로픽 상장 앞 위험자산 축소에 약세 마감. 다우 -1.6%·S&P500 -1.0%·나스닥 -0.7%·필 반도체 +0.3%. S&P500 전 섹터 하락. 다우는 6월 초, S&P500은 7월 말 이후 최저치. 나스닥은 4거래일 연속 하락, 10월 고점 대비 -11.9%”, “NSA 통신망 장애 보도에 IT 인프라 안정성 우려 확산되며 소프트웨어업종 하락. 세일즈포스(-9.5%)·서비스나우(-6.5%)·오라클(-3.4%) 등 약세. 나이키(-6.3%)는 인베스터데이에서 FY28을 재무적으로 어려운 해로 예고하며 하락. 홈디포(-2.5%)는 3분기 실적 양호했으나 연간 가이던스가 4분기 이익 컨센서스 하회를 시사”, “10월 소매판매 전월비 +0.2%로 예상(+0.1%) 소폭 상회(9월 +0.8%), 근원 소매판매 +0.6%(예상 +0.4%), 9월 근원은 +0.1%에서 +0.5%로 상향 수정. 10월 수입물가 +1.1%(예상 +0.7%·9월 +1.1%), 자본재 수입물가는 +1.5%로 1988년 월간 집계 이후 최대 상승폭”이라고 밝혔다.",
       "publisher": "유진투자증권",
       "sourceUrl": "https://stock.pstatic.net/stock-research/market/63/20261118_market_402401000.pdf"
     },
     {
-      "id": "F20",
+      "id": "F22",
       "kind": "broker",
       "text": "유진투자증권은 「코스피 9 개월여 만에 5 천 하회」에서 “국내 양대 증시는 美 대중국 AI 반도체 원격접속 규제 발표에 엔비디아 실적 발표를 앞둔 경계에 외국인 매도가 이어져 동반 하락(코스피 -2.6%·코스닥 -2.3%). 코스피는 4거래일 연속 하락하며 종가 기준 9개월여 만에 5000선을 내주고 4960선 마감, 코스닥은 650선 마감”, “2)엔비디아 실적·앤트로픽 상장 앞둔 경계 매물. 엔비디아 3분기 실적(한국시간 18일 새벽)과 앤트로픽 나스닥 상장(19일)을 앞두고 외국인 3거래일 연속 순매도. 오후 들어 외국인 매도가 확대되며 장중 저점 부근에서 마감. 전날 강세였던 은행·보험·방산도 약세. 하락 종목 709개 vs 상승 185개”, “코스피 외국인(-1.4조원) vs 기관(+5,134억원)·개인(+4,310억원), 코스닥 개인(+1,081억원) vs 외국인(-883억원)·기관(-263억원). 아시아도 반도체주 약세에 닛케이225(-1.3%, 키옥시아 -5.1%·어드반테스트 -4.4%·소프트뱅크그룹 -4.0%)·대만 가권(-2.3%) 동반 하락”이라고 밝혔다.",
       "publisher": "유진투자증권",
       "sourceUrl": "https://stock.pstatic.net/stock-research/market/63/20261118_market_402401000.pdf"
     },
     {
-      "id": "F21",
-      "kind": "broker",
-      "text": "KB증권은 「만회했으나 오후 들어 재차 확대」에서 “미국 산업안보국 (BIS)은 중국 기업의 제3국 데이터센터를 통한 첨단 AI 반도체 우회”, “전일 강세를 보였던 금융 업종도 차익실현 압력에 약세 전환”이라고 밝혔다.",
-      "publisher": "KB증권",
-      "sourceUrl": "https://stock.pstatic.net/stock-research/market/58/20261118_market_427461000.pdf"
-    },
-    {
-      "id": "F22",
+      "id": "F23",
       "kind": "broker",
       "text": "요약문 없이 투자의견만 공개된 AI 관련 리포트도 있었다: 라온시큐어(유진투자증권, 11월 18일, nr), SK(한화투자증권, 11월 17일, Buy, 목표주가 650,000원), 웹케시(유진투자증권, 11월 17일, Buy, 목표주가 9,100원), NICE평가정보(LS증권, 11월 16일, Buy, 목표주가 25,000원).",
       "publisher": "유진투자증권",
