@@ -69,7 +69,7 @@ export async function collectUSDeep(input:{sessionDate:string;operationDate:stri
     // Owner 2026-11-05 (traffic analysis #97): '마감' is the word the top posts and searchers use.
     // Owner 2026-11-07 (traffic analysis #97): the session date leads the title ('11월 6일 뉴욕증시 마감, …'), as 7 of
     // the top 10 posts do. This replaces 루인's 10-21 no-date rule for market-close titles only (owner decision).
-    return {composition,title:composition.titleFocus?`${sessionDatePrefix(input.sessionDate)}뉴욕증시 마감, ${indexPhrase}…${composition.titleFocus}`:null,sources};
+    return {composition,title:composition.titleFocus?`${sessionDatePrefix(input.sessionDate)}뉴욕증시 마감, ${indexPhrase}…${composition.titleFocus}`:null,sources,driver:sessionDriver(bundle?.briefs??[],'US',wire?.reports??[])};
   }catch{return empty}
 }
 

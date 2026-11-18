@@ -45,7 +45,7 @@ function indexFact(stats:SeriesStats,horizonLabel:string):string {
 export interface RateObservation {label:string;latest:number;previous:number;date:string;sessionDate:string}
 
 /** U.S. close: per-index facts, 10Y fact, and rule-based MOTUS analysis. */
-export function buildUSMarketNarrative(series:ClosingSeries[],tenYear:RateObservation|null):MarketNarrative {
+export function buildUSMarketNarrative(series:ClosingSeries[],tenYear:RateObservation|null,context:{driver?:{publisher:string;text:string}|null}={}):MarketNarrative {
   const stats=series.map(item=>seriesStats(item)).filter((item):item is SeriesStats=>Boolean(item));
   const facts=stats.map(item=>indexFact(item,'최근 63거래일'));
   let rateChange:number|null=null;
@@ -54,6 +54,20 @@ export function buildUSMarketNarrative(series:ClosingSeries[],tenYear:RateObserv
     facts.push(`미국 10년물 국채금리는 ${tenYear.date===tenYear.sessionDate?'':`${tenYear.date} 기준 `}${tenYear.latest.toFixed(2)}%로 직전 관측치보다 ${rateChange===0?'변동이 없었다':`${Math.abs(rateChange)}bp ${rateChange>0?'올랐다':'내렸다'}`}.`);
   }
   const analysis:string[]=[],core=stats.slice(0,3);
+  // 2026-11-18 owner: the box reads the day (trend, level, size), not only index-vs-index differences.
+  const sp=stats.find(item=>item.name===US_NAMES.sp500),spSeries=series.find(item=>item.key==='sp500');
+  let spCrossed:number|null=null;
+  if(sp&&spSeries&&direction(sp.day)!==0){
+    const closes=spSeries.closes,down=sp.day<0,parts:string[]=[],run=streak(closes),moves=closes.slice(1).map((value,index)=>Math.abs(pct(closes[index]!,value)));
+    spCrossed=levelCrossed(closes.at(-2)!,closes.at(-1)!,500);
+    const lead=run>=2?`S&P 500은 ${run}거래일 연속 ${down?'하락':'상승'}했다`:`S&P 500은 ${Math.abs(sp.day).toFixed(2)}% ${down?'내렸다':'올랐다'}`;
+    parts.push(spCrossed!==null?`${lead.replace(/했다$|내렸다$|올랐다$/,match=>match==='했다'?'하며':match==='내렸다'?'내리며':'오르며')} ${formatLevel(spCrossed).replace(/\.00$/,'')}선 ${down?'아래로 내려왔다':'위로 올라섰다'}.`:`${lead}.`);
+    if(moves.length>=10&&Math.abs(sp.day)>=1&&Math.abs(sp.day)>=Math.max(...moves)-1e-9)parts.push(`하루 ${down?'낙폭':'상승폭'} ${Math.abs(sp.day).toFixed(2)}%는 최근 ${closes.length}거래일 가운데 가장 컸다.`);
+    if(sp.fromHigh<=-10)parts.push(`최근 ${closes.length}거래일 고점(${formatLevel(sp.high)}, ${sp.highDate})보다 ${Math.abs(sp.fromHigh).toFixed(2)}% 낮아, 흔히 '조정'이라 부르는 고점 대비 10% 이상 하락 구간에 들어섰다.`);
+    else if(sp.fromHigh<=-5)parts.push(`최근 ${closes.length}거래일 고점보다 ${Math.abs(sp.fromHigh).toFixed(2)}% 낮다.`);
+    else if(!down&&sp.close>=sp.high)parts.push(`최근 ${closes.length}거래일 종가 가운데 가장 높다.`);
+    analysis.push(parts.join(' '));
+  }
   if(core.length>=2){
     const ups=core.filter(item=>direction(item.day)>0).length,downs=core.filter(item=>direction(item.day)<0).length;
     // Analysis states only what the verified closes show; no generic caveats, no inferred causes.
@@ -70,7 +84,19 @@ export function buildUSMarketNarrative(series:ClosingSeries[],tenYear:RateObserv
     }
     // Rates sit next to the lead index only when the yield is observed on the same session date; no cause is stated.
     const lead=stats[0]!;
-    if(rateChange!==null&&rateChange!==0&&tenYear?.date===tenYear?.sessionDate&&direction(lead.day)!==0)analysis.push(`같은 날 미국 10년물 국채금리는 ${Math.abs(rateChange)}bp ${rateChange>0?'올랐고':'내렸고'} ${josa(lead.name,'은','는')} ${Math.abs(lead.day).toFixed(2)}% ${lead.day>0?'상승했다':'하락했다'}.`);
+    if(rateChange!==null&&rateChange!==0&&tenYear?.date===tenYear?.sessionDate&&direction(lead.day)!==0){
+      analysis.push(`같은 날 미국 10년물 국채금리는 ${Math.abs(rateChange)}bp ${rateChange>0?'올랐고':'내렸고'} ${josa(lead.name,'은','는')} ${Math.abs(lead.day).toFixed(2)}% ${lead.day>0?'상승했다':'하락했다'}.`);
+      const up=rateChange>0,rally=lead.day>0;
+      analysis.push(up&&!rally?'금리 상승이 주가에 부담으로 작용했을 가능성이 있다(추정).':!up&&!rally?'금리가 내렸는데도 주가가 내려, 이날 하락은 금리보다 다른 요인에서 나온 것으로 읽힌다(추정).':!up&&rally?'금리 하락이 주가를 받친 것으로 읽힌다(추정).':'금리가 올랐는데도 주가가 올라, 금리 부담보다 다른 재료가 더 크게 작용한 것으로 읽힌다(추정).');
+    }
+  }
+  if(context.driver&&sp&&direction(sp.day)!==0)analysis.push(`원인으로는 ${josa(context.driver.publisher,'이','가')} “${context.driver.text.replace(/[.。]\s*$/,'')}”고 짚었다.`);
+  if(sp&&direction(sp.day)!==0){
+    const down=sp.day<0,checks:string[]=[];
+    if(spCrossed!==null)checks.push(`S&P 500 ${formatLevel(spCrossed).replace(/\.00$/,'')}선 ${down?'회복':'안착'} 여부`);
+    else if(sp.fromHigh<=-10&&down)checks.push('고점 대비 낙폭이 더 커지는지');
+    if(rateChange!==null&&tenYear?.date===tenYear?.sessionDate)checks.push('10년물 금리 방향');
+    if(checks.length)analysis.push(`다음 정규장에서는 ${josa(checks.join('와 '),'이','가')} 첫 확인점이다.`);
   }
   return {facts,analysis};
 }
@@ -155,7 +181,7 @@ export function buildKoreaMarketNarrative(histories:KoreaIndexHistory[],flows:Ar
     if(crossed!==null)checks.push(`${formatLevel(crossed).replace(/\.00$/,'')}선 ${down?'회복':'안착'} 여부`);
     if(foreign)checks.push(`외국인 ${foreign.value<0?'매도가 멈추는지':'매수가 이어지는지'}`);
     else if(run>=3)checks.push(`${run}거래일 연속 ${down?'하락':'상승'}이 멈추는지`);
-    if(checks.length)analysis.push(`다음 거래일에는 ${checks.join('와 ')}가 이 ${down?'하락':'상승'}이 이어질지를 가르는 첫 확인점이다.`);
+    if(checks.length)analysis.push(`다음 거래일에는 ${josa(checks.join('와 '),'이','가')} 이 ${down?'하락':'상승'}이 이어질지를 가르는 첫 확인점이다.`);
   }
   return {facts,analysis};
 }

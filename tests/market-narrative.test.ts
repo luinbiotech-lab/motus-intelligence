@@ -54,7 +54,7 @@ test('flat moves are never read as a direction, and index-only data supports no 
   const allFlat=buildUSMarketNarrative([flat('sp500','S&P 500'),flat('nasdaq','Nasdaq'),flat('dow-jones','Dow Jones')],null);
   assert.ok(!allFlat.analysis.some(line=>line.includes('엇갈려')));assert.match(allFlat.analysis[0]!,/모두 보합권/);
   const upAndFlat=buildUSMarketNarrative([{key:'sp500',label:'S&P 500',dates:dates(7),closes:[100,100,100,100,100,100,101]},flat('nasdaq','Nasdaq'),flat('dow-jones','Dow Jones')],null);
-  assert.ok(!upAndFlat.analysis.some(line=>line.includes('엇갈려')));assert.match(upAndFlat.analysis[0]!,/일부 지수만 오르고/);
+  assert.ok(!upAndFlat.analysis.some(line=>line.includes('엇갈려')));assert.ok(upAndFlat.analysis.some(line=>/일부 지수만 오르고/.test(line)),upAndFlat.analysis.join(' | '));
 
   const korea=buildKoreaMarketNarrative([{label:'KOSPI',dates:dates(6),closes:[100,101,101,101,101,100]},{label:'KOSDAQ',dates:dates(6),closes:[100,100,100,100,100,101]}],[]);
   assert.ok(!korea.analysis.some(line=>/대형주|중소형주|수급/.test(line)),korea.analysis.join(' '));
@@ -84,4 +84,15 @@ test('when the largest flow runs against the index, the reading says so instead 
   const r=buildKoreaMarketNarrative([{label:'KOSPI',dates:d,closes:[5683.8,5383.8,5059.69,5018.85,5239.13,5375.36]},{label:'KOSDAQ',dates:d,closes:[714.95,678.41,644.27,638.97,667.61,705.1]}],[],{flows:[{label:'개인',value:-13821},{label:'외국인',value:4177},{label:'기관',value:4768}]});
   assert.ok(r.analysis.some(line=>line.includes('가장 크게 움직인 개인은 지수와 반대로 팔았고, 지수는 매수 쪽(기관·외국인)을 따라 올랐다(추정).')),r.analysis.join(' | '));
   assert.ok(!r.analysis.some(line=>line.startsWith('원인으로는')),'no cause sentence is invented without a driver');
+});
+
+test('US MOTUS analysis reads trend, the rate move against the index, the sourced cause and the next check',()=>{
+  const n=63,base=Array.from({length:n-2},(_,i)=>7400-i*10);
+  const sp=[...base,base.at(-1)!-20,6490];   // three straight declines, 6,500 lost, the largest move of the period
+  const series=[{key:'sp500',label:'S&P 500',dates:dates(n),closes:sp},{key:'nasdaq',label:'Nasdaq',dates:dates(n),closes:[...Array(n-1).fill(200),196]},{key:'dow-jones',label:'Dow Jones',dates:dates(n),closes:[...Array(n-1).fill(300),299]}];
+  const r=buildUSMarketNarrative(series,{label:'10Y',latest:4.1,previous:4.13,date:'d',sessionDate:'d'},{driver:{publisher:'연합뉴스',text:'엔비디아 실적 경계감에 기술주가 약세를 보였다.'}});
+  assert.match(r.analysis[0]!,/^S&P 500은 \d+거래일 연속 하락하며 6,500선 아래로 내려왔다\. 하루 낙폭 [\d.]+%는 최근 63거래일 가운데 가장 컸다\./);
+  assert.ok(r.analysis.includes('금리가 내렸는데도 주가가 내려, 이날 하락은 금리보다 다른 요인에서 나온 것으로 읽힌다(추정).'),r.analysis.join(' | '));
+  assert.ok(r.analysis.includes('원인으로는 연합뉴스가 “엔비디아 실적 경계감에 기술주가 약세를 보였다”고 짚었다.'));
+  assert.equal(r.analysis.at(-1),'다음 정규장에서는 S&P 500 6,500선 회복 여부와 10년물 금리 방향가 첫 확인점이다.'.replace('방향가','방향이'));
 });
