@@ -127,7 +127,9 @@ export function renderUSEditorialArticle(view:USMarketDailyViewModel):DailyMaste
 const metricValue=(value:string)=>{const number=Number(value.replace(/[^0-9.+\-−]/g,'').replace('−','-'));return Number.isFinite(number)?number:Number.NaN};
 export function renderKoreaEditorialArticle(view:KoreaMarketDailyViewModel):DailyMasterRenderResult {
   const parts=[masthead(view.title,view.subtitle,view.displayLabel,view.issueDate)+heroFigure(view.heroImage),lead(view.marketSummary)];
-  const deep=view.deepSections??[],place=(where:'early'|'late'|'risks')=>deep.filter(item=>(item.placement??'early')===where).map(deepSection).filter(Boolean);
+  // 2026-11-13 owner: the FX and flow readings sit inside their data sections, under the figures.
+  const inline=new Set(['korea-fx-comment','korea-flow-comment']),commentOf=(key:string)=>(view.deepSections??[]).find(item=>item.key===key)?.paragraphs.map(p=>`<p style="margin:0 0 13px">${emph(p.text)}${sourceLink(p.source)}</p>`).join('')??'';
+  const deep=(view.deepSections??[]).filter(item=>!inline.has(item.key)),place=(where:'early'|'late'|'risks')=>deep.filter(item=>(item.placement??'early')===where).map(deepSection).filter(Boolean);
   const top=deep.find(item=>item.key==='korea-stocks')?.bars?.[0];
   parts.push(keyPoints([view.indexMetrics.length?`지수: ${view.indexMetrics.map(item=>`${item.label} ${item.displayValue}`).join(', ')}.`:'',view.investorFlows.length?`수급: ${view.investorFlows.map(item=>`${item.label} ${item.displayValue}`).join(', ')}.`:'',top?`검색 1위 ${top.label} ${top.value>0?'+':top.value<0?'-':''}${Math.abs(top.value).toFixed(2)}%.`:'']));
   parts.push(...place('early'));
@@ -135,8 +137,8 @@ export function renderKoreaEditorialArticle(view:KoreaMarketDailyViewModel):Dail
   // The index change is the one the narrative states for that index ('코스피는 … 전 거래일보다 3.59% 하락').
   const changeOf=(label:string)=>{const name=/KOSPI/i.test(label)?'코스피':/KOSDAQ/i.test(label)?'코스닥':null;if(!name)return null;const match=(view.narrative?.facts??[]).join(' ').match(new RegExp(`${name}(?:은|는) [\\d,.]+(?:으로|로) 마감해 전 거래일보다 ([\\d.]+)% (상승|하락)`));return match?`${match[2]==='상승'?'+':'-'}${match[1]}%`:null};
   const tileOf=(item:{label:string;displayValue:string})=>{const match=item.displayValue.match(/^(.*?)\s*\(([^)]*)\)\s*$/);return {label:item.label,value:match?match[1]!:item.displayValue,change:match?match[2]!:changeOf(item.label)}};
-  if(view.indexMetrics.length||view.fxAndSupporting.length)parts.push(roleSection('코스피·코스닥·환율',tiles([...view.indexMetrics,...view.fxAndSupporting].map(tileOf))+(view.narrative?.facts.length?prose(view.narrative.facts):''),'data','korea-indexes'));
-  if(view.investorFlows.length)parts.push(roleSection('투자자별 순매수',flow(view.investorFlows.map(item=>({label:item.label,displayValue:item.displayValue,direction:item.direction}))),'data','korea-flows'));
+  if(view.indexMetrics.length||view.fxAndSupporting.length)parts.push(roleSection('코스피·코스닥·환율',tiles([...view.indexMetrics,...view.fxAndSupporting].map(tileOf))+(view.narrative?.facts.length?prose(view.narrative.facts):'')+commentOf('korea-fx-comment'),'data','korea-indexes'));
+  if(view.investorFlows.length)parts.push(roleSection('투자자별 순매수',flow(view.investorFlows.map(item=>({label:item.label,displayValue:item.displayValue,direction:item.direction})))+commentOf('korea-flow-comment'),'data','korea-flows'));
   const bars=(rows:Array<{label:string;displayValue:string}>)=>rows.map(item=>({label:item.label,value:metricValue(item.displayValue.replace(/^.*\(([^)]*)\).*$/,'$1'))})).filter(item=>Number.isFinite(item.value));
   if(view.sectors.length){const chart=barsSvg(bars(view.sectors));parts.push(roleSection('업종별 등락',chart||metricProse(view.sectors),'data','korea-sectors'))}
   const ordinaryMovers=view.movers.filter(item=>!isStructuredLeveragedProduct(item.label));
@@ -200,7 +202,7 @@ export function renderWeeklySection(item:import('../operations/weekly-review.js'
 export function relatedPosts(posts:Array<{title:string;url:string;label:string;published:string}>|undefined,currentLabel=''):string {
   // Optional block: a post whose title would trip a public-HTML or leakage check is dropped, never the article (#100 review).
   const unsafe=/https?:\/\/|www\.|(무슨 일이 있었나|왜 중요한가|핵심 내용|산업 연결|시장 연결)|fixture|placeholder|sample marker|eventId|themeId|companyId|publicationId|verificationStatus|confidenceScore|claimId|reportId|researchId|[A-Z]{2,}_[A-Z]{2,}/i;
-  const block=(items:Array<{title:string;url:string;label:string;published:string}>)=>renderWeeklySection({key:'related-posts',title:'MOTUS 최근 기사',intro:'최근 발행한 시장·AI 브리핑을 이어서 읽어 보세요.',links:items.map(post=>({label:post.title,url:post.url,meta:[post.label,post.published].filter(Boolean).join(' · ')}))});
+  const block=(items:Array<{title:string;url:string;label:string;published:string}>)=>renderWeeklySection({key:'related-posts',title:'MOTUS 최근 기사',intro:'최근 발행한 시장·AI 브리핑이다.',links:items.map(post=>({label:post.title,url:post.url,meta:[post.label,post.published].filter(Boolean).join(' · ')}))});
   const items=(posts??[]).filter(post=>/^https:\/\/motusnova\.blogspot\.com\/\d{4}\/\d{2}\/[\w.-]+\.html$/.test(post.url)&&post.title&&!unsafe.test(post.title)&&!unsafe.test(post.label)).filter(post=>{try{assertNewsletterPublicHtmlSafe(`<article>${block([post])}</article>`);return true}catch{return false}}).slice(0,6);
   if(!items.length)return '';
   // Category pages follow the post list (crawl hubs, 2026-11-11); their URLs are fixed, never taken from the feed.
