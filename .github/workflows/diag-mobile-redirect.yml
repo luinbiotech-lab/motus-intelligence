@@ -7,7 +7,8 @@ jobs:
     timeout-minutes: 10
     steps:
       - run: |
-          U="https://motusnova.blogspot.com/2026/11/11-17-259-496848-1-30.html"
+          U="https://motusnova.blogspot.com/2026/11/11-18-199-506744-1-27.html"
+          sudo apt-get install -y -qq fonts-noto-cjk >/dev/null 2>&1 || true
           google-chrome --headless=new --no-sandbox --hide-scrollbars --window-size=390,7000 --user-agent="Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1" --screenshot=m.png "$U?m=1"
           google-chrome --headless=new --no-sandbox --hide-scrollbars --window-size=1280,3000 --screenshot=d.png "$U"
           google-chrome --headless=new --no-sandbox --hide-scrollbars --window-size=1280,2400 --screenshot=home.png "https://motusnova.blogspot.com/"
