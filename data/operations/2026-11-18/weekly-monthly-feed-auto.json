@@ -12,5 +12,12 @@
     "publicationId": "motus-live-2026-11-17:us",
     "publicPostUrl": "https://motusnova.blogspot.com/2026/11/11-17-3-16-tsmc-37.html",
     "publishedAt": "2026-11-18T08:42:06+09:00"
+  },
+  {
+    "idempotencyKey": "weekly:motus-live-2026-11-18:ai",
+    "category": "AI_INTELLIGENCE",
+    "publicationId": "motus-live-2026-11-18:ai",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/11/copilot.html",
+    "publishedAt": "2026-11-18T12:41:08+09:00"
   }
 ]
