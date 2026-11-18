@@ -1,0 +1,49 @@
+name: MOTUS Briefing Web App
+
+# Owner 2026-11-16: the daily summary as an installable web app (PWA), cost 0, GitHub Pages.
+# Rebuilt after every daily report run (which writes the evening summary to ops-data) and on demand.
+# Read-only towards the blog and ops-data; publishes only the static site to GitHub Pages.
+on:
+  workflow_run:
+    workflows: [MOTUS Daily Report]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: motus-briefing-site
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: main}
+      - uses: actions/setup-node@v4
+        with: {node-version: 22, cache: npm}
+      - run: npm ci
+      - run: npx tsc -p .
+      - name: Read the evening summaries from ops-data
+        shell: bash
+        run: |
+          git fetch --no-tags --depth=1 origin ops-data
+          git checkout FETCH_HEAD -- data/daily-report
+      - name: Build the site
+        run: node dist/src/briefing-site-cli.js --out site --origin "https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPOSITORY#*/}/"
+      - uses: actions/upload-pages-artifact@v3
+        with: {path: site}
+  deploy:
+    needs: build
+    runs-on: ubuntu-24.04
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,19 @@
+# MOTUS briefing push (owner 2026-11-16). Free plan. Deploy needs owner approval: Cloudflare account, KV namespace id,
+# and the secret VAPID_PRIVATE_KEY (wrangler secret put VAPID_PRIVATE_KEY). Never commit the private key.
+name = "motus-briefing-push"
+main = "index.ts"
+compatibility_date = "2026-11-01"
+
+[vars]
+SITE_ORIGIN = "https://luinbiotech-lab.github.io/motus-intelligence/"
+SUMMARY_URL = "https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/daily-report/naver-latest.txt"
+VAPID_SUBJECT = "https://luinbiotech-lab.github.io/motus-intelligence/"
+VAPID_PUBLIC_KEY = "REPLACE_AT_DEPLOY"
+
+[[kv_namespaces]]
+binding = "SUBSCRIPTIONS"
+id = "REPLACE_AT_DEPLOY"
+
+# Weekdays 17:40, 18:40, 19:40 KST (after the evening Korea edition and its retries); one send per new summary title.
+[triggers]
+crons = ["40 8,9,10 * * 1-5"]
