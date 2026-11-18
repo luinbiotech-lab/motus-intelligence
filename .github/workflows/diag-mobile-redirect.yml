@@ -3,6 +3,7 @@ on: push
 jobs:
   probe:
     runs-on: ubuntu-24.04
+    permissions: {contents: write}
     timeout-minutes: 10
     steps:
       - run: |
@@ -11,5 +12,6 @@ jobs:
           google-chrome --headless=new --no-sandbox --hide-scrollbars --window-size=1280,3000 --screenshot=d.png "$U"
           google-chrome --headless=new --no-sandbox --hide-scrollbars --window-size=1280,2400 --screenshot=home.png "https://motusnova.blogspot.com/"
           ls -la *.png
-      - uses: actions/upload-artifact@v4
-        with: {name: shots, path: '*.png', retention-days: 1}
+      - run: |
+          git init -q out && cd out && mv ../*.png . && git checkout -q -b diag-shots && git add . && git -c user.name=diag -c user.email=diag@users.noreply.github.com commit -qm shots
+          git push -f -q https://x-access-token:${{ github.token }}@github.com/${{ github.repository }} diag-shots
