@@ -52,6 +52,9 @@ const OTHER_FOR_KOREA=/뉴욕|미 증시|미국 증시|나스닥|S&P|다우|알�
 function causes(briefs:BrokerBrief[],region:'US'|'KOREA'){
   const drivers:Pick[]=[],cautions:Pick[]=[];
   for(const brief of briefs){
+    // 11/18: a report titled for the other market ('유안타 AI 미국 주식시장 마감 시황') supplied the Korea cause (a Fed remark).
+    // A report whose title names only the other market never explains this one.
+    if(region==='KOREA'?/미국|뉴욕|美|해외 ?증시|US market/i.test(brief.report.title)&&!/코스피|코스닥|국내|KOSPI|한국/.test(brief.report.title):/코스피|코스닥|국내 ?증시|KOSPI|KOSDAQ/.test(brief.report.title)&&!/미국|뉴욕|美|글로벌/.test(brief.report.title))continue;
     // A line under a regional heading can still be about the other market; it never explains this one.
     const items=brief.statements.filter(item=>item.region===region&&item.text.length<=130&&!(region==='KOREA'?OTHER_FOR_KOREA.test(item.text)&&!KOREA_MARKET.test(item.text):KOREA_MARKET.test(item.text)));
     // The best explanation of the session is the driver whatever its direction (a bearish close explained by
