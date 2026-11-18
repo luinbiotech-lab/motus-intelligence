@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.1",
+  "category": "US_MARKET",
+  "operationDate": "2026-11-19",
+  "observedDate": "2026-11-19",
+  "sourceMode": "internal",
+  "verification": "FAILED",
+  "unresolvedConflicts": [
+    "YAHOO_US_HTTP_429"
+  ],
+  "provenancePass": false,
+  "sourceDiversityPass": false,
+  "sourceLinksPass": false,
+  "mobilePass": false,
+  "editorialQualityPass": false,
+  "leakagePass": true,
+  "duplicateCheck": "PENDING_REMOTE",
+  "duplicateUncertainty": true,
+  "articleFingerprint": "",
+  "commerceEnabled": false,
+  "verifiedAt": "2026-11-18T23:46:14.637Z",
+  "expiresAt": "2026-11-19T01:16:14.637Z",
+  "sourceAuditIds": [],
+  "sourceAuditFingerprint": "sha256:07b4f1f48fdbfec0b4c3ac8ee9869699347c6648768f5b1aec1ec7df5941c6a2",
+  "crossVerificationFingerprint": null,
+  "crossVerification": null
+}
