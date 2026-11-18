@@ -50,18 +50,19 @@ function shell(input:{title:string;description:string;canonical:string;base:stri
 :root{--bg:#f6f7f9;--card:#fff;--ink:#16202a;--muted:#5b6672;--line:#e3e7ec;--accent:#0f3d5e;--up:#c62828;--down:#1565c0}
 @media (prefers-color-scheme:dark){:root{--bg:#0e1419;--card:#151d24;--ink:#e8edf2;--muted:#9aa7b3;--line:#24303a;--accent:#7fb8e0}}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 -apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif}
-header{background:var(--accent);color:#fff;padding:14px 16px calc(14px);position:sticky;top:0;z-index:2}
+header{background:linear-gradient(135deg,#0b2545,#13406b);color:#fff;padding:14px 16px;position:sticky;top:0;z-index:2;box-shadow:0 2px 10px rgba(0,0,0,.12)}
 header a{color:#fff;text-decoration:none}header .brand{font-weight:700;letter-spacing:.02em}header nav{float:right;font-size:14px}header nav a{margin-left:14px;opacity:.9}
 main{max-width:720px;margin:0 auto;padding:16px}
-h1{font-size:21px;line-height:1.4;margin:6px 0 4px}.date{color:var(--muted);font-size:14px}
+h1{font-size:23px;line-height:1.38;margin:8px 0 6px;letter-spacing:-.02em}.date{display:inline-block;color:var(--accent);background:var(--card);border:1px solid var(--line);border-radius:999px;font-size:12.5px;font-weight:700;padding:3px 10px}
 .intro{color:var(--muted);font-size:15px;margin:10px 0 14px}
 .hero{width:100%;border-radius:12px;display:block;margin:8px 0 14px;aspect-ratio:1200/630;object-fit:cover;background:var(--line)}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:0 0 12px}
-.card h2{font-size:17px;margin:0 0 8px;line-height:1.45}.card ul{margin:0;padding-left:18px}.card li{margin:4px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin:0 0 14px;box-shadow:0 1px 3px rgba(16,32,48,.06)}
+.chip{display:inline-block;font-size:12px;font-weight:800;letter-spacing:.04em;border-radius:999px;padding:3px 10px;margin:0 0 8px;color:#fff;background:var(--accent)}.chip.k{background:#b3261e}.chip.u{background:#1f4e8c}.chip.a{background:#6b4fbb}
+.card h2{font-size:18px;margin:0 0 10px;line-height:1.45;letter-spacing:-.01em}.card ul{margin:0;padding:0;list-style:none}.card li{margin:0;padding:7px 0 7px 14px;position:relative;border-top:1px solid var(--line);font-size:15.5px}.card li:first-child{border-top:0}.card li:before{content:"";position:absolute;left:0;top:17px;width:5px;height:5px;border-radius:50%;background:var(--muted)}.card li b{color:var(--accent)}
 .more{display:inline-block;margin-top:10px;font-weight:600;color:var(--accent);text-decoration:none}
 .tags{color:var(--muted);font-size:13px;margin:6px 0 16px}.note{color:var(--muted);font-size:13px;border-top:1px solid var(--line);padding-top:12px;margin-top:18px}
 .list a{display:block;padding:12px 0;border-bottom:1px solid var(--line);color:var(--ink);text-decoration:none}.list small{color:var(--muted);display:block}
-.alert{display:block;width:100%;margin:0 0 12px;padding:12px;border:0;border-radius:12px;background:var(--accent);color:#fff;font-size:15px;font-weight:700}.install{display:none;background:var(--card);border:1px dashed var(--line);border-radius:12px;padding:12px 14px;font-size:14px;margin:0 0 14px}
+.alert{display:block;width:100%;margin:0 0 12px;padding:12px;border:0;border-radius:12px;background:var(--accent);color:#fff;font-size:15px;font-weight:700}.install{display:none;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;font-size:13.5px;color:var(--muted);margin:16px 0 0}.install b{color:var(--ink)}
 .pager{display:flex;justify-content:space-between;font-size:14px;margin:6px 0 0}.pager a{color:var(--accent);text-decoration:none}
 </style>
 </head>
@@ -69,8 +70,8 @@ h1{font-size:21px;line-height:1.4;margin:6px 0 4px}.date{color:var(--muted);font
 <header><a class="brand" href="${input.base}">MOTUS 증시 브리핑</a><nav><a href="${input.base}">오늘</a><a href="${input.base}archive.html">지난 브리핑</a></nav></header>
 <main>
 ${input.pushEndpoint?`<button class="alert" id="alert" hidden>매일 저녁 브리핑 알림 받기</button>`:''}
-<div class="install" id="install"><b>홈 화면에 추가</b>하면 앱처럼 열립니다. 아이폰: 공유 버튼 → '홈 화면에 추가'. 안드로이드: 메뉴 → '앱 설치' 또는 '홈 화면에 추가'.</div>
 ${input.body}
+<div class="install" id="install"><b>홈 화면에 추가</b>하면 앱처럼 열립니다. 아이폰: 공유 버튼 → '홈 화면에 추가'. 안드로이드: 메뉴 → '앱 설치' 또는 '홈 화면에 추가'.</div>
 </main>
 <script>
 if('serviceWorker' in navigator)navigator.serviceWorker.register('${input.base}sw.js').catch(()=>{});
@@ -91,7 +92,9 @@ export function dayPath(day:BriefingDay):string{return `d/${day.sessionDate}.htm
 
 export function renderDayPage(day:BriefingDay,origin:string,base:string,neighbours:{newer?:BriefingDay|null;older?:BriefingDay|null}={},pushEndpoint:string|null=null):string{
   const description=day.items.map(item=>item.heading).join(' · ').slice(0,150);
-  const items=day.items.map(item=>`<section class="card"><h2>${esc(item.heading)}</h2><ul>${item.lines.map(line=>`<li>${color(line)}</li>`).join('')}</ul>${item.articleUrl?`<a class="more" href="${esc(item.articleUrl)}">전체 분석 보기 →</a>`:''}</section>`).join('\n');
+  // 2026-11-18 owner (design first): each card leads with a coloured category chip, then the headline.
+  const chipOf=(heading:string)=>{const [head,...rest]=heading.split(' — ');const kind=/국내/.test(head!)?'k':/뉴욕|미국/.test(head!)?'u':/AI/.test(head!)?'a':'';return rest.length?`<span class="chip ${kind}">${esc(head!)}</span><h2>${esc(rest.join(' — '))}</h2>`:`<h2>${esc(heading)}</h2>`};
+  const items=day.items.map(item=>`<section class="card">${chipOf(item.heading)}<ul>${item.lines.map(line=>`<li>${color(line).replace(/^(MOTUS 정리|증권가 공통 시각|다음에 볼 것|공식 발표):/,'<b>$1</b>:')}</li>`).join('')}</ul>${item.articleUrl?`<a class="more" href="${esc(item.articleUrl)}">전체 분석 보기 →</a>`:''}</section>`).join('\n');
   const pager=`<div class="pager">${neighbours.older?`<a href="${base}${dayPath(neighbours.older)}">← ${esc(neighbours.older.sessionDate)}</a>`:'<span></span>'}${neighbours.newer?`<a href="${base}${dayPath(neighbours.newer)}">${esc(neighbours.newer.sessionDate)} →</a>`:'<span></span>'}</div>`;
   const body=`<div class="date">${esc(day.sessionDate)} 장 마감 기준</div><h1>${esc(day.title)}</h1>${day.imageUrl?`<img class="hero" src="${esc(day.imageUrl)}" alt="${esc(day.title)}" loading="lazy">`:''}<p class="intro">${esc(day.intro)}</p>\n${items}\n<div class="tags">${day.tags.map(tag=>'#'+esc(tag)).join(' ')}</div>${pager}<p class="note">${esc(day.disclaimer)}</p>`;
   return shell({title:`${day.title} | ${SITE_NAME}`,description,canonical:origin+dayPath(day),base,body,image:day.imageUrl,pushEndpoint});
