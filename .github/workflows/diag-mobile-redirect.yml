@@ -3,13 +3,13 @@ on: push
 jobs:
   probe:
     runs-on: ubuntu-24.04
+    timeout-minutes: 10
     steps:
       - run: |
-          curl -sL "https://news.einfomax.co.kr/news/articleView.html?idxno=4445196" > a.html
-          python3 - <<'PY'
-          import re,html
-          s=open('a.html',encoding='utf-8',errors='ignore').read()
-          ps=[html.unescape(re.sub(r'<[^>]+>','',p)) for p in re.findall(r'<p[^>]*>(.*?)</p>',s,re.S)]
-          for p in ps:
-            if '억' in p or '외국인' in p: print('P>',p.strip()[:300])
-          PY
+          U="https://motusnova.blogspot.com/2026/11/11-17-259-496848-1-30.html"
+          google-chrome --headless=new --no-sandbox --hide-scrollbars --window-size=390,7000 --user-agent="Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1" --screenshot=m.png "$U?m=1"
+          google-chrome --headless=new --no-sandbox --hide-scrollbars --window-size=1280,3000 --screenshot=d.png "$U"
+          google-chrome --headless=new --no-sandbox --hide-scrollbars --window-size=1280,2400 --screenshot=home.png "https://motusnova.blogspot.com/"
+          ls -la *.png
+      - uses: actions/upload-artifact@v4
+        with: {name: shots, path: '*.png', retention-days: 1}
