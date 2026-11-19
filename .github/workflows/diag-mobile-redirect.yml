@@ -10,7 +10,7 @@ jobs:
           set +e; mkdir out; cd out
           sudo apt-get install -y -qq fonts-noto-cjk >/dev/null 2>&1
           U="https://luinbiotech-lab.github.io/motus-intelligence/"
-          curl -sS -o page.html -w "%{http_code}\n" "$U" > result.txt
+          curl -sS -o page.html -w "%{http_code}\n" "$U" > result.txt; grep -c "motus-briefing-push" page.html >> result.txt; grep -o "id=\"alert\"[^>]*>[^<]*" page.html >> result.txt
           curl -sS -o /dev/null -w "manifest %{http_code}\n" "${U}manifest.webmanifest" >> result.txt
           curl -sS -o /dev/null -w "sw %{http_code}\n" "${U}sw.js" >> result.txt
           google-chrome --headless=new --no-sandbox --hide-scrollbars --window-size=390,2600 --user-agent="Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1" --virtual-time-budget=8000 --screenshot=m.png "$U"
