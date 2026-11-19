@@ -14,6 +14,9 @@ jobs:
           ACC="https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID"; AUTH="authorization: Bearer $CLOUDFLARE_API_TOKEN"
           ID=$(curl -fsS -H "$AUTH" "$ACC/storage/kv/namespaces?per_page=100" | jq -r '.result[]|select(.title=="motus-briefing-push-subscriptions")|.id')
           echo "subs: $(curl -fsS -H "$AUTH" "$ACC/storage/kv/namespaces/$ID/keys?prefix=sub:" | jq '.result|length')" > result.txt
+          for K in $(curl -fsS -H "$AUTH" "$ACC/storage/kv/namespaces/$ID/keys?prefix=sub:" | jq -r '.result[].name'); do
+            echo "sub endpoint host: $(curl -fsS -H "$AUTH" "$ACC/storage/kv/namespaces/$ID/values/$K" | jq -r '(.endpoint // .subscription.endpoint // "?")' | awk -F/ '{print $3}') created: $(curl -fsS -H "$AUTH" "$ACC/storage/kv/namespaces/$ID/values/$K" | jq -r '(.createdAt // .created // "?")')" >> result.txt
+          done
           echo "meta keys: $(curl -fsS -H "$AUTH" "$ACC/storage/kv/namespaces/$ID/keys?prefix=meta:" | jq -c '[.result[].name]')" >> result.txt
           U=https://motus-briefing-push.luinbiotech-cc1.workers.dev/
           echo "health: $(curl -fsS ${U}health)" >> result.txt
