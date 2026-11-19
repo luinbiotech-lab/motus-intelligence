@@ -2,7 +2,7 @@ import {fetchWithTransientRetry} from './http-retry.js';
 export type KoreaComparedField='KOSPI'|'KOSDAQ'|'USD_KRW';
 export type KoreaMetricBasis='SESSION_CLOSE'|'CURRENT_AT_COLLECTION'|'REFERENCE_RATE';
 export interface KoreaPrimaryMarketSnapshot {observedDate:string;values:Partial<Record<KoreaComparedField,number>>;sourceUrls:string[];metricBasis?:Partial<Record<KoreaComparedField,KoreaMetricBasis>>}
-export interface KoreaOfficialObservation {field:KoreaComparedField;observedDate:string;value:number;provider:'KRX'|'BOK_ECOS'|'YAHOO_FINANCE'|'DAUM_FINANCE';sourceUrl:string;metricBasis?:KoreaMetricBasis}
+export interface KoreaOfficialObservation {field:KoreaComparedField;observedDate:string;value:number;provider:'KRX'|'BOK_ECOS'|'YAHOO_FINANCE';sourceUrl:string;metricBasis?:KoreaMetricBasis}
 export interface KoreaOfficialAudit {sourceId:string;url:string;status:'PASS'|'FAILED'|'SKIPPED';recordCount:number;error:string|null;requestedDate?:string;availableDates?:string[]}
 export interface KoreaOfficialFetchResult {observations:KoreaOfficialObservation[];audit:KoreaOfficialAudit[];requiredProviderAvailable:boolean;reasonCode:string|null;phase?:'PRE_PUBLICATION'|'POST_PUBLICATION_RECONCILIATION'}
 export interface KoreaOfficialSourceAdapter {readonly adapterId:string;fetch(observedDate:string,collectedAt:string):Promise<KoreaOfficialFetchResult>}
@@ -10,7 +10,7 @@ export interface KoreaFieldComparison {field:KoreaComparedField;primaryValue:num
 export interface KoreaCrossVerificationArtifact {
  schemaVersion:'1.0';category:'KOREA_MARKET';observedDate:string;
  primarySource:{provider:'Naver Finance';domain:'naver.com';urls:string[]};
- independentSource:{providers:Array<'KRX'|'BOK_ECOS'|'YAHOO_FINANCE'|'DAUM_FINANCE'>;domains:string[];urls:string[]};
+ independentSource:{providers:Array<'KRX'|'BOK_ECOS'|'YAHOO_FINANCE'>;domains:string[];urls:string[]};
  comparedFields:KoreaFieldComparison[];tolerance:{KOSPI:number;KOSDAQ:number;USD_KRW:number};
  comparisonResult:'PASS'|'FAIL'|'UNAVAILABLE';sourceDiversityPass:boolean;
  verification:'VERIFIED'|'REVIEW_REQUIRED';reasonCodes:string[];verifiedAt:string;officialPhase?:'PRE_PUBLICATION'|'POST_PUBLICATION_RECONCILIATION';reconciliation?:{status:'NOT_REQUIRED'|'PENDING'|'PASS'|'MISMATCH';officialObservedDates:string[]};
@@ -48,7 +48,7 @@ export class KrxBokOfficialSourceAdapter implements KoreaOfficialSourceAdapter {
 export class YahooKoreaSecondarySourceAdapter implements KoreaOfficialSourceAdapter {
  readonly adapterId='yahoo-korea-secondary-v2';
  constructor(private readonly fetcher:typeof fetch=fetch){}
- async fetch(observedDate:string,collectedAt:string):Promise<KoreaOfficialFetchResult>{
+ async fetch(observedDate:string,_collectedAt:string):Promise<KoreaOfficialFetchResult>{
   const observations:KoreaOfficialObservation[]=[],audit:KoreaOfficialAudit[]=[],center=Date.parse(observedDate+'T00:00:00Z'),from=Math.floor((center-2*86400000)/1000),to=Math.floor((center+3*86400000)/1000);
   try{
    for(const [field,symbol] of [['KOSPI','%5EKS11'],['KOSDAQ','%5EKQ11']] as const){
@@ -70,12 +70,8 @@ export class YahooKoreaSecondarySourceAdapter implements KoreaOfficialSourceAdap
      if(!code){accepted={value:value as number,url,availableDates:dates};break}
      lastCode=code;
     }
-    // Yahoo can leave the KOSDAQ row empty for an hour or more after the close (MOT-048: the 17:12 run held on 11/17 and
-    // 11/18). Daum Finance publishes the same session's close on its own domain; it is used only when Yahoo has none.
-    const daum=accepted?null:await daumKoreaClose(this.fetcher,field,observedDate,collectedAt,audit);
-    if(!accepted&&!daum)throw new Error(lastCode);
-    if(daum)observations.push({field,observedDate,value:daum.value,provider:'DAUM_FINANCE',sourceUrl:daum.url,metricBasis:'SESSION_CLOSE'});
-    else observations.push({field,observedDate,value:accepted!.value,provider:'YAHOO_FINANCE',sourceUrl:accepted!.url,metricBasis:'SESSION_CLOSE'});
+    if(!accepted)throw new Error(lastCode);
+    observations.push({field,observedDate,value:accepted.value,provider:'YAHOO_FINANCE',sourceUrl:accepted.url,metricBasis:'SESSION_CLOSE'});
    }
    return {observations,audit,requiredProviderAvailable:true,reasonCode:null,phase:'PRE_PUBLICATION'};
   }
@@ -84,22 +80,9 @@ export class YahooKoreaSecondarySourceAdapter implements KoreaOfficialSourceAdap
 }
 
 /** The session date of a regular-market quote time, only once that time is at or after the 15:30 KST close. */
-export const DAUM_KOREA_INDEX_URL=(market:'KOSPI'|'KOSDAQ')=>`https://finance.daum.net/api/market_index/days?page=1&perPage=10&market=${market}&pagination=true`;
-/** Session close of a Korean index from Daum Finance. Its row for the current day is intraday until the close, so a row
- * for the collection day is accepted only from 15:40 KST (10 minutes after the close). Never throws. */
-export async function daumKoreaClose(fetcher:typeof fetch,field:'KOSPI'|'KOSDAQ',observedDate:string,collectedAt:string,audit:KoreaOfficialAudit[]):Promise<{value:number;url:string}|null>{
- const url=DAUM_KOREA_INDEX_URL(field),sourceId='daum-finance:'+field.toLowerCase();
- const kst=new Date(Date.parse(collectedAt)+9*3600000),today=kst.toISOString().slice(0,10),minutes=kst.getUTCHours()*60+kst.getUTCMinutes();
- if(observedDate>today||(observedDate===today&&minutes<15*60+40)){audit.push({sourceId,url,status:'SKIPPED',recordCount:0,error:'DAUM_SESSION_NOT_CLOSED',requestedDate:observedDate,availableDates:[]});return null}
- try{
-  const response=await fetchWithTransientRetry(fetcher,url,()=>({headers:{accept:'application/json',referer:'https://finance.daum.net/domestic/'+field.toLowerCase(),'user-agent':'Mozilla/5.0 (compatible; MOTUS-Internal-Collector/1.0)'},signal:AbortSignal.timeout(20000)}));
-  if(!response.ok){audit.push({sourceId,url,status:'FAILED',recordCount:0,error:'DAUM_HTTP_'+response.status,requestedDate:observedDate,availableDates:[]});return null}
-  const rows=parseDaumDays(await response.json()),row=rows.find(item=>item.date===observedDate);
-  audit.push({sourceId,url,status:row?'PASS':'FAILED',recordCount:row?1:0,error:row?null:'DAUM_'+field+'_ROW_MISSING',requestedDate:observedDate,availableDates:rows.map(item=>item.date).slice(0,8)});
-  return row?{value:row.value,url}:null;
- }catch(error){audit.push({sourceId,url,status:'FAILED',recordCount:0,error:'DAUM_'+(error instanceof Error?error.name:'ERROR'),requestedDate:observedDate,availableDates:[]});return null}
-}
-/** Daum Finance `days` rows ({date:'YYYY-MM-DD 00:00:00', tradePrice}) as ascending-free {date,value}, newest first as served. */
+/** Daum Finance `days` rows ({date:'YYYY-MM-DD 00:00:00', tradePrice}) as {date,value}, newest first as served.
+ * Used only as a U.S. index fallback. Not used for Korea cross-verification: Daum and Naver can both redistribute
+ * the same Koscom feed, so a Daum value is not independent corroboration of a Naver value (luin review RB-26af416). */
 export function parseDaumDays(body:unknown):Array<{date:string;value:number}>{
  const data=(body as {data?:Array<{date?:unknown;tradePrice?:unknown}>})?.data;if(!Array.isArray(data))return [];
  return data.flatMap(item=>{const date=typeof item.date==='string'?item.date.slice(0,10):'',value=typeof item.tradePrice==='number'?item.tradePrice:Number.NaN;return /^\d{4}-\d{2}-\d{2}$/.test(date)&&Number.isFinite(value)&&value>0?[{date,value}]:[]});
