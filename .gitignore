@@ -7,3 +7,4 @@ data/evidence/*
 artifacts/mobile-*/
 artifacts/search-intelligence-mobile-us/
 !**/.gitkeep
+workers/briefing-push/wrangler.ci.toml
