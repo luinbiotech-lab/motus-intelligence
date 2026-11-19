@@ -1,5 +1,5 @@
 import test from 'node:test';import assert from 'node:assert/strict';import {tmpdir} from 'node:os';import {join} from 'node:path';
-import {RepositoryInternalDailyBuilder,type InternalSourceAuditEntry} from '../src/operations/internal-live-daily.js';
+import {RepositoryInternalDailyBuilder,usProvider,type InternalSourceAuditEntry} from '../src/operations/internal-live-daily.js';
 import {YahooKoreaSecondarySourceAdapter,parseDaumDays} from '../src/operations/korea-official.js';
 
 type YahooReader={yahooUsIndex(symbol:string,label:string,sourceId:string,at:string,audit:InternalSourceAuditEntry[],expectedDate:string):Promise<{url:string;points:Array<{date:string;value:number}>}>};
@@ -33,4 +33,15 @@ test('Korea cross-verification never uses Daum (shared Koscom upstream with Nave
 test('parseDaumDays drops malformed rows',()=>{
  assert.deepEqual(parseDaumDays({data:[{date:'2026-11-18 00:00:00',tradePrice:1},{date:'bad',tradePrice:2},{date:'2026-11-17 00:00:00',tradePrice:'3'}]}),[{date:'2026-11-18',value:1}]);
  assert.deepEqual(parseDaumDays(null),[]);
+});
+
+test('Daum 403 (missing Referer / blocked) keeps the U.S. edition on HOLD with an audited reason',async()=>{
+ const fetcher=(async(input:string|URL)=>String(input).includes('yahoo.com')?new Response('rate',{status:429,headers:{'retry-after':'0'}}):new Response('forbidden',{status:403})) as typeof fetch,audit:InternalSourceAuditEntry[]=[];
+ await assert.rejects(builder(fetcher).yahooUsIndex('^GSPC','S&P 500','sp500','2026-11-18T23:46:00Z',audit,'2026-11-18'),/YAHOO_US_HTTP_429/);
+ assert.deepEqual(audit.map(item=>[item.sourceId,item.status,item.error]),[['yahoo-us:sp500','FAILED','YAHOO_US_HTTP_429'],['yahoo-us:sp500:query2','FAILED','YAHOO_US_HTTP_429'],['daum-us:sp500','FAILED','DAUM_US_HTTP_403']]);
+});
+
+test('a Daum-served series is named as Daum Finance in the published sources (single-source fallback, not corroboration)',()=>{
+ assert.deepEqual(usProvider('https://finance.daum.net/api/quote/US.SP500/days?page=1&perPage=100'),{label:'Daum Finance',publisher:'Daum Finance'});
+ assert.equal(usProvider('https://query2.finance.yahoo.com/v8/finance/chart/%5EGSPC').label,'Yahoo Finance');
 });
