@@ -90,7 +90,7 @@ export function buildUSMarketNarrative(series:ClosingSeries[],tenYear:RateObserv
       analysis.push(up&&!rally?'금리 상승이 주가에 부담으로 작용했을 가능성이 있다(추정).':!up&&!rally?'금리가 내렸는데도 주가가 내려, 이날 하락은 금리보다 다른 요인에서 나온 것으로 읽힌다(추정).':!up&&rally?'금리 하락이 주가를 받친 것으로 읽힌다(추정).':'금리가 올랐는데도 주가가 올라, 금리 부담보다 다른 재료가 더 크게 작용한 것으로 읽힌다(추정).');
     }
   }
-  if(context.driver&&sp&&direction(sp.day)!==0)analysis.push(`원인으로는 ${josa(context.driver.publisher,'이','가')} “${context.driver.text.replace(/[.。]\s*$/,'')}”고 짚었다.`);
+  if(context.driver&&sp&&direction(sp.day)!==0&&driverFits(context.driver.text,'US',sp.day>0))analysis.push(`원인으로는 ${josa(context.driver.publisher,'이','가')} ${quoted(context.driver.text)} 짚었다.`);
   if(sp&&direction(sp.day)!==0){
     const down=sp.day<0,checks:string[]=[];
     if(spCrossed!==null)checks.push(`S&P 500 ${formatLevel(spCrossed).replace(/\.00$/,'')}선 ${down?'회복':'안착'} 여부`);
@@ -107,6 +107,19 @@ export interface KoreaIndexHistory {label:'KOSPI'|'KOSDAQ';dates:string[];closes
 export function eokText(value:number):string {
   const a=Math.round(Math.abs(value)),jo=Math.floor(a/10000),rest=a%10000;
   return jo?`${jo}조${rest?` ${rest.toLocaleString('en-US')}억원`:'원'}`:`${rest.toLocaleString('en-US')}억원`;
+}
+/** A quoted sentence followed by the right quotative: '…했다”고' after a sentence ending in 다, '…시사”라고' otherwise. */
+export function quoted(text:string):string {const body=text.trim().replace(/[.。]\s*$/,'');return `“${body}”${/다$/.test(body)?'고':'라고'}`}
+/**
+ * A cause is quoted only when it is about this market and agrees with the day's direction (11/18: a Korea close at +1.99%
+ * quoted a Fed speaker's hawkish remark from a broker brief). Korea needs a Korean market word; the U.S. needs a U.S.
+ * market word; a sentence that names only the opposite move is left out.
+ */
+export function driverFits(text:string,region:'KOREA'|'US',up:boolean):boolean {
+  const market=region==='KOREA'?/코스피|코스닥|국내 ?증시|KOSPI|KOSDAQ|국내 ?주식|한국 ?증시/:/S&P|나스닥|다우|뉴욕 ?증시|미국 ?증시|미 증시|뉴욕증시|기술주/;
+  if(!market.test(text))return false;
+  const rise=/상승|올랐|오른|반등|강세|급등|회복/.test(text),fall=/하락|내렸|내린|약세|급락|밀려|하회|떨어/.test(text);
+  return up?!(fall&&!rise):!(rise&&!fall);
 }
 export interface KoreaNarrativeContext {flows?:Array<{label:string;value:number}>;driver?:{publisher:string;text:string}|null}
 
@@ -171,10 +184,10 @@ export function buildKoreaMarketNarrative(histories:KoreaIndexHistory[],flows:Ar
         :`${text} 가장 크게 움직인 ${josa(largest.label,'은','는')} 지수와 반대로 ${largest.value>0?'샀고':'팔았고'}, 지수는 ${down?'매도':'매수'} 쪽(${(down?sellers:buyers).map(item=>item.label).join('·')})을 따라 ${down?'내렸다':'올랐다'}(추정).`);
     }
   }
-  if(context.driver&&kospi&&direction(kospi.day)!==0){
-    const quote=`“${context.driver.text.replace(/[.。]\s*$/,'')}”`;
-    analysis.push(foreignLed&&foreign?`원인으로는 ${josa(context.driver.publisher,'이','가')} ${quote}고 짚었다. 같은 날 외국인이 ${eokText(foreign.value)}을 ${foreign.value<0?'순매도':'순매수'}한 만큼, 이 요인이 외국인 매매를 통해 지수에 반영된 것으로 읽힌다(추정).`
-      :`원인으로는 ${josa(context.driver.publisher,'이','가')} ${quote}고 짚었다.`);
+  if(context.driver&&kospi&&direction(kospi.day)!==0&&driverFits(context.driver.text,'KOREA',kospi.day>0)){
+    const quote=quoted(context.driver.text);
+    analysis.push(foreignLed&&foreign?`원인으로는 ${josa(context.driver.publisher,'이','가')} ${quote} 짚었다. 같은 날 외국인이 ${eokText(foreign.value)}을 ${foreign.value<0?'순매도':'순매수'}한 만큼, 이 요인이 외국인 매매를 통해 지수에 반영된 것으로 읽힌다(추정).`
+      :`원인으로는 ${josa(context.driver.publisher,'이','가')} ${quote} 짚었다.`);
   }
   if(kospi&&direction(kospi.day)!==0){
     const down=kospi.day<0,checks:string[]=[];
