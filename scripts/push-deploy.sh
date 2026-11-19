@@ -3,7 +3,8 @@
 # Env: CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID, WORKER_NAME, KV_TITLE, INJECT (none|stop-before-kv; test only).
 # Exit 0 ready, 1 failed/refused, 3 injected stop. Prints no key material: only the public key's SHA-256 prefix.
 # Writes PUSH_URL, VAPID_PUBLIC, NEW_KEY to $GITHUB_ENV when set.
-set -euo pipefail
+set -Eeuo pipefail
+trap 'echo "::error::push-deploy failed at line $LINENO"' ERR
 : "${WORKER_NAME:?}" "${KV_TITLE:?}" "${CLOUDFLARE_API_TOKEN:?}" "${CLOUDFLARE_ACCOUNT_ID:?}"
 INJECT=${INJECT:-none}
 DIR=$(cd "$(dirname "$0")/../workers/briefing-push" && pwd)
@@ -18,12 +19,15 @@ KV_ID=$(curl -fsS -H "$AUTH" "$ACC/storage/kv/namespaces?per_page=100" | jq -r -
 if [ -z "$KV_ID" ]; then KV_ID=$(curl -fsS -X POST -H "$AUTH" -H 'content-type: application/json' --data "{\"title\":\"$KV_TITLE\"}" "$ACC/storage/kv/namespaces" | jq -r '.result.id'); echo "created KV namespace $KV_TITLE"; fi
 [ -n "$KV_ID" ] && [ "$KV_ID" != null ] || { echo "::error::KV namespace unavailable"; exit 1; }
 KVAPI="$ACC/storage/kv/namespaces/$KV_ID"
-CFG="$DIR/wrangler.ci.toml"; trap 'rm -f "$CFG"' EXIT
+CFG="$DIR/wrangler.ci.toml"; trap 'rm -f "$CFG" "${WRLOG:-}"' EXIT
 sed -e "s/^name = .*/name = \"$WORKER_NAME\"/" -e "s/^id = \"REPLACE_AT_DEPLOY\"/id = \"$KV_ID\"/" "$DIR/wrangler.toml" > "$CFG"
 SUB=$(curl -fsS -H "$AUTH" "$ACC/workers/subdomain" | jq -r '.result.subdomain')
 [ -n "$SUB" ] && [ "$SUB" != null ] || { echo "::error::workers.dev subdomain unavailable"; exit 1; }
 URL="https://$WORKER_NAME.$SUB.workers.dev/"; out PUSH_URL "$URL"
-deploy(){ (cd "$DIR" && "${WR[@]}" deploy -c "$CFG" --var "VAPID_PUBLIC_KEY:$1" >/dev/null); }
+WRLOG=$(mktemp)
+# wrangler output is kept out of the log unless a step fails; then its tail is shown with long base64url runs redacted.
+wr(){ if ! (cd "$DIR" && "${WR[@]}" "$@" > "$WRLOG" 2>&1); then echo "::error::wrangler $1 failed"; sed -E 's/[A-Za-z0-9_-]{40,}/[redacted]/g' "$WRLOG" | tail -25; return 1; fi; }
+deploy(){ wr deploy -c "$CFG" --var "VAPID_PUBLIC_KEY:$1"; }
 ready(){ for _ in 1 2 3 4 5 6 7 8; do sleep 5; [ "$(curl -fsS "${URL}health" 2>/dev/null | jq -r '.vapidPairReady' 2>/dev/null)" = true ] && return 0; done; return 1; }
 
 RESP=$(curl -sS -H "$AUTH" -w '\n%{http_code}' "$KVAPI/values/meta:vapid-public"); CODE=$(echo "$RESP" | tail -1); PUB=$(echo "$RESP" | head -n -1)
@@ -34,11 +38,11 @@ if [ "$CODE" = 200 ] && [ -n "$PUB" ]; then
   if [ "$SUBS" != 0 ]; then echo "::error title=VAPID pair broken with live subscribers::refusing to rotate ($SUBS+ subscriptions would break); owner decision needed"; out NEW_KEY refused; exit 1; fi
   echo "stored public key has no matching private key and no subscribers: rotating"
 fi
-KEYDIR=$(umask 077; mktemp -d); trap 'rm -rf "$KEYDIR"; rm -f "$CFG"' EXIT
+KEYDIR=$(umask 077; mktemp -d); trap 'rm -rf "$KEYDIR"; rm -f "$CFG" "$WRLOG"' EXIT
 node -e "const c=require('crypto');const e=c.createECDH('prime256v1');e.generateKeys();const f=require('fs');f.writeFileSync(process.argv[1]+'/priv',e.getPrivateKey().toString('base64url'),{mode:0o600});f.writeFileSync(process.argv[1]+'/pub',e.getPublicKey().toString('base64url'))" "$KEYDIR"
 PUB=$(cat "$KEYDIR/pub")
 deploy "$PUB"
-(cd "$DIR" && "${WR[@]}" secret put VAPID_PRIVATE_KEY -c "$CFG" < "$KEYDIR/priv" >/dev/null)
+wr secret put VAPID_PRIVATE_KEY -c "$CFG" < "$KEYDIR/priv"
 rm -f "$KEYDIR/priv"
 ready || { echo "::error title=VAPID pair not ready::Worker did not confirm the key pair; KV left unchanged"; exit 1; }
 [ "$INJECT" = stop-before-kv ] && { echo "INJECTED stop before KV write"; exit 3; }
