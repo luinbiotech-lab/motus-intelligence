@@ -15,11 +15,7 @@ jobs:
           probe spx100 "https://finance.daum.net/api/quote/US.SP500/days?page=1&perPage=100" -H "Referer: https://finance.daum.net/global/quotes/US.SP500"
           probe kospi "https://finance.daum.net/api/market_index/days?page=1&perPage=10&market=KOSPI&pagination=true" -H "Referer: https://finance.daum.net/domestic/kospi"
           probe noref "https://finance.daum.net/api/quote/US.SP500/days?page=1&perPage=10"
-          for n in comp dji spx100 kospi noref; do python3 -c "
-import json,sys
-try:
- d=json.load(open('$n.full'));r=d['data'];print('$n',len(r),r[0].get('date'),r[0].get('tradePrice'),r[-1].get('date'),list(r[0].keys())[:20])
-except Exception as e: print('$n ERR',e)" >> result.txt; done
+          for n in comp dji spx100 kospi noref; do python3 -c "import json;d=json.load(open('$n.full'));r=d['data'];print('$n',len(r),r[0].get('date'),r[0].get('tradePrice'),r[-1].get('date'))" >> result.txt 2>&1 || echo "$n ERR" >> result.txt; done
           cat result.txt; true
       - run: |
           cd out && git init -q && git checkout -q -b diag-shots && git add . && git -c user.name=diag -c user.email=diag@users.noreply.github.com commit -qm probe
