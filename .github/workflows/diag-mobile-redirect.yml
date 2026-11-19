@@ -9,18 +9,17 @@ jobs:
       - run: |
           set +e; mkdir out; cd out
           UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
-          probe(){ n=$1; shift; code=$(curl -sS -m 25 -A "$UA" "$@" -o $n.body -w "%{http_code}" 2>$n.err); echo "$n $code $(wc -c <$n.body)" >> result.txt; head -c 600 $n.body > $n.head; rm -f $n.body; }
-          probe yahoo1 "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?range=5d&interval=1d"
-          probe yahoo2 "https://query2.finance.yahoo.com/v8/finance/chart/%5EGSPC?range=5d&interval=1d"
-          probe stooq "https://stooq.com/q/d/l/?s=%5Espx&i=d"
-          probe nasdaq "https://api.nasdaq.com/api/quote/SPX/historical?assetclass=index&fromdate=2026-07-01&limit=120" -H "accept: application/json"
-          probe cnbc "https://quote.cnbc.com/quote-html-webservice/restQuote/symbolType/symbol?symbols=.SPX&requestMethod=itv&noform=1&output=json"
-          probe wsj "https://www.wsj.com/market-data/quotes/index/SPX/historical-prices/download?num_rows=120&range_days=180"
-          probe fredcsv "https://fred.stlouisfed.org/graph/fredgraph.csv?id=SP500"
-          probe investing "https://api.investing.com/api/financialdata/historical/166?start-date=2026-07-01&end-date=2026-11-19&time-frame=Daily&add-missing-rows=false" -H "domain-id: www"
-          probe kq11 "https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?range=5d&interval=1d"
-          probe daumidx "https://finance.daum.net/api/market_index/days?page=1&perPage=10&market=KOSDAQ&pagination=true" -H "Referer: https://finance.daum.net/domestic/kosdaq"
-          probe daumspx "https://finance.daum.net/api/quote/US.SP500/days?page=1&perPage=10" -H "Referer: https://finance.daum.net/global/quotes/US.SP500"
+          probe(){ n=$1; shift; code=$(curl -sS -m 25 -A "$UA" "$@" -o $n.body -w "%{http_code}" 2>$n.err); echo "$n $code $(wc -c <$n.body)" >> result.txt; head -c 600 $n.body > $n.head; cp $n.body $n.full; rm -f $n.body; }
+          probe comp "https://finance.daum.net/api/quote/US.COMP/days?page=1&perPage=100" -H "Referer: https://finance.daum.net/global/quotes/US.COMP"
+          probe dji "https://finance.daum.net/api/quote/US.DJI/days?page=1&perPage=100" -H "Referer: https://finance.daum.net/global/quotes/US.DJI"
+          probe spx100 "https://finance.daum.net/api/quote/US.SP500/days?page=1&perPage=100" -H "Referer: https://finance.daum.net/global/quotes/US.SP500"
+          probe kospi "https://finance.daum.net/api/market_index/days?page=1&perPage=10&market=KOSPI&pagination=true" -H "Referer: https://finance.daum.net/domestic/kospi"
+          probe noref "https://finance.daum.net/api/quote/US.SP500/days?page=1&perPage=10"
+          for n in comp dji spx100 kospi noref; do python3 -c "
+import json,sys
+try:
+ d=json.load(open('$n.full'));r=d['data'];print('$n',len(r),r[0].get('date'),r[0].get('tradePrice'),r[-1].get('date'),list(r[0].keys())[:20])
+except Exception as e: print('$n ERR',e)" >> result.txt; done
           cat result.txt; true
       - run: |
           cd out && git init -q && git checkout -q -b diag-shots && git add . && git -c user.name=diag -c user.email=diag@users.noreply.github.com commit -qm probe
