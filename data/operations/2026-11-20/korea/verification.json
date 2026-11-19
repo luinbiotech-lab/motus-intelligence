@@ -1,0 +1,127 @@
+{
+  "schemaVersion": "1.1",
+  "category": "KOREA_MARKET",
+  "operationDate": "2026-11-20",
+  "observedDate": "2026-11-19",
+  "sourceMode": "internal",
+  "verification": "VERIFIED",
+  "unresolvedConflicts": [],
+  "provenancePass": true,
+  "sourceDiversityPass": true,
+  "sourceLinksPass": true,
+  "mobilePass": true,
+  "editorialQualityPass": true,
+  "leakagePass": true,
+  "duplicateCheck": "PENDING_REMOTE",
+  "duplicateUncertainty": true,
+  "articleFingerprint": "sha256:ad607a1c0393e77bc05d247d69aaa84c8b7f889ad675b28cf80a209e1beacfba",
+  "commerceEnabled": false,
+  "verifiedAt": "2026-11-19T08:36:28.394Z",
+  "expiresAt": "2026-11-19T10:06:28.394Z",
+  "sourceAuditIds": [
+    "deep:consensus:list:company",
+    "deep:consensus:list:economy",
+    "deep:consensus:list:industry",
+    "deep:consensus:list:market",
+    "deep:naver-research:list:company",
+    "deep:naver-research:list:economy",
+    "deep:naver-research:list:industry",
+    "deep:naver-research:list:invest",
+    "deep:naver-research:list:market",
+    "deep:naver-research:market:38221",
+    "deep:naver:search-top",
+    "deep:naver:stock-price:000660",
+    "deep:naver:stock-price:005380",
+    "deep:naver:stock-price:005930",
+    "deep:naver:stock-price:006400",
+    "deep:naver:stock-price:009150",
+    "deep:naver:stock-price:034020",
+    "deep:research:listed:stock.pstatic.net/stock-research/company/61/20261119_company_571225000.pdf",
+    "deep:wire:report:news.einfomax.co.kr/news/articleView.html?idxno=4445584",
+    "deep:wire:report:www.yna.co.kr/view/AKR20261119149300008",
+    "market-research:KB증권 리서치",
+    "market-research:article:https://rc.kbsec.com/detailView.able?documentid=20261030172030640K",
+    "market-research:article:https://rc.kbsec.com/detailView.able?documentid=20261119125620847K",
+    "market-research:article:https://www.hankyung.com/article/2026111978716",
+    "market-research:article:https://www.hankyung.com/article/2026111978996",
+    "market-research:article:https://www.mk.co.kr/news/stock/12213721",
+    "market-research:article:https://www.mk.co.kr/news/stock/12213722",
+    "market-research:매일경제 증권",
+    "market-research:한국경제 증권",
+    "naver:flows",
+    "naver:kosdaq:history",
+    "naver:kospi:history",
+    "naver:mover",
+    "naver:usd-krw",
+    "yahoo-finance:kosdaq:query1.finance.yahoo.com",
+    "yahoo-finance:kospi:query1.finance.yahoo.com"
+  ],
+  "sourceAuditFingerprint": "sha256:ca4a4db3ab2ab5485d4883a1b9d66f02d1d72453778ea94c4719facef1bfb205",
+  "crossVerificationFingerprint": "sha256:f974d95070a2d66d161fd0e0b4c67f02f02d66be074f3d57fae8b2a34d86ac8f",
+  "crossVerification": {
+    "schemaVersion": "1.0",
+    "category": "KOREA_MARKET",
+    "observedDate": "2026-11-19",
+    "primarySource": {
+      "provider": "Naver Finance",
+      "domain": "naver.com",
+      "urls": [
+        "https://m.stock.naver.com/api/index/KOSPI/price?pageSize=10&page=1",
+        "https://m.stock.naver.com/api/index/KOSDAQ/price?pageSize=10&page=1"
+      ]
+    },
+    "independentSource": {
+      "providers": [
+        "YAHOO_FINANCE"
+      ],
+      "domains": [
+        "yahoo.com"
+      ],
+      "urls": [
+        "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?period1=1794873600&period2=1795305600&interval=1d",
+        "https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?period1=1794873600&period2=1795305600&interval=1d"
+      ]
+    },
+    "comparedFields": [
+      {
+        "field": "KOSPI",
+        "primaryValue": 5137.89,
+        "independentValue": 5137.89013671875,
+        "difference": 0.0001367187496725819,
+        "tolerance": 0.05,
+        "result": "PASS",
+        "primarySourceUrl": "https://m.stock.naver.com/api/index/KOSPI/price?pageSize=10&page=1",
+        "independentSourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?period1=1794873600&period2=1795305600&interval=1d",
+        "metricBasis": "SESSION_CLOSE"
+      },
+      {
+        "field": "KOSDAQ",
+        "primaryValue": 684.81,
+        "independentValue": 684.8099975585938,
+        "difference": 0.000002441406195430318,
+        "tolerance": 0.05,
+        "result": "PASS",
+        "primarySourceUrl": "https://m.stock.naver.com/api/index/KOSDAQ/price?pageSize=10&page=1",
+        "independentSourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?period1=1794873600&period2=1795305600&interval=1d",
+        "metricBasis": "SESSION_CLOSE"
+      }
+    ],
+    "tolerance": {
+      "KOSPI": 0.05,
+      "KOSDAQ": 0.05,
+      "USD_KRW": 2
+    },
+    "comparisonResult": "PASS",
+    "sourceDiversityPass": true,
+    "verification": "VERIFIED",
+    "reasonCodes": [],
+    "verifiedAt": "2026-11-19T08:36:28.394Z",
+    "officialPhase": "PRE_PUBLICATION",
+    "reconciliation": {
+      "status": "NOT_REQUIRED",
+      "officialObservedDates": [
+        "2026-11-19"
+      ]
+    }
+  }
+}

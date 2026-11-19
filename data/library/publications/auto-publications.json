@@ -310,5 +310,11 @@
     "publicationId": "motus-live-2026-11-19:ai",
     "publicPostUrl": "https://motusnova.blogspot.com/2026/11/gemini_0912487108.html",
     "publishedAt": "2026-11-19T12:55:29+09:00"
+  },
+  {
+    "idempotencyKey": "library:motus-live-2026-11-20:korea|https://motusnova.blogspot.com/2026/11/11-19-139-513789-1-09.html",
+    "publicationId": "motus-live-2026-11-20:korea",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/11/11-19-139-513789-1-09.html",
+    "publishedAt": "2026-11-19T17:36:52+09:00"
   }
 ]
