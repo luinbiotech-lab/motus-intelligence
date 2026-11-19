@@ -1,40 +1,40 @@
 {
-  "updatedAt": "2026-11-18T02:35:26.153Z",
+  "updatedAt": "2026-11-19T01:59:35.016Z",
   "items": [
     {
-      "postId": "1329969301383262104",
-      "url": "https://motusnova.blogspot.com/2026/10/kbi.html",
-      "title": "국내증시 마감: KBI동양철관 흐름과 다음 거래일 체크포인트",
+      "postId": "496319119090085372",
+      "url": "https://motusnova.blogspot.com/2026/10/blog-post.html",
+      "title": "코스피 상승으로 읽는 전일 국내증시",
       "labels": [
         "국내증시"
       ],
-      "originalSha256": "sha256:5ddc81577cb2378aeadcef45033c1cefce4fbd0128397063f040eb0e826773e0",
-      "proposedSha256": "sha256:f72a5d2dceafdb34dacac62ee10f9d97d1393ec86e9c1f2dabad76e52b355472",
-      "image": "https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/daily-report/backfill/img/hero-f8411be73ae3.png",
+      "originalSha256": "sha256:7754c7cc16c60ffc1ea2c374c844026a2fb33aa02c00bd5ceaad46b520605619",
+      "proposedSha256": "sha256:d39c3886d5be49309aafe70c7e321361c5c0ee300ae30b816cf6736b300034ee",
+      "image": "https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/daily-report/backfill/img/hero-0c54692772ce.png",
       "relatedCount": 6
     },
     {
-      "postId": "2224110527358191460",
-      "url": "https://motusnova.blogspot.com/2026/10/dow-jones.html",
-      "title": "Dow Jones 하락, 미국 주요 지수 동반 하락",
-      "labels": [
-        "미국증시"
-      ],
-      "originalSha256": "sha256:0a26cf1867f2bf7e8d9073198d5b3015f2e6341d77480bc38a7c5822cf21fff3",
-      "proposedSha256": "sha256:b8916cedae89aa470f87635e811a8ff5e12099e9b3f0f5e0f5e73aaa455d18c8",
-      "image": "https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/daily-report/backfill/img/hero-ebc96b6f1ff2.png",
-      "relatedCount": 6
-    },
-    {
-      "postId": "5585115675162819801",
-      "url": "https://motusnova.blogspot.com/2026/10/ai_0953310071.html",
-      "title": "엔비디아가 공개한 카자흐스탄 AI 컴퓨팅 인프라 확충, 실제 산업 변화로 이어질까",
+      "postId": "6398407321898042940",
+      "url": "https://motusnova.blogspot.com/2026/10/aws-gpt-61.html",
+      "title": "아마존웹서비스(AWS)가 공개한 GPT-6.1 신규 기능, 실제 산업 변화로 이어질까",
       "labels": [
         "AI 인텔리전스"
       ],
-      "originalSha256": "sha256:33773059fcd4c5bce997231bb59111ef5eb8f609b120e0de3ac18ba30ee56b65",
-      "proposedSha256": "sha256:e5f15032d298b4f29192128e3e74242aab1dffd65bf88937a93892cc744f4d8e",
-      "image": "https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/daily-report/backfill/img/hero-7dcd8fd7f819.png",
+      "originalSha256": "sha256:a5637976ad3f641405ac06684e99521ecc2a30d56a67b3ee1e6e6df75c7fd5c5",
+      "proposedSha256": "sha256:c5f5368fc7c84b494ebc022ccaa8639149f480b964725c189549d0523cc7ff14",
+      "image": "https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/daily-report/backfill/img/hero-39f88e4438bb.png",
+      "relatedCount": 6
+    },
+    {
+      "postId": "1430670859649785573",
+      "url": "https://motusnova.blogspot.com/2026/10/nasdaq.html",
+      "title": "Nasdaq 상승, 미국 주요 지수 동반 상승",
+      "labels": [
+        "미국증시"
+      ],
+      "originalSha256": "sha256:a6ebfc574e7af15447fc9a5fa9f9fe68816459950cade71a7071667e717fceba",
+      "proposedSha256": "sha256:188e2a967db37c796a014f9503d228e303b1a886abe47e16df92ce2d7b043e84",
+      "image": "https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/daily-report/backfill/img/hero-7722f653e5b0.png",
       "relatedCount": 6
     }
   ]
