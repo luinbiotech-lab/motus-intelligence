@@ -1,8 +1,10 @@
 name: MOTUS Briefing Push Deploy
 # Owner-approved 2026-11-19 ("알림 서버 진행"). Manual only. Cloudflare Workers free plan.
 # Needs repository secrets CLOUDFLARE_API_TOKEN (template "Edit Cloudflare Workers") and CLOUDFLARE_ACCOUNT_ID.
-# The VAPID key pair is generated once on the runner: the private key goes only to the Worker secret store,
-# the public key is kept in the Worker's KV (meta:vapid-public) so later deploys reuse the same pair.
+# Token scope: Cloudflare template "Edit Cloudflare Workers" (Workers scripts + KV on one account). Rollback:
+# `wrangler delete motus-briefing-push` and unset MOTUS_BRIEFING_PUSH_ENDPOINT (the site then hides the button).
+# The VAPID key pair is generated on the runner: the private key goes only to the Worker secret store (temp file in
+# a 0700 dir, removed by trap), the public key is recorded in KV only after the Worker proves the pair via /health.
 # Nothing secret is printed, committed or uploaded as an artifact.
 on:
   workflow_dispatch:
@@ -37,38 +39,49 @@ jobs:
           [ -n "$ID" ] && [ "$ID" != null ] || { echo "::error::KV namespace unavailable"; exit 1; }
           echo "KV_ID=$ID" >> "$GITHUB_ENV"
           sed -i "s/^id = \"REPLACE_AT_DEPLOY\"/id = \"$ID\"/" workers/briefing-push/wrangler.toml
-      - name: VAPID public key (reuse or generate once)
-        run: |
-          API="https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/storage/kv/namespaces/$KV_ID/values/meta:vapid-public"
-          AUTH="authorization: Bearer $CLOUDFLARE_API_TOKEN"
-          PUB=$(curl -sS -H "$AUTH" -w '\n%{http_code}' "$API")
-          CODE=$(echo "$PUB" | tail -1); PUB=$(echo "$PUB" | head -n -1)
-          if [ "$CODE" = 200 ] && [ -n "$PUB" ]; then echo "reusing existing VAPID key pair"; echo "NEW_KEY=0" >> "$GITHUB_ENV"
-          else
-            umask 077
-            node -e "const c=require('crypto');const e=c.createECDH('prime256v1');e.generateKeys();const b=x=>x.toString('base64url');require('fs').writeFileSync(process.env.RUNNER_TEMP+'/vapid-private',b(e.getPrivateKey()));process.stdout.write(b(e.getPublicKey()))" > "$RUNNER_TEMP/vapid-public"
-            PUB=$(cat "$RUNNER_TEMP/vapid-public")
-            curl -fsS -X PUT -H "$AUTH" --data-binary "$PUB" "$API" >/dev/null
-            echo "generated a new VAPID key pair"; echo "NEW_KEY=1" >> "$GITHUB_ENV"
-          fi
-          echo "VAPID_PUBLIC=$PUB" >> "$GITHUB_ENV"
-      - name: Deploy worker
-        working-directory: workers/briefing-push
-        run: npx --yes wrangler@4.20.0 deploy --var "VAPID_PUBLIC_KEY:$VAPID_PUBLIC"
-      - name: Store private key as worker secret (first deploy only)
-        if: env.NEW_KEY == '1'
-        working-directory: workers/briefing-push
-        run: |
-          npx --yes wrangler@4.20.0 secret put VAPID_PRIVATE_KEY < "$RUNNER_TEMP/vapid-private"
-          rm -f "$RUNNER_TEMP/vapid-private"
-      - name: Worker URL and smoke test
+      - name: Worker URL
         run: |
           SUB=$(curl -fsS -H "authorization: Bearer $CLOUDFLARE_API_TOKEN" "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/workers/subdomain" | jq -r '.result.subdomain')
-          URL="https://motus-briefing-push.$SUB.workers.dev/"
-          sleep 10
-          GOT=$(curl -fsS "${URL}vapid-public-key" || true)
-          if [ "$GOT" = "$VAPID_PUBLIC" ]; then R=PASS; else R=FAIL; fi
-          CORS=$(curl -sS -o /dev/null -w '%{http_code}' -X OPTIONS -H 'origin: https://luinbiotech-lab.github.io' "${URL}subscribe")
-          { echo "### MOTUS push worker"; echo "- URL: $URL"; echo "- vapid-public-key matches: $R"; echo "- CORS preflight: $CORS"; echo "- new key pair: $NEW_KEY"; } >> "$GITHUB_STEP_SUMMARY"
-          echo "PUSH_URL=$URL"
-          [ "$R" = PASS ] || exit 1
+          [ -n "$SUB" ] && [ "$SUB" != null ] || { echo "::error::workers.dev subdomain unavailable"; exit 1; }
+          echo "PUSH_URL=https://motus-briefing-push.$SUB.workers.dev/" >> "$GITHUB_ENV"
+      # Key handling (luin RB-8ad8a2a): the KV public key is written only AFTER the Worker proves, via /health, that its
+      # secret is the private half of that public key. A partial run therefore never leaves a public key that later runs
+      # trust without a working private key. /health signs with the private key and verifies with the public key; it
+      # returns only true/false.
+      - name: Deploy and provision the VAPID key pair
+        working-directory: workers/briefing-push
+        run: |
+          set -euo pipefail
+          KVAPI="https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/storage/kv/namespaces/$KV_ID"
+          AUTH="authorization: Bearer $CLOUDFLARE_API_TOKEN"
+          WR="npx --yes wrangler@4.20.0"
+          ready(){ for i in 1 2 3 4 5 6; do sleep 5; [ "$(curl -fsS "${PUSH_URL}health" 2>/dev/null | jq -r '.vapidPairReady' 2>/dev/null)" = true ] && return 0; done; return 1; }
+          RESP=$(curl -sS -H "$AUTH" -w '\n%{http_code}' "$KVAPI/values/meta:vapid-public"); CODE=$(echo "$RESP" | tail -1); PUB=$(echo "$RESP" | head -n -1)
+          if [ "$CODE" = 200 ] && [ -n "$PUB" ]; then
+            $WR deploy --var "VAPID_PUBLIC_KEY:$PUB"
+            if ready; then echo "existing key pair verified"; echo "VAPID_PUBLIC=$PUB" >> "$GITHUB_ENV"; echo "NEW_KEY=0" >> "$GITHUB_ENV"; exit 0; fi
+            SUBS=$(curl -fsS -H "$AUTH" "$KVAPI/keys?prefix=sub:&limit=10" | jq '.result|length')
+            if [ "$SUBS" != 0 ]; then echo "::error title=VAPID pair broken with live subscribers::rotation would silently break $SUBS+ subscriptions; owner decision needed"; exit 1; fi
+            echo "stored public key has no matching private key and no subscribers: rotating"
+          fi
+          umask 077; KEYDIR=$(mktemp -d); trap 'rm -rf "$KEYDIR"' EXIT
+          node -e "const c=require('crypto');const e=c.createECDH('prime256v1');e.generateKeys();const f=require('fs');f.writeFileSync(process.argv[1]+'/priv',e.getPrivateKey().toString('base64url'));f.writeFileSync(process.argv[1]+'/pub',e.getPublicKey().toString('base64url'))" "$KEYDIR"
+          PUB=$(cat "$KEYDIR/pub")
+          $WR deploy --var "VAPID_PUBLIC_KEY:$PUB"
+          $WR secret put VAPID_PRIVATE_KEY < "$KEYDIR/priv"
+          rm -f "$KEYDIR/priv"
+          ready || { echo "::error title=VAPID pair not ready::Worker did not confirm the key pair; KV left unchanged"; exit 1; }
+          curl -fsS -X PUT -H "$AUTH" --data-binary "$PUB" "$KVAPI/values/meta:vapid-public" >/dev/null
+          echo "new key pair provisioned and verified"; echo "VAPID_PUBLIC=$PUB" >> "$GITHUB_ENV"; echo "NEW_KEY=1" >> "$GITHUB_ENV"
+      - name: Smoke test (fail-closed)
+        run: |
+          set -euo pipefail
+          ORIGIN=https://luinbiotech-lab.github.io
+          [ "$(curl -fsS "${PUSH_URL}vapid-public-key")" = "$VAPID_PUBLIC" ] || { echo "::error::public key mismatch"; exit 1; }
+          [ "$(curl -fsS "${PUSH_URL}health" | jq -r .vapidPairReady)" = true ] || { echo "::error::key pair not ready"; exit 1; }
+          H=$(curl -sS -D - -o /dev/null -X OPTIONS -H "origin: $ORIGIN" "${PUSH_URL}subscribe")
+          echo "$H" | head -1 | grep -q ' 204' || { echo "::error::CORS preflight not 204"; exit 1; }
+          echo "$H" | grep -qi "^access-control-allow-origin: $ORIGIN" || { echo "::error::CORS origin not allowed"; exit 1; }
+          BAD=$(curl -sS -o /dev/null -w '%{http_code}' -X POST -H 'origin: https://evil.example' -H 'content-type: application/json' --data '{}' "${PUSH_URL}subscribe")
+          [ "$BAD" = 403 ] || { echo "::error::foreign origin not rejected ($BAD)"; exit 1; }
+          { echo "### MOTUS push worker"; echo "- URL: $PUSH_URL"; echo "- key pair verified by /health: PASS"; echo "- CORS allow $ORIGIN, reject others: PASS"; echo "- new key pair this run: $NEW_KEY"; echo "- next: set repository variable MOTUS_BRIEFING_PUSH_ENDPOINT to the URL and redeploy the briefing site"; } >> "$GITHUB_STEP_SUMMARY"

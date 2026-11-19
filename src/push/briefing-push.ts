@@ -25,9 +25,26 @@ function cors(env:PushEnv,origin:string|null):Record<string,string>{
   return origin===allowed?{'access-control-allow-origin':allowed,'access-control-allow-methods':'GET,POST,OPTIONS','access-control-allow-headers':'content-type','vary':'origin'}:{vary:'origin'};
 }
 
+function b64u(text:string):Uint8Array{const bin=atob(text.replace(/-/g,'+').replace(/_/g,'/')+'='.repeat((4-text.length%4)%4));return Uint8Array.from(bin,char=>char.charCodeAt(0))}
+
+/** True only when VAPID_PRIVATE_KEY is present and is the private half of VAPID_PUBLIC_KEY (sign with one, verify with
+ * the other). Reveals nothing about either key beyond this yes/no. Deploy readiness checks this (luin RB-8ad8a2a). */
+export async function vapidPairReady(env:Pick<PushEnv,'VAPID_PUBLIC_KEY'|'VAPID_PRIVATE_KEY'>):Promise<boolean>{
+  try{
+    const pub=b64u(env.VAPID_PUBLIC_KEY??''),d=env.VAPID_PRIVATE_KEY??'';
+    if(pub.length!==65||pub[0]!==4||b64u(d).length!==32)return false;
+    const enc=(bytes:Uint8Array)=>btoa(String.fromCharCode(...bytes)).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+    const jwk={kty:'EC',crv:'P-256',x:enc(pub.slice(1,33)),y:enc(pub.slice(33,65))};
+    const algo={name:'ECDSA',namedCurve:'P-256'},sign={name:'ECDSA',hash:'SHA-256'},probe=new TextEncoder().encode('motus-vapid-pair-check');
+    const privateKey=await crypto.subtle.importKey('jwk',{...jwk,d},algo,false,['sign']),publicKey=await crypto.subtle.importKey('jwk',jwk,algo,false,['verify']);
+    return await crypto.subtle.verify(sign,publicKey,await crypto.subtle.sign(sign,privateKey,probe),probe);
+  }catch{return false}
+}
+
 export async function handleRequest(request:Request,env:PushEnv):Promise<Response>{
   const url=new URL(request.url),headers=cors(env,request.headers.get('origin'));
   if(request.method==='OPTIONS')return new Response(null,{status:204,headers});
+  if(request.method==='GET'&&url.pathname==='/health')return new Response(JSON.stringify({vapidPairReady:await vapidPairReady(env)}),{headers:{...headers,'content-type':'application/json','cache-control':'no-store'}});
   if(request.method==='GET'&&url.pathname==='/vapid-public-key')return new Response(env.VAPID_PUBLIC_KEY,{headers:{...headers,'content-type':'text/plain'}});
   if(request.method==='POST'&&(url.pathname==='/subscribe'||url.pathname==='/unsubscribe')){
     if(!headers['access-control-allow-origin'])return new Response('forbidden origin',{status:403,headers});
