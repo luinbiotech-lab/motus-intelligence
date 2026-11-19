@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {buildKoreaMarketNarrative,eokText,buildUSMarketNarrative,numberWithEul,numberWithRo,seriesStats} from '../src/operations/market-narrative.js';
+import {buildKoreaMarketNarrative,driverFits,quoted,eokText,buildUSMarketNarrative,numberWithEul,numberWithRo,seriesStats} from '../src/operations/market-narrative.js';
 
 const dates=(n:number)=>Array.from({length:n},(_,i)=>`2026-08-${String(i+1).padStart(2,'0')}`);
 const ramp=(n:number,start:number,step:number)=>Array.from({length:n},(_,i)=>start+i*step);
@@ -95,4 +95,14 @@ test('US MOTUS analysis reads trend, the rate move against the index, the source
   assert.ok(r.analysis.includes('금리가 내렸는데도 주가가 내려, 이날 하락은 금리보다 다른 요인에서 나온 것으로 읽힌다(추정).'),r.analysis.join(' | '));
   assert.ok(r.analysis.includes('원인으로는 연합뉴스가 “엔비디아 실적 경계감에 기술주가 약세를 보였다”고 짚었다.'));
   assert.equal(r.analysis.at(-1),'다음 정규장에서는 S&P 500 6,500선 회복 여부와 10년물 금리 방향가 첫 확인점이다.'.replace('방향가','방향이'));
+});
+
+test('a cause is quoted only when it is about this market and agrees with the move (11/18 Fed remark on a Korea up day)',()=>{
+  const d=['2026-11-16','2026-11-17','2026-11-18'];
+  const r=buildKoreaMarketNarrative([{label:'KOSPI',dates:d,closes:[5100.5,4968.48,5067.44]},{label:'KOSDAQ',dates:d,closes:[665.65,650.06,662.8]}],[],{flows:[{label:'개인',value:-6211},{label:'외국인',value:-3387},{label:'기관',value:4968}],driver:{publisher:'유안타증권',text:'윌리엄스, 긴축 기조 선호 유지하며 인플레이션 대응 위한 추가 인상 필요성 시사'}});
+  assert.ok(!r.analysis.some(line=>line.startsWith('원인으로는')),r.analysis.join(' | '));
+  assert.equal(driverFits('코스피가 반도체 강세에 상승했다','KOREA',true),true);
+  assert.equal(driverFits('코스피가 엔비디아 경계감에 하락했다','KOREA',true),false);
+  assert.equal(driverFits('나스닥이 기술주 약세에 하락했다','US',false),true);
+  assert.equal(quoted('코스피가 하락했다.'),'“코스피가 하락했다”고');assert.equal(quoted('추가 인상 필요성 시사'),'“추가 인상 필요성 시사”라고');
 });

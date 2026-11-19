@@ -49,3 +49,10 @@ test('MOT-044: statements without a driver do not count as a broker explanation 
   assert.equal(hasBrokerCause([brief(['반도체 실적 기대에 외국인 순매수가 이어지며 코스피가 상승했다'],'KOREA')],'KOREA'),true);
   assert.equal(hasBrokerCause([brief(['반도체 실적 기대에 외국인 순매수가 이어지며 코스피가 상승했다'],'KOREA')],'US'),false);
 });
+
+test('11/18: a report titled for the U.S. market never supplies the Korea cause',()=>{
+  const us={...brief(['반도체 실적 기대에 외국인 순매수가 이어지며 코스피가 상승했다'],'KOREA')};us.report={...us.report,title:'유안타 AI 미국 주식시장 마감 시황 (26.11.18)'};
+  assert.equal(hasBrokerCause([us],'KOREA'),false);
+  const both={...us,report:{...us.report,title:'국내·미국 증시 마감 코멘트'}};
+  assert.equal(hasBrokerCause([both],'KOREA'),true);
+});
