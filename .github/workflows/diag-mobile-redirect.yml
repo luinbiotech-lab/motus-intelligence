@@ -22,6 +22,9 @@ jobs:
           echo "health: $(curl -fsS ${U}health)" >> result.txt
           echo "pubkey len: $(curl -fsS ${U}vapid-public-key | wc -c)" >> result.txt
           curl -sS -D - -o /dev/null -H 'origin: https://luinbiotech-lab.github.io' ${U}vapid-public-key | tr -d '\r' | grep -i "^access-control\|^HTTP" >> result.txt
+          curl -fsS https://luinbiotech-lab.github.io/motus-intelligence/ > site.html; echo "site endpoint: $(grep -o 'https://motus-briefing-push[^"\x27 ]*' site.html | sort -u)" >> result.txt
+          echo "site has PushManager: $(grep -c PushManager site.html)  home-guide: $(grep -c '홈 화면 앱에서만' site.html)" >> result.txt
+          curl -sS -D - -o /dev/null https://luinbiotech-lab.github.io/motus-intelligence/ | tr -d '\r' | grep -i '^last-modified' >> result.txt
           cat result.txt; true
       - run: |
           cd out && git init -q && git checkout -q -b diag-shots && git add . && git -c user.name=diag -c user.email=diag@users.noreply.github.com commit -qm probe
