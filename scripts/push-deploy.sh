@@ -10,8 +10,9 @@ DIR=$(cd "$(dirname "$0")/../workers/briefing-push" && pwd)
 ACC="https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID"
 AUTH="authorization: Bearer $CLOUDFLARE_API_TOKEN"
 WR=(npx --yes wrangler@4.20.0)
-out(){ [ -n "${GITHUB_ENV:-}" ] && echo "$1=$2" >> "$GITHUB_ENV"; echo "RESULT $1=$2"; }
 fp(){ printf %s "$1" | sha256sum | cut -c1-12; }
+# Key values go only to $GITHUB_ENV (needed by the smoke step); stdout gets a fingerprint (luin RB-cb9258d).
+out(){ [ -n "${GITHUB_ENV:-}" ] && echo "$1=$2" >> "$GITHUB_ENV"; case "$1" in VAPID_*) echo "RESULT $1=fp:$(fp "$2")";; *) echo "RESULT $1=$2";; esac; }
 
 KV_ID=$(curl -fsS -H "$AUTH" "$ACC/storage/kv/namespaces?per_page=100" | jq -r --arg t "$KV_TITLE" '.result[]|select(.title==$t)|.id' | head -1)
 if [ -z "$KV_ID" ]; then KV_ID=$(curl -fsS -X POST -H "$AUTH" -H 'content-type: application/json' --data "{\"title\":\"$KV_TITLE\"}" "$ACC/storage/kv/namespaces" | jq -r '.result.id'); echo "created KV namespace $KV_TITLE"; fi
