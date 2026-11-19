@@ -1,0 +1,12 @@
+subs: 0
+meta keys: ["meta:vapid-public"]
+health: {"vapidPairReady":true}
+pubkey len: 87
+HTTP/2 200 
+access-control-allow-origin: https://luinbiotech-lab.github.io
+access-control-allow-headers: content-type
+access-control-allow-methods: GET,POST,OPTIONS
+site endpoint: https://motus-briefing-push.luinbiotech-cc1.workers.dev/',A=document.getElementById('alert');
+site has PushManager: 1  home-guide: 1 steps: 1
+last-modified: Thu, 19 Nov 2026 15:45:31 GMT
+invocations(3h): [{"dimensions":{"datetimeHour":"2026-11-19T15:00:00Z","status":"success"},"sum":{"errors":0,"requests":29}}]
