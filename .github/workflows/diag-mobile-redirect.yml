@@ -7,12 +7,18 @@ jobs:
     timeout-minutes: 10
     steps:
       - run: |
-          U="https://motusnova.blogspot.com/2026/11/11-18-199-506744-1-27.html"
-          sudo apt-get install -y -qq fonts-noto-cjk >/dev/null 2>&1 || true
-          google-chrome --headless=new --no-sandbox --hide-scrollbars --window-size=390,7000 --user-agent="Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1" --screenshot=m.png "$U?m=1"
-          google-chrome --headless=new --no-sandbox --hide-scrollbars --window-size=1280,3000 --screenshot=d.png "$U"
-          google-chrome --headless=new --no-sandbox --hide-scrollbars --window-size=1280,2400 --screenshot=home.png "https://motusnova.blogspot.com/"
-          ls -la *.png
+          mkdir out; cd out
+          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
+          probe(){ n=$1; shift; code=$(curl -sS -m 25 -A "$UA" "$@" -o $n.body -w "%{http_code}" 2>$n.err); echo "$n $code $(wc -c <$n.body)" >> result.txt; head -c 600 $n.body > $n.head; rm -f $n.body; }
+          probe yahoo1 "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?range=5d&interval=1d"
+          probe yahoo2 "https://query2.finance.yahoo.com/v8/finance/chart/%5EGSPC?range=5d&interval=1d"
+          probe stooq "https://stooq.com/q/d/l/?s=%5Espx&i=d"
+          probe nasdaq "https://api.nasdaq.com/api/quote/SPX/historical?assetclass=index&fromdate=2026-07-01&limit=120" -H "accept: application/json"
+          probe cnbc "https://quote.cnbc.com/quote-html-webservice/restQuote/symbolType/symbol?symbols=.SPX&requestMethod=itv&noform=1&output=json"
+          probe wsj "https://www.wsj.com/market-data/quotes/index/SPX/historical-prices/download?num_rows=120&range_days=180"
+          probe fredcsv "https://fred.stlouisfed.org/graph/fredgraph.csv?id=SP500"
+          probe investing "https://api.investing.com/api/financialdata/historical/166?start-date=2026-07-01&end-date=2026-11-19&time-frame=Daily&add-missing-rows=false" -H "domain-id: www"
+          cat result.txt
       - run: |
-          git init -q out && cd out && mv ../*.png . && git checkout -q -b diag-shots && git add . && git -c user.name=diag -c user.email=diag@users.noreply.github.com commit -qm shots
+          cd out && git init -q && git checkout -q -b diag-shots && git add . && git -c user.name=diag -c user.email=diag@users.noreply.github.com commit -qm probe
           git push -f -q https://x-access-token:${{ github.token }}@github.com/${{ github.repository }} diag-shots
