@@ -4,18 +4,22 @@ jobs:
   probe:
     runs-on: ubuntu-24.04
     permissions: {contents: write}
-    timeout-minutes: 10
+    timeout-minutes: 5
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
     steps:
       - run: |
           set +e; mkdir out; cd out
-          sudo apt-get install -y -qq fonts-noto-cjk >/dev/null 2>&1
-          U="https://luinbiotech-lab.github.io/motus-intelligence/"
-          curl -sS -o page.html -w "%{http_code}\n" "$U" > result.txt; grep -c "motus-briefing-push" page.html >> result.txt; grep -o "id=\"alert\"[^>]*>[^<]*" page.html >> result.txt
-          curl -sS -o /dev/null -w "manifest %{http_code}\n" "${U}manifest.webmanifest" >> result.txt
-          curl -sS -o /dev/null -w "sw %{http_code}\n" "${U}sw.js" >> result.txt
-          google-chrome --headless=new --no-sandbox --hide-scrollbars --window-size=390,2600 --user-agent="Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1" --virtual-time-budget=8000 --screenshot=m.png "$U"
-          google-chrome --headless=new --no-sandbox --hide-scrollbars --window-size=1280,1800 --virtual-time-budget=8000 --screenshot=d.png "$U"
+          ACC="https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID"; AUTH="authorization: Bearer $CLOUDFLARE_API_TOKEN"
+          ID=$(curl -fsS -H "$AUTH" "$ACC/storage/kv/namespaces?per_page=100" | jq -r '.result[]|select(.title=="motus-briefing-push-subscriptions")|.id')
+          echo "subs: $(curl -fsS -H "$AUTH" "$ACC/storage/kv/namespaces/$ID/keys?prefix=sub:" | jq '.result|length')" > result.txt
+          echo "meta keys: $(curl -fsS -H "$AUTH" "$ACC/storage/kv/namespaces/$ID/keys?prefix=meta:" | jq -c '[.result[].name]')" >> result.txt
+          U=https://motus-briefing-push.luinbiotech-cc1.workers.dev/
+          echo "health: $(curl -fsS ${U}health)" >> result.txt
+          echo "pubkey len: $(curl -fsS ${U}vapid-public-key | wc -c)" >> result.txt
+          curl -sS -D - -o /dev/null -H 'origin: https://luinbiotech-lab.github.io' ${U}vapid-public-key | tr -d '\r' | grep -i "^access-control\|^HTTP" >> result.txt
           cat result.txt; true
       - run: |
-          cd out && git init -q && git checkout -q -b diag-shots && git add . && git -c user.name=diag -c user.email=diag@users.noreply.github.com commit -qm shots
+          cd out && git init -q && git checkout -q -b diag-shots && git add . && git -c user.name=diag -c user.email=diag@users.noreply.github.com commit -qm probe
           git push -f -q https://x-access-token:${{ github.token }}@github.com/${{ github.repository }} diag-shots
