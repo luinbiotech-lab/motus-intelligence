@@ -1,6 +1,6 @@
 {
   "schema": "motus.ai-facts/1",
-  "bundleHash": "48f0c12034dd33ba",
+  "bundleHash": "500e010f44faef88",
   "operationDate": "2026-11-19",
   "sessionDate": "2026-11-18",
   "facts": [
@@ -13,23 +13,23 @@
     {
       "id": "F2",
       "kind": "official",
-      "text": "구글은 2026년 11월 19일(한국 시간) 공식 블로그에 「The Gemini app is now available on lower-memory Android devices.」 제목의 발표를 게시했다. 발표 제목과 본문은 신규 AI 제품·기능 공개에 관한 내용을 다룬다. 발표의 중심 제품·플랫폼은 Gemini이다. 원문은 언어 45개 등의 수치를 명시했다.",
+      "text": "구글은 2026년 11월 18일(한국 시간) 공식 블로그에 「Put Gemini to work for you」 제목의 발표를 게시했다. 원문 본문은 AI 보안·안전 강화에 관한 내용을 다룬다. 발표의 중심 제품·플랫폼은 Gemini이다. 원문에서 함께 언급된 국가·기업은 미국이다.",
       "publisher": "구글",
-      "sourceUrl": "https://blog.google/innovation-and-ai/products/gemini-app/gemini-lower-memory-devices/"
+      "sourceUrl": "https://blog.google/innovation-and-ai/products/gemini-app/tasks-in-gemini-free-new-features/"
     },
     {
       "id": "F3",
       "kind": "official",
-      "text": "마이크로소프트는 2026년 11월 18일(한국 시간) 공식 뉴스룸에 「Microsoft and organizations across industries launch AI Transparency Initiative to strengthen enterprise trust in AI models and agents」 제목의 발표를 게시했다. 발표 제목과 본문은 신규 AI 제품·기능 공개에 관한 내용을 다룬다. 원문에서 언급된 제품·플랫폼은 Microsoft Foundry이다.",
-      "publisher": "마이크로소프트",
-      "sourceUrl": "https://news.microsoft.com/source/2026/11/17/microsoft-and-organizations-across-industries-launch-ai-transparency-initiative-to-strengthen-enterprise-trust-in-ai-models-and-agents/"
+      "text": "엔비디아는 2026년 11월 18일(한국 시간) 공식 뉴스룸에 「NVIDIA Expands Commitments With Supply Chain Partners to Support AI Infrastructure Buildout」 제목의 발표를 게시했다. 발표 제목과 본문은 AI 컴퓨팅 인프라 확충에 관한 내용을 다룬다. 원문에서 함께 언급된 국가·기업은 삼성이다. 원문 페이지에서 기사 본문을 추출하지 못해 이 항목은 엔비디아 공식 페이지의 요약 설명을 근거로 정리했다.",
+      "publisher": "엔비디아",
+      "sourceUrl": "https://nvidianews.nvidia.com/news/nvidia-expands-commitments-with-supply-chain-partners-to-support-ai-infrastructure-buildout"
     },
     {
       "id": "F4",
       "kind": "official",
-      "text": "아마존웹서비스(AWS)는 2026년 11월 19일(한국 시간) 공식 블로그에 「AWS Lambda now supports GPU instances for Event Functions on Lambda Managed Instances」 제목의 발표를 게시했다. 발표 제목과 본문은 신규 AI 제품·기능 공개에 관한 내용을 다룬다. 원문에서 언급된 제품·플랫폼은 CUDA이다.",
+      "text": "아마존웹서비스(AWS)는 2026년 11월 19일(한국 시간) 공식 What’s New 공지에 「Amazon SageMaker AI now supports cross-Region inference routing」 제목의 발표를 게시했다. 발표 제목과 본문은 신규 AI 제품·기능 공개에 관한 내용을 다룬다. 발표의 중심 제품·플랫폼은 SageMaker AI이다.",
       "publisher": "아마존웹서비스(AWS)",
-      "sourceUrl": "https://aws.amazon.com/blogs/aws/aws-lambda-now-supports-gpu-instances-for-event-functions-on-lambda-managed-instances/"
+      "sourceUrl": "https://aws.amazon.com/about-aws/whats-new/2026/11/sagemaker-cross-region-routing/"
     },
     {
       "id": "F5",
