@@ -23,7 +23,7 @@ jobs:
           echo "pubkey len: $(curl -fsS ${U}vapid-public-key | wc -c)" >> result.txt
           curl -sS -D - -o /dev/null -H 'origin: https://luinbiotech-lab.github.io' ${U}vapid-public-key | tr -d '\r' | grep -i "^access-control\|^HTTP" >> result.txt
           curl -fsS https://luinbiotech-lab.github.io/motus-intelligence/ > site.html; echo "site endpoint: $(grep -o 'https://motus-briefing-push[^"\x27 ]*' site.html | sort -u)" >> result.txt
-          echo "site has PushManager: $(grep -c PushManager site.html)  home-guide: $(grep -c '홈 화면 앱에서만' site.html)" >> result.txt
+          echo "site has PushManager: $(grep -c PushManager site.html)  home-guide: $(grep -c '홈 화면 앱에서만 알림을 받을' site.html) steps: $(grep -c '서버 연결' site.html)" >> result.txt
           curl -sS -D - -o /dev/null https://luinbiotech-lab.github.io/motus-intelligence/ | tr -d '\r' | grep -i '^last-modified' >> result.txt
           Q=$(jq -n --arg a "$CLOUDFLARE_ACCOUNT_ID" --arg s "$(date -u -d '-3 hours' +%FT%TZ)" --arg e "$(date -u +%FT%TZ)" '{query:"query($a:String!,$s:Time!,$e:Time!){viewer{accounts(filter:{accountTag:$a}){workersInvocationsAdaptive(limit:50,filter:{scriptName:\"motus-briefing-push\",datetime_geq:$s,datetime_leq:$e}){sum{requests errors} dimensions{status datetimeHour}}}}}",variables:{a:$a,s:$s,e:$e}}')
           echo "invocations(3h): $(curl -sS -H "$AUTH" -H 'content-type: application/json' https://api.cloudflare.com/client/v4/graphql -d "$Q" | jq -c '(.data.viewer.accounts[0].workersInvocationsAdaptive // .errors)')" >> result.txt
