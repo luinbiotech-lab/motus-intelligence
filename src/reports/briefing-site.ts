@@ -62,7 +62,7 @@ h1{font-size:23px;line-height:1.38;margin:8px 0 6px;letter-spacing:-.02em}.date{
 .more{display:inline-block;margin-top:10px;font-weight:600;color:var(--accent);text-decoration:none}
 .tags{color:var(--muted);font-size:13px;margin:6px 0 16px}.note{color:var(--muted);font-size:13px;border-top:1px solid var(--line);padding-top:12px;margin-top:18px}
 .list a{display:block;padding:12px 0;border-bottom:1px solid var(--line);color:var(--ink);text-decoration:none}.list small{color:var(--muted);display:block}
-.alert{display:block;width:100%;margin:0 0 12px;padding:12px;border:0;border-radius:12px;background:var(--accent);color:#fff;font-size:15px;font-weight:700}.install{display:none;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;font-size:13.5px;color:var(--muted);margin:16px 0 0}.install b{color:var(--ink)}
+.alert{display:block;width:100%;margin:0 0 12px;padding:12px;border:0;border-radius:12px;background:var(--accent);color:#fff;font-size:15px;font-weight:700;line-height:1.45;white-space:normal}.alert[data-state=info]{background:#fff7e6;color:#7a4b00;border:1px solid #f0c36d;font-weight:600;text-align:left}.alert[data-state=ok]{background:#e8f6ee;color:#11633a;border:1px solid #9bd3b2}.install{display:none;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;font-size:13.5px;color:var(--muted);margin:16px 0 0}.install b{color:var(--ink)}
 .pager{display:flex;justify-content:space-between;font-size:14px;margin:6px 0 0}.pager a{color:var(--accent);text-decoration:none}
 </style>
 </head>
@@ -78,8 +78,14 @@ if('serviceWorker' in navigator)navigator.serviceWorker.register('${input.base}s
 if(!(window.matchMedia&&matchMedia('(display-mode: standalone)').matches)&&!navigator.standalone){var i=document.getElementById('install');if(i)i.style.display='block'}${input.pushEndpoint?`
 var P='${input.pushEndpoint}',A=document.getElementById('alert');
 function k(s){s=s.replace(/-/g,'+').replace(/_/g,'/');var b=atob(s+'==='.slice((s.length+3)%4)),o=new Uint8Array(b.length);for(var j=0;j<b.length;j++)o[j]=b.charCodeAt(j);return o}
-if(A&&'serviceWorker' in navigator&&'PushManager' in window&&'Notification' in window&&Notification.permission!=='denied'){navigator.serviceWorker.ready.then(function(reg){return reg.pushManager.getSubscription()}).then(function(s){if(!s){A.hidden=false}}).catch(function(){});
-A.onclick=function(){A.disabled=true;Notification.requestPermission().then(function(p){if(p!=='granted')throw 0;return Promise.all([navigator.serviceWorker.ready,fetch(P+'vapid-public-key').then(function(r){return r.text()})])}).then(function(v){return v[0].pushManager.subscribe({userVisibleOnly:true,applicationServerKey:k(v[1].trim())})}).then(function(s){return fetch(P+'subscribe',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(s)})}).then(function(r){if(!r.ok)throw 0;A.textContent='알림 신청 완료 — 매일 저녁 보내 드립니다'}).catch(function(){A.disabled=false;A.textContent='알림 신청 실패 — 다시 누르기 (아이폰은 홈 화면 앱에서만 가능)'})}}`:''}
+var S=window.matchMedia&&matchMedia('(display-mode: standalone)').matches||navigator.standalone===true,IOS=/iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+function say(t,ok){A.textContent=t;A.setAttribute('data-state',ok?'ok':'info')}
+if(A&&IOS&&!S){A.hidden=false;A.onclick=function(){say('아이폰은 홈 화면 앱에서만 알림을 받을 수 있습니다. 공유 버튼 → “홈 화면에 추가” → 홈 화면의 MOTUS 아이콘으로 열고 다시 눌러 주세요.')}}
+else if(A&&'serviceWorker' in navigator&&'PushManager' in window&&'Notification' in window){navigator.serviceWorker.ready.then(function(reg){return reg.pushManager.getSubscription()}).then(function(s){A.hidden=false;if(s)say('알림 신청 완료 — 매일 저녁 보내 드립니다',1)}).catch(function(){A.hidden=false});
+if(Notification.permission==='denied'){A.hidden=false;A.onclick=function(){say('알림이 꺼져 있습니다. 휴대폰 설정 → 알림 → MOTUS(또는 브라우저)에서 허용한 뒤 다시 눌러 주세요.')};}
+else A.onclick=function(){if(A.disabled)return;A.disabled=true;var step='권한',t=setTimeout(function(){A.disabled=false;say('응답이 없습니다('+step+' 단계). 화면을 새로고침한 뒤 다시 눌러 주세요.')},20000);
+function fail(){clearTimeout(t);A.disabled=false;say(step==='권한'?'알림을 허용하지 않으셨습니다. 다시 누르고 “허용”을 눌러 주세요.':'알림 신청 실패('+step+' 단계) — 다시 눌러 주세요.')}
+say('알림 허용 창을 띄우는 중…');Notification.requestPermission().then(function(p){if(p!=='granted')throw 0;step='서버 연결';say('알림 신청 중…');return Promise.all([navigator.serviceWorker.ready,fetch(P+'vapid-public-key').then(function(r){if(!r.ok)throw 0;return r.text()})])}).then(function(v){step='구독';return v[0].pushManager.subscribe({userVisibleOnly:true,applicationServerKey:k(v[1].trim())})}).then(function(s){step='등록';return fetch(P+'subscribe',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(s)})}).then(function(r){if(!r.ok)throw 0;clearTimeout(t);say('알림 신청 완료 — 매일 저녁 보내 드립니다',1)}).catch(fail)}}`:''}
 </script>
 </body>
 </html>
