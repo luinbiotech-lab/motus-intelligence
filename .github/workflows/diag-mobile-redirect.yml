@@ -8,15 +8,14 @@ jobs:
     steps:
       - run: |
           set +e; mkdir out; cd out
-          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
-          probe(){ n=$1; shift; code=$(curl -sS -m 40 --retry 2 -A "$UA" "$@" -o $n.body -w "%{http_code}" 2>$n.err); echo "$n $code $(wc -c <$n.body)" >> result.txt; head -c 600 $n.body > $n.head; cp $n.body $n.full; rm -f $n.body; }
-          probe comp "https://finance.daum.net/api/quote/US.COMP/days?page=1&perPage=100" -H "Referer: https://finance.daum.net/global/quotes/US.COMP"
-          probe dji "https://finance.daum.net/api/quote/US.DJI/days?page=1&perPage=100" -H "Referer: https://finance.daum.net/global/quotes/US.DJI"
-          probe spx100 "https://finance.daum.net/api/quote/US.SP500/days?page=1&perPage=100" -H "Referer: https://finance.daum.net/global/quotes/US.SP500"
-          probe kospi "https://finance.daum.net/api/market_index/days?page=1&perPage=10&market=KOSPI&pagination=true" -H "Referer: https://finance.daum.net/domestic/kospi"
-          probe noref "https://finance.daum.net/api/quote/US.SP500/days?page=1&perPage=10"
-          for n in comp dji spx100 kospi noref; do python3 -c "import json;d=json.load(open('$n.full'));r=d['data'];print('$n',len(r),r[0].get('date'),r[0].get('tradePrice'),r[-1].get('date'))" >> result.txt 2>&1 || echo "$n ERR" >> result.txt; done
+          sudo apt-get install -y -qq fonts-noto-cjk >/dev/null 2>&1
+          U="https://luinbiotech-lab.github.io/motus-intelligence/"
+          curl -sS -o page.html -w "%{http_code}\n" "$U" > result.txt
+          curl -sS -o /dev/null -w "manifest %{http_code}\n" "${U}manifest.webmanifest" >> result.txt
+          curl -sS -o /dev/null -w "sw %{http_code}\n" "${U}sw.js" >> result.txt
+          google-chrome --headless=new --no-sandbox --hide-scrollbars --window-size=390,2600 --user-agent="Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1" --virtual-time-budget=8000 --screenshot=m.png "$U"
+          google-chrome --headless=new --no-sandbox --hide-scrollbars --window-size=1280,1800 --virtual-time-budget=8000 --screenshot=d.png "$U"
           cat result.txt; true
       - run: |
-          cd out && git init -q && git checkout -q -b diag-shots && git add . && git -c user.name=diag -c user.email=diag@users.noreply.github.com commit -qm probe
+          cd out && git init -q && git checkout -q -b diag-shots && git add . && git -c user.name=diag -c user.email=diag@users.noreply.github.com commit -qm shots
           git push -f -q https://x-access-token:${{ github.token }}@github.com/${{ github.repository }} diag-shots
