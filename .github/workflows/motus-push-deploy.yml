@@ -49,12 +49,13 @@ jobs:
         with: {node-version: '22', cache: npm}
       - run: npm ci
       - name: Scenarios
+        shell: bash --noprofile --norc -uo pipefail {0}
         run: |
-          set -uo pipefail
+          set +e
           ACC="https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID"; AUTH="authorization: Bearer $CLOUDFLARE_API_TOKEN"
           kvid(){ curl -fsS -H "$AUTH" "$ACC/storage/kv/namespaces?per_page=100" | jq -r --arg t "$KV_TITLE" '.result[]|select(.title==$t)|.id' | head -1; }
           kvpub(){ local c; c=$(curl -sS -H "$AUTH" "$ACC/storage/kv/namespaces/$(kvid)/values/meta:vapid-public" -o /tmp/p -w '%{http_code}'); [ "$c" = 200 ] && [ -s /tmp/p ] && sha256sum /tmp/p | cut -c1-12 || echo none; }
-          run(){ GITHUB_ENV=/tmp/env INJECT=${1:-none} scripts/push-deploy.sh > /tmp/log 2>&1; local rc=$?; grep -E '^RESULT (NEW_KEY|PUSH_URL)|INJECTED|refusing|rotating|verified|::error' /tmp/log; return $rc; }
+          run(){ GITHUB_ENV=/tmp/env INJECT=${1:-none} scripts/push-deploy.sh > /tmp/log 2>&1; local rc=$?; grep -E '^RESULT (NEW_KEY|PUSH_URL)|INJECTED|refusing|rotating|verified|::error|rror' /tmp/log | sed 's/^::error/ERR/'; return $rc; }
           corrupt(){ node -e "const e=require('crypto').createECDH('prime256v1');e.generateKeys();process.stdout.write(e.getPrivateKey().toString('base64url'))" | (cd workers/briefing-push && npx --yes wrangler@4.20.0 secret put VAPID_PRIVATE_KEY --name "$WORKER_NAME" >/dev/null); }
           health(){ curl -fsS "$(grep '^PUSH_URL=' /tmp/env | tail -1 | cut -d= -f2-)health" | jq -r .vapidPairReady; }
           T=0; F=0; check(){ if [ "$2" = "$3" ]; then echo "PASS $1 ($2)"; T=$((T+1)); else echo "FAIL $1 expected=$3 got=$2"; F=$((F+1)); fi; }
