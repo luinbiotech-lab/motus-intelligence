@@ -14,10 +14,10 @@
   "leakagePass": true,
   "duplicateCheck": "PENDING_REMOTE",
   "duplicateUncertainty": true,
-  "articleFingerprint": "sha256:3349c2abc8930b1dc53c5837c55eb75bf6e339c73365255b15fda5c76722d846",
+  "articleFingerprint": "sha256:ea41db360cd6bac4b097af851b288b7fd1d09604666dfe08195be7b0d6a671e4",
   "commerceEnabled": false,
-  "verifiedAt": "2026-11-19T03:11:38.990Z",
-  "expiresAt": "2026-11-19T04:41:38.990Z",
+  "verifiedAt": "2026-11-19T04:30:39.371Z",
+  "expiresAt": "2026-11-19T06:00:39.371Z",
   "sourceAuditIds": [
     "calendar:nyse",
     "deep:consensus:list:company",
@@ -51,14 +51,14 @@
     "market-research:Bloomberg Markets",
     "market-research:CNBC Investing",
     "market-research:Goldman Sachs",
+    "market-research:article:https://www.bloomberg.com/news/articles/2026-11-18/latest-oil-market-news-and-analysis-for-nov-19",
     "market-research:article:https://www.bloomberg.com/news/articles/2026-11-18/stock-market-today-dow-s-p-live-updates",
-    "market-research:article:https://www.bloomberg.com/news/newsletters/2026-11-19/india-studies-tax-proposals-to-encourage-stock-trading-curb-speculative-bets",
     "market-research:article:https://www.cnbc.com/2026/11/17/nvidia-has-lost-2-trillion-in-value-heres-what-options-traders-expect-from-earnings.html",
     "market-research:article:https://www.goldmansachs.com/insights/articles/why-european-companies-are-forecast-to-have-robust-earnings-growth",
     "treasury:10y:2026",
     "yahoo-us:nasdaq"
   ],
-  "sourceAuditFingerprint": "sha256:23466f757f62a445c266da6f7920465277ffe218e693dd32dceb30d7e8e46e94",
+  "sourceAuditFingerprint": "sha256:f6a67d918752afa950726b96756b5baa4ec9edf5afb6c25cbf330b261538167a",
   "crossVerificationFingerprint": null,
   "crossVerification": null
 }
