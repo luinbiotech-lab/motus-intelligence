@@ -1,0 +1,91 @@
+name: MOTUS Briefing Push Deploy
+# Owner-approved 2026-11-19 ("알림 서버 진행"). Cloudflare Workers free plan.
+# Needs repository secrets CLOUDFLARE_API_TOKEN (template "Edit Cloudflare Workers": Workers scripts + KV, one account)
+# and CLOUDFLARE_ACCOUNT_ID. Production deploy is manual (workflow_dispatch). Rollback: `wrangler delete
+# motus-briefing-push` and unset MOTUS_BRIEFING_PUSH_ENDPOINT (the site then hides the alert button).
+# Key handling is in scripts/push-deploy.sh: the KV public key is recorded only after the Worker proves the pair via
+# /health; a broken pair with live subscribers is never rotated automatically. No key material is printed or stored.
+#
+# The `staging-failure-injection` job (luin RB-82188c7) runs only on pushes to claude/push-deploy against a separate,
+# throw-away Worker + KV (motus-briefing-push-staging), exercises interruption/recovery/refusal, then deletes both.
+on:
+  workflow_dispatch:
+  push:
+    branches: [claude/push-deploy]
+    paths: [scripts/push-deploy.sh, scripts/push-smoke.sh, src/push/**, workers/briefing-push/**, .github/workflows/motus-push-deploy.yml]
+permissions:
+  contents: read
+concurrency:
+  group: motus-push-deploy-${{ github.event_name }}
+  cancel-in-progress: false
+env:
+  CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+  CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+jobs:
+  deploy:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env: {WORKER_NAME: motus-briefing-push, KV_TITLE: motus-briefing-push-subscriptions}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22', cache: npm}
+      - run: npm ci
+      - run: scripts/push-deploy.sh
+      - run: scripts/push-smoke.sh
+      - run: |
+          { echo "### MOTUS push worker"; echo "- URL: $PUSH_URL"; echo "- smoke: PASS"; echo "- new key pair this run: $NEW_KEY"
+            echo "- next: set repository variable MOTUS_BRIEFING_PUSH_ENDPOINT to the URL and redeploy the briefing site"; } >> "$GITHUB_STEP_SUMMARY"
+
+  staging-failure-injection:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env: {WORKER_NAME: motus-briefing-push-staging, KV_TITLE: motus-briefing-push-staging}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22', cache: npm}
+      - run: npm ci
+      - name: Scenarios
+        shell: bash --noprofile --norc -uo pipefail {0}
+        run: |
+          set +e
+          ACC="https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID"; AUTH="authorization: Bearer $CLOUDFLARE_API_TOKEN"
+          kvid(){ curl -fsS -H "$AUTH" "$ACC/storage/kv/namespaces?per_page=100" | jq -r --arg t "$KV_TITLE" '.result[]|select(.title==$t)|.id' | head -1; }
+          kvpub(){ local c; c=$(curl -sS -H "$AUTH" "$ACC/storage/kv/namespaces/$(kvid)/values/meta:vapid-public" -o /tmp/p -w '%{http_code}'); [ "$c" = 200 ] && [ -s /tmp/p ] && sha256sum /tmp/p | cut -c1-12 || echo none; }
+          N=0; run(){ N=$((N+1)); GITHUB_ENV=/tmp/env INJECT=${1:-none} scripts/push-deploy.sh > /tmp/log 2>&1; local rc=$?; cp /tmp/log /tmp/log$N.all; grep -E '^RESULT|INJECTED|refusing|rotating|verified|::error|rror' /tmp/log | sed 's/^::error/ERR/'; return $rc; }
+          corrupt(){ node -e "const e=require('crypto').createECDH('prime256v1');e.generateKeys();process.stdout.write(e.getPrivateKey().toString('base64url'))" | (cd workers/briefing-push && npx --yes wrangler@4.20.0 secret put VAPID_PRIVATE_KEY --name "$WORKER_NAME" >/dev/null); }
+          health(){ curl -fsS "$(grep '^PUSH_URL=' /tmp/env | tail -1 | cut -d= -f2-)health" | jq -r .vapidPairReady; }
+          T=0; F=0; check(){ if [ "$2" = "$3" ]; then echo "PASS $1 ($2)"; T=$((T+1)); else echo "FAIL $1 expected=$3 got=$2"; F=$((F+1)); fi; }
+          : > /tmp/env
+          echo "## S1 fresh provision"; run; check S1.exit $? 0; P1=$(kvpub); check S1.kv-written "$([ "$P1" != none ] && echo yes)" yes
+          set -a; . /tmp/env; set +a; VAPID_PUBLIC=$VAPID_PUBLIC PUSH_URL=$PUSH_URL scripts/push-smoke.sh; check S1.smoke $? 0
+          echo "## S2 rerun keeps the same pair"; run; check S2.exit $? 0; check S2.same-pub "$(kvpub)" "$P1"; check S2.new-key "$(grep '^NEW_KEY=' /tmp/env | tail -1 | cut -d= -f2)" 0
+          echo "## S3 mismatched private key -> /health false"; corrupt; sleep 8; check S3.health-false "$(health)" false
+          echo "## S4 broken pair + live subscriber -> refuse, KV unchanged"
+          curl -fsS -X PUT -H "$AUTH" --data '{"endpoint":"https://example.invalid/x","keys":{"p256dh":"a","auth":"b"}}' "$ACC/storage/kv/namespaces/$(kvid)/values/sub:staging-test" >/dev/null
+          run; check S4.exit $? 1; check S4.kv-unchanged "$(kvpub)" "$P1"
+          echo "## S5 broken pair, zero subscribers -> rotate and verify"
+          curl -fsS -X DELETE -H "$AUTH" "$ACC/storage/kv/namespaces/$(kvid)/values/sub:staging-test" >/dev/null
+          run; check S5.exit $? 0; P5=$(kvpub); check S5.rotated "$([ "$P5" != "$P1" ] && [ "$P5" != none ] && echo yes)" yes; check S5.health "$(health)" true
+          echo "## S6 interrupted provisioning (stop before KV write) then recovery"
+          curl -fsS -X DELETE -H "$AUTH" "$ACC/storage/kv/namespaces/$(kvid)/values/meta:vapid-public" >/dev/null
+          run stop-before-kv; check S6.injected-exit $? 3; check S6.kv-empty "$(kvpub)" none
+          run; check S6.recover-exit $? 0; P6=$(kvpub); check S6.kv-written "$([ "$P6" != none ] && echo yes)" yes; check S6.health "$(health)" true
+          echo "## S7 log hygiene (every run's full stdout+stderr)"; cat /tmp/log*.all > /tmp/all 2>/dev/null
+          check S7.logs-captured "$([ -s /tmp/all ] && echo yes)" yes
+          PUBS=$(grep '^VAPID_PUBLIC=' /tmp/env | cut -d= -f2- | sort -u); LEAK=0; for k in $PUBS; do grep -qF "$k" /tmp/all && LEAK=$((LEAK+1)); done
+          check S7.no-public-key-value "$LEAK" 0
+          check S7.no-private-key-assignment "$(grep -c 'PRIVATE_KEY=' /tmp/all || true)" 0
+          check S7.no-long-base64url "$(grep -Ec '[A-Za-z0-9_-]{80,}' /tmp/all || true)" 0
+          echo "TOTAL PASS=$T FAIL=$F"; { echo "### staging failure injection"; echo "PASS=$T FAIL=$F"; } >> "$GITHUB_STEP_SUMMARY"
+          [ "$F" = 0 ]
+      - name: Delete staging Worker and KV
+        if: always()
+        run: |
+          (cd workers/briefing-push && npx --yes wrangler@4.20.0 delete --name "$WORKER_NAME" --force >/dev/null 2>&1) && echo "staging worker deleted" || echo "staging worker delete skipped"
+          ACC="https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID"; AUTH="authorization: Bearer $CLOUDFLARE_API_TOKEN"
+          ID=$(curl -fsS -H "$AUTH" "$ACC/storage/kv/namespaces?per_page=100" | jq -r --arg t "$KV_TITLE" '.result[]|select(.title==$t)|.id' | head -1)
+          [ -n "$ID" ] && curl -fsS -X DELETE -H "$AUTH" "$ACC/storage/kv/namespaces/$ID" >/dev/null && echo "staging KV deleted" || true

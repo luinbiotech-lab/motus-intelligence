@@ -48,3 +48,24 @@ test('no summary means no notification', async () => {
   assert.equal((await sendDaily(e,fetcher)).state,'NO_SUMMARY');
   assert.equal(summaryTitle('[제목]\n  제목입니다 \n'),'제목입니다');
 });
+
+test('vapidPairReady: true only for a matching key pair; missing or foreign private key is not ready',async()=>{
+ const {createECDH}=await import('node:crypto');
+ const pair=()=>{const e=createECDH('prime256v1');e.generateKeys();return {pub:e.getPublicKey().toString('base64url'),priv:e.getPrivateKey().toString('base64url')}};
+ const a=pair(),b=pair();
+ const {vapidPairReady}=await import('../src/push/briefing-push.js');
+ assert.equal(await vapidPairReady({VAPID_PUBLIC_KEY:a.pub,VAPID_PRIVATE_KEY:a.priv}),true);
+ assert.equal(await vapidPairReady({VAPID_PUBLIC_KEY:a.pub,VAPID_PRIVATE_KEY:b.priv}),false);
+ assert.equal(await vapidPairReady({VAPID_PUBLIC_KEY:a.pub,VAPID_PRIVATE_KEY:''}),false);
+ assert.equal(await vapidPairReady({VAPID_PUBLIC_KEY:'REPLACE_AT_DEPLOY',VAPID_PRIVATE_KEY:a.priv}),false);
+});
+
+test('/health answers only a yes/no and never echoes key material',async()=>{
+ const {createECDH}=await import('node:crypto');const e=createECDH('prime256v1');e.generateKeys();
+ const pub=e.getPublicKey().toString('base64url'),priv=e.getPrivateKey().toString('base64url');
+ const {handleRequest}=await import('../src/push/briefing-push.js');
+ const kv={get:async()=>null,put:async()=>{},delete:async()=>{},list:async()=>({keys:[],list_complete:true})};
+ const res=await handleRequest(new Request('https://w.example/health'),{SUBSCRIPTIONS:kv as never,VAPID_PUBLIC_KEY:pub,VAPID_PRIVATE_KEY:priv,VAPID_SUBJECT:'https://x/',SITE_ORIGIN:'https://luinbiotech-lab.github.io/motus-intelligence/',SUMMARY_URL:'https://x/s'});
+ const text=await res.text();
+ assert.deepEqual(JSON.parse(text),{vapidPairReady:true});assert.ok(!text.includes(priv)&&!text.includes(pub));
+});
