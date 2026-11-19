@@ -35,9 +35,10 @@ jobs:
           git fetch --no-tags --depth=1 origin ops-data
           git checkout FETCH_HEAD -- data/daily-report
       - name: Build the site
-        # The alert button appears only once the push worker URL is set as repository variable MOTUS_BRIEFING_PUSH_ENDPOINT.
+        # Push worker deployed 2026-11-19 (run 44554907040, smoke PASS). A repository variable MOTUS_BRIEFING_PUSH_ENDPOINT overrides
+        # the URL; rollback = delete the worker and replace this default with '' (the site then hides the alert button).
         env:
-          MOTUS_BRIEFING_PUSH_ENDPOINT: ${{ vars.MOTUS_BRIEFING_PUSH_ENDPOINT }}
+          MOTUS_BRIEFING_PUSH_ENDPOINT: ${{ vars.MOTUS_BRIEFING_PUSH_ENDPOINT || 'https://motus-briefing-push.luinbiotech-cc1.workers.dev/' }}
         run: node dist/src/briefing-site-cli.js --out site --origin "https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPOSITORY#*/}/"
       - uses: actions/upload-pages-artifact@v3
         with: {path: site}
