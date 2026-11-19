@@ -9,7 +9,7 @@ jobs:
       - run: |
           set +e; mkdir out; cd out
           UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
-          probe(){ n=$1; shift; code=$(curl -sS -m 25 -A "$UA" "$@" -o $n.body -w "%{http_code}" 2>$n.err); echo "$n $code $(wc -c <$n.body)" >> result.txt; head -c 600 $n.body > $n.head; cp $n.body $n.full; rm -f $n.body; }
+          probe(){ n=$1; shift; code=$(curl -sS -m 40 --retry 2 -A "$UA" "$@" -o $n.body -w "%{http_code}" 2>$n.err); echo "$n $code $(wc -c <$n.body)" >> result.txt; head -c 600 $n.body > $n.head; cp $n.body $n.full; rm -f $n.body; }
           probe comp "https://finance.daum.net/api/quote/US.COMP/days?page=1&perPage=100" -H "Referer: https://finance.daum.net/global/quotes/US.COMP"
           probe dji "https://finance.daum.net/api/quote/US.DJI/days?page=1&perPage=100" -H "Referer: https://finance.daum.net/global/quotes/US.DJI"
           probe spx100 "https://finance.daum.net/api/quote/US.SP500/days?page=1&perPage=100" -H "Referer: https://finance.daum.net/global/quotes/US.SP500"
