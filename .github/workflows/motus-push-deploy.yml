@@ -1,0 +1,74 @@
+name: MOTUS Briefing Push Deploy
+# Owner-approved 2026-11-19 ("알림 서버 진행"). Manual only. Cloudflare Workers free plan.
+# Needs repository secrets CLOUDFLARE_API_TOKEN (template "Edit Cloudflare Workers") and CLOUDFLARE_ACCOUNT_ID.
+# The VAPID key pair is generated once on the runner: the private key goes only to the Worker secret store,
+# the public key is kept in the Worker's KV (meta:vapid-public) so later deploys reuse the same pair.
+# Nothing secret is printed, committed or uploaded as an artifact.
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: motus-push-deploy
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      KV_TITLE: motus-briefing-push-subscriptions
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22', cache: npm}
+      - run: npm ci
+      - name: Check credentials
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            echo "::error title=Cloudflare credentials missing::Add CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID repository secrets"; exit 1; fi
+      - name: KV namespace (find or create)
+        run: |
+          API="https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/storage/kv/namespaces"
+          AUTH="authorization: Bearer $CLOUDFLARE_API_TOKEN"
+          ID=$(curl -fsS -H "$AUTH" "$API?per_page=100" | jq -r --arg t "$KV_TITLE" '.result[]|select(.title==$t)|.id' | head -1)
+          if [ -z "$ID" ]; then ID=$(curl -fsS -X POST -H "$AUTH" -H 'content-type: application/json' --data "{\"title\":\"$KV_TITLE\"}" "$API" | jq -r '.result.id'); echo "created KV namespace"; fi
+          [ -n "$ID" ] && [ "$ID" != null ] || { echo "::error::KV namespace unavailable"; exit 1; }
+          echo "KV_ID=$ID" >> "$GITHUB_ENV"
+          sed -i "s/^id = \"REPLACE_AT_DEPLOY\"/id = \"$ID\"/" workers/briefing-push/wrangler.toml
+      - name: VAPID public key (reuse or generate once)
+        run: |
+          API="https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/storage/kv/namespaces/$KV_ID/values/meta:vapid-public"
+          AUTH="authorization: Bearer $CLOUDFLARE_API_TOKEN"
+          PUB=$(curl -sS -H "$AUTH" -w '\n%{http_code}' "$API")
+          CODE=$(echo "$PUB" | tail -1); PUB=$(echo "$PUB" | head -n -1)
+          if [ "$CODE" = 200 ] && [ -n "$PUB" ]; then echo "reusing existing VAPID key pair"; echo "NEW_KEY=0" >> "$GITHUB_ENV"
+          else
+            umask 077
+            node -e "const c=require('crypto');const e=c.createECDH('prime256v1');e.generateKeys();const b=x=>x.toString('base64url');require('fs').writeFileSync(process.env.RUNNER_TEMP+'/vapid-private',b(e.getPrivateKey()));process.stdout.write(b(e.getPublicKey()))" > "$RUNNER_TEMP/vapid-public"
+            PUB=$(cat "$RUNNER_TEMP/vapid-public")
+            curl -fsS -X PUT -H "$AUTH" --data-binary "$PUB" "$API" >/dev/null
+            echo "generated a new VAPID key pair"; echo "NEW_KEY=1" >> "$GITHUB_ENV"
+          fi
+          echo "VAPID_PUBLIC=$PUB" >> "$GITHUB_ENV"
+      - name: Deploy worker
+        working-directory: workers/briefing-push
+        run: npx --yes wrangler@4.20.0 deploy --var "VAPID_PUBLIC_KEY:$VAPID_PUBLIC"
+      - name: Store private key as worker secret (first deploy only)
+        if: env.NEW_KEY == '1'
+        working-directory: workers/briefing-push
+        run: |
+          npx --yes wrangler@4.20.0 secret put VAPID_PRIVATE_KEY < "$RUNNER_TEMP/vapid-private"
+          rm -f "$RUNNER_TEMP/vapid-private"
+      - name: Worker URL and smoke test
+        run: |
+          SUB=$(curl -fsS -H "authorization: Bearer $CLOUDFLARE_API_TOKEN" "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/workers/subdomain" | jq -r '.result.subdomain')
+          URL="https://motus-briefing-push.$SUB.workers.dev/"
+          sleep 10
+          GOT=$(curl -fsS "${URL}vapid-public-key" || true)
+          if [ "$GOT" = "$VAPID_PUBLIC" ]; then R=PASS; else R=FAIL; fi
+          CORS=$(curl -sS -o /dev/null -w '%{http_code}' -X OPTIONS -H 'origin: https://luinbiotech-lab.github.io' "${URL}subscribe")
+          { echo "### MOTUS push worker"; echo "- URL: $URL"; echo "- vapid-public-key matches: $R"; echo "- CORS preflight: $CORS"; echo "- new key pair: $NEW_KEY"; } >> "$GITHUB_STEP_SUMMARY"
+          echo "PUSH_URL=$URL"
+          [ "$R" = PASS ] || exit 1
