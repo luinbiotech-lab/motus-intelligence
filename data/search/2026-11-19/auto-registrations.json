@@ -25,5 +25,32 @@
       "sitemapIncluded": null,
       "rssIncluded": null
     }
+  },
+  {
+    "publicationId": "motus-live-2026-11-18:us",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/11/11-18-3-amd-53.html",
+    "registeredAt": "2026-11-19T12:12:04+09:00",
+    "trigger": "PUBLICATION_PUBLISHED",
+    "googleInspectionState": "QUEUED",
+    "naverDiscoveryState": "PENDING",
+    "visibility": {
+      "publicationId": "motus-live-2026-11-18:us",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/11/11-18-3-amd-53.html",
+      "google": {
+        "discovered": null,
+        "indexed": null,
+        "lastCrawl": null,
+        "coverageState": null,
+        "inspectionAt": null
+      },
+      "naver": {
+        "discovered": null,
+        "indexed": null,
+        "collectionState": null,
+        "inspectionAt": null
+      },
+      "sitemapIncluded": null,
+      "rssIncluded": null
+    }
   }
 ]
