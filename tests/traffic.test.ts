@@ -1,11 +1,33 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {articleKeywords,contentFeatures} from '../src/operations/traffic.js';
+import {articleKeywordFallbacks,articleKeywords,contentFeatures,fillEmptyDatalabSeries} from '../src/operations/traffic.js';
 
 test('article keywords: the market phrase plus the headline head without figures', () => {
   assert.deepEqual(articleKeywords('코스피 3.59% 급락해 5,648…검색 1위 삼성전자 3.1% 하락',['국내증시']),['코스피 마감','코스피']);
   assert.deepEqual(articleKeywords('뉴욕증시 3대 지수 혼조…오라클 5.8% 급등',['미국증시']),['뉴욕증시 마감','뉴욕증시 지수 혼조']);
   assert.equal(articleKeywords('엔비디아가 공개한 도시 운영에 적용되는 AI 에이전트',['AI 인텔리전스'])[0],'AI 뉴스');
+});
+
+test('DataLab fallbacks: shorter headline heads, never the primary keywords (MOT-045, MO-7)', () => {
+  const title='AMD 8.8% 급락…증권가가 짚은 AI 투자 쟁점';
+  assert.deepEqual(articleKeywords(title,['AI 인텔리전스']),['AI 뉴스','AMD 급락']);
+  assert.deepEqual(articleKeywordFallbacks(title,['AI 인텔리전스']),['AMD','AMD 주가']);
+  // Index headlines have no company word to fall back to; the market phrase is already primary.
+  assert.deepEqual(articleKeywordFallbacks('코스피 3.59% 급락해 5,648…검색 1위 삼성전자 3.1% 하락',['국내증시']),[]);
+  assert.deepEqual(articleKeywordFallbacks('주간 증시 전망(11/16~11/20)｜엔비디아 실적 주목',['주간 증시']),['주간 증시','증시 전망']);
+});
+
+test('empty DataLab series is retried with the next fallback and the empty keyword names its replacement (MO-7)', async () => {
+  const calls:string[][]=[];
+  const out=await fillEmptyDatalabSeries([{keyword:'AI 뉴스',series:[['2026-11-16',100]]},{keyword:'AMD 급락',series:[]}],['AMD','AMD 주가'],async keywords=>{calls.push(keywords);return [{keyword:'AMD',series:[['2026-11-16',42]]},{keyword:'AMD 주가',series:[]}]});
+  assert.deepEqual(calls,[['AMD','AMD 주가']]);
+  assert.deepEqual(out,[{keyword:'AI 뉴스',series:[['2026-11-16',100]]},{keyword:'AMD 급락',series:[],emptyFallback:'AMD'},{keyword:'AMD',series:[['2026-11-16',42]],fallbackFor:'AMD 급락'}]);
+  // Nothing empty → no extra request.
+  const full=await fillEmptyDatalabSeries([{keyword:'코스피',series:[['2026-11-16',1]]}],['x'],async()=>{throw new Error('must not query')});
+  assert.deepEqual(full,[{keyword:'코스피',series:[['2026-11-16',1]]}]);
+  // Fallbacks also empty, or none left → the empty keyword says so (null) instead of silently vanishing.
+  assert.deepEqual(await fillEmptyDatalabSeries([{keyword:'AMD 급락',series:[]}],['AMD'],async()=>[{keyword:'AMD',series:[]}]),[{keyword:'AMD 급락',series:[],emptyFallback:null}]);
+  assert.deepEqual(await fillEmptyDatalabSeries([{keyword:'AMD 급락',series:[]}],[],async()=>{throw new Error('must not query')}),[{keyword:'AMD 급락',series:[],emptyFallback:null}]);
 });
 
 test('content features count text, images, charts, headings, tables and links', () => {
