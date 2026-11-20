@@ -17,5 +17,5 @@ test('the second host never accepts a different session than the one requested',
  const fetcher=(async(input:string|URL)=>String(input).includes('query1.')?new Response('x',{status:404}):new Response(JSON.stringify(chart('2026-10-28')),{status:200})) as typeof fetch;
  const builder=new RepositoryInternalDailyBuilder(fetcher,{},undefined,undefined,undefined,join(tmpdir(),'motus-none-'+Date.now())) as unknown as YahooReader,audit:InternalSourceAuditEntry[]=[];
  await assert.rejects(builder.yahooUsIndex('^GSPC','S&P 500','sp500','2026-10-29T22:00:00Z',audit,'2026-10-29'),/SESSION_MISMATCH/);
- assert.deepEqual(audit.map(item=>item.status),['FAILED','FAILED']);
+ assert.deepEqual(audit.map(item=>item.status),['FAILED','FAILED','FAILED']);assert.equal(audit.at(-1)?.sourceId,'daum-us:sp500');
 });
