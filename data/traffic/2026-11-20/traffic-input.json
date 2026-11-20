@@ -1,0 +1,2275 @@
+{
+  "date": "2026-11-20",
+  "articlesDay": "2026-11-19",
+  "collectedAt": "2026-11-20T04:41:09.234Z",
+  "pageviews": {
+    "state": "PASS",
+    "capturedAt": "2026-11-20T04:41:09.609Z",
+    "allTime": 1150,
+    "sevenDays": 381,
+    "thirtyDays": 1095,
+    "previous": {
+      "capturedAt": "2026-11-19T04:41:41.768Z",
+      "allTime": 1086
+    },
+    "sincePrevious": {
+      "views": 64,
+      "hours": 24
+    }
+  },
+  "articles": {
+    "state": "PASS",
+    "count": 4
+  },
+  "searchConsole": {
+    "state": "PASS",
+    "range": [
+      "2026-11-12",
+      "2026-11-20"
+    ],
+    "dataState": "all",
+    "lastDataDate": "2026-11-16",
+    "topQueries": []
+  },
+  "indexStatus": {
+    "state": "PASS",
+    "sitemaps": [
+      {
+        "path": "https://motusnova.blogspot.com/sitemap.xml",
+        "lastSubmitted": "2026-11-05T14:31:04.586Z",
+        "lastDownloaded": "2026-11-14T18:47:28.385Z",
+        "isPending": false,
+        "errors": "0",
+        "warnings": "0",
+        "contents": [
+          {
+            "type": "web",
+            "submitted": "61",
+            "indexed": "0"
+          }
+        ]
+      }
+    ],
+    "inspected": 53,
+    "indexed": 2,
+    "inspections": [
+      {
+        "url": "https://motusnova.blogspot.com/",
+        "verdict": "PASS",
+        "coverageState": "제출되고 색인이 생성되었습니다.",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_ALLOWED",
+        "pageFetchState": "SUCCESSFUL",
+        "lastCrawlTime": "2026-11-02T12:40:33Z",
+        "googleCanonical": "https://motusnova.blogspot.com/",
+        "userCanonical": "https://motusnova.blogspot.com/",
+        "referringUrls": [
+          "https://motusnova.blogspot.com/?m=1",
+          "https://motusnova.blogspot.com/2026/10/13-ai.html"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/3-70.html",
+        "error": "The operation was aborted due to timeout"
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/062-5683-1-09.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-05T14:35:59Z",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://www.blogger.com/feeds/3015267553244608361/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/amd-37-ai.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-05T14:35:44Z",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://motusnova.blogspot.com/feeds/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/359-5648-1-31.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-05T14:36:34Z",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://www.blogger.com/feeds/3015267553244608361/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/3-58.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-05T14:36:45Z",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://www.blogger.com/feeds/3015267553244608361/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/20-33.html",
+        "verdict": "PASS",
+        "coverageState": "제출되고 색인이 생성되었습니다.",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_ALLOWED",
+        "pageFetchState": "SUCCESSFUL",
+        "lastCrawlTime": "2026-11-02T14:10:53Z",
+        "googleCanonical": "https://motusnova.blogspot.com/2026/11/20-33.html",
+        "userCanonical": "https://motusnova.blogspot.com/2026/11/20-33.html",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://www.blogger.com/feeds/3015267553244608361/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/11-19-139-513789-1-09.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-19T12:14:35Z"
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/2026-11-19-ai.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-19T12:17:01Z"
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/gemini_0912487108.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-19T12:17:16Z"
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/11-18-3-amd-53.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-19T12:26:38Z"
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/2026-11-20-ai.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "발견됨 - 현재 색인이 생성되지 않음",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/azure-ai.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "발견됨 - 현재 색인이 생성되지 않음",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "referringUrls": [
+          "https://www.blogger.com/feeds/3015267553244608361/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/11-19-3-23-amd-77.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "발견됨 - 현재 색인이 생성되지 않음",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/11-18-199-506744-1-27.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-19T12:25:54Z",
+        "referringUrls": [
+          "http://www.blogger.com/feeds/3015267553244608361/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/2026-11-18-ai.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-19T12:23:52Z",
+        "referringUrls": [
+          "http://www.blogger.com/feeds/3015267553244608361/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/copilot.html",
+        "error": "The operation was aborted due to timeout"
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/11-17-3-16-tsmc-37.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-19T12:30:14Z",
+        "referringUrls": [
+          "https://www.blogger.com/feeds/3015267553244608361/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/11-17-259-496848-1-30.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-18T14:27:03Z"
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/2026-11-17-ai.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-18T14:27:20Z"
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/41-ai.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-18T14:31:44Z"
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/11-16-3-25-tsmc-63.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-18T14:30:33Z"
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/11-16-359-510050-1-sk-70.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-17T12:21:21Z"
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/2026-11-16-ai.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-17T12:23:58Z"
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/amd-88-ai.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-17T12:29:04Z"
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/s-500-25-46-fomc.html",
+        "error": "The operation was aborted due to timeout"
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/11-13-3-amd-88.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-16T12:31:01Z",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "http://motusnova.blogspot.com/feeds/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/11-13-098-529053-1-05.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "발견됨 - 현재 색인이 생성되지 않음",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://motusnova.blogspot.com/feeds/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/2026-11-13-ai.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "발견됨 - 현재 색인이 생성되지 않음",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://motusnova.blogspot.com/2026/11/"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/amd-59-ai.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "발견됨 - 현재 색인이 생성되지 않음",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://motusnova.blogspot.com/2026/11/"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/11-12-3-amd-59.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "발견됨 - 현재 색인이 생성되지 않음",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://www.blogger.com/feeds/3015267553244608361/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/11-12-061-534273-1-10.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-12T12:25:02Z",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://motusnova.blogspot.com/2026/11/11-12-3-amd-59.html"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/2026-11-12-ai.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-12T12:24:59Z",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "http://motusnova.blogspot.com/feeds/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/gemini.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-13T07:59:20Z",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "http://motusnova.blogspot.com/feeds/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/11-11-260-537536-1-46.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-12T12:24:52Z",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://motusnova.blogspot.com/feeds/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/11-11-3-16-88.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-12T12:22:53Z",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://www.blogger.com/feeds/3015267553244608361/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/2026-11-11-ai.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-12T12:34:25Z",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://motusnova.blogspot.com/feeds/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/55-ai.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-12T12:35:29Z",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://motusnova.blogspot.com/2026/11/2026-11-11-ai.html"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/11-10-3-55.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-12T12:38:37Z",
+        "referringUrls": [
+          "https://motusnova.blogspot.com/2026/11/2026-11-11-ai.html"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/11-10-439-523913-1-50.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-12T12:35:29Z",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://motusnova.blogspot.com/feeds/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/2026-11-10-ai.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-11T10:44:37Z",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://motusnova.blogspot.com/feeds/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/ai_01456032107.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-11T10:45:01Z",
+        "referringUrls": [
+          "https://motusnova.blogspot.com/feeds/posts/default",
+          "http://motusnova.blogspot.com/feeds/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/11-9-081-501885-1-09.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-11T10:45:31Z",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://motusnova.blogspot.com/feeds/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/11-9-3-27-amd-13.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "리디렉션 오류",
+        "robotsTxtState": "ALLOWED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "REDIRECT_ERROR",
+        "lastCrawlTime": "2026-11-11T10:45:01Z",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://motusnova.blogspot.com/feeds/posts/default",
+          "http://motusnova.blogspot.com/feeds/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/2026-11-9-ai.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "Google에는 아직 알려지지 않은 URL입니다.",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED"
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/amd-11-ai.html",
+        "verdict": "NEUTRAL",
+        "coverageState": "발견됨 - 현재 색인이 생성되지 않음",
+        "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+        "indexingState": "INDEXING_STATE_UNSPECIFIED",
+        "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+        "sitemap": [
+          "https://motusnova.blogspot.com/sitemap.xml"
+        ],
+        "referringUrls": [
+          "https://www.blogger.com/feeds/3015267553244608361/posts/default"
+        ]
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/11-6-602-505969-1-40.html",
+        "error": "SKIPPED_TIME_BUDGET"
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/34-117-cpippi.html",
+        "error": "SKIPPED_TIME_BUDGET"
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/3-amd-11.html",
+        "error": "SKIPPED_TIME_BUDGET"
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/2026-11-6.html",
+        "error": "SKIPPED_TIME_BUDGET"
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/528-538380-1-76.html",
+        "error": "SKIPPED_TIME_BUDGET"
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/3-amd-17.html",
+        "error": "SKIPPED_TIME_BUDGET"
+      },
+      {
+        "url": "https://motusnova.blogspot.com/2026/11/2026-11-5.html",
+        "error": "SKIPPED_TIME_BUDGET"
+      }
+    ],
+    "fixedSample": {
+      "paths": [
+        "/",
+        "/2026/11/3-70.html",
+        "/2026/11/062-5683-1-09.html",
+        "/2026/11/amd-37-ai.html",
+        "/2026/11/359-5648-1-31.html",
+        "/2026/11/3-58.html",
+        "/2026/11/20-33.html"
+      ],
+      "chains": [
+        {
+          "url": "https://motusnova.blogspot.com/",
+          "agent": "desktop",
+          "hops": [
+            {
+              "status": 302,
+              "location": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/&q=EgSsuNuoGNOh_9cGIi3a7mWKQqiZCFtzR87OOtfnKf7OIWgZRfj73a2l0AdhAxjcbc2Gvu_Za7bDY-AyAnJSWgFDYITawYLsqO6DqQE"
+            },
+            {
+              "status": 429,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/&q=EgSsuNuoGNOh_9cGIi3a7mWKQqiZCFtzR87OOtfnKf7OIWgZRfj73a2l0AdhAxjcbc2Gvu_Za7bDY-AyAnJSWgFDYITawYLsqO6DqQE",
+          "canonical": null
+        },
+        {
+          "url": "https://motusnova.blogspot.com/",
+          "agent": "googlebot-smartphone",
+          "hops": [
+            {
+              "status": 302,
+              "location": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/&q=EgSsuNuoGNSh_9cGIi1e7Wradpjkm0vlxFIkHSjlqAtDSX49NbzvIWIgX08dMK9qblgOKLfIlIsWvmQyAnJSWgFDYLWzhszO1tiODQ"
+            },
+            {
+              "status": 429,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/&q=EgSsuNuoGNSh_9cGIi1e7Wradpjkm0vlxFIkHSjlqAtDSX49NbzvIWIgX08dMK9qblgOKLfIlIsWvmQyAnJSWgFDYLWzhszO1tiODQ",
+          "canonical": null
+        },
+        {
+          "url": "https://motusnova.blogspot.com/2026/11/3-70.html",
+          "agent": "desktop",
+          "hops": [
+            {
+              "status": 200,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://motusnova.blogspot.com/2026/11/3-70.html",
+          "canonical": null
+        },
+        {
+          "url": "https://motusnova.blogspot.com/2026/11/3-70.html",
+          "agent": "googlebot-smartphone",
+          "hops": [
+            {
+              "status": 302,
+              "location": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/3-70.html&q=EgSsuNuoGNWh_9cGIi0VgOfdRL_CZTlL4IQaD0akZ1XLoDXfSu4Gkwudf2lLgYFYrmp-a656mRPwWhcyAnJSWgFDYIGbsNSo6oO2oQE"
+            },
+            {
+              "status": 429,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/3-70.html&q=EgSsuNuoGNWh_9cGIi0VgOfdRL_CZTlL4IQaD0akZ1XLoDXfSu4Gkwudf2lLgYFYrmp-a656mRPwWhcyAnJSWgFDYIGbsNSo6oO2oQE",
+          "canonical": null
+        },
+        {
+          "url": "https://motusnova.blogspot.com/2026/11/062-5683-1-09.html",
+          "agent": "desktop",
+          "hops": [
+            {
+              "status": 302,
+              "location": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/062-5683-1-09.html&q=EgSsuNuoGNWh_9cGIi0oDaWCR3HOzGKGrayHIDmM5ZsjkEgAfRGuN7woERZ6wKfLqi_DZetsN90yGoEyAnJSWgFDYI3Gufu_1YieKQ"
+            },
+            {
+              "status": 429,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/062-5683-1-09.html&q=EgSsuNuoGNWh_9cGIi0oDaWCR3HOzGKGrayHIDmM5ZsjkEgAfRGuN7woERZ6wKfLqi_DZetsN90yGoEyAnJSWgFDYI3Gufu_1YieKQ",
+          "canonical": null
+        },
+        {
+          "url": "https://motusnova.blogspot.com/2026/11/062-5683-1-09.html",
+          "agent": "googlebot-smartphone",
+          "hops": [
+            {
+              "status": 302,
+              "location": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/062-5683-1-09.html&q=EgSsuNuoGNah_9cGIi1D3eLMB6JMAsW5XZVB_sNN5cXhCGmhFPrjtLl0-Zb5wC3B-rBJxVpU6y9e7XcyAnJSWgFDYKPY3dOR8Jz54AE"
+            },
+            {
+              "status": 429,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/062-5683-1-09.html&q=EgSsuNuoGNah_9cGIi1D3eLMB6JMAsW5XZVB_sNN5cXhCGmhFPrjtLl0-Zb5wC3B-rBJxVpU6y9e7XcyAnJSWgFDYKPY3dOR8Jz54AE",
+          "canonical": null
+        },
+        {
+          "url": "https://motusnova.blogspot.com/2026/11/amd-37-ai.html",
+          "agent": "desktop",
+          "hops": [
+            {
+              "status": 302,
+              "location": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/amd-37-ai.html&q=EgSsuNuoGNah_9cGIi0lEXxog196UqhDgeXyOi_j-5QPRmTP6Uptx6-vgsZ_am5xel3z9WJ__q1dPoYyAnJSWgFDYLiM2fbM7pPbrQE"
+            },
+            {
+              "status": 429,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/amd-37-ai.html&q=EgSsuNuoGNah_9cGIi0lEXxog196UqhDgeXyOi_j-5QPRmTP6Uptx6-vgsZ_am5xel3z9WJ__q1dPoYyAnJSWgFDYLiM2fbM7pPbrQE",
+          "canonical": null
+        },
+        {
+          "url": "https://motusnova.blogspot.com/2026/11/amd-37-ai.html",
+          "agent": "googlebot-smartphone",
+          "hops": [
+            {
+              "status": 302,
+              "location": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/amd-37-ai.html&q=EgSsuNuoGNeh_9cGIi1Drtqv-UGxJrRwaAqsU74UeavQ5tChBMZv-rJP7zFxeCOuCPBd4gJQQcfOiL8yAnJSWgFDYJnI3pb7o4bergE"
+            },
+            {
+              "status": 429,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/amd-37-ai.html&q=EgSsuNuoGNeh_9cGIi1Drtqv-UGxJrRwaAqsU74UeavQ5tChBMZv-rJP7zFxeCOuCPBd4gJQQcfOiL8yAnJSWgFDYJnI3pb7o4bergE",
+          "canonical": null
+        },
+        {
+          "url": "https://motusnova.blogspot.com/2026/11/359-5648-1-31.html",
+          "agent": "desktop",
+          "hops": [
+            {
+              "status": 302,
+              "location": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/359-5648-1-31.html&q=EgSsuNuoGNeh_9cGIi3XoUJAQUQq1QKs2a--uiauPcD5WmKBvg90xx72xGOkWhU80RtkIehDvHfL8KEyAnJSWgFDYIre1KOO18aSJQ"
+            },
+            {
+              "status": 429,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/359-5648-1-31.html&q=EgSsuNuoGNeh_9cGIi3XoUJAQUQq1QKs2a--uiauPcD5WmKBvg90xx72xGOkWhU80RtkIehDvHfL8KEyAnJSWgFDYIre1KOO18aSJQ",
+          "canonical": null
+        },
+        {
+          "url": "https://motusnova.blogspot.com/2026/11/359-5648-1-31.html",
+          "agent": "googlebot-smartphone",
+          "hops": [
+            {
+              "status": 302,
+              "location": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/359-5648-1-31.html&q=EgSsuNuoGNeh_9cGIi3nV9Lo5Ex3Pa7phLG5dBkvQcgU3pDKO1pnqxyUZVL3ozhzxituaIhY4vvS26AyAnJSWgFDYPy1sb26s8q2pAE"
+            },
+            {
+              "status": 429,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/359-5648-1-31.html&q=EgSsuNuoGNeh_9cGIi3nV9Lo5Ex3Pa7phLG5dBkvQcgU3pDKO1pnqxyUZVL3ozhzxituaIhY4vvS26AyAnJSWgFDYPy1sb26s8q2pAE",
+          "canonical": null
+        },
+        {
+          "url": "https://motusnova.blogspot.com/2026/11/3-58.html",
+          "agent": "desktop",
+          "hops": [
+            {
+              "status": 302,
+              "location": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/3-58.html&q=EgSsuNuoGNih_9cGIi2I4pN1M5bf2MqeHwxilu1OuSht7aUUvdk-WENxsPB5y4hp1TX2Jqu8mInK_YwyAnJSWgFDYMKKjNuGpuWzdw"
+            },
+            {
+              "status": 429,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/3-58.html&q=EgSsuNuoGNih_9cGIi2I4pN1M5bf2MqeHwxilu1OuSht7aUUvdk-WENxsPB5y4hp1TX2Jqu8mInK_YwyAnJSWgFDYMKKjNuGpuWzdw",
+          "canonical": null
+        },
+        {
+          "url": "https://motusnova.blogspot.com/2026/11/3-58.html",
+          "agent": "googlebot-smartphone",
+          "hops": [
+            {
+              "status": 302,
+              "location": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/3-58.html&q=EgSsuNuoGNih_9cGIi2h-jagjb3xB2j-Rzdqc1lYk--khMJWfLFig_GyrcWOVBcIonpTOXXhHXlFkDsyAnJSWgFDYKaou8GYnfCdiAE"
+            },
+            {
+              "status": 429,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/3-58.html&q=EgSsuNuoGNih_9cGIi2h-jagjb3xB2j-Rzdqc1lYk--khMJWfLFig_GyrcWOVBcIonpTOXXhHXlFkDsyAnJSWgFDYKaou8GYnfCdiAE",
+          "canonical": null
+        },
+        {
+          "url": "https://motusnova.blogspot.com/2026/11/20-33.html",
+          "agent": "desktop",
+          "hops": [
+            {
+              "status": 302,
+              "location": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/20-33.html&q=EgSsuNuoGNmh_9cGIi3SZA1Ka8YibFboJ-XBjGx1eSGOg365VcWF_XlNEPwFKtLcrlRcWgjYFgSnoPkyAnJSWgFDYPr7u4Lmh_rA0wE"
+            },
+            {
+              "status": 429,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/20-33.html&q=EgSsuNuoGNmh_9cGIi3SZA1Ka8YibFboJ-XBjGx1eSGOg365VcWF_XlNEPwFKtLcrlRcWgjYFgSnoPkyAnJSWgFDYPr7u4Lmh_rA0wE",
+          "canonical": null
+        },
+        {
+          "url": "https://motusnova.blogspot.com/2026/11/20-33.html",
+          "agent": "googlebot-smartphone",
+          "hops": [
+            {
+              "status": 302,
+              "location": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/20-33.html&q=EgSsuNuoGNmh_9cGIi2oNZx7RGDG6VEjqVFN8R-A0uP5mD9B4n9pMCZ9uz_A2iTGbSvscFDEqkGsOvEyAnJSWgFDYI3_9bGluu3UQA"
+            },
+            {
+              "status": 429,
+              "location": null
+            }
+          ],
+          "finalUrl": "https://www.google.com/sorry/index?continue=https://motusnova.blogspot.com/2026/11/20-33.html&q=EgSsuNuoGNmh_9cGIi2oNZx7RGDG6VEjqVFN8R-A0uP5mD9B4n9pMCZ9uz_A2iTGbSvscFDEqkGsOvEyAnJSWgFDYI3_9bGluu3UQA",
+          "canonical": null
+        }
+      ]
+    }
+  },
+  "datalab": {
+    "state": "PASS"
+  },
+  "naverBlogSearch": {
+    "state": "PASS"
+  },
+  "ourArticles": [
+    {
+      "title": "11월 19일 코스피 마감, 1.39% 올라 5,137.89…검색 1위 삼성전자 0.9% 상승",
+      "url": "https://motusnova.blogspot.com/2026/11/11-19-139-513789-1-09.html",
+      "labels": [
+        "국내증시"
+      ],
+      "publishedKst": "2026-11-19 17:36",
+      "features": {
+        "textLength": 4379,
+        "imageCount": 1,
+        "chartCount": 2,
+        "headingCount": 12,
+        "tableCount": 0,
+        "linkCount": 41
+      },
+      "keywords": [
+        "코스피 마감",
+        "코스피"
+      ],
+      "searchConsole": [],
+      "datalab": [
+        {
+          "keyword": "코스피 마감",
+          "series": [
+            [
+              "2026-11-06",
+              0.00282
+            ],
+            [
+              "2026-11-09",
+              0.003
+            ],
+            [
+              "2026-11-10",
+              0.00282
+            ],
+            [
+              "2026-11-11",
+              0.00255
+            ],
+            [
+              "2026-11-12",
+              0.00227
+            ],
+            [
+              "2026-11-13",
+              0.00182
+            ],
+            [
+              "2026-11-16",
+              0.00264
+            ],
+            [
+              "2026-11-17",
+              0.00327
+            ],
+            [
+              "2026-11-18",
+              0.00227
+            ],
+            [
+              "2026-11-19",
+              0.00336
+            ]
+          ]
+        },
+        {
+          "keyword": "코스피",
+          "series": [
+            [
+              "2026-11-06",
+              100
+            ],
+            [
+              "2026-11-07",
+              6.39057
+            ],
+            [
+              "2026-11-08",
+              3.41591
+            ],
+            [
+              "2026-11-09",
+              62.70992
+            ],
+            [
+              "2026-11-10",
+              48.94308
+            ],
+            [
+              "2026-11-11",
+              45.15167
+            ],
+            [
+              "2026-11-12",
+              45.37571
+            ],
+            [
+              "2026-11-13",
+              42.59477
+            ],
+            [
+              "2026-11-14",
+              3.47219
+            ],
+            [
+              "2026-11-15",
+              2.26828
+            ],
+            [
+              "2026-11-16",
+              48.82505
+            ],
+            [
+              "2026-11-17",
+              57.181
+            ],
+            [
+              "2026-11-18",
+              50.70345
+            ],
+            [
+              "2026-11-19",
+              47.24291
+            ]
+          ]
+        }
+      ],
+      "competitors": [
+        {
+          "keyword": "코스피 마감",
+          "top": [
+            {
+              "rank": 1,
+              "title": "11월 19일 코스피 마감은 16시 30분인데, 17시 주가는 왜 바뀔까요?",
+              "link": "https://blog.naver.com/love_papaa/224481926956",
+              "blogger": "LODA의 좌충우돌 생활리뷰",
+              "bloggerLink": "https://blog.naver.com/love_papaa",
+              "postdate": "20261118",
+              "description": "수능일 코스피의 16:30 마감 지수는 그날 정규장 가격을 바탕으로 산출됩니다. 정규장이 끝난 뒤 개별 주식에 새 거래가 생기면 거기서 정해진 가격이 시간외 체결가로 표시됩니다. 저녁에 주가가 올랐다는... ",
+              "features": {
+                "textLength": 2936,
+                "imageCount": 6,
+                "chartCount": 0,
+                "headingCount": 0,
+                "tableCount": 0,
+                "linkCount": 6
+              }
+            },
+            {
+              "rank": 2,
+              "title": "5천피 하루 만에 복귀! 오늘 코스피 마감, 내 연금엔 무슨 영향?",
+              "link": "https://blog.naver.com/bbt8399/224482218834",
+              "blogger": "경제 정책 복지",
+              "bloggerLink": "https://blog.naver.com/bbt8399",
+              "postdate": "20261118",
+              "description": "■ 한눈에 보는 3줄 요약 정리하면 18일 코스피는 5,067.44로 마감하며 하루 만에 5천선을 되찾았고, 엔비디아 실적과 외국인 순매수, 반도체 대형주 강세가 상승을 이끌었습니다. 하지만 올해 증시는 하루 2%대... ",
+              "features": {
+                "textLength": 2217,
+                "imageCount": 4,
+                "chartCount": 0,
+                "headingCount": 0,
+                "tableCount": 0,
+                "linkCount": 5
+              }
+            },
+            {
+              "rank": 3,
+              "title": "코스피 5,137.89 마감, 코스닥 3.32% 급등…장중 5,000선 붕괴 후 반등한 ....",
+              "link": "https://blog.naver.com/ajl6016/224484281026",
+              "blogger": "숲속스케치북",
+              "bloggerLink": "https://blog.naver.com/ajl6016",
+              "postdate": "20261120",
+              "description": "코스피 5,137.89 마감이 남긴 의미 이번 거래일의 핵심은 종가 5,137.89라는 숫자 하나에만 있지 않습니다. 코스피는 장중 4,963.61까지 내려갔다가 174포인트 넘게 회복했습니다. 이는 시장에 하락 압력이... ",
+              "features": {
+                "textLength": 4360,
+                "imageCount": 3,
+                "chartCount": 0,
+                "headingCount": 0,
+                "tableCount": 2,
+                "linkCount": 6
+              }
+            },
+            {
+              "rank": 4,
+              "title": "11/19 코스피 마감 | 한한령 들썩",
+              "link": "https://blog.naver.com/moneywargogo/224483698406",
+              "blogger": "퇴근 후 돈 전쟁!",
+              "bloggerLink": "https://blog.naver.com/moneywargogo",
+              "postdate": "20261119",
+              "description": "kr/article/view/ecn202311160040 #코스피마감 #증시마감 #주식시황 #직장인주식 #퇴근후돈전쟁 #한한령 #한중FTA #코스닥 #여행주 #엔터주 #하나투어 #하이브 #제주항공 #SK하이닉스 #제주반도체 (※ 본... ",
+              "features": {
+                "textLength": 3968,
+                "imageCount": 8,
+                "chartCount": 0,
+                "headingCount": 0,
+                "tableCount": 0,
+                "linkCount": 8
+              }
+            },
+            {
+              "rank": 5,
+              "title": "오늘 코스피 마감 시황과 증시 주요 특징주 분석",
+              "link": "https://blog.naver.com/allreview_98/224482440025",
+              "blogger": "머니박스 | 금융·주식·이슈",
+              "bloggerLink": "https://blog.naver.com/allreview_98",
+              "postdate": "20261118",
+              "description": "오늘 코스피 마감에 가장 큰 영향을 준 주체는 누구인가요? A2. 외국인과 기관의 수급 동향이 지수 방향성을 결정하는 핵심 요인이었습니다. 외국인의 대형주 순매수 유입 규모와 기관의 차익실현 매물 출회... ",
+              "features": {
+                "textLength": 2181,
+                "imageCount": 5,
+                "chartCount": 0,
+                "headingCount": 0,
+                "tableCount": 0,
+                "linkCount": 5
+              }
+            },
+            {
+              "rank": 6,
+              "title": "코스피 마감 정리: 장중 5000선 내줬다가 이틀 연속 상승, 5119.42 (11월 ....",
+              "link": "https://blog.naver.com/saintjw/224483787263",
+              "blogger": "냉철한 F의 따뜻한 시선",
+              "bloggerLink": "https://blog.naver.com/saintjw",
+              "postdate": "20261119",
+              "description": "필자는 투자자문가가 아니며, 투자 판단과 책임은 본인에게 있습니다. #코스피마감 #코스피 #코스피5000 #코스닥 #국내증시 #삼성전기 #SK하이닉스 #SK스퀘어 #외국인수급 #증시정리"
+            },
+            {
+              "rank": 7,
+              "title": "어제 코스피 마감 정리, 엔터주 급등 이유와 환율 흐름",
+              "link": "https://blog.naver.com/ralaman/224482864220",
+              "blogger": "매매의 숲 · 데이터로 읽는 증시",
+              "bloggerLink": "https://blog.naver.com/ralaman",
+              "postdate": "20261119",
+              "description": "정규장을 마감했다 어제 국내 증시는 코스피가 5,067.44포인트로 전장 대비 1.99% 올랐고 코스닥 역시 662.81포인트로 1.96% 상승하며 양 시장 모두 강한 탄력성을 보여주었다. 하루 만에 코스피가 98포인트 이상... "
+            },
+            {
+              "rank": 8,
+              "title": "11월 19일 코스피 마감, 한한령 수혜주 상한가와 한중 협상",
+              "link": "https://blog.naver.com/alliknam/224483663111",
+              "blogger": "알읽남 | 알고리즘으로 읽어주는 남자",
+              "bloggerLink": "https://blog.naver.com/alliknam",
+              "postdate": "20261119",
+              "description": "숫자 기준: 한국거래소 정규장 종가 기준, 종목 수급은 알읽남 레이더 화면 기준, 업종지수 -37%는 전날까지 -42.79%에 오늘 +9.39%를 이어 붙인 값 #코스피 #코스피마감 #한한령 #한한령수혜주 #한중FTA... "
+            },
+            {
+              "rank": 9,
+              "title": "오늘의 코스피 마감｜반도체주 급락",
+              "link": "https://blog.naver.com/kissbkl/224479856500",
+              "blogger": "벤자민의 소통공간",
+              "bloggerLink": "https://blog.naver.com/kissbkl",
+              "postdate": "20261117",
+              "description": "특정 종목의 매수·매도를 권유하지 않습니다. #오늘의코스피 #코스피마감 #11월16일증시 #국내증시 #코스닥 #삼성전자 #SK하이닉스 #반도체주 #엔비디아실적 #외국인수급 #기관매도 #주식시장 #증시전망"
+            },
+            {
+              "rank": 10,
+              "title": "코스피 마감 5,137.89 +1.39%, 11월 19일 코스닥 3% 급등 한한령 이유",
+              "link": "https://blog.naver.com/moneyfinds/224483605909",
+              "blogger": "머니알려줘",
+              "bloggerLink": "https://blog.naver.com/moneyfinds",
+              "postdate": "20261119",
+              "description": "(11월 19일 마감·장중 시황), 경제타임스(11월 19일 장중). 수치는 잠정치와 차이가 있을 수 있어요. 투자 권유가 아닙니다. &amp; #코스피마감 #코스닥마감 #코스피상승이유 #한한령 #머니알려줘"
+            }
+          ]
+        },
+        {
+          "keyword": "코스피",
+          "top": [
+            {
+              "rank": 1,
+              "title": "코스피 지수 -47%, 과거 반토막 뒤 바닥은 언제 왔나?",
+              "link": "https://blog.naver.com/kk_place_editor/224481087395",
+              "blogger": "머니플로우",
+              "bloggerLink": "https://blog.naver.com/kk_place_editor",
+              "postdate": "20261117",
+              "description": "코스피 지수는 11월 17일 4,968.48로 마감해 6월 19일 장중 고점(9,385.59)보다 -47.06% 낮아졌어요(네이버... 왔는지, 코스피 전망을 가를 날짜까지 정리해요. ① 코스피는 어떻게 반토막 근처까지 왔나요? 고점... ",
+              "features": {
+                "textLength": 3911,
+                "imageCount": 13,
+                "chartCount": 0,
+                "headingCount": 13,
+                "tableCount": 0,
+                "linkCount": 16
+              }
+            },
+            {
+              "rank": 2,
+              "title": "코스피 야간선물ㅣ행온에서 시세 보는법",
+              "link": "https://blog.naver.com/lll1566/224477007441",
+              "blogger": "먹어야 사는 여자",
+              "bloggerLink": "https://blog.naver.com/lll1566",
+              "postdate": "20261114",
+              "description": "코스피 야간선물 행온에서 보는법 해당 글은 투자 권유 목적이 아닌 정보 공유용으로 작성하였음을... 걸렸습니다 코스피 야간선물은 무엇인지, 코스피 야간선물 보는법은 어떤 순서인지, 행온이라는... ",
+              "features": {
+                "textLength": 3347,
+                "imageCount": 9,
+                "chartCount": 0,
+                "headingCount": 6,
+                "tableCount": 0,
+                "linkCount": 9
+              }
+            },
+            {
+              "rank": 3,
+              "title": "이번주 코스피 전망, 반등이냐 재하락이냐 (주말 3분 정리)",
+              "link": "https://blog.naver.com/ssibar1188/224477619580",
+              "blogger": "킴찹의 하루살이",
+              "bloggerLink": "https://blog.naver.com/ssibar1188",
+              "postdate": "20261115",
+              "description": "이번주 코스피 전망, 반등이냐 재하락이냐 (월요일 장 열리기 전 이것만 체크!) 지난주 코스피, 금요일에 하락 마감했다 보니... 이번주 코스피 전망 주말 3분 정리 시작...!!! 1. 이번주 코스피는...... ",
+              "features": {
+                "textLength": 3323,
+                "imageCount": 14,
+                "chartCount": 0,
+                "headingCount": 5,
+                "tableCount": 2,
+                "linkCount": 14
+              }
+            },
+            {
+              "rank": 4,
+              "title": "&quot;5천피 깨지니까 바로 올려주네&quot; 코스피 지수 전망, 바닥 다지기일까....",
+              "link": "https://blog.naver.com/traderfeels/224482647610",
+              "blogger": "트필 | Traderfeels",
+              "bloggerLink": "https://blog.naver.com/traderfeels",
+              "postdate": "20261118",
+              "description": "코스피가 5천을 중간에 두고 투자자들의 마음을 놓고 장난치고 있다.... &quot;5천피 깨지니까 바로 올려주네&quot; 코스피 지수 전망, 바닥 다지기일까 데드캣 바운스일까 하루에 5천피를 두 번 되찾았다 17일 코스피... ",
+              "features": {
+                "textLength": 3340,
+                "imageCount": 9,
+                "chartCount": 0,
+                "headingCount": 12,
+                "tableCount": 0,
+                "linkCount": 11
+              }
+            },
+            {
+              "rank": 5,
+              "title": "코스피 9000 환호가 5000 공포로, '개미들만 털리는 구조 속' 진짜 돈 ....",
+              "link": "https://blog.naver.com/partner6766/224479888443",
+              "blogger": "아이엠그레이트",
+              "bloggerLink": "https://blog.naver.com/partner6766",
+              "postdate": "20261117",
+              "description": "코스피 9000 환호가 5000 공포로, '개미들만 털리는 구조 속' 진짜 돈 번 사람들 코스피 9,000을 돌파했을 때만 해도 대한민국 주식시장이... 삼성전자와 SK하이닉스가 연일 최고가를 경신했고, 코스피 1만 시대도... ",
+              "features": {
+                "textLength": 3315,
+                "imageCount": 5,
+                "chartCount": 0,
+                "headingCount": 8,
+                "tableCount": 0,
+                "linkCount": 6
+              }
+            },
+            {
+              "rank": 6,
+              "title": "코스피 5000 붕괴 가능성, 2027년 주식시장 전망은?",
+              "link": "https://blog.naver.com/aeiouplus/224480226761",
+              "blogger": "꿀팁정보",
+              "bloggerLink": "https://blog.naver.com/aeiouplus",
+              "postdate": "20261117",
+              "description": "코스피가 5000선 위로 올라가면 안도하지만, 다시 아래로 내려가면 불안해지는 것이죠. 같은... 코스피 KOSPI코스피 5,024.16 76.34 -1.50% 2026.11.17. 10:32 실시간 기준 그런데 2026년 11월 17일, 코스피가 장중... "
+            },
+            {
+              "rank": 7,
+              "title": "외국인은 샀는데 코스피는 하락? 오늘 장에서 엇갈린 수급",
+              "link": "https://blog.naver.com/banda_i/224475184272",
+              "blogger": "반다이의 이야기",
+              "bloggerLink": "https://blog.naver.com/banda_i",
+              "postdate": "20261113",
+              "description": "순매수에도 코스피 하락, 기관은 왜 팔았을까? 외국인 투자자가 국내 주식을 사들이면 코스피도 오를 것이라고 생각하기 쉽습니다. 하지만 2026년 11월 12일 시장은 다른 모습을 보여줬습니다. 외국인은 코스피... "
+            },
+            {
+              "rank": 8,
+              "title": "코스피 시황 총정리, 주간 4.6% 올랐는데 외국인은 왜 팔았을까요",
+              "link": "https://blog.naver.com/dmoon88/224478581290",
+              "blogger": "dmoon88님의 블로그",
+              "bloggerLink": "https://blog.naver.com/dmoon88",
+              "postdate": "20261116",
+              "description": "코스피가 주간으로는 4%를 넘게 올랐는데, 정작 외국인은 금요일에... 11월 13일 정규장 마감 기준으로 코스피가 어디까지 올랐다... 코스피, 5290선 마감까지 어떻게 움직였나 코스피는 11월 13일 5290.53으로 전... "
+            },
+            {
+              "rank": 9,
+              "title": "코스피 폭락속에 꽃을 피우는 종목, TOP3",
+              "link": "https://blog.naver.com/hodrt/224474592669",
+              "blogger": "한국금융상담 for 경제적자유",
+              "bloggerLink": "https://blog.naver.com/hodrt",
+              "postdate": "20261113",
+              "description": "코스피 폭락속에 꽃을 피우는 종목 TOP3 코스피가 하루 만에 5.28% 빠진 11월 5일, 삼성전자는 7.57... 코스피 폭락에도 급등! 살아남은 종목 TOP3의 정체 지난 11월 5일 코스피는 5.28% 급락하며 5,383.80으로... "
+            },
+            {
+              "rank": 10,
+              "title": "“코스피 6000 회복 가능?”… 반등 전망에 숨은 결정적 변수",
+              "link": "https://blog.naver.com/sada9_/224477129901",
+              "blogger": "경제인사이트365",
+              "bloggerLink": "https://blog.naver.com/sada9_",
+              "postdate": "20261114",
+              "description": "“코스피 적정 수준이 6390이라는데 왜 주가는 오르지 않을까?” 최근 국내 증시가 크게 흔들리면서 코스피 6000선 회복 가능성에 관심이 집중되고 있습니다. 특히 11월 14일 BNK투자증권이 코스피 적정... "
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "[데일리 리포트] 2026년 11월 19일 국내 증시·미국 증시·AI 핵심 정리",
+      "url": "https://motusnova.blogspot.com/2026/11/2026-11-19-ai.html",
+      "labels": [
+        "리포트"
+      ],
+      "publishedKst": "2026-11-19 12:57",
+      "features": {
+        "textLength": 2966,
+        "imageCount": 1,
+        "chartCount": 0,
+        "headingCount": 5,
+        "tableCount": 3,
+        "linkCount": 13
+      },
+      "keywords": [
+        "국내 증시"
+      ],
+      "searchConsole": [],
+      "datalab": [
+        {
+          "keyword": "국내 증시",
+          "series": [
+            [
+              "2026-11-06",
+              100
+            ],
+            [
+              "2026-11-07",
+              10.67081
+            ],
+            [
+              "2026-11-08",
+              4.1624
+            ],
+            [
+              "2026-11-09",
+              75.23924
+            ],
+            [
+              "2026-11-10",
+              67.76456
+            ],
+            [
+              "2026-11-11",
+              67.28607
+            ],
+            [
+              "2026-11-12",
+              69.7064
+            ],
+            [
+              "2026-11-13",
+              64.61952
+            ],
+            [
+              "2026-11-14",
+              7.87187
+            ],
+            [
+              "2026-11-15",
+              3.591
+            ],
+            [
+              "2026-11-16",
+              65.91331
+            ],
+            [
+              "2026-11-17",
+              70.89798
+            ],
+            [
+              "2026-11-18",
+              71.18833
+            ],
+            [
+              "2026-11-19",
+              96.98271
+            ]
+          ]
+        }
+      ],
+      "competitors": [
+        {
+          "keyword": "국내 증시",
+          "top": [
+            {
+              "rank": 1,
+              "title": "[2026.11.19 국내 증시 마감] 4,963까지 밀렸다가 5,137 고점 마감! 수출 1....",
+              "link": "https://blog.naver.com/loveinyourlife/224483630542",
+              "blogger": "일상 속 작은 행복, 맛집 탐방기",
+              "bloggerLink": "https://blog.naver.com/loveinyourlife",
+              "postdate": "20261119",
+              "description": "수능일이라 평소보다 한 시간 늦은 오전 10시에 문을 연 오늘 국내 증시, 그야말로 '전약후강'의 드라마를 썼습니다. 장 초반만 해도 젠슨 황 전 CEO의 공백과 매파적 FOMC 의사록 여파로 코스피가 4,963.... ",
+              "features": {
+                "textLength": 3629,
+                "imageCount": 2,
+                "chartCount": 0,
+                "headingCount": 0,
+                "tableCount": 0,
+                "linkCount": 2
+              }
+            },
+            {
+              "rank": 2,
+              "title": "코스피·코스닥 동반 반등! 주가 급등 이유와 앞으로 국내 증시 전망",
+              "link": "https://blog.naver.com/ailite/224483686126",
+              "blogger": "소소한 부자일기",
+              "bloggerLink": "https://blog.naver.com/ailite",
+              "postdate": "20261119",
+              "description": "#코스피 #코스닥 #코스피반등 #코스닥반등 #국내증시 #주식시장전망 #주가급등 #삼성전자 #SK하이닉스 #삼성전기 #반도체관련주 #로봇관련주 #기업분석 #주식분석 #소소한부자일기",
+              "features": {
+                "textLength": 3189,
+                "imageCount": 5,
+                "chartCount": 0,
+                "headingCount": 0,
+                "tableCount": 0,
+                "linkCount": 5
+              }
+            },
+            {
+              "rank": 3,
+              "title": "&quot;코스피 5000선 붕괴&quot; 국내 증시 급락 이유 및 전망",
+              "link": "https://blog.naver.com/soap77777/224482538965",
+              "blogger": "비누의 경제 공방",
+              "bloggerLink": "https://blog.naver.com/soap77777",
+              "postdate": "20261119",
+              "description": "&quot;코스피 5000선 붕괴&quot; 국내 증시 급락 이유 및 전망 최근 국내 증시를 지켜보면서 하루 사이 시장 분위기가 이렇게 달라질 수 있다는 사실을 다시 한번 느꼈다. 지난 17일 코스피가 5000선이 붕괴되면서... ",
+              "features": {
+                "textLength": 3381,
+                "imageCount": 9,
+                "chartCount": 0,
+                "headingCount": 1,
+                "tableCount": 2,
+                "linkCount": 9
+              }
+            },
+            {
+              "rank": 4,
+              "title": "2026년 11월 16일 국내 증시 전망｜코스피·코스닥 반등 가능할까? 엔....",
+              "link": "https://blog.naver.com/wjdgodtn3/224477829823",
+              "blogger": "오늘의 마켓노트",
+              "bloggerLink": "https://blog.naver.com/wjdgodtn3",
+              "postdate": "20261115",
+              "description": "11월 셋째 주 국내 증시는 미국 기술주 조정과 반도체 업종의 불확실성 속에서 새로운 방향을 모색할 것으로 예상됩니다. 지난주 미국 증시에서는 엔비디아를 둘러싼 경영 불확실성과 AI 데이터센터 투자... ",
+              "features": {
+                "textLength": 6827,
+                "imageCount": 6,
+                "chartCount": 0,
+                "headingCount": 0,
+                "tableCount": 3,
+                "linkCount": 9
+              }
+            },
+            {
+              "rank": 5,
+              "title": "2026년 11월 13일 국내 증시 마감 분석과 종가베팅 전략",
+              "link": "https://blog.naver.com/ck9981/224475860079",
+              "blogger": "케이 7의 성장 인사이트",
+              "bloggerLink": "https://blog.naver.com/ck9981",
+              "postdate": "20261113",
+              "description": "#경제 #주식 #부동산 #재테크 #정보 #국내증시 #코스피 #코스닥 #종가베팅 #주식투자 #주식매매 #전업투자자 #반도체 #SK하이닉스 #삼성전자 #신한지주 #KB금융 #금호건설 #외국인수급 #미국증시",
+              "features": {
+                "textLength": 3410,
+                "imageCount": 1,
+                "chartCount": 0,
+                "headingCount": 0,
+                "tableCount": 0,
+                "linkCount": 1
+              }
+            },
+            {
+              "rank": 6,
+              "title": "2026년 11월 18일 국내증시 전망, 코스피 5,000선 회복 시도…엔비디아 ....",
+              "link": "https://blog.naver.com/economyy365/224481510607",
+              "blogger": "매일 만나는 경제 인사이트",
+              "bloggerLink": "https://blog.naver.com/economyy365",
+              "postdate": "20261118",
+              "description": "전일 국내증시, 큰 폭의 조정 11월 17일 국내증시는 상당히 큰 폭으로 하락했습니다. 코스피는 4,968.48로 2.59% 하락하면서 약 9개월 만에 다시 5,000선 아래로 내려왔고, 코스닥도 650.06으로 2.34% 하락했습니다.... "
+            },
+            {
+              "rank": 7,
+              "title": "국내증시 상한가 종목 정리 2026년 11월 10일 (화)",
+              "link": "https://blog.naver.com/jnpp87/224472534800",
+              "blogger": "부자만들기",
+              "bloggerLink": "https://blog.naver.com/jnpp87",
+              "postdate": "20261111",
+              "description": "이날 시장의 핵심 키워드는 국제유가 급락에 따른 항공주 강세, NHN의 어닝 서프라이즈, 우선주 품귀 현상이었다고 정리할 수 있습니다. 국내증시는 코스피 +4.39%, 코스닥 4.48%로 큰 폭으로 상승 마감 되었습니다."
+            },
+            {
+              "rank": 8,
+              "title": "&lt;미증시 마감분석&gt;엔비디아 실적 앞두고 AI주 변동성 확대…다우·반....",
+              "link": "https://blog.naver.com/finesignalnews/224481434118",
+              "blogger": "V+IEW 돈의 흐름을 잡는 파인시그널투자연구소",
+              "bloggerLink": "https://blog.naver.com/finesignalnews",
+              "postdate": "20261118",
+              "description": "국내증시는 외국인 수급과 반도체 대형주의 시가 회복 여부가 중요합니다. 출처 한국경제TV 미국 증시는 엔비디아 실적과 향후 AI 투자 전망을 둘러싼 불확실성 때문에 3대 지수가 동반 하락했습니다.... "
+            },
+            {
+              "rank": 9,
+              "title": "2026년 11월 16일 국내증시 전망, 코스피·코스닥 오늘 주목할 포인트",
+              "link": "https://blog.naver.com/economyy365/224478635783",
+              "blogger": "매일 만나는 경제 인사이트",
+              "bloggerLink": "https://blog.naver.com/economyy365",
+              "postdate": "20261116",
+              "description": "안녕하세요 :) 오늘은 2026년 11월 16일 국내증시를 살펴보겠습니다. 지난주 국내 증시는 큰 변동성을 보여주면서 투자자들의 긴장감이 높아졌는데요. 특히 코스피는 장중 5,500선을 넘어섰다가 외국인 매도세가... "
+            },
+            {
+              "rank": 10,
+              "title": "2026년 11월 19일 국내증시 — 코스피 5,000선, 오늘의 핵심은 ‘외국인 ....",
+              "link": "https://blog.naver.com/economyy365/224482963683",
+              "blogger": "매일 만나는 경제 인사이트",
+              "bloggerLink": "https://blog.naver.com/economyy365",
+              "postdate": "20261119",
+              "description": "11월 19일 국내증시 핵심 체크포인트 구분 체크 포인트  코스피 5,000선 지지 여부  반도체 삼성전자·SK하이닉스 흐름  외국인 4거래일 연속 매도 지속 여부  기관 전일 매수세 지속 여부  환율 원·달러 1... "
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "구글이 공개한 Gemini 신규 기능, 마이크로소프트 움직임까지 읽기",
+      "url": "https://motusnova.blogspot.com/2026/11/gemini_0912487108.html",
+      "labels": [
+        "AI 인텔리전스"
+      ],
+      "publishedKst": "2026-11-19 12:55",
+      "features": {
+        "textLength": 5011,
+        "imageCount": 1,
+        "chartCount": 1,
+        "headingCount": 6,
+        "tableCount": 0,
+        "linkCount": 31
+      },
+      "keywords": [
+        "AI 뉴스",
+        "구글이 공개한 Gemini"
+      ],
+      "searchConsole": [],
+      "datalab": [
+        {
+          "keyword": "AI 뉴스",
+          "series": [
+            [
+              "2026-11-06",
+              60.78431
+            ],
+            [
+              "2026-11-07",
+              19.60784
+            ],
+            [
+              "2026-11-08",
+              13.72549
+            ],
+            [
+              "2026-11-09",
+              54.90196
+            ],
+            [
+              "2026-11-10",
+              50.98039
+            ],
+            [
+              "2026-11-11",
+              37.2549
+            ],
+            [
+              "2026-11-12",
+              54.90196
+            ],
+            [
+              "2026-11-13",
+              29.41176
+            ],
+            [
+              "2026-11-14",
+              33.33333
+            ],
+            [
+              "2026-11-15",
+              29.41176
+            ],
+            [
+              "2026-11-16",
+              82.35294
+            ],
+            [
+              "2026-11-17",
+              76.47058
+            ],
+            [
+              "2026-11-18",
+              49.0196
+            ],
+            [
+              "2026-11-19",
+              100
+            ]
+          ]
+        },
+        {
+          "keyword": "구글이 공개한 Gemini",
+          "series": []
+        }
+      ],
+      "competitors": [
+        {
+          "keyword": "AI 뉴스",
+          "top": [
+            {
+              "rank": 1,
+              "title": "AI 뉴스 모아 보기, 컴퓨터 채점 믿어도 될까",
+              "link": "https://blog.naver.com/ddakman/224482886473",
+              "blogger": "SECOND SYNTAX",
+              "bloggerLink": "https://blog.naver.com/ddakman",
+              "postdate": "20261119",
+              "description": "AI 뉴스 모아 보기 — 11월 19일 · 4가지 소식 (캐릭터는 AI 이미지 생성) 아침마다 궁금이가 묻는 질문이 있어요. &quot;오늘 AI 소식 뭐 있어?&quot; 그래서 오늘 나온 AI 소식을 골라 한 장씩 정리했어요.... ",
+              "features": {
+                "textLength": 2977,
+                "imageCount": 9,
+                "chartCount": 0,
+                "headingCount": 2,
+                "tableCount": 0,
+                "linkCount": 17
+              }
+            },
+            {
+              "rank": 2,
+              "title": "AI 가짜뉴스 문제, 정부가 시민토론회를 여는 이유",
+              "link": "https://blog.naver.com/bgreen24/224474216046",
+              "blogger": "일상공유블로그Job",
+              "bloggerLink": "https://blog.naver.com/bgreen24",
+              "postdate": "20261113",
+              "description": "이번 뉴스는 AI 기술이 사회에 미치는 영향을 전문가와 시민이 함께 논의한다는 점에서 살펴볼 만한 이슈입니다. AI와 디지털 기술에 관심이 있는 분들에게는 관련 정책의 흐름을 이해하는 데 도움이 될 수... ",
+              "features": {
+                "textLength": 3641,
+                "imageCount": 3,
+                "chartCount": 0,
+                "headingCount": 13,
+                "tableCount": 1,
+                "linkCount": 3
+              }
+            },
+            {
+              "rank": 3,
+              "title": "주말 아침 10분 투자해 이번 주 관심 뉴스 핵심만 AI에게 브리핑받는 ....",
+              "link": "https://blog.naver.com/21-ai-story/224476286088",
+              "blogger": "동네아낙's 생활과 AI의 모든것",
+              "bloggerLink": "https://blog.naver.com/21-ai-story",
+              "postdate": "20261115",
+              "description": "☕ 주말 아침 10분 AI 뉴스 브리핑을 요청하는 나만의 기준 그래서 저는 인공지능을 개인 뉴스 큐레이터처럼 활용하기로 마음먹었습니다. 무작정 이번 주 뉴스를 알려달라고 하면 너무 광범위한 이야기만 나오기... ",
+              "features": {
+                "textLength": 2017,
+                "imageCount": 0,
+                "chartCount": 0,
+                "headingCount": 1,
+                "tableCount": 0,
+                "linkCount": 0
+              }
+            },
+            {
+              "rank": 4,
+              "title": "제미나이4 클로드페이블 GPT6.2 AI뉴스 정리",
+              "link": "https://blog.naver.com/mingming_818/224481946161",
+              "blogger": "꼬꼬디자인 연구소✨",
+              "bloggerLink": "https://blog.naver.com/mingming_818",
+              "postdate": "20261119",
+              "description": "제미나이4 클로드페이블 GPT6.2 AI뉴스 정리 안녕하세요 매일매일 성장하는 꼬꼬디자인입니다 요즘 AI 소식은 일주일만 지나도 이름이 바뀌어 있더라고요 새 모델 이름을 외우기도 전에 또 다음... ",
+              "features": {
+                "textLength": 2464,
+                "imageCount": 10,
+                "chartCount": 0,
+                "headingCount": 13,
+                "tableCount": 1,
+                "linkCount": 11
+              }
+            },
+            {
+              "rank": 5,
+              "title": "2026년 11월 셋째 주 주요 뉴스 총정리｜AI·경제·기업·국제·사회·자....",
+              "link": "https://blog.naver.com/romanticguy_/224482588736",
+              "blogger": "Romanticman",
+              "bloggerLink": "https://blog.naver.com/romanticguy_",
+              "postdate": "20261118",
+              "description": "※ 디시인사이드 게시물과 앞서 수집한 뉴스 요약을 바탕으로 작성했으며, 일부 세부 수치와 발표 내용은 공식 원문 재검증이 필요하다. ▶ 1. AI·IT·과학기술 이번 주 가장 주목할 분야는 역시 인공지능이다.... ",
+              "features": {
+                "textLength": 3670,
+                "imageCount": 0,
+                "chartCount": 0,
+                "headingCount": 1,
+                "tableCount": 0,
+                "linkCount": 0
+              }
+            },
+            {
+              "rank": 6,
+              "title": "AI 카드뉴스 제작 방법, 9번 갈아엎고 알게 된 'AI 티' 나는 이유 | 좌....",
+              "link": "https://blog.naver.com/sooooolog/224433452759",
+              "blogger": "수수한 수로그",
+              "bloggerLink": "https://blog.naver.com/sooooolog",
+              "postdate": "20261006",
+              "description": "AI 카드뉴스 제작 방법, 9번 갈아엎고 알게 된 'AI 티' 나는 이유 | 좌충우돌 도전기 ② 01 · AI카드뉴스 9번 갈아엎은 이유 #AI카드뉴스제작방법 #챗gpt카드뉴스만드는법 #카드뉴스만들기ai #ai티안나는그림... "
+            },
+            {
+              "rank": 7,
+              "title": "AI시대에는 뉴스를 많이 보는 것보다 제대로 골라보는 힘이 필요하....",
+              "link": "https://blog.naver.com/warartist1052/224446104806",
+              "blogger": "철학적전략가",
+              "bloggerLink": "https://blog.naver.com/warartist1052",
+              "postdate": "20261019",
+              "description": "이제 AI는 뉴스를 요약하고, 제목을 뽑고, 논점을 정리해준다. 그래서 앞으로 더 중요한 것은 뉴스를 많이 보는 능력이 아니다. 무엇을 볼지, 무엇을 넘길지, 무엇을 다시 확인할지 정하는 능력이다. 정보가... "
+            },
+            {
+              "rank": 8,
+              "title": "AI 뉴스 정리: OpenAI 투자 목표 축소부터 컴퓨터 조작 AI까지, 이번 주 ....",
+              "link": "https://blog.naver.com/limjintu/224472778459",
+              "blogger": "올빼미의 꿈",
+              "bloggerLink": "https://blog.naver.com/limjintu",
+              "postdate": "20261111",
+              "description": "10가지 뉴스를 돈, 기술, 내 투자 순서로 정리해 봤어요. AI에 몰리는 돈, 어디로 가고 있을까 이번 주 가장 눈에 띄는 변화는 투자자들이 AI에 돈을 넣을 때 더 꼼꼼해졌다는 점이에요. 무조건 큰돈이... "
+            },
+            {
+              "rank": 9,
+              "title": "AI가 뉴스를 대신 읽어준다면, 무엇을 놓치게 될까? AI 뉴스 요약·정....",
+              "link": "https://blog.naver.com/kimuss/224469181277",
+              "blogger": "도원 X-AI 공법연구센터",
+              "bloggerLink": "https://blog.naver.com/kimuss",
+              "postdate": "20261108",
+              "description": "될까?」 — AI 뉴스 요약·정보 누락·출처 확인과 판단의 책임 ※ 먼저 확인할 점 아침에 뉴스를 확인합니다. 정치와 경제, 사회와 국제뉴스까지 살펴보려면 시간이 필요합니다. 그런데 이제는 AI에게 이렇게... "
+            },
+            {
+              "rank": 10,
+              "title": "AI가 뉴스를 대신 읽어준다면, 무엇을 놓치게 될까? AI 뉴스 요약·정....",
+              "link": "https://blog.naver.com/kimuss/224466730515",
+              "blogger": "도원 X-AI 공법연구센터",
+              "bloggerLink": "https://blog.naver.com/kimuss",
+              "postdate": "20261106",
+              "description": "될까?」 — AI 뉴스 요약·정보 누락·출처 확인과 판단의 책임 ※ 먼저 확인할 점 아침에 스마트폰을 켰습니다. 오늘의 주요 뉴스를 확인하려고 AI에게 질문합니다. “오늘 중요한 뉴스만 간단하게 정리해줘.”... "
+            }
+          ]
+        },
+        {
+          "keyword": "구글이 공개한 Gemini",
+          "top": [
+            {
+              "rank": 1,
+              "title": "구글 제미나이 4 하이드로젠 출시! 챗GPT보다 좋을까? 무료 사용법·....",
+              "link": "https://blog.naver.com/rorymcilroy-/224478643173",
+              "blogger": "AI 생활연구소",
+              "bloggerLink": "https://blog.naver.com/rorymcilroy-",
+              "postdate": "20261116",
+              "description": "구글 제미나이 4 하이드로젠 출시! 챗GPT보다 좋을까? 무료 사용법·성능·차이점 총정리 구글이 새로운 인공지능 모델을 공개했습니다. 바로 **제미나이 4 하이드로젠(Gemini 4 Hydrogen)**입니다. 2026년... ",
+              "features": {
+                "textLength": 7725,
+                "imageCount": 5,
+                "chartCount": 0,
+                "headingCount": 1,
+                "tableCount": 4,
+                "linkCount": 10
+              }
+            },
+            {
+              "rank": 2,
+              "title": "Gemini 4 Carbon vs Argon, 구글 최신 AI 무엇이 달라졌을까? 성능·사용 목....",
+              "link": "https://blog.naver.com/bellom/224479203750",
+              "blogger": "벨롬 / IT TECH",
+              "bloggerLink": "https://blog.naver.com/bellom",
+              "postdate": "20261116",
+              "description": "구글이 새로운 AI 모델 Gemini 4 Carbon을 정식으로 선보였습니다.... 2026년 9월 30일: Gemini 4 Argon 최초 공개 2026년 10월 13일: Argon 일반... 구글 딥마인드가 공개한 Gemini 4 Carbon 모델 카드에는 Argon과의... ",
+              "features": {
+                "textLength": 7486,
+                "imageCount": 12,
+                "chartCount": 0,
+                "headingCount": 2,
+                "tableCount": 4,
+                "linkCount": 12
+              }
+            },
+            {
+              "rank": 3,
+              "title": "구글 Gemini 4 Hydrogen 출시｜무료 사용법·API 가격·Carbon과 차이 총정리",
+              "link": "https://blog.naver.com/ningverse/224475577572",
+              "blogger": "닝버스 | 오늘의 이슈와 정보",
+              "bloggerLink": "https://blog.naver.com/ningverse",
+              "postdate": "20261113",
+              "description": "모델의 성능 수치는 구글이 공개한 시험 결과이므로 실제 사용... 12일 구글이 신규 모델을 공식 공개하고 앱·검색·개발자 서비스에 배포하기 시작했기 때문입니다. 구글은 Gemini 4 Carbon과 Argon을... ",
+              "features": {
+                "textLength": 4400,
+                "imageCount": 6,
+                "chartCount": 0,
+                "headingCount": 0,
+                "tableCount": 1,
+                "linkCount": 16
+              }
+            },
+            {
+              "rank": 4,
+              "title": "구글 Gemini 4 Neon 전격 출시! Carbon급 두뇌에 Flash급 속도… AI Pro 사용....",
+              "link": "https://blog.naver.com/ljw0620/224483210004",
+              "blogger": "재우기 삶의 기록",
+              "bloggerLink": "https://blog.naver.com/ljw0620",
+              "postdate": "20261119",
+              "description": "다만 구글은 구체적으로 어떤 구조적 최적화나 학습 방식을 적용했는지 모두 공개하지 않았다. 따라서 단순히 Carbon을 압축한... 구글이 공개한 Gemini 4 Neon의 표준 API 가격은 다음과 같다. 입력... ",
+              "features": {
+                "textLength": 13446,
+                "imageCount": 1,
+                "chartCount": 0,
+                "headingCount": 0,
+                "tableCount": 0,
+                "linkCount": 1
+              }
+            },
+            {
+              "rank": 5,
+              "title": "[구글] Gemini 4 Carbon 정식 공개, Ultra 구독자와 개발자가 쓰는 방법",
+              "link": "https://blog.naver.com/p-cher/224472588019",
+              "blogger": "강의하는 광희형",
+              "bloggerLink": "https://blog.naver.com/p-cher",
+              "postdate": "20261111",
+              "description": "구글의 가장 강력한 모델 Gemini 4 Carbon을 이제 더 많은 사람이 쓸 수 있게 됐어요  구글이 11월 10일 Carbon을 개발자, 기업, 과학자, 일반 사용자에게 공개했어요. 일반 사용자는 Google AI Ultra... ",
+              "features": {
+                "textLength": 1538,
+                "imageCount": 1,
+                "chartCount": 0,
+                "headingCount": 0,
+                "tableCount": 0,
+                "linkCount": 2
+              }
+            },
+            {
+              "rank": 6,
+              "title": "빨라진 속도만큼 반가운 무료 API, 구글 Gemini 4 Hydrogen 핵심 살펴보기",
+              "link": "https://blog.naver.com/tscommuni/224476756236",
+              "blogger": "tscommuni님의 블로그",
+              "bloggerLink": "https://blog.naver.com/tscommuni",
+              "postdate": "20261114",
+              "description": "구글이 현지 시각 11월 12일에 새로운 고속 AI 모델 Gemini 4 Hydrogen을 공개했어요. 제미나이 앱 모델 선택창에도 바로 올라와서 이름이 낯설게 느껴진 분들도 많으실 텐데요. 기존에 쓰던 3.8 Flash... "
+            },
+            {
+              "rank": 7,
+              "title": "[구글] Gemini 작업 모드 한국 무료 배포, Task로 바꾸고 일 맡기기",
+              "link": "https://blog.naver.com/p-cher/224481548847",
+              "blogger": "강의하는 광희형",
+              "bloggerLink": "https://blog.naver.com/p-cher",
+              "postdate": "20261118",
+              "description": "구글이 2026년 11월 17일 Gemini의 작업(Tasks) 기능을 한국을 포함한 6개 나라 사용자에게 무료로... 구글은 새 Gemini 4 Hydrogen 모델로 동작한다고 밝혔어요. 구글은 이번 무료 배포로 Gemini를 질문에... "
+            },
+            {
+              "rank": 8,
+              "title": "“제미나이 4, 무료로도 쓸 수 있다고?” Gemini 4 Hydrogen 사용 조건과 ....",
+              "link": "https://blog.naver.com/it-tech-show/224476840569",
+              "blogger": "it-tech-show",
+              "bloggerLink": "https://blog.naver.com/it-tech-show",
+              "postdate": "20261115",
+              "description": "구글이 공개한 Gemini 4 Hydrogen의 공식 대표 이미지입니다. 사진=Google. 무료 계정에서는 어떻게 쓰나요? 구글은 Hydrogen을 Gemini 앱과... ‘무료 공개’라는 표현을 모든 서비스의 무제한 무료 사용으로 넓혀... "
+            },
+            {
+              "rank": 9,
+              "title": "구글 Gemini 4 Hydrogen 공개…빠른 코딩과 반복 업무에 초점",
+              "link": "https://blog.naver.com/money7j/224483728344",
+              "blogger": "테크노트 | 일상에 쓰는 IT",
+              "bloggerLink": "https://blog.naver.com/money7j",
+              "postdate": "20261119",
+              "description": "구글이 Gemini 4 Hydrogen을 공개했습니다. 구글은 이 모델을 복잡한 문제를 오래 추론하는 용도보다, 코딩과 여러 단계의 작업을 빠르게 실행하는 데 초점을 둔 모델로 소개했습니다. 발표일은 2026년... "
+            },
+            {
+              "rank": 10,
+              "title": "새 AI 모델 나왔는데, 구글이 먼저 바꾼 곳은 검색창이었다",
+              "link": "https://blog.naver.com/pure123_/224475846261",
+              "blogger": "호호리뷰랩",
+              "bloggerLink": "https://blog.naver.com/pure123_",
+              "postdate": "20261113",
+              "description": "구글은 Gemini 4 Hydrogen을 공개해 검색에도 적용한다고 밝혔고, 데이터브릭스는 AI를 업무 자동화에 연결했습니다. 저는 모델의 똑똑함뿐 아니라 AI가 실제 어디에 연결되는지도 주목합니다. 검색과... "
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "11월 18일 뉴욕증시 마감, 3대 지수 혼조…AMD 5.3% 급등",
+      "url": "https://motusnova.blogspot.com/2026/11/11-18-3-amd-53.html",
+      "labels": [
+        "미국증시"
+      ],
+      "publishedKst": "2026-11-19 12:12",
+      "features": {
+        "textLength": 9597,
+        "imageCount": 1,
+        "chartCount": 4,
+        "headingCount": 14,
+        "tableCount": 0,
+        "linkCount": 43
+      },
+      "keywords": [
+        "뉴욕증시 마감",
+        "뉴욕증시"
+      ],
+      "searchConsole": [],
+      "datalab": [
+        {
+          "keyword": "뉴욕증시 마감",
+          "series": [
+            [
+              "2026-11-06",
+              0.36937
+            ],
+            [
+              "2026-11-07",
+              0.18468
+            ],
+            [
+              "2026-11-08",
+              0.03621
+            ],
+            [
+              "2026-11-09",
+              0.07604
+            ],
+            [
+              "2026-11-10",
+              0.24263
+            ],
+            [
+              "2026-11-11",
+              0.24987
+            ],
+            [
+              "2026-11-12",
+              0.28608
+            ],
+            [
+              "2026-11-13",
+              0.26435
+            ],
+            [
+              "2026-11-14",
+              0.08691
+            ],
+            [
+              "2026-11-15",
+              0.02172
+            ],
+            [
+              "2026-11-16",
+              0.05432
+            ],
+            [
+              "2026-11-17",
+              0.26435
+            ],
+            [
+              "2026-11-18",
+              0.28246
+            ],
+            [
+              "2026-11-19",
+              0.29695
+            ]
+          ]
+        },
+        {
+          "keyword": "뉴욕증시",
+          "series": [
+            [
+              "2026-11-06",
+              100
+            ],
+            [
+              "2026-11-07",
+              57.23546
+            ],
+            [
+              "2026-11-08",
+              7.03266
+            ],
+            [
+              "2026-11-09",
+              24.65416
+            ],
+            [
+              "2026-11-10",
+              78.57246
+            ],
+            [
+              "2026-11-11",
+              78.38777
+            ],
+            [
+              "2026-11-12",
+              79.01788
+            ],
+            [
+              "2026-11-13",
+              69.41768
+            ],
+            [
+              "2026-11-14",
+              50.06156
+            ],
+            [
+              "2026-11-15",
+              6.35185
+            ],
+            [
+              "2026-11-16",
+              21.35873
+            ],
+            [
+              "2026-11-17",
+              71.48185
+            ],
+            [
+              "2026-11-18",
+              77.89889
+            ],
+            [
+              "2026-11-19",
+              74.36807
+            ]
+          ]
+        }
+      ],
+      "competitors": [
+        {
+          "keyword": "뉴욕증시 마감",
+          "top": [
+            {
+              "rank": 1,
+              "title": "11월 17일 뉴욕증시 마감 시황｜미국 증시 주요 이슈 정리",
+              "link": "https://blog.naver.com/sc_tv/224481510233",
+              "blogger": "SCTV주식챔피언",
+              "bloggerLink": "https://blog.naver.com/sc_tv",
+              "postdate": "20261118",
+              "description": "김선규 소장이 알려주는 전일 뉴욕증시 마감시황입니다. 11월 17일(현지시간) 뉴욕증시는 엔비디아 실적 발표를 앞둔 경계감과 미국 핵심 디지털 인프라의 연쇄 장애 우려가 겹치면서 뉴욕증시 3대... ",
+              "features": {
+                "textLength": 4498,
+                "imageCount": 0,
+                "chartCount": 0,
+                "headingCount": 1,
+                "tableCount": 6,
+                "linkCount": 0
+              }
+            },
+            {
+              "rank": 2,
+              "title": "[11월 19일 미국 증시 마감] 뉴욕증시 3대 지수 2%대 급락…앤트로픽 ....",
+              "link": "https://blog.naver.com/stock_demon_king/224484417558",
+              "blogger": "피로의 경제적 자유를 위하여",
+              "bloggerLink": "https://blog.naver.com/stock_demon_king",
+              "postdate": "20261120",
+              "description": "11월 19일 마감 기준 뉴욕증시 3대 지수와 필라델피아 반도체지수는 모두 2%대의 큰 폭 하락세를 기록했습니다. 역대 최대 규모로 주목받았던 인공지능(AI) 기업 앤트로픽(Anthropic)의 상장 흥행에도... ",
+              "features": {
+                "textLength": 3157,
+                "imageCount": 4,
+                "chartCount": 0,
+                "headingCount": 1,
+                "tableCount": 0,
+                "linkCount": 4
+              }
+            },
+            {
+              "rank": 3,
+              "title": "뉴욕증시 마감 다우는 1.11% 빠지고 나스닥은 0.42% 올랐다",
+              "link": "https://blog.naver.com/aricomi_20/224482905389",
+              "blogger": "아리코미",
+              "bloggerLink": "https://blog.naver.com/aricomi_20",
+              "postdate": "20261119",
+              "description": "이 글은 여러 언론 보도와 공식 자료를 바탕으로 정리했어요. 자세한 내용은 관련기사 원문에서 확인하세요. #뉴욕증시마감 #뉴욕증시 #다우지수 #나스닥 #SP500 #미국증시 #엔비디아실적 #앤트로픽IPO",
+              "features": {
+                "textLength": 2031,
+                "imageCount": 6,
+                "chartCount": 0,
+                "headingCount": 1,
+                "tableCount": 0,
+                "linkCount": 13
+              }
+            },
+            {
+              "rank": 4,
+              "title": "뉴욕증시 마감 다우 -2.19% 나스닥 -2.25%, 11월 19일 미국 증시 급락 이....",
+              "link": "https://blog.naver.com/moneyfinds/224484233015",
+              "blogger": "머니알려줘",
+              "bloggerLink": "https://blog.naver.com/moneyfinds",
+              "postdate": "20261120",
+              "description": "로이터(11월 19일), 야후파이낸스(11월 19일), 뉴스핌(11월 19일). 수치는 잠정치와 차이가 있을 수 있어요. 투자 권유가 아닙니다. &amp; #뉴욕증시마감 #다우마감 #미국증시급락이유 #나스닥마감 #머니알려줘",
+              "features": {
+                "textLength": 2542,
+                "imageCount": 7,
+                "chartCount": 0,
+                "headingCount": 4,
+                "tableCount": 0,
+                "linkCount": 10
+              }
+            },
+            {
+              "rank": 5,
+              "title": "[2026년 11월 18일 아침시황] 개장전 브리핑 :: 뉴욕 증시 마감 :: 오늘....",
+              "link": "https://blog.naver.com/noblesstock/224481540412",
+              "blogger": "노블레스 주식연구소-초보주식사는방법",
+              "bloggerLink": "https://blog.naver.com/noblesstock",
+              "postdate": "20261118",
+              "description": "뉴욕 증시 마감, 시간외 상승 종목, 오늘의 주요 일정, 개장전 주요 뉴스&amp;관련주, 개장전 브리핑까지 체크하셔서 오늘 시장도 성투하시기 바랍니다. 오늘 아침 3줄 브리핑 미국 증시는 엔비디아 실적 발표를... ",
+              "features": {
+                "textLength": 6377,
+                "imageCount": 7,
+                "chartCount": 0,
+                "headingCount": 5,
+                "tableCount": 0,
+                "linkCount": 15
+              }
+            },
+            {
+              "rank": 6,
+              "title": "11월 13일 뉴욕증시 마감 시황｜미국 증시 주요 이슈 정리",
+              "link": "https://blog.naver.com/sc_tv/224478646412",
+              "blogger": "SCTV주식챔피언",
+              "bloggerLink": "https://blog.naver.com/sc_tv",
+              "postdate": "20261116",
+              "description": "김선규 소장이 알려주는 전일 뉴욕증시 마감시황입니다. 11월 13일(현지시간) 뉴욕증시는 엔비디아를 둘러싼 경영 불확실성과 미국 생산자물가 상승, 연방준비제도(Fed) 인사들의 매파적 발언이... "
+            },
+            {
+              "rank": 7,
+              "title": "11월 19일 뉴욕증시 마감 시황｜미국 증시 주요 이슈 정리",
+              "link": "https://blog.naver.com/sc_tv/224484307567",
+              "blogger": "SCTV주식챔피언",
+              "bloggerLink": "https://blog.naver.com/sc_tv",
+              "postdate": "20261120",
+              "description": "김선규 소장이 알려주는 전일 뉴욕증시 마감시황입니다. 11월 19일(현지시간) 뉴욕증시는앤스로픽의 나스닥 상장 이후 AI 관련주에서 차익실현 매물이 쏟아지고, 인공지능 투자 수익성에 대한 의구심과... "
+            },
+            {
+              "rank": 8,
+              "title": "11월 16일 뉴욕증시 마감 시황｜미국 증시 주요 이슈 정리",
+              "link": "https://blog.naver.com/sc_tv/224480069145",
+              "blogger": "SCTV주식챔피언",
+              "bloggerLink": "https://blog.naver.com/sc_tv",
+              "postdate": "20261117",
+              "description": "김선규 소장이 알려주는 전일 뉴욕증시 마감시황입니다. 11월 16일(현지시간) 뉴욕증시는 미국 상무부의 대중국 AI 반도체 규제 강화와 엔비디아 경영진 공백 우려가 겹치면서 급락했습니다. 특히... "
+            },
+            {
+              "rank": 9,
+              "title": "11.16 뉴욕증시 마감 및 11.17 국내증시 투자전략",
+              "link": "https://blog.naver.com/maxstock_260629/224480054752",
+              "blogger": "맥스탁 리서치 블로그",
+              "bloggerLink": "https://blog.naver.com/maxstock_260629",
+              "postdate": "20261117",
+              "description": "11.16 뉴욕증시 마감 및 11.17 국내증시 투자전략 핵심 판단 뉴욕증시는 4대 핵심지수가 모두 하락했고, 필라델피아 반도체지수는 5.28% 급락했다. 마이크론과 SK하이닉스 ADR도 7%대 하락해 국내... "
+            },
+            {
+              "rank": 10,
+              "title": "뉴욕증시 마감요약(11월17일)",
+              "link": "https://blog.naver.com/insigt913/224481485883",
+              "blogger": "insigt913님의 블로그",
+              "bloggerLink": "https://blog.naver.com/insigt913",
+              "postdate": "20261118",
+              "description": "### 뉴욕증시 마감시황 및 주요 이슈 26년 11월 17일(화) 미국 증시 마감 기준 · 한국시간 11월 18일 미국 증시의 핵심은 AI·반도체 투자심리, 미국 금리 전망, 대형 기술주 실적 및 밸류에이션 변화입니다. 1.... "
+            }
+          ]
+        },
+        {
+          "keyword": "뉴욕증시",
+          "top": [
+            {
+              "rank": 1,
+              "title": "11월 17일 뉴욕증시 마감 시황｜미국 증시 주요 이슈 정리",
+              "link": "https://blog.naver.com/sc_tv/224481510233",
+              "blogger": "SCTV주식챔피언",
+              "bloggerLink": "https://blog.naver.com/sc_tv",
+              "postdate": "20261118",
+              "description": "김선규 소장이 알려주는 전일 뉴욕증시 마감시황입니다. 11월 17일(현지시간) 뉴욕증시는 엔비디아 실적 발표를 앞둔 경계감과 미국 핵심 디지털 인프라의 연쇄 장애 우려가 겹치면서 뉴욕증시 3대... ",
+              "features": {
+                "textLength": 4498,
+                "imageCount": 0,
+                "chartCount": 0,
+                "headingCount": 1,
+                "tableCount": 6,
+                "linkCount": 0
+              }
+            },
+            {
+              "rank": 2,
+              "title": "앤트로픽 상장 17% 상승에도 뉴욕증시 급락, 진짜 이유는",
+              "link": "https://blog.naver.com/moneymos0321/224484364669",
+              "blogger": "자산의 흐름, 머니모스의 플로우",
+              "bloggerLink": "https://blog.naver.com/moneymos0321",
+              "postdate": "20261120",
+              "description": "⚡ 뉴욕증시는 다우지수가 1,101포인트 급락해 49,097선으로 밀렸고, S&amp;P 500은 6거래일 연속 하락했습니다. ⚡ 트럼프·시진핑·푸틴이 첫 3자 정상회담을 열었으며, IEA는 호르무즈 해협 우회에 2,400억 달러가... ",
+              "features": {
+                "textLength": 3927,
+                "imageCount": 3,
+                "chartCount": 0,
+                "headingCount": 7,
+                "tableCount": 1,
+                "linkCount": 6
+              }
+            },
+            {
+              "rank": 3,
+              "title": "간밤에 미국경제 주요 이슈 총정리! AI·반도체 급락에 뉴욕증시 하....",
+              "link": "https://blog.naver.com/sky131tank/224480005133",
+              "blogger": "보석 파파의 경제공부",
+              "bloggerLink": "https://blog.naver.com/sky131tank",
+              "postdate": "20261117",
+              "description": "미국 주요 증시 일제히 하락 미국 현지 11월 16일 뉴욕증시는 주요 3대 지수가 모두 하락했습니다. 주요 지수| 등락률 다우존스 산업평균지수| 약 -1.4% S&amp;P500| 약 -1.9% 나스닥 종합지수| 약 -2.5% 다우지수는 약... ",
+              "features": {
+                "textLength": 4246,
+                "imageCount": 1,
+                "chartCount": 0,
+                "headingCount": 9,
+                "tableCount": 0,
+                "linkCount": 1
+              }
+            },
+            {
+              "rank": 4,
+              "title": "[글로벌 증시] 다우 5만선 붕괴·뉴욕증시 급락 이유와 투자자 체크....",
+              "link": "https://blog.naver.com/prime2320/224484480171",
+              "blogger": "직장인 관심사 정보 공유",
+              "bloggerLink": "https://blog.naver.com/prime2320",
+              "postdate": "20261120",
+              "description": "간밤 뉴욕증시가 3대 지수 모두 2%대 급락으로 마감하며 투자심리가 크게 얼어붙었습니다. 다우지수는 5개월 만에 5만선을 내줬고, 그동안 시장을 이끌던 기술주와 반도체주가 낙폭을 키웠는데요. 오늘 아침... ",
+              "features": {
+                "textLength": 1324,
+                "imageCount": 1,
+                "chartCount": 0,
+                "headingCount": 0,
+                "tableCount": 0,
+                "linkCount": 1
+              }
+            },
+            {
+              "rank": 5,
+              "title": "오늘 뉴욕증시 하락 원인",
+              "link": "https://blog.naver.com/mg419/224484270850",
+              "blogger": "[비타충전소]수민's orchard",
+              "bloggerLink": "https://blog.naver.com/mg419",
+              "postdate": "20261120",
+              "description": "미국 현지시간 11월 19일 뉴욕증시가 급락한 핵심 원인은 AI 관련 주식의 고평가 우려와 미국 연방준비제도(Fed)의 금리 인상 가능성입니다. 단순한 차익실현을 넘어 시장 전반으로 매도세가 확산되고... ",
+              "features": {
+                "textLength": 1661,
+                "imageCount": 0,
+                "chartCount": 0,
+                "headingCount": 0,
+                "tableCount": 0,
+                "linkCount": 0
+              }
+            },
+            {
+              "rank": 6,
+              "title": "간밤에 미국경제 주요 이슈｜AI주 급락에 뉴욕증시 동반 하락, 연준 ....",
+              "link": "https://blog.naver.com/sky131tank/224484286272",
+              "blogger": "보석 파파의 경제공부",
+              "bloggerLink": "https://blog.naver.com/sky131tank",
+              "postdate": "20261120",
+              "description": "AI 기업 앤트로픽이 성공적으로 뉴욕증시에 상장했지만, 시장 전체의 투자심리를 되살리지는 못했습니다. 여기에 연준의 추가 금리인상 가능성, 제조업 경기 둔화 신호, 고용지표의 일부 약화 조짐까지... "
+            },
+            {
+              "rank": 7,
+              "title": "[뉴욕증시] 뉴욕증시 4대 지수 2%대 급락｜앤트로픽 IPO 성공에도 미....",
+              "link": "https://blog.naver.com/meta_universe420/224484275590",
+              "blogger": "푸투로비스(Futuro_Vis)",
+              "bloggerLink": "https://blog.naver.com/meta_universe420",
+              "postdate": "20261120",
+              "description": "앤트로픽 주가는 공모가보다 17% 이상 상승하며 성공적으로 데뷔했지만, 뉴욕증시 전체는 정반대의 방향으로 움직였습니다. 시장은 왜 이렇게 반응했을까요? 이번 급락의 배경에는 연방준비제도(Fed)의... "
+            },
+            {
+              "rank": 8,
+              "title": "뉴욕증시 3대 지수 2%대 급락, 오늘 코스피는 어디까지 흔들릴까 AI ....",
+              "link": "https://blog.naver.com/windowofwisdom831/224484312398",
+              "blogger": "지혜의 창",
+              "bloggerLink": "https://blog.naver.com/windowofwisdom831",
+              "postdate": "20261120",
+              "description": "SmartFox 투자연구소 | 2026년 11월 20일 금요일 장 개장 전 기준 뉴욕증시 3대 지수 2%대 급락, 오늘 코스피는 어디까지 흔들릴까 AI 거품 논란의 진짜 신호 핵심 요약 1. 다우 -2.19%, S&amp;P500 -2.02%, 나스닥 -2.25... "
+            },
+            {
+              "rank": 9,
+              "title": "&lt;뉴욕 증시&gt; 앤트로픽 첫날 17%↑, AMD도 중국 구설수",
+              "link": "https://blog.naver.com/pokara61/224484303829",
+              "blogger": "포카라의 실전투자",
+              "bloggerLink": "https://blog.naver.com/pokara61",
+              "postdate": "20261120",
+              "description": "어제 뉴욕 증시는 앤트로픽 상장 축포를 쏘는 사이에 2%대 하락했다. 어제 새로 나온 악재는 AMD도 중국 구설수에 휘말렸다. 그런데 공매도 때리고 계열사 매체 통해 악재 퍼뜨리는 행위를 하면서 주가가... "
+            },
+            {
+              "rank": 10,
+              "title": "뉴욕증시 급락, 엔비디아 4.1% 하락·나스닥 2.5%↓",
+              "link": "https://blog.naver.com/honeyypig/224480116485",
+              "blogger": "Honey Pig’s blog",
+              "bloggerLink": "https://blog.naver.com/honeyypig",
+              "postdate": "20261117",
+              "description": "뉴욕증시 일제히 하락, 엔비디아 4.1% 급락…AI주 매도세 확산 안녕하세요. 오늘은 미국 뉴욕증시가 인공지능(AI) 관련 기술주를 중심으로 큰 폭의 하락세를 보였다는 소식을 정리해 보려고 해요.... "
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
