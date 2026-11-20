@@ -1,0 +1,74 @@
+{
+  "gate": {
+    "state": "AUTO_PUBLISH_READY",
+    "reasons": [],
+    "approval": "AUTO_POLICY_APPROVAL",
+    "checkedAt": "2026-11-20T03:35:12.638Z"
+  },
+  "searchRegistration": {
+    "publicationId": "motus-live-2026-11-20:ai",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/11/azure-ai.html",
+    "registeredAt": "2026-11-20T12:35:18+09:00",
+    "trigger": "PUBLICATION_PUBLISHED",
+    "googleInspectionState": "QUEUED",
+    "naverDiscoveryState": "PENDING",
+    "visibility": {
+      "publicationId": "motus-live-2026-11-20:ai",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/11/azure-ai.html",
+      "google": {
+        "discovered": null,
+        "indexed": null,
+        "lastCrawl": null,
+        "coverageState": null,
+        "inspectionAt": null
+      },
+      "naver": {
+        "discovered": null,
+        "indexed": null,
+        "collectionState": null,
+        "inspectionAt": null
+      },
+      "sitemapIncluded": null,
+      "rssIncluded": null
+    }
+  },
+  "libraryRegistration": {
+    "idempotencyKey": "library:motus-live-2026-11-20:ai|https://motusnova.blogspot.com/2026/11/azure-ai.html"
+  },
+  "weeklyFeed": {
+    "idempotencyKey": "weekly:motus-live-2026-11-20:ai"
+  },
+  "pdfCandidate": {
+    "idempotencyKey": "pdf:motus-live-2026-11-20:ai:sha256:09cce8ed3c945d9efdf626d126c635d061f8526e5da9a9106f87a7c5d3ebcd2f",
+    "visibility": "PRIVATE"
+  },
+  "audit": [
+    {
+      "at": "2026-11-20T03:35:12.638Z",
+      "event": "AUTO_PUBLISH_STATIC_GATE",
+      "detail": "AUTO_PUBLISH_READY"
+    },
+    {
+      "at": "2026-11-20T03:35:12.638Z",
+      "event": "REMOTE_DUPLICATE_CHECK",
+      "detail": "PASS"
+    },
+    {
+      "at": "2026-11-20T03:35:12.638Z",
+      "event": "FINAL_REMOTE_DUPLICATE_CHECK",
+      "detail": "PASS"
+    },
+    {
+      "at": "2026-11-20T12:35:18+09:00",
+      "event": "PUBLISHED",
+      "detail": "AUTO_POLICY_APPROVAL"
+    }
+  ],
+  "state": "PUBLISHED",
+  "draftPostId": "1324508138202725251",
+  "publicPostUrl": "https://motusnova.blogspot.com/2026/11/azure-ai.html",
+  "publishedAt": "2026-11-20T12:35:18+09:00",
+  "insertCallCount": 1,
+  "publishCallCount": 1,
+  "error": null
+}

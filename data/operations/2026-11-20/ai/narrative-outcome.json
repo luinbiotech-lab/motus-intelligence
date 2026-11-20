@@ -1,0 +1,15 @@
+{
+  "schema": "motus.ai-narrative-outcome/1",
+  "mode": "SHADOW",
+  "bundleHash": "00060c4e5f74b502",
+  "status": "VALID",
+  "reason": null,
+  "attempts": 1,
+  "errors": [],
+  "model": "claude-sonnet-5-5",
+  "durationMs": 14013,
+  "editorialQuality": {
+    "pass": true,
+    "reasons": []
+  }
+}
