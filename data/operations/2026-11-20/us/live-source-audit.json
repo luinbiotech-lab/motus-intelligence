@@ -7,30 +7,30 @@
   "reasonCode": null,
   "entries": [
     {
-      "sourceId": "twelve:russell-2000",
-      "category": "US_MARKET",
-      "url": "https://api.twelvedata.com/time_series?symbol=RUT&interval=1day",
-      "status": "FAILED",
-      "recordCount": 0,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
-      "error": "TWELVE_DATA_DATA_NOT_FOUND symbol=RUT endpoint=/time_series http=404 providerCode=404"
-    },
-    {
       "sourceId": "twelve:dxy",
       "category": "US_MARKET",
       "url": "https://api.twelvedata.com/time_series?symbol=DXY&interval=1day",
       "status": "FAILED",
       "recordCount": 0,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
+      "collectedAt": "2026-11-20T02:39:49.894Z",
       "error": "TWELVE_DATA_DATA_NOT_FOUND symbol=DXY endpoint=/time_series http=404 providerCode=404"
+    },
+    {
+      "sourceId": "twelve:russell-2000",
+      "category": "US_MARKET",
+      "url": "https://api.twelvedata.com/time_series?symbol=RUT&interval=1day",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-11-20T02:39:49.894Z",
+      "error": "TWELVE_DATA_DATA_NOT_FOUND symbol=RUT endpoint=/time_series http=404 providerCode=404"
     },
     {
       "sourceId": "fred:sp500",
       "category": "US_MARKET",
-      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=SP500&cosd=2019-03-31",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=SP500&cosd=2019-04-01",
       "status": "FAILED",
       "recordCount": 1921,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
+      "collectedAt": "2026-11-20T02:39:49.894Z",
       "error": "FRED_STALE_OR_INCOMPLETE",
       "observedDate": "2026-11-18",
       "referenceDate": "2026-11-19"
@@ -38,10 +38,10 @@
     {
       "sourceId": "yahoo-us:sp500",
       "category": "US_MARKET",
-      "url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1769298261&period2=1795218261&interval=1d",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EGSPC?period1=1769308789&period2=1795228789&interval=1d",
       "status": "PASS",
       "recordCount": 208,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
+      "collectedAt": "2026-11-20T02:39:49.894Z",
       "error": null,
       "observedDate": "2026-11-19",
       "referenceDate": "2026-11-19"
@@ -49,10 +49,10 @@
     {
       "sourceId": "fred:nasdaq",
       "category": "US_MARKET",
-      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=NASDAQCOM&cosd=2019-03-31",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=NASDAQCOM&cosd=2019-04-01",
       "status": "FAILED",
       "recordCount": 1922,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
+      "collectedAt": "2026-11-20T02:39:49.894Z",
       "error": "FRED_STALE_OR_INCOMPLETE",
       "observedDate": "2026-11-18",
       "referenceDate": "2026-11-19"
@@ -60,10 +60,10 @@
     {
       "sourceId": "yahoo-us:nasdaq",
       "category": "US_MARKET",
-      "url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1769298261&period2=1795218261&interval=1d",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EIXIC?period1=1769308789&period2=1795228789&interval=1d",
       "status": "PASS",
       "recordCount": 208,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
+      "collectedAt": "2026-11-20T02:39:49.894Z",
       "error": null,
       "observedDate": "2026-11-19",
       "referenceDate": "2026-11-19"
@@ -71,42 +71,42 @@
     {
       "sourceId": "fred:dow-jones",
       "category": "US_MARKET",
-      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-03-31",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DJIA&cosd=2019-04-01",
       "status": "PASS",
       "recordCount": 1922,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
+      "collectedAt": "2026-11-20T02:39:49.894Z",
       "error": null,
       "observedDate": "2026-11-19"
     },
     {
       "sourceId": "fred:DGS10",
       "category": "US_MARKET",
-      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2026-01-13",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS10&cosd=2026-01-14",
       "status": "PASS",
-      "recordCount": 214,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
-      "error": null,
-      "observedDate": "2026-11-18"
-    },
-    {
-      "sourceId": "fred:VIXCLS",
-      "category": "US_MARKET",
-      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS&cosd=2026-01-13",
-      "status": "PASS",
-      "recordCount": 221,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
+      "recordCount": 213,
+      "collectedAt": "2026-11-20T02:39:49.894Z",
       "error": null,
       "observedDate": "2026-11-18"
     },
     {
       "sourceId": "fred:DCOILBRENTEU",
       "category": "US_MARKET",
-      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILBRENTEU&cosd=2026-01-13",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILBRENTEU&cosd=2026-01-14",
       "status": "PASS",
-      "recordCount": 216,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
+      "recordCount": 215,
+      "collectedAt": "2026-11-20T02:39:49.894Z",
       "error": null,
       "observedDate": "2026-11-17"
+    },
+    {
+      "sourceId": "fred:VIXCLS",
+      "category": "US_MARKET",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS&cosd=2026-01-14",
+      "status": "PASS",
+      "recordCount": 220,
+      "collectedAt": "2026-11-20T02:39:49.894Z",
+      "error": null,
+      "observedDate": "2026-11-18"
     },
     {
       "sourceId": "calendar:nyse",
@@ -114,7 +114,7 @@
       "url": "https://www.nyse.com/trade/hours-calendars",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
+      "collectedAt": "2026-11-20T02:39:49.894Z",
       "error": null,
       "observedDate": "2026-11-19",
       "referenceDate": "2026-11-19"
@@ -125,17 +125,17 @@
       "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/pages/xml?data=daily_treasury_yield_curve&field_tdr_date_value=2026",
       "status": "PASS",
       "recordCount": 222,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
+      "collectedAt": "2026-11-20T02:39:49.894Z",
       "error": null,
       "observedDate": "2026-11-19"
     },
     {
       "sourceId": "freshness:vix",
       "category": "US_MARKET",
-      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS&cosd=2026-01-13",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS&cosd=2026-01-14",
       "status": "FAILED",
       "recordCount": 0,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
+      "collectedAt": "2026-11-20T02:39:49.894Z",
       "error": "OPTIONAL_METRIC_STALE",
       "observedDate": "2026-11-18",
       "referenceDate": "2026-11-19"
@@ -143,10 +143,10 @@
     {
       "sourceId": "freshness:brent",
       "category": "US_MARKET",
-      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILBRENTEU&cosd=2026-01-13",
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DCOILBRENTEU&cosd=2026-01-14",
       "status": "FAILED",
       "recordCount": 0,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
+      "collectedAt": "2026-11-20T02:39:49.894Z",
       "error": "OPTIONAL_METRIC_STALE",
       "observedDate": "2026-11-17",
       "referenceDate": "2026-11-19"
@@ -157,7 +157,7 @@
       "url": "https://www.goldmansachs.com/insights",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
+      "collectedAt": "2026-11-20T02:39:49.894Z",
       "error": null
     },
     {
@@ -166,7 +166,7 @@
       "url": "https://www.cnbc.com/id/15839069/device/rss/rss.html",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
+      "collectedAt": "2026-11-20T02:39:49.894Z",
       "error": null
     },
     {
@@ -175,7 +175,7 @@
       "url": "https://feeds.bloomberg.com/markets/news.rss",
       "status": "PASS",
       "recordCount": 2,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
+      "collectedAt": "2026-11-20T02:39:49.894Z",
       "error": null
     },
     {
@@ -184,7 +184,7 @@
       "url": "https://www.goldmansachs.com/insights/articles/why-european-companies-are-forecast-to-have-robust-earnings-growth",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
+      "collectedAt": "2026-11-20T02:39:49.894Z",
       "error": null,
       "observedDate": "2026-11-13"
     },
@@ -194,29 +194,29 @@
       "url": "https://www.cnbc.com/2026/11/17/nvidia-has-lost-2-trillion-in-value-heres-what-options-traders-expect-from-earnings.html",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
+      "collectedAt": "2026-11-20T02:39:49.894Z",
       "error": null,
       "observedDate": "2026-11-17"
     },
     {
-      "sourceId": "market-research:article:https://www.bloomberg.com/news/articles/2026-11-19/latest-oil-market-news-and-analysis-for-nov-20",
+      "sourceId": "market-research:article:https://www.bloomberg.com/news/articles/2026-11-19/gold-set-for-worst-week-since-march-on-hawkish-fed-ai-selloff",
       "category": "US_MARKET",
-      "url": "https://www.bloomberg.com/news/articles/2026-11-19/latest-oil-market-news-and-analysis-for-nov-20",
+      "url": "https://www.bloomberg.com/news/articles/2026-11-19/gold-set-for-worst-week-since-march-on-hawkish-fed-ai-selloff",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
+      "collectedAt": "2026-11-20T02:39:49.894Z",
       "error": null,
       "observedDate": "2026-11-19"
     },
     {
-      "sourceId": "market-research:article:https://www.bloomberg.com/news/articles/2026-11-19/fed-tells-regional-staff-to-expect-lower-pay-increases-in-2027",
+      "sourceId": "market-research:article:https://www.bloomberg.com/news/features/2026-11-20/anthropic-ant-ipo-on-nasdaq-overcame-ai-fears-and-warnings",
       "category": "US_MARKET",
-      "url": "https://www.bloomberg.com/news/articles/2026-11-19/fed-tells-regional-staff-to-expect-lower-pay-increases-in-2027",
+      "url": "https://www.bloomberg.com/news/features/2026-11-20/anthropic-ant-ipo-on-nasdaq-overcame-ai-fears-and-warnings",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
+      "collectedAt": "2026-11-20T02:39:49.894Z",
       "error": null,
-      "observedDate": "2026-11-19"
+      "observedDate": "2026-11-20"
     },
     {
       "sourceId": "deep:yahoo:spark:megacaps",
@@ -224,45 +224,9 @@
       "url": "https://query1.finance.yahoo.com/v7/finance/spark?symbols=NVDA,MSFT,GOOGL,AMZN,META,AVGO,AMD,TSM,ORCL,AAPL,TSLA&range=5d&interval=1d",
       "status": "PASS",
       "recordCount": 11,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
+      "collectedAt": "2026-11-20T02:39:49.894Z",
       "error": null,
       "observedDate": "2026-11-19"
-    },
-    {
-      "sourceId": "deep:naver-research:list:invest",
-      "category": "US_MARKET",
-      "url": "https://m.stock.naver.com/api/research/invest?page=1&pageSize=60",
-      "status": "PASS",
-      "recordCount": 60,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
-      "error": null
-    },
-    {
-      "sourceId": "deep:naver-research:list:industry",
-      "category": "US_MARKET",
-      "url": "https://m.stock.naver.com/api/research/industry?page=1&pageSize=60",
-      "status": "PASS",
-      "recordCount": 60,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
-      "error": null
-    },
-    {
-      "sourceId": "deep:naver-research:list:economy",
-      "category": "US_MARKET",
-      "url": "https://m.stock.naver.com/api/research/economy?page=1&pageSize=60",
-      "status": "PASS",
-      "recordCount": 23,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
-      "error": null
-    },
-    {
-      "sourceId": "deep:naver-research:list:market",
-      "category": "US_MARKET",
-      "url": "https://m.stock.naver.com/api/research/market?page=1&pageSize=60",
-      "status": "PASS",
-      "recordCount": 60,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
-      "error": null
     },
     {
       "sourceId": "deep:consensus:list:economy",
@@ -270,34 +234,7 @@
       "url": "https://consensus.hankyung.com/analysis/list?report_type=EC&sdate=2026-11-13&edate=2026-11-21&now_page=1&pagenum=80",
       "status": "PASS",
       "recordCount": 2,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
-      "error": null
-    },
-    {
-      "sourceId": "deep:naver-research:list:company",
-      "category": "US_MARKET",
-      "url": "https://m.stock.naver.com/api/research/company?page=1&pageSize=60",
-      "status": "PASS",
-      "recordCount": 60,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
-      "error": null
-    },
-    {
-      "sourceId": "deep:consensus:list:market",
-      "category": "US_MARKET",
-      "url": "https://consensus.hankyung.com/analysis/list?skinType=market&report_type=MK&sdate=2026-11-13&edate=2026-11-21&now_page=1&pagenum=80",
-      "status": "PASS",
-      "recordCount": 45,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
-      "error": null
-    },
-    {
-      "sourceId": "deep:consensus:list:industry",
-      "category": "US_MARKET",
-      "url": "https://consensus.hankyung.com/analysis/list?skinType=industry&report_type=IN&sdate=2026-11-13&edate=2026-11-21&now_page=1&pagenum=80",
-      "status": "PASS",
-      "recordCount": 58,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
+      "collectedAt": "2026-11-20T02:39:49.894Z",
       "error": null
     },
     {
@@ -306,8 +243,139 @@
       "url": "https://consensus.hankyung.com/analysis/list?skinType=business&report_type=CO&sdate=2026-11-13&edate=2026-11-21&now_page=1&pagenum=80",
       "status": "PASS",
       "recordCount": 76,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
+      "collectedAt": "2026-11-20T02:39:49.894Z",
       "error": null
+    },
+    {
+      "sourceId": "deep:consensus:list:market",
+      "category": "US_MARKET",
+      "url": "https://consensus.hankyung.com/analysis/list?skinType=market&report_type=MK&sdate=2026-11-13&edate=2026-11-21&now_page=1&pagenum=80",
+      "status": "PASS",
+      "recordCount": 52,
+      "collectedAt": "2026-11-20T02:39:49.894Z",
+      "error": null
+    },
+    {
+      "sourceId": "deep:consensus:list:industry",
+      "category": "US_MARKET",
+      "url": "https://consensus.hankyung.com/analysis/list?skinType=industry&report_type=IN&sdate=2026-11-13&edate=2026-11-21&now_page=1&pagenum=80",
+      "status": "PASS",
+      "recordCount": 63,
+      "collectedAt": "2026-11-20T02:39:49.894Z",
+      "error": null
+    },
+    {
+      "sourceId": "deep:naver-research:list:economy",
+      "category": "US_MARKET",
+      "url": "https://m.stock.naver.com/api/research/economy?page=1&pageSize=60",
+      "status": "PASS",
+      "recordCount": 25,
+      "collectedAt": "2026-11-20T02:39:49.894Z",
+      "error": null
+    },
+    {
+      "sourceId": "deep:naver-research:list:invest",
+      "category": "US_MARKET",
+      "url": "https://m.stock.naver.com/api/research/invest?page=1&pageSize=60",
+      "status": "PASS",
+      "recordCount": 60,
+      "collectedAt": "2026-11-20T02:39:49.894Z",
+      "error": null
+    },
+    {
+      "sourceId": "deep:naver-research:list:industry",
+      "category": "US_MARKET",
+      "url": "https://m.stock.naver.com/api/research/industry?page=1&pageSize=60",
+      "status": "PASS",
+      "recordCount": 60,
+      "collectedAt": "2026-11-20T02:39:49.894Z",
+      "error": null
+    },
+    {
+      "sourceId": "deep:naver-research:list:market",
+      "category": "US_MARKET",
+      "url": "https://m.stock.naver.com/api/research/market?page=1&pageSize=60",
+      "status": "PASS",
+      "recordCount": 60,
+      "collectedAt": "2026-11-20T02:39:49.894Z",
+      "error": null
+    },
+    {
+      "sourceId": "deep:naver-research:list:company",
+      "category": "US_MARKET",
+      "url": "https://m.stock.naver.com/api/research/company?page=1&pageSize=60",
+      "status": "PASS",
+      "recordCount": 60,
+      "collectedAt": "2026-11-20T02:39:49.894Z",
+      "error": null
+    },
+    {
+      "sourceId": "deep:naver-research:market:38247",
+      "category": "US_MARKET",
+      "url": "https://stock.pstatic.net/stock-research/market/21/20261120_market_939807000.pdf",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-11-20T02:39:49.894Z",
+      "error": "NAVER_RESEARCH_EMPTY"
+    },
+    {
+      "sourceId": "deep:naver-research:market:38246",
+      "category": "US_MARKET",
+      "url": "https://stock.pstatic.net/stock-research/market/76/20261120_market_426313000.pdf",
+      "status": "PASS",
+      "recordCount": 2,
+      "collectedAt": "2026-11-20T02:39:49.894Z",
+      "error": null,
+      "observedDate": "2026-11-20"
+    },
+    {
+      "sourceId": "deep:naver-research:market:38245",
+      "category": "US_MARKET",
+      "url": "https://stock.pstatic.net/stock-research/market/18/20261120_market_267981000.pdf",
+      "status": "PASS",
+      "recordCount": 2,
+      "collectedAt": "2026-11-20T02:39:49.894Z",
+      "error": null,
+      "observedDate": "2026-11-20"
+    },
+    {
+      "sourceId": "deep:naver-research:market:38243",
+      "category": "US_MARKET",
+      "url": "https://stock.pstatic.net/stock-research/market/18/20261120_market_662866000.pdf",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-11-20T02:39:49.894Z",
+      "error": "NAVER_RESEARCH_EMPTY"
+    },
+    {
+      "sourceId": "deep:naver-research:market:38242",
+      "category": "US_MARKET",
+      "url": "https://stock.pstatic.net/stock-research/market/21/20261120_market_814213000.pdf",
+      "status": "PASS",
+      "recordCount": 5,
+      "collectedAt": "2026-11-20T02:39:49.894Z",
+      "error": null,
+      "observedDate": "2026-11-20"
+    },
+    {
+      "sourceId": "deep:naver-research:market:38241",
+      "category": "US_MARKET",
+      "url": "https://stock.pstatic.net/stock-research/market/63/20261120_market_415521000.pdf",
+      "status": "PASS",
+      "recordCount": 2,
+      "collectedAt": "2026-11-20T02:39:49.894Z",
+      "error": null,
+      "observedDate": "2026-11-20"
+    },
+    {
+      "sourceId": "deep:naver-research:market:38238",
+      "category": "US_MARKET",
+      "url": "https://stock.pstatic.net/stock-research/market/61/20261120_market_54574000.pdf",
+      "status": "PASS",
+      "recordCount": 4,
+      "collectedAt": "2026-11-20T02:39:49.894Z",
+      "error": null,
+      "observedDate": "2026-11-20"
     },
     {
       "sourceId": "deep:naver-research:market:38237",
@@ -315,7 +383,7 @@
       "url": "https://stock.pstatic.net/stock-research/market/64/20261120_market_586194000.pdf",
       "status": "PASS",
       "recordCount": 4,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
+      "collectedAt": "2026-11-20T02:39:49.894Z",
       "error": null,
       "observedDate": "2026-11-20"
     },
@@ -325,7 +393,7 @@
       "url": "https://stock.pstatic.net/stock-research/market/40/20261120_market_878537000.pdf",
       "status": "PASS",
       "recordCount": 4,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
+      "collectedAt": "2026-11-20T02:39:49.894Z",
       "error": null,
       "observedDate": "2026-11-20"
     },
@@ -335,75 +403,7 @@
       "url": "https://stock.pstatic.net/stock-research/market/58/20261120_market_116239000.pdf",
       "status": "PASS",
       "recordCount": 4,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
-      "error": null,
-      "observedDate": "2026-11-20"
-    },
-    {
-      "sourceId": "deep:naver-research:market:38229",
-      "category": "US_MARKET",
-      "url": "https://stock.pstatic.net/stock-research/market/21/20261120_market_285548000.pdf",
-      "status": "PASS",
-      "recordCount": 2,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
-      "error": null,
-      "observedDate": "2026-11-20"
-    },
-    {
-      "sourceId": "deep:naver-research:market:38228",
-      "category": "US_MARKET",
-      "url": "https://stock.pstatic.net/stock-research/market/58/20261120_market_485347000.pdf",
-      "status": "PASS",
-      "recordCount": 9,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
-      "error": null,
-      "observedDate": "2026-11-20"
-    },
-    {
-      "sourceId": "deep:naver-research:invest:40885",
-      "category": "US_MARKET",
-      "url": "https://stock.pstatic.net/stock-research/invest/39/20261120_invest_328249000.pdf",
-      "status": "FAILED",
-      "recordCount": 0,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
-      "error": "NAVER_RESEARCH_EMPTY"
-    },
-    {
-      "sourceId": "deep:naver-research:invest:40884",
-      "category": "US_MARKET",
-      "url": "https://stock.pstatic.net/stock-research/invest/39/20261120_invest_431644000.pdf",
-      "status": "FAILED",
-      "recordCount": 0,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
-      "error": "NAVER_RESEARCH_EMPTY"
-    },
-    {
-      "sourceId": "deep:naver-research:invest:40882",
-      "category": "US_MARKET",
-      "url": "https://stock.pstatic.net/stock-research/invest/40/20261120_invest_152894000.pdf",
-      "status": "PASS",
-      "recordCount": 1,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
-      "error": null,
-      "observedDate": "2026-11-20"
-    },
-    {
-      "sourceId": "deep:consensus:pdf:654386",
-      "category": "US_MARKET",
-      "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=654386",
-      "status": "PASS",
-      "recordCount": 7,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
-      "error": null,
-      "observedDate": "2026-11-20"
-    },
-    {
-      "sourceId": "deep:consensus:pdf:654384",
-      "category": "US_MARKET",
-      "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=654384",
-      "status": "PASS",
-      "recordCount": 0,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
+      "collectedAt": "2026-11-20T02:39:49.894Z",
       "error": null,
       "observedDate": "2026-11-20"
     },
@@ -412,8 +412,8 @@
       "category": "US_MARKET",
       "url": "https://query1.finance.yahoo.com/v1/finance/trending/US?count=20",
       "status": "PASS",
-      "recordCount": 16,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
+      "recordCount": 11,
+      "collectedAt": "2026-11-20T02:39:49.894Z",
       "error": null,
       "observedDate": "2026-11-19"
     },
@@ -423,17 +423,17 @@
       "url": "https://query1.finance.yahoo.com/v1/finance/screener/predefined/saved?scrIds=most_actives&count=25",
       "status": "PASS",
       "recordCount": 25,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
+      "collectedAt": "2026-11-20T02:39:49.894Z",
       "error": null,
       "observedDate": "2026-11-19"
     },
     {
       "sourceId": "deep:yahoo:spark:stocks",
       "category": "US_MARKET",
-      "url": "https://query1.finance.yahoo.com/v7/finance/spark?symbols=ANT,INTU,INSM,GME,AMD,ROST,META,GAP,QQQ,SPY,VOO,KEYS,NVDA,INTC,SPCX,CRWV,BBD,NU,NOK,AMZN&range=5d&interval=1d",
+      "url": "https://query1.finance.yahoo.com/v7/finance/spark?symbols=ANT,INTU,AMD,INSM,GME,OPEN,BSP,META,GAP,GLD,VVV,NVDA,INTC,SPCX,CRWV,BBD,NU,NOK,AMZN&range=5d&interval=1d",
       "status": "PASS",
-      "recordCount": 19,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
+      "recordCount": 18,
+      "collectedAt": "2026-11-20T02:39:49.894Z",
       "error": null,
       "observedDate": "2026-11-19"
     },
@@ -443,7 +443,7 @@
       "url": "https://query1.finance.yahoo.com/v7/finance/spark?symbols=XLK,XLC,XLY,XLF,XLV,XLI,XLE,XLB,XLP,XLU,XLRE&range=5d&interval=1d",
       "status": "PASS",
       "recordCount": 11,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
+      "collectedAt": "2026-11-20T02:39:49.894Z",
       "error": null,
       "observedDate": "2026-11-19"
     },
@@ -453,7 +453,7 @@
       "url": "https://query1.finance.yahoo.com/v7/finance/spark?symbols=MU&range=5d&interval=1d",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
+      "collectedAt": "2026-11-20T02:39:49.894Z",
       "error": null,
       "observedDate": "2026-11-19"
     },
@@ -463,7 +463,7 @@
       "url": "https://stock.pstatic.net/stock-research/economy/39/20261120_economy_696802000.pdf",
       "status": "PASS",
       "recordCount": 1,
-      "collectedAt": "2026-11-19T23:44:21.335Z",
+      "collectedAt": "2026-11-20T02:39:49.894Z",
       "error": null,
       "observedDate": "2026-11-20"
     }
