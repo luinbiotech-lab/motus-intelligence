@@ -328,5 +328,11 @@
     "publicationId": "motus-live-2026-11-20:ai",
     "publicPostUrl": "https://motusnova.blogspot.com/2026/11/azure-ai.html",
     "publishedAt": "2026-11-20T12:35:18+09:00"
+  },
+  {
+    "idempotencyKey": "library:motus-live-2026-11-23:korea|https://motusnova.blogspot.com/2026/11/11-20-521-486996-1-69.html",
+    "publicationId": "motus-live-2026-11-23:korea",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/11/11-20-521-486996-1-69.html",
+    "publishedAt": "2026-11-20T17:16:44+09:00"
   }
 ]
