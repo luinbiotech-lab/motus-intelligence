@@ -1,10 +1,10 @@
 {
-  "state": "SKIP",
-  "reasonCode": "ALREADY_PUBLISHED_IN_PERSISTED_LEDGER",
-  "identity": "2026-11-21|US_MARKET",
-  "postId": "4482583651125519517",
-  "publicPostUrl": "https://motusnova.blogspot.com/2026/11/11-20-3-53-14.html",
-  "reason": "persistent publish ledger already records this publication identity",
+  "state": "HOLD",
+  "reasonCode": "YAHOO_US_HTTP_429",
+  "reasonCodes": [
+    "YAHOO_US_HTTP_429"
+  ],
+  "reason": "YAHOO_US_HTTP_429",
   "insertCallCount": 0,
   "publishCallCount": 0
 }

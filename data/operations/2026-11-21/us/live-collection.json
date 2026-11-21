@@ -2,11 +2,11 @@
   "mode": "LIVE",
   "sourceMode": "internal",
   "date": "2026-11-21",
-  "observedDate": "2026-11-20",
+  "observedDate": null,
   "category": "US_MARKET",
-  "state": "LIVE_READY",
-  "reasonCode": null,
-  "verification": "VERIFIED",
+  "state": "HOLD",
+  "reasonCode": "YAHOO_US_HTTP_429",
+  "verification": "FAILED",
   "publishCallCount": 0,
   "commerce": {
     "enabled": false
