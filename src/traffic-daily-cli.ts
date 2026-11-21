@@ -16,7 +16,7 @@
 import {mkdir,readFile,readdir,writeFile} from 'node:fs/promises';
 import {existsSync} from 'node:fs';
 import {join} from 'node:path';
-import {articleKeywords,contentFeatures,type ContentFeatures} from './operations/traffic.js';
+import {articleKeywords,contentFeatures,normalizeBlogUrl,searchConsolePages,type ContentFeatures} from './operations/traffic.js';
 
 const args=process.argv.slice(2),value=(flag:string)=>{const index=args.indexOf(flag);return index>=0?args[index+1]:undefined};
 const date=value('--date')??'';
@@ -72,14 +72,15 @@ try{
 }catch(error){result.articles={state:'UNAVAILABLE',reason:error instanceof Error?error.message:String(error)}}
 
 // 3) Search Console per page (data usually lags 2-3 days; the last 7 days by page and date are kept).
+//    pages: per-page totals of all rows, ?m=1/http merged (MOT-050, MO-5); article rows match on the same key.
 try{
   const property=env('GOOGLE_SEARCH_CONSOLE_PROPERTY'),cid=env('SEARCH_CONSOLE_CLIENT_ID'),secret=env('SEARCH_CONSOLE_CLIENT_SECRET'),refresh=env('SEARCH_CONSOLE_REFRESH_TOKEN');
   if(!property||!cid||!secret||!refresh)throw new Error('NOT_CONNECTED');
   const token=await googleToken(cid,secret,refresh),start=new Date(Date.parse(date+'T00:00:00Z')-8*86400000).toISOString().slice(0,10);
   const query=async(dimensions:string[])=>{const response=await fetch(`https://www.googleapis.com/webmasters/v3/sites/${encodeURIComponent(property)}/searchAnalytics/query`,{method:'POST',headers:{authorization:`Bearer ${token}`,'content-type':'application/json'},body:JSON.stringify({startDate:start,endDate:date,dimensions,rowLimit:250,dataState:'all'}),signal:timeout(30000)});if(!response.ok)throw new Error(`HTTP ${response.status}`);return (await response.json() as {rows?:Array<{keys?:string[];clicks?:number;impressions?:number;ctr?:number;position?:number}>}).rows??[]};
   const byPage=await query(['page','date']),byQuery=await query(['query']);
-  for(const article of ours)article.searchConsole=byPage.filter(row=>row.keys?.[0]===article.url).map(row=>({date:row.keys?.[1],clicks:row.clicks,impressions:row.impressions,ctr:row.ctr,position:row.position}));
-  result.searchConsole={state:byPage.length||byQuery.length?'PASS':'NO_DATA',range:[start,date],dataState:'all',lastDataDate:byPage.map(row=>row.keys?.[1]??'').sort().at(-1)??null,topQueries:byQuery.sort((a,b)=>(b.impressions??0)-(a.impressions??0)).slice(0,20)};
+  for(const article of ours)article.searchConsole=byPage.filter(row=>normalizeBlogUrl(row.keys?.[0]??'')===normalizeBlogUrl(article.url)).map(row=>({date:row.keys?.[1],clicks:row.clicks,impressions:row.impressions,ctr:row.ctr,position:row.position}));
+  result.searchConsole={state:byPage.length||byQuery.length?'PASS':'NO_DATA',range:[start,date],dataState:'all',lastDataDate:byPage.map(row=>row.keys?.[1]??'').sort().at(-1)??null,pageRows:byPage.length,pages:searchConsolePages(byPage),topQueries:byQuery.sort((a,b)=>(b.impressions??0)-(a.impressions??0)).slice(0,20)};
 }catch(error){result.searchConsole={state:'UNAVAILABLE',reason:error instanceof Error?error.message:String(error)}}
 
 // 3b) Index status (owner 2026-11-05: "구글검색 노출이 전혀 안 되는 것은 반드시 보완"): submitted sitemaps and the
