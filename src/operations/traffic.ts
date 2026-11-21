@@ -26,3 +26,30 @@ export function articleKeywords(title:string,labels:string[]):string[] {
   return [...new Set([base,head].filter((item):item is string=>Boolean(item&&item.length>=2)))];
 }
 
+
+/**
+ * One page key for Search Console rows and feed URLs (MOT-050): Blogger serves phones `?m=1`, and rows can come as
+ * http, with a fragment or another query. Lower-cased host, https, no query or fragment.
+ */
+export function normalizeBlogUrl(url:string):string {
+  try{const parsed=new URL(url);return `https://${parsed.host.toLowerCase()}${parsed.pathname}`}catch{return url.split(/[?#]/)[0]??url}
+}
+export interface SearchConsoleRow {keys?:string[];clicks?:number;impressions?:number;ctr?:number;position?:number}
+export interface SearchConsolePage {page:string;clicks:number;impressions:number;ctr:number|null;position:number|null;dates:string[];variants:string[]}
+/**
+ * Per-page totals of page×date rows (MOT-050: rows not matching a D-1 article were dropped, so a PASS could not say
+ * which pages were shown). Variants (`?m=1`, http) are merged; position is the impression-weighted average. Top `limit`
+ * by impressions, then clicks. Only measured rows are used; a page without impressions has ctr/position null.
+ */
+export function searchConsolePages(rows:SearchConsoleRow[],limit=20):SearchConsolePage[] {
+  const pages=new Map<string,{clicks:number;impressions:number;weighted:number;dates:Set<string>;variants:Set<string>}>();
+  for(const row of rows){
+    const raw=row.keys?.[0];if(!raw)continue;
+    const key=normalizeBlogUrl(raw),entry=pages.get(key)??{clicks:0,impressions:0,weighted:0,dates:new Set<string>(),variants:new Set<string>()};
+    const impressions=row.impressions??0;
+    entry.clicks+=row.clicks??0;entry.impressions+=impressions;entry.weighted+=(row.position??0)*impressions;
+    if(row.keys?.[1])entry.dates.add(row.keys[1]);entry.variants.add(raw);pages.set(key,entry);
+  }
+  return [...pages].map(([page,e])=>({page,clicks:e.clicks,impressions:e.impressions,ctr:e.impressions?e.clicks/e.impressions:null,position:e.impressions?Math.round(e.weighted/e.impressions*10)/10:null,dates:[...e.dates].sort(),variants:[...e.variants].sort()}))
+    .sort((a,b)=>b.impressions-a.impressions||b.clicks-a.clicks||a.page.localeCompare(b.page)).slice(0,limit);
+}
