@@ -1,8 +1,9 @@
 {
   "identity": "weekly|2026-11-16",
   "runDate": "2026-11-23",
-  "state": "SKIP",
-  "reason": "this week is already published",
+  "state": "REFRESHED",
   "postId": "1054499696680483812",
-  "publicPostUrl": "https://motusnova.blogspot.com/2026/11/11231127-pce-gdp-100-79.html"
+  "publicPostUrl": "https://motusnova.blogspot.com/2026/11/11231127-pce-gdp-100-79.html",
+  "title": "주간 증시 전망(11/23~11/27)｜델 실적·PCE 물가·GDP 주목…지난주 나스닥 10.0% 하락·코스피 7.9% 하락",
+  "publishCallCount": 1
 }
