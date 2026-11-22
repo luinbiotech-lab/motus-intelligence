@@ -16,7 +16,7 @@ test('the AI article leads with the day\'s AI issue as brokers explained it', ()
   const issue=composed.sections[0]!;
   assert.equal(issue.key,'ai-issue');assert.equal(issue.placement,'early');
   const text=issue.paragraphs.map(p=>p.text).join('\n');
-  assert.match(text,/A증권은 10월 30일 아침 리포트 「10\/30 A증권 모닝코멘트」에서 “알파벳이 실적 부진과 잉여현금흐름 악화에 12%대 급락/);
+  assert.match(text,/A증권은 「10\/30 A증권 모닝코멘트」에서 “알파벳이 실적 부진과 잉여현금흐름 악화에 12%대 급락/);
   assert.match(text,/B증권은 .*“미국 빅테크는 AI 매출 성장에도/);
   assert.doesNotMatch(text,/PCE|코스피/,'only AI-related U.S. commentary');
   assert.equal(composed.titleFocus,'알파벳 13% 급락');

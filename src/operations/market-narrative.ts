@@ -87,16 +87,16 @@ export function buildUSMarketNarrative(series:ClosingSeries[],tenYear:RateObserv
     if(rateChange!==null&&rateChange!==0&&tenYear?.date===tenYear?.sessionDate&&direction(lead.day)!==0){
       analysis.push(`같은 날 미국 10년물 국채금리는 ${Math.abs(rateChange)}bp ${rateChange>0?'올랐고':'내렸고'} ${josa(lead.name,'은','는')} ${Math.abs(lead.day).toFixed(2)}% ${lead.day>0?'상승했다':'하락했다'}.`);
       const up=rateChange>0,rally=lead.day>0;
-      analysis.push(up&&!rally?'금리 상승이 주가에 부담으로 작용했을 가능성이 있다(추정).':!up&&!rally?'금리가 내렸는데도 주가가 내려, 이날 하락은 금리보다 다른 요인에서 나온 것으로 읽힌다(추정).':!up&&rally?'금리 하락이 주가를 받친 것으로 읽힌다(추정).':'금리가 올랐는데도 주가가 올라, 금리 부담보다 다른 재료가 더 크게 작용한 것으로 읽힌다(추정).');
+      analysis.push(up&&!rally?'금리 상승이 주가에 부담으로 작용한 것으로 보인다.':!up&&!rally?'금리가 내렸는데도 주가가 떨어져, 이날 하락은 금리보다 다른 악재의 영향이 컸던 것으로 풀이된다.':!up&&rally?'금리 하락이 주가를 떠받친 것으로 보인다.':'금리가 올랐는데도 주가가 올라, 금리 부담보다 다른 호재가 더 크게 작용한 것으로 풀이된다.');
     }
   }
-  if(context.driver&&sp&&direction(sp.day)!==0&&driverFits(context.driver.text,'US',sp.day>0))analysis.push(`원인으로는 ${josa(context.driver.publisher,'이','가')} ${quoted(context.driver.text)} 짚었다.`);
+  if(context.driver&&sp&&direction(sp.day)!==0&&driverFits(context.driver.text,'US',sp.day>0))analysis.push(`${josa(context.driver.publisher,'은','는')} ${quoted(context.driver.text)} 분석했다.`);
   if(sp&&direction(sp.day)!==0){
     const down=sp.day<0,checks:string[]=[];
     if(spCrossed!==null)checks.push(`S&P 500 ${formatLevel(spCrossed).replace(/\.00$/,'')}선 ${down?'회복':'안착'} 여부`);
     else if(sp.fromHigh<=-10&&down)checks.push('고점 대비 낙폭이 더 커지는지');
     if(rateChange!==null&&tenYear?.date===tenYear?.sessionDate)checks.push('10년물 금리 방향');
-    if(checks.length)analysis.push(`다음 정규장에서는 ${josa(checks.join('와 '),'이','가')} 첫 확인점이다.`);
+    if(checks.length)analysis.push(`다음 정규장에서는 ${josa(checks.join('와 '),'이','가')} 관건이다.`);
   }
   return {facts,analysis};
 }
@@ -107,6 +107,29 @@ export interface KoreaIndexHistory {label:'KOSPI'|'KOSDAQ';dates:string[];closes
 export function eokText(value:number):string {
   const a=Math.round(Math.abs(value)),jo=Math.floor(a/10000),rest=a%10000;
   return jo?`${jo}조${rest?` ${rest.toLocaleString('en-US')}억원`:'원'}`:`${rest.toLocaleString('en-US')}억원`;
+}
+/** Wire style amount: 15,924 -> '1조5천924억원', 9,534 -> '9천534억원' (연합뉴스 표기). */
+export function pressEok(value:number):string {
+  const a=Math.round(Math.abs(value)),jo=Math.floor(a/10000),rest=a%10000,ch=Math.floor(rest/1000),tail=rest%1000;
+  const eok=rest?`${ch?`${ch}천`:''}${tail?String(tail):''}억원`:'원';
+  return jo?`${jo}조${rest?eok:'원'}`:eok;
+}
+/**
+ * Investor flows the way a wire close reads them (2026-11-22 owner: "AI가 쓴 티가 안 나게"):
+ * '개인이 1조5천924억원어치를 순매수했고, 외국인과 기관은 각각 1조1천259억원, 9천534억원어치를 순매도했다.'
+ */
+export function pressFlow(amounts:Array<{label:string;value:number}>):string {
+  const buy=amounts.filter(item=>item.value>0).sort((a,b)=>b.value-a.value),sell=amounts.filter(item=>item.value<0).sort((a,b)=>a.value-b.value);
+  const part=(items:typeof amounts,verb:string)=>{
+    if(items.length===1)return `${josa(items[0]!.label,'이','가')} ${pressEok(items[0]!.value)}어치를 ${verb}`;
+    const head=items.slice(0,-1).map(item=>item.label).join(', '),last=items.at(-1)!.label;
+    const and=josa(items.at(-2)!.label,'과','와').slice(items.at(-2)!.label.length);
+    return `${head}${and} ${josa(last,'은','는')} 각각 ${items.map(item=>pressEok(item.value)).join(', ')}어치를 ${verb}`;
+  };
+  const a=buy.length?part(buy,'순매수'):'',b=sell.length?part(sell,'순매도'):'';
+  const top=[...amounts].sort((x,y)=>Math.abs(y.value)-Math.abs(x.value))[0];
+  const [first,second]=top&&top.value<0?[b,a]:[a,b];
+  return first&&second?`${first}했고, ${second}했다.`:`${first||second}했다.`;
 }
 /** A quoted sentence followed by the right quotative: '…했다”고' after a sentence ending in 다, '…시사”라고' otherwise. */
 export function quoted(text:string):string {const body=text.trim().replace(/[.。]\s*$/,'');return `“${body}”${/다$/.test(body)?'고':'라고'}`}
@@ -177,24 +200,24 @@ export function buildKoreaMarketNarrative(histories:KoreaIndexHistory[],flows:Ar
     const list=(items:typeof amounts)=>items.map(item=>`${item.label}(${item.value>0?'+':'−'}${eokText(item.value)})`).join('·');
     const lead=down?sellers[0]:buyers[0];
     if(sellers.length&&buyers.length&&lead){
-      const text=`매도 쪽은 ${list(sellers)}, 매수 쪽은 ${list(buyers)}이었다.`;
+      const text=`${pressFlow(amounts)}`;
       const largest=[...amounts].sort((a,b)=>Math.abs(b.value)-Math.abs(a.value))[0]!;
       foreignLed=lead===largest&&/외국인/.test(lead.label);
-      analysis.push(lead===largest?`${text} 지수 방향과 같은 쪽에서 가장 크게 움직인 주체가 ${lead.label}이어서, 이날 ${down?'하락':'상승'}은 ${lead.label} ${down?'매도':'매수'}가 주도한 것으로 읽힌다(추정).`
-        :`${text} 가장 크게 움직인 ${josa(largest.label,'은','는')} 지수와 반대로 ${largest.value>0?'샀고':'팔았고'}, 지수는 ${down?'매도':'매수'} 쪽(${(down?sellers:buyers).map(item=>item.label).join('·')})을 따라 ${down?'내렸다':'올랐다'}(추정).`);
+      analysis.push(lead===largest?`${text} 이날 ${down?'하락':'상승'}은 ${lead.label} ${down?'매도':'매수'}세가 이끈 것으로 풀이된다.`
+        :`${text} ${josa(largest.label,'이','가')} 가장 많이 ${largest.value>0?'사들였지만':'팔았지만'} 지수는 ${(down?sellers:buyers).map(item=>item.label).join('·')} ${down?'매도':'매수'}세를 따라 ${down?'내린':'오른'} 것으로 보인다.`);
     }
   }
   if(context.driver&&kospi&&direction(kospi.day)!==0&&driverFits(context.driver.text,'KOREA',kospi.day>0)){
     const quote=quoted(context.driver.text);
-    analysis.push(foreignLed&&foreign?`원인으로는 ${josa(context.driver.publisher,'이','가')} ${quote} 짚었다. 같은 날 외국인이 ${eokText(foreign.value)}을 ${foreign.value<0?'순매도':'순매수'}한 만큼, 이 요인이 외국인 매매를 통해 지수에 반영된 것으로 읽힌다(추정).`
-      :`원인으로는 ${josa(context.driver.publisher,'이','가')} ${quote} 짚었다.`);
+    analysis.push(foreignLed&&foreign?`${josa(context.driver.publisher,'은','는')} ${quote} 분석했다. 이 요인이 외국인 ${foreign.value<0?'매도':'매수'}를 통해 지수에 반영된 것으로 보인다.`
+      :`${josa(context.driver.publisher,'은','는')} ${quote} 분석했다.`);
   }
   if(kospi&&direction(kospi.day)!==0){
     const down=kospi.day<0,checks:string[]=[];
     if(crossed!==null)checks.push(`${formatLevel(crossed).replace(/\.00$/,'')}선 ${down?'회복':'안착'} 여부`);
     if(foreign)checks.push(`외국인 ${foreign.value<0?'매도가 멈추는지':'매수가 이어지는지'}`);
     else if(run>=3)checks.push(`${run}거래일 연속 ${down?'하락':'상승'}이 멈추는지`);
-    if(checks.length)analysis.push(`다음 거래일에는 ${josa(checks.join('와 '),'이','가')} 이 ${down?'하락':'상승'}이 이어질지를 가르는 첫 확인점이다.`);
+    if(checks.length)analysis.push(`다음 거래일에는 ${josa(checks.join('와 '),'이','가')} 관건이다.`);
   }
   return {facts,analysis};
 }

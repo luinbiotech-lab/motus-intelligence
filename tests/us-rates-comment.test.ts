@@ -16,10 +16,10 @@ test('the rate comment reads the move against the prior session, a week and 20 s
   assert.equal(section.key,'us-rates-comment');
   const [fact,cause,reading,next]=section.paragraphs.map(p=>p.text);
   assert.equal(fact,'미국 10년물 국채금리는 11월 12일 5.10%로 전 거래일(11월 11일 4.98%)보다 12bp 올랐다. 5거래일 전(11월 5일 4.84%)과 비교하면 +26bp이다. 최근 20거래일 범위 4.79%~5.10%에서 최고치다. 5거래일 연속 상승이다.');
-  assert.match(cause!,/^금리 관련 증권가 시각: .*「11\/13 Weekly Macro」에서 “미국 10월 소매판매 둔화는 미 국채금리의/);
+  assert.match(cause!,/^키움증권은 「11\/13 Weekly Macro」에서 금리에 대해 “미국 10월 소매판매 둔화는 미 국채금리의/);
   assert.equal(section.paragraphs[1]!.source?.url,'https://example.com/kiwoom.pdf');
-  assert.match(reading!,/^MOTUS 해석\(추정\): 금리가 \+12bp 오른 날 지수가 내렸다\(나스닥 -0\.39%, S&P 500 -0\.35%\)/);
-  assert.equal(next,'다음 거래일 관전 포인트(전망 아님): 10년물이 5.25%를 넘어서는지(15bp 위), 5.00% 아래로 되돌아오는지(10bp 아래)가 1차 확인 지점이다. 금리에 영향을 줄 예정 일정: 미국: 생산자물가지수, 윌리엄스 연은 총재 연설(SK증권 집계).');
+  assert.equal(reading,'금리가 +12bp 오르면서 성장주 가치평가에 부담이 된 것으로 보인다(나스닥 -0.39%, S&P 500 -0.35%).');
+  assert.equal(next,'다음 거래일에는 10년물 금리가 5.25%를 넘어서는지, 5.00% 아래로 내려가는지가 관심사다. 금리에 영향을 줄 일정으로는 미국: 생산자물가지수, 윌리엄스 연은 총재 연설(SK증권 집계)이 예정돼 있다.');
   // Owner rule: no sentence without a number or a named source.
   for(const p of section.paragraphs)assert.ok(/\d/.test(p.text)||p.source,p.text);
 });
@@ -28,18 +28,18 @@ test('without a source that explains the move it says so, and a stale value is l
   const section=composeRatesComment({points:points.slice(0,-1),sessionDate:'2026-11-12',indexes,bundle:null})!;
   const texts=section.paragraphs.map(p=>p.text);
   assert.match(texts[0]!,/11월 11일 4\.98%로 전 거래일\(11월 10일 4\.88%\)보다 10bp 올랐다\. 이 값은 11월 11일 고시분으로, 11월 12일 정규장 값은 아직 고시되지 않았다\./);
-  assert.ok(texts.includes('금리 배경: 이날 10년물 금리가 10bp 올랐는데 그 이유를 직접 설명한 증권사 리포트·통신 기사 문장은 수집되지 않았다(원인 미확인).'));
+  assert.ok(!texts.some(text=>/원인 미확인|수집되지 않았다/.test(text)),'no source -> no meta sentence (2026-11-22)');
   // The index reading is only made when the yield is from the same session.
-  assert.ok(!texts.some(text=>text.startsWith('MOTUS 해석')));
+  assert.ok(!texts.some(text=>/풀이된다|보인다|어렵다|만들어졌다|가능성이 있다/.test(text)));
 });
 
 test('a small move is not read as the driver; a wire sentence about rates is quoted when no broker explains it', ()=>{
   const flat=[...points.slice(0,-1),{date:'2026-11-12',value:5.00}];
   const section=composeRatesComment({points:flat,sessionDate:'2026-11-12',indexes:[{name:'나스닥',changePct:1.6}],bundle:null,wire:[{publisher:'연합뉴스',title:'뉴욕증시, 국채금리 안정에 상승',url:'https://example.com/yna',publishedAt:'2026-11-12T21:30:00Z',sentence:'국채금리가 안정되며 기술주가 올랐다.',feed:'x'}]})!;
   const texts=section.paragraphs.map(p=>p.text);
-  assert.ok(texts.some(text=>text.startsWith('금리 배경(통신 보도): 연합뉴스는 11월 13일 「뉴욕증시, 국채금리 안정에 상승」에서 “국채금리가 안정되며 기술주가 올랐다”라고 전했다.')),texts.join('\n'));
-  assert.ok(texts.includes('MOTUS 해석(추정): 금리 변동이 +2bp로 작아 이날 지수 등락(나스닥 +1.60%)의 주된 변수로 보기는 어렵다.'));
-  assert.match(texts.at(-1)!,/10년물이 5\.00%선 위를 지키는지가 1차 확인 지점이다\.$/);
+  assert.ok(texts.includes('연합뉴스는 금리 흐름에 대해 “국채금리가 안정되며 기술주가 올랐다”고 전했다.'),texts.join('\n'));
+  assert.ok(texts.includes('금리 움직임(+2bp)이 크지 않아 이날 지수 등락(나스닥 +1.60%)을 금리로 설명하기는 어렵다.'),texts.join('\n'));
+  assert.match(texts.at(-1)!,/10년물 금리가 5\.00%선 위를 지키는지가 관심사다\.$/);
 });
 
 import {createFirstSplitDailyProductionRun} from '../src/intelligence/split-daily-production.js';
@@ -54,7 +54,8 @@ test('the rate comment is printed inside the 금리·달러·변동성 section, 
   assert.ok(macro>0);
   const section=html.slice(macro,html.indexOf('</section>',macro)).replace(/<[^>]+>/g,'');
   assert.match(section,/전 거래일\(11월 11일 4\.98%\)보다/);
-  assert.match(section,/MOTUS 해석\(추정\)/);
-  assert.match(section,/관전 포인트\(전망 아님\)/);
+  assert.match(section,/부담이 된 것으로 보인다/);
+  assert.match(section,/가 관심사다\./);
+  assert.doesNotMatch(section,/MOTUS 해석|전망 아님|확인 지점/);
   assert.equal((html.replace(/<[^>]+>/g,'').match(/5거래일 전\(11월 5일/g)??[]).length,1);
 });

@@ -12,13 +12,13 @@ test('Korea search stocks without commentary are read together, never as one-lin
   const stocks=texts(composed.sections.find(item=>item.key==='korea-stocks'));
   assert.equal(stocks.filter(text=>/^검색 \d+위 .+했다(\(.*\))?\.$/.test(text)).length,0);
   assert.equal(stocks.length,2);
-  assert.match(stocks[0]!,/^MOTUS 정리: 투자자 검색 상위 5종목 가운데 3종목이 오르고 1종목이 내렸다\(보합 1종목\)\. 가장 강한 종목은 삼성SDI\(\+9\.52%\), 가장 약한 종목은 한화오션\(-6\.10%\)로 등락 폭 차이가 15\.62%p였다\./);
-  assert.match(stocks[0]!,/코스피는 \+0\.85%였고, 코스피보다 강했던 종목은 3종목\(삼성전자·SK하이닉스·삼성SDI\)이다\./);
-  assert.match(stocks[1]!,/삼성SDI\(3위, 30,000원, \+9\.52%\)/);
-  assert.match(stocks[1]!,/삼성전자·SK하이닉스·삼성SDI가 지수보다 강했고 한화오션·카카오는 지수를 밑돌았다\./);
+  assert.match(stocks[0]!,/^MOTUS 정리: 투자자 검색 상위 5종목 가운데 3종목이 오르고 1종목이 내렸다\(보합 1종목\)\. 삼성SDI가 \+9\.52%로 가장 많이 올랐고, 한화오션은 -6\.10%로 가장 많이 내렸다\./);
+  assert.match(stocks[0]!,/코스피\(\+0\.85%\)보다 나은 흐름을 보인 종목은 삼성전자·SK하이닉스·삼성SDI였다\./);
+  assert.match(stocks[1]!,/삼성SDI 30,000원\(\+9\.52%\)/);
+  assert.match(stocks[1]!,/^(나머지 )?검색 상위 종목은 .+에 거래를 마쳤다\.$/);
   const risks=texts(composed.sections.find(item=>item.key==='korea-risks'));
   assert.equal(risks[0],'체크.');
-  assert.match(risks[1]!,/^변동성 점검: 직전 거래일 검색 상위 가운데 5% 넘게 움직인 삼성SDI\(\+9\.52%\)·한화오션\(-6\.10%\)은 등락이 이어지는지가 함께 확인 대상이다\.$/);
+  assert.match(risks[1]!,/^직전 거래일 검색 상위 가운데 5% 넘게 움직인 삼성SDI\(\+9\.52%\)·한화오션\(-6\.10%\)은 다음 거래일에도 큰 폭의 등락이 이어질 수 있어 지켜볼 만하다\.$/);
 });
 
 test('a single bare stock keeps its line with the KOSPI gap, and no KOSPI value means no invented comparison',()=>{

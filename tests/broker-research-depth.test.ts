@@ -126,13 +126,13 @@ test('composed sections quote named brokers with dates and links, and lead with 
   const korea=composeKoreaDeepSections({bundle,searchTop:[{rank:1,name:'HD현대중공업',code:'329180',close:285500,changePct:-3.81,date:'2026-10-28',url:'https://m.stock.naver.com/api/stock/329180/price?pageSize=5&page=1'}]});
   assert.equal(korea.titleFocus,'검색 1위 HD현대중공업 3.8% 하락');
   const html=korea.sections.map(deepSection).join('');
-  assert.match(html.replace(/<[^>]+>/g,''),/대신증권 리서치센터는 10월 29일 아침 리포트 「morning meeting brief」에서 “[^”]+”(?:이)?라고 진단했다/);assert.doesNotMatch(html,/MOTUS 정리: /,'a single broker yields no consensus sentence');
+  assert.match(html.replace(/<[^>]+>/g,''),/대신증권 리서치센터는 「morning meeting brief」에서 “[^”]+”(?:이)?라고 진단했다/);assert.doesNotMatch(html,/MOTUS 정리: /,'a single broker yields no consensus sentence');
   assert.match(html.replace(/<[^>]+>/g,''),/검색 1위 HD현대중공업은 285,500원으로 3\.81% 하락했다\. 유진투자증권 양승윤 연구원은 10월 29일 「피크아웃 우려를 이겨낼 조선사」 리포트에서 투자의견 Buy, 목표주가 610,000원을 제시했다/);
   assert.ok(korea.sources.some(item=>item.url.endsWith('report_idx=111')));
   const us=composeUSDeepSections({bundle,stocks:[{symbol:'GOOG',name:'Alphabet',koreanName:'알파벳',changePct:-11.15,close:251.2,date:'2026-10-29',trendingRank:1,mostActiveRank:null,marketCap:3.5e12}],sectors:[]});
   assert.equal(us.titleFocus,'알파벳 11% 급락');
   const usHtml=us.sections.map(deepSection).join('');
-  assert.match(usHtml,/“FOMC 동결 속 연준 의장 인플레 낙관론에 상승 마감”/);assert.match(usHtml,/경계 요인도 제시됐다\./);
+  assert.match(usHtml,/“FOMC 동결 속 연준 의장 인플레 낙관론에 상승 마감”/);assert.match(usHtml,/라고 경계했다\./);
   assert.match(usHtml.replace(/<[^>]+>/g,''),/알파벳\(GOOG\)은 251\.20달러로 11\.15% 급락했다\(야후 파이낸스 검색 1위\)/);
   assert.match(usHtml,/공동락 연구원은 「10 월 FOMC: 금리 인상 잠시 쉬어가기」에서/);
 });
@@ -144,7 +144,7 @@ test('MOTUS synthesis names themes shared by several brokers and flags divergent
   const text=korea.sections.flatMap(section=>section.paragraphs.map(p=>p.text)).join(' ');
   assert.match(text,/MOTUS 정리: 증권사 3곳의 리포트를 대조하면 반도체\(A증권·B증권\)/);
   assert.match(text,/C증권은 환율·달러를 따로 짚었다/);
-  assert.match(text,/경계 요인도 제시됐다\. B증권 리서치센터는 “FOMC 대기 속 경계감 공존”이라고 짚었다/);
+  assert.match(text,/B증권 리서치센터는 “FOMC 대기 속 경계감 공존”이라고 경계했다/);
 });
 
 test('a bullet followed by an unmarked line is never quoted, even if its first line looks complete',()=>{

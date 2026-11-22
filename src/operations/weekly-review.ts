@@ -320,7 +320,7 @@ export async function collectWeeklyEvidence(runDate:string,fetcher:typeof fetch=
 /* ---------------- Article ---------------- */
 
 const quote=(value:string)=>`“${value.replace(/[“"]/g,'‘').replace(/[”]/g,'’').replace(/\s+/g,' ').trim().replace(/[.。]$/,'')}”`;
-function said(text:string):string {const char=text.replace(/[”’\s]+$/,'').slice(-1),code=char.charCodeAt(0)-0xac00;return `${text}${code>=0&&code<11172&&code%28!==0?'이라고':'라고'}`}
+function said(text:string):string {const char=text.replace(/[”’\s]+$/,'').slice(-1),code=char.charCodeAt(0)-0xac00;return `${text}${char==='다'?'고':code>=0&&code<11172&&code%28!==0?'이라고':'라고'}`}
 const fmt=(value:number,digits=2)=>new Intl.NumberFormat('en-US',{minimumFractionDigits:digits,maximumFractionDigits:digits}).format(value);
 const move=(pct:number)=>Math.abs(pct)<0.005?'보합':pct>0?'상승':'하락';
 const titlePct=(pct:number)=>Math.abs(pct)<0.005?'보합':`${Math.abs(pct)<0.1?Math.abs(pct).toFixed(2):Math.abs(pct).toFixed(1)}% ${move(pct)}`;
