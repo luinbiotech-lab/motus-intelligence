@@ -17,6 +17,7 @@ import {mkdir,readFile,readdir,writeFile} from 'node:fs/promises';
 import {existsSync} from 'node:fs';
 import {join} from 'node:path';
 import {articleKeywords,contentFeatures,type ContentFeatures} from './operations/traffic.js';
+import {carriedIndexedUrls,inspectionUrlOrder,type PriorCapture} from './operations/index-sample.js';
 
 const args=process.argv.slice(2),value=(flag:string)=>{const index=args.indexOf(flag);return index>=0?args[index+1]:undefined};
 const date=value('--date')??'';
@@ -98,16 +99,21 @@ try{
   // Fixed sample (루인 review 2026-11-08, MOT-035): the same URLs every day, so the redirect-error fix is judged on a
   // stable before/after set: the five REDIRECT_ERROR posts, the home page and one post that was indexed.
   const fixed=INDEX_FIXED_SAMPLE.map(path=>BLOG+path);
-  const urls=[...new Set([...fixed,...ours.map(article=>article.url),...recent])].slice(0,60),inspections=[];
+  // MO-13 (MOT-053): URLs indexed in a capture of the last 14 days stay in the sample even after the newest-50 feed
+  // window moves past them, so a lower indexed count is a real change, not a sample change.
+  const priors:PriorCapture[]=[];
+  try{const base=join(process.cwd(),'data','traffic');if(existsSync(base))for(const folder of (await readdir(base)).filter(name=>/^\d{4}-\d{2}-\d{2}$/.test(name)&&name<date)){try{priors.push({date:folder,input:JSON.parse(await readFile(join(base,folder,'traffic-input.json'),'utf8'))})}catch{/* missing or unreadable capture */}}}catch{/* optional */}
+  const carried=carriedIndexedUrls(date,priors);
+  const order=inspectionUrlOrder({fixed,articles:ours.map(article=>article.url),carried:carried.map(item=>item.url),recent},60),urls=order.map(item=>item.url),sourceOf=new Map(order.map(item=>[item.url,item.source])),inspections:Array<Record<string,unknown>>=[];
   const inspectDeadline=Date.now()+6*60000;
   for(const url of urls){
-    if(Date.now()>inspectDeadline){inspections.push({url,error:'SKIPPED_TIME_BUDGET'});continue}
+    if(Date.now()>inspectDeadline){inspections.push({url,source:sourceOf.get(url),error:'SKIPPED_TIME_BUDGET'});continue}
     // MOT-043: one slow inspection (11/11 timeout) must not discard every other result; it is recorded per URL.
     const response=await fetch('https://searchconsole.googleapis.com/v1/urlInspection/index:inspect',{method:'POST',headers:{...auth,'content-type':'application/json'},body:JSON.stringify({inspectionUrl:url,siteUrl:property,languageCode:'ko'}),signal:timeout(30000)}).catch((error:unknown)=>error instanceof Error?error:new Error(String(error)));
-    if(response instanceof Error){inspections.push({url,error:response.message.slice(0,160)});continue}
-    if(!response.ok){inspections.push({url,error:`HTTP ${response.status}: ${(await response.text()).slice(0,160)}`});continue}
+    if(response instanceof Error){inspections.push({url,source:sourceOf.get(url),error:response.message.slice(0,160)});continue}
+    if(!response.ok){inspections.push({url,source:sourceOf.get(url),error:`HTTP ${response.status}: ${(await response.text()).slice(0,160)}`});continue}
     const index=(await response.json() as {inspectionResult?:{indexStatusResult?:Record<string,unknown>}}).inspectionResult?.indexStatusResult??{};
-    inspections.push({url,verdict:index.verdict,coverageState:index.coverageState,robotsTxtState:index.robotsTxtState,indexingState:index.indexingState,pageFetchState:index.pageFetchState,lastCrawlTime:index.lastCrawlTime,googleCanonical:index.googleCanonical,userCanonical:index.userCanonical,sitemap:index.sitemap,referringUrls:index.referringUrls});
+    inspections.push({url,source:sourceOf.get(url),verdict:index.verdict,coverageState:index.coverageState,robotsTxtState:index.robotsTxtState,indexingState:index.indexingState,pageFetchState:index.pageFetchState,lastCrawlTime:index.lastCrawlTime,googleCanonical:index.googleCanonical,userCanonical:index.userCanonical,sitemap:index.sitemap,referringUrls:index.referringUrls});
   }
   const indexed=inspections.filter(item=>'verdict' in item&&item.verdict==='PASS').length;
   // Redirect chain of each fixed URL as a desktop browser and as Googlebot smartphone (public pages, read-only).
@@ -119,7 +125,7 @@ try{
         const html=response.status===200?await response.text():'';chains.push({url,agent,hops,finalUrl:next,canonical:html.match(/<link[^>]+rel=['"]canonical['"][^>]*href=['"]([^'"]+)/i)?.[1]??null});break}
     }catch(error){chains.push({url,agent,error:error instanceof Error?error.message:String(error)})}
   }
-  result.indexStatus={state:'PASS',sitemaps,inspected:inspections.length,indexed,inspections,fixedSample:{paths:INDEX_FIXED_SAMPLE,chains}};
+  result.indexStatus={state:'PASS',sitemaps,inspected:inspections.length,indexed,carriedIndexed:{count:carried.length,inspected:order.filter(item=>item.source==='carried').length,urls:carried},inspections,fixedSample:{paths:INDEX_FIXED_SAMPLE,chains}};
 }catch(error){result.indexStatus={state:'UNAVAILABLE',reason:error instanceof Error?error.message:String(error)}}
 
 // 4) Naver DataLab interest (relative, last 14 days) for each article's keywords.
