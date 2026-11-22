@@ -2,10 +2,59 @@
   "publicationId": "motus-weekly-2026-11-16",
   "weekStart": "2026-11-16",
   "weekEnd": "2026-11-20",
-  "title": "주간 증시 전망(11/23~11/27)｜델 실적 주목…지난주 나스닥 10.0% 하락·코스피 7.9% 하락",
+  "title": "주간 증시 전망(11/23~11/27)｜델 실적·PCE 물가·GDP 주목…지난주 나스닥 10.0% 하락·코스피 7.9% 하락",
   "subtitle": "11월 23~27일 이번 주 증시 일정·실적 발표·증권가 전망과 지난주(11월 16~20일) 결산",
-  "lead": "이번 주(11월 23~27일)에는 델·Analog Devices 실적 발표가 예정돼 있다. 지난주(11월 16~20일) 뉴욕증시는 S&P 500 -8.61%, 나스닥 -10.02%, 다우존스 -8.02%로 마감했다. 국내 증시는 코스피가 주간 -7.95%(4,869.96), 코스닥이 -7.72%(645.68)를 기록했다. 미국 10년물 국채금리는 4.91%로 한 주 사이 24bp 내렸다. 원·달러 환율은 1,334.79원으로 주간 0.08% 올랐다(원화 약세).",
+  "lead": "이번 주(11월 23~27일)에는 델·Analog Devices 실적 발표와 미국 PCE 물가·GDP가 예정돼 있다. 지난주(11월 16~20일) 뉴욕증시는 S&P 500 -8.61%, 나스닥 -10.02%, 다우존스 -8.02%로 마감했다. 국내 증시는 코스피가 주간 -7.95%(4,869.96), 코스닥이 -7.72%(645.68)를 기록했다. 미국 10년물 국채금리는 4.91%로 한 주 사이 24bp 내렸다. 원·달러 환율은 1,334.79원으로 주간 0.08% 올랐다(원화 약세).",
   "sections": [
+    {
+      "key": "weekly-calendar",
+      "title": "이번 주 주요 일정 (11월 23~27일)",
+      "table": {
+        "headers": [
+          "한국시간",
+          "일정",
+          "예상 / 이전"
+        ],
+        "rows": [
+          [
+            "11/23(월) 23:45",
+            "미국 제조업 PMI(예비)",
+            "54.5 / 56.0"
+          ],
+          [
+            "11/23(월) 23:45",
+            "미국 서비스업 PMI(예비)",
+            "55.6 / 57.9"
+          ],
+          [
+            "11/25(수) 00:00",
+            "미국 콘퍼런스보드 소비자신뢰지수",
+            "92.1 / 91.7"
+          ],
+          [
+            "11/25(수) 22:30",
+            "미국 근원 PCE 물가 ★",
+            "0.3% / 0.3%"
+          ],
+          [
+            "11/25(수) 22:30",
+            "미국 국내총생산(GDP) ★",
+            "3.5% / 3.4%"
+          ],
+          [
+            "11/25(수) 22:30",
+            "미국 국내총생산(GDP)",
+            "2.3% / 2.3%"
+          ],
+          [
+            "11/25(수) 22:30",
+            "미국 신규 실업수당 청구건수",
+            "201K / 203K"
+          ]
+        ],
+        "note": "★는 시장 영향이 큰 일정. 예상치는 Forex Factory 집계 기준이며, 일정은 발표 기관 사정에 따라 바뀔 수 있다."
+      }
+    },
     {
       "key": "weekly-earnings",
       "title": "이번 주 주요 실적 발표 (11월 23~27일)",
@@ -62,6 +111,18 @@
             "label": "키움증권 11/20 Weekly Macro : 미국 물가와 한국 금통위에 주목 (11월 20일)",
             "url": "https://stock.pstatic.net/stock-research/economy/39/20261120_economy_696802000.pdf"
           }
+        }
+      ]
+    },
+    {
+      "key": "weekly-pdf",
+      "title": "PDF 리포트: 주간 시장 전략",
+      "intro": "그래프와 표로 한 주를 정리한 A4 3쪽 리포트입니다. 지수 3개월 추이, 업종별 수익률, 대형주 등락, 다음 주 일정을 담았습니다.",
+      "links": [
+        {
+          "label": "MOTUS 주간 시장 전략 (MOTUS_Weekly_2026-11-16_2026-11-20.pdf)",
+          "url": "https://drive.google.com/file/d/1cOGFBWgZeg5JphYGou_XcaefRPdGi7cj/view?usp=drivesdk",
+          "meta": "PDF · Google Drive에서 보기·내려받기"
         }
       ]
     },
@@ -369,12 +430,20 @@
       "url": "https://finance.yahoo.com/markets/"
     },
     {
+      "label": "Forex Factory 경제 캘린더",
+      "url": "https://www.forexfactory.com/calendar"
+    },
+    {
       "label": "Nasdaq 실적 발표 캘린더",
       "url": "https://www.nasdaq.com/market-activity/earnings"
     }
   ],
-  "readiness": "HOLD",
-  "reasons": [
-    "WEEKLY_CALENDAR_NOT_ON_NEXT_WEEK"
-  ]
+  "readiness": "READY",
+  "reasons": [],
+  "heroImage": {
+    "url": "https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/weekly/2026-11-16/hero-0c86cb92d7c4.png",
+    "alt": "주간 증시 전망 2026년 11월 23일: 주간 증시 전망(11/23~11/27)｜델 실적·PCE 물가·GDP 주목…지난주 나스닥 10.0% 하락·코스피 7.9% 하락",
+    "width": 1200,
+    "height": 630
+  }
 }

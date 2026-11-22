@@ -1,10 +1,10 @@
 {
   "identity": "weekly|2026-11-16",
   "runDate": "2026-11-22",
-  "state": "HOLD",
-  "reasons": [
-    "WEEKLY_CALENDAR_NOT_ON_NEXT_WEEK"
-  ],
-  "title": "주간 증시 전망(11/23~11/27)｜델 실적 주목…지난주 나스닥 10.0% 하락·코스피 7.9% 하락",
-  "publishCallCount": 0
+  "state": "PUBLISHED",
+  "postId": "1054499696680483812",
+  "publicPostUrl": "https://motusnova.blogspot.com/2026/11/11231127-pce-gdp-100-79.html",
+  "title": "주간 증시 전망(11/23~11/27)｜델 실적·PCE 물가·GDP 주목…지난주 나스닥 10.0% 하락·코스피 7.9% 하락",
+  "pdf": "https://drive.google.com/file/d/1cOGFBWgZeg5JphYGou_XcaefRPdGi7cj/view?usp=drivesdk",
+  "publishCallCount": 1
 }
