@@ -1,0 +1,79 @@
+{
+  "gate": {
+    "state": "AUTO_PUBLISH_READY",
+    "reasons": [],
+    "approval": "AUTO_POLICY_APPROVAL",
+    "checkedAt": "2026-11-23T08:14:37.098Z"
+  },
+  "searchRegistration": {
+    "publicationId": "motus-live-2026-11-24:korea",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/11/11-23-331-470854-1-28.html",
+    "registeredAt": "2026-11-23T17:14:41+09:00",
+    "trigger": "PUBLICATION_PUBLISHED",
+    "googleInspectionState": "QUEUED",
+    "naverDiscoveryState": "PENDING",
+    "visibility": {
+      "publicationId": "motus-live-2026-11-24:korea",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/11/11-23-331-470854-1-28.html",
+      "google": {
+        "discovered": null,
+        "indexed": null,
+        "lastCrawl": null,
+        "coverageState": null,
+        "inspectionAt": null
+      },
+      "naver": {
+        "discovered": null,
+        "indexed": null,
+        "collectionState": null,
+        "inspectionAt": null
+      },
+      "sitemapIncluded": null,
+      "rssIncluded": null
+    }
+  },
+  "libraryRegistration": {
+    "idempotencyKey": "library:motus-live-2026-11-24:korea|https://motusnova.blogspot.com/2026/11/11-23-331-470854-1-28.html"
+  },
+  "weeklyFeed": {
+    "idempotencyKey": "weekly:motus-live-2026-11-24:korea"
+  },
+  "pdfCandidate": {
+    "idempotencyKey": "pdf:motus-live-2026-11-24:korea:sha256:fbdae9ca38f4c5263456e8ca606090ca156ca7969cd4cfd98fc7d211985258a6",
+    "visibility": "PRIVATE"
+  },
+  "audit": [
+    {
+      "at": "2026-11-23T08:14:37.098Z",
+      "event": "AUTO_PUBLISH_STATIC_GATE",
+      "detail": "AUTO_PUBLISH_READY"
+    },
+    {
+      "at": "2026-11-23T08:14:37.098Z",
+      "event": "REMOTE_DUPLICATE_CHECK",
+      "detail": "PASS"
+    },
+    {
+      "at": "2026-11-23T08:14:37.098Z",
+      "event": "FINAL_REMOTE_DUPLICATE_CHECK",
+      "detail": "PASS"
+    },
+    {
+      "at": "2026-11-23T08:14:37.098Z",
+      "event": "PUBLIC_PAGE_RATE_LIMITED",
+      "detail": "HTTP 429; Blogger API published readback and content verification passed"
+    },
+    {
+      "at": "2026-11-23T17:14:41+09:00",
+      "event": "PUBLISHED",
+      "detail": "AUTO_POLICY_APPROVAL"
+    }
+  ],
+  "state": "PUBLISHED",
+  "draftPostId": "5685321321668885673",
+  "publicPostUrl": "https://motusnova.blogspot.com/2026/11/11-23-331-470854-1-28.html",
+  "publishedAt": "2026-11-23T17:14:41+09:00",
+  "insertCallCount": 1,
+  "publishCallCount": 1,
+  "error": null
+}
