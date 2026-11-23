@@ -16,7 +16,7 @@
 import {mkdir,readFile,readdir,writeFile} from 'node:fs/promises';
 import {existsSync} from 'node:fs';
 import {join} from 'node:path';
-import {articleKeywords,contentFeatures,type ContentFeatures} from './operations/traffic.js';
+import {articleKeywords,contentFeatures,inspectWithRetry,summarizeInspections,type ContentFeatures} from './operations/traffic.js';
 
 const args=process.argv.slice(2),value=(flag:string)=>{const index=args.indexOf(flag);return index>=0?args[index+1]:undefined};
 const date=value('--date')??'';
@@ -103,13 +103,16 @@ try{
   for(const url of urls){
     if(Date.now()>inspectDeadline){inspections.push({url,error:'SKIPPED_TIME_BUDGET'});continue}
     // MOT-043: one slow inspection (11/11 timeout) must not discard every other result; it is recorded per URL.
-    const response=await fetch('https://searchconsole.googleapis.com/v1/urlInspection/index:inspect',{method:'POST',headers:{...auth,'content-type':'application/json'},body:JSON.stringify({inspectionUrl:url,siteUrl:property,languageCode:'ko'}),signal:timeout(30000)}).catch((error:unknown)=>error instanceof Error?error:new Error(String(error)));
-    if(response instanceof Error){inspections.push({url,error:response.message.slice(0,160)});continue}
-    if(!response.ok){inspections.push({url,error:`HTTP ${response.status}: ${(await response.text()).slice(0,160)}`});continue}
+    // MO-21: a timeout, network error or HTTP 5xx is retried once while the budget lasts; attempts are recorded.
+    const {result:response,attempts}=await inspectWithRetry(()=>fetch('https://searchconsole.googleapis.com/v1/urlInspection/index:inspect',{method:'POST',headers:{...auth,'content-type':'application/json'},body:JSON.stringify({inspectionUrl:url,siteUrl:property,languageCode:'ko'}),signal:timeout(30000)}).catch((error:unknown)=>error instanceof Error?error:new Error(String(error))),inspectDeadline);
+    if(response instanceof Error){inspections.push({url,attempts,error:response.message.slice(0,160)});continue}
+    if(!response.ok){inspections.push({url,attempts,error:`HTTP ${response.status}: ${(await response.text()).slice(0,160)}`});continue}
     const index=(await response.json() as {inspectionResult?:{indexStatusResult?:Record<string,unknown>}}).inspectionResult?.indexStatusResult??{};
-    inspections.push({url,verdict:index.verdict,coverageState:index.coverageState,robotsTxtState:index.robotsTxtState,indexingState:index.indexingState,pageFetchState:index.pageFetchState,lastCrawlTime:index.lastCrawlTime,googleCanonical:index.googleCanonical,userCanonical:index.userCanonical,sitemap:index.sitemap,referringUrls:index.referringUrls});
+    inspections.push({url,attempts,verdict:index.verdict,coverageState:index.coverageState,robotsTxtState:index.robotsTxtState,indexingState:index.indexingState,pageFetchState:index.pageFetchState,lastCrawlTime:index.lastCrawlTime,googleCanonical:index.googleCanonical,userCanonical:index.userCanonical,sitemap:index.sitemap,referringUrls:index.referringUrls});
   }
   const indexed=inspections.filter(item=>'verdict' in item&&item.verdict==='PASS').length;
+  const inspectionSummary=summarizeInspections(inspections);
+  if(inspectionSummary.unmeasured>0)console.log(`::warning::URL Inspection unmeasured ${inspectionSummary.unmeasured}/${inspectionSummary.total} ${JSON.stringify(inspectionSummary.byReason)}`);
   // Redirect chain of each fixed URL as a desktop browser and as Googlebot smartphone (public pages, read-only).
   const chains=[];
   for(const url of fixed)for(const [agent,ua] of [['desktop',DESKTOP_UA],['googlebot-smartphone',GOOGLEBOT_SMARTPHONE_UA]] as const){
@@ -119,7 +122,7 @@ try{
         const html=response.status===200?await response.text():'';chains.push({url,agent,hops,finalUrl:next,canonical:html.match(/<link[^>]+rel=['"]canonical['"][^>]*href=['"]([^'"]+)/i)?.[1]??null});break}
     }catch(error){chains.push({url,agent,error:error instanceof Error?error.message:String(error)})}
   }
-  result.indexStatus={state:'PASS',sitemaps,inspected:inspections.length,indexed,inspections,fixedSample:{paths:INDEX_FIXED_SAMPLE,chains}};
+  result.indexStatus={state:'PASS',sitemaps,inspected:inspections.length,indexed,inspectionSummary,inspections,fixedSample:{paths:INDEX_FIXED_SAMPLE,chains}};
 }catch(error){result.indexStatus={state:'UNAVAILABLE',reason:error instanceof Error?error.message:String(error)}}
 
 // 4) Naver DataLab interest (relative, last 14 days) for each article's keywords.
