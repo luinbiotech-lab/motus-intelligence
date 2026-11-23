@@ -2,14 +2,14 @@
   "schema": "motus.ai-narrative-outcome/1",
   "mode": "SHADOW",
   "bundleHash": "d1bd275ff41771f4",
-  "status": "VALID",
-  "reason": null,
+  "status": "REJECTED",
+  "reason": "NARRATIVE_INVALID:LENGTH",
   "attempts": 2,
-  "errors": [],
+  "errors": [
+    "LENGTH:s2p2:67",
+    "LENGTH:s3p2:77"
+  ],
   "model": "claude-sonnet-5-5",
-  "durationMs": 42296,
-  "editorialQuality": {
-    "pass": true,
-    "reasons": []
-  }
+  "durationMs": 32070,
+  "editorialQuality": null
 }
