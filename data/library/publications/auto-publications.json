@@ -358,5 +358,11 @@
     "publicationId": "motus-live-2026-11-24:ai",
     "publicPostUrl": "https://motusnova.blogspot.com/2026/11/31-ai.html",
     "publishedAt": "2026-11-24T12:37:59+09:00"
+  },
+  {
+    "idempotencyKey": "library:motus-live-2026-11-25:korea|https://motusnova.blogspot.com/2026/11/11-24-632-500603-1-62.html",
+    "publicationId": "motus-live-2026-11-25:korea",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/11/11-24-632-500603-1-62.html",
+    "publishedAt": "2026-11-24T17:34:42+09:00"
   }
 ]

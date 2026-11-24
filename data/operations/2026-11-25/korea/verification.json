@@ -1,0 +1,122 @@
+{
+  "schemaVersion": "1.1",
+  "category": "KOREA_MARKET",
+  "operationDate": "2026-11-25",
+  "observedDate": "2026-11-24",
+  "sourceMode": "internal",
+  "verification": "VERIFIED",
+  "unresolvedConflicts": [],
+  "provenancePass": true,
+  "sourceDiversityPass": true,
+  "sourceLinksPass": true,
+  "mobilePass": true,
+  "editorialQualityPass": true,
+  "leakagePass": true,
+  "duplicateCheck": "PENDING_REMOTE",
+  "duplicateUncertainty": true,
+  "articleFingerprint": "sha256:8e4f530685c9bf29d34207c04ad430d318524a5933854fb9ad0598526244471c",
+  "commerceEnabled": false,
+  "verifiedAt": "2026-11-24T08:34:15.925Z",
+  "expiresAt": "2026-11-24T10:04:15.925Z",
+  "sourceAuditIds": [
+    "deep:consensus:list:company",
+    "deep:consensus:list:economy",
+    "deep:consensus:list:industry",
+    "deep:consensus:list:market",
+    "deep:naver-research:list:company",
+    "deep:naver-research:list:economy",
+    "deep:naver-research:list:industry",
+    "deep:naver-research:list:invest",
+    "deep:naver-research:list:market",
+    "deep:naver-research:market:38278",
+    "deep:naver:search-top",
+    "deep:naver:stock-price:000660",
+    "deep:naver:stock-price:005380",
+    "deep:naver:stock-price:005930",
+    "deep:naver:stock-price:006400",
+    "deep:naver:stock-price:009150",
+    "deep:naver:stock-price:196170",
+    "deep:wire:report:news.einfomax.co.kr/news/articleView.html?idxno=4446294",
+    "deep:wire:report:www.yna.co.kr/view/AKR20261124153751008",
+    "market-research:KB증권 리서치",
+    "market-research:article:https://rc.kbsec.com/detailView.able?documentid=20261119125620847K",
+    "market-research:article:https://www.mk.co.kr/news/stock/12217373",
+    "market-research:article:https://www.mk.co.kr/news/stock/12217380",
+    "market-research:매일경제 증권",
+    "naver:flows",
+    "naver:kosdaq:history",
+    "naver:kospi:history",
+    "naver:mover",
+    "naver:usd-krw",
+    "yahoo-finance:kosdaq:query1.finance.yahoo.com",
+    "yahoo-finance:kospi:query1.finance.yahoo.com"
+  ],
+  "sourceAuditFingerprint": "sha256:0eb3a2e8642c28cd4f840f5659d56b00b9fcb6bf63a970b4c3b0902039d53127",
+  "crossVerificationFingerprint": "sha256:fc84d69412efdc7e41f603191227b44c0613fed3ddf0063abffcfe53eca363d1",
+  "crossVerification": {
+    "schemaVersion": "1.0",
+    "category": "KOREA_MARKET",
+    "observedDate": "2026-11-24",
+    "primarySource": {
+      "provider": "Naver Finance",
+      "domain": "naver.com",
+      "urls": [
+        "https://m.stock.naver.com/api/index/KOSPI/price?pageSize=10&page=1",
+        "https://m.stock.naver.com/api/index/KOSDAQ/price?pageSize=10&page=1"
+      ]
+    },
+    "independentSource": {
+      "providers": [
+        "YAHOO_FINANCE"
+      ],
+      "domains": [
+        "yahoo.com"
+      ],
+      "urls": [
+        "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?period1=1795305600&period2=1795737600&interval=1d",
+        "https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?period1=1795305600&period2=1795737600&interval=1d"
+      ]
+    },
+    "comparedFields": [
+      {
+        "field": "KOSPI",
+        "primaryValue": 5006.03,
+        "independentValue": 5006.02978515625,
+        "difference": 0.00021484374974534148,
+        "tolerance": 0.05,
+        "result": "PASS",
+        "primarySourceUrl": "https://m.stock.naver.com/api/index/KOSPI/price?pageSize=10&page=1",
+        "independentSourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?period1=1795305600&period2=1795737600&interval=1d",
+        "metricBasis": "SESSION_CLOSE"
+      },
+      {
+        "field": "KOSDAQ",
+        "primaryValue": 665.88,
+        "independentValue": 665.8800048828125,
+        "difference": 0.0000048828125045474735,
+        "tolerance": 0.05,
+        "result": "PASS",
+        "primarySourceUrl": "https://m.stock.naver.com/api/index/KOSDAQ/price?pageSize=10&page=1",
+        "independentSourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?period1=1795305600&period2=1795737600&interval=1d",
+        "metricBasis": "SESSION_CLOSE"
+      }
+    ],
+    "tolerance": {
+      "KOSPI": 0.05,
+      "KOSDAQ": 0.05,
+      "USD_KRW": 2
+    },
+    "comparisonResult": "PASS",
+    "sourceDiversityPass": true,
+    "verification": "VERIFIED",
+    "reasonCodes": [],
+    "verifiedAt": "2026-11-24T08:34:15.925Z",
+    "officialPhase": "PRE_PUBLICATION",
+    "reconciliation": {
+      "status": "NOT_REQUIRED",
+      "officialObservedDates": [
+        "2026-11-24"
+      ]
+    }
+  }
+}
