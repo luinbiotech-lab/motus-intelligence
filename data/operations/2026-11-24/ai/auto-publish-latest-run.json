@@ -1,0 +1,10 @@
+{
+  "state": "SKIP",
+  "reasonCode": "ALREADY_PUBLISHED_IN_PERSISTED_LEDGER",
+  "identity": "2026-11-24|AI_INTELLIGENCE",
+  "postId": "4355523108899318222",
+  "publicPostUrl": "https://motusnova.blogspot.com/2026/11/31-ai.html",
+  "reason": "persistent publish ledger already records this publication identity",
+  "insertCallCount": 0,
+  "publishCallCount": 0
+}
