@@ -25,7 +25,8 @@ interface DailyMasterBase {
 }
 /** A broker report shown as a card: the rating and target exactly as the broker published them. */
 export interface ArticleReportCard {company?:string|null;broker:string;analysts?:string;date:string;title:string;rating?:string|null;target?:string|null}
-export interface ArticleDeepParagraph {text:string;source?:{label:string;url:string;kind?:'article'};report?:ArticleReportCard}
+/** basis marks a sentence that is MOTUS's own inference or a watch point (2026-11-22: the label left the prose, the flag stays in data). */
+export interface ArticleDeepParagraph {text:string;source?:{label:string;url:string;kind?:'article'};report?:ArticleReportCard;basis?:'inference'|'watch'}
 /**
  * A composed article section. The role decides how it is set apart on the page (2026-11-04 owner-approved design):
  * data (charted figures), news (official or wire reports), broker (securities research, highlighted panel),

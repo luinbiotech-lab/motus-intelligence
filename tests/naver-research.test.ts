@@ -92,12 +92,12 @@ test('Naver research supplies the session briefs when Hankyung has not listed th
   const us=composeUSDeepSections({bundle,stocks:[],sectors:[],checkpoint:'다음 확인 지표.'});
   assert.equal(us.hasCoreCommentary,true);
   const usText=us.sections.flatMap(section=>section.paragraphs.map(p=>p.text)).join('\n');
-  assert.match(usText,/A증권은 10월 30일 아침 리포트 「10\/30 A증권 리서치 모닝코멘트」에서 “대형 기술주가 실적 부진과 현금흐름 악화에 급락하며 시장 전반 약세/);
+  assert.match(usText,/A증권은 「10\/30 A증권 리서치 모닝코멘트」에서 “대형 기술주가 실적 부진과 현금흐름 악화에 급락하며 시장 전반 약세/);
   assert.doesNotMatch(usText,/연속 상승/,'the previous U.S. night from a Korean closing comment is never quoted');
 
   const korea=composeKoreaDeepSections({bundle,searchTop:[{rank:1,name:'삼성전자',code:'005930',close:230500,changePct:-4.75,date:'2026-10-29',url:'https://m.stock.naver.com/api/stock/005930/price'}],checkpoint:'다음 확인 지표.'});
   const koreaText=korea.sections.flatMap(section=>section.paragraphs.map(p=>p.text)).join('\n');
-  assert.match(koreaText,/B증권은 10월 30일 마감 코멘트 「10\/29 B증권 장마감코멘트」에서 “코스피와 코스닥은/);
+  assert.match(koreaText,/B증권은 「10\/29 B증권 장마감코멘트」에서 “코스피와 코스닥은/);
   assert.match(koreaText,/검색 1위 삼성전자는 230,500원으로 4\.75% 하락했다\. A증권은 10월 30일 「실적은 좋지만, 환원은 아쉽다」 리포트에서 투자의견 매수, 목표주가 350,000원을 제시했다\./);
 });
 

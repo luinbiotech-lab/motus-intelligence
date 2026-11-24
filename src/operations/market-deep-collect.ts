@@ -57,7 +57,7 @@ export async function collectUSDeep(input:{sessionDate:string;operationDate:stri
     const flag=<T extends {symbol:string;changePct:number}>(stock:T)=>mentioned.has(stock.symbol)&&Math.abs(stock.changePct)>=3?{...stock,inNews:true}:stock;
     const attentionStocks=(attention?.stocks??[]).map(stock=>flag(bigMovers.some(item=>item.symbol===stock.symbol)?{...stock,bigMover:true}:stock));
     const stocks=[...newsMovers,...bigMovers.filter(item=>!attentionStocks.some(stock=>stock.symbol===item.symbol)).map(item=>flag({...item,bigMover:true})),...attentionStocks];
-    const composition=composeUSDeepSections({bundle,stocks,sectors:attention?.sectors??[],wire:wire?.reports??[],checkpoint:'다음 정규장에서는 미국 10년물 금리 방향과 함께, 증권사들이 짚은 경계 요인이 주요 지수와 업종 등락에 실제로 반영되는지가 확인 대상이다.'});
+    const composition=composeUSDeepSections({bundle,stocks,sectors:attention?.sectors??[],wire:wire?.reports??[],checkpoint:'다음 정규장에서는 미국 10년물 금리 방향과 함께, 증권가가 경계한 요인이 지수와 업종 흐름에 반영될지가 관심사다.'});
     // 2026-11-13 owner: the rate tile gets a sourced reading (금리 해설), rendered under the tile.
     const ratesComment=input.rates?composeRatesComment({points:input.rates.points,sessionDate:input.sessionDate,indexes:input.indexChanges.map((changePct,index)=>({name:input.indexNames?.[index]??'',changePct})),bundle,wire:wire?.reports??[]}):null;
     if(ratesComment){composition.sections.push(ratesComment);for(const p of ratesComment.paragraphs)if(p.source&&!composition.sources.some(item=>item.url===p.source!.url))composition.sources.push({label:p.source.label,url:p.source.url,publisher:p.source.label.split(' ')[0]!})}
@@ -84,7 +84,7 @@ export async function collectKoreaDeep(input:{sessionDate:string;operationDate:s
     const krBriefed=hasBrokerCause(bundle?.briefs??[],'KOREA');
     const wire=krBriefed||!wireFallbackAllowed(input.at)?null:await collectWireCloses({region:'KOREA',sessionDate:input.sessionDate,change:input.kospiChangePct,fetcher:input.fetcher}).catch(()=>null);
     if(wire)record(input.audit,wire.audit,'KOREA_MARKET',input.at,input.sessionDate);
-    const composition=composeKoreaDeepSections({bundle,searchTop:search?.stocks??[],wire:wire?.reports??[],kospiChangePct:input.kospiChangePct,checkpoint:input.evening?'다음 거래일에는 외국인·기관 수급의 연속성, 원·달러 환율, 오늘 강세 업종이 이어지는지가 확인 대상이다.':'오늘 장에서는 외국인·기관 수급의 연속성, 원·달러 환율, 전일 강세 업종이 이어지는지가 확인 대상이다.'});
+    const composition=composeKoreaDeepSections({bundle,searchTop:search?.stocks??[],wire:wire?.reports??[],kospiChangePct:input.kospiChangePct,checkpoint:input.evening?'다음 거래일에는 외국인과 기관의 매매가 이어질지, 원·달러 환율과 이날 강했던 업종의 흐름이 관심사다.':'오늘 장에서는 외국인과 기관의 매매가 이어질지, 원·달러 환율과 전날 강했던 업종의 흐름이 관심사다.'});
     // 2026-11-13 owner: the FX tile and the investor flows are read, not only listed.
     for(const section of composeKoreaFxFlowComment({fx:input.fx??null,flows:input.flows??[],kospiChangePct:input.kospiChangePct,bundle,wire:wire?.reports??[]})){composition.sections.push(section);for(const p of section.paragraphs)if(p.source&&!composition.sources.some(item=>item.url===p.source!.url))composition.sources.push({label:p.source.label,url:p.source.url,publisher:p.source.label.split(' ')[0]!})}
     const sources=[...composition.sources];
