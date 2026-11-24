@@ -118,7 +118,7 @@ function wireCause(reports:WireReport[],key:string,sources:DeepComposition['sour
 function riskParagraphs(briefs:BrokerBrief[],region:'US'|'KOREA',checkpoint:string):DeepParagraph[]{
   const events=[...new Map(briefs.flatMap(brief=>(brief.events??[]).filter(item=>item.region===region).map(item=>[item.text,{item,brief}]))).values()].slice(0,4);
   const paragraphs:DeepParagraph[]=events.map(({item,brief})=>({text:`예정 일정(${brief.report.broker} 집계): ${item.text}`,source:reportSource(brief.report)}));
-  paragraphs.push({text:checkpoint});
+  paragraphs.push({text:checkpoint,basis:'watch'});
   return paragraphs;
 }
 
@@ -149,7 +149,7 @@ function breadthParagraph(rows:Array<{label:string;changePct:number}>,universe:s
 function volatilityWatch(rows:Array<{label:string;changePct:number}>,scope:string):DeepParagraph|null{
   const big=[...rows].filter(item=>Math.abs(item.changePct)>=5).sort((a,b)=>Math.abs(b.changePct)-Math.abs(a.changePct)).slice(0,4);
   if(!big.length)return null;
-  return {text:`${scope} 가운데 5% 넘게 움직인 ${big.map(item=>`${item.label}(${signedPct(item.changePct)})`).join('·')}${josa(big.at(-1)!.label,'은','는').slice(-1)} 다음 거래일에도 큰 폭의 등락이 이어질 수 있어 지켜볼 만하다.`};
+  return {basis:'watch',text:`${scope} 가운데 5% 넘게 움직인 ${big.map(item=>`${item.label}(${signedPct(item.changePct)})`).join('·')}${josa(big.at(-1)!.label,'은','는').slice(-1)} 다음 거래일에도 큰 폭의 등락이 이어질 수 있어 지켜볼 만하다.`};
 }
 
 export function composeUSDeepSections(input:{bundle:BrokerResearchBundle|null;stocks:USAttentionStock[];sectors:SectorMove[];checkpoint?:string;wire?:WireReport[]}):DeepComposition {
@@ -300,8 +300,13 @@ export function composeAIDeepSections(input:{bundle:BrokerResearchBundle|null;st
   if(input.stocks.length>=3&&input.sessionDate){
     const sorted=[...input.stocks].sort((a,b)=>b.changePct-a.changePct),best=sorted[0]!,worst=sorted.at(-1)!;
     const up=sorted.filter(item=>item.changePct>0.005).length;
-    sections.push({key:'ai-stocks',placement:'early',role:'data',bars:sorted.map(item=>({label:`${displayName(item)} ${item.symbol}`,value:item.changePct})),title:'AI 대표 종목의 주가 흐름',intro:`미국 AI 대표 종목 ${sorted.length}개의 직전 정규장(${input.sessionDate}) 종가 기준 등락이다.`,paragraphs:[
-      {text:`${sorted.length}개 종목 가운데 ${up}개가 올랐다. 가장 강한 종목은 ${displayName(best)}(${best.symbol}, ${signedPct(best.changePct)}), 가장 약한 종목은 ${displayName(worst)}(${worst.symbol}, ${signedPct(worst.changePct)})${josa(displayName(worst),'이었다','였다').slice(displayName(worst).length)}.`},
+    sections.push({key:'ai-stocks',placement:'early',role:'data',bars:sorted.map(item=>({label:`${displayName(item)} ${item.symbol}`,value:item.changePct})),title:'AI 대표 종목의 주가 흐름',intro:`미국 AI 대표 종목 ${sorted.length}개의 ${koreanDateLabel(input.sessionDate)}(현지시간) 종가 기준 등락률이다.`,paragraphs:[
+      {text:(()=>{const pj=(item:typeof best,x:string,y:string)=>`${displayName(item)}(${item.symbol})${josa(displayName(item),x,y).slice(displayName(item).length)}`,down=sorted.length-up;
+        const head=up===sorted.length?`${sorted.length}개 종목이 모두 올랐다.`:up===0?`${sorted.length}개 종목이 모두 내렸다.`:`${sorted.length}개 종목 가운데 ${up}개가 오르고 ${down}개가 내렸다.`;
+        const tail=up===0?`${pj(worst,'이','가')} ${signedPct(worst.changePct)}로 낙폭이 가장 컸고, ${pj(best,'은','는')} ${signedPct(best.changePct)}로 상대적으로 선방했다.`
+          :up===sorted.length?`${pj(best,'이','가')} ${signedPct(best.changePct)}로 가장 많이 올랐다.`
+          :`${pj(best,'이','가')} ${signedPct(best.changePct)}로 가장 많이 올랐고, ${pj(worst,'은','는')} ${signedPct(worst.changePct)}로 가장 많이 내렸다.`;
+        return `${head} ${tail}`})()},
       {text:sorted.map(item=>`${displayName(item)} ${signedPct(item.changePct)}`).join(' · ')},
     ]});
   }
@@ -374,17 +379,18 @@ export function composeRatesComment(input:{label?:string;points:RatePoint[];sess
   const nasdaq=input.indexes.find(item=>/나스닥|Nasdaq/i.test(item.name)),sp=input.indexes.find(item=>/S&P/.test(item.name));
   if(nasdaq&&latest.date===input.sessionDate){
     const b=bp(change),n=`나스닥 ${signedPct(nasdaq.changePct)}${sp?`, S&P 500 ${signedPct(sp.changePct)}`:''}`;
+    const ab=`${Math.abs(b)}bp`;
     const reading=Math.abs(b)<5?`금리 움직임(${signedBp(change)})이 크지 않아 이날 지수 등락(${n})을 금리로 설명하기는 어렵다.`
-      :b>0&&nasdaq.changePct<0?`금리가 ${signedBp(change)} 오르면서 성장주 가치평가에 부담이 된 것으로 보인다(${n}).`
-      :b>0?`금리가 ${signedBp(change)} 올랐지만 지수는 상승해(${n}), 금리보다 실적과 개별 종목 재료가 장을 이끈 것으로 풀이된다.`
-      :nasdaq.changePct>0?`금리가 ${signedBp(change)} 내리면서 성장주에 우호적인 환경이 만들어졌다(${n}).`
-      :`금리가 ${signedBp(change)} 내렸는데도 지수가 떨어져(${n}), 금리 하락에 경기 둔화 우려가 함께 반영됐을 가능성이 있다.`;
-    paragraphs.push({text:reading});
+      :b>0&&nasdaq.changePct<0?`금리가 ${ab} 오르면서 성장주 가치평가에 부담이 된 것으로 보인다(${n}).`
+      :b>0?`금리가 ${ab} 올랐지만 지수는 상승해(${n}), 금리보다 실적과 개별 종목 재료가 장을 이끈 것으로 풀이된다.`
+      :nasdaq.changePct>0?`금리가 ${ab} 내리면서 성장주에 우호적인 환경이 만들어졌다(${n}).`
+      :`금리가 ${ab} 내렸는데도 지수가 떨어져(${n}), 금리 하락에 경기 둔화 우려가 함께 반영됐을 가능성이 있다.`;
+    paragraphs.push({text:reading,basis:'inference'});
   }
   // 4. Next: the nearest quarter-point levels and the rate-related data on the brokers' calendars (check points only).
   const below=Math.floor(latest.value*4)/4,above=below+0.25,levels=latest.value-below<0.005?`${pct2(below)}선 위를 지키는지`:`${pct2(above)}를 넘어서는지, ${pct2(below)} 아래로 내려가는지`;
   const events=[...new Set(briefs.flatMap(brief=>(brief.events??[]).filter(item=>item.region==='US'&&RATE_WORDS.test(item.text)).map(item=>`${item.text}(${brief.report.broker} 집계)`)))].slice(0,2);
-  paragraphs.push({text:`다음 거래일에는 10년물 금리가 ${levels}가 관심사다.${events.length?` 금리에 영향을 줄 일정으로는 ${events.join(', ')}이 예정돼 있다.`:''}`});
+  paragraphs.push({basis:'watch',text:`다음 거래일에는 10년물 금리가 ${levels}가 관심사다.${events.length?` 금리에 영향을 줄 일정으로는 ${events.join(', ')}이 예정돼 있다.`:''}`});
   return {key:'us-rates-comment',placement:'early',role:'analysis',title:'금리 해설',paragraphs};
 }
 
@@ -407,10 +413,10 @@ export function composeKoreaFxFlowComment(input:{fx:{value:number;change:number}
     // A move under 1원 is flat in wire copy; it is not read against flows (2026-11-22).
     if(foreign&&Math.abs(change)>=1&&foreign.value!==0){
       const sell=foreign.value<0,weak=change>0,flow=pressEok(foreign.value);
-      paragraphs.push({text:sell===weak?`외국인이 주식을 ${flow}어치 ${sell?'순매도':'순매수'}한 가운데 원화도 ${weak?'약세':'강세'}를 보였다.`:`외국인이 주식을 ${flow}어치 ${sell?'순매도':'순매수'}했는데도 원화는 ${weak?'약세':'강세'}를 보여, 환율은 주식 수급 밖의 요인에 더 크게 움직인 것으로 보인다.`});
+      paragraphs.push({basis:'inference',text:sell===weak?`외국인이 주식을 ${flow}어치 ${sell?'순매도':'순매수'}한 가운데 원화도 ${weak?'약세':'강세'}를 보였다.`:`외국인이 주식을 ${flow}어치 ${sell?'순매도':'순매수'}했는데도 원화는 ${weak?'약세':'강세'}를 보여, 환율은 주식 수급 밖의 요인에 더 크게 움직인 것으로 보인다.`});
     }
     const below=Math.floor(value/10)*10,above=below+10;
-    paragraphs.push({text:`다음 거래일에는 ${value-below<0.05?`환율이 ${fmtNum(below)}원선을 지키는지`:`환율이 ${fmtNum(above)}원을 넘어서는지, ${fmtNum(below)}원 아래로 내려가는지`}가 관심사다.`});
+    paragraphs.push({basis:'watch',text:`다음 거래일에는 ${value-below<0.05?`환율이 ${fmtNum(below)}원선을 지키는지`:`환율이 ${fmtNum(above)}원을 넘어서는지, ${fmtNum(below)}원 아래로 내려가는지`}가 관심사다.`});
     sections.push({key:'korea-fx-comment',placement:'early',role:'analysis',title:'환율 해설',paragraphs});
   }
   if(input.flows.length>=2){
@@ -421,7 +427,7 @@ export function composeKoreaFxFlowComment(input:{fx:{value:number;change:number}
     const paragraphs:DeepParagraph[]=[{text:`유가증권시장에서 ${pressFlow(input.flows.filter(item=>item.value!==0))}`}];
     if(foreign&&input.kospiChangePct!==null&&Math.abs(input.kospiChangePct)>=0.05&&foreign.value!==0){
       const same=(foreign.value>0)===(input.kospiChangePct>0);
-      paragraphs.push({text:same?`코스피는 외국인 ${foreign.value>0?'매수세':'매도세'} 속에 ${Math.abs(input.kospiChangePct).toFixed(2)}% ${input.kospiChangePct>0?'올랐다':'내렸다'}.`:`외국인이 ${foreign.value>0?'순매수':'순매도'}했는데도 코스피는 ${Math.abs(input.kospiChangePct).toFixed(2)}% ${input.kospiChangePct>0?'올라':'내려'}, 지수는 다른 투자자들의 매매 영향을 더 크게 받은 것으로 보인다.`});
+      paragraphs.push({basis:'inference',text:same?`코스피는 외국인 ${foreign.value>0?'매수세':'매도세'} 속에 ${Math.abs(input.kospiChangePct).toFixed(2)}% ${input.kospiChangePct>0?'올랐다':'내렸다'}.`:`외국인이 ${foreign.value>0?'순매수':'순매도'}했는데도 코스피는 ${Math.abs(input.kospiChangePct).toFixed(2)}% ${input.kospiChangePct>0?'올라':'내려'}, 지수는 다른 투자자들의 매매 영향을 더 크게 받은 것으로 보인다.`});
     }
     sections.push({key:'korea-flow-comment',placement:'early',role:'analysis',title:'수급 해설',paragraphs});
   }

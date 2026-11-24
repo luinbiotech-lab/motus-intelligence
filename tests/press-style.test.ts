@@ -30,3 +30,10 @@ test('article prose carries no AI meta labels (11/20 Korea close shape)',()=>{
   check(narrative.analysis);
   assert.ok(narrative.analysis.some(text=>text.startsWith('개인이 1조5천924억원어치를 순매수했고, 외국인과 기관은 각각 1조1천259억원, 9천534억원어치를 순매도했다.')),narrative.analysis.join('\n'));
 });
+
+test('inferences and watch points keep a machine-readable basis flag after the label left the prose',()=>{
+  const [fx,flow]=composeKoreaFxFlowComment({fx:{value:1337.8,change:3.2},flows:[{label:'개인',value:194},{label:'외국인',value:-5527},{label:'기관',value:23}],kospiChangePct:-0.98,bundle:null});
+  assert.deepEqual(fx!.paragraphs.map(p=>p.basis??null),[null,'inference','watch']);
+  assert.deepEqual(flow!.paragraphs.map(p=>p.basis??null),[null,'inference']);
+  assert.ok(fx!.paragraphs.every(p=>p.basis!=='inference'||/보였다|보인다|풀이된다/.test(p.text)));
+});

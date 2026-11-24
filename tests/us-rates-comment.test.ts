@@ -18,7 +18,7 @@ test('the rate comment reads the move against the prior session, a week and 20 s
   assert.equal(fact,'미국 10년물 국채금리는 11월 12일 5.10%로 전 거래일(11월 11일 4.98%)보다 12bp 올랐다. 5거래일 전(11월 5일 4.84%)과 비교하면 +26bp이다. 최근 20거래일 범위 4.79%~5.10%에서 최고치다. 5거래일 연속 상승이다.');
   assert.match(cause!,/^키움증권은 「11\/13 Weekly Macro」에서 금리에 대해 “미국 10월 소매판매 둔화는 미 국채금리의/);
   assert.equal(section.paragraphs[1]!.source?.url,'https://example.com/kiwoom.pdf');
-  assert.equal(reading,'금리가 +12bp 오르면서 성장주 가치평가에 부담이 된 것으로 보인다(나스닥 -0.39%, S&P 500 -0.35%).');
+  assert.equal(reading,'금리가 12bp 오르면서 성장주 가치평가에 부담이 된 것으로 보인다(나스닥 -0.39%, S&P 500 -0.35%).');
   assert.equal(next,'다음 거래일에는 10년물 금리가 5.25%를 넘어서는지, 5.00% 아래로 내려가는지가 관심사다. 금리에 영향을 줄 일정으로는 미국: 생산자물가지수, 윌리엄스 연은 총재 연설(SK증권 집계)이 예정돼 있다.');
   // Owner rule: no sentence without a number or a named source.
   for(const p of section.paragraphs)assert.ok(/\d/.test(p.text)||p.source,p.text);

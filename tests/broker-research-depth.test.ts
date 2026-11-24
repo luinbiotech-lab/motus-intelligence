@@ -233,7 +233,7 @@ test('AI article adds bellwether moves and AI-specific broker analysis only',asy
   const stock=(symbol:string,changePct:number)=>({symbol,name:symbol,koreanName:symbol==='NVDA'?'엔비디아':null,changePct,close:100,date:'2026-10-29',trendingRank:null,mostActiveRank:null,marketCap:null});
   const ai=composeAIDeepSections({bundle:{briefs:[{report,statements,digests}],company:[],industry:[],economy:[],audit:[]},stocks:[stock('NVDA',2.5),stock('MSFT',-1),stock('AMD',0.4)],sessionDate:'2026-10-29'});
   const html=ai.sections.map(deepSection).join('');
-  assert.match(html.replace(/<[^>]+>/g,''),/가장 강한 종목은 엔비디아\(NVDA, \+2\.50%\)/);
+  assert.match(html.replace(/<[^>]+>/g,''),/엔비디아\(NVDA\)가 \+2\.50%로 가장 많이 올랐/);
   assert.match(html,/삼성전기/);assert.doesNotMatch(html,/프랑스|OEM/);
 });
 

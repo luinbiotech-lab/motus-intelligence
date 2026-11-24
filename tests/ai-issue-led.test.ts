@@ -22,7 +22,7 @@ test('the AI article leads with the day\'s AI issue as brokers explained it', ()
   assert.equal(composed.titleFocus,'알파벳 13% 급락');
   assert.deepEqual(composed.leadAddition,['직전 미국 정규장(10월 29일)에서 알파벳(GOOGL)은 12.64% 급락했다.']);
   const stocks=composed.sections.find(item=>item.key==='ai-stocks')!;assert.equal(stocks.placement,'early');
-  assert.match(stocks.paragraphs[0]!.text,/가장 약한 종목은 알파벳\(GOOGL, -12\.64%\)이었다\./);
+  assert.equal(stocks.paragraphs[0]!.text,'3개 종목이 모두 내렸다. 알파벳(GOOGL)이 -12.64%로 낙폭이 가장 컸고, 마이크로소프트(MSFT)는 -0.20%로 상대적으로 선방했다.');
 });
 
 test('no AI commentary, no issue section and no market headline', () => {
