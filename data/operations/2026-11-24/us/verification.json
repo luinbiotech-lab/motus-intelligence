@@ -14,10 +14,10 @@
   "leakagePass": true,
   "duplicateCheck": "PENDING_REMOTE",
   "duplicateUncertainty": true,
-  "articleFingerprint": "sha256:839fc6c909f6a455a24579d98161261deb2c1c7d5399a970303c557368a04a79",
+  "articleFingerprint": "sha256:f26e956d57772f2d47b3c4767730ad6d6674215b5a40f1b520236ee04802e953",
   "commerceEnabled": false,
-  "verifiedAt": "2026-11-24T07:06:36.260Z",
-  "expiresAt": "2026-11-24T08:36:36.260Z",
+  "verifiedAt": "2026-11-24T11:36:17.992Z",
+  "expiresAt": "2026-11-24T13:06:17.992Z",
   "sourceAuditIds": [
     "calendar:nyse",
     "deep:consensus:list:company",
@@ -52,7 +52,7 @@
     "market-research:CNBC Investing",
     "market-research:Goldman Sachs",
     "market-research:article:https://www.bloomberg.com/news/articles/2026-11-23/stock-market-today-dow-s-p-live-updates",
-    "market-research:article:https://www.bloomberg.com/news/live-blog/2026-11-24/ftse-100-live-updates-pound-gilts-gold-prices-uk-retail-sales-nvidia-ai-stocks-jensen-huang-trump-iran-what-s-moving-uk-markets-right-now-markets-today-mwucfxwp",
+    "market-research:article:https://www.bloomberg.com/news/videos/2026-11-24/nvidia-market-whiplash-far-from-over-rbc-s-wu-silverman-video",
     "market-research:article:https://www.cnbc.com/2026/11/22/top-wall-street-analysts-favor-these-stocks-for-strong-returns.html",
     "market-research:article:https://www.cnbc.com/2026/11/23/nvidia-stock-jensen-huang-ai-trade.html",
     "market-research:article:https://www.goldmansachs.com/insights/articles/why-european-companies-are-forecast-to-have-robust-earnings-growth",
@@ -60,7 +60,7 @@
     "yahoo-us:nasdaq",
     "yahoo-us:sp500"
   ],
-  "sourceAuditFingerprint": "sha256:135041c70a7df5f67acf5099efdee9c802f8876e858cbef18215b3573eda143a",
+  "sourceAuditFingerprint": "sha256:5f6d48495551056e8dea7d893a9b3559bfc99993fd2ecdd2d94d1075e167cd57",
   "crossVerificationFingerprint": null,
   "crossVerification": null
 }
