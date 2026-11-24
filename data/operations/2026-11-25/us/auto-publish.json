@@ -1,0 +1,10 @@
+{
+  "state": "HOLD",
+  "reasonCode": "YAHOO_US_HTTP_429",
+  "reasonCodes": [
+    "YAHOO_US_HTTP_429"
+  ],
+  "reason": "YAHOO_US_HTTP_429",
+  "insertCallCount": 0,
+  "publishCallCount": 0
+}
