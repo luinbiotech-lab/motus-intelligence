@@ -1,0 +1,458 @@
+{
+  "publicationId": "motus-live-2026-11-25:ai",
+  "category": "AI_INTELLIGENCE",
+  "observedDate": "2026-11-25",
+  "title": "엔비디아 5.9% 급락…증권가가 짚은 AI 투자 쟁점",
+  "label": "AI 인텔리전스",
+  "sourceCount": 13,
+  "itemCount": 3,
+  "readiness": "READY",
+  "readinessReasons": [],
+  "review": {
+    "state": "PENDING",
+    "reviewer": null,
+    "reviewedAt": null,
+    "history": []
+  },
+  "publicationState": "PREVIEW_READY",
+  "draftPostId": null,
+  "publicPostUrl": null,
+  "duplicateCount": 0,
+  "contentFingerprint": "d107498587b79bc4123a0f90b1d3c5518783bc0bd6a6c1d73359ff296e83dc11",
+  "render": {
+    "html": "<!doctype html><html lang=\"ko\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>엔비디아 5.9% 급락…증권가가 짚은 AI 투자 쟁점</title></head><body><article data-product=\"motus-ai-intelligence\" data-layout=\"editorial-article-4q\" style=\"font-family:Arial,&quot;Noto Sans KR&quot;,sans-serif;color:#172033;line-height:1.78;font-size:17px;width:100%;max-width:820px;box-sizing:border-box;margin:0 auto;overflow-x:hidden;overflow-wrap:anywhere\"><header data-section=\"masthead\" style=\"width:100%;max-width:100%;box-sizing:border-box;margin:0 0 16px\"><p style=\"margin:0;font-size:12px;font-weight:800;letter-spacing:.14em;color:#a8822e\">MOTUS · AI 인텔리전스 · 2026-11-25</p><p style=\"margin:6px 0 0;font-size:15px;color:#566476\">증권가 분석과 공식 발표로 읽는 AI 산업</p></header><figure data-section=\"hero-image\" style=\"margin:0 0 18px\"><img src=\"https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/operations/2026-11-25/ai/hero-991c3aecf6ec.png\" alt=\"AI 인텔리전스 2026년 11월 25일: 엔비디아 5.9% 급락…증권가가 짚은 AI 투자 쟁점\" width=\"1200\" height=\"630\" style=\"display:block;width:100%;height:auto;border:0;border-radius:14px\"></figure>\n<p data-section=\"editorial-lead\" style=\"margin:0 0 24px;font-size:18px;line-height:1.82;color:#172033\">직전 미국 정규장(11월 24일)에서 엔비디아(NVDA)는 5.86% 급락했다. 공식 채널에서는 구글의 Gemini 관련 AI 협력, 메타의 신규 AI 제품·기능, 아마존웹서비스(AWS)의 Amazon Bedrock 관련 AI 보안 발표가 나왔다. 공식 AI 채널 11곳에서 최근 4일간 게시된 AI 발표 29건을 확인했고, 원문 출처와 발표일이 검증된 3건을 골라 정리했다.</p>\n<div data-section=\"key-points\" style=\"background:#f7f9fc;border:1px solid #e3e8ef;border-radius:14px;padding:16px 18px 8px;margin:0 0 8px\"><div style=\"font-size:12px;font-weight:800;color:#a8822e;letter-spacing:.12em;margin:0 0 10px\">오늘의 핵심</div><p style=\"margin:0 0 10px;font-size:16px;line-height:1.65;display:flex;gap:10px\"><span style=\"flex:0 0 22px;height:22px;border-radius:50%;background:#0b2545;color:#fff;font-size:12px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;margin-top:2px\">1</span><span>10개 종목 가운데 2개가 올랐다. 가장 강한 종목은 팔란티어(PLTR, <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+1.14%</b>), 가장 약한 종목은 AMD(AMD, <b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">-8.86%</b>)였다.</span></p><p style=\"margin:0 0 10px;font-size:16px;line-height:1.65;display:flex;gap:10px\"><span style=\"flex:0 0 22px;height:22px;border-radius:50%;background:#0b2545;color:#fff;font-size:12px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;margin-top:2px\">2</span><span>공식 발표: 구글, Gemini 관련 AI 협력 / 메타, 신규 AI 제품·기능 공개 / 아마존웹서비스(AWS), Amazon Bedrock 관련 AI 보안.</span></p></div>\n<section data-section=\"ai-issue\" style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><div style=\"margin:0 0 14px\"><span style=\"display:block;width:28px;height:3px;background:#a8822e;margin:0 0 9px;border-radius:2px\"></span><h2 style=\"margin:0;font-size:clamp(19px,4.8vw,22px);line-height:1.35;font-weight:800;color:#0b2545;letter-spacing:-.01em;word-break:keep-all\">오늘의 AI 쟁점: 증권가 시각</h2></div><div style=\"background:#fbf5e6;border:1px solid #e6d2a0;padding:12px 12px 2px\"><p style=\"margin:0 0 10px;color:#6b5a2f;font-size:14px\">직전 미국 정규장에서 AI 관련 기업의 주가를 움직인 사안을 증권사 아침 리포트 원문으로 정리했다.</p><div style=\"background:#fff;border:1px solid #e6d2a0;border-left:4px solid #a8822e;padding:11px 14px;margin:0 0 10px;font-size:16px\">MOTUS 정리: 증권사 5곳의 리포트를 대조하면 AI 투자(신한투자증권·다올투자증권·iM증권·KB증권), 환율·달러(iM증권·KB증권)가 공통으로 꼽힌 배경이다.</div><div style=\"background:#fff;border:1px solid #e6d2a0;border-left:4px solid #a8822e;padding:11px 14px;margin:0 0 10px;font-size:16px\">신한투자증권은 11월 25일 아침 리포트 「Daily Market Digest (11월 25일)」에서 “미국 시장은 AI 밸류체인 급등 후 차익 매물 출회 속 헬스케어·필수소비재 등 선방하며 혼조. S&amp;P500 <b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">-0.5%</b>, NASDAQ <b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">-1.5%</b>, Dow <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+0.9%</b>, SOX <b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">-7.9%</b>”라고 진단했다. <a href=\"https://stock.pstatic.net/stock-research/market/21/20261125_market_777711000.pdf\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></div><div style=\"background:#fff;border:1px solid #e6d2a0;border-left:4px solid #a8822e;padding:11px 14px;margin:0 0 10px;font-size:16px\">다올투자증권은 11월 25일 아침 리포트 「Daily Morning Brief(2026.11.25)」에서 “미국증시, 전일 젠슨 황 CEO 복귀 소식에 급등했던 기술주는 AI 산업 회의론 재부각에 차익실현 매물 출회되며 하락한 반면, 전통 산업군 및 우량주는 강세를 보이며 3대 지수 혼조 마감”이라고 진단했다. <a href=\"https://stock.pstatic.net/stock-research/market/76/20261125_market_217603000.pdf\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></div><div style=\"background:#fff;border:1px solid #e6d2a0;border-left:4px solid #a8822e;padding:11px 14px;margin:0 0 10px;font-size:16px\">iM증권은 11월 25일 아침 리포트 「[Market Time] 기술주 약세와 과잉생산 관세 우려 확대」에서 “다만 미국 장 마감 후 실적 발표한 델은 견조한 AI 서버 수요를 바탕으로 FY27년 연간 매출 전망을 1,920억 달러에서 2,020억 달러로 상향했습니다”라고 진단했다. <a href=\"https://stock.pstatic.net/stock-research/market/61/20261125_market_319617000.pdf\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></div><div style=\"background:#fff;border:1px solid #e6d2a0;border-left:4px solid #a8822e;padding:11px 14px;margin:0 0 10px;font-size:16px\">KB증권은 11월 25일 아침 리포트 「11/25 KB 리서치 모닝코멘트」에서 “엔비디아 약 <b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">-6%</b>, 퀄컴 (강보합) 제외 필리 지수 전 종목 하락. 앤트로픽 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">6%</b>대 하락하며 공모가 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">83달러</b> 하회”라고 진단했다. <a href=\"https://stock.pstatic.net/stock-research/market/58/20261125_market_650952000.pdf\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></div><div style=\"background:#fff;border:1px solid #e6d2a0;border-left:4px solid #a8822e;padding:11px 14px;margin:0 0 10px;font-size:16px\">경계 요인도 제시됐다. KB증권은 “젠슨 황 복귀에도 여전히 AI 산업 관련 불확실성이 크다는 회의론이 부상하며 나스닥 <b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">-1%</b>, 필리 지수 약 <b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">-8%</b>”라고 짚었다. <a href=\"https://stock.pstatic.net/stock-research/market/58/20261125_market_650952000.pdf\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></div></div></section>\n<section data-section=\"ai-stocks\" style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><div style=\"margin:0 0 14px\"><span style=\"display:block;width:28px;height:3px;background:#0b2545;margin:0 0 9px;border-radius:2px\"></span><h2 style=\"margin:0;font-size:clamp(19px,4.8vw,22px);line-height:1.35;font-weight:800;color:#0b2545;letter-spacing:-.01em;word-break:keep-all\">AI 대표 종목의 주가 흐름</h2></div><p style=\"margin:0 0 12px;color:#566476;font-size:15px\">미국 AI 대표 종목 10개의 직전 정규장(2026-11-24) 종가 기준 등락이다.</p><div data-visualization=\"change-bars\" style=\"border:1px solid #dbe2ea;padding:10px 10px 4px;margin:0 0 12px\"><svg viewBox=\"0 0 360 248\" width=\"100%\" style=\"display:block;max-width:100%\" role=\"img\"><line x1=\"244\" x2=\"244\" y1=\"2\" y2=\"246\" stroke=\"#9aa6b2\" stroke-width=\"1\"></line><text x=\"122\" y=\"19\" font-size=\"12\" text-anchor=\"end\" fill=\"#16202e\">팔란티어 PLTR</text><rect x=\"244.0\" y=\"8\" width=\"8.0\" height=\"14\" fill=\"#c62828\"></rect><text x=\"256.0\" y=\"19\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"start\" fill=\"#c62828\">+1.14%</text><text x=\"122\" y=\"43\" font-size=\"12\" text-anchor=\"end\" fill=\"#16202e\">마이크로소프트 M…</text><rect x=\"244.0\" y=\"32\" width=\"5.2\" height=\"14\" fill=\"#c62828\"></rect><text x=\"253.2\" y=\"43\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"start\" fill=\"#c62828\">+0.74%</text><text x=\"122\" y=\"67\" font-size=\"12\" text-anchor=\"end\" fill=\"#16202e\">알파벳 GOOGL</text><rect x=\"236.4\" y=\"56\" width=\"7.6\" height=\"14\" fill=\"#1f5fbf\"></rect><text x=\"232.4\" y=\"67\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"end\" fill=\"#1f5fbf\">-1.08%</text><text x=\"122\" y=\"91\" font-size=\"12\" text-anchor=\"end\" fill=\"#16202e\">아마존 AMZN</text><rect x=\"235.5\" y=\"80\" width=\"8.5\" height=\"14\" fill=\"#1f5fbf\"></rect><text x=\"231.5\" y=\"91\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"end\" fill=\"#1f5fbf\">-1.21%</text><text x=\"122\" y=\"115\" font-size=\"12\" text-anchor=\"end\" fill=\"#16202e\">메타 META</text><rect x=\"234.9\" y=\"104\" width=\"9.1\" height=\"14\" fill=\"#1f5fbf\"></rect><text x=\"230.9\" y=\"115\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"end\" fill=\"#1f5fbf\">-1.30%</text><text x=\"122\" y=\"139\" font-size=\"12\" text-anchor=\"end\" fill=\"#16202e\">오라클 ORCL</text><rect x=\"218.3\" y=\"128\" width=\"25.7\" height=\"14\" fill=\"#1f5fbf\"></rect><text x=\"214.3\" y=\"139\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"end\" fill=\"#1f5fbf\">-3.68%</text><text x=\"122\" y=\"163\" font-size=\"12\" text-anchor=\"end\" fill=\"#16202e\">TSMC TSM</text><rect x=\"216.3\" y=\"152\" width=\"27.7\" height=\"14\" fill=\"#1f5fbf\"></rect><text x=\"212.3\" y=\"163\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"end\" fill=\"#1f5fbf\">-3.96%</text><text x=\"122\" y=\"187\" font-size=\"12\" text-anchor=\"end\" fill=\"#16202e\">브로드컴 AVGO</text><rect x=\"216.2\" y=\"176\" width=\"27.8\" height=\"14\" fill=\"#1f5fbf\"></rect><text x=\"212.2\" y=\"187\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"end\" fill=\"#1f5fbf\">-3.98%</text><text x=\"122\" y=\"211\" font-size=\"12\" text-anchor=\"end\" fill=\"#16202e\">엔비디아 NVDA</text><rect x=\"203.0\" y=\"200\" width=\"41.0\" height=\"14\" fill=\"#1f5fbf\"></rect><text x=\"199.0\" y=\"211\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"end\" fill=\"#1f5fbf\">-5.86%</text><text x=\"122\" y=\"235\" font-size=\"12\" text-anchor=\"end\" fill=\"#16202e\">AMD AMD</text><rect x=\"182.0\" y=\"224\" width=\"62.0\" height=\"14\" fill=\"#1f5fbf\"></rect><text x=\"178.0\" y=\"235\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"end\" fill=\"#1f5fbf\">-8.86%</text></svg></div><p style=\"margin:0 0 13px\">10개 종목 가운데 2개가 올랐다. 가장 강한 종목은 팔란티어(PLTR, <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+1.14%</b>), 가장 약한 종목은 AMD(AMD, <b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">-8.86%</b>)였다.</p></section>\n<section data-section=\"ai-issues\" style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><div style=\"margin:0 0 14px\"><span style=\"display:block;width:28px;height:3px;background:#3b5b7a;margin:0 0 9px;border-radius:2px\"></span><h2 style=\"margin:0;font-size:clamp(19px,4.8vw,22px);line-height:1.35;font-weight:800;color:#0b2545;letter-spacing:-.01em;word-break:keep-all\">오늘의 AI 발표</h2></div><div style=\"border:1px solid #dbe2ea;border-left:4px solid #3b5b7a;padding:12px 14px;margin:0 0 12px\"><div style=\"font-size:18px;font-weight:800;line-height:1.45;margin:2px 0 6px;word-break:keep-all\">구글, Gemini 관련 AI 협력</div><p style=\"margin:0 0 8px;font-size:16px\">구글은 2026년 11월 25일(한국 시간) 공식 블로그에 「How Gemini is changing the game for Golden State's organization and fans.」 제목의 발표를 게시했다.</p><p style=\"margin:0 0 8px;font-size:16px\">원문 본문은 AI 협력 확대에 관한 내용을 다룬다. 발표의 중심 제품·플랫폼은 Gemini이다.</p></div><div style=\"border:1px solid #dbe2ea;border-left:4px solid #3b5b7a;padding:12px 14px;margin:0 0 12px\"><div style=\"font-size:18px;font-weight:800;line-height:1.45;margin:2px 0 6px;word-break:keep-all\">메타, 신규 AI 제품·기능 공개</div><p style=\"margin:0 0 8px;font-size:16px\">메타는 2026년 11월 24일(한국 시간) 공식 뉴스룸에 「Introducing Muse in the UK: A Personal AI Agent You Control」 제목의 발표를 게시했다.</p><p style=\"margin:0 0 8px;font-size:16px\">발표 제목과 본문은 신규 AI 제품·기능 공개에 관한 내용을 다룬다. 원문에서 함께 언급된 국가·기업은 영국이다.</p></div><div style=\"border:1px solid #dbe2ea;border-left:4px solid #3b5b7a;padding:12px 14px;margin:0 0 12px\"><div style=\"font-size:18px;font-weight:800;line-height:1.45;margin:2px 0 6px;word-break:keep-all\">아마존웹서비스(AWS), Amazon Bedrock 관련 AI 보안</div><p style=\"margin:0 0 8px;font-size:16px\">아마존웹서비스(AWS)는 2026년 11월 25일(한국 시간) 공식 What’s New 공지에 「Amazon Bedrock adds bedrock-runtime endpoint support for OpenAI Daybreak Red in AWS GovCloud (US)」 제목의 발표를 게시했다.</p><p style=\"margin:0 0 8px;font-size:16px\">원문 본문은 AI 보안·안전 강화에 관한 내용을 다룬다. 발표의 중심 제품·플랫폼은 Amazon Bedrock이다. 원문에서 함께 언급된 국가·기업은 오픈AI이다.</p></div></section>\n<section data-section=\"ai-broker-research\" style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><div style=\"margin:0 0 14px\"><span style=\"display:block;width:28px;height:3px;background:#a8822e;margin:0 0 9px;border-radius:2px\"></span><h2 style=\"margin:0;font-size:clamp(19px,4.8vw,22px);line-height:1.35;font-weight:800;color:#0b2545;letter-spacing:-.01em;word-break:keep-all\">증권가가 본 AI 산업</h2></div><div style=\"background:#fbf5e6;border:1px solid #e6d2a0;padding:12px 12px 2px\"><p style=\"margin:0 0 10px;color:#6b5a2f;font-size:14px\">국내 증권사가 최근 공개한 리포트 가운데 AI 수요를 직접 다룬 분석의 문장과 투자의견을 그대로 옮겼다.</p><div style=\"background:#fff;border:1px solid #e6d2a0;border-left:4px solid #a8822e;padding:11px 14px;margin:0 0 10px;font-size:16px\">유진투자증권은 「반도체 차익실현 &amp; 관세 우려에 나스닥 <b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">-1.5%</b>·다우 <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+0.9%</b>」에서 “뉴욕증시 3대 지수, 반도체 급락 속 방어주 강세로 혼조 마감. 다우 <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+0.9%</b>·S&amp;P500 <b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">-0.5%</b>·나스닥 <b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">-1.5%</b>·필라델피아 반도체 <b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">-7.9%</b>. S&amp;P500 섹터 가운데 헬스케어(<b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+2.9%</b>)·필수소비재(<b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+1.7%</b>) 등 방어업종 중심 강세, 정보기술(<b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">-2.8%</b>)·산업재(<b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">-0.5%</b>)는 약세”, “전일 젠슨 황 CEO 복귀로 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">31.5%</b> 폭등한 엔비디아 중심 AI·반도체 차익실현 &amp; WSJ의 美 행정부 중국·EU 등 대상 관세 인상 준비 보도에 기술주 약세”, “엔비디아(<b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">-5.9%</b>)는 복귀 과정의 정치·지배구조 리스크와 12/1 의회 출석 등 미해소 이슈가 재부각되며 하락. AMD(<b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">-8.9%</b>)·인텔(<b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">-8.2%</b>)·브로드컴(<b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">-4.0%</b>)·TSMC ADR(<b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">-4.0%</b>) 하락, 마이크론(<b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">-11.0%</b>)·SK하이닉스 ADR(<b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">-9.9%</b>)은 급락”이라고 밝혔다. <a href=\"https://stock.pstatic.net/stock-research/market/63/20261125_market_786384000.pdf\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></div><div style=\"background:#fff;border:1px solid #e6d2a0;border-left:4px solid #a8822e;padding:11px 14px;margin:0 0 10px;font-size:16px\">유진투자증권은 「외국인 8거래일 만의 귀환, 코스피 <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+6.3%</b>로 5,000선 회복」에서 “국내 양대 증시는 젠슨 황 엔비디아 CEO 복귀(사임 11일 만)에 따른 美 AI·반도체 랠리에 동반 급등. 코스피는 이틀 연속 매도 사이드카 이후 매수 사이드카로 반전, 코스닥도 매수 사이드카 발동(올해 양대 증시 합산 101회째). 코스피는 3거래일 만에 5,000선 회복(코스피 <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+6.3%</b>·코스닥 <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+4.8%</b>)”, “1)반도체 투톱 &amp; 외국인 8거래일 만에 순매수 전환. 간밤 엔비디아(<b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+31.5%</b>)·필 반도체(<b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+14.0%</b>)·나스닥(<b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+6.5%</b>), SK하이닉스 ADR(<b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+20.0%</b>)·삼성전자 GDR(<b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+11.4%</b>) 급등. 삼성전자·SK하이닉스(각 <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+6.7%</b>)·SK스퀘어(<b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+5.2%</b>) 상승. 코스피 상승 종목 713개 vs 하락 80개로 전방위적 반등”, “2)코스닥 로봇·소부장 중심 상승 &amp; 알테오젠 약세. 로봇(휴림로봇 上)은 삼성전자의 CES 2027 자체 휴머노이드 첫 공개 계획 보도에 급등, 폴더블폰 힌지 공급사 KH바텍(上)도 휴머노이드 관절 부품 기대감에 상한가. 반도체 소부장(리노공업·심텍·이오테크닉스)·2차전지(에코프로비엠·에코프로)로도 매수 확산. 시총 1위 알테오젠(<b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">-5.2%</b>)은 하락”이라고 밝혔다. <a href=\"https://stock.pstatic.net/stock-research/market/63/20261125_market_786384000.pdf\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></div><div style=\"background:#fff;border:1px solid #e6d2a0;border-left:4px solid #a8822e;padding:11px 14px;margin:0 0 10px;font-size:16px\">요약문 없이 투자의견만 공개된 AI 관련 리포트도 있었다: 아모텍(IBK투자증권, 11월 24일, 매수, 목표주가 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">25,000원</b>), LG유플러스(iM증권, 11월 24일, Buy, 목표주가 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">19,500원</b>), SK텔레콤(iM증권, 11월 24일, Buy, 목표주가 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">112,000원</b>), 파인엠텍(메리츠증권, 11월 23일, Buy, 목표주가 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">13,000원</b>). <a href=\"https://consensus.hankyung.com/analysis/downpdf?report_idx=654504\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></div><div style=\"background:#fff;border:1px solid #e6d2a0;border-left:4px solid #a8822e;padding:11px 14px;margin:0 0 10px;font-size:16px\">한화투자증권은 11월 25일 「반도체 소부장: 첫번째 메가팹, Y1」 산업 리포트에서 “Y1의 장비 발주는 이미 시작됐다. 2027년 2월 첫 번째 클린룸 개방을 앞두고 있으며 2027년 말까지 월 10만 장 규모의 CAPA 구축을 예상한다. 전공정 장비 업체들에 대한 고강도 발주가 기대된다”, “기존 생산시설의 공정 전환과 달리 신규 팹 증설은 전공정 장비 전반의 발주 증가를 수반한다. Y1의 후속 클린룸 투자와 삼성전자 P5 증설까지 고려하면 국내 전공정 장비 업체들의 중장기 실적 가시성이 높아질 전망이다”라고 분석했다. <a href=\"https://stock.pstatic.net/stock-research/industry/16/20261125_industry_668693000.pdf\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></div><div style=\"background:#fff;border:1px solid #e6d2a0;border-left:4px solid #a8822e;padding:11px 14px;margin:0 0 10px;font-size:16px\">유안타증권은 11월 25일 「[유안타이슈테마] 삼성전자 휴머노이드 로봇」 산업 리포트에서 “삼성전자가 CES 2027에서 자체 개발할 휴머노이드를 처음 공개할 계획이라는 내용이 보도되었다”, “H/W 측면에서 3가지의 특징이 제기되었다”라고 분석했다. <a href=\"https://stock.pstatic.net/stock-research/industry/18/20261125_industry_906615000.pdf\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></div><div style=\"background:#fff;border:1px solid #e6d2a0;border-left:4px solid #a8822e;padding:11px 14px;margin:0 0 10px;font-size:16px\">유안타증권은 11월 25일 「반도체 업종 Update」 산업 리포트에서 “반도체 업종의 분위기 전환을 기대한다”, “엔비디아 이사회는 11/23 젠슨 황을 사장 겸 CEO로 즉시 복귀시키는 안을 만장일치로 의결했고, 주가는 장중 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">30%</b> 넘게 급등해 사임 직전 수준에 근접했다”라고 분석했다. <a href=\"https://stock.pstatic.net/stock-research/industry/18/20261125_industry_289186000.pdf\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></div></div></section>\n<section data-section=\"related-posts\" style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><div style=\"margin:0 0 14px\"><span style=\"display:block;width:28px;height:3px;background:#0b2545;margin:0 0 9px;border-radius:2px\"></span><h2 style=\"margin:0;font-size:clamp(19px,4.8vw,22px);line-height:1.35;font-weight:800;color:#0b2545;letter-spacing:-.01em;word-break:keep-all\">MOTUS 최근 기사</h2></div><p style=\"margin:0 0 12px;color:#4a5a6e;font-size:15px\">최근 발행한 시장·AI 브리핑이다.</p><ul style=\"margin:0;padding:0;list-style:none;border-top:1px solid #dbe2ea\"><li style=\"margin:0;padding:12px 2px;border-bottom:1px solid #dbe2ea\"><span style=\"display:block;color:#a8822e;font-size:12px;font-weight:800;letter-spacing:.04em;margin:0 0 3px\">미국증시 · 2026-11-25</span><a href=\"https://motusnova.blogspot.com/2026/11/11-24-3-amd-89.html\" style=\"color:#0b2545;text-decoration:none;font-weight:700;line-height:1.5;overflow-wrap:anywhere\">11월 24일 뉴욕증시 마감, 3대 지수 혼조…AMD 8.9% 급락</a></li><li style=\"margin:0;padding:12px 2px;border-bottom:1px solid #dbe2ea\"><span style=\"display:block;color:#a8822e;font-size:12px;font-weight:800;letter-spacing:.04em;margin:0 0 3px\">국내증시 · 2026-11-24</span><a href=\"https://motusnova.blogspot.com/2026/11/11-24-632-500603-1-62.html\" style=\"color:#0b2545;text-decoration:none;font-weight:700;line-height:1.5;overflow-wrap:anywhere\">11월 24일 코스피 마감, 6.32% 급등해 5,006.03…검색 1위 삼성전자 6.2% 급등</a></li><li style=\"margin:0;padding:12px 2px;border-bottom:1px solid #dbe2ea\"><span style=\"display:block;color:#a8822e;font-size:12px;font-weight:800;letter-spacing:.04em;margin:0 0 3px\">리포트 · 2026-11-24</span><a href=\"https://motusnova.blogspot.com/2026/11/2026-11-24-ai.html\" style=\"color:#0b2545;text-decoration:none;font-weight:700;line-height:1.5;overflow-wrap:anywhere\">[데일리 리포트] 2026년 11월 24일 국내 증시·미국 증시·AI 핵심 정리</a></li><li style=\"margin:0;padding:12px 2px;border-bottom:1px solid #dbe2ea\"><span style=\"display:block;color:#a8822e;font-size:12px;font-weight:800;letter-spacing:.04em;margin:0 0 3px\">AI 인텔리전스 · 2026-11-24</span><a href=\"https://motusnova.blogspot.com/2026/11/31-ai.html\" style=\"color:#0b2545;text-decoration:none;font-weight:700;line-height:1.5;overflow-wrap:anywhere\">엔비디아 31% 급등…증권가가 짚은 AI 투자 쟁점</a></li><li style=\"margin:0;padding:12px 2px;border-bottom:1px solid #dbe2ea\"><span style=\"display:block;color:#a8822e;font-size:12px;font-weight:800;letter-spacing:.04em;margin:0 0 3px\">AI 인텔리전스 · 2026-11-18</span><a href=\"https://motusnova.blogspot.com/2026/11/copilot.html\" style=\"color:#0b2545;text-decoration:none;font-weight:700;line-height:1.5;overflow-wrap:anywhere\">마이크로소프트가 공개한 Copilot 신규 기능, 엔비디아 움직임까지 읽기</a></li><li style=\"margin:0;padding:12px 2px;border-bottom:1px solid #dbe2ea\"><span style=\"display:block;color:#a8822e;font-size:12px;font-weight:800;letter-spacing:.04em;margin:0 0 3px\">AI 인텔리전스 · 2026-11-11</span><a href=\"https://motusnova.blogspot.com/2026/11/55-ai.html\" style=\"color:#0b2545;text-decoration:none;font-weight:700;line-height:1.5;overflow-wrap:anywhere\">엔비디아 5.5% 급락…증권가가 짚은 AI 투자 쟁점</a></li></ul><p data-section=\"category-hubs\" style=\"margin:4px 0 0;font-size:15px\"><a href=\"https://motusnova.blogspot.com/search/label/AI%20%EC%9D%B8%ED%85%94%EB%A6%AC%EC%A0%84%EC%8A%A4\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">AI 인텔리전스 전체 보기</a> · <a href=\"https://motusnova.blogspot.com/search/label/%EA%B5%AD%EB%82%B4%EC%A6%9D%EC%8B%9C\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">국내증시 전체 보기</a> · <a href=\"https://motusnova.blogspot.com/search/label/%EB%AF%B8%EA%B5%AD%EC%A6%9D%EC%8B%9C\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">미국증시 전체 보기</a> · <a href=\"https://motusnova.blogspot.com/search/label/%EB%A6%AC%ED%8F%AC%ED%8A%B8\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">리포트 전체 보기</a></p></section>\n<section style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><div style=\"margin:0 0 14px\"><span style=\"display:block;width:28px;height:3px;background:#0b2545;margin:0 0 9px;border-radius:2px\"></span><h2 style=\"margin:0;font-size:clamp(19px,4.8vw,22px);line-height:1.35;font-weight:800;color:#0b2545;letter-spacing:-.01em;word-break:keep-all\">자료</h2></div><details style=\"border:1px solid #dbe2ea;border-radius:12px;padding:10px 14px\"><summary style=\"cursor:pointer;font-weight:800;color:#0b2545;font-size:15px\">출처 13건 보기</summary><ul style=\"margin:10px 0 0;padding-left:20px;font-size:14px\"><li style=\"margin:5px 0\"><a href=\"https://blog.google/products-and-platforms/products/gemini/gemini-golden-state/\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">구글 공식 발표</a></li><li style=\"margin:5px 0\"><a href=\"https://about.fb.com/news/2026/11/introducing-muse-in-the-uk-a-personal-ai-agent-you-control/\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">메타 공식 발표</a></li><li style=\"margin:5px 0\"><a href=\"https://aws.amazon.com/about-aws/whats-new/2026/11/gpt-daybreak-red-runtime-govcloud/\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">아마존웹서비스(AWS) 공식 발표</a></li><li style=\"margin:5px 0\"><a href=\"https://stock.pstatic.net/stock-research/market/21/20261125_market_777711000.pdf\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">신한투자증권 「Daily Market Digest (11월 25일)」 (2026-11-25)</a></li><li style=\"margin:5px 0\"><a href=\"https://stock.pstatic.net/stock-research/market/76/20261125_market_217603000.pdf\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">다올투자증권 「Daily Morning Brief(2026.11.25)」 (2026-11-25)</a></li><li style=\"margin:5px 0\"><a href=\"https://stock.pstatic.net/stock-research/market/63/20261125_market_786384000.pdf\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">유진투자증권 「Eugene Daily Snapshot - 좋아질 만하면 관세, 풀릴 만하면 젠슨 황 조사」 (2026-11-25)</a></li><li style=\"margin:5px 0\"><a href=\"https://stock.pstatic.net/stock-research/market/61/20261125_market_319617000.pdf\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">iM증권 「[Market Time] 기술주 약세와 과잉생산 관세 우려 확대」 (2026-11-25)</a></li><li style=\"margin:5px 0\"><a href=\"https://stock.pstatic.net/stock-research/market/58/20261125_market_650952000.pdf\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">KB증권 「11/25 KB 리서치 모닝코멘트」 (2026-11-25)</a></li><li style=\"margin:5px 0\"><a href=\"https://consensus.hankyung.com/analysis/downpdf?report_idx=654504\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">IBK투자증권 「아모텍(052710) AI 숫자는 탄탄 그 이상」 (2026-11-24)</a></li><li style=\"margin:5px 0\"><a href=\"https://stock.pstatic.net/stock-research/industry/16/20261125_industry_668693000.pdf\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">한화투자증권 「반도체 소부장: 첫번째 메가팹, Y1」 (2026-11-25)</a></li><li style=\"margin:5px 0\"><a href=\"https://stock.pstatic.net/stock-research/industry/18/20261125_industry_906615000.pdf\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">유안타증권 「[유안타이슈테마] 삼성전자 휴머노이드 로봇」 (2026-11-25)</a></li><li style=\"margin:5px 0\"><a href=\"https://stock.pstatic.net/stock-research/industry/18/20261125_industry_289186000.pdf\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">유안타증권 「반도체 업종 Update」 (2026-11-25)</a></li><li style=\"margin:5px 0\"><a href=\"https://query1.finance.yahoo.com/v7/finance/spark?symbols=NVDA,MSFT,GOOGL,AMZN,META,AVGO,AMD,TSM,ORCL,PLTR&amp;range=5d&amp;interval=1d\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">Yahoo Finance AI 대표 종목 일별 종가</a></li></ul></details></section></article></body></html>",
+    "renderedSections": [
+      "masthead",
+      "lead",
+      "key-points",
+      "issues",
+      "watch",
+      "sources"
+    ],
+    "label": "AI 인텔리전스"
+  },
+  "viewModel": {
+    "publicationId": "motus-live-2026-11-25:ai",
+    "issueDate": "2026-11-25",
+    "issueNumber": 20261125,
+    "title": "엔비디아 5.9% 급락…증권가가 짚은 AI 투자 쟁점",
+    "subtitle": "증권가 분석과 공식 발표로 읽는 AI 산업",
+    "category": "AI_INTELLIGENCE",
+    "canonicalLabel": "AI Intelligence",
+    "displayLabel": "AI 인텔리전스 (AI Intelligence)",
+    "todayCore": {
+      "headline": "구글, Gemini 관련 AI 협력",
+      "summary": "직전 미국 정규장(11월 24일)에서 엔비디아(NVDA)는 5.86% 급락했다. 공식 채널에서는 구글의 Gemini 관련 AI 협력, 메타의 신규 AI 제품·기능, 아마존웹서비스(AWS)의 Amazon Bedrock 관련 AI 보안 발표가 나왔다. 공식 AI 채널 11곳에서 최근 4일간 게시된 AI 발표 29건을 확인했고, 원문 출처와 발표일이 검증된 3건을 골라 정리했다.",
+      "bullets": [
+        "구글, Gemini 관련 AI 협력",
+        "메타, 신규 AI 제품·기능 공개",
+        "아마존웹서비스(AWS), Amazon Bedrock 관련 AI 보안"
+      ]
+    },
+    "issues": [
+      {
+        "headline": "구글, Gemini 관련 AI 협력",
+        "whatHappened": [
+          "구글은 2026년 11월 25일(한국 시간) 공식 블로그에 「How Gemini is changing the game for Golden State's organization and fans.」 제목의 발표를 게시했다.",
+          "원문 본문은 AI 협력 확대에 관한 내용을 다룬다. 발표의 중심 제품·플랫폼은 Gemini이다."
+        ],
+        "coreContent": "",
+        "whyItMatters": "MOTUS 분석: 협력 발표는 실제 공동 고객과 매출로 이어질 때 의미가 커진다.",
+        "relatedCompaniesIndustries": [
+          "구글",
+          "AI 산업"
+        ],
+        "marketConnection": "시장 평가는 발표 이후 고객 채택, 매출 기여와 인프라 투자 자료가 확인된 뒤 판단해야 한다.",
+        "institutionView": null,
+        "evidenceRefs": [
+          "https://blog.google/products-and-platforms/products/gemini/gemini-golden-state/"
+        ]
+      },
+      {
+        "headline": "메타, 신규 AI 제품·기능 공개",
+        "whatHappened": [
+          "메타는 2026년 11월 24일(한국 시간) 공식 뉴스룸에 「Introducing Muse in the UK: A Personal AI Agent You Control」 제목의 발표를 게시했다.",
+          "발표 제목과 본문은 신규 AI 제품·기능 공개에 관한 내용을 다룬다. 원문에서 함께 언급된 국가·기업은 영국이다."
+        ],
+        "coreContent": "",
+        "whyItMatters": "MOTUS 분석: 신규 기능 공개의 의미는 기술 사양보다 실제로 쓰는 고객이 얼마나 빨리 늘어나는지와 과금 구조에 달려 있다.",
+        "relatedCompaniesIndustries": [
+          "메타",
+          "AI 산업"
+        ],
+        "marketConnection": "시장 평가는 발표 이후 고객 채택, 매출 기여와 인프라 투자 자료가 확인된 뒤 판단해야 한다.",
+        "institutionView": null,
+        "evidenceRefs": [
+          "https://about.fb.com/news/2026/11/introducing-muse-in-the-uk-a-personal-ai-agent-you-control/"
+        ]
+      },
+      {
+        "headline": "아마존웹서비스(AWS), Amazon Bedrock 관련 AI 보안",
+        "whatHappened": [
+          "아마존웹서비스(AWS)는 2026년 11월 25일(한국 시간) 공식 What’s New 공지에 「Amazon Bedrock adds bedrock-runtime endpoint support for OpenAI Daybreak Red in AWS GovCloud (US)」 제목의 발표를 게시했다.",
+          "원문 본문은 AI 보안·안전 강화에 관한 내용을 다룬다. 발표의 중심 제품·플랫폼은 Amazon Bedrock이다. 원문에서 함께 언급된 국가·기업은 오픈AI이다."
+        ],
+        "coreContent": "",
+        "whyItMatters": "MOTUS 분석: AI 서비스 이용자가 늘수록 보안과 안전 체계는 기업 고객의 도입 여부를 가르는 조건이 된다. 공개된 조치가 실제 사고 예방이나 인증 획득으로 이어지는지가 신뢰도의 기준이다.",
+        "relatedCompaniesIndustries": [
+          "아마존웹서비스(AWS)",
+          "AI 산업"
+        ],
+        "marketConnection": "시장 평가는 발표 이후 고객 채택, 매출 기여와 인프라 투자 자료가 확인된 뒤 판단해야 한다.",
+        "institutionView": null,
+        "evidenceRefs": [
+          "https://aws.amazon.com/about-aws/whats-new/2026/11/gpt-daybreak-red-runtime-govcloud/"
+        ]
+      }
+    ],
+    "deepSections": [
+      {
+        "key": "ai-issue",
+        "placement": "early",
+        "role": "broker",
+        "title": "오늘의 AI 쟁점: 증권가 시각",
+        "intro": "직전 미국 정규장에서 AI 관련 기업의 주가를 움직인 사안을 증권사 아침 리포트 원문으로 정리했다.",
+        "paragraphs": [
+          {
+            "text": "MOTUS 정리: 증권사 5곳의 리포트를 대조하면 AI 투자(신한투자증권·다올투자증권·iM증권·KB증권), 환율·달러(iM증권·KB증권)가 공통으로 꼽힌 배경이다."
+          },
+          {
+            "text": "신한투자증권은 11월 25일 아침 리포트 「Daily Market Digest (11월 25일)」에서 “미국 시장은 AI 밸류체인 급등 후 차익 매물 출회 속 헬스케어·필수소비재 등 선방하며 혼조. S&P500 -0.5%, NASDAQ -1.5%, Dow +0.9%, SOX -7.9%”라고 진단했다.",
+            "source": {
+              "label": "신한투자증권 Daily Market Digest (11월 25일) (11월 25일)",
+              "url": "https://stock.pstatic.net/stock-research/market/21/20261125_market_777711000.pdf"
+            }
+          },
+          {
+            "text": "다올투자증권은 11월 25일 아침 리포트 「Daily Morning Brief(2026.11.25)」에서 “미국증시, 전일 젠슨 황 CEO 복귀 소식에 급등했던 기술주는 AI 산업 회의론 재부각에 차익실현 매물 출회되며 하락한 반면, 전통 산업군 및 우량주는 강세를 보이며 3대 지수 혼조 마감”이라고 진단했다.",
+            "source": {
+              "label": "다올투자증권 Daily Morning Brief(2026.11.25) (11월 25일)",
+              "url": "https://stock.pstatic.net/stock-research/market/76/20261125_market_217603000.pdf"
+            }
+          },
+          {
+            "text": "iM증권은 11월 25일 아침 리포트 「[Market Time] 기술주 약세와 과잉생산 관세 우려 확대」에서 “다만 미국 장 마감 후 실적 발표한 델은 견조한 AI 서버 수요를 바탕으로 FY27년 연간 매출 전망을 1,920억 달러에서 2,020억 달러로 상향했습니다”라고 진단했다.",
+            "source": {
+              "label": "iM증권 [Market Time] 기술주 약세와 과잉생산 관세 우려 확대 (11월 25일)",
+              "url": "https://stock.pstatic.net/stock-research/market/61/20261125_market_319617000.pdf"
+            }
+          },
+          {
+            "text": "KB증권은 11월 25일 아침 리포트 「11/25 KB 리서치 모닝코멘트」에서 “엔비디아 약 -6%, 퀄컴 (강보합) 제외 필리 지수 전 종목 하락. 앤트로픽 6%대 하락하며 공모가 83달러 하회”라고 진단했다.",
+            "source": {
+              "label": "KB증권 11/25 KB 리서치 모닝코멘트 (11월 25일)",
+              "url": "https://stock.pstatic.net/stock-research/market/58/20261125_market_650952000.pdf"
+            }
+          },
+          {
+            "text": "경계 요인도 제시됐다. KB증권은 “젠슨 황 복귀에도 여전히 AI 산업 관련 불확실성이 크다는 회의론이 부상하며 나스닥 -1%, 필리 지수 약 -8%”라고 짚었다.",
+            "source": {
+              "label": "KB증권 11/25 KB 리서치 모닝코멘트 (11월 25일)",
+              "url": "https://stock.pstatic.net/stock-research/market/58/20261125_market_650952000.pdf"
+            }
+          }
+        ]
+      },
+      {
+        "key": "ai-stocks",
+        "placement": "early",
+        "role": "data",
+        "bars": [
+          {
+            "label": "팔란티어 PLTR",
+            "value": 1.142068273092365
+          },
+          {
+            "label": "마이크로소프트 MSFT",
+            "value": 0.7370558375634508
+          },
+          {
+            "label": "알파벳 GOOGL",
+            "value": -1.0811768876285044
+          },
+          {
+            "label": "아마존 AMZN",
+            "value": -1.2138298288891478
+          },
+          {
+            "label": "메타 META",
+            "value": -1.3018741633199418
+          },
+          {
+            "label": "오라클 ORCL",
+            "value": -3.6769880365939542
+          },
+          {
+            "label": "TSMC TSM",
+            "value": -3.9603960396039692
+          },
+          {
+            "label": "브로드컴 AVGO",
+            "value": -3.9770371551586754
+          },
+          {
+            "label": "엔비디아 NVDA",
+            "value": -5.858830657376561
+          },
+          {
+            "label": "AMD AMD",
+            "value": -8.862964759846513
+          }
+        ],
+        "title": "AI 대표 종목의 주가 흐름",
+        "intro": "미국 AI 대표 종목 10개의 직전 정규장(2026-11-24) 종가 기준 등락이다.",
+        "paragraphs": [
+          {
+            "text": "10개 종목 가운데 2개가 올랐다. 가장 강한 종목은 팔란티어(PLTR, +1.14%), 가장 약한 종목은 AMD(AMD, -8.86%)였다."
+          },
+          {
+            "text": "팔란티어 +1.14% · 마이크로소프트 +0.74% · 알파벳 -1.08% · 아마존 -1.21% · 메타 -1.30% · 오라클 -3.68% · TSMC -3.96% · 브로드컴 -3.98% · 엔비디아 -5.86% · AMD -8.86%"
+          }
+        ],
+        "image": {
+          "url": "https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/operations/2026-11-25/ai/chart-d547be243a26.png",
+          "alt": "AI 인텔리전스 2026년 11월 25일 AI 대표 종목의 주가 흐름: 팔란티어 PLTR +1.14%, 마이크로소프트 MSFT +0.74%, 알파벳 GOOGL −1.08%, 아마존 AMZN −1.21%",
+          "width": 1200,
+          "height": 630
+        }
+      },
+      {
+        "key": "ai-broker-research",
+        "role": "broker",
+        "title": "증권가가 본 AI 산업",
+        "intro": "국내 증권사가 최근 공개한 리포트 가운데 AI 수요를 직접 다룬 분석의 문장과 투자의견을 그대로 옮겼다.",
+        "paragraphs": [
+          {
+            "text": "유진투자증권은 「반도체 차익실현 & 관세 우려에 나스닥 -1.5%·다우 +0.9%」에서 “뉴욕증시 3대 지수, 반도체 급락 속 방어주 강세로 혼조 마감. 다우 +0.9%·S&P500 -0.5%·나스닥 -1.5%·필라델피아 반도체 -7.9%. S&P500 섹터 가운데 헬스케어(+2.9%)·필수소비재(+1.7%) 등 방어업종 중심 강세, 정보기술(-2.8%)·산업재(-0.5%)는 약세”, “전일 젠슨 황 CEO 복귀로 31.5% 폭등한 엔비디아 중심 AI·반도체 차익실현 & WSJ의 美 행정부 중국·EU 등 대상 관세 인상 준비 보도에 기술주 약세”, “엔비디아(-5.9%)는 복귀 과정의 정치·지배구조 리스크와 12/1 의회 출석 등 미해소 이슈가 재부각되며 하락. AMD(-8.9%)·인텔(-8.2%)·브로드컴(-4.0%)·TSMC ADR(-4.0%) 하락, 마이크론(-11.0%)·SK하이닉스 ADR(-9.9%)은 급락”이라고 밝혔다.",
+            "source": {
+              "label": "유진투자증권 Eugene Daily Snapshot - 좋아질 만하면 관세, 풀릴 만하면 젠슨 황 조사 (11월 25일)",
+              "url": "https://stock.pstatic.net/stock-research/market/63/20261125_market_786384000.pdf"
+            }
+          },
+          {
+            "text": "유진투자증권은 「외국인 8거래일 만의 귀환, 코스피 +6.3%로 5,000선 회복」에서 “국내 양대 증시는 젠슨 황 엔비디아 CEO 복귀(사임 11일 만)에 따른 美 AI·반도체 랠리에 동반 급등. 코스피는 이틀 연속 매도 사이드카 이후 매수 사이드카로 반전, 코스닥도 매수 사이드카 발동(올해 양대 증시 합산 101회째). 코스피는 3거래일 만에 5,000선 회복(코스피 +6.3%·코스닥 +4.8%)”, “1)반도체 투톱 & 외국인 8거래일 만에 순매수 전환. 간밤 엔비디아(+31.5%)·필 반도체(+14.0%)·나스닥(+6.5%), SK하이닉스 ADR(+20.0%)·삼성전자 GDR(+11.4%) 급등. 삼성전자·SK하이닉스(각 +6.7%)·SK스퀘어(+5.2%) 상승. 코스피 상승 종목 713개 vs 하락 80개로 전방위적 반등”, “2)코스닥 로봇·소부장 중심 상승 & 알테오젠 약세. 로봇(휴림로봇 上)은 삼성전자의 CES 2027 자체 휴머노이드 첫 공개 계획 보도에 급등, 폴더블폰 힌지 공급사 KH바텍(上)도 휴머노이드 관절 부품 기대감에 상한가. 반도체 소부장(리노공업·심텍·이오테크닉스)·2차전지(에코프로비엠·에코프로)로도 매수 확산. 시총 1위 알테오젠(-5.2%)은 하락”이라고 밝혔다.",
+            "source": {
+              "label": "유진투자증권 Eugene Daily Snapshot - 좋아질 만하면 관세, 풀릴 만하면 젠슨 황 조사 (11월 25일)",
+              "url": "https://stock.pstatic.net/stock-research/market/63/20261125_market_786384000.pdf"
+            }
+          },
+          {
+            "text": "요약문 없이 투자의견만 공개된 AI 관련 리포트도 있었다: 아모텍(IBK투자증권, 11월 24일, 매수, 목표주가 25,000원), LG유플러스(iM증권, 11월 24일, Buy, 목표주가 19,500원), SK텔레콤(iM증권, 11월 24일, Buy, 목표주가 112,000원), 파인엠텍(메리츠증권, 11월 23일, Buy, 목표주가 13,000원).",
+            "source": {
+              "label": "IBK투자증권 아모텍(052710) AI 숫자는 탄탄 그 이상 (11월 24일)",
+              "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=654504"
+            }
+          },
+          {
+            "text": "한화투자증권은 11월 25일 「반도체 소부장: 첫번째 메가팹, Y1」 산업 리포트에서 “Y1의 장비 발주는 이미 시작됐다. 2027년 2월 첫 번째 클린룸 개방을 앞두고 있으며 2027년 말까지 월 10만 장 규모의 CAPA 구축을 예상한다. 전공정 장비 업체들에 대한 고강도 발주가 기대된다”, “기존 생산시설의 공정 전환과 달리 신규 팹 증설은 전공정 장비 전반의 발주 증가를 수반한다. Y1의 후속 클린룸 투자와 삼성전자 P5 증설까지 고려하면 국내 전공정 장비 업체들의 중장기 실적 가시성이 높아질 전망이다”라고 분석했다.",
+            "source": {
+              "label": "한화투자증권 반도체 소부장: 첫번째 메가팹, Y1 (11월 25일)",
+              "url": "https://stock.pstatic.net/stock-research/industry/16/20261125_industry_668693000.pdf"
+            }
+          },
+          {
+            "text": "유안타증권은 11월 25일 「[유안타이슈테마] 삼성전자 휴머노이드 로봇」 산업 리포트에서 “삼성전자가 CES 2027에서 자체 개발할 휴머노이드를 처음 공개할 계획이라는 내용이 보도되었다”, “H/W 측면에서 3가지의 특징이 제기되었다”라고 분석했다.",
+            "source": {
+              "label": "유안타증권 [유안타이슈테마] 삼성전자 휴머노이드 로봇 (11월 25일)",
+              "url": "https://stock.pstatic.net/stock-research/industry/18/20261125_industry_906615000.pdf"
+            }
+          },
+          {
+            "text": "유안타증권은 11월 25일 「반도체 업종 Update」 산업 리포트에서 “반도체 업종의 분위기 전환을 기대한다”, “엔비디아 이사회는 11/23 젠슨 황을 사장 겸 CEO로 즉시 복귀시키는 안을 만장일치로 의결했고, 주가는 장중 30% 넘게 급등해 사임 직전 수준에 근접했다”라고 분석했다.",
+            "source": {
+              "label": "유안타증권 반도체 업종 Update (11월 25일)",
+              "url": "https://stock.pstatic.net/stock-research/industry/18/20261125_industry_289186000.pdf"
+            }
+          }
+        ]
+      }
+    ],
+    "industryFlow": [
+      "AI 제품 적용",
+      "AI 인프라",
+      "기업 도입"
+    ],
+    "industryConnections": [
+      {
+        "title": "구글 발표의 산업 연결",
+        "explanation": "MOTUS 분석: 협력 발표는 실제 공동 고객과 매출로 이어질 때 의미가 커진다.",
+        "connectedCompanies": [
+          "구글"
+        ],
+        "connectedIndustries": [
+          "AI 산업"
+        ],
+        "evidenceRefs": [
+          "https://blog.google/products-and-platforms/products/gemini/gemini-golden-state/"
+        ],
+        "optionalWatchPoint": ""
+      },
+      {
+        "title": "메타 발표의 산업 연결",
+        "explanation": "MOTUS 분석: 신규 기능 공개의 의미는 기술 사양보다 실제로 쓰는 고객이 얼마나 빨리 늘어나는지와 과금 구조에 달려 있다.",
+        "connectedCompanies": [
+          "메타"
+        ],
+        "connectedIndustries": [
+          "AI 산업"
+        ],
+        "evidenceRefs": [
+          "https://about.fb.com/news/2026/11/introducing-muse-in-the-uk-a-personal-ai-agent-you-control/"
+        ],
+        "optionalWatchPoint": ""
+      },
+      {
+        "title": "아마존웹서비스(AWS) 발표의 산업 연결",
+        "explanation": "MOTUS 분석: AI 서비스 이용자가 늘수록 보안과 안전 체계는 기업 고객의 도입 여부를 가르는 조건이 된다. 공개된 조치가 실제 사고 예방이나 인증 획득으로 이어지는지가 신뢰도의 기준이다.",
+        "connectedCompanies": [
+          "아마존웹서비스(AWS)"
+        ],
+        "connectedIndustries": [
+          "AI 산업"
+        ],
+        "evidenceRefs": [
+          "https://aws.amazon.com/about-aws/whats-new/2026/11/gpt-daybreak-red-runtime-govcloud/"
+        ],
+        "optionalWatchPoint": ""
+      }
+    ],
+    "whatToWatch": [
+      {
+        "headline": "구글 Gemini 관련 AI 협력",
+        "watchFor": "협력의 계약 기간과 범위, 공동 고객 사례와 매출 기여가 공개되는지 확인할 필요가 있다.",
+        "validityHorizon": "NEXT_30_DAYS"
+      },
+      {
+        "headline": "메타 신규 AI 제품·기능",
+        "watchFor": "제공 지역과 가격, 기존 고객의 실제 사용량과 경쟁 서비스 대비 차별점을 확인할 필요가 있다.",
+        "validityHorizon": "NEXT_30_DAYS"
+      },
+      {
+        "headline": "아마존웹서비스(AWS) Amazon Bedrock 관련 AI 보안",
+        "watchFor": "적용 대상 서비스와 시점, 외부 검증 결과가 공개되는지 확인할 필요가 있다.",
+        "validityHorizon": "NEXT_30_DAYS"
+      }
+    ],
+    "sources": [
+      {
+        "label": "구글 공식 발표",
+        "url": "https://blog.google/products-and-platforms/products/gemini/gemini-golden-state/",
+        "publisher": "Google AI"
+      },
+      {
+        "label": "메타 공식 발표",
+        "url": "https://about.fb.com/news/2026/11/introducing-muse-in-the-uk-a-personal-ai-agent-you-control/",
+        "publisher": "Meta"
+      },
+      {
+        "label": "아마존웹서비스(AWS) 공식 발표",
+        "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/gpt-daybreak-red-runtime-govcloud/",
+        "publisher": "Amazon AWS"
+      },
+      {
+        "label": "신한투자증권 「Daily Market Digest (11월 25일)」 (2026-11-25)",
+        "url": "https://stock.pstatic.net/stock-research/market/21/20261125_market_777711000.pdf",
+        "publisher": "신한투자증권",
+        "role": "SUPPLEMENTARY"
+      },
+      {
+        "label": "다올투자증권 「Daily Morning Brief(2026.11.25)」 (2026-11-25)",
+        "url": "https://stock.pstatic.net/stock-research/market/76/20261125_market_217603000.pdf",
+        "publisher": "다올투자증권",
+        "role": "SUPPLEMENTARY"
+      },
+      {
+        "label": "유진투자증권 「Eugene Daily Snapshot - 좋아질 만하면 관세, 풀릴 만하면 젠슨 황 조사」 (2026-11-25)",
+        "url": "https://stock.pstatic.net/stock-research/market/63/20261125_market_786384000.pdf",
+        "publisher": "유진투자증권",
+        "role": "SUPPLEMENTARY"
+      },
+      {
+        "label": "iM증권 「[Market Time] 기술주 약세와 과잉생산 관세 우려 확대」 (2026-11-25)",
+        "url": "https://stock.pstatic.net/stock-research/market/61/20261125_market_319617000.pdf",
+        "publisher": "iM증권",
+        "role": "SUPPLEMENTARY"
+      },
+      {
+        "label": "KB증권 「11/25 KB 리서치 모닝코멘트」 (2026-11-25)",
+        "url": "https://stock.pstatic.net/stock-research/market/58/20261125_market_650952000.pdf",
+        "publisher": "KB증권",
+        "role": "SUPPLEMENTARY"
+      },
+      {
+        "label": "IBK투자증권 「아모텍(052710) AI 숫자는 탄탄 그 이상」 (2026-11-24)",
+        "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=654504",
+        "publisher": "IBK투자증권",
+        "role": "SUPPLEMENTARY"
+      },
+      {
+        "label": "한화투자증권 「반도체 소부장: 첫번째 메가팹, Y1」 (2026-11-25)",
+        "url": "https://stock.pstatic.net/stock-research/industry/16/20261125_industry_668693000.pdf",
+        "publisher": "한화투자증권",
+        "role": "SUPPLEMENTARY"
+      },
+      {
+        "label": "유안타증권 「[유안타이슈테마] 삼성전자 휴머노이드 로봇」 (2026-11-25)",
+        "url": "https://stock.pstatic.net/stock-research/industry/18/20261125_industry_906615000.pdf",
+        "publisher": "유안타증권",
+        "role": "SUPPLEMENTARY"
+      },
+      {
+        "label": "유안타증권 「반도체 업종 Update」 (2026-11-25)",
+        "url": "https://stock.pstatic.net/stock-research/industry/18/20261125_industry_289186000.pdf",
+        "publisher": "유안타증권",
+        "role": "SUPPLEMENTARY"
+      },
+      {
+        "label": "Yahoo Finance AI 대표 종목 일별 종가",
+        "url": "https://query1.finance.yahoo.com/v7/finance/spark?symbols=NVDA,MSFT,GOOGL,AMZN,META,AVGO,AMD,TSM,ORCL,PLTR&range=5d&interval=1d",
+        "publisher": "Yahoo Finance",
+        "role": "SUPPLEMENTARY"
+      }
+    ],
+    "relatedPosts": [
+      {
+        "title": "11월 24일 뉴욕증시 마감, 3대 지수 혼조…AMD 8.9% 급락",
+        "url": "https://motusnova.blogspot.com/2026/11/11-24-3-amd-89.html",
+        "label": "미국증시",
+        "published": "2026-11-25"
+      },
+      {
+        "title": "11월 24일 코스피 마감, 6.32% 급등해 5,006.03…검색 1위 삼성전자 6.2% 급등",
+        "url": "https://motusnova.blogspot.com/2026/11/11-24-632-500603-1-62.html",
+        "label": "국내증시",
+        "published": "2026-11-24"
+      },
+      {
+        "title": "[데일리 리포트] 2026년 11월 24일 국내 증시·미국 증시·AI 핵심 정리",
+        "url": "https://motusnova.blogspot.com/2026/11/2026-11-24-ai.html",
+        "label": "리포트",
+        "published": "2026-11-24"
+      },
+      {
+        "title": "엔비디아 31% 급등…증권가가 짚은 AI 투자 쟁점",
+        "url": "https://motusnova.blogspot.com/2026/11/31-ai.html",
+        "label": "AI 인텔리전스",
+        "published": "2026-11-24"
+      },
+      {
+        "title": "마이크로소프트가 공개한 Copilot 신규 기능, 엔비디아 움직임까지 읽기",
+        "url": "https://motusnova.blogspot.com/2026/11/copilot.html",
+        "label": "AI 인텔리전스",
+        "published": "2026-11-18"
+      },
+      {
+        "title": "엔비디아 5.5% 급락…증권가가 짚은 AI 투자 쟁점",
+        "url": "https://motusnova.blogspot.com/2026/11/55-ai.html",
+        "label": "AI 인텔리전스",
+        "published": "2026-11-11"
+      }
+    ],
+    "heroImage": {
+      "url": "https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/operations/2026-11-25/ai/hero-991c3aecf6ec.png",
+      "alt": "AI 인텔리전스 2026년 11월 25일: 엔비디아 5.9% 급락…증권가가 짚은 AI 투자 쟁점",
+      "width": 1200,
+      "height": 630
+    }
+  }
+}
