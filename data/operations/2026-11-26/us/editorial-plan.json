@@ -1,0 +1,11 @@
+{
+  "category": "US_MARKET",
+  "operationDate": "2026-11-26",
+  "observedDate": "2026-11-25",
+  "state": "AUTO_POLICY_CANDIDATE",
+  "searchDemandMayOverride": false,
+  "articleFingerprint": "sha256:a6f1cc9ec4621b3dca922b2cc1b374b74455ebdc8fb9b726965c43ecd3743e6e",
+  "commerce": {
+    "enabled": false
+  }
+}
