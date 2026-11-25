@@ -2,11 +2,11 @@
   "mode": "LIVE",
   "sourceMode": "internal",
   "date": "2026-11-26",
-  "observedDate": null,
+  "observedDate": "2026-11-25",
   "category": "KOREA_MARKET",
-  "state": "HOLD",
-  "reasonCode": "YAHOO_FINANCE_KOSDAQ_ROW_MISSING",
-  "verification": "FAILED",
+  "state": "LIVE_READY",
+  "reasonCode": null,
+  "verification": "VERIFIED",
   "publishCallCount": 0,
   "commerce": {
     "enabled": false

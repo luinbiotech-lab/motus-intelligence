@@ -1,10 +1,74 @@
 {
-  "state": "HOLD",
-  "reasonCode": "YAHOO_FINANCE_KOSDAQ_ROW_MISSING",
-  "reasonCodes": [
-    "YAHOO_FINANCE_KOSDAQ_ROW_MISSING"
+  "gate": {
+    "state": "AUTO_PUBLISH_READY",
+    "reasons": [],
+    "approval": "AUTO_POLICY_APPROVAL",
+    "checkedAt": "2026-11-25T09:56:35.180Z"
+  },
+  "searchRegistration": {
+    "publicationId": "motus-live-2026-11-26:korea",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/11/11-25-616-469751-1-117.html",
+    "registeredAt": "2026-11-25T18:56:41+09:00",
+    "trigger": "PUBLICATION_PUBLISHED",
+    "googleInspectionState": "QUEUED",
+    "naverDiscoveryState": "PENDING",
+    "visibility": {
+      "publicationId": "motus-live-2026-11-26:korea",
+      "publicPostUrl": "https://motusnova.blogspot.com/2026/11/11-25-616-469751-1-117.html",
+      "google": {
+        "discovered": null,
+        "indexed": null,
+        "lastCrawl": null,
+        "coverageState": null,
+        "inspectionAt": null
+      },
+      "naver": {
+        "discovered": null,
+        "indexed": null,
+        "collectionState": null,
+        "inspectionAt": null
+      },
+      "sitemapIncluded": null,
+      "rssIncluded": null
+    }
+  },
+  "libraryRegistration": {
+    "idempotencyKey": "library:motus-live-2026-11-26:korea|https://motusnova.blogspot.com/2026/11/11-25-616-469751-1-117.html"
+  },
+  "weeklyFeed": {
+    "idempotencyKey": "weekly:motus-live-2026-11-26:korea"
+  },
+  "pdfCandidate": {
+    "idempotencyKey": "pdf:motus-live-2026-11-26:korea:sha256:cce1b23a9a4968d3dd67620383969d7943f24b0ecd36b94c087a3aaf15c8a16d",
+    "visibility": "PRIVATE"
+  },
+  "audit": [
+    {
+      "at": "2026-11-25T09:56:35.180Z",
+      "event": "AUTO_PUBLISH_STATIC_GATE",
+      "detail": "AUTO_PUBLISH_READY"
+    },
+    {
+      "at": "2026-11-25T09:56:35.180Z",
+      "event": "REMOTE_DUPLICATE_CHECK",
+      "detail": "PASS"
+    },
+    {
+      "at": "2026-11-25T09:56:35.180Z",
+      "event": "FINAL_REMOTE_DUPLICATE_CHECK",
+      "detail": "PASS"
+    },
+    {
+      "at": "2026-11-25T18:56:41+09:00",
+      "event": "PUBLISHED",
+      "detail": "AUTO_POLICY_APPROVAL"
+    }
   ],
-  "reason": "YAHOO_FINANCE_KOSDAQ_ROW_MISSING",
-  "insertCallCount": 0,
-  "publishCallCount": 0
+  "state": "PUBLISHED",
+  "draftPostId": "5102500328258443720",
+  "publicPostUrl": "https://motusnova.blogspot.com/2026/11/11-25-616-469751-1-117.html",
+  "publishedAt": "2026-11-25T18:56:41+09:00",
+  "insertCallCount": 1,
+  "publishCallCount": 1,
+  "error": null
 }
