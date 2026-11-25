@@ -1,40 +1,40 @@
 {
-  "updatedAt": "2026-11-21T01:44:50.291Z",
+  "updatedAt": "2026-11-25T03:44:11.933Z",
   "items": [
     {
-      "postId": "240289543400332274",
-      "url": "https://motusnova.blogspot.com/2026/11/20-33.html",
-      "title": "[주간 증시] 나스닥 주간 2.0% 하락·코스피 3.3% 상승…다음 주 미국 중간선거·고용보고서 주목",
+      "postId": "5630041542994590221",
+      "url": "https://motusnova.blogspot.com/2026/11/3-amd-11.html",
+      "title": "뉴욕증시 마감, 3대 지수 혼조…AMD 11% 급등",
+      "labels": [
+        "미국증시"
+      ],
+      "originalSha256": "sha256:9e930d8aa37dd9d626b9260ab1409c227f94bb35de194c484c86b3de0804811c",
+      "proposedSha256": "sha256:6011bd2167fbdc3ff897d0c60b21060645348511f5b2116fd0ef929370b25a7e",
+      "image": "https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/daily-report/backfill/img/hero-1a4fce164a6f.png",
+      "relatedCount": 0
+    },
+    {
+      "postId": "8927180619845222128",
+      "url": "https://motusnova.blogspot.com/2026/11/34-117-cpippi.html",
+      "title": "[주간 증시] 나스닥 주간 3.4% 하락·코스피 11.7% 하락…다음 주 미국 CPI·PPI 주목",
       "labels": [
         "주간 증시"
       ],
-      "originalSha256": "sha256:32c6ea0530aad3b3ab5bf942bcf750b0130f08bec9eb358ae38e65d4588e8010",
-      "proposedSha256": "sha256:7194e8b25769b93f7aa71b5ad2e2dd43f8834e806196627328eb21e8ae357283",
+      "originalSha256": "sha256:8e1e43874d3f239fb38cdfd7ccde325f211e14d4fa2a195f7ca21b743ca1040d",
+      "proposedSha256": "sha256:e9e4232c6742f2475d2e5f07991402660f39c80ae2c7064840b6b25072c3966a",
       "image": null,
       "relatedCount": 5
     },
     {
-      "postId": "3724306994735729668",
-      "url": "https://motusnova.blogspot.com/2026/11/3-58.html",
-      "title": "뉴욕증시 3대 지수 혼조…오라클 5.8% 급등",
+      "postId": "5347584718397795647",
+      "url": "https://motusnova.blogspot.com/2026/11/2026-11-9-ai.html",
+      "title": "[데일리 리포트] 2026년 11월 9일 국내 증시·AI 핵심 정리",
       "labels": [
-        "미국증시"
+        "리포트"
       ],
-      "originalSha256": "sha256:aedcdedd401916773969da9c015e4eb7d9b9f71502233048cea6f1090d610e3e",
-      "proposedSha256": "sha256:c0699830210cf98a5cd6ad878c784c5cc8af04b6c2c6952c577c9cfe0bf2f650",
-      "image": "https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/daily-report/backfill/img/hero-222fc6a25096.png",
-      "relatedCount": 5
-    },
-    {
-      "postId": "1742453031811244766",
-      "url": "https://motusnova.blogspot.com/2026/11/359-5648-1-31.html",
-      "title": "코스피 3.59% 급락해 5,648…검색 1위 삼성전자 3.1% 하락",
-      "labels": [
-        "국내증시"
-      ],
-      "originalSha256": "sha256:45b71cd0eddd2b5b7bf30d64a8571bed060b2ee7b468ae1b2dbe3b02c1e24981",
-      "proposedSha256": "sha256:4cefd321cfbc2a10a572c31f258d0dd91566365d8b352cf6806535b742069207",
-      "image": "https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/daily-report/backfill/img/hero-01e50756c25c.png",
+      "originalSha256": "sha256:16ee94221df423c15bffa3a70e287f6930fe95d9b1944fa5ceefa75827f39cc1",
+      "proposedSha256": "sha256:c1e1f80cebfe0bb7f3032ddda9e8784fb8e1692e64b77d983566ccfa15362270",
+      "image": null,
       "relatedCount": 5
     }
   ]
