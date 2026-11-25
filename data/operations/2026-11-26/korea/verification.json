@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "1.1",
+  "category": "KOREA_MARKET",
+  "operationDate": "2026-11-26",
+  "observedDate": "2026-11-26",
+  "sourceMode": "internal",
+  "verification": "FAILED",
+  "unresolvedConflicts": [
+    "YAHOO_FINANCE_KOSDAQ_ROW_MISSING"
+  ],
+  "provenancePass": false,
+  "sourceDiversityPass": false,
+  "sourceLinksPass": false,
+  "mobilePass": false,
+  "editorialQualityPass": false,
+  "leakagePass": true,
+  "duplicateCheck": "PENDING_REMOTE",
+  "duplicateUncertainty": true,
+  "articleFingerprint": "",
+  "commerceEnabled": false,
+  "verifiedAt": "2026-11-25T08:12:23.560Z",
+  "expiresAt": "2026-11-25T09:42:23.560Z",
+  "sourceAuditIds": [
+    "naver:kospi:history",
+    "naver:kosdaq:history",
+    "naver:usd-krw",
+    "naver:flows",
+    "naver:mover",
+    "yahoo-finance:kospi:query1.finance.yahoo.com"
+  ],
+  "sourceAuditFingerprint": "sha256:8423a73f9ddc8a212ecbc72b647e9e20ca6c336d194f585e0c8767bf97edfbfd",
+  "crossVerificationFingerprint": "sha256:e663a3afc8fb11dfda26e675d6893411b9fb2f6d3d953ad46192c72d70c2cf1c",
+  "crossVerification": {
+    "schemaVersion": "1.0",
+    "category": "KOREA_MARKET",
+    "observedDate": "2026-11-25",
+    "primarySource": {
+      "provider": "Naver Finance",
+      "domain": "naver.com",
+      "urls": [
+        "https://m.stock.naver.com/api/index/KOSPI/price?pageSize=10&page=1",
+        "https://m.stock.naver.com/api/index/KOSDAQ/price?pageSize=10&page=1"
+      ]
+    },
+    "independentSource": {
+      "providers": [
+        "YAHOO_FINANCE"
+      ],
+      "domains": [
+        "yahoo.com"
+      ],
+      "urls": [
+        "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?period1=1795392000&period2=1795824000&interval=1d"
+      ]
+    },
+    "comparedFields": [
+      {
+        "field": "KOSPI",
+        "primaryValue": 4697.51,
+        "independentValue": 4697.509765625,
+        "difference": 0.00023437500021827873,
+        "tolerance": 0.05,
+        "result": "PASS",
+        "primarySourceUrl": "https://m.stock.naver.com/api/index/KOSPI/price?pageSize=10&page=1",
+        "independentSourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?period1=1795392000&period2=1795824000&interval=1d",
+        "metricBasis": "SESSION_CLOSE"
+      }
+    ],
+    "tolerance": {
+      "KOSPI": 0.05,
+      "KOSDAQ": 0.05,
+      "USD_KRW": 2
+    },
+    "comparisonResult": "FAIL",
+    "sourceDiversityPass": true,
+    "verification": "REVIEW_REQUIRED",
+    "reasonCodes": [
+      "YAHOO_FINANCE_KOSDAQ_ROW_MISSING",
+      "KOREA_OFFICIAL_INDEX_COMPARISON_INCOMPLETE"
+    ],
+    "verifiedAt": "2026-11-25T08:12:23.560Z",
+    "officialPhase": "PRE_PUBLICATION",
+    "reconciliation": {
+      "status": "NOT_REQUIRED",
+      "officialObservedDates": [
+        "2026-11-25"
+      ]
+    }
+  }
+}
