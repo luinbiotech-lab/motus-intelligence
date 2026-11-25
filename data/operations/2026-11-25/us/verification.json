@@ -14,10 +14,10 @@
   "leakagePass": true,
   "duplicateCheck": "PENDING_REMOTE",
   "duplicateUncertainty": true,
-  "articleFingerprint": "sha256:d1df07fe6b424fd6e2cf6b946d5e1344f10b37a2b6d792f857b65684f1600caf",
+  "articleFingerprint": "sha256:f746ac422c2a7ed182861ff91baff27649659f1fc6f845cc7b5feb2d2b262942",
   "commerceEnabled": false,
-  "verifiedAt": "2026-11-25T05:41:23.372Z",
-  "expiresAt": "2026-11-25T07:11:23.372Z",
+  "verifiedAt": "2026-11-25T10:26:56.276Z",
+  "expiresAt": "2026-11-25T11:56:56.276Z",
   "sourceAuditIds": [
     "calendar:nyse",
     "deep:consensus:list:company",
@@ -51,14 +51,14 @@
     "market-research:Bloomberg Markets",
     "market-research:CNBC Investing",
     "market-research:Goldman Sachs",
-    "market-research:article:https://www.bloomberg.com/news/articles/2026-11-24/latest-oil-market-news-and-analysis-for-nov-25",
-    "market-research:article:https://www.bloomberg.com/news/articles/2026-11-25/indian-stocks-extend-world-beating-run-as-ai-selloff-resumes",
+    "market-research:article:https://www.bloomberg.com/news/articles/2026-11-24/asian-stocks-to-slide-as-ai-trade-doubts-resurface-markets-wrap",
+    "market-research:article:https://www.bloomberg.com/news/articles/2026-11-25/deutsche-bank-is-among-biggest-s-p-500-bulls-with-9-000-target",
     "market-research:article:https://www.cnbc.com/2026/11/24/kalshi-perps-volume-prediction-markets.html",
     "market-research:article:https://www.cnbc.com/2026/11/24/nvidia-jensen-huang-ai-credit-markets.html",
     "treasury:10y:2026",
     "yahoo-us:sp500"
   ],
-  "sourceAuditFingerprint": "sha256:ba9cf1913faf42d0560bc9c810f24636c8cdbf9e1965817e55e8a313f13b9ac1",
+  "sourceAuditFingerprint": "sha256:a8dc549273326b342cac1be3b7a9b3aead058144244e475c46666c2775ebfbd9",
   "crossVerificationFingerprint": null,
   "crossVerification": null
 }
