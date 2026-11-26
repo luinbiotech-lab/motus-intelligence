@@ -104,7 +104,7 @@ export function sessionDriver(briefs:BrokerBrief[],region:'US'|'KOREA',wire:Wire
 }
 const kstDay=(iso:string)=>new Date(Date.parse(iso)+9*3600000).toISOString().slice(0,10);
 /** Wire edition tags such as (종합) are not part of what the report says. */
-const wireHeadline=(title:string)=>title.replace(/\s*\((?:종합|\d+보)[^)]*\)\s*$/,'').trim();
+const wireHeadline=(title:string)=>title.replace(/^\s*\[[^\]]{1,8}\]\s*/,'').replace(/\s*\((?:종합|\d+보)[^)]*\)\s*$/,'').trim();
 const wireSource=(report:WireReport)=>({label:`${report.publisher} 「${report.title}」 (${koreanDateLabel(kstDay(report.publishedAt))})`,url:report.url,kind:'article' as const});
 /** Fallback core commentary: news-wire close reports, quoted with publisher and date, used only when no broker brief explains the session. */
 function wireCause(reports:WireReport[],key:string,sources:DeepComposition['sources']):{section:DeepSection;lead:string}|null{
@@ -444,26 +444,25 @@ function sentenceNaming(text:string,name:string):string|null {
   const parts=text.split(/(?<=[.。])\s+/).map(part=>part.trim()).filter(Boolean);
   return parts.find(part=>namesStock(part,name))??null;
 }
-const kstClock=(iso:string)=>new Date(Date.parse(iso)+9*3600000).toISOString().slice(11,16);
 /**
  * MO-22 (traffic analysis #97, 11/18·11/19·11/23·11/24): '주요 종목 흐름' printed +30% movers with no reason.
- * Each mover gets the collected sentence that names it (broker comment first, then a wire close report with its
- * publisher, date and KST time); a mover no collected sentence names is listed once as '원인 미확인'.
+ * Each mover gets the collected sentence that names it (broker comment first, then a wire close report); a mover no collected sentence names is left out
+ * (2026-11-22 press-style decision).
  * Nothing is inferred from a sector or theme: only a sentence that names the stock counts.
  */
 export function composeKoreaMoverComment(input:{movers:Array<{name:string;changePct:number}>;bundle:BrokerResearchBundle|null;wire?:WireReport[]}):DeepSection|null{
   const movers=input.movers.filter(item=>item.name.trim()&&Number.isFinite(item.changePct)).slice(0,5);
   if(!movers.length)return null;
   const statements=(input.bundle?.briefs??[]).flatMap(brief=>brief.statements.filter(item=>item.region==='KOREA').map(item=>({text:item.text,report:brief.report})));
-  const paragraphs:DeepParagraph[]=[],unconfirmed:string[]=[];
+  const paragraphs:DeepParagraph[]=[];
   for(const mover of movers){
     const head=`${mover.name}(${signedPct(mover.changePct)})`;
     const broker=statements.map(item=>({item,sentence:sentenceNaming(item.text,mover.name)})).find(entry=>entry.sentence&&entry.sentence.length<=200);
-    if(broker){paragraphs.push({text:`${head} 관련 증권가 시각: ${subject(broker.item.report)} ${koreanDateLabel(broker.item.report.date)} 「${broker.item.report.title}」에서 ${said([quote(broker.sentence!)])} 짚었다.`,source:reportSource(broker.item.report)});continue}
+    if(broker){paragraphs.push({text:`${head}에 대해 ${subject(broker.item.report)} 「${broker.item.report.title}」에서 ${said([quote(broker.sentence!)])} 분석했다.`,source:reportSource(broker.item.report)});continue}
     const wire=(input.wire??[]).map(report=>({report,sentence:report.sentence&&namesStock(report.sentence,mover.name)?report.sentence:namesStock(report.title,mover.name)?wireHeadline(report.title):null})).find(entry=>entry.sentence);
-    if(wire){paragraphs.push({text:`${head} 관련 통신 보도: ${josa(wire.report.publisher,'은','는')} ${koreanDateLabel(kstDay(wire.report.publishedAt))} ${kstClock(wire.report.publishedAt)} 「${wire.report.title}」에서 ${said([quote(wire.sentence!)])} 전했다.`,source:wireSource(wire.report)});continue}
-    unconfirmed.push(head);
+    if(wire){paragraphs.push({text:`${head}에 대해 ${josa(wire.report.publisher,'은','는')} ${said([quote(wire.sentence!)])} 전했다.`,source:wireSource(wire.report)});continue}
   }
-  if(unconfirmed.length)paragraphs.push({text:`종목 등락 배경: ${unconfirmed.join('·')}의 등락 이유를 직접 설명한 증권사 리포트·통신 기사 문장은 수집되지 않았다(원인 미확인).`});
+  // 2026-11-22 owner (press style): a mover with no collected sentence is left out, not labelled; no guessed reason.
+  if(!paragraphs.length)return null;
   return {key:'korea-movers-comment',placement:'early',role:'analysis',title:'종목 등락 이유',paragraphs};
 }
