@@ -1,41 +1,41 @@
 {
-  "updatedAt": "2026-11-25T03:44:11.933Z",
+  "updatedAt": "2026-11-26T03:04:43.886Z",
   "items": [
     {
-      "postId": "5630041542994590221",
-      "url": "https://motusnova.blogspot.com/2026/11/3-amd-11.html",
-      "title": "뉴욕증시 마감, 3대 지수 혼조…AMD 11% 급등",
-      "labels": [
-        "미국증시"
-      ],
-      "originalSha256": "sha256:9e930d8aa37dd9d626b9260ab1409c227f94bb35de194c484c86b3de0804811c",
-      "proposedSha256": "sha256:6011bd2167fbdc3ff897d0c60b21060645348511f5b2116fd0ef929370b25a7e",
-      "image": "https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/daily-report/backfill/img/hero-1a4fce164a6f.png",
-      "relatedCount": 0
-    },
-    {
-      "postId": "8927180619845222128",
-      "url": "https://motusnova.blogspot.com/2026/11/34-117-cpippi.html",
-      "title": "[주간 증시] 나스닥 주간 3.4% 하락·코스피 11.7% 하락…다음 주 미국 CPI·PPI 주목",
-      "labels": [
-        "주간 증시"
-      ],
-      "originalSha256": "sha256:8e1e43874d3f239fb38cdfd7ccde325f211e14d4fa2a195f7ca21b743ca1040d",
-      "proposedSha256": "sha256:e9e4232c6742f2475d2e5f07991402660f39c80ae2c7064840b6b25072c3966a",
-      "image": null,
-      "relatedCount": 5
-    },
-    {
-      "postId": "5347584718397795647",
-      "url": "https://motusnova.blogspot.com/2026/11/2026-11-9-ai.html",
-      "title": "[데일리 리포트] 2026년 11월 9일 국내 증시·AI 핵심 정리",
+      "postId": "5408418122239801516",
+      "url": "https://motusnova.blogspot.com/2026/11/2026-11-10-ai.html",
+      "title": "[데일리 리포트] 2026년 11월 10일 국내 증시·미국 증시·AI 핵심 정리",
       "labels": [
         "리포트"
       ],
-      "originalSha256": "sha256:16ee94221df423c15bffa3a70e287f6930fe95d9b1944fa5ceefa75827f39cc1",
-      "proposedSha256": "sha256:c1e1f80cebfe0bb7f3032ddda9e8784fb8e1692e64b77d983566ccfa15362270",
+      "originalSha256": "sha256:b52e2a2a7deb12fb6532ab098aff10e98f49c2c3ec0b4a14cee1e1ca6392a309",
+      "proposedSha256": "sha256:d88d6ce4dd3fe60abdbb4c42017b5b4514037f089b62e30cb734505f50b14a99",
       "image": null,
-      "relatedCount": 5
+      "relatedCount": 6
+    },
+    {
+      "postId": "276851531641962947",
+      "url": "https://motusnova.blogspot.com/2026/11/2026-11-11-ai.html",
+      "title": "[데일리 리포트] 2026년 11월 11일 국내 증시·미국 증시·AI 핵심 정리",
+      "labels": [
+        "리포트"
+      ],
+      "originalSha256": "sha256:3eb4587964107e628d025e52a96335ddb50acb97de31b8f1ec84fea558a914bd",
+      "proposedSha256": "sha256:8d95a0b932cdb1870282d256f6cddd77691464685c606349f0f31a9599ccad8e",
+      "image": null,
+      "relatedCount": 6
+    },
+    {
+      "postId": "255878027584643605",
+      "url": "https://motusnova.blogspot.com/2026/11/2026-11-12-ai.html",
+      "title": "[데일리 리포트] 2026년 11월 12일 국내 증시·미국 증시·AI 핵심 정리",
+      "labels": [
+        "리포트"
+      ],
+      "originalSha256": "sha256:aeca3a12c86ec968e925acded19330be6df865b37927493c0c463e0d27892d34",
+      "proposedSha256": "sha256:843a8593a42edd286285659740594d03dc9bc7e23ffbaa5ce3a7491f3d64e0e2",
+      "image": null,
+      "relatedCount": 6
     }
   ]
 }
