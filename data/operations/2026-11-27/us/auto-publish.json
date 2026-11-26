@@ -1,0 +1,15 @@
+{
+  "state": "SKIP",
+  "reasonCode": "ALREADY_PUBLISHED_SAME_SESSION",
+  "reasonCodes": [
+    "ALREADY_PUBLISHED_SAME_SESSION"
+  ],
+  "identity": "2026-11-27|US_MARKET",
+  "sessionDate": "2026-11-25",
+  "previousOperationDate": "2026-11-26",
+  "postId": "5071558040981645135",
+  "publicPostUrl": "https://motusnova.blogspot.com/2026/11/11-25-3-51.html",
+  "reason": "a publication for this category and session date is already recorded in the persistent ledger",
+  "insertCallCount": 0,
+  "publishCallCount": 0
+}
