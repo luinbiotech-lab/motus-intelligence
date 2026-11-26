@@ -21,7 +21,8 @@ export interface BrokerReport {kind:BrokerReportKind;date:string;title:string;br
 export interface BrokerStatement {region:'US'|'KOREA';text:string;heading:string|null}
 export interface BrokerDigest {heading:string;bullets:string[];analyst:string|null}
 export interface BrokerEvent {region:'US'|'KOREA';text:string}
-export interface BrokerBrief {report:BrokerReport;statements:BrokerStatement[];digests:BrokerDigest[];events?:BrokerEvent[]}
+/** outlooks: a brief's forward-looking Korea lines ('금일 국내 증시는 … 출발 예상'), kept apart from statements because they explain no finished session (MO-23). */
+export interface BrokerBrief {report:BrokerReport;statements:BrokerStatement[];digests:BrokerDigest[];events?:BrokerEvent[];outlooks?:BrokerStatement[]}
 export interface BrokerAudit {sourceId:string;url:string;status:'PASS'|'FAILED';count:number;error:string|null;date?:string}
 export interface BrokerResearchBundle {briefs:BrokerBrief[];company:BrokerReport[];industry:BrokerReport[];economy:BrokerReport[];audit:BrokerAudit[]}
 
@@ -209,9 +210,11 @@ export async function collectBrokerResearch(input:{sessionDate:string;operationD
     if(briefs.length>=(input.maxBriefs??8)||attempts>=(input.maxBriefs??8)*2)break;attempts++;
     let report=candidate.report;
     try{
-      let statements:BrokerStatement[]=[],digests:BrokerDigest[]=[],events:BrokerEvent[]=[];
+      let statements:BrokerStatement[]=[],digests:BrokerDigest[]=[],events:BrokerEvent[]=[],outlooks:BrokerStatement[]=[];
       const merge=(content:ReturnType<typeof extractBriefContent>,outlookFree:boolean)=>{
         statements=[...new Map([...statements,...content.statements.filter(item=>!outlookFree||!OUTLOOK.test(item.text))].map(item=>[item.region+item.text,item])).values()];
+        // MO-23: the Korea outlook lines dropped from statements are kept for the U.S. article's 국내 시장 연결 quote only.
+        if(outlookFree)outlooks=[...new Map([...outlooks,...content.statements.filter(item=>item.region==='KOREA'&&OUTLOOK.test(item.text))].map(item=>[item.text,item])).values()];
         digests=[...digests,...content.digests.filter(digest=>!digests.some(existing=>existing.heading===digest.heading))];
         events=[...new Map([...events,...content.events].map(item=>[item.text,item])).values()];
       };
@@ -237,9 +240,9 @@ export async function collectBrokerResearch(input:{sessionDate:string;operationD
         const asStatements=(digest:BrokerDigest)=>[digest.heading,...digest.bullets].map(text=>({region:'KOREA' as const,text,heading:null}));
         const mismatched=contradictsKospi(statements,close)||digests.some(digest=>contradictsKospi(asStatements(digest),close));
         // A brief describing another session must not contribute any Korean market commentary, in statements or digests.
-        if(mismatched){statements=statements.filter(item=>item.region!=='KOREA');digests=digests.filter(digest=>!/코스피|KOSPI|코스닥|KOSDAQ|국내 증시|국내증시|시황|전략|퀀틴전시/i.test([digest.heading,...digest.bullets].join(' ')))}
+        if(mismatched){statements=statements.filter(item=>item.region!=='KOREA');outlooks=[];digests=digests.filter(digest=>!/코스피|KOSPI|코스닥|KOSDAQ|국내 증시|국내증시|시황|전략|퀀틴전시/i.test([digest.heading,...digest.bullets].join(' ')))}
       }
-      briefs.push({report,statements,digests,events});
+      briefs.push({report,statements,digests,events,...(outlooks.length?{outlooks}:{})});
       audit.push({sourceId:(candidate.naver?'naver-research:'+candidate.naver.category+':':'consensus:pdf:')+(candidate.naver?candidate.naver.item.researchId:report.url.split('=').pop()),url:report.url,status:'PASS',count:statements.length+digests.length,error:null,date:report.date});
     }catch(error){audit.push({sourceId:(candidate.naver?'naver-research:'+candidate.naver.category+':'+candidate.naver.item.researchId:'consensus:pdf:'+report.url.split('=').pop()),url:report.url,status:'FAILED',count:0,error:error instanceof Error&&/^(?:CONSENSUS_HTTP_\d{3}|CONSENSUS_NOT_PDF|PDF_TEXT_UNAVAILABLE|NAVER_RESEARCH_HTTP_\d{3}|NAVER_RESEARCH_SHAPE|NAVER_RESEARCH_EMPTY)$/.test(error.message)?error.message:'BROKER_BRIEF_FAILED'})}
   }
