@@ -394,5 +394,11 @@
     "publicationId": "motus-live-2026-11-26:ai",
     "publicPostUrl": "https://motusnova.blogspot.com/2026/11/ai-ai.html",
     "publishedAt": "2026-11-26T12:34:48+09:00"
+  },
+  {
+    "idempotencyKey": "library:motus-live-2026-11-27:korea|https://motusnova.blogspot.com/2026/11/11-26-029-471121-1-05.html",
+    "publicationId": "motus-live-2026-11-27:korea",
+    "publicPostUrl": "https://motusnova.blogspot.com/2026/11/11-26-029-471121-1-05.html",
+    "publishedAt": "2026-11-26T18:41:03+09:00"
   }
 ]

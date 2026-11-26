@@ -1,9 +1,604 @@
 {
-  "schemaVersion": "1.0",
+  "publicationId": "motus-live-2026-11-27:korea",
   "category": "KOREA_MARKET",
-  "operationDate": "2026-11-27",
-  "status": "HOLD",
-  "observedDate": null,
-  "reasonCode": "YAHOO_FINANCE_KOSDAQ_ROW_MISSING",
-  "unit": null
+  "observedDate": "2026-11-26",
+  "title": "11월 26일 코스피 마감, 0.29% 올라 4,711.21…검색 1위 삼성전자 0.5% 상승",
+  "label": "국내증시",
+  "sourceCount": 23,
+  "itemCount": 10,
+  "readiness": "READY",
+  "readinessReasons": [],
+  "review": {
+    "state": "PENDING",
+    "reviewer": null,
+    "reviewedAt": null,
+    "history": []
+  },
+  "publicationState": "PREVIEW_READY",
+  "draftPostId": null,
+  "publicPostUrl": null,
+  "duplicateCount": 0,
+  "contentFingerprint": "0f65dae6e62b03f3a3e0588726468c92890504996c8c28db17638f23c6c2329c",
+  "render": {
+    "html": "<!doctype html><html lang=\"ko\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>11월 26일 코스피 마감, 0.29% 올라 4,711.21…검색 1위 삼성전자 0.5% 상승</title></head><body><article data-product=\"motus-korea-market\" data-layout=\"editorial-article-4q\" style=\"font-family:Arial,&quot;Noto Sans KR&quot;,sans-serif;color:#172033;line-height:1.78;font-size:17px;width:100%;max-width:820px;box-sizing:border-box;margin:0 auto;overflow-x:hidden;overflow-wrap:anywhere\"><header data-section=\"masthead\" style=\"width:100%;max-width:100%;box-sizing:border-box;margin:0 0 16px\"><p style=\"margin:0;font-size:12px;font-weight:800;letter-spacing:.14em;color:#a8822e\">MOTUS · 국내증시 · 2026-11-26</p><p style=\"margin:6px 0 0;font-size:15px;color:#566476\">증권사 리포트와 투자자 검색 순위로 읽는 오늘 국내증시</p></header><figure data-section=\"hero-image\" style=\"margin:0 0 18px\"><img src=\"https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/operations/2026-11-27/korea/hero-393a0ff1e848.png\" alt=\"국내증시 2026년 11월 26일: 11월 26일 코스피 마감, 0.29% 올라 4,711.21…검색 1위 삼성전자 0.5% 상승\" width=\"1200\" height=\"630\" style=\"display:block;width:100%;height:auto;border:0;border-radius:14px\"></figure>\n<p data-section=\"editorial-lead\" style=\"margin:0 0 24px;font-size:18px;line-height:1.82;color:#172033\">2026-11-26 오늘 국내증시는 KOSPI 4,711.21, KOSDAQ 655.71을 기록하며 마감했다. 마감 직후 지수 흐름과 환율, 확인 가능한 보조 신호를 함께 놓고 오늘 장의 성격을 짚는다.</p>\n<div data-section=\"key-points\" style=\"background:#f7f9fc;border:1px solid #e3e8ef;border-radius:14px;padding:16px 18px 8px;margin:0 0 8px\"><div style=\"font-size:12px;font-weight:800;color:#a8822e;letter-spacing:.12em;margin:0 0 10px\">오늘의 핵심</div><p style=\"margin:0 0 10px;font-size:16px;line-height:1.65;display:flex;gap:10px\"><span style=\"flex:0 0 22px;height:22px;border-radius:50%;background:#0b2545;color:#fff;font-size:12px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;margin-top:2px\">1</span><span>지수: KOSPI 4,711.21, KOSDAQ 655.71.</span></p><p style=\"margin:0 0 10px;font-size:16px;line-height:1.65;display:flex;gap:10px\"><span style=\"flex:0 0 22px;height:22px;border-radius:50%;background:#0b2545;color:#fff;font-size:12px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;margin-top:2px\">2</span><span>수급: 개인 <b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">-10,698억원</b>, 외국인 <b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">-903억원</b>, 기관 <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+7,530억원</b>.</span></p><p style=\"margin:0 0 10px;font-size:16px;line-height:1.65;display:flex;gap:10px\"><span style=\"flex:0 0 22px;height:22px;border-radius:50%;background:#0b2545;color:#fff;font-size:12px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;margin-top:2px\">3</span><span>검색 1위 삼성전자 <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+0.47%</b>.</span></p></div>\n<section data-section=\"korea-analysis\" style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><div style=\"margin:0 0 14px\"><span style=\"display:block;width:28px;height:3px;background:#a8822e;margin:0 0 9px;border-radius:2px\"></span><h2 style=\"margin:0;font-size:clamp(19px,4.8vw,22px);line-height:1.35;font-weight:800;color:#0b2545;letter-spacing:-.01em;word-break:keep-all\">MOTUS 분석</h2></div><div data-visualization=\"motus-analysis\" style=\"background:#fbf8f1;border:1px solid #e6d2a0;border-top:3px solid #a8822e;border-radius:14px;padding:18px 18px 6px;overflow:hidden\"><p style=\"margin:0 0 13px\">코스피는 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">0.29%</b> 오르며 4,711.21로 마감했다. 최근 10거래일 고점(5,290.53, 2026-11-13)보다 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">10.95%</b> 낮아, 흔히 '조정'이라 부르는 고점 대비 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">10%</b> 이상 하락 구간에 들어섰다. 최근 5거래일 기준으로는 아직 하락 구간이다.</p><p style=\"margin:0 0 13px\">매도 쪽은 개인(<b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">−1조 698억원</b>)·외국인(<b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">−903억원</b>), 매수 쪽은 기관(<b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+7,530억원</b>)이었다. 가장 크게 움직인 개인은 지수와 반대로 팔았고, 지수는 매수 쪽(기관)을 따라 올랐다(추정).</p><p style=\"margin:0 0 13px\">다음 거래일에는 외국인 매도가 멈추는지가 이 상승이 이어질지를 가르는 첫 확인점이다.</p></div></section>\n<section data-section=\"korea-causes\" style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><div style=\"margin:0 0 14px\"><span style=\"display:block;width:28px;height:3px;background:#3b5b7a;margin:0 0 9px;border-radius:2px\"></span><h2 style=\"margin:0;font-size:clamp(19px,4.8vw,22px);line-height:1.35;font-weight:800;color:#0b2545;letter-spacing:-.01em;word-break:keep-all\">상승·하락 요인</h2></div><p style=\"margin:0 0 12px;color:#566476;font-size:15px\">이 세션을 다룬 증권사 아침 리포트가 아직 없어 통신사 마감 기사를 인용했다.</p><div style=\"border:1px solid #dbe2ea;border-left:4px solid #3b5b7a;padding:11px 14px;margin:0 0 10px\">연합뉴스는 11월 26일 마감 기사 「'전강후약' 코스피, <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">0.29%</b> 상승…전날 급락후 간신히 반등(종합)」에서 “기업의 자사주 매입이 반영되는 기타법인은 4천66억원 순매수했다”라고 전했다. <a href=\"https://www.yna.co.kr/view/AKR20261126145451008\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[기사 원문]</a></div><div style=\"border:1px solid #dbe2ea;border-left:4px solid #3b5b7a;padding:11px 14px;margin:0 0 10px\">연합인포맥스는 11월 26일 마감 기사 「[증시-마감] 저가 매수에 코스피 4,700선 회복…4,711.21 마감」에서 “코스피가 저가 매수세 속에서 전일의 급락분을 일부 되돌리고 4,700선을 회복했다”라고 전했다. <a href=\"https://news.einfomax.co.kr/news/articleView.html?idxno=4446806\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[기사 원문]</a></div></section>\n<section data-section=\"korea-stocks\" style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><div style=\"margin:0 0 14px\"><span style=\"display:block;width:28px;height:3px;background:#0b2545;margin:0 0 9px;border-radius:2px\"></span><h2 style=\"margin:0;font-size:clamp(19px,4.8vw,22px);line-height:1.35;font-weight:800;color:#0b2545;letter-spacing:-.01em;word-break:keep-all\">업종과 종목: 투자자 검색 상위</h2></div><p style=\"margin:0 0 12px;color:#566476;font-size:15px\">네이버페이 증권 검색 상위 종목(ETF·ETN·레버리지 제외)의 전일 종가 기준 등락과 최근 증권사 리포트다. 검색 순위는 관심도 지표이며 주가 변동의 원인이 아니다.</p><div data-visualization=\"change-bars\" style=\"border:1px solid #dbe2ea;padding:10px 10px 4px;margin:0 0 12px\"><svg viewBox=\"0 0 360 152\" width=\"100%\" style=\"display:block;max-width:100%\" role=\"img\"><line x1=\"244\" x2=\"244\" y1=\"2\" y2=\"150\" stroke=\"#9aa6b2\" stroke-width=\"1\"></line><text x=\"122\" y=\"19\" font-size=\"12\" text-anchor=\"end\" fill=\"#16202e\">삼성전자</text><rect x=\"244.0\" y=\"8\" width=\"2.6\" height=\"14\" fill=\"#c62828\"></rect><text x=\"250.6\" y=\"19\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"start\" fill=\"#c62828\">+0.47%</text><text x=\"122\" y=\"43\" font-size=\"12\" text-anchor=\"end\" fill=\"#16202e\">SK하이닉스</text><rect x=\"244.0\" y=\"32\" width=\"15.2\" height=\"14\" fill=\"#c62828\"></rect><text x=\"263.2\" y=\"43\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"start\" fill=\"#c62828\">+2.72%</text><text x=\"122\" y=\"67\" font-size=\"12\" text-anchor=\"end\" fill=\"#16202e\">에이피알</text><rect x=\"244.0\" y=\"56\" width=\"62.0\" height=\"14\" fill=\"#c62828\"></rect><text x=\"310.0\" y=\"67\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"start\" fill=\"#c62828\">+11.13%</text><text x=\"122\" y=\"91\" font-size=\"12\" text-anchor=\"end\" fill=\"#16202e\">삼성전기</text><rect x=\"244.0\" y=\"80\" width=\"21.4\" height=\"14\" fill=\"#c62828\"></rect><text x=\"269.4\" y=\"91\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"start\" fill=\"#c62828\">+3.84%</text><text x=\"122\" y=\"115\" font-size=\"12\" text-anchor=\"end\" fill=\"#16202e\">현대차</text><rect x=\"223.3\" y=\"104\" width=\"20.7\" height=\"14\" fill=\"#1f5fbf\"></rect><text x=\"219.3\" y=\"115\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"end\" fill=\"#1f5fbf\">-3.71%</text><text x=\"122\" y=\"139\" font-size=\"12\" text-anchor=\"end\" fill=\"#16202e\">안랩</text><rect x=\"244.0\" y=\"128\" width=\"11.3\" height=\"14\" fill=\"#c62828\"></rect><text x=\"259.3\" y=\"139\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"start\" fill=\"#c62828\">+2.03%</text></svg></div><p style=\"margin:0 0 13px\">MOTUS 정리: 투자자 검색 상위 6종목 가운데 5종목이 오르고 1종목이 내렸다. 가장 강한 종목은 에이피알(<b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+11.13%</b>), 가장 약한 종목은 현대차(<b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">-3.71%</b>)로 등락 폭 차이가 14.84%p였다. 같은 날 코스피는 +0.29%였고, 코스피보다 강했던 종목은 5종목이다.</p><p style=\"margin:0 0 13px\">검색 3위 에이피알은 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">324,500원</b>으로 <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">11.13%</b> 급등했다(코스피 대비 <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+10.84%p</b>). DS투자증권은 11월 26일 「지금은 매수 기회」 리포트에서 투자의견 매수, 목표주가 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">530,000원</b>을 제시했다. <a href=\"https://stock.pstatic.net/stock-research/company/66/20261126_company_364301000.pdf\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></p><p style=\"margin:0 0 13px\">검색 5위 현대차는 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">259,500원</b>으로 <b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">3.71%</b> 하락했다(코스피 대비 <b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">-4.00%p</b>). SK증권 권순우 연구원은 11월 25일 「공급 회복에 신차 사이클이 더해진다」 리포트에서 투자의견 매수, 목표주가 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">370,000원</b>을 제시했다. <a href=\"https://consensus.hankyung.com/analysis/downpdf?report_idx=654543\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere;font-size:14px\">[리포트 원문]</a></p><p style=\"margin:0 0 13px\">이 밖의 검색 상위 종목은 해당 세션을 다룬 증권사 코멘트·리포트가 확인되지 않아 종가와 등락만 정리했다: 삼성전자(1위, <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">171,500원</b>, <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+0.47%</b>), SK하이닉스(2위, <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">1,058,000원</b>, <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+2.72%</b>), 삼성전기(4위, <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">784,000원</b>, <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+3.84%</b>), 안랩(6위, <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">161,100원</b>, <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+2.03%</b>). 코스피(<b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+0.29%</b>)와 비교하면 삼성전자·SK하이닉스·삼성전기·안랩이 지수보다 강했고 지수를 밑돈 종목은 없었다.</p></section>\n<section data-section=\"korea-indexes\" style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><div style=\"margin:0 0 14px\"><span style=\"display:block;width:28px;height:3px;background:#0b2545;margin:0 0 9px;border-radius:2px\"></span><h2 style=\"margin:0;font-size:clamp(19px,4.8vw,22px);line-height:1.35;font-weight:800;color:#0b2545;letter-spacing:-.01em;word-break:keep-all\">코스피·코스닥·환율</h2></div><div style=\"display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,104px),1fr));gap:8px;margin:0 0 12px\"><div style=\"background:#f7f9fc;border:1px solid #e3e8ef;border-radius:12px;padding:11px 12px;min-width:0\"><div style=\"font-size:12px;color:#566476;word-break:keep-all;line-height:1.4\">KOSPI</div><div style=\"font-size:clamp(17px,4.6vw,22px);font-weight:800;color:#16202e;white-space:nowrap;letter-spacing:-.02em;margin:2px 0 6px\">4,711.21</div><span style=\"display:inline-block;font-size:13px;font-weight:800;color:#c62828;background:#fdecec;border-radius:999px;padding:2px 9px;white-space:nowrap\">+0.29%</span></div><div style=\"background:#f7f9fc;border:1px solid #e3e8ef;border-radius:12px;padding:11px 12px;min-width:0\"><div style=\"font-size:12px;color:#566476;word-break:keep-all;line-height:1.4\">KOSDAQ</div><div style=\"font-size:clamp(17px,4.6vw,22px);font-weight:800;color:#16202e;white-space:nowrap;letter-spacing:-.02em;margin:2px 0 6px\">655.71</div><span style=\"display:inline-block;font-size:13px;font-weight:800;color:#c62828;background:#fdecec;border-radius:999px;padding:2px 9px;white-space:nowrap\">+0.78%</span></div><div style=\"background:#f7f9fc;border:1px solid #e3e8ef;border-radius:12px;padding:11px 12px;min-width:0\"><div style=\"font-size:12px;color:#566476;word-break:keep-all;line-height:1.4\">원·달러 환율(기사 작성 시점)</div><div style=\"font-size:clamp(17px,4.6vw,22px);font-weight:800;color:#16202e;white-space:nowrap;letter-spacing:-.02em;margin:2px 0 6px\">1,343.8</div></div></div><p style=\"margin:0 0 13px\">코스피는 4,711.21로 마감해 전 거래일보다 <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">0.29%</b> 상승했다. 최근 5거래일 기준으로는 <b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">8.30%</b> 하락했다. 최근 10거래일 종가 고점(5,290.53, 2026-11-13)보다 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">10.95%</b> 낮다.</p><p style=\"margin:0 0 13px\">코스닥은 655.71로 마감해 전 거래일보다 <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">0.78%</b> 상승했다. 최근 5거래일 기준으로는 <b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">4.25%</b> 하락했다. 최근 10거래일 종가 고점(699.66, 2026-11-13)보다 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">6.28%</b> 낮다.</p><p style=\"margin:0 0 13px\">원·달러 환율은 기사 작성 시점 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">1,343.8원</b>으로 전일보다 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">1.7원</b>(<b style=\"color:#16202e;font-weight:800;white-space:nowrap\">0.13%</b>) 내렸다(원화 강세).</p><p style=\"margin:0 0 13px\">환율 배경: 이날 환율이 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">1.7원</b> 내린 이유를 직접 설명한 증권사 리포트·통신 기사 문장은 수집되지 않았다(원인 미확인).</p><p style=\"margin:0 0 13px\">MOTUS 해석(추정): 외국인 순매도(외국인 <b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">-903억원</b>)와 달리 원화가 강해져, 이날 환율은 국내 주식 수급보다 다른 요인의 영향이 컸던 것으로 읽힌다.</p><p style=\"margin:0 0 13px\">다음 거래일 관전 포인트(전망 아님): 환율이 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">1,350원</b>을 넘어서는지(<b style=\"color:#16202e;font-weight:800;white-space:nowrap\">6.2원</b> 위), <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">1,340원</b> 아래로 내려가는지(<b style=\"color:#16202e;font-weight:800;white-space:nowrap\">3.8원</b> 아래)가 확인 지점이다.</p></section>\n<section data-section=\"korea-flows\" style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><div style=\"margin:0 0 14px\"><span style=\"display:block;width:28px;height:3px;background:#0b2545;margin:0 0 9px;border-radius:2px\"></span><h2 style=\"margin:0;font-size:clamp(19px,4.8vw,22px);line-height:1.35;font-weight:800;color:#0b2545;letter-spacing:-.01em;word-break:keep-all\">투자자별 순매수</h2></div><div data-visualization=\"korea-investor-flow\" style=\"width:100%;max-width:100%;box-sizing:border-box\"><div style=\"margin:0 0 12px;width:100%;max-width:100%;box-sizing:border-box\"><div style=\"display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:0 0 5px\"><strong>개인</strong><span style=\"color:#1565c0;font-weight:800\">-10,698억원</span></div><div style=\"position:relative;height:10px;background:#eef2f6;border-radius:999px;overflow:hidden\"><span style=\"position:absolute;left:50%;top:0;bottom:0;width:1px;background:#9aa6b2\"></span><span style=\"position:absolute;right:50%;top:0;height:100%;width:50%;background:#1565c0;border-radius:999px\"></span></div></div><div style=\"margin:0 0 12px;width:100%;max-width:100%;box-sizing:border-box\"><div style=\"display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:0 0 5px\"><strong>외국인</strong><span style=\"color:#1565c0;font-weight:800\">-903억원</span></div><div style=\"position:relative;height:10px;background:#eef2f6;border-radius:999px;overflow:hidden\"><span style=\"position:absolute;left:50%;top:0;bottom:0;width:1px;background:#9aa6b2\"></span><span style=\"position:absolute;right:50%;top:0;height:100%;width:4%;background:#1565c0;border-radius:999px\"></span></div></div><div style=\"margin:0 0 12px;width:100%;max-width:100%;box-sizing:border-box\"><div style=\"display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:0 0 5px\"><strong>기관</strong><span style=\"color:#c62828;font-weight:800\">+7,530억원</span></div><div style=\"position:relative;height:10px;background:#eef2f6;border-radius:999px;overflow:hidden\"><span style=\"position:absolute;left:50%;top:0;bottom:0;width:1px;background:#9aa6b2\"></span><span style=\"position:absolute;left:50%;top:0;height:100%;width:35%;background:#c62828;border-radius:999px\"></span></div></div></div><p style=\"margin:0 0 13px\">투자자별로는 개인의 순매도(<b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">-10,698억원</b>) 규모가 가장 컸고, 외국인(<b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">-903억원</b>)·기관(<b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+7,530억원</b>)이 뒤를 이었다.</p><p style=\"margin:0 0 13px\">MOTUS 해석(추정): 코스피가 <b style=\"color:#c62828;font-weight:800;white-space:nowrap\">0.29%</b> 오른 날 외국인은 순매도(<b style=\"color:#1f5fbf;font-weight:800;white-space:nowrap\">-903억원</b>)해, 지수 방향과 외국인 수급이 엇갈렸다. 지수를 움직인 주체가 외국인 밖에 있었을 가능성이 있다.</p></section>\n<section data-section=\"korea-movers\" style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><div style=\"margin:0 0 14px\"><span style=\"display:block;width:28px;height:3px;background:#0b2545;margin:0 0 9px;border-radius:2px\"></span><h2 style=\"margin:0;font-size:clamp(19px,4.8vw,22px);line-height:1.35;font-weight:800;color:#0b2545;letter-spacing:-.01em;word-break:keep-all\">주요 종목 흐름</h2></div><div data-visualization=\"change-bars\" style=\"border:1px solid #dbe2ea;padding:10px 10px 4px;margin:0 0 12px\"><svg viewBox=\"0 0 360 104\" width=\"100%\" style=\"display:block;max-width:100%\" role=\"img\"><line x1=\"134\" x2=\"134\" y1=\"2\" y2=\"102\" stroke=\"#9aa6b2\" stroke-width=\"1\"></line><text x=\"122\" y=\"19\" font-size=\"12\" text-anchor=\"end\" fill=\"#16202e\">동양고속</text><rect x=\"134.0\" y=\"8\" width=\"172.0\" height=\"14\" fill=\"#c62828\"></rect><text x=\"310.0\" y=\"19\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"start\" fill=\"#c62828\">+29.96%</text><text x=\"122\" y=\"43\" font-size=\"12\" text-anchor=\"end\" fill=\"#16202e\">천일고속</text><rect x=\"134.0\" y=\"32\" width=\"172.0\" height=\"14\" fill=\"#c62828\"></rect><text x=\"310.0\" y=\"43\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"start\" fill=\"#c62828\">+29.96%</text><text x=\"122\" y=\"67\" font-size=\"12\" text-anchor=\"end\" fill=\"#16202e\">체시스</text><rect x=\"134.0\" y=\"56\" width=\"159.7\" height=\"14\" fill=\"#c62828\"></rect><text x=\"297.7\" y=\"67\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"start\" fill=\"#c62828\">+27.82%</text><text x=\"122\" y=\"91\" font-size=\"12\" text-anchor=\"end\" fill=\"#16202e\">영흥</text><rect x=\"134.0\" y=\"80\" width=\"128.0\" height=\"14\" fill=\"#c62828\"></rect><text x=\"266.0\" y=\"91\" font-size=\"11.5\" font-weight=\"700\" text-anchor=\"start\" fill=\"#c62828\">+22.30%</text></svg></div></section>\n<section style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><div style=\"margin:0 0 14px\"><span style=\"display:block;width:28px;height:3px;background:#a8822e;margin:0 0 9px;border-radius:2px\"></span><h2 style=\"margin:0;font-size:clamp(19px,4.8vw,22px);line-height:1.35;font-weight:800;color:#0b2545;letter-spacing:-.01em;word-break:keep-all\">증권사 공개 리서치 자료</h2></div><p style=\"margin:0 0 12px\">증권사가 공식 사이트에 최근 일주일 안에 공개한 자료의 제목과 발행일이다.</p><ul style=\"margin:0;padding:0;list-style:none;border-top:1px solid #dbe2ea\"><li style=\"margin:0;padding:12px 2px;border-bottom:1px solid #dbe2ea\"><span style=\"display:block;color:#566476;font-size:12px;font-weight:700;margin:0 0 3px\">KB증권 리서치 · 2026-11-19</span><div><a href=\"https://rc.kbsec.com/detailView.able?documentid=20261119125620847K\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0b2545;text-decoration:none;font-weight:700;line-height:1.5;overflow-wrap:anywhere\">KB Core View · 2027년 자산배분 전략 ↗</a></div><p style=\"margin:6px 0 0\">공식 공개 요약: 글로벌 자산배분: Gravity's Rabbit Hole / 경제: 모래주머니를 차고 달리는 법</p></li></ul></section><section style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><div style=\"margin:0 0 14px\"><span style=\"display:block;width:28px;height:3px;background:#3b5b7a;margin:0 0 9px;border-radius:2px\"></span><h2 style=\"margin:0;font-size:clamp(19px,4.8vw,22px);line-height:1.35;font-weight:800;color:#0b2545;letter-spacing:-.01em;word-break:keep-all\">금융 전문 언론 원문</h2></div><p style=\"margin:0 0 12px\">해외·국내 금융 매체가 같은 시기에 보도한 시장 기사다. 해외 기사는 원문 제목을 그대로 적었다.</p><ul style=\"margin:0;padding:0;list-style:none;border-top:1px solid #dbe2ea\"><li style=\"margin:0;padding:12px 2px;border-bottom:1px solid #dbe2ea\"><span style=\"display:block;color:#566476;font-size:12px;font-weight:700;margin:0 0 3px\">한국경제 증권 · 2026-11-26</span><div><a href=\"https://www.hankyung.com/article/202611262896i\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0b2545;text-decoration:none;font-weight:700;line-height:1.5;overflow-wrap:anywhere\">'대통령 직보' 자본시장 개혁기구 출범…위원장에 김용범 메리츠 부회장 ↗</a></div></li><li style=\"margin:0;padding:12px 2px;border-bottom:1px solid #dbe2ea\"><span style=\"display:block;color:#566476;font-size:12px;font-weight:700;margin:0 0 3px\">한국경제 증권 · 2026-11-26</span><div><a href=\"https://www.hankyung.com/article/202611262700i\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0b2545;text-decoration:none;font-weight:700;line-height:1.5;overflow-wrap:anywhere\">[마감시황] 장 막판 상승폭 반납한 코스피…0.29% 오른 4711.21 마감 ↗</a></div></li><li style=\"margin:0;padding:12px 2px;border-bottom:1px solid #dbe2ea\"><span style=\"display:block;color:#566476;font-size:12px;font-weight:700;margin:0 0 3px\">매일경제 증권 · 2026-11-26</span><div><a href=\"https://www.mk.co.kr/news/stock/12219730\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0b2545;text-decoration:none;font-weight:700;line-height:1.5;overflow-wrap:anywhere\">금리·AI 수익성 우려에 관세까지…여의도 족집게 “반등 시그널 이때 나온다” [머니닥터 시장진단] ↗</a></div></li><li style=\"margin:0;padding:12px 2px;border-bottom:1px solid #dbe2ea\"><span style=\"display:block;color:#566476;font-size:12px;font-weight:700;margin:0 0 3px\">매일경제 증권 · 2026-11-26</span><div><a href=\"https://www.mk.co.kr/news/stock/12219691\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0b2545;text-decoration:none;font-weight:700;line-height:1.5;overflow-wrap:anywhere\">&quot;증시 안정 위해 반드시 증액&quot; vs &quot;지수 방어 효과 제한적&quot; ↗</a></div></li></ul></section>\n<section data-section=\"korea-risks\" style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><div style=\"margin:0 0 14px\"><span style=\"display:block;width:28px;height:3px;background:#0b2545;margin:0 0 9px;border-radius:2px\"></span><h2 style=\"margin:0;font-size:clamp(19px,4.8vw,22px);line-height:1.35;font-weight:800;color:#0b2545;letter-spacing:-.01em;word-break:keep-all\">위험 요인과 다음 확인 지표</h2></div><div style=\"display:grid;gap:10px\"><p style=\"margin:0;display:flex;gap:10px;align-items:flex-start;background:#f7f9fc;border-radius:10px;padding:10px 12px\"><span style=\"flex:0 0 22px;height:22px;border-radius:50%;border:1.5px solid #0b2545;color:#0b2545;font-size:12px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;margin-top:3px\">1</span><span>다음 거래일에는 외국인·기관 수급의 연속성, 원·달러 환율, 오늘 강세 업종이 이어지는지가 확인 대상이다.</span></p><p style=\"margin:0;display:flex;gap:10px;align-items:flex-start;background:#f7f9fc;border-radius:10px;padding:10px 12px\"><span style=\"flex:0 0 22px;height:22px;border-radius:50%;border:1.5px solid #0b2545;color:#0b2545;font-size:12px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;margin-top:3px\">2</span><span><b style=\"color:#0b2545\">변동성 점검:</b> 직전 거래일 검색 상위 가운데 <b style=\"color:#16202e;font-weight:800;white-space:nowrap\">5%</b> 넘게 움직인 에이피알(<b style=\"color:#c62828;font-weight:800;white-space:nowrap\">+11.13%</b>)은 등락이 이어지는지가 함께 확인 대상이다.</span></p></div></section>\n<section style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><div style=\"margin:0 0 14px\"><span style=\"display:block;width:28px;height:3px;background:#0b2545;margin:0 0 9px;border-radius:2px\"></span><h2 style=\"margin:0;font-size:clamp(19px,4.8vw,22px);line-height:1.35;font-weight:800;color:#0b2545;letter-spacing:-.01em;word-break:keep-all\">자료 기준</h2></div><div style=\"font-size:14px;color:#566476\"><p style=\"margin:0 0 13px\">오늘 국내증시의 지수 종가는 네이버금융 마감값을 Yahoo Finance의 독립 비교값과 대조해 확인했다. 원·달러 환율은 기사 작성 시점 값이다.</p><p style=\"margin:0 0 13px\">투자자 수급과 업종·종목 흐름은 같은 거래일 자료다.</p></div></section>\n<section data-section=\"related-posts\" style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><div style=\"margin:0 0 14px\"><span style=\"display:block;width:28px;height:3px;background:#0b2545;margin:0 0 9px;border-radius:2px\"></span><h2 style=\"margin:0;font-size:clamp(19px,4.8vw,22px);line-height:1.35;font-weight:800;color:#0b2545;letter-spacing:-.01em;word-break:keep-all\">MOTUS 최근 기사</h2></div><p style=\"margin:0 0 12px;color:#4a5a6e;font-size:15px\">최근 발행한 시장·AI 브리핑이다.</p><ul style=\"margin:0;padding:0;list-style:none;border-top:1px solid #dbe2ea\"><li style=\"margin:0;padding:12px 2px;border-bottom:1px solid #dbe2ea\"><span style=\"display:block;color:#a8822e;font-size:12px;font-weight:800;letter-spacing:.04em;margin:0 0 3px\">리포트 · 2026-11-26</span><a href=\"https://motusnova.blogspot.com/2026/11/2026-11-26-ai.html\" style=\"color:#0b2545;text-decoration:none;font-weight:700;line-height:1.5;overflow-wrap:anywhere\">[데일리 리포트] 2026년 11월 26일 국내 증시·미국 증시·AI 핵심 정리</a></li><li style=\"margin:0;padding:12px 2px;border-bottom:1px solid #dbe2ea\"><span style=\"display:block;color:#a8822e;font-size:12px;font-weight:800;letter-spacing:.04em;margin:0 0 3px\">AI 인텔리전스 · 2026-11-26</span><a href=\"https://motusnova.blogspot.com/2026/11/ai-ai.html\" style=\"color:#0b2545;text-decoration:none;font-weight:700;line-height:1.5;overflow-wrap:anywhere\">오픈AI의 AI 연구 성과 공개, 제품으로 이어질 시점</a></li><li style=\"margin:0;padding:12px 2px;border-bottom:1px solid #dbe2ea\"><span style=\"display:block;color:#a8822e;font-size:12px;font-weight:800;letter-spacing:.04em;margin:0 0 3px\">미국증시 · 2026-11-26</span><a href=\"https://motusnova.blogspot.com/2026/11/11-25-3-51.html\" style=\"color:#0b2545;text-decoration:none;font-weight:700;line-height:1.5;overflow-wrap:anywhere\">11월 25일 뉴욕증시 마감, 3대 지수 혼조…오라클 5.1% 급락</a></li><li style=\"margin:0;padding:12px 2px;border-bottom:1px solid #dbe2ea\"><span style=\"display:block;color:#a8822e;font-size:12px;font-weight:800;letter-spacing:.04em;margin:0 0 3px\">국내증시 · 2026-11-25</span><a href=\"https://motusnova.blogspot.com/2026/11/11-25-616-469751-1-117.html\" style=\"color:#0b2545;text-decoration:none;font-weight:700;line-height:1.5;overflow-wrap:anywhere\">11월 25일 코스피 마감, 6.16% 급락해 4,697.51…검색 1위 삼성전자 11.7% 급락</a></li><li style=\"margin:0;padding:12px 2px;border-bottom:1px solid #dbe2ea\"><span style=\"display:block;color:#a8822e;font-size:12px;font-weight:800;letter-spacing:.04em;margin:0 0 3px\">리포트 · 2026-11-16</span><a href=\"https://motusnova.blogspot.com/2026/11/2026-11-16-ai.html\" style=\"color:#0b2545;text-decoration:none;font-weight:700;line-height:1.5;overflow-wrap:anywhere\">[데일리 리포트] 2026년 11월 16일 국내 증시·AI 핵심 정리</a></li><li style=\"margin:0;padding:12px 2px;border-bottom:1px solid #dbe2ea\"><span style=\"display:block;color:#a8822e;font-size:12px;font-weight:800;letter-spacing:.04em;margin:0 0 3px\">미국증시 · 2026-11-10</span><a href=\"https://motusnova.blogspot.com/2026/11/11-9-3-27-amd-13.html\" style=\"color:#0b2545;text-decoration:none;font-weight:700;line-height:1.5;overflow-wrap:anywhere\">11월 9일 뉴욕증시 마감, 3대 지수 상승·나스닥 2.7% 상승…AMD 13% 급등</a></li></ul><p data-section=\"category-hubs\" style=\"margin:4px 0 0;font-size:15px\"><a href=\"https://motusnova.blogspot.com/search/label/%EA%B5%AD%EB%82%B4%EC%A6%9D%EC%8B%9C\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">국내증시 전체 보기</a> · <a href=\"https://motusnova.blogspot.com/search/label/%EB%AF%B8%EA%B5%AD%EC%A6%9D%EC%8B%9C\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">미국증시 전체 보기</a> · <a href=\"https://motusnova.blogspot.com/search/label/AI%20%EC%9D%B8%ED%85%94%EB%A6%AC%EC%A0%84%EC%8A%A4\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">AI 인텔리전스 전체 보기</a> · <a href=\"https://motusnova.blogspot.com/search/label/%EB%A6%AC%ED%8F%AC%ED%8A%B8\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">리포트 전체 보기</a></p></section>\n<section style=\"width:100%;max-width:100%;box-sizing:border-box;margin:26px 0 0\"><div style=\"margin:0 0 14px\"><span style=\"display:block;width:28px;height:3px;background:#0b2545;margin:0 0 9px;border-radius:2px\"></span><h2 style=\"margin:0;font-size:clamp(19px,4.8vw,22px);line-height:1.35;font-weight:800;color:#0b2545;letter-spacing:-.01em;word-break:keep-all\">자료</h2></div><details style=\"border:1px solid #dbe2ea;border-radius:12px;padding:10px 14px\"><summary style=\"cursor:pointer;font-weight:800;color:#0b2545;font-size:15px\">출처 23건 보기</summary><ul style=\"margin:10px 0 0;padding-left:20px;font-size:14px\"><li style=\"margin:5px 0\"><a href=\"https://m.stock.naver.com/api/index/KOSPI/price?pageSize=10&amp;page=1\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">네이버금융 KOSPI 전일 마감</a></li><li style=\"margin:5px 0\"><a href=\"https://m.stock.naver.com/api/index/KOSDAQ/price?pageSize=10&amp;page=1\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">네이버금융 KOSDAQ 전일 마감</a></li><li style=\"margin:5px 0\"><a href=\"https://api.stock.naver.com/marketindex/exchange/FX_USDKRW\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">네이버금융 USD/KRW 현재가</a></li><li style=\"margin:5px 0\"><a href=\"https://m.stock.naver.com/api/index/KOSPI/trend\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">네이버금융 투자자 수급</a></li><li style=\"margin:5px 0\"><a href=\"https://m.stock.naver.com/api/stocks/up/KOSPI?page=1&amp;pageSize=20\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">네이버금융 상승종목</a></li><li style=\"margin:5px 0\"><a href=\"https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?period1=1795478400&amp;period2=1795910400&amp;interval=1d\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">YAHOO_FINANCE KOSPI</a></li><li style=\"margin:5px 0\"><a href=\"https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?period1=1795478400&amp;period2=1795910400&amp;interval=1d\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">YAHOO_FINANCE KOSDAQ</a></li><li style=\"margin:5px 0\"><a href=\"https://www.yna.co.kr/view/AKR20261126145451008\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">연합뉴스 「'전강후약' 코스피, 0.29% 상승…전날 급락후 간신히 반등(종합)」 (2026-11-26)</a></li><li style=\"margin:5px 0\"><a href=\"https://news.einfomax.co.kr/news/articleView.html?idxno=4446806\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">연합인포맥스 「[증시-마감] 저가 매수에 코스피 4,700선 회복…4,711.21 마감」 (2026-11-26)</a></li><li style=\"margin:5px 0\"><a href=\"https://stock.pstatic.net/stock-research/company/66/20261126_company_364301000.pdf\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">DS투자증권 「지금은 매수 기회」 (2026-11-26)</a></li><li style=\"margin:5px 0\"><a href=\"https://consensus.hankyung.com/analysis/downpdf?report_idx=654543\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">SK증권 「현대차(005380) 공급 회복에 신차 사이클이 더해진다」 (2026-11-25)</a></li><li style=\"margin:5px 0\"><a href=\"https://m.stock.naver.com/api/stocks/searchTop/all?page=1&amp;pageSize=20\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">네이버페이 증권 검색 상위 종목</a></li><li style=\"margin:5px 0\"><a href=\"https://m.stock.naver.com/api/stock/005930/price?pageSize=5&amp;page=1\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">네이버페이 증권 삼성전자 일별 시세</a></li><li style=\"margin:5px 0\"><a href=\"https://m.stock.naver.com/api/stock/000660/price?pageSize=5&amp;page=1\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">네이버페이 증권 SK하이닉스 일별 시세</a></li><li style=\"margin:5px 0\"><a href=\"https://m.stock.naver.com/api/stock/278470/price?pageSize=5&amp;page=1\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">네이버페이 증권 에이피알 일별 시세</a></li><li style=\"margin:5px 0\"><a href=\"https://m.stock.naver.com/api/stock/009150/price?pageSize=5&amp;page=1\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">네이버페이 증권 삼성전기 일별 시세</a></li><li style=\"margin:5px 0\"><a href=\"https://m.stock.naver.com/api/stock/005380/price?pageSize=5&amp;page=1\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">네이버페이 증권 현대차 일별 시세</a></li><li style=\"margin:5px 0\"><a href=\"https://m.stock.naver.com/api/stock/053800/price?pageSize=5&amp;page=1\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">네이버페이 증권 안랩 일별 시세</a></li><li style=\"margin:5px 0\"><a href=\"https://rc.kbsec.com/detailView.able?documentid=20261119125620847K\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">KB증권 리서치 공개 시장기사 (2026-11-19)</a></li><li style=\"margin:5px 0\"><a href=\"https://www.hankyung.com/article/202611262896i\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">한국경제 증권 공개 시장기사 (2026-11-26)</a></li><li style=\"margin:5px 0\"><a href=\"https://www.hankyung.com/article/202611262700i\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">한국경제 증권 공개 시장기사 (2026-11-26)</a></li><li style=\"margin:5px 0\"><a href=\"https://www.mk.co.kr/news/stock/12219730\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">매일경제 증권 공개 시장기사 (2026-11-26)</a></li><li style=\"margin:5px 0\"><a href=\"https://www.mk.co.kr/news/stock/12219691\" target=\"_blank\" rel=\"nofollow noopener noreferrer\" style=\"color:#0759a6;text-decoration:underline;text-underline-offset:2px;font-weight:700;overflow-wrap:anywhere\">매일경제 증권 공개 시장기사 (2026-11-26)</a></li></ul></details></section></article></body></html>",
+    "renderedSections": [
+      "masthead",
+      "lead",
+      "key-points",
+      "indexes",
+      "fx",
+      "flows",
+      "sectors",
+      "research",
+      "watch",
+      "sources"
+    ],
+    "label": "국내증시"
+  },
+  "viewModel": {
+    "publicationId": "motus-live-2026-11-27:korea",
+    "issueDate": "2026-11-26",
+    "issueNumber": 20261126,
+    "operationDate": "2026-11-26",
+    "sessionDate": "2026-11-26",
+    "edition": "SAME_DAY_CLOSE",
+    "fxBasis": "CURRENT_AT_COLLECTION",
+    "title": "11월 26일 코스피 마감, 0.29% 올라 4,711.21…검색 1위 삼성전자 0.5% 상승",
+    "subtitle": "증권사 리포트와 투자자 검색 순위로 읽는 오늘 국내증시",
+    "category": "KOREA_MARKET",
+    "canonicalLabel": "Korea Market",
+    "displayLabel": "국내증시 (Korea Market)",
+    "marketSummary": "2026-11-26 오늘 국내증시는 KOSPI 4,711.21, KOSDAQ 655.71을 기록하며 마감했다. 마감 직후 지수 흐름과 환율, 확인 가능한 보조 신호를 함께 놓고 오늘 장의 성격을 짚는다.",
+    "deepSections": [
+      {
+        "key": "korea-causes",
+        "placement": "early",
+        "role": "news",
+        "title": "상승·하락 요인",
+        "intro": "이 세션을 다룬 증권사 아침 리포트가 아직 없어 통신사 마감 기사를 인용했다.",
+        "paragraphs": [
+          {
+            "text": "연합뉴스는 11월 26일 마감 기사 「'전강후약' 코스피, 0.29% 상승…전날 급락후 간신히 반등(종합)」에서 “기업의 자사주 매입이 반영되는 기타법인은 4천66억원 순매수했다”라고 전했다.",
+            "source": {
+              "label": "연합뉴스 「'전강후약' 코스피, 0.29% 상승…전날 급락후 간신히 반등(종합)」 (11월 26일)",
+              "url": "https://www.yna.co.kr/view/AKR20261126145451008",
+              "kind": "article"
+            }
+          },
+          {
+            "text": "연합인포맥스는 11월 26일 마감 기사 「[증시-마감] 저가 매수에 코스피 4,700선 회복…4,711.21 마감」에서 “코스피가 저가 매수세 속에서 전일의 급락분을 일부 되돌리고 4,700선을 회복했다”라고 전했다.",
+            "source": {
+              "label": "연합인포맥스 「[증시-마감] 저가 매수에 코스피 4,700선 회복…4,711.21 마감」 (11월 26일)",
+              "url": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446806",
+              "kind": "article"
+            }
+          }
+        ]
+      },
+      {
+        "key": "korea-stocks",
+        "placement": "early",
+        "role": "data",
+        "bars": [
+          {
+            "label": "삼성전자",
+            "value": 0.47
+          },
+          {
+            "label": "SK하이닉스",
+            "value": 2.72
+          },
+          {
+            "label": "에이피알",
+            "value": 11.13
+          },
+          {
+            "label": "삼성전기",
+            "value": 3.84
+          },
+          {
+            "label": "현대차",
+            "value": -3.71
+          },
+          {
+            "label": "안랩",
+            "value": 2.03
+          }
+        ],
+        "title": "업종과 종목: 투자자 검색 상위",
+        "intro": "네이버페이 증권 검색 상위 종목(ETF·ETN·레버리지 제외)의 전일 종가 기준 등락과 최근 증권사 리포트다. 검색 순위는 관심도 지표이며 주가 변동의 원인이 아니다.",
+        "paragraphs": [
+          {
+            "text": "MOTUS 정리: 투자자 검색 상위 6종목 가운데 5종목이 오르고 1종목이 내렸다. 가장 강한 종목은 에이피알(+11.13%), 가장 약한 종목은 현대차(-3.71%)로 등락 폭 차이가 14.84%p였다. 같은 날 코스피는 +0.29%였고, 코스피보다 강했던 종목은 5종목이다."
+          },
+          {
+            "text": "검색 3위 에이피알은 324,500원으로 11.13% 급등했다(코스피 대비 +10.84%p). DS투자증권은 11월 26일 「지금은 매수 기회」 리포트에서 투자의견 매수, 목표주가 530,000원을 제시했다.",
+            "source": {
+              "label": "DS투자증권 지금은 매수 기회 (11월 26일)",
+              "url": "https://stock.pstatic.net/stock-research/company/66/20261126_company_364301000.pdf"
+            },
+            "report": {
+              "company": "에이피알",
+              "broker": "DS투자증권",
+              "analysts": "",
+              "date": "2026-11-26",
+              "title": "지금은 매수 기회",
+              "rating": "매수",
+              "target": "530,000"
+            }
+          },
+          {
+            "text": "검색 5위 현대차는 259,500원으로 3.71% 하락했다(코스피 대비 -4.00%p). SK증권 권순우 연구원은 11월 25일 「공급 회복에 신차 사이클이 더해진다」 리포트에서 투자의견 매수, 목표주가 370,000원을 제시했다.",
+            "source": {
+              "label": "SK증권 현대차(005380) 공급 회복에 신차 사이클이 더해진다 (11월 25일)",
+              "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=654543"
+            },
+            "report": {
+              "company": "현대차",
+              "broker": "SK증권",
+              "analysts": "권순우",
+              "date": "2026-11-25",
+              "title": "현대차(005380) 공급 회복에 신차 사이클이 더해진다",
+              "rating": "매수",
+              "target": "370,000"
+            }
+          },
+          {
+            "text": "이 밖의 검색 상위 종목은 해당 세션을 다룬 증권사 코멘트·리포트가 확인되지 않아 종가와 등락만 정리했다: 삼성전자(1위, 171,500원, +0.47%), SK하이닉스(2위, 1,058,000원, +2.72%), 삼성전기(4위, 784,000원, +3.84%), 안랩(6위, 161,100원, +2.03%). 코스피(+0.29%)와 비교하면 삼성전자·SK하이닉스·삼성전기·안랩이 지수보다 강했고 지수를 밑돈 종목은 없었다."
+          }
+        ],
+        "image": {
+          "url": "https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/operations/2026-11-27/korea/chart-43ecc7dc6df4.png",
+          "alt": "국내증시 2026년 11월 26일 업종과 종목: 투자자 검색 상위: 삼성전자 +0.47%, SK하이닉스 +2.72%, 에이피알 +11.13%, 삼성전기 +3.84%",
+          "width": 1200,
+          "height": 630
+        }
+      },
+      {
+        "key": "korea-risks",
+        "placement": "risks",
+        "role": "watch",
+        "title": "위험 요인과 다음 확인 지표",
+        "paragraphs": [
+          {
+            "text": "다음 거래일에는 외국인·기관 수급의 연속성, 원·달러 환율, 오늘 강세 업종이 이어지는지가 확인 대상이다."
+          },
+          {
+            "text": "변동성 점검: 직전 거래일 검색 상위 가운데 5% 넘게 움직인 에이피알(+11.13%)은 등락이 이어지는지가 함께 확인 대상이다."
+          }
+        ]
+      },
+      {
+        "key": "korea-fx-comment",
+        "placement": "early",
+        "role": "analysis",
+        "title": "환율 해설",
+        "paragraphs": [
+          {
+            "text": "원·달러 환율은 기사 작성 시점 1,343.8원으로 전일보다 1.7원(0.13%) 내렸다(원화 강세)."
+          },
+          {
+            "text": "환율 배경: 이날 환율이 1.7원 내린 이유를 직접 설명한 증권사 리포트·통신 기사 문장은 수집되지 않았다(원인 미확인)."
+          },
+          {
+            "text": "MOTUS 해석(추정): 외국인 순매도(외국인 -903억원)와 달리 원화가 강해져, 이날 환율은 국내 주식 수급보다 다른 요인의 영향이 컸던 것으로 읽힌다."
+          },
+          {
+            "text": "다음 거래일 관전 포인트(전망 아님): 환율이 1,350원을 넘어서는지(6.2원 위), 1,340원 아래로 내려가는지(3.8원 아래)가 확인 지점이다."
+          }
+        ]
+      },
+      {
+        "key": "korea-flow-comment",
+        "placement": "early",
+        "role": "analysis",
+        "title": "수급 해설",
+        "paragraphs": [
+          {
+            "text": "투자자별로는 개인의 순매도(-10,698억원) 규모가 가장 컸고, 외국인(-903억원)·기관(+7,530억원)이 뒤를 이었다."
+          },
+          {
+            "text": "MOTUS 해석(추정): 코스피가 0.29% 오른 날 외국인은 순매도(-903억원)해, 지수 방향과 외국인 수급이 엇갈렸다. 지수를 움직인 주체가 외국인 밖에 있었을 가능성이 있다."
+          }
+        ]
+      }
+    ],
+    "indexMetrics": [
+      {
+        "factId": "index:KOSPI",
+        "group": "INDEX",
+        "label": "KOSPI",
+        "displayValue": "4,711.21",
+        "direction": "UP",
+        "source": {
+          "label": "Yahoo Finance 독립 비교값",
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?period1=1795478400&period2=1795910400&interval=1d"
+        }
+      },
+      {
+        "factId": "index:KOSDAQ",
+        "group": "INDEX",
+        "label": "KOSDAQ",
+        "displayValue": "655.71",
+        "direction": "UP",
+        "source": {
+          "label": "Yahoo Finance 독립 비교값",
+          "url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?period1=1795478400&period2=1795910400&interval=1d"
+        }
+      }
+    ],
+    "fxAndSupporting": [
+      {
+        "factId": "fx:usd-krw",
+        "group": "FX",
+        "label": "원·달러 환율(기사 작성 시점)",
+        "displayValue": "1,343.8",
+        "direction": "DOWN",
+        "source": {
+          "label": "네이버금융",
+          "url": "https://api.stock.naver.com/marketindex/exchange/FX_USDKRW"
+        }
+      }
+    ],
+    "investorFlows": [
+      {
+        "factId": "flow:0",
+        "group": "FLOW",
+        "label": "개인",
+        "displayValue": "-10,698억원",
+        "direction": "DOWN",
+        "source": {
+          "label": "네이버금융",
+          "url": "https://m.stock.naver.com/api/index/KOSPI/trend"
+        }
+      },
+      {
+        "factId": "flow:1",
+        "group": "FLOW",
+        "label": "외국인",
+        "displayValue": "-903억원",
+        "direction": "DOWN",
+        "source": {
+          "label": "네이버금융",
+          "url": "https://m.stock.naver.com/api/index/KOSPI/trend"
+        }
+      },
+      {
+        "factId": "flow:2",
+        "group": "FLOW",
+        "label": "기관",
+        "displayValue": "+7,530억원",
+        "direction": "UP",
+        "source": {
+          "label": "네이버금융",
+          "url": "https://m.stock.naver.com/api/index/KOSPI/trend"
+        }
+      }
+    ],
+    "sectors": [],
+    "movers": [
+      {
+        "factId": "mover:0",
+        "group": "MOVER",
+        "label": "하나 인버스 2X 천연가스 선물 ETN(H)",
+        "displayValue": "+33.75",
+        "direction": "UP",
+        "source": {
+          "label": "네이버금융",
+          "url": "https://m.stock.naver.com/api/stocks/up/KOSPI?page=1&pageSize=20"
+        }
+      },
+      {
+        "factId": "mover:1",
+        "group": "MOVER",
+        "label": "동양고속",
+        "displayValue": "+29.96",
+        "direction": "UP",
+        "source": {
+          "label": "네이버금융",
+          "url": "https://m.stock.naver.com/api/stocks/up/KOSPI?page=1&pageSize=20"
+        }
+      },
+      {
+        "factId": "mover:2",
+        "group": "MOVER",
+        "label": "천일고속",
+        "displayValue": "+29.96",
+        "direction": "UP",
+        "source": {
+          "label": "네이버금융",
+          "url": "https://m.stock.naver.com/api/stocks/up/KOSPI?page=1&pageSize=20"
+        }
+      },
+      {
+        "factId": "mover:3",
+        "group": "MOVER",
+        "label": "체시스",
+        "displayValue": "+27.82",
+        "direction": "UP",
+        "source": {
+          "label": "네이버금융",
+          "url": "https://m.stock.naver.com/api/stocks/up/KOSPI?page=1&pageSize=20"
+        }
+      },
+      {
+        "factId": "mover:4",
+        "group": "MOVER",
+        "label": "영흥",
+        "displayValue": "+22.3",
+        "direction": "UP",
+        "source": {
+          "label": "네이버금융",
+          "url": "https://m.stock.naver.com/api/stocks/up/KOSPI?page=1&pageSize=20"
+        }
+      }
+    ],
+    "research": [
+      {
+        "researchId": "kb-broker:2026-11-19:0",
+        "publisher": "KB증권 리서치",
+        "analyst": null,
+        "headline": "KB Core View · 2027년 자산배분 전략",
+        "summary": "KB증권 공식 사이트에 공개된 리포트 제목과 발행일이 확인됐다. 본문 분석이나 투자 의견은 수집되지 않았다.",
+        "institutionView": "공식 공개 요약: 글로벌 자산배분: Gravity's Rabbit Hole / 경제: 모래주머니를 차고 달리는 법",
+        "evidence": [
+          "글로벌 자산배분: Gravity's Rabbit Hole",
+          "경제: 모래주머니를 차고 달리는 법"
+        ],
+        "interests": [],
+        "investmentStrategy": [],
+        "riskFactors": [],
+        "targetPriceLabel": null,
+        "ratingLabel": null,
+        "aiInterpretation": null,
+        "sources": [
+          {
+            "label": "KB증권 리서치",
+            "url": "https://rc.kbsec.com/detailView.able?documentid=20261119125620847K",
+            "publisher": "KB증권 리서치"
+          }
+        ]
+      }
+    ],
+    "marketResearch": [
+      {
+        "publisher": "KB증권 리서치",
+        "headline": "KB Core View · 2027년 자산배분 전략",
+        "url": "https://rc.kbsec.com/detailView.able?documentid=20261119125620847K",
+        "publishedAt": "2026-11-19T00:00:00.000Z",
+        "kind": "BROKER_RESEARCH",
+        "sourceFeed": "https://rc.kbsec.com/today/index.able",
+        "evidence": [
+          "글로벌 자산배분: Gravity's Rabbit Hole",
+          "경제: 모래주머니를 차고 달리는 법"
+        ]
+      },
+      {
+        "publisher": "한국경제 증권",
+        "headline": "'대통령 직보' 자본시장 개혁기구 출범…위원장에 김용범 메리츠 부회장",
+        "url": "https://www.hankyung.com/article/202611262896i",
+        "publishedAt": "2026-11-26T08:15:14.000Z",
+        "kind": "FINANCIAL_MEDIA",
+        "sourceFeed": "https://www.hankyung.com/feed/finance"
+      },
+      {
+        "publisher": "한국경제 증권",
+        "headline": "[마감시황] 장 막판 상승폭 반납한 코스피…0.29% 오른 4711.21 마감",
+        "url": "https://www.hankyung.com/article/202611262700i",
+        "publishedAt": "2026-11-26T07:08:03.000Z",
+        "kind": "FINANCIAL_MEDIA",
+        "sourceFeed": "https://www.hankyung.com/feed/finance"
+      },
+      {
+        "publisher": "매일경제 증권",
+        "headline": "금리·AI 수익성 우려에 관세까지…여의도 족집게 “반등 시그널 이때 나온다” [머니닥터 시장진단]",
+        "url": "https://www.mk.co.kr/news/stock/12219730",
+        "publishedAt": "2026-11-26T09:00:41.000Z",
+        "kind": "FINANCIAL_MEDIA",
+        "sourceFeed": "https://www.mk.co.kr/rss/50200011/"
+      },
+      {
+        "publisher": "매일경제 증권",
+        "headline": "\"증시 안정 위해 반드시 증액\" vs \"지수 방어 효과 제한적\"",
+        "url": "https://www.mk.co.kr/news/stock/12219691",
+        "publishedAt": "2026-11-26T08:40:54.000Z",
+        "kind": "FINANCIAL_MEDIA",
+        "sourceFeed": "https://www.mk.co.kr/rss/50200011/"
+      }
+    ],
+    "marketCommentary": [
+      "오늘 국내증시의 지수 종가는 네이버금융 마감값을 Yahoo Finance의 독립 비교값과 대조해 확인했다. 원·달러 환율은 기사 작성 시점 값이다.",
+      "투자자 수급과 업종·종목 흐름은 같은 거래일 자료다."
+    ],
+    "checkpoints": [
+      {
+        "headline": "다음 거래일 체크포인트",
+        "watchFor": "외국인 수급과 원·달러 환율, 직전 주도 업종의 연속성을 확인",
+        "validityHorizon": "NEXT_SESSION"
+      }
+    ],
+    "sources": [
+      {
+        "label": "네이버금융 KOSPI 전일 마감",
+        "url": "https://m.stock.naver.com/api/index/KOSPI/price?pageSize=10&page=1",
+        "publisher": "네이버금융"
+      },
+      {
+        "label": "네이버금융 KOSDAQ 전일 마감",
+        "url": "https://m.stock.naver.com/api/index/KOSDAQ/price?pageSize=10&page=1",
+        "publisher": "네이버금융"
+      },
+      {
+        "label": "네이버금융 USD/KRW 현재가",
+        "url": "https://api.stock.naver.com/marketindex/exchange/FX_USDKRW",
+        "publisher": "네이버금융"
+      },
+      {
+        "label": "네이버금융 투자자 수급",
+        "url": "https://m.stock.naver.com/api/index/KOSPI/trend",
+        "publisher": "네이버금융"
+      },
+      {
+        "label": "네이버금융 상승종목",
+        "url": "https://m.stock.naver.com/api/stocks/up/KOSPI?page=1&pageSize=20",
+        "publisher": "네이버금융"
+      },
+      {
+        "label": "YAHOO_FINANCE KOSPI",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?period1=1795478400&period2=1795910400&interval=1d",
+        "publisher": "Yahoo Finance"
+      },
+      {
+        "label": "YAHOO_FINANCE KOSDAQ",
+        "url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?period1=1795478400&period2=1795910400&interval=1d",
+        "publisher": "Yahoo Finance"
+      },
+      {
+        "label": "연합뉴스 「'전강후약' 코스피, 0.29% 상승…전날 급락후 간신히 반등(종합)」 (2026-11-26)",
+        "url": "https://www.yna.co.kr/view/AKR20261126145451008",
+        "publisher": "연합뉴스",
+        "role": "SUPPLEMENTARY"
+      },
+      {
+        "label": "연합인포맥스 「[증시-마감] 저가 매수에 코스피 4,700선 회복…4,711.21 마감」 (2026-11-26)",
+        "url": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446806",
+        "publisher": "연합인포맥스",
+        "role": "SUPPLEMENTARY"
+      },
+      {
+        "label": "DS투자증권 「지금은 매수 기회」 (2026-11-26)",
+        "url": "https://stock.pstatic.net/stock-research/company/66/20261126_company_364301000.pdf",
+        "publisher": "DS투자증권",
+        "role": "SUPPLEMENTARY"
+      },
+      {
+        "label": "SK증권 「현대차(005380) 공급 회복에 신차 사이클이 더해진다」 (2026-11-25)",
+        "url": "https://consensus.hankyung.com/analysis/downpdf?report_idx=654543",
+        "publisher": "SK증권",
+        "role": "SUPPLEMENTARY"
+      },
+      {
+        "label": "네이버페이 증권 검색 상위 종목",
+        "url": "https://m.stock.naver.com/api/stocks/searchTop/all?page=1&pageSize=20",
+        "publisher": "네이버페이 증권",
+        "role": "SUPPLEMENTARY"
+      },
+      {
+        "label": "네이버페이 증권 삼성전자 일별 시세",
+        "url": "https://m.stock.naver.com/api/stock/005930/price?pageSize=5&page=1",
+        "publisher": "네이버페이 증권",
+        "role": "SUPPLEMENTARY"
+      },
+      {
+        "label": "네이버페이 증권 SK하이닉스 일별 시세",
+        "url": "https://m.stock.naver.com/api/stock/000660/price?pageSize=5&page=1",
+        "publisher": "네이버페이 증권",
+        "role": "SUPPLEMENTARY"
+      },
+      {
+        "label": "네이버페이 증권 에이피알 일별 시세",
+        "url": "https://m.stock.naver.com/api/stock/278470/price?pageSize=5&page=1",
+        "publisher": "네이버페이 증권",
+        "role": "SUPPLEMENTARY"
+      },
+      {
+        "label": "네이버페이 증권 삼성전기 일별 시세",
+        "url": "https://m.stock.naver.com/api/stock/009150/price?pageSize=5&page=1",
+        "publisher": "네이버페이 증권",
+        "role": "SUPPLEMENTARY"
+      },
+      {
+        "label": "네이버페이 증권 현대차 일별 시세",
+        "url": "https://m.stock.naver.com/api/stock/005380/price?pageSize=5&page=1",
+        "publisher": "네이버페이 증권",
+        "role": "SUPPLEMENTARY"
+      },
+      {
+        "label": "네이버페이 증권 안랩 일별 시세",
+        "url": "https://m.stock.naver.com/api/stock/053800/price?pageSize=5&page=1",
+        "publisher": "네이버페이 증권",
+        "role": "SUPPLEMENTARY"
+      },
+      {
+        "label": "KB증권 리서치 공개 시장기사 (2026-11-19)",
+        "url": "https://rc.kbsec.com/detailView.able?documentid=20261119125620847K",
+        "publisher": "KB증권 리서치"
+      },
+      {
+        "label": "한국경제 증권 공개 시장기사 (2026-11-26)",
+        "url": "https://www.hankyung.com/article/202611262896i",
+        "publisher": "한국경제 증권"
+      },
+      {
+        "label": "한국경제 증권 공개 시장기사 (2026-11-26)",
+        "url": "https://www.hankyung.com/article/202611262700i",
+        "publisher": "한국경제 증권"
+      },
+      {
+        "label": "매일경제 증권 공개 시장기사 (2026-11-26)",
+        "url": "https://www.mk.co.kr/news/stock/12219730",
+        "publisher": "매일경제 증권"
+      },
+      {
+        "label": "매일경제 증권 공개 시장기사 (2026-11-26)",
+        "url": "https://www.mk.co.kr/news/stock/12219691",
+        "publisher": "매일경제 증권"
+      }
+    ],
+    "narrative": {
+      "facts": [
+        "코스피는 4,711.21로 마감해 전 거래일보다 0.29% 상승했다. 최근 5거래일 기준으로는 8.30% 하락했다. 최근 10거래일 종가 고점(5,290.53, 2026-11-13)보다 10.95% 낮다.",
+        "코스닥은 655.71로 마감해 전 거래일보다 0.78% 상승했다. 최근 5거래일 기준으로는 4.25% 하락했다. 최근 10거래일 종가 고점(699.66, 2026-11-13)보다 6.28% 낮다."
+      ],
+      "analysis": [
+        "코스피는 0.29% 오르며 4,711.21로 마감했다. 최근 10거래일 고점(5,290.53, 2026-11-13)보다 10.95% 낮아, 흔히 '조정'이라 부르는 고점 대비 10% 이상 하락 구간에 들어섰다. 최근 5거래일 기준으로는 아직 하락 구간이다.",
+        "매도 쪽은 개인(−1조 698억원)·외국인(−903억원), 매수 쪽은 기관(+7,530억원)이었다. 가장 크게 움직인 개인은 지수와 반대로 팔았고, 지수는 매수 쪽(기관)을 따라 올랐다(추정).",
+        "다음 거래일에는 외국인 매도가 멈추는지가 이 상승이 이어질지를 가르는 첫 확인점이다."
+      ]
+    },
+    "relatedPosts": [
+      {
+        "title": "[데일리 리포트] 2026년 11월 26일 국내 증시·미국 증시·AI 핵심 정리",
+        "url": "https://motusnova.blogspot.com/2026/11/2026-11-26-ai.html",
+        "label": "리포트",
+        "published": "2026-11-26"
+      },
+      {
+        "title": "오픈AI의 AI 연구 성과 공개, 제품으로 이어질 시점",
+        "url": "https://motusnova.blogspot.com/2026/11/ai-ai.html",
+        "label": "AI 인텔리전스",
+        "published": "2026-11-26"
+      },
+      {
+        "title": "11월 25일 뉴욕증시 마감, 3대 지수 혼조…오라클 5.1% 급락",
+        "url": "https://motusnova.blogspot.com/2026/11/11-25-3-51.html",
+        "label": "미국증시",
+        "published": "2026-11-26"
+      },
+      {
+        "title": "11월 25일 코스피 마감, 6.16% 급락해 4,697.51…검색 1위 삼성전자 11.7% 급락",
+        "url": "https://motusnova.blogspot.com/2026/11/11-25-616-469751-1-117.html",
+        "label": "국내증시",
+        "published": "2026-11-25"
+      },
+      {
+        "title": "[데일리 리포트] 2026년 11월 16일 국내 증시·AI 핵심 정리",
+        "url": "https://motusnova.blogspot.com/2026/11/2026-11-16-ai.html",
+        "label": "리포트",
+        "published": "2026-11-16"
+      },
+      {
+        "title": "11월 9일 뉴욕증시 마감, 3대 지수 상승·나스닥 2.7% 상승…AMD 13% 급등",
+        "url": "https://motusnova.blogspot.com/2026/11/11-9-3-27-amd-13.html",
+        "label": "미국증시",
+        "published": "2026-11-10"
+      }
+    ],
+    "heroImage": {
+      "url": "https://raw.githubusercontent.com/luinbiotech-lab/motus-intelligence/ops-data/data/operations/2026-11-27/korea/hero-393a0ff1e848.png",
+      "alt": "국내증시 2026년 11월 26일: 11월 26일 코스피 마감, 0.29% 올라 4,711.21…검색 1위 삼성전자 0.5% 상승",
+      "width": 1200,
+      "height": 630
+    }
+  }
 }
