@@ -1,0 +1,150 @@
+{
+  "schema": "motus.ai-facts/1",
+  "bundleHash": "0327437a204438f9",
+  "operationDate": "2026-11-26",
+  "sessionDate": "2026-11-25",
+  "facts": [
+    {
+      "id": "F1",
+      "kind": "calendar",
+      "text": "기사 발행일은 2026-11-26이다. 주가는 직전 미국 정규장(2026-11-25, 11월 25일) 종가 기준이다.",
+      "date": "2026-11-26"
+    },
+    {
+      "id": "F2",
+      "kind": "official",
+      "text": "오픈AI는 2026년 11월 24일(한국 시간) 공식 블로그에 「GPT-6 models demonstrate intrinsic protein-design capabilities」 제목의 발표를 게시했다. 원문 본문은 AI 연구 성과 공개에 관한 내용을 다룬다. 발표의 중심 제품·플랫폼은 GPT-6이다.",
+      "publisher": "오픈AI",
+      "sourceUrl": "https://openai.com/index/gpt-6-models-demonstrate-intrinsic-protein-design-capabilities"
+    },
+    {
+      "id": "F3",
+      "kind": "official",
+      "text": "아마존웹서비스(AWS)는 2026년 11월 24일(한국 시간) 공식 What’s New 공지에 「AWS WAF announces automated discovery and protection for LLM, MCP, and A2A endpoints using Amazon Bedrock Guardrails」 제목의 발표를 게시했다. 발표 제목과 본문은 신규 AI 제품·기능 공개에 관한 내용을 다룬다. 발표의 중심 제품·플랫폼은 Amazon Bedrock이다.",
+      "publisher": "아마존웹서비스(AWS)",
+      "sourceUrl": "https://aws.amazon.com/about-aws/whats-new/2026/11/waf-ai-endpoint-discovery-protection/"
+    },
+    {
+      "id": "F4",
+      "kind": "price",
+      "text": "10개 종목 가운데 2개가 올랐다. 가장 강한 종목은 메타(META, +3.40%), 가장 약한 종목은 오라클(ORCL, -5.13%)이었다.",
+      "date": "2026-11-25"
+    },
+    {
+      "id": "F5",
+      "kind": "price",
+      "text": "메타 META: 직전 정규장 등락 +3.40%",
+      "date": "2026-11-25"
+    },
+    {
+      "id": "F6",
+      "kind": "price",
+      "text": "팔란티어 PLTR: 직전 정규장 등락 +1.50%",
+      "date": "2026-11-25"
+    },
+    {
+      "id": "F7",
+      "kind": "price",
+      "text": "브로드컴 AVGO: 직전 정규장 등락 -0.07%",
+      "date": "2026-11-25"
+    },
+    {
+      "id": "F8",
+      "kind": "price",
+      "text": "마이크로소프트 MSFT: 직전 정규장 등락 -1.25%",
+      "date": "2026-11-25"
+    },
+    {
+      "id": "F9",
+      "kind": "price",
+      "text": "AMD AMD: 직전 정규장 등락 -1.75%",
+      "date": "2026-11-25"
+    },
+    {
+      "id": "F10",
+      "kind": "price",
+      "text": "TSMC TSM: 직전 정규장 등락 -1.96%",
+      "date": "2026-11-25"
+    },
+    {
+      "id": "F11",
+      "kind": "price",
+      "text": "알파벳 GOOGL: 직전 정규장 등락 -2.13%",
+      "date": "2026-11-25"
+    },
+    {
+      "id": "F12",
+      "kind": "price",
+      "text": "아마존 AMZN: 직전 정규장 등락 -3.12%",
+      "date": "2026-11-25"
+    },
+    {
+      "id": "F13",
+      "kind": "price",
+      "text": "엔비디아 NVDA: 직전 정규장 등락 -3.91%",
+      "date": "2026-11-25"
+    },
+    {
+      "id": "F14",
+      "kind": "price",
+      "text": "오라클 ORCL: 직전 정규장 등락 -5.13%",
+      "date": "2026-11-25"
+    },
+    {
+      "id": "F15",
+      "kind": "broker",
+      "text": "다올투자증권은 11월 26일 아침 리포트 「Daily Morning Brief(2026.11.26)」에서 “미국증시, AI 투자 비용 및 수익성 우려 재부각과 인플레이션, 신규 관세 부담에 기술주 중심 급락 출발. 이후 저가 매수세 유입과 업종 간 순환매에 낙폭을 대부분 만회하며 3대 지수 혼조 마감”이라고 진단했다.",
+      "publisher": "다올투자증권",
+      "sourceUrl": "https://stock.pstatic.net/stock-research/market/-/20261126_market_816426000.pdf"
+    },
+    {
+      "id": "F16",
+      "kind": "broker",
+      "text": "SK증권은 11월 26일 아침 리포트 「SK증권 아침에 슥_2026.11.26」에서 “AI 회의론 속 저가 매수 유입에 혼조 마감”이라고 진단했다.",
+      "publisher": "SK증권",
+      "sourceUrl": "https://stock.pstatic.net/stock-research/market/64/20261126_market_956485000.pdf"
+    },
+    {
+      "id": "F17",
+      "kind": "broker",
+      "text": "KB증권은 11월 26일 아침 리포트 「11/26 KB 리서치 모닝코멘트」에서 “AI 회의론 여전한 가운데 저가 매수세 유입되며 전약후강. 장중 나스닥 -4.64%, 필리 지수 -7.96%까지 하락”이라고 진단했다.",
+      "publisher": "KB증권",
+      "sourceUrl": "https://stock.pstatic.net/stock-research/market/58/20261126_market_442476000.pdf"
+    },
+    {
+      "id": "F18",
+      "kind": "broker",
+      "text": "경계 요인도 제시됐다. KB증권은 “미 증시도 AI vs. 비AI 종목 양극화 흐름 보이는 가운데 주요 교역국에 신규 관세부과를 추진한 점도 부담”이라고 짚었다.",
+      "publisher": "KB증권",
+      "sourceUrl": "https://stock.pstatic.net/stock-research/market/58/20261126_market_442476000.pdf"
+    },
+    {
+      "id": "F19",
+      "kind": "broker",
+      "text": "유진투자증권은 「다우만 살아남은 추수감사절 전야」에서 “뉴욕증시 3대 지수는 관세, PCE물가, AI 겹악재에 급락 출발했으나 저가매수 유입되며 혼조 마감. 다우 +0.3%·S&P500 -0.3%·나스닥 -0.6%·필 반도체 -0.7%. 채권은 안전자산 수요 유입되며 강세, 10년물 4.86%(-6.5bp) 8거래일 연속 하락, 2년물 4.65%(-3.7bp)”, “USTR은 한국·일본·중국·EU 등 14개 교역국에 과잉생산 관세안 제시. 한국·대만·인도 등에는 최고 25%가 제시됐으나, 미국과 무역합의를 맺은 한국·일본·EU·대만은 15% 상한 유지. 중국에는 기존 약 25%에 20% 추가 관세 제안”, “10월 근원 PCE 전년비 3.3%(예상 3.2%·9월 3.1%)로 예상 상회. 헤드라인은 3.8%(9월 3.7%)로 예상 부합, 전월비는 둘 다 +0.3%로 예상 부합. 3분기 GDP 잠정치는 4.3%(예상 3.5%·속보치 3.4%)로 대폭 상향. 신규 실업수당 청구 18.9만 건(예상 20만·전주 20.2만)으로 예상 하회”라고 밝혔다.",
+      "publisher": "유진투자증권",
+      "sourceUrl": "https://stock.pstatic.net/stock-research/market/63/20261126_market_257185000.pdf"
+    },
+    {
+      "id": "F20",
+      "kind": "broker",
+      "text": "유진투자증권은 「반도체 셀오프 & 美 관세 경계에 코스피 -6.2% 5천선 반납」에서 “국내 양대 증시는 글로벌 반도체 셀오프 & 美 추가 관세 경계에 동반 하락. 코스피는 개장 8분 만에 매도 사이드카 발동(4거래일 연속 사이드카), 다시 4,600선으로 후퇴. 이어지는 5천선 공방 (코스피 -6.2%·코스닥 -2.3%)”, “2)코스닥 반도체 소부장 약세 & 보안·바이오 강세. 반도체 소부장(주성엔지니어링 -11.4%·심텍 -6.5%)은 반도체 셀오프에 동반 하락. 보안주(안랩·파수AI 上)는 美 CIA·국가정보국(ODNI) 해킹 피해 보도에 급등. 바이오는 시총 1위 알테오젠(+6.2%)·삼천당제약(+5.1%) 상승”, “코스피 개인(+1조3,521억원)·기관(+4,539억원) vs 외국인(-1조8,193억원), 코스닥 기관(+281억원)·외국인(+165억원) vs 개인(-505억원). 여타 아시아 증시는 대만 가권(-4.8%, TSMC -3.6%)·닛케이 225(-2.8%, 키옥시아 -14.2%·어드반테스트 -12.9%)·홍콩 항셍(-1.1%) 하락”이라고 밝혔다.",
+      "publisher": "유진투자증권",
+      "sourceUrl": "https://stock.pstatic.net/stock-research/market/63/20261126_market_257185000.pdf"
+    },
+    {
+      "id": "F21",
+      "kind": "broker",
+      "text": "요약문 없이 투자의견만 공개된 AI 관련 리포트도 있었다: 아모텍(IBK투자증권, 11월 24일, 매수, 목표주가 25,000원), LG유플러스(iM증권, 11월 24일, Buy, 목표주가 19,500원), SK텔레콤(iM증권, 11월 24일, Buy, 목표주가 112,000원), 파인엠텍(메리츠증권, 11월 23일, Buy, 목표주가 13,000원).",
+      "publisher": "IBK투자증권",
+      "sourceUrl": "https://consensus.hankyung.com/analysis/downpdf?report_idx=654504"
+    },
+    {
+      "id": "F22",
+      "kind": "broker",
+      "text": "DS투자증권은 11월 26일 「AIDC 기대감이 현실화되는 순간」 산업 리포트에서 “26년 상반기 건설 업종 YTD 수익률은 대우건설 +648%, 현대건설 +201%로 대형 원전 수주 기대감이 올해 주가 상승의 주요 동력이었다”, “27년 건설업종은 사업 가속화에 대한 막연한 기대감보다 27·28년 실적 추정치를 끌어올릴 수주를 실제로 쌓는 기업에 주목해야 한다고 판단한다”라고 분석했다.",
+      "publisher": "DS투자증권",
+      "sourceUrl": "https://stock.pstatic.net/stock-research/industry/66/20261126_industry_958384000.pdf"
+    }
+  ]
+}
