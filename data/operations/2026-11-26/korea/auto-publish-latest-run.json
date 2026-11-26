@@ -1,0 +1,10 @@
+{
+  "state": "SKIP",
+  "reasonCode": "KOREA_MORNING_EDITION_RETIRED",
+  "reasonCodes": [
+    "KOREA_MORNING_EDITION_RETIRED"
+  ],
+  "reason": "KOREA_MORNING_EDITION_RETIRED",
+  "insertCallCount": 0,
+  "publishCallCount": 0
+}
