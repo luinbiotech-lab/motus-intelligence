@@ -14,10 +14,10 @@
   "leakagePass": true,
   "duplicateCheck": "PENDING_REMOTE",
   "duplicateUncertainty": true,
-  "articleFingerprint": "sha256:5a3d3caf4851c8461f48fd920fd59734e4de4362832f46927c2745cd24fcbaa6",
+  "articleFingerprint": "sha256:46e17e7a04c10161a1a2e5b992d4201573d0c14ab1d6a9a162538a9011c79773",
   "commerceEnabled": false,
-  "verifiedAt": "2026-11-26T05:27:45.349Z",
-  "expiresAt": "2026-11-26T06:57:45.349Z",
+  "verifiedAt": "2026-11-26T10:01:09.065Z",
+  "expiresAt": "2026-11-26T11:31:09.065Z",
   "sourceAuditIds": [
     "calendar:nyse",
     "deep:consensus:list:company",
@@ -51,14 +51,14 @@
     "market-research:Bloomberg Markets",
     "market-research:CNBC Investing",
     "market-research:Goldman Sachs",
+    "market-research:article:https://www.bloomberg.com/news/articles/2026-11-25/latest-oil-market-news-and-analysis-for-nov-26",
     "market-research:article:https://www.bloomberg.com/news/articles/2026-11-25/stock-market-today-dow-s-p-live-updates",
-    "market-research:article:https://www.bloomberg.com/news/videos/2026-11-26/canada-pitches-infrastructure-plan-to-uae-investors-video",
     "market-research:article:https://www.cnbc.com/2026/11/24/kalshi-perps-volume-prediction-markets.html",
     "market-research:article:https://www.cnbc.com/2026/11/24/nvidia-jensen-huang-ai-credit-markets.html",
     "treasury:10y:2026",
     "yahoo-us:sp500"
   ],
-  "sourceAuditFingerprint": "sha256:d5fae72990a8c8c3e65e7baf056782b2bb616aee77079c1a77cb7672b9b0cf8c",
+  "sourceAuditFingerprint": "sha256:b73e3917c13b6ebbca18b98ee9cb88d003eacd949713243ddcfe6c1c273e4d84",
   "crossVerificationFingerprint": null,
   "crossVerification": null
 }
