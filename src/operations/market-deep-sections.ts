@@ -144,6 +144,27 @@ function volatilityWatch(rows:Array<{label:string;changePct:number}>,scope:strin
   return {text:`변동성 점검: ${scope} 가운데 5% 넘게 움직인 ${big.map(item=>`${item.label}(${signedPct(item.changePct)})`).join('·')}${josa(big.at(-1)!.label,'은','는').slice(-1)} 등락이 이어지는지가 함께 확인 대상이다.`};
 }
 
+/**
+ * MO-23 (11/18~11/23 traffic reviews): the U.S. close is read in Korea before the KOSPI opens, and the top posts
+ * answer 'what does this mean for 국내 증시'. MOTUS does not forecast; it quotes up to two morning-brief lines in which a
+ * named broker links the U.S. session to the Korean market (반도체·환율·야간선물·코스피), with the report and date.
+ * Evening close comments are skipped: their '금일' is the session that already closed. No line, no paragraph.
+ */
+const KOREA_LINK_TARGET=/코스피|KOSPI|코스닥|KOSDAQ|국내 ?증시|한국 ?증시|국내 ?반도체|반도체|원\/달러|원·달러|원달러|환율|야간 ?선물|외국인/;
+const KOREA_LINK_FORWARD=/금일|오늘|출발|예상|전망|영향|부담|우호|연동|주목|관심|유입|기대/;
+const KOREA_LINK_PAST=/(?:상승|하락|보합|혼조|강세|약세|급등|급락)\s*마감(?:했다|하였다|\.)?$|마감했다|마감하였다/;
+export function koreaLinkParagraphs(briefs:BrokerBrief[],exclude:Set<string>=new Set()):DeepParagraph[]{
+  const picks:Array<{text:string;brief:BrokerBrief}>=[],brokers=new Set<string>(),texts=new Set<string>();
+  for(const brief of briefs){
+    if(/마감|레이더/.test(brief.report.title)||brokers.has(brief.report.broker))continue;
+    const line=[...brief.statements,...(brief.outlooks??[])].find(item=>item.region==='KOREA'&&item.text.length<=130&&KOREA_LINK_TARGET.test(item.text)&&KOREA_LINK_FORWARD.test(item.text)&&!KOREA_LINK_PAST.test(item.text.trim())&&![...exclude].some(used=>used.includes(item.text.replace(/\s+/g,' ').trim().slice(0,30)))&&!texts.has(item.text));
+    if(!line)continue;
+    picks.push({text:line.text,brief});brokers.add(brief.report.broker);texts.add(line.text);
+    if(picks.length>=2)break;
+  }
+  return picks.map(pick=>({text:`국내 시장 연결(증권사 아침 리포트 인용, MOTUS 전망 아님): ${subject(pick.brief.report)} ${koreanDateLabel(pick.brief.report.date)} 「${pick.brief.report.title}」에서 ${said([quote(pick.text)])} 짚었다.`,source:reportSource(pick.brief.report)}));
+}
+
 export function composeUSDeepSections(input:{bundle:BrokerResearchBundle|null;stocks:USAttentionStock[];sectors:SectorMove[];checkpoint?:string;wire?:WireReport[]}):DeepComposition {
   const sections:DeepSection[]=[],sources:DeepComposition['sources']=[],leadAddition:string[]=[];
   const briefs=input.bundle?.briefs??[];
@@ -189,7 +210,8 @@ export function composeUSDeepSections(input:{bundle:BrokerResearchBundle|null;st
   if(rateDigests.length||economy.length)sections.push({key:'us-broker-analysis',placement:'late',role:'broker',title:'증권사별 분석: 금리와 통화정책',paragraphs:[...rateDigests.map(({item,brief})=>digestParagraph(item,brief)),...economy.map(report=>({text:ratingSentence(report),source:reportSource(report),report:reportCard(report)}))]});
   if(input.checkpoint&&sections.length){
     const watch=volatilityWatch(ranked.map(stock=>({label:displayName(stock),changePct:stock.changePct})),'직전 정규장 관심 종목');
-    sections.push({key:'us-risks',placement:'risks',role:'watch',title:'위험 요인과 다음 확인 지표',paragraphs:[...riskParagraphs(briefs,'US',input.checkpoint),...(watch?[watch]:[])]});
+    const link=koreaLinkParagraphs(briefs,new Set(sections.flatMap(section=>section.paragraphs.map(p=>p.text))));
+    sections.push({key:'us-risks',placement:'risks',role:'watch',title:'위험 요인과 다음 확인 지표',paragraphs:[...link,...riskParagraphs(briefs,'US',input.checkpoint),...(watch?[watch]:[])]});
   }
   const used=new Set(sections.flatMap(section=>section.paragraphs.map(p=>p.source?.url).filter(Boolean)));
   for(const report of [...briefs.map(item=>item.report),...economy])if(used.has(report.url))sources.push(sourceEntry(report));
