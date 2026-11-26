@@ -1,13 +1,12 @@
 {
-  "collectedAt": "2026-11-26T03:34:28.652Z",
+  "collectedAt": "2026-11-26T12:59:29.685Z",
   "signalDate": null,
   "provider": null,
   "freshness": "NO_SEARCH_SIGNAL",
   "fallbackReason": "NO_MATCHING_VERIFIED_TOPIC",
   "warnings": [],
   "orderedTopicIds": [
-    "ai:1",
-    "ai:3"
+    "ai:8"
   ],
   "selectedSecondaryTopicId": null,
   "factsChanged": false,

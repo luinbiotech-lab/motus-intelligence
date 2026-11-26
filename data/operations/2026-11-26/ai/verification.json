@@ -4,20 +4,23 @@
   "operationDate": "2026-11-26",
   "observedDate": "2026-11-26",
   "sourceMode": "internal",
-  "verification": "VERIFIED",
-  "unresolvedConflicts": [],
-  "provenancePass": true,
-  "sourceDiversityPass": true,
+  "verification": "REVIEW_REQUIRED",
+  "unresolvedConflicts": [
+    "independent source diversity failed",
+    "production provenance audit failed"
+  ],
+  "provenancePass": false,
+  "sourceDiversityPass": false,
   "sourceLinksPass": true,
   "mobilePass": true,
   "editorialQualityPass": true,
   "leakagePass": true,
   "duplicateCheck": "PENDING_REMOTE",
   "duplicateUncertainty": true,
-  "articleFingerprint": "sha256:c0dee63ece4c860b6f5edd81ab8dec6f9d0c5fe3a4b9c572b80873f3b40f572d",
+  "articleFingerprint": "sha256:cc57aa52916a7f7c65542e80aa621bc81b830174797807cb62ffca4cd4fd2c36",
   "commerceEnabled": false,
-  "verifiedAt": "2026-11-26T03:34:28.652Z",
-  "expiresAt": "2026-11-26T05:04:28.652Z",
+  "verifiedAt": "2026-11-26T12:59:29.685Z",
+  "expiresAt": "2026-11-26T14:29:29.685Z",
   "sourceAuditIds": [
     "ai:page:1",
     "ai:page:10",
@@ -27,7 +30,6 @@
     "ai:page:5",
     "ai:page:6",
     "ai:page:7",
-    "ai:page:8",
     "ai:page:9",
     "anthropic",
     "aws-news",
@@ -61,7 +63,7 @@
     "nvidia-newsroom",
     "openai"
   ],
-  "sourceAuditFingerprint": "sha256:c180e5196b2d7c97e4a23fc0283f1ac346ce36312df9e849af47cfc63d20e229",
+  "sourceAuditFingerprint": "sha256:9db0c32417f57d041131a18c6e1353251d0cf873854f00b9805443feba7caf6e",
   "crossVerificationFingerprint": null,
   "crossVerification": null
 }
