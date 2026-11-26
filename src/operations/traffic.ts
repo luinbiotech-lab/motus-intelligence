@@ -91,3 +91,39 @@ export function searchConsolePages(rows:SearchConsoleRow[],limit=20):SearchConso
   return [...pages].map(([page,e])=>({page,clicks:e.clicks,impressions:e.impressions,ctr:e.impressions?e.clicks/e.impressions:null,position:e.impressions?Math.round(e.weighted/e.impressions*10)/10:null,dates:[...e.dates].sort(),variants:[...e.variants].sort()}))
     .sort((a,b)=>b.impressions-a.impressions||b.clicks-a.clicks||a.page.localeCompare(b.page)).slice(0,limit);
 }
+
+/**
+ * URL Inspection retry (MO-21, MOT-057). 11/20: three 30-second timeouts used up the 6-minute budget and 7 more URLs
+ * were SKIPPED_TIME_BUDGET; 11/22: one URL got HTTP 500. Before this change there was no retry (one attempt per URL).
+ * The call is read-only, so a transient failure (timeout, network error, HTTP 5xx) is retried once, only while the
+ * time budget still has room. 4xx (including 429 quota) is not retried: the same request would fail the same way.
+ */
+export type InspectionAttempt = Error | {ok:boolean;status:number};
+export function isRetryableInspectionFailure(result:InspectionAttempt):boolean {
+  if(result instanceof Error)return true;
+  return !result.ok&&result.status>=500;
+}
+export async function inspectWithRetry<T extends InspectionAttempt>(attempt:()=>Promise<T>,deadline:number,now:()=>number=Date.now):Promise<{result:T;attempts:number}> {
+  const first=await attempt();
+  if(!isRetryableInspectionFailure(first)||now()>deadline)return {result:first,attempts:1};
+  return {result:await attempt(),attempts:2};
+}
+
+/** Why an inspection was not measured, as a short fixed reason. */
+export function inspectionFailureReason(error:string):string {
+  if(error==='SKIPPED_TIME_BUDGET')return 'SKIPPED_TIME_BUDGET';
+  if(/timeout|aborted/i.test(error))return 'TIMEOUT';
+  const status=error.match(/^HTTP (\d{3})/)?.[1];
+  if(status)return status.startsWith('5')?'HTTP_5XX':status==='429'?'HTTP_429':'HTTP_4XX';
+  return 'OTHER';
+}
+
+/** Counts of measured and unmeasured inspections, so the report states the gap instead of reading it as a change. */
+export function summarizeInspections(inspections:Array<{error?:string;attempts?:number;verdict?:unknown}>):{total:number;measured:number;unmeasured:number;byReason:Record<string,number>;retried:number;recoveredByRetry:number} {
+  const byReason:Record<string,number>={};let measured=0,retried=0,recovered=0;
+  for(const item of inspections){
+    if((item.attempts??1)>1){retried++;if(!item.error)recovered++}
+    if(item.error){const reason=inspectionFailureReason(item.error);byReason[reason]=(byReason[reason]??0)+1}else measured++;
+  }
+  return {total:inspections.length,measured,unmeasured:inspections.length-measured,byReason,retried,recoveredByRetry:recovered};
+}
