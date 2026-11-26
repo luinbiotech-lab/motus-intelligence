@@ -87,7 +87,7 @@ export async function collectKoreaDeep(input:{sessionDate:string;operationDate:s
     const composition=composeKoreaDeepSections({bundle,searchTop:search?.stocks??[],wire:wire?.reports??[],kospiChangePct:input.kospiChangePct,checkpoint:input.evening?'다음 거래일에는 외국인·기관 수급의 연속성, 원·달러 환율, 오늘 강세 업종이 이어지는지가 확인 대상이다.':'오늘 장에서는 외국인·기관 수급의 연속성, 원·달러 환율, 전일 강세 업종이 이어지는지가 확인 대상이다.'});
     // 2026-11-13 owner: the FX tile and the investor flows are read, not only listed.
     for(const section of composeKoreaFxFlowComment({fx:input.fx??null,flows:input.flows??[],kospiChangePct:input.kospiChangePct,bundle,wire:wire?.reports??[]})){composition.sections.push(section);for(const p of section.paragraphs)if(p.source&&!composition.sources.some(item=>item.url===p.source!.url))composition.sources.push({label:p.source.label,url:p.source.url,publisher:p.source.label.split(' ')[0]!})}
-    // MO-22 (#97): the movers chart gets the collected sentence that names each stock, or '원인 미확인'.
+    // MO-22 (#97): the movers chart gets the collected sentence that names each stock; others are left out.
     const moverComment=composeKoreaMoverComment({movers:input.movers??[],bundle,wire:wire?.reports??[]});
     if(moverComment){composition.sections.push(moverComment);for(const p of moverComment.paragraphs)if(p.source&&!composition.sources.some(item=>item.url===p.source!.url))composition.sources.push({label:p.source.label,url:p.source.url,publisher:p.source.label.split(' ')[0]!})}
     const sources=[...composition.sources];

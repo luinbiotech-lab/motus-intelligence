@@ -17,23 +17,23 @@ test('a mover named in a broker line is quoted with only the sentence that names
   assert.equal(section.key,'korea-movers-comment');
   assert.equal(section.paragraphs.length,1);
   const text=section.paragraphs[0]!.text;
-  assert.ok(text.startsWith('에이피알(+8.70%) 관련 증권가 시각: 유진투자증권은 11월 23일 「'),text);
+  assert.ok(text.startsWith('에이피알(+8.70%)에 대해 유진투자증권은 「'),text);
+  assert.match(text,/분석했다\.$/);
   assert.match(text,/“화장품\(에이피알·뷰티스킨\)은 블프 효과/);
   assert.doesNotMatch(text,/로봇|데이터센터/,'only the sentence naming the stock is quoted');
   assert.equal(section.paragraphs[0]!.source?.url,'https://example.com/yujin');
 });
 
-test('a wire headline names the stock: publisher, date and KST time are cited; others are 원인 미확인', ()=>{
+test('a wire headline names the stock: publisher, date and KST time are quoted; movers with no sentence are left out (11/22)', ()=>{
   const section=composeKoreaMoverComment({movers:[{name:'깨끗한나라우',changePct:30},{name:'현대오토에버',changePct:29.93},{name:'롯데에너지머티리얼즈',changePct:18.01}],bundle:null,wire})!;
   const texts=section.paragraphs.map(p=>p.text);
-  assert.equal(texts.length,2);
-  assert.equal(texts[0],'현대오토에버(+29.93%) 관련 통신 보도: 연합뉴스는 11월 24일 15:42 「[특징주] 현대오토에버, 로봇 사업 기대에 상한가」에서 “[특징주] 현대오토에버, 로봇 사업 기대에 상한가”라고 전했다.');
-  assert.equal(texts[1],'종목 등락 배경: 깨끗한나라우(+30.00%)·롯데에너지머티리얼즈(+18.01%)의 등락 이유를 직접 설명한 증권사 리포트·통신 기사 문장은 수집되지 않았다(원인 미확인).');
+  assert.equal(texts.length,1);
+  assert.equal(texts[0],'현대오토에버(+29.93%)에 대해 연합뉴스는 “현대오토에버, 로봇 사업 기대에 상한가”라고 전했다.');
+  assert.doesNotMatch(texts.join(' '),/깨끗한나라우|롯데에너지머티리얼즈|원인 미확인|수집되지 않았다/);
 });
 
 test('a name inside a longer name does not count (현대차 ≠ 현대차증권), so no reason is borrowed', ()=>{
-  const section=composeKoreaMoverComment({movers:[{name:'현대차',changePct:-3.1}],bundle:null,wire:[{publisher:'뉴시스',title:'현대차증권, 자사주 소각',url:'https://example.com/w2',publishedAt:'2026-11-24T07:00:00Z',sentence:'현대차증권이 자사주를 소각한다.',feed:'x'}]})!;
-  assert.deepEqual(section.paragraphs.map(p=>p.text),['종목 등락 배경: 현대차(-3.10%)의 등락 이유를 직접 설명한 증권사 리포트·통신 기사 문장은 수집되지 않았다(원인 미확인).']);
+  assert.equal(composeKoreaMoverComment({movers:[{name:'현대차',changePct:-3.1}],bundle:null,wire:[{publisher:'뉴시스',title:'현대차증권, 자사주 소각',url:'https://example.com/w2',publishedAt:'2026-11-24T07:00:00Z',sentence:'현대차증권이 자사주를 소각한다.',feed:'x'}]})??null,null);
   assert.equal(composeKoreaMoverComment({movers:[],bundle})??null,null);
 });
 
@@ -41,12 +41,13 @@ test('the mover reasons print once, inside the 주요 종목 흐름 section', ()
   const unit=createFirstSplitDailyProductionRun().units.find(item=>item.category==='KOREA_MARKET')!;
   const view=structuredClone(unit.viewModel) as KoreaMarketDailyViewModel;
   const name=view.movers[0]!.label;
-  view.deepSections=[...(view.deepSections??[]),composeKoreaMoverComment({movers:[{name,changePct:5}],bundle:null})!];
+  view.deepSections=[...(view.deepSections??[]),composeKoreaMoverComment({movers:[{name,changePct:5}],bundle:null,wire:[{publisher:'연합뉴스',title:`[특징주] ${name}, 강세`,url:'https://example.com/w3',publishedAt:'2026-11-24T06:42:00Z',sentence:null,feed:'x'}]})!];
   const html=renderKoreaEditorialArticle(view).html;
   const at=html.indexOf('data-section="korea-movers"');
   assert.ok(at>=0);
   const section=html.slice(at,html.indexOf('</section>',at)).replace(/<[^>]+>/g,'');
-  assert.match(section,/원인 미확인/);
-  assert.equal((html.replace(/<[^>]+>/g,'').match(/종목 등락 배경:/g)??[]).length,1);
+  assert.match(section,/연합뉴스는 “/);
+  assert.equal((html.replace(/<[^>]+>/g,'').match(/에 대해 연합뉴스는/g)??[]).length,1);
+  assert.doesNotMatch(html,/원인 미확인/);
   assert.doesNotMatch(html,/data-section="korea-movers-comment"/);
 });
