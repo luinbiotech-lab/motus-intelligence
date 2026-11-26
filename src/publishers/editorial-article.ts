@@ -128,7 +128,7 @@ const metricValue=(value:string)=>{const number=Number(value.replace(/[^0-9.+\-�
 export function renderKoreaEditorialArticle(view:KoreaMarketDailyViewModel):DailyMasterRenderResult {
   const parts=[masthead(view.title,view.subtitle,view.displayLabel,view.issueDate)+heroFigure(view.heroImage),lead(view.marketSummary)];
   // 2026-11-13 owner: the FX and flow readings sit inside their data sections, under the figures.
-  const inline=new Set(['korea-fx-comment','korea-flow-comment']),commentOf=(key:string)=>(view.deepSections??[]).find(item=>item.key===key)?.paragraphs.map(p=>`<p style="margin:0 0 13px">${emph(p.text)}${sourceLink(p.source)}</p>`).join('')??'';
+  const inline=new Set(['korea-fx-comment','korea-flow-comment','korea-movers-comment']),commentOf=(key:string)=>(view.deepSections??[]).find(item=>item.key===key)?.paragraphs.map(p=>`<p style="margin:0 0 13px">${emph(p.text)}${sourceLink(p.source)}</p>`).join('')??'';
   const deep=(view.deepSections??[]).filter(item=>!inline.has(item.key)),place=(where:'early'|'late'|'risks')=>deep.filter(item=>(item.placement??'early')===where).map(deepSection).filter(Boolean);
   const top=deep.find(item=>item.key==='korea-stocks')?.bars?.[0];
   parts.push(keyPoints([view.indexMetrics.length?`지수: ${view.indexMetrics.map(item=>`${item.label} ${item.displayValue}`).join(', ')}.`:'',view.investorFlows.length?`수급: ${view.investorFlows.map(item=>`${item.label} ${item.displayValue}`).join(', ')}.`:'',top?`검색 1위 ${top.label} ${top.value>0?'+':top.value<0?'-':''}${Math.abs(top.value).toFixed(2)}%.`:'']));
@@ -144,7 +144,7 @@ export function renderKoreaEditorialArticle(view:KoreaMarketDailyViewModel):Dail
   const bars=(rows:Array<{label:string;displayValue:string}>)=>rows.map(item=>({label:item.label,value:metricValue(item.displayValue.replace(/^.*\(([^)]*)\).*$/,'$1'))})).filter(item=>Number.isFinite(item.value));
   if(view.sectors.length){const chart=barsSvg(bars(view.sectors));parts.push(roleSection('업종별 등락',chart||metricProse(view.sectors),'data','korea-sectors'))}
   const ordinaryMovers=view.movers.filter(item=>!isStructuredLeveragedProduct(item.label));
-  if(ordinaryMovers.length){const chart=barsSvg(bars(ordinaryMovers));parts.push(roleSection('주요 종목 흐름',chart||metricProse(ordinaryMovers),'data','korea-movers'))}
+  if(ordinaryMovers.length){const chart=barsSvg(bars(ordinaryMovers));parts.push(roleSection('주요 종목 흐름',(chart||metricProse(ordinaryMovers))+commentOf('korea-movers-comment'),'data','korea-movers'))}
   parts.push(...place('late'));
   if(view.marketResearch?.length)parts.push(renderMarketResearchEntries(view.marketResearch,view.operationDate??view.issueDate));
   const risks=place('risks');
