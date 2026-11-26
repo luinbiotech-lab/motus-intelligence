@@ -59,7 +59,7 @@
 - [x] B0. 제목 정책 gate, 발행 결과 덮어쓰기, Goldman 날짜 시간대 (#57)
 - [x] B1. **데이터 소스 복원력.** 일시 장애 재시도(`fetchWithTransientRetry`), 국내 Yahoo query2 우회, 미국 FRED 우선·Yahoo 보조는 #56 이전에 반영됐다. 미국 Yahoo 경로의 query2 우회는 #60에서 추가했다. 두 호스트 모두 같은 세션 날짜 검증을 거치며, 값이 다르면 HOLD를 유지한다.
 - [x] B2. **정시성 측정.** 실행마다 `data/operations/<날짜>/<카테고리>/runs.jsonl`에 예정 시각(KST), 실제 시작, 지연(분), 결과를 남긴다(#61). 루프는 이 기록으로 cron 지연을 집계한다.
-- [x] B3. **일일 상태 파일.** `ops-data`의 `data/operations/<날짜>/daily-status.md`에 카테고리별 상태·사유·글 링크·실행 수·첫 실행 지연을 한 표로 남긴다(#61). 실행마다 갱신된다.
+- [x] B3. **일일 상태 파일.** `ops-data`의 `data/operations/<날짜>/daily-status.md`에 카테고리별 상태·사유·글 링크·실행 수·발행 실행(실제로 발행한 실행과 그 지연, MOT-048)을 한 표로 남긴다(#61). 실행마다 갱신된다.
 - [x] B4. **AI 제목 다양성.** 이벤트 유형(출시·인프라·제휴·도입·투자·연구·보안·정책·교육)별로 제목 꼬리를 다르게 쓴다(#62). 유형을 모르면 기존 제목을 유지한다.
 - [x] B5. **일회성 workflow 정리.** 검토 결과 삭제 대상이 없다. `motus-existing-korea-close-title-correction.yml`은 #53에서 수동 정정 도구로 의도적으로 남겼고, `motus-blogger-connection.yml`은 읽기 전용 진단이다. 정정 도구에는 발행 글을 바꾸는 `apply` 옵션이 있으나 수동 실행 전용이므로 그대로 둔다.
 - [x] B6. **기록 정합성 점검 도구.** `npm run motus:record-consistency -- --root <ops-data의 data>`는 읽기 전용이다(#63). ledger와 결과 파일의 발행물을 Library·Weekly feed·Search 등록과 대조하고, 같은 운영일 다중 발행과 같은 시장 세션 이중 발행도 찾는다. 루프는 매 실행 이 점검을 돌린다.

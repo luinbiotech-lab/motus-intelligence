@@ -50,11 +50,29 @@ export async function buildDailyStatus(operationsRoot:string,date:string,generat
     let state='미실행',reason='',url='';
     if(published){state='발행';url=published.publicPostUrl??''}
     else{const outcome=await outcomeFile(root);if(outcome){state=koreanState(String(outcome.state??''));reason=String(outcome.reasonCode??outcome.reason??outcome.error??(outcome.gate as {reasons?:string[]}|undefined)?.reasons?.join('; ')??'')}}
-    const firstDelay=runs.map(run=>run.delayMinutes).find((value):value is number=>typeof value==='number');
-    rows.push(`| ${label} | ${state} | ${escapeCell(reason).slice(0,160)} | ${url?`[링크](${url})`:''} | ${runs.length} | ${firstDelay===undefined?'':firstDelay+'분'} |`);
+    rows.push(`| ${label} | ${state} | ${escapeCell(reason).slice(0,160)} | ${url?`[링크](${url})`:''} | ${runs.length} | ${publishingRunCell(runs,Boolean(published))} |`);
   }
   const sitemap=await sitemapStatusLine(join(operationsRoot,'..','traffic'),date);
-  return [`# MOTUS 일일 상태 ${date}`,'',`갱신: ${generatedAt}`,'','| 카테고리 | 상태 | 사유 | 글 | 실행 수 | 첫 실행 지연 |','| --- | --- | --- | --- | --- | --- |',...rows,'','지연은 예정 시각(KST) 대비 실제 시작까지의 분이다. 수동 실행은 예정 시각이 없어 비워 둔다.','',sitemap,''].join('\n');
+  return [`# MOTUS 일일 상태 ${date}`,'',`갱신: ${generatedAt}`,'','| 카테고리 | 상태 | 사유 | 글 | 실행 수 | 발행 실행 |','| --- | --- | --- | --- | --- | --- |',...rows,'','발행 실행은 실제로 글을 발행한 실행이다(예약이면 예정 시각 대비 지연, 수동이면 시작 시각 KST). 발행 뒤 SKIP된 예약 실행의 지연은 넣지 않는다(MOT-048). 미발행이면 첫 예약 실행의 지연을 적는다.','',sitemap,''].join('\n');
+}
+
+/**
+ * The run that actually published, not the first run with a delay value: after a manual (or evening) publication the later
+ * cron runs SKIP with ALREADY_PUBLISHED and their large delays used to be shown as if they were the publication delay (MOT-048).
+ */
+export function publishingRunCell(runs:RunRecord[],publishedInLedger:boolean):string {
+  const publisher=runs.find(run=>run.state==='PUBLISHED');
+  if(publisher){
+    if(publisher.event==='schedule'&&publisher.scheduledKst&&typeof publisher.delayMinutes==='number')return `예약 ${publisher.scheduledKst} · ${publisher.delayMinutes}분 지연`;
+    const clock=kstClock(publisher.startedAt);return clock?`수동 ${clock} 시작`:'수동';
+  }
+  if(publishedInLedger)return '발행 실행 기록 없음';
+  const firstScheduled=runs.find(run=>run.event==='schedule'&&typeof run.delayMinutes==='number');
+  return firstScheduled?`미발행 · 첫 예약 ${firstScheduled.scheduledKst} ${firstScheduled.delayMinutes}분 지연`:'';
+}
+function kstClock(iso:string):string|null {
+  const instant=Date.parse(iso);if(!Number.isFinite(instant))return null;const kst=new Date(instant+9*3600000);
+  return `${String(kst.getUTCHours()).padStart(2,'0')}:${String(kst.getUTCMinutes()).padStart(2,'0')}`;
 }
 
 async function readLedgerEvents(root:string):Promise<Array<{event?:string;publicPostUrl?:string|null}>> {
