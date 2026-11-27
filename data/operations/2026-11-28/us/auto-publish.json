@@ -1,0 +1,10 @@
+{
+  "state": "HOLD",
+  "reasonCode": "BROKER_MARKET_COMMENTARY_UNAVAILABLE",
+  "reasonCodes": [
+    "BROKER_MARKET_COMMENTARY_UNAVAILABLE"
+  ],
+  "reason": "BROKER_MARKET_COMMENTARY_UNAVAILABLE",
+  "insertCallCount": 0,
+  "publishCallCount": 0
+}
