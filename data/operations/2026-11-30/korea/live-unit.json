@@ -4,6 +4,6 @@
   "operationDate": "2026-11-30",
   "status": "HOLD",
   "observedDate": null,
-  "reasonCode": "YAHOO_FINANCE_KOSDAQ_ROW_MISSING",
+  "reasonCode": "YAHOO_FINANCE_HTTP_429",
   "unit": null
 }

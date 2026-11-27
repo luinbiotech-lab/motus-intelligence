@@ -1,1 +1,2 @@
 {"runId":"45963666977","attempt":"1","event":"workflow_dispatch","schedule":null,"category":"korea","operationDate":"2026-11-30","scheduledKst":null,"startedAt":"2026-11-27T08:10:56Z","delayMinutes":null,"state":"HOLD","reason":"YAHOO_FINANCE_KOSDAQ_ROW_MISSING","publicPostUrl":null}
+{"runId":"45976249694","attempt":"1","event":"schedule","schedule":"25 1 * * 1-5","category":"korea","operationDate":"2026-11-30","scheduledKst":"10:25","startedAt":"2026-11-27T09:45:04Z","delayMinutes":500,"state":"HOLD","reason":"YAHOO_FINANCE_HTTP_429","publicPostUrl":null}

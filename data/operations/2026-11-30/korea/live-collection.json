@@ -5,7 +5,7 @@
   "observedDate": null,
   "category": "KOREA_MARKET",
   "state": "HOLD",
-  "reasonCode": "YAHOO_FINANCE_KOSDAQ_ROW_MISSING",
+  "reasonCode": "YAHOO_FINANCE_HTTP_429",
   "verification": "FAILED",
   "publishCallCount": 0,
   "commerce": {

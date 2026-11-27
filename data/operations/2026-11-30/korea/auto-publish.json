@@ -1,10 +1,10 @@
 {
   "state": "HOLD",
-  "reasonCode": "YAHOO_FINANCE_KOSDAQ_ROW_MISSING",
+  "reasonCode": "YAHOO_FINANCE_HTTP_429",
   "reasonCodes": [
-    "YAHOO_FINANCE_KOSDAQ_ROW_MISSING"
+    "YAHOO_FINANCE_HTTP_429"
   ],
-  "reason": "YAHOO_FINANCE_KOSDAQ_ROW_MISSING",
+  "reason": "YAHOO_FINANCE_HTTP_429",
   "insertCallCount": 0,
   "publishCallCount": 0
 }

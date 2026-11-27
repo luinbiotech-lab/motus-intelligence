@@ -6,7 +6,7 @@
   "sourceMode": "internal",
   "verification": "FAILED",
   "unresolvedConflicts": [
-    "YAHOO_FINANCE_KOSDAQ_ROW_MISSING"
+    "YAHOO_FINANCE_HTTP_429"
   ],
   "provenancePass": false,
   "sourceDiversityPass": false,
@@ -18,18 +18,17 @@
   "duplicateUncertainty": true,
   "articleFingerprint": "",
   "commerceEnabled": false,
-  "verifiedAt": "2026-11-27T08:11:48.347Z",
-  "expiresAt": "2026-11-27T09:41:48.347Z",
+  "verifiedAt": "2026-11-27T09:45:56.757Z",
+  "expiresAt": "2026-11-27T11:15:56.757Z",
   "sourceAuditIds": [
     "naver:kospi:history",
     "naver:kosdaq:history",
     "naver:usd-krw",
     "naver:flows",
-    "naver:mover",
-    "yahoo-finance:kospi:query1.finance.yahoo.com"
+    "naver:mover"
   ],
-  "sourceAuditFingerprint": "sha256:2f54f044e122f4a6e0005589fe37bdd13f827e5391a12b3d70b176e7b5e729cc",
-  "crossVerificationFingerprint": "sha256:f8808ac1575488c211fb1c99d74da2c467760957dfac79ce2d15b0a3abd6bf0d",
+  "sourceAuditFingerprint": "sha256:548512769bc79eea2a415a37ba0a0b44c179182eee8b7fa391df5a8cfda629a8",
+  "crossVerificationFingerprint": "sha256:7c9ff8d0d2ed5e9f3b5bb30fd446bf7b3ac831398428bc0a2522ef435ae4941a",
   "crossVerification": {
     "schemaVersion": "1.0",
     "category": "KOREA_MARKET",
@@ -43,48 +42,29 @@
       ]
     },
     "independentSource": {
-      "providers": [
-        "YAHOO_FINANCE"
-      ],
-      "domains": [
-        "yahoo.com"
-      ],
-      "urls": [
-        "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?period1=1795564800&period2=1795996800&interval=1d"
-      ]
+      "providers": [],
+      "domains": [],
+      "urls": []
     },
-    "comparedFields": [
-      {
-        "field": "KOSPI",
-        "primaryValue": 4915.68,
-        "independentValue": 4915.68017578125,
-        "difference": 0.0001757812497089617,
-        "tolerance": 0.05,
-        "result": "PASS",
-        "primarySourceUrl": "https://m.stock.naver.com/api/index/KOSPI/price?pageSize=10&page=1",
-        "independentSourceUrl": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?period1=1795564800&period2=1795996800&interval=1d",
-        "metricBasis": "SESSION_CLOSE"
-      }
-    ],
+    "comparedFields": [],
     "tolerance": {
       "KOSPI": 0.05,
       "KOSDAQ": 0.05,
       "USD_KRW": 2
     },
-    "comparisonResult": "FAIL",
-    "sourceDiversityPass": true,
+    "comparisonResult": "UNAVAILABLE",
+    "sourceDiversityPass": false,
     "verification": "REVIEW_REQUIRED",
     "reasonCodes": [
-      "YAHOO_FINANCE_KOSDAQ_ROW_MISSING",
-      "KOREA_OFFICIAL_INDEX_COMPARISON_INCOMPLETE"
+      "YAHOO_FINANCE_HTTP_429",
+      "KOREA_OFFICIAL_INDEX_COMPARISON_INCOMPLETE",
+      "KOREA_INDEPENDENT_SOURCE_DIVERSITY_FAILED"
     ],
-    "verifiedAt": "2026-11-27T08:11:48.347Z",
+    "verifiedAt": "2026-11-27T09:45:56.757Z",
     "officialPhase": "PRE_PUBLICATION",
     "reconciliation": {
       "status": "NOT_REQUIRED",
-      "officialObservedDates": [
-        "2026-11-27"
-      ]
+      "officialObservedDates": []
     }
   }
 }
