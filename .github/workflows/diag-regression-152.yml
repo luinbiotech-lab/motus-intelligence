@@ -7,7 +7,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ref: [a5c3627c1c18b4bd32354a7fd603429c10bebc6f]
+        ref: [bad266cb2cff961604a8468983ceabceb4544161]
         job:
           - {cat: korea, date: '2026-11-27', hydrate: 'false'}
           - {cat: us, date: '2026-11-26', hydrate: 'false'}
