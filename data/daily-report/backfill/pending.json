@@ -1,39 +1,39 @@
 {
-  "updatedAt": "2026-11-26T03:04:43.886Z",
+  "updatedAt": "2026-11-27T03:14:56.669Z",
   "items": [
     {
-      "postId": "5408418122239801516",
-      "url": "https://motusnova.blogspot.com/2026/11/2026-11-10-ai.html",
-      "title": "[데일리 리포트] 2026년 11월 10일 국내 증시·미국 증시·AI 핵심 정리",
+      "postId": "4125442001749836948",
+      "url": "https://motusnova.blogspot.com/2026/11/2026-11-13-ai.html",
+      "title": "[데일리 리포트] 2026년 11월 13일 국내 증시·미국 증시·AI 핵심 정리",
       "labels": [
         "리포트"
       ],
-      "originalSha256": "sha256:b52e2a2a7deb12fb6532ab098aff10e98f49c2c3ec0b4a14cee1e1ca6392a309",
-      "proposedSha256": "sha256:d88d6ce4dd3fe60abdbb4c42017b5b4514037f089b62e30cb734505f50b14a99",
+      "originalSha256": "sha256:dfbec2d5f6d6d9f0158be7a6d62db870a683fd645e4ae25969b538f54ac4567d",
+      "proposedSha256": "sha256:e905ff97d00d77eaa22e45173407a692179ef32aef4ca1621aafecb42f450ecc",
       "image": null,
       "relatedCount": 6
     },
     {
-      "postId": "276851531641962947",
-      "url": "https://motusnova.blogspot.com/2026/11/2026-11-11-ai.html",
-      "title": "[데일리 리포트] 2026년 11월 11일 국내 증시·미국 증시·AI 핵심 정리",
+      "postId": "4018719477333209473",
+      "url": "https://motusnova.blogspot.com/2026/11/s-500-25-46-fomc.html",
+      "title": "[주간 증시] S&P 500 주간 2.5% 상승·코스피 4.6% 상승…다음 주 미국 소매판매·FOMC 의사록 주목",
       "labels": [
-        "리포트"
+        "주간 증시"
       ],
-      "originalSha256": "sha256:3eb4587964107e628d025e52a96335ddb50acb97de31b8f1ec84fea558a914bd",
-      "proposedSha256": "sha256:8d95a0b932cdb1870282d256f6cddd77691464685c606349f0f31a9599ccad8e",
+      "originalSha256": "sha256:c85329d256d85b87b7107c9c3e8fdcbf2b0a115da19db850caf08a28667c6f23",
+      "proposedSha256": "sha256:58b2d98d3786b424f9c49774e0d22b77a07e9e6bfa0141ab6e788d2df4bada7e",
       "image": null,
-      "relatedCount": 6
+      "relatedCount": 5
     },
     {
-      "postId": "255878027584643605",
-      "url": "https://motusnova.blogspot.com/2026/11/2026-11-12-ai.html",
-      "title": "[데일리 리포트] 2026년 11월 12일 국내 증시·미국 증시·AI 핵심 정리",
+      "postId": "1656849563003522505",
+      "url": "https://motusnova.blogspot.com/2026/11/2026-11-16-ai.html",
+      "title": "[데일리 리포트] 2026년 11월 16일 국내 증시·AI 핵심 정리",
       "labels": [
         "리포트"
       ],
-      "originalSha256": "sha256:aeca3a12c86ec968e925acded19330be6df865b37927493c0c463e0d27892d34",
-      "proposedSha256": "sha256:843a8593a42edd286285659740594d03dc9bc7e23ffbaa5ce3a7491f3d64e0e2",
+      "originalSha256": "sha256:fda0b4fd3b1765537f337e5657b8d848c3ebef37e856fd1eb338c37b1b46ddf4",
+      "proposedSha256": "sha256:8dfb964f4a8b3ca3801112dd0fdfa52e3891c0ae18eef51e73b78dfc93a24cc6",
       "image": null,
       "relatedCount": 6
     }
