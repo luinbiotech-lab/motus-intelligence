@@ -1,0 +1,134 @@
+{
+  "schemaVersion": "1.0",
+  "sourceMode": "internal",
+  "category": "KOREA_MARKET",
+  "operationDate": "2026-11-30",
+  "status": "HOLD",
+  "reasonCode": "YAHOO_FINANCE_KOSDAQ_ROW_MISSING",
+  "entries": [
+    {
+      "sourceId": "naver:kospi:history",
+      "category": "KOREA_MARKET",
+      "url": "https://m.stock.naver.com/api/index/KOSPI/price?pageSize=10&page=1",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-27T08:11:48.347Z",
+      "error": null,
+      "observedDate": "2026-11-27",
+      "referenceDate": "2026-11-27",
+      "dateField": "localTradedAt",
+      "sourceTimestamp": "2026-11-27"
+    },
+    {
+      "sourceId": "naver:kosdaq:history",
+      "category": "KOREA_MARKET",
+      "url": "https://m.stock.naver.com/api/index/KOSDAQ/price?pageSize=10&page=1",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-27T08:11:48.347Z",
+      "error": null,
+      "observedDate": "2026-11-27",
+      "referenceDate": "2026-11-27",
+      "dateField": "localTradedAt",
+      "sourceTimestamp": "2026-11-27"
+    },
+    {
+      "sourceId": "naver:usd-krw",
+      "category": "KOREA_MARKET",
+      "url": "https://api.stock.naver.com/marketindex/exchange/FX_USDKRW",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-27T08:11:48.347Z",
+      "error": null,
+      "dateField": "exchangeInfo.localTradedAt",
+      "sourceTimestamp": "2026-11-27T17:09:03+09:00",
+      "observedDate": "2026-11-27",
+      "referenceDate": "2026-11-27"
+    },
+    {
+      "sourceId": "naver:flows",
+      "category": "KOREA_MARKET",
+      "url": "https://m.stock.naver.com/api/index/KOSPI/trend",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-27T08:11:48.347Z",
+      "error": null,
+      "dateField": "bizdate",
+      "sourceTimestamp": "20261127",
+      "observedDate": "2026-11-27",
+      "referenceDate": "2026-11-27"
+    },
+    {
+      "sourceId": "naver:mover",
+      "category": "KOREA_MARKET",
+      "url": "https://m.stock.naver.com/api/stocks/up/KOSPI?page=1&pageSize=20",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-27T08:11:48.347Z",
+      "error": null,
+      "dateField": "localTradedAt",
+      "sourceTimestamp": "2026-11-27T17:11:24+09:00",
+      "observedDate": "2026-11-27",
+      "referenceDate": "2026-11-27"
+    },
+    {
+      "sourceId": "naver:sector",
+      "category": "KOREA_MARKET",
+      "url": "https://stock.naver.com/api/domestic/market/upjong/list?startIdx=0&pageSize=100&sortType=changeRate",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-11-27T08:11:48.347Z",
+      "error": "HTTP_404"
+    },
+    {
+      "sourceId": "krx:official",
+      "category": "KOREA_MARKET",
+      "url": "https://data-dbg.krx.co.kr",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-11-27T08:11:48.347Z",
+      "error": "KRX_KOSPI_NO_ROWS_FOR_DATE",
+      "referenceDate": "2026-11-27"
+    },
+    {
+      "sourceId": "yahoo-finance:kospi:query1.finance.yahoo.com",
+      "category": "KOREA_MARKET",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKS11?period1=1795564800&period2=1795996800&interval=1d",
+      "status": "PASS",
+      "recordCount": 1,
+      "collectedAt": "2026-11-27T08:11:48.347Z",
+      "error": null,
+      "referenceDate": "2026-11-27"
+    },
+    {
+      "sourceId": "yahoo-finance:kosdaq:query1.finance.yahoo.com",
+      "category": "KOREA_MARKET",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/%5EKQ11?period1=1795564800&period2=1795996800&interval=1d",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-11-27T08:11:48.347Z",
+      "error": "YAHOO_FINANCE_KOSDAQ_ROW_MISSING",
+      "referenceDate": "2026-11-27"
+    },
+    {
+      "sourceId": "yahoo-finance:kosdaq:query2.finance.yahoo.com",
+      "category": "KOREA_MARKET",
+      "url": "https://query2.finance.yahoo.com/v8/finance/chart/%5EKQ11?period1=1795564800&period2=1795996800&interval=1d",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-11-27T08:11:48.347Z",
+      "error": "YAHOO_FINANCE_KOSDAQ_ROW_MISSING",
+      "referenceDate": "2026-11-27"
+    },
+    {
+      "sourceId": "yahoo-finance:secondary",
+      "category": "KOREA_MARKET",
+      "url": "https://finance.yahoo.com/",
+      "status": "FAILED",
+      "recordCount": 0,
+      "collectedAt": "2026-11-27T08:11:48.347Z",
+      "error": "YAHOO_FINANCE_KOSDAQ_ROW_MISSING",
+      "referenceDate": "2026-11-27"
+    }
+  ]
+}
