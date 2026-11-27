@@ -2,11 +2,11 @@
   "mode": "LIVE",
   "sourceMode": "internal",
   "date": "2026-11-30",
-  "observedDate": null,
+  "observedDate": "2026-11-27",
   "category": "KOREA_MARKET",
-  "state": "HOLD",
-  "reasonCode": "YAHOO_FINANCE_HTTP_429",
-  "verification": "FAILED",
+  "state": "LIVE_READY",
+  "reasonCode": null,
+  "verification": "VERIFIED",
   "publishCallCount": 0,
   "commerce": {
     "enabled": false
