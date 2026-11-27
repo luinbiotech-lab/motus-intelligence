@@ -32,13 +32,30 @@ export function wireTime(value:string):number {
   return bare?Date.parse(`${bare[1]}T${bare[2]!.length===5?bare[2]+':00':bare[2]}+09:00`):Date.parse(value);
 }
 
+/**
+ * MO-34 (11/24·11/25): a bond close ('국고채 금리 혼조세…코스피 상승 속…', '[채권-마감] 금통위 대기 속 코스피 급락…')
+ * names 코스피 in its headline, so the headline passed; its sentence ('국고채 금리가 25일 하락했다') became the cause of
+ * a 6.16% KOSPI fall. A sentence about another market (bonds, rates, FX) never explains the Korea stock session.
+ */
+const OTHER_MARKET_SUBJECT=/국고채|국채|채권|회사채|금리(?:는|가|도)|원·달러|원-달러|달러-원|원달러|환율(?:은|이|도)|외환/;
+const STOCK_SUBJECT=/코스피|코스닥|KOSPI|KOSDAQ|증시|주가|지수|증안펀드|주식시장|유가증권시장/;
+/** A desk tag for another market ([채권-마감], [외환-마감]) or a first clause that leads with bonds/FX and not stocks. */
+export function otherMarketHeadline(title:string):boolean {
+  if(/^\s*\[(?:채권|외환|서환|달러|국채|뉴욕채권|뉴욕환시)/.test(title))return true;
+  const head=title.split(/…|\.{3}/)[0]!;
+  return /국고채|국채|채권|회사채|금리|환율|원·달러|원-달러|달러-원|외환/.test(head)&&!/코스피|코스닥|증시|KOSPI|KOSDAQ/.test(head);
+}
+export function otherMarketSentence(region:WireRegion,sentence:string):boolean {
+  return region==='KOREA'&&OTHER_MARKET_SUBJECT.test(sentence)&&!STOCK_SUBJECT.test(sentence);
+}
 /** The first sentence of the summary that gives a reason for the move (pure index-level lines are skipped). */
-export function causalSentence(description:string):string|null {
+export function causalSentence(description:string,region?:WireRegion):string|null {
   const sentences=description.replace(/^\s*[[(][^\])]{0,40}[\])]\s*[^=]{0,30}=\s*/,'').split(/(?<=다\.)\s*|\n+/).map(item=>item.trim()).filter(Boolean);
   for(const sentence of sentences){
     if(sentence.length<15||sentence.length>150)continue;
     const digits=(sentence.match(/\d/g)??[]).length/sentence.length;
     if(digits>0.12||/후속기사|무단 전재|저작권/.test(sentence))continue;
+    if(region&&otherMarketSentence(region,sentence))continue;
     if(CAUSAL.test(sentence))return sentence;
   }
   return null;
@@ -64,6 +81,8 @@ export function wireWindow(region:WireRegion,sessionDate:string):[number,number]
 
 /** Close reports only: openings, intraday, flash, preview and question headlines are not explanations of the session. */
 export function isCloseReport(region:WireRegion,title:string):boolean {
+  // A desk tag for another market ([채권-마감], [외환-마감]) or a headline that leads with bonds/FX is that market's close.
+  if(region==='KOREA'&&otherMarketHeadline(title))return false;
   if(/출발|개장|장중|오전|전망|주요공시|\[속보\]|1보|까\s*[?？]?$|[?？]/.test(title.replace(/\([^)]*\)\s*$/,'').trim()))return false;
   return region==='US'?/뉴욕증시|뉴욕 증시|미 증시|미국 증시/.test(title)&&!/코스피|코스닥|국내 증시|아시아/.test(title)&&/마감|하락|상승|혼조|일제히|급락|급등|↓|↑/.test(title):/코스피/.test(title)&&/마감|하락|상승|급락|급등|반납|↓|↑|내려|올라/.test(title)&&!/코스닥(?:만|은)/.test(title);
 }
@@ -99,7 +118,7 @@ export async function fillSentencesFromArticles(reports:WireReport[],region:Wire
     try{
       const response=await fetcher(item.url,{headers:{'user-agent':UA,accept:'text/html'},signal:AbortSignal.timeout(15000)});
       if(!response.ok)throw new Error('WIRE_ARTICLE_HTTP_'+response.status);
-      const sentence=causalSentence(articleText(await response.text()));
+      const sentence=causalSentence(articleText(await response.text()),region);
       for(const report of reports)if(report.url===item.url)report.sentence=sentence;
     }catch(error){audit.push({sourceId:'wire:article:'+item.url.replace(/^https:\/\//,''),url:item.url,status:'FAILED',count:0,error:error instanceof Error&&/^WIRE_ARTICLE_HTTP_\d{3}$/.test(error.message)?error.message:'WIRE_ARTICLE_FETCH_FAILED'})}
   }));
@@ -122,6 +141,8 @@ export async function collectWireCloses(input:{region:WireRegion;sessionDate:str
       all.push(...parseWireFeed(await response.text(),feed));
     }catch(error){audit.push({sourceId:'wire:'+feed.url.replace(/^https:\/\//,''),url:feed.url,status:'FAILED',count:0,error:error instanceof Error&&/^WIRE_HTTP_\d{3}$/.test(error.message)?error.message:'WIRE_FETCH_FAILED'})}
   }));
+  // Feed summaries are parsed once for both regions; a sentence about another market is read again from the article.
+  for(const report of all)if(report.sentence&&otherMarketSentence(input.region,report.sentence))report.sentence=null;
   await fillSentencesFromArticles(all,input.region,input.sessionDate,input.change,input.now??Date.now(),input.fetcher,audit);
   const reports=selectWireReports(all,input.region,input.sessionDate,input.change,input.now??Date.now());
   for(const report of reports)audit.push({sourceId:'wire:report:'+report.url.replace(/^https:\/\//,''),url:report.url,status:'PASS',count:1,error:null});
