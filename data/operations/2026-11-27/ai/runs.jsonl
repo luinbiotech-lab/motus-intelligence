@@ -1,0 +1,1 @@
+{"runId":"45934838313","attempt":"1","event":"workflow_dispatch","schedule":null,"category":"ai","operationDate":"2026-11-27","scheduledKst":null,"startedAt":"2026-11-27T03:33:39Z","delayMinutes":null,"state":"HOLD","reason":"verification is not VERIFIED; unresolved verification conflict; provenance validation failed","publicPostUrl":null}

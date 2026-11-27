@@ -1,0 +1,14 @@
+{
+  "collectedAt": "2026-11-27T03:34:29.341Z",
+  "signalDate": null,
+  "provider": null,
+  "freshness": "NO_SEARCH_SIGNAL",
+  "fallbackReason": "NO_MATCHING_VERIFIED_TOPIC",
+  "warnings": [],
+  "orderedTopicIds": [
+    "ai:9"
+  ],
+  "selectedSecondaryTopicId": null,
+  "factsChanged": false,
+  "gateOverride": false
+}

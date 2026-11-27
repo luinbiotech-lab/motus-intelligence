@@ -1,0 +1,14 @@
+{
+  "mode": "LIVE",
+  "sourceMode": "internal",
+  "date": "2026-11-27",
+  "observedDate": "2026-11-27",
+  "category": "AI_INTELLIGENCE",
+  "state": "HOLD",
+  "reasonCode": "independent source diversity failed; production provenance audit failed",
+  "verification": "REVIEW_REQUIRED",
+  "publishCallCount": 0,
+  "commerce": {
+    "enabled": false
+  }
+}
