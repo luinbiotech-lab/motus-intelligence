@@ -131,8 +131,18 @@ export function pressFlow(amounts:Array<{label:string;value:number}>):string {
   const [first,second]=top&&top.value<0?[b,a]:[a,b];
   return first&&second?`${first}했고, ${second}했다.`:`${first||second}했다.`;
 }
-/** A quoted sentence followed by the right quotative: '…했다”고' after a sentence ending in 다, '…시사”라고' otherwise. */
-export function quoted(text:string):string {const body=text.trim().replace(/[.。]\s*$/,'');return `“${body}”${/다$/.test(body)?'고':'라고'}`}
+/**
+ * The quotative after a closing quote, as Korean newspapers write it: '…했다”고' after a plain 다 ending,
+ * '…변수입니다”라고' after a polite 니다 ending, '…마감”이라고' after a final consonant, '…시사”라고' otherwise.
+ */
+export function quotative(body:string):string {
+  const text=body.trim().replace(/[.。!?]+$/,'');
+  if(/다$/.test(text)&&!/니다$/.test(text))return '고';
+  const code=text.slice(-1).charCodeAt(0)-0xac00;
+  return code>=0&&code<11172&&code%28!==0?'이라고':'라고';
+}
+/** A quoted sentence followed by the right quotative (see quotative). */
+export function quoted(text:string):string {const body=text.trim().replace(/[.。]\s*$/,'');return `“${body}”${quotative(body)}`}
 /**
  * A cause is quoted only when it is about this market and agrees with the day's direction (11/18: a Korea close at +1.99%
  * quoted a Fed speaker's hawkish remark from a broker brief). Korea needs a Korean market word; the U.S. needs a U.S.

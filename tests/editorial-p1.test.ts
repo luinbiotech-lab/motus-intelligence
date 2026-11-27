@@ -45,7 +45,8 @@ test('a short stock name does not borrow a longer name\'s comment', () => {
   const composed=composeKoreaDeepSections({bundle,searchTop:[{rank:1,name:'SK',code:'034730',close:1,changePct:1,date:'2026-10-29',url:'https://m.stock.naver.com/api/stock/034730/price'},{rank:2,name:'SK하이닉스',code:'000660',close:1,changePct:5,date:'2026-10-29',url:'https://m.stock.naver.com/api/stock/000660/price'}],checkpoint:'체크.'});
   const stocks=composed.sections.find(item=>item.key==='korea-stocks')!.paragraphs.map(p=>p.text);
   assert.ok(!stocks.some(text=>text.startsWith('검색 1위 SK는')&&text.includes('HBM')),stocks.join('\n'));
-  assert.ok(stocks.some(text=>text.startsWith('검색 2위 SK하이닉스는')&&text.includes('HBM')),stocks.join('\n'));
+  // The sentence is already quoted in the causes section, so the stock cites the same report without re-quoting it (2026-11-27).
+  assert.ok(stocks.some(text=>text.startsWith('검색 2위 SK하이닉스는')&&text.includes('에서도 이 종목이 거론됐다')),stocks.join('\n'));
 });
 
 test('an unfinalized daily bar uses the regular-market price stamped at the session close', async () => {

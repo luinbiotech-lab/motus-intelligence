@@ -7,7 +7,7 @@ import {josa} from './ai-generic-synthesis.js';
 import {analystLabel,koreanDateLabel,type BrokerBrief,type BrokerDigest,type BrokerReport,type BrokerResearchBundle} from './broker-briefs.js';
 import {displayName,moveWord,signedPct,absPct,type KoreaSearchStock,type SectorMove,type USAttentionStock} from './market-attention.js';
 import type {WireReport} from './market-wire.js';
-import {pressEok,pressFlow} from './market-narrative.js';
+import {pressEok,pressFlow,quotative} from './market-narrative.js';
 
 import type {ArticleDeepParagraph,ArticleDeepSection,ArticleReportCard} from '../intelligence/daily-masters.js';
 export type DeepParagraph=ArticleDeepParagraph;
@@ -17,8 +17,8 @@ export const reportCard=(report:BrokerReport):ArticleReportCard=>({company:repor
 export interface DeepComposition {sections:DeepSection[];leadAddition:string[];titleFocus:string|null;sources:Array<{label:string;url:string;publisher:string;date?:string}>;hasCoreCommentary?:boolean}
 
 const quote=(value:string)=>`“${value.replace(/[“"]/g,'‘').replace(/[”]/g,'’').replace(/\s+/g,' ').trim().replace(/[.。]$/,'')}”`;
-/** “…”라고 / “…”이라고 by the final syllable of the quotation. */
-function said(quotes:string[]):string {const last=quotes.at(-1)??'',char=last.replace(/[”’\s]+$/,'').slice(-1),code=char.charCodeAt(0)-0xac00;const batchim=code>=0&&code<11172&&code%28!==0;return `${quotes.join(', ')}${char==='다'?'고':batchim?'이라고':'라고'}`}
+/** “…”고 / “…”라고 / “…”이라고 by the ending of the quotation (see quotative). */
+function said(quotes:string[]):string {return `${quotes.join(', ')}${quotative((quotes.at(-1)??'').replace(/[”’\s]+$/,''))}`}
 /** Statements that describe the market as a whole lead; side notes (FX, oil) follow. */
 function marketScore(text:string){const digits=(text.match(/\d/g)??[]).length/Math.max(text.length,1);return (/마감|지수|증시|코스피|KOSPI|나스닥|S&P|다우|3대/.test(text)?2:0)+(/상승|하락|강세|약세|급등|급락|반등/.test(text)?1:0)+(/힘입|기대|영향|덕분|때문|배경|우려|부진|악화|쇼크|하회|상회|호실적|속에?\s|에\s?(?:상승|하락|급등|급락|강세|약세)/.test(text)?3:0)-(digits>0.12?3:0)}
 const reportSource=(report:BrokerReport)=>({label:`${report.broker} ${report.title} (${koreanDateLabel(report.date)})`,url:report.url});
@@ -219,7 +219,10 @@ export function composeKoreaDeepSections(input:{bundle:BrokerResearchBundle|null
     // Why the stock moved: a broker comment on the session that names it, quoted with the broker; then the latest rating.
     // The name must stand on its own: 'SK' does not match 'SK하이닉스', '현대차' does not match '현대차증권'.
     const named=(text:string,name:string)=>new RegExp(`(?<![가-힣A-Za-z0-9])${name.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}(?![가-힣A-Za-z0-9&])|(?<![가-힣A-Za-z0-9])${name.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}(?=[은는이가을를의와과도에])`).test(text);
-    const why=(name:string)=>briefs.flatMap(brief=>brief.statements.filter(item=>item.region==='KOREA'&&item.text.length<=200&&named(item.text,name)).map(item=>({item,brief})))[0];
+    // 2026-11-27 (RB-MOTUS-INTEG-152 run): one iM sentence was printed four times (analysis, causes, 1위, 2위). A sentence
+    // already quoted in the causes section, or for an earlier stock, is not quoted again.
+    const quotedAlready=new Set(sections.flatMap(section=>section.paragraphs.map(p=>p.text)).join('\n').match(/“[^”]+”/g)??[]);
+    const why=(name:string)=>{const hit=briefs.flatMap(brief=>brief.statements.filter(item=>item.region==='KOREA'&&item.text.length<=200&&named(item.text,name)).map(item=>({item,brief})))[0];if(!hit)return undefined;const repeated=quotedAlready.has(quote(hit.item.text));quotedAlready.add(quote(hit.item.text));return {...hit,repeated}};
     // One link per paragraph: the move with its reason (broker comment) and the rating (company report) are cited separately.
     const kospi=typeof input.kospiChangePct==='number'&&Number.isFinite(input.kospiChangePct)?input.kospiChangePct:null;
     const vsKospi=(value:number)=>kospi===null?'':`(코스피 대비 ${value-kospi>=0?'+':'-'}${Math.abs(value-kospi).toFixed(2)}%p)`;
@@ -230,7 +233,7 @@ export function composeKoreaDeepSections(input:{bundle:BrokerResearchBundle|null
       const report=companyReports.find(item=>item.stockCode===stock.code),digest=companyDigest(stock.name),reason=why(stock.name);
       const head=`검색 ${stock.rank}위 ${josa(stock.name,'은','는')} ${won(stock.close)}원으로 ${absPct(stock.changePct)} ${moveWord(stock.changePct)}했다${vsKospi(stock.changePct)}.`;
       const out:DeepParagraph[]=[];
-      if(reason)out.push({text:`${head} ${josa(reason.brief.report.broker,'은','는')} ${koreanDateLabel(reason.brief.report.date)} 「${reason.brief.report.title}」에서 ${said([quote(reason.item.text)])} 짚었다.`,source:reportSource(reason.brief.report)});
+      if(reason)out.push({text:reason.repeated?`${head} 앞서 인용한 ${reason.brief.report.broker} 「${reason.brief.report.title}」에서도 이 종목이 거론됐다.`:`${head} ${josa(reason.brief.report.broker,'은','는')} ${koreanDateLabel(reason.brief.report.date)} 「${reason.brief.report.title}」에서 ${said([quote(reason.item.text)])} 짚었다.`,source:reportSource(reason.brief.report)});
       const research=report?{text:ratingSentence(report),source:reportSource(report),report:reportCard(report)}:digest&&!reason?{text:digestParagraph(digest.item,digest.brief,2).text,source:reportSource(digest.brief.report)}:null;
       if(!reason&&research)out.push({text:`${head} ${research.text}`,source:research.source,...('report' in research&&research.report?{report:research.report}:{})});
       else if(!reason)bare.push(stock);

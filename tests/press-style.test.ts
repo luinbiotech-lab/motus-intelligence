@@ -37,3 +37,12 @@ test('inferences and watch points keep a machine-readable basis flag after the l
   assert.deepEqual(flow!.paragraphs.map(p=>p.basis??null),[null,'inference']);
   assert.ok(fx!.paragraphs.every(p=>p.basis!=='inference'||/보였다|보인다|풀이된다/.test(p.text)));
 });
+
+test('quotative follows the ending: 다→고, 니다→라고, final consonant→이라고 (RB-MOTUS-INTEG-152 run)', async ()=>{
+  const {quotative,quoted}=await import('../src/operations/market-narrative.js');
+  assert.equal(quotative('하락 마감했다'),'고');
+  assert.equal(quotative('반등 지속 여부를 가늠할 변수입니다'),'라고');
+  assert.equal(quotative('3대 지수 혼조 마감'),'이라고');
+  assert.equal(quotative('관세 부담 시사'),'라고');
+  assert.equal(quoted('변수입니다.'),'“변수입니다”라고');
+});
