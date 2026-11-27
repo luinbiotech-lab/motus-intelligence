@@ -1,0 +1,62 @@
+name: diag-regression-152
+# Read-only regression run for PR #152: builds the article on main and on the PR head with real public data.
+# No --execute, MOTUS_LIVE_PUBLISH_ENABLED=false, no Blogger secrets, never writes ops-data.
+on: push
+jobs:
+  run:
+    strategy:
+      fail-fast: false
+      matrix:
+        ref: [a5c3627, e3cadf6241957e7aa6498e5095fdf58c03458b9d]
+        job:
+          - {cat: korea, date: '2026-11-27', hydrate: 'false'}
+          - {cat: us, date: '2026-11-26', hydrate: 'false'}
+          - {cat: ai, date: '2026-11-27', hydrate: 'false'}
+          - {cat: korea, date: '2026-11-27', hydrate: 'true'}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      TZ: Asia/Seoul
+      MOTUS_LIVE_PUBLISH_ENABLED: 'false'
+      MOTUS_PRODUCTION_RUN: 'true'
+      MOTUS_COMMERCE_ENABLED: 'false'
+      MOTUS_KOREA_EVENING_ONLY: 'false'
+      TWELVE_DATA_API_KEY: ${{ secrets.TWELVE_DATA_API_KEY }}
+      KRX_AUTH_KEY: ${{ secrets.KRX_AUTH_KEY }}
+      BOK_ECOS_API_KEY: ${{ secrets.BOK_ECOS_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: '${{ matrix.ref }}', fetch-depth: 0}
+      - uses: actions/setup-node@v4
+        with: {node-version: 22}
+      - run: npm ci --no-audit --no-fund
+      - name: Hydrate ops-data (read only, dedup variant)
+        if: matrix.job.hydrate == 'true'
+        run: git fetch origin ops-data:refs/remotes/origin/ops-data && git archive origin/ops-data data | tar -xf - && git rev-parse origin/ops-data > data/.ops-data-hydrated
+      - run: command -v pdftotext >/dev/null || (sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils)
+        continue-on-error: true
+      - name: Build and run (simulation)
+        shell: bash
+        run: |
+          set +e
+          D=${{ matrix.job.date }}; C=${{ matrix.job.cat }}
+          npm run build > build.log 2>&1; echo "build=$?" > status.txt
+          npm run motus:live -- --date "$D" --category "$C" --source internal > live.log 2>&1; echo "live=$?" >> status.txt
+          npm run motus:publish -- --date "$D" --category "$C" > publish.log 2>&1; echo "publish=$?" >> status.txt
+          mkdir -p out && cp -r data/operations/$D/$C out/unit 2>/dev/null; cp build.log live.log publish.log status.txt out/
+          true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r-${{ matrix.ref }}-${{ matrix.job.cat }}-${{ matrix.job.hydrate }}
+          path: out/
+  collect:
+    needs: run
+    if: always()
+    runs-on: ubuntu-24.04
+    permissions: {contents: write}
+    steps:
+      - uses: actions/download-artifact@v4
+        with: {path: out}
+      - run: |
+          cd out && git init -q && git checkout -q -b diag-shots && git add . && git -c user.name=diag -c user.email=diag@users.noreply.github.com commit -qm regression-152
+          git push -f -q https://x-access-token:${{ github.token }}@github.com/${{ github.repository }} diag-shots

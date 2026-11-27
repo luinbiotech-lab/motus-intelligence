@@ -1,5 +1,5 @@
 name: diag-mobile-redirect
-on: push
+on: workflow_dispatch
 jobs:
   probe:
     runs-on: ubuntu-24.04
