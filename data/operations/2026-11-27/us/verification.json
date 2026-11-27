@@ -14,10 +14,10 @@
   "leakagePass": true,
   "duplicateCheck": "PENDING_REMOTE",
   "duplicateUncertainty": true,
-  "articleFingerprint": "sha256:2e7b96b77d7591d10743b371da4a38801ef61ac9d6643809cb754f294292ea29",
+  "articleFingerprint": "sha256:ad9c0bd2591a73697b9c0af421497da5fad09cd73369d8dae8993e3f078606ff",
   "commerceEnabled": false,
-  "verifiedAt": "2026-11-27T05:21:22.056Z",
-  "expiresAt": "2026-11-27T06:51:22.056Z",
+  "verifiedAt": "2026-11-27T10:07:02.087Z",
+  "expiresAt": "2026-11-27T11:37:02.087Z",
   "sourceAuditIds": [
     "calendar:nyse",
     "deep:consensus:list:company",
@@ -52,13 +52,13 @@
     "market-research:CNBC Investing",
     "market-research:Goldman Sachs",
     "market-research:article:https://www.bloomberg.com/news/articles/2026-11-27/china-s-cabinet-stresses-market-support-in-midday-release",
-    "market-research:article:https://www.bloomberg.com/news/articles/2026-11-27/mahanadi-coalfields-set-for-mumbai-debut-after-969-million-ipo",
+    "market-research:article:https://www.bloomberg.com/news/articles/2026-11-27/em-asia-stocks-set-for-weekly-gain-as-markets-regain-footing",
     "market-research:article:https://www.cnbc.com/2026/11/24/kalshi-perps-volume-prediction-markets.html",
     "market-research:article:https://www.cnbc.com/2026/11/24/nvidia-jensen-huang-ai-credit-markets.html",
     "treasury:10y:2026",
     "yahoo-us:sp500"
   ],
-  "sourceAuditFingerprint": "sha256:e871032a4d67108b457c0d2ad4454946317ebf60ce2cdf5ffbf66f339bd4e0b9",
+  "sourceAuditFingerprint": "sha256:c8e525ff698f7085c36c0d0de2c840833f9ae34c21fd3256ea8b80f8c9e64390",
   "crossVerificationFingerprint": null,
   "crossVerification": null
 }
