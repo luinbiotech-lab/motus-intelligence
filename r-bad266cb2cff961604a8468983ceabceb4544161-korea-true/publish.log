@@ -1,0 +1,9 @@
+
+> us-market-close-report@0.1.0 motus:publish
+> npm run build && node dist/src/motus-publish-cli.js --date 2026-11-27 --category korea
+
+
+> us-market-close-report@0.1.0 build
+> tsc
+
+{"state":"HOLD","gate":{"state":"HOLD","reasons":["duplicate state uncertain"],"approval":null,"checkedAt":"2026-11-27T00:28:37.334Z"},"publishCallCount":0,"execution":"SIMULATED","commerce":{"enabled":false},"outcomeFile":"auto-publish-latest-run.json","preservedPublishedOutcome":true}

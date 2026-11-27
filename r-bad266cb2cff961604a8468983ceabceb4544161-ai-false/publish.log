@@ -1,0 +1,9 @@
+
+> us-market-close-report@0.1.0 motus:publish
+> npm run build && node dist/src/motus-publish-cli.js --date 2026-11-27 --category ai
+
+
+> us-market-close-report@0.1.0 build
+> tsc
+
+{"state":"HOLD","gate":{"state":"HOLD","reasons":["duplicate state uncertain"],"approval":null,"checkedAt":"2026-11-27T00:28:13.650Z"},"publishCallCount":0,"execution":"SIMULATED","commerce":{"enabled":false}}
