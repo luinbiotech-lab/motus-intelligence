@@ -28,7 +28,11 @@ export function stockRows(view:View):DailyRow[] {
   // PR #116 (2026-11-11): Korea search stocks without commentary share one paragraph, so their rows come from the
   // section's bars; names already read from their own line are not repeated.
   const regexRows=rows.length;
-  for(const section of deep.filter(item=>item.bars?.length&&/stocks/.test(item.key)&&(!regexRows||item.key==='korea-stocks')))for(const bar of section.bars!)if(!rows.some(row=>row.name===bar.label||row.name.startsWith(bar.label+'(')))rows.push({name:bar.label,close:null,change:bar.value});
+  // 2026-11-28 owner ("리포트가 엉망"): the bare-list stocks printed '-' as their close. Their closes are in the
+  // same section's list paragraph ('삼성전자(1위, 171,500원, +0.47%)' or '삼성전기 785,000원(+3.97%)').
+  const listText=deep.filter(item=>/stocks/.test(item.key)).flatMap(item=>item.paragraphs.map(p=>p.text)).join('\n');
+  const listedClose=(name:string)=>{const n=name.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');return listText.match(new RegExp(`(?:^|[\\s,:(])${n}\\(\\d+위, ([\\d,]+)원`))?.[1]??listText.match(new RegExp(`(?:^|[\\s,:])${n} ([\\d,]+)원\\(`))?.[1]??null};
+  for(const section of deep.filter(item=>item.bars?.length&&/stocks/.test(item.key)&&(!regexRows||item.key==='korea-stocks')))for(const bar of section.bars!)if(!rows.some(row=>row.name===bar.label||row.name.startsWith(bar.label+'('))){const close=listedClose(bar.label);rows.push({name:bar.label,close:close?`${close}원`:null,change:bar.value})}
   // Units composed before sections carried bars: the '·'-joined list of the same figures ('엔비디아 -1.26% · …').
   if(!rows.length)for(const section of deep.filter(item=>/stocks/.test(item.key)))for(const p of section.paragraphs)if((p.text.match(/ · /g)??[]).length>=2)for(const part of p.text.split(' · ')){const match=part.match(/^(.*\S)\s+([+\-−]?\d+(?:\.\d+)?)%$/);if(match)rows.push({name:match[1]!,close:null,change:Number(match[2]!.replace('−','-'))})}
   return rows;
@@ -39,7 +43,7 @@ const brokerQuotes=(view:View)=>(view.deepSections??[]).filter(section=>section.
 export interface DailyPdf {html:string;fileName:string}
 export function buildDailyPdfHtml(view:View,category:'AI_INTELLIGENCE'|'US_MARKET'|'KOREA_MARKET',sessionLabel:string):DailyPdf {
   const deep=view.deepSections??[],kind=category==='AI_INTELLIGENCE'?'AI 산업':category==='US_MARKET'?'미국 증시':'국내 증시';
-  const header=`<div class=band><div class=bandtop><div class=logo>MOTUS <span>Market Intelligence Report</span></div><div class=when>${esc(kind)} 브리핑<br><b>${esc(view.issueDate.replace(/-/g,'. '))}</b></div></div><div class=rule></div><h1>${esc(view.title).replace(/^(.*?)(…|,)/,'<em>$1</em>$2')}</h1><p class=lede>${esc(leadOf(view))}</p></div>`;
+  const header=`<div class=band><div class=bandtop><div class=logo>MOTUS <span>Market Intelligence Report</span></div><div class=when>${esc(kind)} 브리핑<br><b>${esc(sessionClose(view,category))}</b></div></div><div class=rule></div><h1>${esc(view.title).replace(/^(.*?)(…|,)/,'<em>$1</em>$2')}</h1><p class=lede>${esc(leadOf(view))}</p></div>`;
   // Box 1: today at a glance (real closes and changes only).
   const tiles:Array<{label:string;value:string;change:number|null}>=[];
   if(category==='US_MARKET'){const v=view as USMarketDailyViewModel,names:Record<string,string>={sp500:'S&P 500',nasdaq:'나스닥','dow-jones':'다우존스'};for(const series of v.marketHistory.series.filter(item=>names[item.key]))tiles.push({label:names[series.key]!,value:num(series.latestClose),change:series.latestChangePct})}
@@ -53,17 +57,25 @@ export function buildDailyPdfHtml(view:View,category:'AI_INTELLIGENCE'|'US_MARKE
   // Box 3: stock table; box 4: index trend (US/Korea history).
   const table=rows.length?box('주요 종목 동향 (종가 기준)',`<table class=t><thead><tr><th>종목</th>${rows.some(row=>row.close)?'<th class=r>종가</th>':''}<th class=r>등락률</th></tr></thead><tbody>${rows.slice(0,7).map(row=>`<tr><td>${esc(row.name)}</td>${rows.some(item=>item.close)?`<td class=r>${esc(row.close??'-')}</td>`:''}<td class=r style="color:${col(row.change)};font-weight:800">${signed(row.change)}</td></tr>`).join('')}</tbody></table>`):'';
   const history=(view as USMarketDailyViewModel).marketHistory,lead=history?.series?.[category==='US_MARKET'?1:0];
+  // 2026-11-28 owner: the Korea page had no index history, so half the page was empty. The session's investor
+  // flows (유가증권시장, 억원) and the article's FX/flow readings fill it; nothing new is computed.
+  const flows=category==='KOREA_MARKET'?(view as KoreaMarketDailyViewModel).investorFlows.map(item=>({label:item.label,value:Number(item.displayValue.replace(/[^0-9.\-+]/g,''))})).filter(item=>Number.isFinite(item.value)&&item.label):[];
+  const flowBox=flows.length>=2?box('투자자별 순매수 (유가증권시장, 억원)',barChart(flows.map(item=>[item.label,item.value] as [string,number]),300,Math.max(90,flows.length*24+10),value=>`${value>0?'+':''}${num(value,0)}`)):'';
+  const readings=category==='KOREA_MARKET'?deep.filter(section=>/korea-(fx|flow)-comment/.test(section.key)).flatMap(section=>section.paragraphs.map(p=>p.text)).filter(text=>!/^MOTUS 정리/.test(text)).slice(0,4):[];
+  const readingBox=readings.length?box('환율·수급 해설',readings.map(text=>`<div class=issue><div class=ib>${esc(clip(text,170))}</div></div>`).join('')):'';
   const trend=lead&&lead.closes.length>=5?box(`${lead.key==='nasdaq'?'나스닥':lead.label} 지수 추이 (최근 ${Math.min(20,lead.closes.length)}거래일)`,lineChart(lead.dates.slice(-20).map((date,index)=>({date,close:lead.closes.slice(-20)[index]!})),lead.dates.slice(-1)[0]!,NAVY2,value=>num(value,0),300,130)):'';
   // Box 5: today's issues (official announcements for AI; broker comments for the markets).
   const issues=category==='AI_INTELLIGENCE'?(view as AIIntelligenceDailyViewModel).issues.slice(0,3).map(issue=>({head:issue.headline,body:issue.whatHappened[0]??issue.coreContent})):brokerQuotes(view).slice(0,3).map(p=>({head:(p.text.match(/^(\S+?)[은는] /)?.[1]??'증권가')+' 시각',body:p.text.match(/“([^”]+)”/)?.[1]??p.text}));
   const issueBox=issues.length?box(category==='AI_INTELLIGENCE'?'시장 핵심 이슈 (공식 발표)':'시장 핵심 이슈 (증권가 진단)',issues.map(item=>`<div class=issue><div class=ih>${esc(item.head)}</div><div class=ib>${esc(clip(item.body,150))}</div></div>`).join('')):'';
-  const analysis=(view as USMarketDailyViewModel).narrative?.analysis?.[0];
+  // A sentence that quotes a broker is already in the issue box; the MOTUS box keeps only MOTUS's own reading.
+  const analysis=((view as USMarketDailyViewModel).narrative?.analysis??[]).filter((text,index)=>index===0||!/“/.test(text)).slice(0,category==='KOREA_MARKET'?2:1).join(' ');
   const motus=analysis?`<div class=motus><div class=ml>MOTUS 분석</div><div class=mt>${esc(analysis)}</div></div>`:'';
   // Page 2: broker report table with rating boxes, quotes, index comparison, checkpoints.
   const cards=reportCards(view);
   const reportBox=cards.length?box('증권가 주요 리포트',`<table class=rep>${cards.slice(0,6).map(({card})=>`<tr><td class=rc><b>${esc(card.company??card.title)}</b><div>${esc(card.broker)}, ${esc(day(card.date))}</div></td><td class=rq>“${esc(card.title)}”</td><td class=rr>${card.rating||card.target?`<div class=rb><b>${esc(card.rating??'')}</b>${card.target?`<div>${esc(card.target)}원</div>`:''}</div>`:''}</td></tr>`).join('')}</table>`,'gold'):'';
   // Only quotes whose broker is named (a wire sentence has no source badge to show).
-  const quotes=brokerQuotes(view).filter(p=>/^\S+?[은는] /.test(p.text)).slice(cards.length?0:3,cards.length?4:7);
+  const shown=new Set(issues.map(item=>item.body));
+  const quotes=brokerQuotes(view).filter(p=>/^\S+?[은는] /.test(p.text)&&!shown.has(p.text.match(/“([^”]+)”/)?.[1]??p.text)).slice(0,4);
   const quoteBox=quotes.length?box('증권가 시각 (원문 인용)',quotes.map(p=>`<div class=q><div class=qs>${esc(p.text.match(/^(\S+?)[은는] /)?.[1]??'')}</div>“${esc(clip(p.text.match(/“([^”]+)”/)?.[1]??p.text,170))}”</div>`).join(''),'gold'):'';
   const compare=history&&history.series.length>=2?box('주요 지수 비교 (최근 20거래일, 첫날=100)',multiLine(history.series.slice(0,4).map(series=>({label:series.key==='sp500'?'S&P 500':series.key==='nasdaq'?'나스닥':series.key==='dow-jones'?'다우':series.label,points:series.closes.slice(-20)})))):'';
   const watch=checkpoints(view);
@@ -83,10 +95,13 @@ h1{font-size:19pt;line-height:1.3;margin:0 0 6px;font-weight:900;word-break:keep
 .q{padding:5px 0;border-bottom:1px dashed ${LINE};font-size:8.8pt}.q:last-child{border:0}.qs{display:inline-block;background:${NAVY2};color:#fff;font-size:7.5pt;font-weight:700;padding:1px 6px;border-radius:3px;margin-right:5px}
 .ck{display:flex;gap:7px;padding:4px 0}.cb{color:#7a1f2b;font-weight:900;font-size:12pt;line-height:1}.ck b{font-size:9.8pt}.ck div div{font-size:8.6pt;color:#2c3a4b}
 .foot{position:absolute;left:9mm;right:9mm;bottom:4mm;border-top:1px solid ${LINE};padding-top:2px;font-size:6.8pt;color:${GRAY}}`;
-  const p1=`<div class=page>${header}<div class=in><div class=grid2>${glance}${barsBox}</div><div class=grid2>${table}${trend||issueBox}</div>${trend?issueBox:''}${motus}</div><div class=foot>MOTUS Market Intelligence · ${esc(sessionLabel)} · 공개 자료 기반 참고 자료이며 투자 권유가 아닙니다.</div></div>`;
-  const p2=`<div class=page><div class=in style="padding-top:8mm">${reportBox}${quoteBox?`<div style="margin-top:4mm">${quoteBox}</div>`:''}<div class=grid2>${compare||''}${watchBox}</div><div style="margin-top:4mm;font-size:7.4pt;color:${GRAY}"><b>자료</b> ${sources}</div><div style="margin-top:3mm;font-size:7.2pt;color:${GRAY};border:1px solid ${LINE};padding:5px 7px"><b>Compliance Notice</b> 본 자료는 MOTUS가 공개된 시장 데이터와 증권사 공개 리포트를 바탕으로 작성한 참고 자료로, 특정 종목의 매수·매도를 권유하지 않습니다. 증권사 문장은 원문 그대로 인용했으며 저작권은 해당 증권사에 있습니다.</div></div><div class=foot>MOTUS Market Intelligence · 2/2</div></div>`;
+  const side=trend||flowBox||issueBox;
+  const p1=`<div class=page>${header}<div class=in><div class=grid2>${glance}${barsBox}</div><div class=grid2>${table}${side}</div>${side!==issueBox&&issueBox?`<div style="margin-top:4mm">${issueBox}</div>`:''}${motus}</div><div class=foot>MOTUS Market Intelligence · ${esc(sessionLabel)} · 공개 자료 기반 참고 자료이며 투자 권유가 아닙니다.</div></div>`;
+  const p2=`<div class=page><div class=in style="padding-top:8mm">${reportBox}${quoteBox?`<div style="margin-top:4mm">${quoteBox}</div>`:''}${readingBox?`<div style="margin-top:4mm">${readingBox}</div>`:''}<div class=grid2>${compare||''}${watchBox}</div><div style="margin-top:4mm;font-size:7.4pt;color:${GRAY}"><b>자료</b> ${sources}</div><div style="margin-top:3mm;font-size:7.2pt;color:${GRAY};border:1px solid ${LINE};padding:5px 7px"><b>Compliance Notice</b> 본 자료는 MOTUS가 공개된 시장 데이터와 증권사 공개 리포트를 바탕으로 작성한 참고 자료로, 특정 종목의 매수·매도를 권유하지 않습니다. 증권사 문장은 원문 그대로 인용했으며 저작권은 해당 증권사에 있습니다.</div></div><div class=foot>MOTUS Market Intelligence · 2/2</div></div>`;
   return {html:`<!doctype html><html lang=ko><head><meta charset=utf-8><title>${esc(view.title)}</title><style>${css}</style></head><body>${p1}${p2}</body></html>`,fileName:`MOTUS_${category==='AI_INTELLIGENCE'?'AI':category==='US_MARKET'?'US':'Korea'}_Daily_${view.issueDate}.pdf`};
 }
+/** '11월 26일 마감' (Korea/US session) or the issue date for AI, so the cover's report date and the page dates do not read as a conflict. */
+function sessionClose(view:View,category:DailyCategory):string {const date=(view as KoreaMarketDailyViewModel).sessionDate??view.issueDate;return category==='AI_INTELLIGENCE'?`${Number(date.slice(5,7))}월 ${Number(date.slice(8,10))}일`:`${Number(date.slice(5,7))}월 ${Number(date.slice(8,10))}일 마감`}
 function box(title:string,body:string,tone?:'gold'|'red'){return `<div class=box><div class="bh${tone?' '+tone:''}">${esc(title)}</div><div class=bb>${body}</div></div>`}
 function clip(value:string,max:number){const text=value.replace(/\s+/g,' ').trim();return text.length>max?text.slice(0,max-1)+'…':text}
 function leadOf(view:View){const text=(view as AIIntelligenceDailyViewModel).todayCore?.summary??(view as USMarketDailyViewModel).marketSummary??'';return clip(text.split(/(?<=다\.)\s/).slice(0,2).join(' '),170)}
@@ -127,7 +142,9 @@ export function buildCombinedDailyPdfHtml(parts:DailyReportPart[],date:string):D
   // The last tile closes as </div>(tc) </div>(tile) </div>(tiles): the first triple close ends the tile grid.
   const tilesOf=(html:string)=>html.match(/<div class=tiles>[\s\S]*?<\/div><\/div><\/div>/)?.[0]??'';
   const cards=built.map(({part,html})=>`<div class=box style="margin-top:4mm"><div class=bh>${esc(dailyKind(part.category))} · ${esc(part.sessionLabel)}</div><div class=bb><div style="font-size:13pt;font-weight:900;line-height:1.35;word-break:keep-all">${esc(part.view.title)}</div><p style="margin:3px 0 5px;color:#2c3a4b">${esc(leadOf(part.view))}</p>${tilesOf(html)}</div></div>`).join('');
-  const cover=`<div class=page><div class=band><div class=bandtop><div class=logo>MOTUS <span>Daily Market &amp; AI Report</span></div><div class=when>데일리 리포트<br><b>${esc(date.replace(/-/g,'. '))}</b></div></div><div class=rule></div><h1><em>오늘의 시장</em>: ${esc(ordered.map(part=>dailyKind(part.category)).join(' · '))}</h1><p class=lede>${esc(ordered.map((part,index)=>`${index+2+index}쪽 ${dailyKind(part.category)}`).join(' / '))} — 각 시장의 수치·차트·증권가 리포트를 2쪽씩 정리했습니다.</p></div><div class=in>${cards}</div><div class=foot>MOTUS Market Intelligence · ${esc(date)} 데일리 리포트 · 공개 자료 기반 참고 자료이며 투자 권유가 아닙니다.</div></div>`;
+  // 2026-11-28 owner: with one market the cover was one card on an empty page that the next page repeated.
+  if(ordered.length===1){const body=built[0]!.html.match(/<body>([\s\S]*)<\/body>/)![1]!.replace('MOTUS Market Intelligence · 2/2',`MOTUS Market Intelligence · ${esc(dailyKind(ordered[0]!.category))} · ${esc(date)} 데일리 리포트`);return {html:`<!doctype html><html lang=ko><head><meta charset=utf-8><title>MOTUS 데일리 리포트 ${esc(date)}</title><style>${css}</style></head><body>${body}</body></html>`,fileName:`MOTUS_Daily_Report_${date}.pdf`,pages:2}}
+  const cover=`<div class=page><div class=band><div class=bandtop><div class=logo>MOTUS <span>Daily Market &amp; AI Report</span></div><div class=when>데일리 리포트<br><b>${esc(date.replace(/-/g,'. '))}</b></div></div><div class=rule></div><h1><em>오늘의 시장</em>: ${esc(ordered.map(part=>dailyKind(part.category)).join(' · '))}</h1><p class=lede>${esc(ordered.map((part,index)=>`${dailyKind(part.category)} ${2+2*index}~${3+2*index}쪽`).join(' · '))}. 시장마다 지수·종목·증권가 리포트를 두 쪽에 담았습니다.</p></div><div class=in>${cards}</div><div class=foot>MOTUS Market Intelligence · ${esc(date)} 데일리 리포트 · 공개 자료 기반 참고 자료이며 투자 권유가 아닙니다.</div></div>`;
   const bodies=built.map(({part,html})=>html.match(/<body>([\s\S]*)<\/body>/)![1]!.replace('MOTUS Market Intelligence · 2/2',`MOTUS Market Intelligence · ${esc(dailyKind(part.category))}`));
   return {html:`<!doctype html><html lang=ko><head><meta charset=utf-8><title>MOTUS 데일리 리포트 ${esc(date)}</title><style>${css}</style></head><body>${cover}${bodies.join('')}</body></html>`,fileName:`MOTUS_Daily_Report_${date}.pdf`,pages:1+2*ordered.length};
 }

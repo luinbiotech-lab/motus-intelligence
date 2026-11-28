@@ -16,13 +16,13 @@ test('the AI article leads with the day\'s AI issue as brokers explained it', ()
   const issue=composed.sections[0]!;
   assert.equal(issue.key,'ai-issue');assert.equal(issue.placement,'early');
   const text=issue.paragraphs.map(p=>p.text).join('\n');
-  assert.match(text,/A증권은 10월 30일 아침 리포트 「10\/30 A증권 모닝코멘트」에서 “알파벳이 실적 부진과 잉여현금흐름 악화에 12%대 급락/);
+  assert.match(text,/A증권은 「10\/30 A증권 모닝코멘트」에서 “알파벳이 실적 부진과 잉여현금흐름 악화에 12%대 급락/);
   assert.match(text,/B증권은 .*“미국 빅테크는 AI 매출 성장에도/);
   assert.doesNotMatch(text,/PCE|코스피/,'only AI-related U.S. commentary');
   assert.equal(composed.titleFocus,'알파벳 13% 급락');
   assert.deepEqual(composed.leadAddition,['직전 미국 정규장(10월 29일)에서 알파벳(GOOGL)은 12.64% 급락했다.']);
   const stocks=composed.sections.find(item=>item.key==='ai-stocks')!;assert.equal(stocks.placement,'early');
-  assert.match(stocks.paragraphs[0]!.text,/가장 약한 종목은 알파벳\(GOOGL, -12\.64%\)이었다\./);
+  assert.equal(stocks.paragraphs[0]!.text,'3개 종목이 모두 내렸다. 알파벳(GOOGL)이 -12.64%로 낙폭이 가장 컸고, 마이크로소프트(MSFT)는 -0.20%로 상대적으로 선방했다.');
 });
 
 test('no AI commentary, no issue section and no market headline', () => {

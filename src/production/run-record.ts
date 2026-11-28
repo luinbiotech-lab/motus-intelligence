@@ -1,4 +1,4 @@
-import {appendFile,mkdir,readFile,stat} from 'node:fs/promises';
+import {appendFile,mkdir,readFile,readdir,stat} from 'node:fs/promises';
 import {join} from 'node:path';
 
 /** One line per production workflow run, persisted through ops-data (jsonl is union-merged). */
@@ -50,10 +50,29 @@ export async function buildDailyStatus(operationsRoot:string,date:string,generat
     let state='미실행',reason='',url='';
     if(published){state='발행';url=published.publicPostUrl??''}
     else{const outcome=await outcomeFile(root);if(outcome){state=koreanState(String(outcome.state??''));reason=String(outcome.reasonCode??outcome.reason??outcome.error??(outcome.gate as {reasons?:string[]}|undefined)?.reasons?.join('; ')??'')}}
-    const firstDelay=runs.map(run=>run.delayMinutes).find((value):value is number=>typeof value==='number');
-    rows.push(`| ${label} | ${state} | ${escapeCell(reason).slice(0,160)} | ${url?`[링크](${url})`:''} | ${runs.length} | ${firstDelay===undefined?'':firstDelay+'분'} |`);
+    rows.push(`| ${label} | ${state} | ${escapeCell(reason).slice(0,160)} | ${url?`[링크](${url})`:''} | ${runs.length} | ${publishingRunCell(runs,Boolean(published))} |`);
   }
-  return [`# MOTUS 일일 상태 ${date}`,'',`갱신: ${generatedAt}`,'','| 카테고리 | 상태 | 사유 | 글 | 실행 수 | 첫 실행 지연 |','| --- | --- | --- | --- | --- | --- |',...rows,'','지연은 예정 시각(KST) 대비 실제 시작까지의 분이다. 수동 실행은 예정 시각이 없어 비워 둔다.',''].join('\n');
+  const sitemap=await sitemapStatusLine(join(operationsRoot,'..','traffic'),date);
+  return [`# MOTUS 일일 상태 ${date}`,'',`갱신: ${generatedAt}`,'','| 카테고리 | 상태 | 사유 | 글 | 실행 수 | 발행 실행 |','| --- | --- | --- | --- | --- | --- |',...rows,'','발행 실행은 실제로 글을 발행한 실행이다(예약이면 예정 시각 대비 지연, 수동이면 시작 시각 KST). 발행 뒤 SKIP된 예약 실행의 지연은 넣지 않는다(MOT-048). 미발행이면 첫 예약 실행의 지연을 적는다.','',sitemap,''].join('\n');
+}
+
+/**
+ * The run that actually published, not the first run with a delay value: after a manual (or evening) publication the later
+ * cron runs SKIP with ALREADY_PUBLISHED and their large delays used to be shown as if they were the publication delay (MOT-048).
+ */
+export function publishingRunCell(runs:RunRecord[],publishedInLedger:boolean):string {
+  const publisher=runs.find(run=>run.state==='PUBLISHED');
+  if(publisher){
+    if(publisher.event==='schedule'&&publisher.scheduledKst&&typeof publisher.delayMinutes==='number')return `예약 ${publisher.scheduledKst} · ${publisher.delayMinutes}분 지연`;
+    const clock=kstClock(publisher.startedAt);return clock?`수동 ${clock} 시작`:'수동';
+  }
+  if(publishedInLedger)return '발행 실행 기록 없음';
+  const firstScheduled=runs.find(run=>run.event==='schedule'&&typeof run.delayMinutes==='number');
+  return firstScheduled?`미발행 · 첫 예약 ${firstScheduled.scheduledKst} ${firstScheduled.delayMinutes}분 지연`:'';
+}
+function kstClock(iso:string):string|null {
+  const instant=Date.parse(iso);if(!Number.isFinite(instant))return null;const kst=new Date(instant+9*3600000);
+  return `${String(kst.getUTCHours()).padStart(2,'0')}:${String(kst.getUTCMinutes()).padStart(2,'0')}`;
 }
 
 async function readLedgerEvents(root:string):Promise<Array<{event?:string;publicPostUrl?:string|null}>> {
@@ -65,3 +84,39 @@ async function outcomeFile(root:string):Promise<Record<string,unknown>|null> {
 }
 function koreanState(state:string):string {return state==='SKIP'?'SKIP':state==='FAILED'?'실패':state==='PUBLISHED'?'발행':state==='AUTO_PUBLISH_READY'?'발행 가능(시뮬레이션)':state?'HOLD':'미실행'}
 function escapeCell(value:string):string {return value.replace(/\|/g,'/').replace(/\s+/g,' ').trim()}
+
+/**
+ * MO-9: Google sitemap download age from the latest traffic capture on or before the date (data/traffic/<date>/).
+ * Older than 48 hours at capture time is a warning; a missing capture or field is written as not measured.
+ */
+export async function sitemapStatusLine(trafficRoot:string,date:string):Promise<string> {
+  let folders:string[]=[];
+  try{folders=(await readdir(trafficRoot)).filter(name=>/^\d{4}-\d{2}-\d{2}$/.test(name)&&name<=date).sort().reverse().slice(0,3)}catch{/* none */}
+  for(const folder of folders){
+    try{
+      const input=JSON.parse(await readFile(join(trafficRoot,folder,'traffic-input.json'),'utf8')) as {collectedAt?:string;indexStatus?:{state?:string;sitemaps?:unknown}};
+      if(input.indexStatus?.state!=='PASS')continue;
+      const f=sitemapFreshness(input.indexStatus.sitemaps,input.collectedAt??'');
+      if(f.state==='UNKNOWN')return `구글 사이트맵: 측정 안 됨(${folder} 수집에 마지막 다운로드 시각 없음)`;
+      const kst=(iso:string)=>new Date(Date.parse(iso)+9*3600000).toISOString().slice(5,16).replace('T',' ').replace('-','/');
+      return f.state==='STALE'
+        ?`**경고: 구글 사이트맵을 ${f.hours}시간째 다시 내려받지 않았다** (마지막 ${kst(f.lastDownloaded!)} KST, 기준 ${f.maxHours}시간, ${folder} 수집 ${kst(f.checkedAt)} KST 기준)`
+        :`구글 사이트맵: 정상(마지막 다운로드 ${kst(f.lastDownloaded!)} KST, ${folder} 수집 기준 ${f.hours}시간 전)`;
+    }catch{/* next */}
+  }
+  return '구글 사이트맵: 측정 안 됨(최근 3일 traffic-input 없음)';
+}
+
+/**
+ * Sitemap freshness (MO-9, MOT-035 follow-up): Google's last sitemap download older than maxHours is a warning.
+ * Kept here (no imports) because the ops-data persist tool ships run-record.js alone (motus-*-production.yml).
+ */
+export interface SitemapFreshness {state:'FRESH'|'STALE'|'UNKNOWN';lastDownloaded:string|null;hours:number|null;maxHours:number;checkedAt:string}
+export function sitemapFreshness(sitemaps:unknown,checkedAt:string,maxHours=48):SitemapFreshness {
+  const checked=Date.parse(checkedAt);
+  const times=(Array.isArray(sitemaps)?sitemaps:[]).map(item=>typeof (item as {lastDownloaded?:unknown})?.lastDownloaded==='string'?(item as {lastDownloaded:string}).lastDownloaded:'').filter(value=>Number.isFinite(Date.parse(value))).sort((a,b)=>Date.parse(a)-Date.parse(b));
+  const last=times.at(-1)??null;
+  if(!last||!Number.isFinite(checked))return {state:'UNKNOWN',lastDownloaded:last,hours:null,maxHours,checkedAt};
+  const hours=Math.round((checked-Date.parse(last))/360000)/10;
+  return {state:hours>maxHours?'STALE':'FRESH',lastDownloaded:last,hours,maxHours,checkedAt};
+}

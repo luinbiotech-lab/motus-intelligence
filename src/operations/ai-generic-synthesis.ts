@@ -137,6 +137,35 @@ export function productTitleFallback(input:{title:string;publisher:string;link:s
   return {type:/deepmind/i.test(input.publisher)||/\/research\//i.test(input.link)?'research':'launch',fromTitle:true};
 }
 
+const PRODUCT_OWNER:Array<[RegExp,string]>=[
+  [/^(?:Azure|Microsoft|GitHub Copilot|Copilot)/,'마이크로소프트'],[/^(?:Google |Gemini|Gemma|Veo|Imagen|NotebookLM|Antigravity)/,'구글'],
+  [/^Claude/,'앤트로픽'],[/^(?:ChatGPT|GPT-|Codex|Sora)/,'오픈AI'],[/^(?:Llama|Meta AI)/,'메타'],
+  [/^(?:Amazon|Bedrock|SageMaker|Trainium|Inferentia|Kiro)/,'아마존웹서비스(AWS)'],[/^(?:Vera|Blackwell|Rubin|DGX|NIM|Omniverse|Cosmos|Isaac|Jetson|CUDA)/,'엔비디아'],
+];
+function productOwner(product:string):string|null {return PRODUCT_OWNER.find(([pattern])=>pattern.test(product))?.[1]??null}
+const SUBJECT_SUFFIX=/^ (app|API|CLI|SDK|Live|Studio|Workspace|Enterprise|agents?|extension)\b/i;
+const escapeRegExp=(value:string)=>value.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+/**
+ * MO-24 (2026-11-24): how the title itself names the announced thing. A catalogued product only counts when it is a
+ * whole word in the title ('Copilotforce' is not 'Copilot'; the longer name is kept), a following app/API word stays
+ * with it ('Gemini app', 'Gemini API'), and 'Introducing X in the Gemini API' names X as the feature. Nothing is
+ * translated or inferred: every word comes from the official title.
+ */
+export function titleSubject(title:string,product:string):{name:string;feature?:string;announced?:boolean;available?:boolean}|null {
+  const at=new RegExp(`(?<![A-Za-z0-9-])${escapeRegExp(product)}([A-Za-z0-9]*)`).exec(title);
+  if(!at)return null;
+  const before=title.slice(0,at.index),announced=/\b(?:announces?|introduces?|unveils?|launch(?:es)?)\s+(?:the\s+|new\s+)?$/i.test(before);
+  // A longer word ('Copilotforce') only stands for the announcement when the title says that word is what was announced.
+  if(at[1]&&!announced)return null;
+  let name=product+(at[1]??'');const rest=title.slice(at.index+at[0].length),suffix=SUBJECT_SUFFIX.exec(rest);
+  if(suffix&&!at[1])name+=` ${suffix[1]}`;
+  const feature=new RegExp(`^(?:introducing|meet|announcing)\\s+(.{3,40}?)\\s+(?:in|for|on|to)\\s+(?:the\\s+)?${escapeRegExp(name)}\\b`,'i').exec(title)?.[1]?.trim();
+  return {name,
+    ...(feature&&feature.split(/\s+/).length<=5?{feature}:{}),
+    ...(announced?{announced:true}:{}),
+    ...(/\b(?:is|are) now (?:generally )?available\b/i.test(title)?{available:true}:{})};
+}
+
 export function classifyAIEvent(title:string,text:string,link=''):{type:AIEventType;fromTitle:boolean}|null {
   if(/^[A-Z][\w.&-]*(?: [A-Z][\w.&-]*)* and (?:the )?[A-Z][\w.&-]*(?: [A-Z][\w.&-]*)* [a-z]+s\b/.test(title)&&!/\b(?:data ?cent|supercomput|compute)\w*/i.test(title))return {type:'partnership',fromTitle:true};
   if(/\/research\//i.test(link)&&!/\b(?:launch|available|introduc\w*|announc\w*)\b/i.test(title))return {type:'research',fromTitle:false};
@@ -183,15 +212,20 @@ export function synthesizeEvidenceBoundAIEvent(input:EvidenceBoundAIInput):(Kore
   if(!classified)return null;
   const company=companyKorean(input.publisher),type=TYPE_KO[classified.type];
   const places=findAll(text,PLACES),orgs=findAll(withoutApiMentions(text),COMPANIES).filter(name=>name!==company&&!company.startsWith(name)&&!name.startsWith(company));
-  const product=(input.title.match(PRODUCT)??input.evidence.match(PRODUCT))?.[0]??null,figures=extractFigures(text);
+  const rawProduct=(input.title.match(PRODUCT)??input.evidence.match(PRODUCT))?.[0]??null,figures=extractFigures(text);
   const place=places[0]??null,org=orgs[0]??null;
-  const productInTitle=Boolean(product&&input.title.includes(product));
-  const newProduct=productInTitle&&/^(?:introducing|meet|announcing|launching)\b/i.test(input.title);
-  const topic=classified.type==='launch'&&productInTitle?(newProduct?`${product}`:`${product} 신규 기능`)
+  // MO-24: the subject is read from the title as written, so the headline names what was actually announced.
+  const subject=rawProduct?titleSubject(input.title,rawProduct):null;
+  const productInTitle=Boolean(subject);
+  const product=subject?.name??rawProduct;
+  const owner=rawProduct?productOwner(rawProduct):null;
+  const named=product&&productInTitle&&owner&&owner!==company&&!company.startsWith(owner)?`${owner} ${product}`:product;
+  const newProduct=productInTitle&&(/^(?:introducing|meet|announcing|launching)\b/i.test(input.title)||Boolean(subject?.announced));
+  const topic=classified.type==='launch'&&productInTitle?(subject?.feature?`${named} ${subject.feature}`:newProduct?`${named}`:subject?.available?`${named} 이용 확대`:`${named} 신규 기능`)
     :(classified.type==='infrastructure'||classified.type==='policy')&&place?`${place} ${type.topic}`
     :classified.type==='partnership'&&org?`${josa(org,'과','와')}의 AI 협력`
     :classified.type==='adoption'&&org?`${org}의 AI 도입`
-    :productInTitle&&classified.type!=='research'?`${product} 관련 ${type.short}`
+    :productInTitle&&classified.type!=='research'?`${named} 관련 ${type.short}`
     :type.topic;
   const channel=channelLabel(input.link,input.sourceId);
   const facts:string[]=[`${josa(company,'은','는')} ${kstDateLabel(input.publishedAt)}(한국 시간) 공식 ${channel}에 「${input.title}」 제목의 발표를 게시했다.`];

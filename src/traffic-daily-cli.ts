@@ -16,7 +16,9 @@
 import {mkdir,readFile,readdir,writeFile} from 'node:fs/promises';
 import {existsSync} from 'node:fs';
 import {join} from 'node:path';
-import {articleKeywords,contentFeatures,type ContentFeatures} from './operations/traffic.js';
+import {articleKeywordFallbacks,articleKeywords,contentFeatures,fillEmptyDatalabSeries,inspectWithRetry,normalizeBlogUrl,searchConsolePages,summarizeInspections,type ContentFeatures,type DatalabSeries} from './operations/traffic.js';
+import {sitemapFreshness} from './production/run-record.js';
+import {carriedIndexedUrls,inspectionUrlOrder,type PriorCapture} from './operations/index-sample.js';
 
 const args=process.argv.slice(2),value=(flag:string)=>{const index=args.indexOf(flag);return index>=0?args[index+1]:undefined};
 const date=value('--date')??'';
@@ -72,14 +74,15 @@ try{
 }catch(error){result.articles={state:'UNAVAILABLE',reason:error instanceof Error?error.message:String(error)}}
 
 // 3) Search Console per page (data usually lags 2-3 days; the last 7 days by page and date are kept).
+//    pages: per-page totals of all rows, ?m=1/http merged (MOT-050, MO-5); article rows match on the same key.
 try{
   const property=env('GOOGLE_SEARCH_CONSOLE_PROPERTY'),cid=env('SEARCH_CONSOLE_CLIENT_ID'),secret=env('SEARCH_CONSOLE_CLIENT_SECRET'),refresh=env('SEARCH_CONSOLE_REFRESH_TOKEN');
   if(!property||!cid||!secret||!refresh)throw new Error('NOT_CONNECTED');
   const token=await googleToken(cid,secret,refresh),start=new Date(Date.parse(date+'T00:00:00Z')-8*86400000).toISOString().slice(0,10);
   const query=async(dimensions:string[])=>{const response=await fetch(`https://www.googleapis.com/webmasters/v3/sites/${encodeURIComponent(property)}/searchAnalytics/query`,{method:'POST',headers:{authorization:`Bearer ${token}`,'content-type':'application/json'},body:JSON.stringify({startDate:start,endDate:date,dimensions,rowLimit:250,dataState:'all'}),signal:timeout(30000)});if(!response.ok)throw new Error(`HTTP ${response.status}`);return (await response.json() as {rows?:Array<{keys?:string[];clicks?:number;impressions?:number;ctr?:number;position?:number}>}).rows??[]};
   const byPage=await query(['page','date']),byQuery=await query(['query']);
-  for(const article of ours)article.searchConsole=byPage.filter(row=>row.keys?.[0]===article.url).map(row=>({date:row.keys?.[1],clicks:row.clicks,impressions:row.impressions,ctr:row.ctr,position:row.position}));
-  result.searchConsole={state:byPage.length||byQuery.length?'PASS':'NO_DATA',range:[start,date],dataState:'all',lastDataDate:byPage.map(row=>row.keys?.[1]??'').sort().at(-1)??null,topQueries:byQuery.sort((a,b)=>(b.impressions??0)-(a.impressions??0)).slice(0,20)};
+  for(const article of ours)article.searchConsole=byPage.filter(row=>normalizeBlogUrl(row.keys?.[0]??'')===normalizeBlogUrl(article.url)).map(row=>({date:row.keys?.[1],clicks:row.clicks,impressions:row.impressions,ctr:row.ctr,position:row.position}));
+  result.searchConsole={state:byPage.length||byQuery.length?'PASS':'NO_DATA',range:[start,date],dataState:'all',lastDataDate:byPage.map(row=>row.keys?.[1]??'').sort().at(-1)??null,pageRows:byPage.length,pages:searchConsolePages(byPage),topQueries:byQuery.sort((a,b)=>(b.impressions??0)-(a.impressions??0)).slice(0,20)};
 }catch(error){result.searchConsole={state:'UNAVAILABLE',reason:error instanceof Error?error.message:String(error)}}
 
 // 3b) Index status (owner 2026-11-05: "구글검색 노출이 전혀 안 되는 것은 반드시 보완"): submitted sitemaps and the
@@ -98,18 +101,26 @@ try{
   // Fixed sample (루인 review 2026-11-08, MOT-035): the same URLs every day, so the redirect-error fix is judged on a
   // stable before/after set: the five REDIRECT_ERROR posts, the home page and one post that was indexed.
   const fixed=INDEX_FIXED_SAMPLE.map(path=>BLOG+path);
-  const urls=[...new Set([...fixed,...ours.map(article=>article.url),...recent])].slice(0,60),inspections=[];
+  // MO-13 (MOT-053): URLs indexed in a capture of the last 14 days stay in the sample even after the newest-50 feed
+  // window moves past them, so a lower indexed count is a real change, not a sample change.
+  const priors:PriorCapture[]=[];
+  try{const base=join(process.cwd(),'data','traffic');if(existsSync(base))for(const folder of (await readdir(base)).filter(name=>/^\d{4}-\d{2}-\d{2}$/.test(name)&&name<date)){try{priors.push({date:folder,input:JSON.parse(await readFile(join(base,folder,'traffic-input.json'),'utf8'))})}catch{/* missing or unreadable capture */}}}catch{/* optional */}
+  const carried=carriedIndexedUrls(date,priors);
+  const order=inspectionUrlOrder({fixed,articles:ours.map(article=>article.url),carried:carried.map(item=>item.url),recent},60),urls=order.map(item=>item.url),sourceOf=new Map(order.map(item=>[item.url,item.source])),inspections:Array<Record<string,unknown>>=[];
   const inspectDeadline=Date.now()+6*60000;
   for(const url of urls){
-    if(Date.now()>inspectDeadline){inspections.push({url,error:'SKIPPED_TIME_BUDGET'});continue}
+    if(Date.now()>inspectDeadline){inspections.push({url,source:sourceOf.get(url),error:'SKIPPED_TIME_BUDGET'});continue}
     // MOT-043: one slow inspection (11/11 timeout) must not discard every other result; it is recorded per URL.
-    const response=await fetch('https://searchconsole.googleapis.com/v1/urlInspection/index:inspect',{method:'POST',headers:{...auth,'content-type':'application/json'},body:JSON.stringify({inspectionUrl:url,siteUrl:property,languageCode:'ko'}),signal:timeout(30000)}).catch((error:unknown)=>error instanceof Error?error:new Error(String(error)));
-    if(response instanceof Error){inspections.push({url,error:response.message.slice(0,160)});continue}
-    if(!response.ok){inspections.push({url,error:`HTTP ${response.status}: ${(await response.text()).slice(0,160)}`});continue}
+    // MO-21: a timeout, network error or HTTP 5xx is retried once while the budget lasts; attempts are recorded.
+    const {result:response,attempts}=await inspectWithRetry(()=>fetch('https://searchconsole.googleapis.com/v1/urlInspection/index:inspect',{method:'POST',headers:{...auth,'content-type':'application/json'},body:JSON.stringify({inspectionUrl:url,siteUrl:property,languageCode:'ko'}),signal:timeout(30000)}).catch((error:unknown)=>error instanceof Error?error:new Error(String(error))),inspectDeadline);
+    if(response instanceof Error){inspections.push({url,source:sourceOf.get(url),attempts,error:response.message.slice(0,160)});continue}
+    if(!response.ok){inspections.push({url,source:sourceOf.get(url),attempts,error:`HTTP ${response.status}: ${(await response.text()).slice(0,160)}`});continue}
     const index=(await response.json() as {inspectionResult?:{indexStatusResult?:Record<string,unknown>}}).inspectionResult?.indexStatusResult??{};
-    inspections.push({url,verdict:index.verdict,coverageState:index.coverageState,robotsTxtState:index.robotsTxtState,indexingState:index.indexingState,pageFetchState:index.pageFetchState,lastCrawlTime:index.lastCrawlTime,googleCanonical:index.googleCanonical,userCanonical:index.userCanonical,sitemap:index.sitemap,referringUrls:index.referringUrls});
+    inspections.push({url,source:sourceOf.get(url),attempts,verdict:index.verdict,coverageState:index.coverageState,robotsTxtState:index.robotsTxtState,indexingState:index.indexingState,pageFetchState:index.pageFetchState,lastCrawlTime:index.lastCrawlTime,googleCanonical:index.googleCanonical,userCanonical:index.userCanonical,sitemap:index.sitemap,referringUrls:index.referringUrls});
   }
   const indexed=inspections.filter(item=>'verdict' in item&&item.verdict==='PASS').length;
+  const inspectionSummary=summarizeInspections(inspections);
+  if(inspectionSummary.unmeasured>0)console.log(`::warning::URL Inspection unmeasured ${inspectionSummary.unmeasured}/${inspectionSummary.total} ${JSON.stringify(inspectionSummary.byReason)}`);
   // Redirect chain of each fixed URL as a desktop browser and as Googlebot smartphone (public pages, read-only).
   const chains=[];
   for(const url of fixed)for(const [agent,ua] of [['desktop',DESKTOP_UA],['googlebot-smartphone',GOOGLEBOT_SMARTPHONE_UA]] as const){
@@ -119,17 +130,25 @@ try{
         const html=response.status===200?await response.text():'';chains.push({url,agent,hops,finalUrl:next,canonical:html.match(/<link[^>]+rel=['"]canonical['"][^>]*href=['"]([^'"]+)/i)?.[1]??null});break}
     }catch(error){chains.push({url,agent,error:error instanceof Error?error.message:String(error)})}
   }
-  result.indexStatus={state:'PASS',sitemaps,inspected:inspections.length,indexed,inspections,fixedSample:{paths:INDEX_FIXED_SAMPLE,chains}};
+  // MO-9: a sitemap Google has not downloaded for 48 hours is flagged here and in the daily status.
+  const freshness=sitemapFreshness(sitemaps,new Date().toISOString());
+  if(freshness.state==='STALE')console.log(`::warning title=Sitemap not downloaded for ${freshness.hours}h::last download ${freshness.lastDownloaded} (limit ${freshness.maxHours}h)`);
+  result.indexStatus={state:'PASS',sitemaps,sitemapFreshness:freshness,inspected:inspections.length,indexed,inspectionSummary,carriedIndexed:{count:carried.length,inspected:order.filter(item=>item.source==='carried').length,urls:carried},inspections,fixedSample:{paths:INDEX_FIXED_SAMPLE,chains}};
 }catch(error){result.indexStatus={state:'UNAVAILABLE',reason:error instanceof Error?error.message:String(error)}}
 
 // 4) Naver DataLab interest (relative, last 14 days) for each article's keywords.
 try{
   const cid=env('NAVER_DATALAB_CLIENT_ID'),secret=env('NAVER_DATALAB_CLIENT_SECRET');if(!cid||!secret)throw new Error('NOT_CONFIGURED');
   const start=new Date(Date.parse(date+'T00:00:00Z')-14*86400000).toISOString().slice(0,10);
+  const datalab=async(keywords:string[]):Promise<DatalabSeries[]|{error:string}>=>{
+    const response=await fetch('https://naverapihub.apigw.ntruss.com/search-trend/v1/search',{method:'POST',headers:{'content-type':'application/json','X-NCP-APIGW-API-KEY-ID':cid,'X-NCP-APIGW-API-KEY':secret},body:JSON.stringify({startDate:start,endDate:day,timeUnit:'date',keywordGroups:keywords.map(keyword=>({groupName:keyword,keywords:[keyword]}))}),signal:timeout(20000)});
+    return response.ok?((await response.json() as {results?:Array<{title?:string;data?:Array<{period?:string;ratio?:number}>}>}).results??[]).map(item=>({keyword:String(item.title),series:(item.data??[]).map(point=>[String(point.period),Number(point.ratio)] as [string,number])})):{error:`HTTP ${response.status}`};
+  };
   for(const article of ours){
-    const groups=article.keywords.slice(0,5).map(keyword=>({groupName:keyword,keywords:[keyword]}));if(!groups.length)continue;
-    const response=await fetch('https://naverapihub.apigw.ntruss.com/search-trend/v1/search',{method:'POST',headers:{'content-type':'application/json','X-NCP-APIGW-API-KEY-ID':cid,'X-NCP-APIGW-API-KEY':secret},body:JSON.stringify({startDate:start,endDate:day,timeUnit:'date',keywordGroups:groups}),signal:timeout(20000)});
-    article.datalab=response.ok?((await response.json() as {results?:Array<{title?:string;data?:Array<{period?:string;ratio?:number}>}>}).results??[]).map(item=>({keyword:item.title,series:(item.data??[]).map(point=>[point.period,point.ratio])})):{error:`HTTP ${response.status}`};
+    const keywords=article.keywords.slice(0,5);if(!keywords.length)continue;
+    const first=await datalab(keywords);
+    // An empty series means too little volume for that phrase: retry with shorter fallbacks (MOT-045, ledger MO-7).
+    article.datalab=Array.isArray(first)?await fillEmptyDatalabSeries(first,articleKeywordFallbacks(article.title,article.labels),async next=>{const reply=await datalab(next);return Array.isArray(reply)?reply:[]}):first;
   }
   result.datalab={state:'PASS'};
 }catch(error){result.datalab={state:'UNAVAILABLE',reason:error instanceof Error?error.message:String(error)}}

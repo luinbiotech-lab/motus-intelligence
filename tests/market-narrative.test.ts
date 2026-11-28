@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {buildKoreaMarketNarrative,driverFits,quoted,eokText,buildUSMarketNarrative,numberWithEul,numberWithRo,seriesStats} from '../src/operations/market-narrative.js';
+import {buildKoreaMarketNarrative,driverFits,quoted,eokText,pressEok,buildUSMarketNarrative,numberWithEul,numberWithRo,seriesStats} from '../src/operations/market-narrative.js';
 
 const dates=(n:number)=>Array.from({length:n},(_,i)=>`2026-08-${String(i+1).padStart(2,'0')}`);
 const ramp=(n:number,start:number,step:number)=>Array.from({length:n},(_,i)=>start+i*step);
@@ -74,16 +74,17 @@ test('Korea MOTUS analysis reads the day: trend, level, who moved it, the cause 
   const kospi=[5683.8,5383.8,5059.69,5018.85,5239.13,5375.36,5342.73,5290.53,5100.5,4968.48],kosdaq=[714.95,678.41,644.27,638.97,667.61,705.1,696.53,699.66,665.65,650.06];
   const r=buildKoreaMarketNarrative([{label:'KOSPI',dates:d,closes:kospi},{label:'KOSDAQ',dates:d,closes:kosdaq}],[],{flows:[{label:'개인',value:4041},{label:'외국인',value:-14090},{label:'기관',value:5292}],driver:{publisher:'연합인포맥스',text:'코스피가 엔비디아 실적 발표를 앞둔 경계감에 하락했다.'}});
   assert.equal(r.analysis[0],"코스피는 4거래일 연속 하락하며 5,000선 아래로 내려왔다. 최근 10거래일 고점(5,683.80, 2026-11-04)보다 12.59% 낮아, 흔히 '조정'이라 부르는 고점 대비 10% 이상 하락 구간에 들어섰다. 코스닥도 2.34% 내려 두 시장이 함께 움직였다.");
-  assert.equal(r.analysis[1],'매도 쪽은 외국인(−1조 4,090억원), 매수 쪽은 기관(+5,292억원)·개인(+4,041억원)이었다. 지수 방향과 같은 쪽에서 가장 크게 움직인 주체가 외국인이어서, 이날 하락은 외국인 매도가 주도한 것으로 읽힌다(추정).');
-  assert.match(r.analysis[2]!,/^원인으로는 연합인포맥스가 “코스피가 엔비디아 실적 발표를 앞둔 경계감에 하락했다”고 짚었다\. 같은 날 외국인이 1조 4,090억원을 순매도한 만큼/);
-  assert.equal(r.analysis[3],'다음 거래일에는 5,000선 회복 여부와 외국인 매도가 멈추는지가 이 하락이 이어질지를 가르는 첫 확인점이다.');
+  assert.equal(r.analysis[1],'외국인이 1조4천90억원어치를 순매도했고, 기관과 개인은 각각 5천292억원, 4천41억원어치를 순매수했다. 이날 하락은 외국인 매도세가 이끈 것으로 풀이된다.');
+  assert.equal(r.analysis[2],'연합인포맥스는 “코스피가 엔비디아 실적 발표를 앞둔 경계감에 하락했다”고 분석했다. 이 요인이 외국인 매도를 통해 지수에 반영된 것으로 보인다.');
+  assert.equal(r.analysis[3],'다음 거래일에는 5,000선 회복 여부와 외국인 매도가 멈추는지가 관건이다.');
+  assert.equal(pressEok(-14090),'1조4천90억원');assert.equal(pressEok(9534),'9천534억원');assert.equal(pressEok(20000),'2조원');assert.equal(pressEok(23),'23억원');
   assert.equal(eokText(-14090),'1조 4,090억원');assert.equal(eokText(20000),'2조원');assert.equal(eokText(23),'23억원');
 });
 test('when the largest flow runs against the index, the reading says so instead of crediting it',()=>{
   const d=['2026-11-04','2026-11-05','2026-11-06','2026-11-09','2026-11-10','2026-11-11'];
   const r=buildKoreaMarketNarrative([{label:'KOSPI',dates:d,closes:[5683.8,5383.8,5059.69,5018.85,5239.13,5375.36]},{label:'KOSDAQ',dates:d,closes:[714.95,678.41,644.27,638.97,667.61,705.1]}],[],{flows:[{label:'개인',value:-13821},{label:'외국인',value:4177},{label:'기관',value:4768}]});
-  assert.ok(r.analysis.some(line=>line.includes('가장 크게 움직인 개인은 지수와 반대로 팔았고, 지수는 매수 쪽(기관·외국인)을 따라 올랐다(추정).')),r.analysis.join(' | '));
-  assert.ok(!r.analysis.some(line=>line.startsWith('원인으로는')),'no cause sentence is invented without a driver');
+  assert.ok(r.analysis.some(line=>line.includes('개인이 가장 많이 팔았지만 지수는 기관·외국인 매수세를 따라 오른 것으로 보인다.')),r.analysis.join(' | '));
+  assert.ok(!r.analysis.some(line=>line.includes('분석했다')),'no cause sentence is invented without a driver');
 });
 
 test('US MOTUS analysis reads trend, the rate move against the index, the sourced cause and the next check',()=>{
@@ -92,15 +93,15 @@ test('US MOTUS analysis reads trend, the rate move against the index, the source
   const series=[{key:'sp500',label:'S&P 500',dates:dates(n),closes:sp},{key:'nasdaq',label:'Nasdaq',dates:dates(n),closes:[...Array(n-1).fill(200),196]},{key:'dow-jones',label:'Dow Jones',dates:dates(n),closes:[...Array(n-1).fill(300),299]}];
   const r=buildUSMarketNarrative(series,{label:'10Y',latest:4.1,previous:4.13,date:'d',sessionDate:'d'},{driver:{publisher:'연합뉴스',text:'엔비디아 실적 경계감에 기술주가 약세를 보였다.'}});
   assert.match(r.analysis[0]!,/^S&P 500은 \d+거래일 연속 하락하며 6,500선 아래로 내려왔다\. 하루 낙폭 [\d.]+%는 최근 63거래일 가운데 가장 컸다\./);
-  assert.ok(r.analysis.includes('금리가 내렸는데도 주가가 내려, 이날 하락은 금리보다 다른 요인에서 나온 것으로 읽힌다(추정).'),r.analysis.join(' | '));
-  assert.ok(r.analysis.includes('원인으로는 연합뉴스가 “엔비디아 실적 경계감에 기술주가 약세를 보였다”고 짚었다.'));
-  assert.equal(r.analysis.at(-1),'다음 정규장에서는 S&P 500 6,500선 회복 여부와 10년물 금리 방향가 첫 확인점이다.'.replace('방향가','방향이'));
+  assert.ok(r.analysis.includes('금리가 내렸는데도 주가가 떨어져, 이날 하락은 금리보다 다른 악재의 영향이 컸던 것으로 풀이된다.'),r.analysis.join(' | '));
+  assert.ok(r.analysis.includes('연합뉴스는 “엔비디아 실적 경계감에 기술주가 약세를 보였다”고 분석했다.'));
+  assert.equal(r.analysis.at(-1),'다음 정규장에서는 S&P 500 6,500선 회복 여부와 10년물 금리 방향이 관건이다.');
 });
 
 test('a cause is quoted only when it is about this market and agrees with the move (11/18 Fed remark on a Korea up day)',()=>{
   const d=['2026-11-16','2026-11-17','2026-11-18'];
   const r=buildKoreaMarketNarrative([{label:'KOSPI',dates:d,closes:[5100.5,4968.48,5067.44]},{label:'KOSDAQ',dates:d,closes:[665.65,650.06,662.8]}],[],{flows:[{label:'개인',value:-6211},{label:'외국인',value:-3387},{label:'기관',value:4968}],driver:{publisher:'유안타증권',text:'윌리엄스, 긴축 기조 선호 유지하며 인플레이션 대응 위한 추가 인상 필요성 시사'}});
-  assert.ok(!r.analysis.some(line=>line.startsWith('원인으로는')),r.analysis.join(' | '));
+  assert.ok(!r.analysis.some(line=>line.includes('분석했다')),r.analysis.join(' | '));
   assert.equal(driverFits('코스피가 반도체 강세에 상승했다','KOREA',true),true);
   assert.equal(driverFits('코스피가 엔비디아 경계감에 하락했다','KOREA',true),false);
   assert.equal(driverFits('나스닥이 기술주 약세에 하락했다','US',false),true);

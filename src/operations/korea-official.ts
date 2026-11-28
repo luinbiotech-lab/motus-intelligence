@@ -80,6 +80,14 @@ export class YahooKoreaSecondarySourceAdapter implements KoreaOfficialSourceAdap
 }
 
 /** The session date of a regular-market quote time, only once that time is at or after the 15:30 KST close. */
+/** Daum Finance `days` rows ({date:'YYYY-MM-DD 00:00:00', tradePrice}) as {date,value}, newest first as served.
+ * Used only as a U.S. index fallback. Not used for Korea cross-verification: Daum and Naver can both redistribute
+ * the same Koscom feed, so a Daum value is not independent corroboration of a Naver value (luin review RB-26af416). */
+export function parseDaumDays(body:unknown):Array<{date:string;value:number}>{
+ const data=(body as {data?:Array<{date?:unknown;tradePrice?:unknown}>})?.data;if(!Array.isArray(data))return [];
+ return data.flatMap(item=>{const date=typeof item.date==='string'?item.date.slice(0,10):'',value=typeof item.tradePrice==='number'?item.tradePrice:Number.NaN;return /^\d{4}-\d{2}-\d{2}$/.test(date)&&Number.isFinite(value)&&value>0?[{date,value}]:[]});
+}
+
 export function yahooClosedSession(value:number|undefined,timeZone:string):string {
  if(typeof value!=='number'||!Number.isFinite(value))return '';
  const kst=new Date(value*1000+9*3600000),minutes=kst.getUTCHours()*60+kst.getUTCMinutes();
