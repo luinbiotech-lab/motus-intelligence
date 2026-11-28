@@ -1,6 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {WEEKLY_TITLE_MAX,buildWeeklyArticle,headlineEvents,parseNasdaqEarnings,weeklyTitle,isWeeklyMarketReport,joinEvents,koreanEventName,parseForexFactory,parseMotusFeed,pickBrokerSentences,sparkCloses,summarySentences,weekWindow,weeklyQuote,type WeeklyEvidence,type WeeklyQuote} from '../src/operations/weekly-review.js';
+import {withOfficialSchedule,calendarRows} from '../src/operations/weekly-review.js';
+import {officialSchedule,earlyCloseKst} from '../src/operations/official-schedule.js';
 import {renderWeeklyEditorialArticle} from '../src/publishers/editorial-article.js';
 
 test('a weekend or weekday run reviews the last completed Monday-Friday week', () => {
@@ -156,4 +158,43 @@ test('a long weekly title drops focus items instead of exceeding the limit', () 
   const window=weekWindow('2026-11-01'),q=(label:string,changePct:number)=>({symbol:label,label,group:'US_INDEX',unit:'index',weekClose:1,weekCloseDate:'2026-10-30',priorClose:1,priorCloseDate:'2026-10-23',changePct,changeBp:null,daily:[]}) as WeeklyQuote;
   const title=weeklyTitle({nextStart:window.nextStart,nextEnd:window.nextEnd,earnings:['마이크로소프트·알파벳·메타 플랫폼스'],headline:['미국 소비자물가지수(CPI)','미국 생산자물가지수(PPI)'],usLead:q('S&P 500',2.51),kospi:q('코스피',-11.7)});
   assert.ok(title.length<=WEEKLY_TITLE_MAX,title);assert.match(title,/^주간 증시 전망\(11\/2~11\/6\)｜/);
+});
+
+// MO-29 / MOT-058: the 11/23~27 weekly had no 금통위 (11/26), no Thanksgiving holiday (11/26) or early close (11/27).
+test('MO-29: next week\'s BOK 금통위 and NYSE holiday/early close come from the official tables, in KST', () => {
+  const schedule=officialSchedule('2026-11-23','2026-11-27');
+  assert.deepEqual(schedule.uncovered,[]);
+  assert.deepEqual(schedule.items.map(item=>[item.date,item.kind]),[['2026-11-26','BOK_MPC'],['2026-11-26','NYSE_HOLIDAY'],['2026-11-27','NYSE_EARLY_CLOSE']]);
+  assert.equal(schedule.items[2]!.kstClose,'11/28(토) 03:00','13:00 EST is 03:00 KST the next day');
+  assert.equal(earlyCloseKst('2028-07-03'),'7/4(화) 02:00','13:00 EDT is 02:00 KST the next day');
+  assert.deepEqual(officialSchedule('2026-11-30','2026-12-04').items,[],'a week with neither is empty, not an error');
+});
+
+test('MO-29: the 11/23 week table shows 금통위·휴장·조기 마감 and names each GDP line apart', () => {
+  const window=weekWindow('2026-11-22'),raw=[
+    {title:'Prelim GDP q/q',country:'USD',date:'2026-11-25T08:30:00-05:00',impact:'High',forecast:'3.5%',previous:'3.4%'},
+    {title:'Prelim GDP Price Index q/q',country:'USD',date:'2026-11-25T08:30:00-05:00',impact:'Medium',forecast:'2.3%',previous:'2.3%'},
+    {title:'Core PCE Price Index m/m',country:'USD',date:'2026-11-25T10:00:00-05:00',impact:'High',forecast:'0.2%',previous:'0.2%'}];
+  const audit:Parameters<typeof withOfficialSchedule>[2]=[];
+  const calendar=withOfficialSchedule(parseForexFactory(raw,window).events,window,audit);
+  assert.deepEqual(audit.map(item=>[item.sourceId,item.status,item.count]),[['bok:mpc-schedule','PASS',1],['nyse:holiday-calendar','PASS',2]]);
+  const article=buildWeeklyArticle(evidence({window,calendar}));
+  const table=article.sections.find(item=>item.key==='weekly-calendar')!.table!;
+  const rows=table.rows.map(row=>row.slice(0,2).join(' | '));
+  assert.deepEqual(rows,['11/25(수) 22:30 | 미국 국내총생산(GDP, 잠정치) ★','11/25(수) 22:30 | 미국 GDP 물가지수','11/26(목) | 한국 한은 금통위 기준금리 결정 ★','11/26(목) 00:00 | 미국 근원 PCE 물가 ★','11/26(목) 미국 현지 | 미국 뉴욕증시 휴장(추수감사절)','11/28(토) 03:00 | 미국 뉴욕증시 조기 마감(추수감사절 다음 날, 현지 13:00)']);
+  assert.equal(new Set(rows.map(row=>row.split(' | ')[1])).size,rows.length,'no two rows read the same');
+  assert.match(table.note!,/한국은행 발표 일정/);assert.match(table.note!,/NYSE 공식 일정/);
+  assert.ok(article.sources.some(item=>/bok\.or\.kr/.test(item.url)));assert.ok(article.sources.some(item=>/theice\.com/.test(item.url)));
+  // Title/lead priority is unchanged (PR #130 rule: U.S. high-impact first); 금통위 leads only when it is in the top two.
+  assert.doesNotMatch(article.title,/금통위/);
+});
+
+test('MO-29: official rows survive the 20-row cap, and an uncovered year is a FAILED audit, not a guess', () => {
+  const window=weekWindow('2026-11-22'),raw=Array.from({length:25},(_,i)=>({title:`Crude Oil Inventories`,country:'USD',date:`2026-11-2${3+(i%3)}T${String(8+(i%8)).padStart(2,'0')}:${String(i).padStart(2,'0')}:00-05:00`,impact:'Medium',forecast:'',previous:''}));
+  const calendar=withOfficialSchedule(parseForexFactory(raw,window).events,window,[]);
+  const kept=calendarRows(calendar);
+  assert.equal(kept.length,20);assert.equal(kept.filter(item=>item.source).length,3);
+  const later=weekWindow('2029-01-07'),audit:Parameters<typeof withOfficialSchedule>[2]=[];
+  assert.deepEqual(withOfficialSchedule([],later,audit),[]);
+  assert.deepEqual(audit.map(item=>[item.sourceId,item.status,item.error]),[['bok:mpc-schedule','FAILED','SCHEDULE_NOT_COVERED 2029-01-08~2029-01-12'],['nyse:holiday-calendar','FAILED','SCHEDULE_NOT_COVERED 2029-01-08~2029-01-12']]);
 });
