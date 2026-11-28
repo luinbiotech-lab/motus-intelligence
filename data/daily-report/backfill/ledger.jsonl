@@ -78,3 +78,18 @@
 {"at":"2026-11-27T03:14:56.080Z","event":"PLANNED","postId":"4018719477333209473","url":"https://motusnova.blogspot.com/2026/11/s-500-25-46-fomc.html","image":false,"related":5}
 {"at":"2026-11-27T03:14:56.315Z","event":"SKIPPED","postId":"3544100085694172601","url":"https://motusnova.blogspot.com/2026/11/11-16-359-510050-1-sk-70.html","reason":"already has internal links and an image"}
 {"at":"2026-11-27T03:14:56.669Z","event":"PLANNED","postId":"1656849563003522505","url":"https://motusnova.blogspot.com/2026/11/2026-11-16-ai.html","image":false,"related":6}
+{"at":"2026-11-28T02:56:56.222Z","event":"BACKFILLED","postId":"4125442001749836948","url":"https://motusnova.blogspot.com/2026/11/2026-11-13-ai.html","image":false,"related":6}
+{"at":"2026-11-28T02:56:57.293Z","event":"BACKFILLED","postId":"4018719477333209473","url":"https://motusnova.blogspot.com/2026/11/s-500-25-46-fomc.html","image":false,"related":5}
+{"at":"2026-11-28T02:56:58.329Z","event":"BACKFILLED","postId":"1656849563003522505","url":"https://motusnova.blogspot.com/2026/11/2026-11-16-ai.html","image":false,"related":6}
+{"at":"2026-11-28T02:56:59.193Z","event":"SKIPPED","postId":"6853334885200587930","url":"https://motusnova.blogspot.com/2026/11/amd-88-ai.html","reason":"already has internal links and an image"}
+{"at":"2026-11-28T02:56:59.363Z","event":"SKIPPED","postId":"7058260686444730115","url":"https://motusnova.blogspot.com/2026/11/11-16-3-25-tsmc-63.html","reason":"already has internal links and an image"}
+{"at":"2026-11-28T02:56:59.579Z","event":"SKIPPED","postId":"153943772032324043","url":"https://motusnova.blogspot.com/2026/11/11-17-259-496848-1-30.html","reason":"already has internal links and an image"}
+{"at":"2026-11-28T02:56:59.796Z","event":"PLANNED","postId":"5029586988852541145","url":"https://motusnova.blogspot.com/2026/11/2026-11-17-ai.html","image":false,"related":6}
+{"at":"2026-11-28T02:56:59.987Z","event":"SKIPPED","postId":"7208265745906784144","url":"https://motusnova.blogspot.com/2026/11/41-ai.html","reason":"already has internal links and an image"}
+{"at":"2026-11-28T02:57:00.197Z","event":"SKIPPED","postId":"2129532309641873143","url":"https://motusnova.blogspot.com/2026/11/11-17-3-16-tsmc-37.html","reason":"already has internal links and an image"}
+{"at":"2026-11-28T02:57:00.405Z","event":"SKIPPED","postId":"333479123807087408","url":"https://motusnova.blogspot.com/2026/11/11-18-199-506744-1-27.html","reason":"already has internal links and an image"}
+{"at":"2026-11-28T02:57:00.595Z","event":"PLANNED","postId":"1001170674476240588","url":"https://motusnova.blogspot.com/2026/11/2026-11-18-ai.html","image":false,"related":6}
+{"at":"2026-11-28T02:57:00.717Z","event":"SKIPPED","postId":"2139366550341554860","url":"https://motusnova.blogspot.com/2026/11/copilot.html","reason":"already has internal links and an image"}
+{"at":"2026-11-28T02:57:00.856Z","event":"SKIPPED","postId":"5467503684314322340","url":"https://motusnova.blogspot.com/2026/11/11-18-3-amd-53.html","reason":"already has internal links and an image"}
+{"at":"2026-11-28T02:57:00.998Z","event":"SKIPPED","postId":"6575796435896910387","url":"https://motusnova.blogspot.com/2026/11/11-19-139-513789-1-09.html","reason":"already has internal links and an image"}
+{"at":"2026-11-28T02:57:01.197Z","event":"PLANNED","postId":"7289947718681430780","url":"https://motusnova.blogspot.com/2026/11/2026-11-19-ai.html","image":false,"related":6}
