@@ -197,7 +197,7 @@ export function buildKoreaMarketNarrative(histories:KoreaIndexHistory[],flows:Ar
       else if(a===b&&Math.abs(kospi.day-kosdaq.day)>=0.5){const bigger=Math.abs(kosdaq.day)>Math.abs(kospi.day)?'코스닥':'코스피',other=bigger==='코스닥'?'코스피':'코스닥';parts.push(`${josa(bigger,'이','가')} ${other}보다 ${Math.abs(kospi.day-kosdaq.day).toFixed(2)}%p 더 크게 ${down?'내렸다':'올랐다'}.`)}
       else if(a===b&&Math.abs(kospi.day)>=1&&Math.abs(kosdaq.day)>=1)parts.push(`코스닥도 ${Math.abs(kosdaq.day).toFixed(2)}% ${down?'내려':'올라'} 두 시장이 함께 움직였다.`);
     }
-    if(kospi.week!==null&&direction(kospi.week)!==0&&direction(kospi.week)!==direction(kospi.day))parts.push(`최근 5거래일 기준으로는 아직 ${kospi.week>0?'상승':'하락'} 구간이다.`);
+    if(kospi.week!==null&&direction(kospi.week)!==0&&direction(kospi.week)!==direction(kospi.day))parts.push(`하루 ${down?'내렸지만':'올랐지만'} 최근 5거래일 기준으로는 ${Math.abs(kospi.week).toFixed(2)}% ${kospi.week>0?'오른':'내린'} 상태다.`);
     analysis.push(parts.join(' '));
   }else if(kospi&&kosdaq){
     const b=direction(kosdaq.day);if(b!==0)analysis.push(`코스피는 보합이었고 코스닥은 ${Math.abs(kosdaq.day).toFixed(2)}% ${kosdaq.day>0?'올랐다':'내렸다'}.`);

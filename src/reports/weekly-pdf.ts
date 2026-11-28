@@ -36,12 +36,12 @@ export function lineChart(points:Point[],weekStart:string,color:string,format:(v
   out.push(`<circle cx="${lx.toFixed(1)}" cy="${ly.toFixed(1)}" r="2.4" fill="${color}"/><rect x="${width-padR+1}" y="${(ly-7).toFixed(1)}" width="${padR-2}" height="13" rx="2" fill="${color}"/><text x="${width-padR+4}" y="${(ly+2.6).toFixed(1)}" font-size="7.8" font-weight="700" fill="#fff">${esc(format(points.at(-1)!.close))}</text></svg>`);
   return out.join('');
 }
-export function barChart(rows:Array<[string,number]>,width=300,height=190):string {
+export function barChart(rows:Array<[string,number]>,width=300,height=190,format:(value:number)=>string=pct):string {
   if(!rows.length)return '';
   const sorted=[...rows].sort((a,b)=>b[1]-a[1]),max=Math.max(...sorted.map(row=>Math.abs(row[1])))*1.25||1,mid=width*0.55,bar=(height-10)/sorted.length;
   const out=[`<svg viewBox="0 0 ${width} ${height}" width="100%" xmlns="http://www.w3.org/2000/svg"><line x1="${mid}" x2="${mid}" y1="0" y2="${height}" stroke="#9aa6b2" stroke-width="0.6"/>`];
   sorted.forEach(([label,value],index)=>{const y=4+index*bar,length=width*0.42*Math.abs(value)/max,x=value>=0?mid:mid-length;
-    out.push(`<rect x="${x.toFixed(1)}" y="${(y+2).toFixed(1)}" width="${length.toFixed(1)}" height="${(bar-5).toFixed(1)}" fill="${col(value)}" opacity="0.88"/><text x="${value>=0?mid-4:mid+4}" y="${(y+bar/2+2).toFixed(1)}" font-size="8" text-anchor="${value>=0?'end':'start'}" fill="#222">${esc(label)}</text><text x="${(value>=0?x+length+3:x-3).toFixed(1)}" y="${(y+bar/2+2).toFixed(1)}" font-size="8" font-weight="700" text-anchor="${value>=0?'start':'end'}" fill="${col(value)}">${pct(value)}</text>`)});
+    out.push(`<rect x="${x.toFixed(1)}" y="${(y+2).toFixed(1)}" width="${length.toFixed(1)}" height="${(bar-5).toFixed(1)}" fill="${col(value)}" opacity="0.88"/><text x="${value>=0?mid-4:mid+4}" y="${(y+bar/2+2).toFixed(1)}" font-size="8" text-anchor="${value>=0?'end':'start'}" fill="#222">${esc(label)}</text><text x="${(value>=0?x+length+3:x-3).toFixed(1)}" y="${(y+bar/2+2).toFixed(1)}" font-size="8" font-weight="700" text-anchor="${value>=0?'start':'end'}" fill="${col(value)}">${format(value)}</text>`)});
   out.push('</svg>');return out.join('');
 }
 

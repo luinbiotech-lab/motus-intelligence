@@ -71,7 +71,7 @@ try{
   title=`[데일리 리포트] ${year}년 ${month}월 ${day}일 ${links.map(link=>dailyKind(link.category).replace(' 산업','')).join('·')} 핵심 정리`;
   const article=(link:{url:string;fileName:string}|null)=>{
     const sections:WeeklySection[]=[];
-    if(link)sections.push({key:'daily-report-pdf',title:'PDF 리포트: 오늘의 시장 브리핑',intro:`표지 한 장에 ${parts.length}개 분야의 핵심 수치를, 이어서 분야마다 차트·종목·증권가 리포트를 2쪽씩 담은 A4 ${pdf.pages}쪽 리포트입니다.`,links:[{label:`MOTUS 데일리 리포트 (${link.fileName})`,url:link.url,meta:'PDF · Google Drive에서 보기·내려받기'}]});
+    if(link)sections.push({key:'daily-report-pdf',title:'PDF 리포트: 오늘의 시장 브리핑',intro:parts.length>1?`표지에 ${parts.length}개 분야의 핵심 수치를 모으고, 분야마다 지수·종목·증권가 리포트를 두 쪽에 담은 A4 ${pdf.pages}쪽 리포트입니다.`:`지수·종목·수급·증권가 리포트를 두 쪽에 담은 A4 ${pdf.pages}쪽 리포트입니다.`,links:[{label:`MOTUS 데일리 리포트 (${link.fileName})`,url:link.url,meta:'PDF · Google Drive에서 보기·내려받기'}]});
     for(const link of links){const part=parts.find(item=>item.category===link.category),key=`daily-report-${folders[link.category]}`,title=`${dailyKind(link.category)}: ${link.title}`,articleLink={label:link.title,url:link.url,meta:`${dailyKind(link.category)} 기사 전문${link.sessionDate?` · ${link.sessionDate} 세션`:''}`};sections.push(part?dailyReportSection({key,title,view:part.view,link:articleLink}):{key,title,links:[articleLink]})}
     const kindOf=(name:string)=>dailyKind(DAILY_REPORT_ORDER.find(c=>folders[c]===name)!);
     const lead=`${month}월 ${day}일 MOTUS 데일리 리포트입니다. 오늘 발행한 ${parts.map(part=>dailyKind(part.category)).join('·')} 기사의 핵심 수치와 차트, 증권가 리포트를 PDF 한 편으로 묶었습니다.${weekday===1?' 월요일은 주말 동안 미국 정규장이 열리지 않아 국내 증시와 AI 산업만 다룹니다.':''}${missing.length?` ${missing.map(kindOf).join('·')} 기사는 이날 발행되지 않아 이번 리포트에서 빠졌습니다.`:''}${noData.length?` ${noData.map(kindOf).join('·')} 기사는 링크로만 소개합니다.`:''}`;
