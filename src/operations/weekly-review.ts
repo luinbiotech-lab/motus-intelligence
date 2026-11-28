@@ -7,6 +7,7 @@
  * titles. Nothing here invents a cause, a forecast or a schedule.
  */
 import {josa} from './ai-generic-synthesis.js';
+import {BOK_MPC_SOURCE,NYSE_CALENDAR_SOURCE,newYorkOffsetHours,officialSchedule} from './official-schedule.js';
 import {koreanDateLabel} from './broker-briefs.js';
 import {US_KOREAN_NAMES,US_MEGACAPS,signedPct} from './market-attention.js';
 import {listNaverResearch,naverResearchDetail,naverResearchPageUrl,summaryText,type NaverResearchCategory,type NaverResearchItem} from './naver-research.js';
@@ -18,7 +19,9 @@ const WEEKDAY=['일','월','화','수','목','금','토'];
 export interface WeekWindow {runDate:string;weekStart:string;weekEnd:string;nextStart:string;nextEnd:string}
 export interface WeeklyQuote {symbol:string;label:string;group:'US_INDEX'|'KOREA_INDEX'|'MACRO'|'US_STOCK'|'KOREA_STOCK';unit:'index'|'yield'|'fx'|'price';weekClose:number;weekCloseDate:string;priorClose:number;priorCloseDate:string;changePct:number;changeBp:number|null;daily:Array<{date:string;close:number}>}
 export interface WeeklyBrokerQuote {broker:string;title:string;date:string;url:string;sentence:string;kind:'review'|'outlook'}
-export interface CalendarEvent {at:string;kstLabel:string;country:string;countryLabel:string;title:string;koreanTitle:string|null;group:string|null;impact:'High'|'Medium';forecast:string;previous:string}
+export interface CalendarEvent {at:string;kstLabel:string;country:string;countryLabel:string;title:string;koreanTitle:string|null;group:string|null;impact:'High'|'Medium';forecast:string;previous:string;
+  /** Absent = Forex Factory. BOK·NYSE rows come from the institutions' published schedules (official-schedule.ts). */
+  source?:'BOK'|'NYSE'}
 export interface MotusWeekPost {title:string;url:string;publishedAt:string;category:'US_MARKET'|'KOREA_MARKET'|'AI_INTELLIGENCE'|'OTHER'}
 export interface WeeklyAudit {sourceId:string;url:string;status:'PASS'|'FAILED';count:number;error:string|null}
 /** A large-cap US earnings release in the previewed week (Nasdaq earnings calendar; the date is the company's expected date). */
@@ -189,7 +192,7 @@ const EVENT_NAMES:Array<[RegExp,string,string]>=[
   [/^ISM Manufacturing PMI/i,'ISM 제조업 PMI','ISM 지수'],[/^ISM Services PMI/i,'ISM 서비스업 PMI','ISM 지수'],[/^ISM Manufacturing Prices/i,'ISM 제조업 가격지수','ISM 지수'],[/^ISM Services Prices/i,'ISM 서비스업 가격지수','ISM 지수'],
   [/^Final Manufacturing PMI/i,'S&P 글로벌 제조업 PMI(확정)',''],[/^Final Services PMI/i,'S&P 글로벌 서비스업 PMI(확정)',''],[/^Flash Manufacturing PMI/i,'제조업 PMI(예비)',''],[/^Flash Services PMI/i,'서비스업 PMI(예비)',''],
   [/^Core CPI/i,'근원 소비자물가(CPI)','CPI'],[/^CPI/i,'소비자물가(CPI)','CPI'],[/^Core PPI/i,'근원 생산자물가(PPI)','PPI'],[/^PPI/i,'생산자물가(PPI)','PPI'],
-  [/^Core PCE Price Index/i,'근원 PCE 물가','PCE 물가'],[/^PCE Price Index/i,'PCE 물가','PCE 물가'],[/GDP/i,'국내총생산(GDP)','GDP'],
+  [/^Core PCE Price Index/i,'근원 PCE 물가','PCE 물가'],[/^PCE Price Index/i,'PCE 물가','PCE 물가'],[/GDP Price Index/i,'GDP 물가지수',''],[/^Advance GDP/i,'국내총생산(GDP, 속보치)','GDP'],[/^Prelim GDP/i,'국내총생산(GDP, 잠정치)','GDP'],[/^Final GDP/i,'국내총생산(GDP, 확정치)','GDP'],[/GDP/i,'국내총생산(GDP)','GDP'],
   [/^Federal Funds Rate/i,'FOMC 기준금리 결정','FOMC'],[/^FOMC Statement/i,'FOMC 성명','FOMC'],[/^FOMC Press Conference/i,'FOMC 기자회견','FOMC'],[/^FOMC Meeting Minutes/i,'FOMC 의사록','FOMC 의사록'],
   [/^Fed Chair .* Speaks/i,'연준 의장 발언','연준 의장 발언'],[/^FOMC Member (.+) Speaks/i,'연준 위원 발언',''],
   [/^Core Retail Sales/i,'근원 소매판매','소매판매'],[/^Retail Sales/i,'소매판매','소매판매'],
@@ -230,6 +233,24 @@ export function parseForexFactory(body:unknown,window:WeekWindow):{events:Calend
   }
   events.sort((a,b)=>a.at.localeCompare(b.at));
   return {events,coversNextWeek:covers};
+}
+/**
+ * Adds the next week's BOK 금통위 and NYSE holidays/early closes (MO-29): Forex Factory carries neither.
+ * A next week outside the verified tables gets a FAILED audit row (SCHEDULE_NOT_COVERED) instead of a guess.
+ */
+export function withOfficialSchedule(events:CalendarEvent[],window:WeekWindow,audit:WeeklyAudit[]):CalendarEvent[] {
+  const schedule=officialSchedule(window.nextStart,window.nextEnd),out=[...events];
+  for(const item of schedule.items){
+    if(item.kind==='BOK_MPC'){out.push({at:new Date(Date.parse(`${item.date}T00:00:00+09:00`)).toISOString(),kstLabel:shortDayLabel(item.date),country:'KRW',countryLabel:'한국',title:'BOK Monetary Policy Decision',koreanTitle:item.koreanTitle,group:'한은 금통위',impact:'High',forecast:'',previous:'',source:'BOK'});continue}
+    // NYSE dates are New York dates. Holidays sort at that day's 09:30 ET open; early closes at 13:00 ET.
+    const offset=newYorkOffsetHours(item.date),at=(hhmm:string)=>new Date(Date.parse(`${item.date}T${hhmm}:00Z`)-offset*3600000).toISOString();
+    out.push({at:item.kind==='NYSE_HOLIDAY'?at('09:30'):at('13:00'),kstLabel:item.kind==='NYSE_HOLIDAY'?`${shortDayLabel(item.date)} 미국 현지`:item.kstClose!,country:'USD',countryLabel:'미국',title:item.kind==='NYSE_HOLIDAY'?'NYSE Holiday':'NYSE Early Close',koreanTitle:item.koreanTitle,group:null,impact:'Medium',forecast:'',previous:'',source:'NYSE'});
+  }
+  for(const [source,info,id] of [['BOK_MPC',BOK_MPC_SOURCE,'bok:mpc-schedule'],['NYSE',NYSE_CALENDAR_SOURCE,'nyse:holiday-calendar']] as const){
+    const gap=schedule.uncovered.filter(item=>item.source===source),count=schedule.items.filter(item=>source==='BOK_MPC'?item.kind==='BOK_MPC':item.kind!=='BOK_MPC').length;
+    audit.push({sourceId:id,url:info.url,status:gap.length?'FAILED':'PASS',count,error:gap.length?`SCHEDULE_NOT_COVERED ${gap.map(item=>`${item.from}~${item.to}`).join(',')}`:null});
+  }
+  return out.sort((a,b)=>a.at.localeCompare(b.at));
 }
 export async function collectCalendar(window:WeekWindow,fetcher:typeof fetch,audit:WeeklyAudit[]):Promise<{events:CalendarEvent[];coversNextWeek:boolean}> {
   try{const body=await getJson<unknown>(fetcher,FF_THIS_WEEK);const parsed=parseForexFactory(body,window);audit.push({sourceId:'forexfactory:thisweek',url:FF_THIS_WEEK,status:parsed.coversNextWeek?'PASS':'FAILED',count:parsed.events.length,error:parsed.coversNextWeek?null:'FEED_NOT_YET_ON_NEXT_WEEK'});return parsed}
@@ -314,7 +335,7 @@ export async function collectWeeklyEvidence(runDate:string,fetcher:typeof fetch=
   const window=weekWindow(runDate),audit:WeeklyAudit[]=[];
   const [quotes,broker,calendar,posts,charts,earnings]=await Promise.all([collectWeeklyQuotes(window,fetcher,audit),collectWeeklyResearch(window,fetcher,audit),collectCalendar(window,fetcher,audit),collectMotusPosts(window,fetcher,audit),collectWeeklyCharts(window,fetcher,audit),collectEarnings(window,fetcher,audit)]);
   const kospi=quotes.find(item=>item.symbol==='^KS11'),flows=await collectKoreaFlows(window,fetcher,audit,kospi?.weekCloseDate??null);
-  return {window,quotes,broker,calendar:calendar.events,calendarCoversNextWeek:calendar.coversNextWeek,posts,audit,collectedAt,charts,flows,earnings};
+  return {window,quotes,broker,calendar:withOfficialSchedule(calendar.events,window,audit),calendarCoversNextWeek:calendar.coversNextWeek,posts,audit,collectedAt,charts,flows,earnings};
 }
 
 /* ---------------- Article ---------------- */
@@ -336,7 +357,7 @@ export function headlineEvents(events:CalendarEvent[],limit=2):string[] {
   add(events.filter(event=>event.country==='USD'&&event.impact==='High'));
   add(events.filter(event=>event.country==='USD'&&event.impact==='Medium'&&/^(?:ISM 지수|FOMC|CPI|PCE 물가|소매판매|GDP)$/.test(event.group??'')));
   add(events.filter(event=>event.country!=='USD'&&event.impact==='High'));
-  return out.slice(0,limit).map(event=>/^(?:FOMC|ECB|일본은행|영란은행|호주중앙은행)/.test(event.group!)?event.group!:`${event.countryLabel} ${event.group}`);
+  return out.slice(0,limit).map(event=>/^(?:FOMC|ECB|일본은행|영란은행|호주중앙은행|한은 금통위)/.test(event.group!)?event.group!:`${event.countryLabel} ${event.group}`);
 }
 
 /**
@@ -357,6 +378,20 @@ export function weeklyTitle(input:{nextStart:string;nextEnd:string;earnings:stri
   return head;
 }
 
+/** At most 20 rows; BOK·NYSE rows are always kept (a holiday cut off by the cap is the miss MO-29 fixes). */
+export function calendarRows(events:CalendarEvent[],limit=20):CalendarEvent[] {
+  const official=events.filter(item=>item.source),rest=events.filter(item=>!item.source).slice(0,Math.max(0,limit-official.length));
+  return [...official,...rest].sort((a,b)=>a.at.localeCompare(b.at));
+}
+/** Table note: names only the sources actually in the table. */
+export function calendarNote(events:CalendarEvent[]):string {
+  const parts=['★는 시장 영향이 큰 일정.'];
+  if(events.some(item=>!item.source))parts.push('예상치는 Forex Factory 집계 기준이다.');
+  if(events.some(item=>item.source==='BOK'))parts.push('금통위 날짜는 한국은행 발표 일정 기준이다.');
+  if(events.some(item=>item.source==='NYSE'))parts.push('휴장·조기 마감은 NYSE 공식 일정 기준이다.');
+  parts.push('일정은 발표 기관 사정에 따라 바뀔 수 있다.');
+  return parts.join(' ');
+}
 export function buildWeeklyArticle(evidence:WeeklyEvidence,options:{requireCalendar:boolean}={requireCalendar:true}):WeeklyArticle {
   const {window}=evidence,reasons:string[]=[],find=(label:string)=>evidence.quotes.find(item=>item.label===label);
   const sp=find('S&P 500'),nasdaq=find('나스닥'),dow=find('다우존스'),kospi=find('코스피'),kosdaq=find('코스닥'),tenYear=find('미국 10년물 국채금리'),krw=find('원·달러 환율');
@@ -384,7 +419,7 @@ export function buildWeeklyArticle(evidence:WeeklyEvidence,options:{requireCalen
   const sections:WeeklySection[]=[];
   const cite=(item:WeeklyBrokerQuote,verb:string)=>({text:`${josa(item.broker,'은','는')} ${koreanDateLabel(item.date)} 「${item.title}」에서 ${said(quote(item.sentence))} ${verb}.`,source:{label:`${item.broker} ${item.title} (${koreanDateLabel(item.date)})`,url:item.url}});
   // 1) The week ahead: economic calendar.
-  if(evidence.calendar.length)sections.push({key:'weekly-calendar',title:`이번 주 주요 일정 (${nextRange})`,table:{headers:['한국시간','일정','예상 / 이전'],rows:evidence.calendar.slice(0,20).map(item=>[item.kstLabel,`${item.countryLabel} ${item.koreanTitle??item.title}${item.impact==='High'?' ★':''}`,item.forecast||item.previous?`${item.forecast||'-'} / ${item.previous||'-'}`:'-']),note:'★는 시장 영향이 큰 일정. 예상치는 Forex Factory 집계 기준이며, 일정은 발표 기관 사정에 따라 바뀔 수 있다.'}});
+  if(evidence.calendar.length)sections.push({key:'weekly-calendar',title:`이번 주 주요 일정 (${nextRange})`,table:{headers:['한국시간','일정','예상 / 이전'],rows:calendarRows(evidence.calendar).map(item=>[item.kstLabel,`${item.countryLabel} ${item.koreanTitle??item.title}${item.impact==='High'?' ★':''}`,item.forecast||item.previous?`${item.forecast||'-'} / ${item.previous||'-'}`:'-']),note:calendarNote(evidence.calendar)}});
   // 2) The week ahead: large-cap earnings.
   if(earnings.length)sections.push({key:'weekly-earnings',title:`이번 주 주요 실적 발표 (${nextRange})`,intro:`시가총액 ${capText(EARNINGS_MIN_CAP)} 이상 미국 기업의 실적 발표 예정일이다.`,table:{headers:['한국시간','기업','시가총액','분기'],rows:earnings.slice(0,12).map(item=>[item.kstLabel,`${earningsName(item)}(${item.symbol})`,capText(item.marketCapUsd),item.fiscalQuarter||'-']),note:'발표일·시각은 Nasdaq 실적 캘린더의 회사 예정 기준이며 바뀔 수 있다. 한국시간은 미국 장 마감 후 발표를 다음 날 오전으로 표기했다.'}});
   // 3) The week ahead: what brokers say to watch.
@@ -402,7 +437,9 @@ export function buildWeeklyArticle(evidence:WeeklyEvidence,options:{requireCalen
   const posts=evidence.posts.filter(item=>item.category!=='OTHER');
   if(posts.length)sections.push({key:'weekly-daily',title:'지난주 시장을 움직인 장면',intro:'MOTUS가 지난주 발행한 데일리 기사 제목으로 한 주를 되짚었다. 제목을 누르면 그날의 원인 분석과 증권가 해석을 볼 수 있다.',links:posts.map(item=>({label:item.title,url:item.url,meta:`${dayLabel(new Date(Date.parse(item.publishedAt)+9*3600000).toISOString().slice(0,10))} · ${item.category==='US_MARKET'?'미국증시':item.category==='KOREA_MARKET'?'국내증시':'AI 인텔리전스'}`}))});
   const sourceList:Array<[string,{label:string;url:string}]>=[...evidence.broker.map(item=>[item.url,{label:`${item.broker} ${item.title} (${koreanDateLabel(item.date)})`,url:item.url}] as [string,{label:string;url:string}]),['yahoo',{label:'Yahoo Finance 일별 종가 (지수·금리·환율·종목)',url:'https://finance.yahoo.com/markets/'}]];
-  if(evidence.calendar.length)sourceList.push(['ff',{label:'Forex Factory 경제 캘린더',url:FF_CALENDAR_PAGE}]);
+  if(evidence.calendar.some(item=>!item.source))sourceList.push(['ff',{label:'Forex Factory 경제 캘린더',url:FF_CALENDAR_PAGE}]);
+  if(evidence.calendar.some(item=>item.source==='BOK'))sourceList.push(['bok',BOK_MPC_SOURCE]);
+  if(evidence.calendar.some(item=>item.source==='NYSE'))sourceList.push(['nyse',NYSE_CALENDAR_SOURCE]);
   if(earnings.length)sourceList.push(['nasdaq',{label:'Nasdaq 실적 발표 캘린더',url:NASDAQ_EARNINGS_PAGE}]);
   const sources=[...new Map(sourceList).values()];
   return {publicationId:`motus-weekly-${window.weekStart}`,weekStart:window.weekStart,weekEnd:window.weekEnd,title,subtitle,lead:leadParts.join(' '),sections,sources,readiness:reasons.length?'HOLD':'READY',reasons};
