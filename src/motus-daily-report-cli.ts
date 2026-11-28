@@ -4,7 +4,12 @@
  * ("MOTUS Reports/<year>/Daily/Report") and publish one post in the '리포트' category that links the PDF and the
  * three articles.
  *
- *   node dist/src/motus-daily-report-cli.js --date YYYY-MM-DD [--execute] [--allow-partial]
+ *   node dist/src/motus-daily-report-cli.js --date YYYY-MM-DD [--execute] [--allow-partial] [--replace]
+ *
+ * --replace (owner decision card 2026-11-28 "11/27도 교체"): rebuild an already PUBLISHED report of this date with the
+ * current code and replace it in place, once: the PDF overwrites the same Drive file (same link) and the post body is
+ * patched (same post id, same permalink, same title). The original body is saved first (replaced-original.html).
+ * A date that was already replaced is not replaced again.
  *
  * Owner decisions 2026-11-04: Monday = Korea + AI (no US session on Sunday), Tuesday-Friday = Korea + US + AI;
  * no report on Saturday/Sunday. Without --allow-partial it waits (HOLD, exit 0) until every expected category is
@@ -27,7 +32,7 @@ import type {WeeklySection} from './operations/weekly-review.js';
 import {planCategory,verifiedCandidate,type CategoryPlan} from './operations/daily-report-plan.js';
 
 const args=process.argv.slice(2),value=(flag:string)=>{const index=args.indexOf(flag);return index>=0?args[index+1]:undefined};
-const date=value('--date')??'',execute=args.includes('--execute'),finalAttempt=args.includes('--final-attempt'),allowPartial=finalAttempt||args.includes('--allow-partial');
+const date=value('--date')??'',execute=args.includes('--execute'),replace=args.includes('--replace'),finalAttempt=args.includes('--final-attempt'),allowPartial=finalAttempt||replace||args.includes('--allow-partial');
 if(!/^\d{4}-\d{2}-\d{2}$/.test(date))throw new Error('--date YYYY-MM-DD required');
 const root=join(process.cwd(),'data','daily-report',date),ledgerPath=join(root,'publish-ledger.jsonl'),outcomePath=join(root,'daily-report.json');
 if(execute)await mkdir(root,{recursive:true});
@@ -42,7 +47,10 @@ const prior=existsSync(ledgerPath)?(await readFile(ledgerPath,'utf8')).split('\n
 let postId:string|null=null,title='';
 try{
   const published=prior.find(item=>item.event==='PUBLISHED'||item.event==='SKIPPED_EXISTING');
-  if(published)await done({state:'SKIP',reason:'daily report already published',publicPostUrl:published.publicPostUrl,publishCallCount:0});
+  if(replace){
+    if(!published?.postId||!published.publicPostUrl)await done({state:'HOLD',reasons:['REPLACE_WITHOUT_PUBLISHED_POST'],publishCallCount:0});
+    if(prior.some(item=>item.event==='REPLACED'))await done({state:'SKIP',reason:'this date was already replaced once',publicPostUrl:published!.publicPostUrl,publishCallCount:0});
+  }else if(published)await done({state:'SKIP',reason:'daily report already published',publicPostUrl:published.publicPostUrl,publishCallCount:0});
   // The day's expected categories (owner decision): Monday Korea + AI, Tuesday-Friday all three, weekend none.
   const weekday=new Date(date+'T00:00:00Z').getUTCDay(),expected=expectedCategories(weekday);
   if(!expected.length)await done({state:'SKIP',reason:'no daily report on weekends',publishCallCount:0});
@@ -79,20 +87,21 @@ try{
     return renderDailyReportArticle({date,title,subtitle:'국내·미국 증시와 AI 산업을 한 번에 보는 하루 정리',lead,sections,...(heroImage?{heroImage:{...heroImage,alt:`MOTUS 데일리 리포트 ${month}월 ${day}일 대표 이미지`}}:{}),sources:links.map(link=>({label:`${dailyKind(link.category)} — ${link.title}`,url:link.url}))}).html;
   };
   article({url:'https://drive.google.com/',fileName:pdf.fileName});
-  if(!execute||process.env.MOTUS_LIVE_PUBLISH_ENABLED!=='true')await done({state:'SIMULATED',title,fileName:pdf.fileName,pages:pdf.pages,missing,noData,dataReasons,publishCallCount:0});
+  if(!execute||process.env.MOTUS_LIVE_PUBLISH_ENABLED!=='true')await done({state:'SIMULATED',mode:replace?'REPLACE':'PUBLISH',title,fileName:pdf.fileName,pages:pdf.pages,missing,noData,dataReasons,publishCallCount:0});
   const blogId=process.env.BLOGGER_BLOG_ID?.trim(),credentials=driveCredentialsFromEnvironment();
   if(!blogId||!process.env.BLOGGER_CLIENT_ID||!process.env.BLOGGER_CLIENT_SECRET||!process.env.BLOGGER_REFRESH_TOKEN)await done({state:'HOLD',reasons:['BLOGGER_CREDENTIALS_MISSING'],publishCallCount:0});
   if(!credentials)await done({state:'HOLD',reasons:['DRIVE_NOT_CONFIGURED'],publishCallCount:0});
   // The public label feed: a report of this date that the ledger does not know about (e.g. a lost persistence run).
-  const response=await fetch(`https://motusnova.blogspot.com/feeds/posts/default/-/${encodeURIComponent(DAILY_REPORT_LABEL)}?alt=json&max-results=10`,{signal:AbortSignal.timeout(20000)});
-  if(response.ok){const body=await response.json() as {feed?:{entry?:Array<{content?:{$t?:string};link?:Array<{rel?:string;href?:string}>;title?:{$t?:string}}>}};
+  const response=replace?null:await fetch(`https://motusnova.blogspot.com/feeds/posts/default/-/${encodeURIComponent(DAILY_REPORT_LABEL)}?alt=json&max-results=10`,{signal:AbortSignal.timeout(20000)});
+  if(!response){/* replace mode: the post of this date is the one being replaced */}
+  else if(response.ok){const body=await response.json() as {feed?:{entry?:Array<{content?:{$t?:string};link?:Array<{rel?:string;href?:string}>;title?:{$t?:string}}>}};
     if((body.feed?.entry??[]).some(entry=>typeof entry.content?.$t!=='string'))await done({state:'HOLD',reasons:['PUBLIC_FEED_HAS_NO_CONTENT'],publishCallCount:0});
     const hit=(body.feed?.entry??[]).find(entry=>(entry.content?.$t??'').includes(`data-daily-report="${date}"`));
     if(hit){const url=hit.link?.find(link=>link.rel==='alternate')?.href??null;await record({event:'SKIPPED_EXISTING',postId:null,publicPostUrl:url,title:hit.title?.$t??'',detail:'found on the public label feed'});await done({state:'SKIP',reason:'this date is already on the blog',publicPostUrl:url,publishCallCount:0})}}
   else if(response.status!==404)await done({state:'HOLD',reasons:['PUBLIC_FEED_LOOKUP_'+response.status],publishCallCount:0});
   const raw=JSON.parse(await readFile(resolve('config/publishing.json'),'utf8')) as {blogger:BloggerPublishingConfig};
   const config={...raw.blogger,blogId:blogId!,credentialAvailable:true,publishAsDraft:true},google=new GoogleBloggerApiAdapter();
-  const same=(await google.findMatchingPosts({title,label:DAILY_REPORT_LABEL},config)).filter(item=>item.status!=='DRAFT'||item.content.includes(`data-daily-report="${date}"`));
+  const same=replace?[]:(await google.findMatchingPosts({title,label:DAILY_REPORT_LABEL},config)).filter(item=>item.status!=='DRAFT'||item.content.includes(`data-daily-report="${date}"`));
   const live=same.find(item=>item.status==='PUBLISHED'&&item.url);
   if(live){await record({event:'SKIPPED_EXISTING',postId:live.postId,publicPostUrl:live.url,title:live.title,detail:'same title already published'});await done({state:'SKIP',reason:'same title already published',publicPostUrl:live.url,publishCallCount:0})}
   // 루인 review P0: chart only a unit whose rendered article equals the stored post; otherwise link only.
@@ -121,6 +130,16 @@ try{
   if(!(await drive.verifyPublic(upload)))throw new Error('PDF_PUBLIC_READ_FAILED');
   const html=article({url:upload.webViewLink,fileName:pdf.fileName});
   await writeFile(join(root,'daily-report-article.html'),html,'utf8');
+  if(replace){
+    const target=published!,before=await google.readPost(target.postId!,config);
+    if(before.status!=='PUBLISHED'||before.url!==target.publicPostUrl||!before.content.includes(`data-daily-report="${date}"`))throw new Error('REPLACE_TARGET_MISMATCH: the stored post is not this date\'s published report');
+    await writeFile(join(root,'replaced-original.html'),before.content,'utf8');
+    // The title stays as published so the permalink and search listing do not change.
+    const after=await google.patchPostContent(target.postId!,{title:before.title,content:html,labels:[DAILY_REPORT_LABEL]},config);
+    if(after.status!=='PUBLISHED'||after.url!==before.url||!after.content.includes(`data-daily-report="${date}"`)||!after.content.includes(upload.webViewLink))throw new Error('readback after replace does not match (status, permalink, date marker or PDF link)');
+    await record({event:'REPLACED',postId:target.postId,publicPostUrl:after.url,title:before.title,detail:`replaced in place with the current report (pages ${check.pages}); original body saved as replaced-original.html`});
+    await done({state:'REPLACED',postId:target.postId,publicPostUrl:after.url,title:before.title,pdf:upload.webViewLink,pages:check.pages,missing,noData,verification,publishCallCount:1});
+  }
   // Reuse this date's own draft (an earlier run that failed between insert and publish) rather than adding a post.
   const abandoned=new Set(prior.filter(item=>item.event==='DRAFT_ABANDONED').map(item=>item.postId));
   const draftId=prior.filter(item=>item.event==='DRAFT_CREATED'&&!abandoned.has(item.postId)).at(-1)?.postId??same.find(item=>item.status==='DRAFT')?.postId??null;

@@ -24,6 +24,11 @@ on:
         required: false
         type: boolean
         default: false
+      replace_published:
+        description: Owner-approved one-time replacement of this date's already published report (needs run_date and execute_publish)
+        required: false
+        type: boolean
+        default: false
       backfill_revert_post_id:
         description: Restore the backed-up original body of one backfilled post (numeric post id)
         required: false
@@ -57,6 +62,7 @@ jobs:
           INPUT_DATE: ${{ inputs.run_date }}
           INPUT_EXECUTE: ${{ inputs.execute_publish }}
           INPUT_PARTIAL: ${{ inputs.allow_partial }}
+          INPUT_REPLACE: ${{ inputs.replace_published }}
           EVENT: ${{ github.event_name }}
         run: |
           today=$(date +%F); yesterday=$(date -d yesterday +%F)
@@ -70,6 +76,12 @@ jobs:
             [[ "$INPUT_PARTIAL" == "true" ]] && PARTIAL=true
             if [[ -n "$INPUT_DATE" ]]; then [[ "$INPUT_DATE" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]] || exit 1; DATES="$INPUT_DATE"; fi
           fi
+          REPLACE=false
+          if [[ "$EVENT" == "workflow_dispatch" && "$INPUT_REPLACE" == "true" ]]; then
+            [[ -n "$INPUT_DATE" && "$INPUT_EXECUTE" == "true" ]] || { echo '::error::replace_published needs run_date and execute_publish'; exit 1; }
+            REPLACE=true
+          fi
+          echo "REPLACE=$REPLACE" >> "$GITHUB_ENV"
           echo "DATES=$DATES" >> "$GITHUB_ENV"
           echo "LIVE=$LIVE" >> "$GITHUB_ENV"
           echo "PARTIAL=$PARTIAL" >> "$GITHUB_ENV"
@@ -101,7 +113,7 @@ jobs:
           set -uo pipefail
           ready=""; status=0
           for d in $DATES; do
-            flags=(--date "$d"); [[ "$PARTIAL" == "true" ]] && flags+=(--final-attempt)
+            flags=(--date "$d"); [[ "$PARTIAL" == "true" ]] && flags+=(--final-attempt); [[ "$REPLACE" == "true" ]] && flags+=(--replace)
             out=$(node dist/src/motus-daily-report-cli.js "${flags[@]}"); code=$?
             echo "$out"; echo "- $d (사전 점검: 파일 기준, Blogger 저장본 대조 전 — SIMULATED는 실발행 가능·검증 통과가 아님): \`$(echo "$out" | tail -1 | cut -c1-300)\`" >> "$GITHUB_STEP_SUMMARY"
             if [[ "$out" == *'"state":"SIMULATED"'* ]]; then ready="$ready $d"; elif [[ $code -ne 0 ]]; then status=1; fi
@@ -145,7 +157,7 @@ jobs:
           set -uo pipefail
           status=0
           for d in $READY; do
-            flags=(--date "$d" --execute); [[ "$PARTIAL" == "true" ]] && flags+=(--final-attempt)
+            flags=(--date "$d" --execute); [[ "$PARTIAL" == "true" ]] && flags+=(--final-attempt); [[ "$REPLACE" == "true" ]] && flags+=(--replace)
             MOTUS_LIVE_PUBLISH_ENABLED=true node dist/src/motus-daily-report-cli.js "${flags[@]}" || status=1
             node -e 'const r=require(process.argv[1]);console.log("### MOTUS daily report "+r.date+"\n- State: **"+r.state+"**\n- Title: "+(r.title??"")+(r.publicPostUrl?"\n- URL: "+r.publicPostUrl:"")+(r.reason?"\n- Reason: "+r.reason:""))' "$PWD/data/daily-report/$d/daily-report.json" >> "$GITHUB_STEP_SUMMARY" || true
           done
